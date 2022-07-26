@@ -382,6 +382,85 @@ type AutoscalingAdded struct {
 }
 
 // Predefined struct for user
+type CheckEdgeClusterCIDRRequestParams struct {
+	// Cluster VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Cluster Pod CIDR block
+	PodCIDR *string `json:"PodCIDR,omitempty" name:"PodCIDR"`
+
+	// Cluster service CIDR block
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+}
+
+type CheckEdgeClusterCIDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Cluster Pod CIDR block
+	PodCIDR *string `json:"PodCIDR,omitempty" name:"PodCIDR"`
+
+	// Cluster service CIDR block
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+}
+
+func (r *CheckEdgeClusterCIDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckEdgeClusterCIDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "PodCIDR")
+	delete(f, "ServiceCIDR")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckEdgeClusterCIDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckEdgeClusterCIDRResponseParams struct {
+	// Return code. Valid values:
+	// -1: Internal error
+	// 0: No conflict
+	// 1: Conflict between VPC and serviceCIDR
+	// 2: Conflict between VPC and podCIDR
+	// 3: Conflict between serviceCIDR and podCIDR
+	ConflictCode *int64 `json:"ConflictCode,omitempty" name:"ConflictCode"`
+
+	// CIDR block conflict description
+	ConflictMsg *string `json:"ConflictMsg,omitempty" name:"ConflictMsg"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CheckEdgeClusterCIDRResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckEdgeClusterCIDRResponseParams `json:"Response"`
+}
+
+func (r *CheckEdgeClusterCIDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckEdgeClusterCIDRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CheckInstancesUpgradeAbleRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -555,6 +634,10 @@ type Cluster struct {
 	// The target cluster model for auto-upgrade
 	// Note: this field may return null, indicating that no valid value is obtained.
 	AutoUpgradeClusterLevel *bool `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Whether to enable qGPU Sharing
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	QGPUShareEnable *bool `json:"QGPUShareEnable,omitempty" name:"QGPUShareEnable"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -614,6 +697,12 @@ type ClusterAdvancedSettings struct {
 
 	// Specifies whether to enable Cilium. If it’s left empty, Cilium is not enabled. If `clusterIP` is passed in, it means to enable Cilium to support the clusterIP service type.
 	CiliumMode *string `json:"CiliumMode,omitempty" name:"CiliumMode"`
+
+	// Whether it is a dual-stack cluster in VPC-CNI mode. Default value: `false`, which indicates it is not a dual-stack cluster.
+	IsDualStack *bool `json:"IsDualStack,omitempty" name:"IsDualStack"`
+
+	// Whether to enable qGPU Sharing
+	QGPUShareEnable *bool `json:"QGPUShareEnable,omitempty" name:"QGPUShareEnable"`
 }
 
 type ClusterAsGroup struct {
@@ -701,7 +790,7 @@ type ClusterAsGroupOption struct {
 }
 
 type ClusterBasicSettings struct {
-	// Cluster operating system. CentOS 7.2x86_64 or Ubuntu 16.04.1 LTSx86_64. Default value: Ubuntu 16.04.1 LTSx86_64
+	// Cluster operating system. Public image (enter the image ID) and custom image (enter the image name) are supported. For details, see https://intl.cloud.tencent.com/document/product/457/68289?from_cn_redirect=1
 	ClusterOs *string `json:"ClusterOs,omitempty" name:"ClusterOs"`
 
 	// Cluster version. The default value is 1.10.5.
@@ -762,6 +851,38 @@ type ClusterCIDRSettings struct {
 
 	// Whether to ignore ServiceCIDR conflict errors. It is only valid in VPC-CNI mode. Default value: `false`.
 	IgnoreServiceCIDRConflict *bool `json:"IgnoreServiceCIDRConflict,omitempty" name:"IgnoreServiceCIDRConflict"`
+}
+
+type ClusterCondition struct {
+	// Process type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Process status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Last time when the status is probed
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LastProbeTime *string `json:"LastProbeTime,omitempty" name:"LastProbeTime"`
+
+	// Last time when transiting to the process
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LastTransitionTime *string `json:"LastTransitionTime,omitempty" name:"LastTransitionTime"`
+
+	// Reasons for transiting to the process
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Reason *string `json:"Reason,omitempty" name:"Reason"`
+
+	// More information on transition
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+type ClusterCredential struct {
+	// CA root certificate
+	CACert *string `json:"CACert,omitempty" name:"CACert"`
+
+	// Token for authentication
+	Token *string `json:"Token,omitempty" name:"Token"`
 }
 
 type ClusterExtraArgs struct {
@@ -875,6 +996,14 @@ type ClusterNetworkSettings struct {
 	// Whether to ignore ServiceCIDR conflict errors. It is only valid in VPC-CNI mode. Default value: `false`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	IgnoreServiceCIDRConflict *bool `json:"IgnoreServiceCIDRConflict,omitempty" name:"IgnoreServiceCIDRConflict"`
+
+	// Whether it is a dual-stack cluster in VPC-CNI mode. Default value: `false`, which indicates it is not a dual-stack cluster.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IsDualStack *bool `json:"IsDualStack,omitempty" name:"IsDualStack"`
+
+	// It is used to automatically assign the IP ranges for the service.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Ipv6ServiceCIDR *string `json:"Ipv6ServiceCIDR,omitempty" name:"Ipv6ServiceCIDR"`
 }
 
 type ClusterStatus struct {
@@ -1259,7 +1388,7 @@ type CreateClusterNodePoolRequestParams struct {
 	// Runtime version
 	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
 
-	// Operating system of the node pool
+	// Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image)
 	NodePoolOs *string `json:"NodePoolOs,omitempty" name:"NodePoolOs"`
 
 	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
@@ -1267,6 +1396,9 @@ type CreateClusterNodePoolRequestParams struct {
 
 	// Resource tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether Deletion Protection is enabled
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 type CreateClusterNodePoolRequest struct {
@@ -1302,7 +1434,7 @@ type CreateClusterNodePoolRequest struct {
 	// Runtime version
 	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
 
-	// Operating system of the node pool
+	// Node pool operating system (enter the image ID for a custom image, and enter the OS name for a public image)
 	NodePoolOs *string `json:"NodePoolOs,omitempty" name:"NodePoolOs"`
 
 	// Container image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
@@ -1310,6 +1442,9 @@ type CreateClusterNodePoolRequest struct {
 
 	// Resource tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether Deletion Protection is enabled
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 func (r *CreateClusterNodePoolRequest) ToJsonString() string {
@@ -1337,6 +1472,7 @@ func (r *CreateClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "NodePoolOs")
 	delete(f, "OsCustomizeType")
 	delete(f, "Tags")
+	delete(f, "DeletionProtection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterNodePoolRequest has unknown keys!", "")
 	}
@@ -1557,6 +1693,140 @@ func (r *CreateClusterRouteTableResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateECMInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Module ID
+	ModuleId *string `json:"ModuleId,omitempty" name:"ModuleId"`
+
+	// Instance AZ, number of instances and ISP
+	ZoneInstanceCountISPSet []*ECMZoneInstanceCountISP `json:"ZoneInstanceCountISPSet,omitempty" name:"ZoneInstanceCountISPSet"`
+
+	// Password
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Public network bandwidth
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Image ID
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Host name
+	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// Enhanced service (including CWP and Cloud Monitoring)
+	EnhancedService *ECMEnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
+
+	// Custom script
+	UserData *string `json:"UserData,omitempty" name:"UserData"`
+
+	// Instance extension information
+	External *string `json:"External,omitempty" name:"External"`
+
+	// Security group of the instance
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+type CreateECMInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Module ID
+	ModuleId *string `json:"ModuleId,omitempty" name:"ModuleId"`
+
+	// Instance AZ, number of instances and ISP
+	ZoneInstanceCountISPSet []*ECMZoneInstanceCountISP `json:"ZoneInstanceCountISPSet,omitempty" name:"ZoneInstanceCountISPSet"`
+
+	// Password
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Public network bandwidth
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Image ID
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Host name
+	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// Enhanced service (including CWP and Cloud Monitoring)
+	EnhancedService *ECMEnhancedService `json:"EnhancedService,omitempty" name:"EnhancedService"`
+
+	// Custom script
+	UserData *string `json:"UserData,omitempty" name:"UserData"`
+
+	// Instance extension information
+	External *string `json:"External,omitempty" name:"External"`
+
+	// Security group of the instance
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+func (r *CreateECMInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateECMInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "ModuleId")
+	delete(f, "ZoneInstanceCountISPSet")
+	delete(f, "Password")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "ImageId")
+	delete(f, "InstanceName")
+	delete(f, "HostName")
+	delete(f, "EnhancedService")
+	delete(f, "UserData")
+	delete(f, "External")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateECMInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateECMInstancesResponseParams struct {
+	// ECM ID list
+	EcmIdSet []*string `json:"EcmIdSet,omitempty" name:"EcmIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateECMInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateECMInstancesResponseParams `json:"Response"`
+}
+
+func (r *CreateECMInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateECMInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreatePrometheusAlertRuleRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -1617,6 +1887,118 @@ func (r *CreatePrometheusAlertRuleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreatePrometheusAlertRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTKEEdgeClusterRequestParams struct {
+
+	K8SVersion *string `json:"K8SVersion,omitempty" name:"K8SVersion"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Cluster Pod CIDR block
+	PodCIDR *string `json:"PodCIDR,omitempty" name:"PodCIDR"`
+
+	// Cluster service CIDR block
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+
+	// Cluster description
+	ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+
+	// Cluster advanced settings
+	ClusterAdvancedSettings *EdgeClusterAdvancedSettings `json:"ClusterAdvancedSettings,omitempty" name:"ClusterAdvancedSettings"`
+
+	// Maximum number of Pods on the node
+	MaxNodePodNum *int64 `json:"MaxNodePodNum,omitempty" name:"MaxNodePodNum"`
+
+	// Public LB of the TKE Edge cluster
+	PublicLB *EdgeClusterPublicLB `json:"PublicLB,omitempty" name:"PublicLB"`
+}
+
+type CreateTKEEdgeClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	K8SVersion *string `json:"K8SVersion,omitempty" name:"K8SVersion"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Cluster Pod CIDR block
+	PodCIDR *string `json:"PodCIDR,omitempty" name:"PodCIDR"`
+
+	// Cluster service CIDR block
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+
+	// Cluster description
+	ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+
+	// Cluster advanced settings
+	ClusterAdvancedSettings *EdgeClusterAdvancedSettings `json:"ClusterAdvancedSettings,omitempty" name:"ClusterAdvancedSettings"`
+
+	// Maximum number of Pods on the node
+	MaxNodePodNum *int64 `json:"MaxNodePodNum,omitempty" name:"MaxNodePodNum"`
+
+	// Public LB of the TKE Edge cluster
+	PublicLB *EdgeClusterPublicLB `json:"PublicLB,omitempty" name:"PublicLB"`
+}
+
+func (r *CreateTKEEdgeClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTKEEdgeClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "K8SVersion")
+	delete(f, "VpcId")
+	delete(f, "ClusterName")
+	delete(f, "PodCIDR")
+	delete(f, "ServiceCIDR")
+	delete(f, "ClusterDesc")
+	delete(f, "ClusterAdvancedSettings")
+	delete(f, "MaxNodePodNum")
+	delete(f, "PublicLB")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTKEEdgeClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTKEEdgeClusterResponseParams struct {
+	// TKE Edge cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateTKEEdgeClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateTKEEdgeClusterResponseParams `json:"Response"`
+}
+
+func (r *CreateTKEEdgeClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTKEEdgeClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2172,6 +2554,189 @@ func (r *DeleteClusterRouteTableResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteECMInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// IDs of ECMs to be deleted
+	EcmIdSet []*string `json:"EcmIdSet,omitempty" name:"EcmIdSet"`
+}
+
+type DeleteECMInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// IDs of ECMs to be deleted
+	EcmIdSet []*string `json:"EcmIdSet,omitempty" name:"EcmIdSet"`
+}
+
+func (r *DeleteECMInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteECMInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "EcmIdSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteECMInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteECMInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteECMInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteECMInstancesResponseParams `json:"Response"`
+}
+
+func (r *DeleteECMInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteECMInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEdgeCVMInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// IDs of CVMs to be deleted
+	CvmIdSet []*string `json:"CvmIdSet,omitempty" name:"CvmIdSet"`
+}
+
+type DeleteEdgeCVMInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// IDs of CVMs to be deleted
+	CvmIdSet []*string `json:"CvmIdSet,omitempty" name:"CvmIdSet"`
+}
+
+func (r *DeleteEdgeCVMInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEdgeCVMInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "CvmIdSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteEdgeCVMInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEdgeCVMInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteEdgeCVMInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteEdgeCVMInstancesResponseParams `json:"Response"`
+}
+
+func (r *DeleteEdgeCVMInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEdgeCVMInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEdgeClusterInstancesRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Array of instance IDs to be deleted
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+type DeleteEdgeClusterInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Array of instance IDs to be deleted
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *DeleteEdgeClusterInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEdgeClusterInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteEdgeClusterInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEdgeClusterInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteEdgeClusterInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteEdgeClusterInstancesResponseParams `json:"Response"`
+}
+
+func (r *DeleteEdgeClusterInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEdgeClusterInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeletePrometheusAlertRuleRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2229,6 +2794,60 @@ func (r *DeletePrometheusAlertRuleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeletePrometheusAlertRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteTKEEdgeClusterRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DeleteTKEEdgeClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DeleteTKEEdgeClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTKEEdgeClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteTKEEdgeClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteTKEEdgeClusterResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteTKEEdgeClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteTKEEdgeClusterResponseParams `json:"Response"`
+}
+
+func (r *DeleteTKEEdgeClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTKEEdgeClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2298,6 +2917,60 @@ func (r *DescribeAvailableClusterVersionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAvailableClusterVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAvailableTKEEdgeVersionRequestParams struct {
+
+}
+
+type DescribeAvailableTKEEdgeVersionRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeAvailableTKEEdgeVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableTKEEdgeVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableTKEEdgeVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAvailableTKEEdgeVersionResponseParams struct {
+	// Version list
+	Versions []*string `json:"Versions,omitempty" name:"Versions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAvailableTKEEdgeVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAvailableTKEEdgeVersionResponseParams `json:"Response"`
+}
+
+func (r *DescribeAvailableTKEEdgeVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableTKEEdgeVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3612,6 +4285,345 @@ func (r *DescribeClustersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeECMInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Filter condition
+	// Only filtering by an ECM ID is supported
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeECMInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Filter condition
+	// Only filtering by an ECM ID is supported
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeECMInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeECMInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeECMInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeECMInstancesResponseParams struct {
+	// Number of instances matched the condition
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of the returned instance information
+	InstanceInfoSet []*string `json:"InstanceInfoSet,omitempty" name:"InstanceInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeECMInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeECMInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeECMInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeECMInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeAvailableExtraArgsRequestParams struct {
+	// Cluster version
+	ClusterVersion *string `json:"ClusterVersion,omitempty" name:"ClusterVersion"`
+}
+
+type DescribeEdgeAvailableExtraArgsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster version
+	ClusterVersion *string `json:"ClusterVersion,omitempty" name:"ClusterVersion"`
+}
+
+func (r *DescribeEdgeAvailableExtraArgsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeAvailableExtraArgsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeAvailableExtraArgsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeAvailableExtraArgsResponseParams struct {
+	// Cluster version
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterVersion *string `json:"ClusterVersion,omitempty" name:"ClusterVersion"`
+
+	// Available custom parameters
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AvailableExtraArgs *EdgeAvailableExtraArgs `json:"AvailableExtraArgs,omitempty" name:"AvailableExtraArgs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeAvailableExtraArgsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeAvailableExtraArgsResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeAvailableExtraArgsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeAvailableExtraArgsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeCVMInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Filter condition
+	// Only `cvm-id` is supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeEdgeCVMInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Filter condition
+	// Only `cvm-id` is supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeEdgeCVMInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeCVMInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeCVMInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeCVMInstancesResponseParams struct {
+	// Number of instances matched the condition
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of the returned instance information
+	InstanceInfoSet []*string `json:"InstanceInfoSet,omitempty" name:"InstanceInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeCVMInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeCVMInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeCVMInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeCVMInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeClusterExtraArgsRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeEdgeClusterExtraArgsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeEdgeClusterExtraArgsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeClusterExtraArgsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeClusterExtraArgsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeClusterExtraArgsResponseParams struct {
+	// Custom parameters of the cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterExtraArgs *EdgeClusterExtraArgs `json:"ClusterExtraArgs,omitempty" name:"ClusterExtraArgs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeClusterExtraArgsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeClusterExtraArgsResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeClusterExtraArgsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeClusterExtraArgsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeClusterInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Max number of returned entries
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter condition. Only `NodeName` is supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeEdgeClusterInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Max number of returned entries
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter condition. Only `NodeName` is supported.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeEdgeClusterInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeClusterInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeClusterInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeClusterInstancesResponseParams struct {
+	// Total number of nodes in the cluster
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Array of node information
+	InstanceInfoSet *string `json:"InstanceInfoSet,omitempty" name:"InstanceInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeClusterInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeClusterInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeClusterInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeClusterInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeEnableVpcCniProgressRequestParams struct {
 	// ID of the cluster for which you want to enable the VPC-CNI mode
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -4115,6 +5127,285 @@ func (r *DescribeRouteTableConflictsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTKEEdgeClusterCredentialRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeTKEEdgeClusterCredentialRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeTKEEdgeClusterCredentialRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeClusterCredentialRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTKEEdgeClusterCredentialRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeClusterCredentialResponseParams struct {
+	// Access address of the cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Addresses []*IPAddress `json:"Addresses,omitempty" name:"Addresses"`
+
+	// Cluster authentication information
+	Credential *ClusterCredential `json:"Credential,omitempty" name:"Credential"`
+
+	// Public network access information of the cluster
+	PublicLB *EdgeClusterPublicLB `json:"PublicLB,omitempty" name:"PublicLB"`
+
+	// Private network access information of the cluster
+	InternalLB *EdgeClusterInternalLB `json:"InternalLB,omitempty" name:"InternalLB"`
+
+	// CoreDns deployment information of the cluster
+	CoreDns *string `json:"CoreDns,omitempty" name:"CoreDns"`
+
+	// Multi-region health check deployment information of the cluster
+	HealthRegion *string `json:"HealthRegion,omitempty" name:"HealthRegion"`
+
+	// Health check deployment information of the cluster
+	Health *string `json:"Health,omitempty" name:"Health"`
+
+	// Whether to deploy GridDaemon to support headless service
+	GridDaemon *string `json:"GridDaemon,omitempty" name:"GridDaemon"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTKEEdgeClusterCredentialResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTKEEdgeClusterCredentialResponseParams `json:"Response"`
+}
+
+func (r *DescribeTKEEdgeClusterCredentialResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeClusterCredentialResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeClusterStatusRequestParams struct {
+	// Edge compute cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeTKEEdgeClusterStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Edge compute cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeTKEEdgeClusterStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeClusterStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTKEEdgeClusterStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeClusterStatusResponseParams struct {
+	// Current cluster status
+	Phase *string `json:"Phase,omitempty" name:"Phase"`
+
+	// Array of cluster processes
+	Conditions []*ClusterCondition `json:"Conditions,omitempty" name:"Conditions"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTKEEdgeClusterStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTKEEdgeClusterStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeTKEEdgeClusterStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeClusterStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeClustersRequestParams struct {
+	// Cluster ID list (when it is empty,
+	// all clusters under the account are obtained)
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// Offset. Default value: `0`
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: `20`
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition (only filtering by a single ClusterName is supported)
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeTKEEdgeClustersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID list (when it is empty,
+	// all clusters under the account are obtained)
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+
+	// Offset. Default value: `0`
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of output entries. Default value: `20`
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition (only filtering by a single ClusterName is supported)
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeTKEEdgeClustersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeClustersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTKEEdgeClustersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeClustersResponseParams struct {
+	// Total number of clusters
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Cluster information list
+	Clusters []*EdgeCluster `json:"Clusters,omitempty" name:"Clusters"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTKEEdgeClustersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTKEEdgeClustersResponseParams `json:"Response"`
+}
+
+func (r *DescribeTKEEdgeClustersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeClustersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeExternalKubeconfigRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeTKEEdgeExternalKubeconfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeTKEEdgeExternalKubeconfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeExternalKubeconfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTKEEdgeExternalKubeconfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTKEEdgeExternalKubeconfigResponseParams struct {
+	// Kubeconfig file content
+	Kubeconfig *string `json:"Kubeconfig,omitempty" name:"Kubeconfig"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTKEEdgeExternalKubeconfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTKEEdgeExternalKubeconfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeTKEEdgeExternalKubeconfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTKEEdgeExternalKubeconfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTKEEdgeScriptRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -4169,6 +5460,15 @@ func (r *DescribeTKEEdgeScriptRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTKEEdgeScriptResponseParams struct {
+	// Whether to download the link
+	Link *string `json:"Link,omitempty" name:"Link"`
+
+	// Whether to download the desired token
+	Token *string `json:"Token,omitempty" name:"Token"`
+
+	// Whether to download the command
+	Command *string `json:"Command,omitempty" name:"Command"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -4376,6 +5676,154 @@ func (r *DisableClusterDeletionProtectionResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DisableClusterDeletionProtectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ECMEnhancedService struct {
+	// Whether Cloud Monitoring is enabled
+	SecurityService *ECMRunMonitorServiceEnabled `json:"SecurityService,omitempty" name:"SecurityService"`
+
+	// Whether Cloud Workload Protection is enabled
+	MonitorService *ECMRunSecurityServiceEnabled `json:"MonitorService,omitempty" name:"MonitorService"`
+}
+
+type ECMRunMonitorServiceEnabled struct {
+	// Whether it is enabled
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type ECMRunSecurityServiceEnabled struct {
+	// Whether it is enabled
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+
+	// CWP version. Valid values: `0` (CWP Pro), `1` (CWP Pro)
+	Version *int64 `json:"Version,omitempty" name:"Version"`
+}
+
+type ECMZoneInstanceCountISP struct {
+	// Instance AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instances to be created in the current AZ
+	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// ISP
+	ISP *string `json:"ISP,omitempty" name:"ISP"`
+}
+
+type EdgeArgsFlag struct {
+	// Parameter name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Parameter type
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Parameter description
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Usage *string `json:"Usage,omitempty" name:"Usage"`
+
+	// Default value of the parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Default *string `json:"Default,omitempty" name:"Default"`
+
+	// Valid value or range. Options: `[]` (it indicates a range, for example, “[1, 5]” indicates the parameter must be equal or larger than 1, and be equal or smaller than 5), and `()` (it indicates a valid value, for example, “('aa', 'bb')” indicates the parameter must be “aa” or “bb”. If it is left empty, the verification can be skipped.)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Constraint *string `json:"Constraint,omitempty" name:"Constraint"`
+}
+
+type EdgeAvailableExtraArgs struct {
+	// kube-apiserver custom parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KubeAPIServer []*EdgeArgsFlag `json:"KubeAPIServer,omitempty" name:"KubeAPIServer"`
+
+	// kube-controller-manager custom parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KubeControllerManager []*EdgeArgsFlag `json:"KubeControllerManager,omitempty" name:"KubeControllerManager"`
+
+	// kube-scheduler custom parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KubeScheduler []*EdgeArgsFlag `json:"KubeScheduler,omitempty" name:"KubeScheduler"`
+
+	// kubelet custom parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Kubelet []*EdgeArgsFlag `json:"Kubelet,omitempty" name:"Kubelet"`
+}
+
+type EdgeCluster struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Cluster Pod CIDR block
+	PodCIDR *string `json:"PodCIDR,omitempty" name:"PodCIDR"`
+
+	// Cluster service CIDR block
+	ServiceCIDR *string `json:"ServiceCIDR,omitempty" name:"ServiceCIDR"`
+
+
+	K8SVersion *string `json:"K8SVersion,omitempty" name:"K8SVersion"`
+
+	// Cluster status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Cluster description
+	ClusterDesc *string `json:"ClusterDesc,omitempty" name:"ClusterDesc"`
+
+	// Cluster creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Edge cluster version
+	EdgeClusterVersion *string `json:"EdgeClusterVersion,omitempty" name:"EdgeClusterVersion"`
+
+	// Maximum number of Pods on the node
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	MaxNodePodNum *int64 `json:"MaxNodePodNum,omitempty" name:"MaxNodePodNum"`
+}
+
+type EdgeClusterAdvancedSettings struct {
+	// Custom parameters of the cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExtraArgs *EdgeClusterExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
+}
+
+type EdgeClusterExtraArgs struct {
+	// kube-apiserver custom parameter, in the format of ["k1=v1", "k1=v2"], for example: ["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KubeAPIServer []*string `json:"KubeAPIServer,omitempty" name:"KubeAPIServer"`
+
+	// kube-controller-manager custom parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KubeControllerManager []*string `json:"KubeControllerManager,omitempty" name:"KubeControllerManager"`
+
+	// kube-scheduler custom parameter
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KubeScheduler []*string `json:"KubeScheduler,omitempty" name:"KubeScheduler"`
+}
+
+type EdgeClusterInternalLB struct {
+	// Whether the private LB is enabled
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+
+	// ID of the subnet associated with the private LB
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SubnetId []*string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type EdgeClusterPublicLB struct {
+	// Whether the public LB is enabled
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+
+	// Public network CIDR block allowed to access
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AllowFromCidrs []*string `json:"AllowFromCidrs,omitempty" name:"AllowFromCidrs"`
 }
 
 // Predefined struct for user
@@ -4633,6 +6081,105 @@ type Filter struct {
 }
 
 // Predefined struct for user
+type ForwardTKEEdgeApplicationRequestV3RequestParams struct {
+	// Access to request the cluster add-on
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Path to request the cluster add-on
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Data format allowed to receive the requested cluster add-on
+	Accept *string `json:"Accept,omitempty" name:"Accept"`
+
+	// Data format for requesting the cluster add-on
+	ContentType *string `json:"ContentType,omitempty" name:"ContentType"`
+
+	// Data sent to request the cluster add-on
+	RequestBody *string `json:"RequestBody,omitempty" name:"RequestBody"`
+
+	// Cluster name (for example, `cls-1234abcd`)
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Whether to encode the request content
+	EncodedBody *string `json:"EncodedBody,omitempty" name:"EncodedBody"`
+}
+
+type ForwardTKEEdgeApplicationRequestV3Request struct {
+	*tchttp.BaseRequest
+	
+	// Access to request the cluster add-on
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Path to request the cluster add-on
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Data format allowed to receive the requested cluster add-on
+	Accept *string `json:"Accept,omitempty" name:"Accept"`
+
+	// Data format for requesting the cluster add-on
+	ContentType *string `json:"ContentType,omitempty" name:"ContentType"`
+
+	// Data sent to request the cluster add-on
+	RequestBody *string `json:"RequestBody,omitempty" name:"RequestBody"`
+
+	// Cluster name (for example, `cls-1234abcd`)
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Whether to encode the request content
+	EncodedBody *string `json:"EncodedBody,omitempty" name:"EncodedBody"`
+}
+
+func (r *ForwardTKEEdgeApplicationRequestV3Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ForwardTKEEdgeApplicationRequestV3Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Method")
+	delete(f, "Path")
+	delete(f, "Accept")
+	delete(f, "ContentType")
+	delete(f, "RequestBody")
+	delete(f, "ClusterName")
+	delete(f, "EncodedBody")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ForwardTKEEdgeApplicationRequestV3Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ForwardTKEEdgeApplicationRequestV3ResponseParams struct {
+	// Data returned after requesting the cluster add-on
+	ResponseBody *string `json:"ResponseBody,omitempty" name:"ResponseBody"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ForwardTKEEdgeApplicationRequestV3Response struct {
+	*tchttp.BaseResponse
+	Response *ForwardTKEEdgeApplicationRequestV3ResponseParams `json:"Response"`
+}
+
+func (r *ForwardTKEEdgeApplicationRequestV3Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ForwardTKEEdgeApplicationRequestV3Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetClusterLevelPriceRequestParams struct {
 	// The cluster model. It’s used for price query.
 	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
@@ -4779,6 +6326,17 @@ func (r *GetUpgradeInstanceProgressResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetUpgradeInstanceProgressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type IPAddress struct {
+	// Type. Valid values: `advertise`, `public`, and others
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// IP Address
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Network port
+	Port *uint64 `json:"Port,omitempty" name:"Port"`
 }
 
 type ImageInstance struct {
@@ -5140,6 +6698,9 @@ type ModifyClusterAttributeRequestParams struct {
 
 	// Auto-upgrades cluster specification
 	AutoUpgradeClusterLevel *AutoUpgradeClusterLevel `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Whether to enable qGPU Sharing
+	QGPUShareEnable *bool `json:"QGPUShareEnable,omitempty" name:"QGPUShareEnable"`
 }
 
 type ModifyClusterAttributeRequest struct {
@@ -5162,6 +6723,9 @@ type ModifyClusterAttributeRequest struct {
 
 	// Auto-upgrades cluster specification
 	AutoUpgradeClusterLevel *AutoUpgradeClusterLevel `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Whether to enable qGPU Sharing
+	QGPUShareEnable *bool `json:"QGPUShareEnable,omitempty" name:"QGPUShareEnable"`
 }
 
 func (r *ModifyClusterAttributeRequest) ToJsonString() string {
@@ -5182,6 +6746,7 @@ func (r *ModifyClusterAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ClusterDesc")
 	delete(f, "ClusterLevel")
 	delete(f, "AutoUpgradeClusterLevel")
+	delete(f, "QGPUShareEnable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAttributeRequest has unknown keys!", "")
 	}
@@ -5209,6 +6774,10 @@ type ModifyClusterAttributeResponseParams struct {
 	// Auto-upgrades cluster specification
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AutoUpgradeClusterLevel *AutoUpgradeClusterLevel `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Whether to enable qGPU Sharing
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	QGPUShareEnable *bool `json:"QGPUShareEnable,omitempty" name:"QGPUShareEnable"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5392,6 +6961,9 @@ type ModifyClusterNodePoolRequestParams struct {
 
 	// Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run `kubectl uncordon nodename` to enable this node for scheduling.
 	Unschedulable *int64 `json:"Unschedulable,omitempty" name:"Unschedulable"`
+
+	// Whether Deletion Protection is enabled
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 type ModifyClusterNodePoolRequest struct {
@@ -5435,6 +7007,9 @@ type ModifyClusterNodePoolRequest struct {
 
 	// Sets whether the added node is schedulable. 0 (default): schedulable; other values: unschedulable. After node initialization is completed, you can run `kubectl uncordon nodename` to enable this node for scheduling.
 	Unschedulable *int64 `json:"Unschedulable,omitempty" name:"Unschedulable"`
+
+	// Whether Deletion Protection is enabled
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 func (r *ModifyClusterNodePoolRequest) ToJsonString() string {
@@ -5462,6 +7037,7 @@ func (r *ModifyClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "ExtraArgs")
 	delete(f, "Tags")
 	delete(f, "Unschedulable")
+	delete(f, "DeletionProtection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterNodePoolRequest has unknown keys!", "")
 	}
@@ -5695,6 +7271,10 @@ type NodePool struct {
 	// Resource tag
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether Deletion Protection is enabled
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
 }
 
 type NodePoolOption struct {

@@ -663,15 +663,15 @@ type CloneLoadBalancerRequestParams struct {
 	// Note: if the name of a new CLB instance already exists, a default name will be generated automatically.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Project ID of the CLB instance, which can be obtained through the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this field is not specified, it will default to the default project.
+	// ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not passed in, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-	// Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+	// Note: A primary AZ loads traffic, while a secondary AZ does not load traffic by default and will be used only if the primary AZ becomes unavailable. The platform will automatically select the optimal secondary AZ. You can use the `DescribeResource` API to query the primary AZ list of a region.
 	MasterZoneId *string `json:"MasterZoneId,omitempty" name:"MasterZoneId"`
 
 	// Specifies the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It is applicable only to public network CLB.
-	// Note: The traffic only goes to the secondary AZ when the primary AZ is unavailable. You can query the list of primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+	// Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use the `DescribeMasterZones` API to query the primary and secondary AZ list of a region.
 	SlaveZoneId *string `json:"SlaveZoneId,omitempty" name:"SlaveZoneId"`
 
 	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
@@ -727,15 +727,15 @@ type CloneLoadBalancerRequest struct {
 	// Note: if the name of a new CLB instance already exists, a default name will be generated automatically.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Project ID of the CLB instance, which can be obtained through the [`DescribeProject`](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this field is not specified, it will default to the default project.
+	// ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not passed in, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-	// Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+	// Note: A primary AZ loads traffic, while a secondary AZ does not load traffic by default and will be used only if the primary AZ becomes unavailable. The platform will automatically select the optimal secondary AZ. You can use the `DescribeResource` API to query the primary AZ list of a region.
 	MasterZoneId *string `json:"MasterZoneId,omitempty" name:"MasterZoneId"`
 
 	// Specifies the secondary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It is applicable only to public network CLB.
-	// Note: The traffic only goes to the secondary AZ when the primary AZ is unavailable. You can query the list of primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+	// Note: A secondary AZ will load traffic if the primary AZ is faulty. You can use the `DescribeMasterZones` API to query the primary and secondary AZ list of a region.
 	SlaveZoneId *string `json:"SlaveZoneId,omitempty" name:"SlaveZoneId"`
 
 	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
@@ -1108,13 +1108,13 @@ type CreateLoadBalancerRequestParams struct {
 	// Note: if the name of the new CLB instance already exists, a default name will be generated automatically.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Network ID of the target CLB real server, such as `vpc-12345678`, which can be obtained through the [DescribeVpcEx](https://intl.cloud.tencent.com/document/product/215/1372?from_cn_redirect=1) API. If this parameter is not specified, it will default to `DefaultVPC`. This parameter is required for creating a CLB instance.
+	// Network ID of the target device on the CLB backend, such as `vpc-12345678`, which can be obtained through the `DescribeVpcEx` API. If this parameter is not entered, `DefaultVPC` is used by default. This parameter is required when creating a private network instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet. This parameter is required for creating a CLB instance.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Project ID of the CLB instance, which can be obtained through the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this parameter is not specified, it will default to the default project.
+	// ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
@@ -1136,7 +1136,7 @@ type CreateLoadBalancerRequestParams struct {
 	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
-	// Tags a CLB instance when purchasing it.
+	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Specifies a VIP for the CLB instance.
@@ -1193,13 +1193,13 @@ type CreateLoadBalancerRequest struct {
 	// Note: if the name of the new CLB instance already exists, a default name will be generated automatically.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Network ID of the target CLB real server, such as `vpc-12345678`, which can be obtained through the [DescribeVpcEx](https://intl.cloud.tencent.com/document/product/215/1372?from_cn_redirect=1) API. If this parameter is not specified, it will default to `DefaultVPC`. This parameter is required for creating a CLB instance.
+	// Network ID of the target device on the CLB backend, such as `vpc-12345678`, which can be obtained through the `DescribeVpcEx` API. If this parameter is not entered, `DefaultVPC` is used by default. This parameter is required when creating a private network instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// A subnet ID must be specified when you purchase a private network CLB instance in a VPC, and the VIP of this instance will be generated in this subnet. This parameter is required for creating a CLB instance.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Project ID of the CLB instance, which can be obtained through the [DescribeProject](https://intl.cloud.tencent.com/document/product/378/4400?from_cn_redirect=1) API. If this parameter is not specified, it will default to the default project.
+	// ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
@@ -1221,7 +1221,7 @@ type CreateLoadBalancerRequest struct {
 	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
-	// Tags a CLB instance when purchasing it.
+	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
 	// Specifies a VIP for the CLB instance.
@@ -4170,6 +4170,7 @@ type DescribeTaskStatusRequestParams struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 	// Order ID.
+	// Note: Either `TaskId` or `DealName` is required.
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
 }
 
@@ -4180,6 +4181,7 @@ type DescribeTaskStatusRequest struct {
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 	// Order ID.
+	// Note: Either `TaskId` or `DealName` is required.
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
 }
 
@@ -4521,6 +4523,10 @@ type Listener struct {
 	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
+
+	// Attribute of listener
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AttrFlags []*string `json:"AttrFlags,omitempty" name:"AttrFlags"`
 }
 
 type ListenerBackend struct {

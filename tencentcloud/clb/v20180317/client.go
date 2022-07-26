@@ -621,6 +621,7 @@ func NewCreateListenerResponse() (response *CreateListenerResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_PORTCHECKFAILED = "InvalidParameter.PortCheckFailed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -641,6 +642,7 @@ func (c *Client) CreateListener(request *CreateListenerRequest) (response *Creat
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_PORTCHECKFAILED = "InvalidParameter.PortCheckFailed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -699,6 +701,7 @@ func NewCreateLoadBalancerResponse() (response *CreateLoadBalancerResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (response *CreateLoadBalancerResponse, err error) {
     return c.CreateLoadBalancerWithContext(context.Background(), request)
 }
@@ -722,6 +725,7 @@ func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (respons
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateLoadBalancerWithContext(ctx context.Context, request *CreateLoadBalancerRequest) (response *CreateLoadBalancerResponse, err error) {
     if request == nil {
         request = NewCreateLoadBalancerRequest()
@@ -1900,6 +1904,7 @@ func NewDescribeClassicalLBListenersResponse() (response *DescribeClassicalLBLis
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClassicalLBListeners(request *DescribeClassicalLBListenersRequest) (response *DescribeClassicalLBListenersResponse, err error) {
     return c.DescribeClassicalLBListenersWithContext(context.Background(), request)
 }
@@ -1917,6 +1922,7 @@ func (c *Client) DescribeClassicalLBListeners(request *DescribeClassicalLBListen
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClassicalLBListenersWithContext(ctx context.Context, request *DescribeClassicalLBListenersRequest) (response *DescribeClassicalLBListenersResponse, err error) {
     if request == nil {
         request = NewDescribeClassicalLBListenersRequest()
@@ -2585,6 +2591,7 @@ func NewDescribeLoadBalancersResponse() (response *DescribeLoadBalancersResponse
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLoadBalancers(request *DescribeLoadBalancersRequest) (response *DescribeLoadBalancersResponse, err error) {
     return c.DescribeLoadBalancersWithContext(context.Background(), request)
 }
@@ -2602,6 +2609,7 @@ func (c *Client) DescribeLoadBalancers(request *DescribeLoadBalancersRequest) (r
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLoadBalancersWithContext(ctx context.Context, request *DescribeLoadBalancersRequest) (response *DescribeLoadBalancersResponse, err error) {
     if request == nil {
         request = NewDescribeLoadBalancersRequest()
@@ -2703,6 +2711,7 @@ func NewDescribeQuotaResponse() (response *DescribeQuotaResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeQuota(request *DescribeQuotaRequest) (response *DescribeQuotaResponse, err error) {
     return c.DescribeQuotaWithContext(context.Background(), request)
 }
@@ -2712,6 +2721,7 @@ func (c *Client) DescribeQuota(request *DescribeQuotaRequest) (response *Describ
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeQuotaWithContext(ctx context.Context, request *DescribeQuotaRequest) (response *DescribeQuotaResponse, err error) {
     if request == nil {
         request = NewDescribeQuotaRequest()
@@ -2989,6 +2999,7 @@ func NewDescribeTargetHealthResponse() (response *DescribeTargetHealthResponse) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTargetHealth(request *DescribeTargetHealthRequest) (response *DescribeTargetHealthResponse, err error) {
     return c.DescribeTargetHealthWithContext(context.Background(), request)
 }
@@ -3005,6 +3016,7 @@ func (c *Client) DescribeTargetHealth(request *DescribeTargetHealthRequest) (res
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTargetHealthWithContext(ctx context.Context, request *DescribeTargetHealthRequest) (response *DescribeTargetHealthResponse, err error) {
     if request == nil {
         request = NewDescribeTargetHealthRequest()
@@ -3050,6 +3062,7 @@ func NewDescribeTargetsResponse() (response *DescribeTargetsResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTargets(request *DescribeTargetsRequest) (response *DescribeTargetsResponse, err error) {
     return c.DescribeTargetsWithContext(context.Background(), request)
 }
@@ -3066,6 +3079,7 @@ func (c *Client) DescribeTargets(request *DescribeTargetsRequest) (response *Des
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTargetsWithContext(ctx context.Context, request *DescribeTargetsRequest) (response *DescribeTargetsResponse, err error) {
     if request == nil {
         request = NewDescribeTargetsRequest()
