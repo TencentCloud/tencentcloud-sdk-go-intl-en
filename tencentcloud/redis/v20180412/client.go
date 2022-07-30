@@ -119,6 +119,7 @@ func NewApplyParamsTemplateResponse() (response *ApplyParamsTemplateResponse) {
 // This API is used to apply a parameter template to instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
@@ -140,6 +141,7 @@ func (c *Client) ApplyParamsTemplate(request *ApplyParamsTemplateRequest) (respo
 // This API is used to apply a parameter template to instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"

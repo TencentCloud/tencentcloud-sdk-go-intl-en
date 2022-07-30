@@ -653,6 +653,12 @@ type CreateInstancesRequestParams struct {
 
 	// false: send a normal request and create an instance directly after the check is passed (default value); true: send a check request without creating an instance.
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+	ProductVersion *string `json:"ProductVersion,omitempty" name:"ProductVersion"`
+
+	// Dedicated cluster ID, which is required when `ProductVersion` is "cdc".
+	RedisClusterId *string `json:"RedisClusterId,omitempty" name:"RedisClusterId"`
 }
 
 type CreateInstancesRequest struct {
@@ -729,6 +735,12 @@ type CreateInstancesRequest struct {
 
 	// false: send a normal request and create an instance directly after the check is passed (default value); true: send a check request without creating an instance.
 	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+	ProductVersion *string `json:"ProductVersion,omitempty" name:"ProductVersion"`
+
+	// Dedicated cluster ID, which is required when `ProductVersion` is "cdc".
+	RedisClusterId *string `json:"RedisClusterId,omitempty" name:"RedisClusterId"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -766,6 +778,8 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ZoneName")
 	delete(f, "TemplateId")
 	delete(f, "DryRun")
+	delete(f, "ProductVersion")
+	delete(f, "RedisClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -4280,6 +4294,9 @@ type InquiryPriceCreateInstanceRequestParams struct {
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+	ProductVersion *string `json:"ProductVersion,omitempty" name:"ProductVersion"`
 }
 
 type InquiryPriceCreateInstanceRequest struct {
@@ -4315,6 +4332,9 @@ type InquiryPriceCreateInstanceRequest struct {
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
+	ProductVersion *string `json:"ProductVersion,omitempty" name:"ProductVersion"`
 }
 
 func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
@@ -4339,6 +4359,7 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "RedisReplicasNum")
 	delete(f, "ReplicasReadonly")
 	delete(f, "ZoneName")
+	delete(f, "ProductVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateInstanceRequest has unknown keys!", "")
 	}
