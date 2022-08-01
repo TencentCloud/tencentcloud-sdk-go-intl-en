@@ -5423,6 +5423,9 @@ type ModifyListenerRequestParams struct {
 	// Whether to enable the SNI feature. This parameter is applicable only to HTTPS listeners. Note: The SNI feature can be enabled but cannot be disabled once enabled.
 	SniSwitch *int64 `json:"SniSwitch,omitempty" name:"SniSwitch"`
 
+	// Target backend type. `NODE`: A single node; `TARGETGROUP`: A target group.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
 	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners.
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
 
@@ -5461,6 +5464,9 @@ type ModifyListenerRequest struct {
 	// Whether to enable the SNI feature. This parameter is applicable only to HTTPS listeners. Note: The SNI feature can be enabled but cannot be disabled once enabled.
 	SniSwitch *int64 `json:"SniSwitch,omitempty" name:"SniSwitch"`
 
+	// Target backend type. `NODE`: A single node; `TARGETGROUP`: A target group.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
 	// Whether to enable a persistent connection. This parameter is applicable only to HTTP and HTTPS listeners.
 	KeepaliveEnable *int64 `json:"KeepaliveEnable,omitempty" name:"KeepaliveEnable"`
 
@@ -5491,6 +5497,7 @@ func (r *ModifyListenerRequest) FromJsonString(s string) error {
 	delete(f, "Certificate")
 	delete(f, "Scheduler")
 	delete(f, "SniSwitch")
+	delete(f, "TargetType")
 	delete(f, "KeepaliveEnable")
 	delete(f, "DeregisterTargetRst")
 	delete(f, "SessionType")
@@ -6954,16 +6961,16 @@ type Target struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Unique ID of a CVM instance, which is required when binding a CVM instance. It can be obtained from the `InstanceId` field in the response of the `DescribeInstances` API. It indicates binding the primary IP of the primary ENI.
-	// Note: either `InstanceId` or `EniIp` must be passed in.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: Either `InstanceId` or `EniIp` can be passed in.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The new forwarding weight of the real server. Value range: [0, 100]. Default: 10. This parameter takes priority over `Weight` in [`RsWeightRule`](https://intl.cloud.tencent.com/document/api/214/30694?from_cn_redirect=1#RsWeightRule). If it’s left empty, the value of `Weight` in `RsWeightRule` will be used.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
 
 	// It is required when binding an IP. ENI IPs and other private IPs are supported. To bind an ENI IP, the ENI should be bound to a CVM instance before being bound to a CLB instance.
-	// Note: either `InstanceId` or `EniIp` must be passed in. It is required when binding a dual-stack IPv6 CVM instance.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: Either `InstanceId` or `EniIp` can be passed in. `EniIp` is required in a cross-region binding or when the dual-stack IPV6 CVM is bound.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	EniIp *string `json:"EniIp,omitempty" name:"EniIp"`
 }
 

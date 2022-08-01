@@ -1107,7 +1107,7 @@ func (r *CreateExporterIntegrationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateExporterIntegrationResponseParams struct {
-
+	// The list of successfully created integrations.
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1345,7 +1345,7 @@ func (r *CreatePrometheusAgentRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePrometheusAgentResponseParams struct {
-
+	// ID of a successfully created agent.
 	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1515,7 +1515,7 @@ func (r *CreatePrometheusScrapeJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePrometheusScrapeJobResponseParams struct {
-
+	// ID of a successfully created scrape task.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

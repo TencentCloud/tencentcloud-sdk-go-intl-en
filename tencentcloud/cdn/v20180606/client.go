@@ -369,6 +369,7 @@ func NewDeleteCdnDomainResponse() (response *DeleteCdnDomainResponse) {
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
 //  INVALIDPARAMETER_CDNHOSTHASSPECIALCONFIG = "InvalidParameter.CdnHostHasSpecialConfig"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -396,6 +397,7 @@ func (c *Client) DeleteCdnDomain(request *DeleteCdnDomainRequest) (response *Del
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
 //  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
 //  INVALIDPARAMETER_CDNHOSTHASSPECIALCONFIG = "InvalidParameter.CdnHostHasSpecialConfig"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -445,7 +447,7 @@ func NewDeleteClsLogTopicResponse() (response *DeleteClsLogTopicResponse) {
 }
 
 // DeleteClsLogTopic
-// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5-15 minutes.
+// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5–15 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
@@ -481,7 +483,7 @@ func (c *Client) DeleteClsLogTopic(request *DeleteClsLogTopicRequest) (response 
 }
 
 // DeleteClsLogTopic
-// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5-15 minutes.
+// This API is used to delete a log topic. Note: when a log topic is deleted, all logs of the domain names bound to it will no longer be published to the topic, and the logs previously published to the topic will be deleted. This action will take effect within 5–15 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
@@ -972,7 +974,7 @@ func NewDescribeCdnOriginIpResponse() (response *DescribeCdnOriginIpResponse) {
 }
 
 // DescribeCdnOriginIp
-// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon. Please call `DescribeIpStatus` instead.
+// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon and no longer be maintained. Please call `DescribeIpStatus` instead.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -991,7 +993,7 @@ func (c *Client) DescribeCdnOriginIp(request *DescribeCdnOriginIpRequest) (respo
 }
 
 // DescribeCdnOriginIp
-// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon. Please call `DescribeIpStatus` instead.
+// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon and no longer be maintained. Please call `DescribeIpStatus` instead.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -1039,7 +1041,7 @@ func NewDescribeCertDomainsResponse() (response *DescribeCertDomainsResponse) {
 }
 
 // DescribeCertDomains
-// This API is used to verify an SSL certificate and extract the domain names. It will then return the list of domain names connected to CDN and the list of domain names with the certificate configured.
+// This API is used to verify a SSL certificate and obtain its domain names.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -1066,7 +1068,7 @@ func (c *Client) DescribeCertDomains(request *DescribeCertDomainsRequest) (respo
 }
 
 // DescribeCertDomains
-// This API is used to verify an SSL certificate and extract the domain names. It will then return the list of domain names connected to CDN and the list of domain names with the certificate configured.
+// This API is used to verify a SSL certificate and obtain its domain names.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -1713,6 +1715,7 @@ func NewDescribePayTypeResponse() (response *DescribePayTypeResponse) {
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
@@ -1729,6 +1732,7 @@ func (c *Client) DescribePayType(request *DescribePayTypeRequest) (response *Des
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
+//  INTERNALERROR_DATASYSTEMERROR = "InternalError.DataSystemError"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  INVALIDPARAMETER_ECDNINTERFACEERROR = "InvalidParameter.EcdnInterfaceError"
@@ -1954,8 +1958,6 @@ func NewDescribePushTasksResponse() (response *DescribePushTasksResponse) {
 // DescribePushTasks
 // This API is used to query the submission record and progress of prefetch tasks.
 //
-// This API is in beta test and not fully available yet. Please stay tuned.
-//
 // error code that may be returned:
 //  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -1987,8 +1989,6 @@ func (c *Client) DescribePushTasks(request *DescribePushTasksRequest) (response 
 
 // DescribePushTasks
 // This API is used to query the submission record and progress of prefetch tasks.
-//
-// This API is in beta test and not fully available yet. Please stay tuned.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
@@ -2266,7 +2266,7 @@ func NewDisableClsLogTopicResponse() (response *DisableClsLogTopicResponse) {
 }
 
 // DisableClsLogTopic
-// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5-15 minutes.
+// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5–15 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2304,7 +2304,7 @@ func (c *Client) DisableClsLogTopic(request *DisableClsLogTopicRequest) (respons
 }
 
 // DisableClsLogTopic
-// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5-15 minutes.
+// This API is used to stop publishing to a log topic. Note: after a log topic is disabled, all logs of the domain names bound to it will no longer be published to the topic, and the logs that have already been published will be retained. This action will take effect within 5–15 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2450,7 +2450,7 @@ func NewEnableClsLogTopicResponse() (response *EnableClsLogTopicResponse) {
 }
 
 // EnableClsLogTopic
-// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5-15 minutes.
+// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5–15 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2488,7 +2488,7 @@ func (c *Client) EnableClsLogTopic(request *EnableClsLogTopicRequest) (response 
 }
 
 // EnableClsLogTopic
-// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5-15 minutes.
+// This API is used to start publishing to a log topic. Note: after a log topic is enabled, all logs of the domain names bound to the topic will be published to it. This action will take effect within 5–15 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2750,6 +2750,7 @@ func NewListClsTopicDomainsResponse() (response *ListClsTopicDomainsResponse) {
 // This API is used to get the list of domain names bound to a log topic.
 //
 // error code that may be returned:
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
 //  INVALIDPARAMETER_CDNCLSDUPLICATETOPIC = "InvalidParameter.CdnClsDuplicateTopic"
@@ -2788,6 +2789,7 @@ func (c *Client) ListClsTopicDomains(request *ListClsTopicDomainsRequest) (respo
 // This API is used to get the list of domain names bound to a log topic.
 //
 // error code that may be returned:
+//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_CLSINTERNALERROR = "InternalError.ClsInternalError"
 //  INVALIDPARAMETER_CDNCLSDUPLICATETOPIC = "InvalidParameter.CdnClsDuplicateTopic"
@@ -2881,6 +2883,7 @@ func NewListTopDataResponse() (response *ListTopDataResponse) {
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -2934,6 +2937,7 @@ func (c *Client) ListTopData(request *ListTopDataRequest) (response *ListTopData
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_TAGSYSTEMERROR = "InternalError.TagSystemError"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
@@ -3314,6 +3318,7 @@ func NewPushUrlsCacheResponse() (response *PushUrlsCacheResponse) {
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INVALIDPARAMETER_CDNHOSTINVALIDMIDDLECONFIG = "InvalidParameter.CdnHostInvalidMiddleConfig"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
@@ -3356,6 +3361,7 @@ func (c *Client) PushUrlsCache(request *PushUrlsCacheRequest) (response *PushUrl
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
 //  INTERNALERROR_ERROR = "InternalError.Error"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INVALIDPARAMETER_CDNHOSTINVALIDMIDDLECONFIG = "InvalidParameter.CdnHostInvalidMiddleConfig"
 //  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
 //  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
@@ -3720,6 +3726,7 @@ func NewUpdateDomainConfigResponse() (response *UpdateDomainConfigResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
@@ -3777,6 +3784,7 @@ func (c *Client) UpdateDomainConfig(request *UpdateDomainConfigRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR_CAMSYSTEMERROR = "InternalError.CamSystemError"
 //  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"

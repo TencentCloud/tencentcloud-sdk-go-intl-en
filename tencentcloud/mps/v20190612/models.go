@@ -98,6 +98,61 @@ type AIRecognitionTemplateItem struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type ActivityResItem struct {
+	// The result of a transcoding task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranscodeTask *MediaProcessTaskTranscodeResult `json:"TranscodeTask,omitempty" name:"TranscodeTask"`
+
+	// The result of an animated image generating task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnimatedGraphicTask *MediaProcessTaskAnimatedGraphicResult `json:"AnimatedGraphicTask,omitempty" name:"AnimatedGraphicTask"`
+
+	// The result of a time point screenshot task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SnapshotByTimeOffsetTask *MediaProcessTaskSampleSnapshotResult `json:"SnapshotByTimeOffsetTask,omitempty" name:"SnapshotByTimeOffsetTask"`
+
+	// The result of a sampled screenshot task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SampleSnapshotTask *MediaProcessTaskSampleSnapshotResult `json:"SampleSnapshotTask,omitempty" name:"SampleSnapshotTask"`
+
+	// The result of an image sprite task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageSpriteTask *MediaProcessTaskImageSpriteResult `json:"ImageSpriteTask,omitempty" name:"ImageSpriteTask"`
+
+	// The result of an adaptive bitrate streaming task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdaptiveDynamicStreamingTask *MediaProcessTaskAdaptiveDynamicStreamingResult `json:"AdaptiveDynamicStreamingTask,omitempty" name:"AdaptiveDynamicStreamingTask"`
+
+	// The result of a content recognition task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecognitionTask *ScheduleRecognitionTaskResult `json:"RecognitionTask,omitempty" name:"RecognitionTask"`
+
+	// The result of a content moderation task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReviewTask *ScheduleReviewTaskResult `json:"ReviewTask,omitempty" name:"ReviewTask"`
+
+	// The result of a content analysis task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnalysisTask *ScheduleAnalysisTaskResult `json:"AnalysisTask,omitempty" name:"AnalysisTask"`
+}
+
+type ActivityResult struct {
+	// The type of the scheme’s subtask.
+	// <li>Transcode: Transcoding</li>
+	// <li>SampleSnapshot: Sampled screenshot</li>
+	// <li>AnimatedGraphics: Animated image generating</li>
+	// <li>SnapshotByTimeOffset: Time point screenshot</li>
+	// <li>ImageSprites: Image sprite generating</li>
+	// <li>AdaptiveDynamicStreaming: Adaptive bitrate streaming</li>
+	// <li>AiContentReview: Content moderation</li>
+	// <li>AIRecognition: Content recognition</li>
+	// <li>AIAnalysis: Content analysis</li>
+	ActivityType *string `json:"ActivityType,omitempty" name:"ActivityType"`
+
+	// The execution results of the subtasks of the scheme.
+	ActivityResItem *ActivityResItem `json:"ActivityResItem,omitempty" name:"ActivityResItem"`
+}
+
 type AdaptiveDynamicStreamingInfoItem struct {
 	// Adaptive bitrate streaming specification.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
@@ -1359,6 +1414,21 @@ type AnimatedGraphicsTemplate struct {
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type ArtifactRepairConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>weak</li>
+	// <li>strong</li>
+	// Default value: weak.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type AsrFullTextConfigureInfo struct {
 	// Switch of a full speech recognition task. Valid values:
 	// <li>ON: Enables an intelligent full speech recognition task;</li>
@@ -1490,6 +1560,22 @@ type ClassificationConfigureInfoForUpdate struct {
 	// <li>ON: enables intelligent categorization task;</li>
 	// <li>OFF: disables intelligent categorization task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type ColorEnhanceConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>weak</li>
+	// <li>normal</li>
+	// <li>strong</li>
+	// Default value: weak.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type ContentReviewTemplateItem struct {
@@ -2645,6 +2731,9 @@ type CreateTranscodeTemplateRequestParams struct {
 
 	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// Audio/Video enhancement configuration.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitempty" name:"EnhanceConfig"`
 }
 
 type CreateTranscodeTemplateRequest struct {
@@ -2679,6 +2768,9 @@ type CreateTranscodeTemplateRequest struct {
 
 	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// Audio/Video enhancement configuration.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitempty" name:"EnhanceConfig"`
 }
 
 func (r *CreateTranscodeTemplateRequest) ToJsonString() string {
@@ -2701,6 +2793,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
+	delete(f, "EnhanceConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -4651,9 +4744,11 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskDetailResponseParams struct {
-	// Task type. Currently valid values:
-	// <li>WorkflowTask: Video workflow processing task.</li>
-	// <li>LiveStreamProcessTask: Live stream processing task.</li>
+	// The task type. Valid values:
+	// <li>WorkflowTask</li>
+	// <li>EditMediaTask</li>
+	// <li>LiveStreamProcessTask</li>
+	// <li>ScheduleTask (scheme)</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -4671,12 +4766,12 @@ type DescribeTaskDetailResponseParams struct {
 	// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
+	// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
+	EditMediaTask *EditMediaTask `json:"EditMediaTask,omitempty" name:"EditMediaTask"`
+
 	// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WorkflowTask *WorkflowTask `json:"WorkflowTask,omitempty" name:"WorkflowTask"`
-
-	// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
-	EditMediaTask *EditMediaTask `json:"EditMediaTask,omitempty" name:"EditMediaTask"`
 
 	// Information of a live stream processing task. This field has a value only when `TaskType` is `LiveStreamProcessTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4697,6 +4792,10 @@ type DescribeTaskDetailResponseParams struct {
 
 	// Extended information field, used in specific scenarios.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+
+	// The information of a scheme. This parameter is valid only if `TaskType` is `ScheduleTask`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScheduleTask *ScheduleTask `json:"ScheduleTask,omitempty" name:"ScheduleTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4772,6 +4871,9 @@ type DescribeTasksResponseParams struct {
 	// Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.
 	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
 
+	// The total number of records that meet the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -4817,6 +4919,13 @@ type DescribeTranscodeTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The template type (replacing `TEHDType`). Valid values:
+	// <li>Common: Common transcoding template</li>
+	// <li>TEHD: TESHD template</li>
+	// <li>Enhance: Audio/Video enhancement template.</li>
+	// This parameter is left empty by default, which indicates to return all types of templates.
+	TranscodeType *string `json:"TranscodeType,omitempty" name:"TranscodeType"`
 }
 
 type DescribeTranscodeTemplatesRequest struct {
@@ -4845,6 +4954,13 @@ type DescribeTranscodeTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The template type (replacing `TEHDType`). Valid values:
+	// <li>Common: Common transcoding template</li>
+	// <li>TEHD: TESHD template</li>
+	// <li>Enhance: Audio/Video enhancement template.</li>
+	// This parameter is left empty by default, which indicates to return all types of templates.
+	TranscodeType *string `json:"TranscodeType,omitempty" name:"TranscodeType"`
 }
 
 func (r *DescribeTranscodeTemplatesRequest) ToJsonString() string {
@@ -4865,6 +4981,7 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "TEHDType")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "TranscodeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTemplatesRequest has unknown keys!", "")
 	}
@@ -5448,6 +5565,12 @@ func (r *EnableWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type EnhanceConfig struct {
+	// Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoEnhance *VideoEnhanceConfig `json:"VideoEnhance,omitempty" name:"VideoEnhance"`
+}
+
 // Predefined struct for user
 type ExecuteFunctionRequestParams struct {
 	// Name of called backend API.
@@ -5565,6 +5688,33 @@ type FaceConfigureInfoForUpdate struct {
 	FaceLibrary *string `json:"FaceLibrary,omitempty" name:"FaceLibrary"`
 }
 
+type FaceEnhanceConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Value range: 0.0-1.0
+	// Default value: 0.0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Intensity *float64 `json:"Intensity,omitempty" name:"Intensity"`
+}
+
+type FrameRateConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The frame rate (Hz). Value range: [0, 100].
+	// Default value: 0.
+	// Note: For transcoding, this parameter will overwrite `Fps` of `VideoTemplate`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
+}
+
 type FrameTagConfigureInfo struct {
 	// Switch of intelligent frame-specific tagging task. Valid values:
 	// <li>ON: enables intelligent frame-specific tagging task;</li>
@@ -5579,12 +5729,45 @@ type FrameTagConfigureInfoForUpdate struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type HdrConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>HDR10</li>
+	// <li>HLG</li>
+	// Default value: HDR10.
+	// Note: The video codec must be `libx265`.
+	// Note: The bit depth for video encoding is 10 bits.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type HeadTailParameter struct {
 	// Opening credits list
 	HeadSet []*MediaInputInfo `json:"HeadSet,omitempty" name:"HeadSet"`
 
 	// Closing credits list
 	TailSet []*MediaInputInfo `json:"TailSet,omitempty" name:"TailSet"`
+}
+
+type ImageQualityEnhanceConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>weak</li>
+	// <li>normal</li>
+	// <li>strong</li>
+	// Default value: weak.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type ImageSpriteTaskInput struct {
@@ -6041,6 +6224,20 @@ type LiveStreamTaskNotifyConfig struct {
 
 	// HTTP callback URL, required if `NotifyType` is set to `URL`
 	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
+}
+
+type LowLightEnhanceConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>normal</li>
+	// Default value: normal.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
@@ -7830,6 +8027,9 @@ type ModifyTranscodeTemplateRequestParams struct {
 
 	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// Audio/Video enhancement settings.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitempty" name:"EnhanceConfig"`
 }
 
 type ModifyTranscodeTemplateRequest struct {
@@ -7865,6 +8065,9 @@ type ModifyTranscodeTemplateRequest struct {
 
 	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// Audio/Video enhancement settings.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitempty" name:"EnhanceConfig"`
 }
 
 func (r *ModifyTranscodeTemplateRequest) ToJsonString() string {
@@ -7888,6 +8091,7 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
+	delete(f, "EnhanceConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -8359,8 +8563,10 @@ func (r *ParseNotificationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ParseNotificationResponseParams struct {
-	// Supported event type. Valid values:
-	// <li>WorkflowTask: Video workflow processing task.</li>
+	// The event type. Valid values:
+	// <li>WorkflowTask</li>
+	// <li>EditMediaTask</li>
+	// <li>ScheduleTask (scheme)</li>
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
@@ -8375,6 +8581,10 @@ type ParseNotificationResponseParams struct {
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The information of a scheme. This parameter is valid only if `TaskType` is `ScheduleTask`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScheduleTaskEvent *ScheduleTask `json:"ScheduleTaskEvent,omitempty" name:"ScheduleTaskEvent"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -8775,6 +8985,12 @@ type ProcessMediaRequestParams struct {
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The scheme ID.
+	// Notes: 1. If output information is not specified for a scheme, the request parameters `OutputStorage` and `OutputDir` will be used.
+	// 2. If a notification is not configured for a scheme, the request parameter `TaskNotifyConfig` will be used.
+	// 3. The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 }
 
 type ProcessMediaRequest struct {
@@ -8812,6 +9028,12 @@ type ProcessMediaRequest struct {
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The scheme ID.
+	// Notes: 1. If output information is not specified for a scheme, the request parameters `OutputStorage` and `OutputDir` will be used.
+	// 2. If a notification is not configured for a scheme, the request parameter `TaskNotifyConfig` will be used.
+	// 3. The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 }
 
 func (r *ProcessMediaRequest) ToJsonString() string {
@@ -8837,6 +9059,7 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "TasksPriority")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
+	delete(f, "ScheduleId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
 	}
@@ -9216,6 +9439,117 @@ type SampleSnapshotTemplate struct {
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 }
 
+type ScheduleAnalysisTaskResult struct {
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of the content analysis task.
+	Input *AiAnalysisTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of the content analysis task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output []*AiAnalysisResult `json:"Output,omitempty" name:"Output"`
+}
+
+type ScheduleRecognitionTaskResult struct {
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of the content recognition task.
+	Input *AiRecognitionTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of the content recognition task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output []*AiRecognitionResult `json:"Output,omitempty" name:"Output"`
+}
+
+type ScheduleReviewTaskResult struct {
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; any other value returned indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error code. 0 indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of the content moderation task.
+	Input *AiContentReviewTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of the content moderation task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output []*AiContentReviewResult `json:"Output,omitempty" name:"Output"`
+}
+
+type ScheduleTask struct {
+	// The scheme ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The scheme status. Valid values:
+	// <li>PROCESSING</li>
+	// <li>FINISH</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The information of the file processed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitempty" name:"InputInfo"`
+
+	// The metadata of the source video.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
+	// The output of the scheme.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ActivityResultSet []*ActivityResult `json:"ActivityResultSet,omitempty" name:"ActivityResultSet"`
+}
+
+type ScratchRepairConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Value range: 0.0-1.0
+	// Default value: 0.0
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Intensity *float64 `json:"Intensity,omitempty" name:"Intensity"`
+}
+
+type SharpEnhanceConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Value range: 0.0-1.0
+	// Default value: 0.0
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Intensity *float64 `json:"Intensity,omitempty" name:"Intensity"`
+}
+
 type SnapshotByTimeOffsetTaskInput struct {
 	// ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
@@ -9297,6 +9631,27 @@ type SnapshotByTimeOffsetTemplate struct {
 	// <li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
 	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
+}
+
+type SuperResolutionConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>lq: For low-resolution videos with obvious noise</li>
+	// <li>hq: For high-resolution videos</li>
+	// Default value: lq.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The ratio of the target resolution to the original resolution. Valid values:
+	// <li>2</li>
+	// Default value: 2.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Size *int64 `json:"Size,omitempty" name:"Size"`
 }
 
 type SvgWatermarkInput struct {
@@ -9402,6 +9757,7 @@ type TaskNotifyConfig struct {
 	// <li>CMQ: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
 	// <li>TDMQ-CMQ: Message queue</li>
 	// <li>URL: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
+	// <li>SCF: We do not recommend this notification type, which you need to configure in the SCF console.</li>
 	// Default value: `TDMQ-CMQ`.
 	NotifyType *string `json:"NotifyType,omitempty" name:"NotifyType"`
 
@@ -9670,6 +10026,10 @@ type TranscodeTemplate struct {
 
 	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Audio/Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitempty" name:"EnhanceConfig"`
 }
 
 type UrlInputInfo struct {
@@ -9804,25 +10164,90 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
 }
 
+type VideoDenoiseConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The strength. Valid values:
+	// <li>weak</li>
+	// <li>strong</li>
+	// Default value: weak.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type VideoEnhanceConfig struct {
+	// Frame interpolation configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FrameRate *FrameRateConfig `json:"FrameRate,omitempty" name:"FrameRate"`
+
+	// Super resolution configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitempty" name:"SuperResolution"`
+
+	// HDR configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Hdr *HdrConfig `json:"Hdr,omitempty" name:"Hdr"`
+
+	// Image noise removal configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Denoise *VideoDenoiseConfig `json:"Denoise,omitempty" name:"Denoise"`
+
+	// Overall enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageQualityEnhance *ImageQualityEnhanceConfig `json:"ImageQualityEnhance,omitempty" name:"ImageQualityEnhance"`
+
+	// Color enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitempty" name:"ColorEnhance"`
+
+	// Detail enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SharpEnhance *SharpEnhanceConfig `json:"SharpEnhance,omitempty" name:"SharpEnhance"`
+
+	// Face enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FaceEnhance *FaceEnhanceConfig `json:"FaceEnhance,omitempty" name:"FaceEnhance"`
+
+	// Low-light enhancement configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LowLightEnhance *LowLightEnhanceConfig `json:"LowLightEnhance,omitempty" name:"LowLightEnhance"`
+
+	// Banding removal configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScratchRepair *ScratchRepairConfig `json:"ScratchRepair,omitempty" name:"ScratchRepair"`
+
+	// Artifact removal (smoothing) configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ArtifactRepair *ArtifactRepairConfig `json:"ArtifactRepair,omitempty" name:"ArtifactRepair"`
+}
+
 type VideoTemplateInfo struct {
-	// Video stream codec. Valid values:
+	// The video codec. Valid values:
 	// <li>`libx264`: H.264</li>
 	// <li>`libx265`: H.265</li>
 	// <li>`av1`: AOMedia Video 1</li>
+	// Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.
+	// Note: You can only use the AOMedia Video 1 codec for MP4 files.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
-	// Video frame rate in Hz. Value range: [0, 100].
+	// The video frame rate (Hz). Value range: [0, 100].
 	// If the value is 0, the frame rate will be the same as that of the source video.
+	// Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
 	Fps *uint64 `json:"Fps,omitempty" name:"Fps"`
 
-	// Video stream bitrate (Kbps). Valid values: `0`; [75, 35000]
-	// If the value is `0`, the original video bitrate will be used.
+	// The video bitrate (Kbps). Value range: 0 and [128, 35000].
+	// If the value is 0, the bitrate of the video will be the same as that of the source video.
 	Bitrate *uint64 `json:"Bitrate,omitempty" name:"Bitrate"`
 
 	// Resolution adaption. Valid values:
-	// <li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-	// <li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// <li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
+	// <li>close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.</li>
 	// Default value: open.
+	// Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
@@ -9845,12 +10270,13 @@ type VideoTemplateInfo struct {
 	// If this parameter is 0 or left empty, the system will automatically set the GOP length.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
 
-	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported:
-	// <li> stretch: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot "shorter" or "longer";</li>
-	// <li>black: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks.</li>
-	// <li>white: fill with white. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with white color blocks.</li>
-	// <li>gauss: fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
+	// The fill mode, which indicates how a video is resized when the video’s original aspect ratio is different from the target aspect ratio. Valid values:
+	// <li>stretch: Stretch the image frame by frame to fill the entire screen. The video image may become "squashed" or "stretched" after transcoding.</li>
+	// <li>black: Keep the image's original aspect ratio and fill the blank space with black bars.</li>
+	// <li>white: Keep the image’s original aspect ratio and fill the blank space with white bars.</li>
+	// <li>gauss: Keep the image’s original aspect ratio and apply Gaussian blur to the blank space.</li>
 	// Default value: black.
+	// Note: Only `stretch` and `black` are supported for adaptive bitrate streaming.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
 
 	// The control factor of video constant bitrate. Value range: [1, 51]
@@ -9860,10 +10286,12 @@ type VideoTemplateInfo struct {
 }
 
 type VideoTemplateInfoForUpdate struct {
-	// Video stream codec. Valid values:
+	// The video codec. Valid values:
 	// <li>libx264: H.264</li>
 	// <li>libx265: H.265</li>
-	// Currently, a resolution within 640*480p must be specified for H.265.
+	// <li>av1: AOMedia Video 1</li>
+	// Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.
+	// Note: You can only use the AOMedia Video 1 codec for MP4 files.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
 
 	// Video frame rate in Hz. Value range: [0, 100].
@@ -9875,8 +10303,9 @@ type VideoTemplateInfoForUpdate struct {
 	Bitrate *uint64 `json:"Bitrate,omitempty" name:"Bitrate"`
 
 	// Resolution adaption. Valid values:
-	// <li>open: Enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;</li>
-	// <li>close: Disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
+	// <li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
+	// <li>close: Disabled. When resolution adaption is disabled, `Width` indicates the width of a video, while `Height` indicates the height.</li>
+	// Note: When resolution adaption is enabled, `Width` cannot be smaller than `Height`.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
 	// Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].

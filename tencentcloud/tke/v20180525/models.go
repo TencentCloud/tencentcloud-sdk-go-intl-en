@@ -834,7 +834,7 @@ type ClusterCIDRSettings struct {
 	// Whether to ignore ClusterCIDR conflict errors, which are not ignored by default
 	IgnoreClusterCIDRConflict *bool `json:"IgnoreClusterCIDRConflict,omitempty" name:"IgnoreClusterCIDRConflict"`
 
-	// Maximum number of pods on each node in the cluster
+	// Maximum number of Pods on each node. Value range: 16 to 256. When its power is not 2, it will round upward to the closest power of 2.
 	MaxNodePodNum *uint64 `json:"MaxNodePodNum,omitempty" name:"MaxNodePodNum"`
 
 	// The maximum number of services in a cluster. The range is from 32 to 32768. When its power is not 2, it will round upward to the closest power of 2. Default value is 256.
@@ -6028,6 +6028,11 @@ type ExistedInstance struct {
 	// Instance billing method. Valid values: POSTPAID_BY_HOUR (pay-as-you-go hourly); CDHPAID (billed based on CDH, i.e., only CDH is billed but not the instances on CDH)
 	// Note: This field may return null, indicating that no valid value was found.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// IPv6 address of the instance
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IPv6Addresses []*string `json:"IPv6Addresses,omitempty" name:"IPv6Addresses"`
 }
 
 type ExistedInstancesForNode struct {

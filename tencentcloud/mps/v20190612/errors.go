@@ -35,6 +35,9 @@ const (
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
+	// Data error.
+	INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+
 	// Internal error: failed to generate template ID.
 	INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
 

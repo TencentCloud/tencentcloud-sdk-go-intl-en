@@ -267,6 +267,252 @@ type ChargePrepaid struct {
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 }
 
+type ChcDeployExtraConfig struct {
+
+}
+
+type ChcHost struct {
+	// CHC host ID
+	ChcId *string `json:"ChcId,omitempty" name:"ChcId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Server serial number
+	SerialNumber *string `json:"SerialNumber,omitempty" name:"SerialNumber"`
+
+	// CHC host status<br/>
+	// <ul>
+	// <li>REGISTERED: The CHC host is registered, but the out-of-band network and deployment network are not configured.</li>
+	// <li>VPC_READY: The out-of-band network and deployment network are configured.</li>
+	// <li>PREPARED: It’s ready and can be associated with a CVM.</li>
+	// <li>ONLINE: It’s already associated with a CVM.</li>
+	// </ul>
+	InstanceState *string `json:"InstanceState,omitempty" name:"InstanceState"`
+
+	// Device type
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Availability zone
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// Out-of-band network
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BmcVirtualPrivateCloud *VirtualPrivateCloud `json:"BmcVirtualPrivateCloud,omitempty" name:"BmcVirtualPrivateCloud"`
+
+	// Out-of-band network IP
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BmcIp *string `json:"BmcIp,omitempty" name:"BmcIp"`
+
+	// Out-of-band network security group ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BmcSecurityGroupIds []*string `json:"BmcSecurityGroupIds,omitempty" name:"BmcSecurityGroupIds"`
+
+	// Deployment network
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeployVirtualPrivateCloud *VirtualPrivateCloud `json:"DeployVirtualPrivateCloud,omitempty" name:"DeployVirtualPrivateCloud"`
+
+	// Deployment network IP
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeployIp *string `json:"DeployIp,omitempty" name:"DeployIp"`
+
+	// Deployment network security group ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitempty" name:"DeploySecurityGroupIds"`
+
+	// ID of the associated CVM
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CvmInstanceId *string `json:"CvmInstanceId,omitempty" name:"CvmInstanceId"`
+
+	// Server creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Instance hardware description, including CPU cores, memory capacity and disk capacity.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	HardwareDescription *string `json:"HardwareDescription,omitempty" name:"HardwareDescription"`
+
+	// CPU cores of the CHC host
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CPU *int64 `json:"CPU,omitempty" name:"CPU"`
+
+	// Memory capacity of the CHC host (unit: GB)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Disk capacity of the CHC host
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Disk *string `json:"Disk,omitempty" name:"Disk"`
+
+	// MAC address assigned under the out-of-band network
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BmcMAC *string `json:"BmcMAC,omitempty" name:"BmcMAC"`
+
+	// MAC address assigned under the deployment network
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeployMAC *string `json:"DeployMAC,omitempty" name:"DeployMAC"`
+
+	// Management type
+	// HOSTING: Hosting
+	// TENANT: Leasing
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TenantType *string `json:"TenantType,omitempty" name:"TenantType"`
+
+	// CHC DHCP option, which is used for MiniOS debugging.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeployExtraConfig *ChcDeployExtraConfig `json:"DeployExtraConfig,omitempty" name:"DeployExtraConfig"`
+}
+
+// Predefined struct for user
+type ConfigureChcAssistVpcRequestParams struct {
+	// CHC host IDs
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// Out-of-band network information
+	BmcVirtualPrivateCloud *VirtualPrivateCloud `json:"BmcVirtualPrivateCloud,omitempty" name:"BmcVirtualPrivateCloud"`
+
+	// Out-of-band network security group list
+	BmcSecurityGroupIds []*string `json:"BmcSecurityGroupIds,omitempty" name:"BmcSecurityGroupIds"`
+
+	// Deployment network information
+	DeployVirtualPrivateCloud *VirtualPrivateCloud `json:"DeployVirtualPrivateCloud,omitempty" name:"DeployVirtualPrivateCloud"`
+
+	// Deployment network security group list
+	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitempty" name:"DeploySecurityGroupIds"`
+}
+
+type ConfigureChcAssistVpcRequest struct {
+	*tchttp.BaseRequest
+	
+	// CHC host IDs
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// Out-of-band network information
+	BmcVirtualPrivateCloud *VirtualPrivateCloud `json:"BmcVirtualPrivateCloud,omitempty" name:"BmcVirtualPrivateCloud"`
+
+	// Out-of-band network security group list
+	BmcSecurityGroupIds []*string `json:"BmcSecurityGroupIds,omitempty" name:"BmcSecurityGroupIds"`
+
+	// Deployment network information
+	DeployVirtualPrivateCloud *VirtualPrivateCloud `json:"DeployVirtualPrivateCloud,omitempty" name:"DeployVirtualPrivateCloud"`
+
+	// Deployment network security group list
+	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitempty" name:"DeploySecurityGroupIds"`
+}
+
+func (r *ConfigureChcAssistVpcRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ConfigureChcAssistVpcRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChcIds")
+	delete(f, "BmcVirtualPrivateCloud")
+	delete(f, "BmcSecurityGroupIds")
+	delete(f, "DeployVirtualPrivateCloud")
+	delete(f, "DeploySecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureChcAssistVpcRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ConfigureChcAssistVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ConfigureChcAssistVpcResponse struct {
+	*tchttp.BaseResponse
+	Response *ConfigureChcAssistVpcResponseParams `json:"Response"`
+}
+
+func (r *ConfigureChcAssistVpcResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ConfigureChcAssistVpcResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ConfigureChcDeployVpcRequestParams struct {
+	// CHC instance ID
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// Deployment network information
+	DeployVirtualPrivateCloud *VirtualPrivateCloud `json:"DeployVirtualPrivateCloud,omitempty" name:"DeployVirtualPrivateCloud"`
+
+	// Deployment network security group list
+	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitempty" name:"DeploySecurityGroupIds"`
+}
+
+type ConfigureChcDeployVpcRequest struct {
+	*tchttp.BaseRequest
+	
+	// CHC instance ID
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// Deployment network information
+	DeployVirtualPrivateCloud *VirtualPrivateCloud `json:"DeployVirtualPrivateCloud,omitempty" name:"DeployVirtualPrivateCloud"`
+
+	// Deployment network security group list
+	DeploySecurityGroupIds []*string `json:"DeploySecurityGroupIds,omitempty" name:"DeploySecurityGroupIds"`
+}
+
+func (r *ConfigureChcDeployVpcRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ConfigureChcDeployVpcRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChcIds")
+	delete(f, "DeployVirtualPrivateCloud")
+	delete(f, "DeploySecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureChcDeployVpcRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ConfigureChcDeployVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ConfigureChcDeployVpcResponse struct {
+	*tchttp.BaseResponse
+	Response *ConfigureChcDeployVpcResponseParams `json:"Response"`
+}
+
+func (r *ConfigureChcDeployVpcResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ConfigureChcDeployVpcResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type CreateDisasterRecoverGroupRequestParams struct {
 	// Name of the spread placement group. The name must be 1-60 characters long and can contain both Chinese characters and English letters.
@@ -483,6 +729,9 @@ type CreateKeyPairRequestParams struct {
 	// <li>Query the project IDs in the project list.
 	// <li>Call `DescribeProject` and look for `projectId` in the response.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Tag description list. This parameter is used to bind a tag to a key pair.
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 }
 
 type CreateKeyPairRequest struct {
@@ -496,6 +745,9 @@ type CreateKeyPairRequest struct {
 	// <li>Query the project IDs in the project list.
 	// <li>Call `DescribeProject` and look for `projectId` in the response.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Tag description list. This parameter is used to bind a tag to a key pair.
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 }
 
 func (r *CreateKeyPairRequest) ToJsonString() string {
@@ -512,6 +764,7 @@ func (r *CreateKeyPairRequest) FromJsonString(s string) error {
 	}
 	delete(f, "KeyName")
 	delete(f, "ProjectId")
+	delete(f, "TagSpecification")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateKeyPairRequest has unknown keys!", "")
 	}
@@ -807,7 +1060,7 @@ type DataDisk struct {
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// Data disk ID. Note that it’s not available for `LOCAL_BASIC` and `LOCAL_SSD` disks.
-	// This parameter is only available for the `DescribeInstances` API.
+	// It is only used as a response parameter for APIs such as `DescribeInstances`, and cannot be used as a request parameter for APIs such as `RunInstances`.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
 
 	// Whether to terminate the data disk when its CVM is terminated. Valid values:
@@ -1133,6 +1386,109 @@ func (r *DeleteLaunchTemplateVersionsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteLaunchTemplateVersionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeChcHostsRequestParams struct {
+	// CHC host ID. Up to 100 instances per request is allowed. `ChcIds` and `Filters` cannot be specified at the same time.
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+	// <li><strong>instance-name</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>instance name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>instance-state</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>instance status</strong>. For status details, see [InstanceStatus](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>device-type</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>device type</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>vpc-id</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>unique VPC ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>subnet-id</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>unique VPC subnet ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset. Default value: `0`. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeChcHostsRequest struct {
+	*tchttp.BaseRequest
+	
+	// CHC host ID. Up to 100 instances per request is allowed. `ChcIds` and `Filters` cannot be specified at the same time.
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>availability zone</strong>, such as `ap-guangzhou-1`.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p><p style="padding-left: 30px;">Valid values: See <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Regions and Availability Zones</a></p>
+	// <li><strong>instance-name</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>instance name</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>instance-state</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>instance status</strong>. For status details, see [InstanceStatus](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>device-type</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>device type</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>vpc-id</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>unique VPC ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <li><strong>subnet-id</strong></li>
+	// <p style="padding-left: 30px;">Filter by the <strong>unique VPC subnet ID</strong>.</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The offset. Default value: `0`. For more information on `Offset`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeChcHostsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeChcHostsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChcIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeChcHostsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeChcHostsResponseParams struct {
+	// Number of eligible instances
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of returned instances
+	ChcHostSet []*ChcHost `json:"ChcHostSet,omitempty" name:"ChcHostSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeChcHostsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeChcHostsResponseParams `json:"Response"`
+}
+
+func (r *DescribeChcHostsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeChcHostsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2214,7 +2570,7 @@ type DescribeLaunchTemplatesRequestParams struct {
 	// Instance launch template ID. ID of one or more instance launch templates. If not specified, all templates of the user will be displayed.
 	LaunchTemplateIds []*string `json:"LaunchTemplateIds,omitempty" name:"LaunchTemplateIds"`
 
-	// <p style="padding-left: 30px;">Filter by [<strong>LaunchTemplateNames</strong>].</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <p style="padding-left: 30px;">Filter by [<strong>LaunchTemplateName</strong>].</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `LaunchTemplateIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
@@ -2231,7 +2587,7 @@ type DescribeLaunchTemplatesRequest struct {
 	// Instance launch template ID. ID of one or more instance launch templates. If not specified, all templates of the user will be displayed.
 	LaunchTemplateIds []*string `json:"LaunchTemplateIds,omitempty" name:"LaunchTemplateIds"`
 
-	// <p style="padding-left: 30px;">Filter by [<strong>LaunchTemplateNames</strong>].</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
+	// <p style="padding-left: 30px;">Filter by [<strong>LaunchTemplateName</strong>].</p><p style="padding-left: 30px;">Type: String</p><p style="padding-left: 30px;">Optional</p>
 	// The maximum number of `Filters` in each request is 10. The upper limit for `Filter.Values` is 5. This parameter cannot specify `LaunchTemplateIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
@@ -3243,6 +3599,9 @@ type ImportKeyPairRequestParams struct {
 
 	// Content of the public key in the key pair in the `OpenSSH RSA` format.
 	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+
+	// Tag description list. This parameter is used to bind a tag to a key pair.
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 }
 
 type ImportKeyPairRequest struct {
@@ -3258,6 +3617,9 @@ type ImportKeyPairRequest struct {
 
 	// Content of the public key in the key pair in the `OpenSSH RSA` format.
 	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+
+	// Tag description list. This parameter is used to bind a tag to a key pair.
+	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 }
 
 func (r *ImportKeyPairRequest) ToJsonString() string {
@@ -3275,6 +3637,7 @@ func (r *ImportKeyPairRequest) FromJsonString(s string) error {
 	delete(f, "KeyName")
 	delete(f, "ProjectId")
 	delete(f, "PublicKey")
+	delete(f, "TagSpecification")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImportKeyPairRequest has unknown keys!", "")
 	}
@@ -4233,6 +4596,95 @@ type LoginSettings struct {
 }
 
 // Predefined struct for user
+type ModifyChcAttributeRequestParams struct {
+	// CHC host IDs
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// CHC host name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Server type
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Valid characters: Letters, numbers, hyphens and underscores
+	BmcUser *string `json:"BmcUser,omitempty" name:"BmcUser"`
+
+	// The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&*-+=_|{}).
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// BMC network security group list
+	BmcSecurityGroupIds []*string `json:"BmcSecurityGroupIds,omitempty" name:"BmcSecurityGroupIds"`
+}
+
+type ModifyChcAttributeRequest struct {
+	*tchttp.BaseRequest
+	
+	// CHC host IDs
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+
+	// CHC host name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Server type
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Valid characters: Letters, numbers, hyphens and underscores
+	BmcUser *string `json:"BmcUser,omitempty" name:"BmcUser"`
+
+	// The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&*-+=_|{}).
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// BMC network security group list
+	BmcSecurityGroupIds []*string `json:"BmcSecurityGroupIds,omitempty" name:"BmcSecurityGroupIds"`
+}
+
+func (r *ModifyChcAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyChcAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChcIds")
+	delete(f, "InstanceName")
+	delete(f, "DeviceType")
+	delete(f, "BmcUser")
+	delete(f, "Password")
+	delete(f, "BmcSecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyChcAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyChcAttributeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyChcAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyChcAttributeResponseParams `json:"Response"`
+}
+
+func (r *ModifyChcAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyChcAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDisasterRecoverGroupAttributeRequestParams struct {
 	// Spread placement group ID, which can be obtained by calling the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API.
 	DisasterRecoverGroupId *string `json:"DisasterRecoverGroupId,omitempty" name:"DisasterRecoverGroupId"`
@@ -5076,6 +5528,114 @@ type RegionInfo struct {
 
 	// Whether the region is available
 	RegionState *string `json:"RegionState,omitempty" name:"RegionState"`
+}
+
+// Predefined struct for user
+type RemoveChcAssistVpcRequestParams struct {
+	// CHC ID
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+}
+
+type RemoveChcAssistVpcRequest struct {
+	*tchttp.BaseRequest
+	
+	// CHC ID
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+}
+
+func (r *RemoveChcAssistVpcRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveChcAssistVpcRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChcIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveChcAssistVpcRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveChcAssistVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RemoveChcAssistVpcResponse struct {
+	*tchttp.BaseResponse
+	Response *RemoveChcAssistVpcResponseParams `json:"Response"`
+}
+
+func (r *RemoveChcAssistVpcResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveChcAssistVpcResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveChcDeployVpcRequestParams struct {
+	// CHC ID
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+}
+
+type RemoveChcDeployVpcRequest struct {
+	*tchttp.BaseRequest
+	
+	// CHC ID
+	ChcIds []*string `json:"ChcIds,omitempty" name:"ChcIds"`
+}
+
+func (r *RemoveChcDeployVpcRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveChcDeployVpcRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChcIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveChcDeployVpcRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveChcDeployVpcResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RemoveChcDeployVpcResponse struct {
+	*tchttp.BaseResponse
+	Response *RemoveChcDeployVpcResponseParams `json:"Response"`
+}
+
+func (r *RemoveChcDeployVpcResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveChcDeployVpcResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ReservedInstanceConfigInfoItem struct {
@@ -6142,7 +6702,8 @@ type SystemDisk struct {
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). Valid values:<br><li>LOCAL_BASIC: local disk<br><li>LOCAL_SSD: local SSD disk<br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_SSD: SSD<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><br>The disk type currently in stock will be used by default. 
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
-	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter currently.
+	// System disk ID. System disks whose type is `LOCAL_BASIC` or `LOCAL_SSD` do not have an ID and do not support this parameter.
+	// It is only used as a response parameter for APIs such as `DescribeInstances`, and cannot be used as a request parameter for APIs such as `RunInstances`.
 	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
 
 	// System disk size; unit: GB; default value: 50 GB.
@@ -6161,7 +6722,7 @@ type Tag struct {
 }
 
 type TagSpecification struct {
-	// The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH) and `image` (for image).
+	// The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH), `image` (for image), and `keypair` (for key).
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
 	// List of tags

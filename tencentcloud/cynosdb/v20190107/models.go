@@ -300,6 +300,9 @@ type BillingResourceInfo struct {
 
 	// Instance ID list
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Order ID
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
 }
 
 type BinlogItem struct {
@@ -422,14 +425,14 @@ type CreateClustersRequestParams struct {
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Database version. Valid values: 
-	// <li> Valid values for `MYSQL`: 5.7 </li>
+	// <li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
 	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
 
-	// Project ID
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
-	// Number of CPU cores of a non-serverless instance
+	// Number of CPU cores of normal instance
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
@@ -437,34 +440,34 @@ type CreateClustersRequestParams struct {
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
 	// This parameter has been deprecated.
-	// Storage capacity in GB.
+	// Storage capacity in GB
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
 
-	// Cluster name
+	// Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
 	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 
-	// Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
+	// Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
 	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
 
-	// Port. Default value: 5432
+	// Port. Valid range: [0, 65535). Default value: 3306
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// Billing mode. 0: pay-as-you-go; 1: monthly subscription. Default value: 0
+	// Billing mode. `0`: pay-as-you-go; `1`: monthly subscription. Default value: `0`
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
 
-	// Number of purchased items. Currently, only 1 can be passed in. If this parameter is left empty, 1 will be used by default.
+	// Number of purchased clusters. Valid range: [1,50]. Default value: 1
 	Count *int64 `json:"Count,omitempty" name:"Count"`
 
 	// Rollback type:
-	// noneRollback: no rollback
-	// snapRollback: rollback by snapshot
+	// noneRollback: no rollback;
+	// snapRollback: rollback by snapshot;
 	// timeRollback: rollback by time point
 	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
 
 	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
 	RollbackId *uint64 `json:"RollbackId,omitempty" name:"RollbackId"`
 
-	// Pass in the source cluster ID during rollback to find the source `poolId`
+	// The source cluster ID passed in during rollback to find the source `poolId`
 	OriginalClusterId *string `json:"OriginalClusterId,omitempty" name:"OriginalClusterId"`
 
 	// Specified time for time point rollback or snapshot time for snapshot rollback
@@ -474,23 +477,23 @@ type CreateClustersRequestParams struct {
 	// Specified allowed time range for time point rollback
 	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
 
-	// The maximum storage of a non-serverless instance in GB
-	// If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
+	// Storage upper limit of normal instance in GB
+	// If `DbType` is `MYSQL` and the storage billing mode is monthly subscription, the parameter value can’t exceed the maximum storage corresponding to the CPU and memory specifications.
 	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
 
-	// Number of instances
+	// Number of Instances. Valid range: (0,16]
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
 	// Purchase duration of monthly subscription plan
 	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
-	// Purchase duration unit of monthly subscription plan
+	// Duration unit of monthly subscription. Valid values: `s`, `d`, `m`, `y`
 	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
 
-	// Whether auto-renewal is enabled for monthly subscription plan
+	// Whether auto-renewal is enabled for monthly subscription plan. Default value: `0`
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+	// Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
@@ -503,17 +506,17 @@ type CreateClustersRequestParams struct {
 	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 
 	// Database type
-	// Valid values when `DbType` is `MYSQL` (default value: NORMAL):
+	// Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
 	// <li>NORMAL</li>
 	// <li>SERVERLESS</li>
 	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`
-	// Minimum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	// This parameter is required if `DbMode` is `SERVERLESS`.
+	// Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
 	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`:
-	// Maximum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	// This parameter is required if `DbMode` is `SERVERLESS`.
+	// Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
 	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
 
 	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
@@ -523,12 +526,12 @@ type CreateClustersRequestParams struct {
 	AutoPause *string `json:"AutoPause,omitempty" name:"AutoPause"`
 
 	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
-	// Default value: 600
+	// Default value: `600`
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
 
-	// The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
-	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
-	// Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+	// The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription). Default value: `0`.
+	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
+	// Clusters with storage billed in monthly subscription can’t be cloned or rolled back.
 	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
 
 	// Array of security group IDs
@@ -543,8 +546,11 @@ type CreateClustersRequestParams struct {
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
 	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
 
-	// Parameter template ID
+	// Parameter template ID, which can be obtained by querying parameter template information “DescribeParamTemplates”
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// Multi-AZ address
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 }
 
 type CreateClustersRequest struct {
@@ -564,14 +570,14 @@ type CreateClustersRequest struct {
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// Database version. Valid values: 
-	// <li> Valid values for `MYSQL`: 5.7 </li>
+	// <li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
 	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
 
-	// Project ID
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
-	// Number of CPU cores of a non-serverless instance
+	// Number of CPU cores of normal instance
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
@@ -579,34 +585,34 @@ type CreateClustersRequest struct {
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
 	// This parameter has been deprecated.
-	// Storage capacity in GB.
+	// Storage capacity in GB
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
 
-	// Cluster name
+	// Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
 	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 
-	// Account password (it must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).)
+	// Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
 	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
 
-	// Port. Default value: 5432
+	// Port. Valid range: [0, 65535). Default value: 3306
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
-	// Billing mode. 0: pay-as-you-go; 1: monthly subscription. Default value: 0
+	// Billing mode. `0`: pay-as-you-go; `1`: monthly subscription. Default value: `0`
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
 
-	// Number of purchased items. Currently, only 1 can be passed in. If this parameter is left empty, 1 will be used by default.
+	// Number of purchased clusters. Valid range: [1,50]. Default value: 1
 	Count *int64 `json:"Count,omitempty" name:"Count"`
 
 	// Rollback type:
-	// noneRollback: no rollback
-	// snapRollback: rollback by snapshot
+	// noneRollback: no rollback;
+	// snapRollback: rollback by snapshot;
 	// timeRollback: rollback by time point
 	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
 
 	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
 	RollbackId *uint64 `json:"RollbackId,omitempty" name:"RollbackId"`
 
-	// Pass in the source cluster ID during rollback to find the source `poolId`
+	// The source cluster ID passed in during rollback to find the source `poolId`
 	OriginalClusterId *string `json:"OriginalClusterId,omitempty" name:"OriginalClusterId"`
 
 	// Specified time for time point rollback or snapshot time for snapshot rollback
@@ -616,23 +622,23 @@ type CreateClustersRequest struct {
 	// Specified allowed time range for time point rollback
 	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
 
-	// The maximum storage of a non-serverless instance in GB
-	// If `DbType` is `MYSQL` and the storage billing mode is prepaid, the parameter value cannot exceed the maximum storage corresponding to the CPU and memory specifications.
+	// Storage upper limit of normal instance in GB
+	// If `DbType` is `MYSQL` and the storage billing mode is monthly subscription, the parameter value can’t exceed the maximum storage corresponding to the CPU and memory specifications.
 	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
 
-	// Number of instances
+	// Number of Instances. Valid range: (0,16]
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
 	// Purchase duration of monthly subscription plan
 	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
-	// Purchase duration unit of monthly subscription plan
+	// Duration unit of monthly subscription. Valid values: `s`, `d`, `m`, `y`
 	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
 
-	// Whether auto-renewal is enabled for monthly subscription plan
+	// Whether auto-renewal is enabled for monthly subscription plan. Default value: `0`
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+	// Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
 	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 
 	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
@@ -645,17 +651,17 @@ type CreateClustersRequest struct {
 	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 
 	// Database type
-	// Valid values when `DbType` is `MYSQL` (default value: NORMAL):
+	// Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
 	// <li>NORMAL</li>
 	// <li>SERVERLESS</li>
 	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`
-	// Minimum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	// This parameter is required if `DbMode` is `SERVERLESS`.
+	// Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
 	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
 
-	// This parameter is required if `DbMode` is `SERVERLESS`:
-	// Maximum number of CPU cores. For the value range, please see the returned result of `DescribeServerlessInstanceSpecs`
+	// This parameter is required if `DbMode` is `SERVERLESS`.
+	// Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
 	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
 
 	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
@@ -665,12 +671,12 @@ type CreateClustersRequest struct {
 	AutoPause *string `json:"AutoPause,omitempty" name:"AutoPause"`
 
 	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
-	// Default value: 600
+	// Default value: `600`
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
 
-	// The billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid). Default value: `0`.
-	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be postpaid.
-	// Clusters with storage billed in prepaid mode cannot be cloned or rolled back.
+	// The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription). Default value: `0`.
+	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
+	// Clusters with storage billed in monthly subscription can’t be cloned or rolled back.
 	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
 
 	// Array of security group IDs
@@ -685,8 +691,11 @@ type CreateClustersRequest struct {
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
 	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
 
-	// Parameter template ID
+	// Parameter template ID, which can be obtained by querying parameter template information “DescribeParamTemplates”
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// Multi-AZ address
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 }
 
 func (r *CreateClustersRequest) ToJsonString() string {
@@ -740,6 +749,7 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 	delete(f, "ClusterParams")
 	delete(f, "DealMode")
 	delete(f, "ParamTemplateId")
+	delete(f, "SlaveZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClustersRequest has unknown keys!", "")
 	}
@@ -749,23 +759,23 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateClustersResponseParams struct {
 	// Freezing transaction ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranId *string `json:"TranId,omitempty" name:"TranId"`
 
 	// Order ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 
-	// List of resource IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// List of resource IDs (This field has been deprecated. You need to use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
 
-	// List of cluster IDs (This field has been deprecated. Please use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// List of cluster IDs (This field has been deprecated. You need to use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
-	// Big order ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Big order ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BigDealIds []*string `json:"BigDealIds,omitempty" name:"BigDealIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2535,15 +2545,21 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeResourcesByDealNameRequestParams struct {
-	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Please call the API again until it succeeds.)
+	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// Order ID, which can be used to query the resource information of multiple orders ID (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 }
 
 type DescribeResourcesByDealNameRequest struct {
 	*tchttp.BaseRequest
 	
-	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Please call the API again until it succeeds.)
+	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// Order ID, which can be used to query the resource information of multiple orders ID (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 }
 
 func (r *DescribeResourcesByDealNameRequest) ToJsonString() string {
@@ -2559,6 +2575,7 @@ func (r *DescribeResourcesByDealNameRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DealName")
+	delete(f, "DealNames")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResourcesByDealNameRequest has unknown keys!", "")
 	}
@@ -3224,7 +3241,7 @@ type ModifyClusterParamRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`.
+	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
 	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
@@ -3237,7 +3254,7 @@ type ModifyClusterParamRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`.
+	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
 	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)

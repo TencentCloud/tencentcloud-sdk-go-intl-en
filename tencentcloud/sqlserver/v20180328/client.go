@@ -442,6 +442,7 @@ func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  FAILEDOPERATION_GETVPCFAILED = "FailedOperation.GetVpcFailed"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -464,6 +465,7 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  FAILEDOPERATION_GETVPCFAILED = "FailedOperation.GetVpcFailed"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -2173,6 +2175,7 @@ func NewDescribeSlowlogsResponse() (response *DescribeSlowlogsResponse) {
 // This API is used to get file information of slow query logs.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  INTERNALERROR_COSERROR = "InternalError.CosError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_GCSERROR = "InternalError.GcsError"
@@ -2189,6 +2192,7 @@ func (c *Client) DescribeSlowlogs(request *DescribeSlowlogsRequest) (response *D
 // This API is used to get file information of slow query logs.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  INTERNALERROR_COSERROR = "InternalError.CosError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_GCSERROR = "InternalError.GcsError"
@@ -3745,6 +3749,7 @@ func NewRollbackInstanceResponse() (response *RollbackInstanceResponse) {
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
 //  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) RollbackInstance(request *RollbackInstanceRequest) (response *RollbackInstanceResponse, err error) {
@@ -3761,6 +3766,7 @@ func (c *Client) RollbackInstance(request *RollbackInstanceRequest) (response *R
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
 //  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) RollbackInstanceWithContext(ctx context.Context, request *RollbackInstanceRequest) (response *RollbackInstanceResponse, err error) {

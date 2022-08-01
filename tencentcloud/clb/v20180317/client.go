@@ -201,7 +201,7 @@ func NewBatchDeregisterTargetsResponse() (response *BatchDeregisterTargetsRespon
 }
 
 // BatchDeregisterTargets
-// This API is used to unbind layer-4 and layer-7 real servers in batches. Up to 500 servers can be unbound in a batch.
+// This API is used to batch unbind real servers of the layer-4 and layer-7 VPC-based CLBs. Up to 500 real servers can be unbound in a batch.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -226,7 +226,7 @@ func (c *Client) BatchDeregisterTargets(request *BatchDeregisterTargetsRequest) 
 }
 
 // BatchDeregisterTargets
-// This API is used to unbind layer-4 and layer-7 real servers in batches. Up to 500 servers can be unbound in a batch.
+// This API is used to batch unbind real servers of the layer-4 and layer-7 VPC-based CLBs. Up to 500 real servers can be unbound in a batch.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -339,7 +339,7 @@ func NewBatchRegisterTargetsResponse() (response *BatchRegisterTargetsResponse) 
 }
 
 // BatchRegisterTargets
-// This API is used to bind CVM instances or ENIs in batches. Up to 500 servers can be bound in a batch. It supports cross-region binding, and layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols.
+// This API is used to batch bind CVM instances or ENIs. Up to 500 servers can be bound in a batch. It supports cross-region binding, layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols, and VPC-based CLBs only.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -363,7 +363,7 @@ func (c *Client) BatchRegisterTargets(request *BatchRegisterTargetsRequest) (res
 }
 
 // BatchRegisterTargets
-// This API is used to bind CVM instances or ENIs in batches. Up to 500 servers can be bound in a batch. It supports cross-region binding, and layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols.
+// This API is used to batch bind CVM instances or ENIs. Up to 500 servers can be bound in a batch. It supports cross-region binding, layer-4 and layer-7 (TCP/UDP/HTTP/HTTPS) protocols, and VPC-based CLBs only.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

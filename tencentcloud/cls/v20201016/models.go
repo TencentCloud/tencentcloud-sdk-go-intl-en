@@ -20,6 +20,14 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AlarmAnalysisConfig struct {
+	// Key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type AlarmInfo struct {
 	// Alarm policy name
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -148,11 +156,14 @@ type AnalysisDimensional struct {
 	// Analysis name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Analysis type. Valid values: `query`, `field`
+	// Type of data being analyzed. Valid values: `query`; `field`; `original`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Analysis content
 	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Configuration
+	ConfigInfo []*AlarmAnalysisConfig `json:"ConfigInfo,omitempty" name:"ConfigInfo"`
 }
 
 // Predefined struct for user
@@ -3543,7 +3554,7 @@ type ExportInfo struct {
 	// Number of logs to be exported
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
 
-	// Log download status. Valid values: `Processing`: exporting; `Complete`: completed; `Failed`: failed; `Expired`: expired (3-day validity period).
+	// Log download status. Valid values: `Processing`, `Completed`, `Failed`, `Expired` (three-day validity period), and `Queuing`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Log export start time
@@ -3599,6 +3610,14 @@ type ExtractRuleInfo struct {
 	// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Backtracking *int64 `json:"Backtracking,omitempty" name:"Backtracking"`
+
+	// Whether to be encoded in GBK format. Valid values: `0` (No) and `1` (Yes).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsGBK *int64 `json:"IsGBK,omitempty" name:"IsGBK"`
+
+	// Whether to be formatted as JSON (standard). Valid values: `0` (No) and `1` (Yes).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	JsonStandard *int64 `json:"JsonStandard,omitempty" name:"JsonStandard"`
 }
 
 type Filter struct {
@@ -5134,8 +5153,9 @@ type SearchLogRequestParams struct {
 	// * To limit the number of analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+	// You can pass through the `Context` value (validity: an hour) returned by the API last time to continue to get logs (up to 10,000 raw logs).
 	// Notes:
+	// * Do not modify any other parameters while passing through the `Context` parameter.
 	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
 	// * To continue to get analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
 	Context *string `json:"Context,omitempty" name:"Context"`
@@ -5174,8 +5194,9 @@ type SearchLogRequest struct {
 	// * To limit the number of analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+	// You can pass through the `Context` value (validity: an hour) returned by the API last time to continue to get logs (up to 10,000 raw logs).
 	// Notes:
+	// * Do not modify any other parameters while passing through the `Context` parameter.
 	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
 	// * To continue to get analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>.
 	Context *string `json:"Context,omitempty" name:"Context"`

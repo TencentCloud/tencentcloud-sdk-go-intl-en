@@ -36,7 +36,7 @@ type AccountCreateInfo struct {
 	// Whether it is an admin account. Default value: no
 	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
 
-	// Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`.
+	// Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`
 	Authentication *string `json:"Authentication,omitempty" name:"Authentication"`
 }
 
@@ -152,6 +152,15 @@ type Backup struct {
 
 	// Backup file format. Valid values:`pkg` (archive file), `single` (unarchived files).
 	BackupFormat *string `json:"BackupFormat,omitempty" name:"BackupFormat"`
+
+	// The code of current region where the instance resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// The download address of cross-region backup in target region
+	CrossBackupAddr []*CrossBackupAddr `json:"CrossBackupAddr,omitempty" name:"CrossBackupAddr"`
+
+	// The target region and status of cross-region backup
+	CrossBackupStatus []*CrossRegionStatus `json:"CrossBackupStatus,omitempty" name:"CrossBackupStatus"`
 }
 
 type BackupFile struct {
@@ -169,6 +178,12 @@ type BackupFile struct {
 
 	// Download address
 	DownloadLink *string `json:"DownloadLink,omitempty" name:"DownloadLink"`
+
+	// The code of the region where current instance resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// The target region and download address of cross-region backup
+	CrossBackupAddr []*CrossBackupAddr `json:"CrossBackupAddr,omitempty" name:"CrossBackupAddr"`
 }
 
 // Predefined struct for user
@@ -904,6 +919,25 @@ func (r *CreateMigrationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CrossBackupAddr struct {
+	// The target region of cross-region backup
+	CrossRegion *string `json:"CrossRegion,omitempty" name:"CrossRegion"`
+
+	// The address used to download the cross-region backup over a private network
+	CrossInternalAddr *string `json:"CrossInternalAddr,omitempty" name:"CrossInternalAddr"`
+
+	// The address used to download the cross-region backup over a public network
+	CrossExternalAddr *string `json:"CrossExternalAddr,omitempty" name:"CrossExternalAddr"`
+}
+
+type CrossRegionStatus struct {
+	// The target region of cross-region backup
+	CrossRegion *string `json:"CrossRegion,omitempty" name:"CrossRegion"`
+
+	// Synchronization status of cross-region backup. Valid values: `0` (creating), `1` (succeeded), `2`: (failed), `4` (syncing)
+	CrossStatus *int64 `json:"CrossStatus,omitempty" name:"CrossStatus"`
+}
+
 type DBCreateInfo struct {
 	// Database name
 	DBName *string `json:"DBName,omitempty" name:"DBName"`
@@ -1077,6 +1111,21 @@ type DBInstance struct {
 
 	// Instance type. Valid values: `HA` (high-availability), `RO` (read-only), `SI` (basic edition), `BI` (business intelligence service).
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The target region of cross-region backup. If this parameter left empty, it indicates that cross-region backup is disabled.
+	CrossRegions []*string `json:"CrossRegions,omitempty" name:"CrossRegions"`
+
+	// Cross-region backup status. Valid values: `enable` (enabled), `disable` (disabed)
+	CrossBackupEnabled *string `json:"CrossBackupEnabled,omitempty" name:"CrossBackupEnabled"`
+
+	// The retention period of cross-region backup. Default value: 7 days
+	CrossBackupSaveDays *uint64 `json:"CrossBackupSaveDays,omitempty" name:"CrossBackupSaveDays"`
+
+
+	DnsPodDomain *string `json:"DnsPodDomain,omitempty" name:"DnsPodDomain"`
+
+
+	TgwWanVPort *int64 `json:"TgwWanVPort,omitempty" name:"TgwWanVPort"`
 }
 
 type DBPrivilege struct {
