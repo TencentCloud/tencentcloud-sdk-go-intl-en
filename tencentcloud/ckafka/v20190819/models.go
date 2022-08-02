@@ -3487,7 +3487,8 @@ type InstanceDetail struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
-
+	// Instance feature list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Features []*string `json:"Features,omitempty" name:"Features"`
 }
 
@@ -3962,6 +3963,9 @@ type ModifyTopicAttributesRequestParams struct {
 
 	// Consumption throttling in MB/sec.
 	QuotaConsumerByteRate *int64 `json:"QuotaConsumerByteRate,omitempty" name:"QuotaConsumerByteRate"`
+
+	// The number of topic replicas.
+	ReplicaNum *int64 `json:"ReplicaNum,omitempty" name:"ReplicaNum"`
 }
 
 type ModifyTopicAttributesRequest struct {
@@ -4017,6 +4021,9 @@ type ModifyTopicAttributesRequest struct {
 
 	// Consumption throttling in MB/sec.
 	QuotaConsumerByteRate *int64 `json:"QuotaConsumerByteRate,omitempty" name:"QuotaConsumerByteRate"`
+
+	// The number of topic replicas.
+	ReplicaNum *int64 `json:"ReplicaNum,omitempty" name:"ReplicaNum"`
 }
 
 func (r *ModifyTopicAttributesRequest) ToJsonString() string {
@@ -4048,6 +4055,7 @@ func (r *ModifyTopicAttributesRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "QuotaProducerByteRate")
 	delete(f, "QuotaConsumerByteRate")
+	delete(f, "ReplicaNum")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicAttributesRequest has unknown keys!", "")
 	}

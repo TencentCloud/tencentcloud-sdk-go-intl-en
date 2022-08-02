@@ -66,6 +66,7 @@ func NewBatchCreateAclResponse() (response *BatchCreateAclResponse) {
 // This API is used to create ACL policies in batches.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) BatchCreateAcl(request *BatchCreateAclRequest) (response *BatchCreateAclResponse, err error) {
@@ -76,6 +77,7 @@ func (c *Client) BatchCreateAcl(request *BatchCreateAclRequest) (response *Batch
 // This API is used to create ACL policies in batches.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) BatchCreateAclWithContext(ctx context.Context, request *BatchCreateAclRequest) (response *BatchCreateAclResponse, err error) {
