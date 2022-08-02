@@ -165,6 +165,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 //  INVALIDPARAMETER_INVALIDPRODUCTID = "InvalidParameter.InvalidProductId"
 //  INVALIDPARAMETER_INVALIDPROJECTID = "InvalidParameter.InvalidProjectId"
 //  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDSECURITYSUPPORT = "InvalidParameter.InvalidSecuritySupport"
 //  INVALIDPARAMETER_INVALIDSERCURITYGRPUPID = "InvalidParameter.InvalidSercurityGrpupId"
 //  INVALIDPARAMETER_INVALIDSERVICENAME = "InvalidParameter.InvalidServiceName"
 //  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
@@ -244,6 +245,7 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
 //  INVALIDPARAMETER_INVALIDPRODUCTID = "InvalidParameter.InvalidProductId"
 //  INVALIDPARAMETER_INVALIDPROJECTID = "InvalidParameter.InvalidProjectId"
 //  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDSECURITYSUPPORT = "InvalidParameter.InvalidSecuritySupport"
 //  INVALIDPARAMETER_INVALIDSERCURITYGRPUPID = "InvalidParameter.InvalidSercurityGrpupId"
 //  INVALIDPARAMETER_INVALIDSERVICENAME = "InvalidParameter.InvalidServiceName"
 //  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
@@ -312,6 +314,7 @@ func NewDescribeClusterNodesResponse() (response *DescribeClusterNodesResponse) 
 // This API is used to query the information of a hardware node.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -344,6 +347,7 @@ func (c *Client) DescribeClusterNodes(request *DescribeClusterNodesRequest) (res
 // This API is used to query the information of a hardware node.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -384,6 +388,55 @@ func (c *Client) DescribeClusterNodesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeEmrApplicationStaticsRequest() (request *DescribeEmrApplicationStaticsRequest) {
+    request = &DescribeEmrApplicationStaticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeEmrApplicationStatics")
+    
+    
+    return
+}
+
+func NewDescribeEmrApplicationStaticsResponse() (response *DescribeEmrApplicationStaticsResponse) {
+    response = &DescribeEmrApplicationStaticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeEmrApplicationStatics
+//  This API is used to query the Yarn application statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeEmrApplicationStatics(request *DescribeEmrApplicationStaticsRequest) (response *DescribeEmrApplicationStaticsResponse, err error) {
+    return c.DescribeEmrApplicationStaticsWithContext(context.Background(), request)
+}
+
+// DescribeEmrApplicationStatics
+//  This API is used to query the Yarn application statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeEmrApplicationStaticsWithContext(ctx context.Context, request *DescribeEmrApplicationStaticsRequest) (response *DescribeEmrApplicationStaticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeEmrApplicationStaticsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEmrApplicationStatics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEmrApplicationStaticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -405,6 +458,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 // This API is used to query EMR instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -439,6 +493,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 // This API is used to query EMR instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -502,6 +557,7 @@ func NewDescribeInstancesListResponse() (response *DescribeInstancesListResponse
 // This API is used to query EMR cluster instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -533,6 +589,7 @@ func (c *Client) DescribeInstancesList(request *DescribeInstancesListRequest) (r
 // This API is used to query EMR cluster instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -594,6 +651,7 @@ func NewDescribeResourceScheduleResponse() (response *DescribeResourceScheduleRe
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) DescribeResourceSchedule(request *DescribeResourceScheduleRequest) (response *DescribeResourceScheduleResponse, err error) {
@@ -605,6 +663,7 @@ func (c *Client) DescribeResourceSchedule(request *DescribeResourceScheduleReque
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) DescribeResourceScheduleWithContext(ctx context.Context, request *DescribeResourceScheduleRequest) (response *DescribeResourceScheduleResponse, err error) {
@@ -904,6 +963,113 @@ func (c *Client) InquiryPriceRenewInstanceWithContext(ctx context.Context, reque
     return
 }
 
+func NewInquiryPriceScaleOutInstanceRequest() (request *InquiryPriceScaleOutInstanceRequest) {
+    request = &InquiryPriceScaleOutInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceScaleOutInstance")
+    
+    
+    return
+}
+
+func NewInquiryPriceScaleOutInstanceResponse() (response *InquiryPriceScaleOutInstanceResponse) {
+    response = &InquiryPriceScaleOutInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquiryPriceScaleOutInstance
+// This API is used to query price of scale-out.
+//
+// error code that may be returned:
+//  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CBSCGWERROR = "InternalError.CbsCgwError"
+//  INTERNALERROR_CBSERROR = "InternalError.CbsError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_CHECKQUOTAERR = "InternalError.CheckQuotaErr"
+//  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
+//  INTERNALERROR_SGERROR = "InternalError.SgError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
+//  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
+//  INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
+//  INVALIDPARAMETER_INVALIDMODIFYSPEC = "InvalidParameter.InvalidModifySpec"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
+//  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDVPCID = "InvalidParameter.InvalidVpcId"
+//  RESOURCEINSUFFICIENT_DISKINSUFFICIENT = "ResourceInsufficient.DiskInsufficient"
+//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_RESOURCESPECNOTDEFAULTSPEC = "ResourceUnavailable.ResourceSpecNotDefaultSpec"
+//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+func (c *Client) InquiryPriceScaleOutInstance(request *InquiryPriceScaleOutInstanceRequest) (response *InquiryPriceScaleOutInstanceResponse, err error) {
+    return c.InquiryPriceScaleOutInstanceWithContext(context.Background(), request)
+}
+
+// InquiryPriceScaleOutInstance
+// This API is used to query price of scale-out.
+//
+// error code that may be returned:
+//  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CBSCGWERROR = "InternalError.CbsCgwError"
+//  INTERNALERROR_CBSERROR = "InternalError.CbsError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_CHECKQUOTAERR = "InternalError.CheckQuotaErr"
+//  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
+//  INTERNALERROR_SGERROR = "InternalError.SgError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
+//  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
+//  INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
+//  INVALIDPARAMETER_INVALIDMODIFYSPEC = "InvalidParameter.InvalidModifySpec"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
+//  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDVPCID = "InvalidParameter.InvalidVpcId"
+//  RESOURCEINSUFFICIENT_DISKINSUFFICIENT = "ResourceInsufficient.DiskInsufficient"
+//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_RESOURCESPECNOTDEFAULTSPEC = "ResourceUnavailable.ResourceSpecNotDefaultSpec"
+//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+func (c *Client) InquiryPriceScaleOutInstanceWithContext(ctx context.Context, request *InquiryPriceScaleOutInstanceRequest) (response *InquiryPriceScaleOutInstanceResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceScaleOutInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceScaleOutInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceScaleOutInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquiryPriceUpdateInstanceRequest() (request *InquiryPriceUpdateInstanceRequest) {
     request = &InquiryPriceUpdateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1101,6 +1267,220 @@ func (c *Client) ModifyResourceSchedulerWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyResourceSchedulerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewScaleOutInstanceRequest() (request *ScaleOutInstanceRequest) {
+    request = &ScaleOutInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("emr", APIVersion, "ScaleOutInstance")
+    
+    
+    return
+}
+
+func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
+    response = &ScaleOutInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ScaleOutInstance
+// This API is used to scale out instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
+//  FAILEDOPERATION_NOTSUPPORTPOD = "FailedOperation.NotSupportPod"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CBSCGWERROR = "InternalError.CbsCgwError"
+//  INTERNALERROR_CBSERROR = "InternalError.CbsError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
+//  INTERNALERROR_SGERROR = "InternalError.SgError"
+//  INTERNALERROR_TKEERROR = "InternalError.TKEError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
+//  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLICKHOUSECLUSTER = "InvalidParameter.InvalidClickHouseCluster"
+//  INVALIDPARAMETER_INVALIDCLIENTTOKEN = "InvalidParameter.InvalidClientToken"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
+//  INVALIDPARAMETER_INVALIDCOUNT = "InvalidParameter.InvalidCount"
+//  INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
+//  INVALIDPARAMETER_INVALIDCUSTOMIZEDPODPARAM = "InvalidParameter.InvalidCustomizedPodParam"
+//  INVALIDPARAMETER_INVALIDEKSINSTANCE = "InvalidParameter.InvalidEksInstance"
+//  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
+//  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDSERVICENODEINFO = "InvalidParameter.InvalidServiceNodeInfo"
+//  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
+//  INVALIDPARAMETER_INVALIDTASKCOUNT = "InvalidParameter.InvalidTaskCount"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDTKEINSTANCE = "InvalidParameter.InvalidTkeInstance"
+//  INVALIDPARAMETERVALUE_INVALIDTKEINSTANCE = "InvalidParameterValue.InvalidTkeInstance"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_TKEPRECONDITIONNOTFOUND = "ResourceNotFound.TKEPreconditionNotFound"
+//  RESOURCENOTFOUND_TAGSNOTFOUND = "ResourceNotFound.TagsNotFound"
+//  RESOURCEUNAVAILABLE_RESOURCESPECNOTDEFAULTSPEC = "ResourceUnavailable.ResourceSpecNotDefaultSpec"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  RESOURCESSOLDOUT_CBSSOLDOUT = "ResourcesSoldOut.CbsSoldOut"
+//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+func (c *Client) ScaleOutInstance(request *ScaleOutInstanceRequest) (response *ScaleOutInstanceResponse, err error) {
+    return c.ScaleOutInstanceWithContext(context.Background(), request)
+}
+
+// ScaleOutInstance
+// This API is used to scale out instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
+//  FAILEDOPERATION_NOTSUPPORTPOD = "FailedOperation.NotSupportPod"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CBSCGWERROR = "InternalError.CbsCgwError"
+//  INTERNALERROR_CBSERROR = "InternalError.CbsError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
+//  INTERNALERROR_SGERROR = "InternalError.SgError"
+//  INTERNALERROR_TKEERROR = "InternalError.TKEError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
+//  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLICKHOUSECLUSTER = "InvalidParameter.InvalidClickHouseCluster"
+//  INVALIDPARAMETER_INVALIDCLIENTTOKEN = "InvalidParameter.InvalidClientToken"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
+//  INVALIDPARAMETER_INVALIDCOUNT = "InvalidParameter.InvalidCount"
+//  INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
+//  INVALIDPARAMETER_INVALIDCUSTOMIZEDPODPARAM = "InvalidParameter.InvalidCustomizedPodParam"
+//  INVALIDPARAMETER_INVALIDEKSINSTANCE = "InvalidParameter.InvalidEksInstance"
+//  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
+//  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDSERVICENODEINFO = "InvalidParameter.InvalidServiceNodeInfo"
+//  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
+//  INVALIDPARAMETER_INVALIDTASKCOUNT = "InvalidParameter.InvalidTaskCount"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDTKEINSTANCE = "InvalidParameter.InvalidTkeInstance"
+//  INVALIDPARAMETERVALUE_INVALIDTKEINSTANCE = "InvalidParameterValue.InvalidTkeInstance"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_TKEPRECONDITIONNOTFOUND = "ResourceNotFound.TKEPreconditionNotFound"
+//  RESOURCENOTFOUND_TAGSNOTFOUND = "ResourceNotFound.TagsNotFound"
+//  RESOURCEUNAVAILABLE_RESOURCESPECNOTDEFAULTSPEC = "ResourceUnavailable.ResourceSpecNotDefaultSpec"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  RESOURCESSOLDOUT_CBSSOLDOUT = "ResourcesSoldOut.CbsSoldOut"
+//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+func (c *Client) ScaleOutInstanceWithContext(ctx context.Context, request *ScaleOutInstanceRequest) (response *ScaleOutInstanceResponse, err error) {
+    if request == nil {
+        request = NewScaleOutInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ScaleOutInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewScaleOutInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTerminateInstanceRequest() (request *TerminateInstanceRequest) {
+    request = &TerminateInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("emr", APIVersion, "TerminateInstance")
+    
+    
+    return
+}
+
+func NewTerminateInstanceResponse() (response *TerminateInstanceResponse) {
+    response = &TerminateInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// TerminateInstance
+// This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_SERVICENOTSUPPORT = "UnsupportedOperation.ServiceNotSupport"
+func (c *Client) TerminateInstance(request *TerminateInstanceRequest) (response *TerminateInstanceResponse, err error) {
+    return c.TerminateInstanceWithContext(context.Background(), request)
+}
+
+// TerminateInstance
+// This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_SERVICENOTSUPPORT = "UnsupportedOperation.ServiceNotSupport"
+func (c *Client) TerminateInstanceWithContext(ctx context.Context, request *TerminateInstanceRequest) (response *TerminateInstanceResponse, err error) {
+    if request == nil {
+        request = NewTerminateInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminateInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTerminateInstanceResponse()
     err = c.Send(request, response)
     return
 }

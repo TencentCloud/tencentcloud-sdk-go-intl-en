@@ -89,6 +89,32 @@ func (r *AddUsersForUserManagerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ApplicationStatics struct {
+	// Queue name
+	Queue *string `json:"Queue,omitempty" name:"Queue"`
+
+	// Username
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Application type
+	ApplicationType *string `json:"ApplicationType,omitempty" name:"ApplicationType"`
+
+	// `SumMemorySeconds` meaning
+	SumMemorySeconds *int64 `json:"SumMemorySeconds,omitempty" name:"SumMemorySeconds"`
+
+
+	SumVCoreSeconds *int64 `json:"SumVCoreSeconds,omitempty" name:"SumVCoreSeconds"`
+
+	// SumHDFSBytesWritten (with unit)
+	SumHDFSBytesWritten *string `json:"SumHDFSBytesWritten,omitempty" name:"SumHDFSBytesWritten"`
+
+	// SumHDFSBytesRead (with unit)
+	SumHDFSBytesRead *string `json:"SumHDFSBytesRead,omitempty" name:"SumHDFSBytesRead"`
+
+	// Application count
+	CountApps *int64 `json:"CountApps,omitempty" name:"CountApps"`
+}
+
 type COSSettings struct {
 	// COS `SecretId`
 	CosSecretId *string `json:"CosSecretId,omitempty" name:"CosSecretId"`
@@ -875,6 +901,145 @@ func (r *DescribeClusterNodesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeEmrApplicationStaticsRequestParams struct {
+	// Cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time in the format of timestamp. Unit: seconds.
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of timestamp. Unit: seconds.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queue name used for filtering
+	Queues []*string `json:"Queues,omitempty" name:"Queues"`
+
+	// Username used for filtering
+	Users []*string `json:"Users,omitempty" name:"Users"`
+
+	// Application type used for filtering
+	ApplicationTypes []*string `json:"ApplicationTypes,omitempty" name:"ApplicationTypes"`
+
+	// Group field. Valid values: `queue`, `user`, and `applicationType`.
+	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
+
+	// Sorting field. Valid values: `sumMemorySeconds`, `sumVCoreSeconds`, `sumHDFSBytesWritten`, and `sumHDFSBytesRead`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Order type. Valid values: `0` (descending) and `1`(ascending).
+	IsAsc *int64 `json:"IsAsc,omitempty" name:"IsAsc"`
+
+	// Page number
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeEmrApplicationStaticsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time in the format of timestamp. Unit: seconds.
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of timestamp. Unit: seconds.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Queue name used for filtering
+	Queues []*string `json:"Queues,omitempty" name:"Queues"`
+
+	// Username used for filtering
+	Users []*string `json:"Users,omitempty" name:"Users"`
+
+	// Application type used for filtering
+	ApplicationTypes []*string `json:"ApplicationTypes,omitempty" name:"ApplicationTypes"`
+
+	// Group field. Valid values: `queue`, `user`, and `applicationType`.
+	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
+
+	// Sorting field. Valid values: `sumMemorySeconds`, `sumVCoreSeconds`, `sumHDFSBytesWritten`, and `sumHDFSBytesRead`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Order type. Valid values: `0` (descending) and `1`(ascending).
+	IsAsc *int64 `json:"IsAsc,omitempty" name:"IsAsc"`
+
+	// Page number
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeEmrApplicationStaticsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEmrApplicationStaticsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Queues")
+	delete(f, "Users")
+	delete(f, "ApplicationTypes")
+	delete(f, "GroupBy")
+	delete(f, "OrderBy")
+	delete(f, "IsAsc")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEmrApplicationStaticsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEmrApplicationStaticsResponseParams struct {
+	// Application statistics
+	Statics []*ApplicationStatics `json:"Statics,omitempty" name:"Statics"`
+
+	// Total count
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Available queue name
+	Queues []*string `json:"Queues,omitempty" name:"Queues"`
+
+	// Available usernames
+	Users []*string `json:"Users,omitempty" name:"Users"`
+
+	// Available application type
+	ApplicationTypes []*string `json:"ApplicationTypes,omitempty" name:"ApplicationTypes"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEmrApplicationStaticsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEmrApplicationStaticsResponseParams `json:"Response"`
+}
+
+func (r *DescribeEmrApplicationStaticsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEmrApplicationStaticsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeInstancesListRequestParams struct {
 	// Cluster filtering policy. Valid values: <li>clusterList: Queries the list of clusters excluding terminated ones.</li><li>monitorManage: Queries the list of clusters excluding those terminated, under creation and not successfully created.</li><li>cloudHardwareManage/componentManage: Two reserved values, which have the same implications as those of `monitorManage`.</li>
 	DisplayStrategy *string `json:"DisplayStrategy,omitempty" name:"DisplayStrategy"`
@@ -1247,6 +1412,20 @@ func (r *DescribeUsersForUserManagerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DynamicPodSpec struct {
+	// Minimum number of CPUs
+	RequestCpu *float64 `json:"RequestCpu,omitempty" name:"RequestCpu"`
+
+	// Maximum number of CPUs
+	LimitCpu *float64 `json:"LimitCpu,omitempty" name:"LimitCpu"`
+
+	// Minimum memory in MB
+	RequestMemory *float64 `json:"RequestMemory,omitempty" name:"RequestMemory"`
+
+	// Maximum memory in MB
+	LimitMemory *float64 `json:"LimitMemory,omitempty" name:"LimitMemory"`
+}
+
 type EmrListInstance struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -1445,6 +1624,12 @@ type Filters struct {
 
 	// Filters by the field value
 	Values []*string `json:"Values,omitempty" name:"Values"`
+}
+
+type HostVolumeContext struct {
+	// The directory for mounting the host in the pod, which is the mount point of the host in the resource. A specified mount point corresponds to the host path and is used as the data storage directory in the pod.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VolumePath *string `json:"VolumePath,omitempty" name:"VolumePath"`
 }
 
 // Predefined struct for user
@@ -1780,6 +1965,146 @@ func (r *InquiryPriceRenewInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *InquiryPriceRenewInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceScaleOutInstanceRequestParams struct {
+	// Time unit of scale-out. Valid value:
+	// <li>s: Second. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Time span of scale-out, which needs to be used together with `TimeUnit`.
+	// <li>When `PayMode` is 0, `TimeSpan` can only be 3,600.</li>
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// ID of the AZ where an instance resides.
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Instance billing mode. Valid value:
+	// <li>0: Pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of core nodes to be added.
+	CoreCount *uint64 `json:"CoreCount,omitempty" name:"CoreCount"`
+
+	// Number of task nodes to be added.
+	TaskCount *uint64 `json:"TaskCount,omitempty" name:"TaskCount"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Number of router nodes to be added.
+	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
+
+	// Number of master nodes to be added.
+	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
+}
+
+type InquiryPriceScaleOutInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Time unit of scale-out. Valid value:
+	// <li>s: Second. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Time span of scale-out, which needs to be used together with `TimeUnit`.
+	// <li>When `PayMode` is 0, `TimeSpan` can only be 3,600.</li>
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// ID of the AZ where an instance resides.
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Instance billing mode. Valid value:
+	// <li>0: Pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of core nodes to be added.
+	CoreCount *uint64 `json:"CoreCount,omitempty" name:"CoreCount"`
+
+	// Number of task nodes to be added.
+	TaskCount *uint64 `json:"TaskCount,omitempty" name:"TaskCount"`
+
+	// Currency.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Number of router nodes to be added.
+	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
+
+	// Number of master nodes to be added.
+	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
+}
+
+func (r *InquiryPriceScaleOutInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceScaleOutInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TimeUnit")
+	delete(f, "TimeSpan")
+	delete(f, "ZoneId")
+	delete(f, "PayMode")
+	delete(f, "InstanceId")
+	delete(f, "CoreCount")
+	delete(f, "TaskCount")
+	delete(f, "Currency")
+	delete(f, "RouterCount")
+	delete(f, "MasterCount")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceScaleOutInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceScaleOutInstanceResponseParams struct {
+	// Original price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// Discounted price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiscountCost *string `json:"DiscountCost,omitempty" name:"DiscountCost"`
+
+	// Time unit of scale-out. Valid value:
+	// <li>s: Second.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Node spec queried for price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PriceSpec *PriceResource `json:"PriceSpec,omitempty" name:"PriceSpec"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceScaleOutInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceScaleOutInstanceResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceScaleOutInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceScaleOutInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2331,12 +2656,204 @@ type OutterResource struct {
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
+type PersistentVolumeContext struct {
+	// Disk size in GB.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Disk type. Valid values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Number of disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskNum *int64 `json:"DiskNum,omitempty" name:"DiskNum"`
+}
+
 type Placement struct {
 	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// AZ where the instance resides, such as ap-guangzhou-1. You can call the `DescribeZones` API and see the `Zone` field to get the value of this parameter.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
+type PodParameter struct {
+	// ID of TKE or EKS cluster
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Custom permissions
+	// Example:
+	// {
+	//   "apiVersion": "v1",
+	//   "Clusters": [
+	//     {
+	//       "cluster": {
+	//         "certificate-authority-data": "xxxxxx==",
+	//         "server": "https://xxxxx.com"
+	//       },
+	//       "name": "cls-xxxxx"
+	//     }
+	//   ],
+	//   "contexts": [
+	//     {
+	//       "context": {
+	//         "cluster": "cls-xxxxx",
+	//         "user": "100014xxxxx"
+	//       },
+	//       "name": "cls-a44yhcxxxxxxxxxx"
+	//     }
+	//   ],
+	//   "current-context": "cls-a4xxxx-context-default",
+	//   "kind": "Config",
+	//   "preferences": {},
+	//   "users": [
+	//     {
+	//       "name": "100014xxxxx",
+	//       "user": {
+	//         "client-certificate-data": "xxxxxx",
+	//         "client-key-data": "xxxxxx"
+	//       }
+	//     }
+	//   ]
+	// }
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// Custom parameters
+	// Example:
+	// {
+	//     "apiVersion": "apps/v1",
+	//     "kind": "Deployment",
+	//     "metadata": {
+	//       "name": "test-deployment",
+	//       "labels": {
+	//         "app": "test"
+	//       }
+	//     },
+	//     "spec": {
+	//       "replicas": 3,
+	//       "selector": {
+	//         "matchLabels": {
+	//           "app": "test-app"
+	//         }
+	//       },
+	//       "template": {
+	//         "metadata": {
+	//           "annotations": {
+	//             "your-organization.com/department-v1": "test-example-v1",
+	//             "your-organization.com/department-v2": "test-example-v2"
+	//           },
+	//           "labels": {
+	//             "app": "test-app",
+	//             "environment": "production"
+	//           }
+	//         },
+	//         "spec": {
+	//           "nodeSelector": {
+	//             "your-organization/node-test": "test-node"
+	//           },
+	//           "containers": [
+	//             {
+	//               "name": "nginx",
+	//               "image": "nginx:1.14.2",
+	//               "ports": [
+	//                 {
+	//                   "containerPort": 80
+	//                 }
+	//               ]
+	//             }
+	//           ],
+	//           "affinity": {
+	//             "nodeAffinity": {
+	//               "requiredDuringSchedulingIgnoredDuringExecution": {
+	//                 "nodeSelectorTerms": [
+	//                   {
+	//                     "matchExpressions": [
+	//                       {
+	//                         "key": "disk-type",
+	//                         "operator": "In",
+	//                         "values": [
+	//                           "ssd",
+	//                           "sas"
+	//                         ]
+	//                       },
+	//                       {
+	//                         "key": "cpu-num",
+	//                         "operator": "Gt",
+	//                         "values": [
+	//                           "6"
+	//                         ]
+	//                       }
+	//                     ]
+	//                   }
+	//                 ]
+	//               }
+	//             }
+	//           }
+	//         }
+	//       }
+	//     }
+	//   }
+	Parameter *string `json:"Parameter,omitempty" name:"Parameter"`
+}
+
+type PodSpec struct {
+	// Identifier of external resource provider, such as "cls-a1cd23fa".
+	ResourceProviderIdentifier *string `json:"ResourceProviderIdentifier,omitempty" name:"ResourceProviderIdentifier"`
+
+	// Type of external resource provider, such as "tke". Currently, only "tke" is supported.
+	ResourceProviderType *string `json:"ResourceProviderType,omitempty" name:"ResourceProviderType"`
+
+	// Purpose of the resource, which means the node type and can only be "TASK".
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
+
+	// Number of CPUs
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory size in GB.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Mount point of resources for the host. A specified mount point corresponds to the host path and is used as the data storage directory in the pod. (This parameter has been disused)
+	DataVolumes []*string `json:"DataVolumes,omitempty" name:"DataVolumes"`
+
+	// EKS cluster - CPU type. Valid values: `intel` and `amd`.
+	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
+
+	// Data directory mounting information of the pod node.
+	PodVolumes []*PodVolume `json:"PodVolumes,omitempty" name:"PodVolumes"`
+
+	// Whether floating specification is used. `1`: Yes; `0`: No.
+	IsDynamicSpec *uint64 `json:"IsDynamicSpec,omitempty" name:"IsDynamicSpec"`
+
+	// Floating specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DynamicPodSpec *DynamicPodSpec `json:"DynamicPodSpec,omitempty" name:"DynamicPodSpec"`
+
+	// Unique VPC ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Unique VPC subnet ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// pod name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PodName *string `json:"PodName,omitempty" name:"PodName"`
+}
+
+type PodVolume struct {
+	// Storage type. Valid values: `pvc` and `hostpath`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VolumeType *string `json:"VolumeType,omitempty" name:"VolumeType"`
+
+	// This field will take effect if `VolumeType` is `pvc`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PVCVolume *PersistentVolumeContext `json:"PVCVolume,omitempty" name:"PVCVolume"`
+
+	// This field will take effect if `VolumeType` is `hostpath`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostVolume *HostVolumeContext `json:"HostVolume,omitempty" name:"HostVolume"`
 }
 
 type PreExecuteFileSettings struct {
@@ -2375,6 +2892,60 @@ type PreExecuteFileSettings struct {
 
 	// COS `appid`, which has been disused
 	AppId *string `json:"AppId,omitempty" name:"AppId"`
+}
+
+type PriceResource struct {
+	// Target specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Spec *string `json:"Spec,omitempty" name:"Spec"`
+
+	// Disk type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *uint64 `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Disk type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// System disk size
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RootSize *int64 `json:"RootSize,omitempty" name:"RootSize"`
+
+	// Memory size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// Number of CPUs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Disk size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// List of cloud disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MultiDisks []*MultiDisk `json:"MultiDisks,omitempty" name:"MultiDisks"`
+
+	// Number of disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskCnt *int64 `json:"DiskCnt,omitempty" name:"DiskCnt"`
+
+	// Specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Number of disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskNum *int64 `json:"DiskNum,omitempty" name:"DiskNum"`
+
+	// Number of local disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LocalDiskNum *int64 `json:"LocalDiskNum,omitempty" name:"LocalDiskNum"`
 }
 
 type Resource struct {
@@ -2437,6 +3008,263 @@ type Resource struct {
 	DiskNum *uint64 `json:"DiskNum,omitempty" name:"DiskNum"`
 }
 
+// Predefined struct for user
+type ScaleOutInstanceRequestParams struct {
+	// Time unit of scale-out. Valid values:
+	// <li>s: Second. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	// <li>m: Month. When `PayMode` is 1, `TimeUnit` can only be `m`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Time span of scale-out, which needs to be used together with `TimeUnit`.
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance billing mode. Valid value:
+	// <li>0: Pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Client token.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Bootstrap script settings.
+	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings"`
+
+	// Number of task nodes to be added.
+	TaskCount *uint64 `json:"TaskCount,omitempty" name:"TaskCount"`
+
+	// Number of core nodes to be added.
+	CoreCount *uint64 `json:"CoreCount,omitempty" name:"CoreCount"`
+
+	// Processes unnecessary for scale-out.
+	UnNecessaryNodeList []*uint64 `json:"UnNecessaryNodeList,omitempty" name:"UnNecessaryNodeList"`
+
+	// Number of router nodes to be added.
+	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
+
+	// Deployed service.
+	// <li>`SoftDeployInfo` and `ServiceNodeInfo` are in the same group and mutually exclusive with `UnNecessaryNodeList`.</li>
+	// <li>The combination of `SoftDeployInfo` and `ServiceNodeInfo` is recommended.</li>
+	SoftDeployInfo []*uint64 `json:"SoftDeployInfo,omitempty" name:"SoftDeployInfo"`
+
+	// Started process.
+	ServiceNodeInfo []*uint64 `json:"ServiceNodeInfo,omitempty" name:"ServiceNodeInfo"`
+
+	// List of spread placement group IDs. Only one can be specified currently.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// List of tags bound to added nodes.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Resource type selected for scaling. Valid values: `host` (general CVM resource) and `pod` (resource provided by TKE or EKS cluster).
+	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
+
+	// Specified information such as pod specification and source for scale-out with pod resources.
+	PodSpec *PodSpec `json:"PodSpec,omitempty" name:"PodSpec"`
+
+	// Server group name selected for ClickHouse cluster scale-out.
+	ClickHouseClusterName *string `json:"ClickHouseClusterName,omitempty" name:"ClickHouseClusterName"`
+
+	// Server group type selected for ClickHouse cluster scale-out. Valid values: `new` (create a group) and `old` (select an existing group).
+	ClickHouseClusterType *string `json:"ClickHouseClusterType,omitempty" name:"ClickHouseClusterType"`
+
+	// Yarn node label specified for rule-based scale-out.
+	YarnNodeLabel *string `json:"YarnNodeLabel,omitempty" name:"YarnNodeLabel"`
+
+	// Custom pod permission and parameter
+	PodParameter *PodParameter `json:"PodParameter,omitempty" name:"PodParameter"`
+
+	// Number of master nodes to be added.
+	// When a ClickHouse cluster is scaled, this parameter does not take effect.
+	// When a Kafka cluster is scaled, this parameter does not take effect.
+	// When `HardwareResourceType` is `pod`, this parameter does not take effect.
+	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
+
+	// Whether to start the service after scale-out. `true`: Yes; `false`: No.
+	StartServiceAfterScaleOut *string `json:"StartServiceAfterScaleOut,omitempty" name:"StartServiceAfterScaleOut"`
+
+	// AZ, which defaults to the primary AZ of the cluster.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Subnet, which defaults to the subnet used when the cluster is created.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Pre-defined configuration set
+	ScaleOutServiceConfAssign *string `json:"ScaleOutServiceConfAssign,omitempty" name:"ScaleOutServiceConfAssign"`
+}
+
+type ScaleOutInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Time unit of scale-out. Valid values:
+	// <li>s: Second. When `PayMode` is 0, `TimeUnit` can only be `s`.</li>
+	// <li>m: Month. When `PayMode` is 1, `TimeUnit` can only be `m`.</li>
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Time span of scale-out, which needs to be used together with `TimeUnit`.
+	TimeSpan *uint64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance billing mode. Valid value:
+	// <li>0: Pay-as-you-go.</li>
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Client token.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Bootstrap script settings.
+	PreExecutedFileSettings []*PreExecuteFileSettings `json:"PreExecutedFileSettings,omitempty" name:"PreExecutedFileSettings"`
+
+	// Number of task nodes to be added.
+	TaskCount *uint64 `json:"TaskCount,omitempty" name:"TaskCount"`
+
+	// Number of core nodes to be added.
+	CoreCount *uint64 `json:"CoreCount,omitempty" name:"CoreCount"`
+
+	// Processes unnecessary for scale-out.
+	UnNecessaryNodeList []*uint64 `json:"UnNecessaryNodeList,omitempty" name:"UnNecessaryNodeList"`
+
+	// Number of router nodes to be added.
+	RouterCount *uint64 `json:"RouterCount,omitempty" name:"RouterCount"`
+
+	// Deployed service.
+	// <li>`SoftDeployInfo` and `ServiceNodeInfo` are in the same group and mutually exclusive with `UnNecessaryNodeList`.</li>
+	// <li>The combination of `SoftDeployInfo` and `ServiceNodeInfo` is recommended.</li>
+	SoftDeployInfo []*uint64 `json:"SoftDeployInfo,omitempty" name:"SoftDeployInfo"`
+
+	// Started process.
+	ServiceNodeInfo []*uint64 `json:"ServiceNodeInfo,omitempty" name:"ServiceNodeInfo"`
+
+	// List of spread placement group IDs. Only one can be specified currently.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// List of tags bound to added nodes.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Resource type selected for scaling. Valid values: `host` (general CVM resource) and `pod` (resource provided by TKE or EKS cluster).
+	HardwareResourceType *string `json:"HardwareResourceType,omitempty" name:"HardwareResourceType"`
+
+	// Specified information such as pod specification and source for scale-out with pod resources.
+	PodSpec *PodSpec `json:"PodSpec,omitempty" name:"PodSpec"`
+
+	// Server group name selected for ClickHouse cluster scale-out.
+	ClickHouseClusterName *string `json:"ClickHouseClusterName,omitempty" name:"ClickHouseClusterName"`
+
+	// Server group type selected for ClickHouse cluster scale-out. Valid values: `new` (create a group) and `old` (select an existing group).
+	ClickHouseClusterType *string `json:"ClickHouseClusterType,omitempty" name:"ClickHouseClusterType"`
+
+	// Yarn node label specified for rule-based scale-out.
+	YarnNodeLabel *string `json:"YarnNodeLabel,omitempty" name:"YarnNodeLabel"`
+
+	// Custom pod permission and parameter
+	PodParameter *PodParameter `json:"PodParameter,omitempty" name:"PodParameter"`
+
+	// Number of master nodes to be added.
+	// When a ClickHouse cluster is scaled, this parameter does not take effect.
+	// When a Kafka cluster is scaled, this parameter does not take effect.
+	// When `HardwareResourceType` is `pod`, this parameter does not take effect.
+	MasterCount *uint64 `json:"MasterCount,omitempty" name:"MasterCount"`
+
+	// Whether to start the service after scale-out. `true`: Yes; `false`: No.
+	StartServiceAfterScaleOut *string `json:"StartServiceAfterScaleOut,omitempty" name:"StartServiceAfterScaleOut"`
+
+	// AZ, which defaults to the primary AZ of the cluster.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Subnet, which defaults to the subnet used when the cluster is created.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Pre-defined configuration set
+	ScaleOutServiceConfAssign *string `json:"ScaleOutServiceConfAssign,omitempty" name:"ScaleOutServiceConfAssign"`
+}
+
+func (r *ScaleOutInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ScaleOutInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TimeUnit")
+	delete(f, "TimeSpan")
+	delete(f, "InstanceId")
+	delete(f, "PayMode")
+	delete(f, "ClientToken")
+	delete(f, "PreExecutedFileSettings")
+	delete(f, "TaskCount")
+	delete(f, "CoreCount")
+	delete(f, "UnNecessaryNodeList")
+	delete(f, "RouterCount")
+	delete(f, "SoftDeployInfo")
+	delete(f, "ServiceNodeInfo")
+	delete(f, "DisasterRecoverGroupIds")
+	delete(f, "Tags")
+	delete(f, "HardwareResourceType")
+	delete(f, "PodSpec")
+	delete(f, "ClickHouseClusterName")
+	delete(f, "ClickHouseClusterType")
+	delete(f, "YarnNodeLabel")
+	delete(f, "PodParameter")
+	delete(f, "MasterCount")
+	delete(f, "StartServiceAfterScaleOut")
+	delete(f, "ZoneId")
+	delete(f, "SubnetId")
+	delete(f, "ScaleOutServiceConfAssign")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ScaleOutInstanceResponseParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Order number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// Client token.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Scale-out workflow ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Big order ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BillId *string `json:"BillId,omitempty" name:"BillId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ScaleOutInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ScaleOutInstanceResponseParams `json:"Response"`
+}
+
+func (r *ScaleOutInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ScaleOutInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SearchItem struct {
 	// Searchable type
 	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
@@ -2471,6 +3299,67 @@ type Tag struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+// Predefined struct for user
+type TerminateInstanceRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ID of terminated node. This parameter is reserved and does not need to be configured.
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+}
+
+type TerminateInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ID of terminated node. This parameter is reserved and does not need to be configured.
+	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+}
+
+func (r *TerminateInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ResourceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TerminateInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type TerminateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *TerminateInstanceResponseParams `json:"Response"`
+}
+
+func (r *TerminateInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

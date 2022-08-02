@@ -271,7 +271,7 @@ type GeneralAccurateOCRResponseParams struct {
 	// Information on recognized text, including the text line content, confidence, text line coordinates, and text line coordinates after rotation correction. For more information, please click the link on the left.
 	TextDetections []*TextDetection `json:"TextDetections,omitempty" name:"TextDetections"`
 
-	// Image rotation angle in degrees. 0° indicates horizontal text. A positive value indicates clockwise rotation. A negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
+	// Image rotation angle in degrees. 0°: The horizontal direction of the text on the image; a positive value: rotate clockwise; a negative value: rotate counterclockwise.
 	Angel *float64 `json:"Angel,omitempty" name:"Angel"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -432,7 +432,7 @@ type GeneralBasicOCRResponseParams struct {
 	// Detected language. For more information on the supported languages, please see the description of the `LanguageType` input parameter.
 	Language *string `json:"Language,omitempty" name:"Language"`
 
-	// Image rotation angle in degrees. 0° indicates horizontal text, a positive value indicates clockwise rotation, and a negative value indicates anticlockwise rotation. For more information, please see <a href="https://intl.cloud.tencent.com/document/product/866/45139?from_cn_redirect=1">How to Correct Tilted Text</a>.
+	// Image rotation angle in degrees. 0°: The horizontal direction of the text on the image; a positive value: rotate clockwise; a negative value: rotate counterclockwise.
 	Angel *float64 `json:"Angel,omitempty" name:"Angel"`
 
 	// Total number of PDF pages to be returned if the image is a PDF. Default value: 0.
@@ -608,132 +608,6 @@ type ItemCoord struct {
 
 	// Height
 	Height *int64 `json:"Height,omitempty" name:"Height"`
-}
-
-// Predefined struct for user
-type MLIDCardOCRRequestParams struct {
-	// Base64-encoded value of an image.
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
-
-	// URL of an image. (This field is not supported outside the Chinese mainland)
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
-	// The download speed and stability of non-Tencent Cloud URLs may be low.
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
-
-	// Whether to return an image
-	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
-}
-
-type MLIDCardOCRRequest struct {
-	*tchttp.BaseRequest
-	
-	// Base64-encoded value of an image.
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
-
-	// URL of an image. (This field is not supported outside the Chinese mainland)
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
-	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
-	// We recommend storing the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
-	// The download speed and stability of non-Tencent Cloud URLs may be low.
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
-
-	// Whether to return an image
-	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
-}
-
-func (r *MLIDCardOCRRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *MLIDCardOCRRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ImageBase64")
-	delete(f, "ImageUrl")
-	delete(f, "RetImage")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MLIDCardOCRRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type MLIDCardOCRResponseParams struct {
-	// Identity card number
-	ID *string `json:"ID,omitempty" name:"ID"`
-
-	// Name
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
-
-	// Gender
-	Sex *string `json:"Sex,omitempty" name:"Sex"`
-
-	// Warning code
-	// -9103 Warning for spoofed card
-	// -9102 Warning for photocopied card
-	// -9106 Warning for covered card
-	// -9107 Warning for blurry image
-	Warn []*int64 `json:"Warn,omitempty" name:"Warn"`
-
-	// Identity photo
-	Image *string `json:"Image,omitempty" name:"Image"`
-
-	// Extended field:
-	// {
-	//     ID:{
-	//         Confidence:0.9999
-	//     },
-	//     Name:{
-	//         Confidence:0.9996
-	//     }
-	// }
-	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
-
-	// Certificate type
-	// MyKad  ID card
-	// MyPR    Permanent resident card
-	// MyTentera   Military identity card
-	// MyKAS    Temporary ID card
-	// POLIS  Police card
-	// IKAD   Work permit
-	// MyKid   Kid card
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// Date of birth (currently, this field is only supported for IKAD).
-	Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type MLIDCardOCRResponse struct {
-	*tchttp.BaseResponse
-	Response *MLIDCardOCRResponseParams `json:"Response"`
-}
-
-func (r *MLIDCardOCRResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *MLIDCardOCRResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
