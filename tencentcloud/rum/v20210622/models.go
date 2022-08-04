@@ -425,7 +425,7 @@ type CreateTawInstanceRequestParams struct {
 	// Region ID (at least greater than 0)
 	AreaId *int64 `json:"AreaId,omitempty" name:"AreaId"`
 
-	// Billing mode (1: trial; 2: prepaid; 3: postpaid)
+	// Billing type (1: Pay-as-you-go).
 	ChargeType *int64 `json:"ChargeType,omitempty" name:"ChargeType"`
 
 	// Data retention period (at least greater than 0)
@@ -456,7 +456,7 @@ type CreateTawInstanceRequest struct {
 	// Region ID (at least greater than 0)
 	AreaId *int64 `json:"AreaId,omitempty" name:"AreaId"`
 
-	// Billing mode (1: trial; 2: prepaid; 3: postpaid)
+	// Billing type (1: Pay-as-you-go).
 	ChargeType *int64 `json:"ChargeType,omitempty" name:"ChargeType"`
 
 	// Data retention period (at least greater than 0)
@@ -1586,6 +1586,12 @@ type DescribeDataFetchProjectRequestParams struct {
 
 	// Environment
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// HTTP status code.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitempty" name:"Ret"`
 }
 
 type DescribeDataFetchProjectRequest struct {
@@ -1659,6 +1665,12 @@ type DescribeDataFetchProjectRequest struct {
 
 	// Environment
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// HTTP status code.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitempty" name:"Ret"`
 }
 
 func (r *DescribeDataFetchProjectRequest) ToJsonString() string {
@@ -1696,6 +1708,8 @@ func (r *DescribeDataFetchProjectRequest) FromJsonString(s string) error {
 	delete(f, "CostType")
 	delete(f, "Url")
 	delete(f, "Env")
+	delete(f, "Status")
+	delete(f, "Ret")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataFetchProjectRequest has unknown keys!", "")
 	}
@@ -2008,6 +2022,12 @@ type DescribeDataFetchUrlRequestParams struct {
 
 	// Environment
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// HTTP status code.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitempty" name:"Ret"`
 }
 
 type DescribeDataFetchUrlRequest struct {
@@ -2081,6 +2101,12 @@ type DescribeDataFetchUrlRequest struct {
 
 	// Environment
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// HTTP status code.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// retcode
+	Ret *string `json:"Ret,omitempty" name:"Ret"`
 }
 
 func (r *DescribeDataFetchUrlRequest) ToJsonString() string {
@@ -2118,6 +2144,8 @@ func (r *DescribeDataFetchUrlRequest) FromJsonString(s string) error {
 	delete(f, "CostType")
 	delete(f, "Url")
 	delete(f, "Env")
+	delete(f, "Status")
+	delete(f, "Ret")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataFetchUrlRequest has unknown keys!", "")
 	}
@@ -3435,6 +3463,9 @@ type DescribeDataSetUrlStatisticsRequestParams struct {
 
 	// Environment
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// The obtained package.
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 type DescribeDataSetUrlStatisticsRequest struct {
@@ -3505,6 +3536,9 @@ type DescribeDataSetUrlStatisticsRequest struct {
 
 	// Environment
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// The obtained package.
+	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 }
 
 func (r *DescribeDataSetUrlStatisticsRequest) ToJsonString() string {
@@ -3541,6 +3575,7 @@ func (r *DescribeDataSetUrlStatisticsRequest) FromJsonString(s string) error {
 	delete(f, "Browser")
 	delete(f, "CostType")
 	delete(f, "Env")
+	delete(f, "PackageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataSetUrlStatisticsRequest has unknown keys!", "")
 	}
@@ -4887,6 +4922,87 @@ func (r *DescribeProjectLimitsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeProjectsRequestParams struct {
+	// Number of items per page (integer)
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number (integer)
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter parameter. Pass in {"Name": "IsDemo", "Values":["1"]} for the demo mode.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// This parameter has been disused. You need to indicate whether the demo mode is used in `Filters`.
+	IsDemo *int64 `json:"IsDemo,omitempty" name:"IsDemo"`
+}
+
+type DescribeProjectsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of items per page (integer)
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number (integer)
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter parameter. Pass in {"Name": "IsDemo", "Values":["1"]} for the demo mode.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// This parameter has been disused. You need to indicate whether the demo mode is used in `Filters`.
+	IsDemo *int64 `json:"IsDemo,omitempty" name:"IsDemo"`
+}
+
+func (r *DescribeProjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	delete(f, "IsDemo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProjectsResponseParams struct {
+	// Total number of items in the list
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Project list
+	ProjectSet []*RumProject `json:"ProjectSet,omitempty" name:"ProjectSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeProjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProjectsResponseParams `json:"Response"`
+}
+
+func (r *DescribeProjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribePvListRequestParams struct {
 	// ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -5095,6 +5211,84 @@ func (r *DescribeReleaseFilesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeReleaseFilesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScoresRequestParams struct {
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Project ID
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+
+	// This parameter has been disused.
+	IsDemo *int64 `json:"IsDemo,omitempty" name:"IsDemo"`
+}
+
+type DescribeScoresRequest struct {
+	*tchttp.BaseRequest
+	
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Project ID
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+
+	// This parameter has been disused.
+	IsDemo *int64 `json:"IsDemo,omitempty" name:"IsDemo"`
+}
+
+func (r *DescribeScoresRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScoresRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EndTime")
+	delete(f, "StartTime")
+	delete(f, "ID")
+	delete(f, "IsDemo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScoresRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScoresResponseParams struct {
+	// Array
+	ScoreSet []*ScoreInfo `json:"ScoreSet,omitempty" name:"ScoreSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeScoresResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeScoresResponseParams `json:"Response"`
+}
+
+func (r *DescribeScoresResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScoresResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5319,6 +5513,14 @@ func (r *DescribeWhitelistsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeWhitelistsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Filter struct {
+	// One or more filter values.
+	Values []*string `json:"Values,omitempty" name:"Values"`
+
+	// Filter name.
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type LogExport struct {
@@ -5732,6 +5934,61 @@ type RumAreaInfo struct {
 	AreaKey *string `json:"AreaKey,omitempty" name:"AreaKey"`
 }
 
+type RumProject struct {
+	// Project name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Creator ID
+	Creator *string `json:"Creator,omitempty" name:"Creator"`
+
+	// Instance ID
+	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+
+	// Project type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Project repository address
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Repo *string `json:"Repo,omitempty" name:"Repo"`
+
+	// Project URL
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	URL *string `json:"URL,omitempty" name:"URL"`
+
+	// Project sample rate
+	Rate *string `json:"Rate,omitempty" name:"Rate"`
+
+	// Unique project key (12 characters)
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Whether to enable URL aggregation
+	EnableURLGroup *int64 `json:"EnableURLGroup,omitempty" name:"EnableURLGroup"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Project ID
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+
+	// Instance key
+	InstanceKey *string `json:"InstanceKey,omitempty" name:"InstanceKey"`
+
+	// Project description
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Desc *string `json:"Desc,omitempty" name:"Desc"`
+
+	// Starred status. 1: yes; 0: no
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IsStar *int64 `json:"IsStar,omitempty" name:"IsStar"`
+
+	// Project status (`1`: Creating; `2`: Running; `3`: Abnormal; `4`: Restarting; `5`: Stopping; `6`: Stopped; `7`: Terminating; `8`: Terminated)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ProjectStatus *int64 `json:"ProjectStatus,omitempty" name:"ProjectStatus"`
+}
+
 type RumPvInfo struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -5753,6 +6010,47 @@ type RumUvInfo struct {
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
+type ScoreInfo struct {
+	// duration
+	StaticDuration *string `json:"StaticDuration,omitempty" name:"StaticDuration"`
+
+	// pv
+	PagePv *string `json:"PagePv,omitempty" name:"PagePv"`
+
+	// Failure
+	ApiFail *string `json:"ApiFail,omitempty" name:"ApiFail"`
+
+	// Request
+	ApiNum *string `json:"ApiNum,omitempty" name:"ApiNum"`
+
+	// fail
+	StaticFail *string `json:"StaticFail,omitempty" name:"StaticFail"`
+
+	// Project ID
+	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+
+	// uv
+	PageUv *string `json:"PageUv,omitempty" name:"PageUv"`
+
+	// Number of requests
+	ApiDuration *string `json:"ApiDuration,omitempty" name:"ApiDuration"`
+
+	// Score
+	Score *string `json:"Score,omitempty" name:"Score"`
+
+	// error
+	PageError *string `json:"PageError,omitempty" name:"PageError"`
+
+	// num
+	StaticNum *string `json:"StaticNum,omitempty" name:"StaticNum"`
+
+	// num
+	RecordNum *int64 `json:"RecordNum,omitempty" name:"RecordNum"`
+
+	// Duration
+	PageDuration *string `json:"PageDuration,omitempty" name:"PageDuration"`
 }
 
 // Predefined struct for user
