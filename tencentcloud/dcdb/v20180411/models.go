@@ -1013,6 +1013,10 @@ type DCDBInstanceInfo struct {
 	// Instance tag information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Database engine version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
 }
 
 type DCDBShardInfo struct {
