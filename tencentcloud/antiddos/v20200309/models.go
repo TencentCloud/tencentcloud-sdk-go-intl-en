@@ -16,9 +16,23 @@ package v20200309
 
 import (
     "encoding/json"
-    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
 )
+
+type AnycastOutPackRelation struct {
+
+	NormalBandwidth *uint64 `json:"NormalBandwidth,omitempty" name:"NormalBandwidth"`
+
+
+	ForwardRulesLimit *uint64 `json:"ForwardRulesLimit,omitempty" name:"ForwardRulesLimit"`
+
+
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+
+	CurDeadline *string `json:"CurDeadline,omitempty" name:"CurDeadline"`
+}
 
 // Predefined struct for user
 type AssociateDDoSEipAddressRequestParams struct {
@@ -259,8 +273,15 @@ type BGPIPInstance struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	BGPIPChannelFlag *uint64 `json:"BGPIPChannelFlag,omitempty" name:"BGPIPChannelFlag"`
 
-
+	// Tag that the Anti-DDoS Advanced instance is associated with
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	TagInfoList []*TagInfo `json:"TagInfoList,omitempty" name:"TagInfoList"`
+
+
+	AnycastOutPackRelation *AnycastOutPackRelation `json:"AnycastOutPackRelation,omitempty" name:"AnycastOutPackRelation"`
+
+
+	InstanceVersion *uint64 `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
 }
 
 type BGPIPInstanceSpecification struct {
@@ -406,6 +427,9 @@ type BlackWhiteIpRelation struct {
 
 	// IP mask. `0` indicates a 32-bit IP.
 	Mask *uint64 `json:"Mask,omitempty" name:"Mask"`
+
+	// Modification time
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 }
 
 type BoundIpInfo struct {
@@ -891,6 +915,9 @@ type CreateCCReqLimitPolicyRequestParams struct {
 
 	// Configuration field
 	Policy *CCReqLimitPolicyRecord `json:"Policy,omitempty" name:"Policy"`
+
+	// Whether it’s a global CC frequency limit
+	IsGlobal *int64 `json:"IsGlobal,omitempty" name:"IsGlobal"`
 }
 
 type CreateCCReqLimitPolicyRequest struct {
@@ -910,6 +937,9 @@ type CreateCCReqLimitPolicyRequest struct {
 
 	// Configuration field
 	Policy *CCReqLimitPolicyRecord `json:"Policy,omitempty" name:"Policy"`
+
+	// Whether it’s a global CC frequency limit
+	IsGlobal *int64 `json:"IsGlobal,omitempty" name:"IsGlobal"`
 }
 
 func (r *CreateCCReqLimitPolicyRequest) ToJsonString() string {
@@ -929,6 +959,7 @@ func (r *CreateCCReqLimitPolicyRequest) FromJsonString(s string) error {
 	delete(f, "Protocol")
 	delete(f, "Domain")
 	delete(f, "Policy")
+	delete(f, "IsGlobal")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCCReqLimitPolicyRequest has unknown keys!", "")
 	}
@@ -1890,74 +1921,6 @@ type DefaultAlarmThreshold struct {
 }
 
 // Predefined struct for user
-type DeleteBlackWhiteIpListRequestParams struct {
-	// Anti-DDoS instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// List of IPs
-	IpList []*string `json:"IpList,omitempty" name:"IpList"`
-
-	// IP type. Valid values: `black` (blocklisted IP), `white`(allowlisted IP).
-	Type *string `json:"Type,omitempty" name:"Type"`
-}
-
-type DeleteBlackWhiteIpListRequest struct {
-	*tchttp.BaseRequest
-	
-	// Anti-DDoS instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// List of IPs
-	IpList []*string `json:"IpList,omitempty" name:"IpList"`
-
-	// IP type. Valid values: `black` (blocklisted IP), `white`(allowlisted IP).
-	Type *string `json:"Type,omitempty" name:"Type"`
-}
-
-func (r *DeleteBlackWhiteIpListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteBlackWhiteIpListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "IpList")
-	delete(f, "Type")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBlackWhiteIpListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteBlackWhiteIpListResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DeleteBlackWhiteIpListResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteBlackWhiteIpListResponseParams `json:"Response"`
-}
-
-func (r *DeleteBlackWhiteIpListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteBlackWhiteIpListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DeleteCCLevelPolicyRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2882,7 +2845,7 @@ type DescribeCCLevelListResponseParams struct {
 	// Total number of level-defining policies
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-	// Details of level-defining policies
+	// Total number of level-defining policies
 	LevelList []*CCLevelPolicy `json:"LevelList,omitempty" name:"LevelList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3826,8 +3789,11 @@ type DescribeListBGPIPInstancesRequestParams struct {
 	// Filters by the instance ID
 	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
 
-
+	// Searches by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
+
+
+	FilterPackType []*string `json:"FilterPackType,omitempty" name:"FilterPackType"`
 }
 
 type DescribeListBGPIPInstancesRequest struct {
@@ -3878,7 +3844,10 @@ type DescribeListBGPIPInstancesRequest struct {
 	// Filters by the instance ID
 	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
 
+	// Searches by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
+
+	FilterPackType []*string `json:"FilterPackType,omitempty" name:"FilterPackType"`
 }
 
 func (r *DescribeListBGPIPInstancesRequest) ToJsonString() string {
@@ -3907,6 +3876,7 @@ func (r *DescribeListBGPIPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterCname")
 	delete(f, "FilterInstanceIdList")
 	delete(f, "FilterTag")
+	delete(f, "FilterPackType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPIPInstancesRequest has unknown keys!", "")
 	}
@@ -5308,7 +5278,7 @@ type ListenerCcThreholdConfig struct {
 	// Domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Protocol. Value: htttps
+	// Protocol. Value: `https`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Status. Valid values: `0` (disabled), `1` (enabled).
@@ -6020,6 +5990,9 @@ type PacketFilterRelation struct {
 
 	// Anti-DDoS instance configured
 	InstanceDetailList []*InstanceRelation `json:"InstanceDetailList,omitempty" name:"InstanceDetailList"`
+
+	// Modification time
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 }
 
 type PortSegment struct {
@@ -6271,18 +6244,18 @@ func (r *SwitchWaterPrintConfigResponse) FromJsonString(s string) error {
 }
 
 type TagFilter struct {
-
+	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-
+	// Tag value
 	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type TagInfo struct {
-
+	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
-
+	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
