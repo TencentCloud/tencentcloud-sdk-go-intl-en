@@ -17,9 +17,9 @@ package v20200309
 import (
     "context"
     "errors"
-    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
-    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
+    "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
 )
 
 const APIVersion = "2020-03-09"
@@ -1144,55 +1144,6 @@ func (c *Client) CreateWaterPrintKeyWithContext(ctx context.Context, request *Cr
     return
 }
 
-func NewDeleteBlackWhiteIpListRequest() (request *DeleteBlackWhiteIpListRequest) {
-    request = &DeleteBlackWhiteIpListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    request.Init().WithApiInfo("antiddos", APIVersion, "DeleteBlackWhiteIpList")
-    
-    
-    return
-}
-
-func NewDeleteBlackWhiteIpListResponse() (response *DeleteBlackWhiteIpListResponse) {
-    response = &DeleteBlackWhiteIpListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteBlackWhiteIpList
-// This API is used to delete an Anti-DDoS IP blocklist/allowlist.
-//
-// error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DeleteBlackWhiteIpList(request *DeleteBlackWhiteIpListRequest) (response *DeleteBlackWhiteIpListResponse, err error) {
-    return c.DeleteBlackWhiteIpListWithContext(context.Background(), request)
-}
-
-// DeleteBlackWhiteIpList
-// This API is used to delete an Anti-DDoS IP blocklist/allowlist.
-//
-// error code that may be returned:
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DeleteBlackWhiteIpListWithContext(ctx context.Context, request *DeleteBlackWhiteIpListRequest) (response *DeleteBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewDeleteBlackWhiteIpListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteBlackWhiteIpList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteBlackWhiteIpListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDeleteCCLevelPolicyRequest() (request *DeleteCCLevelPolicyRequest) {
     request = &DeleteCCLevelPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1982,7 +1933,7 @@ func NewDescribeCCLevelListResponse() (response *DescribeCCLevelListResponse) {
 }
 
 // DescribeCCLevelList
-// This API is used to query the list of CC protection levels.
+// Gets the list of CC protection levels
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2007,7 +1958,7 @@ func (c *Client) DescribeCCLevelList(request *DescribeCCLevelListRequest) (respo
 }
 
 // DescribeCCLevelList
-// This API is used to query the list of CC protection levels.
+// Gets the list of CC protection levels
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
