@@ -16,8 +16,8 @@ package v20170312
 
 import (
     "encoding/json"
-    tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
 type ActionTimer struct {
@@ -3505,6 +3505,12 @@ type ImportImageRequestParams struct {
 
 	// Tag description list. This parameter is used to bind a tag to a custom image.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// The license type used to activate the OS after importing an image.
+	// Valid values:
+	// `TencentCloud`: Tencent Cloud official license
+	// `BYOL`: Bring Your Own License
+	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
 }
 
 type ImportImageRequest struct {
@@ -3536,6 +3542,12 @@ type ImportImageRequest struct {
 
 	// Tag description list. This parameter is used to bind a tag to a custom image.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// The license type used to activate the OS after importing an image.
+	// Valid values:
+	// `TencentCloud`: Tencent Cloud official license
+	// `BYOL`: Bring Your Own License
+	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
 }
 
 func (r *ImportImageRequest) ToJsonString() string {
@@ -3559,6 +3571,7 @@ func (r *ImportImageRequest) FromJsonString(s string) error {
 	delete(f, "DryRun")
 	delete(f, "Force")
 	delete(f, "TagSpecification")
+	delete(f, "LicenseType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImportImageRequest has unknown keys!", "")
 	}

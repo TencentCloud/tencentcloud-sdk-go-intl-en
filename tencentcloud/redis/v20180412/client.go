@@ -17,9 +17,9 @@ package v20180412
 import (
     "context"
     "errors"
-    "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
-    "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
 )
 
 const APIVersion = "2018-04-12"
@@ -224,6 +224,136 @@ func (c *Client) AssociateSecurityGroupsWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewAssociateSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewChangeInstanceRoleRequest() (request *ChangeInstanceRoleRequest) {
+    request = &ChangeInstanceRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ChangeInstanceRole")
+    
+    
+    return
+}
+
+func NewChangeInstanceRoleResponse() (response *ChangeInstanceRoleResponse) {
+    response = &ChangeInstanceRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ChangeInstanceRole
+// This API is used to modify the role of an instance in a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+func (c *Client) ChangeInstanceRole(request *ChangeInstanceRoleRequest) (response *ChangeInstanceRoleResponse, err error) {
+    return c.ChangeInstanceRoleWithContext(context.Background(), request)
+}
+
+// ChangeInstanceRole
+// This API is used to modify the role of an instance in a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+func (c *Client) ChangeInstanceRoleWithContext(ctx context.Context, request *ChangeInstanceRoleRequest) (response *ChangeInstanceRoleResponse, err error) {
+    if request == nil {
+        request = NewChangeInstanceRoleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChangeInstanceRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChangeInstanceRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewChangeMasterInstanceRequest() (request *ChangeMasterInstanceRequest) {
+    request = &ChangeMasterInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    request.Init().WithApiInfo("redis", APIVersion, "ChangeMasterInstance")
+    
+    
+    return
+}
+
+func NewChangeMasterInstanceResponse() (response *ChangeMasterInstanceResponse) {
+    response = &ChangeMasterInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ChangeMasterInstance
+// This API is used to switch with master instance in a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+func (c *Client) ChangeMasterInstance(request *ChangeMasterInstanceRequest) (response *ChangeMasterInstanceResponse, err error) {
+    return c.ChangeMasterInstanceWithContext(context.Background(), request)
+}
+
+// ChangeMasterInstance
+// This API is used to switch with master instance in a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+func (c *Client) ChangeMasterInstanceWithContext(ctx context.Context, request *ChangeMasterInstanceRequest) (response *ChangeMasterInstanceResponse, err error) {
+    if request == nil {
+        request = NewChangeMasterInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChangeMasterInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChangeMasterInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -511,6 +641,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  RESOURCEUNAVAILABLE_SALEOUT = "ResourceUnavailable.SaleOut"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *CreateInstancesResponse, err error) {
     return c.CreateInstancesWithContext(context.Background(), request)
 }
@@ -549,6 +680,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  RESOURCEUNAVAILABLE_SALEOUT = "ResourceUnavailable.SaleOut"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateInstancesWithContext(ctx context.Context, request *CreateInstancesRequest) (response *CreateInstancesResponse, err error) {
     if request == nil {
         request = NewCreateInstancesRequest()
@@ -1062,6 +1194,7 @@ func NewDescribeInstanceBackupsResponse() (response *DescribeInstanceBackupsResp
 // This API is used to query the list of Redis instance backups.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
@@ -1077,6 +1210,7 @@ func (c *Client) DescribeInstanceBackups(request *DescribeInstanceBackupsRequest
 // This API is used to query the list of Redis instance backups.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
@@ -2638,7 +2772,10 @@ func NewDescribeTendisSlowLogResponse() (response *DescribeTendisSlowLogResponse
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
 func (c *Client) DescribeTendisSlowLog(request *DescribeTendisSlowLogRequest) (response *DescribeTendisSlowLogResponse, err error) {
     return c.DescribeTendisSlowLogWithContext(context.Background(), request)
 }
@@ -2648,7 +2785,10 @@ func (c *Client) DescribeTendisSlowLog(request *DescribeTendisSlowLogRequest) (r
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
 func (c *Client) DescribeTendisSlowLogWithContext(ctx context.Context, request *DescribeTendisSlowLogRequest) (response *DescribeTendisSlowLogResponse, err error) {
     if request == nil {
         request = NewDescribeTendisSlowLogRequest()
@@ -4115,6 +4255,7 @@ func NewStartupInstanceResponse() (response *StartupInstanceResponse) {
 // This API is used to deisolate an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
@@ -4130,6 +4271,7 @@ func (c *Client) StartupInstance(request *StartupInstanceRequest) (response *Sta
 // This API is used to deisolate an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"

@@ -134,6 +134,9 @@ const (
 	// The instance is not in a VPC.
 	INVALIDPARAMETERVALUE_BASENETWORKACCESSDENY = "InvalidParameterValue.BaseNetWorkAccessDeny"
 
+	// Business verification failed
+	INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+
 	// The type of instances requested for purchase is incorrect (TypeId - 1: Cluster Edition; 2: Master-Replica Edition, i.e., the legacy Master-Replica Edition).
 	INVALIDPARAMETERVALUE_INVALIDINSTANCETYPEID = "InvalidParameterValue.InvalidInstanceTypeId"
 
@@ -193,6 +196,9 @@ const (
 
 	// The length of purchase is invalid. It must be at least one month.
 	LIMITEXCEEDED_PERIODLESSTHANMINLIMIT = "LimitExceeded.PeriodLessThanMinLimit"
+
+	// Replication group locked
+	LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
 
 	// The instance is locked by another process.
 	RESOURCEINUSE_INSTANCEBEENLOCKED = "ResourceInUse.InstanceBeenLocked"
@@ -286,6 +292,9 @@ const (
 
 	// The Redis cluster edition is not allowed to connect to a security group.
 	UNSUPPORTEDOPERATION_CLUSTERINSTANCEACCESSEDDENY = "UnsupportedOperation.ClusterInstanceAccessedDeny"
+
+	// Inspecting replication group
+	UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
 
 	// Unsupported operation
 	UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"

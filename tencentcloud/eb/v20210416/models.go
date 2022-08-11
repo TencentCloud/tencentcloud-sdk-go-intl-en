@@ -16,8 +16,8 @@ package v20210416
 
 import (
     "encoding/json"
-    tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
 type APIGWParams struct {
@@ -226,10 +226,10 @@ type CreateConnectionRequestParams struct {
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Switch
+	// Whether to enable
 	Enable *bool `json:"Enable,omitempty" name:"Enable"`
 
-	// Type
+	// Type of the connector
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -248,10 +248,10 @@ type CreateConnectionRequest struct {
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Switch
+	// Whether to enable
 	Enable *bool `json:"Enable,omitempty" name:"Enable"`
 
-	// Type
+	// Type of the connector
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -306,20 +306,20 @@ func (r *CreateConnectionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateEventBusRequestParams struct {
-	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	// Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
 	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
 
-	// Event bus description, which can contain up to 200 characters of any type
+	// Event bus description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type CreateEventBusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	// Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
 	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
 
-	// Event bus description, which can contain up to 200 characters of any type
+	// Event bus description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
@@ -923,6 +923,26 @@ func (r *DeleteTransformationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ESTargetParams struct {
+	// Network connection type
+	NetMode *string `json:"NetMode,omitempty" name:"NetMode"`
+
+	// Index prefix
+	IndexPrefix *string `json:"IndexPrefix,omitempty" name:"IndexPrefix"`
+
+	// ES log rotation interval
+	RotationInterval *string `json:"RotationInterval,omitempty" name:"RotationInterval"`
+
+	// DTS event configuration
+	OutputMode *string `json:"OutputMode,omitempty" name:"OutputMode"`
+
+	// DTS indexing configuration
+	IndexSuffixMode *string `json:"IndexSuffixMode,omitempty" name:"IndexSuffixMode"`
+
+	// ES template type
+	IndexTemplateType *string `json:"IndexTemplateType,omitempty" name:"IndexTemplateType"`
+}
+
 type EtlFilter struct {
 	// The syntax is the same as that of `Rule`
 	Filter *string `json:"Filter,omitempty" name:"Filter"`
@@ -1011,7 +1031,7 @@ type GetEventBusResponseParams struct {
 	// Log topic ID
 	ClsTopicId *string `json:"ClsTopicId,omitempty" name:"ClsTopicId"`
 
-	// Creation time
+	// Creation time.
 	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
 
 	// Logset ID
@@ -1674,6 +1694,9 @@ type TargetDescription struct {
 
 	// CKafka parameters
 	CkafkaTargetParams *CkafkaTargetParams `json:"CkafkaTargetParams,omitempty" name:"CkafkaTargetParams"`
+
+	// ElasticSearch parameters
+	ESTargetParams *ESTargetParams `json:"ESTargetParams,omitempty" name:"ESTargetParams"`
 }
 
 type TextParams struct {
@@ -1792,10 +1815,10 @@ type UpdateEventBusRequestParams struct {
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
-	// Event bus description, which can contain up to 200 characters of any type
+	// Event bus description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	// Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
 	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
 }
 
@@ -1805,10 +1828,10 @@ type UpdateEventBusRequest struct {
 	// Event bus ID
 	EventBusId *string `json:"EventBusId,omitempty" name:"EventBusId"`
 
-	// Event bus description, which can contain up to 200 characters of any type
+	// Event bus description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Event bus name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
+	// Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
 	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
 }
 

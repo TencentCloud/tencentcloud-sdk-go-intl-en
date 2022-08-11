@@ -812,7 +812,7 @@ const (
 	// This instance type does not support spot instances.
 	UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
 
-	// 
+	// A physical network is not supported by this instance.
 	UNSUPPORTEDOPERATION_NOVPCNETWORK = "UnsupportedOperation.NoVpcNetwork"
 
 	// Failed to configure the scheduled action for the current instance. 
@@ -848,7 +848,7 @@ const (
 	// This special instance type does not support the operation.
 	UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
 
-	// 
+	// Spot instance is not supported in this region.
 	UNSUPPORTEDOPERATION_SPOTUNSUPPORTEDREGION = "UnsupportedOperation.SpotUnsupportedRegion"
 
 	// The instance does not support the **no charges when shut down** feature.

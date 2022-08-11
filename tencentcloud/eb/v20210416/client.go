@@ -17,9 +17,9 @@ package v20210416
 import (
     "context"
     "errors"
-    "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
-    "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
 )
 
 const APIVersion = "2021-04-16"
@@ -277,6 +277,7 @@ func NewCreateEventBusResponse() (response *CreateEventBusResponse) {
 //  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
 //  INVALIDPARAMETERVALUE_EVENTTRACECONFIG = "InvalidParameterValue.EventTraceConfig"
 //  INVALIDPARAMETERVALUE_LINKMODE = "InvalidParameterValue.LinkMode"
+//  INVALIDPARAMETERVALUE_TAGS = "InvalidParameterValue.Tags"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_EVENTBUS = "LimitExceeded.EventBus"
 //  LIMITEXCEEDED_INSUFFICIENTBALANCE = "LimitExceeded.InsufficientBalance"
@@ -297,6 +298,7 @@ func (c *Client) CreateEventBus(request *CreateEventBusRequest) (response *Creat
 //  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
 //  INVALIDPARAMETERVALUE_EVENTTRACECONFIG = "InvalidParameterValue.EventTraceConfig"
 //  INVALIDPARAMETERVALUE_LINKMODE = "InvalidParameterValue.LinkMode"
+//  INVALIDPARAMETERVALUE_TAGS = "InvalidParameterValue.Tags"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_EVENTBUS = "LimitExceeded.EventBus"
 //  LIMITEXCEEDED_INSUFFICIENTBALANCE = "LimitExceeded.InsufficientBalance"
@@ -344,6 +346,7 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EVENTPATTERN = "InvalidParameterValue.EventPattern"
 //  INVALIDPARAMETERVALUE_RULENAME = "InvalidParameterValue.RuleName"
+//  INVALIDPARAMETERVALUE_TAGS = "InvalidParameterValue.Tags"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_RULE = "LimitExceeded.Rule"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
@@ -359,6 +362,7 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EVENTPATTERN = "InvalidParameterValue.EventPattern"
 //  INVALIDPARAMETERVALUE_RULENAME = "InvalidParameterValue.RuleName"
+//  INVALIDPARAMETERVALUE_TAGS = "InvalidParameterValue.Tags"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_RULE = "LimitExceeded.Rule"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
@@ -400,13 +404,16 @@ func NewCreateTargetResponse() (response *CreateTargetResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHENTICATEUSERFAILED = "FailedOperation.AuthenticateUserFailed"
 //  FAILEDOPERATION_CREATETRIGGER = "FailedOperation.CreateTrigger"
+//  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
 //  INVALIDPARAMETERVALUE_AMPPARAMS = "InvalidParameterValue.AMPParams"
 //  INVALIDPARAMETERVALUE_BATCHEVENTCOUNT = "InvalidParameterValue.BatchEventCount"
 //  INVALIDPARAMETERVALUE_BATCHTIMEOUT = "InvalidParameterValue.BatchTimeout"
 //  INVALIDPARAMETERVALUE_CKAFKATARGETPARAMS = "InvalidParameterValue.CKafkaTargetParams"
 //  INVALIDPARAMETERVALUE_CALLBACKTYPE = "InvalidParameterValue.CallbackType"
 //  INVALIDPARAMETERVALUE_CALLBACKWECOMURL = "InvalidParameterValue.CallbackWeComURL"
+//  INVALIDPARAMETERVALUE_ELASTICSEARCHTARGETPARAMS = "InvalidParameterValue.ElasticSearchTargetParams"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERCHANNEL = "InvalidParameterValue.NoticeReceiverChannel"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERTIMEWINDOW = "InvalidParameterValue.NoticeReceiverTimeWindow"
@@ -439,13 +446,16 @@ func (c *Client) CreateTarget(request *CreateTargetRequest) (response *CreateTar
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHENTICATEUSERFAILED = "FailedOperation.AuthenticateUserFailed"
 //  FAILEDOPERATION_CREATETRIGGER = "FailedOperation.CreateTrigger"
+//  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
 //  INVALIDPARAMETERVALUE_AMPPARAMS = "InvalidParameterValue.AMPParams"
 //  INVALIDPARAMETERVALUE_BATCHEVENTCOUNT = "InvalidParameterValue.BatchEventCount"
 //  INVALIDPARAMETERVALUE_BATCHTIMEOUT = "InvalidParameterValue.BatchTimeout"
 //  INVALIDPARAMETERVALUE_CKAFKATARGETPARAMS = "InvalidParameterValue.CKafkaTargetParams"
 //  INVALIDPARAMETERVALUE_CALLBACKTYPE = "InvalidParameterValue.CallbackType"
 //  INVALIDPARAMETERVALUE_CALLBACKWECOMURL = "InvalidParameterValue.CallbackWeComURL"
+//  INVALIDPARAMETERVALUE_ELASTICSEARCHTARGETPARAMS = "InvalidParameterValue.ElasticSearchTargetParams"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERCHANNEL = "InvalidParameterValue.NoticeReceiverChannel"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERTIMEWINDOW = "InvalidParameterValue.NoticeReceiverTimeWindow"
@@ -732,12 +742,14 @@ func NewDeleteTargetResponse() (response *DeleteTargetResponse) {
 // This API is used to delete a delivery target.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_PRIVATELINKRESOURCE = "ResourceNotFound.PrivateLinkResource"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 //  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
@@ -749,12 +761,14 @@ func (c *Client) DeleteTarget(request *DeleteTargetRequest) (response *DeleteTar
 // This API is used to delete a delivery target.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_PRIVATELINKRESOURCE = "ResourceNotFound.PrivateLinkResource"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 //  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
@@ -797,6 +811,7 @@ func NewDeleteTransformationResponse() (response *DeleteTransformationResponse) 
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_TRANSFORMATIONID = "InvalidParameterValue.TransformationID"
+//  RESOURCENOTFOUND_TRANSFORMATION = "ResourceNotFound.Transformation"
 func (c *Client) DeleteTransformation(request *DeleteTransformationRequest) (response *DeleteTransformationResponse, err error) {
     return c.DeleteTransformationWithContext(context.Background(), request)
 }
@@ -807,6 +822,7 @@ func (c *Client) DeleteTransformation(request *DeleteTransformationRequest) (res
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_TRANSFORMATIONID = "InvalidParameterValue.TransformationID"
+//  RESOURCENOTFOUND_TRANSFORMATION = "ResourceNotFound.Transformation"
 func (c *Client) DeleteTransformationWithContext(ctx context.Context, request *DeleteTransformationRequest) (response *DeleteTransformationResponse, err error) {
     if request == nil {
         request = NewDeleteTransformationRequest()

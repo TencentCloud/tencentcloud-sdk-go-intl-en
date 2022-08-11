@@ -16,8 +16,8 @@ package v20180529
 
 import (
     "encoding/json"
-    tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
 type AccessConfiguration struct {
@@ -1685,6 +1685,9 @@ type CreateRuleRequestParams struct {
 
 	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
 	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+
+	// Enables HTTP-to-HTTPS force redirect for a forwarding rule. Enter a hostname and path of the current forwarding rule.
+	ForcedRedirect *string `json:"ForcedRedirect,omitempty" name:"ForcedRedirect"`
 }
 
 type CreateRuleRequest struct {
@@ -1723,6 +1726,9 @@ type CreateRuleRequest struct {
 
 	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
 	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+
+	// Enables HTTP-to-HTTPS force redirect for a forwarding rule. Enter a hostname and path of the current forwarding rule.
+	ForcedRedirect *string `json:"ForcedRedirect,omitempty" name:"ForcedRedirect"`
 }
 
 func (r *CreateRuleRequest) ToJsonString() string {
@@ -1748,6 +1754,7 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 	delete(f, "ForwardHost")
 	delete(f, "ServerNameIndicationSwitch")
 	delete(f, "ServerNameIndication")
+	delete(f, "ForcedRedirect")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRuleRequest has unknown keys!", "")
 	}
@@ -6909,6 +6916,9 @@ type ModifyRuleAttributeRequestParams struct {
 
 	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
 	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+
+	// Enables HTTP-to-HTTPS force redirect for a forwarding rule. Enter a hostname and path of the current forwarding rule.
+	ForcedRedirect *string `json:"ForcedRedirect,omitempty" name:"ForcedRedirect"`
 }
 
 type ModifyRuleAttributeRequest struct {
@@ -6950,6 +6960,9 @@ type ModifyRuleAttributeRequest struct {
 
 	// Server Name Indication (SNI). This field is required when `ServerNameIndicationSwitch` is `ON`.
 	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+
+	// Enables HTTP-to-HTTPS force redirect for a forwarding rule. Enter a hostname and path of the current forwarding rule.
+	ForcedRedirect *string `json:"ForcedRedirect,omitempty" name:"ForcedRedirect"`
 }
 
 func (r *ModifyRuleAttributeRequest) ToJsonString() string {
@@ -6974,6 +6987,7 @@ func (r *ModifyRuleAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ForwardHost")
 	delete(f, "ServerNameIndicationSwitch")
 	delete(f, "ServerNameIndication")
+	delete(f, "ForcedRedirect")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRuleAttributeRequest has unknown keys!", "")
 	}
@@ -8040,6 +8054,10 @@ type RuleInfo struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ServerNameIndication *string `json:"ServerNameIndication,omitempty" name:"ServerNameIndication"`
+
+	// Forces requests to redirect to HTTPS. When `https:` is passed in, all requests are redirected to HTTPS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ForcedRedirect *string `json:"ForcedRedirect,omitempty" name:"ForcedRedirect"`
 }
 
 type SecurityPolicyRuleIn struct {

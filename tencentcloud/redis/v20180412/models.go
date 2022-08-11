@@ -16,8 +16,8 @@ package v20180412
 
 import (
     "encoding/json"
-    tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
 type Account struct {
@@ -281,6 +281,141 @@ type BigKeyTypeInfo struct {
 
 	// Timestamp
 	Updatetime *int64 `json:"Updatetime,omitempty" name:"Updatetime"`
+}
+
+// Predefined struct for user
+type ChangeInstanceRoleRequestParams struct {
+	// Replication group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance role. Valid values: `rw` (read-write), `r`( read-only).
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+}
+
+type ChangeInstanceRoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Replication group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance role. Valid values: `rw` (read-write), `r`( read-only).
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+}
+
+func (r *ChangeInstanceRoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeInstanceRoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	delete(f, "InstanceId")
+	delete(f, "InstanceRole")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChangeInstanceRoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChangeInstanceRoleResponseParams struct {
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ChangeInstanceRoleResponse struct {
+	*tchttp.BaseResponse
+	Response *ChangeInstanceRoleResponseParams `json:"Response"`
+}
+
+func (r *ChangeInstanceRoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeInstanceRoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChangeMasterInstanceRequestParams struct {
+	// Replication group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type ChangeMasterInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Replication group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ChangeMasterInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeMasterInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChangeMasterInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChangeMasterInstanceResponseParams struct {
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ChangeMasterInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ChangeMasterInstanceResponseParams `json:"Response"`
+}
+
+func (r *ChangeMasterInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangeMasterInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -2751,6 +2886,9 @@ type DescribeInstancesRequestParams struct {
 
 	// Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
 	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
+
+	// The specified instances for batch query
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 type DescribeInstancesRequest struct {
@@ -2830,6 +2968,9 @@ type DescribeInstancesRequest struct {
 
 	// Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
 	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
+
+	// The specified instances for batch query
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -2869,6 +3010,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceTags")
 	delete(f, "TagKeys")
 	delete(f, "ProductVersions")
+	delete(f, "InstanceIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}

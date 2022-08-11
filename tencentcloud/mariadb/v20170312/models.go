@@ -16,8 +16,8 @@ package v20170312
 
 import (
     "encoding/json"
-    tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
-    tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
+    tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+    tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
 type Account struct {
@@ -716,6 +716,10 @@ type CreateHourDBInstanceResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
+	// Async task ID, which can be used in the [DescribeFlow](https://www.tencentcloud.com/document/product/237/16177) API to query the async task result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -931,6 +935,10 @@ type DBInstance struct {
 	// Instance tag information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Database version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
 }
 
 type DBParamValue struct {

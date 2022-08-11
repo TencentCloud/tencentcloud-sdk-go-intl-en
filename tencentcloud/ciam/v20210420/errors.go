@@ -17,13 +17,13 @@ package v20210420
 const (
 	// error codes for specific actions
 
-	// CAM signature/authentication error.
+	// A CAM signature/authentication error occurred.
 	AUTHFAILURE = "AuthFailure"
 
 	// `DryRun` Operation. It means that the request would have succeeded, but the `DryRun` parameter was used.
 	DRYRUNOPERATION = "DryRunOperation"
 
-	// Operation failed.
+	// The operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
 	// FailedOperation.AccountNotFound
@@ -83,7 +83,7 @@ const (
 	// FailedOperation.GroupIdNotFound
 	FAILEDOPERATION_GROUPIDNOTFOUND = "FailedOperation.GroupIdNotFound"
 
-	// 
+	// Invalid tenant
 	FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
 
 	// FailedOperation.ListAllUserGroupsFailure
@@ -164,10 +164,10 @@ const (
 	// FailedOperation.UserPhoneExisted
 	FAILEDOPERATION_USERPHONEEXISTED = "FailedOperation.UserPhoneExisted"
 
-	// Internal error.
+	// An internal error occurred.
 	INTERNALERROR = "InternalError"
 
-	// Incorrect parameter.
+	// The parameter is incorrect.
 	INVALIDPARAMETER = "InvalidParameter"
 
 	// InvalidParameter.AttributeValueValidFailure
@@ -191,10 +191,10 @@ const (
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
 
-	// Missing parameter.
+	// The parameter is missing.
 	MISSINGPARAMETER = "MissingParameter"
 
-	// Operation denied.
+	// The operation was denied.
 	OPERATIONDENIED = "OperationDenied"
 
 	// OperationDenied.DataTypeIsIllegal
@@ -209,7 +209,7 @@ const (
 	// The resource is in use.
 	RESOURCEINUSE = "ResourceInUse"
 
-	// Insufficient resource.
+	// The resource is insufficient.
 	RESOURCEINSUFFICIENT = "ResourceInsufficient"
 
 	// The resource does not exist.
@@ -221,15 +221,15 @@ const (
 	// The resources have been sold out.
 	RESOURCESSOLDOUT = "ResourcesSoldOut"
 
-	// Unauthorized operation.
+	// The operation is unauthorized.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// 
+	// Not activated
 	UNAUTHORIZEDOPERATION_TENANTNOTACTIVATED = "UnauthorizedOperation.TenantNotActivated"
 
-	// Unknown parameter.
+	// The parameter is unknown.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
-	// Unsupported operation.
+	// The operation is not supported.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )
