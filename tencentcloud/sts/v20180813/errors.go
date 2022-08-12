@@ -91,4 +91,7 @@ const (
 
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
+	// Unsupported operation.
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

@@ -44,13 +44,13 @@ type BatchSendEmailRequestParams struct {
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
 	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
 
-	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
 	// Template when emails are sent using a template
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
-	// Email content when emails are sent by calling the API. This parameter is currently unavailable.
+	// Disused
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
 	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
@@ -86,13 +86,13 @@ type BatchSendEmailRequest struct {
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
 	TaskType *uint64 `json:"TaskType,omitempty" name:"TaskType"`
 
-	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will be sent to Tencent Cloud.
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
 	// Template when emails are sent using a template
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
-	// Email content when emails are sent by calling the API. This parameter is currently unavailable.
+	// Disused
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
 	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
@@ -791,6 +791,12 @@ type EmailIdentity struct {
 
 	// Verification passed or not.
 	SendingEnabled *bool `json:"SendingEnabled,omitempty" name:"SendingEnabled"`
+
+	// Current reputation level
+	CurrentReputationLevel *uint64 `json:"CurrentReputationLevel,omitempty" name:"CurrentReputationLevel"`
+
+	// Maximum number of messages sent per day
+	DailyQuota *uint64 `json:"DailyQuota,omitempty" name:"DailyQuota"`
 }
 
 type EmailSender struct {
@@ -906,6 +912,9 @@ type GetEmailTemplateResponseParams struct {
 	// Template content.
 	TemplateContent *TemplateContent `json:"TemplateContent,omitempty" name:"TemplateContent"`
 
+	// Template status. Valid values: `0` (approved); `1` (pending approval); `2` (rejected).
+	TemplateStatus *uint64 `json:"TemplateStatus,omitempty" name:"TemplateStatus"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -928,38 +937,38 @@ func (r *GetEmailTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetSendEmailStatusRequestParams struct {
-	// Sent date. This parameter is required. You can only query the sending status for a single date at a time.
+	// Date sent. This parameter is required. You can only query the sending status for a single date at a time.
 	RequestDate *string `json:"RequestDate,omitempty" name:"RequestDate"`
 
-	// Offset. Default value: `0`
+	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of pulled entries. The maximum value is `100`.
+	// Maximum number of pulled entries. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// `MessageId` field returned by the `SendMail` API
+	// The `MessageId` field returned by the `SendMail` API.
 	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
 
-	// Recipient email address
+	// Recipient email address.
 	ToEmailAddress *string `json:"ToEmailAddress,omitempty" name:"ToEmailAddress"`
 }
 
 type GetSendEmailStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sent date. This parameter is required. You can only query the sending status for a single date at a time.
+	// Date sent. This parameter is required. You can only query the sending status for a single date at a time.
 	RequestDate *string `json:"RequestDate,omitempty" name:"RequestDate"`
 
-	// Offset. Default value: `0`
+	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of pulled entries. The maximum value is `100`.
+	// Maximum number of pulled entries. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// `MessageId` field returned by the `SendMail` API
+	// The `MessageId` field returned by the `SendMail` API.
 	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
 
-	// Recipient email address
+	// Recipient email address.
 	ToEmailAddress *string `json:"ToEmailAddress,omitempty" name:"ToEmailAddress"`
 }
 
@@ -988,7 +997,7 @@ func (r *GetSendEmailStatusRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetSendEmailStatusResponseParams struct {
-	// Email sending status list
+	// Status of sent emails
 	EmailStatusList []*SendEmailStatus `json:"EmailStatusList,omitempty" name:"EmailStatusList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1276,6 +1285,12 @@ type ListEmailIdentitiesResponseParams struct {
 	// List of sender domains.
 	EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitempty" name:"EmailIdentities"`
 
+	// Maximum reputation level
+	MaxReputationLevel *uint64 `json:"MaxReputationLevel,omitempty" name:"MaxReputationLevel"`
+
+	// Maximum number of emails sent per domain name
+	MaxDailyQuota *uint64 `json:"MaxDailyQuota,omitempty" name:"MaxDailyQuota"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -1340,7 +1355,7 @@ type ListEmailTemplatesResponseParams struct {
 	// List of email templates.
 	TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitempty" name:"TemplatesMetadata"`
 
-	// Total number of templates.
+	// Total number of templates
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1567,13 +1582,13 @@ type SendEmailRequestParams struct {
 	// Email subject.
 	Subject *string `json:"Subject,omitempty" name:"Subject"`
 
-	// Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud.
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
 	// Template when sending emails using a template.
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
-	// Email content when sending emails by calling the API.
+	// Disused
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
 	// Email attachments
@@ -1600,13 +1615,13 @@ type SendEmailRequest struct {
 	// Email subject.
 	Subject *string `json:"Subject,omitempty" name:"Subject"`
 
-	// Reply-to address. You can enter a valid personal email address that can receive emails. If this field is left empty, reply emails will be sent to Tencent Cloud.
+	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
 	// Template when sending emails using a template.
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
-	// Email content when sending emails by calling the API.
+	// Disused
 	Simple *Simple `json:"Simple,omitempty" name:"Simple"`
 
 	// Email attachments
@@ -1672,7 +1687,7 @@ func (r *SendEmailResponse) FromJsonString(s string) error {
 }
 
 type SendEmailStatus struct {
-	// `MessageId` field returned by the `SendEmail` API
+	// The `MessageId` field returned by the `SendEmail` API
 	MessageId *string `json:"MessageId,omitempty" name:"MessageId"`
 
 	// Recipient email address
@@ -1681,37 +1696,37 @@ type SendEmailStatus struct {
 	// Sender email address
 	FromEmailAddress *string `json:"FromEmailAddress,omitempty" name:"FromEmailAddress"`
 
-	// Tencent Cloud processing status:
-	// 0: successful.
-	// 1001: internal system exception.
-	// 1002: internal system exception.
-	// 1003: internal system exception.
-	// 1003: internal system exception.
-	// 1004: email sending timeout.
-	// 1005: internal system exception.
-	// 1006: you have sent too many emails to the same address in a short period.
-	// 1007: the email address is in the blocklist.
-	// 1009: internal system exception.
-	// 1010: daily email sending limit exceeded.
-	// 1011: no permission to send custom content. Use a template.
-	// 2001: no results found.
-	// 3007: invalid template ID or unavailable template.
-	// 3008: template status exception.
-	// 3009: no permission to use this template.
-	// 3010: the format of the `TemplateData` field is incorrect. 
-	// 3014: unable to send the email because the sender domain is not verified.
-	// 3020: the recipient email address is in the blocklist.
-	// 3024: failed to pre-check the email address format.
-	// 3030: email sending is restricted temporarily due to high bounce rate.
-	// 3033: the account has insufficient balance or overdue payment.
+	// Tencent Cloud processing status
+	// 0: Successful.
+	// 1001: Internal system exception.
+	// 1002: Internal system exception.
+	// 1003: Internal system exception.
+	// 1003: Internal system exception.
+	// 1004: Email sending timed out.
+	// 1005: Internal system exception.
+	// 1006: You have sent too many emails to the same address in a short period.
+	// 1007: The email address is in the blocklist.
+	// 1009: Internal system exception.
+	// 1010: The daily email sending limit is exceeded.
+	// 1011: You have no permission to send custom content. Use a template.
+	// 2001: No results were found.
+	// 3007: The template ID is invalid or the template is unavailable.
+	// 3008: Template status exception.
+	// 3009: You have no permission to use this template.
+	// 3010: The format of the `TemplateData` field is incorrect. 
+	// 3014: The email cannot be sent because the sender domain is not verified.
+	// 3020: The recipient email address is in the blocklist.
+	// 3024: Failed to precheck the email address format.
+	// 3030: Email sending is restricted temporarily due to high bounce rate.
+	// 3033: The account has insufficient balance or overdue payment.
 	SendStatus *int64 `json:"SendStatus,omitempty" name:"SendStatus"`
 
-	// Recipient processing status:
+	// Recipient processing status
 	// 0: Tencent Cloud has accepted the request and added it to the send queue.
-	// 1: the email is delivered successfully, `DeliverTime` indicates the time when the email is delivered successfully.
-	// 2: the email is discarded. `DeliverMessage` indicates the reason for discarding.
-	// 3: the recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
-	// 8: the email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
+	// 1: The email is delivered successfully. `DeliverTime` indicates the time when the email is delivered successfully.
+	// 2: The email is discarded. `DeliverMessage` indicates the reason for discarding.
+	// 3: The recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
+	// 8: The email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
 	DeliverStatus *int64 `json:"DeliverStatus,omitempty" name:"DeliverStatus"`
 
 	// Description of the recipient processing status
@@ -1729,7 +1744,7 @@ type SendEmailStatus struct {
 	// Whether the recipient has clicked the links in the email
 	UserClicked *bool `json:"UserClicked,omitempty" name:"UserClicked"`
 
-	// Whether the recipient has unsubscribed from emails sent by the sender
+	// Whether the recipient has unsubscribed from the email sent by the sender
 	UserUnsubscribed *bool `json:"UserUnsubscribed,omitempty" name:"UserUnsubscribed"`
 
 	// Whether the recipient has reported the sender

@@ -49,6 +49,9 @@ type AssumeRoleRequestParams struct {
 
 	// List of session tags. Up to 50 tags are allowed. The tag keys can not duplicate.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// UIN of the initiator
+	SourceIdentity *string `json:"SourceIdentity,omitempty" name:"SourceIdentity"`
 }
 
 type AssumeRoleRequest struct {
@@ -81,6 +84,9 @@ type AssumeRoleRequest struct {
 
 	// List of session tags. Up to 50 tags are allowed. The tag keys can not duplicate.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// UIN of the initiator
+	SourceIdentity *string `json:"SourceIdentity,omitempty" name:"SourceIdentity"`
 }
 
 func (r *AssumeRoleRequest) ToJsonString() string {
@@ -101,6 +107,7 @@ func (r *AssumeRoleRequest) FromJsonString(s string) error {
 	delete(f, "Policy")
 	delete(f, "ExternalId")
 	delete(f, "Tags")
+	delete(f, "SourceIdentity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssumeRoleRequest has unknown keys!", "")
 	}

@@ -17,6 +17,9 @@ package v20190107
 const (
 	// error codes for specific actions
 
+	// Batch query failed
+	FAILEDOPERATION_BATCHGETINSTANCEERROR = "FailedOperation.BatchGetInstanceError"
+
 	// Failed to get permissions. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
 
@@ -88,6 +91,9 @@ const (
 
 	// This API was not found.
 	INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+
+	// Unknown parameter. Please check whether the parameter is valid.
+	INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 
 	// The current instance cannot be isolated.
 	INVALIDPARAMETER_ISOLATENOTALLOWED = "InvalidParameter.IsolateNotAllowed"

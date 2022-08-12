@@ -2487,6 +2487,63 @@ func (r *DescribeMaintainPeriodResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeParamTemplatesRequestParams struct {
+
+}
+
+type DescribeParamTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeParamTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeParamTemplatesResponseParams struct {
+	// Number of parameter templates
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Parameter template information
+	Items []*ParamTemplateListInfo `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeParamTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeParamTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeParamTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParamTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeProjectSecurityGroupsRequestParams struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -2857,6 +2914,212 @@ func (r *ExportInstanceSlowQueriesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ExportInstanceSlowQueriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquirePriceCreateRequestParams struct {
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Purchase quantity
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
+	InstancePayMode *string `json:"InstancePayMode,omitempty" name:"InstancePayMode"`
+
+	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
+	StoragePayMode *string `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
+	Ccu *float64 `json:"Ccu,omitempty" name:"Ccu"`
+
+	// Storage size, which is required when `StoragePayMode` is `PREPAID`.
+	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+
+	// Validity period, which is required when `InstancePayMode` is `PREPAID`.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+}
+
+type InquirePriceCreateRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Purchase quantity
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
+	InstancePayMode *string `json:"InstancePayMode,omitempty" name:"InstancePayMode"`
+
+	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
+	StoragePayMode *string `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
+	Ccu *float64 `json:"Ccu,omitempty" name:"Ccu"`
+
+	// Storage size, which is required when `StoragePayMode` is `PREPAID`.
+	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+
+	// Validity period, which is required when `InstancePayMode` is `PREPAID`.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+}
+
+func (r *InquirePriceCreateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceCreateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "GoodsNum")
+	delete(f, "InstancePayMode")
+	delete(f, "StoragePayMode")
+	delete(f, "Cpu")
+	delete(f, "Memory")
+	delete(f, "Ccu")
+	delete(f, "StorageLimit")
+	delete(f, "TimeSpan")
+	delete(f, "TimeUnit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquirePriceCreateResponseParams struct {
+	// Instance price
+	InstancePrice *TradePrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
+
+	// Storage price
+	StoragePrice *TradePrice `json:"StoragePrice,omitempty" name:"StoragePrice"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InquirePriceCreateResponse struct {
+	*tchttp.BaseResponse
+	Response *InquirePriceCreateResponseParams `json:"Response"`
+}
+
+func (r *InquirePriceCreateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceCreateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquirePriceRenewRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Validity period, which needs to be used together with `TimeUnit`.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Unit of validity period, which needs to be used together with `TimeSpan`. Valid values: `d` (day), `m` (month).
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+}
+
+type InquirePriceRenewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Validity period, which needs to be used together with `TimeUnit`.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Unit of validity period, which needs to be used together with `TimeSpan`. Valid values: `d` (day), `m` (month).
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+}
+
+func (r *InquirePriceRenewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceRenewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "TimeSpan")
+	delete(f, "TimeUnit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceRenewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquirePriceRenewResponseParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance ID list
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Price of instance specification in array
+	Prices []*TradePrice `json:"Prices,omitempty" name:"Prices"`
+
+	// Total renewal price of compute node
+	InstanceRealTotalPrice *int64 `json:"InstanceRealTotalPrice,omitempty" name:"InstanceRealTotalPrice"`
+
+	// Total renewal price of storage node
+	StorageRealTotalPrice *int64 `json:"StorageRealTotalPrice,omitempty" name:"StorageRealTotalPrice"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InquirePriceRenewResponse struct {
+	*tchttp.BaseResponse
+	Response *InquirePriceRenewResponseParams `json:"Response"`
+}
+
+func (r *InquirePriceRenewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquirePriceRenewResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3701,6 +3964,20 @@ type ParamItem struct {
 	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
 }
 
+type ParamTemplateListInfo struct {
+	// Parameter template ID
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+
+	// Parameter template name
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Parameter template description
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+
+	// Engine version
+	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+}
+
 // Predefined struct for user
 type PauseServerlessRequestParams struct {
 	// Cluster ID
@@ -3990,6 +4267,30 @@ type Tag struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TradePrice struct {
+	// The non-discounted total price of monthly subscribed resources (unit: US cent)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPrice *int64 `json:"TotalPrice,omitempty" name:"TotalPrice"`
+
+	// Total discount. `100` means no discount.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+
+	// The discounted total price of monthly subscribed resources (unit: US cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPriceDiscount *int64 `json:"TotalPriceDiscount,omitempty" name:"TotalPriceDiscount"`
+
+	// The non-discounted unit price of pay-as-you-go resources (unit: US cent)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPrice *int64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// The discounted unit price of pay-as-you-go resources (unit: US cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPriceDiscount *int64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Price unit
+	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
 }
 
 // Predefined struct for user
