@@ -193,6 +193,7 @@ func NewCreatePrivateZoneResponse() (response *CreatePrivateZoneResponse) {
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTDNSFORWARD = "UnsupportedOperation.NotSupportDnsForward"
 func (c *Client) CreatePrivateZone(request *CreatePrivateZoneRequest) (response *CreatePrivateZoneResponse, err error) {
     return c.CreatePrivateZoneWithContext(context.Background(), request)
 }
@@ -237,6 +238,7 @@ func (c *Client) CreatePrivateZone(request *CreatePrivateZoneRequest) (response 
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTDNSFORWARD = "UnsupportedOperation.NotSupportDnsForward"
 func (c *Client) CreatePrivateZoneWithContext(ctx context.Context, request *CreatePrivateZoneRequest) (response *CreatePrivateZoneResponse, err error) {
     if request == nil {
         request = NewCreatePrivateZoneRequest()
@@ -278,6 +280,7 @@ func NewCreatePrivateZoneRecordResponse() (response *CreatePrivateZoneRecordResp
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATERECORDFAILED = "FailedOperation.CreateRecordFailed"
+//  FAILEDOPERATION_DATAERROR = "FailedOperation.DataError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -325,6 +328,7 @@ func (c *Client) CreatePrivateZoneRecord(request *CreatePrivateZoneRecordRequest
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATERECORDFAILED = "FailedOperation.CreateRecordFailed"
+//  FAILEDOPERATION_DATAERROR = "FailedOperation.DataError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -958,6 +962,7 @@ func NewModifyPrivateZoneResponse() (response *ModifyPrivateZoneResponse) {
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTDNSFORWARD = "UnsupportedOperation.NotSupportDnsForward"
 func (c *Client) ModifyPrivateZone(request *ModifyPrivateZoneRequest) (response *ModifyPrivateZoneResponse, err error) {
     return c.ModifyPrivateZoneWithContext(context.Background(), request)
 }
@@ -992,6 +997,7 @@ func (c *Client) ModifyPrivateZone(request *ModifyPrivateZoneRequest) (response 
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTDNSFORWARD = "UnsupportedOperation.NotSupportDnsForward"
 func (c *Client) ModifyPrivateZoneWithContext(ctx context.Context, request *ModifyPrivateZoneRequest) (response *ModifyPrivateZoneResponse, err error) {
     if request == nil {
         request = NewModifyPrivateZoneRequest()
@@ -1032,6 +1038,7 @@ func NewModifyPrivateZoneRecordResponse() (response *ModifyPrivateZoneRecordResp
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATAERROR = "FailedOperation.DataError"
 //  FAILEDOPERATION_MODIFYRECORDFAILED = "FailedOperation.ModifyRecordFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
@@ -1049,6 +1056,7 @@ func NewModifyPrivateZoneRecordResponse() (response *ModifyPrivateZoneRecordResp
 //  INVALIDPARAMETER_RECORDEXIST = "InvalidParameter.RecordExist"
 //  INVALIDPARAMETER_RECORDLEVELEXCEED = "InvalidParameter.RecordLevelExceed"
 //  INVALIDPARAMETER_RECORDMXCOUNTEXCEED = "InvalidParameter.RecordMXCountExceed"
+//  INVALIDPARAMETER_RECORDNOTEXIST = "InvalidParameter.RecordNotExist"
 //  INVALIDPARAMETER_RECORDROLLLIMITCOUNTEXCEED = "InvalidParameter.RecordRolllimitCountExceed"
 //  INVALIDPARAMETER_RECORDTXTCOUNTEXCEED = "InvalidParameter.RecordTXTCountExceed"
 //  INVALIDPARAMETER_RECORDUNSUPPORTWEIGHT = "InvalidParameter.RecordUnsupportWeight"
@@ -1082,6 +1090,7 @@ func (c *Client) ModifyPrivateZoneRecord(request *ModifyPrivateZoneRecordRequest
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATAERROR = "FailedOperation.DataError"
 //  FAILEDOPERATION_MODIFYRECORDFAILED = "FailedOperation.ModifyRecordFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
@@ -1099,6 +1108,7 @@ func (c *Client) ModifyPrivateZoneRecord(request *ModifyPrivateZoneRecordRequest
 //  INVALIDPARAMETER_RECORDEXIST = "InvalidParameter.RecordExist"
 //  INVALIDPARAMETER_RECORDLEVELEXCEED = "InvalidParameter.RecordLevelExceed"
 //  INVALIDPARAMETER_RECORDMXCOUNTEXCEED = "InvalidParameter.RecordMXCountExceed"
+//  INVALIDPARAMETER_RECORDNOTEXIST = "InvalidParameter.RecordNotExist"
 //  INVALIDPARAMETER_RECORDROLLLIMITCOUNTEXCEED = "InvalidParameter.RecordRolllimitCountExceed"
 //  INVALIDPARAMETER_RECORDTXTCOUNTEXCEED = "InvalidParameter.RecordTXTCountExceed"
 //  INVALIDPARAMETER_RECORDUNSUPPORTWEIGHT = "InvalidParameter.RecordUnsupportWeight"
@@ -1163,6 +1173,7 @@ func NewModifyPrivateZoneVpcResponse() (response *ModifyPrivateZoneVpcResponse) 
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_BINDZONEVPCFAILED = "FailedOperation.BindZoneVpcFailed"
+//  FAILEDOPERATION_DATAERROR = "FailedOperation.DataError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1201,6 +1212,7 @@ func (c *Client) ModifyPrivateZoneVpc(request *ModifyPrivateZoneVpcRequest) (res
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_BINDZONEVPCFAILED = "FailedOperation.BindZoneVpcFailed"
+//  FAILEDOPERATION_DATAERROR = "FailedOperation.DataError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
 //  INVALIDPARAMETER = "InvalidParameter"
