@@ -1121,11 +1121,17 @@ type DBInstance struct {
 	// The retention period of cross-region backup. Default value: 7 days
 	CrossBackupSaveDays *uint64 `json:"CrossBackupSaveDays,omitempty" name:"CrossBackupSaveDays"`
 
-
+	// Domain name of the public network address
 	DnsPodDomain *string `json:"DnsPodDomain,omitempty" name:"DnsPodDomain"`
 
-
+	// Port number of the public network
 	TgwWanVPort *int64 `json:"TgwWanVPort,omitempty" name:"TgwWanVPort"`
+
+
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
 }
 
 type DBPrivilege struct {

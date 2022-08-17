@@ -254,7 +254,7 @@ type CreatePrivateZoneRequestParams struct {
 	// Remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED
+	// Whether to enable subdomain recursive DNS. Valid values: `ENABLED` (default) and `DISABLED`.
 	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
 
 	// Associates the private domain to a VPC when it is created
@@ -262,6 +262,9 @@ type CreatePrivateZoneRequestParams struct {
 
 	// List of authorized accounts' VPCs to associate with the private domain
 	AccountVpcSet []*AccountVpcInfo `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
+
+	// Whether to enable CNAME flattening. Valid values: `ENABLED` (default) and `DISABLED`.
+	CnameSpeedupStatus *string `json:"CnameSpeedupStatus,omitempty" name:"CnameSpeedupStatus"`
 }
 
 type CreatePrivateZoneRequest struct {
@@ -279,7 +282,7 @@ type CreatePrivateZoneRequest struct {
 	// Remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED. Default value: DISABLED
+	// Whether to enable subdomain recursive DNS. Valid values: `ENABLED` (default) and `DISABLED`.
 	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
 
 	// Associates the private domain to a VPC when it is created
@@ -287,6 +290,9 @@ type CreatePrivateZoneRequest struct {
 
 	// List of authorized accounts' VPCs to associate with the private domain
 	AccountVpcSet []*AccountVpcInfo `json:"AccountVpcSet,omitempty" name:"AccountVpcSet"`
+
+	// Whether to enable CNAME flattening. Valid values: `ENABLED` (default) and `DISABLED`.
+	CnameSpeedupStatus *string `json:"CnameSpeedupStatus,omitempty" name:"CnameSpeedupStatus"`
 }
 
 func (r *CreatePrivateZoneRequest) ToJsonString() string {
@@ -308,6 +314,7 @@ func (r *CreatePrivateZoneRequest) FromJsonString(s string) error {
 	delete(f, "DnsForwardStatus")
 	delete(f, "Vpcs")
 	delete(f, "AccountVpcSet")
+	delete(f, "CnameSpeedupStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrivateZoneRequest has unknown keys!", "")
 	}
@@ -978,6 +985,9 @@ type ModifyPrivateZoneRequestParams struct {
 
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED
 	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
+
+	// Whether to enable CNAME flattening. Valid values: `ENABLED` and `DISABLED`.
+	CnameSpeedupStatus *string `json:"CnameSpeedupStatus,omitempty" name:"CnameSpeedupStatus"`
 }
 
 type ModifyPrivateZoneRequest struct {
@@ -991,6 +1001,9 @@ type ModifyPrivateZoneRequest struct {
 
 	// Whether to enable subdomain recursive DNS. Valid values: ENABLED, DISABLED
 	DnsForwardStatus *string `json:"DnsForwardStatus,omitempty" name:"DnsForwardStatus"`
+
+	// Whether to enable CNAME flattening. Valid values: `ENABLED` and `DISABLED`.
+	CnameSpeedupStatus *string `json:"CnameSpeedupStatus,omitempty" name:"CnameSpeedupStatus"`
 }
 
 func (r *ModifyPrivateZoneRequest) ToJsonString() string {
@@ -1008,6 +1021,7 @@ func (r *ModifyPrivateZoneRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "Remark")
 	delete(f, "DnsForwardStatus")
+	delete(f, "CnameSpeedupStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPrivateZoneRequest has unknown keys!", "")
 	}
