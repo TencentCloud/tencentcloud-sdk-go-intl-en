@@ -56,11 +56,17 @@ const (
 	// Failed to assign an exclusive VIP to the read-only replica.
 	FAILEDOPERATION_CREATEROVIPERROR = "FailedOperation.CreateRoVipError"
 
+	// Database operation failed.
+	FAILEDOPERATION_DBOPERATIONACTIONERROR = "FailedOperation.DBOperationActionError"
+
 	// Failed to query database proxy.
 	FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 
 	// An error occurred while obtaining permissions.
 	FAILEDOPERATION_GETPRIVILEGEERROR = "FailedOperation.GetPrivilegeError"
+
+	// Query failed.
+	FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
 
 	// Failed to deserialize JSON.
 	FAILEDOPERATION_JSONUNMARSHALERROR = "FailedOperation.JsonUnmarshalError"
@@ -146,7 +152,10 @@ const (
 	// SQL statement error
 	INTERNALERROR_EXESQLERROR = "InternalError.ExeSqlError"
 
-	// 
+	// Failed to execute the HTTP request
+	INTERNALERROR_EXECHTTPREQUESTERROR = "InternalError.ExecHttpRequestError"
+
+	// Failed to execute SQL statement
 	INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
 
 	// File transfer exception
@@ -233,6 +242,9 @@ const (
 	// This API was not found.
 	INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 
+	// There are resources in the placement group.
+	INVALIDPARAMETER_DEPLOYGROUPNOTEMPTY = "InvalidParameter.DeployGroupNotEmpty"
+
 	// Parameter exception.
 	INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 
@@ -253,6 +265,9 @@ const (
 
 	// Failed to deserialize JSON.
 	INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
+
+	// The quota of placement group resources has been exceeded.
+	INVALIDPARAMETER_OVERDEPLOYGROUPQUOTA = "InvalidParameter.OverDeployGroupQuota"
 
 	// The resource already exists.
 	INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
@@ -362,7 +377,7 @@ const (
 	// This instance needs permissions to use this feature.
 	OPERATIONDENIED_FUNCTIONDENIED = "OperationDenied.FunctionDenied"
 
-	// 
+	// The current instance type does not support this operation.
 	OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 
 	// Instance locks are in conflict. Please try again later.
