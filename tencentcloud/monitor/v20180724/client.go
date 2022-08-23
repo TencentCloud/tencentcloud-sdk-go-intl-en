@@ -49,6 +49,7 @@ func NewBindPrometheusManagedGrafanaRequest() (request *BindPrometheusManagedGra
     request = &BindPrometheusManagedGrafanaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "BindPrometheusManagedGrafana")
     
     
@@ -90,6 +91,7 @@ func NewBindingPolicyObjectRequest() (request *BindingPolicyObjectRequest) {
     request = &BindingPolicyObjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "BindingPolicyObject")
     
     
@@ -139,6 +141,7 @@ func NewCreateAlarmNoticeRequest() (request *CreateAlarmNoticeRequest) {
     request = &CreateAlarmNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreateAlarmNotice")
     
     
@@ -198,6 +201,7 @@ func NewCreateAlarmPolicyRequest() (request *CreateAlarmPolicyRequest) {
     request = &CreateAlarmPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreateAlarmPolicy")
     
     
@@ -257,6 +261,7 @@ func NewCreateAlertRuleRequest() (request *CreateAlertRuleRequest) {
     request = &CreateAlertRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreateAlertRule")
     
     
@@ -334,6 +339,7 @@ func NewCreateExporterIntegrationRequest() (request *CreateExporterIntegrationRe
     request = &CreateExporterIntegrationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreateExporterIntegration")
     
     
@@ -401,6 +407,7 @@ func NewCreatePolicyGroupRequest() (request *CreatePolicyGroupRequest) {
     request = &CreatePolicyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreatePolicyGroup")
     
     
@@ -472,6 +479,7 @@ func NewCreatePrometheusAgentRequest() (request *CreatePrometheusAgentRequest) {
     request = &CreatePrometheusAgentRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusAgent")
     
     
@@ -537,6 +545,7 @@ func NewCreatePrometheusMultiTenantInstancePostPayModeRequest() (request *Create
     request = &CreatePrometheusMultiTenantInstancePostPayModeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusMultiTenantInstancePostPayMode")
     
     
@@ -608,6 +617,7 @@ func NewCreatePrometheusScrapeJobRequest() (request *CreatePrometheusScrapeJobRe
     request = &CreatePrometheusScrapeJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusScrapeJob")
     
     
@@ -677,6 +687,7 @@ func NewCreateRecordingRuleRequest() (request *CreateRecordingRuleRequest) {
     request = &CreateRecordingRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreateRecordingRule")
     
     
@@ -746,6 +757,7 @@ func NewCreateServiceDiscoveryRequest() (request *CreateServiceDiscoveryRequest)
     request = &CreateServiceDiscoveryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "CreateServiceDiscovery")
     
     
@@ -821,6 +833,7 @@ func NewDeleteAlarmNoticesRequest() (request *DeleteAlarmNoticesRequest) {
     request = &DeleteAlarmNoticesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeleteAlarmNotices")
     
     
@@ -876,6 +889,7 @@ func NewDeleteAlarmPolicyRequest() (request *DeleteAlarmPolicyRequest) {
     request = &DeleteAlarmPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeleteAlarmPolicy")
     
     
@@ -931,6 +945,7 @@ func NewDeleteAlertRulesRequest() (request *DeleteAlertRulesRequest) {
     request = &DeleteAlertRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeleteAlertRules")
     
     
@@ -1000,6 +1015,7 @@ func NewDeleteExporterIntegrationRequest() (request *DeleteExporterIntegrationRe
     request = &DeleteExporterIntegrationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeleteExporterIntegration")
     
     
@@ -1073,6 +1089,7 @@ func NewDeletePolicyGroupRequest() (request *DeletePolicyGroupRequest) {
     request = &DeletePolicyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeletePolicyGroup")
     
     
@@ -1190,6 +1207,7 @@ func NewDeletePrometheusScrapeJobsRequest() (request *DeletePrometheusScrapeJobs
     request = &DeletePrometheusScrapeJobsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeletePrometheusScrapeJobs")
     
     
@@ -1259,6 +1277,7 @@ func NewDeleteRecordingRulesRequest() (request *DeleteRecordingRulesRequest) {
     request = &DeleteRecordingRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DeleteRecordingRules")
     
     
@@ -1328,6 +1347,7 @@ func NewDescribeAccidentEventListRequest() (request *DescribeAccidentEventListRe
     request = &DescribeAccidentEventListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAccidentEventList")
     
     
@@ -1383,6 +1403,7 @@ func NewDescribeAlarmEventsRequest() (request *DescribeAlarmEventsRequest) {
     request = &DescribeAlarmEventsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmEvents")
     
     
@@ -1432,6 +1453,7 @@ func NewDescribeAlarmHistoriesRequest() (request *DescribeAlarmHistoriesRequest)
     request = &DescribeAlarmHistoriesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmHistories")
     
     
@@ -1497,6 +1519,7 @@ func NewDescribeAlarmMetricsRequest() (request *DescribeAlarmMetricsRequest) {
     request = &DescribeAlarmMetricsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmMetrics")
     
     
@@ -1546,6 +1569,7 @@ func NewDescribeAlarmNoticeRequest() (request *DescribeAlarmNoticeRequest) {
     request = &DescribeAlarmNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmNotice")
     
     
@@ -1605,6 +1629,7 @@ func NewDescribeAlarmNoticeCallbacksRequest() (request *DescribeAlarmNoticeCallb
     request = &DescribeAlarmNoticeCallbacksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmNoticeCallbacks")
     
     
@@ -1664,6 +1689,7 @@ func NewDescribeAlarmNoticesRequest() (request *DescribeAlarmNoticesRequest) {
     request = &DescribeAlarmNoticesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmNotices")
     
     
@@ -1723,6 +1749,7 @@ func NewDescribeAlarmPoliciesRequest() (request *DescribeAlarmPoliciesRequest) {
     request = &DescribeAlarmPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmPolicies")
     
     
@@ -1774,6 +1801,7 @@ func NewDescribeAlarmPolicyRequest() (request *DescribeAlarmPolicyRequest) {
     request = &DescribeAlarmPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlarmPolicy")
     
     
@@ -1827,6 +1855,7 @@ func NewDescribeAlertRulesRequest() (request *DescribeAlertRulesRequest) {
     request = &DescribeAlertRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAlertRules")
     
     
@@ -1896,6 +1925,7 @@ func NewDescribeAllNamespacesRequest() (request *DescribeAllNamespacesRequest) {
     request = &DescribeAllNamespacesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeAllNamespaces")
     
     
@@ -1943,6 +1973,7 @@ func NewDescribeBaseMetricsRequest() (request *DescribeBaseMetricsRequest) {
     request = &DescribeBaseMetricsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeBaseMetrics")
     
     
@@ -1990,6 +2021,7 @@ func NewDescribeBasicAlarmListRequest() (request *DescribeBasicAlarmListRequest)
     request = &DescribeBasicAlarmListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeBasicAlarmList")
     
     
@@ -2047,6 +2079,7 @@ func NewDescribeBindingPolicyObjectListRequest() (request *DescribeBindingPolicy
     request = &DescribeBindingPolicyObjectListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeBindingPolicyObjectList")
     
     
@@ -2168,6 +2201,7 @@ func NewDescribeConditionsTemplateListRequest() (request *DescribeConditionsTemp
     request = &DescribeConditionsTemplateListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeConditionsTemplateList")
     
     
@@ -2285,6 +2319,7 @@ func NewDescribeExporterIntegrationsRequest() (request *DescribeExporterIntegrat
     request = &DescribeExporterIntegrationsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeExporterIntegrations")
     
     
@@ -2354,6 +2389,7 @@ func NewDescribeMonitorTypesRequest() (request *DescribeMonitorTypesRequest) {
     request = &DescribeMonitorTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeMonitorTypes")
     
     
@@ -2401,6 +2437,7 @@ func NewDescribePolicyConditionListRequest() (request *DescribePolicyConditionLi
     request = &DescribePolicyConditionListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribePolicyConditionList")
     
     
@@ -2518,6 +2555,7 @@ func NewDescribePolicyGroupInfoRequest() (request *DescribePolicyGroupInfoReques
     request = &DescribePolicyGroupInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribePolicyGroupInfo")
     
     
@@ -2635,6 +2673,7 @@ func NewDescribePolicyGroupListRequest() (request *DescribePolicyGroupListReques
     request = &DescribePolicyGroupListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribePolicyGroupList")
     
     
@@ -2752,6 +2791,7 @@ func NewDescribeProductEventListRequest() (request *DescribeProductEventListRequ
     request = &DescribeProductEventListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeProductEventList")
     
     
@@ -2813,6 +2853,7 @@ func NewDescribePrometheusAgentsRequest() (request *DescribePrometheusAgentsRequ
     request = &DescribePrometheusAgentsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusAgents")
     
     
@@ -2876,6 +2917,7 @@ func NewDescribePrometheusInstancesRequest() (request *DescribePrometheusInstanc
     request = &DescribePrometheusInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusInstances")
     
     
@@ -2957,6 +2999,7 @@ func NewDescribePrometheusScrapeJobsRequest() (request *DescribePrometheusScrape
     request = &DescribePrometheusScrapeJobsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusScrapeJobs")
     
     
@@ -3024,6 +3067,7 @@ func NewDescribeRecordingRulesRequest() (request *DescribeRecordingRulesRequest)
     request = &DescribeRecordingRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeRecordingRules")
     
     
@@ -3091,6 +3135,7 @@ func NewDescribeServiceDiscoveryRequest() (request *DescribeServiceDiscoveryRequ
     request = &DescribeServiceDiscoveryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeServiceDiscovery")
     
     
@@ -3162,6 +3207,7 @@ func NewDescribeStatisticDataRequest() (request *DescribeStatisticDataRequest) {
     request = &DescribeStatisticDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DescribeStatisticData")
     
     
@@ -3297,6 +3343,7 @@ func NewDestroyPrometheusInstanceRequest() (request *DestroyPrometheusInstanceRe
     request = &DestroyPrometheusInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "DestroyPrometheusInstance")
     
     
@@ -3360,6 +3407,7 @@ func NewGetMonitorDataRequest() (request *GetMonitorDataRequest) {
     request = &GetMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "GetMonitorData")
     
     
@@ -3423,6 +3471,7 @@ func NewGetPrometheusAgentManagementCommandRequest() (request *GetPrometheusAgen
     request = &GetPrometheusAgentManagementCommandRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "GetPrometheusAgentManagementCommand")
     
     
@@ -3486,6 +3535,7 @@ func NewModifyAlarmNoticeRequest() (request *ModifyAlarmNoticeRequest) {
     request = &ModifyAlarmNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmNotice")
     
     
@@ -3545,6 +3595,7 @@ func NewModifyAlarmPolicyConditionRequest() (request *ModifyAlarmPolicyCondition
     request = &ModifyAlarmPolicyConditionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmPolicyCondition")
     
     
@@ -3602,6 +3653,7 @@ func NewModifyAlarmPolicyInfoRequest() (request *ModifyAlarmPolicyInfoRequest) {
     request = &ModifyAlarmPolicyInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmPolicyInfo")
     
     
@@ -3661,6 +3713,7 @@ func NewModifyAlarmPolicyNoticeRequest() (request *ModifyAlarmPolicyNoticeReques
     request = &ModifyAlarmPolicyNoticeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmPolicyNotice")
     
     
@@ -3714,6 +3767,7 @@ func NewModifyAlarmPolicyStatusRequest() (request *ModifyAlarmPolicyStatusReques
     request = &ModifyAlarmPolicyStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmPolicyStatus")
     
     
@@ -3771,6 +3825,7 @@ func NewModifyAlarmPolicyTasksRequest() (request *ModifyAlarmPolicyTasksRequest)
     request = &ModifyAlarmPolicyTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmPolicyTasks")
     
     
@@ -3826,6 +3881,7 @@ func NewModifyAlarmReceiversRequest() (request *ModifyAlarmReceiversRequest) {
     request = &ModifyAlarmReceiversRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyAlarmReceivers")
     
     
@@ -3881,6 +3937,7 @@ func NewModifyPolicyGroupRequest() (request *ModifyPolicyGroupRequest) {
     request = &ModifyPolicyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyPolicyGroup")
     
     
@@ -3970,6 +4027,7 @@ func NewModifyPrometheusInstanceAttributesRequest() (request *ModifyPrometheusIn
     request = &ModifyPrometheusInstanceAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "ModifyPrometheusInstanceAttributes")
     
     
@@ -4033,6 +4091,7 @@ func NewPutMonitorDataRequest() (request *PutMonitorDataRequest) {
     request = &PutMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "PutMonitorData")
     
     
@@ -4136,6 +4195,7 @@ func NewSendCustomAlarmMsgRequest() (request *SendCustomAlarmMsgRequest) {
     request = &SendCustomAlarmMsgRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "SendCustomAlarmMsg")
     
     
@@ -4197,6 +4257,7 @@ func NewSetDefaultAlarmPolicyRequest() (request *SetDefaultAlarmPolicyRequest) {
     request = &SetDefaultAlarmPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "SetDefaultAlarmPolicy")
     
     
@@ -4258,6 +4319,7 @@ func NewTerminatePrometheusInstancesRequest() (request *TerminatePrometheusInsta
     request = &TerminatePrometheusInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "TerminatePrometheusInstances")
     
     
@@ -4321,6 +4383,7 @@ func NewUnBindingAllPolicyObjectRequest() (request *UnBindingAllPolicyObjectRequ
     request = &UnBindingAllPolicyObjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UnBindingAllPolicyObject")
     
     
@@ -4438,6 +4501,7 @@ func NewUnBindingPolicyObjectRequest() (request *UnBindingPolicyObjectRequest) {
     request = &UnBindingPolicyObjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UnBindingPolicyObject")
     
     
@@ -4559,6 +4623,7 @@ func NewUnbindPrometheusManagedGrafanaRequest() (request *UnbindPrometheusManage
     request = &UnbindPrometheusManagedGrafanaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UnbindPrometheusManagedGrafana")
     
     
@@ -4608,6 +4673,7 @@ func NewUninstallGrafanaDashboardRequest() (request *UninstallGrafanaDashboardRe
     request = &UninstallGrafanaDashboardRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UninstallGrafanaDashboard")
     
     
@@ -4657,6 +4723,7 @@ func NewUpdateAlertRuleRequest() (request *UpdateAlertRuleRequest) {
     request = &UpdateAlertRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpdateAlertRule")
     
     
@@ -4734,6 +4801,7 @@ func NewUpdateAlertRuleStateRequest() (request *UpdateAlertRuleStateRequest) {
     request = &UpdateAlertRuleStateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpdateAlertRuleState")
     
     
@@ -4803,6 +4871,7 @@ func NewUpdateExporterIntegrationRequest() (request *UpdateExporterIntegrationRe
     request = &UpdateExporterIntegrationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpdateExporterIntegration")
     
     
@@ -4884,6 +4953,7 @@ func NewUpdatePrometheusAgentStatusRequest() (request *UpdatePrometheusAgentStat
     request = &UpdatePrometheusAgentStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpdatePrometheusAgentStatus")
     
     
@@ -4943,6 +5013,7 @@ func NewUpdatePrometheusScrapeJobRequest() (request *UpdatePrometheusScrapeJobRe
     request = &UpdatePrometheusScrapeJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpdatePrometheusScrapeJob")
     
     
@@ -5010,6 +5081,7 @@ func NewUpdateRecordingRuleRequest() (request *UpdateRecordingRuleRequest) {
     request = &UpdateRecordingRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpdateRecordingRule")
     
     
@@ -5079,6 +5151,7 @@ func NewUpgradeGrafanaDashboardRequest() (request *UpgradeGrafanaDashboardReques
     request = &UpgradeGrafanaDashboardRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("monitor", APIVersion, "UpgradeGrafanaDashboard")
     
     

@@ -49,6 +49,7 @@ func NewCancelTaskRequest() (request *CancelTaskRequest) {
     request = &CancelTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "CancelTask")
     
     
@@ -104,6 +105,7 @@ func NewCreateSparkAppRequest() (request *CreateSparkAppRequest) {
     request = &CreateSparkAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "CreateSparkApp")
     
     
@@ -153,6 +155,7 @@ func NewCreateSparkAppTaskRequest() (request *CreateSparkAppTaskRequest) {
     request = &CreateSparkAppTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "CreateSparkAppTask")
     
     
@@ -204,6 +207,7 @@ func NewCreateTaskRequest() (request *CreateTaskRequest) {
     request = &CreateTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "CreateTask")
     
     
@@ -271,6 +275,7 @@ func NewCreateTasksRequest() (request *CreateTasksRequest) {
     request = &CreateTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "CreateTasks")
     
     
@@ -342,6 +347,7 @@ func NewDeleteSparkAppRequest() (request *DeleteSparkAppRequest) {
     request = &DeleteSparkAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "DeleteSparkApp")
     
     
@@ -413,6 +419,7 @@ func NewDescribeSparkAppJobRequest() (request *DescribeSparkAppJobRequest) {
     request = &DescribeSparkAppJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "DescribeSparkAppJob")
     
     
@@ -464,6 +471,7 @@ func NewDescribeSparkAppJobsRequest() (request *DescribeSparkAppJobsRequest) {
     request = &DescribeSparkAppJobsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "DescribeSparkAppJobs")
     
     
@@ -511,6 +519,7 @@ func NewDescribeSparkAppTasksRequest() (request *DescribeSparkAppTasksRequest) {
     request = &DescribeSparkAppTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "DescribeSparkAppTasks")
     
     
@@ -558,6 +567,7 @@ func NewDescribeTaskResultRequest() (request *DescribeTaskResultRequest) {
     request = &DescribeTaskResultRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "DescribeTaskResult")
     
     
@@ -613,6 +623,7 @@ func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
     request = &DescribeTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "DescribeTasks")
     
     
@@ -666,6 +677,7 @@ func NewModifySparkAppRequest() (request *ModifySparkAppRequest) {
     request = &ModifySparkAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dlc", APIVersion, "ModifySparkApp")
     
     

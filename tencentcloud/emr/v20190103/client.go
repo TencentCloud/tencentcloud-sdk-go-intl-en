@@ -49,6 +49,7 @@ func NewAddUsersForUserManagerRequest() (request *AddUsersForUserManagerRequest)
     request = &AddUsersForUserManagerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "AddUsersForUserManager")
     
     
@@ -108,6 +109,7 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
     request = &CreateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "CreateInstance")
     
     
@@ -297,6 +299,7 @@ func NewDescribeClusterNodesRequest() (request *DescribeClusterNodesRequest) {
     request = &DescribeClusterNodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "DescribeClusterNodes")
     
     
@@ -392,6 +395,7 @@ func NewDescribeEmrApplicationStaticsRequest() (request *DescribeEmrApplicationS
     request = &DescribeEmrApplicationStaticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "DescribeEmrApplicationStatics")
     
     
@@ -441,6 +445,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "DescribeInstances")
     
     
@@ -540,6 +545,7 @@ func NewDescribeInstancesListRequest() (request *DescribeInstancesListRequest) {
     request = &DescribeInstancesListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "DescribeInstancesList")
     
     
@@ -633,6 +639,7 @@ func NewDescribeResourceScheduleRequest() (request *DescribeResourceScheduleRequ
     request = &DescribeResourceScheduleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "DescribeResourceSchedule")
     
     
@@ -686,6 +693,7 @@ func NewDescribeUsersForUserManagerRequest() (request *DescribeUsersForUserManag
     request = &DescribeUsersForUserManagerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "DescribeUsersForUserManager")
     
     
@@ -739,6 +747,7 @@ func NewInquiryPriceCreateInstanceRequest() (request *InquiryPriceCreateInstance
     request = &InquiryPriceCreateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceCreateInstance")
     
     
@@ -868,6 +877,7 @@ func NewInquiryPriceRenewInstanceRequest() (request *InquiryPriceRenewInstanceRe
     request = &InquiryPriceRenewInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceRenewInstance")
     
     
@@ -967,6 +977,7 @@ func NewInquiryPriceScaleOutInstanceRequest() (request *InquiryPriceScaleOutInst
     request = &InquiryPriceScaleOutInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceScaleOutInstance")
     
     
@@ -1074,6 +1085,7 @@ func NewInquiryPriceUpdateInstanceRequest() (request *InquiryPriceUpdateInstance
     request = &InquiryPriceUpdateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "InquiryPriceUpdateInstance")
     
     
@@ -1173,6 +1185,7 @@ func NewModifyResourceScheduleConfigRequest() (request *ModifyResourceScheduleCo
     request = &ModifyResourceScheduleConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "ModifyResourceScheduleConfig")
     
     
@@ -1226,6 +1239,7 @@ func NewModifyResourceSchedulerRequest() (request *ModifyResourceSchedulerReques
     request = &ModifyResourceSchedulerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "ModifyResourceScheduler")
     
     
@@ -1275,6 +1289,7 @@ func NewScaleOutInstanceRequest() (request *ScaleOutInstanceRequest) {
     request = &ScaleOutInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "ScaleOutInstance")
     
     
@@ -1422,6 +1437,7 @@ func NewTerminateInstanceRequest() (request *TerminateInstanceRequest) {
     request = &TerminateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "TerminateInstance")
     
     
@@ -1489,6 +1505,7 @@ func NewTerminateTasksRequest() (request *TerminateTasksRequest) {
     request = &TerminateTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("emr", APIVersion, "TerminateTasks")
     
     

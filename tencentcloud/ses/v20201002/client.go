@@ -49,6 +49,7 @@ func NewBatchSendEmailRequest() (request *BatchSendEmailRequest) {
     request = &BatchSendEmailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "BatchSendEmail")
     
     
@@ -122,6 +123,7 @@ func NewCreateEmailAddressRequest() (request *CreateEmailAddressRequest) {
     request = &CreateEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "CreateEmailAddress")
     
     
@@ -189,6 +191,7 @@ func NewCreateEmailIdentityRequest() (request *CreateEmailIdentityRequest) {
     request = &CreateEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "CreateEmailIdentity")
     
     
@@ -256,6 +259,7 @@ func NewCreateEmailTemplateRequest() (request *CreateEmailTemplateRequest) {
     request = &CreateEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "CreateEmailTemplate")
     
     
@@ -327,6 +331,7 @@ func NewCreateReceiverRequest() (request *CreateReceiverRequest) {
     request = &CreateReceiverRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "CreateReceiver")
     
     
@@ -382,6 +387,7 @@ func NewCreateReceiverDetailRequest() (request *CreateReceiverDetailRequest) {
     request = &CreateReceiverDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "CreateReceiverDetail")
     
     
@@ -445,6 +451,7 @@ func NewDeleteBlackListRequest() (request *DeleteBlackListRequest) {
     request = &DeleteBlackListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "DeleteBlackList")
     
     
@@ -498,6 +505,7 @@ func NewDeleteEmailAddressRequest() (request *DeleteEmailAddressRequest) {
     request = &DeleteEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "DeleteEmailAddress")
     
     
@@ -559,6 +567,7 @@ func NewDeleteEmailIdentityRequest() (request *DeleteEmailIdentityRequest) {
     request = &DeleteEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "DeleteEmailIdentity")
     
     
@@ -618,6 +627,7 @@ func NewDeleteEmailTemplateRequest() (request *DeleteEmailTemplateRequest) {
     request = &DeleteEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "DeleteEmailTemplate")
     
     
@@ -677,6 +687,7 @@ func NewDeleteReceiverRequest() (request *DeleteReceiverRequest) {
     request = &DeleteReceiverRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "DeleteReceiver")
     
     
@@ -728,6 +739,7 @@ func NewGetEmailIdentityRequest() (request *GetEmailIdentityRequest) {
     request = &GetEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "GetEmailIdentity")
     
     
@@ -789,6 +801,7 @@ func NewGetEmailTemplateRequest() (request *GetEmailTemplateRequest) {
     request = &GetEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "GetEmailTemplate")
     
     
@@ -850,6 +863,7 @@ func NewGetSendEmailStatusRequest() (request *GetSendEmailStatusRequest) {
     request = &GetSendEmailStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "GetSendEmailStatus")
     
     
@@ -963,6 +977,7 @@ func NewGetStatisticsReportRequest() (request *GetStatisticsReportRequest) {
     request = &GetStatisticsReportRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "GetStatisticsReport")
     
     
@@ -1020,6 +1035,7 @@ func NewListBlackEmailAddressRequest() (request *ListBlackEmailAddressRequest) {
     request = &ListBlackEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "ListBlackEmailAddress")
     
     
@@ -1077,6 +1093,7 @@ func NewListEmailAddressRequest() (request *ListEmailAddressRequest) {
     request = &ListEmailAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "ListEmailAddress")
     
     
@@ -1136,6 +1153,7 @@ func NewListEmailIdentitiesRequest() (request *ListEmailIdentitiesRequest) {
     request = &ListEmailIdentitiesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "ListEmailIdentities")
     
     
@@ -1195,6 +1213,7 @@ func NewListEmailTemplatesRequest() (request *ListEmailTemplatesRequest) {
     request = &ListEmailTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "ListEmailTemplates")
     
     
@@ -1254,6 +1273,7 @@ func NewListReceiversRequest() (request *ListReceiversRequest) {
     request = &ListReceiversRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "ListReceivers")
     
     
@@ -1303,6 +1323,7 @@ func NewListSendTasksRequest() (request *ListSendTasksRequest) {
     request = &ListSendTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "ListSendTasks")
     
     
@@ -1350,6 +1371,7 @@ func NewSendEmailRequest() (request *SendEmailRequest) {
     request = &SendEmailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "SendEmail")
     
     
@@ -1475,6 +1497,7 @@ func NewUpdateEmailIdentityRequest() (request *UpdateEmailIdentityRequest) {
     request = &UpdateEmailIdentityRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "UpdateEmailIdentity")
     
     
@@ -1538,6 +1561,7 @@ func NewUpdateEmailTemplateRequest() (request *UpdateEmailTemplateRequest) {
     request = &UpdateEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ses", APIVersion, "UpdateEmailTemplate")
     
     

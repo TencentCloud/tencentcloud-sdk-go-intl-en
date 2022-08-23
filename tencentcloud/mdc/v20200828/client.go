@@ -49,6 +49,7 @@ func NewCreateStreamLinkFlowRequest() (request *CreateStreamLinkFlowRequest) {
     request = &CreateStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkFlow")
     
     
@@ -106,6 +107,7 @@ func NewCreateStreamLinkOutputInfoRequest() (request *CreateStreamLinkOutputInfo
     request = &CreateStreamLinkOutputInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkOutputInfo")
     
     
@@ -165,6 +167,7 @@ func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
     request = &DeleteStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkFlow")
     
     
@@ -214,6 +217,7 @@ func NewDeleteStreamLinkOutputRequest() (request *DeleteStreamLinkOutputRequest)
     request = &DeleteStreamLinkOutputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DeleteStreamLinkOutput")
     
     
@@ -267,6 +271,7 @@ func NewDescribeStreamLinkFlowRequest() (request *DescribeStreamLinkFlowRequest)
     request = &DescribeStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlow")
     
     
@@ -316,6 +321,7 @@ func NewDescribeStreamLinkFlowLogsRequest() (request *DescribeStreamLinkFlowLogs
     request = &DescribeStreamLinkFlowLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowLogs")
     
     
@@ -381,6 +387,7 @@ func NewDescribeStreamLinkFlowMediaStatisticsRequest() (request *DescribeStreamL
     request = &DescribeStreamLinkFlowMediaStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowMediaStatistics")
     
     
@@ -444,6 +451,7 @@ func NewDescribeStreamLinkFlowRealtimeStatusRequest() (request *DescribeStreamLi
     request = &DescribeStreamLinkFlowRealtimeStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowRealtimeStatus")
     
     
@@ -495,6 +503,7 @@ func NewDescribeStreamLinkFlowSRTStatisticsRequest() (request *DescribeStreamLin
     request = &DescribeStreamLinkFlowSRTStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowSRTStatistics")
     
     
@@ -558,6 +567,7 @@ func NewDescribeStreamLinkFlowStatisticsRequest() (request *DescribeStreamLinkFl
     request = &DescribeStreamLinkFlowStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlowStatistics")
     
     
@@ -621,6 +631,7 @@ func NewDescribeStreamLinkFlowsRequest() (request *DescribeStreamLinkFlowsReques
     request = &DescribeStreamLinkFlowsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkFlows")
     
     
@@ -674,6 +685,7 @@ func NewDescribeStreamLinkRegionsRequest() (request *DescribeStreamLinkRegionsRe
     request = &DescribeStreamLinkRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "DescribeStreamLinkRegions")
     
     
@@ -721,6 +733,7 @@ func NewModifyStreamLinkFlowRequest() (request *ModifyStreamLinkFlowRequest) {
     request = &ModifyStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkFlow")
     
     
@@ -774,6 +787,7 @@ func NewModifyStreamLinkInputRequest() (request *ModifyStreamLinkInputRequest) {
     request = &ModifyStreamLinkInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkInput")
     
     
@@ -829,6 +843,7 @@ func NewModifyStreamLinkOutputInfoRequest() (request *ModifyStreamLinkOutputInfo
     request = &ModifyStreamLinkOutputInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "ModifyStreamLinkOutputInfo")
     
     
@@ -886,6 +901,7 @@ func NewStartStreamLinkFlowRequest() (request *StartStreamLinkFlowRequest) {
     request = &StartStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "StartStreamLinkFlow")
     
     
@@ -939,6 +955,7 @@ func NewStopStreamLinkFlowRequest() (request *StopStreamLinkFlowRequest) {
     request = &StopStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdc", APIVersion, "StopStreamLinkFlow")
     
     

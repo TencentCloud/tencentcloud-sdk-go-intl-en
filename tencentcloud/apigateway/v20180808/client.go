@@ -49,6 +49,7 @@ func NewAttachPluginRequest() (request *AttachPluginRequest) {
     request = &AttachPluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "AttachPlugin")
     
     
@@ -122,6 +123,7 @@ func NewBindApiAppRequest() (request *BindApiAppRequest) {
     request = &BindApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "BindApiApp")
     
     
@@ -191,6 +193,7 @@ func NewBindEnvironmentRequest() (request *BindEnvironmentRequest) {
     request = &BindEnvironmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "BindEnvironment")
     
     
@@ -264,6 +267,7 @@ func NewBindIPStrategyRequest() (request *BindIPStrategyRequest) {
     request = &BindIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "BindIPStrategy")
     
     
@@ -321,6 +325,7 @@ func NewBindSecretIdsRequest() (request *BindSecretIdsRequest) {
     request = &BindSecretIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "BindSecretIds")
     
     
@@ -388,6 +393,7 @@ func NewBindSubDomainRequest() (request *BindSubDomainRequest) {
     request = &BindSubDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "BindSubDomain")
     
     
@@ -505,6 +511,7 @@ func NewBuildAPIDocRequest() (request *BuildAPIDocRequest) {
     request = &BuildAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "BuildAPIDoc")
     
     
@@ -564,6 +571,7 @@ func NewCreateAPIDocRequest() (request *CreateAPIDocRequest) {
     request = &CreateAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateAPIDoc")
     
     
@@ -657,6 +665,7 @@ func NewCreateApiRequest() (request *CreateApiRequest) {
     request = &CreateApiRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateApi")
     
     
@@ -796,6 +805,7 @@ func NewCreateApiAppRequest() (request *CreateApiAppRequest) {
     request = &CreateApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateApiApp")
     
     
@@ -855,6 +865,7 @@ func NewCreateApiKeyRequest() (request *CreateApiKeyRequest) {
     request = &CreateApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateApiKey")
     
     
@@ -908,6 +919,7 @@ func NewCreateIPStrategyRequest() (request *CreateIPStrategyRequest) {
     request = &CreateIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateIPStrategy")
     
     
@@ -961,6 +973,7 @@ func NewCreatePluginRequest() (request *CreatePluginRequest) {
     request = &CreatePluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreatePlugin")
     
     
@@ -1058,6 +1071,7 @@ func NewCreateServiceRequest() (request *CreateServiceRequest) {
     request = &CreateServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateService")
     
     
@@ -1157,6 +1171,7 @@ func NewCreateUpstreamRequest() (request *CreateUpstreamRequest) {
     request = &CreateUpstreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateUpstream")
     
     
@@ -1240,6 +1255,7 @@ func NewCreateUsagePlanRequest() (request *CreateUsagePlanRequest) {
     request = &CreateUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "CreateUsagePlan")
     
     
@@ -1295,6 +1311,7 @@ func NewDeleteAPIDocRequest() (request *DeleteAPIDocRequest) {
     request = &DeleteAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteAPIDoc")
     
     
@@ -1376,6 +1393,7 @@ func NewDeleteApiRequest() (request *DeleteApiRequest) {
     request = &DeleteApiRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteApi")
     
     
@@ -1471,6 +1489,7 @@ func NewDeleteApiAppRequest() (request *DeleteApiAppRequest) {
     request = &DeleteApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteApiApp")
     
     
@@ -1540,6 +1559,7 @@ func NewDeleteApiKeyRequest() (request *DeleteApiKeyRequest) {
     request = &DeleteApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteApiKey")
     
     
@@ -1593,6 +1613,7 @@ func NewDeleteIPStrategyRequest() (request *DeleteIPStrategyRequest) {
     request = &DeleteIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteIPStrategy")
     
     
@@ -1640,6 +1661,7 @@ func NewDeletePluginRequest() (request *DeletePluginRequest) {
     request = &DeletePluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeletePlugin")
     
     
@@ -1693,6 +1715,7 @@ func NewDeleteServiceRequest() (request *DeleteServiceRequest) {
     request = &DeleteServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteService")
     
     
@@ -1754,6 +1777,7 @@ func NewDeleteServiceSubDomainMappingRequest() (request *DeleteServiceSubDomainM
     request = &DeleteServiceSubDomainMappingRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteServiceSubDomainMapping")
     
     
@@ -1813,6 +1837,7 @@ func NewDeleteUpstreamRequest() (request *DeleteUpstreamRequest) {
     request = &DeleteUpstreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteUpstream")
     
     
@@ -1880,6 +1905,7 @@ func NewDeleteUsagePlanRequest() (request *DeleteUsagePlanRequest) {
     request = &DeleteUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DeleteUsagePlan")
     
     
@@ -1931,6 +1957,7 @@ func NewDemoteServiceUsagePlanRequest() (request *DemoteServiceUsagePlanRequest)
     request = &DemoteServiceUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DemoteServiceUsagePlan")
     
     
@@ -1990,6 +2017,7 @@ func NewDescribeAPIDocDetailRequest() (request *DescribeAPIDocDetailRequest) {
     request = &DescribeAPIDocDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeAPIDocDetail")
     
     
@@ -2043,6 +2071,7 @@ func NewDescribeAPIDocsRequest() (request *DescribeAPIDocsRequest) {
     request = &DescribeAPIDocsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeAPIDocs")
     
     
@@ -2110,6 +2139,7 @@ func NewDescribeAllPluginApisRequest() (request *DescribeAllPluginApisRequest) {
     request = &DescribeAllPluginApisRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeAllPluginApis")
     
     
@@ -2163,6 +2193,7 @@ func NewDescribeApiRequest() (request *DescribeApiRequest) {
     request = &DescribeApiRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApi")
     
     
@@ -2230,6 +2261,7 @@ func NewDescribeApiAppRequest() (request *DescribeApiAppRequest) {
     request = &DescribeApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiApp")
     
     
@@ -2281,6 +2313,7 @@ func NewDescribeApiAppBindApisStatusRequest() (request *DescribeApiAppBindApisSt
     request = &DescribeApiAppBindApisStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiAppBindApisStatus")
     
     
@@ -2332,6 +2365,7 @@ func NewDescribeApiAppsStatusRequest() (request *DescribeApiAppsStatusRequest) {
     request = &DescribeApiAppsStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiAppsStatus")
     
     
@@ -2383,6 +2417,7 @@ func NewDescribeApiBindApiAppsStatusRequest() (request *DescribeApiBindApiAppsSt
     request = &DescribeApiBindApiAppsStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiBindApiAppsStatus")
     
     
@@ -2430,6 +2465,7 @@ func NewDescribeApiEnvironmentStrategyRequest() (request *DescribeApiEnvironment
     request = &DescribeApiEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiEnvironmentStrategy")
     
     
@@ -2483,6 +2519,7 @@ func NewDescribeApiForApiAppRequest() (request *DescribeApiForApiAppRequest) {
     request = &DescribeApiForApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiForApiApp")
     
     
@@ -2542,6 +2579,7 @@ func NewDescribeApiKeyRequest() (request *DescribeApiKeyRequest) {
     request = &DescribeApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiKey")
     
     
@@ -2593,6 +2631,7 @@ func NewDescribeApiKeysStatusRequest() (request *DescribeApiKeysStatusRequest) {
     request = &DescribeApiKeysStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiKeysStatus")
     
     
@@ -2646,6 +2685,7 @@ func NewDescribeApiUsagePlanRequest() (request *DescribeApiUsagePlanRequest) {
     request = &DescribeApiUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApiUsagePlan")
     
     
@@ -2701,6 +2741,7 @@ func NewDescribeApisStatusRequest() (request *DescribeApisStatusRequest) {
     request = &DescribeApisStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeApisStatus")
     
     
@@ -2758,6 +2799,7 @@ func NewDescribeIPStrategyRequest() (request *DescribeIPStrategyRequest) {
     request = &DescribeIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeIPStrategy")
     
     
@@ -2811,6 +2853,7 @@ func NewDescribeIPStrategyApisStatusRequest() (request *DescribeIPStrategyApisSt
     request = &DescribeIPStrategyApisStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeIPStrategyApisStatus")
     
     
@@ -2860,6 +2903,7 @@ func NewDescribeIPStrategysStatusRequest() (request *DescribeIPStrategysStatusRe
     request = &DescribeIPStrategysStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeIPStrategysStatus")
     
     
@@ -2911,6 +2955,7 @@ func NewDescribeLogSearchRequest() (request *DescribeLogSearchRequest) {
     request = &DescribeLogSearchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeLogSearch")
     
     
@@ -2960,6 +3005,7 @@ func NewDescribePluginRequest() (request *DescribePluginRequest) {
     request = &DescribePluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribePlugin")
     
     
@@ -3011,6 +3057,7 @@ func NewDescribePluginApisRequest() (request *DescribePluginApisRequest) {
     request = &DescribePluginApisRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribePluginApis")
     
     
@@ -3064,6 +3111,7 @@ func NewDescribeServiceRequest() (request *DescribeServiceRequest) {
     request = &DescribeServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeService")
     
     
@@ -3125,6 +3173,7 @@ func NewDescribeServiceEnvironmentListRequest() (request *DescribeServiceEnviron
     request = &DescribeServiceEnvironmentListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceEnvironmentList")
     
     
@@ -3174,6 +3223,7 @@ func NewDescribeServiceEnvironmentReleaseHistoryRequest() (request *DescribeServ
     request = &DescribeServiceEnvironmentReleaseHistoryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceEnvironmentReleaseHistory")
     
     
@@ -3227,6 +3277,7 @@ func NewDescribeServiceEnvironmentStrategyRequest() (request *DescribeServiceEnv
     request = &DescribeServiceEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceEnvironmentStrategy")
     
     
@@ -3276,6 +3327,7 @@ func NewDescribeServiceForApiAppRequest() (request *DescribeServiceForApiAppRequ
     request = &DescribeServiceForApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceForApiApp")
     
     
@@ -3325,6 +3377,7 @@ func NewDescribeServiceReleaseVersionRequest() (request *DescribeServiceReleaseV
     request = &DescribeServiceReleaseVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceReleaseVersion")
     
     
@@ -3378,6 +3431,7 @@ func NewDescribeServiceSubDomainMappingsRequest() (request *DescribeServiceSubDo
     request = &DescribeServiceSubDomainMappingsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceSubDomainMappings")
     
     
@@ -3433,6 +3487,7 @@ func NewDescribeServiceSubDomainsRequest() (request *DescribeServiceSubDomainsRe
     request = &DescribeServiceSubDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceSubDomains")
     
     
@@ -3492,6 +3547,7 @@ func NewDescribeServiceUsagePlanRequest() (request *DescribeServiceUsagePlanRequ
     request = &DescribeServiceUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServiceUsagePlan")
     
     
@@ -3547,6 +3603,7 @@ func NewDescribeServicesStatusRequest() (request *DescribeServicesStatusRequest)
     request = &DescribeServicesStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeServicesStatus")
     
     
@@ -3632,6 +3689,7 @@ func NewDescribeUpstreamBindApisRequest() (request *DescribeUpstreamBindApisRequ
     request = &DescribeUpstreamBindApisRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUpstreamBindApis")
     
     
@@ -3697,6 +3755,7 @@ func NewDescribeUpstreamsRequest() (request *DescribeUpstreamsRequest) {
     request = &DescribeUpstreamsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUpstreams")
     
     
@@ -3762,6 +3821,7 @@ func NewDescribeUsagePlanRequest() (request *DescribeUsagePlanRequest) {
     request = &DescribeUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUsagePlan")
     
     
@@ -3811,6 +3871,7 @@ func NewDescribeUsagePlanEnvironmentsRequest() (request *DescribeUsagePlanEnviro
     request = &DescribeUsagePlanEnvironmentsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUsagePlanEnvironments")
     
     
@@ -3864,6 +3925,7 @@ func NewDescribeUsagePlanSecretIdsRequest() (request *DescribeUsagePlanSecretIds
     request = &DescribeUsagePlanSecretIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUsagePlanSecretIds")
     
     
@@ -3917,6 +3979,7 @@ func NewDescribeUsagePlansStatusRequest() (request *DescribeUsagePlansStatusRequ
     request = &DescribeUsagePlansStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DescribeUsagePlansStatus")
     
     
@@ -3966,6 +4029,7 @@ func NewDetachPluginRequest() (request *DetachPluginRequest) {
     request = &DetachPluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DetachPlugin")
     
     
@@ -4027,6 +4091,7 @@ func NewDisableApiKeyRequest() (request *DisableApiKeyRequest) {
     request = &DisableApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "DisableApiKey")
     
     
@@ -4080,6 +4145,7 @@ func NewEnableApiKeyRequest() (request *EnableApiKeyRequest) {
     request = &EnableApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "EnableApiKey")
     
     
@@ -4131,6 +4197,7 @@ func NewGenerateApiDocumentRequest() (request *GenerateApiDocumentRequest) {
     request = &GenerateApiDocumentRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "GenerateApiDocument")
     
     
@@ -4184,6 +4251,7 @@ func NewModifyAPIDocRequest() (request *ModifyAPIDocRequest) {
     request = &ModifyAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyAPIDoc")
     
     
@@ -4243,6 +4311,7 @@ func NewModifyApiRequest() (request *ModifyApiRequest) {
     request = &ModifyApiRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyApi")
     
     
@@ -4382,6 +4451,7 @@ func NewModifyApiAppRequest() (request *ModifyApiAppRequest) {
     request = &ModifyApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyApiApp")
     
     
@@ -4453,6 +4523,7 @@ func NewModifyApiEnvironmentStrategyRequest() (request *ModifyApiEnvironmentStra
     request = &ModifyApiEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyApiEnvironmentStrategy")
     
     
@@ -4506,6 +4577,7 @@ func NewModifyApiIncrementRequest() (request *ModifyApiIncrementRequest) {
     request = &ModifyApiIncrementRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyApiIncrement")
     
     
@@ -4561,6 +4633,7 @@ func NewModifyIPStrategyRequest() (request *ModifyIPStrategyRequest) {
     request = &ModifyIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyIPStrategy")
     
     
@@ -4610,6 +4683,7 @@ func NewModifyPluginRequest() (request *ModifyPluginRequest) {
     request = &ModifyPluginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyPlugin")
     
     
@@ -4711,6 +4785,7 @@ func NewModifyServiceRequest() (request *ModifyServiceRequest) {
     request = &ModifyServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyService")
     
     
@@ -4772,6 +4847,7 @@ func NewModifyServiceEnvironmentStrategyRequest() (request *ModifyServiceEnviron
     request = &ModifyServiceEnvironmentStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyServiceEnvironmentStrategy")
     
     
@@ -4825,6 +4901,7 @@ func NewModifySubDomainRequest() (request *ModifySubDomainRequest) {
     request = &ModifySubDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifySubDomain")
     
     
@@ -4896,6 +4973,7 @@ func NewModifyUpstreamRequest() (request *ModifyUpstreamRequest) {
     request = &ModifyUpstreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyUpstream")
     
     
@@ -4971,6 +5049,7 @@ func NewModifyUsagePlanRequest() (request *ModifyUsagePlanRequest) {
     request = &ModifyUsagePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ModifyUsagePlan")
     
     
@@ -5022,6 +5101,7 @@ func NewReleaseServiceRequest() (request *ReleaseServiceRequest) {
     request = &ReleaseServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ReleaseService")
     
     
@@ -5089,6 +5169,7 @@ func NewResetAPIDocPasswordRequest() (request *ResetAPIDocPasswordRequest) {
     request = &ResetAPIDocPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "ResetAPIDocPassword")
     
     
@@ -5140,6 +5221,7 @@ func NewUnBindEnvironmentRequest() (request *UnBindEnvironmentRequest) {
     request = &UnBindEnvironmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UnBindEnvironment")
     
     
@@ -5201,6 +5283,7 @@ func NewUnBindIPStrategyRequest() (request *UnBindIPStrategyRequest) {
     request = &UnBindIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UnBindIPStrategy")
     
     
@@ -5248,6 +5331,7 @@ func NewUnBindSecretIdsRequest() (request *UnBindSecretIdsRequest) {
     request = &UnBindSecretIdsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UnBindSecretIds")
     
     
@@ -5299,6 +5383,7 @@ func NewUnBindSubDomainRequest() (request *UnBindSubDomainRequest) {
     request = &UnBindSubDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UnBindSubDomain")
     
     
@@ -5366,6 +5451,7 @@ func NewUnReleaseServiceRequest() (request *UnReleaseServiceRequest) {
     request = &UnReleaseServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UnReleaseService")
     
     
@@ -5433,6 +5519,7 @@ func NewUnbindApiAppRequest() (request *UnbindApiAppRequest) {
     request = &UnbindApiAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UnbindApiApp")
     
     
@@ -5498,6 +5585,7 @@ func NewUpdateApiAppKeyRequest() (request *UpdateApiAppKeyRequest) {
     request = &UpdateApiAppKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UpdateApiAppKey")
     
     
@@ -5569,6 +5657,7 @@ func NewUpdateApiKeyRequest() (request *UpdateApiKeyRequest) {
     request = &UpdateApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UpdateApiKey")
     
     
@@ -5618,6 +5707,7 @@ func NewUpdateServiceRequest() (request *UpdateServiceRequest) {
     request = &UpdateServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("apigateway", APIVersion, "UpdateService")
     
     

@@ -49,6 +49,7 @@ func NewCreateStreamLiveChannelRequest() (request *CreateStreamLiveChannelReques
     request = &CreateStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveChannel")
     
     
@@ -116,6 +117,7 @@ func NewCreateStreamLiveInputRequest() (request *CreateStreamLiveInputRequest) {
     request = &CreateStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInput")
     
     
@@ -177,6 +179,7 @@ func NewCreateStreamLiveInputSecurityGroupRequest() (request *CreateStreamLiveIn
     request = &CreateStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveInputSecurityGroup")
     
     
@@ -232,6 +235,7 @@ func NewCreateStreamLivePlanRequest() (request *CreateStreamLivePlanRequest) {
     request = &CreateStreamLivePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLivePlan")
     
     
@@ -283,6 +287,7 @@ func NewCreateStreamLiveWatermarkRequest() (request *CreateStreamLiveWatermarkRe
     request = &CreateStreamLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "CreateStreamLiveWatermark")
     
     
@@ -340,6 +345,7 @@ func NewDeleteStreamLiveChannelRequest() (request *DeleteStreamLiveChannelReques
     request = &DeleteStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveChannel")
     
     
@@ -397,6 +403,7 @@ func NewDeleteStreamLiveInputRequest() (request *DeleteStreamLiveInputRequest) {
     request = &DeleteStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInput")
     
     
@@ -452,6 +459,7 @@ func NewDeleteStreamLiveInputSecurityGroupRequest() (request *DeleteStreamLiveIn
     request = &DeleteStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveInputSecurityGroup")
     
     
@@ -507,6 +515,7 @@ func NewDeleteStreamLivePlanRequest() (request *DeleteStreamLivePlanRequest) {
     request = &DeleteStreamLivePlanRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLivePlan")
     
     
@@ -558,6 +567,7 @@ func NewDeleteStreamLiveWatermarkRequest() (request *DeleteStreamLiveWatermarkRe
     request = &DeleteStreamLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DeleteStreamLiveWatermark")
     
     
@@ -611,6 +621,7 @@ func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRe
     request = &DescribeStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannel")
     
     
@@ -660,6 +671,7 @@ func NewDescribeStreamLiveChannelAlertsRequest() (request *DescribeStreamLiveCha
     request = &DescribeStreamLiveChannelAlertsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelAlerts")
     
     
@@ -709,6 +721,7 @@ func NewDescribeStreamLiveChannelInputStatisticsRequest() (request *DescribeStre
     request = &DescribeStreamLiveChannelInputStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelInputStatistics")
     
     
@@ -762,6 +775,7 @@ func NewDescribeStreamLiveChannelLogsRequest() (request *DescribeStreamLiveChann
     request = &DescribeStreamLiveChannelLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelLogs")
     
     
@@ -815,6 +829,7 @@ func NewDescribeStreamLiveChannelOutputStatisticsRequest() (request *DescribeStr
     request = &DescribeStreamLiveChannelOutputStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannelOutputStatistics")
     
     
@@ -870,6 +885,7 @@ func NewDescribeStreamLiveChannelsRequest() (request *DescribeStreamLiveChannels
     request = &DescribeStreamLiveChannelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveChannels")
     
     
@@ -917,6 +933,7 @@ func NewDescribeStreamLiveInputRequest() (request *DescribeStreamLiveInputReques
     request = &DescribeStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInput")
     
     
@@ -970,6 +987,7 @@ func NewDescribeStreamLiveInputSecurityGroupRequest() (request *DescribeStreamLi
     request = &DescribeStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroup")
     
     
@@ -1023,6 +1041,7 @@ func NewDescribeStreamLiveInputSecurityGroupsRequest() (request *DescribeStreamL
     request = &DescribeStreamLiveInputSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputSecurityGroups")
     
     
@@ -1070,6 +1089,7 @@ func NewDescribeStreamLiveInputsRequest() (request *DescribeStreamLiveInputsRequ
     request = &DescribeStreamLiveInputsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveInputs")
     
     
@@ -1117,6 +1137,7 @@ func NewDescribeStreamLivePlansRequest() (request *DescribeStreamLivePlansReques
     request = &DescribeStreamLivePlansRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLivePlans")
     
     
@@ -1166,6 +1187,7 @@ func NewDescribeStreamLiveRegionsRequest() (request *DescribeStreamLiveRegionsRe
     request = &DescribeStreamLiveRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveRegions")
     
     
@@ -1213,6 +1235,7 @@ func NewDescribeStreamLiveTranscodeDetailRequest() (request *DescribeStreamLiveT
     request = &DescribeStreamLiveTranscodeDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveTranscodeDetail")
     
     
@@ -1270,6 +1293,7 @@ func NewDescribeStreamLiveWatermarkRequest() (request *DescribeStreamLiveWaterma
     request = &DescribeStreamLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveWatermark")
     
     
@@ -1321,6 +1345,7 @@ func NewDescribeStreamLiveWatermarksRequest() (request *DescribeStreamLiveWaterm
     request = &DescribeStreamLiveWatermarksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "DescribeStreamLiveWatermarks")
     
     
@@ -1372,6 +1397,7 @@ func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelReques
     request = &ModifyStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveChannel")
     
     
@@ -1439,6 +1465,7 @@ func NewModifyStreamLiveInputRequest() (request *ModifyStreamLiveInputRequest) {
     request = &ModifyStreamLiveInputRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInput")
     
     
@@ -1500,6 +1527,7 @@ func NewModifyStreamLiveInputSecurityGroupRequest() (request *ModifyStreamLiveIn
     request = &ModifyStreamLiveInputSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveInputSecurityGroup")
     
     
@@ -1557,6 +1585,7 @@ func NewModifyStreamLiveWatermarkRequest() (request *ModifyStreamLiveWatermarkRe
     request = &ModifyStreamLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "ModifyStreamLiveWatermark")
     
     
@@ -1614,6 +1643,7 @@ func NewStartStreamLiveChannelRequest() (request *StartStreamLiveChannelRequest)
     request = &StartStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "StartStreamLiveChannel")
     
     
@@ -1669,6 +1699,7 @@ func NewStopStreamLiveChannelRequest() (request *StopStreamLiveChannelRequest) {
     request = &StopStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mdl", APIVersion, "StopStreamLiveChannel")
     
     

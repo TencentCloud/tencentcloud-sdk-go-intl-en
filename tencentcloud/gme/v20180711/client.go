@@ -49,6 +49,7 @@ func NewCreateAppRequest() (request *CreateAppRequest) {
     request = &CreateAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gme", APIVersion, "CreateApp")
     
     
@@ -116,6 +117,7 @@ func NewDescribeAppStatisticsRequest() (request *DescribeAppStatisticsRequest) {
     request = &DescribeAppStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gme", APIVersion, "DescribeAppStatistics")
     
     
@@ -181,6 +183,7 @@ func NewDescribeApplicationDataRequest() (request *DescribeApplicationDataReques
     request = &DescribeApplicationDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gme", APIVersion, "DescribeApplicationData")
     
     
@@ -236,6 +239,7 @@ func NewDescribeScanResultListRequest() (request *DescribeScanResultListRequest)
     request = &DescribeScanResultListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gme", APIVersion, "DescribeScanResultList")
     
     
@@ -305,6 +309,7 @@ func NewModifyAppStatusRequest() (request *ModifyAppStatusRequest) {
     request = &ModifyAppStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gme", APIVersion, "ModifyAppStatus")
     
     
@@ -370,6 +375,7 @@ func NewScanVoiceRequest() (request *ScanVoiceRequest) {
     request = &ScanVoiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gme", APIVersion, "ScanVoice")
     
     

@@ -49,6 +49,7 @@ func NewBankCardOCRRequest() (request *BankCardOCRRequest) {
     request = &BankCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ocr", APIVersion, "BankCardOCR")
     
     
@@ -120,6 +121,7 @@ func NewGeneralAccurateOCRRequest() (request *GeneralAccurateOCRRequest) {
     request = &GeneralAccurateOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ocr", APIVersion, "GeneralAccurateOCR")
     
     
@@ -217,6 +219,7 @@ func NewGeneralBasicOCRRequest() (request *GeneralBasicOCRRequest) {
     request = &GeneralBasicOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ocr", APIVersion, "GeneralBasicOCR")
     
     
@@ -310,6 +313,7 @@ func NewHKIDCardOCRRequest() (request *HKIDCardOCRRequest) {
     request = &HKIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ocr", APIVersion, "HKIDCardOCR")
     
     
@@ -377,10 +381,85 @@ func (c *Client) HKIDCardOCRWithContext(ctx context.Context, request *HKIDCardOC
     return
 }
 
+func NewMLIDCardOCRRequest() (request *MLIDCardOCRRequest) {
+    request = &MLIDCardOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "MLIDCardOCR")
+    
+    
+    return
+}
+
+func NewMLIDCardOCRResponse() (response *MLIDCardOCRResponse) {
+    response = &MLIDCardOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// MLIDCardOCR
+// This API is used to recognize a Malaysian identity card, including identity card number, name, gender, and address. It is also used to crop identity photos and give alarms for photographed or photocopied certificates.
+//
+// 
+//
+// This API is not fully available for the time being. For more information, contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_NOMASIDCARD = "FailedOperation.NoMASIDCard"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) MLIDCardOCR(request *MLIDCardOCRRequest) (response *MLIDCardOCRResponse, err error) {
+    return c.MLIDCardOCRWithContext(context.Background(), request)
+}
+
+// MLIDCardOCR
+// This API is used to recognize a Malaysian identity card, including identity card number, name, gender, and address. It is also used to crop identity photos and give alarms for photographed or photocopied certificates.
+//
+// 
+//
+// This API is not fully available for the time being. For more information, contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_NOMASIDCARD = "FailedOperation.NoMASIDCard"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) MLIDCardOCRWithContext(ctx context.Context, request *MLIDCardOCRRequest) (response *MLIDCardOCRResponse, err error) {
+    if request == nil {
+        request = NewMLIDCardOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("MLIDCardOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewMLIDCardOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewMLIDPassportOCRRequest() (request *MLIDPassportOCRRequest) {
     request = &MLIDPassportOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ocr", APIVersion, "MLIDPassportOCR")
     
     
@@ -452,6 +531,7 @@ func NewTableOCRRequest() (request *TableOCRRequest) {
     request = &TableOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ocr", APIVersion, "TableOCR")
     
     

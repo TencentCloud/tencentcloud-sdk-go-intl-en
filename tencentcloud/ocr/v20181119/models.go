@@ -611,6 +611,130 @@ type ItemCoord struct {
 }
 
 // Predefined struct for user
+type MLIDCardOCRRequestParams struct {
+	// The Base64-encoded value of an image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of an image. (This field is not available outside the Chinese mainland.)
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// For a non-Tencent Cloud URL, the download speed and stability may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return an image. Default value: `false`.
+	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
+}
+
+type MLIDCardOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of an image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of an image. (This field is not available outside the Chinese mainland.)
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// For a non-Tencent Cloud URL, the download speed and stability may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return an image. Default value: `false`.
+	RetImage *bool `json:"RetImage,omitempty" name:"RetImage"`
+}
+
+func (r *MLIDCardOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MLIDCardOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "RetImage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MLIDCardOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type MLIDCardOCRResponseParams struct {
+	// ID number
+	ID *string `json:"ID,omitempty" name:"ID"`
+
+	// Full name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Address
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// Gender
+	Sex *string `json:"Sex,omitempty" name:"Sex"`
+
+	// Alarm codes
+	// -9103 Alarm for photographed certificate
+	// -9102 Alarm for photocopied certificate
+	// -9106 Alarm for covered certificate
+	// -9107 Alarm for blurry image
+	Warn []*int64 `json:"Warn,omitempty" name:"Warn"`
+
+	// Identity photo
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// This is an extended field, 
+	// with the confidence of a field recognition result returned in the following format.
+	// {
+	//   Field name:{
+	//     Confidence:0.9999
+	//   }
+	// }
+	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
+
+	// Certificate type
+	// MyKad  ID card
+	// MyPR    Permanent resident card
+	// MyTentera   Military identity card
+	// MyKAS    Temporary ID card
+	// POLIS  Police card
+	// IKAD   Work permit
+	// MyKid   Kid card
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Date of birth. This field is available only for work permits (i-Kad) and ID cards (MyKad).
+	Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type MLIDCardOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *MLIDCardOCRResponseParams `json:"Response"`
+}
+
+func (r *MLIDCardOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MLIDCardOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type MLIDPassportOCRRequestParams struct {
 	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
 	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`

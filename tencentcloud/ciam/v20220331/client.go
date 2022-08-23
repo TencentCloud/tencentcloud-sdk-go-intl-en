@@ -49,6 +49,7 @@ func NewCreateApiImportUserJobRequest() (request *CreateApiImportUserJobRequest)
     request = &CreateApiImportUserJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "CreateApiImportUserJob")
     
     
@@ -150,6 +151,7 @@ func NewCreateFileExportUserJobRequest() (request *CreateFileExportUserJobReques
     request = &CreateFileExportUserJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "CreateFileExportUserJob")
     
     
@@ -251,6 +253,7 @@ func NewCreateUserRequest() (request *CreateUserRequest) {
     request = &CreateUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "CreateUser")
     
     
@@ -366,6 +369,7 @@ func NewDeleteUsersRequest() (request *DeleteUsersRequest) {
     request = &DeleteUsersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "DeleteUsers")
     
     
@@ -463,6 +467,7 @@ func NewDescribeUserByIdRequest() (request *DescribeUserByIdRequest) {
     request = &DescribeUserByIdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "DescribeUserById")
     
     
@@ -560,6 +565,7 @@ func NewLinkAccountRequest() (request *LinkAccountRequest) {
     request = &LinkAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "LinkAccount")
     
     
@@ -665,6 +671,7 @@ func NewListJobsRequest() (request *ListJobsRequest) {
     request = &ListJobsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "ListJobs")
     
     
@@ -766,6 +773,7 @@ func NewListLogMessageByConditionRequest() (request *ListLogMessageByConditionRe
     request = &ListLogMessageByConditionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "ListLogMessageByCondition")
     
     
@@ -863,6 +871,7 @@ func NewListUserRequest() (request *ListUserRequest) {
     request = &ListUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "ListUser")
     
     
@@ -960,6 +969,7 @@ func NewListUserByPropertyRequest() (request *ListUserByPropertyRequest) {
     request = &ListUserByPropertyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "ListUserByProperty")
     
     
@@ -1057,6 +1067,7 @@ func NewResetPasswordRequest() (request *ResetPasswordRequest) {
     request = &ResetPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "ResetPassword")
     
     
@@ -1158,6 +1169,7 @@ func NewSetPasswordRequest() (request *SetPasswordRequest) {
     request = &SetPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "SetPassword")
     
     
@@ -1261,6 +1273,7 @@ func NewUpdateUserRequest() (request *UpdateUserRequest) {
     request = &UpdateUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "UpdateUser")
     
     
@@ -1370,6 +1383,7 @@ func NewUpdateUserStatusRequest() (request *UpdateUserStatusRequest) {
     request = &UpdateUserStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "UpdateUserStatus")
     
     

@@ -49,6 +49,7 @@ func NewAddSmsSignRequest() (request *AddSmsSignRequest) {
     request = &AddSmsSignRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "AddSmsSign")
     
     
@@ -140,6 +141,7 @@ func NewAddSmsTemplateRequest() (request *AddSmsTemplateRequest) {
     request = &AddSmsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "AddSmsTemplate")
     
     
@@ -229,6 +231,7 @@ func NewCallbackStatusStatisticsRequest() (request *CallbackStatusStatisticsRequ
     request = &CallbackStatusStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "CallbackStatusStatistics")
     
     
@@ -316,6 +319,7 @@ func NewDeleteSmsSignRequest() (request *DeleteSmsSignRequest) {
     request = &DeleteSmsSignRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "DeleteSmsSign")
     
     
@@ -391,6 +395,7 @@ func NewDeleteSmsTemplateRequest() (request *DeleteSmsTemplateRequest) {
     request = &DeleteSmsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "DeleteSmsTemplate")
     
     
@@ -468,6 +473,7 @@ func NewDescribeSmsSignListRequest() (request *DescribeSmsSignListRequest) {
     request = &DescribeSmsSignListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "DescribeSmsSignList")
     
     
@@ -545,6 +551,7 @@ func NewDescribeSmsTemplateListRequest() (request *DescribeSmsTemplateListReques
     request = &DescribeSmsTemplateListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "DescribeSmsTemplateList")
     
     
@@ -620,6 +627,7 @@ func NewModifySmsSignRequest() (request *ModifySmsSignRequest) {
     request = &ModifySmsSignRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "ModifySmsSign")
     
     
@@ -721,6 +729,7 @@ func NewModifySmsTemplateRequest() (request *ModifySmsTemplateRequest) {
     request = &ModifySmsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "ModifySmsTemplate")
     
     
@@ -808,6 +817,7 @@ func NewPullSmsReplyStatusRequest() (request *PullSmsReplyStatusRequest) {
     request = &PullSmsReplyStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "PullSmsReplyStatus")
     
     
@@ -895,6 +905,7 @@ func NewPullSmsReplyStatusByPhoneNumberRequest() (request *PullSmsReplyStatusByP
     request = &PullSmsReplyStatusByPhoneNumberRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "PullSmsReplyStatusByPhoneNumber")
     
     
@@ -978,6 +989,7 @@ func NewPullSmsSendStatusRequest() (request *PullSmsSendStatusRequest) {
     request = &PullSmsSendStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "PullSmsSendStatus")
     
     
@@ -1063,6 +1075,7 @@ func NewPullSmsSendStatusByPhoneNumberRequest() (request *PullSmsSendStatusByPho
     request = &PullSmsSendStatusByPhoneNumberRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "PullSmsSendStatusByPhoneNumber")
     
     
@@ -1152,6 +1165,7 @@ func NewSendSmsRequest() (request *SendSmsRequest) {
     request = &SendSmsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "SendSms")
     
     
@@ -1281,6 +1295,7 @@ func NewSendStatusStatisticsRequest() (request *SendStatusStatisticsRequest) {
     request = &SendStatusStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "SendStatusStatistics")
     
     
@@ -1370,6 +1385,7 @@ func NewSmsPackagesStatisticsRequest() (request *SmsPackagesStatisticsRequest) {
     request = &SmsPackagesStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("sms", APIVersion, "SmsPackagesStatistics")
     
     

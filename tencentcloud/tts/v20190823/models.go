@@ -20,6 +20,23 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type Subtitle struct {
+	// The word in the text that is sent.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The start timestamp of the word in the synthesized audio data, in milliseconds.
+	BeginTime *int64 `json:"BeginTime,omitempty" name:"BeginTime"`
+
+	// The end timestamp of the word in the synthesized audio data, in milliseconds.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The start index of the character in the whole sentence, starting from 0.
+	BeginIndex *int64 `json:"BeginIndex,omitempty" name:"BeginIndex"`
+
+	// The end index of the character in the whole sentence, starting from 0.
+	EndIndex *int64 `json:"EndIndex,omitempty" name:"EndIndex"`
+}
+
 // Predefined struct for user
 type TextToVoiceRequestParams struct {
 	// The source text for synthesizing speech, which is encoded in UTF-8.
@@ -52,6 +69,9 @@ type TextToVoiceRequestParams struct {
 
 	// Format of returned audio. Valid values: WAV (default), MP3, and PCM.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
+
+	// Whether to enable the timestamp feature. Default value: `false`.
+	EnableSubtitle *bool `json:"EnableSubtitle,omitempty" name:"EnableSubtitle"`
 }
 
 type TextToVoiceRequest struct {
@@ -86,6 +106,9 @@ type TextToVoiceRequest struct {
 
 	// Format of returned audio. Valid values: WAV (default), MP3, and PCM.
 	Codec *string `json:"Codec,omitempty" name:"Codec"`
+
+	// Whether to enable the timestamp feature. Default value: `false`.
+	EnableSubtitle *bool `json:"EnableSubtitle,omitempty" name:"EnableSubtitle"`
 }
 
 func (r *TextToVoiceRequest) ToJsonString() string {
@@ -110,6 +133,7 @@ func (r *TextToVoiceRequest) FromJsonString(s string) error {
 	delete(f, "PrimaryLanguage")
 	delete(f, "SampleRate")
 	delete(f, "Codec")
+	delete(f, "EnableSubtitle")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TextToVoiceRequest has unknown keys!", "")
 	}
@@ -123,6 +147,9 @@ type TextToVoiceResponseParams struct {
 
 	// The `SessionId` of a request
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Timestamp information. If the timestamp feature is not enabled, an empty array will be returned.
+	Subtitles []*Subtitle `json:"Subtitles,omitempty" name:"Subtitles"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

@@ -49,6 +49,7 @@ func NewAllocateCustomerCreditRequest() (request *AllocateCustomerCreditRequest)
     request = &AllocateCustomerCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ip", APIVersion, "AllocateCustomerCredit")
     
     
@@ -112,6 +113,7 @@ func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ip", APIVersion, "CreateAccount")
     
     
@@ -183,6 +185,7 @@ func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
     request = &GetCountryCodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ip", APIVersion, "GetCountryCodes")
     
     
@@ -230,6 +233,7 @@ func NewQueryCreditAllocationHistoryRequest() (request *QueryCreditAllocationHis
     request = &QueryCreditAllocationHistoryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ip", APIVersion, "QueryCreditAllocationHistory")
     
     
@@ -277,6 +281,7 @@ func NewQueryCustomersCreditRequest() (request *QueryCustomersCreditRequest) {
     request = &QueryCustomersCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ip", APIVersion, "QueryCustomersCredit")
     
     
@@ -324,6 +329,7 @@ func NewQueryPartnerCreditRequest() (request *QueryPartnerCreditRequest) {
     request = &QueryPartnerCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ip", APIVersion, "QueryPartnerCredit")
     
     

@@ -49,6 +49,7 @@ func NewAddDelayLiveStreamRequest() (request *AddDelayLiveStreamRequest) {
     request = &AddDelayLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "AddDelayLiveStream")
     
     
@@ -140,6 +141,7 @@ func NewAddLiveDomainRequest() (request *AddLiveDomainRequest) {
     request = &AddLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "AddLiveDomain")
     
     
@@ -247,6 +249,7 @@ func NewAddLiveWatermarkRequest() (request *AddLiveWatermarkRequest) {
     request = &AddLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "AddLiveWatermark")
     
     
@@ -314,6 +317,7 @@ func NewBindLiveDomainCertRequest() (request *BindLiveDomainCertRequest) {
     request = &BindLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "BindLiveDomainCert")
     
     
@@ -387,6 +391,7 @@ func NewCancelCommonMixStreamRequest() (request *CancelCommonMixStreamRequest) {
     request = &CancelCommonMixStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CancelCommonMixStream")
     
     
@@ -456,6 +461,7 @@ func NewCreateCommonMixStreamRequest() (request *CreateCommonMixStreamRequest) {
     request = &CreateCommonMixStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateCommonMixStream")
     
     
@@ -565,6 +571,7 @@ func NewCreateLiveCallbackRuleRequest() (request *CreateLiveCallbackRuleRequest)
     request = &CreateLiveCallbackRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveCallbackRule")
     
     
@@ -636,6 +643,7 @@ func NewCreateLiveCallbackTemplateRequest() (request *CreateLiveCallbackTemplate
     request = &CreateLiveCallbackTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveCallbackTemplate")
     
     
@@ -737,6 +745,7 @@ func NewCreateLiveCertRequest() (request *CreateLiveCertRequest) {
     request = &CreateLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveCert")
     
     
@@ -820,6 +829,7 @@ func NewCreateLivePullStreamTaskRequest() (request *CreateLivePullStreamTaskRequ
     request = &CreateLivePullStreamTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLivePullStreamTask")
     
     
@@ -927,6 +937,7 @@ func NewCreateLiveRecordRequest() (request *CreateLiveRecordRequest) {
     request = &CreateLiveRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveRecord")
     
     
@@ -1060,6 +1071,7 @@ func NewCreateLiveRecordRuleRequest() (request *CreateLiveRecordRuleRequest) {
     request = &CreateLiveRecordRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveRecordRule")
     
     
@@ -1143,6 +1155,7 @@ func NewCreateLiveRecordTemplateRequest() (request *CreateLiveRecordTemplateRequ
     request = &CreateLiveRecordTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveRecordTemplate")
     
     
@@ -1232,6 +1245,7 @@ func NewCreateLiveSnapshotRuleRequest() (request *CreateLiveSnapshotRuleRequest)
     request = &CreateLiveSnapshotRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveSnapshotRule")
     
     
@@ -1321,6 +1335,7 @@ func NewCreateLiveSnapshotTemplateRequest() (request *CreateLiveSnapshotTemplate
     request = &CreateLiveSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveSnapshotTemplate")
     
     
@@ -1408,6 +1423,7 @@ func NewCreateLiveTranscodeRuleRequest() (request *CreateLiveTranscodeRuleReques
     request = &CreateLiveTranscodeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveTranscodeRule")
     
     
@@ -1497,6 +1513,7 @@ func NewCreateLiveTranscodeTemplateRequest() (request *CreateLiveTranscodeTempla
     request = &CreateLiveTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveTranscodeTemplate")
     
     
@@ -1588,6 +1605,7 @@ func NewCreateLiveWatermarkRuleRequest() (request *CreateLiveWatermarkRuleReques
     request = &CreateLiveWatermarkRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateLiveWatermarkRule")
     
     
@@ -1671,6 +1689,7 @@ func NewCreateRecordTaskRequest() (request *CreateRecordTaskRequest) {
     request = &CreateRecordTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "CreateRecordTask")
     
     
@@ -1774,6 +1793,7 @@ func NewDeleteLiveCallbackRuleRequest() (request *DeleteLiveCallbackRuleRequest)
     request = &DeleteLiveCallbackRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCallbackRule")
     
     
@@ -1839,6 +1859,7 @@ func NewDeleteLiveCallbackTemplateRequest() (request *DeleteLiveCallbackTemplate
     request = &DeleteLiveCallbackTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCallbackTemplate")
     
     
@@ -1924,6 +1945,7 @@ func NewDeleteLiveCertRequest() (request *DeleteLiveCertRequest) {
     request = &DeleteLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCert")
     
     
@@ -1993,6 +2015,7 @@ func NewDeleteLiveDomainRequest() (request *DeleteLiveDomainRequest) {
     request = &DeleteLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveDomain")
     
     
@@ -2064,6 +2087,7 @@ func NewDeleteLivePullStreamTaskRequest() (request *DeleteLivePullStreamTaskRequ
     request = &DeleteLivePullStreamTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLivePullStreamTask")
     
     
@@ -2141,6 +2165,7 @@ func NewDeleteLiveRecordRequest() (request *DeleteLiveRecordRequest) {
     request = &DeleteLiveRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveRecord")
     
     
@@ -2212,6 +2237,7 @@ func NewDeleteLiveRecordRuleRequest() (request *DeleteLiveRecordRuleRequest) {
     request = &DeleteLiveRecordRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveRecordRule")
     
     
@@ -2293,6 +2319,7 @@ func NewDeleteLiveRecordTemplateRequest() (request *DeleteLiveRecordTemplateRequ
     request = &DeleteLiveRecordTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveRecordTemplate")
     
     
@@ -2372,6 +2399,7 @@ func NewDeleteLiveSnapshotRuleRequest() (request *DeleteLiveSnapshotRuleRequest)
     request = &DeleteLiveSnapshotRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveSnapshotRule")
     
     
@@ -2453,6 +2481,7 @@ func NewDeleteLiveSnapshotTemplateRequest() (request *DeleteLiveSnapshotTemplate
     request = &DeleteLiveSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveSnapshotTemplate")
     
     
@@ -2532,6 +2561,7 @@ func NewDeleteLiveTranscodeRuleRequest() (request *DeleteLiveTranscodeRuleReques
     request = &DeleteLiveTranscodeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveTranscodeRule")
     
     
@@ -2617,6 +2647,7 @@ func NewDeleteLiveTranscodeTemplateRequest() (request *DeleteLiveTranscodeTempla
     request = &DeleteLiveTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveTranscodeTemplate")
     
     
@@ -2700,6 +2731,7 @@ func NewDeleteLiveWatermarkRequest() (request *DeleteLiveWatermarkRequest) {
     request = &DeleteLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveWatermark")
     
     
@@ -2765,6 +2797,7 @@ func NewDeleteLiveWatermarkRuleRequest() (request *DeleteLiveWatermarkRuleReques
     request = &DeleteLiveWatermarkRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteLiveWatermarkRule")
     
     
@@ -2846,6 +2879,7 @@ func NewDeleteRecordTaskRequest() (request *DeleteRecordTaskRequest) {
     request = &DeleteRecordTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DeleteRecordTask")
     
     
@@ -2911,6 +2945,7 @@ func NewDescribeConcurrentRecordStreamNumRequest() (request *DescribeConcurrentR
     request = &DescribeConcurrentRecordStreamNumRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeConcurrentRecordStreamNum")
     
     
@@ -2972,6 +3007,7 @@ func NewDescribeDeliverBandwidthListRequest() (request *DescribeDeliverBandwidth
     request = &DescribeDeliverBandwidthListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeDeliverBandwidthList")
     
     
@@ -3033,6 +3069,7 @@ func NewDescribeGroupProIspPlayInfoListRequest() (request *DescribeGroupProIspPl
     request = &DescribeGroupProIspPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeGroupProIspPlayInfoList")
     
     
@@ -3094,6 +3131,7 @@ func NewDescribeHttpStatusInfoListRequest() (request *DescribeHttpStatusInfoList
     request = &DescribeHttpStatusInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeHttpStatusInfoList")
     
     
@@ -3157,6 +3195,7 @@ func NewDescribeLiveCallbackRulesRequest() (request *DescribeLiveCallbackRulesRe
     request = &DescribeLiveCallbackRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCallbackRules")
     
     
@@ -3220,6 +3259,7 @@ func NewDescribeLiveCallbackTemplateRequest() (request *DescribeLiveCallbackTemp
     request = &DescribeLiveCallbackTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCallbackTemplate")
     
     
@@ -3309,6 +3349,7 @@ func NewDescribeLiveCallbackTemplatesRequest() (request *DescribeLiveCallbackTem
     request = &DescribeLiveCallbackTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCallbackTemplates")
     
     
@@ -3396,6 +3437,7 @@ func NewDescribeLiveCertRequest() (request *DescribeLiveCertRequest) {
     request = &DescribeLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCert")
     
     
@@ -3461,6 +3503,7 @@ func NewDescribeLiveCertsRequest() (request *DescribeLiveCertsRequest) {
     request = &DescribeLiveCertsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveCerts")
     
     
@@ -3526,6 +3569,7 @@ func NewDescribeLiveDelayInfoListRequest() (request *DescribeLiveDelayInfoListRe
     request = &DescribeLiveDelayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDelayInfoList")
     
     
@@ -3589,6 +3633,7 @@ func NewDescribeLiveDomainRequest() (request *DescribeLiveDomainRequest) {
     request = &DescribeLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomain")
     
     
@@ -3658,6 +3703,7 @@ func NewDescribeLiveDomainCertRequest() (request *DescribeLiveDomainCertRequest)
     request = &DescribeLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainCert")
     
     
@@ -3723,6 +3769,7 @@ func NewDescribeLiveDomainRefererRequest() (request *DescribeLiveDomainRefererRe
     request = &DescribeLiveDomainRefererRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainReferer")
     
     
@@ -3796,6 +3843,7 @@ func NewDescribeLiveDomainsRequest() (request *DescribeLiveDomainsRequest) {
     request = &DescribeLiveDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomains")
     
     
@@ -3861,6 +3909,7 @@ func NewDescribeLiveForbidStreamListRequest() (request *DescribeLiveForbidStream
     request = &DescribeLiveForbidStreamListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveForbidStreamList")
     
     
@@ -3934,6 +3983,7 @@ func NewDescribeLivePlayAuthKeyRequest() (request *DescribeLivePlayAuthKeyReques
     request = &DescribeLivePlayAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLivePlayAuthKey")
     
     
@@ -4003,6 +4053,7 @@ func NewDescribeLivePullStreamTasksRequest() (request *DescribeLivePullStreamTas
     request = &DescribeLivePullStreamTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLivePullStreamTasks")
     
     
@@ -4068,6 +4119,7 @@ func NewDescribeLivePushAuthKeyRequest() (request *DescribeLivePushAuthKeyReques
     request = &DescribeLivePushAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLivePushAuthKey")
     
     
@@ -4137,6 +4189,7 @@ func NewDescribeLiveRecordRulesRequest() (request *DescribeLiveRecordRulesReques
     request = &DescribeLiveRecordRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveRecordRules")
     
     
@@ -4214,6 +4267,7 @@ func NewDescribeLiveRecordTemplateRequest() (request *DescribeLiveRecordTemplate
     request = &DescribeLiveRecordTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveRecordTemplate")
     
     
@@ -4293,6 +4347,7 @@ func NewDescribeLiveRecordTemplatesRequest() (request *DescribeLiveRecordTemplat
     request = &DescribeLiveRecordTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveRecordTemplates")
     
     
@@ -4370,6 +4425,7 @@ func NewDescribeLiveSnapshotRulesRequest() (request *DescribeLiveSnapshotRulesRe
     request = &DescribeLiveSnapshotRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveSnapshotRules")
     
     
@@ -4447,6 +4503,7 @@ func NewDescribeLiveSnapshotTemplateRequest() (request *DescribeLiveSnapshotTemp
     request = &DescribeLiveSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveSnapshotTemplate")
     
     
@@ -4532,6 +4589,7 @@ func NewDescribeLiveSnapshotTemplatesRequest() (request *DescribeLiveSnapshotTem
     request = &DescribeLiveSnapshotTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveSnapshotTemplates")
     
     
@@ -4611,6 +4669,7 @@ func NewDescribeLiveStreamEventListRequest() (request *DescribeLiveStreamEventLi
     request = &DescribeLiveStreamEventListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveStreamEventList")
     
     
@@ -4692,6 +4751,7 @@ func NewDescribeLiveStreamOnlineListRequest() (request *DescribeLiveStreamOnline
     request = &DescribeLiveStreamOnlineListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveStreamOnlineList")
     
     
@@ -4789,6 +4849,7 @@ func NewDescribeLiveStreamPublishedListRequest() (request *DescribeLiveStreamPub
     request = &DescribeLiveStreamPublishedListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveStreamPublishedList")
     
     
@@ -4876,6 +4937,7 @@ func NewDescribeLiveStreamPushInfoListRequest() (request *DescribeLiveStreamPush
     request = &DescribeLiveStreamPushInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveStreamPushInfoList")
     
     
@@ -4945,6 +5007,7 @@ func NewDescribeLiveStreamStateRequest() (request *DescribeLiveStreamStateReques
     request = &DescribeLiveStreamStateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveStreamState")
     
     
@@ -5064,6 +5127,7 @@ func NewDescribeLiveTimeShiftBillInfoListRequest() (request *DescribeLiveTimeShi
     request = &DescribeLiveTimeShiftBillInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTimeShiftBillInfoList")
     
     
@@ -5125,6 +5189,7 @@ func NewDescribeLiveTranscodeDetailInfoRequest() (request *DescribeLiveTranscode
     request = &DescribeLiveTranscodeDetailInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeDetailInfo")
     
     
@@ -5184,6 +5249,7 @@ func NewDescribeLiveTranscodeRulesRequest() (request *DescribeLiveTranscodeRules
     request = &DescribeLiveTranscodeRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeRules")
     
     
@@ -5261,6 +5327,7 @@ func NewDescribeLiveTranscodeTemplateRequest() (request *DescribeLiveTranscodeTe
     request = &DescribeLiveTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeTemplate")
     
     
@@ -5342,6 +5409,7 @@ func NewDescribeLiveTranscodeTemplatesRequest() (request *DescribeLiveTranscodeT
     request = &DescribeLiveTranscodeTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeTemplates")
     
     
@@ -5421,6 +5489,7 @@ func NewDescribeLiveTranscodeTotalInfoRequest() (request *DescribeLiveTranscodeT
     request = &DescribeLiveTranscodeTotalInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveTranscodeTotalInfo")
     
     
@@ -5494,6 +5563,7 @@ func NewDescribeLiveWatermarkRequest() (request *DescribeLiveWatermarkRequest) {
     request = &DescribeLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveWatermark")
     
     
@@ -5573,6 +5643,7 @@ func NewDescribeLiveWatermarkRulesRequest() (request *DescribeLiveWatermarkRules
     request = &DescribeLiveWatermarkRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveWatermarkRules")
     
     
@@ -5650,6 +5721,7 @@ func NewDescribeLiveWatermarksRequest() (request *DescribeLiveWatermarksRequest)
     request = &DescribeLiveWatermarksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeLiveWatermarks")
     
     
@@ -5703,6 +5775,7 @@ func NewDescribePlayErrorCodeDetailInfoListRequest() (request *DescribePlayError
     request = &DescribePlayErrorCodeDetailInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribePlayErrorCodeDetailInfoList")
     
     
@@ -5766,6 +5839,7 @@ func NewDescribePlayErrorCodeSumInfoListRequest() (request *DescribePlayErrorCod
     request = &DescribePlayErrorCodeSumInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribePlayErrorCodeSumInfoList")
     
     
@@ -5825,6 +5899,7 @@ func NewDescribeProvinceIspPlayInfoListRequest() (request *DescribeProvinceIspPl
     request = &DescribeProvinceIspPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeProvinceIspPlayInfoList")
     
     
@@ -5894,6 +5969,7 @@ func NewDescribeScreenShotSheetNumListRequest() (request *DescribeScreenShotShee
     request = &DescribeScreenShotSheetNumListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeScreenShotSheetNumList")
     
     
@@ -5957,6 +6033,7 @@ func NewDescribeStreamDayPlayInfoListRequest() (request *DescribeStreamDayPlayIn
     request = &DescribeStreamDayPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeStreamDayPlayInfoList")
     
     
@@ -6018,6 +6095,7 @@ func NewDescribeStreamPlayInfoListRequest() (request *DescribeStreamPlayInfoList
     request = &DescribeStreamPlayInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeStreamPlayInfoList")
     
     
@@ -6085,6 +6163,7 @@ func NewDescribeTopClientIpSumInfoListRequest() (request *DescribeTopClientIpSum
     request = &DescribeTopClientIpSumInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeTopClientIpSumInfoList")
     
     
@@ -6144,6 +6223,7 @@ func NewDescribeUploadStreamNumsRequest() (request *DescribeUploadStreamNumsRequ
     request = &DescribeUploadStreamNumsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeUploadStreamNums")
     
     
@@ -6203,6 +6283,7 @@ func NewDescribeVisitTopSumInfoListRequest() (request *DescribeVisitTopSumInfoLi
     request = &DescribeVisitTopSumInfoListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "DescribeVisitTopSumInfoList")
     
     
@@ -6264,6 +6345,7 @@ func NewEnableLiveDomainRequest() (request *EnableLiveDomainRequest) {
     request = &EnableLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "EnableLiveDomain")
     
     
@@ -6335,6 +6417,7 @@ func NewForbidLiveDomainRequest() (request *ForbidLiveDomainRequest) {
     request = &ForbidLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ForbidLiveDomain")
     
     
@@ -6396,6 +6479,7 @@ func NewForbidLiveStreamRequest() (request *ForbidLiveStreamRequest) {
     request = &ForbidLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ForbidLiveStream")
     
     
@@ -6479,6 +6563,7 @@ func NewModifyLiveCallbackTemplateRequest() (request *ModifyLiveCallbackTemplate
     request = &ModifyLiveCallbackTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveCallbackTemplate")
     
     
@@ -6570,6 +6655,7 @@ func NewModifyLiveCertRequest() (request *ModifyLiveCertRequest) {
     request = &ModifyLiveCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveCert")
     
     
@@ -6643,6 +6729,7 @@ func NewModifyLiveDomainCertRequest() (request *ModifyLiveDomainCertRequest) {
     request = &ModifyLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveDomainCert")
     
     
@@ -6712,6 +6799,7 @@ func NewModifyLiveDomainRefererRequest() (request *ModifyLiveDomainRefererReques
     request = &ModifyLiveDomainRefererRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveDomainReferer")
     
     
@@ -6785,6 +6873,7 @@ func NewModifyLivePlayAuthKeyRequest() (request *ModifyLivePlayAuthKeyRequest) {
     request = &ModifyLivePlayAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLivePlayAuthKey")
     
     
@@ -6850,6 +6939,7 @@ func NewModifyLivePlayDomainRequest() (request *ModifyLivePlayDomainRequest) {
     request = &ModifyLivePlayDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLivePlayDomain")
     
     
@@ -6923,6 +7013,7 @@ func NewModifyLivePullStreamTaskRequest() (request *ModifyLivePullStreamTaskRequ
     request = &ModifyLivePullStreamTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLivePullStreamTask")
     
     
@@ -7008,6 +7099,7 @@ func NewModifyLivePushAuthKeyRequest() (request *ModifyLivePushAuthKeyRequest) {
     request = &ModifyLivePushAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLivePushAuthKey")
     
     
@@ -7077,6 +7169,7 @@ func NewModifyLiveRecordTemplateRequest() (request *ModifyLiveRecordTemplateRequ
     request = &ModifyLiveRecordTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveRecordTemplate")
     
     
@@ -7158,6 +7251,7 @@ func NewModifyLiveSnapshotTemplateRequest() (request *ModifyLiveSnapshotTemplate
     request = &ModifyLiveSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveSnapshotTemplate")
     
     
@@ -7241,6 +7335,7 @@ func NewModifyLiveTranscodeTemplateRequest() (request *ModifyLiveTranscodeTempla
     request = &ModifyLiveTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ModifyLiveTranscodeTemplate")
     
     
@@ -7322,6 +7417,7 @@ func NewResumeDelayLiveStreamRequest() (request *ResumeDelayLiveStreamRequest) {
     request = &ResumeDelayLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ResumeDelayLiveStream")
     
     
@@ -7421,6 +7517,7 @@ func NewResumeLiveStreamRequest() (request *ResumeLiveStreamRequest) {
     request = &ResumeLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "ResumeLiveStream")
     
     
@@ -7504,6 +7601,7 @@ func NewStopLiveRecordRequest() (request *StopLiveRecordRequest) {
     request = &StopLiveRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "StopLiveRecord")
     
     
@@ -7573,6 +7671,7 @@ func NewStopRecordTaskRequest() (request *StopRecordTaskRequest) {
     request = &StopRecordTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "StopRecordTask")
     
     
@@ -7640,6 +7739,7 @@ func NewUnBindLiveDomainCertRequest() (request *UnBindLiveDomainCertRequest) {
     request = &UnBindLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "UnBindLiveDomainCert")
     
     
@@ -7701,6 +7801,7 @@ func NewUpdateLiveWatermarkRequest() (request *UpdateLiveWatermarkRequest) {
     request = &UpdateLiveWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("live", APIVersion, "UpdateLiveWatermark")
     
     

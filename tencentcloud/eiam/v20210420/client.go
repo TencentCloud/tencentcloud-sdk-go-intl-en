@@ -49,6 +49,7 @@ func NewAddAccountToAccountGroupRequest() (request *AddAccountToAccountGroupRequ
     request = &AddAccountToAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "AddAccountToAccountGroup")
     
     
@@ -112,6 +113,7 @@ func NewAddUserToUserGroupRequest() (request *AddUserToUserGroupRequest) {
     request = &AddUserToUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "AddUserToUserGroup")
     
     
@@ -169,6 +171,7 @@ func NewCreateAccountGroupRequest() (request *CreateAccountGroupRequest) {
     request = &CreateAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "CreateAccountGroup")
     
     
@@ -222,6 +225,7 @@ func NewCreateAppAccountRequest() (request *CreateAppAccountRequest) {
     request = &CreateAppAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "CreateAppAccount")
     
     
@@ -277,6 +281,7 @@ func NewCreateOrgNodeRequest() (request *CreateOrgNodeRequest) {
     request = &CreateOrgNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "CreateOrgNode")
     
     
@@ -340,6 +345,7 @@ func NewCreateUserRequest() (request *CreateUserRequest) {
     request = &CreateUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "CreateUser")
     
     
@@ -413,6 +419,7 @@ func NewCreateUserGroupRequest() (request *CreateUserGroupRequest) {
     request = &CreateUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "CreateUserGroup")
     
     
@@ -464,6 +471,7 @@ func NewDeleteAccountGroupRequest() (request *DeleteAccountGroupRequest) {
     request = &DeleteAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DeleteAccountGroup")
     
     
@@ -521,6 +529,7 @@ func NewDeleteAppAccountRequest() (request *DeleteAppAccountRequest) {
     request = &DeleteAppAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DeleteAppAccount")
     
     
@@ -578,6 +587,7 @@ func NewDeleteOrgNodeRequest() (request *DeleteOrgNodeRequest) {
     request = &DeleteOrgNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DeleteOrgNode")
     
     
@@ -641,6 +651,7 @@ func NewDeleteUserRequest() (request *DeleteUserRequest) {
     request = &DeleteUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DeleteUser")
     
     
@@ -696,6 +707,7 @@ func NewDeleteUserGroupRequest() (request *DeleteUserGroupRequest) {
     request = &DeleteUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DeleteUserGroup")
     
     
@@ -751,6 +763,7 @@ func NewDeleteUsersRequest() (request *DeleteUsersRequest) {
     request = &DeleteUsersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DeleteUsers")
     
     
@@ -802,6 +815,7 @@ func NewDescribeAccountGroupRequest() (request *DescribeAccountGroupRequest) {
     request = &DescribeAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeAccountGroup")
     
     
@@ -853,6 +867,7 @@ func NewDescribeAppAccountRequest() (request *DescribeAppAccountRequest) {
     request = &DescribeAppAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeAppAccount")
     
     
@@ -906,6 +921,7 @@ func NewDescribeApplicationRequest() (request *DescribeApplicationRequest) {
     request = &DescribeApplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeApplication")
     
     
@@ -957,6 +973,7 @@ func NewDescribeOrgNodeRequest() (request *DescribeOrgNodeRequest) {
     request = &DescribeOrgNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeOrgNode")
     
     
@@ -1012,6 +1029,7 @@ func NewDescribePublicKeyRequest() (request *DescribePublicKeyRequest) {
     request = &DescribePublicKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribePublicKey")
     
     
@@ -1065,6 +1083,7 @@ func NewDescribeUserGroupRequest() (request *DescribeUserGroupRequest) {
     request = &DescribeUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeUserGroup")
     
     
@@ -1116,6 +1135,7 @@ func NewDescribeUserInfoRequest() (request *DescribeUserInfoRequest) {
     request = &DescribeUserInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeUserInfo")
     
     
@@ -1175,6 +1195,7 @@ func NewDescribeUserResourcesAuthorizationRequest() (request *DescribeUserResour
     request = &DescribeUserResourcesAuthorizationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeUserResourcesAuthorization")
     
     
@@ -1228,6 +1249,7 @@ func NewDescribeUserThirdPartyAccountInfoRequest() (request *DescribeUserThirdPa
     request = &DescribeUserThirdPartyAccountInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "DescribeUserThirdPartyAccountInfo")
     
     
@@ -1283,6 +1305,7 @@ func NewListAccountInAccountGroupRequest() (request *ListAccountInAccountGroupRe
     request = &ListAccountInAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListAccountInAccountGroup")
     
     
@@ -1336,6 +1359,7 @@ func NewListApplicationAuthorizationsRequest() (request *ListApplicationAuthoriz
     request = &ListApplicationAuthorizationsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListApplicationAuthorizations")
     
     
@@ -1393,6 +1417,7 @@ func NewListApplicationsRequest() (request *ListApplicationsRequest) {
     request = &ListApplicationsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListApplications")
     
     
@@ -1448,6 +1473,7 @@ func NewListAuthorizedApplicationsToOrgNodeRequest() (request *ListAuthorizedApp
     request = &ListAuthorizedApplicationsToOrgNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListAuthorizedApplicationsToOrgNode")
     
     
@@ -1501,6 +1527,7 @@ func NewListAuthorizedApplicationsToUserRequest() (request *ListAuthorizedApplic
     request = &ListAuthorizedApplicationsToUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListAuthorizedApplicationsToUser")
     
     
@@ -1560,6 +1587,7 @@ func NewListAuthorizedApplicationsToUserGroupRequest() (request *ListAuthorizedA
     request = &ListAuthorizedApplicationsToUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListAuthorizedApplicationsToUserGroup")
     
     
@@ -1615,6 +1643,7 @@ func NewListUserGroupsRequest() (request *ListUserGroupsRequest) {
     request = &ListUserGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListUserGroups")
     
     
@@ -1666,6 +1695,7 @@ func NewListUserGroupsOfUserRequest() (request *ListUserGroupsOfUserRequest) {
     request = &ListUserGroupsOfUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListUserGroupsOfUser")
     
     
@@ -1721,6 +1751,7 @@ func NewListUsersRequest() (request *ListUsersRequest) {
     request = &ListUsersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListUsers")
     
     
@@ -1778,6 +1809,7 @@ func NewListUsersInOrgNodeRequest() (request *ListUsersInOrgNodeRequest) {
     request = &ListUsersInOrgNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListUsersInOrgNode")
     
     
@@ -1835,6 +1867,7 @@ func NewListUsersInUserGroupRequest() (request *ListUsersInUserGroupRequest) {
     request = &ListUsersInUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ListUsersInUserGroup")
     
     
@@ -1890,6 +1923,7 @@ func NewModifyAccountGroupRequest() (request *ModifyAccountGroupRequest) {
     request = &ModifyAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ModifyAccountGroup")
     
     
@@ -1947,6 +1981,7 @@ func NewModifyAppAccountRequest() (request *ModifyAppAccountRequest) {
     request = &ModifyAppAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ModifyAppAccount")
     
     
@@ -2002,6 +2037,7 @@ func NewModifyApplicationRequest() (request *ModifyApplicationRequest) {
     request = &ModifyApplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ModifyApplication")
     
     
@@ -2055,6 +2091,7 @@ func NewModifyUserInfoRequest() (request *ModifyUserInfoRequest) {
     request = &ModifyUserInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "ModifyUserInfo")
     
     
@@ -2150,6 +2187,7 @@ func NewRemoveAccountFromAccountGroupRequest() (request *RemoveAccountFromAccoun
     request = &RemoveAccountFromAccountGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "RemoveAccountFromAccountGroup")
     
     
@@ -2209,6 +2247,7 @@ func NewRemoveUserFromUserGroupRequest() (request *RemoveUserFromUserGroupReques
     request = &RemoveUserFromUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "RemoveUserFromUserGroup")
     
     
@@ -2268,6 +2307,7 @@ func NewUpdateOrgNodeRequest() (request *UpdateOrgNodeRequest) {
     request = &UpdateOrgNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("eiam", APIVersion, "UpdateOrgNode")
     
     

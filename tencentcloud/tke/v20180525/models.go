@@ -1827,6 +1827,74 @@ func (r *CreateECMInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateEdgeLogConfigRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Log collection configuration in json form
+	LogConfig *string `json:"LogConfig,omitempty" name:"LogConfig"`
+
+	// CLS logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+}
+
+type CreateEdgeLogConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Log collection configuration in json form
+	LogConfig *string `json:"LogConfig,omitempty" name:"LogConfig"`
+
+	// CLS logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+}
+
+func (r *CreateEdgeLogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEdgeLogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "LogConfig")
+	delete(f, "LogsetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEdgeLogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEdgeLogConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateEdgeLogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateEdgeLogConfigResponseParams `json:"Response"`
+}
+
+func (r *CreateEdgeLogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEdgeLogConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreatePrometheusAlertRuleRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3376,6 +3444,77 @@ func (r *DescribeClusterEndpointVipStatusResponse) FromJsonString(s string) erro
 }
 
 // Predefined struct for user
+type DescribeClusterEndpointsRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeClusterEndpointsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeClusterEndpointsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterEndpointsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterEndpointsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterEndpointsResponseParams struct {
+	// CA certificate of cluster APIServer
+	CertificationAuthority *string `json:"CertificationAuthority,omitempty" name:"CertificationAuthority"`
+
+	// Public network access address of cluster APIServer
+	ClusterExternalEndpoint *string `json:"ClusterExternalEndpoint,omitempty" name:"ClusterExternalEndpoint"`
+
+	// Private network access address of cluster APIServer
+	ClusterIntranetEndpoint *string `json:"ClusterIntranetEndpoint,omitempty" name:"ClusterIntranetEndpoint"`
+
+	// Domain name of cluster APIServer
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterDomain *string `json:"ClusterDomain,omitempty" name:"ClusterDomain"`
+
+	// Public network access ACL of cluster APIServer
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterExternalACL []*string `json:"ClusterExternalACL,omitempty" name:"ClusterExternalACL"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterEndpointsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterEndpointsResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterEndpointsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterEndpointsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeClusterInstancesRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -4624,6 +4763,64 @@ func (r *DescribeEdgeClusterInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeEdgeLogSwitchesRequestParams struct {
+	// List of cluster IDs
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+}
+
+type DescribeEdgeLogSwitchesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of cluster IDs
+	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+}
+
+func (r *DescribeEdgeLogSwitchesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeLogSwitchesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeLogSwitchesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeLogSwitchesResponseParams struct {
+	// Array of TKE Edge cluster log switches
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SwitchSet []*string `json:"SwitchSet,omitempty" name:"SwitchSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeLogSwitchesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeLogSwitchesResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeLogSwitchesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeLogSwitchesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeEnableVpcCniProgressRequestParams struct {
 	// ID of the cluster for which you want to enable the VPC-CNI mode
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -5418,6 +5615,9 @@ type DescribeTKEEdgeScriptRequestParams struct {
 
 	// Node configuration in JSON format 
 	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// A legacy version of edgectl script can be downloaded. The latest version is downloaded by default. The version information can be checked in the script.
+	ScriptVersion *string `json:"ScriptVersion,omitempty" name:"ScriptVersion"`
 }
 
 type DescribeTKEEdgeScriptRequest struct {
@@ -5434,6 +5634,9 @@ type DescribeTKEEdgeScriptRequest struct {
 
 	// Node configuration in JSON format 
 	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// A legacy version of edgectl script can be downloaded. The latest version is downloaded by default. The version information can be checked in the script.
+	ScriptVersion *string `json:"ScriptVersion,omitempty" name:"ScriptVersion"`
 }
 
 func (r *DescribeTKEEdgeScriptRequest) ToJsonString() string {
@@ -5452,6 +5655,7 @@ func (r *DescribeTKEEdgeScriptRequest) FromJsonString(s string) error {
 	delete(f, "Interface")
 	delete(f, "NodeName")
 	delete(f, "Config")
+	delete(f, "ScriptVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTKEEdgeScriptRequest has unknown keys!", "")
 	}
@@ -5468,6 +5672,10 @@ type DescribeTKEEdgeScriptResponseParams struct {
 
 	// Whether to download the command
 	Command *string `json:"Command,omitempty" name:"Command"`
+
+	// Version of edgectl script. The latest version is obtained by default.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ScriptVersion *string `json:"ScriptVersion,omitempty" name:"ScriptVersion"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5784,12 +5992,24 @@ type EdgeCluster struct {
 	// Maximum number of Pods on the node
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	MaxNodePodNum *int64 `json:"MaxNodePodNum,omitempty" name:"MaxNodePodNum"`
+
+	// Cluster advanced settings
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterAdvancedSettings *EdgeClusterAdvancedSettings `json:"ClusterAdvancedSettings,omitempty" name:"ClusterAdvancedSettings"`
 }
 
 type EdgeClusterAdvancedSettings struct {
 	// Custom parameters of the cluster
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ExtraArgs *EdgeClusterExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
+
+	// Runtime type. Valid values: "docker" (default), "containerd".
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
+
+	// Forwarding mode of kube-proxy. Valid values: "iptables" (default), "ipvs".
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ProxyMode *string `json:"ProxyMode,omitempty" name:"ProxyMode"`
 }
 
 type EdgeClusterExtraArgs struct {
@@ -6360,6 +6580,60 @@ type ImageInstance struct {
 	// Container image tag, **DOCKER_CUSTOMIZE** (container customized tag), **GENERAL** (general tag, default value)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
+}
+
+// Predefined struct for user
+type InstallEdgeLogAgentRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type InstallEdgeLogAgentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *InstallEdgeLogAgentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InstallEdgeLogAgentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InstallEdgeLogAgentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InstallEdgeLogAgentResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InstallEdgeLogAgentResponse struct {
+	*tchttp.BaseResponse
+	Response *InstallEdgeLogAgentResponseParams `json:"Response"`
+}
+
+func (r *InstallEdgeLogAgentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InstallEdgeLogAgentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type Instance struct {
@@ -7789,6 +8063,60 @@ type TaskStepInfo struct {
 	// If the lifecycle of the step is failed, this field will display the error information.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	FailedMsg *string `json:"FailedMsg,omitempty" name:"FailedMsg"`
+}
+
+// Predefined struct for user
+type UninstallEdgeLogAgentRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type UninstallEdgeLogAgentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *UninstallEdgeLogAgentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallEdgeLogAgentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UninstallEdgeLogAgentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UninstallEdgeLogAgentResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UninstallEdgeLogAgentResponse struct {
+	*tchttp.BaseResponse
+	Response *UninstallEdgeLogAgentResponseParams `json:"Response"`
+}
+
+func (r *UninstallEdgeLogAgentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallEdgeLogAgentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

@@ -49,6 +49,7 @@ func NewAcquireClusterAdminRoleRequest() (request *AcquireClusterAdminRoleReques
     request = &AcquireClusterAdminRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "AcquireClusterAdminRole")
     
     
@@ -126,6 +127,7 @@ func NewAddExistedInstancesRequest() (request *AddExistedInstancesRequest) {
     request = &AddExistedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "AddExistedInstances")
     
     
@@ -207,6 +209,7 @@ func NewAddNodeToNodePoolRequest() (request *AddNodeToNodePoolRequest) {
     request = &AddNodeToNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "AddNodeToNodePool")
     
     
@@ -225,6 +228,7 @@ func NewAddNodeToNodePoolResponse() (response *AddNodeToNodePoolResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) AddNodeToNodePool(request *AddNodeToNodePoolRequest) (response *AddNodeToNodePoolResponse, err error) {
     return c.AddNodeToNodePoolWithContext(context.Background(), request)
@@ -235,6 +239,7 @@ func (c *Client) AddNodeToNodePool(request *AddNodeToNodePoolRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) AddNodeToNodePoolWithContext(ctx context.Context, request *AddNodeToNodePoolRequest) (response *AddNodeToNodePoolResponse, err error) {
     if request == nil {
@@ -256,6 +261,7 @@ func NewAddVpcCniSubnetsRequest() (request *AddVpcCniSubnetsRequest) {
     request = &AddVpcCniSubnetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "AddVpcCniSubnets")
     
     
@@ -323,6 +329,7 @@ func NewCheckEdgeClusterCIDRRequest() (request *CheckEdgeClusterCIDRRequest) {
     request = &CheckEdgeClusterCIDRRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CheckEdgeClusterCIDR")
     
     
@@ -356,6 +363,7 @@ func NewCheckEdgeClusterCIDRResponse() (response *CheckEdgeClusterCIDRResponse) 
 //  INTERNALERROR_VPCPEERNOTFOUND = "InternalError.VpcPeerNotFound"
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 //  INTERNALERROR_VSTATIONERROR = "InternalError.VstationError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_ROUTETABLENOTEMPTY = "InvalidParameter.RouteTableNotEmpty"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -388,6 +396,7 @@ func (c *Client) CheckEdgeClusterCIDR(request *CheckEdgeClusterCIDRRequest) (res
 //  INTERNALERROR_VPCPEERNOTFOUND = "InternalError.VpcPeerNotFound"
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 //  INTERNALERROR_VSTATIONERROR = "InternalError.VstationError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_ROUTETABLENOTEMPTY = "InvalidParameter.RouteTableNotEmpty"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -416,6 +425,7 @@ func NewCheckInstancesUpgradeAbleRequest() (request *CheckInstancesUpgradeAbleRe
     request = &CheckInstancesUpgradeAbleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CheckInstancesUpgradeAble")
     
     
@@ -483,6 +493,7 @@ func NewCreateClusterRequest() (request *CreateClusterRequest) {
     request = &CreateClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateCluster")
     
     
@@ -652,6 +663,7 @@ func NewCreateClusterEndpointRequest() (request *CreateClusterEndpointRequest) {
     request = &CreateClusterEndpointRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterEndpoint")
     
     
@@ -739,6 +751,7 @@ func NewCreateClusterEndpointVipRequest() (request *CreateClusterEndpointVipRequ
     request = &CreateClusterEndpointVipRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterEndpointVip")
     
     
@@ -822,6 +835,7 @@ func NewCreateClusterInstancesRequest() (request *CreateClusterInstancesRequest)
     request = &CreateClusterInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterInstances")
     
     
@@ -945,6 +959,7 @@ func NewCreateClusterNodePoolRequest() (request *CreateClusterNodePoolRequest) {
     request = &CreateClusterNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePool")
     
     
@@ -1014,6 +1029,7 @@ func NewCreateClusterNodePoolFromExistingAsgRequest() (request *CreateClusterNod
     request = &CreateClusterNodePoolFromExistingAsgRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePoolFromExistingAsg")
     
     
@@ -1065,6 +1081,7 @@ func NewCreateClusterRouteTableRequest() (request *CreateClusterRouteTableReques
     request = &CreateClusterRouteTableRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateClusterRouteTable")
     
     
@@ -1140,6 +1157,7 @@ func NewCreateECMInstancesRequest() (request *CreateECMInstancesRequest) {
     request = &CreateECMInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateECMInstances")
     
     
@@ -1205,10 +1223,61 @@ func (c *Client) CreateECMInstancesWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateEdgeLogConfigRequest() (request *CreateEdgeLogConfigRequest) {
+    request = &CreateEdgeLogConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateEdgeLogConfig")
+    
+    
+    return
+}
+
+func NewCreateEdgeLogConfigResponse() (response *CreateEdgeLogConfigResponse) {
+    response = &CreateEdgeLogConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateEdgeLogConfig
+// This API is used to create log collection configuration for a TKE Edge cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateEdgeLogConfig(request *CreateEdgeLogConfigRequest) (response *CreateEdgeLogConfigResponse, err error) {
+    return c.CreateEdgeLogConfigWithContext(context.Background(), request)
+}
+
+// CreateEdgeLogConfig
+// This API is used to create log collection configuration for a TKE Edge cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateEdgeLogConfigWithContext(ctx context.Context, request *CreateEdgeLogConfigRequest) (response *CreateEdgeLogConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateEdgeLogConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEdgeLogConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEdgeLogConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePrometheusAlertRuleRequest() (request *CreatePrometheusAlertRuleRequest) {
     request = &CreatePrometheusAlertRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreatePrometheusAlertRule")
     
     
@@ -1266,6 +1335,7 @@ func NewCreateTKEEdgeClusterRequest() (request *CreateTKEEdgeClusterRequest) {
     request = &CreateTKEEdgeClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "CreateTKEEdgeCluster")
     
     
@@ -1333,6 +1403,7 @@ func NewDeleteClusterRequest() (request *DeleteClusterRequest) {
     request = &DeleteClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteCluster")
     
     
@@ -1418,6 +1489,7 @@ func NewDeleteClusterAsGroupsRequest() (request *DeleteClusterAsGroupsRequest) {
     request = &DeleteClusterAsGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterAsGroups")
     
     
@@ -1501,6 +1573,7 @@ func NewDeleteClusterEndpointRequest() (request *DeleteClusterEndpointRequest) {
     request = &DeleteClusterEndpointRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterEndpoint")
     
     
@@ -1590,6 +1663,7 @@ func NewDeleteClusterEndpointVipRequest() (request *DeleteClusterEndpointVipRequ
     request = &DeleteClusterEndpointVipRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterEndpointVip")
     
     
@@ -1673,6 +1747,7 @@ func NewDeleteClusterInstancesRequest() (request *DeleteClusterInstancesRequest)
     request = &DeleteClusterInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterInstances")
     
     
@@ -1750,6 +1825,7 @@ func NewDeleteClusterNodePoolRequest() (request *DeleteClusterNodePoolRequest) {
     request = &DeleteClusterNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterNodePool")
     
     
@@ -1805,6 +1881,7 @@ func NewDeleteClusterRouteRequest() (request *DeleteClusterRouteRequest) {
     request = &DeleteClusterRouteRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterRoute")
     
     
@@ -1864,6 +1941,7 @@ func NewDeleteClusterRouteTableRequest() (request *DeleteClusterRouteTableReques
     request = &DeleteClusterRouteTableRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterRouteTable")
     
     
@@ -1921,6 +1999,7 @@ func NewDeleteECMInstancesRequest() (request *DeleteECMInstancesRequest) {
     request = &DeleteECMInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteECMInstances")
     
     
@@ -1990,6 +2069,7 @@ func NewDeleteEdgeCVMInstancesRequest() (request *DeleteEdgeCVMInstancesRequest)
     request = &DeleteEdgeCVMInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteEdgeCVMInstances")
     
     
@@ -2059,6 +2139,7 @@ func NewDeleteEdgeClusterInstancesRequest() (request *DeleteEdgeClusterInstances
     request = &DeleteEdgeClusterInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteEdgeClusterInstances")
     
     
@@ -2128,6 +2209,7 @@ func NewDeletePrometheusAlertRuleRequest() (request *DeletePrometheusAlertRuleRe
     request = &DeletePrometheusAlertRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeletePrometheusAlertRule")
     
     
@@ -2181,6 +2263,7 @@ func NewDeleteTKEEdgeClusterRequest() (request *DeleteTKEEdgeClusterRequest) {
     request = &DeleteTKEEdgeClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DeleteTKEEdgeCluster")
     
     
@@ -2248,6 +2331,7 @@ func NewDescribeAvailableClusterVersionRequest() (request *DescribeAvailableClus
     request = &DescribeAvailableClusterVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeAvailableClusterVersion")
     
     
@@ -2309,6 +2393,7 @@ func NewDescribeAvailableTKEEdgeVersionRequest() (request *DescribeAvailableTKEE
     request = &DescribeAvailableTKEEdgeVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeAvailableTKEEdgeVersion")
     
     
@@ -2374,6 +2459,7 @@ func NewDescribeClusterAsGroupOptionRequest() (request *DescribeClusterAsGroupOp
     request = &DescribeClusterAsGroupOptionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAsGroupOption")
     
     
@@ -2445,6 +2531,7 @@ func NewDescribeClusterAsGroupsRequest() (request *DescribeClusterAsGroupsReques
     request = &DescribeClusterAsGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAsGroups")
     
     
@@ -2522,6 +2609,7 @@ func NewDescribeClusterAuthenticationOptionsRequest() (request *DescribeClusterA
     request = &DescribeClusterAuthenticationOptionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterAuthenticationOptions")
     
     
@@ -2575,6 +2663,7 @@ func NewDescribeClusterCommonNamesRequest() (request *DescribeClusterCommonNames
     request = &DescribeClusterCommonNamesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterCommonNames")
     
     
@@ -2640,6 +2729,7 @@ func NewDescribeClusterEndpointStatusRequest() (request *DescribeClusterEndpoint
     request = &DescribeClusterEndpointStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterEndpointStatus")
     
     
@@ -2733,6 +2823,7 @@ func NewDescribeClusterEndpointVipStatusRequest() (request *DescribeClusterEndpo
     request = &DescribeClusterEndpointVipStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterEndpointVipStatus")
     
     
@@ -2818,10 +2909,79 @@ func (c *Client) DescribeClusterEndpointVipStatusWithContext(ctx context.Context
     return
 }
 
+func NewDescribeClusterEndpointsRequest() (request *DescribeClusterEndpointsRequest) {
+    request = &DescribeClusterEndpointsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterEndpoints")
+    
+    
+    return
+}
+
+func NewDescribeClusterEndpointsResponse() (response *DescribeClusterEndpointsResponse) {
+    response = &DescribeClusterEndpointsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterEndpoints
+// This API is used to query cluster access addresses, including private network address, public network address, public network domain name, and security policy for public network access.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
+//  INTERNALERROR_KUBECLIENTCONNECTION = "InternalError.KubeClientConnection"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_KUBERESOURCENOTFOUND = "ResourceNotFound.KubeResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+func (c *Client) DescribeClusterEndpoints(request *DescribeClusterEndpointsRequest) (response *DescribeClusterEndpointsResponse, err error) {
+    return c.DescribeClusterEndpointsWithContext(context.Background(), request)
+}
+
+// DescribeClusterEndpoints
+// This API is used to query cluster access addresses, including private network address, public network address, public network domain name, and security policy for public network access.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
+//  INTERNALERROR_KUBECLIENTCONNECTION = "InternalError.KubeClientConnection"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_KUBERESOURCENOTFOUND = "ResourceNotFound.KubeResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+func (c *Client) DescribeClusterEndpointsWithContext(ctx context.Context, request *DescribeClusterEndpointsRequest) (response *DescribeClusterEndpointsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterEndpointsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterEndpoints require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterEndpointsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterInstancesRequest() (request *DescribeClusterInstancesRequest) {
     request = &DescribeClusterInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterInstances")
     
     
@@ -2891,6 +3051,7 @@ func NewDescribeClusterKubeconfigRequest() (request *DescribeClusterKubeconfigRe
     request = &DescribeClusterKubeconfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterKubeconfig")
     
     
@@ -2976,6 +3137,7 @@ func NewDescribeClusterLevelAttributeRequest() (request *DescribeClusterLevelAtt
     request = &DescribeClusterLevelAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterLevelAttribute")
     
     
@@ -3029,6 +3191,7 @@ func NewDescribeClusterLevelChangeRecordsRequest() (request *DescribeClusterLeve
     request = &DescribeClusterLevelChangeRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterLevelChangeRecords")
     
     
@@ -3082,6 +3245,7 @@ func NewDescribeClusterNodePoolDetailRequest() (request *DescribeClusterNodePool
     request = &DescribeClusterNodePoolDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterNodePoolDetail")
     
     
@@ -3137,6 +3301,7 @@ func NewDescribeClusterNodePoolsRequest() (request *DescribeClusterNodePoolsRequ
     request = &DescribeClusterNodePoolsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterNodePools")
     
     
@@ -3192,6 +3357,7 @@ func NewDescribeClusterRouteTablesRequest() (request *DescribeClusterRouteTables
     request = &DescribeClusterRouteTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterRouteTables")
     
     
@@ -3239,6 +3405,7 @@ func NewDescribeClusterRoutesRequest() (request *DescribeClusterRoutesRequest) {
     request = &DescribeClusterRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterRoutes")
     
     
@@ -3292,6 +3459,7 @@ func NewDescribeClusterSecurityRequest() (request *DescribeClusterSecurityReques
     request = &DescribeClusterSecurityRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterSecurity")
     
     
@@ -3395,6 +3563,7 @@ func NewDescribeClusterStatusRequest() (request *DescribeClusterStatusRequest) {
     request = &DescribeClusterStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterStatus")
     
     
@@ -3472,6 +3641,7 @@ func NewDescribeClustersRequest() (request *DescribeClustersRequest) {
     request = &DescribeClustersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeClusters")
     
     
@@ -3547,6 +3717,7 @@ func NewDescribeECMInstancesRequest() (request *DescribeECMInstancesRequest) {
     request = &DescribeECMInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeECMInstances")
     
     
@@ -3616,6 +3787,7 @@ func NewDescribeEdgeAvailableExtraArgsRequest() (request *DescribeEdgeAvailableE
     request = &DescribeEdgeAvailableExtraArgsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeEdgeAvailableExtraArgs")
     
     
@@ -3665,6 +3837,7 @@ func NewDescribeEdgeCVMInstancesRequest() (request *DescribeEdgeCVMInstancesRequ
     request = &DescribeEdgeCVMInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeEdgeCVMInstances")
     
     
@@ -3734,6 +3907,7 @@ func NewDescribeEdgeClusterExtraArgsRequest() (request *DescribeEdgeClusterExtra
     request = &DescribeEdgeClusterExtraArgsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeEdgeClusterExtraArgs")
     
     
@@ -3793,6 +3967,7 @@ func NewDescribeEdgeClusterInstancesRequest() (request *DescribeEdgeClusterInsta
     request = &DescribeEdgeClusterInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeEdgeClusterInstances")
     
     
@@ -3858,10 +4033,71 @@ func (c *Client) DescribeEdgeClusterInstancesWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeEdgeLogSwitchesRequest() (request *DescribeEdgeLogSwitchesRequest) {
+    request = &DescribeEdgeLogSwitchesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeEdgeLogSwitches")
+    
+    
+    return
+}
+
+func NewDescribeEdgeLogSwitchesResponse() (response *DescribeEdgeLogSwitchesResponse) {
+    response = &DescribeEdgeLogSwitchesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeEdgeLogSwitches
+// This API is used to query the status of events, audits and logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RBACFORBIDDEN = "FailedOperation.RBACForbidden"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_KUBERNETESCLIENTBUILDERROR = "InternalError.KubernetesClientBuildError"
+//  INTERNALERROR_KUBERNETESGETOPERATIONERROR = "InternalError.KubernetesGetOperationError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeEdgeLogSwitches(request *DescribeEdgeLogSwitchesRequest) (response *DescribeEdgeLogSwitchesResponse, err error) {
+    return c.DescribeEdgeLogSwitchesWithContext(context.Background(), request)
+}
+
+// DescribeEdgeLogSwitches
+// This API is used to query the status of events, audits and logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RBACFORBIDDEN = "FailedOperation.RBACForbidden"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_KUBERNETESCLIENTBUILDERROR = "InternalError.KubernetesClientBuildError"
+//  INTERNALERROR_KUBERNETESGETOPERATIONERROR = "InternalError.KubernetesGetOperationError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeEdgeLogSwitchesWithContext(ctx context.Context, request *DescribeEdgeLogSwitchesRequest) (response *DescribeEdgeLogSwitchesResponse, err error) {
+    if request == nil {
+        request = NewDescribeEdgeLogSwitchesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEdgeLogSwitches require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEdgeLogSwitchesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeEnableVpcCniProgressRequest() (request *DescribeEnableVpcCniProgressRequest) {
     request = &DescribeEnableVpcCniProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeEnableVpcCniProgress")
     
     
@@ -3913,6 +4149,7 @@ func NewDescribeExistedInstancesRequest() (request *DescribeExistedInstancesRequ
     request = &DescribeExistedInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeExistedInstances")
     
     
@@ -4026,6 +4263,7 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
     request = &DescribeImagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeImages")
     
     
@@ -4109,6 +4347,7 @@ func NewDescribePrometheusInstanceRequest() (request *DescribePrometheusInstance
     request = &DescribePrometheusInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribePrometheusInstance")
     
     
@@ -4178,6 +4417,7 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
     request = &DescribeRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeRegions")
     
     
@@ -4257,6 +4497,7 @@ func NewDescribeResourceUsageRequest() (request *DescribeResourceUsageRequest) {
     request = &DescribeResourceUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeResourceUsage")
     
     
@@ -4314,6 +4555,7 @@ func NewDescribeRouteTableConflictsRequest() (request *DescribeRouteTableConflic
     request = &DescribeRouteTableConflictsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeRouteTableConflicts")
     
     
@@ -4375,6 +4617,7 @@ func NewDescribeTKEEdgeClusterCredentialRequest() (request *DescribeTKEEdgeClust
     request = &DescribeTKEEdgeClusterCredentialRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeTKEEdgeClusterCredential")
     
     
@@ -4442,6 +4685,7 @@ func NewDescribeTKEEdgeClusterStatusRequest() (request *DescribeTKEEdgeClusterSt
     request = &DescribeTKEEdgeClusterStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeTKEEdgeClusterStatus")
     
     
@@ -4509,6 +4753,7 @@ func NewDescribeTKEEdgeClustersRequest() (request *DescribeTKEEdgeClustersReques
     request = &DescribeTKEEdgeClustersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeTKEEdgeClusters")
     
     
@@ -4576,6 +4821,7 @@ func NewDescribeTKEEdgeExternalKubeconfigRequest() (request *DescribeTKEEdgeExte
     request = &DescribeTKEEdgeExternalKubeconfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeTKEEdgeExternalKubeconfig")
     
     
@@ -4643,6 +4889,7 @@ func NewDescribeTKEEdgeScriptRequest() (request *DescribeTKEEdgeScriptRequest) {
     request = &DescribeTKEEdgeScriptRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeTKEEdgeScript")
     
     
@@ -4710,6 +4957,7 @@ func NewDescribeVersionsRequest() (request *DescribeVersionsRequest) {
     request = &DescribeVersionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeVersions")
     
     
@@ -4795,6 +5043,7 @@ func NewDescribeVpcCniPodLimitsRequest() (request *DescribeVpcCniPodLimitsReques
     request = &DescribeVpcCniPodLimitsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DescribeVpcCniPodLimits")
     
     
@@ -4866,6 +5115,7 @@ func NewDisableClusterDeletionProtectionRequest() (request *DisableClusterDeleti
     request = &DisableClusterDeletionProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "DisableClusterDeletionProtection")
     
     
@@ -4917,6 +5167,7 @@ func NewEnableClusterDeletionProtectionRequest() (request *EnableClusterDeletion
     request = &EnableClusterDeletionProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "EnableClusterDeletionProtection")
     
     
@@ -4968,6 +5219,7 @@ func NewEnableVpcCniNetworkTypeRequest() (request *EnableVpcCniNetworkTypeReques
     request = &EnableVpcCniNetworkTypeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "EnableVpcCniNetworkType")
     
     
@@ -5023,6 +5275,7 @@ func NewForwardTKEEdgeApplicationRequestV3Request() (request *ForwardTKEEdgeAppl
     request = &ForwardTKEEdgeApplicationRequestV3Request{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ForwardTKEEdgeApplicationRequestV3")
     
     
@@ -5094,6 +5347,7 @@ func NewGetClusterLevelPriceRequest() (request *GetClusterLevelPriceRequest) {
     request = &GetClusterLevelPriceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "GetClusterLevelPrice")
     
     
@@ -5143,6 +5397,7 @@ func NewGetUpgradeInstanceProgressRequest() (request *GetUpgradeInstanceProgress
     request = &GetUpgradeInstanceProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "GetUpgradeInstanceProgress")
     
     
@@ -5188,10 +5443,65 @@ func (c *Client) GetUpgradeInstanceProgressWithContext(ctx context.Context, requ
     return
 }
 
+func NewInstallEdgeLogAgentRequest() (request *InstallEdgeLogAgentRequest) {
+    request = &InstallEdgeLogAgentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "InstallEdgeLogAgent")
+    
+    
+    return
+}
+
+func NewInstallEdgeLogAgentResponse() (response *InstallEdgeLogAgentResponse) {
+    response = &InstallEdgeLogAgentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InstallEdgeLogAgent
+// This API is used to install the log collection add-on on TKE Edge cluster nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) InstallEdgeLogAgent(request *InstallEdgeLogAgentRequest) (response *InstallEdgeLogAgentResponse, err error) {
+    return c.InstallEdgeLogAgentWithContext(context.Background(), request)
+}
+
+// InstallEdgeLogAgent
+// This API is used to install the log collection add-on on TKE Edge cluster nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) InstallEdgeLogAgentWithContext(ctx context.Context, request *InstallEdgeLogAgentRequest) (response *InstallEdgeLogAgentResponse, err error) {
+    if request == nil {
+        request = NewInstallEdgeLogAgentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InstallEdgeLogAgent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInstallEdgeLogAgentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClusterAsGroupAttributeRequest() (request *ModifyClusterAsGroupAttributeRequest) {
     request = &ModifyClusterAsGroupAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAsGroupAttribute")
     
     
@@ -5210,6 +5520,7 @@ func NewModifyClusterAsGroupAttributeResponse() (response *ModifyClusterAsGroupA
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -5239,6 +5550,7 @@ func (c *Client) ModifyClusterAsGroupAttribute(request *ModifyClusterAsGroupAttr
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
@@ -5279,6 +5591,7 @@ func NewModifyClusterAsGroupOptionAttributeRequest() (request *ModifyClusterAsGr
     request = &ModifyClusterAsGroupOptionAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAsGroupOptionAttribute")
     
     
@@ -5358,6 +5671,7 @@ func NewModifyClusterAttributeRequest() (request *ModifyClusterAttributeRequest)
     request = &ModifyClusterAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAttribute")
     
     
@@ -5437,6 +5751,7 @@ func NewModifyClusterAuthenticationOptionsRequest() (request *ModifyClusterAuthe
     request = &ModifyClusterAuthenticationOptionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterAuthenticationOptions")
     
     
@@ -5492,6 +5807,7 @@ func NewModifyClusterEndpointSPRequest() (request *ModifyClusterEndpointSPReques
     request = &ModifyClusterEndpointSPRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterEndpointSP")
     
     
@@ -5579,6 +5895,7 @@ func NewModifyClusterNodePoolRequest() (request *ModifyClusterNodePoolRequest) {
     request = &ModifyClusterNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterNodePool")
     
     
@@ -5640,6 +5957,7 @@ func NewModifyNodePoolInstanceTypesRequest() (request *ModifyNodePoolInstanceTyp
     request = &ModifyNodePoolInstanceTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyNodePoolInstanceTypes")
     
     
@@ -5707,6 +6025,7 @@ func NewModifyPrometheusAlertRuleRequest() (request *ModifyPrometheusAlertRuleRe
     request = &ModifyPrometheusAlertRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "ModifyPrometheusAlertRule")
     
     
@@ -5768,6 +6087,7 @@ func NewRemoveNodeFromNodePoolRequest() (request *RemoveNodeFromNodePoolRequest)
     request = &RemoveNodeFromNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "RemoveNodeFromNodePool")
     
     
@@ -5817,6 +6137,7 @@ func NewSetNodePoolNodeProtectionRequest() (request *SetNodePoolNodeProtectionRe
     request = &SetNodePoolNodeProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "SetNodePoolNodeProtection")
     
     
@@ -5878,10 +6199,63 @@ func (c *Client) SetNodePoolNodeProtectionWithContext(ctx context.Context, reque
     return
 }
 
+func NewUninstallEdgeLogAgentRequest() (request *UninstallEdgeLogAgentRequest) {
+    request = &UninstallEdgeLogAgentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "UninstallEdgeLogAgent")
+    
+    
+    return
+}
+
+func NewUninstallEdgeLogAgentResponse() (response *UninstallEdgeLogAgentResponse) {
+    response = &UninstallEdgeLogAgentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UninstallEdgeLogAgent
+// This API is used to uninstall the log collection add-on from TKE Edge cluster nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UninstallEdgeLogAgent(request *UninstallEdgeLogAgentRequest) (response *UninstallEdgeLogAgentResponse, err error) {
+    return c.UninstallEdgeLogAgentWithContext(context.Background(), request)
+}
+
+// UninstallEdgeLogAgent
+// This API is used to uninstall the log collection add-on from TKE Edge cluster nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UninstallEdgeLogAgentWithContext(ctx context.Context, request *UninstallEdgeLogAgentRequest) (response *UninstallEdgeLogAgentResponse, err error) {
+    if request == nil {
+        request = NewUninstallEdgeLogAgentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UninstallEdgeLogAgent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUninstallEdgeLogAgentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateClusterVersionRequest() (request *UpdateClusterVersionRequest) {
     request = &UpdateClusterVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "UpdateClusterVersion")
     
     
@@ -5945,6 +6319,7 @@ func NewUpgradeClusterInstancesRequest() (request *UpgradeClusterInstancesReques
     request = &UpgradeClusterInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tke", APIVersion, "UpgradeClusterInstances")
     
     

@@ -49,6 +49,7 @@ func NewCancelMatchingRequest() (request *CancelMatchingRequest) {
     request = &CancelMatchingRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "CancelMatching")
     
     
@@ -130,6 +131,7 @@ func NewCreateMatchRequest() (request *CreateMatchRequest) {
     request = &CreateMatchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "CreateMatch")
     
     
@@ -235,6 +237,7 @@ func NewCreateRuleRequest() (request *CreateRuleRequest) {
     request = &CreateRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "CreateRule")
     
     
@@ -336,6 +339,7 @@ func NewDeleteMatchRequest() (request *DeleteMatchRequest) {
     request = &DeleteMatchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DeleteMatch")
     
     
@@ -435,6 +439,7 @@ func NewDeleteRuleRequest() (request *DeleteRuleRequest) {
     request = &DeleteRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DeleteRule")
     
     
@@ -532,6 +537,7 @@ func NewDescribeDataRequest() (request *DescribeDataRequest) {
     request = &DescribeDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeData")
     
     
@@ -629,6 +635,7 @@ func NewDescribeMatchRequest() (request *DescribeMatchRequest) {
     request = &DescribeMatchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatch")
     
     
@@ -722,6 +729,7 @@ func NewDescribeMatchCodesRequest() (request *DescribeMatchCodesRequest) {
     request = &DescribeMatchCodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatchCodes")
     
     
@@ -813,6 +821,7 @@ func NewDescribeMatchesRequest() (request *DescribeMatchesRequest) {
     request = &DescribeMatchesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatches")
     
     
@@ -912,6 +921,7 @@ func NewDescribeMatchingProgressRequest() (request *DescribeMatchingProgressRequ
     request = &DescribeMatchingProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeMatchingProgress")
     
     
@@ -991,6 +1001,7 @@ func NewDescribeRuleRequest() (request *DescribeRuleRequest) {
     request = &DescribeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeRule")
     
     
@@ -1082,6 +1093,7 @@ func NewDescribeRulesRequest() (request *DescribeRulesRequest) {
     request = &DescribeRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeRules")
     
     
@@ -1177,6 +1189,7 @@ func NewDescribeTokenRequest() (request *DescribeTokenRequest) {
     request = &DescribeTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "DescribeToken")
     
     
@@ -1230,6 +1243,7 @@ func NewModifyMatchRequest() (request *ModifyMatchRequest) {
     request = &ModifyMatchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "ModifyMatch")
     
     
@@ -1333,6 +1347,7 @@ func NewModifyRuleRequest() (request *ModifyRuleRequest) {
     request = &ModifyRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "ModifyRule")
     
     
@@ -1428,6 +1443,7 @@ func NewModifyTokenRequest() (request *ModifyTokenRequest) {
     request = &ModifyTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "ModifyToken")
     
     
@@ -1481,6 +1497,7 @@ func NewStartMatchingRequest() (request *StartMatchingRequest) {
     request = &StartMatchingRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "StartMatching")
     
     
@@ -1580,6 +1597,7 @@ func NewStartMatchingBackfillRequest() (request *StartMatchingBackfillRequest) {
     request = &StartMatchingBackfillRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("gpm", APIVersion, "StartMatchingBackfill")
     
     

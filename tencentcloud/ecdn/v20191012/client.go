@@ -49,6 +49,7 @@ func NewAddEcdnDomainRequest() (request *AddEcdnDomainRequest) {
     request = &AddEcdnDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "AddEcdnDomain")
     
     
@@ -152,6 +153,7 @@ func NewDeleteEcdnDomainRequest() (request *DeleteEcdnDomainRequest) {
     request = &DeleteEcdnDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DeleteEcdnDomain")
     
     
@@ -233,6 +235,7 @@ func NewDescribeDomainsRequest() (request *DescribeDomainsRequest) {
     request = &DescribeDomainsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeDomains")
     
     
@@ -304,6 +307,7 @@ func NewDescribeDomainsConfigRequest() (request *DescribeDomainsConfigRequest) {
     request = &DescribeDomainsConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeDomainsConfig")
     
     
@@ -381,6 +385,7 @@ func NewDescribeEcdnDomainLogsRequest() (request *DescribeEcdnDomainLogsRequest)
     request = &DescribeEcdnDomainLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnDomainLogs")
     
     
@@ -452,6 +457,7 @@ func NewDescribeEcdnDomainStatisticsRequest() (request *DescribeEcdnDomainStatis
     request = &DescribeEcdnDomainStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnDomainStatistics")
     
     
@@ -551,6 +557,7 @@ func NewDescribeEcdnStatisticsRequest() (request *DescribeEcdnStatisticsRequest)
     request = &DescribeEcdnStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeEcdnStatistics")
     
     
@@ -692,6 +699,7 @@ func NewDescribeIpStatusRequest() (request *DescribeIpStatusRequest) {
     request = &DescribeIpStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribeIpStatus")
     
     
@@ -767,6 +775,7 @@ func NewDescribePurgeQuotaRequest() (request *DescribePurgeQuotaRequest) {
     request = &DescribePurgeQuotaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribePurgeQuota")
     
     
@@ -838,6 +847,7 @@ func NewDescribePurgeTasksRequest() (request *DescribePurgeTasksRequest) {
     request = &DescribePurgeTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "DescribePurgeTasks")
     
     
@@ -907,6 +917,7 @@ func NewPurgePathCacheRequest() (request *PurgePathCacheRequest) {
     request = &PurgePathCacheRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "PurgePathCache")
     
     
@@ -992,6 +1003,7 @@ func NewPurgeUrlsCacheRequest() (request *PurgeUrlsCacheRequest) {
     request = &PurgeUrlsCacheRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "PurgeUrlsCache")
     
     
@@ -1079,6 +1091,7 @@ func NewStartEcdnDomainRequest() (request *StartEcdnDomainRequest) {
     request = &StartEcdnDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "StartEcdnDomain")
     
     
@@ -1158,6 +1171,7 @@ func NewStopEcdnDomainRequest() (request *StopEcdnDomainRequest) {
     request = &StopEcdnDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "StopEcdnDomain")
     
     
@@ -1237,6 +1251,7 @@ func NewUpdateDomainConfigRequest() (request *UpdateDomainConfigRequest) {
     request = &UpdateDomainConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecdn", APIVersion, "UpdateDomainConfig")
     
     

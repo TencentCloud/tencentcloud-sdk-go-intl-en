@@ -49,6 +49,7 @@ func NewCreateBasicDDoSAlarmThresholdRequest() (request *CreateBasicDDoSAlarmThr
     request = &CreateBasicDDoSAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateBasicDDoSAlarmThreshold")
     
     
@@ -90,6 +91,7 @@ func NewCreateBoundIPRequest() (request *CreateBoundIPRequest) {
     request = &CreateBoundIPRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateBoundIP")
     
     
@@ -141,6 +143,7 @@ func NewCreateCCFrequencyRulesRequest() (request *CreateCCFrequencyRulesRequest)
     request = &CreateCCFrequencyRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateCCFrequencyRules")
     
     
@@ -192,6 +195,7 @@ func NewCreateCCSelfDefinePolicyRequest() (request *CreateCCSelfDefinePolicyRequ
     request = &CreateCCSelfDefinePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateCCSelfDefinePolicy")
     
     
@@ -255,6 +259,7 @@ func NewCreateDDoSPolicyRequest() (request *CreateDDoSPolicyRequest) {
     request = &CreateDDoSPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateDDoSPolicy")
     
     
@@ -318,6 +323,7 @@ func NewCreateDDoSPolicyCaseRequest() (request *CreateDDoSPolicyCaseRequest) {
     request = &CreateDDoSPolicyCaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateDDoSPolicyCase")
     
     
@@ -381,6 +387,7 @@ func NewCreateInstanceNameRequest() (request *CreateInstanceNameRequest) {
     request = &CreateInstanceNameRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateInstanceName")
     
     
@@ -444,6 +451,7 @@ func NewCreateL4HealthConfigRequest() (request *CreateL4HealthConfigRequest) {
     request = &CreateL4HealthConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL4HealthConfig")
     
     
@@ -507,6 +515,7 @@ func NewCreateL4RulesRequest() (request *CreateL4RulesRequest) {
     request = &CreateL4RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL4Rules")
     
     
@@ -570,6 +579,7 @@ func NewCreateL7CCRuleRequest() (request *CreateL7CCRuleRequest) {
     request = &CreateL7CCRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7CCRule")
     
     
@@ -633,6 +643,7 @@ func NewCreateL7HealthConfigRequest() (request *CreateL7HealthConfigRequest) {
     request = &CreateL7HealthConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7HealthConfig")
     
     
@@ -696,6 +707,7 @@ func NewCreateL7RuleCertRequest() (request *CreateL7RuleCertRequest) {
     request = &CreateL7RuleCertRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7RuleCert")
     
     
@@ -743,6 +755,7 @@ func NewCreateL7RulesRequest() (request *CreateL7RulesRequest) {
     request = &CreateL7RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7Rules")
     
     
@@ -790,6 +803,7 @@ func NewCreateL7RulesUploadRequest() (request *CreateL7RulesUploadRequest) {
     request = &CreateL7RulesUploadRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateL7RulesUpload")
     
     
@@ -855,6 +869,7 @@ func NewCreateNetReturnRequest() (request *CreateNetReturnRequest) {
     request = &CreateNetReturnRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateNetReturn")
     
     
@@ -920,6 +935,7 @@ func NewCreateNewL7RulesUploadRequest() (request *CreateNewL7RulesUploadRequest)
     request = &CreateNewL7RulesUploadRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateNewL7RulesUpload")
     
     
@@ -967,6 +983,7 @@ func NewCreateUnblockIpRequest() (request *CreateUnblockIpRequest) {
     request = &CreateUnblockIpRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "CreateUnblockIp")
     
     
@@ -1014,6 +1031,7 @@ func NewDeleteCCFrequencyRulesRequest() (request *DeleteCCFrequencyRulesRequest)
     request = &DeleteCCFrequencyRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteCCFrequencyRules")
     
     
@@ -1061,6 +1079,7 @@ func NewDeleteCCSelfDefinePolicyRequest() (request *DeleteCCSelfDefinePolicyRequ
     request = &DeleteCCSelfDefinePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteCCSelfDefinePolicy")
     
     
@@ -1124,6 +1143,7 @@ func NewDeleteDDoSPolicyRequest() (request *DeleteDDoSPolicyRequest) {
     request = &DeleteDDoSPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteDDoSPolicy")
     
     
@@ -1171,6 +1191,7 @@ func NewDeleteDDoSPolicyCaseRequest() (request *DeleteDDoSPolicyCaseRequest) {
     request = &DeleteDDoSPolicyCaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteDDoSPolicyCase")
     
     
@@ -1218,6 +1239,7 @@ func NewDeleteL4RulesRequest() (request *DeleteL4RulesRequest) {
     request = &DeleteL4RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteL4Rules")
     
     
@@ -1265,6 +1287,7 @@ func NewDeleteL7RulesRequest() (request *DeleteL7RulesRequest) {
     request = &DeleteL7RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DeleteL7Rules")
     
     
@@ -1312,6 +1335,7 @@ func NewDescribeActionLogRequest() (request *DescribeActionLogRequest) {
     request = &DescribeActionLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeActionLog")
     
     
@@ -1359,6 +1383,7 @@ func NewDescribeBGPIPL7RuleMaxCntRequest() (request *DescribeBGPIPL7RuleMaxCntRe
     request = &DescribeBGPIPL7RuleMaxCntRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBGPIPL7RuleMaxCnt")
     
     
@@ -1406,6 +1431,7 @@ func NewDescribeBaradDataRequest() (request *DescribeBaradDataRequest) {
     request = &DescribeBaradDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBaradData")
     
     
@@ -1453,6 +1479,7 @@ func NewDescribeBasicCCThresholdRequest() (request *DescribeBasicCCThresholdRequ
     request = &DescribeBasicCCThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBasicCCThreshold")
     
     
@@ -1518,6 +1545,7 @@ func NewDescribeBasicDeviceThresholdRequest() (request *DescribeBasicDeviceThres
     request = &DescribeBasicDeviceThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBasicDeviceThreshold")
     
     
@@ -1583,6 +1611,7 @@ func NewDescribeBizHttpStatusRequest() (request *DescribeBizHttpStatusRequest) {
     request = &DescribeBizHttpStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeBizHttpStatus")
     
     
@@ -1648,6 +1677,7 @@ func NewDescribeCCAlarmThresholdRequest() (request *DescribeCCAlarmThresholdRequ
     request = &DescribeCCAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCAlarmThreshold")
     
     
@@ -1713,6 +1743,7 @@ func NewDescribeCCEvListRequest() (request *DescribeCCEvListRequest) {
     request = &DescribeCCEvListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCEvList")
     
     
@@ -1778,6 +1809,7 @@ func NewDescribeCCFrequencyRulesRequest() (request *DescribeCCFrequencyRulesRequ
     request = &DescribeCCFrequencyRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCFrequencyRules")
     
     
@@ -1843,6 +1875,7 @@ func NewDescribeCCIpAllowDenyRequest() (request *DescribeCCIpAllowDenyRequest) {
     request = &DescribeCCIpAllowDenyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCIpAllowDeny")
     
     
@@ -1908,6 +1941,7 @@ func NewDescribeCCSelfDefinePolicyRequest() (request *DescribeCCSelfDefinePolicy
     request = &DescribeCCSelfDefinePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCSelfDefinePolicy")
     
     
@@ -1971,6 +2005,7 @@ func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
     request = &DescribeCCTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCTrend")
     
     
@@ -2034,6 +2069,7 @@ func NewDescribeCCUrlAllowRequest() (request *DescribeCCUrlAllowRequest) {
     request = &DescribeCCUrlAllowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeCCUrlAllow")
     
     
@@ -2097,6 +2133,7 @@ func NewDescribeDDoSAlarmThresholdRequest() (request *DescribeDDoSAlarmThreshold
     request = &DescribeDDoSAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSAlarmThreshold")
     
     
@@ -2160,6 +2197,7 @@ func NewDescribeDDoSAttackIPRegionMapRequest() (request *DescribeDDoSAttackIPReg
     request = &DescribeDDoSAttackIPRegionMapRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSAttackIPRegionMap")
     
     
@@ -2219,6 +2257,7 @@ func NewDescribeDDoSAttackSourceRequest() (request *DescribeDDoSAttackSourceRequ
     request = &DescribeDDoSAttackSourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSAttackSource")
     
     
@@ -2284,6 +2323,7 @@ func NewDescribeDDoSCountRequest() (request *DescribeDDoSCountRequest) {
     request = &DescribeDDoSCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSCount")
     
     
@@ -2349,6 +2389,7 @@ func NewDescribeDDoSDefendStatusRequest() (request *DescribeDDoSDefendStatusRequ
     request = &DescribeDDoSDefendStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSDefendStatus")
     
     
@@ -2414,6 +2455,7 @@ func NewDescribeDDoSEvInfoRequest() (request *DescribeDDoSEvInfoRequest) {
     request = &DescribeDDoSEvInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSEvInfo")
     
     
@@ -2479,6 +2521,7 @@ func NewDescribeDDoSEvListRequest() (request *DescribeDDoSEvListRequest) {
     request = &DescribeDDoSEvListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSEvList")
     
     
@@ -2544,6 +2587,7 @@ func NewDescribeDDoSIpLogRequest() (request *DescribeDDoSIpLogRequest) {
     request = &DescribeDDoSIpLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSIpLog")
     
     
@@ -2609,6 +2653,7 @@ func NewDescribeDDoSNetCountRequest() (request *DescribeDDoSNetCountRequest) {
     request = &DescribeDDoSNetCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetCount")
     
     
@@ -2674,6 +2719,7 @@ func NewDescribeDDoSNetEvInfoRequest() (request *DescribeDDoSNetEvInfoRequest) {
     request = &DescribeDDoSNetEvInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetEvInfo")
     
     
@@ -2739,6 +2785,7 @@ func NewDescribeDDoSNetEvListRequest() (request *DescribeDDoSNetEvListRequest) {
     request = &DescribeDDoSNetEvListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetEvList")
     
     
@@ -2804,6 +2851,7 @@ func NewDescribeDDoSNetIpLogRequest() (request *DescribeDDoSNetIpLogRequest) {
     request = &DescribeDDoSNetIpLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetIpLog")
     
     
@@ -2869,6 +2917,7 @@ func NewDescribeDDoSNetTrendRequest() (request *DescribeDDoSNetTrendRequest) {
     request = &DescribeDDoSNetTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSNetTrend")
     
     
@@ -2934,6 +2983,7 @@ func NewDescribeDDoSPolicyRequest() (request *DescribeDDoSPolicyRequest) {
     request = &DescribeDDoSPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSPolicy")
     
     
@@ -2999,6 +3049,7 @@ func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
     request = &DescribeDDoSTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSTrend")
     
     
@@ -3064,6 +3115,7 @@ func NewDescribeDDoSUsedStatisRequest() (request *DescribeDDoSUsedStatisRequest)
     request = &DescribeDDoSUsedStatisRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeDDoSUsedStatis")
     
     
@@ -3129,6 +3181,7 @@ func NewDescribeIPProductInfoRequest() (request *DescribeIPProductInfoRequest) {
     request = &DescribeIPProductInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeIPProductInfo")
     
     
@@ -3194,6 +3247,7 @@ func NewDescribeInsurePacksRequest() (request *DescribeInsurePacksRequest) {
     request = &DescribeInsurePacksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeInsurePacks")
     
     
@@ -3259,6 +3313,7 @@ func NewDescribeIpBlockListRequest() (request *DescribeIpBlockListRequest) {
     request = &DescribeIpBlockListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeIpBlockList")
     
     
@@ -3324,6 +3379,7 @@ func NewDescribeIpUnBlockListRequest() (request *DescribeIpUnBlockListRequest) {
     request = &DescribeIpUnBlockListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeIpUnBlockList")
     
     
@@ -3389,6 +3445,7 @@ func NewDescribeL4HealthConfigRequest() (request *DescribeL4HealthConfigRequest)
     request = &DescribeL4HealthConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeL4HealthConfig")
     
     
@@ -3454,6 +3511,7 @@ func NewDescribeL4RulesErrHealthRequest() (request *DescribeL4RulesErrHealthRequ
     request = &DescribeL4RulesErrHealthRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeL4RulesErrHealth")
     
     
@@ -3519,6 +3577,7 @@ func NewDescribeL7HealthConfigRequest() (request *DescribeL7HealthConfigRequest)
     request = &DescribeL7HealthConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeL7HealthConfig")
     
     
@@ -3584,6 +3643,7 @@ func NewDescribePackIndexRequest() (request *DescribePackIndexRequest) {
     request = &DescribePackIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribePackIndex")
     
     
@@ -3649,6 +3709,7 @@ func NewDescribePcapRequest() (request *DescribePcapRequest) {
     request = &DescribePcapRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribePcap")
     
     
@@ -3714,6 +3775,7 @@ func NewDescribePolicyCaseRequest() (request *DescribePolicyCaseRequest) {
     request = &DescribePolicyCaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribePolicyCase")
     
     
@@ -3779,6 +3841,7 @@ func NewDescribeResIpListRequest() (request *DescribeResIpListRequest) {
     request = &DescribeResIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeResIpList")
     
     
@@ -3844,6 +3907,7 @@ func NewDescribeResourceListRequest() (request *DescribeResourceListRequest) {
     request = &DescribeResourceListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeResourceList")
     
     
@@ -3909,6 +3973,7 @@ func NewDescribeRuleSetsRequest() (request *DescribeRuleSetsRequest) {
     request = &DescribeRuleSetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeRuleSets")
     
     
@@ -3974,6 +4039,7 @@ func NewDescribeSchedulingDomainListRequest() (request *DescribeSchedulingDomain
     request = &DescribeSchedulingDomainListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeSchedulingDomainList")
     
     
@@ -4039,6 +4105,7 @@ func NewDescribeSecIndexRequest() (request *DescribeSecIndexRequest) {
     request = &DescribeSecIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeSecIndex")
     
     
@@ -4104,6 +4171,7 @@ func NewDescribeSourceIpSegmentRequest() (request *DescribeSourceIpSegmentReques
     request = &DescribeSourceIpSegmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeSourceIpSegment")
     
     
@@ -4169,6 +4237,7 @@ func NewDescribeTransmitStatisRequest() (request *DescribeTransmitStatisRequest)
     request = &DescribeTransmitStatisRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeTransmitStatis")
     
     
@@ -4216,6 +4285,7 @@ func NewDescribeUnBlockStatisRequest() (request *DescribeUnBlockStatisRequest) {
     request = &DescribeUnBlockStatisRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribeUnBlockStatis")
     
     
@@ -4263,6 +4333,7 @@ func NewDescribleL4RulesRequest() (request *DescribleL4RulesRequest) {
     request = &DescribleL4RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribleL4Rules")
     
     
@@ -4310,6 +4381,7 @@ func NewDescribleL7RulesRequest() (request *DescribleL7RulesRequest) {
     request = &DescribleL7RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribleL7Rules")
     
     
@@ -4357,6 +4429,7 @@ func NewDescribleRegionCountRequest() (request *DescribleRegionCountRequest) {
     request = &DescribleRegionCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "DescribleRegionCount")
     
     
@@ -4404,6 +4477,7 @@ func NewModifyCCAlarmThresholdRequest() (request *ModifyCCAlarmThresholdRequest)
     request = &ModifyCCAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCAlarmThreshold")
     
     
@@ -4451,6 +4525,7 @@ func NewModifyCCFrequencyRulesRequest() (request *ModifyCCFrequencyRulesRequest)
     request = &ModifyCCFrequencyRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCFrequencyRules")
     
     
@@ -4498,6 +4573,7 @@ func NewModifyCCFrequencyRulesStatusRequest() (request *ModifyCCFrequencyRulesSt
     request = &ModifyCCFrequencyRulesStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCFrequencyRulesStatus")
     
     
@@ -4545,6 +4621,7 @@ func NewModifyCCHostProtectionRequest() (request *ModifyCCHostProtectionRequest)
     request = &ModifyCCHostProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCHostProtection")
     
     
@@ -4592,6 +4669,7 @@ func NewModifyCCIpAllowDenyRequest() (request *ModifyCCIpAllowDenyRequest) {
     request = &ModifyCCIpAllowDenyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCIpAllowDeny")
     
     
@@ -4639,6 +4717,7 @@ func NewModifyCCLevelRequest() (request *ModifyCCLevelRequest) {
     request = &ModifyCCLevelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCLevel")
     
     
@@ -4686,6 +4765,7 @@ func NewModifyCCPolicySwitchRequest() (request *ModifyCCPolicySwitchRequest) {
     request = &ModifyCCPolicySwitchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCPolicySwitch")
     
     
@@ -4749,6 +4829,7 @@ func NewModifyCCSelfDefinePolicyRequest() (request *ModifyCCSelfDefinePolicyRequ
     request = &ModifyCCSelfDefinePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCSelfDefinePolicy")
     
     
@@ -4812,6 +4893,7 @@ func NewModifyCCThresholdRequest() (request *ModifyCCThresholdRequest) {
     request = &ModifyCCThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCThreshold")
     
     
@@ -4859,6 +4941,7 @@ func NewModifyCCUrlAllowRequest() (request *ModifyCCUrlAllowRequest) {
     request = &ModifyCCUrlAllowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyCCUrlAllow")
     
     
@@ -4906,6 +4989,7 @@ func NewModifyDDoSAIStatusRequest() (request *ModifyDDoSAIStatusRequest) {
     request = &ModifyDDoSAIStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSAIStatus")
     
     
@@ -4953,6 +5037,7 @@ func NewModifyDDoSAlarmThresholdRequest() (request *ModifyDDoSAlarmThresholdRequ
     request = &ModifyDDoSAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSAlarmThreshold")
     
     
@@ -5000,6 +5085,7 @@ func NewModifyDDoSDefendStatusRequest() (request *ModifyDDoSDefendStatusRequest)
     request = &ModifyDDoSDefendStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSDefendStatus")
     
     
@@ -5047,6 +5133,7 @@ func NewModifyDDoSLevelRequest() (request *ModifyDDoSLevelRequest) {
     request = &ModifyDDoSLevelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSLevel")
     
     
@@ -5094,6 +5181,7 @@ func NewModifyDDoSPolicyRequest() (request *ModifyDDoSPolicyRequest) {
     request = &ModifyDDoSPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSPolicy")
     
     
@@ -5141,6 +5229,7 @@ func NewModifyDDoSPolicyCaseRequest() (request *ModifyDDoSPolicyCaseRequest) {
     request = &ModifyDDoSPolicyCaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSPolicyCase")
     
     
@@ -5188,6 +5277,7 @@ func NewModifyDDoSPolicyNameRequest() (request *ModifyDDoSPolicyNameRequest) {
     request = &ModifyDDoSPolicyNameRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSPolicyName")
     
     
@@ -5235,6 +5325,7 @@ func NewModifyDDoSSwitchRequest() (request *ModifyDDoSSwitchRequest) {
     request = &ModifyDDoSSwitchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSSwitch")
     
     
@@ -5282,6 +5373,7 @@ func NewModifyDDoSThresholdRequest() (request *ModifyDDoSThresholdRequest) {
     request = &ModifyDDoSThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSThreshold")
     
     
@@ -5329,6 +5421,7 @@ func NewModifyDDoSWaterKeyRequest() (request *ModifyDDoSWaterKeyRequest) {
     request = &ModifyDDoSWaterKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyDDoSWaterKey")
     
     
@@ -5376,6 +5469,7 @@ func NewModifyElasticLimitRequest() (request *ModifyElasticLimitRequest) {
     request = &ModifyElasticLimitRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyElasticLimit")
     
     
@@ -5423,6 +5517,7 @@ func NewModifyL4HealthRequest() (request *ModifyL4HealthRequest) {
     request = &ModifyL4HealthRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL4Health")
     
     
@@ -5470,6 +5565,7 @@ func NewModifyL4KeepTimeRequest() (request *ModifyL4KeepTimeRequest) {
     request = &ModifyL4KeepTimeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL4KeepTime")
     
     
@@ -5517,6 +5613,7 @@ func NewModifyL4RulesRequest() (request *ModifyL4RulesRequest) {
     request = &ModifyL4RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL4Rules")
     
     
@@ -5564,6 +5661,7 @@ func NewModifyL7RulesRequest() (request *ModifyL7RulesRequest) {
     request = &ModifyL7RulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyL7Rules")
     
     
@@ -5613,6 +5711,7 @@ func NewModifyNetReturnSwitchRequest() (request *ModifyNetReturnSwitchRequest) {
     request = &ModifyNetReturnSwitchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyNetReturnSwitch")
     
     
@@ -5662,6 +5761,7 @@ func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
     request = &ModifyNewDomainRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyNewDomainRules")
     
     
@@ -5709,6 +5809,7 @@ func NewModifyNewL4RuleRequest() (request *ModifyNewL4RuleRequest) {
     request = &ModifyNewL4RuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyNewL4Rule")
     
     
@@ -5756,6 +5857,7 @@ func NewModifyResBindDDoSPolicyRequest() (request *ModifyResBindDDoSPolicyReques
     request = &ModifyResBindDDoSPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyResBindDDoSPolicy")
     
     
@@ -5803,6 +5905,7 @@ func NewModifyResourceRenewFlagRequest() (request *ModifyResourceRenewFlagReques
     request = &ModifyResourceRenewFlagRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dayu", APIVersion, "ModifyResourceRenewFlag")
     
     

@@ -49,6 +49,7 @@ func NewCreateDomainRequest() (request *CreateDomainRequest) {
     request = &CreateDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "CreateDomain")
     
     
@@ -112,6 +113,7 @@ func NewCreateRecordRequest() (request *CreateRecordRequest) {
     request = &CreateRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "CreateRecord")
     
     
@@ -257,6 +259,7 @@ func NewDeleteDomainRequest() (request *DeleteDomainRequest) {
     request = &DeleteDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "DeleteDomain")
     
     
@@ -326,6 +329,7 @@ func NewDeleteRecordRequest() (request *DeleteRecordRequest) {
     request = &DeleteRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "DeleteRecord")
     
     
@@ -423,6 +427,7 @@ func NewDescribeDomainRequest() (request *DescribeDomainRequest) {
     request = &DescribeDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "DescribeDomain")
     
     
@@ -480,6 +485,7 @@ func NewDescribeRecordRequest() (request *DescribeRecordRequest) {
     request = &DescribeRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "DescribeRecord")
     
     
@@ -569,6 +575,7 @@ func NewModifyDomainRemarkRequest() (request *ModifyDomainRemarkRequest) {
     request = &ModifyDomainRemarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "ModifyDomainRemark")
     
     
@@ -660,6 +667,7 @@ func NewModifyDomainStatusRequest() (request *ModifyDomainStatusRequest) {
     request = &ModifyDomainStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "ModifyDomainStatus")
     
     
@@ -723,6 +731,7 @@ func NewModifyRecordRequest() (request *ModifyRecordRequest) {
     request = &ModifyRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dnspod", APIVersion, "ModifyRecord")
     
     

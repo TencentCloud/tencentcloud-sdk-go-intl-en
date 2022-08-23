@@ -49,6 +49,7 @@ func NewAnalyzeFaceRequest() (request *AnalyzeFaceRequest) {
     request = &AnalyzeFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "AnalyzeFace")
     
     
@@ -246,6 +247,7 @@ func NewCompareFaceRequest() (request *CompareFaceRequest) {
     request = &CompareFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "CompareFace")
     
     
@@ -455,6 +457,7 @@ func NewCopyPersonRequest() (request *CopyPersonRequest) {
     request = &CopyPersonRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "CopyPerson")
     
     
@@ -642,6 +645,7 @@ func NewCreateFaceRequest() (request *CreateFaceRequest) {
     request = &CreateFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "CreateFace")
     
     
@@ -845,6 +849,7 @@ func NewCreateGroupRequest() (request *CreateGroupRequest) {
     request = &CreateGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "CreateGroup")
     
     
@@ -1048,6 +1053,7 @@ func NewCreatePersonRequest() (request *CreatePersonRequest) {
     request = &CreatePersonRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "CreatePerson")
     
     
@@ -1253,6 +1259,7 @@ func NewDeleteFaceRequest() (request *DeleteFaceRequest) {
     request = &DeleteFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DeleteFace")
     
     
@@ -1432,6 +1439,7 @@ func NewDeleteGroupRequest() (request *DeleteGroupRequest) {
     request = &DeleteGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DeleteGroup")
     
     
@@ -1609,6 +1617,7 @@ func NewDeletePersonRequest() (request *DeletePersonRequest) {
     request = &DeletePersonRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DeletePerson")
     
     
@@ -1788,6 +1797,7 @@ func NewDeletePersonFromGroupRequest() (request *DeletePersonFromGroupRequest) {
     request = &DeletePersonFromGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DeletePersonFromGroup")
     
     
@@ -1967,6 +1977,7 @@ func NewDetectFaceRequest() (request *DetectFaceRequest) {
     request = &DetectFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DetectFace")
     
     
@@ -2218,6 +2229,7 @@ func NewDetectFaceAttributesRequest() (request *DetectFaceAttributesRequest) {
     request = &DetectFaceAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DetectFaceAttributes")
     
     
@@ -2397,6 +2409,7 @@ func NewDetectLiveFaceRequest() (request *DetectLiveFaceRequest) {
     request = &DetectLiveFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "DetectLiveFace")
     
     
@@ -2628,6 +2641,7 @@ func NewGetGroupInfoRequest() (request *GetGroupInfoRequest) {
     request = &GetGroupInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "GetGroupInfo")
     
     
@@ -2691,6 +2705,7 @@ func NewGetGroupListRequest() (request *GetGroupListRequest) {
     request = &GetGroupListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "GetGroupList")
     
     
@@ -2868,6 +2883,7 @@ func NewGetPersonBaseInfoRequest() (request *GetPersonBaseInfoRequest) {
     request = &GetPersonBaseInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "GetPersonBaseInfo")
     
     
@@ -3045,6 +3061,7 @@ func NewGetPersonGroupInfoRequest() (request *GetPersonGroupInfoRequest) {
     request = &GetPersonGroupInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "GetPersonGroupInfo")
     
     
@@ -3222,6 +3239,7 @@ func NewGetPersonListRequest() (request *GetPersonListRequest) {
     request = &GetPersonListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "GetPersonList")
     
     
@@ -3399,6 +3417,7 @@ func NewGetPersonListNumRequest() (request *GetPersonListNumRequest) {
     request = &GetPersonListNumRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "GetPersonListNum")
     
     
@@ -3576,6 +3595,7 @@ func NewModifyGroupRequest() (request *ModifyGroupRequest) {
     request = &ModifyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "ModifyGroup")
     
     
@@ -3751,6 +3771,7 @@ func NewModifyPersonBaseInfoRequest() (request *ModifyPersonBaseInfoRequest) {
     request = &ModifyPersonBaseInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "ModifyPersonBaseInfo")
     
     
@@ -3928,6 +3949,7 @@ func NewModifyPersonGroupInfoRequest() (request *ModifyPersonGroupInfoRequest) {
     request = &ModifyPersonGroupInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "ModifyPersonGroupInfo")
     
     
@@ -4103,6 +4125,7 @@ func NewSearchFacesRequest() (request *SearchFacesRequest) {
     request = &SearchFacesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "SearchFaces")
     
     
@@ -4354,6 +4377,7 @@ func NewSearchFacesReturnsByGroupRequest() (request *SearchFacesReturnsByGroupRe
     request = &SearchFacesReturnsByGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "SearchFacesReturnsByGroup")
     
     
@@ -4601,6 +4625,7 @@ func NewSearchPersonsRequest() (request *SearchPersonsRequest) {
     request = &SearchPersonsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "SearchPersons")
     
     
@@ -4766,6 +4791,7 @@ func NewSearchPersonsReturnsByGroupRequest() (request *SearchPersonsReturnsByGro
     request = &SearchPersonsReturnsByGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "SearchPersonsReturnsByGroup")
     
     
@@ -4925,6 +4951,7 @@ func NewVerifyFaceRequest() (request *VerifyFaceRequest) {
     request = &VerifyFaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "VerifyFace")
     
     
@@ -5140,6 +5167,7 @@ func NewVerifyPersonRequest() (request *VerifyPersonRequest) {
     request = &VerifyPersonRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iai", APIVersion, "VerifyPerson")
     
     

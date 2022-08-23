@@ -49,6 +49,7 @@ func NewCreateCfsFileSystemRequest() (request *CreateCfsFileSystemRequest) {
     request = &CreateCfsFileSystemRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "CreateCfsFileSystem")
     
     
@@ -192,6 +193,7 @@ func NewCreateCfsPGroupRequest() (request *CreateCfsPGroupRequest) {
     request = &CreateCfsPGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "CreateCfsPGroup")
     
     
@@ -255,6 +257,7 @@ func NewCreateCfsRuleRequest() (request *CreateCfsRuleRequest) {
     request = &CreateCfsRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "CreateCfsRule")
     
     
@@ -334,6 +337,7 @@ func NewDeleteCfsFileSystemRequest() (request *DeleteCfsFileSystemRequest) {
     request = &DeleteCfsFileSystemRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DeleteCfsFileSystem")
     
     
@@ -405,6 +409,7 @@ func NewDeleteCfsPGroupRequest() (request *DeleteCfsPGroupRequest) {
     request = &DeleteCfsPGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DeleteCfsPGroup")
     
     
@@ -470,6 +475,7 @@ func NewDeleteCfsRuleRequest() (request *DeleteCfsRuleRequest) {
     request = &DeleteCfsRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DeleteCfsRule")
     
     
@@ -549,6 +555,7 @@ func NewDeleteMountTargetRequest() (request *DeleteMountTargetRequest) {
     request = &DeleteMountTargetRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DeleteMountTarget")
     
     
@@ -616,6 +623,7 @@ func NewDescribeAvailableZoneInfoRequest() (request *DescribeAvailableZoneInfoRe
     request = &DescribeAvailableZoneInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeAvailableZoneInfo")
     
     
@@ -669,6 +677,7 @@ func NewDescribeCfsFileSystemClientsRequest() (request *DescribeCfsFileSystemCli
     request = &DescribeCfsFileSystemClientsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeCfsFileSystemClients")
     
     
@@ -728,6 +737,7 @@ func NewDescribeCfsFileSystemsRequest() (request *DescribeCfsFileSystemsRequest)
     request = &DescribeCfsFileSystemsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeCfsFileSystems")
     
     
@@ -797,6 +807,7 @@ func NewDescribeCfsPGroupsRequest() (request *DescribeCfsPGroupsRequest) {
     request = &DescribeCfsPGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeCfsPGroups")
     
     
@@ -848,6 +859,7 @@ func NewDescribeCfsRulesRequest() (request *DescribeCfsRulesRequest) {
     request = &DescribeCfsRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeCfsRules")
     
     
@@ -903,6 +915,7 @@ func NewDescribeCfsServiceStatusRequest() (request *DescribeCfsServiceStatusRequ
     request = &DescribeCfsServiceStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeCfsServiceStatus")
     
     
@@ -958,6 +971,7 @@ func NewDescribeMountTargetsRequest() (request *DescribeMountTargetsRequest) {
     request = &DescribeMountTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "DescribeMountTargets")
     
     
@@ -1023,6 +1037,7 @@ func NewSignUpCfsServiceRequest() (request *SignUpCfsServiceRequest) {
     request = &SignUpCfsServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "SignUpCfsService")
     
     
@@ -1078,6 +1093,7 @@ func NewUpdateCfsFileSystemNameRequest() (request *UpdateCfsFileSystemNameReques
     request = &UpdateCfsFileSystemNameRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "UpdateCfsFileSystemName")
     
     
@@ -1149,6 +1165,7 @@ func NewUpdateCfsFileSystemPGroupRequest() (request *UpdateCfsFileSystemPGroupRe
     request = &UpdateCfsFileSystemPGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "UpdateCfsFileSystemPGroup")
     
     
@@ -1228,6 +1245,7 @@ func NewUpdateCfsFileSystemSizeLimitRequest() (request *UpdateCfsFileSystemSizeL
     request = &UpdateCfsFileSystemSizeLimitRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "UpdateCfsFileSystemSizeLimit")
     
     
@@ -1299,6 +1317,7 @@ func NewUpdateCfsPGroupRequest() (request *UpdateCfsPGroupRequest) {
     request = &UpdateCfsPGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "UpdateCfsPGroup")
     
     
@@ -1372,6 +1391,7 @@ func NewUpdateCfsRuleRequest() (request *UpdateCfsRuleRequest) {
     request = &UpdateCfsRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cfs", APIVersion, "UpdateCfsRule")
     
     

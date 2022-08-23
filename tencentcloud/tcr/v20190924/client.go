@@ -49,6 +49,7 @@ func NewCheckInstanceRequest() (request *CheckInstanceRequest) {
     request = &CheckInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "CheckInstance")
     
     
@@ -124,6 +125,7 @@ func NewCreateImmutableTagRulesRequest() (request *CreateImmutableTagRulesReques
     request = &CreateImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "CreateImmutableTagRules")
     
     
@@ -181,6 +183,7 @@ func NewCreateInstanceTokenRequest() (request *CreateInstanceTokenRequest) {
     request = &CreateInstanceTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "CreateInstanceToken")
     
     
@@ -242,6 +245,7 @@ func NewCreateMultipleSecurityPolicyRequest() (request *CreateMultipleSecurityPo
     request = &CreateMultipleSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "CreateMultipleSecurityPolicy")
     
     
@@ -309,6 +313,7 @@ func NewCreateReplicationInstanceRequest() (request *CreateReplicationInstanceRe
     request = &CreateReplicationInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "CreateReplicationInstance")
     
     
@@ -378,6 +383,7 @@ func NewDeleteImmutableTagRulesRequest() (request *DeleteImmutableTagRulesReques
     request = &DeleteImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "DeleteImmutableTagRules")
     
     
@@ -433,6 +439,7 @@ func NewDeleteMultipleSecurityPolicyRequest() (request *DeleteMultipleSecurityPo
     request = &DeleteMultipleSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "DeleteMultipleSecurityPolicy")
     
     
@@ -492,6 +499,7 @@ func NewDescribeImmutableTagRulesRequest() (request *DescribeImmutableTagRulesRe
     request = &DescribeImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeImmutableTagRules")
     
     
@@ -555,6 +563,7 @@ func NewDescribeReplicationInstanceCreateTasksRequest() (request *DescribeReplic
     request = &DescribeReplicationInstanceCreateTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstanceCreateTasks")
     
     
@@ -614,6 +623,7 @@ func NewDescribeReplicationInstanceSyncStatusRequest() (request *DescribeReplica
     request = &DescribeReplicationInstanceSyncStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstanceSyncStatus")
     
     
@@ -673,6 +683,7 @@ func NewDescribeReplicationInstancesRequest() (request *DescribeReplicationInsta
     request = &DescribeReplicationInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "DescribeReplicationInstances")
     
     
@@ -736,6 +747,7 @@ func NewManageReplicationRequest() (request *ManageReplicationRequest) {
     request = &ManageReplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "ManageReplication")
     
     
@@ -809,6 +821,7 @@ func NewModifyImmutableTagRulesRequest() (request *ModifyImmutableTagRulesReques
     request = &ModifyImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "ModifyImmutableTagRules")
     
     
@@ -866,6 +879,7 @@ func NewModifyInstanceRequest() (request *ModifyInstanceRequest) {
     request = &ModifyInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("tcr", APIVersion, "ModifyInstance")
     
     

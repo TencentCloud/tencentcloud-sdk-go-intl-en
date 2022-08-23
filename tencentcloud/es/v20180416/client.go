@@ -49,6 +49,7 @@ func NewCreateIndexRequest() (request *CreateIndexRequest) {
     request = &CreateIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "CreateIndex")
     
     
@@ -122,6 +123,7 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
     request = &CreateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "CreateInstance")
     
     
@@ -191,6 +193,7 @@ func NewDeleteIndexRequest() (request *DeleteIndexRequest) {
     request = &DeleteIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DeleteIndex")
     
     
@@ -264,6 +267,7 @@ func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
     request = &DeleteInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DeleteInstance")
     
     
@@ -317,6 +321,7 @@ func NewDescribeIndexListRequest() (request *DescribeIndexListRequest) {
     request = &DescribeIndexListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DescribeIndexList")
     
     
@@ -390,6 +395,7 @@ func NewDescribeIndexMetaRequest() (request *DescribeIndexMetaRequest) {
     request = &DescribeIndexMetaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DescribeIndexMeta")
     
     
@@ -463,6 +469,7 @@ func NewDescribeInstanceLogsRequest() (request *DescribeInstanceLogsRequest) {
     request = &DescribeInstanceLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DescribeInstanceLogs")
     
     
@@ -512,6 +519,7 @@ func NewDescribeInstanceOperationsRequest() (request *DescribeInstanceOperations
     request = &DescribeInstanceOperationsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DescribeInstanceOperations")
     
     
@@ -563,6 +571,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DescribeInstances")
     
     
@@ -616,6 +625,7 @@ func NewDescribeViewsRequest() (request *DescribeViewsRequest) {
     request = &DescribeViewsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "DescribeViews")
     
     
@@ -667,6 +677,7 @@ func NewGetRequestTargetNodeTypesRequest() (request *GetRequestTargetNodeTypesRe
     request = &GetRequestTargetNodeTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "GetRequestTargetNodeTypes")
     
     
@@ -718,6 +729,7 @@ func NewRestartInstanceRequest() (request *RestartInstanceRequest) {
     request = &RestartInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "RestartInstance")
     
     
@@ -771,6 +783,7 @@ func NewRestartKibanaRequest() (request *RestartKibanaRequest) {
     request = &RestartKibanaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "RestartKibana")
     
     
@@ -822,6 +835,7 @@ func NewRestartNodesRequest() (request *RestartNodesRequest) {
     request = &RestartNodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "RestartNodes")
     
     
@@ -877,6 +891,7 @@ func NewUpdateDictionariesRequest() (request *UpdateDictionariesRequest) {
     request = &UpdateDictionariesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpdateDictionaries")
     
     
@@ -934,6 +949,7 @@ func NewUpdateIndexRequest() (request *UpdateIndexRequest) {
     request = &UpdateIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpdateIndex")
     
     
@@ -1007,6 +1023,7 @@ func NewUpdateInstanceRequest() (request *UpdateInstanceRequest) {
     request = &UpdateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpdateInstance")
     
     
@@ -1110,6 +1127,7 @@ func NewUpdatePluginsRequest() (request *UpdatePluginsRequest) {
     request = &UpdatePluginsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpdatePlugins")
     
     
@@ -1175,6 +1193,7 @@ func NewUpdateRequestTargetNodeTypesRequest() (request *UpdateRequestTargetNodeT
     request = &UpdateRequestTargetNodeTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpdateRequestTargetNodeTypes")
     
     
@@ -1232,6 +1251,7 @@ func NewUpgradeInstanceRequest() (request *UpgradeInstanceRequest) {
     request = &UpgradeInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpgradeInstance")
     
     
@@ -1297,6 +1317,7 @@ func NewUpgradeLicenseRequest() (request *UpgradeLicenseRequest) {
     request = &UpgradeLicenseRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("es", APIVersion, "UpgradeLicense")
     
     

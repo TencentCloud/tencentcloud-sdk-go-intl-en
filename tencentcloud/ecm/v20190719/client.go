@@ -49,6 +49,7 @@ func NewAllocateAddressesRequest() (request *AllocateAddressesRequest) {
     request = &AllocateAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "AllocateAddresses")
     
     
@@ -144,6 +145,7 @@ func NewAssignIpv6AddressesRequest() (request *AssignIpv6AddressesRequest) {
     request = &AssignIpv6AddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "AssignIpv6Addresses")
     
     
@@ -219,6 +221,7 @@ func NewAssignPrivateIpAddressesRequest() (request *AssignPrivateIpAddressesRequ
     request = &AssignPrivateIpAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "AssignPrivateIpAddresses")
     
     
@@ -290,6 +293,7 @@ func NewAssociateAddressRequest() (request *AssociateAddressRequest) {
     request = &AssociateAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "AssociateAddress")
     
     
@@ -401,6 +405,7 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
     request = &AssociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "AssociateSecurityGroups")
     
     
@@ -462,6 +467,7 @@ func NewAttachNetworkInterfaceRequest() (request *AttachNetworkInterfaceRequest)
     request = &AttachNetworkInterfaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "AttachNetworkInterface")
     
     
@@ -545,6 +551,7 @@ func NewBatchDeregisterTargetsRequest() (request *BatchDeregisterTargetsRequest)
     request = &BatchDeregisterTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "BatchDeregisterTargets")
     
     
@@ -618,6 +625,7 @@ func NewBatchModifyTargetWeightRequest() (request *BatchModifyTargetWeightReques
     request = &BatchModifyTargetWeightRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "BatchModifyTargetWeight")
     
     
@@ -677,6 +685,7 @@ func NewBatchRegisterTargetsRequest() (request *BatchRegisterTargetsRequest) {
     request = &BatchRegisterTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "BatchRegisterTargets")
     
     
@@ -748,6 +757,7 @@ func NewCreateHaVipRequest() (request *CreateHaVipRequest) {
     request = &CreateHaVipRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateHaVip")
     
     
@@ -813,6 +823,7 @@ func NewCreateImageRequest() (request *CreateImageRequest) {
     request = &CreateImageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateImage")
     
     
@@ -886,6 +897,7 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
     request = &CreateKeyPairRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateKeyPair")
     
     
@@ -939,6 +951,7 @@ func NewCreateListenerRequest() (request *CreateListenerRequest) {
     request = &CreateListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateListener")
     
     
@@ -1000,6 +1013,7 @@ func NewCreateLoadBalancerRequest() (request *CreateLoadBalancerRequest) {
     request = &CreateLoadBalancerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateLoadBalancer")
     
     
@@ -1087,6 +1101,7 @@ func NewCreateModuleRequest() (request *CreateModuleRequest) {
     request = &CreateModuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateModule")
     
     
@@ -1176,6 +1191,7 @@ func NewCreateNetworkInterfaceRequest() (request *CreateNetworkInterfaceRequest)
     request = &CreateNetworkInterfaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateNetworkInterface")
     
     
@@ -1251,6 +1267,7 @@ func NewCreateRouteTableRequest() (request *CreateRouteTableRequest) {
     request = &CreateRouteTableRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateRouteTable")
     
     
@@ -1316,6 +1333,7 @@ func NewCreateRoutesRequest() (request *CreateRoutesRequest) {
     request = &CreateRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateRoutes")
     
     
@@ -1389,6 +1407,7 @@ func NewCreateSecurityGroupRequest() (request *CreateSecurityGroupRequest) {
     request = &CreateSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateSecurityGroup")
     
     
@@ -1450,6 +1469,7 @@ func NewCreateSecurityGroupPoliciesRequest() (request *CreateSecurityGroupPolici
     request = &CreateSecurityGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateSecurityGroupPolicies")
     
     
@@ -1575,6 +1595,7 @@ func NewCreateSubnetRequest() (request *CreateSubnetRequest) {
     request = &CreateSubnetRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateSubnet")
     
     
@@ -1646,6 +1667,7 @@ func NewCreateVpcRequest() (request *CreateVpcRequest) {
     request = &CreateVpcRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "CreateVpc")
     
     
@@ -1711,6 +1733,7 @@ func NewDeleteHaVipRequest() (request *DeleteHaVipRequest) {
     request = &DeleteHaVipRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteHaVip")
     
     
@@ -1770,6 +1793,7 @@ func NewDeleteImageRequest() (request *DeleteImageRequest) {
     request = &DeleteImageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteImage")
     
     
@@ -1829,6 +1853,7 @@ func NewDeleteListenerRequest() (request *DeleteListenerRequest) {
     request = &DeleteListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteListener")
     
     
@@ -1888,6 +1913,7 @@ func NewDeleteLoadBalancerRequest() (request *DeleteLoadBalancerRequest) {
     request = &DeleteLoadBalancerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteLoadBalancer")
     
     
@@ -1959,6 +1985,7 @@ func NewDeleteLoadBalancerListenersRequest() (request *DeleteLoadBalancerListene
     request = &DeleteLoadBalancerListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteLoadBalancerListeners")
     
     
@@ -2012,6 +2039,7 @@ func NewDeleteModuleRequest() (request *DeleteModuleRequest) {
     request = &DeleteModuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteModule")
     
     
@@ -2071,6 +2099,7 @@ func NewDeleteNetworkInterfaceRequest() (request *DeleteNetworkInterfaceRequest)
     request = &DeleteNetworkInterfaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteNetworkInterface")
     
     
@@ -2138,6 +2167,7 @@ func NewDeleteRouteTableRequest() (request *DeleteRouteTableRequest) {
     request = &DeleteRouteTableRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteRouteTable")
     
     
@@ -2195,6 +2225,7 @@ func NewDeleteRoutesRequest() (request *DeleteRoutesRequest) {
     request = &DeleteRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteRoutes")
     
     
@@ -2246,6 +2277,7 @@ func NewDeleteSecurityGroupRequest() (request *DeleteSecurityGroupRequest) {
     request = &DeleteSecurityGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteSecurityGroup")
     
     
@@ -2311,6 +2343,7 @@ func NewDeleteSecurityGroupPoliciesRequest() (request *DeleteSecurityGroupPolici
     request = &DeleteSecurityGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteSecurityGroupPolicies")
     
     
@@ -2368,6 +2401,7 @@ func NewDeleteSnapshotsRequest() (request *DeleteSnapshotsRequest) {
     request = &DeleteSnapshotsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteSnapshots")
     
     
@@ -2441,6 +2475,7 @@ func NewDeleteSubnetRequest() (request *DeleteSubnetRequest) {
     request = &DeleteSubnetRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteSubnet")
     
     
@@ -2508,6 +2543,7 @@ func NewDeleteVpcRequest() (request *DeleteVpcRequest) {
     request = &DeleteVpcRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DeleteVpc")
     
     
@@ -2569,6 +2605,7 @@ func NewDescribeAddressQuotaRequest() (request *DescribeAddressQuotaRequest) {
     request = &DescribeAddressQuotaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeAddressQuota")
     
     
@@ -2626,6 +2663,7 @@ func NewDescribeAddressesRequest() (request *DescribeAddressesRequest) {
     request = &DescribeAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeAddresses")
     
     
@@ -2689,6 +2727,7 @@ func NewDescribeBaseOverviewRequest() (request *DescribeBaseOverviewRequest) {
     request = &DescribeBaseOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeBaseOverview")
     
     
@@ -2742,6 +2781,7 @@ func NewDescribeConfigRequest() (request *DescribeConfigRequest) {
     request = &DescribeConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeConfig")
     
     
@@ -2797,6 +2837,7 @@ func NewDescribeCustomImageTaskRequest() (request *DescribeCustomImageTaskReques
     request = &DescribeCustomImageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeCustomImageTask")
     
     
@@ -2852,6 +2893,7 @@ func NewDescribeDefaultSubnetRequest() (request *DescribeDefaultSubnetRequest) {
     request = &DescribeDefaultSubnetRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeDefaultSubnet")
     
     
@@ -2907,6 +2949,7 @@ func NewDescribeHaVipsRequest() (request *DescribeHaVipsRequest) {
     request = &DescribeHaVipsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeHaVips")
     
     
@@ -2966,6 +3009,7 @@ func NewDescribeImageRequest() (request *DescribeImageRequest) {
     request = &DescribeImageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeImage")
     
     
@@ -3029,6 +3073,7 @@ func NewDescribeImportImageOsRequest() (request *DescribeImportImageOsRequest) {
     request = &DescribeImportImageOsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeImportImageOs")
     
     
@@ -3076,6 +3121,7 @@ func NewDescribeInstanceTypeConfigRequest() (request *DescribeInstanceTypeConfig
     request = &DescribeInstanceTypeConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeInstanceTypeConfig")
     
     
@@ -3129,6 +3175,7 @@ func NewDescribeInstanceVncUrlRequest() (request *DescribeInstanceVncUrlRequest)
     request = &DescribeInstanceVncUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeInstanceVncUrl")
     
     
@@ -3186,6 +3233,7 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeInstances")
     
     
@@ -3251,6 +3299,7 @@ func NewDescribeInstancesDeniedActionsRequest() (request *DescribeInstancesDenie
     request = &DescribeInstancesDeniedActionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeInstancesDeniedActions")
     
     
@@ -3306,6 +3355,7 @@ func NewDescribeListenersRequest() (request *DescribeListenersRequest) {
     request = &DescribeListenersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeListeners")
     
     
@@ -3365,6 +3415,7 @@ func NewDescribeLoadBalanceTaskStatusRequest() (request *DescribeLoadBalanceTask
     request = &DescribeLoadBalanceTaskStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeLoadBalanceTaskStatus")
     
     
@@ -3418,6 +3469,7 @@ func NewDescribeLoadBalancersRequest() (request *DescribeLoadBalancersRequest) {
     request = &DescribeLoadBalancersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeLoadBalancers")
     
     
@@ -3483,6 +3535,7 @@ func NewDescribeModuleRequest() (request *DescribeModuleRequest) {
     request = &DescribeModuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeModule")
     
     
@@ -3544,6 +3597,7 @@ func NewDescribeModuleDetailRequest() (request *DescribeModuleDetailRequest) {
     request = &DescribeModuleDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeModuleDetail")
     
     
@@ -3601,6 +3655,7 @@ func NewDescribeMonthPeakNetworkRequest() (request *DescribeMonthPeakNetworkRequ
     request = &DescribeMonthPeakNetworkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeMonthPeakNetwork")
     
     
@@ -3666,6 +3721,7 @@ func NewDescribeNetworkInterfacesRequest() (request *DescribeNetworkInterfacesRe
     request = &DescribeNetworkInterfacesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeNetworkInterfaces")
     
     
@@ -3735,6 +3791,7 @@ func NewDescribeNodeRequest() (request *DescribeNodeRequest) {
     request = &DescribeNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeNode")
     
     
@@ -3788,6 +3845,7 @@ func NewDescribePackingQuotaGroupRequest() (request *DescribePackingQuotaGroupRe
     request = &DescribePackingQuotaGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribePackingQuotaGroup")
     
     
@@ -3853,6 +3911,7 @@ func NewDescribePeakBaseOverviewRequest() (request *DescribePeakBaseOverviewRequ
     request = &DescribePeakBaseOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribePeakBaseOverview")
     
     
@@ -3908,6 +3967,7 @@ func NewDescribePeakNetworkOverviewRequest() (request *DescribePeakNetworkOvervi
     request = &DescribePeakNetworkOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribePeakNetworkOverview")
     
     
@@ -3965,6 +4025,7 @@ func NewDescribePriceRunInstanceRequest() (request *DescribePriceRunInstanceRequ
     request = &DescribePriceRunInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribePriceRunInstance")
     
     
@@ -4026,6 +4087,7 @@ func NewDescribeRouteConflictsRequest() (request *DescribeRouteConflictsRequest)
     request = &DescribeRouteConflictsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeRouteConflicts")
     
     
@@ -4081,6 +4143,7 @@ func NewDescribeRouteTablesRequest() (request *DescribeRouteTablesRequest) {
     request = &DescribeRouteTablesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeRouteTables")
     
     
@@ -4146,6 +4209,7 @@ func NewDescribeSecurityGroupAssociationStatisticsRequest() (request *DescribeSe
     request = &DescribeSecurityGroupAssociationStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeSecurityGroupAssociationStatistics")
     
     
@@ -4203,6 +4267,7 @@ func NewDescribeSecurityGroupLimitsRequest() (request *DescribeSecurityGroupLimi
     request = &DescribeSecurityGroupLimitsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeSecurityGroupLimits")
     
     
@@ -4256,6 +4321,7 @@ func NewDescribeSecurityGroupPoliciesRequest() (request *DescribeSecurityGroupPo
     request = &DescribeSecurityGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeSecurityGroupPolicies")
     
     
@@ -4313,6 +4379,7 @@ func NewDescribeSecurityGroupsRequest() (request *DescribeSecurityGroupsRequest)
     request = &DescribeSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeSecurityGroups")
     
     
@@ -4374,6 +4441,7 @@ func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
     request = &DescribeSnapshotsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeSnapshots")
     
     
@@ -4439,6 +4507,7 @@ func NewDescribeSubnetsRequest() (request *DescribeSubnetsRequest) {
     request = &DescribeSubnetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeSubnets")
     
     
@@ -4508,6 +4577,7 @@ func NewDescribeTargetHealthRequest() (request *DescribeTargetHealthRequest) {
     request = &DescribeTargetHealthRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeTargetHealth")
     
     
@@ -4569,6 +4639,7 @@ func NewDescribeTargetsRequest() (request *DescribeTargetsRequest) {
     request = &DescribeTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeTargets")
     
     
@@ -4626,6 +4697,7 @@ func NewDescribeTaskResultRequest() (request *DescribeTaskResultRequest) {
     request = &DescribeTaskResultRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeTaskResult")
     
     
@@ -4687,6 +4759,7 @@ func NewDescribeTaskStatusRequest() (request *DescribeTaskStatusRequest) {
     request = &DescribeTaskStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeTaskStatus")
     
     
@@ -4738,6 +4811,7 @@ func NewDescribeVpcsRequest() (request *DescribeVpcsRequest) {
     request = &DescribeVpcsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DescribeVpcs")
     
     
@@ -4805,6 +4879,7 @@ func NewDetachNetworkInterfaceRequest() (request *DetachNetworkInterfaceRequest)
     request = &DetachNetworkInterfaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DetachNetworkInterface")
     
     
@@ -4870,6 +4945,7 @@ func NewDisableRoutesRequest() (request *DisableRoutesRequest) {
     request = &DisableRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DisableRoutes")
     
     
@@ -4931,6 +5007,7 @@ func NewDisassociateAddressRequest() (request *DisassociateAddressRequest) {
     request = &DisassociateAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DisassociateAddress")
     
     
@@ -5018,6 +5095,7 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
     request = &DisassociateInstancesKeyPairsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DisassociateInstancesKeyPairs")
     
     
@@ -5073,6 +5151,7 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
     request = &DisassociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "DisassociateSecurityGroups")
     
     
@@ -5126,6 +5205,7 @@ func NewEnableRoutesRequest() (request *EnableRoutesRequest) {
     request = &EnableRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "EnableRoutes")
     
     
@@ -5199,6 +5279,7 @@ func NewImportImageRequest() (request *ImportImageRequest) {
     request = &ImportImageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ImportImage")
     
     
@@ -5264,6 +5345,7 @@ func NewMigrateNetworkInterfaceRequest() (request *MigrateNetworkInterfaceReques
     request = &MigrateNetworkInterfaceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "MigrateNetworkInterface")
     
     
@@ -5325,6 +5407,7 @@ func NewMigratePrivateIpAddressRequest() (request *MigratePrivateIpAddressReques
     request = &MigratePrivateIpAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "MigratePrivateIpAddress")
     
     
@@ -5394,6 +5477,7 @@ func NewModifyAddressAttributeRequest() (request *ModifyAddressAttributeRequest)
     request = &ModifyAddressAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyAddressAttribute")
     
     
@@ -5463,6 +5547,7 @@ func NewModifyAddressesBandwidthRequest() (request *ModifyAddressesBandwidthRequ
     request = &ModifyAddressesBandwidthRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyAddressesBandwidth")
     
     
@@ -5530,6 +5615,7 @@ func NewModifyDefaultSubnetRequest() (request *ModifyDefaultSubnetRequest) {
     request = &ModifyDefaultSubnetRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyDefaultSubnet")
     
     
@@ -5585,6 +5671,7 @@ func NewModifyHaVipAttributeRequest() (request *ModifyHaVipAttributeRequest) {
     request = &ModifyHaVipAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyHaVipAttribute")
     
     
@@ -5640,6 +5727,7 @@ func NewModifyImageAttributeRequest() (request *ModifyImageAttributeRequest) {
     request = &ModifyImageAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyImageAttribute")
     
     
@@ -5701,6 +5789,7 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
     request = &ModifyInstancesAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyInstancesAttribute")
     
     
@@ -5764,6 +5853,7 @@ func NewModifyIpv6AddressesAttributeRequest() (request *ModifyIpv6AddressesAttri
     request = &ModifyIpv6AddressesAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyIpv6AddressesAttribute")
     
     
@@ -5823,6 +5913,7 @@ func NewModifyListenerRequest() (request *ModifyListenerRequest) {
     request = &ModifyListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyListener")
     
     
@@ -5880,6 +5971,7 @@ func NewModifyLoadBalancerAttributesRequest() (request *ModifyLoadBalancerAttrib
     request = &ModifyLoadBalancerAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyLoadBalancerAttributes")
     
     
@@ -5945,6 +6037,7 @@ func NewModifyModuleConfigRequest() (request *ModifyModuleConfigRequest) {
     request = &ModifyModuleConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleConfig")
     
     
@@ -6014,6 +6107,7 @@ func NewModifyModuleDisableWanIpRequest() (request *ModifyModuleDisableWanIpRequ
     request = &ModifyModuleDisableWanIpRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleDisableWanIp")
     
     
@@ -6067,6 +6161,7 @@ func NewModifyModuleImageRequest() (request *ModifyModuleImageRequest) {
     request = &ModifyModuleImageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleImage")
     
     
@@ -6130,6 +6225,7 @@ func NewModifyModuleIpDirectRequest() (request *ModifyModuleIpDirectRequest) {
     request = &ModifyModuleIpDirectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleIpDirect")
     
     
@@ -6185,6 +6281,7 @@ func NewModifyModuleNameRequest() (request *ModifyModuleNameRequest) {
     request = &ModifyModuleNameRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleName")
     
     
@@ -6242,6 +6339,7 @@ func NewModifyModuleNetworkRequest() (request *ModifyModuleNetworkRequest) {
     request = &ModifyModuleNetworkRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleNetwork")
     
     
@@ -6307,6 +6405,7 @@ func NewModifyModuleSecurityGroupsRequest() (request *ModifyModuleSecurityGroups
     request = &ModifyModuleSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyModuleSecurityGroups")
     
     
@@ -6368,6 +6467,7 @@ func NewModifyPrivateIpAddressesAttributeRequest() (request *ModifyPrivateIpAddr
     request = &ModifyPrivateIpAddressesAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyPrivateIpAddressesAttribute")
     
     
@@ -6423,6 +6523,7 @@ func NewModifyRouteTableAttributeRequest() (request *ModifyRouteTableAttributeRe
     request = &ModifyRouteTableAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyRouteTableAttribute")
     
     
@@ -6476,6 +6577,7 @@ func NewModifySecurityGroupAttributeRequest() (request *ModifySecurityGroupAttri
     request = &ModifySecurityGroupAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifySecurityGroupAttribute")
     
     
@@ -6535,6 +6637,7 @@ func NewModifySecurityGroupPoliciesRequest() (request *ModifySecurityGroupPolici
     request = &ModifySecurityGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifySecurityGroupPolicies")
     
     
@@ -6592,6 +6695,7 @@ func NewModifySubnetAttributeRequest() (request *ModifySubnetAttributeRequest) {
     request = &ModifySubnetAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifySubnetAttribute")
     
     
@@ -6659,6 +6763,7 @@ func NewModifyTargetPortRequest() (request *ModifyTargetPortRequest) {
     request = &ModifyTargetPortRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyTargetPort")
     
     
@@ -6716,6 +6821,7 @@ func NewModifyTargetWeightRequest() (request *ModifyTargetWeightRequest) {
     request = &ModifyTargetWeightRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyTargetWeight")
     
     
@@ -6777,6 +6883,7 @@ func NewModifyVpcAttributeRequest() (request *ModifyVpcAttributeRequest) {
     request = &ModifyVpcAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ModifyVpcAttribute")
     
     
@@ -6840,6 +6947,7 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
     request = &RebootInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "RebootInstances")
     
     
@@ -6905,6 +7013,7 @@ func NewReleaseAddressesRequest() (request *ReleaseAddressesRequest) {
     request = &ReleaseAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ReleaseAddresses")
     
     
@@ -6980,6 +7089,7 @@ func NewReleaseIpv6AddressesRequest() (request *ReleaseIpv6AddressesRequest) {
     request = &ReleaseIpv6AddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ReleaseIpv6Addresses")
     
     
@@ -7037,6 +7147,7 @@ func NewRemovePrivateIpAddressesRequest() (request *RemovePrivateIpAddressesRequ
     request = &RemovePrivateIpAddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "RemovePrivateIpAddresses")
     
     
@@ -7106,6 +7217,7 @@ func NewReplaceRouteTableAssociationRequest() (request *ReplaceRouteTableAssocia
     request = &ReplaceRouteTableAssociationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ReplaceRouteTableAssociation")
     
     
@@ -7165,6 +7277,7 @@ func NewReplaceRoutesRequest() (request *ReplaceRoutesRequest) {
     request = &ReplaceRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ReplaceRoutes")
     
     
@@ -7232,6 +7345,7 @@ func NewReplaceSecurityGroupPolicyRequest() (request *ReplaceSecurityGroupPolicy
     request = &ReplaceSecurityGroupPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ReplaceSecurityGroupPolicy")
     
     
@@ -7289,6 +7403,7 @@ func NewResetInstancesRequest() (request *ResetInstancesRequest) {
     request = &ResetInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ResetInstances")
     
     
@@ -7358,6 +7473,7 @@ func NewResetInstancesMaxBandwidthRequest() (request *ResetInstancesMaxBandwidth
     request = &ResetInstancesMaxBandwidthRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ResetInstancesMaxBandwidth")
     
     
@@ -7423,6 +7539,7 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
     request = &ResetInstancesPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ResetInstancesPassword")
     
     
@@ -7488,6 +7605,7 @@ func NewResetRoutesRequest() (request *ResetRoutesRequest) {
     request = &ResetRoutesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "ResetRoutes")
     
     
@@ -7547,6 +7665,7 @@ func NewRunInstancesRequest() (request *RunInstancesRequest) {
     request = &RunInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "RunInstances")
     
     
@@ -7706,6 +7825,7 @@ func NewSetLoadBalancerSecurityGroupsRequest() (request *SetLoadBalancerSecurity
     request = &SetLoadBalancerSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "SetLoadBalancerSecurityGroups")
     
     
@@ -7773,6 +7893,7 @@ func NewSetSecurityGroupForLoadbalancersRequest() (request *SetSecurityGroupForL
     request = &SetSecurityGroupForLoadbalancersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "SetSecurityGroupForLoadbalancers")
     
     
@@ -7842,6 +7963,7 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
     request = &StartInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "StartInstances")
     
     
@@ -7905,6 +8027,7 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
     request = &StopInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "StopInstances")
     
     
@@ -7976,6 +8099,7 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
     request = &TerminateInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ecm", APIVersion, "TerminateInstances")
     
     

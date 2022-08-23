@@ -49,6 +49,7 @@ func NewListUserGroupsRequest() (request *ListUserGroupsRequest) {
     request = &ListUserGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("ciam", APIVersion, "ListUserGroups")
     
     

@@ -49,6 +49,7 @@ func NewCreatePrivateDNSAccountRequest() (request *CreatePrivateDNSAccountReques
     request = &CreatePrivateDNSAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "CreatePrivateDNSAccount")
     
     
@@ -140,6 +141,7 @@ func NewCreatePrivateZoneRequest() (request *CreatePrivateZoneRequest) {
     request = &CreatePrivateZoneRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "CreatePrivateZone")
     
     
@@ -259,6 +261,7 @@ func NewCreatePrivateZoneRecordRequest() (request *CreatePrivateZoneRecordReques
     request = &CreatePrivateZoneRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "CreatePrivateZoneRecord")
     
     
@@ -384,6 +387,7 @@ func NewDescribeAccountVpcListRequest() (request *DescribeAccountVpcListRequest)
     request = &DescribeAccountVpcListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribeAccountVpcList")
     
     
@@ -473,6 +477,7 @@ func NewDescribeAuditLogRequest() (request *DescribeAuditLogRequest) {
     request = &DescribeAuditLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribeAuditLog")
     
     
@@ -554,6 +559,7 @@ func NewDescribeDashboardRequest() (request *DescribeDashboardRequest) {
     request = &DescribeDashboardRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribeDashboard")
     
     
@@ -641,6 +647,7 @@ func NewDescribePrivateDNSAccountListRequest() (request *DescribePrivateDNSAccou
     request = &DescribePrivateDNSAccountListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribePrivateDNSAccountList")
     
     
@@ -726,6 +733,7 @@ func NewDescribePrivateZoneServiceRequest() (request *DescribePrivateZoneService
     request = &DescribePrivateZoneServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribePrivateZoneService")
     
     
@@ -809,6 +817,7 @@ func NewDescribeQuotaUsageRequest() (request *DescribeQuotaUsageRequest) {
     request = &DescribeQuotaUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribeQuotaUsage")
     
     
@@ -868,6 +877,7 @@ func NewDescribeRequestDataRequest() (request *DescribeRequestDataRequest) {
     request = &DescribeRequestDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "DescribeRequestData")
     
     
@@ -919,6 +929,7 @@ func NewModifyPrivateZoneRequest() (request *ModifyPrivateZoneRequest) {
     request = &ModifyPrivateZoneRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "ModifyPrivateZone")
     
     
@@ -1018,6 +1029,7 @@ func NewModifyPrivateZoneRecordRequest() (request *ModifyPrivateZoneRecordReques
     request = &ModifyPrivateZoneRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "ModifyPrivateZoneRecord")
     
     
@@ -1151,6 +1163,7 @@ func NewModifyPrivateZoneVpcRequest() (request *ModifyPrivateZoneVpcRequest) {
     request = &ModifyPrivateZoneVpcRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "ModifyPrivateZoneVpc")
     
     
@@ -1258,6 +1271,7 @@ func NewSubscribePrivateZoneServiceRequest() (request *SubscribePrivateZoneServi
     request = &SubscribePrivateZoneServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("privatedns", APIVersion, "SubscribePrivateZoneService")
     
     

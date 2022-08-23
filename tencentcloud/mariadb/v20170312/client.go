@@ -49,6 +49,7 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
     request = &AssociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "AssociateSecurityGroups")
     
     
@@ -148,6 +149,7 @@ func NewCancelDcnJobRequest() (request *CancelDcnJobRequest) {
     request = &CancelDcnJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "CancelDcnJob")
     
     
@@ -205,6 +207,7 @@ func NewCloneAccountRequest() (request *CloneAccountRequest) {
     request = &CloneAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "CloneAccount")
     
     
@@ -272,6 +275,7 @@ func NewCloseDBExtranetAccessRequest() (request *CloseDBExtranetAccessRequest) {
     request = &CloseDBExtranetAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "CloseDBExtranetAccess")
     
     
@@ -335,6 +339,7 @@ func NewCopyAccountPrivilegesRequest() (request *CopyAccountPrivilegesRequest) {
     request = &CopyAccountPrivilegesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "CopyAccountPrivileges")
     
     
@@ -402,6 +407,7 @@ func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "CreateAccount")
     
     
@@ -477,6 +483,7 @@ func NewCreateHourDBInstanceRequest() (request *CreateHourDBInstanceRequest) {
     request = &CreateHourDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "CreateHourDBInstance")
     
     
@@ -558,6 +565,7 @@ func NewDeleteAccountRequest() (request *DeleteAccountRequest) {
     request = &DeleteAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DeleteAccount")
     
     
@@ -621,6 +629,7 @@ func NewDescribeAccountPrivilegesRequest() (request *DescribeAccountPrivilegesRe
     request = &DescribeAccountPrivilegesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeAccountPrivileges")
     
     
@@ -686,6 +695,7 @@ func NewDescribeAccountsRequest() (request *DescribeAccountsRequest) {
     request = &DescribeAccountsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeAccounts")
     
     
@@ -745,6 +755,7 @@ func NewDescribeDBInstancesRequest() (request *DescribeDBInstancesRequest) {
     request = &DescribeDBInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDBInstances")
     
     
@@ -812,6 +823,7 @@ func NewDescribeDBLogFilesRequest() (request *DescribeDBLogFilesRequest) {
     request = &DescribeDBLogFilesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDBLogFiles")
     
     
@@ -883,6 +895,7 @@ func NewDescribeDBParametersRequest() (request *DescribeDBParametersRequest) {
     request = &DescribeDBParametersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDBParameters")
     
     
@@ -944,6 +957,7 @@ func NewDescribeDBSecurityGroupsRequest() (request *DescribeDBSecurityGroupsRequ
     request = &DescribeDBSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDBSecurityGroups")
     
     
@@ -1025,6 +1039,7 @@ func NewDescribeDBSlowLogsRequest() (request *DescribeDBSlowLogsRequest) {
     request = &DescribeDBSlowLogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDBSlowLogs")
     
     
@@ -1090,6 +1105,7 @@ func NewDescribeDatabaseObjectsRequest() (request *DescribeDatabaseObjectsReques
     request = &DescribeDatabaseObjectsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDatabaseObjects")
     
     
@@ -1147,6 +1163,7 @@ func NewDescribeDatabaseTableRequest() (request *DescribeDatabaseTableRequest) {
     request = &DescribeDatabaseTableRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDatabaseTable")
     
     
@@ -1206,6 +1223,7 @@ func NewDescribeDatabasesRequest() (request *DescribeDatabasesRequest) {
     request = &DescribeDatabasesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDatabases")
     
     
@@ -1261,6 +1279,7 @@ func NewDescribeDcnDetailRequest() (request *DescribeDcnDetailRequest) {
     request = &DescribeDcnDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDcnDetail")
     
     
@@ -1316,6 +1335,7 @@ func NewDescribeFileDownloadUrlRequest() (request *DescribeFileDownloadUrlReques
     request = &DescribeFileDownloadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeFileDownloadUrl")
     
     
@@ -1371,6 +1391,7 @@ func NewDescribeInstanceNodeInfoRequest() (request *DescribeInstanceNodeInfoRequ
     request = &DescribeInstanceNodeInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeInstanceNodeInfo")
     
     
@@ -1422,6 +1443,7 @@ func NewDescribeOrdersRequest() (request *DescribeOrdersRequest) {
     request = &DescribeOrdersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeOrders")
     
     
@@ -1477,6 +1499,7 @@ func NewDescribeProjectSecurityGroupsRequest() (request *DescribeProjectSecurity
     request = &DescribeProjectSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DescribeProjectSecurityGroups")
     
     
@@ -1526,6 +1549,7 @@ func NewDestroyDBInstanceRequest() (request *DestroyDBInstanceRequest) {
     request = &DestroyDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DestroyDBInstance")
     
     
@@ -1585,6 +1609,7 @@ func NewDestroyHourDBInstanceRequest() (request *DestroyHourDBInstanceRequest) {
     request = &DestroyHourDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DestroyHourDBInstance")
     
     
@@ -1644,6 +1669,7 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
     request = &DisassociateSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "DisassociateSecurityGroups")
     
     
@@ -1725,6 +1751,7 @@ func NewGrantAccountPrivilegesRequest() (request *GrantAccountPrivilegesRequest)
     request = &GrantAccountPrivilegesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "GrantAccountPrivileges")
     
     
@@ -1800,6 +1827,7 @@ func NewModifyAccountDescriptionRequest() (request *ModifyAccountDescriptionRequ
     request = &ModifyAccountDescriptionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ModifyAccountDescription")
     
     
@@ -1859,6 +1887,7 @@ func NewModifyAccountPrivilegesRequest() (request *ModifyAccountPrivilegesReques
     request = &ModifyAccountPrivilegesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ModifyAccountPrivileges")
     
     
@@ -1938,6 +1967,7 @@ func NewModifyDBInstancesProjectRequest() (request *ModifyDBInstancesProjectRequ
     request = &ModifyDBInstancesProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ModifyDBInstancesProject")
     
     
@@ -1993,6 +2023,7 @@ func NewModifyDBParametersRequest() (request *ModifyDBParametersRequest) {
     request = &ModifyDBParametersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ModifyDBParameters")
     
     
@@ -2054,6 +2085,7 @@ func NewModifyDBSyncModeRequest() (request *ModifyDBSyncModeRequest) {
     request = &ModifyDBSyncModeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ModifyDBSyncMode")
     
     
@@ -2121,6 +2153,7 @@ func NewModifySyncTaskAttributeRequest() (request *ModifySyncTaskAttributeReques
     request = &ModifySyncTaskAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ModifySyncTaskAttribute")
     
     
@@ -2172,6 +2205,7 @@ func NewResetAccountPasswordRequest() (request *ResetAccountPasswordRequest) {
     request = &ResetAccountPasswordRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mariadb", APIVersion, "ResetAccountPassword")
     
     

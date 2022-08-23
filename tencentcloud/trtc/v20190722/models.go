@@ -95,16 +95,16 @@ type CreateCloudRecordingRequestParams struct {
 	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include this user ID in the room ID.
+	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in the user ID.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The signature (similar to login password) required for the recording robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104). |
+	// The signature (similar to a login password) required for the recording robot to enter the room. Each user ID corresponds to a signature. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
 	UserSig *string `json:"UserSig,omitempty" name:"UserSig"`
 
 	// The on-cloud recording parameters.
 	RecordParams *RecordParams `json:"RecordParams,omitempty" name:"RecordParams"`
 
-	// The cloud storage parameters.
+	// The cloud storage information of the recording file. Currently, you can only save recording files to Tencent Cloud VOD.
 	StorageParams *StorageParams `json:"StorageParams,omitempty" name:"StorageParams"`
 
 	// The type of the TRTC room ID, which must be the same as the ID type of the room whose streams are recorded.
@@ -134,16 +134,16 @@ type CreateCloudRecordingRequest struct {
 	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include this user ID in the room ID.
+	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in the user ID.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The signature (similar to login password) required for the recording robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104). |
+	// The signature (similar to a login password) required for the recording robot to enter the room. Each user ID corresponds to a signature. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
 	UserSig *string `json:"UserSig,omitempty" name:"UserSig"`
 
 	// The on-cloud recording parameters.
 	RecordParams *RecordParams `json:"RecordParams,omitempty" name:"RecordParams"`
 
-	// The cloud storage parameters.
+	// The cloud storage information of the recording file. Currently, you can only save recording files to Tencent Cloud VOD.
 	StorageParams *StorageParams `json:"StorageParams,omitempty" name:"StorageParams"`
 
 	// The type of the TRTC room ID, which must be the same as the ID type of the room whose streams are recorded.
@@ -541,12 +541,39 @@ type McuLayoutParams struct {
 	MaxVideoUser *MaxVideoUser `json:"MaxVideoUser,omitempty" name:"MaxVideoUser"`
 }
 
+type McuLayoutVolume struct {
+	// The application data, which will be embedded in the `app_data` field of the custom SEI. It must be shorter than 4,096 characters.
+	AppData *string `json:"AppData,omitempty" name:"AppData"`
+
+	// The payload type of the SEI message. The default is 100. Value range: 100-254 (244 is used internally by Tencent Cloud for timestamps).
+	PayloadType *uint64 `json:"PayloadType,omitempty" name:"PayloadType"`
+}
+
+type McuPassThrough struct {
+	// The payload of the pass-through SEI.
+	PayloadContent *string `json:"PayloadContent,omitempty" name:"PayloadContent"`
+
+	// The payload type of the SEI message. Value range: 5 and 100-254 (244 is used internally by Tencent Cloud for timestamps).
+	PayloadType *uint64 `json:"PayloadType,omitempty" name:"PayloadType"`
+
+	// This parameter is required only if `PayloadType` is 5. It must be a 32-character hexadecimal string. If `PayloadType` is not 5, this parameter will be ignored.
+	PayloadUuid *string `json:"PayloadUuid,omitempty" name:"PayloadUuid"`
+}
+
 type McuPublishCdnParam struct {
 	// The URLs of the CDNs to relay to.
 	PublishCdnUrl *string `json:"PublishCdnUrl,omitempty" name:"PublishCdnUrl"`
 
 	// Whether to relay to Tencent Cloud’s CDN. 0 (default): No; 1: Yes. An optimized route will be assigned if you relay to Tencent Cloud’s CDN.
 	IsTencentCdn *uint64 `json:"IsTencentCdn,omitempty" name:"IsTencentCdn"`
+}
+
+type McuSeiParams struct {
+	// The audio volume layout SEI.
+	LayoutVolume *McuLayoutVolume `json:"LayoutVolume,omitempty" name:"LayoutVolume"`
+
+	// The pass-through SEI.
+	PassThrough *McuPassThrough `json:"PassThrough,omitempty" name:"PassThrough"`
 }
 
 type McuUserInfoParams struct {
@@ -599,7 +626,10 @@ type McuWaterMarkImage struct {
 }
 
 type McuWaterMarkParams struct {
-	// The information of the watermark image.
+	// The watermark type. The default is 0, which indicates an image watermark.
+	WaterMarkType *uint64 `json:"WaterMarkType,omitempty" name:"WaterMarkType"`
+
+	// The watermark image information. This parameter is required if `WaterMarkType` is 0.
 	WaterMarkImage *McuWaterMarkImage `json:"WaterMarkImage,omitempty" name:"WaterMarkImage"`
 }
 
@@ -789,8 +819,8 @@ func (r *ModifyCloudRecordingResponse) FromJsonString(s string) error {
 
 type RecordParams struct {
 	// The recording mode.
-	// 1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files (M3U8/TS) to the cloud.
-	// 2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files (M3U8/TS) to the cloud.
+	// 1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files to the cloud.
+	// 2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files to the cloud.
 	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
 
 	// The time period (seconds) to wait after there are no anchors in a room to stop recording automatically. The value cannot be smaller than 5 or larger than 86400 (24 hours). Default value: 30.
@@ -805,7 +835,7 @@ type RecordParams struct {
 	// The allowlist/blocklist for stream subscription.
 	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitempty" name:"SubscribeStreamUserIds"`
 
-	// The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4).
+	// The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if recording files are saved to VOD.
 	OutputFormat *uint64 `json:"OutputFormat,omitempty" name:"OutputFormat"`
 }
 
@@ -978,6 +1008,9 @@ type StartPublishCdnStreamRequestParams struct {
 
 	// The CDN information.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+
+	// The stream mixing SEI parameters.
+	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
 }
 
 type StartPublishCdnStreamRequest struct {
@@ -1009,6 +1042,9 @@ type StartPublishCdnStreamRequest struct {
 
 	// The CDN information.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+
+	// The stream mixing SEI parameters.
+	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
 }
 
 func (r *StartPublishCdnStreamRequest) ToJsonString() string {
@@ -1032,6 +1068,7 @@ func (r *StartPublishCdnStreamRequest) FromJsonString(s string) error {
 	delete(f, "VideoParams")
 	delete(f, "SingleSubscribeParams")
 	delete(f, "PublishCdnParams")
+	delete(f, "SeiParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartPublishCdnStreamRequest has unknown keys!", "")
 	}
@@ -1217,6 +1254,9 @@ type UpdatePublishCdnStreamRequestParams struct {
 
 	// Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+
+	// The stream mixing SEI parameters.
+	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
 }
 
 type UpdatePublishCdnStreamRequest struct {
@@ -1245,6 +1285,9 @@ type UpdatePublishCdnStreamRequest struct {
 
 	// Pass this parameter to change the CDNs to relay to. If you do not pass this parameter, no changes will be made.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
+
+	// The stream mixing SEI parameters.
+	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
 }
 
 func (r *UpdatePublishCdnStreamRequest) ToJsonString() string {
@@ -1267,6 +1310,7 @@ func (r *UpdatePublishCdnStreamRequest) FromJsonString(s string) error {
 	delete(f, "VideoParams")
 	delete(f, "SingleSubscribeParams")
 	delete(f, "PublishCdnParams")
+	delete(f, "SeiParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePublishCdnStreamRequest has unknown keys!", "")
 	}

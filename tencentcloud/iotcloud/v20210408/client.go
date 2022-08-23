@@ -49,6 +49,7 @@ func NewCreateDeviceRequest() (request *CreateDeviceRequest) {
     request = &CreateDeviceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "CreateDevice")
     
     
@@ -124,6 +125,7 @@ func NewCreatePrivateCARequest() (request *CreatePrivateCARequest) {
     request = &CreatePrivateCARequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "CreatePrivateCA")
     
     
@@ -177,6 +179,7 @@ func NewCreateProductRequest() (request *CreateProductRequest) {
     request = &CreateProductRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "CreateProduct")
     
     
@@ -238,6 +241,7 @@ func NewDeleteDeviceRequest() (request *DeleteDeviceRequest) {
     request = &DeleteDeviceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DeleteDevice")
     
     
@@ -297,6 +301,7 @@ func NewDeletePrivateCARequest() (request *DeletePrivateCARequest) {
     request = &DeletePrivateCARequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DeletePrivateCA")
     
     
@@ -346,6 +351,7 @@ func NewDeleteProductRequest() (request *DeleteProductRequest) {
     request = &DeleteProductRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DeleteProduct")
     
     
@@ -405,6 +411,7 @@ func NewDescribeDeviceRequest() (request *DescribeDeviceRequest) {
     request = &DescribeDeviceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribeDevice")
     
     
@@ -458,6 +465,7 @@ func NewDescribeDevicesRequest() (request *DescribeDevicesRequest) {
     request = &DescribeDevicesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribeDevices")
     
     
@@ -509,6 +517,7 @@ func NewDescribePrivateCARequest() (request *DescribePrivateCARequest) {
     request = &DescribePrivateCARequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribePrivateCA")
     
     
@@ -556,6 +565,7 @@ func NewDescribePrivateCABindedProductsRequest() (request *DescribePrivateCABind
     request = &DescribePrivateCABindedProductsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribePrivateCABindedProducts")
     
     
@@ -603,6 +613,7 @@ func NewDescribePrivateCAsRequest() (request *DescribePrivateCAsRequest) {
     request = &DescribePrivateCAsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribePrivateCAs")
     
     
@@ -650,6 +661,7 @@ func NewDescribeProductRequest() (request *DescribeProductRequest) {
     request = &DescribeProductRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribeProduct")
     
     
@@ -701,6 +713,7 @@ func NewDescribeProductCARequest() (request *DescribeProductCARequest) {
     request = &DescribeProductCARequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribeProductCA")
     
     
@@ -752,6 +765,7 @@ func NewDescribeProductsRequest() (request *DescribeProductsRequest) {
     request = &DescribeProductsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "DescribeProducts")
     
     
@@ -801,6 +815,7 @@ func NewSetProductsForbiddenStatusRequest() (request *SetProductsForbiddenStatus
     request = &SetProductsForbiddenStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "SetProductsForbiddenStatus")
     
     
@@ -852,6 +867,7 @@ func NewUpdateDeviceLogLevelRequest() (request *UpdateDeviceLogLevelRequest) {
     request = &UpdateDeviceLogLevelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "UpdateDeviceLogLevel")
     
     
@@ -903,6 +919,7 @@ func NewUpdateDevicesEnableStateRequest() (request *UpdateDevicesEnableStateRequ
     request = &UpdateDevicesEnableStateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "UpdateDevicesEnableState")
     
     
@@ -958,6 +975,7 @@ func NewUpdatePrivateCARequest() (request *UpdatePrivateCARequest) {
     request = &UpdatePrivateCARequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "UpdatePrivateCA")
     
     
@@ -1011,6 +1029,7 @@ func NewUpdateProductDynamicRegisterRequest() (request *UpdateProductDynamicRegi
     request = &UpdateProductDynamicRegisterRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("iotcloud", APIVersion, "UpdateProductDynamicRegister")
     
     

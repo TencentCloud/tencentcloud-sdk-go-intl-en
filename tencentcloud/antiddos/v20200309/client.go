@@ -49,6 +49,7 @@ func NewAssociateDDoSEipAddressRequest() (request *AssociateDDoSEipAddressReques
     request = &AssociateDDoSEipAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "AssociateDDoSEipAddress")
     
     
@@ -130,6 +131,7 @@ func NewAssociateDDoSEipLoadBalancerRequest() (request *AssociateDDoSEipLoadBala
     request = &AssociateDDoSEipLoadBalancerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "AssociateDDoSEipLoadBalancer")
     
     
@@ -211,6 +213,7 @@ func NewCreateBlackWhiteIpListRequest() (request *CreateBlackWhiteIpListRequest)
     request = &CreateBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateBlackWhiteIpList")
     
     
@@ -262,6 +265,7 @@ func NewCreateBoundIPRequest() (request *CreateBoundIPRequest) {
     request = &CreateBoundIPRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateBoundIP")
     
     
@@ -313,6 +317,7 @@ func NewCreateCCPrecisionPolicyRequest() (request *CreateCCPrecisionPolicyReques
     request = &CreateCCPrecisionPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateCCPrecisionPolicy")
     
     
@@ -392,6 +397,7 @@ func NewCreateCCReqLimitPolicyRequest() (request *CreateCCReqLimitPolicyRequest)
     request = &CreateCCReqLimitPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateCCReqLimitPolicy")
     
     
@@ -471,6 +477,7 @@ func NewCreateCcBlackWhiteIpListRequest() (request *CreateCcBlackWhiteIpListRequ
     request = &CreateCcBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateCcBlackWhiteIpList")
     
     
@@ -522,6 +529,7 @@ func NewCreateCcGeoIPBlockConfigRequest() (request *CreateCcGeoIPBlockConfigRequ
     request = &CreateCcGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateCcGeoIPBlockConfig")
     
     
@@ -571,6 +579,7 @@ func NewCreateDDoSAIRequest() (request *CreateDDoSAIRequest) {
     request = &CreateDDoSAIRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateDDoSAI")
     
     
@@ -618,6 +627,7 @@ func NewCreateDDoSGeoIPBlockConfigRequest() (request *CreateDDoSGeoIPBlockConfig
     request = &CreateDDoSGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateDDoSGeoIPBlockConfig")
     
     
@@ -669,6 +679,7 @@ func NewCreateDDoSSpeedLimitConfigRequest() (request *CreateDDoSSpeedLimitConfig
     request = &CreateDDoSSpeedLimitConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateDDoSSpeedLimitConfig")
     
     
@@ -720,6 +731,7 @@ func NewCreateDefaultAlarmThresholdRequest() (request *CreateDefaultAlarmThresho
     request = &CreateDefaultAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateDefaultAlarmThreshold")
     
     
@@ -767,6 +779,7 @@ func NewCreateIPAlarmThresholdConfigRequest() (request *CreateIPAlarmThresholdCo
     request = &CreateIPAlarmThresholdConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateIPAlarmThresholdConfig")
     
     
@@ -814,6 +827,7 @@ func NewCreateL7RuleCertsRequest() (request *CreateL7RuleCertsRequest) {
     request = &CreateL7RuleCertsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateL7RuleCerts")
     
     
@@ -873,6 +887,7 @@ func NewCreatePacketFilterConfigRequest() (request *CreatePacketFilterConfigRequ
     request = &CreatePacketFilterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreatePacketFilterConfig")
     
     
@@ -926,6 +941,7 @@ func NewCreateProtocolBlockConfigRequest() (request *CreateProtocolBlockConfigRe
     request = &CreateProtocolBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateProtocolBlockConfig")
     
     
@@ -977,6 +993,7 @@ func NewCreateSchedulingDomainRequest() (request *CreateSchedulingDomainRequest)
     request = &CreateSchedulingDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateSchedulingDomain")
     
     
@@ -1042,6 +1059,7 @@ func NewCreateWaterPrintConfigRequest() (request *CreateWaterPrintConfigRequest)
     request = &CreateWaterPrintConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateWaterPrintConfig")
     
     
@@ -1095,6 +1113,7 @@ func NewCreateWaterPrintKeyRequest() (request *CreateWaterPrintKeyRequest) {
     request = &CreateWaterPrintKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "CreateWaterPrintKey")
     
     
@@ -1148,6 +1167,7 @@ func NewDeleteCCLevelPolicyRequest() (request *DeleteCCLevelPolicyRequest) {
     request = &DeleteCCLevelPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCCLevelPolicy")
     
     
@@ -1227,6 +1247,7 @@ func NewDeleteCCPrecisionPolicyRequest() (request *DeleteCCPrecisionPolicyReques
     request = &DeleteCCPrecisionPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCCPrecisionPolicy")
     
     
@@ -1306,6 +1327,7 @@ func NewDeleteCCThresholdPolicyRequest() (request *DeleteCCThresholdPolicyReques
     request = &DeleteCCThresholdPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCCThresholdPolicy")
     
     
@@ -1385,6 +1407,7 @@ func NewDeleteCcBlackWhiteIpListRequest() (request *DeleteCcBlackWhiteIpListRequ
     request = &DeleteCcBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCcBlackWhiteIpList")
     
     
@@ -1438,6 +1461,7 @@ func NewDeleteCcGeoIPBlockConfigRequest() (request *DeleteCcGeoIPBlockConfigRequ
     request = &DeleteCcGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteCcGeoIPBlockConfig")
     
     
@@ -1487,6 +1511,7 @@ func NewDeleteDDoSGeoIPBlockConfigRequest() (request *DeleteDDoSGeoIPBlockConfig
     request = &DeleteDDoSGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteDDoSGeoIPBlockConfig")
     
     
@@ -1534,6 +1559,7 @@ func NewDeleteDDoSSpeedLimitConfigRequest() (request *DeleteDDoSSpeedLimitConfig
     request = &DeleteDDoSSpeedLimitConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteDDoSSpeedLimitConfig")
     
     
@@ -1581,6 +1607,7 @@ func NewDeletePacketFilterConfigRequest() (request *DeletePacketFilterConfigRequ
     request = &DeletePacketFilterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeletePacketFilterConfig")
     
     
@@ -1628,6 +1655,7 @@ func NewDeleteWaterPrintConfigRequest() (request *DeleteWaterPrintConfigRequest)
     request = &DeleteWaterPrintConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteWaterPrintConfig")
     
     
@@ -1677,6 +1705,7 @@ func NewDeleteWaterPrintKeyRequest() (request *DeleteWaterPrintKeyRequest) {
     request = &DeleteWaterPrintKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DeleteWaterPrintKey")
     
     
@@ -1726,6 +1755,7 @@ func NewDescribeBasicDeviceStatusRequest() (request *DescribeBasicDeviceStatusRe
     request = &DescribeBasicDeviceStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBasicDeviceStatus")
     
     
@@ -1775,6 +1805,7 @@ func NewDescribeBizTrendRequest() (request *DescribeBizTrendRequest) {
     request = &DescribeBizTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBizTrend")
     
     
@@ -1840,6 +1871,7 @@ func NewDescribeBlackWhiteIpListRequest() (request *DescribeBlackWhiteIpListRequ
     request = &DescribeBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBlackWhiteIpList")
     
     
@@ -1919,6 +1951,7 @@ func NewDescribeCCLevelListRequest() (request *DescribeCCLevelListRequest) {
     request = &DescribeCCLevelListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCLevelList")
     
     
@@ -1998,6 +2031,7 @@ func NewDescribeCCLevelPolicyRequest() (request *DescribeCCLevelPolicyRequest) {
     request = &DescribeCCLevelPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCLevelPolicy")
     
     
@@ -2077,6 +2111,7 @@ func NewDescribeCCPrecisionPlyListRequest() (request *DescribeCCPrecisionPlyList
     request = &DescribeCCPrecisionPlyListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCPrecisionPlyList")
     
     
@@ -2156,6 +2191,7 @@ func NewDescribeCCThresholdListRequest() (request *DescribeCCThresholdListReques
     request = &DescribeCCThresholdListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCThresholdList")
     
     
@@ -2235,6 +2271,7 @@ func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
     request = &DescribeCCTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCCTrend")
     
     
@@ -2314,6 +2351,7 @@ func NewDescribeCcBlackWhiteIpListRequest() (request *DescribeCcBlackWhiteIpList
     request = &DescribeCcBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCcBlackWhiteIpList")
     
     
@@ -2365,6 +2403,7 @@ func NewDescribeCcGeoIPBlockConfigListRequest() (request *DescribeCcGeoIPBlockCo
     request = &DescribeCcGeoIPBlockConfigListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeCcGeoIPBlockConfigList")
     
     
@@ -2414,6 +2453,7 @@ func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
     request = &DescribeDDoSTrendRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeDDoSTrend")
     
     
@@ -2463,6 +2503,7 @@ func NewDescribeDefaultAlarmThresholdRequest() (request *DescribeDefaultAlarmThr
     request = &DescribeDefaultAlarmThresholdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeDefaultAlarmThreshold")
     
     
@@ -2512,6 +2553,7 @@ func NewDescribeL7RulesBySSLCertIdRequest() (request *DescribeL7RulesBySSLCertId
     request = &DescribeL7RulesBySSLCertIdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeL7RulesBySSLCertId")
     
     
@@ -2573,6 +2615,7 @@ func NewDescribeListBGPIPInstancesRequest() (request *DescribeListBGPIPInstances
     request = &DescribeListBGPIPInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListBGPIPInstances")
     
     
@@ -2634,6 +2677,7 @@ func NewDescribeListBGPInstancesRequest() (request *DescribeListBGPInstancesRequ
     request = &DescribeListBGPInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListBGPInstances")
     
     
@@ -2695,6 +2739,7 @@ func NewDescribeListBlackWhiteIpListRequest() (request *DescribeListBlackWhiteIp
     request = &DescribeListBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListBlackWhiteIpList")
     
     
@@ -2756,6 +2801,7 @@ func NewDescribeListDDoSAIRequest() (request *DescribeListDDoSAIRequest) {
     request = &DescribeListDDoSAIRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListDDoSAI")
     
     
@@ -2817,6 +2863,7 @@ func NewDescribeListDDoSGeoIPBlockConfigRequest() (request *DescribeListDDoSGeoI
     request = &DescribeListDDoSGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListDDoSGeoIPBlockConfig")
     
     
@@ -2878,6 +2925,7 @@ func NewDescribeListDDoSSpeedLimitConfigRequest() (request *DescribeListDDoSSpee
     request = &DescribeListDDoSSpeedLimitConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListDDoSSpeedLimitConfig")
     
     
@@ -2939,6 +2987,7 @@ func NewDescribeListIPAlarmConfigRequest() (request *DescribeListIPAlarmConfigRe
     request = &DescribeListIPAlarmConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListIPAlarmConfig")
     
     
@@ -3000,6 +3049,7 @@ func NewDescribeListListenerRequest() (request *DescribeListListenerRequest) {
     request = &DescribeListListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListListener")
     
     
@@ -3061,6 +3111,7 @@ func NewDescribeListPacketFilterConfigRequest() (request *DescribeListPacketFilt
     request = &DescribeListPacketFilterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListPacketFilterConfig")
     
     
@@ -3122,6 +3173,7 @@ func NewDescribeListProtectThresholdConfigRequest() (request *DescribeListProtec
     request = &DescribeListProtectThresholdConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListProtectThresholdConfig")
     
     
@@ -3183,6 +3235,7 @@ func NewDescribeListProtocolBlockConfigRequest() (request *DescribeListProtocolB
     request = &DescribeListProtocolBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListProtocolBlockConfig")
     
     
@@ -3244,6 +3297,7 @@ func NewDescribeListSchedulingDomainRequest() (request *DescribeListSchedulingDo
     request = &DescribeListSchedulingDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListSchedulingDomain")
     
     
@@ -3305,6 +3359,7 @@ func NewDescribeListWaterPrintConfigRequest() (request *DescribeListWaterPrintCo
     request = &DescribeListWaterPrintConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListWaterPrintConfig")
     
     
@@ -3366,6 +3421,7 @@ func NewDescribeOverviewDDoSEventListRequest() (request *DescribeOverviewDDoSEve
     request = &DescribeOverviewDDoSEventListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DescribeOverviewDDoSEventList")
     
     
@@ -3447,6 +3503,7 @@ func NewDisassociateDDoSEipAddressRequest() (request *DisassociateDDoSEipAddress
     request = &DisassociateDDoSEipAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "DisassociateDDoSEipAddress")
     
     
@@ -3528,6 +3585,7 @@ func NewModifyCCPrecisionPolicyRequest() (request *ModifyCCPrecisionPolicyReques
     request = &ModifyCCPrecisionPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyCCPrecisionPolicy")
     
     
@@ -3607,6 +3665,7 @@ func NewModifyCcBlackWhiteIpListRequest() (request *ModifyCcBlackWhiteIpListRequ
     request = &ModifyCcBlackWhiteIpListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyCcBlackWhiteIpList")
     
     
@@ -3658,6 +3717,7 @@ func NewModifyDDoSGeoIPBlockConfigRequest() (request *ModifyDDoSGeoIPBlockConfig
     request = &ModifyDDoSGeoIPBlockConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyDDoSGeoIPBlockConfig")
     
     
@@ -3705,6 +3765,7 @@ func NewModifyDDoSSpeedLimitConfigRequest() (request *ModifyDDoSSpeedLimitConfig
     request = &ModifyDDoSSpeedLimitConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyDDoSSpeedLimitConfig")
     
     
@@ -3752,6 +3813,7 @@ func NewModifyDomainUsrNameRequest() (request *ModifyDomainUsrNameRequest) {
     request = &ModifyDomainUsrNameRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyDomainUsrName")
     
     
@@ -3799,6 +3861,7 @@ func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
     request = &ModifyNewDomainRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyNewDomainRules")
     
     
@@ -3848,6 +3911,7 @@ func NewModifyPacketFilterConfigRequest() (request *ModifyPacketFilterConfigRequ
     request = &ModifyPacketFilterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "ModifyPacketFilterConfig")
     
     
@@ -3895,6 +3959,7 @@ func NewSwitchWaterPrintConfigRequest() (request *SwitchWaterPrintConfigRequest)
     request = &SwitchWaterPrintConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("antiddos", APIVersion, "SwitchWaterPrintConfig")
     
     

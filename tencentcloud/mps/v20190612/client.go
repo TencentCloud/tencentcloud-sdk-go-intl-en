@@ -49,6 +49,7 @@ func NewCreateAIAnalysisTemplateRequest() (request *CreateAIAnalysisTemplateRequ
     request = &CreateAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateAIAnalysisTemplate")
     
     
@@ -116,6 +117,7 @@ func NewCreateAIRecognitionTemplateRequest() (request *CreateAIRecognitionTempla
     request = &CreateAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateAIRecognitionTemplate")
     
     
@@ -189,6 +191,7 @@ func NewCreateAdaptiveDynamicStreamingTemplateRequest() (request *CreateAdaptive
     request = &CreateAdaptiveDynamicStreamingTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateAdaptiveDynamicStreamingTemplate")
     
     
@@ -272,6 +275,7 @@ func NewCreateAnimatedGraphicsTemplateRequest() (request *CreateAnimatedGraphics
     request = &CreateAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateAnimatedGraphicsTemplate")
     
     
@@ -339,6 +343,7 @@ func NewCreateContentReviewTemplateRequest() (request *CreateContentReviewTempla
     request = &CreateContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateContentReviewTemplate")
     
     
@@ -404,6 +409,7 @@ func NewCreateImageSpriteTemplateRequest() (request *CreateImageSpriteTemplateRe
     request = &CreateImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateImageSpriteTemplate")
     
     
@@ -471,6 +477,7 @@ func NewCreatePersonSampleRequest() (request *CreatePersonSampleRequest) {
     request = &CreatePersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreatePersonSample")
     
     
@@ -526,6 +533,7 @@ func NewCreateSampleSnapshotTemplateRequest() (request *CreateSampleSnapshotTemp
     request = &CreateSampleSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateSampleSnapshotTemplate")
     
     
@@ -593,6 +601,7 @@ func NewCreateSnapshotByTimeOffsetTemplateRequest() (request *CreateSnapshotByTi
     request = &CreateSnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateSnapshotByTimeOffsetTemplate")
     
     
@@ -656,6 +665,7 @@ func NewCreateTranscodeTemplateRequest() (request *CreateTranscodeTemplateReques
     request = &CreateTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateTranscodeTemplate")
     
     
@@ -741,6 +751,7 @@ func NewCreateWatermarkTemplateRequest() (request *CreateWatermarkTemplateReques
     request = &CreateWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateWatermarkTemplate")
     
     
@@ -828,6 +839,7 @@ func NewCreateWordSamplesRequest() (request *CreateWordSamplesRequest) {
     request = &CreateWordSamplesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateWordSamples")
     
     
@@ -879,6 +891,7 @@ func NewCreateWorkflowRequest() (request *CreateWorkflowRequest) {
     request = &CreateWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "CreateWorkflow")
     
     
@@ -982,6 +995,7 @@ func NewDeleteAIAnalysisTemplateRequest() (request *DeleteAIAnalysisTemplateRequ
     request = &DeleteAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteAIAnalysisTemplate")
     
     
@@ -1043,6 +1057,7 @@ func NewDeleteAIRecognitionTemplateRequest() (request *DeleteAIRecognitionTempla
     request = &DeleteAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteAIRecognitionTemplate")
     
     
@@ -1098,6 +1113,7 @@ func NewDeleteAdaptiveDynamicStreamingTemplateRequest() (request *DeleteAdaptive
     request = &DeleteAdaptiveDynamicStreamingTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteAdaptiveDynamicStreamingTemplate")
     
     
@@ -1151,6 +1167,7 @@ func NewDeleteAnimatedGraphicsTemplateRequest() (request *DeleteAnimatedGraphics
     request = &DeleteAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteAnimatedGraphicsTemplate")
     
     
@@ -1202,6 +1219,7 @@ func NewDeleteContentReviewTemplateRequest() (request *DeleteContentReviewTempla
     request = &DeleteContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteContentReviewTemplate")
     
     
@@ -1255,6 +1273,7 @@ func NewDeleteImageSpriteTemplateRequest() (request *DeleteImageSpriteTemplateRe
     request = &DeleteImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteImageSpriteTemplate")
     
     
@@ -1306,6 +1325,7 @@ func NewDeletePersonSampleRequest() (request *DeletePersonSampleRequest) {
     request = &DeletePersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeletePersonSample")
     
     
@@ -1355,6 +1375,7 @@ func NewDeleteSampleSnapshotTemplateRequest() (request *DeleteSampleSnapshotTemp
     request = &DeleteSampleSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteSampleSnapshotTemplate")
     
     
@@ -1406,6 +1427,7 @@ func NewDeleteSnapshotByTimeOffsetTemplateRequest() (request *DeleteSnapshotByTi
     request = &DeleteSnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteSnapshotByTimeOffsetTemplate")
     
     
@@ -1457,6 +1479,7 @@ func NewDeleteTranscodeTemplateRequest() (request *DeleteTranscodeTemplateReques
     request = &DeleteTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteTranscodeTemplate")
     
     
@@ -1514,6 +1537,7 @@ func NewDeleteWatermarkTemplateRequest() (request *DeleteWatermarkTemplateReques
     request = &DeleteWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteWatermarkTemplate")
     
     
@@ -1567,6 +1591,7 @@ func NewDeleteWordSamplesRequest() (request *DeleteWordSamplesRequest) {
     request = &DeleteWordSamplesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteWordSamples")
     
     
@@ -1616,6 +1641,7 @@ func NewDeleteWorkflowRequest() (request *DeleteWorkflowRequest) {
     request = &DeleteWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DeleteWorkflow")
     
     
@@ -1669,6 +1695,7 @@ func NewDescribeAIAnalysisTemplatesRequest() (request *DescribeAIAnalysisTemplat
     request = &DescribeAIAnalysisTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeAIAnalysisTemplates")
     
     
@@ -1726,6 +1753,7 @@ func NewDescribeAIRecognitionTemplatesRequest() (request *DescribeAIRecognitionT
     request = &DescribeAIRecognitionTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeAIRecognitionTemplates")
     
     
@@ -1783,6 +1811,7 @@ func NewDescribeAdaptiveDynamicStreamingTemplatesRequest() (request *DescribeAda
     request = &DescribeAdaptiveDynamicStreamingTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeAdaptiveDynamicStreamingTemplates")
     
     
@@ -1840,6 +1869,7 @@ func NewDescribeAnimatedGraphicsTemplatesRequest() (request *DescribeAnimatedGra
     request = &DescribeAnimatedGraphicsTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeAnimatedGraphicsTemplates")
     
     
@@ -1893,6 +1923,7 @@ func NewDescribeContentReviewTemplatesRequest() (request *DescribeContentReviewT
     request = &DescribeContentReviewTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeContentReviewTemplates")
     
     
@@ -1950,6 +1981,7 @@ func NewDescribeImageSpriteTemplatesRequest() (request *DescribeImageSpriteTempl
     request = &DescribeImageSpriteTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeImageSpriteTemplates")
     
     
@@ -2003,6 +2035,7 @@ func NewDescribeMediaMetaDataRequest() (request *DescribeMediaMetaDataRequest) {
     request = &DescribeMediaMetaDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeMediaMetaData")
     
     
@@ -2056,6 +2089,7 @@ func NewDescribePersonSamplesRequest() (request *DescribePersonSamplesRequest) {
     request = &DescribePersonSamplesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribePersonSamples")
     
     
@@ -2107,6 +2141,7 @@ func NewDescribeSampleSnapshotTemplatesRequest() (request *DescribeSampleSnapsho
     request = &DescribeSampleSnapshotTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeSampleSnapshotTemplates")
     
     
@@ -2160,6 +2195,7 @@ func NewDescribeSnapshotByTimeOffsetTemplatesRequest() (request *DescribeSnapsho
     request = &DescribeSnapshotByTimeOffsetTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeSnapshotByTimeOffsetTemplates")
     
     
@@ -2213,6 +2249,7 @@ func NewDescribeTaskDetailRequest() (request *DescribeTaskDetailRequest) {
     request = &DescribeTaskDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeTaskDetail")
     
     
@@ -2268,6 +2305,7 @@ func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
     request = &DescribeTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeTasks")
     
     
@@ -2329,6 +2367,7 @@ func NewDescribeTranscodeTemplatesRequest() (request *DescribeTranscodeTemplates
     request = &DescribeTranscodeTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeTranscodeTemplates")
     
     
@@ -2394,6 +2433,7 @@ func NewDescribeWatermarkTemplatesRequest() (request *DescribeWatermarkTemplates
     request = &DescribeWatermarkTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeWatermarkTemplates")
     
     
@@ -2451,6 +2491,7 @@ func NewDescribeWordSamplesRequest() (request *DescribeWordSamplesRequest) {
     request = &DescribeWordSamplesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeWordSamples")
     
     
@@ -2502,6 +2543,7 @@ func NewDescribeWorkflowsRequest() (request *DescribeWorkflowsRequest) {
     request = &DescribeWorkflowsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DescribeWorkflows")
     
     
@@ -2553,6 +2595,7 @@ func NewDisableWorkflowRequest() (request *DisableWorkflowRequest) {
     request = &DisableWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "DisableWorkflow")
     
     
@@ -2612,6 +2655,7 @@ func NewEditMediaRequest() (request *EditMediaRequest) {
     request = &EditMediaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "EditMedia")
     
     
@@ -2679,6 +2723,7 @@ func NewEnableWorkflowRequest() (request *EnableWorkflowRequest) {
     request = &EnableWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "EnableWorkflow")
     
     
@@ -2740,6 +2785,7 @@ func NewExecuteFunctionRequest() (request *ExecuteFunctionRequest) {
     request = &ExecuteFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ExecuteFunction")
     
     
@@ -2795,6 +2841,7 @@ func NewManageTaskRequest() (request *ManageTaskRequest) {
     request = &ManageTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ManageTask")
     
     
@@ -2852,6 +2899,7 @@ func NewModifyAIAnalysisTemplateRequest() (request *ModifyAIAnalysisTemplateRequ
     request = &ModifyAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyAIAnalysisTemplate")
     
     
@@ -2925,6 +2973,7 @@ func NewModifyAIRecognitionTemplateRequest() (request *ModifyAIRecognitionTempla
     request = &ModifyAIRecognitionTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyAIRecognitionTemplate")
     
     
@@ -3000,6 +3049,7 @@ func NewModifyAdaptiveDynamicStreamingTemplateRequest() (request *ModifyAdaptive
     request = &ModifyAdaptiveDynamicStreamingTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyAdaptiveDynamicStreamingTemplate")
     
     
@@ -3095,6 +3145,7 @@ func NewModifyAnimatedGraphicsTemplateRequest() (request *ModifyAnimatedGraphics
     request = &ModifyAnimatedGraphicsTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyAnimatedGraphicsTemplate")
     
     
@@ -3162,6 +3213,7 @@ func NewModifyContentReviewTemplateRequest() (request *ModifyContentReviewTempla
     request = &ModifyContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyContentReviewTemplate")
     
     
@@ -3225,6 +3277,7 @@ func NewModifyImageSpriteTemplateRequest() (request *ModifyImageSpriteTemplateRe
     request = &ModifyImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyImageSpriteTemplate")
     
     
@@ -3292,6 +3345,7 @@ func NewModifyPersonSampleRequest() (request *ModifyPersonSampleRequest) {
     request = &ModifyPersonSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyPersonSample")
     
     
@@ -3349,6 +3403,7 @@ func NewModifySampleSnapshotTemplateRequest() (request *ModifySampleSnapshotTemp
     request = &ModifySampleSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifySampleSnapshotTemplate")
     
     
@@ -3418,6 +3473,7 @@ func NewModifySnapshotByTimeOffsetTemplateRequest() (request *ModifySnapshotByTi
     request = &ModifySnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifySnapshotByTimeOffsetTemplate")
     
     
@@ -3481,6 +3537,7 @@ func NewModifyTranscodeTemplateRequest() (request *ModifyTranscodeTemplateReques
     request = &ModifyTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyTranscodeTemplate")
     
     
@@ -3568,6 +3625,7 @@ func NewModifyWatermarkTemplateRequest() (request *ModifyWatermarkTemplateReques
     request = &ModifyWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyWatermarkTemplate")
     
     
@@ -3647,6 +3705,7 @@ func NewModifyWordSampleRequest() (request *ModifyWordSampleRequest) {
     request = &ModifyWordSampleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ModifyWordSample")
     
     
@@ -3700,6 +3759,7 @@ func NewParseLiveStreamProcessNotificationRequest() (request *ParseLiveStreamPro
     request = &ParseLiveStreamProcessNotificationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ParseLiveStreamProcessNotification")
     
     
@@ -3753,6 +3813,7 @@ func NewParseNotificationRequest() (request *ParseNotificationRequest) {
     request = &ParseNotificationRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ParseNotification")
     
     
@@ -3810,6 +3871,7 @@ func NewProcessLiveStreamRequest() (request *ProcessLiveStreamRequest) {
     request = &ProcessLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ProcessLiveStream")
     
     
@@ -3887,6 +3949,7 @@ func NewProcessMediaRequest() (request *ProcessMediaRequest) {
     request = &ProcessMediaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ProcessMedia")
     
     
@@ -3980,6 +4043,7 @@ func NewResetWorkflowRequest() (request *ResetWorkflowRequest) {
     request = &ResetWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("mps", APIVersion, "ResetWorkflow")
     
     

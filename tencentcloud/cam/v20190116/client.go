@@ -49,6 +49,7 @@ func NewAddUserRequest() (request *AddUserRequest) {
     request = &AddUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "AddUser")
     
     
@@ -108,6 +109,7 @@ func NewAddUserToGroupRequest() (request *AddUserToGroupRequest) {
     request = &AddUserToGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "AddUserToGroup")
     
     
@@ -165,6 +167,7 @@ func NewAttachGroupPolicyRequest() (request *AttachGroupPolicyRequest) {
     request = &AttachGroupPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "AttachGroupPolicy")
     
     
@@ -230,6 +233,7 @@ func NewAttachRolePolicyRequest() (request *AttachRolePolicyRequest) {
     request = &AttachRolePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "AttachRolePolicy")
     
     
@@ -289,6 +293,7 @@ func NewAttachUserPolicyRequest() (request *AttachUserPolicyRequest) {
     request = &AttachUserPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "AttachUserPolicy")
     
     
@@ -352,6 +357,7 @@ func NewConsumeCustomMFATokenRequest() (request *ConsumeCustomMFATokenRequest) {
     request = &ConsumeCustomMFATokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ConsumeCustomMFAToken")
     
     
@@ -399,6 +405,7 @@ func NewCreateGroupRequest() (request *CreateGroupRequest) {
     request = &CreateGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateGroup")
     
     
@@ -448,6 +455,7 @@ func NewCreateOIDCConfigRequest() (request *CreateOIDCConfigRequest) {
     request = &CreateOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateOIDCConfig")
     
     
@@ -505,6 +513,7 @@ func NewCreatePolicyRequest() (request *CreatePolicyRequest) {
     request = &CreatePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreatePolicy")
     
     
@@ -614,6 +623,7 @@ func NewCreatePolicyVersionRequest() (request *CreatePolicyVersionRequest) {
     request = &CreatePolicyVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreatePolicyVersion")
     
     
@@ -729,6 +739,7 @@ func NewCreateRoleRequest() (request *CreateRoleRequest) {
     request = &CreateRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateRole")
     
     
@@ -822,6 +833,7 @@ func NewCreateSAMLProviderRequest() (request *CreateSAMLProviderRequest) {
     request = &CreateSAMLProviderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateSAMLProvider")
     
     
@@ -877,6 +889,7 @@ func NewCreateServiceLinkedRoleRequest() (request *CreateServiceLinkedRoleReques
     request = &CreateServiceLinkedRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateServiceLinkedRole")
     
     
@@ -952,6 +965,7 @@ func NewCreateUserOIDCConfigRequest() (request *CreateUserOIDCConfigRequest) {
     request = &CreateUserOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateUserOIDCConfig")
     
     
@@ -1011,6 +1025,7 @@ func NewCreateUserSAMLConfigRequest() (request *CreateUserSAMLConfigRequest) {
     request = &CreateUserSAMLConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "CreateUserSAMLConfig")
     
     
@@ -1058,6 +1073,7 @@ func NewDeleteGroupRequest() (request *DeleteGroupRequest) {
     request = &DeleteGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteGroup")
     
     
@@ -1107,6 +1123,7 @@ func NewDeleteOIDCConfigRequest() (request *DeleteOIDCConfigRequest) {
     request = &DeleteOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteOIDCConfig")
     
     
@@ -1156,6 +1173,7 @@ func NewDeletePolicyRequest() (request *DeletePolicyRequest) {
     request = &DeletePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeletePolicy")
     
     
@@ -1213,6 +1231,7 @@ func NewDeletePolicyVersionRequest() (request *DeletePolicyVersionRequest) {
     request = &DeletePolicyVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeletePolicyVersion")
     
     
@@ -1310,6 +1329,7 @@ func NewDeleteRoleRequest() (request *DeleteRoleRequest) {
     request = &DeleteRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteRole")
     
     
@@ -1363,6 +1383,7 @@ func NewDeleteRolePermissionsBoundaryRequest() (request *DeleteRolePermissionsBo
     request = &DeleteRolePermissionsBoundaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteRolePermissionsBoundary")
     
     
@@ -1424,6 +1445,7 @@ func NewDeleteSAMLProviderRequest() (request *DeleteSAMLProviderRequest) {
     request = &DeleteSAMLProviderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteSAMLProvider")
     
     
@@ -1473,6 +1495,7 @@ func NewDeleteServiceLinkedRoleRequest() (request *DeleteServiceLinkedRoleReques
     request = &DeleteServiceLinkedRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteServiceLinkedRole")
     
     
@@ -1524,6 +1547,7 @@ func NewDeleteUserRequest() (request *DeleteUserRequest) {
     request = &DeleteUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteUser")
     
     
@@ -1579,6 +1603,7 @@ func NewDeleteUserPermissionsBoundaryRequest() (request *DeleteUserPermissionsBo
     request = &DeleteUserPermissionsBoundaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DeleteUserPermissionsBoundary")
     
     
@@ -1636,6 +1661,7 @@ func NewDescribeOIDCConfigRequest() (request *DescribeOIDCConfigRequest) {
     request = &DescribeOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeOIDCConfig")
     
     
@@ -1687,6 +1713,7 @@ func NewDescribeRoleListRequest() (request *DescribeRoleListRequest) {
     request = &DescribeRoleListRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeRoleList")
     
     
@@ -1736,6 +1763,7 @@ func NewDescribeSafeAuthFlagCollRequest() (request *DescribeSafeAuthFlagCollRequ
     request = &DescribeSafeAuthFlagCollRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlagColl")
     
     
@@ -1787,6 +1815,7 @@ func NewDescribeSafeAuthFlagIntlRequest() (request *DescribeSafeAuthFlagIntlRequ
     request = &DescribeSafeAuthFlagIntlRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSafeAuthFlagIntl")
     
     
@@ -1838,6 +1867,7 @@ func NewDescribeSubAccountsRequest() (request *DescribeSubAccountsRequest) {
     request = &DescribeSubAccountsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeSubAccounts")
     
     
@@ -1889,6 +1919,7 @@ func NewDescribeUserOIDCConfigRequest() (request *DescribeUserOIDCConfigRequest)
     request = &DescribeUserOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeUserOIDCConfig")
     
     
@@ -1936,6 +1967,7 @@ func NewDescribeUserSAMLConfigRequest() (request *DescribeUserSAMLConfigRequest)
     request = &DescribeUserSAMLConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DescribeUserSAMLConfig")
     
     
@@ -1983,6 +2015,7 @@ func NewDetachGroupPolicyRequest() (request *DetachGroupPolicyRequest) {
     request = &DetachGroupPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DetachGroupPolicy")
     
     
@@ -2042,6 +2075,7 @@ func NewDetachRolePolicyRequest() (request *DetachRolePolicyRequest) {
     request = &DetachRolePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DetachRolePolicy")
     
     
@@ -2095,6 +2129,7 @@ func NewDetachUserPolicyRequest() (request *DetachUserPolicyRequest) {
     request = &DetachUserPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DetachUserPolicy")
     
     
@@ -2156,6 +2191,7 @@ func NewDisableUserSSORequest() (request *DisableUserSSORequest) {
     request = &DisableUserSSORequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "DisableUserSSO")
     
     
@@ -2203,6 +2239,7 @@ func NewGetAccountSummaryRequest() (request *GetAccountSummaryRequest) {
     request = &GetAccountSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetAccountSummary")
     
     
@@ -2250,6 +2287,7 @@ func NewGetCustomMFATokenInfoRequest() (request *GetCustomMFATokenInfoRequest) {
     request = &GetCustomMFATokenInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetCustomMFATokenInfo")
     
     
@@ -2297,6 +2335,7 @@ func NewGetGroupRequest() (request *GetGroupRequest) {
     request = &GetGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetGroup")
     
     
@@ -2346,6 +2385,7 @@ func NewGetPolicyRequest() (request *GetPolicyRequest) {
     request = &GetPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetPolicy")
     
     
@@ -2399,6 +2439,7 @@ func NewGetPolicyVersionRequest() (request *GetPolicyVersionRequest) {
     request = &GetPolicyVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetPolicyVersion")
     
     
@@ -2454,6 +2495,7 @@ func NewGetRoleRequest() (request *GetRoleRequest) {
     request = &GetRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetRole")
     
     
@@ -2505,6 +2547,7 @@ func NewGetSAMLProviderRequest() (request *GetSAMLProviderRequest) {
     request = &GetSAMLProviderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetSAMLProvider")
     
     
@@ -2554,6 +2597,7 @@ func NewGetSecurityLastUsedRequest() (request *GetSecurityLastUsedRequest) {
     request = &GetSecurityLastUsedRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetSecurityLastUsed")
     
     
@@ -2603,6 +2647,7 @@ func NewGetServiceLinkedRoleDeletionStatusRequest() (request *GetServiceLinkedRo
     request = &GetServiceLinkedRoleDeletionStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetServiceLinkedRoleDeletionStatus")
     
     
@@ -2654,6 +2699,7 @@ func NewGetUserRequest() (request *GetUserRequest) {
     request = &GetUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetUser")
     
     
@@ -2703,6 +2749,7 @@ func NewGetUserAppIdRequest() (request *GetUserAppIdRequest) {
     request = &GetUserAppIdRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "GetUserAppId")
     
     
@@ -2752,6 +2799,7 @@ func NewListAccessKeysRequest() (request *ListAccessKeysRequest) {
     request = &ListAccessKeysRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListAccessKeys")
     
     
@@ -2811,6 +2859,7 @@ func NewListAttachedGroupPoliciesRequest() (request *ListAttachedGroupPoliciesRe
     request = &ListAttachedGroupPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedGroupPolicies")
     
     
@@ -2860,6 +2909,7 @@ func NewListAttachedRolePoliciesRequest() (request *ListAttachedRolePoliciesRequ
     request = &ListAttachedRolePoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedRolePolicies")
     
     
@@ -2909,6 +2959,7 @@ func NewListAttachedUserAllPoliciesRequest() (request *ListAttachedUserAllPolici
     request = &ListAttachedUserAllPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedUserAllPolicies")
     
     
@@ -2960,6 +3011,7 @@ func NewListAttachedUserPoliciesRequest() (request *ListAttachedUserPoliciesRequ
     request = &ListAttachedUserPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListAttachedUserPolicies")
     
     
@@ -3009,6 +3061,7 @@ func NewListCollaboratorsRequest() (request *ListCollaboratorsRequest) {
     request = &ListCollaboratorsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListCollaborators")
     
     
@@ -3056,6 +3109,7 @@ func NewListEntitiesForPolicyRequest() (request *ListEntitiesForPolicyRequest) {
     request = &ListEntitiesForPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListEntitiesForPolicy")
     
     
@@ -3109,6 +3163,7 @@ func NewListGroupsRequest() (request *ListGroupsRequest) {
     request = &ListGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListGroups")
     
     
@@ -3156,6 +3211,7 @@ func NewListGroupsForUserRequest() (request *ListGroupsForUserRequest) {
     request = &ListGroupsForUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListGroupsForUser")
     
     
@@ -3205,6 +3261,7 @@ func NewListPoliciesRequest() (request *ListPoliciesRequest) {
     request = &ListPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListPolicies")
     
     
@@ -3264,6 +3321,7 @@ func NewListPolicyVersionsRequest() (request *ListPolicyVersionsRequest) {
     request = &ListPolicyVersionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListPolicyVersions")
     
     
@@ -3317,6 +3375,7 @@ func NewListSAMLProvidersRequest() (request *ListSAMLProvidersRequest) {
     request = &ListSAMLProvidersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListSAMLProviders")
     
     
@@ -3370,6 +3429,7 @@ func NewListUsersRequest() (request *ListUsersRequest) {
     request = &ListUsersRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListUsers")
     
     
@@ -3417,6 +3477,7 @@ func NewListUsersForGroupRequest() (request *ListUsersForGroupRequest) {
     request = &ListUsersForGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "ListUsersForGroup")
     
     
@@ -3466,6 +3527,7 @@ func NewPutRolePermissionsBoundaryRequest() (request *PutRolePermissionsBoundary
     request = &PutRolePermissionsBoundaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "PutRolePermissionsBoundary")
     
     
@@ -3529,6 +3591,7 @@ func NewPutUserPermissionsBoundaryRequest() (request *PutUserPermissionsBoundary
     request = &PutUserPermissionsBoundaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "PutUserPermissionsBoundary")
     
     
@@ -3590,6 +3653,7 @@ func NewRemoveUserFromGroupRequest() (request *RemoveUserFromGroupRequest) {
     request = &RemoveUserFromGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "RemoveUserFromGroup")
     
     
@@ -3641,6 +3705,7 @@ func NewSetDefaultPolicyVersionRequest() (request *SetDefaultPolicyVersionReques
     request = &SetDefaultPolicyVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "SetDefaultPolicyVersion")
     
     
@@ -3764,6 +3829,7 @@ func NewSetMfaFlagRequest() (request *SetMfaFlagRequest) {
     request = &SetMfaFlagRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "SetMfaFlag")
     
     
@@ -3821,6 +3887,7 @@ func NewTagRoleRequest() (request *TagRoleRequest) {
     request = &TagRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "TagRole")
     
     
@@ -3882,6 +3949,7 @@ func NewUntagRoleRequest() (request *UntagRoleRequest) {
     request = &UntagRoleRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UntagRole")
     
     
@@ -3945,6 +4013,7 @@ func NewUpdateAssumeRolePolicyRequest() (request *UpdateAssumeRolePolicyRequest)
     request = &UpdateAssumeRolePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateAssumeRolePolicy")
     
     
@@ -4028,6 +4097,7 @@ func NewUpdateGroupRequest() (request *UpdateGroupRequest) {
     request = &UpdateGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateGroup")
     
     
@@ -4081,6 +4151,7 @@ func NewUpdateOIDCConfigRequest() (request *UpdateOIDCConfigRequest) {
     request = &UpdateOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateOIDCConfig")
     
     
@@ -4142,6 +4213,7 @@ func NewUpdatePolicyRequest() (request *UpdatePolicyRequest) {
     request = &UpdatePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdatePolicy")
     
     
@@ -4265,6 +4337,7 @@ func NewUpdateRoleConsoleLoginRequest() (request *UpdateRoleConsoleLoginRequest)
     request = &UpdateRoleConsoleLoginRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateRoleConsoleLogin")
     
     
@@ -4316,6 +4389,7 @@ func NewUpdateRoleDescriptionRequest() (request *UpdateRoleDescriptionRequest) {
     request = &UpdateRoleDescriptionRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateRoleDescription")
     
     
@@ -4369,6 +4443,7 @@ func NewUpdateSAMLProviderRequest() (request *UpdateSAMLProviderRequest) {
     request = &UpdateSAMLProviderRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateSAMLProvider")
     
     
@@ -4418,6 +4493,7 @@ func NewUpdateUserRequest() (request *UpdateUserRequest) {
     request = &UpdateUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateUser")
     
     
@@ -4467,6 +4543,7 @@ func NewUpdateUserOIDCConfigRequest() (request *UpdateUserOIDCConfigRequest) {
     request = &UpdateUserOIDCConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateUserOIDCConfig")
     
     
@@ -4526,6 +4603,7 @@ func NewUpdateUserSAMLConfigRequest() (request *UpdateUserSAMLConfigRequest) {
     request = &UpdateUserSAMLConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("cam", APIVersion, "UpdateUserSAMLConfig")
     
     

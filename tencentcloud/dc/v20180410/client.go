@@ -49,6 +49,7 @@ func NewAcceptDirectConnectTunnelRequest() (request *AcceptDirectConnectTunnelRe
     request = &AcceptDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "AcceptDirectConnectTunnel")
     
     
@@ -106,6 +107,7 @@ func NewApplyInternetAddressRequest() (request *ApplyInternetAddressRequest) {
     request = &ApplyInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "ApplyInternetAddress")
     
     
@@ -153,6 +155,7 @@ func NewCreateDirectConnectRequest() (request *CreateDirectConnectRequest) {
     request = &CreateDirectConnectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "CreateDirectConnect")
     
     
@@ -222,6 +225,7 @@ func NewCreateDirectConnectTunnelRequest() (request *CreateDirectConnectTunnelRe
     request = &CreateDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "CreateDirectConnectTunnel")
     
     
@@ -299,6 +303,7 @@ func NewDeleteDirectConnectRequest() (request *DeleteDirectConnectRequest) {
     request = &DeleteDirectConnectRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DeleteDirectConnect")
     
     
@@ -366,6 +371,7 @@ func NewDeleteDirectConnectTunnelRequest() (request *DeleteDirectConnectTunnelRe
     request = &DeleteDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DeleteDirectConnectTunnel")
     
     
@@ -423,6 +429,7 @@ func NewDescribeAccessPointsRequest() (request *DescribeAccessPointsRequest) {
     request = &DescribeAccessPointsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DescribeAccessPoints")
     
     
@@ -484,6 +491,7 @@ func NewDescribeDirectConnectTunnelsRequest() (request *DescribeDirectConnectTun
     request = &DescribeDirectConnectTunnelsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DescribeDirectConnectTunnels")
     
     
@@ -539,6 +547,7 @@ func NewDescribeDirectConnectsRequest() (request *DescribeDirectConnectsRequest)
     request = &DescribeDirectConnectsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DescribeDirectConnects")
     
     
@@ -596,6 +605,7 @@ func NewDescribeInternetAddressRequest() (request *DescribeInternetAddressReques
     request = &DescribeInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DescribeInternetAddress")
     
     
@@ -653,6 +663,7 @@ func NewDescribeInternetAddressQuotaRequest() (request *DescribeInternetAddressQ
     request = &DescribeInternetAddressQuotaRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DescribeInternetAddressQuota")
     
     
@@ -710,6 +721,7 @@ func NewDescribeInternetAddressStatisticsRequest() (request *DescribeInternetAdd
     request = &DescribeInternetAddressStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DescribeInternetAddressStatistics")
     
     
@@ -767,6 +779,7 @@ func NewDisableInternetAddressRequest() (request *DisableInternetAddressRequest)
     request = &DisableInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "DisableInternetAddress")
     
     
@@ -824,6 +837,7 @@ func NewEnableInternetAddressRequest() (request *EnableInternetAddressRequest) {
     request = &EnableInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "EnableInternetAddress")
     
     
@@ -881,6 +895,7 @@ func NewModifyDirectConnectAttributeRequest() (request *ModifyDirectConnectAttri
     request = &ModifyDirectConnectAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "ModifyDirectConnectAttribute")
     
     
@@ -942,6 +957,7 @@ func NewModifyDirectConnectTunnelAttributeRequest() (request *ModifyDirectConnec
     request = &ModifyDirectConnectTunnelAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "ModifyDirectConnectTunnelAttribute")
     
     
@@ -999,6 +1015,7 @@ func NewRejectDirectConnectTunnelRequest() (request *RejectDirectConnectTunnelRe
     request = &RejectDirectConnectTunnelRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "RejectDirectConnectTunnel")
     
     
@@ -1054,6 +1071,7 @@ func NewReleaseInternetAddressRequest() (request *ReleaseInternetAddressRequest)
     request = &ReleaseInternetAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("dc", APIVersion, "ReleaseInternetAddress")
     
     

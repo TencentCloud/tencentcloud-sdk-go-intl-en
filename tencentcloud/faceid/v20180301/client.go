@@ -49,6 +49,7 @@ func NewCreateUploadUrlRequest() (request *CreateUploadUrlRequest) {
     request = &CreateUploadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("faceid", APIVersion, "CreateUploadUrl")
     
     
@@ -104,6 +105,7 @@ func NewDetectReflectLivenessAndCompareRequest() (request *DetectReflectLiveness
     request = &DetectReflectLivenessAndCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("faceid", APIVersion, "DetectReflectLivenessAndCompare")
     
     
@@ -203,6 +205,7 @@ func NewGenerateReflectSequenceRequest() (request *GenerateReflectSequenceReques
     request = &GenerateReflectSequenceRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("faceid", APIVersion, "GenerateReflectSequence")
     
     
@@ -256,6 +259,7 @@ func NewLivenessCompareRequest() (request *LivenessCompareRequest) {
     request = &LivenessCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("faceid", APIVersion, "LivenessCompare")
     
     
@@ -405,6 +409,7 @@ func NewVideoLivenessCompareRequest() (request *VideoLivenessCompareRequest) {
     request = &VideoLivenessCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
+    
     request.Init().WithApiInfo("faceid", APIVersion, "VideoLivenessCompare")
     
     
