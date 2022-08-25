@@ -29,6 +29,9 @@ const (
 	// Failed to change the task status.
 	FAILEDOPERATION_ALTERTASKSTATE = "FailedOperation.AlterTaskState"
 
+	// You do not have permission to perform this operation.
+	FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+
 	// Failed to call the third-party service.
 	FAILEDOPERATION_CALLOTHERSVRERROR = "FailedOperation.CallOtherSvrError"
 
@@ -38,14 +41,47 @@ const (
 	// The canceled stream mix session does not exist.
 	FAILEDOPERATION_CANCELSESSIONNOTEXIST = "FailedOperation.CancelSessionNotExist"
 
+	// Failed to delete the certificate because it has been issued.
+	FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+
+	// Free certificates cannot be deleted within one hour of application.
+	FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+
+	// The certificate already exists.
+	FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
+
+	// The certificate is invalid.
+	FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+
+	// The certificate and the private key do not match.
+	FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+
+	// The certificate does not exist.
+	FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+
 	// The template is in use.
 	FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
+
+	// CDN configuration failed.
+	FAILEDOPERATION_CONFIGCDNFAILED = "FailedOperation.ConfigCDNFailed"
 
 	// The domain name cannot be deleted because it incurred traffic in the last 2 days and is in locked state.
 	FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
 
+	// The domain has already been added.
+	FAILEDOPERATION_DOMAINADDED = "FailedOperation.DomainAdded"
+
 	// Failed to configure the domain rule.
 	FAILEDOPERATION_DOMAINGSLBFAIL = "FailedOperation.DomainGslbFail"
+
+	// The domain has not been verified.
+	FAILEDOPERATION_DOMAINNEEDREALNAME = "FailedOperation.DomainNeedRealName"
+
+	// The ownership of the domain has not been verified.
+	FAILEDOPERATION_DOMAINNEEDVERIFYOWNER = "FailedOperation.DomainNeedVerifyOwner"
+
+	// The number of free certificates exceeded the limit.
+	FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
 
 	// Unable to get the watermark URL.
 	FAILEDOPERATION_GETPICTUREURLERROR = "FailedOperation.GetPictureUrlError"
@@ -59,14 +95,32 @@ const (
 	// The number of domain names exceeded the upper limit (100).
 	FAILEDOPERATION_HOSTOUTLIMIT = "FailedOperation.HostOutLimit"
 
+	// Invalid certificate status.
+	FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+
+	// Invalid parameter.
+	FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+
 	// An exception occurred while manipulating the VOD API.
 	FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
 
 	// The billing platform returned an error of insufficient balance.
 	FAILEDOPERATION_JIFEINOENOUGHFUND = "FailedOperation.JiFeiNoEnoughFund"
 
+	// The CA system is busy. Try again later.
+	FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+
+	// You do not have permission to operate this project.
+	FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+
+	// You haven’t completed identity verification.
+	FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+
 	// No records found.
 	FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
+
+	// The domain’s parent domain has already been added.
+	FAILEDOPERATION_PARENTDOMAINADDED = "FailedOperation.ParentDomainAdded"
 
 	// Failed to start stream mix.
 	FAILEDOPERATION_PROCESSMIXERROR = "FailedOperation.ProcessMixError"
@@ -82,6 +136,9 @@ const (
 
 	// The stream does not exist.
 	FAILEDOPERATION_STREAMNOTEXIST = "FailedOperation.StreamNotExist"
+
+	// The domain’s subdomain has already been added.
+	FAILEDOPERATION_SUBDOMAINADDED = "FailedOperation.SubDomainAdded"
 
 	// Failed to unbind the tag. Try unbinding it manually.
 	FAILEDOPERATION_TAGUNBINDERROR = "FailedOperation.TagUnbindError"
@@ -263,11 +320,17 @@ const (
 	// The certificate is in use.
 	INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
 
+	// The certificate does not exist.
+	INVALIDPARAMETER_CRTDATENOTFOUND = "InvalidParameter.CrtDateNotFound"
+
 	// The certificate is invalid.
 	INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
 
 	// The certificate has expired.
 	INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
+
+	// Unable to find the domain.
+	INVALIDPARAMETER_CRTDOMAINNOTFOUND = "InvalidParameter.CrtDomainNotFound"
 
 	// The certificate key does not match.
 	INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
@@ -335,7 +398,7 @@ const (
 	// Incorrect `VodFileName`.
 	INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
 
-	// 
+	// Invalid watermark parameter.
 	INVALIDPARAMETER_INVALIDWATERMARK = "InvalidParameter.InvalidWatermark"
 
 	// It is not allowed to add a Mini Program domain name deleted in the same month.
@@ -377,6 +440,9 @@ const (
 	// The number of tasks created on the day exceeds the limit.
 	LIMITEXCEEDED_MAXIMUMTASK = "LimitExceeded.MaximumTask"
 
+	// Reached the API rate limit.
+	LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+
 	// Parameter missing.
 	MISSINGPARAMETER = "MissingParameter"
 
@@ -404,10 +470,10 @@ const (
 	// The domain name does not exist or is not matched.
 	RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 
-	// 
+	// You are blocked.
 	RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
 
-	// 
+	// Service suspended.
 	RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 
 	// This API is not supported for the user.
@@ -425,7 +491,7 @@ const (
 	// The `TaskId` does not exist.
 	RESOURCENOTFOUND_TASKID = "ResourceNotFound.TaskId"
 
-	// 
+	// You disabled the service.
 	RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
 
 	// The LVB service has not been activated.

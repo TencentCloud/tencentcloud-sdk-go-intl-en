@@ -159,9 +159,16 @@ func NewAddLiveDomainResponse() (response *AddLiveDomainResponse) {
 // This API is used to add a domain name. Only one domain name can be submitted at a time, and it must have an ICP filing.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
+//  FAILEDOPERATION_DOMAINADDED = "FailedOperation.DomainAdded"
+//  FAILEDOPERATION_DOMAINGSLBFAIL = "FailedOperation.DomainGslbFail"
+//  FAILEDOPERATION_DOMAINNEEDREALNAME = "FailedOperation.DomainNeedRealName"
+//  FAILEDOPERATION_DOMAINNEEDVERIFYOWNER = "FailedOperation.DomainNeedVerifyOwner"
 //  FAILEDOPERATION_HOSTOUTLIMIT = "FailedOperation.HostOutLimit"
+//  FAILEDOPERATION_PARENTDOMAINADDED = "FailedOperation.ParentDomainAdded"
+//  FAILEDOPERATION_SUBDOMAINADDED = "FailedOperation.SubDomainAdded"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CHINESECHARACTERDETECTED = "InternalError.ChineseCharacterDetected"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
@@ -176,6 +183,7 @@ func NewAddLiveDomainResponse() (response *AddLiveDomainResponse) {
 //  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
 //  INTERNALERROR_INVALIDUSER = "InternalError.InvalidUser"
 //  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DOMAINALREADYEXIST = "InvalidParameter.DomainAlreadyExist"
 //  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
 //  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
@@ -198,9 +206,16 @@ func (c *Client) AddLiveDomain(request *AddLiveDomainRequest) (response *AddLive
 // This API is used to add a domain name. Only one domain name can be submitted at a time, and it must have an ICP filing.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
+//  FAILEDOPERATION_DOMAINADDED = "FailedOperation.DomainAdded"
+//  FAILEDOPERATION_DOMAINGSLBFAIL = "FailedOperation.DomainGslbFail"
+//  FAILEDOPERATION_DOMAINNEEDREALNAME = "FailedOperation.DomainNeedRealName"
+//  FAILEDOPERATION_DOMAINNEEDVERIFYOWNER = "FailedOperation.DomainNeedVerifyOwner"
 //  FAILEDOPERATION_HOSTOUTLIMIT = "FailedOperation.HostOutLimit"
+//  FAILEDOPERATION_PARENTDOMAINADDED = "FailedOperation.ParentDomainAdded"
+//  FAILEDOPERATION_SUBDOMAINADDED = "FailedOperation.SubDomainAdded"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CHINESECHARACTERDETECTED = "InternalError.ChineseCharacterDetected"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
@@ -215,6 +230,7 @@ func (c *Client) AddLiveDomain(request *AddLiveDomainRequest) (response *AddLive
 //  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
 //  INTERNALERROR_INVALIDUSER = "InternalError.InvalidUser"
 //  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DOMAINALREADYEXIST = "InvalidParameter.DomainAlreadyExist"
 //  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
 //  INVALIDPARAMETER_DOMAINHITBLACKLIST = "InvalidParameter.DomainHitBlackList"
@@ -309,80 +325,6 @@ func (c *Client) AddLiveWatermarkWithContext(ctx context.Context, request *AddLi
     request.SetContext(ctx)
     
     response = NewAddLiveWatermarkResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewBindLiveDomainCertRequest() (request *BindLiveDomainCertRequest) {
-    request = &BindLiveDomainCertRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("live", APIVersion, "BindLiveDomainCert")
-    
-    
-    return
-}
-
-func NewBindLiveDomainCertResponse() (response *BindLiveDomainCertResponse) {
-    response = &BindLiveDomainCertResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// BindLiveDomainCert
-// This API is used to bind a domain name certificate.
-//
-// Note: you need to call the `CreateLiveCert` API first to add a certificate. After getting the certificate ID, call this API for binding.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
-//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_CRTDATENOTFOUND = "ResourceNotFound.CrtDateNotFound"
-//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) BindLiveDomainCert(request *BindLiveDomainCertRequest) (response *BindLiveDomainCertResponse, err error) {
-    return c.BindLiveDomainCertWithContext(context.Background(), request)
-}
-
-// BindLiveDomainCert
-// This API is used to bind a domain name certificate.
-//
-// Note: you need to call the `CreateLiveCert` API first to add a certificate. After getting the certificate ID, call this API for binding.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
-//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_CRTDATENOTFOUND = "ResourceNotFound.CrtDateNotFound"
-//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) BindLiveDomainCertWithContext(ctx context.Context, request *BindLiveDomainCertRequest) (response *BindLiveDomainCertResponse, err error) {
-    if request == nil {
-        request = NewBindLiveDomainCertRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("BindLiveDomainCert require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewBindLiveDomainCertResponse()
     err = c.Send(request, response)
     return
 }
@@ -737,90 +679,6 @@ func (c *Client) CreateLiveCallbackTemplateWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewCreateLiveCallbackTemplateResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateLiveCertRequest() (request *CreateLiveCertRequest) {
-    request = &CreateLiveCertRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("live", APIVersion, "CreateLiveCert")
-    
-    
-    return
-}
-
-func NewCreateLiveCertResponse() (response *CreateLiveCertResponse) {
-    response = &CreateLiveCertResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateLiveCert
-// This API is used to add a certificate.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
-//  INTERNALERROR_CRTDATEOVERDUE = "InternalError.CrtDateOverdue"
-//  INTERNALERROR_CRTKEYNOTMATCH = "InternalError.CrtKeyNotMatch"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CLOUDCRTIDERROR = "InvalidParameter.CloudCrtIdError"
-//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
-//  INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
-//  INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
-//  INVALIDPARAMETER_CRTORKEYNOTEXIST = "InvalidParameter.CrtOrKeyNotExist"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) CreateLiveCert(request *CreateLiveCertRequest) (response *CreateLiveCertResponse, err error) {
-    return c.CreateLiveCertWithContext(context.Background(), request)
-}
-
-// CreateLiveCert
-// This API is used to add a certificate.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
-//  INTERNALERROR_CRTDATEOVERDUE = "InternalError.CrtDateOverdue"
-//  INTERNALERROR_CRTKEYNOTMATCH = "InternalError.CrtKeyNotMatch"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CLOUDCRTIDERROR = "InvalidParameter.CloudCrtIdError"
-//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
-//  INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
-//  INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
-//  INVALIDPARAMETER_CRTORKEYNOTEXIST = "InvalidParameter.CrtOrKeyNotExist"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) CreateLiveCertWithContext(ctx context.Context, request *CreateLiveCertRequest) (response *CreateLiveCertResponse, err error) {
-    if request == nil {
-        request = NewCreateLiveCertRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateLiveCert require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateLiveCertResponse()
     err = c.Send(request, response)
     return
 }
@@ -1821,6 +1679,7 @@ func NewDeleteLiveCallbackRuleResponse() (response *DeleteLiveCallbackRuleRespon
 //  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 //  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
 //  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
 func (c *Client) DeleteLiveCallbackRule(request *DeleteLiveCallbackRuleRequest) (response *DeleteLiveCallbackRuleResponse, err error) {
     return c.DeleteLiveCallbackRuleWithContext(context.Background(), request)
 }
@@ -1839,6 +1698,7 @@ func (c *Client) DeleteLiveCallbackRule(request *DeleteLiveCallbackRuleRequest) 
 //  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 //  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
 //  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION_NOTLVBCODEMODE = "UnsupportedOperation.NotLVBCodeMode"
 func (c *Client) DeleteLiveCallbackRuleWithContext(ctx context.Context, request *DeleteLiveCallbackRuleRequest) (response *DeleteLiveCallbackRuleResponse, err error) {
     if request == nil {
         request = NewDeleteLiveCallbackRuleRequest()
@@ -1941,76 +1801,6 @@ func (c *Client) DeleteLiveCallbackTemplateWithContext(ctx context.Context, requ
     return
 }
 
-func NewDeleteLiveCertRequest() (request *DeleteLiveCertRequest) {
-    request = &DeleteLiveCertRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("live", APIVersion, "DeleteLiveCert")
-    
-    
-    return
-}
-
-func NewDeleteLiveCertResponse() (response *DeleteLiveCertResponse) {
-    response = &DeleteLiveCertResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteLiveCert
-// This API is used to delete a certificate corresponding to the domain name.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRTDATEINUSING = "InternalError.CrtDateInUsing"
-//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
-//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
-//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) DeleteLiveCert(request *DeleteLiveCertRequest) (response *DeleteLiveCertResponse, err error) {
-    return c.DeleteLiveCertWithContext(context.Background(), request)
-}
-
-// DeleteLiveCert
-// This API is used to delete a certificate corresponding to the domain name.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_INVOKEVIDEOAPIFAIL = "FailedOperation.InvokeVideoApiFail"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRTDATEINUSING = "InternalError.CrtDateInUsing"
-//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
-//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
-//  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) DeleteLiveCertWithContext(ctx context.Context, request *DeleteLiveCertRequest) (response *DeleteLiveCertResponse, err error) {
-    if request == nil {
-        request = NewDeleteLiveCertRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteLiveCert require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteLiveCertResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDeleteLiveDomainRequest() (request *DeleteLiveDomainRequest) {
     request = &DeleteLiveDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2040,6 +1830,7 @@ func NewDeleteLiveDomainResponse() (response *DeleteLiveDomainResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_DOMAINALREADYEXIST = "InvalidParameter.DomainAlreadyExist"
 //  INVALIDPARAMETER_DOMAINISLIMITED = "InvalidParameter.DomainIsLimited"
 //  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -2061,6 +1852,7 @@ func (c *Client) DeleteLiveDomain(request *DeleteLiveDomainRequest) (response *D
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_DOMAINALREADYEXIST = "InvalidParameter.DomainAlreadyExist"
 //  INVALIDPARAMETER_DOMAINISLIMITED = "InvalidParameter.DomainIsLimited"
 //  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -3588,6 +3380,7 @@ func NewDescribeLiveDelayInfoListResponse() (response *DescribeLiveDelayInfoList
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3605,6 +3398,7 @@ func (c *Client) DescribeLiveDelayInfoList(request *DescribeLiveDelayInfoListReq
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3761,6 +3555,70 @@ func (c *Client) DescribeLiveDomainCertWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeLiveDomainCertResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLiveDomainCertBindingsRequest() (request *DescribeLiveDomainCertBindingsRequest) {
+    request = &DescribeLiveDomainCertBindingsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveDomainCertBindings")
+    
+    
+    return
+}
+
+func NewDescribeLiveDomainCertBindingsResponse() (response *DescribeLiveDomainCertBindingsResponse) {
+    response = &DescribeLiveDomainCertBindingsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLiveDomainCertBindings
+// This API is used to query domains bound with certificates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeLiveDomainCertBindings(request *DescribeLiveDomainCertBindingsRequest) (response *DescribeLiveDomainCertBindingsResponse, err error) {
+    return c.DescribeLiveDomainCertBindingsWithContext(context.Background(), request)
+}
+
+// DescribeLiveDomainCertBindings
+// This API is used to query domains bound with certificates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeLiveDomainCertBindingsWithContext(ctx context.Context, request *DescribeLiveDomainCertBindingsRequest) (response *DescribeLiveDomainCertBindingsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLiveDomainCertBindingsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLiveDomainCertBindings require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLiveDomainCertBindingsResponse()
     err = c.Send(request, response)
     return
 }
@@ -6651,146 +6509,136 @@ func (c *Client) ModifyLiveCallbackTemplateWithContext(ctx context.Context, requ
     return
 }
 
-func NewModifyLiveCertRequest() (request *ModifyLiveCertRequest) {
-    request = &ModifyLiveCertRequest{
+func NewModifyLiveDomainCertBindingsRequest() (request *ModifyLiveDomainCertBindingsRequest) {
+    request = &ModifyLiveDomainCertBindingsRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveCert")
+    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveDomainCertBindings")
     
     
     return
 }
 
-func NewModifyLiveCertResponse() (response *ModifyLiveCertResponse) {
-    response = &ModifyLiveCertResponse{
+func NewModifyLiveDomainCertBindingsResponse() (response *ModifyLiveDomainCertBindingsResponse) {
+    response = &ModifyLiveDomainCertBindingsResponse{
         BaseResponse: &tchttp.BaseResponse{},
     }
     return
 }
 
-// ModifyLiveCert
-// This API is used to modify a certificate.
+// ModifyLiveDomainCertBindings
+// This API is used to bind a certificate to multiple playback domains and update the HTTPS configuration of the domains.
+//
+// If a self-owned certificate is used, it will be automatically uploaded to Tencent Cloud’s SSL Certificate Service.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CONFIGCDNFAILED = "FailedOperation.ConfigCDNFailed"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
 //  INTERNALERROR_CRTDATEINUSING = "InternalError.CrtDateInUsing"
+//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
+//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
 //  INTERNALERROR_CRTDATEOVERDUE = "InternalError.CrtDateOverdue"
+//  INTERNALERROR_CRTDOMAINNOTFOUND = "InternalError.CrtDomainNotFound"
 //  INTERNALERROR_CRTKEYNOTMATCH = "InternalError.CrtKeyNotMatch"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLOUDCRTIDERROR = "InvalidParameter.CloudCrtIdError"
 //  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
+//  INVALIDPARAMETER_CRTDATENOTFOUND = "InvalidParameter.CrtDateNotFound"
+//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
 //  INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
+//  INVALIDPARAMETER_CRTDOMAINNOTFOUND = "InvalidParameter.CrtDomainNotFound"
 //  INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
+//  INVALIDPARAMETER_CRTORKEYNOTEXIST = "InvalidParameter.CrtOrKeyNotExist"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+//  RESOURCENOTFOUND_CRTDATENOTFOUND = "ResourceNotFound.CrtDateNotFound"
+//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
 //  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 //  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
 //  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) ModifyLiveCert(request *ModifyLiveCertRequest) (response *ModifyLiveCertResponse, err error) {
-    return c.ModifyLiveCertWithContext(context.Background(), request)
+func (c *Client) ModifyLiveDomainCertBindings(request *ModifyLiveDomainCertBindingsRequest) (response *ModifyLiveDomainCertBindingsResponse, err error) {
+    return c.ModifyLiveDomainCertBindingsWithContext(context.Background(), request)
 }
 
-// ModifyLiveCert
-// This API is used to modify a certificate.
+// ModifyLiveDomainCertBindings
+// This API is used to bind a certificate to multiple playback domains and update the HTTPS configuration of the domains.
+//
+// If a self-owned certificate is used, it will be automatically uploaded to Tencent Cloud’s SSL Certificate Service.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
+//  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
+//  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CONFIGCDNFAILED = "FailedOperation.ConfigCDNFailed"
+//  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
 //  INTERNALERROR_CRTDATEINUSING = "InternalError.CrtDateInUsing"
+//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
+//  INTERNALERROR_CRTDATENOTLEGAL = "InternalError.CrtDateNotLegal"
 //  INTERNALERROR_CRTDATEOVERDUE = "InternalError.CrtDateOverdue"
+//  INTERNALERROR_CRTDOMAINNOTFOUND = "InternalError.CrtDomainNotFound"
 //  INTERNALERROR_CRTKEYNOTMATCH = "InternalError.CrtKeyNotMatch"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLOUDCRTIDERROR = "InvalidParameter.CloudCrtIdError"
 //  INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
+//  INVALIDPARAMETER_CRTDATENOTFOUND = "InvalidParameter.CrtDateNotFound"
+//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
 //  INVALIDPARAMETER_CRTDATEOVERDUE = "InvalidParameter.CrtDateOverdue"
+//  INVALIDPARAMETER_CRTDOMAINNOTFOUND = "InvalidParameter.CrtDomainNotFound"
 //  INVALIDPARAMETER_CRTKEYNOTMATCH = "InvalidParameter.CrtKeyNotMatch"
+//  INVALIDPARAMETER_CRTORKEYNOTEXIST = "InvalidParameter.CrtOrKeyNotExist"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+//  RESOURCENOTFOUND_CRTDATENOTFOUND = "ResourceNotFound.CrtDateNotFound"
+//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
+//  RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
 //  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 //  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
 //  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) ModifyLiveCertWithContext(ctx context.Context, request *ModifyLiveCertRequest) (response *ModifyLiveCertResponse, err error) {
+func (c *Client) ModifyLiveDomainCertBindingsWithContext(ctx context.Context, request *ModifyLiveDomainCertBindingsRequest) (response *ModifyLiveDomainCertBindingsResponse, err error) {
     if request == nil {
-        request = NewModifyLiveCertRequest()
+        request = NewModifyLiveDomainCertBindingsRequest()
     }
     
     if c.GetCredential() == nil {
-        return nil, errors.New("ModifyLiveCert require credential")
+        return nil, errors.New("ModifyLiveDomainCertBindings require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewModifyLiveCertResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyLiveDomainCertRequest() (request *ModifyLiveDomainCertRequest) {
-    request = &ModifyLiveDomainCertRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("live", APIVersion, "ModifyLiveDomainCert")
-    
-    
-    return
-}
-
-func NewModifyLiveDomainCertResponse() (response *ModifyLiveDomainCertResponse) {
-    response = &ModifyLiveDomainCertResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyLiveDomainCert
-// This API is used to modify the domain name and certificate binding information.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
-//  INTERNALERROR_CRTDOMAINNOTFOUND = "InternalError.CrtDomainNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) ModifyLiveDomainCert(request *ModifyLiveDomainCertRequest) (response *ModifyLiveDomainCertResponse, err error) {
-    return c.ModifyLiveDomainCertWithContext(context.Background(), request)
-}
-
-// ModifyLiveDomainCert
-// This API is used to modify the domain name and certificate binding information.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRTDATENOTFOUND = "InternalError.CrtDateNotFound"
-//  INTERNALERROR_CRTDOMAINNOTFOUND = "InternalError.CrtDomainNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CRTDATENOTLEGAL = "InvalidParameter.CrtDateNotLegal"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_CRTDOMAINNOTFOUND = "ResourceNotFound.CrtDomainNotFound"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-func (c *Client) ModifyLiveDomainCertWithContext(ctx context.Context, request *ModifyLiveDomainCertRequest) (response *ModifyLiveDomainCertResponse, err error) {
-    if request == nil {
-        request = NewModifyLiveDomainCertRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyLiveDomainCert require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyLiveDomainCertResponse()
+    response = NewModifyLiveDomainCertBindingsResponse()
     err = c.Send(request, response)
     return
 }
@@ -7458,6 +7306,7 @@ func NewResumeDelayLiveStreamResponse() (response *ResumeDelayLiveStreamResponse
 //  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 //  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
 //  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
@@ -7493,6 +7342,7 @@ func (c *Client) ResumeDelayLiveStream(request *ResumeDelayLiveStreamRequest) (r
 //  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
 //  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
 //  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"

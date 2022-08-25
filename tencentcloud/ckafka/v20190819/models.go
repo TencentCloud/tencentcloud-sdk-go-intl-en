@@ -3123,6 +3123,91 @@ func (r *FetchMessageByOffsetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type FetchMessageListByOffsetRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Partition ID
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// Offset information
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of messages that can be queried. Default value: 20. Maximum value: 20.
+	SinglePartitionRecordNumber *int64 `json:"SinglePartitionRecordNumber,omitempty" name:"SinglePartitionRecordNumber"`
+}
+
+type FetchMessageListByOffsetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	Topic *string `json:"Topic,omitempty" name:"Topic"`
+
+	// Partition ID
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// Offset information
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of messages that can be queried. Default value: 20. Maximum value: 20.
+	SinglePartitionRecordNumber *int64 `json:"SinglePartitionRecordNumber,omitempty" name:"SinglePartitionRecordNumber"`
+}
+
+func (r *FetchMessageListByOffsetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FetchMessageListByOffsetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Topic")
+	delete(f, "Partition")
+	delete(f, "Offset")
+	delete(f, "SinglePartitionRecordNumber")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "FetchMessageListByOffsetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type FetchMessageListByOffsetResponseParams struct {
+	// Returned result. Note: The returned list does not display the message content (key and value). To query the message content, call the `FetchMessageByOffset` API.
+	Result []*ConsumerRecord `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type FetchMessageListByOffsetResponse struct {
+	*tchttp.BaseResponse
+	Response *FetchMessageListByOffsetResponseParams `json:"Response"`
+}
+
+func (r *FetchMessageListByOffsetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FetchMessageListByOffsetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Filter struct {
 	// Field to be filtered.
 	Name *string `json:"Name,omitempty" name:"Name"`

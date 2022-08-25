@@ -319,7 +319,7 @@ type Column struct {
 }
 
 type CompressInfo struct {
-	// Compression format. Valid values: `gzip`, `lzop`, `none` (no compression)
+	// Compression format. Valid values: `gzip`; `lzop`; `snappy`; `none` (no compression)
 	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
@@ -5337,6 +5337,10 @@ type ShipperInfo struct {
 
 	// Creation time of shipped log
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Shipping file naming configuration. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FilenameMode *uint64 `json:"FilenameMode,omitempty" name:"FilenameMode"`
 }
 
 type ShipperTaskInfo struct {

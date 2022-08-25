@@ -6692,6 +6692,90 @@ func (r *DescribeCdnLogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeClientUploadAccelerationUsageDataRequestParams struct {
+	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The client upload acceleration type. Valid values:
+	// <li> AccelerationWithHTTP: Acceleration of HTTP transmission</li>
+	// <li> AccelerationWithQUIC: Acceleration of QUIC transmission</li>
+	// If you do not specify this parameter, the usage of both types will be queried.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type DescribeClientUploadAccelerationUsageDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The client upload acceleration type. Valid values:
+	// <li> AccelerationWithHTTP: Acceleration of HTTP transmission</li>
+	// <li> AccelerationWithQUIC: Acceleration of QUIC transmission</li>
+	// If you do not specify this parameter, the usage of both types will be queried.
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *DescribeClientUploadAccelerationUsageDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClientUploadAccelerationUsageDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SubAppId")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClientUploadAccelerationUsageDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClientUploadAccelerationUsageDataResponseParams struct {
+	// The usage of client upload acceleration.
+	ClientUploadAccelerationUsageDataSet []*StatDataItem `json:"ClientUploadAccelerationUsageDataSet,omitempty" name:"ClientUploadAccelerationUsageDataSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeClientUploadAccelerationUsageDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClientUploadAccelerationUsageDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeClientUploadAccelerationUsageDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClientUploadAccelerationUsageDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeContentReviewTemplatesRequestParams struct {
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -8179,6 +8263,9 @@ func (r *DescribeSubAppIdsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSuperPlayerConfigsRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Player configuration name filter. Array length limit: 100.
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
@@ -8192,14 +8279,14 @@ type DescribeSuperPlayerConfigsRequestParams struct {
 	// <li>Preset: preset configuration;</li>
 	// <li>Custom: custom configuration.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeSuperPlayerConfigsRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Player configuration name filter. Array length limit: 100.
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
@@ -8213,9 +8300,6 @@ type DescribeSuperPlayerConfigsRequest struct {
 	// <li>Preset: preset configuration;</li>
 	// <li>Custom: custom configuration.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeSuperPlayerConfigsRequest) ToJsonString() string {
@@ -8230,11 +8314,11 @@ func (r *DescribeSuperPlayerConfigsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Names")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSuperPlayerConfigsRequest has unknown keys!", "")
 	}
@@ -9116,21 +9200,21 @@ type EventContent struct {
 	EventHandle *string `json:"EventHandle,omitempty" name:"EventHandle"`
 
 	// <b>Supported event types:</b>
-	// <li>NewFileUpload: finished video upload</li>
-	// <li>ProcedureStateChanged: task flow status changed</li>
-	// <li>FileDeleted: finished video deletion</li>
-	// <li>PullComplete: finished pulling for upload</li>
-	// <li>EditMediaComplete: finished video editing</li>
-	// <li>SplitMediaComplete: finished video splitting</li>
-	// <li>WechatPublishComplete: finished publishing on WeChat</li>
-	// <li>ComposeMediaComplete: finished producing the media file</li>
-	// <li>WechatMiniProgramPublishComplete: finished publishing on WeChat Mini Program</li>
-	// <b>Support v2017 task types:</b>
-	// <li>TranscodeComplete: finished video transcoding</li>
-	// <li>ConcatComplete: finished video splicing</li>
-	// <li>ClipComplete: finished video clipping</li>
-	// <li>CreateImageSpriteComplete: finished image sprite generation</li>
-	// <li>CreateSnapshotByTimeOffsetComplete: finished point-in-time screencapturing</li>
+	// <li>NewFileUpload: Video uploaded.</li>
+	// <li>ProcedureStateChanged: Task flow status changed.</li>
+	// <li>FileDeleted: Video deleted.</li>
+	// <li>PullComplete: Finished video pulling.</li>
+	// <li>EditMediaComplete: Finished video editing.</li>
+	// <li>SplitMediaComplete: Finished video splitting.</li>
+	// <li>WechatPublishComplete: Published to WeChat.</li>
+	// <li>ComposeMediaComplete: Finished composition.</li>
+	// <li>FastClipMediaComplete: Finished quick clipping.</li>
+	// <b>v2017 task types:</b>
+	// <li>TranscodeComplete: Finished video transcoding.</li>
+	// <li>ConcatComplete: Finished video splicing.</li>
+	// <li>ClipComplete: Finished video clipping.</li>
+	// <li>CreateImageSpriteComplete: Finished image sprite generation.</li>
+	// <li>CreateSnapshotByTimeOffsetComplete: Finished time point screencapturing.</li>
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// Video upload completion event, which is valid if the event type is `NewFileUpload`.
@@ -10086,20 +10170,23 @@ type MediaBasicInfo struct {
 }
 
 type MediaClassInfo struct {
-	// Category ID
+	// The category ID.
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
 
 	// Parent category ID, which is -1 for a first-level category.
 	ParentId *int64 `json:"ParentId,omitempty" name:"ParentId"`
 
-	// Category name
-	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
+	// The category name.
+	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Category level. 0 for first-level category, up to 3, i.e., up to 4 levels of categories are allowed.
 	Level *uint64 `json:"Level,omitempty" name:"Level"`
 
-	// Set of IDs of the immediate subcategories in current category
+	// The IDs of the immediate subcategories of the current category.
 	SubClassIdSet []*int64 `json:"SubClassIdSet,omitempty" name:"SubClassIdSet"`
+
+	// The category name. This parameter is not recommended. Please use `Name` instead.
+	ClassName *string `json:"ClassName,omitempty" name:"ClassName"`
 }
 
 type MediaContentReviewAsrTextSegmentItem struct {
@@ -12709,6 +12796,9 @@ type ModifySuperPlayerConfigRequestParams struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Type of audio/video played. Valid values:
 	// <li>AdaptiveDynamicStreaming</li>
 	// <li>Transcode</li>
@@ -12746,9 +12836,6 @@ type ModifySuperPlayerConfigRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type ModifySuperPlayerConfigRequest struct {
@@ -12757,6 +12844,9 @@ type ModifySuperPlayerConfigRequest struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Type of audio/video played. Valid values:
 	// <li>AdaptiveDynamicStreaming</li>
 	// <li>Transcode</li>
@@ -12794,9 +12884,6 @@ type ModifySuperPlayerConfigRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *ModifySuperPlayerConfigRequest) ToJsonString() string {
@@ -12812,6 +12899,7 @@ func (r *ModifySuperPlayerConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "SubAppId")
 	delete(f, "AudioVideoType")
 	delete(f, "DrmSwitch")
 	delete(f, "AdaptiveDynamicStreamingDefinition")
@@ -12822,7 +12910,6 @@ func (r *ModifySuperPlayerConfigRequest) FromJsonString(s string) error {
 	delete(f, "Domain")
 	delete(f, "Scheme")
 	delete(f, "Comment")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySuperPlayerConfigRequest has unknown keys!", "")
 	}
@@ -13614,6 +13701,12 @@ type PlayerConfig struct {
 	// <li>Custom: custom configuration.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
+	// The type of audio/video played. Valid values:
+	// <li>AdaptiveDynamicStreaming: Adaptive bitrate stream</li>
+	// <li>Transcode: Transcoded stream</li>
+	// <li>Original: The original stream</li>
+	AudioVideoType *string `json:"AudioVideoType,omitempty" name:"AudioVideoType"`
+
 	// Switch of DRM-protected adaptive bitstream playback:
 	// <li>ON: enabled, indicating to play back only output adaptive bitstreams protected by DRM;</li>
 	// <li>OFF: disabled, indicating to play back unencrypted output adaptive bitstreams.</li>
@@ -13624,6 +13717,9 @@ type PlayerConfig struct {
 
 	// Content of the DRM-protected adaptive bitrate streaming template that allows output.
 	DrmStreamingsInfo *DrmStreamingsInfo `json:"DrmStreamingsInfo,omitempty" name:"DrmStreamingsInfo"`
+
+	// The ID of the transcoding template allowed.
+	TranscodeDefinition *uint64 `json:"TranscodeDefinition,omitempty" name:"TranscodeDefinition"`
 
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitempty" name:"ImageSpriteDefinition"`
@@ -15850,8 +15946,8 @@ type SubAppIdInfo struct {
 	// Subapplication ID.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	// Subapplication name.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	// The subapplication name.
+	SubAppIdName *string `json:"SubAppIdName,omitempty" name:"SubAppIdName"`
 
 	// Subapplication overview.
 	Description *string `json:"Description,omitempty" name:"Description"`
@@ -15865,6 +15961,9 @@ type SubAppIdInfo struct {
 	// <li>Destroying: terminating</li>
 	// <li>Destroyed: terminated</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The subapplication name. This parameter is not recommended. Please use `SubAppIdName` instead.
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type SvgWatermarkInput struct {
@@ -16592,22 +16691,20 @@ type VideoTemplateInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].
+	// <li>If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.</li>
+	// <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
+	// <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
+	// <li>If neither `Width` nor `Height` is 0, the specified width and height will be used.</li>
 	// Default value: 0.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Width *uint64 `json:"Width,omitempty" name:"Width"`
 
-	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].
+	// <li>If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.</li>
+	// <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
+	// <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
+	// <li>If neither `Width` nor `Height` is 0, the specified width and height will be used.</li>
 	// Default value: 0.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
 	// Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:
@@ -16629,6 +16726,12 @@ type VideoTemplateInfo struct {
 	// I-frame interval in frames. Valid values: 0 and 1-100000.
 	// When this parameter is set to 0 or left empty, `Gop` will be automatically set.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
+
+	// Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:
+	// <li>ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.</li>
+	// <li>OFF: Output an SDR video regardless of whether the source video is HDR.</li>
+	// Default value: OFF.
+	PreserveHDRSwitch *string `json:"PreserveHDRSwitch,omitempty" name:"PreserveHDRSwitch"`
 }
 
 type VideoTemplateInfoForUpdate struct {
@@ -16655,14 +16758,14 @@ type VideoTemplateInfoForUpdate struct {
 	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Maximum value of the width (or long side) of a video stream in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
+	// The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].
+	// <li>If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.</li>
+	// <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
+	// <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
+	// <li>If neither `Width` nor `Height` is 0, the specified width and height will be used.</li>
 	Width *uint64 `json:"Width,omitempty" name:"Width"`
 
-	// Maximum value of the height (or short side) of a video stream in px. Value range: 0 and [128, 4,096].
+	// The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
 
 	// Fill type. "Fill" refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. Valid values:
@@ -16683,6 +16786,11 @@ type VideoTemplateInfoForUpdate struct {
 	// I-frame interval in frames. Valid values: 0 and 1-100000.
 	// When this parameter is set to 0 or left empty, `Gop` will be automatically set.
 	Gop *uint64 `json:"Gop,omitempty" name:"Gop"`
+
+	// Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:
+	// <li>ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.</li>
+	// <li>OFF: Output an SDR video regardless of whether the source video is HDR.</li>
+	PreserveHDRSwitch *string `json:"PreserveHDRSwitch,omitempty" name:"PreserveHDRSwitch"`
 }
 
 type VideoTrackItem struct {

@@ -3509,12 +3509,79 @@ func (r *CreateNetDetectResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateNetworkAclQuintupleEntriesRequestParams struct {
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL quintuple rule set.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+}
+
+type CreateNetworkAclQuintupleEntriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL quintuple rule set.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+}
+
+func (r *CreateNetworkAclQuintupleEntriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNetworkAclQuintupleEntriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "NetworkAclQuintupleSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkAclQuintupleEntriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNetworkAclQuintupleEntriesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateNetworkAclQuintupleEntriesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNetworkAclQuintupleEntriesResponseParams `json:"Response"`
+}
+
+func (r *CreateNetworkAclQuintupleEntriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNetworkAclQuintupleEntriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateNetworkAclRequestParams struct {
 	// VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Network ACL name, which can contain up to 60 bytes.
 	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+
+	// Network ACL type. Valid values: `TRIPLE` and `QUINTUPLE`.
+	NetworkAclType *string `json:"NetworkAclType,omitempty" name:"NetworkAclType"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type CreateNetworkAclRequest struct {
@@ -3525,6 +3592,12 @@ type CreateNetworkAclRequest struct {
 
 	// Network ACL name, which can contain up to 60 bytes.
 	NetworkAclName *string `json:"NetworkAclName,omitempty" name:"NetworkAclName"`
+
+	// Network ACL type. Valid values: `TRIPLE` and `QUINTUPLE`.
+	NetworkAclType *string `json:"NetworkAclType,omitempty" name:"NetworkAclType"`
+
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateNetworkAclRequest) ToJsonString() string {
@@ -3541,6 +3614,8 @@ func (r *CreateNetworkAclRequest) FromJsonString(s string) error {
 	}
 	delete(f, "VpcId")
 	delete(f, "NetworkAclName")
+	delete(f, "NetworkAclType")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkAclRequest has unknown keys!", "")
 	}
@@ -6032,6 +6107,67 @@ func (r *DeleteNetDetectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteNetDetectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNetworkAclQuintupleEntriesRequestParams struct {
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL quintuple rule set.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+}
+
+type DeleteNetworkAclQuintupleEntriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL quintuple rule set.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+}
+
+func (r *DeleteNetworkAclQuintupleEntriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNetworkAclQuintupleEntriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "NetworkAclQuintupleSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNetworkAclQuintupleEntriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNetworkAclQuintupleEntriesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteNetworkAclQuintupleEntriesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNetworkAclQuintupleEntriesResponseParams `json:"Response"`
+}
+
+func (r *DeleteNetworkAclQuintupleEntriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNetworkAclQuintupleEntriesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9884,6 +10020,101 @@ func (r *DescribeNetDetectsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeNetDetectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNetworkAclQuintupleEntriesRequestParams struct {
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Returned quantity. Default: 20. Value range: 1-100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition. `HaVipIds` and `Filters` cannot be specified at the same time.
+	// <li>`protocol` - String - Such as `TCP`</li>
+	// <li>`description` - String - Description</li>
+	// <li>`destination-cidr` - String - Destination CIDR block, such as `192.168.0.0/24`</li>
+	// <li>`source-cidr` - String - Source CIDR block, such as `192.168.0.0/24`</li>
+	// <li>`action` - String - ·Values: `ACCEPT`, `DROP`</li>
+	// <li>`network-acl-quintuple-entry-id` - String - Unique ID of the quintuple, such as `acli45-ahnu4rv5`</li>
+	// <li>`network-acl-direction` - String - Direction of the policy. Values: `INGRESS` or `EGRESS`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeNetworkAclQuintupleEntriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Returned quantity. Default: 20. Value range: 1-100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter condition. `HaVipIds` and `Filters` cannot be specified at the same time.
+	// <li>`protocol` - String - Such as `TCP`</li>
+	// <li>`description` - String - Description</li>
+	// <li>`destination-cidr` - String - Destination CIDR block, such as `192.168.0.0/24`</li>
+	// <li>`source-cidr` - String - Source CIDR block, such as `192.168.0.0/24`</li>
+	// <li>`action` - String - ·Values: `ACCEPT`, `DROP`</li>
+	// <li>`network-acl-quintuple-entry-id` - String - Unique ID of the quintuple, such as `acli45-ahnu4rv5`</li>
+	// <li>`network-acl-direction` - String - Direction of the policy. Values: `INGRESS` or `EGRESS`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeNetworkAclQuintupleEntriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNetworkAclQuintupleEntriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetworkAclQuintupleEntriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNetworkAclQuintupleEntriesResponseParams struct {
+	// The list of the network ACL quintuple entries
+	NetworkAclQuintupleSet []*NetworkAclQuintupleEntry `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+
+	// Number of eligible instances.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNetworkAclQuintupleEntriesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNetworkAclQuintupleEntriesResponseParams `json:"Response"`
+}
+
+func (r *DescribeNetworkAclQuintupleEntriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNetworkAclQuintupleEntriesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -15632,6 +15863,9 @@ type ModifyNetworkAclEntriesRequestParams struct {
 
 	// Network ACL rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
 	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
+
+	// Network ACL quintuple rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
 }
 
 type ModifyNetworkAclEntriesRequest struct {
@@ -15642,6 +15876,9 @@ type ModifyNetworkAclEntriesRequest struct {
 
 	// Network ACL rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
 	NetworkAclEntrySet *NetworkAclEntrySet `json:"NetworkAclEntrySet,omitempty" name:"NetworkAclEntrySet"`
+
+	// Network ACL quintuple rule set. `NetworkAclEntrySet` and `NetworkAclQuintupleSet` cannot be entered at the same time.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
 }
 
 func (r *ModifyNetworkAclEntriesRequest) ToJsonString() string {
@@ -15658,6 +15895,7 @@ func (r *ModifyNetworkAclEntriesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "NetworkAclId")
 	delete(f, "NetworkAclEntrySet")
+	delete(f, "NetworkAclQuintupleSet")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAclEntriesRequest has unknown keys!", "")
 	}
@@ -15683,6 +15921,67 @@ func (r *ModifyNetworkAclEntriesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyNetworkAclEntriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAclQuintupleEntriesRequestParams struct {
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL quintuple rule set.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+}
+
+type ModifyNetworkAclQuintupleEntriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network ACL instance ID, such as `acl-12345678`.
+	NetworkAclId *string `json:"NetworkAclId,omitempty" name:"NetworkAclId"`
+
+	// Network ACL quintuple rule set.
+	NetworkAclQuintupleSet *NetworkAclQuintupleEntries `json:"NetworkAclQuintupleSet,omitempty" name:"NetworkAclQuintupleSet"`
+}
+
+func (r *ModifyNetworkAclQuintupleEntriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAclQuintupleEntriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAclId")
+	delete(f, "NetworkAclQuintupleSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkAclQuintupleEntriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkAclQuintupleEntriesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNetworkAclQuintupleEntriesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNetworkAclQuintupleEntriesResponseParams `json:"Response"`
+}
+
+func (r *ModifyNetworkAclQuintupleEntriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkAclQuintupleEntriesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -17098,6 +17397,12 @@ type NetworkAcl struct {
 
 	// Outbound rules of the network ACL.
 	EgressEntries []*NetworkAclEntry `json:"EgressEntries,omitempty" name:"EgressEntries"`
+
+	// Network ACL type. Valid values: `TRIPLE` and `QUINTUPLE`.
+	NetworkAclType *string `json:"NetworkAclType,omitempty" name:"NetworkAclType"`
+
+	// Tag key-value pairs
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type NetworkAclEntry struct {
@@ -17129,6 +17434,49 @@ type NetworkAclEntrySet struct {
 
 	// Outbound rules.
 	Egress []*NetworkAclEntry `json:"Egress,omitempty" name:"Egress"`
+}
+
+type NetworkAclQuintupleEntries struct {
+	// Network ACL quintuple inbound rule.
+	Ingress []*NetworkAclQuintupleEntry `json:"Ingress,omitempty" name:"Ingress"`
+
+	// Network ACL quintuple outbound rule.
+	Egress []*NetworkAclQuintupleEntry `json:"Egress,omitempty" name:"Egress"`
+}
+
+type NetworkAclQuintupleEntry struct {
+	// Protocol. Valid values: `TCP`, `UDP`, `ICMP`, `ALL`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Source port. Valid values: all, single port, range. When `Protocol` is `ALL` or `ICMP`, `Port` cannot be specified.
+	SourcePort *string `json:"SourcePort,omitempty" name:"SourcePort"`
+
+	// Source CIDR block.
+	SourceCidr *string `json:"SourceCidr,omitempty" name:"SourceCidr"`
+
+	// Destination port. Valid values: all, single port, range. When `Protocol` is `ALL` or `ICMP`, `Port` cannot be specified.
+	DestinationPort *string `json:"DestinationPort,omitempty" name:"DestinationPort"`
+
+	// Destination CIDR block.
+	DestinationCidr *string `json:"DestinationCidr,omitempty" name:"DestinationCidr"`
+
+	// Action. Valid values: `ACCEPT` and `DROP`.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Unique ID of a network ACL entry.
+	NetworkAclQuintupleEntryId *string `json:"NetworkAclQuintupleEntryId,omitempty" name:"NetworkAclQuintupleEntryId"`
+
+	// Priority. `1` refers to the highest priority.
+	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+
+	// Creation time. It’s returned by `DescribeNetworkAclQuintupleEntries`.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Direction of the rule. It’s returned by `DescribeNetworkAclQuintupleEntries`. Valid values: `INGRESS` and `EGRESS`.
+	NetworkAclDirection *string `json:"NetworkAclDirection,omitempty" name:"NetworkAclDirection"`
 }
 
 type NetworkInterface struct {

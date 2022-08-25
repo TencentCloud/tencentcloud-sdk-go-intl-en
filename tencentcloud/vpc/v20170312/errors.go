@@ -29,19 +29,19 @@ const (
 	// The ENI information is not available in this address.
 	FAILEDOPERATION_ADDRESSENIINFONOTFOUND = "FailedOperation.AddressEniInfoNotFound"
 
-	// 
+	// Insufficient account balance.
 	FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
 
 	// Unsupported region.
 	FAILEDOPERATION_INVALIDREGION = "FailedOperation.InvalidRegion"
 
-	// 
+	// The instance's primary ENI is not found.
 	FAILEDOPERATION_MASTERENINOTFOUND = "FailedOperation.MasterEniNotFound"
 
 	// Network probe timed out. Please retry later.
 	FAILEDOPERATION_NETDETECTTIMEOUT = "FailedOperation.NetDetectTimeOut"
 
-	// 
+	// Task execution failed.
 	FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
 
 	// An internal error occurred.
@@ -49,6 +49,9 @@ const (
 
 	// Failed to create the Ckafka route. Please retry later.
 	INTERNALERROR_CREATECKAFKAROUTEERROR = "InternalError.CreateCkafkaRouteError"
+
+	// 
+	INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 
 	// Internal error.
 	INTERNALSERVERERROR = "InternalServerError"
@@ -179,6 +182,9 @@ const (
 	// This instance does not support an Anycast EIP.
 	INVALIDPARAMETERVALUE_INSTANCEDOESNOTSUPPORTANYCAST = "InvalidParameterValue.InstanceDoesNotSupportAnycast"
 
+	// 
+	INVALIDPARAMETERVALUE_INSTANCEHASNOWANIP = "InvalidParameterValue.InstanceHasNoWanIP"
+
 	// This instance already has a WanIP (public IP).
 	INVALIDPARAMETERVALUE_INSTANCEHASWANIP = "InvalidParameterValue.InstanceHasWanIP"
 
@@ -280,6 +286,9 @@ const (
 
 	// Subnet CIDR conflict.
 	INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+
+	// The CIDR block overlaps with another subnet within the same VPC.
+	INVALIDPARAMETERVALUE_SUBNETOVERLAP = "InvalidParameterValue.SubnetOverlap"
 
 	// The subnet IP range overlaps with the secondary CIDR block.
 	INVALIDPARAMETERVALUE_SUBNETOVERLAPASSISTCIDR = "InvalidParameterValue.SubnetOverlapAssistCidr"
@@ -449,10 +458,10 @@ const (
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
 
-	// 
+	// The specified public IP is isolated.
 	OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
 
-	// 
+	// Mutually exclusive tasks are executing.
 	OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
 
 	// The resource is occupied.
@@ -482,7 +491,7 @@ const (
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// 
+	// No permission to apply for AnycastEip resources.
 	UNAUTHORIZEDOPERATION_ANYCASTEIP = "UnauthorizedOperation.AnycastEip"
 
 	// The binding relationship does not exist.
@@ -563,6 +572,9 @@ const (
 	// The IP range overlaps with that of the TKE container under the VPC.
 	UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
 
+	// Unable to delete: There’re NAT rules associated with this direct connect gateway. Please delete all NAT rules first. 
+	UNSUPPORTEDOPERATION_DCGATEWAYNATRULEEXISTS = "UnsupportedOperation.DCGatewayNatRuleExists"
+
 	// No direct connect gateway exists in the specified VPC.
 	UNSUPPORTEDOPERATION_DCGATEWAYSNOTFOUNDINVPC = "UnsupportedOperation.DcGatewaysNotFoundInVpc"
 
@@ -604,6 +616,9 @@ const (
 
 	// The configured instance does not match with the route table.
 	UNSUPPORTEDOPERATION_INSTANCEANDRTBNOTMATCH = "UnsupportedOperation.InstanceAndRtbNotMatch"
+
+	// The specified instance resource does not match.
+	UNSUPPORTEDOPERATION_INSTANCEMISMATCH = "UnsupportedOperation.InstanceMismatch"
 
 	// In cross-account association, instances under an ordinary account cannot be associated with CCNs created under an Auto-Driving Cloud account.
 	UNSUPPORTEDOPERATION_INSTANCEORDINARYACCOUNTREFUSEATTACH = "UnsupportedOperation.InstanceOrdinaryAccountRefuseAttach"
@@ -647,7 +662,7 @@ const (
 	// The specified CDC instance already has a local gateway.
 	UNSUPPORTEDOPERATION_LOCALGATEWAYALREADYEXISTS = "UnsupportedOperation.LocalGatewayAlreadyExists"
 
-	// 
+	// The account does not support modifying this attribute of the public IP.
 	UNSUPPORTEDOPERATION_MODIFYADDRESSATTRIBUTE = "UnsupportedOperation.ModifyAddressAttribute"
 
 	// The resource mutual exclusion operation is being executed.
@@ -655,6 +670,9 @@ const (
 
 	// The private IP specified in the SNAT/DNAT forwarding rule has been bound with another rule.
 	UNSUPPORTEDOPERATION_NATGATEWAYRULEPIPEXISTS = "UnsupportedOperation.NatGatewayRulePipExists"
+
+	// 
+	UNSUPPORTEDOPERATION_NATGATEWAYSNATPIPNEEDVM = "UnsupportedOperation.NatGatewaySnatPipNeedVm"
 
 	// The specified NAT Gateway type does not support configuring a SNAT rule.
 	UNSUPPORTEDOPERATION_NATGATEWAYTYPENOTSUPPORTSNAT = "UnsupportedOperation.NatGatewayTypeNotSupportSNAT"
@@ -683,7 +701,7 @@ const (
 	// The specified routing policy cannot be published to or withdrawn from CCN.
 	UNSUPPORTEDOPERATION_NOTIFYCCN = "UnsupportedOperation.NotifyCcn"
 
-	// 
+	// This billing mode is disused. Please try another billing mode.
 	UNSUPPORTEDOPERATION_OFFLINECHARGETYPE = "UnsupportedOperation.OfflineChargeType"
 
 	// Only the Ckafka Pro Edition is supported.
@@ -710,11 +728,20 @@ const (
 	// The current account can not use this service in the current region.
 	UNSUPPORTEDOPERATION_PURCHASELIMIT = "UnsupportedOperation.PurchaseLimit"
 
+	// This record already exists.
+	UNSUPPORTEDOPERATION_RECORDEXISTS = "UnsupportedOperation.RecordExists"
+
+	// The record does not exist.
+	UNSUPPORTEDOPERATION_RECORDNOTEXISTS = "UnsupportedOperation.RecordNotExists"
+
 	// The resource ID entered does not match with any resource bound with the IP. Check and try again.
 	UNSUPPORTEDOPERATION_RESOURCEMISMATCH = "UnsupportedOperation.ResourceMismatch"
 
-	// 
+	// No roles available. Please confirm whether you get the authorization for the role.
 	UNSUPPORTEDOPERATION_ROLENOTFOUND = "UnsupportedOperation.RoleNotFound"
+
+	// The routing table is bound to a subnet.
+	UNSUPPORTEDOPERATION_ROUTETABLEHASSUBNETRULE = "UnsupportedOperation.RouteTableHasSubnetRule"
 
 	// The endpoint created by the specified endpoint service cannot be bound to a security group.
 	UNSUPPORTEDOPERATION_SPECIALENDPOINTSERVICE = "UnsupportedOperation.SpecialEndPointService"
@@ -754,6 +781,9 @@ const (
 
 	// Overdue payments are found under this account. Please complete the payment first.
 	UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
+
+	// Binding the EIPs specified in `LocalZone` is not supported.
+	UNSUPPORTEDOPERATION_UNSUPPORTEDBINDLOCALZONEEIP = "UnsupportedOperation.UnsupportedBindLocalZoneEIP"
 
 	// The specified instance type does not support ENIs.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDINSTANCEFAMILY = "UnsupportedOperation.UnsupportedInstanceFamily"

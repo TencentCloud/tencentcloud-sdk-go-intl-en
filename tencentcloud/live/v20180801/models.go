@@ -322,72 +322,15 @@ type BandwidthInfo struct {
 	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 }
 
-// Predefined struct for user
-type BindLiveDomainCertRequestParams struct {
-	// Certificate ID, which can be obtained through the `CreateLiveCert` API.
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-
-	// Playback domain name.
+type BatchDomainOperateErrors struct {
+	// The domain that the API failed to operate.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// HTTPS status. 0: disabled, 1: enabled.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-}
+	// The API 3.0 error code.
+	Code *string `json:"Code,omitempty" name:"Code"`
 
-type BindLiveDomainCertRequest struct {
-	*tchttp.BaseRequest
-	
-	// Certificate ID, which can be obtained through the `CreateLiveCert` API.
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-
-	// Playback domain name.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-	// HTTPS status. 0: disabled, 1: enabled.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-}
-
-func (r *BindLiveDomainCertRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *BindLiveDomainCertRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "CertId")
-	delete(f, "DomainName")
-	delete(f, "Status")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindLiveDomainCertRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type BindLiveDomainCertResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type BindLiveDomainCertResponse struct {
-	*tchttp.BaseResponse
-	Response *BindLiveDomainCertResponseParams `json:"Response"`
-}
-
-func (r *BindLiveDomainCertResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *BindLiveDomainCertResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
+	// The API 3.0 error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
 type CallBackRuleInfo struct {
@@ -1005,102 +948,6 @@ func (r *CreateLiveCallbackTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateLiveCertRequestParams struct {
-	// Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
-	// Note: if the certificate type is 0, `HttpsCrt` and `HttpsKey` are required;
-	// If the certificate type is 1, the certificate corresponding to `CloudCertId` will be used first. If `CloudCertId` is empty, `HttpsCrt` and `HttpsKey` will be used.
-	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
-
-	// Certificate name.
-	CertName *string `json:"CertName,omitempty" name:"CertName"`
-
-	// Certificate content, i.e., public key.
-	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
-
-	// Private key.
-	HttpsKey *string `json:"HttpsKey,omitempty" name:"HttpsKey"`
-
-	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Tencent Cloud-hosted certificate ID.
-	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
-}
-
-type CreateLiveCertRequest struct {
-	*tchttp.BaseRequest
-	
-	// Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
-	// Note: if the certificate type is 0, `HttpsCrt` and `HttpsKey` are required;
-	// If the certificate type is 1, the certificate corresponding to `CloudCertId` will be used first. If `CloudCertId` is empty, `HttpsCrt` and `HttpsKey` will be used.
-	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
-
-	// Certificate name.
-	CertName *string `json:"CertName,omitempty" name:"CertName"`
-
-	// Certificate content, i.e., public key.
-	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
-
-	// Private key.
-	HttpsKey *string `json:"HttpsKey,omitempty" name:"HttpsKey"`
-
-	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// Tencent Cloud-hosted certificate ID.
-	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
-}
-
-func (r *CreateLiveCertRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateLiveCertRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "CertType")
-	delete(f, "CertName")
-	delete(f, "HttpsCrt")
-	delete(f, "HttpsKey")
-	delete(f, "Description")
-	delete(f, "CloudCertId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLiveCertRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateLiveCertResponseParams struct {
-	// Certificate ID
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateLiveCertResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateLiveCertResponseParams `json:"Response"`
-}
-
-func (r *CreateLiveCertResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateLiveCertResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CreateLivePullStreamTaskRequestParams struct {
 	// The source type. Valid values:
 	// PullLivePushLive: Live streaming
@@ -1123,7 +970,7 @@ type CreateLivePullStreamTaskRequestParams struct {
 
 	// The push domain name.
 	// The pulled stream is pushed to this domain.
-	// Use a push domain you have added in the CSS console.
+	// Note: If the destination is not a CSS address and its format is different from that of CSS addresses, pass the full address to `ToUrl`. For details, see the description of the `ToUrl` parameter.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
 	// The application to push to.
@@ -1216,6 +1063,9 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
 	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+
+
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
 type CreateLivePullStreamTaskRequest struct {
@@ -1242,7 +1092,7 @@ type CreateLivePullStreamTaskRequest struct {
 
 	// The push domain name.
 	// The pulled stream is pushed to this domain.
-	// Use a push domain you have added in the CSS console.
+	// Note: If the destination is not a CSS address and its format is different from that of CSS addresses, pass the full address to `ToUrl`. For details, see the description of the `ToUrl` parameter.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
 	// The application to push to.
@@ -1335,6 +1185,8 @@ type CreateLivePullStreamTaskRequest struct {
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
 	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
 func (r *CreateLivePullStreamTaskRequest) ToJsonString() string {
@@ -1367,6 +1219,7 @@ func (r *CreateLivePullStreamTaskRequest) FromJsonString(s string) error {
 	delete(f, "ToUrl")
 	delete(f, "BackupSourceType")
 	delete(f, "BackupSourceUrl")
+	delete(f, "WatermarkList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLivePullStreamTaskRequest has unknown keys!", "")
 	}
@@ -2675,60 +2528,6 @@ func (r *DeleteLiveCallbackTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteLiveCallbackTemplateResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteLiveCertRequestParams struct {
-	// Certificate ID obtained through the `DescribeLiveCerts` API.
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-}
-
-type DeleteLiveCertRequest struct {
-	*tchttp.BaseRequest
-	
-	// Certificate ID obtained through the `DescribeLiveCerts` API.
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-}
-
-func (r *DeleteLiveCertRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteLiveCertRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "CertId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLiveCertRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteLiveCertResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DeleteLiveCertResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteLiveCertResponseParams `json:"Response"`
-}
-
-func (r *DeleteLiveCertResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteLiveCertResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4143,6 +3942,100 @@ func (r *DescribeLiveDelayInfoListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeLiveDomainCertBindingsRequestParams struct {
+	// The keyword to use to search for domains.
+	DomainSearch *string `json:"DomainSearch,omitempty" name:"DomainSearch"`
+
+	// The number of records to skip before starting to return any results. 0 means to start from the first record and is the default.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of records to return. The default is 50.
+	// If this parameter is not specified, up to 50 records will be returned.
+	Length *int64 `json:"Length,omitempty" name:"Length"`
+
+	// The name of a particular domain to query.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Valid values:
+	// ExpireTimeAsc: Sort the records by certificate expiration time in ascending order.
+	// ExpireTimeDesc: Sort the records by certificate expiration time in descending order.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+}
+
+type DescribeLiveDomainCertBindingsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The keyword to use to search for domains.
+	DomainSearch *string `json:"DomainSearch,omitempty" name:"DomainSearch"`
+
+	// The number of records to skip before starting to return any results. 0 means to start from the first record and is the default.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of records to return. The default is 50.
+	// If this parameter is not specified, up to 50 records will be returned.
+	Length *int64 `json:"Length,omitempty" name:"Length"`
+
+	// The name of a particular domain to query.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Valid values:
+	// ExpireTimeAsc: Sort the records by certificate expiration time in ascending order.
+	// ExpireTimeDesc: Sort the records by certificate expiration time in descending order.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+}
+
+func (r *DescribeLiveDomainCertBindingsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveDomainCertBindingsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DomainSearch")
+	delete(f, "Offset")
+	delete(f, "Length")
+	delete(f, "DomainName")
+	delete(f, "OrderBy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLiveDomainCertBindingsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLiveDomainCertBindingsResponseParams struct {
+	// The information of domains that meet the query criteria.
+	LiveDomainCertBindings []*LiveDomainCertBindings `json:"LiveDomainCertBindings,omitempty" name:"LiveDomainCertBindings"`
+
+	// The number of records returned, which is needed for pagination.
+	TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLiveDomainCertBindingsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLiveDomainCertBindingsResponseParams `json:"Response"`
+}
+
+func (r *DescribeLiveDomainCertBindingsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLiveDomainCertBindingsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeLiveDomainCertRequestParams struct {
 	// Playback domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -4405,6 +4298,10 @@ type DescribeLiveDomainsResponseParams struct {
 	// The number of domain names that can be added
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CreateLimitCount *int64 `json:"CreateLimitCount,omitempty" name:"CreateLimitCount"`
+
+	// The number of domains accelerated in the Chinese mainland, globally, and outside the Chinese mainland respectively.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PlayTypeCount []*int64 `json:"PlayTypeCount,omitempty" name:"PlayTypeCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7600,6 +7497,14 @@ type ForbidStreamInfo struct {
 
 	// Forbidding expiration time.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// The push path.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The push domain name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 }
 
 type GroupProIspDataInfo struct {
@@ -7654,6 +7559,48 @@ type HttpStatusInfo struct {
 
 	// Quantity.
 	Num *uint64 `json:"Num,omitempty" name:"Num"`
+}
+
+type LiveCertDomainInfo struct {
+	// The domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Whether to enable HTTPS for the domain.
+	// 1: Enable
+	// 0: Disable
+	// -1: Keep the current configuration
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+}
+
+type LiveDomainCertBindings struct {
+	// The domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The remarks for the certificate. This parameter is the same as `CertName`.
+	CertificateAlias *string `json:"CertificateAlias,omitempty" name:"CertificateAlias"`
+
+	// The certificate type.
+	// 0: Self-owned certificate
+	// 1: Tencent Cloud-hosted certificate
+	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
+
+	// Whether HTTPS is enabled.
+	// 1: Enabled
+	// 0: Disabled
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The expiration time of the certificate.
+	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
+
+	// The certificate ID.
+	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
+
+	// The SSL certificate ID assigned by Tencent Cloud.
+	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
+
+	// The last updated time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 // Predefined struct for user
@@ -7769,159 +7716,99 @@ func (r *ModifyLiveCallbackTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyLiveCertRequestParams struct {
-	// Certificate ID.
-	CertId *string `json:"CertId,omitempty" name:"CertId"`
+type ModifyLiveDomainCertBindingsRequestParams struct {
+	// The playback domains to bind and whether to enable HTTPS for them.
+	// If neither `CloudCertId` nor the public/private key is specified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain and, if the certificate is a self-owned certificate, upload it to Tencent Cloud.
+	DomainInfos []*LiveCertDomainInfo `json:"DomainInfos,omitempty" name:"DomainInfos"`
 
-	// Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
-	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+	// The SSL certificate ID assigned by Tencent Cloud.
+	// For details, see https://intl.cloud.tencent.com/document/api/400/41665?from_cn_redirect=1
+	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
 
-	// Certificate name.
-	CertName *string `json:"CertName,omitempty" name:"CertName"`
+	// The public key of the certificate.
+	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitempty" name:"CertificatePublicKey"`
 
-	// Certificate content, i.e., public key.
-	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
+	// The private key of the certificate.
+	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-	// Private key.
-	HttpsKey *string `json:"HttpsKey,omitempty" name:"HttpsKey"`
-
-	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	// The remarks for the certificate in Tencent Cloud SSL Certificate Service. This parameter will be ignored if `CloudCertId` is specified.
+	CertificateAlias *string `json:"CertificateAlias,omitempty" name:"CertificateAlias"`
 }
 
-type ModifyLiveCertRequest struct {
+type ModifyLiveDomainCertBindingsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Certificate ID.
-	CertId *string `json:"CertId,omitempty" name:"CertId"`
+	// The playback domains to bind and whether to enable HTTPS for them.
+	// If neither `CloudCertId` nor the public/private key is specified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain and, if the certificate is a self-owned certificate, upload it to Tencent Cloud.
+	DomainInfos []*LiveCertDomainInfo `json:"DomainInfos,omitempty" name:"DomainInfos"`
 
-	// Certificate type. 0: user-added certificate, 1: Tencent Cloud-hosted certificate.
-	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+	// The SSL certificate ID assigned by Tencent Cloud.
+	// For details, see https://intl.cloud.tencent.com/document/api/400/41665?from_cn_redirect=1
+	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
 
-	// Certificate name.
-	CertName *string `json:"CertName,omitempty" name:"CertName"`
+	// The public key of the certificate.
+	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitempty" name:"CertificatePublicKey"`
 
-	// Certificate content, i.e., public key.
-	HttpsCrt *string `json:"HttpsCrt,omitempty" name:"HttpsCrt"`
+	// The private key of the certificate.
+	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-	// Private key.
-	HttpsKey *string `json:"HttpsKey,omitempty" name:"HttpsKey"`
-
-	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	// The remarks for the certificate in Tencent Cloud SSL Certificate Service. This parameter will be ignored if `CloudCertId` is specified.
+	CertificateAlias *string `json:"CertificateAlias,omitempty" name:"CertificateAlias"`
 }
 
-func (r *ModifyLiveCertRequest) ToJsonString() string {
+func (r *ModifyLiveDomainCertBindingsRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyLiveCertRequest) FromJsonString(s string) error {
+func (r *ModifyLiveDomainCertBindingsRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "CertId")
-	delete(f, "CertType")
-	delete(f, "CertName")
-	delete(f, "HttpsCrt")
-	delete(f, "HttpsKey")
-	delete(f, "Description")
+	delete(f, "DomainInfos")
+	delete(f, "CloudCertId")
+	delete(f, "CertificatePublicKey")
+	delete(f, "CertificatePrivateKey")
+	delete(f, "CertificateAlias")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveCertRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveDomainCertBindingsRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
-type ModifyLiveCertResponseParams struct {
+type ModifyLiveDomainCertBindingsResponseParams struct {
+	// The domains skipped due to certificate mismatch.
+	MismatchedDomainNames []*string `json:"MismatchedDomainNames,omitempty" name:"MismatchedDomainNames"`
+
+	// The domains that the API failed to bind, including those in `MismatchedDomainNames`, and the error information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Errors []*BatchDomainOperateErrors `json:"Errors,omitempty" name:"Errors"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
 
-type ModifyLiveCertResponse struct {
+type ModifyLiveDomainCertBindingsResponse struct {
 	*tchttp.BaseResponse
-	Response *ModifyLiveCertResponseParams `json:"Response"`
+	Response *ModifyLiveDomainCertBindingsResponseParams `json:"Response"`
 }
 
-func (r *ModifyLiveCertResponse) ToJsonString() string {
+func (r *ModifyLiveDomainCertBindingsResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *ModifyLiveCertResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyLiveDomainCertRequestParams struct {
-	// Playback domain name.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-	// Certificate ID.
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-
-	// Status. 0: off, 1: on.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-}
-
-type ModifyLiveDomainCertRequest struct {
-	*tchttp.BaseRequest
-	
-	// Playback domain name.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
-
-	// Certificate ID.
-	CertId *int64 `json:"CertId,omitempty" name:"CertId"`
-
-	// Status. 0: off, 1: on.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-}
-
-func (r *ModifyLiveDomainCertRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyLiveDomainCertRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DomainName")
-	delete(f, "CertId")
-	delete(f, "Status")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveDomainCertRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyLiveDomainCertResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyLiveDomainCertResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyLiveDomainCertResponseParams `json:"Response"`
-}
-
-func (r *ModifyLiveDomainCertResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyLiveDomainCertResponse) FromJsonString(s string) error {
+func (r *ModifyLiveDomainCertBindingsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9063,6 +8950,35 @@ type PublishTime struct {
 	// Push time.
 	// In UTC format, such as 2018-06-29T19:00:00Z.
 	PublishTime *string `json:"PublishTime,omitempty" name:"PublishTime"`
+}
+
+type PullPushWatermarkInfo struct {
+	// Watermark ID.
+	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
+
+	// Watermark image URL.
+	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
+
+	// Display position: X-axis offset.
+	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
+
+	// Display position: Y-axis offset.
+	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
+
+	// Watermark name.
+	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
+
+	// Current status. 0: not used. 1: in use.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Watermark width
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Watermark height
+	Height *int64 `json:"Height,omitempty" name:"Height"`
 }
 
 type PullStreamTaskInfo struct {

@@ -963,6 +963,7 @@ func NewDescribeBackupUrlResponse() (response *DescribeBackupUrlResponse) {
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_BACKUPNOTEXISTS = "InvalidParameterValue.BackupNotExists"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_BACKUPSTATUSINVALID = "ResourceUnavailable.BackupStatusInvalid"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 //  UNSUPPORTEDOPERATION_CLUSTERINSTANCEACCESSEDDENY = "UnsupportedOperation.ClusterInstanceAccessedDeny"
@@ -982,6 +983,7 @@ func (c *Client) DescribeBackupUrl(request *DescribeBackupUrlRequest) (response 
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_BACKUPNOTEXISTS = "InvalidParameterValue.BackupNotExists"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_BACKUPSTATUSINVALID = "ResourceUnavailable.BackupStatusInvalid"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 //  UNSUPPORTEDOPERATION_CLUSTERINSTANCEACCESSEDDENY = "UnsupportedOperation.ClusterInstanceAccessedDeny"
@@ -4425,6 +4427,62 @@ func (c *Client) SwitchInstanceVipWithContext(ctx context.Context, request *Swit
     request.SetContext(ctx)
     
     response = NewSwitchInstanceVipResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSwitchProxyRequest() (request *SwitchProxyRequest) {
+    request = &SwitchProxyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "SwitchProxy")
+    
+    
+    return
+}
+
+func NewSwitchProxyResponse() (response *SwitchProxyResponse) {
+    response = &SwitchProxyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SwitchProxy
+// This API is used to simulate the failure of a proxy node.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) SwitchProxy(request *SwitchProxyRequest) (response *SwitchProxyResponse, err error) {
+    return c.SwitchProxyWithContext(context.Background(), request)
+}
+
+// SwitchProxy
+// This API is used to simulate the failure of a proxy node.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) SwitchProxyWithContext(ctx context.Context, request *SwitchProxyRequest) (response *SwitchProxyResponse, err error) {
+    if request == nil {
+        request = NewSwitchProxyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SwitchProxy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSwitchProxyResponse()
     err = c.Send(request, response)
     return
 }

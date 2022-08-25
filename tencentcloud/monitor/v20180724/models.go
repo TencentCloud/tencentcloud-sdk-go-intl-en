@@ -4093,6 +4093,9 @@ type DescribeMonitorTypesResponseParams struct {
 	// Monitor type. Valid values: MT_QCE (Tencent Cloud service monitoring)
 	MonitorTypes []*string `json:"MonitorTypes,omitempty" name:"MonitorTypes"`
 
+	// Monitoring type details
+	MonitorTypeInfos []*MonitorTypeInfo `json:"MonitorTypeInfos,omitempty" name:"MonitorTypeInfos"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -7003,6 +7006,17 @@ func (r *ModifyPrometheusInstanceAttributesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyPrometheusInstanceAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type MonitorTypeInfo struct {
+	// Monitoring type ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Monitoring type
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sort order
+	SortId *int64 `json:"SortId,omitempty" name:"SortId"`
 }
 
 type MonitorTypeNamespace struct {

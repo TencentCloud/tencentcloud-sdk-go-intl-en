@@ -69,6 +69,7 @@ func NewApplyUploadResponse() (response *ApplyUploadResponse) {
 // * For the detailed upload process, please see [Overview of Upload from Client](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_EXPIRETIME = "InvalidParameter.ExpireTime"
 //  INVALIDPARAMETERVALUE_COVERTYPE = "InvalidParameterValue.CoverType"
@@ -86,6 +87,7 @@ func (c *Client) ApplyUpload(request *ApplyUploadRequest) (response *ApplyUpload
 // * For the detailed upload process, please see [Overview of Upload from Client](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_EXPIRETIME = "InvalidParameter.ExpireTime"
 //  INVALIDPARAMETERVALUE_COVERTYPE = "InvalidParameterValue.CoverType"
@@ -240,15 +242,29 @@ func NewComposeMediaResponse() (response *ComposeMediaResponse) {
 }
 
 // ComposeMedia
-// This API is used to compose a media file, including:
+// This API is used to compose a media file. You can use it to do the following:
 //
 // 
 //
-// 1. Clipping a media file to generate a new media file;
+// 1. **Rotation/Flipping**: Rotate a video or image by a specific angle or flip a video or image.
 //
-// 2. Clipping and splicing multiple media files to generate a new media file;
+// 2. **Audio control**: Increase/Lower the volume of an audio/video file or mute an audio/video file.
 //
-// 3. Clipping and splicing the media streams of multiple media files to generate a new media file;
+// 3. **Overlaying**: Overlay videos/images in a specified sequence to achieve the picture-in-picture effect.
+//
+// 4. **Audio mixing**: Mix the audios of audio/video files.
+//
+// 5 **Audio extraction**: Extract audio from a video.
+//
+// 6. **Clipping**: Clip segments from audio/video files according to a specified start and end time.
+//
+// 7. **Splicing**: Splice videos/audios/images in a specified sequence.
+//
+// 8. **Transition**: Add transition effects between video segments or images that are spliced together.
+//
+// 
+//
+// The output file is in MP4 or MP3 format. In the callback for media composition, the event type is [ComposeMediaComplete](https://intl.cloud.tencent.com/document/product/266/43000?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -267,15 +283,29 @@ func (c *Client) ComposeMedia(request *ComposeMediaRequest) (response *ComposeMe
 }
 
 // ComposeMedia
-// This API is used to compose a media file, including:
+// This API is used to compose a media file. You can use it to do the following:
 //
 // 
 //
-// 1. Clipping a media file to generate a new media file;
+// 1. **Rotation/Flipping**: Rotate a video or image by a specific angle or flip a video or image.
 //
-// 2. Clipping and splicing multiple media files to generate a new media file;
+// 2. **Audio control**: Increase/Lower the volume of an audio/video file or mute an audio/video file.
 //
-// 3. Clipping and splicing the media streams of multiple media files to generate a new media file;
+// 3. **Overlaying**: Overlay videos/images in a specified sequence to achieve the picture-in-picture effect.
+//
+// 4. **Audio mixing**: Mix the audios of audio/video files.
+//
+// 5 **Audio extraction**: Extract audio from a video.
+//
+// 6. **Clipping**: Clip segments from audio/video files according to a specified start and end time.
+//
+// 7. **Splicing**: Splice videos/audios/images in a specified sequence.
+//
+// 8. **Transition**: Add transition effects between video segments or images that are spliced together.
+//
+// 
+//
+// The output file is in MP4 or MP3 format. In the callback for media composition, the event type is [ComposeMediaComplete](https://intl.cloud.tencent.com/document/product/266/43000?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1300,7 +1330,7 @@ func NewCreateSuperPlayerConfigResponse() (response *CreateSuperPlayerConfigResp
 }
 
 // CreateSuperPlayerConfig
-// This API is used to create a superplayer configuration. Up to 100 configurations can be created.
+// This API is used to create a player configuration. Up to 100 configurations can be created.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1314,7 +1344,7 @@ func (c *Client) CreateSuperPlayerConfig(request *CreateSuperPlayerConfigRequest
 }
 
 // CreateSuperPlayerConfig
-// This API is used to create a superplayer configuration. Up to 100 configurations can be created.
+// This API is used to create a player configuration. Up to 100 configurations can be created.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2344,9 +2374,9 @@ func NewDeleteSuperPlayerConfigResponse() (response *DeleteSuperPlayerConfigResp
 }
 
 // DeleteSuperPlayerConfig
-// This API is used to delete a superplayer configuration.  
+// This API is used to delete a player configuration.  
 //
-// *Note: preset player configurations cannot be deleted.*
+// *Note: Preset player configurations cannot be deleted.*
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2359,9 +2389,9 @@ func (c *Client) DeleteSuperPlayerConfig(request *DeleteSuperPlayerConfigRequest
 }
 
 // DeleteSuperPlayerConfig
-// This API is used to delete a superplayer configuration.  
+// This API is used to delete a player configuration.  
 //
-// *Note: preset player configurations cannot be deleted.*
+// *Note: Preset player configurations cannot be deleted.*
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3135,6 +3165,72 @@ func (c *Client) DescribeCdnLogsWithContext(ctx context.Context, request *Descri
     request.SetContext(ctx)
     
     response = NewDescribeCdnLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClientUploadAccelerationUsageDataRequest() (request *DescribeClientUploadAccelerationUsageDataRequest) {
+    request = &DescribeClientUploadAccelerationUsageDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeClientUploadAccelerationUsageData")
+    
+    
+    return
+}
+
+func NewDescribeClientUploadAccelerationUsageDataResponse() (response *DescribeClientUploadAccelerationUsageDataResponse) {
+    response = &DescribeClientUploadAccelerationUsageDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClientUploadAccelerationUsageData
+// This API is used to query the usage of the client upload acceleration service in a specific time period.
+//
+//    1. You can query the usage of client upload acceleration in the last 365 days.
+//
+//    2. The maximum time period allowed for query is 90 days.
+//
+//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeClientUploadAccelerationUsageData(request *DescribeClientUploadAccelerationUsageDataRequest) (response *DescribeClientUploadAccelerationUsageDataResponse, err error) {
+    return c.DescribeClientUploadAccelerationUsageDataWithContext(context.Background(), request)
+}
+
+// DescribeClientUploadAccelerationUsageData
+// This API is used to query the usage of the client upload acceleration service in a specific time period.
+//
+//    1. You can query the usage of client upload acceleration in the last 365 days.
+//
+//    2. The maximum time period allowed for query is 90 days.
+//
+//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeClientUploadAccelerationUsageDataWithContext(ctx context.Context, request *DescribeClientUploadAccelerationUsageDataRequest) (response *DescribeClientUploadAccelerationUsageDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeClientUploadAccelerationUsageDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClientUploadAccelerationUsageData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClientUploadAccelerationUsageDataResponse()
     err = c.Send(request, response)
     return
 }
@@ -4294,7 +4390,7 @@ func NewDescribeSuperPlayerConfigsResponse() (response *DescribeSuperPlayerConfi
 }
 
 // DescribeSuperPlayerConfigs
-// This API is used to query the list of superplayer configurations and supports paginated queries by filters.
+// This API is used to query player configurations. It supports pagination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4307,7 +4403,7 @@ func (c *Client) DescribeSuperPlayerConfigs(request *DescribeSuperPlayerConfigsR
 }
 
 // DescribeSuperPlayerConfigs
-// This API is used to query the list of superplayer configurations and supports paginated queries by filters.
+// This API is used to query player configurations. It supports pagination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6154,7 +6250,7 @@ func NewModifySuperPlayerConfigResponse() (response *ModifySuperPlayerConfigResp
 }
 
 // ModifySuperPlayerConfig
-// This API is used to modify a superplayer configuration.
+// This API is used to modify a player configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6167,7 +6263,7 @@ func (c *Client) ModifySuperPlayerConfig(request *ModifySuperPlayerConfigRequest
 }
 
 // ModifySuperPlayerConfig
-// This API is used to modify a superplayer configuration.
+// This API is used to modify a player configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7628,6 +7724,7 @@ func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ENDTIMEOFFSET = "InvalidParameterValue.EndTimeOffset"
+//  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
 //  INVALIDPARAMETERVALUE_STARTTIMEOFFSET = "InvalidParameterValue.StartTimeOffset"
 //  INVALIDPARAMETERVALUE_URL = "InvalidParameterValue.Url"
 //  RESOURCEUNAVAILABLE_MASTERPLAYLIST = "ResourceUnavailable.MasterPlaylist"
@@ -7689,6 +7786,7 @@ func (c *Client) SimpleHlsClip(request *SimpleHlsClipRequest) (response *SimpleH
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ENDTIMEOFFSET = "InvalidParameterValue.EndTimeOffset"
+//  INVALIDPARAMETERVALUE_EXPIRETIME = "InvalidParameterValue.ExpireTime"
 //  INVALIDPARAMETERVALUE_STARTTIMEOFFSET = "InvalidParameterValue.StartTimeOffset"
 //  INVALIDPARAMETERVALUE_URL = "InvalidParameterValue.Url"
 //  RESOURCEUNAVAILABLE_MASTERPLAYLIST = "ResourceUnavailable.MasterPlaylist"

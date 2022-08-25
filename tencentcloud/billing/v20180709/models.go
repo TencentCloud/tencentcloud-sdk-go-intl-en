@@ -383,6 +383,9 @@ type BusinessSummaryOverviewItem struct {
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Payment by commission credits
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type BusinessSummaryTotal struct {
@@ -400,6 +403,9 @@ type BusinessSummaryTotal struct {
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Payment by commission credits
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 // Predefined struct for user
@@ -1446,6 +1452,9 @@ type PayModeSummaryOverviewItem struct {
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Payment by commission credits
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type ProjectSummaryOverviewItem struct {
@@ -1475,6 +1484,9 @@ type ProjectSummaryOverviewItem struct {
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Payment by commission credits
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type RegionSummaryOverviewItem struct {
@@ -1505,6 +1517,9 @@ type RegionSummaryOverviewItem struct {
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Payment by commission credits
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type SummaryTotal struct {
@@ -1533,6 +1548,22 @@ type TagSummaryOverviewItem struct {
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Payment by cash credits
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
+
+	// Payment by free credits
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
+
+	// Payment by vouchers
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Payment by commission credits
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type UsageDetails struct {
