@@ -1445,6 +1445,85 @@ func (r *PullSmsSendStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ReportConversionRequestParams struct {
+	// The SMS SdkAppId generated after an application is created in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as “1400006666”.
+	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
+
+	// The serial number returned for a message sent.
+	SerialNo *string `json:"SerialNo,omitempty" name:"SerialNo"`
+
+	// The recipient’s reply time in seconds in the format of UNIX timestamp.
+	ConversionTime *uint64 `json:"ConversionTime,omitempty" name:"ConversionTime"`
+}
+
+type ReportConversionRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SMS SdkAppId generated after an application is created in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as “1400006666”.
+	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
+
+	// The serial number returned for a message sent.
+	SerialNo *string `json:"SerialNo,omitempty" name:"SerialNo"`
+
+	// The recipient’s reply time in seconds in the format of UNIX timestamp.
+	ConversionTime *uint64 `json:"ConversionTime,omitempty" name:"ConversionTime"`
+}
+
+func (r *ReportConversionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReportConversionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SmsSdkAppId")
+	delete(f, "SerialNo")
+	delete(f, "ConversionTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReportConversionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReportConversionResponseParams struct {
+	// Response packet for conversion rate reporting.
+	ReportConversionStatus *ReportConversionStatus `json:"ReportConversionStatus,omitempty" name:"ReportConversionStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReportConversionResponse struct {
+	*tchttp.BaseResponse
+	Response *ReportConversionResponseParams `json:"Response"`
+}
+
+func (r *ReportConversionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReportConversionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ReportConversionStatus struct {
+	// Error code. `ok` is returned if the conversion rate is successfully reported.
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Error code description.
+	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+// Predefined struct for user
 type SendSmsRequestParams struct {
 	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers).
 	// For example, +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
@@ -1453,11 +1532,10 @@ type SendSmsRequestParams struct {
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
 	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
 
-	// Template ID. You must enter the ID of an approved template, which can be viewed on the [Chinese Mainland SMS](https://console.cloud.tencent.com/smsv2/csms-template) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template) body template management page. If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
+	// Template ID, which can be viewed on the **Body Templates** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template). You must enter the ID of an approved template.
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed on the [Chinese Mainland SMS](https://console.cloud.tencent.com/smsv2/csms-sign) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign) signature management page.
-	// <dx-alert infotype="notice" title="Note">This parameter is required for Chinese Mainland SMS.</dx-alert>
+	// SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed on the **Signatures** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign).
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Template parameter. If there is no template parameter, leave this field empty.
@@ -1470,8 +1548,8 @@ type SendSmsRequestParams struct {
 	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// This parameter is not required for Chinese Mainland SMS. For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
-	// Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+	// For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
+	// Note: If your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	SenderId *string `json:"SenderId,omitempty" name:"SenderId"`
 }
 
@@ -1485,11 +1563,10 @@ type SendSmsRequest struct {
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
 	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
 
-	// Template ID. You must enter the ID of an approved template, which can be viewed on the [Chinese Mainland SMS](https://console.cloud.tencent.com/smsv2/csms-template) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template) body template management page. If you need to send SMS messages to global mobile numbers, you can only use a Global SMS template.
+	// Template ID, which can be viewed on the **Body Templates** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template). You must enter the ID of an approved template.
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Content of the SMS signature, which should be encoded in UTF-8. You must enter an approved signature, such as Tencent Cloud. The signature information can be viewed on the [Chinese Mainland SMS](https://console.cloud.tencent.com/smsv2/csms-sign) or [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign) signature management page.
-	// <dx-alert infotype="notice" title="Note">This parameter is required for Chinese Mainland SMS.</dx-alert>
+	// SMS signature information which is encoded in UTF-8. You must enter an approved signature (such as Tencent Cloud). The signing information can be viewed on the **Signatures** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-sign).
 	SignName *string `json:"SignName,omitempty" name:"SignName"`
 
 	// Template parameter. If there is no template parameter, leave this field empty.
@@ -1502,8 +1579,8 @@ type SendSmsRequest struct {
 	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// This parameter is not required for Chinese Mainland SMS. For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
-	// Note: if your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
+	// For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
+	// Note: If your monthly usage reaches the specified threshold, you can apply for an independent `SenderId`. For more information, contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	SenderId *string `json:"SenderId,omitempty" name:"SenderId"`
 }
 

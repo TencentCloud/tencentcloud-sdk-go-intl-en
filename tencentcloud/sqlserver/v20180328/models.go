@@ -546,6 +546,12 @@ type CreateDBInstancesRequestParams struct {
 
 	// Tags associated with the instances to be created
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+	// System time zone. Default value: `China Standard Time`.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
 }
 
 type CreateDBInstancesRequest struct {
@@ -610,6 +616,12 @@ type CreateDBInstancesRequest struct {
 
 	// Tags associated with the instances to be created
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+	// System time zone. Default value: `China Standard Time`.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -644,6 +656,8 @@ func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "HAType")
 	delete(f, "MultiZones")
 	delete(f, "ResourceTags")
+	delete(f, "Collation")
+	delete(f, "TimeZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -1127,10 +1141,10 @@ type DBInstance struct {
 	// Port number of the public network
 	TgwWanVPort *int64 `json:"TgwWanVPort,omitempty" name:"TgwWanVPort"`
 
-
+	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
 	Collation *string `json:"Collation,omitempty" name:"Collation"`
 
-
+	// System time zone. Default value: `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
 }
 

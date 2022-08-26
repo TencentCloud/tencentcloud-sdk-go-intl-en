@@ -367,7 +367,7 @@ type ConsumerContent struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
 
-	// List of metadata to ship. Only \_\_SOURCE\_\_, \_\_FILENAME\_\_, and \_\_TIMESTAMP\_\_ are supported.
+	// List of metadata to ship. Supported metadata types: \_\_SOURCE\_\_, \_\_FILENAME\_\_, \_\_TIMESTAMP\_\_, \_\_HOSTNAME\_\_, and \_\_PKGID\_\_.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
 
@@ -720,6 +720,9 @@ type CreateConsumerRequestParams struct {
 
 	// CKafka information
 	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 }
 
 type CreateConsumerRequest struct {
@@ -736,6 +739,9 @@ type CreateConsumerRequest struct {
 
 	// CKafka information
 	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 }
 
 func (r *CreateConsumerRequest) ToJsonString() string {
@@ -754,6 +760,7 @@ func (r *CreateConsumerRequest) FromJsonString(s string) error {
 	delete(f, "NeedContent")
 	delete(f, "Content")
 	delete(f, "Ckafka")
+	delete(f, "Compression")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsumerRequest has unknown keys!", "")
 	}
@@ -2441,6 +2448,10 @@ type DescribeConsumerResponseParams struct {
 
 	// CKafka information
 	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4370,6 +4381,9 @@ type ModifyConsumerRequestParams struct {
 
 	// CKafka information
 	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 }
 
 type ModifyConsumerRequest struct {
@@ -4389,6 +4403,9 @@ type ModifyConsumerRequest struct {
 
 	// CKafka information
 	Ckafka *Ckafka `json:"Ckafka,omitempty" name:"Ckafka"`
+
+	// Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 }
 
 func (r *ModifyConsumerRequest) ToJsonString() string {
@@ -4408,6 +4425,7 @@ func (r *ModifyConsumerRequest) FromJsonString(s string) error {
 	delete(f, "NeedContent")
 	delete(f, "Content")
 	delete(f, "Ckafka")
+	delete(f, "Compression")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerRequest has unknown keys!", "")
 	}

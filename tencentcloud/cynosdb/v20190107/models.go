@@ -3794,6 +3794,18 @@ type NetAddr struct {
 	// Network type. Valid values: `ro` (read-only), `rw` or `ha` (read-write)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetType *string `json:"NetType,omitempty" name:"NetType"`
+
+	// Subnet ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// VPC ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type NewAccount struct {
