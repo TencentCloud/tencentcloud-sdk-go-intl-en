@@ -184,6 +184,12 @@ type AdaptiveDynamicStreamingTemplate struct {
 	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
 	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
 
+	// The provider of the DRM key. Valid values:
+	// <li>SDMC</li>
+	// <li>VOD</li>
+	// The default is `VOD`.
+	DrmKeyProvider *string `json:"DrmKeyProvider,omitempty" name:"DrmKeyProvider"`
+
 	// Parameter information of input stream for adaptive bitrate streaming. Up to 10 streams can be input.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitempty" name:"StreamInfos"`
 
@@ -597,11 +603,24 @@ type AiRecognitionTaskAsrFullTextResultOutput struct {
 	// URL to the file of the list for full-text speech recognition segments. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
 	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
 
-	// Expiration time of the URL to the file of the list for full-text speech recognition segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
+	// The expiration time of the URLs of full-text speech recognition segments in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 
-	// Subtitles file URL.
+	// The subtitle files generated, whose format is determined by the `SubtitleFormats` parameter of [AsrFullTextConfigureInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#AsrFullTextConfigureInfo).
+	SubtitleSet []*AiRecognitionTaskAsrFullTextResultOutputSubtitleItem `json:"SubtitleSet,omitempty" name:"SubtitleSet"`
+
+	// The URLs of the subtitle files generated, whose format is determined by the `SubtitleFormats` parameter of [AsrFullTextConfigureInfo](https://intl.cloud.tencent.com/document/api/266/31773?from_cn_redirect=1#AsrFullTextConfigureInfo).
 	SubtitleUrl *string `json:"SubtitleUrl,omitempty" name:"SubtitleUrl"`
+}
+
+type AiRecognitionTaskAsrFullTextResultOutputSubtitleItem struct {
+	// The format of the subtitle files. Valid values:
+	// <li>vtt</li>
+	// <li>srt</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// The URL of a subtitle file.
+	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 type AiRecognitionTaskAsrFullTextSegmentItem struct {
@@ -1852,8 +1871,15 @@ type AsrFullTextConfigureInfo struct {
 	// <li>OFF: disables intelligent full speech recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Format of generated subtitles file. If this parameter is left empty or a blank string is entered, no subtitles files will be generated. Valid value:
-	// <li>vtt: generates a WebVTT subtitles file.</li>
+	// The formats of the subtitle files generated. If this parameter is not passed or an empty string is passed in, no subtitles files will be generated. Valid values:
+	// <li>vtt</li>
+	// <li>srt</li>
+	SubtitleFormats []*string `json:"SubtitleFormats,omitempty" name:"SubtitleFormats"`
+
+	// The format of the subtitle file generated. If this parameter is not passed or an empty string is passed in, no subtitles files will be generated. Valid values:
+	// <li>vtt</li>
+	// <li>srt</li>
+	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormats` instead.</font>
 	SubtitleFormat *string `json:"SubtitleFormat,omitempty" name:"SubtitleFormat"`
 }
 
@@ -1863,8 +1889,13 @@ type AsrFullTextConfigureInfoForUpdate struct {
 	// <li>OFF: disables intelligent full speech recognition task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Format of generated subtitles file. If an empty string is entered, no subtitles files will be generated. Valid values:
-	// <li>vtt: generates a WebVTT subtitles file.</li>
+	// The modification information of the subtitle format list.
+	SubtitleFormatsOperation *SubtitleFormatsOperation `json:"SubtitleFormatsOperation,omitempty" name:"SubtitleFormatsOperation"`
+
+	// The format of the subtitle file generated. <font color='red'>If you pass in an empty string</font>, no subtitle files will be generated. Valid values:
+	// <li>vtt</li>
+	// <li>srt</li>
+	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormatsOperation` instead.</font>
 	SubtitleFormat *string `json:"SubtitleFormat,omitempty" name:"SubtitleFormat"`
 }
 
@@ -2906,6 +2937,12 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
 	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
 
+	// The provider of the DRM key. Valid values:
+	// <li>SDMC</li>
+	// <li>VOD</li>
+	// The default is `VOD`.
+	DrmKeyProvider *string `json:"DrmKeyProvider,omitempty" name:"DrmKeyProvider"`
+
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
 	// <li>1: yes.</li>
@@ -2947,6 +2984,12 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
 	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
 
+	// The provider of the DRM key. Valid values:
+	// <li>SDMC</li>
+	// <li>VOD</li>
+	// The default is `VOD`.
+	DrmKeyProvider *string `json:"DrmKeyProvider,omitempty" name:"DrmKeyProvider"`
+
 	// Whether to prohibit transcoding video from low bitrate to high bitrate. Valid values:
 	// <li>0: no,</li>
 	// <li>1: yes.</li>
@@ -2980,6 +3023,7 @@ func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "DrmType")
+	delete(f, "DrmKeyProvider")
 	delete(f, "DisableHigherVideoBitrate")
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "Comment")
@@ -6928,6 +6972,64 @@ func (r *DescribeDailyPlayStatFileListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDrmKeyProviderInfoRequestParams struct {
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type DescribeDrmKeyProviderInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeDrmKeyProviderInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDrmKeyProviderInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDrmKeyProviderInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDrmKeyProviderInfoResponseParams struct {
+	// The DRM key information provided by SDMC.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitempty" name:"SDMCInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDrmKeyProviderInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDrmKeyProviderInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeDrmKeyProviderInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDrmKeyProviderInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeImageReviewUsageDataRequestParams struct {
 	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -8358,7 +8460,7 @@ type DescribeTaskDetailRequestParams struct {
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8368,7 +8470,7 @@ type DescribeTaskDetailRequest struct {
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -8400,16 +8502,9 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>SplitMedia: Video splitting</li>
 	// <li>ComposeMedia: Media file producing</li>
 	// <li>WechatPublish: WeChat publishing</li>
-	// <li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
 	// <li>PullUpload: Pulling media files for upload</li>
 	// <li>FastClipMedia: Quick clipping</li>
-	// 
-	// Task types for v2017:
-	// <li>Transcode: Transcoding</li>
-	// <li>SnapshotByTimeOffset: Screencapturing</li>
-	// <li>Concat: Video splicing</li>
-	// <li>Clip: Video clipping</li>
-	// <li>ImageSprites: Image sprite generating</li>
+	// <li>RemoveWatermarkTask: Watermark removal</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -8474,6 +8569,10 @@ type DescribeTaskDetailResponseParams struct {
 	// Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetTask,omitempty" name:"SnapshotByTimeOffsetTask"`
+
+	// The information of a watermark removal task. This parameter is valid only if `TaskType` is `RemoveWatermark`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RemoveWatermarkTask *RemoveWatermarkTask `json:"RemoveWatermarkTask,omitempty" name:"RemoveWatermarkTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9273,6 +9372,10 @@ type EventContent struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	WechatMiniProgramPublishCompleteEvent *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishCompleteEvent,omitempty" name:"WechatMiniProgramPublishCompleteEvent"`
 
+	// Watermark removal completion event. This parameter is valid only if `TaskType` is `RemoveWatermark`.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	RemoveWatermarkCompleteEvent *RemoveWatermarkTask `json:"RemoveWatermarkCompleteEvent,omitempty" name:"RemoveWatermarkCompleteEvent"`
+
 	// Callback for video retrieval. This parameter is valid when the event type is `RestoreMediaComplete`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RestoreMediaCompleteEvent *RestoreMediaTask `json:"RestoreMediaCompleteEvent,omitempty" name:"RestoreMediaCompleteEvent"`
@@ -9780,11 +9883,27 @@ type LiveRealTimeClipRequestParams struct {
 	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
+	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the “Other” category.</li>
+	// This parameter is valid only if `IsPersistence` is `1`.
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+
+	// The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+
+	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
 	// Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitempty" name:"MetaDataRequired"`
 
 	// Domain name used for live clipping. Time shifting must be enabled in LVB.
 	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// The information of the live stream to clip.
+	// <li>The video clip is cut from the original stream by default.</li>
+	// <li>If `Type` of `StreamInfo` is set to `Transcoding`, the video clip will be cut from the output stream of the transcoding template specified by `TemplateId`.</li>
+	StreamInfo *LiveRealTimeClipStreamInfo `json:"StreamInfo,omitempty" name:"StreamInfo"`
 
 	// Reserved field. Do not enter a value for it.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
@@ -9814,11 +9933,27 @@ type LiveRealTimeClipRequest struct {
 	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
 
+	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the “Other” category.</li>
+	// This parameter is valid only if `IsPersistence` is `1`.
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+
+	// The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+
+	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
 	// Whether the metadata of clipped video needs to be returned. 0: no, 1: yes. Default value: no.
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitempty" name:"MetaDataRequired"`
 
 	// Domain name used for live clipping. Time shifting must be enabled in LVB.
 	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// The information of the live stream to clip.
+	// <li>The video clip is cut from the original stream by default.</li>
+	// <li>If `Type` of `StreamInfo` is set to `Transcoding`, the video clip will be cut from the output stream of the transcoding template specified by `TemplateId`.</li>
+	StreamInfo *LiveRealTimeClipStreamInfo `json:"StreamInfo,omitempty" name:"StreamInfo"`
 
 	// Reserved field. Do not enter a value for it.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
@@ -9843,8 +9978,12 @@ func (r *LiveRealTimeClipRequest) FromJsonString(s string) error {
 	delete(f, "IsPersistence")
 	delete(f, "ExpireTime")
 	delete(f, "Procedure")
+	delete(f, "ClassId")
+	delete(f, "SourceContext")
+	delete(f, "SessionContext")
 	delete(f, "MetaDataRequired")
 	delete(f, "Host")
+	delete(f, "StreamInfo")
 	delete(f, "ExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "LiveRealTimeClipRequest has unknown keys!", "")
@@ -9887,6 +10026,17 @@ func (r *LiveRealTimeClipResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *LiveRealTimeClipResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type LiveRealTimeClipStreamInfo struct {
+	// The type of live stream to clip. Valid values:
+	// <li>Original (<b>default</b>)</li>
+	// <li>Transcoding</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The transcoding template ID.
+	// <b>This is required if `Type` is `Transcoding`.</b>
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 // Predefined struct for user
@@ -10863,6 +11013,10 @@ type MediaSourceData struct {
 	// Field passed through when a file is created.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+
+	// The TRTC recording information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrtcRecordInfo *TrtcRecordInfo `json:"TrtcRecordInfo,omitempty" name:"TrtcRecordInfo"`
 }
 
 type MediaSubtitleInfo struct {
@@ -14912,6 +15066,147 @@ func (r *RefreshUrlCacheResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RemoveWaterMarkTaskInput struct {
+	// The ID of the media file.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+}
+
+type RemoveWaterMarkTaskOutput struct {
+	// The file ID of the video.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The metadata of the video, including size, duration, video stream information, and audio stream information.
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+}
+
+// Predefined struct for user
+type RemoveWatermarkRequestParams struct {
+	// The ID of the media file.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// This parameter is invalid now.
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitempty" name:"TasksNotifyMode"`
+}
+
+type RemoveWatermarkRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the media file.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// This parameter is invalid now.
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitempty" name:"TasksNotifyMode"`
+}
+
+func (r *RemoveWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "SubAppId")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "TasksNotifyMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveWatermarkResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RemoveWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *RemoveWatermarkResponseParams `json:"Response"`
+}
+
+func (r *RemoveWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RemoveWatermarkTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The task flow status. Valid values:
+	// <li>PROCESSING</li>
+	// <li>FINISH</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0: Successful; other values: Failed.
+	// <li>40000: Invalid input parameter.</li>
+	// <li>60000: Source file error (e.g., video data is corrupted).</li>
+	// <li>70000: Internal server error. Please try again.</li>
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of a watermark removal task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Input *RemoveWaterMarkTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of a watermark removal task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *RemoveWaterMarkTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
 // Predefined struct for user
 type ResetProcedureTemplateRequestParams struct {
 	// Task flow name
@@ -15137,6 +15432,20 @@ type RestoreMediaTask struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+type SDMCDrmKeyProviderInfo struct {
+	// The user ID assigned by SDMC, which can contain up to 128 characters.
+	Uid *string `json:"Uid,omitempty" name:"Uid"`
+
+	// The secret ID assigned by SDMC, which can contain up to 128 characters.
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
+
+	// The secret key assigned by SDMC, which can contain up to 128 characters.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// The URL of the FairPlay certificate issued by SDMC. It must be an HTTPS address and can contain up to 1,024 characters.
+	FairPlayCertificateUrl *string `json:"FairPlayCertificateUrl,omitempty" name:"FairPlayCertificateUrl"`
+}
+
 type SampleSnapshotTaskInput struct {
 	// Sampled screencapturing template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
@@ -15305,6 +15614,15 @@ type SearchMediaRequestParams struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClasses []*string `json:"StorageClasses,omitempty" name:"StorageClasses"`
 
+	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
+	// <li>Array length limit: 10</li>
+	TrtcSdkAppIds []*uint64 `json:"TrtcSdkAppIds,omitempty" name:"TrtcSdkAppIds"`
+
+	// The TRTC room IDs. Any file that matches one of the room IDs will be returned.
+	// <li>Element length limit: 64 characters.</li>
+	// <li>Array length limit: 10.</li>
+	TrtcRoomIds []*string `json:"TrtcRoomIds,omitempty" name:"TrtcRoomIds"`
+
 	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
 	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
 	Text *string `json:"Text,omitempty" name:"Text"`
@@ -15435,6 +15753,15 @@ type SearchMediaRequest struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClasses []*string `json:"StorageClasses,omitempty" name:"StorageClasses"`
 
+	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
+	// <li>Array length limit: 10</li>
+	TrtcSdkAppIds []*uint64 `json:"TrtcSdkAppIds,omitempty" name:"TrtcSdkAppIds"`
+
+	// The TRTC room IDs. Any file that matches one of the room IDs will be returned.
+	// <li>Element length limit: 64 characters.</li>
+	// <li>Array length limit: 10.</li>
+	TrtcRoomIds []*string `json:"TrtcRoomIds,omitempty" name:"TrtcRoomIds"`
+
 	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
 	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
 	Text *string `json:"Text,omitempty" name:"Text"`
@@ -15497,6 +15824,8 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "StorageRegions")
 	delete(f, "StorageClasses")
+	delete(f, "TrtcSdkAppIds")
+	delete(f, "TrtcRoomIds")
 	delete(f, "Text")
 	delete(f, "SourceType")
 	delete(f, "StreamId")
@@ -15553,6 +15882,67 @@ type SegmentConfigureInfoForUpdate struct {
 }
 
 // Predefined struct for user
+type SetDrmKeyProviderInfoRequestParams struct {
+	// The DRM key information provided by SDMC.
+	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitempty" name:"SDMCInfo"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type SetDrmKeyProviderInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The DRM key information provided by SDMC.
+	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitempty" name:"SDMCInfo"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *SetDrmKeyProviderInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetDrmKeyProviderInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SDMCInfo")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetDrmKeyProviderInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetDrmKeyProviderInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SetDrmKeyProviderInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *SetDrmKeyProviderInfoResponseParams `json:"Response"`
+}
+
+func (r *SetDrmKeyProviderInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetDrmKeyProviderInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type SimpleHlsClipRequestParams struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitempty" name:"Url"`
@@ -15568,6 +15958,23 @@ type SimpleHlsClipRequestParams struct {
 
 	// Whether to store the video clip persistently. 0: no (default), 1: yes.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
+
+	// The expiration time of the video clip that is to be saved, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` is the default value, which means the video clip will never expire. After expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter is valid only if `IsPersistence` is 1.
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// The task flow to execute on the video clipped for persistent storage. For details, see [Upload from Server](https://intl.cloud.tencent.com/document/product/266/33912). This parameter is valid only if `IsPersistence` is 1.
+	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
+
+	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the “Other” category.</li>
+	// This parameter is valid only if `IsPersistence` is `1`.
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+
+	// The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+
+	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 }
 
 type SimpleHlsClipRequest struct {
@@ -15587,6 +15994,23 @@ type SimpleHlsClipRequest struct {
 
 	// Whether to store the video clip persistently. 0: no (default), 1: yes.
 	IsPersistence *int64 `json:"IsPersistence,omitempty" name:"IsPersistence"`
+
+	// The expiration time of the video clip that is to be saved, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). `9999-12-31T23:59:59Z` is the default value, which means the video clip will never expire. After expiration, the media file and its related resources (such as transcoding results and image sprites) will be permanently deleted. This parameter is valid only if `IsPersistence` is 1.
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// The task flow to execute on the video clipped for persistent storage. For details, see [Upload from Server](https://intl.cloud.tencent.com/document/product/266/33912). This parameter is valid only if `IsPersistence` is 1.
+	Procedure *string `json:"Procedure,omitempty" name:"Procedure"`
+
+	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the “Other” category.</li>
+	// This parameter is valid only if `IsPersistence` is `1`.
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+
+	// The source context, which is used to pass through user request information. The [NewFileUpload](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 250 characters and is valid only if `IsPersistence` is `1`.
+	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+
+	// The session context, which is used to pass through user request information. If the `Procedure` parameter is specified, the [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters and is valid only if `IsPersistence` is `1`.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 }
 
 func (r *SimpleHlsClipRequest) ToJsonString() string {
@@ -15606,6 +16030,11 @@ func (r *SimpleHlsClipRequest) FromJsonString(s string) error {
 	delete(f, "StartTimeOffset")
 	delete(f, "EndTimeOffset")
 	delete(f, "IsPersistence")
+	delete(f, "ExpireTime")
+	delete(f, "Procedure")
+	delete(f, "ClassId")
+	delete(f, "SourceContext")
+	delete(f, "SessionContext")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SimpleHlsClipRequest has unknown keys!", "")
 	}
@@ -15622,6 +16051,9 @@ type SimpleHlsClipResponseParams struct {
 
 	// Unique ID of a video clip for persistent storage.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The ID of the task flow to execute on the video clipped for persistent storage.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -15964,6 +16396,19 @@ type SubAppIdInfo struct {
 
 	// The subapplication name. This parameter is not recommended. Please use `SubAppIdName` instead.
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type SubtitleFormatsOperation struct {
+	// The modification type. Valid values:
+	// <li>add: Add the formats specified by `Formats`.</li>
+	// <li>delete: Delete the formats specified by `Formats`.<l/i>
+	// <li>reset: Reset the format list to formats specified by `Formats`.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The subtitle format list. Valid values:
+	// <li>vtt</li>
+	// <li>srt</li>
+	Formats []*string `json:"Formats,omitempty" name:"Formats"`
 }
 
 type SvgWatermarkInput struct {
@@ -16525,6 +16970,20 @@ type TransitionOpertion struct {
 	// </li>
 	// </ul>
 	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type TrtcRecordInfo struct {
+	// The TRTC application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The TRTC room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The recording task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The IDs of users whose streams are mixed.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
 }
 
 type UrlSignatureAuthPolicy struct {
