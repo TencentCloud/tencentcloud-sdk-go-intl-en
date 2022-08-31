@@ -1064,7 +1064,11 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// You can specify only one backup source URL.
 	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
 
-
+	// The information of watermarks to add.
+	// Notes:
+	// 1. You can add up to four watermarks to different locations of the video.
+	// 2. Make sure you use publicly accessible URLs for the watermark images.
+	// 3. Supported image formats include PNG, JPG, and GIF.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
@@ -1186,6 +1190,11 @@ type CreateLivePullStreamTaskRequest struct {
 	// You can specify only one backup source URL.
 	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
 
+	// The information of watermarks to add.
+	// Notes:
+	// 1. You can add up to four watermarks to different locations of the video.
+	// 2. Make sure you use publicly accessible URLs for the watermark images.
+	// 3. Supported image formats include PNG, JPG, and GIF.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
@@ -8127,6 +8136,17 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
 	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+
+	// The information of watermarks to add.
+	// Notes:
+	// 1. You can add up to four watermarks to different locations of the video.
+	// 2. Make sure you use publicly accessible URLs for the watermark images.
+	// 3. Supported image formats include PNG and JPG.
+	// 4. If you change the watermark configuration of a task whose source is a list of video files, the new configuration will take effect for the next file in the list.
+	// 5. If you change the watermark configuration of a task whose source is a live stream, the new configuration will take effect immediately.
+	// 6. If you want to stop using watermarks, pass in an empty array.
+	// 7. Currently, animated watermarks are not supported.
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
 type ModifyLivePullStreamTaskRequest struct {
@@ -8212,6 +8232,17 @@ type ModifyLivePullStreamTaskRequest struct {
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
 	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+
+	// The information of watermarks to add.
+	// Notes:
+	// 1. You can add up to four watermarks to different locations of the video.
+	// 2. Make sure you use publicly accessible URLs for the watermark images.
+	// 3. Supported image formats include PNG and JPG.
+	// 4. If you change the watermark configuration of a task whose source is a list of video files, the new configuration will take effect for the next file in the list.
+	// 5. If you change the watermark configuration of a task whose source is a live stream, the new configuration will take effect immediately.
+	// 6. If you want to stop using watermarks, pass in an empty array.
+	// 7. Currently, animated watermarks are not supported.
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
 func (r *ModifyLivePullStreamTaskRequest) ToJsonString() string {
@@ -8241,6 +8272,7 @@ func (r *ModifyLivePullStreamTaskRequest) FromJsonString(s string) error {
 	delete(f, "Comment")
 	delete(f, "BackupSourceType")
 	delete(f, "BackupSourceUrl")
+	delete(f, "WatermarkList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLivePullStreamTaskRequest has unknown keys!", "")
 	}
@@ -8953,32 +8985,29 @@ type PublishTime struct {
 }
 
 type PullPushWatermarkInfo struct {
-	// Watermark ID.
-	WatermarkId *int64 `json:"WatermarkId,omitempty" name:"WatermarkId"`
-
-	// Watermark image URL.
+	// The watermark image URL.
+	// Characters not allowed:
+	// ;(){}$>`#"'|
 	PictureUrl *string `json:"PictureUrl,omitempty" name:"PictureUrl"`
 
-	// Display position: X-axis offset.
+	// The horizontal offset (%) of the watermark. The default value is 0.
 	XPosition *int64 `json:"XPosition,omitempty" name:"XPosition"`
 
-	// Display position: Y-axis offset.
+	// The vertical offset (%) of the watermark. The default value is 0.
 	YPosition *int64 `json:"YPosition,omitempty" name:"YPosition"`
 
-	// Watermark name.
-	WatermarkName *string `json:"WatermarkName,omitempty" name:"WatermarkName"`
-
-	// Current status. 0: not used. 1: in use.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-
-	// Creation time.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Watermark width
+	// The watermark width as a percentage of the video width. To avoid distorted images, we recommend you specify only the width or height so that the other side can be scaled proportionally. By default, the original width of the watermark image is used.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// Watermark height
+	// The watermark height as a percentage of the video height. To avoid distorted images, we recommend you specify only the width or height so that the other side can be scaled proportionally. By default, the original height of the watermark image is used.
 	Height *int64 `json:"Height,omitempty" name:"Height"`
+
+	// The origin. The default value is 0.
+	// 0: Top left corner
+	// 1: Top right corner
+	// 2: Bottom right corner
+	// 3: Bottom left corner
+	Location *int64 `json:"Location,omitempty" name:"Location"`
 }
 
 type PullStreamTaskInfo struct {
@@ -9096,6 +9125,20 @@ type PullStreamTaskInfo struct {
 
 	// The remarks for the task.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The backup source type. Valid values:
+	// PullLivePushLive: Live streaming
+	// PullVodPushLive: Video files
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
+
+	// The URL of the backup source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitempty" name:"BackupSourceUrl"`
+
+	// The information of watermarks to add.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
 }
 
 type PushAuthKeyInfo struct {
