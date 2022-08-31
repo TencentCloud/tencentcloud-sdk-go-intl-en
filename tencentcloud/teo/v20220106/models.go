@@ -1294,7 +1294,7 @@ type CreateLoadBalancingRequestParams struct {
 	// Site ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Subdomain name. You can use @ to represent the root domain.
+	// Subdomain name
 	Host *string `json:"Host,omitempty" name:"Host"`
 
 	// Proxy mode. Valid values:
@@ -1315,7 +1315,7 @@ type CreateLoadBalancingRequest struct {
 	// Site ID
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Subdomain name. You can use @ to represent the root domain.
+	// Subdomain name
 	Host *string `json:"Host,omitempty" name:"Host"`
 
 	// Proxy mode. Valid values:
@@ -1681,6 +1681,9 @@ type CreateZoneRequestParams struct {
 
 	// Specifies whether to skip resolution record scanning
 	JumpStart *bool `json:"JumpStart,omitempty" name:"JumpStart"`
+
+	// Resource tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type CreateZoneRequest struct {
@@ -1696,6 +1699,9 @@ type CreateZoneRequest struct {
 
 	// Specifies whether to skip resolution record scanning
 	JumpStart *bool `json:"JumpStart,omitempty" name:"JumpStart"`
+
+	// Resource tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateZoneRequest) ToJsonString() string {
@@ -1713,6 +1719,7 @@ func (r *CreateZoneRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Type")
 	delete(f, "JumpStart")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateZoneRequest has unknown keys!", "")
 	}
@@ -7007,20 +7014,6 @@ type DescribeZoneDetailsResponseParams struct {
 	// Indicates whether the site is disabled
 	Paused *bool `json:"Paused,omitempty" name:"Paused"`
 
-	// Site creation date
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
-
-	// Site modification date
-	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
-
-	// User-defined name server information
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitempty" name:"VanityNameServers"`
-
-	// User-defined name server IP information
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitempty" name:"VanityNameServersIps"`
-
 	// Specifies whether to enable CNAME acceleration
 	// - `enabled`: Enable
 	// - `disabled`: Disable
@@ -7031,6 +7024,31 @@ type DescribeZoneDetailsResponseParams struct {
 	// - `pending`: The site is waiting for verification.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CnameStatus *string `json:"CnameStatus,omitempty" name:"CnameStatus"`
+
+	// Resource tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Billable resource
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Resources []*Resource `json:"Resources,omitempty" name:"Resources"`
+
+	// Site modification date
+	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
+
+	// Site creation date
+	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+
+	// User-defined name server information
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitempty" name:"VanityNameServers"`
+
+	// User-defined name server IP information
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitempty" name:"VanityNameServersIps"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9948,6 +9966,42 @@ func (r *ReclaimZoneResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Resource struct {
+	// Resource ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Billing mode
+	// `0`: Pay-as-you-go
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Effective time
+	EnableTime *string `json:"EnableTime,omitempty" name:"EnableTime"`
+
+	// Expiration time
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Status of the plan
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Pricing query parameter
+	Sv []*Sv `json:"Sv,omitempty" name:"Sv"`
+
+	// Specifies whether to enable auto-renewal
+	// `0`: Default
+	// `1`: Enable auto-renewal
+	// `2`: Disable auto-renewal
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// ID of the plan
+	PlanId *string `json:"PlanId,omitempty" name:"PlanId"`
+
+
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
 // Predefined struct for user
 type ScanDnsRecordsRequestParams struct {
 	// Site ID
@@ -10159,9 +10213,27 @@ type SmartRouting struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type Sv struct {
+	// Parameter key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Parameter value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type SwitchConfig struct {
 	// Switch that controls all web security configuration: basic web protection, custom rules, and rate limiting
 	WebSwitch *string `json:"WebSwitch,omitempty" name:"WebSwitch"`
+}
+
+type Tag struct {
+	// Tag key
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// Tag value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type Task struct {
@@ -10472,23 +10544,42 @@ type Zone struct {
 	// Indicates whether the site is disabled
 	Paused *bool `json:"Paused,omitempty" name:"Paused"`
 
-	// Site creation date
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
-
-	// Site modification date
-	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
+	// Specifies whether to enable CNAME acceleration
+	// - `enabled`: Enable
+	// - `disabled`: Disable
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CnameSpeedUp *string `json:"CnameSpeedUp,omitempty" name:"CnameSpeedUp"`
 
 	// Ownership verification status of the site when it is connected to EdgeOne via CNAME.
 	// - `finished`: The site is verified.
 	// - `pending`: Verifying the ownership of the site.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CnameStatus *string `json:"CnameStatus,omitempty" name:"CnameStatus"`
+
+	// Resource tag
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Billable resource
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Resources []*Resource `json:"Resources,omitempty" name:"Resources"`
+
+	// Site creation date
+	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+
+	// Site modification date
+	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
+
+
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type ZoneFilter struct {
 	// Filters by the field name. Vaules:
 	// - `name`: Site name.
 	// - `status`: Site status.
+	// - `tagKey`: Tag key.
+	// - `tagValue`: Tag value.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Filters by the field value
