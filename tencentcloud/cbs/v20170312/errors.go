@@ -17,9 +17,6 @@ package v20170312
 const (
 	// error codes for specific actions
 
-	// Number of scheduled snapshot policies has reached the limit.
-	AUTOSNAPSHOTPOLICYOUTOFQUOTA = "AutoSnapshotPolicyOutOfQuota"
-
 	// Number of returned cloud disks has reached the limit and no more cloud disks can be returned.
 	INSUFFICIENTREFUNDQUOTA = "InsufficientRefundQuota"
 
@@ -106,6 +103,9 @@ const (
 
 	// The ‘SnapshotId’ entered does not exist.
 	INVALIDSNAPSHOTID_NOTFOUND = "InvalidSnapshotId.NotFound"
+
+	// The number of scheduled snapshot policies has reached the upper limit.
+	LIMITEXCEEDED_AUTOSNAPSHOTPOLICYOUTOFQUOTA = "LimitExceeded.AutoSnapshotPolicyOutOfQuota"
 
 	// Number of instances mounted to cloud disk exceeds the limit.
 	LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"

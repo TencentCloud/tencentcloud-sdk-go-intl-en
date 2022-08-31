@@ -193,35 +193,47 @@ type AutoMountConfiguration struct {
 }
 
 type AutoSnapshotPolicy struct {
-	// Scheduled snapshot policy ID.
-	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
-
-	// Scheduled snapshot policy name.
-	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
-
-	// Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
-	AutoSnapshotPolicyState *string `json:"AutoSnapshotPolicyState,omitempty" name:"AutoSnapshotPolicyState"`
+	// The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
+	DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet"`
 
 	// Whether scheduled snapshot policy is activated.
 	IsActivated *bool `json:"IsActivated,omitempty" name:"IsActivated"`
 
+	// Scheduled snapshot policy state. Value range:<br><li>NORMAL: Normal<br><li>ISOLATED: Isolated.
+	AutoSnapshotPolicyState *string `json:"AutoSnapshotPolicyState,omitempty" name:"AutoSnapshotPolicyState"`
+
+	// Whether it is to replicate a snapshot across accounts. `1`: yes, `0`: no.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsCopyToRemote *uint64 `json:"IsCopyToRemote,omitempty" name:"IsCopyToRemote"`
+
 	// Whether the snapshot created by this scheduled snapshot policy is retained permanently.
 	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
-
-	// Number of days the snapshot created by this scheduled snapshot policy is retained.
-	RetentionDays *uint64 `json:"RetentionDays,omitempty" name:"RetentionDays"`
-
-	// The time the scheduled snapshot policy was created.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// The time the scheduled snapshot will be triggered again.
 	NextTriggerTime *string `json:"NextTriggerTime,omitempty" name:"NextTriggerTime"`
 
+	// Scheduled snapshot policy name.
+	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
+
+	// Scheduled snapshot policy ID.
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
 	// The policy for executing the scheduled snapshot.
 	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
 
-	// The list of cloud disk IDs that the current scheduled snapshot policy is bound to.
-	DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet"`
+	// The time the scheduled snapshot policy was created.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Number of days the snapshot created by this scheduled snapshot policy is retained.
+	RetentionDays *uint64 `json:"RetentionDays,omitempty" name:"RetentionDays"`
+
+	// ID of the replication target account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CopyToAccountUin *string `json:"CopyToAccountUin,omitempty" name:"CopyToAccountUin"`
+
+	// List of IDs of the instances associated with the scheduled snapshot policy.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
 }
 
 // Predefined struct for user
@@ -1584,7 +1596,7 @@ type Disk struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// Cloud disk media type. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk<br><li>CLOUD_PREMIUM: Premium Cloud Storage<br><li>CLOUD_SSD: SSD<br><li>CLOUD_HSSD: Enhanced SSD<br><li>CLOUD_TSSD: Tremendous SSD
+	// Cloud disk types. Valid values: <br><li>CLOUD_BASIC: HDD cloud disk <br><li>CLOUD_PREMIUM: Premium Cloud Disk <br><li>CLOUD_BSSD: General Purpose SSD <br><li>CLOUD_SSD: SSD <br><li>CLOUD_HSSD: Enhanced SSD <br><li>CLOUD_TSSD: Tremendous SSD
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 
 	// The state of the cloud disk. Value range: <br><li>UNATTACHED: Not mounted <br><li>ATTACHING: Mounting <br><li>ATTACHED: Mounted <br><li>DETACHING: Un-mounting <br><li>EXPANDING: Expanding <br><li>ROLLBACKING: Rolling back <br><li>TORECYCE: Pending recycling. <br><li>DUMPING: Copying the hard drive.
@@ -1696,6 +1708,12 @@ type Disk struct {
 
 	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
 	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitempty" name:"DeleteSnapshot"`
+
+	// Number of used cloud disk backups.
+	DiskBackupCount *uint64 `json:"DiskBackupCount,omitempty" name:"DiskBackupCount"`
+
+	// Type of the instance mounted to the cloud disk. Valid values: <br><li>CVM<br><li>EKS
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 type DiskChargePrepaid struct {
@@ -1713,31 +1731,39 @@ type DiskConfig struct {
 	// Whether the configuration is available.
 	Available *bool `json:"Available,omitempty" name:"Available"`
 
-	// Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
-	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
-
-	// Cloud disk type. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
-	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
-
 	// Billing method. Value range: <br><li>PREPAID: Prepaid, that is, monthly subscription<br><li>POSTPAID_BY_HOUR: Postpaid, that is, pay as you go.
 	DiskChargeType *string `json:"DiskChargeType,omitempty" name:"DiskChargeType"`
 
-	// The maximum configurable cloud disk size (in GB).
-	MaxDiskSize *uint64 `json:"MaxDiskSize,omitempty" name:"MaxDiskSize"`
-
-	// The minimum configurable cloud disk size (in GB).
-	MinDiskSize *uint64 `json:"MinDiskSize,omitempty" name:"MinDiskSize"`
-
 	// The [Availability Region](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#ZoneInfo) of the cloud drive.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance model series. For more information, please see [Instance Models](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
+	// Note: This field may return null, indicating that no valid value was found.
+	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
+
+	// Type of cloud disk medium. Value range: <br><li>CLOUD_BASIC: Ordinary cloud disk <br><li>CLOUD_PREMIUM: Premium cloud storage <br><li>CLOUD_SSD: SSD cloud disk.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Minimum increment of cloud disk size adjustment in GB.
+	// Note: This field might return null, indicating that no valid values can be obtained.
+	StepSize *uint64 `json:"StepSize,omitempty" name:"StepSize"`
+
+	// Additional performance range.
+	// Note: This field might return null, indicating that no valid values can be obtained.
+	ExtraPerformanceRange []*int64 `json:"ExtraPerformanceRange,omitempty" name:"ExtraPerformanceRange"`
 
 	// Instance model.
 	// Note: This field may return null, indicating that no valid value was found.
 	DeviceClass *string `json:"DeviceClass,omitempty" name:"DeviceClass"`
 
-	// Instance model series. For more information, please see [Instance Models](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1)
-	// Note: This field may return null, indicating that no valid value was found.
-	InstanceFamily *string `json:"InstanceFamily,omitempty" name:"InstanceFamily"`
+	// Cloud disk type. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
+	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
+
+	// The minimum configurable cloud disk size (in GB).
+	MinDiskSize *uint64 `json:"MinDiskSize,omitempty" name:"MinDiskSize"`
+
+	// The maximum configurable cloud disk size (in GB).
+	MaxDiskSize *uint64 `json:"MaxDiskSize,omitempty" name:"MaxDiskSize"`
 }
 
 type DiskOperationLog struct {
@@ -2144,19 +2170,19 @@ type ModifyAutoSnapshotPolicyAttributeRequestParams struct {
 	// Scheduled snapshot policy ID.
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
 
-	// The policy for executing the scheduled snapshot.
-	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
-
-	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
-	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
-
 	// Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.
 	IsActivated *bool `json:"IsActivated,omitempty" name:"IsActivated"`
 
 	// Whether the snapshot created by this scheduled snapshot policy is retained permanently. FALSE: Not retained permanently. TRUE: Retained permanently. The default value is FALSE.
 	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
 
-	// The number of days for which snapshots created by this policy are retained. This parameter cannot clash with `IsPermanent`, which is, if the scheduled snapshot policy is configured to retain permanently, `RetentionDays` must be 0.
+	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
+	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
+
+	// The policy for executing the scheduled snapshot.
+	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
+
+	// Number of days to retain the snapshots created according to this scheduled snapshot policy. If this parameter is specified, `IsPermanent` cannot be specified as `TRUE`; otherwise, they will conflict with each other.
 	RetentionDays *uint64 `json:"RetentionDays,omitempty" name:"RetentionDays"`
 }
 
@@ -2166,19 +2192,19 @@ type ModifyAutoSnapshotPolicyAttributeRequest struct {
 	// Scheduled snapshot policy ID.
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
 
-	// The policy for executing the scheduled snapshot.
-	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
-
-	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
-	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
-
 	// Whether or not the scheduled snapshot policy is activated. FALSE: Not activated. TRUE: Activated. The default value is TRUE.
 	IsActivated *bool `json:"IsActivated,omitempty" name:"IsActivated"`
 
 	// Whether the snapshot created by this scheduled snapshot policy is retained permanently. FALSE: Not retained permanently. TRUE: Retained permanently. The default value is FALSE.
 	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
 
-	// The number of days for which snapshots created by this policy are retained. This parameter cannot clash with `IsPermanent`, which is, if the scheduled snapshot policy is configured to retain permanently, `RetentionDays` must be 0.
+	// The name of the scheduled snapshot policy to be created. If it is left empty, the default is 'Not named'. The maximum length cannot exceed 60 bytes.
+	AutoSnapshotPolicyName *string `json:"AutoSnapshotPolicyName,omitempty" name:"AutoSnapshotPolicyName"`
+
+	// The policy for executing the scheduled snapshot.
+	Policy []*Policy `json:"Policy,omitempty" name:"Policy"`
+
+	// Number of days to retain the snapshots created according to this scheduled snapshot policy. If this parameter is specified, `IsPermanent` cannot be specified as `TRUE`; otherwise, they will conflict with each other.
 	RetentionDays *uint64 `json:"RetentionDays,omitempty" name:"RetentionDays"`
 }
 
@@ -2195,10 +2221,10 @@ func (r *ModifyAutoSnapshotPolicyAttributeRequest) FromJsonString(s string) erro
 		return err
 	}
 	delete(f, "AutoSnapshotPolicyId")
-	delete(f, "Policy")
-	delete(f, "AutoSnapshotPolicyName")
 	delete(f, "IsActivated")
 	delete(f, "IsPermanent")
+	delete(f, "AutoSnapshotPolicyName")
+	delete(f, "Policy")
 	delete(f, "RetentionDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAutoSnapshotPolicyAttributeRequest has unknown keys!", "")
@@ -2545,11 +2571,11 @@ type Placement struct {
 }
 
 type Policy struct {
-	// Specifies the days of the week, from Monday to Sunday, on which a scheduled snapshot will be triggered. Value range: [0, 6]. 0 indicates triggering on Sunday, 1-6 indicate triggering on Monday-Saturday.
-	DayOfWeek []*uint64 `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
-
 	// Specifies the time that that the scheduled snapshot policy will be triggered. The unit is hour. The value range is [0-23]. 00:00-23:00 is a total of 24 time points that can be selected. 1 indicates 01:00, and so on.
 	Hour []*uint64 `json:"Hour,omitempty" name:"Hour"`
+
+	// Specifies the days of the week, from Monday to Sunday, on which a scheduled snapshot will be triggered. Value range: [0, 6]. 0 indicates triggering on Sunday, 1-6 indicate triggering on Monday-Saturday.
+	DayOfWeek []*uint64 `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
 }
 
 type PrepayPrice struct {
@@ -2694,62 +2720,65 @@ type SharePermission struct {
 }
 
 type Snapshot struct {
-	// Snapshot ID.
-	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
-
 	// Location of the snapshot.
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
-
-	// The type of the cloud disk used to create the snapshot. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
-	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
-
-	// ID of the cloud disk used to create this snapshot.
-	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
-
-	// Size of the cloud disk used to create this snapshot (in GB).
-	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
-
-	// Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
-	SnapshotState *string `json:"SnapshotState,omitempty" name:"SnapshotState"`
-
-	// Snapshot name, the user-defined snapshot alias. Call [ModifySnapshotAttribute](https://intl.cloud.tencent.com/document/product/362/15650?from_cn_redirect=1) to modify this field.
-	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
-
-	// The progress percentage for snapshot creation. This field is always 100 after the snapshot is created successfully.
-	Percent *uint64 `json:"Percent,omitempty" name:"Percent"`
-
-	// Creation time of the snapshot.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// The expiration time of the snapshot. If the snapshot is permanently retained, this field is blank.
-	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
-
-	// Whether the snapshot is created from an encrypted disk. Value range: <br><li>true: Yes <br><li>false: No.
-	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
-
-	// Whether it is a permanent snapshot. Value range: <br><li>true: Permanent snapshot <br><li>false: Non-permanent snapshot.
-	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
-
-	// The destination region to which the snapshot is being replicated. Default value is [ ].
-	CopyingToRegions []*string `json:"CopyingToRegions,omitempty" name:"CopyingToRegions"`
 
 	// Whether the snapshot is replicated across regions. Value range: <br><li>true: Indicates that the snapshot is replicated across regions. <br><li>false: Indicates that the snapshot belongs to the local region.
 	CopyFromRemote *bool `json:"CopyFromRemote,omitempty" name:"CopyFromRemote"`
 
+	// Snapshot status. Valid values: <br><li>NORMAL: normal <br><li>CREATING: creating<br><li>ROLLBACKING: rolling back<br><li>COPYING_FROM_REMOTE: cross-region replicating<li>CHECKING_COPIED: verifying the cross-region replicated data<br><li>TORECYCLE: to be repossessed.
+	SnapshotState *string `json:"SnapshotState,omitempty" name:"SnapshotState"`
+
+	// Whether it is a permanent snapshot. Value range: <br><li>true: Permanent snapshot <br><li>false: Non-permanent snapshot.
+	IsPermanent *bool `json:"IsPermanent,omitempty" name:"IsPermanent"`
+
+	// Snapshot name, the user-defined snapshot alias. Call [ModifySnapshotAttribute](https://intl.cloud.tencent.com/document/product/362/15650?from_cn_redirect=1) to modify this field.
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// The expiration time of the snapshot. If the snapshot is permanently retained, this field is blank.
+	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
+
+	// The progress percentage for snapshot creation. This field is always 100 after the snapshot is created successfully.
+	Percent *uint64 `json:"Percent,omitempty" name:"Percent"`
+
 	// List of images associated with snapshot.
 	Images []*Image `json:"Images,omitempty" name:"Images"`
-
-	// Number of images associated with snapshot.
-	ImageCount *uint64 `json:"ImageCount,omitempty" name:"ImageCount"`
-
-	// Snapshot type. This value can currently be either PRIVATE_SNAPSHOT or SHARED_SNAPSHOT.
-	SnapshotType *string `json:"SnapshotType,omitempty" name:"SnapshotType"`
 
 	// Number of snapshots currently shared
 	ShareReference *uint64 `json:"ShareReference,omitempty" name:"ShareReference"`
 
+	// Snapshot type. This value can currently be either PRIVATE_SNAPSHOT or SHARED_SNAPSHOT.
+	SnapshotType *string `json:"SnapshotType,omitempty" name:"SnapshotType"`
+
+	// Size of the cloud disk used to create this snapshot (in GB).
+	DiskSize *uint64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// ID of the cloud disk used to create this snapshot.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// The destination region to which the snapshot is being replicated. Default value is [ ].
+	CopyingToRegions []*string `json:"CopyingToRegions,omitempty" name:"CopyingToRegions"`
+
+	// Whether the snapshot is created from an encrypted disk. Value range: <br><li>true: Yes <br><li>false: No.
+	Encrypt *bool `json:"Encrypt,omitempty" name:"Encrypt"`
+
+	// Creation time of the snapshot.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Number of images associated with snapshot.
+	ImageCount *uint64 `json:"ImageCount,omitempty" name:"ImageCount"`
+
+	// The type of the cloud disk used to create the snapshot. Value range: <br><li>SYSTEM_DISK: System disk <br><li>DATA_DISK: Data disk.
+	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
+
+	// Snapshot ID.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
 	// The time when the snapshot sharing starts
 	TimeStartShare *string `json:"TimeStartShare,omitempty" name:"TimeStartShare"`
+
+	// List of tags associated with the snapshot.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type SnapshotCopyResult struct {

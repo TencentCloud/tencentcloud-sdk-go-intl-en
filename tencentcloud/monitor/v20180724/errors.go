@@ -20,6 +20,9 @@ const (
 	// Error with CAM signature/authentication.
 	AUTHFAILURE = "AuthFailure"
 
+	// Access authentication failed.
+	AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+
 	// The request is not authorized. For more information on the authentication, see the CAM documentation.
 	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 
@@ -116,6 +119,12 @@ const (
 	// The name already exists.
 	FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
 
+	// 
+	FAILEDOPERATION_ERRNOTOPEN = "FailedOperation.ErrNotOpen"
+
+	// 
+	FAILEDOPERATION_ERROWED = "FailedOperation.ErrOwed"
+
 	// An error occurred while generating the resource ID.
 	FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
 
@@ -127,6 +136,9 @@ const (
 
 	// Internal service error.
 	FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
+
+	// The region is unavailable.
+	FAILEDOPERATION_REGIONUNAVAILABLE = "FailedOperation.RegionUnavailable"
 
 	// The resource already exists.
 	FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
@@ -151,6 +163,9 @@ const (
 
 	// A conflict occurred while updating the TKE resource.
 	FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
+
+	// The AZ is unavailable.
+	FAILEDOPERATION_ZONEUNAVAILABLE = "FailedOperation.ZoneUnavailable"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"

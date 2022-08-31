@@ -592,6 +592,60 @@ type CLSNotice struct {
 	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
 }
 
+// Predefined struct for user
+type CleanGrafanaInstanceRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type CleanGrafanaInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *CleanGrafanaInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CleanGrafanaInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CleanGrafanaInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CleanGrafanaInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CleanGrafanaInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CleanGrafanaInstanceResponseParams `json:"Response"`
+}
+
+func (r *CleanGrafanaInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CleanGrafanaInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CommonNamespace struct {
 	// Namespace ID
 	Id *string `json:"Id,omitempty" name:"Id"`
@@ -616,6 +670,20 @@ type CommonNamespace struct {
 
 	// Unique ID in Dashboard
 	DashboardId *string `json:"DashboardId,omitempty" name:"DashboardId"`
+}
+
+type CommonNamespaceNew struct {
+	// Namespace ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Namespace name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Monitoring type
+	MonitorType *string `json:"MonitorType,omitempty" name:"MonitorType"`
+
+	// Dimension information
+	Dimensions []*DimensionNew `json:"Dimensions,omitempty" name:"Dimensions"`
 }
 
 type Condition struct {
@@ -1130,6 +1198,248 @@ func (r *CreateExporterIntegrationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGrafanaInstanceRequestParams struct {
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Array of subnet IDs
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Initial Grafana password
+	GrafanaInitPassword *string `json:"GrafanaInitPassword,omitempty" name:"GrafanaInitPassword"`
+
+	// Whether to enable public network access
+	EnableInternet *bool `json:"EnableInternet,omitempty" name:"EnableInternet"`
+
+	// Tag
+	TagSpecification []*PrometheusTag `json:"TagSpecification,omitempty" name:"TagSpecification"`
+}
+
+type CreateGrafanaInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Array of subnet IDs
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Initial Grafana password
+	GrafanaInitPassword *string `json:"GrafanaInitPassword,omitempty" name:"GrafanaInitPassword"`
+
+	// Whether to enable public network access
+	EnableInternet *bool `json:"EnableInternet,omitempty" name:"EnableInternet"`
+
+	// Tag
+	TagSpecification []*PrometheusTag `json:"TagSpecification,omitempty" name:"TagSpecification"`
+}
+
+func (r *CreateGrafanaInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGrafanaInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceName")
+	delete(f, "VpcId")
+	delete(f, "SubnetIds")
+	delete(f, "GrafanaInitPassword")
+	delete(f, "EnableInternet")
+	delete(f, "TagSpecification")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGrafanaInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGrafanaInstanceResponseParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateGrafanaInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateGrafanaInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateGrafanaInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGrafanaInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGrafanaIntegrationRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Configuration
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
+type CreateGrafanaIntegrationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Configuration
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
+func (r *CreateGrafanaIntegrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGrafanaIntegrationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Kind")
+	delete(f, "Content")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGrafanaIntegrationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGrafanaIntegrationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateGrafanaIntegrationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateGrafanaIntegrationResponseParams `json:"Response"`
+}
+
+func (r *CreateGrafanaIntegrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGrafanaIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGrafanaNotificationChannelRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Organization ID
+	OrgId *int64 `json:"OrgId,omitempty" name:"OrgId"`
+
+	// Array of notification channel IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Array of extra organization IDs
+	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+}
+
+type CreateGrafanaNotificationChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Organization ID
+	OrgId *int64 `json:"OrgId,omitempty" name:"OrgId"`
+
+	// Array of notification channel IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Array of extra organization IDs
+	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+}
+
+func (r *CreateGrafanaNotificationChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGrafanaNotificationChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ChannelName")
+	delete(f, "OrgId")
+	delete(f, "Receivers")
+	delete(f, "ExtraOrgIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGrafanaNotificationChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGrafanaNotificationChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateGrafanaNotificationChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateGrafanaNotificationChannelResponseParams `json:"Response"`
+}
+
+func (r *CreateGrafanaNotificationChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGrafanaNotificationChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreatePolicyGroupCondition struct {
 	// Metric ID.
 	MetricId *int64 `json:"MetricId,omitempty" name:"MetricId"`
@@ -1626,6 +1936,81 @@ func (r *CreateRecordingRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateSSOAccountRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Permission
+	Role []*GrafanaAccountRole `json:"Role,omitempty" name:"Role"`
+
+	// Remarks
+	Notes *string `json:"Notes,omitempty" name:"Notes"`
+}
+
+type CreateSSOAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Permission
+	Role []*GrafanaAccountRole `json:"Role,omitempty" name:"Role"`
+
+	// Remarks
+	Notes *string `json:"Notes,omitempty" name:"Notes"`
+}
+
+func (r *CreateSSOAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSSOAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserId")
+	delete(f, "Role")
+	delete(f, "Notes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSSOAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSSOAccountResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateSSOAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSSOAccountResponseParams `json:"Response"`
+}
+
+func (r *CreateSSOAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSSOAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateServiceDiscoveryRequestParams struct {
 	// Prometheus instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2001,6 +2386,182 @@ func (r *DeleteExporterIntegrationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteGrafanaInstanceRequestParams struct {
+	// Array of instance names
+	InstanceIDs []*string `json:"InstanceIDs,omitempty" name:"InstanceIDs"`
+}
+
+type DeleteGrafanaInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of instance names
+	InstanceIDs []*string `json:"InstanceIDs,omitempty" name:"InstanceIDs"`
+}
+
+func (r *DeleteGrafanaInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGrafanaInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGrafanaInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGrafanaInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteGrafanaInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteGrafanaInstanceResponseParams `json:"Response"`
+}
+
+func (r *DeleteGrafanaInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGrafanaInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGrafanaIntegrationRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+}
+
+type DeleteGrafanaIntegrationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+}
+
+func (r *DeleteGrafanaIntegrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGrafanaIntegrationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IntegrationId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGrafanaIntegrationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGrafanaIntegrationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteGrafanaIntegrationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteGrafanaIntegrationResponseParams `json:"Response"`
+}
+
+func (r *DeleteGrafanaIntegrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGrafanaIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGrafanaNotificationChannelRequestParams struct {
+	// Array of channel IDs
+	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
+
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DeleteGrafanaNotificationChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of channel IDs
+	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
+
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DeleteGrafanaNotificationChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGrafanaNotificationChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelIDs")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGrafanaNotificationChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGrafanaNotificationChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteGrafanaNotificationChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteGrafanaNotificationChannelResponseParams `json:"Response"`
+}
+
+func (r *DeleteGrafanaNotificationChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGrafanaNotificationChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeletePolicyGroupRequestParams struct {
 	// The value is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
@@ -2187,6 +2748,67 @@ func (r *DeleteRecordingRulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteRecordingRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSSOAccountRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+}
+
+type DeleteSSOAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+}
+
+func (r *DeleteSSOAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSSOAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSSOAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSSOAccountResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteSSOAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSSOAccountResponseParams `json:"Response"`
+}
+
+func (r *DeleteSSOAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSSOAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3385,6 +4007,10 @@ type DescribeAllNamespacesResponseParams struct {
 	// Other alarm policy type (not supported currently)
 	CustomNamespacesNew []*CommonNamespace `json:"CustomNamespacesNew,omitempty" name:"CustomNamespacesNew"`
 
+	// General alarm policy type, including TAPM, RUM, and CAT.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CommonNamespaces []*CommonNamespaceNew `json:"CommonNamespaces,omitempty" name:"CommonNamespaces"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -3684,6 +4310,10 @@ type DescribeBasicAlarmListResponseParams struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Warning *string `json:"Warning,omitempty" name:"Warning"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -3966,6 +4596,63 @@ func (r *DescribeConditionsTemplateListResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DescribeDNSConfigRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeDNSConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDNSConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDNSConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDNSConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDNSConfigResponseParams struct {
+	// Array of DNS servers
+	NameServers []*string `json:"NameServers,omitempty" name:"NameServers"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDNSConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDNSConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeDNSConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDNSConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeExporterIntegrationsRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -4053,6 +4740,495 @@ func (r *DescribeExporterIntegrationsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeExporterIntegrationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaConfigRequestParams struct {
+	// None
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeGrafanaConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// None
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeGrafanaConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaConfigResponseParams struct {
+	// JSON-encoded string
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaEnvironmentsRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeGrafanaEnvironmentsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeGrafanaEnvironmentsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaEnvironmentsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaEnvironmentsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaEnvironmentsResponseParams struct {
+	// Environment variable string
+	Envs *string `json:"Envs,omitempty" name:"Envs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaEnvironmentsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaEnvironmentsResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaEnvironmentsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaEnvironmentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaInstancesRequestParams struct {
+	// Offset for query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of items to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Array of instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Instance name, which supports fuzzy search by prefix.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Query status
+	InstanceStatus []*int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Array of tag filters
+	TagFilters []*PrometheusTag `json:"TagFilters,omitempty" name:"TagFilters"`
+}
+
+type DescribeGrafanaInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Offset for query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of items to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Array of instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Instance name, which supports fuzzy search by prefix.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Query status
+	InstanceStatus []*int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Array of tag filters
+	TagFilters []*PrometheusTag `json:"TagFilters,omitempty" name:"TagFilters"`
+}
+
+func (r *DescribeGrafanaInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "InstanceIds")
+	delete(f, "InstanceName")
+	delete(f, "InstanceStatus")
+	delete(f, "TagFilters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaInstancesResponseParams struct {
+	// This parameter has been disused. Use `Instances` instead.
+	InstanceSet []*GrafanaInstanceInfo `json:"InstanceSet,omitempty" name:"InstanceSet"`
+
+	// Number of eligible instances
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of instances
+	Instances []*GrafanaInstanceInfo `json:"Instances,omitempty" name:"Instances"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaIntegrationsRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+}
+
+type DescribeGrafanaIntegrationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+
+	// Type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+}
+
+func (r *DescribeGrafanaIntegrationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaIntegrationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "IntegrationId")
+	delete(f, "Kind")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaIntegrationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaIntegrationsResponseParams struct {
+	// Array of integrations
+	IntegrationSet []*GrafanaIntegrationConfig `json:"IntegrationSet,omitempty" name:"IntegrationSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaIntegrationsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaIntegrationsResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaIntegrationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaIntegrationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaNotificationChannelsRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of items to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Channel ID
+	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
+
+	// Status
+	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
+}
+
+type DescribeGrafanaNotificationChannelsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of items to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Channel ID
+	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
+
+	// Status
+	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
+}
+
+func (r *DescribeGrafanaNotificationChannelsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaNotificationChannelsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "ChannelName")
+	delete(f, "ChannelIDs")
+	delete(f, "ChannelState")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaNotificationChannelsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaNotificationChannelsResponseParams struct {
+	// Array of notification channels
+	NotificationChannelSet []*GrafanaNotificationChannel `json:"NotificationChannelSet,omitempty" name:"NotificationChannelSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaNotificationChannelsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaNotificationChannelsResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaNotificationChannelsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaNotificationChannelsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaWhiteListRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeGrafanaWhiteListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeGrafanaWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaWhiteListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaWhiteListResponseParams struct {
+	// Array
+	WhiteList []*string `json:"WhiteList,omitempty" name:"WhiteList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaWhiteListResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaWhiteListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstalledPluginsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeInstalledPluginsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeInstalledPluginsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstalledPluginsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstalledPluginsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstalledPluginsResponseParams struct {
+	// List of plugins
+	PluginSet []*GrafanaPlugin `json:"PluginSet,omitempty" name:"PluginSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeInstalledPluginsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstalledPluginsResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstalledPluginsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstalledPluginsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4846,6 +6022,10 @@ type DescribePolicyGroupListResponseParams struct {
 	// Total number of policy groups.
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Warning *string `json:"Warning,omitempty" name:"Warning"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -5594,6 +6774,64 @@ func (r *DescribeRecordingRulesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSSOAccountRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeSSOAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeSSOAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSSOAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSSOAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSSOAccountResponseParams struct {
+	// List of authorized accounts
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccountSet []*GrafanaAccountInfo `json:"AccountSet,omitempty" name:"AccountSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSSOAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSSOAccountResponseParams `json:"Response"`
+}
+
+func (r *DescribeSSOAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSSOAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeServiceDiscoveryRequestParams struct {
 	// Prometheus instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -5854,9 +7092,231 @@ type Dimension struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+type DimensionNew struct {
+	// Dimension key ID displayed on the backend
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Dimension key name displayed on the frontend
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether it is required
+	IsRequired *bool `json:"IsRequired,omitempty" name:"IsRequired"`
+
+	// List of supported operators
+	Operators []*Operator `json:"Operators,omitempty" name:"Operators"`
+
+	// Whether multiple items can be selected
+	IsMultiple *bool `json:"IsMultiple,omitempty" name:"IsMultiple"`
+
+	// Whether it can be modified after creation
+	IsMutable *bool `json:"IsMutable,omitempty" name:"IsMutable"`
+
+	// Whether it is displayed to users
+	IsVisible *bool `json:"IsVisible,omitempty" name:"IsVisible"`
+
+	// Whether it can be used to filter policies
+	CanFilterPolicy *bool `json:"CanFilterPolicy,omitempty" name:"CanFilterPolicy"`
+
+	// Whether it can be used to filter historical alarms
+	CanFilterHistory *bool `json:"CanFilterHistory,omitempty" name:"CanFilterHistory"`
+
+	// Whether it can be used as an aggregate dimension
+	CanGroupBy *bool `json:"CanGroupBy,omitempty" name:"CanGroupBy"`
+
+	// Whether it must be used as an aggregate dimension
+	MustGroupBy *bool `json:"MustGroupBy,omitempty" name:"MustGroupBy"`
+
+	// The key to be replaced on the frontend
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShowValueReplace *string `json:"ShowValueReplace,omitempty" name:"ShowValueReplace"`
+}
+
 type DimensionsDesc struct {
 	// Array of dimension names
 	Dimensions []*string `json:"Dimensions,omitempty" name:"Dimensions"`
+}
+
+// Predefined struct for user
+type EnableGrafanaInternetRequestParams struct {
+	// Instance ID
+	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+
+	// Enable or disable
+	EnableInternet *bool `json:"EnableInternet,omitempty" name:"EnableInternet"`
+}
+
+type EnableGrafanaInternetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+
+	// Enable or disable
+	EnableInternet *bool `json:"EnableInternet,omitempty" name:"EnableInternet"`
+}
+
+func (r *EnableGrafanaInternetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableGrafanaInternetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceID")
+	delete(f, "EnableInternet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableGrafanaInternetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableGrafanaInternetResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EnableGrafanaInternetResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableGrafanaInternetResponseParams `json:"Response"`
+}
+
+func (r *EnableGrafanaInternetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableGrafanaInternetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableGrafanaSSORequestParams struct {
+	// Whether to enable SSO
+	EnableSSO *bool `json:"EnableSSO,omitempty" name:"EnableSSO"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type EnableGrafanaSSORequest struct {
+	*tchttp.BaseRequest
+	
+	// Whether to enable SSO
+	EnableSSO *bool `json:"EnableSSO,omitempty" name:"EnableSSO"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *EnableGrafanaSSORequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableGrafanaSSORequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnableSSO")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableGrafanaSSORequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableGrafanaSSOResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EnableGrafanaSSOResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableGrafanaSSOResponseParams `json:"Response"`
+}
+
+func (r *EnableGrafanaSSOResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableGrafanaSSOResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableSSOCamCheckRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to enable CAM authentication
+	EnableSSOCamCheck *bool `json:"EnableSSOCamCheck,omitempty" name:"EnableSSOCamCheck"`
+}
+
+type EnableSSOCamCheckRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to enable CAM authentication
+	EnableSSOCamCheck *bool `json:"EnableSSOCamCheck,omitempty" name:"EnableSSOCamCheck"`
+}
+
+func (r *EnableSSOCamCheckRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableSSOCamCheckRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EnableSSOCamCheck")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableSSOCamCheckRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableSSOCamCheckResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EnableSSOCamCheckResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableSSOCamCheckResponseParams `json:"Response"`
+}
+
+func (r *EnableSSOCamCheckResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableSSOCamCheckResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type EventCondition struct {
@@ -6043,6 +7503,189 @@ func (r *GetPrometheusAgentManagementCommandResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetPrometheusAgentManagementCommandResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GrafanaAccountInfo struct {
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// User permission
+	Role []*GrafanaAccountRole `json:"Role,omitempty" name:"Role"`
+
+	// Remarks
+	Notes *string `json:"Notes,omitempty" name:"Notes"`
+
+	// Creation time
+	CreateAt *string `json:"CreateAt,omitempty" name:"CreateAt"`
+}
+
+type GrafanaAccountRole struct {
+	// Organization
+	Organization *string `json:"Organization,omitempty" name:"Organization"`
+
+	// Permission
+	Role *string `json:"Role,omitempty" name:"Role"`
+}
+
+type GrafanaInstanceInfo struct {
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Array of subnet IDs
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Grafana private network address
+	InternetUrl *string `json:"InternetUrl,omitempty" name:"InternetUrl"`
+
+	// Grafana public network address
+	InternalUrl *string `json:"InternalUrl,omitempty" name:"InternalUrl"`
+
+	// Creation time
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+
+	// Status. Valid values: `1` (creating), `2` (running), `3` (abnormal), `4` (restarting), `5` (stopping), `6` (stopped), `7` (deleted).
+	InstanceStatus *int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Instance tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagSpecification []*PrometheusTag `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// Instance AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Billing mode. Valid value: `1` (monthly subscription).
+	InstanceChargeType *int64 `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// VPC name
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// Subnet name
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// The full URL used to access this instance
+	RootUrl *string `json:"RootUrl,omitempty" name:"RootUrl"`
+
+	// Whether to enable SSO
+	EnableSSO *bool `json:"EnableSSO,omitempty" name:"EnableSSO"`
+
+	// Version number
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Whether to enable CAM authentication during SSO
+	EnableSSOCamCheck *bool `json:"EnableSSOCamCheck,omitempty" name:"EnableSSOCamCheck"`
+}
+
+type GrafanaIntegrationConfig struct {
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+
+	// Integration type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Integration content
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Integration description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type GrafanaNotificationChannel struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Array of notification channel template IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Creation time
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+
+	// Update time
+	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+}
+
+type GrafanaPlugin struct {
+	// Grafana plugin ID
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Grafana plugin version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitempty" name:"Version"`
+}
+
+// Predefined struct for user
+type InstallPluginsRequestParams struct {
+	// Plugin information
+	Plugins []*GrafanaPlugin `json:"Plugins,omitempty" name:"Plugins"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type InstallPluginsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Plugin information
+	Plugins []*GrafanaPlugin `json:"Plugins,omitempty" name:"Plugins"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *InstallPluginsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InstallPluginsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Plugins")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InstallPluginsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InstallPluginsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InstallPluginsResponse struct {
+	*tchttp.BaseResponse
+	Response *InstallPluginsResponseParams `json:"Response"`
+}
+
+func (r *InstallPluginsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InstallPluginsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6794,6 +8437,67 @@ func (r *ModifyAlarmReceiversResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyGrafanaInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
+type ModifyGrafanaInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+}
+
+func (r *ModifyGrafanaInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGrafanaInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "InstanceName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGrafanaInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGrafanaInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyGrafanaInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyGrafanaInstanceResponseParams `json:"Response"`
+}
+
+func (r *ModifyGrafanaInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGrafanaInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ModifyPolicyGroupCondition struct {
 	// Metric ID.
 	MetricId *int64 `json:"MetricId,omitempty" name:"MetricId"`
@@ -7025,6 +8729,14 @@ type MonitorTypeNamespace struct {
 
 	// Policy type value
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+}
+
+type Operator struct {
+	// Operator ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Operator name
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type PeriodsSt struct {
@@ -7561,6 +9273,60 @@ type RecordingRuleSet struct {
 
 	// Rule update time
 	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+}
+
+// Predefined struct for user
+type ResumeGrafanaInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type ResumeGrafanaInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *ResumeGrafanaInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeGrafanaInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeGrafanaInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeGrafanaInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ResumeGrafanaInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeGrafanaInstanceResponseParams `json:"Response"`
+}
+
+func (r *ResumeGrafanaInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeGrafanaInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -8173,6 +9939,67 @@ func (r *UninstallGrafanaDashboardResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type UninstallGrafanaPluginsRequestParams struct {
+	// Array of plugin IDs
+	PluginIds []*string `json:"PluginIds,omitempty" name:"PluginIds"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type UninstallGrafanaPluginsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of plugin IDs
+	PluginIds []*string `json:"PluginIds,omitempty" name:"PluginIds"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *UninstallGrafanaPluginsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallGrafanaPluginsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginIds")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UninstallGrafanaPluginsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UninstallGrafanaPluginsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UninstallGrafanaPluginsResponse struct {
+	*tchttp.BaseResponse
+	Response *UninstallGrafanaPluginsResponseParams `json:"Response"`
+}
+
+func (r *UninstallGrafanaPluginsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallGrafanaPluginsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UpdateAlertRuleRequestParams struct {
 	// Prometheus alerting rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
@@ -8379,6 +10206,67 @@ func (r *UpdateAlertRuleStateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type UpdateDNSConfigRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Array of DNS servers
+	NameServers []*string `json:"NameServers,omitempty" name:"NameServers"`
+}
+
+type UpdateDNSConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Array of DNS servers
+	NameServers []*string `json:"NameServers,omitempty" name:"NameServers"`
+}
+
+func (r *UpdateDNSConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateDNSConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "NameServers")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDNSConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateDNSConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateDNSConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateDNSConfigResponseParams `json:"Response"`
+}
+
+func (r *UpdateDNSConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateDNSConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UpdateExporterIntegrationRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -8463,6 +10351,346 @@ func (r *UpdateExporterIntegrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateExporterIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaConfigRequestParams struct {
+	// None
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// JSON-encoded string
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+type UpdateGrafanaConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// None
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// JSON-encoded string
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+func (r *UpdateGrafanaConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Config")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateGrafanaConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateGrafanaConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateGrafanaConfigResponseParams `json:"Response"`
+}
+
+func (r *UpdateGrafanaConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaEnvironmentsRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Environment variable string
+	Envs *string `json:"Envs,omitempty" name:"Envs"`
+}
+
+type UpdateGrafanaEnvironmentsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Environment variable string
+	Envs *string `json:"Envs,omitempty" name:"Envs"`
+}
+
+func (r *UpdateGrafanaEnvironmentsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaEnvironmentsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Envs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateGrafanaEnvironmentsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaEnvironmentsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateGrafanaEnvironmentsResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateGrafanaEnvironmentsResponseParams `json:"Response"`
+}
+
+func (r *UpdateGrafanaEnvironmentsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaEnvironmentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaIntegrationRequestParams struct {
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Integration type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Integration content
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
+type UpdateGrafanaIntegrationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Integration ID
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Integration type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Integration content
+	Content *string `json:"Content,omitempty" name:"Content"`
+}
+
+func (r *UpdateGrafanaIntegrationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaIntegrationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IntegrationId")
+	delete(f, "InstanceId")
+	delete(f, "Kind")
+	delete(f, "Content")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateGrafanaIntegrationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaIntegrationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateGrafanaIntegrationResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateGrafanaIntegrationResponseParams `json:"Response"`
+}
+
+func (r *UpdateGrafanaIntegrationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaIntegrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaNotificationChannelRequestParams struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Array of notification channel IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Array of extra organization IDs
+	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+}
+
+type UpdateGrafanaNotificationChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Array of notification channel IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Array of extra organization IDs
+	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+}
+
+func (r *UpdateGrafanaNotificationChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaNotificationChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	delete(f, "InstanceId")
+	delete(f, "ChannelName")
+	delete(f, "Receivers")
+	delete(f, "ExtraOrgIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateGrafanaNotificationChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaNotificationChannelResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateGrafanaNotificationChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateGrafanaNotificationChannelResponseParams `json:"Response"`
+}
+
+func (r *UpdateGrafanaNotificationChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaNotificationChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaWhiteListRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Allowlist in array
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
+}
+
+type UpdateGrafanaWhiteListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Allowlist in array
+	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
+}
+
+func (r *UpdateGrafanaWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Whitelist")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateGrafanaWhiteListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateGrafanaWhiteListResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateGrafanaWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateGrafanaWhiteListResponseParams `json:"Response"`
+}
+
+func (r *UpdateGrafanaWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateGrafanaWhiteListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8708,6 +10936,81 @@ func (r *UpdateRecordingRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type UpdateSSOAccountRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Permission
+	Role []*GrafanaAccountRole `json:"Role,omitempty" name:"Role"`
+
+	// Remarks
+	Notes *string `json:"Notes,omitempty" name:"Notes"`
+}
+
+type UpdateSSOAccountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User account ID
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Permission
+	Role []*GrafanaAccountRole `json:"Role,omitempty" name:"Role"`
+
+	// Remarks
+	Notes *string `json:"Notes,omitempty" name:"Notes"`
+}
+
+func (r *UpdateSSOAccountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateSSOAccountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserId")
+	delete(f, "Role")
+	delete(f, "Notes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateSSOAccountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateSSOAccountResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateSSOAccountResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateSSOAccountResponseParams `json:"Response"`
+}
+
+func (r *UpdateSSOAccountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateSSOAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UpgradeGrafanaDashboardRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -8799,6 +11102,67 @@ func (r *UpgradeGrafanaDashboardResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpgradeGrafanaDashboardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeGrafanaInstanceRequestParams struct {
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Version alias
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+}
+
+type UpgradeGrafanaInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Version alias
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+}
+
+func (r *UpgradeGrafanaInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeGrafanaInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Alias")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeGrafanaInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeGrafanaInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpgradeGrafanaInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeGrafanaInstanceResponseParams `json:"Response"`
+}
+
+func (r *UpgradeGrafanaInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeGrafanaInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

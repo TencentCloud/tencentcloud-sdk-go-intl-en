@@ -183,6 +183,7 @@ func NewAttachDisksResponse() (response *AttachDisksResponse) {
 //  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_ATTACHED = "ResourceUnavailable.Attached"
 //  RESOURCEUNAVAILABLE_NOTPORTABLE = "ResourceUnavailable.NotPortable"
@@ -215,6 +216,7 @@ func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisks
 //  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
+//  RESOURCEINUSE_DISKMIGRATING = "ResourceInUse.DiskMigrating"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_ATTACHED = "ResourceUnavailable.Attached"
 //  RESOURCEUNAVAILABLE_NOTPORTABLE = "ResourceUnavailable.NotPortable"
@@ -344,6 +346,7 @@ func NewCopySnapshotCrossRegionsResponse() (response *CopySnapshotCrossRegionsRe
 //
 // error code that may be returned:
 //  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
+//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDSNAPSHOT_NOTSUPPORTED = "InvalidSnapshot.NotSupported"
@@ -366,6 +369,7 @@ func (c *Client) CopySnapshotCrossRegions(request *CopySnapshotCrossRegionsReque
 //
 // error code that may be returned:
 //  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
+//  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDSNAPSHOT_NOTSUPPORTED = "InvalidSnapshot.NotSupported"
@@ -417,10 +421,10 @@ func NewCreateAutoSnapshotPolicyResponse() (response *CreateAutoSnapshotPolicyRe
 // * The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
 //
 // error code that may be returned:
-//  AUTOSNAPSHOTPOLICYOUTOFQUOTA = "AutoSnapshotPolicyOutOfQuota"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED_AUTOSNAPSHOTPOLICYOUTOFQUOTA = "LimitExceeded.AutoSnapshotPolicyOutOfQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateAutoSnapshotPolicy(request *CreateAutoSnapshotPolicyRequest) (response *CreateAutoSnapshotPolicyResponse, err error) {
     return c.CreateAutoSnapshotPolicyWithContext(context.Background(), request)
@@ -436,10 +440,10 @@ func (c *Client) CreateAutoSnapshotPolicy(request *CreateAutoSnapshotPolicyReque
 // * The quantity and capacity of the snapshots that can be created in each region are limited. For more information, see the **Snapshots** page on the Tencent Cloud Console. If the number of snapshots exceeds the quota, the creation of the scheduled snapshots will fail.
 //
 // error code that may be returned:
-//  AUTOSNAPSHOTPOLICYOUTOFQUOTA = "AutoSnapshotPolicyOutOfQuota"
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED_AUTOSNAPSHOTPOLICYOUTOFQUOTA = "LimitExceeded.AutoSnapshotPolicyOutOfQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateAutoSnapshotPolicyWithContext(ctx context.Context, request *CreateAutoSnapshotPolicyRequest) (response *CreateAutoSnapshotPolicyResponse, err error) {
     if request == nil {
@@ -490,6 +494,7 @@ func NewCreateDisksResponse() (response *CreateDisksResponse) {
 //  INVALIDPARAMETER_DISKCONFIGNOTSUPPORTED = "InvalidParameter.DiskConfigNotSupported"
 //  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -517,6 +522,7 @@ func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisks
 //  INVALIDPARAMETER_DISKCONFIGNOTSUPPORTED = "InvalidParameter.DiskConfigNotSupported"
 //  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -579,6 +585,7 @@ func NewCreateSnapshotResponse() (response *CreateSnapshotResponse) {
 //  INVALIDDISK_SNAPSHOTCREATING = "InvalidDisk.SnapshotCreating"
 //  INVALIDDISK_TYPEERROR = "InvalidDisk.TypeError"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
@@ -614,6 +621,7 @@ func (c *Client) CreateSnapshot(request *CreateSnapshotRequest) (response *Creat
 //  INVALIDDISK_SNAPSHOTCREATING = "InvalidDisk.SnapshotCreating"
 //  INVALIDDISK_TYPEERROR = "InvalidDisk.TypeError"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER_PROJECTIDNOTEXIST = "InvalidParameter.ProjectIdNotExist"
 //  LIMITEXCEEDED_INSTANCEATTACHEDDISK = "LimitExceeded.InstanceAttachedDisk"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEBUSY = "ResourceBusy"
@@ -738,6 +746,7 @@ func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_SNAPHASSHARED = "UnsupportedOperation.SnapHasShared"
 //  UNSUPPORTEDOPERATION_SNAPSHOTHASBINDEDIMAGE = "UnsupportedOperation.SnapshotHasBindedImage"
 func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *DeleteSnapshotsResponse, err error) {
@@ -761,6 +770,7 @@ func (c *Client) DeleteSnapshots(request *DeleteSnapshotsRequest) (response *Del
 //  RESOURCEBUSY = "ResourceBusy"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_SNAPHASSHARED = "UnsupportedOperation.SnapHasShared"
 //  UNSUPPORTEDOPERATION_SNAPSHOTHASBINDEDIMAGE = "UnsupportedOperation.SnapshotHasBindedImage"
 func (c *Client) DeleteSnapshotsWithContext(ctx context.Context, request *DeleteSnapshotsRequest) (response *DeleteSnapshotsResponse, err error) {
@@ -810,6 +820,7 @@ func NewDescribeAutoSnapshotPoliciesResponse() (response *DescribeAutoSnapshotPo
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAutoSnapshotPolicies(request *DescribeAutoSnapshotPoliciesRequest) (response *DescribeAutoSnapshotPoliciesResponse, err error) {
     return c.DescribeAutoSnapshotPoliciesWithContext(context.Background(), request)
 }
@@ -827,6 +838,7 @@ func (c *Client) DescribeAutoSnapshotPolicies(request *DescribeAutoSnapshotPolic
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAutoSnapshotPoliciesWithContext(ctx context.Context, request *DescribeAutoSnapshotPoliciesRequest) (response *DescribeAutoSnapshotPoliciesResponse, err error) {
     if request == nil {
         request = NewDescribeAutoSnapshotPoliciesRequest()
@@ -917,6 +929,7 @@ func NewDescribeDiskConfigQuotaResponse() (response *DescribeDiskConfigQuotaResp
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDiskConfigQuota(request *DescribeDiskConfigQuotaRequest) (response *DescribeDiskConfigQuotaResponse, err error) {
     return c.DescribeDiskConfigQuotaWithContext(context.Background(), request)
 }
@@ -927,6 +940,7 @@ func (c *Client) DescribeDiskConfigQuota(request *DescribeDiskConfigQuotaRequest
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDiskConfigQuotaWithContext(ctx context.Context, request *DescribeDiskConfigQuotaRequest) (response *DescribeDiskConfigQuotaResponse, err error) {
     if request == nil {
         request = NewDescribeDiskConfigQuotaRequest()
@@ -1040,6 +1054,7 @@ func NewDescribeDisksResponse() (response *DescribeDisksResponse) {
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDisks(request *DescribeDisksRequest) (response *DescribeDisksResponse, err error) {
     return c.DescribeDisksWithContext(context.Background(), request)
 }
@@ -1057,6 +1072,7 @@ func (c *Client) DescribeDisks(request *DescribeDisksRequest) (response *Describ
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDisksWithContext(ctx context.Context, request *DescribeDisksRequest) (response *DescribeDisksResponse, err error) {
     if request == nil {
         request = NewDescribeDisksRequest()
@@ -1284,6 +1300,7 @@ func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response *DescribeSnapshotsResponse, err error) {
     return c.DescribeSnapshotsWithContext(context.Background(), request)
 }
@@ -1301,6 +1318,7 @@ func (c *Client) DescribeSnapshots(request *DescribeSnapshotsRequest) (response 
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeSnapshotsWithContext(ctx context.Context, request *DescribeSnapshotsRequest) (response *DescribeSnapshotsResponse, err error) {
     if request == nil {
         request = NewDescribeSnapshotsRequest()
@@ -1362,6 +1380,7 @@ func NewDetachDisksResponse() (response *DetachDisksResponse) {
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_TYPEERROR = "ResourceUnavailable.TypeError"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_DETACHPOD = "UnsupportedOperation.DetachPod"
 func (c *Client) DetachDisks(request *DetachDisksRequest) (response *DetachDisksResponse, err error) {
     return c.DetachDisksWithContext(context.Background(), request)
@@ -1394,6 +1413,7 @@ func (c *Client) DetachDisks(request *DetachDisksRequest) (response *DetachDisks
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_TYPEERROR = "ResourceUnavailable.TypeError"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_DETACHPOD = "UnsupportedOperation.DetachPod"
 func (c *Client) DetachDisksWithContext(ctx context.Context, request *DetachDisksRequest) (response *DetachDisksResponse, err error) {
     if request == nil {
@@ -1491,8 +1511,7 @@ func NewInitializeDisksResponse() (response *InitializeDisksResponse) {
 // 4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
 //
 // error code that may be returned:
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 func (c *Client) InitializeDisks(request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
     return c.InitializeDisksWithContext(context.Background(), request)
 }
@@ -1509,8 +1528,7 @@ func (c *Client) InitializeDisks(request *InitializeDisksRequest) (response *Ini
 // 4. For a cloud disk created from a snapshot, if the snapshot has been deleted, it cannot be reinitialized.
 //
 // error code that may be returned:
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 func (c *Client) InitializeDisksWithContext(ctx context.Context, request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
     if request == nil {
         request = NewInitializeDisksRequest()
@@ -1553,6 +1571,7 @@ func NewInquirePriceModifyDiskExtraPerformanceResponse() (response *InquirePrice
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 func (c *Client) InquirePriceModifyDiskExtraPerformance(request *InquirePriceModifyDiskExtraPerformanceRequest) (response *InquirePriceModifyDiskExtraPerformanceResponse, err error) {
     return c.InquirePriceModifyDiskExtraPerformanceWithContext(context.Background(), request)
 }
@@ -1565,6 +1584,7 @@ func (c *Client) InquirePriceModifyDiskExtraPerformance(request *InquirePriceMod
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_EXPIRE = "ResourceUnavailable.Expire"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 func (c *Client) InquirePriceModifyDiskExtraPerformanceWithContext(ctx context.Context, request *InquirePriceModifyDiskExtraPerformanceRequest) (response *InquirePriceModifyDiskExtraPerformanceResponse, err error) {
     if request == nil {
         request = NewInquirePriceModifyDiskExtraPerformanceRequest()
@@ -2096,6 +2116,7 @@ func NewResizeDiskResponse() (response *ResizeDiskResponse) {
 //  INVALIDPARAMETER_DISKCONFIGNOTSUPPORTED = "InvalidParameter.DiskConfigNotSupported"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
@@ -2124,6 +2145,7 @@ func (c *Client) ResizeDisk(request *ResizeDiskRequest) (response *ResizeDiskRes
 //  INVALIDPARAMETER_DISKCONFIGNOTSUPPORTED = "InvalidParameter.DiskConfigNotSupported"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
@@ -2187,6 +2209,7 @@ func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_REPEATREFUND = "ResourceUnavailable.RepeatRefund"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) TerminateDisks(request *TerminateDisksRequest) (response *TerminateDisksResponse, err error) {
     return c.TerminateDisksWithContext(context.Background(), request)
 }
@@ -2215,6 +2238,7 @@ func (c *Client) TerminateDisks(request *TerminateDisksRequest) (response *Termi
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_REPEATREFUND = "ResourceUnavailable.RepeatRefund"
 //  TRADEDEALCONFLICT = "TradeDealConflict"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) TerminateDisksWithContext(ctx context.Context, request *TerminateDisksRequest) (response *TerminateDisksResponse, err error) {
     if request == nil {
         request = NewTerminateDisksRequest()
@@ -2259,9 +2283,11 @@ func NewUnbindAutoSnapshotPolicyResponse() (response *UnbindAutoSnapshotPolicyRe
 // * If the passed-in cloud disks are not bound to the current scheduled snapshot policy, they will be skipped. Only cloud disks that are bound to the current scheduled snapshot policy are processed.
 //
 // error code that may be returned:
+//  INVALIDAUTOSNAPSHOTPOLICYID_NOTFOUND = "InvalidAutoSnapshotPolicyId.NotFound"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 func (c *Client) UnbindAutoSnapshotPolicy(request *UnbindAutoSnapshotPolicyRequest) (response *UnbindAutoSnapshotPolicyResponse, err error) {
     return c.UnbindAutoSnapshotPolicyWithContext(context.Background(), request)
 }
@@ -2276,9 +2302,11 @@ func (c *Client) UnbindAutoSnapshotPolicy(request *UnbindAutoSnapshotPolicyReque
 // * If the passed-in cloud disks are not bound to the current scheduled snapshot policy, they will be skipped. Only cloud disks that are bound to the current scheduled snapshot policy are processed.
 //
 // error code that may be returned:
+//  INVALIDAUTOSNAPSHOTPOLICYID_NOTFOUND = "InvalidAutoSnapshotPolicyId.NotFound"
 //  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 func (c *Client) UnbindAutoSnapshotPolicyWithContext(ctx context.Context, request *UnbindAutoSnapshotPolicyRequest) (response *UnbindAutoSnapshotPolicyResponse, err error) {
     if request == nil {
         request = NewUnbindAutoSnapshotPolicyRequest()
