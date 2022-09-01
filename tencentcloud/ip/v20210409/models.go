@@ -61,6 +61,12 @@ func (r *AllocateCustomerCreditRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AllocateCustomerCreditResponseParams struct {
+	// The updated total credit
+	TotalCredit *float64 `json:"TotalCredit,omitempty" name:"TotalCredit"`
+
+	// The updated available credit
+	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -275,6 +281,9 @@ type QueryCreditAllocationHistoryData struct {
 
 	// Allocated credit value
 	Credit *float64 `json:"Credit,omitempty" name:"Credit"`
+
+	// The allocated total credit
+	AllocatedCredit *float64 `json:"AllocatedCredit,omitempty" name:"AllocatedCredit"`
 }
 
 // Predefined struct for user
@@ -383,16 +392,52 @@ type QueryCustomersCreditData struct {
 
 	// The remaining credit of reseller’s customer
 	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+
+	// 0: Identity not verified; 1: Individual identity verified; 2: Enterprise identity verified.
+	IdentifyType *uint64 `json:"IdentifyType,omitempty" name:"IdentifyType"`
+
+	// Customer remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Forced status
+	Force *int64 `json:"Force,omitempty" name:"Force"`
 }
 
 // Predefined struct for user
 type QueryCustomersCreditRequestParams struct {
+	// Search condition type. You can only search by UIN, name, or remarks.
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
+	// Search condition
+	Filter *string `json:"Filter,omitempty" name:"Filter"`
+
+	// A pagination parameter that specifies the current page number, with a value starting from 1.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// A pagination parameter that specifies the number of entries per page.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// A sort parameter that specifies the sort order. Valid values: `desc` (descending order), or `asc` (ascending order) based on `AssociationTime`. The value will be `desc` if left empty.
+	Order *string `json:"Order,omitempty" name:"Order"`
 }
 
 type QueryCustomersCreditRequest struct {
 	*tchttp.BaseRequest
 	
+	// Search condition type. You can only search by UIN, name, or remarks.
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+	// Search condition
+	Filter *string `json:"Filter,omitempty" name:"Filter"`
+
+	// A pagination parameter that specifies the current page number, with a value starting from 1.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// A pagination parameter that specifies the number of entries per page.
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// A sort parameter that specifies the sort order. Valid values: `desc` (descending order), or `asc` (ascending order) based on `AssociationTime`. The value will be `desc` if left empty.
+	Order *string `json:"Order,omitempty" name:"Order"`
 }
 
 func (r *QueryCustomersCreditRequest) ToJsonString() string {
@@ -407,7 +452,11 @@ func (r *QueryCustomersCreditRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "FilterType")
+	delete(f, "Filter")
+	delete(f, "Page")
+	delete(f, "PageSize")
+	delete(f, "Order")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryCustomersCreditRequest has unknown keys!", "")
 	}
