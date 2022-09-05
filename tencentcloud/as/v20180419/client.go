@@ -764,6 +764,7 @@ func NewCreateLifecycleHookResponse() (response *CreateLifecycleHookResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLTATERROR = "InternalError.CallTATError"
 //  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
@@ -777,6 +778,7 @@ func NewCreateLifecycleHookResponse() (response *CreateLifecycleHookResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 //  RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
 //  RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
 //  RESOURCEUNAVAILABLE_CMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.CmqTopicHasNoSubscriber"
@@ -826,6 +828,7 @@ func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (respo
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLTATERROR = "InternalError.CallTATError"
 //  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
@@ -839,6 +842,7 @@ func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (respo
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 //  RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
 //  RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
 //  RESOURCEUNAVAILABLE_CMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.CmqTopicHasNoSubscriber"
@@ -1949,6 +1953,7 @@ func NewDescribeLaunchConfigurationsResponse() (response *DescribeLaunchConfigur
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLaunchConfigurations(request *DescribeLaunchConfigurationsRequest) (response *DescribeLaunchConfigurationsResponse, err error) {
@@ -1971,6 +1976,7 @@ func (c *Client) DescribeLaunchConfigurations(request *DescribeLaunchConfigurati
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLaunchConfigurationsWithContext(ctx context.Context, request *DescribeLaunchConfigurationsRequest) (response *DescribeLaunchConfigurationsResponse, err error) {
@@ -2979,11 +2985,13 @@ func NewModifyLifecycleHookResponse() (response *ModifyLifecycleHookResponse) {
 // This API is used to modify the lifecycle hook.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLTATERROR = "InternalError.CallTATError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
 //  RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
 //  RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
@@ -2996,11 +3004,13 @@ func (c *Client) ModifyLifecycleHook(request *ModifyLifecycleHookRequest) (respo
 // This API is used to modify the lifecycle hook.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLTATERROR = "InternalError.CallTATError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"
+//  RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
 //  RESOURCENOTFOUND_TDMQCMQQUEUENOTFOUND = "ResourceNotFound.TDMQCMQQueueNotFound"
 //  RESOURCENOTFOUND_TDMQCMQTOPICNOTFOUND = "ResourceNotFound.TDMQCMQTopicNotFound"
@@ -3698,6 +3708,7 @@ func NewSetInstancesProtectionResponse() (response *SetInstancesProtectionRespon
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_INSTANCESNOTINAUTOSCALINGGROUP = "ResourceNotFound.InstancesNotInAutoScalingGroup"
 func (c *Client) SetInstancesProtection(request *SetInstancesProtectionRequest) (response *SetInstancesProtectionResponse, err error) {
@@ -3713,6 +3724,7 @@ func (c *Client) SetInstancesProtection(request *SetInstancesProtectionRequest) 
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_INSTANCESNOTINAUTOSCALINGGROUP = "ResourceNotFound.InstancesNotInAutoScalingGroup"
 func (c *Client) SetInstancesProtectionWithContext(ctx context.Context, request *SetInstancesProtectionRequest) (response *SetInstancesProtectionResponse, err error) {
@@ -4032,6 +4044,7 @@ func NewUpgradeLifecycleHookResponse() (response *UpgradeLifecycleHookResponse) 
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLCMQERROR = "InternalError.CallCmqError"
 //  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
+//  INTERNALERROR_CALLTATERROR = "InternalError.CallTATError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
@@ -4040,6 +4053,7 @@ func NewUpgradeLifecycleHookResponse() (response *UpgradeLifecycleHookResponse) 
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEHOOKID = "InvalidParameterValue.InvalidLifecycleHookId"
 //  INVALIDPARAMETERVALUE_LIFECYCLEHOOKNAMEDUPLICATED = "InvalidParameterValue.LifecycleHookNameDuplicated"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
 //  RESOURCEUNAVAILABLE_CMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.CmqTopicHasNoSubscriber"
 func (c *Client) UpgradeLifecycleHook(request *UpgradeLifecycleHookRequest) (response *UpgradeLifecycleHookResponse, err error) {
@@ -4057,6 +4071,7 @@ func (c *Client) UpgradeLifecycleHook(request *UpgradeLifecycleHookRequest) (res
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CALLCMQERROR = "InternalError.CallCmqError"
 //  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
+//  INTERNALERROR_CALLTATERROR = "InternalError.CallTATError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
@@ -4065,6 +4080,7 @@ func (c *Client) UpgradeLifecycleHook(request *UpgradeLifecycleHookRequest) (res
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEHOOKID = "InvalidParameterValue.InvalidLifecycleHookId"
 //  INVALIDPARAMETERVALUE_LIFECYCLEHOOKNAMEDUPLICATED = "InvalidParameterValue.LifecycleHookNameDuplicated"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
 //  RESOURCEUNAVAILABLE_CMQTOPICHASNOSUBSCRIBER = "ResourceUnavailable.CmqTopicHasNoSubscriber"
 func (c *Client) UpgradeLifecycleHookWithContext(ctx context.Context, request *UpgradeLifecycleHookRequest) (response *UpgradeLifecycleHookResponse, err error) {

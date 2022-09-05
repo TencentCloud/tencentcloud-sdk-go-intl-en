@@ -987,7 +987,8 @@ type CreateLaunchConfigurationRequestParams struct {
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 
-
+	// HPC ID<br>
+	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
 }
 
@@ -1073,6 +1074,8 @@ type CreateLaunchConfigurationRequest struct {
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 
+	// HPC ID<br>
+	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
 }
 
@@ -3465,7 +3468,8 @@ type LaunchConfiguration struct {
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
 
-
+	// HPC ID<br>
+	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
 }
 
@@ -3881,7 +3885,7 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	// Launch configuration ID
 	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
 
-	// Valid [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-8toqc6s3`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the image IDs; for `marketplace images`, query the image IDs through [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>This value can be obtained from the `ImageId` field in the return value of the [DescribeImages API](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1).</li>
+	// [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
 	// List of instance types. Each type specifies different resource specifications. This list contains up to 10 instance types.
@@ -3955,6 +3959,10 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 
 	// CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
 	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
+
+	// HPC ID<br>
+	// Note: This field is default to empty
+	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
 }
 
 type ModifyLaunchConfigurationAttributesRequest struct {
@@ -3963,7 +3971,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// Launch configuration ID
 	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitempty" name:"LaunchConfigurationId"`
 
-	// Valid [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-8toqc6s3`. There are four types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><li>Marketplace images </li><br/>You can obtain the available image IDs in the following ways: <br/><li>For `public images`, `custom images`, and `shared images`, log in to the [console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE) to query the image IDs; for `marketplace images`, query the image IDs through [Cloud Marketplace](https://market.cloud.tencent.com/list). </li><li>This value can be obtained from the `ImageId` field in the return value of the [DescribeImages API](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1).</li>
+	// [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
 	// List of instance types. Each type specifies different resource specifications. This list contains up to 10 instance types.
@@ -4037,6 +4045,10 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
 	CamRoleName *string `json:"CamRoleName,omitempty" name:"CamRoleName"`
+
+	// HPC ID<br>
+	// Note: This field is default to empty
+	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -4069,6 +4081,7 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "InstanceNameSettings")
 	delete(f, "EnhancedService")
 	delete(f, "CamRoleName")
+	delete(f, "HpcClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}

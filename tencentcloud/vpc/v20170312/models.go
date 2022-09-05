@@ -19589,6 +19589,25 @@ type VpnConnection struct {
 
 	// Tunnel health check status. Valid values: AVAILABLE: healthy; UNAVAILABLE: unhealthy. This parameter will be returned only after health check is enabled.
 	HealthCheckStatus *string `json:"HealthCheckStatus,omitempty" name:"HealthCheckStatus"`
+
+	// Whether to enable DPD. Values: `0` (Disable) and `1` (Enable)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DpdEnable *int64 `json:"DpdEnable,omitempty" name:"DpdEnable"`
+
+	// DPD timeout period. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DpdTimeout *string `json:"DpdTimeout,omitempty" name:"DpdTimeout"`
+
+	// The action to take in case of DPD timeout. Values: `clear` (Disconnect) and `restart` (retry). This parameter only takes effect when `DpdEnable` is set to `1`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
+
+	// Array of tag key-value pairs
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
+
+	// Negotiation type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NegotiationType *string `json:"NegotiationType,omitempty" name:"NegotiationType"`
 }
 
 type VpnGateway struct {
