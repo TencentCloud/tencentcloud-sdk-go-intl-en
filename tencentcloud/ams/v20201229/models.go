@@ -112,6 +112,9 @@ type AudioResultDetailMoanResult struct {
 	// This field is used to return a subtag under the current tag (Lable).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// This field returns the suggested action according to the check result. <br>Values: `Block`, `Review`, `Pass`.
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 }
 
 type AudioResultDetailTextResult struct {

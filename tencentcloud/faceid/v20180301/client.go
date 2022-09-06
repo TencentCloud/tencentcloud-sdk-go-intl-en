@@ -45,6 +45,174 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewApplyLivenessTokenRequest() (request *ApplyLivenessTokenRequest) {
+    request = &ApplyLivenessTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ApplyLivenessToken")
+    
+    
+    return
+}
+
+func NewApplyLivenessTokenResponse() (response *ApplyLivenessTokenResponse) {
+    response = &ApplyLivenessTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ApplyLivenessToken
+// This API is used to apply for a token before calling the liveness detection service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ApplyLivenessToken(request *ApplyLivenessTokenRequest) (response *ApplyLivenessTokenResponse, err error) {
+    return c.ApplyLivenessTokenWithContext(context.Background(), request)
+}
+
+// ApplyLivenessToken
+// This API is used to apply for a token before calling the liveness detection service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ApplyLivenessTokenWithContext(ctx context.Context, request *ApplyLivenessTokenRequest) (response *ApplyLivenessTokenResponse, err error) {
+    if request == nil {
+        request = NewApplyLivenessTokenRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyLivenessToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplyLivenessTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewApplySdkVerificationTokenRequest() (request *ApplySdkVerificationTokenRequest) {
+    request = &ApplySdkVerificationTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ApplySdkVerificationToken")
+    
+    
+    return
+}
+
+func NewApplySdkVerificationTokenResponse() (response *ApplySdkVerificationTokenResponse) {
+    response = &ApplySdkVerificationTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ApplySdkVerificationToken
+// This API is used to apply for a token before calling the SDK-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ApplySdkVerificationToken(request *ApplySdkVerificationTokenRequest) (response *ApplySdkVerificationTokenResponse, err error) {
+    return c.ApplySdkVerificationTokenWithContext(context.Background(), request)
+}
+
+// ApplySdkVerificationToken
+// This API is used to apply for a token before calling the SDK-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWN = "InternalError.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ApplySdkVerificationTokenWithContext(ctx context.Context, request *ApplySdkVerificationTokenRequest) (response *ApplySdkVerificationTokenResponse, err error) {
+    if request == nil {
+        request = NewApplySdkVerificationTokenRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplySdkVerificationToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplySdkVerificationTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewApplyWebVerificationTokenRequest() (request *ApplyWebVerificationTokenRequest) {
+    request = &ApplyWebVerificationTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ApplyWebVerificationToken")
+    
+    
+    return
+}
+
+func NewApplyWebVerificationTokenResponse() (response *ApplyWebVerificationTokenResponse) {
+    response = &ApplyWebVerificationTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ApplyWebVerificationToken
+// This API is used to apply for a token before calling the web-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
+//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) ApplyWebVerificationToken(request *ApplyWebVerificationTokenRequest) (response *ApplyWebVerificationTokenResponse, err error) {
+    return c.ApplyWebVerificationTokenWithContext(context.Background(), request)
+}
+
+// ApplyWebVerificationToken
+// This API is used to apply for a token before calling the web-based verification service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
+//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) ApplyWebVerificationTokenWithContext(ctx context.Context, request *ApplyWebVerificationTokenRequest) (response *ApplyWebVerificationTokenResponse, err error) {
+    if request == nil {
+        request = NewApplyWebVerificationTokenRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyWebVerificationToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplyWebVerificationTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUploadUrlRequest() (request *CreateUploadUrlRequest) {
     request = &CreateUploadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -255,6 +423,174 @@ func (c *Client) GenerateReflectSequenceWithContext(ctx context.Context, request
     return
 }
 
+func NewGetLivenessResultRequest() (request *GetLivenessResultRequest) {
+    request = &GetLivenessResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetLivenessResult")
+    
+    
+    return
+}
+
+func NewGetLivenessResultResponse() (response *GetLivenessResultResponse) {
+    response = &GetLivenessResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetLivenessResult
+// This API is used to get the verification result with the corresponding token (SdkToken) after the liveness detection is completed. The token is valid for two hours after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetLivenessResult(request *GetLivenessResultRequest) (response *GetLivenessResultResponse, err error) {
+    return c.GetLivenessResultWithContext(context.Background(), request)
+}
+
+// GetLivenessResult
+// This API is used to get the verification result with the corresponding token (SdkToken) after the liveness detection is completed. The token is valid for two hours after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetLivenessResultWithContext(ctx context.Context, request *GetLivenessResultRequest) (response *GetLivenessResultResponse, err error) {
+    if request == nil {
+        request = NewGetLivenessResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetLivenessResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetLivenessResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetSdkVerificationResultRequest() (request *GetSdkVerificationResultRequest) {
+    request = &GetSdkVerificationResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetSdkVerificationResult")
+    
+    
+    return
+}
+
+func NewGetSdkVerificationResultResponse() (response *GetSdkVerificationResultResponse) {
+    response = &GetSdkVerificationResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetSdkVerificationResult
+// This API is used to get the verification result with the corresponding token after the SDK-based verification is completed. The token is valid for three days after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetSdkVerificationResult(request *GetSdkVerificationResultRequest) (response *GetSdkVerificationResultResponse, err error) {
+    return c.GetSdkVerificationResultWithContext(context.Background(), request)
+}
+
+// GetSdkVerificationResult
+// This API is used to get the verification result with the corresponding token after the SDK-based verification is completed. The token is valid for three days after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetSdkVerificationResultWithContext(ctx context.Context, request *GetSdkVerificationResultRequest) (response *GetSdkVerificationResultResponse, err error) {
+    if request == nil {
+        request = NewGetSdkVerificationResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSdkVerificationResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetSdkVerificationResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetWebVerificationResultRequest() (request *GetWebVerificationResultRequest) {
+    request = &GetWebVerificationResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetWebVerificationResult")
+    
+    
+    return
+}
+
+func NewGetWebVerificationResultResponse() (response *GetWebVerificationResultResponse) {
+    response = &GetWebVerificationResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetWebVerificationResult
+// This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) GetWebVerificationResult(request *GetWebVerificationResultRequest) (response *GetWebVerificationResultResponse, err error) {
+    return c.GetWebVerificationResultWithContext(context.Background(), request)
+}
+
+// GetWebVerificationResult
+// This API is used to get the verification result with the corresponding token (BizToken) after the web-based verification is completed. The BizToken is valid for three days (3*24*3,600s) after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) GetWebVerificationResultWithContext(ctx context.Context, request *GetWebVerificationResultRequest) (response *GetWebVerificationResultResponse, err error) {
+    if request == nil {
+        request = NewGetWebVerificationResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetWebVerificationResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetWebVerificationResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewLivenessCompareRequest() (request *LivenessCompareRequest) {
     request = &LivenessCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -275,6 +611,8 @@ func NewLivenessCompareResponse() (response *LivenessCompareResponse) {
 
 // LivenessCompare
 // This API is used to pass in a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+//
+// This API on the legacy version will continue to serve existing users but will be unavailable to new users. We recommend you use `VideoLivenessCompare` for better service quality.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
@@ -335,6 +673,8 @@ func (c *Client) LivenessCompare(request *LivenessCompareRequest) (response *Liv
 
 // LivenessCompare
 // This API is used to pass in a video and a photo, determine whether the person in the video is real, and if yes, then determine whether the person in the video is the same as that in the photo.
+//
+// This API on the legacy version will continue to serve existing users but will be unavailable to new users. We recommend you use `VideoLivenessCompare` for better service quality.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
