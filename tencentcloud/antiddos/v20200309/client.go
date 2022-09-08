@@ -2126,7 +2126,7 @@ func NewDescribeCCPrecisionPlyListResponse() (response *DescribeCCPrecisionPlyLi
 }
 
 // DescribeCCPrecisionPlyList
-// This API is used to obtain a CC precise protection policy.
+// This API is used to obtain the list of CC precise protection policies.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2151,7 +2151,7 @@ func (c *Client) DescribeCCPrecisionPlyList(request *DescribeCCPrecisionPlyListR
 }
 
 // DescribeCCPrecisionPlyList
-// This API is used to obtain a CC precise protection policy.
+// This API is used to obtain the list of CC precise protection policies.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2366,7 +2366,7 @@ func NewDescribeCcBlackWhiteIpListResponse() (response *DescribeCcBlackWhiteIpLi
 }
 
 // DescribeCcBlackWhiteIpList
-// This API is used to obtain a layer-4 access control list.
+// This API is used to obtain the layer-4 access control list.
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -2377,7 +2377,7 @@ func (c *Client) DescribeCcBlackWhiteIpList(request *DescribeCcBlackWhiteIpListR
 }
 
 // DescribeCcBlackWhiteIpList
-// This API is used to obtain a layer-4 access control list.
+// This API is used to obtain the layer-4 access control list.
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"

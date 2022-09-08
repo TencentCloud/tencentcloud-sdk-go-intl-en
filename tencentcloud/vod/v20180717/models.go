@@ -8500,11 +8500,12 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>Procedure: Video processing</li>
 	// <li>EditMedia: Video editing</li>
 	// <li>SplitMedia: Video splitting</li>
-	// <li>ComposeMedia: Media file producing</li>
+	// <li>ComposeMedia: Media file production</li>
 	// <li>WechatPublish: WeChat publishing</li>
 	// <li>PullUpload: Pulling media files for upload</li>
 	// <li>FastClipMedia: Quick clipping</li>
 	// <li>RemoveWatermarkTask: Watermark removal</li>
+	// <li> ReviewAudioVideo: Moderation</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -8573,6 +8574,10 @@ type DescribeTaskDetailResponseParams struct {
 	// The information of a watermark removal task. This parameter is valid only if `TaskType` is `RemoveWatermark`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RemoveWatermarkTask *RemoveWatermarkTask `json:"RemoveWatermarkTask,omitempty" name:"RemoveWatermarkTask"`
+
+	// The information of a moderation task. This parameter is valid only if `TaskType` is `ReviewAudioVideo`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReviewAudioVideoTask *ReviewAudioVideoTask `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9306,8 +9311,9 @@ type EventContent struct {
 	// <li>EditMediaComplete: Finished video editing.</li>
 	// <li>SplitMediaComplete: Finished video splitting.</li>
 	// <li>WechatPublishComplete: Published to WeChat.</li>
-	// <li>ComposeMediaComplete: Finished composition.</li>
+	// <li>ComposeMediaComplete: Finished producing the media file.</li>
 	// <li>FastClipMediaComplete: Finished quick clipping.</li>
+	// <li>ReviewAudioVideoComplete: Finished moderation</li>
 	// <b>v2017 task types:</b>
 	// <li>TranscodeComplete: Finished video transcoding.</li>
 	// <li>ConcatComplete: Finished video splicing.</li>
@@ -9379,6 +9385,10 @@ type EventContent struct {
 	// Callback for video retrieval. This parameter is valid when the event type is `RestoreMediaComplete`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RestoreMediaCompleteEvent *RestoreMediaTask `json:"RestoreMediaCompleteEvent,omitempty" name:"RestoreMediaCompleteEvent"`
+
+	// The callback for the completion of the moderation task. This parameter is valid only if `EventType` is `ReviewAudioVideoComplete`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReviewAudioVideoCompleteEvent *ReviewAudioVideoTask `json:"ReviewAudioVideoCompleteEvent,omitempty" name:"ReviewAudioVideoCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -15430,6 +15440,115 @@ type RestoreMediaTask struct {
 
 	// This field has been disused.
 	Message *string `json:"Message,omitempty" name:"Message"`
+}
+
+type ReviewAudioVideoSegmentItem struct {
+	// The start time offset (seconds) of the segment.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// The end time offset (seconds) of the segment.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// The confidence score of the segment.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The processing suggestion for the segment. Valid values:
+	// <li>review: The content may be non-compliant. Please review it.</li>
+	// <li>block: The content is non-compliant. We recommend you block it.</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The most likely label for the segment. Valid values:
+	// <li>Porn</li>
+	// <li>Terrorism</li>
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// The sublabel for the segment. This parameter is valid only if `Form` is `Image` or `Voice`.
+	// Valid values when `Form` is `Image` and `Label` is `Porn`:
+	// <li>porn</li>
+	// <li>vulgar</li>
+	// 
+	// Valid values when `Form` is `Image` and `Label` is `Terrorism`:
+	// <li>guns</li>
+	// <li>bloody</li>
+	// <li>banners</li>
+	// <li>scenario (terrorist scenes)</li>
+	// <li>explosion</li>
+	// 
+	// Valid values when `Form` is `Voice` and `Label` is `Porn`:
+	// <li>moan</li>
+	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// The format of the suspicious segment detected. Valid values:
+	// <li>Image</li>
+	// <li>OCR</li>
+	// <li>ASR</li>
+	// <li>Voice</li>
+	Form *string `json:"Form,omitempty" name:"Form"`
+
+	// The pixel coordinates ([x1, y1, x2, y2]) of the top-left corner and bottom-right corner of the suspicious text. This parameter is valid only if `Form` is `OCR`.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
+
+	// The content of the suspicious text detected. This parameter is valid only if `Form` is `OCR` or `ASR`.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The keywords that match the suspicious text. This parameter is valid only if `Form` is `OCR` or `ASR`.
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
+}
+
+type ReviewAudioVideoTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The task status. Valid values:
+	// <li>PROCESSING</li>
+	// <li>FINISH</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The output of a moderation task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *ReviewAudioVideoTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
+type ReviewAudioVideoTaskOutput struct {
+	// The handling suggestion. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The most likely label for the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+	// <li>Porn</li>
+	// <li>Terrorism</li>
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// The most likely format of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+	// <li>Image</li>
+	// <li>OCR</li>
+	// <li>ASR</li>
+	// <li>Voice</li>
+	Form *string `json:"Form,omitempty" name:"Form"`
+
+	// A list of the suspicious segments detected.
+	// <font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
+	SegmentSet []*ReviewAudioVideoSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
 }
 
 type SDMCDrmKeyProviderInfo struct {

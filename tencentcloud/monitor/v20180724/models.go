@@ -165,6 +165,10 @@ type AlarmNotice struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 
+	// Backend AMP consumer ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AMPConsumerId *string `json:"AMPConsumerId,omitempty" name:"AMPConsumerId"`
+
 	// Channel to push alarm notifications to CLS.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
@@ -594,14 +598,14 @@ type CLSNotice struct {
 
 // Predefined struct for user
 type CleanGrafanaInstanceRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type CleanGrafanaInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1292,7 +1296,7 @@ func (r *CreateGrafanaInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateGrafanaIntegrationRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Type
@@ -1305,7 +1309,7 @@ type CreateGrafanaIntegrationRequestParams struct {
 type CreateGrafanaIntegrationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Type
@@ -1338,6 +1342,9 @@ func (r *CreateGrafanaIntegrationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateGrafanaIntegrationResponseParams struct {
+
+	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -1360,7 +1367,7 @@ func (r *CreateGrafanaIntegrationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateGrafanaNotificationChannelRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Channel name
@@ -1374,12 +1381,15 @@ type CreateGrafanaNotificationChannelRequestParams struct {
 
 	// Array of extra organization IDs
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+
+
+	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
 type CreateGrafanaNotificationChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Channel name
@@ -1393,6 +1403,8 @@ type CreateGrafanaNotificationChannelRequest struct {
 
 	// Array of extra organization IDs
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+
+	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
 func (r *CreateGrafanaNotificationChannelRequest) ToJsonString() string {
@@ -1412,6 +1424,7 @@ func (r *CreateGrafanaNotificationChannelRequest) FromJsonString(s string) error
 	delete(f, "OrgId")
 	delete(f, "Receivers")
 	delete(f, "ExtraOrgIds")
+	delete(f, "OrganizationIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGrafanaNotificationChannelRequest has unknown keys!", "")
 	}
@@ -1420,6 +1433,9 @@ func (r *CreateGrafanaNotificationChannelRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateGrafanaNotificationChannelResponseParams struct {
+
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -1990,6 +2006,9 @@ func (r *CreateSSOAccountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSSOAccountResponseParams struct {
+
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -4597,14 +4616,14 @@ func (r *DescribeConditionsTemplateListResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeDNSConfigRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeDNSConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -4745,14 +4764,14 @@ func (r *DescribeExporterIntegrationsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaConfigRequestParams struct {
-	// None
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeGrafanaConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// None
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -4802,14 +4821,14 @@ func (r *DescribeGrafanaConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaEnvironmentsRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeGrafanaEnvironmentsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -4957,7 +4976,7 @@ func (r *DescribeGrafanaInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaIntegrationsRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Integration ID
@@ -4970,7 +4989,7 @@ type DescribeGrafanaIntegrationsRequestParams struct {
 type DescribeGrafanaIntegrationsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Integration ID
@@ -5028,7 +5047,7 @@ func (r *DescribeGrafanaIntegrationsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaNotificationChannelsRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Offset
@@ -5050,7 +5069,7 @@ type DescribeGrafanaNotificationChannelsRequestParams struct {
 type DescribeGrafanaNotificationChannelsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Offset
@@ -5120,14 +5139,14 @@ func (r *DescribeGrafanaNotificationChannelsResponse) FromJsonString(s string) e
 
 // Predefined struct for user
 type DescribeGrafanaWhiteListRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeGrafanaWhiteListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -5635,7 +5654,7 @@ type DescribePolicyGroupInfoReceiverInfo struct {
 	// List of alarm recipient IDs.
 	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList"`
 
-	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
+	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time of the alarm period. The meaning is the same as that of StartTime.
@@ -7669,6 +7688,9 @@ func (r *InstallPluginsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InstallPluginsResponseParams struct {
+
+	PluginIds []*string `json:"PluginIds,omitempty" name:"PluginIds"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -9206,7 +9228,7 @@ func (r *PutMonitorDataResponse) FromJsonString(s string) error {
 }
 
 type ReceiverInfo struct {
-	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates '10:0:0'.
+	// Start time of the alarm period. Value range: [0,86400). Convert the Unix timestamp to Beijing time and then remove the date. For example, 7200 indicates “10:0:0”.
 	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time of the alarm period. The meaning is the same as that of StartTime.
@@ -9224,7 +9246,7 @@ type ReceiverInfo struct {
 	// Alarm call notification time. Valid values: OCCUR (indicating that a notice is sent when the alarm is triggered) and RECOVER (indicating that a notice is sent when the alarm is recovered).
 	SendFor []*string `json:"SendFor,omitempty" name:"SendFor"`
 
-	// Uid of the alarm call recipient.
+	// UID of the phone call alarm.
 	UidList []*int64 `json:"UidList,omitempty" name:"UidList"`
 
 	// Number of alarm call rounds.
@@ -9242,10 +9264,10 @@ type ReceiverInfo struct {
 	// Whether to send an alarm call delivery notice. The value 0 indicates that no notice needs to be sent. The value 1 indicates that a notice needs to be sent.
 	NeedSendNotice *int64 `json:"NeedSendNotice,omitempty" name:"NeedSendNotice"`
 
-	// Recipient group list. The list of recipient group IDs that is queried by a platform API.
+	// Recipient group list. The list of recipient group IDs that is queried by API.
 	ReceiverGroupList []*int64 `json:"ReceiverGroupList,omitempty" name:"ReceiverGroupList"`
 
-	// Recipient list. The list of recipient IDs that is queried by a platform API.
+	// Recipient list. The list of recipient IDs that is queried by API.
 	ReceiverUserList []*int64 `json:"ReceiverUserList,omitempty" name:"ReceiverUserList"`
 
 	// Language of received alarms. Enumerated values: zh-CN and en-US.
@@ -10207,7 +10229,7 @@ func (r *UpdateAlertRuleStateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateDNSConfigRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of DNS servers
@@ -10217,7 +10239,7 @@ type UpdateDNSConfigRequestParams struct {
 type UpdateDNSConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of DNS servers
@@ -10356,7 +10378,7 @@ func (r *UpdateExporterIntegrationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateGrafanaConfigRequestParams struct {
-	// None
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// JSON-encoded string
@@ -10366,7 +10388,7 @@ type UpdateGrafanaConfigRequestParams struct {
 type UpdateGrafanaConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// None
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// JSON-encoded string
@@ -10417,7 +10439,7 @@ func (r *UpdateGrafanaConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateGrafanaEnvironmentsRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Environment variable string
@@ -10427,7 +10449,7 @@ type UpdateGrafanaEnvironmentsRequestParams struct {
 type UpdateGrafanaEnvironmentsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Environment variable string
@@ -10556,7 +10578,7 @@ type UpdateGrafanaNotificationChannelRequestParams struct {
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Channel name
@@ -10567,6 +10589,9 @@ type UpdateGrafanaNotificationChannelRequestParams struct {
 
 	// Array of extra organization IDs
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+
+
+	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
 type UpdateGrafanaNotificationChannelRequest struct {
@@ -10575,7 +10600,7 @@ type UpdateGrafanaNotificationChannelRequest struct {
 	// Channel ID
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Channel name
@@ -10586,6 +10611,8 @@ type UpdateGrafanaNotificationChannelRequest struct {
 
 	// Array of extra organization IDs
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+
+	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
 func (r *UpdateGrafanaNotificationChannelRequest) ToJsonString() string {
@@ -10605,6 +10632,7 @@ func (r *UpdateGrafanaNotificationChannelRequest) FromJsonString(s string) error
 	delete(f, "ChannelName")
 	delete(f, "Receivers")
 	delete(f, "ExtraOrgIds")
+	delete(f, "OrganizationIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateGrafanaNotificationChannelRequest has unknown keys!", "")
 	}
@@ -11107,7 +11135,7 @@ func (r *UpgradeGrafanaDashboardResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeGrafanaInstanceRequestParams struct {
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Version alias
@@ -11117,7 +11145,7 @@ type UpgradeGrafanaInstanceRequestParams struct {
 type UpgradeGrafanaInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Version alias

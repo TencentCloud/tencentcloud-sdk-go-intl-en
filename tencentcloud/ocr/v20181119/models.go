@@ -793,7 +793,7 @@ type MLIDPassportOCRResponseParams struct {
 	// Issuing country
 	IssuingCountry *string `json:"IssuingCountry,omitempty" name:"IssuingCountry"`
 
-	// Nationality
+	// Country/region code
 	Nationality *string `json:"Nationality,omitempty" name:"Nationality"`
 
 	// Alarm code

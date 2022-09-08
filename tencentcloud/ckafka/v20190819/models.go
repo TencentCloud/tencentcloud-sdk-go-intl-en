@@ -3759,6 +3759,9 @@ type ModifyInstanceAttributesRequestParams struct {
 
 	// Dynamic disk expansion policy configuration.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitempty" name:"DynamicDiskConfig"`
+
+	// The size of a single message in bytes at the instance level.
+	MaxMessageByte *uint64 `json:"MaxMessageByte,omitempty" name:"MaxMessageByte"`
 }
 
 type ModifyInstanceAttributesRequest struct {
@@ -3787,6 +3790,9 @@ type ModifyInstanceAttributesRequest struct {
 
 	// Dynamic disk expansion policy configuration.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitempty" name:"DynamicDiskConfig"`
+
+	// The size of a single message in bytes at the instance level.
+	MaxMessageByte *uint64 `json:"MaxMessageByte,omitempty" name:"MaxMessageByte"`
 }
 
 func (r *ModifyInstanceAttributesRequest) ToJsonString() string {
@@ -3809,6 +3815,7 @@ func (r *ModifyInstanceAttributesRequest) FromJsonString(s string) error {
 	delete(f, "RebalanceTime")
 	delete(f, "PublicNetwork")
 	delete(f, "DynamicDiskConfig")
+	delete(f, "MaxMessageByte")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceAttributesRequest has unknown keys!", "")
 	}

@@ -21,16 +21,20 @@ import (
 )
 
 type AnycastOutPackRelation struct {
-
+	// Application bandwidth (in Mbps).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NormalBandwidth *uint64 `json:"NormalBandwidth,omitempty" name:"NormalBandwidth"`
 
-
+	// Number of forwarding rules
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ForwardRulesLimit *uint64 `json:"ForwardRulesLimit,omitempty" name:"ForwardRulesLimit"`
 
-
+	// Auto-renewal flag
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-
+	// Expiration date
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CurDeadline *string `json:"CurDeadline,omitempty" name:"CurDeadline"`
 }
 
@@ -277,7 +281,9 @@ type BGPIPInstance struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	TagInfoList []*TagInfo `json:"TagInfoList,omitempty" name:"TagInfoList"`
 
-
+	// All-out package details of the instance
+	// When an all-out package is not used by the instance, this field is `null`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AnycastOutPackRelation *AnycastOutPackRelation `json:"AnycastOutPackRelation,omitempty" name:"AnycastOutPackRelation"`
 
 
@@ -328,38 +334,38 @@ type BGPIPInstanceUsages struct {
 }
 
 type BGPInstance struct {
-	// Anti-DDoS instance details
+	// Details of the Anti-DDoS Pro instance
 	InstanceDetail *InstanceRelation `json:"InstanceDetail,omitempty" name:"InstanceDetail"`
 
-	// Anti-DDoS instance specifications
+	// Specifications of the Anti-DDoS Pro instance
 	SpecificationLimit *BGPInstanceSpecification `json:"SpecificationLimit,omitempty" name:"SpecificationLimit"`
 
-	// Anti-DDoS instance usage statistics
+	// Usage statistics of the Anti-DDoS Pro instance
 	Usage *BGPInstanceUsages `json:"Usage,omitempty" name:"Usage"`
 
-	// Region of the Anti-DDoS instance
+	// Region of the Anti-DDoS Pro instance
 	Region *RegionInfo `json:"Region,omitempty" name:"Region"`
 
-	// Status of the Anti-DDoS instance. Valid values:
-	// `idle`: running
-	// `attacking`: under attacks
-	// `blocking`: blocked
-	// `creating`: creating
-	// `deblocking`: unblocked
-	// `isolate`: isolated
+	// Status of the Anti-DDoS Pro instance. Valid values:
+	// `idle`: The instance is running normally.
+	// `attacking`: The instance is under attack.
+	// `blocking`: The instance is blocked.
+	// `creating`: The instance is being created.
+	// `deblocking`: Unblocking the instance
+	// `isolate`: The instance is being isolated.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Purchase Time
+	// Purchase time
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Expiration time
 	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
 
-	// Name of the Anti-DDoS instance
+	// Name of the Anti-DDoS Pro instance
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Package details of the Anti-DDoS instance.
-	// Note: This field is `null` for an Anti-DDoS instance without using a package.
+	// Details of the package to which the Anti-DDoS Pro instance belongs.
+	// When the package provided is not used by the instance, this field is `null`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PackInfo *PackInfo `json:"PackInfo,omitempty" name:"PackInfo"`
 
@@ -367,17 +373,23 @@ type BGPInstance struct {
 	EipProductInfos []*EipProductInfo `json:"EipProductInfos,omitempty" name:"EipProductInfos"`
 
 	// Binding status of the Anti-DDoS Pro instance
-	// `idle`: the instance is bound.
-	//  `bounding`: the instance is in binding.
-	// `failed`: the binding failed.
+	// `idle`: The instance is bound.
+	//  `bounding`: Binding the instance.
+	// `failed`: Failed to bind
 	// ]
 	BoundStatus *string `json:"BoundStatus,omitempty" name:"BoundStatus"`
 
 	// Layer-4 protection level
 	DDoSLevel *string `json:"DDoSLevel,omitempty" name:"DDoSLevel"`
 
-	// CC protection switch
+	// Status of CC protection
 	CCEnable *int64 `json:"CCEnable,omitempty" name:"CCEnable"`
+
+	// Tags associated with the resource
+	TagInfoList []*TagInfo `json:"TagInfoList,omitempty" name:"TagInfoList"`
+
+	// New edition of Anti-DDoS Pro
+	IpCountNewFlag *uint64 `json:"IpCountNewFlag,omitempty" name:"IpCountNewFlag"`
 }
 
 type BGPInstanceSpecification struct {
@@ -387,21 +399,38 @@ type BGPInstanceSpecification struct {
 	// Number of protection chances
 	ProtectCountLimit *uint64 `json:"ProtectCountLimit,omitempty" name:"ProtectCountLimit"`
 
-	// Number of protection IPs
+	// Number of protected IPs
 	ProtectIPNumberLimit *uint64 `json:"ProtectIPNumberLimit,omitempty" name:"ProtectIPNumberLimit"`
 
-	// Auto-renewal status. Valid values:
-	// `0`: disabled
-	// `1`: enabled
+	// Auto-renewal status. Values:
+	// `0`: Disabled
+	// `1`: Enabled
 	// ]
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
 	// Protection type of Anti-DDoS Pro. Valid values: `0` (general protection) and `1` (Lighthouse-based protection).
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UnionPackFlag *uint64 `json:"UnionPackFlag,omitempty" name:"UnionPackFlag"`
 
-
+	// Application bandwidth
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServiceBandWidth *uint64 `json:"ServiceBandWidth,omitempty" name:"ServiceBandWidth"`
+
+	// Whether it’s an Anti-DDoS Pro Premium edition. Values: `0` (General edition); `1` (Premium edition).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BattleEditionFlag *uint64 `json:"BattleEditionFlag,omitempty" name:"BattleEditionFlag"`
+
+	// Whether it’s an Anti-DDoS Pro Standard edition. Values: `0` (General edition); `1` (Standard edition).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChannelEditionFlag *uint64 `json:"ChannelEditionFlag,omitempty" name:"ChannelEditionFlag"`
+
+	// Whether it’s an Anti-DDoS Pro Enterprise edition. Values: `0` (General edition); `1` (Enterprise edition).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnterpriseFlag *uint64 `json:"EnterpriseFlag,omitempty" name:"EnterpriseFlag"`
+
+	// Elastic bandwidth threshold of the Anti-DDoS Pro Enterprise edition.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ElasticLimit *uint64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
 }
 
 type BGPInstanceUsages struct {
@@ -442,7 +471,7 @@ type BoundIpInfo struct {
 	// Anti-DDoS instance ID of the IP. This field is required only when the instance is bound to an IP. For example, this field InstanceId will be `eni-*` if the instance ID is bound to an ENI IP; `none` if there is no instance to bind to a managed IP.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Sub-product category. Valid values: `cvm` (CVM), `lb` (Load balancer), `eni` (ENI), `vpngw` (VPN gateway), `natgw` (NAT gateway), `waf` (WAF), `fpc` (financial products), `gaap` (GAAP), `eip` (BM EIP) and `other` (hosted IP). This field is required when you perform binding.
+	// Sub-product category. Valid values: `cvm` (CVM), `lb` (Load balancer), `eni` (ENI), `vpngw` (VPN gateway), `natgw` (NAT gateway), `waf` (WAF), `fpc` (financial products), `gaap` (GAAP), `eip` (BM EIP) and `other` (managed IP). This field is required when you perform binding.
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
 
 	// ISP. Valid values: `0` (China Telecom), `1` (China Unicom), `2` (China Mobile), and `5` (BGP). This field is required when you perform binding.
@@ -3792,7 +3821,7 @@ type DescribeListBGPIPInstancesRequestParams struct {
 	// Searches by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 
-
+	// Filters by package type.
 	FilterPackType []*string `json:"FilterPackType,omitempty" name:"FilterPackType"`
 }
 
@@ -3847,6 +3876,7 @@ type DescribeListBGPIPInstancesRequest struct {
 	// Searches by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 
+	// Filters by package type.
 	FilterPackType []*string `json:"FilterPackType,omitempty" name:"FilterPackType"`
 }
 
@@ -3919,16 +3949,16 @@ type DescribeListBGPInstancesRequestParams struct {
 	// Number of items per page. The default value is 20 when `Limit = 0`. The maximum value is 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// IP filter
+	// Filters by IP.
 	FilterIp *string `json:"FilterIp,omitempty" name:"FilterIp"`
 
 	// Anti-DDoS instance ID filter. For example, `bgp-00000001`.
 	FilterInstanceId *string `json:"FilterInstanceId,omitempty" name:"FilterInstanceId"`
 
-	// Region filter. For example, `ap-guangzhou`.
+	// Filters by region. For example, `ap-guangzhou`.
 	FilterRegion *string `json:"FilterRegion,omitempty" name:"FilterRegion"`
 
-	// Name filter
+	// Filters by name.
 	FilterName *string `json:"FilterName,omitempty" name:"FilterName"`
 
 	// Line filter. Valid values: 1: BGP; 2: Non-BGP.
@@ -3937,8 +3967,17 @@ type DescribeListBGPInstancesRequestParams struct {
 	// Filters by instance status. `idle`: Running; `attacking`: Being attacked; `blocking`: Being blocked.
 	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
 
-	// Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
+	// Filters by binding status. `bounding`: The instance is bound; `failed`: The binding failed.
 	FilterBoundStatus *string `json:"FilterBoundStatus,omitempty" name:"FilterBoundStatus"`
+
+	// Array of instance IDs
+	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
+
+	// Filters by Enterprise edition
+	FilterEnterpriseFlag *uint64 `json:"FilterEnterpriseFlag,omitempty" name:"FilterEnterpriseFlag"`
+
+	// Filters by tag
+	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 }
 
 type DescribeListBGPInstancesRequest struct {
@@ -3950,16 +3989,16 @@ type DescribeListBGPInstancesRequest struct {
 	// Number of items per page. The default value is 20 when `Limit = 0`. The maximum value is 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// IP filter
+	// Filters by IP.
 	FilterIp *string `json:"FilterIp,omitempty" name:"FilterIp"`
 
 	// Anti-DDoS instance ID filter. For example, `bgp-00000001`.
 	FilterInstanceId *string `json:"FilterInstanceId,omitempty" name:"FilterInstanceId"`
 
-	// Region filter. For example, `ap-guangzhou`.
+	// Filters by region. For example, `ap-guangzhou`.
 	FilterRegion *string `json:"FilterRegion,omitempty" name:"FilterRegion"`
 
-	// Name filter
+	// Filters by name.
 	FilterName *string `json:"FilterName,omitempty" name:"FilterName"`
 
 	// Line filter. Valid values: 1: BGP; 2: Non-BGP.
@@ -3968,8 +4007,17 @@ type DescribeListBGPInstancesRequest struct {
 	// Filters by instance status. `idle`: Running; `attacking`: Being attacked; `blocking`: Being blocked.
 	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
 
-	// Filters by binding status. `bounding`: the instance is bound; `failed`: the binding failed.
+	// Filters by binding status. `bounding`: The instance is bound; `failed`: The binding failed.
 	FilterBoundStatus *string `json:"FilterBoundStatus,omitempty" name:"FilterBoundStatus"`
+
+	// Array of instance IDs
+	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
+
+	// Filters by Enterprise edition
+	FilterEnterpriseFlag *uint64 `json:"FilterEnterpriseFlag,omitempty" name:"FilterEnterpriseFlag"`
+
+	// Filters by tag
+	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 }
 
 func (r *DescribeListBGPInstancesRequest) ToJsonString() string {
@@ -3993,6 +4041,9 @@ func (r *DescribeListBGPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterLine")
 	delete(f, "FilterStatus")
 	delete(f, "FilterBoundStatus")
+	delete(f, "FilterInstanceIdList")
+	delete(f, "FilterEnterpriseFlag")
+	delete(f, "FilterTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPInstancesRequest has unknown keys!", "")
 	}
@@ -4001,7 +4052,7 @@ func (r *DescribeListBGPInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeListBGPInstancesResponseParams struct {
-	// Total number of lists
+	// Total number of Anti-DDoS Pro instances
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
 	// List of Anti-DDoS Pro instances

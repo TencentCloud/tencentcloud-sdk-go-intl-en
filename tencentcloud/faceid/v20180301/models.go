@@ -816,10 +816,12 @@ type GetWebVerificationResultResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitempty" name:"VerificationDetailList"`
 
-
+	// The temporary URL of the video collected from the video stream. It is valid for 10 minutes. Download the video if needed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
 
-
+	// The MD5 hash value of the video collected from the video stream. It can be used to check whether the video content is consistent with the file content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VideoMd5 *string `json:"VideoMd5,omitempty" name:"VideoMd5"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
