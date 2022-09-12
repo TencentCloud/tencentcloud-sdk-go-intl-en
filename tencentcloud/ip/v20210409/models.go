@@ -125,10 +125,10 @@ type CreateAccountRequestParams struct {
 	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
 	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
 
-	// Country code, which can be obtained via the `GetCountryCodes` API, such as 852.
+	// Customer’s country/region code, which can be obtained via the `GetCountryCodes` API, such as “852”.
 	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
 
-	// ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
+	// Customer’s ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
 	// Expanded field, which is left empty by default.
@@ -157,10 +157,10 @@ type CreateAccountRequest struct {
 	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
 	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
 
-	// Country code, which can be obtained via the `GetCountryCodes` API, such as 852.
+	// Customer’s country/region code, which can be obtained via the `GetCountryCodes` API, such as “852”.
 	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
 
-	// ISO2 standard country code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field.
+	// Customer’s ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
 	// Expanded field, which is left empty by default.
