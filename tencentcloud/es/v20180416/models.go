@@ -308,6 +308,12 @@ type CreateInstanceRequestParams struct {
 
 	// Valid values: `https`, `http` (default)
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// The maintenance time slot
+	OperationDuration *OperationDuration `json:"OperationDuration,omitempty" name:"OperationDuration"`
+
+	// Whether to enable the storage-computing separation feature.
+	EnableHybridStorage *bool `json:"EnableHybridStorage,omitempty" name:"EnableHybridStorage"`
 }
 
 type CreateInstanceRequest struct {
@@ -410,6 +416,12 @@ type CreateInstanceRequest struct {
 
 	// Valid values: `https`, `http` (default)
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// The maintenance time slot
+	OperationDuration *OperationDuration `json:"OperationDuration,omitempty" name:"OperationDuration"`
+
+	// Whether to enable the storage-computing separation feature.
+	EnableHybridStorage *bool `json:"EnableHybridStorage,omitempty" name:"EnableHybridStorage"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -454,6 +466,8 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "SceneType")
 	delete(f, "WebNodeTypeInfo")
 	delete(f, "Protocol")
+	delete(f, "OperationDuration")
+	delete(f, "EnableHybridStorage")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -1086,6 +1100,9 @@ type DescribeInstancesRequestParams struct {
 
 	// Health status filter list
 	HealthStatus []*int64 `json:"HealthStatus,omitempty" name:"HealthStatus"`
+
+	// VPC IDs
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 }
 
 type DescribeInstancesRequest struct {
@@ -1123,6 +1140,9 @@ type DescribeInstancesRequest struct {
 
 	// Health status filter list
 	HealthStatus []*int64 `json:"HealthStatus,omitempty" name:"HealthStatus"`
+
+	// VPC IDs
+	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -1148,6 +1168,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "IpList")
 	delete(f, "ZoneList")
 	delete(f, "HealthStatus")
+	delete(f, "VpcIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
@@ -1745,6 +1766,22 @@ type InstanceInfo struct {
 	// Configuration set info of the cluster.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EsConfigSets []*EsConfigSetInfo `json:"EsConfigSets,omitempty" name:"EsConfigSets"`
+
+	// The maintenance time slot of the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OperationDuration *OperationDuration `json:"OperationDuration,omitempty" name:"OperationDuration"`
+
+	// Web node list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OptionalWebServiceInfos []*OptionalWebServiceInfo `json:"OptionalWebServiceInfos,omitempty" name:"OptionalWebServiceInfos"`
+
+	// Autonomous index option
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoIndexEnabled *bool `json:"AutoIndexEnabled,omitempty" name:"AutoIndexEnabled"`
+
+	// Whether the storage-computing separation feature is enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableHybridStorage *bool `json:"EnableHybridStorage,omitempty" name:"EnableHybridStorage"`
 }
 
 type InstanceLog struct {
@@ -1969,6 +2006,68 @@ type OperationDetail struct {
 
 	// Updated instance configuration information
 	NewInfo []*KeyValue `json:"NewInfo,omitempty" name:"NewInfo"`
+}
+
+type OperationDuration struct {
+	// Maintenance period, which can be one or more days from Monday to Sunday. Valid values: [0, 6].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Periods []*uint64 `json:"Periods,omitempty" name:"Periods"`
+
+	// The maintenance start time
+	TimeStart *string `json:"TimeStart,omitempty" name:"TimeStart"`
+
+	// The maintenance end time
+	TimeEnd *string `json:"TimeEnd,omitempty" name:"TimeEnd"`
+
+	// The time zone expressed in UTC.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+}
+
+type OperationDurationUpdated struct {
+	// Maintenance period, which can be one or more days from Monday to Sunday. Valid values: [0, 6].
+	Periods []*uint64 `json:"Periods,omitempty" name:"Periods"`
+
+	// The maintenance start time
+	TimeStart *string `json:"TimeStart,omitempty" name:"TimeStart"`
+
+	// The maintenance end time
+	TimeEnd *string `json:"TimeEnd,omitempty" name:"TimeEnd"`
+
+	// The time zone expressed in UTC.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+
+	// The array of ES cluster IDs
+	MoreInstances []*string `json:"MoreInstances,omitempty" name:"MoreInstances"`
+}
+
+type OptionalWebServiceInfo struct {
+	// Type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Public URL
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PublicUrl *string `json:"PublicUrl,omitempty" name:"PublicUrl"`
+
+	// Private URL
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateUrl *string `json:"PrivateUrl,omitempty" name:"PrivateUrl"`
+
+	// Public network access
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PublicAccess *string `json:"PublicAccess,omitempty" name:"PublicAccess"`
+
+	// Private network access
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateAccess *string `json:"PrivateAccess,omitempty" name:"PrivateAccess"`
+
+	// Version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitempty" name:"Version"`
 }
 
 // Predefined struct for user
@@ -2324,6 +2423,9 @@ type UpdateIndexRequestParams struct {
 
 	// Password for cluster access
 	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Whether to roll over the backup index
+	RolloverBackingIndex *bool `json:"RolloverBackingIndex,omitempty" name:"RolloverBackingIndex"`
 }
 
 type UpdateIndexRequest struct {
@@ -2346,6 +2448,9 @@ type UpdateIndexRequest struct {
 
 	// Password for cluster access
 	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Whether to roll over the backup index
+	RolloverBackingIndex *bool `json:"RolloverBackingIndex,omitempty" name:"RolloverBackingIndex"`
 }
 
 func (r *UpdateIndexRequest) ToJsonString() string {
@@ -2366,6 +2471,7 @@ func (r *UpdateIndexRequest) FromJsonString(s string) error {
 	delete(f, "UpdateMetaJson")
 	delete(f, "Username")
 	delete(f, "Password")
+	delete(f, "RolloverBackingIndex")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateIndexRequest has unknown keys!", "")
 	}
@@ -2491,6 +2597,9 @@ type UpdateInstanceRequestParams struct {
 
 	// Added or modified configuration set information
 	EsConfigSet *EsConfigSetInfo `json:"EsConfigSet,omitempty" name:"EsConfigSet"`
+
+	// The maintenance time slot
+	OperationDuration *OperationDurationUpdated `json:"OperationDuration,omitempty" name:"OperationDuration"`
 }
 
 type UpdateInstanceRequest struct {
@@ -2591,6 +2700,9 @@ type UpdateInstanceRequest struct {
 
 	// Added or modified configuration set information
 	EsConfigSet *EsConfigSetInfo `json:"EsConfigSet,omitempty" name:"EsConfigSet"`
+
+	// The maintenance time slot
+	OperationDuration *OperationDurationUpdated `json:"OperationDuration,omitempty" name:"OperationDuration"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -2635,6 +2747,7 @@ func (r *UpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "CerebroPublicAccess")
 	delete(f, "CerebroPrivateAccess")
 	delete(f, "EsConfigSet")
+	delete(f, "OperationDuration")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateInstanceRequest has unknown keys!", "")
 	}

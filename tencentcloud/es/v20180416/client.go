@@ -910,6 +910,7 @@ func NewUpdateDictionariesResponse() (response *UpdateDictionariesResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -924,6 +925,7 @@ func (c *Client) UpdateDictionaries(request *UpdateDictionariesRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
