@@ -15510,6 +15510,10 @@ type ReviewAudioVideoTask struct {
 	// The error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
+	// The input of a moderation task.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Input *ReviewAudioVideoTaskInput `json:"Input,omitempty" name:"Input"`
+
 	// The output of a moderation task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *ReviewAudioVideoTaskOutput `json:"Output,omitempty" name:"Output"`
@@ -15517,8 +15521,13 @@ type ReviewAudioVideoTask struct {
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	// The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
+type ReviewAudioVideoTaskInput struct {
+	// The ID of the media file.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
 }
 
 type ReviewAudioVideoTaskOutput struct {
