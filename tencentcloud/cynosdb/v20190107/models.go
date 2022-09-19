@@ -474,6 +474,91 @@ func (r *CreateAccountsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateBackupRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Backup type. Valid values: `logic` (logic backup), `snapshot` (physical backup)
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Backup database, which is valid when `BackupType` is `logic`.
+	BackupDatabases []*string `json:"BackupDatabases,omitempty" name:"BackupDatabases"`
+
+	// Backup table, which is valid when `BackupType` is `logic`.
+	BackupTables []*DatabaseTables `json:"BackupTables,omitempty" name:"BackupTables"`
+
+	// Backup name
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+}
+
+type CreateBackupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Backup type. Valid values: `logic` (logic backup), `snapshot` (physical backup)
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Backup database, which is valid when `BackupType` is `logic`.
+	BackupDatabases []*string `json:"BackupDatabases,omitempty" name:"BackupDatabases"`
+
+	// Backup table, which is valid when `BackupType` is `logic`.
+	BackupTables []*DatabaseTables `json:"BackupTables,omitempty" name:"BackupTables"`
+
+	// Backup name
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+}
+
+func (r *CreateBackupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "BackupType")
+	delete(f, "BackupDatabases")
+	delete(f, "BackupTables")
+	delete(f, "BackupName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBackupResponseParams struct {
+	// Async task flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateBackupResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBackupResponseParams `json:"Response"`
+}
+
+func (r *CreateBackupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateClustersRequestParams struct {
 	// AZ
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
@@ -1337,6 +1422,16 @@ type CynosdbInstanceGrp struct {
 
 	// Information of instances contained in instance group
 	InstanceSet []*CynosdbInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
+}
+
+type DatabaseTables struct {
+	// Database name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Table name list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tables []*string `json:"Tables,omitempty" name:"Tables"`
 }
 
 // Predefined struct for user
@@ -3056,7 +3151,7 @@ type InquirePriceCreateRequestParams struct {
 	// AZ
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Purchase quantity
+	// Number of compute node to purchase
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
 	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
@@ -3090,7 +3185,7 @@ type InquirePriceCreateRequest struct {
 	// AZ
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Purchase quantity
+	// Number of compute node to purchase
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
 	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.

@@ -4088,6 +4088,49 @@ type SnapshotResult struct {
 	SnapshotStatus *uint64 `json:"SnapshotStatus,omitempty" name:"SnapshotStatus"`
 }
 
+type SyncTableField struct {
+	// Field name of TcaplusDB table
+	SourceName *string `json:"SourceName,omitempty" name:"SourceName"`
+
+	// Field name of the target cache table
+	TargetName *string `json:"TargetName,omitempty" name:"TargetName"`
+}
+
+type SyncTableInfo struct {
+	// Sharded table quantity of the target cache table
+	TargetTableSplitNum *uint64 `json:"TargetTableSplitNum,omitempty" name:"TargetTableSplitNum"`
+
+	// Prefix of the target cache table name
+	TargetTableNamePrefix []*string `json:"TargetTableNamePrefix,omitempty" name:"TargetTableNamePrefix"`
+
+	// Instance ID of the cache database
+	TargetSyncDBInstanceId *string `json:"TargetSyncDBInstanceId,omitempty" name:"TargetSyncDBInstanceId"`
+
+	// Name of the database where the cache table resides
+	TargetDatabaseName *string `json:"TargetDatabaseName,omitempty" name:"TargetDatabaseName"`
+
+	// Caching status. Valid values: `0` (creating), `1` (caching), `2` (disabled), `-1` (deleted).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// ID of cluster where the table resides
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// The ID of the table group where the table resides
+	TableGroupId *uint64 `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Table ID
+	TableId *string `json:"TableId,omitempty" name:"TableId"`
+
+	// Mapping from the primary key field of the TcaplusDB table to the field of the target cache table
+	KeyFieldMapping []*SyncTableField `json:"KeyFieldMapping,omitempty" name:"KeyFieldMapping"`
+
+	// Mapping of TcaplusDB table field to target cache table field
+	ValueFieldMapping []*SyncTableField `json:"ValueFieldMapping,omitempty" name:"ValueFieldMapping"`
+}
+
 type TableGroupInfo struct {
 	// Table group ID
 	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
@@ -4217,6 +4260,10 @@ type TableInfoNew struct {
 	// The number of days after which the table Txh backup files will be expire and deleted.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TxhBackupExpireDay *uint64 `json:"TxhBackupExpireDay,omitempty" name:"TxhBackupExpireDay"`
+
+	// Cached information of the table
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SyncTableInfo *SyncTableInfo `json:"SyncTableInfo,omitempty" name:"SyncTableInfo"`
 }
 
 type TableResultNew struct {

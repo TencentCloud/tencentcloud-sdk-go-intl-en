@@ -1164,6 +1164,9 @@ type CreateShipperRequestParams struct {
 
 	// Format configuration of shipped log content
 	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+
+	// Naming a shipping file. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+	FilenameMode *uint64 `json:"FilenameMode,omitempty" name:"FilenameMode"`
 }
 
 type CreateShipperRequest struct {
@@ -1198,6 +1201,9 @@ type CreateShipperRequest struct {
 
 	// Format configuration of shipped log content
 	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+
+	// Naming a shipping file. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+	FilenameMode *uint64 `json:"FilenameMode,omitempty" name:"FilenameMode"`
 }
 
 func (r *CreateShipperRequest) ToJsonString() string {
@@ -1222,6 +1228,7 @@ func (r *CreateShipperRequest) FromJsonString(s string) error {
 	delete(f, "Partition")
 	delete(f, "Compress")
 	delete(f, "Content")
+	delete(f, "FilenameMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateShipperRequest has unknown keys!", "")
 	}
@@ -3801,8 +3808,8 @@ type JsonInfo struct {
 	// Enablement flag
 	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
 
-	// Metadata information list. Valid values: __SOURCE__; __FILENAME__; __TIMESTAMP__
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// List of metadata. Supported metadata types: __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
 }
 
@@ -4741,6 +4748,9 @@ type ModifyShipperRequestParams struct {
 
 	// Format configuration of shipped log content
 	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+
+	// Naming a shipping file. Valid values: `0` (by random number), `1` (by shipping time). Default value: `0`.
+	FilenameMode *uint64 `json:"FilenameMode,omitempty" name:"FilenameMode"`
 }
 
 type ModifyShipperRequest struct {
@@ -4778,6 +4788,9 @@ type ModifyShipperRequest struct {
 
 	// Format configuration of shipped log content
 	Content *ContentInfo `json:"Content,omitempty" name:"Content"`
+
+	// Naming a shipping file. Valid values: `0` (by random number), `1` (by shipping time). Default value: `0`.
+	FilenameMode *uint64 `json:"FilenameMode,omitempty" name:"FilenameMode"`
 }
 
 func (r *ModifyShipperRequest) ToJsonString() string {
@@ -4803,6 +4816,7 @@ func (r *ModifyShipperRequest) FromJsonString(s string) error {
 	delete(f, "Partition")
 	delete(f, "Compress")
 	delete(f, "Content")
+	delete(f, "FilenameMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyShipperRequest has unknown keys!", "")
 	}
@@ -4851,7 +4865,7 @@ type ModifyTopicRequestParams struct {
 	// Maximum number of partitions to split into for this topic if automatic split is enabled
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
 
-	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
@@ -4876,7 +4890,7 @@ type ModifyTopicRequest struct {
 	// Maximum number of partitions to split into for this topic if automatic split is enabled
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitempty" name:"MaxSplitPartitions"`
 
-	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
@@ -4968,6 +4982,9 @@ type NoticeReceiver struct {
 type OpenKafkaConsumerRequestParams struct {
 	// `TopicId` created by the CLS console
 	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
+
+	// Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 }
 
 type OpenKafkaConsumerRequest struct {
@@ -4975,6 +4992,9 @@ type OpenKafkaConsumerRequest struct {
 	
 	// `TopicId` created by the CLS console
 	FromTopicId *string `json:"FromTopicId,omitempty" name:"FromTopicId"`
+
+	// Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
+	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
 }
 
 func (r *OpenKafkaConsumerRequest) ToJsonString() string {
@@ -4990,6 +5010,7 @@ func (r *OpenKafkaConsumerRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FromTopicId")
+	delete(f, "Compression")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenKafkaConsumerRequest has unknown keys!", "")
 	}

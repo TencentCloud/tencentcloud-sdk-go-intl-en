@@ -383,6 +383,64 @@ func (c *Client) CreateAccountsWithContext(ctx context.Context, request *CreateA
     return
 }
 
+func NewCreateBackupRequest() (request *CreateBackupRequest) {
+    request = &CreateBackupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "CreateBackup")
+    
+    
+    return
+}
+
+func NewCreateBackupResponse() (response *CreateBackupResponse) {
+    response = &CreateBackupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateBackup
+// This API is used to create manual backup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBackupResponse, err error) {
+    return c.CreateBackupWithContext(context.Background(), request)
+}
+
+// CreateBackup
+// This API is used to create manual backup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateBackupWithContext(ctx context.Context, request *CreateBackupRequest) (response *CreateBackupResponse, err error) {
+    if request == nil {
+        request = NewCreateBackupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBackup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateBackupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateClustersRequest() (request *CreateClustersRequest) {
     request = &CreateClustersRequest{
         BaseRequest: &tchttp.BaseRequest{},
