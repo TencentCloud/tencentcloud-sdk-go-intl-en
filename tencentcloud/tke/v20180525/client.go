@@ -1114,6 +1114,7 @@ func NewCreateClusterRouteTableResponse() (response *CreateClusterRouteTableResp
 //  INVALIDPARAMETER_CIDRCONFLICTWITHOTHERROUTE = "InvalidParameter.CidrConflictWithOtherRoute"
 //  INVALIDPARAMETER_CIDRCONFLICTWITHVPCCIDR = "InvalidParameter.CidrConflictWithVpcCidr"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE_RESOURCEEXISTALREADY = "ResourceInUse.ResourceExistAlready"
 func (c *Client) CreateClusterRouteTable(request *CreateClusterRouteTableRequest) (response *CreateClusterRouteTableResponse, err error) {
     return c.CreateClusterRouteTableWithContext(context.Background(), request)
 }
@@ -1137,6 +1138,7 @@ func (c *Client) CreateClusterRouteTable(request *CreateClusterRouteTableRequest
 //  INVALIDPARAMETER_CIDRCONFLICTWITHOTHERROUTE = "InvalidParameter.CidrConflictWithOtherRoute"
 //  INVALIDPARAMETER_CIDRCONFLICTWITHVPCCIDR = "InvalidParameter.CidrConflictWithVpcCidr"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE_RESOURCEEXISTALREADY = "ResourceInUse.ResourceExistAlready"
 func (c *Client) CreateClusterRouteTableWithContext(ctx context.Context, request *CreateClusterRouteTableRequest) (response *CreateClusterRouteTableResponse, err error) {
     if request == nil {
         request = NewCreateClusterRouteTableRequest()
@@ -1219,6 +1221,76 @@ func (c *Client) CreateECMInstancesWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateECMInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEdgeCVMInstancesRequest() (request *CreateEdgeCVMInstancesRequest) {
+    request = &CreateEdgeCVMInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateEdgeCVMInstances")
+    
+    
+    return
+}
+
+func NewCreateEdgeCVMInstancesResponse() (response *CreateEdgeCVMInstancesResponse) {
+    response = &CreateEdgeCVMInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateEdgeCVMInstances
+// This API is used to create CVM instances in the specified TKE edge cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateEdgeCVMInstances(request *CreateEdgeCVMInstancesRequest) (response *CreateEdgeCVMInstancesResponse, err error) {
+    return c.CreateEdgeCVMInstancesWithContext(context.Background(), request)
+}
+
+// CreateEdgeCVMInstances
+// This API is used to create CVM instances in the specified TKE edge cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateEdgeCVMInstancesWithContext(ctx context.Context, request *CreateEdgeCVMInstancesRequest) (response *CreateEdgeCVMInstancesResponse, err error) {
+    if request == nil {
+        request = NewCreateEdgeCVMInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEdgeCVMInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEdgeCVMInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3480,6 +3552,7 @@ func NewDescribeClusterSecurityResponse() (response *DescribeClusterSecurityResp
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_LBCOMMON = "FailedOperation.LbCommon"
 //  INTERNALERROR = "InternalError"
@@ -3517,6 +3590,7 @@ func (c *Client) DescribeClusterSecurity(request *DescribeClusterSecurityRequest
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_LBCOMMON = "FailedOperation.LbCommon"
 //  INTERNALERROR = "InternalError"
@@ -4172,6 +4246,7 @@ func NewDescribeExistedInstancesResponse() (response *DescribeExistedInstancesRe
 //  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
@@ -4214,6 +4289,7 @@ func (c *Client) DescribeExistedInstances(request *DescribeExistedInstancesReque
 //  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
@@ -5826,7 +5902,6 @@ func NewModifyClusterEndpointSPResponse() (response *ModifyClusterEndpointSPResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CLBUNEXPECTEDERROR = "FailedOperation.CLBUnexpectedError"
 //  FAILEDOPERATION_VPCUNEXPECTEDERROR = "FailedOperation.VPCUnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
@@ -5855,7 +5930,6 @@ func (c *Client) ModifyClusterEndpointSP(request *ModifyClusterEndpointSPRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CLBUNEXPECTEDERROR = "FailedOperation.CLBUnexpectedError"
 //  FAILEDOPERATION_VPCUNEXPECTEDERROR = "FailedOperation.VPCUnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"

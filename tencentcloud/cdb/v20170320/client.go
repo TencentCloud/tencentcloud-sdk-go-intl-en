@@ -400,7 +400,7 @@ func NewCreateAccountsResponse() (response *CreateAccountsResponse) {
 }
 
 // CreateAccounts
-// This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
+// This API is used to create a TencentDB account. The account name, host address, and password are required. Account remarks and maximum connections can also be configured.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
@@ -440,7 +440,7 @@ func (c *Client) CreateAccounts(request *CreateAccountsRequest) (response *Creat
 }
 
 // CreateAccounts
-// This API is used to create one or more TencentDB instance accounts. The account names, host addresses, and passwords are required, and account remarks and the maximum connections are optional.
+// This API is used to create a TencentDB account. The account name, host address, and password are required. Account remarks and maximum connections can also be configured.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
@@ -1464,7 +1464,7 @@ func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
 }
 
 // DescribeAccounts
-// This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+// This API is used to query information of all TencentDB accounts.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
@@ -1508,7 +1508,7 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
 }
 
 // DescribeAccounts
-// This API (DescribeAccounts) is used to query information of all TencentDB accounts.
+// This API is used to query information of all TencentDB accounts.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEACCOUNTERROR = "FailedOperation.CreateAccountError"
@@ -2683,6 +2683,72 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeDBPriceRequest() (request *DescribeDBPriceRequest) {
+    request = &DescribeDBPriceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBPrice")
+    
+    
+    return
+}
+
+func NewDescribeDBPriceResponse() (response *DescribeDBPriceResponse) {
+    response = &DescribeDBPriceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBPrice
+// This API (DescribeDBPrice) is used to query the prices of pay-as-you-go or monthly subscribed TencentDB instances by passing in information such as instance type, purchased duration, number of purchased instances, memory size, disk size, and AZ.
+//
+// 
+//
+// Note: To query prices in a specific region, please use the access point of the region. For more information on access points, see <a href="https://cloud.tencent.com/document/api/236/15832">Service Addresses</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) DescribeDBPrice(request *DescribeDBPriceRequest) (response *DescribeDBPriceResponse, err error) {
+    return c.DescribeDBPriceWithContext(context.Background(), request)
+}
+
+// DescribeDBPrice
+// This API (DescribeDBPrice) is used to query the prices of pay-as-you-go or monthly subscribed TencentDB instances by passing in information such as instance type, purchased duration, number of purchased instances, memory size, disk size, and AZ.
+//
+// 
+//
+// Note: To query prices in a specific region, please use the access point of the region. For more information on access points, see <a href="https://cloud.tencent.com/document/api/236/15832">Service Addresses</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+func (c *Client) DescribeDBPriceWithContext(ctx context.Context, request *DescribeDBPriceRequest) (response *DescribeDBPriceResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBPriceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBPrice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBPriceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBSecurityGroupsRequest() (request *DescribeDBSecurityGroupsRequest) {
     request = &DescribeDBSecurityGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2807,60 +2873,6 @@ func (c *Client) DescribeDBSwitchRecordsWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeDBSwitchRecordsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeDBZoneConfigRequest() (request *DescribeDBZoneConfigRequest) {
-    request = &DescribeDBZoneConfigRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeDBZoneConfig")
-    
-    
-    return
-}
-
-func NewDescribeDBZoneConfigResponse() (response *DescribeDBZoneConfigResponse) {
-    response = &DescribeDBZoneConfigResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeDBZoneConfig
-// This API (DescribeDBZoneConfig) is used to query the specifications of TencentDB instances purchasable in a region.
-//
-// error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
-//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeDBZoneConfig(request *DescribeDBZoneConfigRequest) (response *DescribeDBZoneConfigResponse, err error) {
-    return c.DescribeDBZoneConfigWithContext(context.Background(), request)
-}
-
-// DescribeDBZoneConfig
-// This API (DescribeDBZoneConfig) is used to query the specifications of TencentDB instances purchasable in a region.
-//
-// error code that may be returned:
-//  CDBERROR = "CdbError"
-//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
-//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeDBZoneConfigWithContext(ctx context.Context, request *DescribeDBZoneConfigRequest) (response *DescribeDBZoneConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeDBZoneConfigRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeDBZoneConfig require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeDBZoneConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -3332,6 +3344,7 @@ func NewDescribeLocalBinlogConfigResponse() (response *DescribeLocalBinlogConfig
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) DescribeLocalBinlogConfig(request *DescribeLocalBinlogConfigRequest) (response *DescribeLocalBinlogConfigResponse, err error) {
     return c.DescribeLocalBinlogConfigWithContext(context.Background(), request)
@@ -3342,6 +3355,7 @@ func (c *Client) DescribeLocalBinlogConfig(request *DescribeLocalBinlogConfigReq
 //
 // error code that may be returned:
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) DescribeLocalBinlogConfigWithContext(ctx context.Context, request *DescribeLocalBinlogConfigRequest) (response *DescribeLocalBinlogConfigResponse, err error) {
     if request == nil {
@@ -5550,7 +5564,7 @@ func NewModifyDBInstanceVipVportResponse() (response *ModifyDBInstanceVipVportRe
 }
 
 // ModifyDBInstanceVipVport
-// This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
+// This API is used to modify the IP and port number of a TencentDB instance, switch from classic network to VPC, or change VPC subnets.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5565,7 +5579,7 @@ func (c *Client) ModifyDBInstanceVipVport(request *ModifyDBInstanceVipVportReque
 }
 
 // ModifyDBInstanceVipVport
-// This API (ModifyDBInstanceVipVport) is used to modify the IP and port number of a TencentDB instance, switch from the basic network to VPC, or change VPC subnets.
+// This API is used to modify the IP and port number of a TencentDB instance, switch from classic network to VPC, or change VPC subnets.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5626,6 +5640,7 @@ func NewModifyInstanceParamResponse() (response *ModifyInstanceParamResponse) {
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCETASKSTATUSERROR = "OperationDenied.InstanceTaskStatusError"
 func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (response *ModifyInstanceParamResponse, err error) {
     return c.ModifyInstanceParamWithContext(context.Background(), request)
 }
@@ -5647,6 +5662,7 @@ func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (respo
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCETASKSTATUSERROR = "OperationDenied.InstanceTaskStatusError"
 func (c *Client) ModifyInstanceParamWithContext(ctx context.Context, request *ModifyInstanceParamRequest) (response *ModifyInstanceParamResponse, err error) {
     if request == nil {
         request = NewModifyInstanceParamRequest()
@@ -6211,6 +6227,7 @@ func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
 // This API is used to enable the audit service.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -6228,6 +6245,7 @@ func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *O
 // This API is used to enable the audit service.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"

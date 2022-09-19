@@ -381,6 +381,20 @@ type AutoscalingAdded struct {
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 }
 
+type CUDNN struct {
+	// cuDNN version
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// cuDNN name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Doc name of cuDNN
+	DocName *string `json:"DocName,omitempty" name:"DocName"`
+
+	// Dev name of cuDNN
+	DevName *string `json:"DevName,omitempty" name:"DevName"`
+}
+
 // Predefined struct for user
 type CheckEdgeClusterCIDRRequestParams struct {
 	// Cluster VPC ID
@@ -638,6 +652,10 @@ type Cluster struct {
 	// Whether to enable qGPU Sharing
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	QGPUShareEnable *bool `json:"QGPUShareEnable,omitempty" name:"QGPUShareEnable"`
+
+	// Runtime version
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -1827,6 +1845,105 @@ func (r *CreateECMInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateEdgeCVMInstancesRequestParams struct {
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Pass-through parameter for CVM creation in the format of a JSON string. To ensure the idempotency of requests for adding cluster nodes, you need to add the `ClientToken` field in this parameter. For more information, see the documentation for [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
+	RunInstancePara *string `json:"RunInstancePara,omitempty" name:"RunInstancePara"`
+
+	// Region of the CVM instances to create
+	CvmRegion *string `json:"CvmRegion,omitempty" name:"CvmRegion"`
+
+	// Quantity of CVM instances to create
+	CvmCount *int64 `json:"CvmCount,omitempty" name:"CvmCount"`
+
+	// Instance extension information
+	External *string `json:"External,omitempty" name:"External"`
+
+	// Custom script
+	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
+
+	// Whether to enable ENI
+	EnableEni *bool `json:"EnableEni,omitempty" name:"EnableEni"`
+}
+
+type CreateEdgeCVMInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
+
+	// Pass-through parameter for CVM creation in the format of a JSON string. To ensure the idempotency of requests for adding cluster nodes, you need to add the `ClientToken` field in this parameter. For more information, see the documentation for [RunInstances](https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1) API.
+	RunInstancePara *string `json:"RunInstancePara,omitempty" name:"RunInstancePara"`
+
+	// Region of the CVM instances to create
+	CvmRegion *string `json:"CvmRegion,omitempty" name:"CvmRegion"`
+
+	// Quantity of CVM instances to create
+	CvmCount *int64 `json:"CvmCount,omitempty" name:"CvmCount"`
+
+	// Instance extension information
+	External *string `json:"External,omitempty" name:"External"`
+
+	// Custom script
+	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
+
+	// Whether to enable ENI
+	EnableEni *bool `json:"EnableEni,omitempty" name:"EnableEni"`
+}
+
+func (r *CreateEdgeCVMInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEdgeCVMInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterID")
+	delete(f, "RunInstancePara")
+	delete(f, "CvmRegion")
+	delete(f, "CvmCount")
+	delete(f, "External")
+	delete(f, "UserScript")
+	delete(f, "EnableEni")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEdgeCVMInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEdgeCVMInstancesResponseParams struct {
+	// List of CVM IDs
+	CvmIdSet []*string `json:"CvmIdSet,omitempty" name:"CvmIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateEdgeCVMInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateEdgeCVMInstancesResponseParams `json:"Response"`
+}
+
+func (r *CreateEdgeCVMInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEdgeCVMInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateEdgeLogConfigRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -1986,6 +2103,15 @@ type CreateTKEEdgeClusterRequestParams struct {
 
 	// Public LB of the TKE Edge cluster
 	PublicLB *EdgeClusterPublicLB `json:"PublicLB,omitempty" name:"PublicLB"`
+
+	// Cluster specification level
+	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+
+	// Whether auto upgrade is supported
+	AutoUpgradeClusterLevel *bool `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Cluster billing mode
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
 }
 
 type CreateTKEEdgeClusterRequest struct {
@@ -2016,6 +2142,15 @@ type CreateTKEEdgeClusterRequest struct {
 
 	// Public LB of the TKE Edge cluster
 	PublicLB *EdgeClusterPublicLB `json:"PublicLB,omitempty" name:"PublicLB"`
+
+	// Cluster specification level
+	ClusterLevel *string `json:"ClusterLevel,omitempty" name:"ClusterLevel"`
+
+	// Whether auto upgrade is supported
+	AutoUpgradeClusterLevel *bool `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Cluster billing mode
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
 }
 
 func (r *CreateTKEEdgeClusterRequest) ToJsonString() string {
@@ -2039,6 +2174,9 @@ func (r *CreateTKEEdgeClusterRequest) FromJsonString(s string) error {
 	delete(f, "ClusterAdvancedSettings")
 	delete(f, "MaxNodePodNum")
 	delete(f, "PublicLB")
+	delete(f, "ClusterLevel")
+	delete(f, "AutoUpgradeClusterLevel")
+	delete(f, "ChargeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTKEEdgeClusterRequest has unknown keys!", "")
 	}
@@ -2068,6 +2206,12 @@ func (r *CreateTKEEdgeClusterResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateTKEEdgeClusterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CustomDriver struct {
+	// URL of custom GPU driver address
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
 }
 
 type DataDisk struct {
@@ -3493,6 +3637,18 @@ type DescribeClusterEndpointsResponseParams struct {
 	// Public network access ACL of cluster APIServer
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ClusterExternalACL []*string `json:"ClusterExternalACL,omitempty" name:"ClusterExternalACL"`
+
+	// Public network domain name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterExternalDomain *string `json:"ClusterExternalDomain,omitempty" name:"ClusterExternalDomain"`
+
+	// Private network domain name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterIntranetDomain *string `json:"ClusterIntranetDomain,omitempty" name:"ClusterIntranetDomain"`
+
+	// Public network security group
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -5886,6 +6042,14 @@ func (r *DisableClusterDeletionProtectionResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DriverVersion struct {
+	// Version of GPU driver or CUDA
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Name of GPU driver or CUDA
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
 type ECMEnhancedService struct {
 	// Whether Cloud Monitoring is enabled
 	SecurityService *ECMRunMonitorServiceEnabled `json:"SecurityService,omitempty" name:"SecurityService"`
@@ -6404,6 +6568,27 @@ func (r *ForwardTKEEdgeApplicationRequestV3Response) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GPUArgs struct {
+	// Whether to enable MIG
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	MIGEnable *bool `json:"MIGEnable,omitempty" name:"MIGEnable"`
+
+	// GPU driver version
+	Driver *DriverVersion `json:"Driver,omitempty" name:"Driver"`
+
+	// CUDA version
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CUDA *DriverVersion `json:"CUDA,omitempty" name:"CUDA"`
+
+	// cuDNN version
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CUDNN *CUDNN `json:"CUDNN,omitempty" name:"CUDNN"`
+
+	// Custom GPU driver
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CustomDriver *CustomDriver `json:"CustomDriver,omitempty" name:"CustomDriver"`
+}
+
 // Predefined struct for user
 type GetClusterLevelPriceRequestParams struct {
 	// The cluster model. It’s used for price query.
@@ -6705,6 +6890,10 @@ type InstanceAdvancedSettings struct {
 	// When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DesiredPodNumber *int64 `json:"DesiredPodNumber,omitempty" name:"DesiredPodNumber"`
+
+	// GPU driver parameters
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	GPUArgs *GPUArgs `json:"GPUArgs,omitempty" name:"GPUArgs"`
 
 	// Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -7146,6 +7335,9 @@ type ModifyClusterEndpointSPRequestParams struct {
 
 	// Security policy opens single IP or CIDR block to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
 	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies"`
+
+	// Modify public network security group
+	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 }
 
 type ModifyClusterEndpointSPRequest struct {
@@ -7156,6 +7348,9 @@ type ModifyClusterEndpointSPRequest struct {
 
 	// Security policy opens single IP or CIDR block to the Internet (for example: '192.168.1.0/24', with 'reject all' as the default).
 	SecurityPolicies []*string `json:"SecurityPolicies,omitempty" name:"SecurityPolicies"`
+
+	// Modify public network security group
+	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 }
 
 func (r *ModifyClusterEndpointSPRequest) ToJsonString() string {
@@ -7172,6 +7367,7 @@ func (r *ModifyClusterEndpointSPRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	delete(f, "SecurityPolicies")
+	delete(f, "SecurityGroup")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterEndpointSPRequest has unknown keys!", "")
 	}

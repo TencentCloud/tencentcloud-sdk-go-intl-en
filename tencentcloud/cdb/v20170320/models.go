@@ -44,7 +44,7 @@ type AccountInfo struct {
 	// Password modification time
 	ModifyPasswordTime *string `json:"ModifyPasswordTime,omitempty" name:"ModifyPasswordTime"`
 
-	// This parameter is no longer supported.
+	// This parameter is deprecated.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// The maximum number of instance connections supported by an account
@@ -864,10 +864,10 @@ type ConnectionPoolInfo struct {
 
 // Predefined struct for user
 type CreateAccountsRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// TencentDB account.
+	// List of TencentDB accounts
 	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Password of the new account
@@ -883,10 +883,10 @@ type CreateAccountsRequestParams struct {
 type CreateAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// TencentDB account.
+	// List of TencentDB accounts
 	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
 	// Password of the new account
@@ -924,7 +924,7 @@ func (r *CreateAccountsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAccountsResponseParams struct {
-	// Async task request ID, which can be used to query the execution result of an async task.
+	// Async task request ID, which can be used to query the execution result of an async task
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1442,7 +1442,7 @@ type CreateDBInstanceHourRequestParams struct {
 	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 
-	// AZ information of the primary instance, which is required for purchasing disaster recovery instances.
+	// AZ information of the source instance, which is required for purchasing disaster recovery instances and read-only instances.
 	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
 
 	// Custom port. Value range: [1024-65535].
@@ -1493,7 +1493,7 @@ type CreateDBInstanceHourRequestParams struct {
 	// Parameter template ID.
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
 
-	// The array of alarm policy IDs.
+	// Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
 
 	// The number of nodes of the instance. To purchase a read-only replica or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
@@ -1557,7 +1557,7 @@ type CreateDBInstanceHourRequest struct {
 	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 
-	// AZ information of the primary instance, which is required for purchasing disaster recovery instances.
+	// AZ information of the source instance, which is required for purchasing disaster recovery instances and read-only instances.
 	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
 
 	// Custom port. Value range: [1024-65535].
@@ -1608,7 +1608,7 @@ type CreateDBInstanceHourRequest struct {
 	// Parameter template ID.
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
 
-	// The array of alarm policy IDs.
+	// Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
 
 	// The number of nodes of the instance. To purchase a read-only replica or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
@@ -2255,32 +2255,32 @@ func (r *DescribeAccountPrivilegesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccountsRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Record offset. Default value: 0.
+	// Record offset. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Value range: 1-100. Default value: 20.
+	// Number of results to be returned for a single request. Value range: 1-100. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Regular expression for matching account names, which complies with the rules at MySQL official website.
+	// Regex for matching account names, which complies with the rules at MySQL's official website
 	AccountRegexp *string `json:"AccountRegexp,omitempty" name:"AccountRegexp"`
 }
 
 type DescribeAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Record offset. Default value: 0.
+	// Record offset. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Value range: 1-100. Default value: 20.
+	// Number of results to be returned for a single request. Value range: 1-100. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Regular expression for matching account names, which complies with the rules at MySQL official website.
+	// Regex for matching account names, which complies with the rules at MySQL's official website
 	AccountRegexp *string `json:"AccountRegexp,omitempty" name:"AccountRegexp"`
 }
 
@@ -2308,13 +2308,13 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccountsResponseParams struct {
-	// Number of eligible accounts.
+	// Number of eligible accounts
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Details of eligible accounts.
+	// Details of eligible accounts
 	Items []*AccountInfo `json:"Items,omitempty" name:"Items"`
 
-	// The maximum number of instance connections (set by the MySQL parameter `max_connections`)
+	// The maximum number of instance connections
 	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3953,6 +3953,115 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBPriceRequestParams struct {
+	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> API to query the values that can be set.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instances. Value range: 1-100. Default value: 1.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance memory size in MB.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Billing method. Value range: PRE_PAID (monthly subscribed), HOUR_PAID (pay-as-you-go).
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
+
+	// Instance validity period in months. Value range: 1-36. This field is invalid when querying prices of pay-as-you-go instances.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Instance type. Value range: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// Data replication mode. Value range: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+}
+
+type DescribeDBPriceRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> API to query the values that can be set.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instances. Value range: 1-100. Default value: 1.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance memory size in MB.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Billing method. Value range: PRE_PAID (monthly subscribed), HOUR_PAID (pay-as-you-go).
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
+
+	// Instance validity period in months. Value range: 1-36. This field is invalid when querying prices of pay-as-you-go instances.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Instance type. Value range: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// Data replication mode. Value range: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+}
+
+func (r *DescribeDBPriceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBPriceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "GoodsNum")
+	delete(f, "Memory")
+	delete(f, "Volume")
+	delete(f, "PayType")
+	delete(f, "Period")
+	delete(f, "InstanceRole")
+	delete(f, "ProtectMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBPriceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBPriceResponseParams struct {
+	// Price of the instance in 0.01 CNY.
+	Price *int64 `json:"Price,omitempty" name:"Price"`
+
+	// Original price of the instance in 0.01 CNY
+	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDBPriceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBPriceResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBPriceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBPriceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBSecurityGroupsRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -4087,63 +4196,6 @@ func (r *DescribeDBSwitchRecordsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBSwitchRecordsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeDBZoneConfigRequestParams struct {
-
-}
-
-type DescribeDBZoneConfigRequest struct {
-	*tchttp.BaseRequest
-	
-}
-
-func (r *DescribeDBZoneConfigRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDBZoneConfigRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBZoneConfigRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeDBZoneConfigResponseParams struct {
-	// Number of configurations in purchasable regions
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// Details of configurations in purchasable regions
-	Items []*RegionSellConf `json:"Items,omitempty" name:"Items"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeDBZoneConfigResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeDBZoneConfigResponseParams `json:"Response"`
-}
-
-func (r *DescribeDBZoneConfigResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDBZoneConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4819,6 +4871,15 @@ func (r *DescribeParamTemplateInfoResponse) FromJsonString(s string) error {
 type DescribeParamTemplatesRequestParams struct {
 	// Engine version. If it is left empty, all parameter templates will be queried.
 	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
+
+	// Engine type. If it is left empty, all engine types will be queried.
+	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
+
+	// Template name. If it is left empty, all template names will be queried.
+	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+
+	// Template ID. If it is left empty, all template IDs will be queried.
+	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
 }
 
 type DescribeParamTemplatesRequest struct {
@@ -4826,6 +4887,15 @@ type DescribeParamTemplatesRequest struct {
 	
 	// Engine version. If it is left empty, all parameter templates will be queried.
 	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
+
+	// Engine type. If it is left empty, all engine types will be queried.
+	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
+
+	// Template name. If it is left empty, all template names will be queried.
+	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+
+	// Template ID. If it is left empty, all template IDs will be queried.
+	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
 }
 
 func (r *DescribeParamTemplatesRequest) ToJsonString() string {
@@ -4841,6 +4911,9 @@ func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "EngineVersions")
+	delete(f, "EngineTypes")
+	delete(f, "TemplateNames")
+	delete(f, "TemplateIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamTemplatesRequest has unknown keys!", "")
 	}
@@ -7818,44 +7891,44 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type ModifyDBInstanceVipVportRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv, cdbro-c2nl9rpv, or cdbrg-c3nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API to query the ID, which is the value of the `InstanceId` output parameter.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Destination IP. Either this parameter or `DstPort` must be passed in.
+	// Target IP. Either this parameter or `DstPort` must be passed in.
 	DstIp *string `json:"DstIp,omitempty" name:"DstIp"`
 
-	// Destination port number. Value range: [1024-65535]. Either this parameter or `DstIp` must be passed in.
+	// Target port number. Value range: 1024-65535. Either this parameter or `DstIp` must be passed in.
 	DstPort *int64 `json:"DstPort,omitempty" name:"DstPort"`
 
 	// Unified VPC ID
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// Unified subnet ID.
+	// Unified subnet ID
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0-168 hours. Default value: 24 hours.
+	// Repossession duration in hours for old IP in the original network when changing from classic network to VPC or changing the VPC subnet. Value range: 0–168. Default value: `24`.
 	ReleaseDuration *int64 `json:"ReleaseDuration,omitempty" name:"ReleaseDuration"`
 }
 
 type ModifyDBInstanceVipVportRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID in the format of cdb-c1nl9rpv, cdbro-c2nl9rpv, or cdbrg-c3nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API to query the ID, which is the value of the `InstanceId` output parameter.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Destination IP. Either this parameter or `DstPort` must be passed in.
+	// Target IP. Either this parameter or `DstPort` must be passed in.
 	DstIp *string `json:"DstIp,omitempty" name:"DstIp"`
 
-	// Destination port number. Value range: [1024-65535]. Either this parameter or `DstIp` must be passed in.
+	// Target port number. Value range: 1024-65535. Either this parameter or `DstIp` must be passed in.
 	DstPort *int64 `json:"DstPort,omitempty" name:"DstPort"`
 
 	// Unified VPC ID
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// Unified subnet ID.
+	// Unified subnet ID
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Repossession duration in hours for old IP in the original network when changing from the basic network to VPC or changing the VPC subnet. Value range: 0-168 hours. Default value: 24 hours.
+	// Repossession duration in hours for old IP in the original network when changing from classic network to VPC or changing the VPC subnet. Value range: 0–168. Default value: `24`.
 	ReleaseDuration *int64 `json:"ReleaseDuration,omitempty" name:"ReleaseDuration"`
 }
 
@@ -7885,8 +7958,8 @@ func (r *ModifyDBInstanceVipVportRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceVipVportResponseParams struct {
-	// Async task ID. (This returned field has been disused)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Async task ID. This parameter is deprecated.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -8189,26 +8262,26 @@ func (r *ModifyLocalBinlogConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyNameOrDescByDpIdRequestParams struct {
-	// ID of a placement group.
+	// Placement group ID
 	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
 
-	// Name of a placement group, which can contain up to 60 characters. The placement group name and description cannot both be empty.
+	// Name of a placement group, which can contain up to 60 characters. The placement group name and description can’t be empty.
 	DeployGroupName *string `json:"DeployGroupName,omitempty" name:"DeployGroupName"`
 
-	// Description of a placement group, which can contain up to 200 characters. The placement group name and description cannot both be empty.
+	// Description of a placement group, which can contain up to 200 characters. The placement group name and description can’t be empty.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type ModifyNameOrDescByDpIdRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of a placement group.
+	// Placement group ID
 	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
 
-	// Name of a placement group, which can contain up to 60 characters. The placement group name and description cannot both be empty.
+	// Name of a placement group, which can contain up to 60 characters. The placement group name and description can’t be empty.
 	DeployGroupName *string `json:"DeployGroupName,omitempty" name:"DeployGroupName"`
 
-	// Description of a placement group, which can contain up to 200 characters. The placement group name and description cannot both be empty.
+	// Description of a placement group, which can contain up to 200 characters. The placement group name and description can’t be empty.
 	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
@@ -9088,23 +9161,6 @@ type RWInstanceInfo struct {
 
 }
 
-type RegionSellConf struct {
-	// Region name
-	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
-
-	// Area
-	Area *string `json:"Area,omitempty" name:"Area"`
-
-	// Whether it is a default region
-	IsDefaultRegion *int64 `json:"IsDefaultRegion,omitempty" name:"IsDefaultRegion"`
-
-	// Region name
-	Region *string `json:"Region,omitempty" name:"Region"`
-
-	// Sale configuration of the AZ
-	ZonesConf []*ZoneSellConf `json:"ZonesConf,omitempty" name:"ZonesConf"`
-}
-
 // Predefined struct for user
 type ReleaseIsolatedDBInstancesRequestParams struct {
 	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in the output parameters.
@@ -9623,73 +9679,6 @@ type SecurityGroup struct {
 
 	// Security group remarks
 	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
-}
-
-type SellConfig struct {
-	// (Disused) Device type
-	Device *string `json:"Device,omitempty" name:"Device"`
-
-	// (Disused) Purchasable specification description 
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// (Disused) Instance type 
-	CdbType *string `json:"CdbType,omitempty" name:"CdbType"`
-
-	// Memory size in MB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
-
-	// CPU core count
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
-
-	// Minimum disk size in GB
-	VolumeMin *int64 `json:"VolumeMin,omitempty" name:"VolumeMin"`
-
-	// Maximum disk size in GB
-	VolumeMax *int64 `json:"VolumeMax,omitempty" name:"VolumeMax"`
-
-	// Disk increment in GB
-	VolumeStep *int64 `json:"VolumeStep,omitempty" name:"VolumeStep"`
-
-	// Number of connections
-	Connection *int64 `json:"Connection,omitempty" name:"Connection"`
-
-	// Queries per second
-	Qps *int64 `json:"Qps,omitempty" name:"Qps"`
-
-	// IOs per second
-	Iops *int64 `json:"Iops,omitempty" name:"Iops"`
-
-	// Application scenario description
-	Info *string `json:"Info,omitempty" name:"Info"`
-
-	// Status. Value `0` indicates that this specification is purchasable.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-
-	// (Disused) Tag value
-	Tag *int64 `json:"Tag,omitempty" name:"Tag"`
-
-	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
-
-	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	DeviceTypeName *string `json:"DeviceTypeName,omitempty" name:"DeviceTypeName"`
-
-	// Engine type. Valid values: `Innodb`,`RocksDB`.
-	// Note: This field may return null, indicating that no valid value can be obtained.
-	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
-}
-
-type SellType struct {
-	// Name of the purchasable instance
-	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
-
-	// Kernel version number
-	EngineVersion []*string `json:"EngineVersion,omitempty" name:"EngineVersion"`
-
-	// Configuration details of a purchasable specification
-	Configs []*SellConfig `json:"Configs,omitempty" name:"Configs"`
 }
 
 type SlaveConfig struct {
@@ -10892,80 +10881,4 @@ type UploadInfo struct {
 
 	// Number of completed parts
 	CompleteNum *int64 `json:"CompleteNum,omitempty" name:"CompleteNum"`
-}
-
-type ZoneConf struct {
-	// AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
-	DeployMode []*int64 `json:"DeployMode,omitempty" name:"DeployMode"`
-
-	// AZ where the primary instance is located
-	MasterZone []*string `json:"MasterZone,omitempty" name:"MasterZone"`
-
-	// AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
-	SlaveZone []*string `json:"SlaveZone,omitempty" name:"SlaveZone"`
-
-	// AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
-	BackupZone []*string `json:"BackupZone,omitempty" name:"BackupZone"`
-}
-
-type ZoneSellConf struct {
-	// AZ status used to indicate whether instances are purchasable. Value range: `1` (purchasable), `3` (not purchasable), `4` (AZ not displayed)
-	Status *int64 `json:"Status,omitempty" name:"Status"`
-
-	// AZ name
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-
-	// Whether it is a custom instance type
-	IsCustom *bool `json:"IsCustom,omitempty" name:"IsCustom"`
-
-	// Whether disaster recovery is supported
-	IsSupportDr *bool `json:"IsSupportDr,omitempty" name:"IsSupportDr"`
-
-	// Whether VPC is supported
-	IsSupportVpc *bool `json:"IsSupportVpc,omitempty" name:"IsSupportVpc"`
-
-	// Maximum purchasable quantity of hourly billed instances
-	HourInstanceSaleMaxNum *int64 `json:"HourInstanceSaleMaxNum,omitempty" name:"HourInstanceSaleMaxNum"`
-
-	// Whether it is a default AZ
-	IsDefaultZone *bool `json:"IsDefaultZone,omitempty" name:"IsDefaultZone"`
-
-	// Whether it is a BM zone
-	IsBm *bool `json:"IsBm,omitempty" name:"IsBm"`
-
-	// Supported billing method. Value range: 0 (monthly subscribed), 1 (hourly), 2 (postpaid)
-	PayType []*string `json:"PayType,omitempty" name:"PayType"`
-
-	// Data replication type. Value range: 0 (async), 1 (semi-sync), 2 (strong sync)
-	ProtectMode []*string `json:"ProtectMode,omitempty" name:"ProtectMode"`
-
-	// AZ name
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
-
-	// Array of purchasable instance types
-	SellType []*SellType `json:"SellType,omitempty" name:"SellType"`
-
-	// Multi-AZ information
-	ZoneConf *ZoneConf `json:"ZoneConf,omitempty" name:"ZoneConf"`
-
-	// Information of the supported disaster recovery AZ
-	DrZone []*string `json:"DrZone,omitempty" name:"DrZone"`
-
-	// Whether cross-AZ read-only access is supported
-	IsSupportRemoteRo *bool `json:"IsSupportRemoteRo,omitempty" name:"IsSupportRemoteRo"`
-
-	// Information of supported cross-AZ read-only zone
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	RemoteRoZone []*string `json:"RemoteRoZone,omitempty" name:"RemoteRoZone"`
-
-	// AZ status used to indicate whether dedicated instances are purchasable. Valid values: `1 (purchasable), `3` (not purchasable), `4` (AZ not displayed)
-	ExClusterStatus *int64 `json:"ExClusterStatus,omitempty" name:"ExClusterStatus"`
-
-	// AZ information of the cross-AZ deployed read-only instances which are associated with a dedicated instance
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ExClusterRemoteRoZone []*string `json:"ExClusterRemoteRoZone,omitempty" name:"ExClusterRemoteRoZone"`
-
-	// AZ information of a multi-AZ deployed dedicated instance.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ExClusterZoneConf *ZoneConf `json:"ExClusterZoneConf,omitempty" name:"ExClusterZoneConf"`
 }

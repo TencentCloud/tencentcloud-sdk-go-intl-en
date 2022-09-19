@@ -397,6 +397,10 @@ type AdvancedCCRules struct {
 	// Layer-7 rule configuration for CC frequency limiting
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Configure []*ScdnSevenLayerRules `json:"Configure,omitempty" name:"Configure"`
+
+	// Whether to enable the rule. Values: `on` (enable), `off` (disable).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type AdvancedCache struct {
@@ -4396,6 +4400,14 @@ type GuetzliAdapter struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type HTTPHeader struct {
+
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type HeaderKey struct {
 	// Whether to use it as part of `CacheKey`
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
@@ -5933,6 +5945,12 @@ type PushUrlsCacheRequestParams struct {
 	// Notes:
 	// This feature is in beta test.
 	DisableRange *bool `json:"DisableRange,omitempty" name:"DisableRange"`
+
+
+	Headers []*HTTPHeader `json:"Headers,omitempty" name:"Headers"`
+
+	// Whether to encode the URL
+	UrlEncode *bool `json:"UrlEncode,omitempty" name:"UrlEncode"`
 }
 
 type PushUrlsCacheRequest struct {
@@ -5967,6 +5985,11 @@ type PushUrlsCacheRequest struct {
 	// Notes:
 	// This feature is in beta test.
 	DisableRange *bool `json:"DisableRange,omitempty" name:"DisableRange"`
+
+	Headers []*HTTPHeader `json:"Headers,omitempty" name:"Headers"`
+
+	// Whether to encode the URL
+	UrlEncode *bool `json:"UrlEncode,omitempty" name:"UrlEncode"`
 }
 
 func (r *PushUrlsCacheRequest) ToJsonString() string {
@@ -5987,6 +6010,8 @@ func (r *PushUrlsCacheRequest) FromJsonString(s string) error {
 	delete(f, "Layer")
 	delete(f, "ParseM3U8")
 	delete(f, "DisableRange")
+	delete(f, "Headers")
+	delete(f, "UrlEncode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PushUrlsCacheRequest has unknown keys!", "")
 	}
@@ -6479,6 +6504,10 @@ type ScdnConfig struct {
 	// Advanced custom CC attack defense rule
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AdvancedRules []*AdvancedCCRules `json:"AdvancedRules,omitempty" name:"AdvancedRules"`
+
+	// Global advanced CC protection rules
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	GlobalAdvancedRules []*AdvancedCCRules `json:"GlobalAdvancedRules,omitempty" name:"GlobalAdvancedRules"`
 }
 
 type ScdnDdosConfig struct {
