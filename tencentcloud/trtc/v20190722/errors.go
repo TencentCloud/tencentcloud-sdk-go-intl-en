@@ -127,4 +127,7 @@ const (
 
 	// No permission to manipulate `SdkAppId`.
 	UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
+
+	// Unsupported operation.
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

@@ -74,7 +74,7 @@ func NewCreateCloudRecordingResponse() (response *CreateCloudRecordingResponse) 
 //
 // * Specify the anchors whose streams you want or do not want to record by using the `RecordParams` parameter
 //
-// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter
+// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can only save recording files to VOD (`CloudVod`).
 //
 // * Specify transcoding settings for mixed-stream recording, including video resolution, video bitrate, frame rate, and audio quality, by using `MixTranscodeParams`
 //
@@ -86,7 +86,7 @@ func NewCreateCloudRecordingResponse() (response *CreateCloudRecordingResponse) 
 //
 // * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to VOD.
 //
-// * Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD.
+// * Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD. After a recording task ends, you can go to the VOD console (https://console.cloud.tencent.com/vod/media) to view the recording files.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -98,6 +98,7 @@ func NewCreateCloudRecordingResponse() (response *CreateCloudRecordingResponse) 
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
 //  MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"
 //  MISSINGPARAMETER_CLOUDSTORAGE = "MissingParameter.CloudStorage"
@@ -113,6 +114,7 @@ func NewCreateCloudRecordingResponse() (response *CreateCloudRecordingResponse) 
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
 //  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
 //  MISSINGPARAMETER_VENDOR = "MissingParameter.Vendor"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (response *CreateCloudRecordingResponse, err error) {
     return c.CreateCloudRecordingWithContext(context.Background(), request)
 }
@@ -128,7 +130,7 @@ func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (res
 //
 // * Specify the anchors whose streams you want or do not want to record by using the `RecordParams` parameter
 //
-// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter
+// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can only save recording files to VOD (`CloudVod`).
 //
 // * Specify transcoding settings for mixed-stream recording, including video resolution, video bitrate, frame rate, and audio quality, by using `MixTranscodeParams`
 //
@@ -140,7 +142,7 @@ func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (res
 //
 // * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to VOD.
 //
-// * Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD.
+// * Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD. After a recording task ends, you can go to the VOD console (https://console.cloud.tencent.com/vod/media) to view the recording files.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -152,6 +154,7 @@ func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (res
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
 //  MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"
 //  MISSINGPARAMETER_CLOUDSTORAGE = "MissingParameter.CloudStorage"
@@ -167,6 +170,7 @@ func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (res
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
 //  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
 //  MISSINGPARAMETER_VENDOR = "MissingParameter.Vendor"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateCloudRecordingWithContext(ctx context.Context, request *CreateCloudRecordingRequest) (response *CreateCloudRecordingResponse, err error) {
     if request == nil {
         request = NewCreateCloudRecordingRequest()

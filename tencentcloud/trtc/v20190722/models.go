@@ -95,7 +95,7 @@ type CreateCloudRecordingRequestParams struct {
 	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in the user ID.
+	// The [user ID](https://www.tencentcloud.com/document/product/647/37714#userid) of the recording robot in the TRTC room, which cannot be identical to the user IDs of anchors in the room or other recording robots. To distinguish this user ID from others, we recommend you include the room ID in the user ID.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// The signature (similar to a login password) required for the recording robot to enter the room. Each user ID corresponds to a signature. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
@@ -134,7 +134,7 @@ type CreateCloudRecordingRequest struct {
 	// The [room ID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are recorded.
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the recording robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in the user ID.
+	// The [user ID](https://www.tencentcloud.com/document/product/647/37714#userid) of the recording robot in the TRTC room, which cannot be identical to the user IDs of anchors in the room or other recording robots. To distinguish this user ID from others, we recommend you include the room ID in the user ID.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// The signature (similar to a login password) required for the recording robot to enter the room. Each user ID corresponds to a signature. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
@@ -491,6 +491,20 @@ type McuAudioParams struct {
 	SubscribeAudioList []*McuUserInfoParams `json:"SubscribeAudioList,omitempty" name:"SubscribeAudioList"`
 }
 
+type McuCustomCrop struct {
+	// The horizontal offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
+	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// The vertical offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
+	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// The video width (pixels) after cropping. The sum of this parameter and `LocationX` cannot be greater than 10000.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// The video height (pixels) after cropping. The sum of this parameter and `LocationY` cannot be greater than 10000.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+}
+
 type McuLayout struct {
 	// The information of the stream that is displayed. If you do not pass this parameter, TRTC will display the videos of anchors in the room according to their room entry sequence.
 	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitempty" name:"UserMediaStream"`
@@ -525,6 +539,9 @@ type McuLayout struct {
 
 	// The URL of the background image for the video. This parameter allows you to specify an image to display when the user’s camera is turned off or before the user enters the room. If the dimensions of the image specified are different from those of the video window, the image will be stretched to fit the space. This parameter has a higher priority than `BackGroundColor`.
 	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitempty" name:"BackgroundImageUrl"`
+
+	// Custom cropping.
+	CustomCrop *McuCustomCrop `json:"CustomCrop,omitempty" name:"CustomCrop"`
 }
 
 type McuLayoutParams struct {
@@ -835,8 +852,11 @@ type RecordParams struct {
 	// The allowlist/blocklist for stream subscription.
 	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitempty" name:"SubscribeStreamUserIds"`
 
-	// The format of recording files. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if recording files are saved to VOD.
+	// The output format. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
 	OutputFormat *uint64 `json:"OutputFormat,omitempty" name:"OutputFormat"`
+
+	// Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
+	AvMerge *uint64 `json:"AvMerge,omitempty" name:"AvMerge"`
 }
 
 // Predefined struct for user
@@ -1184,7 +1204,7 @@ type StorageFile struct {
 }
 
 type StorageParams struct {
-	// The cloud storage information.
+	// The third-party cloud storage information (not supported currently).
 	CloudStorage *CloudStorage `json:"CloudStorage,omitempty" name:"CloudStorage"`
 
 	// The VOD information.
@@ -1227,6 +1247,9 @@ type TencentVod struct {
 
 	// The upload context, which is passed through after upload is completed.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
+
+	// The format of recording files saved to VOD. 0 (default): MP4; 1: HLS.
+	MediaType *uint64 `json:"MediaType,omitempty" name:"MediaType"`
 }
 
 // Predefined struct for user
