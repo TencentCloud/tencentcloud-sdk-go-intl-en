@@ -697,6 +697,7 @@ func NewModifySparkAppResponse() (response *ModifySparkAppResponse) {
 // This API is used to update a Spark application.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
 func (c *Client) ModifySparkApp(request *ModifySparkAppRequest) (response *ModifySparkAppResponse, err error) {
     return c.ModifySparkAppWithContext(context.Background(), request)
@@ -706,6 +707,7 @@ func (c *Client) ModifySparkApp(request *ModifySparkAppRequest) (response *Modif
 // This API is used to update a Spark application.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
 func (c *Client) ModifySparkAppWithContext(ctx context.Context, request *ModifySparkAppRequest) (response *ModifySparkAppResponse, err error) {
     if request == nil {

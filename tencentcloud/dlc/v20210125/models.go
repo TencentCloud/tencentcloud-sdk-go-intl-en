@@ -886,7 +886,7 @@ type DescribeTaskResultRequestParams struct {
 	// Unique task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// Pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. 1,000 rows of data are returned each time.
+	// The pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. The data with a volume set by the `MaxResults` field is returned each time.
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 	// Maximum number of returned rows. Value range: 0–1,000. Default value: 1,000.
@@ -899,7 +899,7 @@ type DescribeTaskResultRequest struct {
 	// Unique task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
-	// Pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. 1,000 rows of data are returned each time.
+	// The pagination information returned by the last response. This parameter can be omitted for the first response, where the data will be returned from the beginning. The data with a volume set by the `MaxResults` field is returned each time.
 	NextToken *string `json:"NextToken,omitempty" name:"NextToken"`
 
 	// Maximum number of returned rows. Value range: 0–1,000. Default value: 1,000.
@@ -1051,6 +1051,10 @@ type DescribeTasksResponseParams struct {
 
 	// Total number of instances
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The task overview.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TasksOverview *TasksOverview `json:"TasksOverview,omitempty" name:"TasksOverview"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1476,7 +1480,7 @@ type TaskResponseInfo struct {
 	// Task ID
 	Id *string `json:"Id,omitempty" name:"Id"`
 
-	// Computing time in ms
+	// The compute time in ms.
 	UsedTime *int64 `json:"UsedTime,omitempty" name:"UsedTime"`
 
 	// Task output path
@@ -1571,6 +1575,14 @@ type TaskResponseInfo struct {
 	// Spark UI URL
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UiUrl *string `json:"UiUrl,omitempty" name:"UiUrl"`
+
+	// The task time in ms.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalTime *int64 `json:"TotalTime,omitempty" name:"TotalTime"`
+
+	// The program entry parameter for running a task under a Spark job.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CmdArgs *string `json:"CmdArgs,omitempty" name:"CmdArgs"`
 }
 
 type TaskResultInfo struct {
@@ -1597,7 +1609,7 @@ type TaskResultInfo struct {
 	// Amount of the data scanned in bytes
 	DataAmount *int64 `json:"DataAmount,omitempty" name:"DataAmount"`
 
-	// Task execution time in seconds
+	// The compute time in ms.
 	UsedTime *int64 `json:"UsedTime,omitempty" name:"UsedTime"`
 
 	// Address of the COS bucket for storing the task result
@@ -1631,6 +1643,9 @@ type TaskResultInfo struct {
 
 	// Console display format. Valid values: `table`, `text`.
 	DisplayFormat *string `json:"DisplayFormat,omitempty" name:"DisplayFormat"`
+
+	// The task time in ms.
+	TotalTime *int64 `json:"TotalTime,omitempty" name:"TotalTime"`
 }
 
 type TasksInfo struct {
@@ -1648,4 +1663,18 @@ type TasksInfo struct {
 
 	// User-defined parameters of the task
 	Params []*KVPair `json:"Params,omitempty" name:"Params"`
+}
+
+type TasksOverview struct {
+	// The number of tasks in queue.
+	TaskQueuedCount *int64 `json:"TaskQueuedCount,omitempty" name:"TaskQueuedCount"`
+
+	// The number of initialized tasks.
+	TaskInitCount *int64 `json:"TaskInitCount,omitempty" name:"TaskInitCount"`
+
+	// The number of tasks in progress.
+	TaskRunningCount *int64 `json:"TaskRunningCount,omitempty" name:"TaskRunningCount"`
+
+	// The total number of tasks in this time range.
+	TotalTaskCount *int64 `json:"TotalTaskCount,omitempty" name:"TotalTaskCount"`
 }

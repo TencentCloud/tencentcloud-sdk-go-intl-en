@@ -660,6 +660,146 @@ type BinlogInfo struct {
 	BinlogFinishTime *string `json:"BinlogFinishTime,omitempty" name:"BinlogFinishTime"`
 }
 
+type CdbRegionSellConf struct {
+	// Region name
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// Area
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Whether it is a default region
+	IsDefaultRegion *int64 `json:"IsDefaultRegion,omitempty" name:"IsDefaultRegion"`
+
+	// Region name
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// The purchasable configuration in an AZ in a region
+	RegionConfig []*CdbZoneSellConf `json:"RegionConfig,omitempty" name:"RegionConfig"`
+}
+
+type CdbSellConfig struct {
+	// Memory size in MB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// CPU core count
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Minimum disk size in GB
+	VolumeMin *int64 `json:"VolumeMin,omitempty" name:"VolumeMin"`
+
+	// Maximum disk size in GB
+	VolumeMax *int64 `json:"VolumeMax,omitempty" name:"VolumeMax"`
+
+	// Disk capacity increment in GB
+	VolumeStep *int64 `json:"VolumeStep,omitempty" name:"VolumeStep"`
+
+	// IO operations per second
+	Iops *int64 `json:"Iops,omitempty" name:"Iops"`
+
+	// Application scenario description
+	Info *string `json:"Info,omitempty" name:"Info"`
+
+	// Status. The value `0` indicates that this specification is available.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Engine type description. Valid values: `Innodb`, `RocksDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
+	// Purchasable specifications ID
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+}
+
+type CdbSellType struct {
+	// Name of the purchasable instance
+	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
+
+	// Engine version number
+	EngineVersion []*string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// Purchasable specifications ID
+	ConfigIds []*int64 `json:"ConfigIds,omitempty" name:"ConfigIds"`
+}
+
+type CdbZoneDataResult struct {
+	// List of purchasable specifications
+	Configs []*CdbSellConfig `json:"Configs,omitempty" name:"Configs"`
+
+	// List of AZs in purchasable regions
+	Regions []*CdbRegionSellConf `json:"Regions,omitempty" name:"Regions"`
+}
+
+type CdbZoneSellConf struct {
+	// AZ status, which is used to indicate whether instances are purchasable. Valid values: `1` (purchasable), `3` (not purchasable), `4` (AZ not displayed)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// AZ name
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// Whether it is a custom instance type
+	IsCustom *bool `json:"IsCustom,omitempty" name:"IsCustom"`
+
+	// Whether disaster recovery is supported
+	IsSupportDr *bool `json:"IsSupportDr,omitempty" name:"IsSupportDr"`
+
+	// Whether VPC is supported
+	IsSupportVpc *bool `json:"IsSupportVpc,omitempty" name:"IsSupportVpc"`
+
+	// Maximum purchasable quantity of hourly billed instances
+	HourInstanceSaleMaxNum *int64 `json:"HourInstanceSaleMaxNum,omitempty" name:"HourInstanceSaleMaxNum"`
+
+	// Whether it is a default AZ
+	IsDefaultZone *bool `json:"IsDefaultZone,omitempty" name:"IsDefaultZone"`
+
+	// Whether it is a BM zone
+	IsBm *bool `json:"IsBm,omitempty" name:"IsBm"`
+
+	// Supported billing method. Valid values: `0` (monthly subscribed), `1` (hourly billed), `2` (pay-as-you-go)
+	PayType []*string `json:"PayType,omitempty" name:"PayType"`
+
+	// Data replication type. Valid values: `0` (async), `1` (semi-sync), `2` (strong sync)
+	ProtectMode []*string `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// AZ name
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Multi-AZ information
+	ZoneConf *ZoneConf `json:"ZoneConf,omitempty" name:"ZoneConf"`
+
+	// Information of supported disaster recovery AZs
+	DrZone []*string `json:"DrZone,omitempty" name:"DrZone"`
+
+	// Whether cross-AZ read-only access is supported
+	IsSupportRemoteRo *bool `json:"IsSupportRemoteRo,omitempty" name:"IsSupportRemoteRo"`
+
+	// Information of supported cross-AZ read-only zone
+	RemoteRoZone []*string `json:"RemoteRoZone,omitempty" name:"RemoteRoZone"`
+
+	// AZ status, which is used to indicate whether dedicated instances are purchasable. Valid values: `1 (purchasable), `3` (not purchasable), `4` (AZ not displayed)
+	ExClusterStatus *int64 `json:"ExClusterStatus,omitempty" name:"ExClusterStatus"`
+
+	// Information of cross-AZ read-only zones supported by a dedicated instance
+	ExClusterRemoteRoZone []*string `json:"ExClusterRemoteRoZone,omitempty" name:"ExClusterRemoteRoZone"`
+
+	// AZ information of a multi-AZ deployed dedicated instance.
+	ExClusterZoneConf *ZoneConf `json:"ExClusterZoneConf,omitempty" name:"ExClusterZoneConf"`
+
+	// Array of purchasable instance types. The value of `configIds` and `configs` have a one-to-one correspondence.
+	SellType []*CdbSellType `json:"SellType,omitempty" name:"SellType"`
+
+	// AZ ID
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Whether IPv6 is supported
+	IsSupportIpv6 *bool `json:"IsSupportIpv6,omitempty" name:"IsSupportIpv6"`
+
+	// Supported engine types for purchasable database
+	EngineType []*string `json:"EngineType,omitempty" name:"EngineType"`
+}
+
 type CloneItem struct {
 	// ID of the original instance in a clone task
 	SrcInstanceId *string `json:"SrcInstanceId,omitempty" name:"SrcInstanceId"`
@@ -3001,11 +3141,17 @@ func (r *DescribeBinlogBackupOverviewRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBinlogBackupOverviewResponseParams struct {
-	// Total capacity of log backups in bytes.
+	// Total capacity of log backups in bytes (including remote log backups)
 	BinlogBackupVolume *int64 `json:"BinlogBackupVolume,omitempty" name:"BinlogBackupVolume"`
 
-	// Total number of log backups.
+	// Total number of log backups (include remote log backups)
 	BinlogBackupCount *int64 `json:"BinlogBackupCount,omitempty" name:"BinlogBackupCount"`
+
+	// Capacity of remote log backups in bytes
+	RemoteBinlogVolume *int64 `json:"RemoteBinlogVolume,omitempty" name:"RemoteBinlogVolume"`
+
+	// Number of remote backups
+	RemoteBinlogCount *int64 `json:"RemoteBinlogCount,omitempty" name:"RemoteBinlogCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3187,6 +3333,60 @@ func (r *DescribeCDBProxyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCDBProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCdbZoneConfigRequestParams struct {
+
+}
+
+type DescribeCdbZoneConfigRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeCdbZoneConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCdbZoneConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCdbZoneConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCdbZoneConfigResponseParams struct {
+	// List of purchasable specification and region information
+	DataResult *CdbZoneDataResult `json:"DataResult,omitempty" name:"DataResult"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCdbZoneConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCdbZoneConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeCdbZoneConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCdbZoneConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3954,57 +4154,87 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBPriceRequestParams struct {
-	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> API to query the values that can be set.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
-
-	// Number of instances. Value range: 1-100. Default value: 1.
-	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
-
-	// Instance memory size in MB.
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
-
-	// Instance disk size in GB.
-	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
-
-	// Billing method. Value range: PRE_PAID (monthly subscribed), HOUR_PAID (pay-as-you-go).
-	PayType *string `json:"PayType,omitempty" name:"PayType"`
-
-	// Instance validity period in months. Value range: 1-36. This field is invalid when querying prices of pay-as-you-go instances.
+	// Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
-	// Instance type. Value range: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance memory size in MB. This parameter is required when `InstanceId` is empty.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB. This parameter is required when `InstanceId` is empty.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 
-	// Data replication mode. Value range: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	// Billing mode. Valid values: `PRE_PAID` (monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
+
+	// Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
 	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
+	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
+
+	// CPU core count of the price-queried instance. To ensure that the CPU value to be passed in is valid, use the [DescribeDBZoneConfig](https://www.tencentcloud.com/document/product/236/17229) API to query the number of purchasable cores. If this value is not specified, a default value based on memory size will be set.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Instance ID for querying renewal price. To query the renewal price of the instance, pass in the values of `InstanceId` and `Period`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
+	Ladder *uint64 `json:"Ladder,omitempty" name:"Ladder"`
 }
 
 type DescribeDBPriceRequest struct {
 	*tchttp.BaseRequest
 	
-	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> API to query the values that can be set.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
-
-	// Number of instances. Value range: 1-100. Default value: 1.
-	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
-
-	// Instance memory size in MB.
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
-
-	// Instance disk size in GB.
-	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
-
-	// Billing method. Value range: PRE_PAID (monthly subscribed), HOUR_PAID (pay-as-you-go).
-	PayType *string `json:"PayType,omitempty" name:"PayType"`
-
-	// Instance validity period in months. Value range: 1-36. This field is invalid when querying prices of pay-as-you-go instances.
+	// Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
-	// Instance type. Value range: master (master instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// AZ information in the format of "ap-guangzhou-2". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Instance memory size in MB. This parameter is required when `InstanceId` is empty.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB. This parameter is required when `InstanceId` is empty.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 
-	// Data replication mode. Value range: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	// Billing mode. Valid values: `PRE_PAID` (monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+	PayType *string `json:"PayType,omitempty" name:"PayType"`
+
+	// Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
 	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
+	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
+
+	// CPU core count of the price-queried instance. To ensure that the CPU value to be passed in is valid, use the [DescribeDBZoneConfig](https://www.tencentcloud.com/document/product/236/17229) API to query the number of purchasable cores. If this value is not specified, a default value based on memory size will be set.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Instance ID for querying renewal price. To query the renewal price of the instance, pass in the values of `InstanceId` and `Period`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
+	Ladder *uint64 `json:"Ladder,omitempty" name:"Ladder"`
 }
 
 func (r *DescribeDBPriceRequest) ToJsonString() string {
@@ -4019,14 +4249,19 @@ func (r *DescribeDBPriceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "Period")
 	delete(f, "Zone")
 	delete(f, "GoodsNum")
 	delete(f, "Memory")
 	delete(f, "Volume")
-	delete(f, "PayType")
-	delete(f, "Period")
 	delete(f, "InstanceRole")
+	delete(f, "PayType")
 	delete(f, "ProtectMode")
+	delete(f, "DeviceType")
+	delete(f, "InstanceNodes")
+	delete(f, "Cpu")
+	delete(f, "InstanceId")
+	delete(f, "Ladder")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBPriceRequest has unknown keys!", "")
 	}
@@ -4035,11 +4270,14 @@ func (r *DescribeDBPriceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBPriceResponseParams struct {
-	// Price of the instance in 0.01 CNY.
+	// Instance price. If `Currency` is set to `CNY`, the unit will be 0.01 CNY. If `Currency` is set to `USD`, the unit will be US Cent.
 	Price *int64 `json:"Price,omitempty" name:"Price"`
 
-	// Original price of the instance in 0.01 CNY
+	// Original price of the instance. If `Currency` is set to `CNY`, the unit will be 0.01 CNY. If `Currency` is set to `USD`, the unit will be US Cent.
 	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Currency: `CNY`, `USD`.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4250,6 +4488,12 @@ type DescribeDataBackupOverviewResponseParams struct {
 
 	// Total number of manual backups in the current region.
 	ManualBackupCount *int64 `json:"ManualBackupCount,omitempty" name:"ManualBackupCount"`
+
+	// Total capacity of remote backups in the current region
+	RemoteBackupVolume *int64 `json:"RemoteBackupVolume,omitempty" name:"RemoteBackupVolume"`
+
+	// Total number of remote backups in the current region
+	RemoteBackupCount *int64 `json:"RemoteBackupCount,omitempty" name:"RemoteBackupCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6608,6 +6852,14 @@ type InstanceInfo struct {
 	// List of tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TagList []*TagInfoItem `json:"TagList,omitempty" name:"TagList"`
+
+	// Engine type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
+	// Maximum delay threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxDelayTime *int64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
 }
 
 type InstanceRebootTime struct {
@@ -10881,4 +11133,18 @@ type UploadInfo struct {
 
 	// Number of completed parts
 	CompleteNum *int64 `json:"CompleteNum,omitempty" name:"CompleteNum"`
+}
+
+type ZoneConf struct {
+	// AZ deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
+	DeployMode []*int64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// AZ where the primary instance is located
+	MasterZone []*string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// AZ where salve database 1 is located when the instance is deployed in multi-AZ mode
+	SlaveZone []*string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// AZ where salve database 2 is located when the instance is deployed in multi-AZ mode
+	BackupZone []*string `json:"BackupZone,omitempty" name:"BackupZone"`
 }

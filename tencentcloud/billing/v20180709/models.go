@@ -409,6 +409,96 @@ type BusinessSummaryTotal struct {
 }
 
 // Predefined struct for user
+type DescribeAccountBalanceRequestParams struct {
+
+}
+
+type DescribeAccountBalanceRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeAccountBalanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccountBalanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountBalanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccountBalanceResponseParams struct {
+	// Available account balance in cents, which takes the same calculation rules as `RealBalance`, `CreditBalance`, and `RealCreditBalance`.
+	Balance *int64 `json:"Balance,omitempty" name:"Balance"`
+
+	// The UIN to query.
+	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
+
+	// Available account balance in cents, which takes the same calculation rules as `Balance`, `CreditBalance`, and `RealCreditBalance`.
+	RealBalance *float64 `json:"RealBalance,omitempty" name:"RealBalance"`
+
+	// Cash account balance in cents. Currently, this field is not applied.
+	CashAccountBalance *float64 `json:"CashAccountBalance,omitempty" name:"CashAccountBalance"`
+
+	// Income account balance in cents. Currently, this field is not applied.
+	IncomeIntoAccountBalance *float64 `json:"IncomeIntoAccountBalance,omitempty" name:"IncomeIntoAccountBalance"`
+
+	// Present account balance in cents. Currently, this field is not applied.
+	PresentAccountBalance *float64 `json:"PresentAccountBalance,omitempty" name:"PresentAccountBalance"`
+
+	// Frozen amount in cents.
+	FreezeAmount *float64 `json:"FreezeAmount,omitempty" name:"FreezeAmount"`
+
+	// Overdue amount in cents, which is when the available credit balance is negative.
+	OweAmount *float64 `json:"OweAmount,omitempty" name:"OweAmount"`
+
+	// Whether overdue payments are allowed. Currently, this field is not applied.
+	IsAllowArrears *bool `json:"IsAllowArrears,omitempty" name:"IsAllowArrears"`
+
+	// Whether you have a credit limit. Currently, this field is not applied.
+	IsCreditLimited *bool `json:"IsCreditLimited,omitempty" name:"IsCreditLimited"`
+
+	// Credit limit. Credit limit－available credit balance = consumption amount
+	CreditAmount *float64 `json:"CreditAmount,omitempty" name:"CreditAmount"`
+
+	// Available credit balance in cents, which takes the same calculation rules as `Balance`, `RealBalance`, and `RealCreditBalance`.
+	CreditBalance *float64 `json:"CreditBalance,omitempty" name:"CreditBalance"`
+
+	// Available account balance in cents, which takes the same calculation rules as `Balance`, `RealBalance`, and `CreditBalance`.
+	RealCreditBalance *float64 `json:"RealCreditBalance,omitempty" name:"RealCreditBalance"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAccountBalanceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccountBalanceResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccountBalanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccountBalanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBillDetailRequestParams struct {
 	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`

@@ -45,6 +45,64 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewDescribeAccountBalanceRequest() (request *DescribeAccountBalanceRequest) {
+    request = &DescribeAccountBalanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAccountBalance")
+    
+    
+    return
+}
+
+func NewDescribeAccountBalanceResponse() (response *DescribeAccountBalanceResponse) {
+    response = &DescribeAccountBalanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAccountBalance
+// This API is used to check the Tencent Cloud account balance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAccountBalance(request *DescribeAccountBalanceRequest) (response *DescribeAccountBalanceResponse, err error) {
+    return c.DescribeAccountBalanceWithContext(context.Background(), request)
+}
+
+// DescribeAccountBalance
+// This API is used to check the Tencent Cloud account balance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAccountBalanceWithContext(ctx context.Context, request *DescribeAccountBalanceRequest) (response *DescribeAccountBalanceResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccountBalanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccountBalance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccountBalanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillDetailRequest() (request *DescribeBillDetailRequest) {
     request = &DescribeBillDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},

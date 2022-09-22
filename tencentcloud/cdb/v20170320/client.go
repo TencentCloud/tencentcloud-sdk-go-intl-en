@@ -2205,6 +2205,60 @@ func (c *Client) DescribeCDBProxyWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeCdbZoneConfigRequest() (request *DescribeCdbZoneConfigRequest) {
+    request = &DescribeCdbZoneConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeCdbZoneConfig")
+    
+    
+    return
+}
+
+func NewDescribeCdbZoneConfigResponse() (response *DescribeCdbZoneConfigResponse) {
+    response = &DescribeCdbZoneConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCdbZoneConfig
+// This API is used to query the purchasable specifications of TencentDB instances in a region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeCdbZoneConfig(request *DescribeCdbZoneConfigRequest) (response *DescribeCdbZoneConfigResponse, err error) {
+    return c.DescribeCdbZoneConfigWithContext(context.Background(), request)
+}
+
+// DescribeCdbZoneConfig
+// This API is used to query the purchasable specifications of TencentDB instances in a region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
+//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeCdbZoneConfigWithContext(ctx context.Context, request *DescribeCdbZoneConfigRequest) (response *DescribeCdbZoneConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeCdbZoneConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCdbZoneConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCdbZoneConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCloneListRequest() (request *DescribeCloneListRequest) {
     request = &DescribeCloneListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2702,11 +2756,11 @@ func NewDescribeDBPriceResponse() (response *DescribeDBPriceResponse) {
 }
 
 // DescribeDBPrice
-// This API (DescribeDBPrice) is used to query the prices of pay-as-you-go or monthly subscribed TencentDB instances by passing in information such as instance type, purchased duration, number of purchased instances, memory size, disk size, and AZ.
+// This API is used to query the purchase or renewal price of a pay-as-you-go or monthly subscribed TencentDB instance by passing in information such as instance type, purchase duration, number of instances to purchase, memory size, disk size, and AZ. For the price of instance renewal, you can pass in instance name to query.
 //
 // 
 //
-// Note: To query prices in a specific region, please use the access point of the region. For more information on access points, see <a href="https://cloud.tencent.com/document/api/236/15832">Service Addresses</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+// Note: To query prices in a specific region, you need to use the access point of the region. For more information on access points, see <a href="https://www.tencentcloud.com/document/product/236/15832">Service Address</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
@@ -2720,11 +2774,11 @@ func (c *Client) DescribeDBPrice(request *DescribeDBPriceRequest) (response *Des
 }
 
 // DescribeDBPrice
-// This API (DescribeDBPrice) is used to query the prices of pay-as-you-go or monthly subscribed TencentDB instances by passing in information such as instance type, purchased duration, number of purchased instances, memory size, disk size, and AZ.
+// This API is used to query the purchase or renewal price of a pay-as-you-go or monthly subscribed TencentDB instance by passing in information such as instance type, purchase duration, number of instances to purchase, memory size, disk size, and AZ. For the price of instance renewal, you can pass in instance name to query.
 //
 // 
 //
-// Note: To query prices in a specific region, please use the access point of the region. For more information on access points, see <a href="https://cloud.tencent.com/document/api/236/15832">Service Addresses</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
+// Note: To query prices in a specific region, you need to use the access point of the region. For more information on access points, see <a href="https://www.tencentcloud.com/document/product/236/15832">Service Address</a>. For example, to query prices in Guangzhou, send a request to: cdb.ap-guangzhou.tencentcloudapi.com. Likewise, to query prices in Shanghai, send a request to: cdb.ap-shanghai.tencentcloudapi.com.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
