@@ -807,6 +807,12 @@ type DescribeClusterNodesRequestParams struct {
 
 	// Searchable field
 	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields"`
+
+	// None
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// None
+	Asc *int64 `json:"Asc,omitempty" name:"Asc"`
 }
 
 type DescribeClusterNodesRequest struct {
@@ -837,6 +843,12 @@ type DescribeClusterNodesRequest struct {
 
 	// Searchable field
 	SearchFields []*SearchItem `json:"SearchFields,omitempty" name:"SearchFields"`
+
+	// None
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// None
+	Asc *int64 `json:"Asc,omitempty" name:"Asc"`
 }
 
 func (r *DescribeClusterNodesRequest) ToJsonString() string {
@@ -857,6 +869,8 @@ func (r *DescribeClusterNodesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "HardwareResourceType")
 	delete(f, "SearchFields")
+	delete(f, "OrderField")
+	delete(f, "Asc")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterNodesRequest has unknown keys!", "")
 	}
@@ -2616,6 +2630,22 @@ type NodeHardwareInfo struct {
 	// Client
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Clients *string `json:"Clients,omitempty" name:"Clients"`
+
+	// The current system time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CurrentTime *string `json:"CurrentTime,omitempty" name:"CurrentTime"`
+
+	// Whether the hardware node is used in a federation. Valid values: `0` (no), `1` (yes).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsFederation *int64 `json:"IsFederation,omitempty" name:"IsFederation"`
+
+	// Device name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+
+	// Service
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceClient *string `json:"ServiceClient,omitempty" name:"ServiceClient"`
 }
 
 type OutterResource struct {

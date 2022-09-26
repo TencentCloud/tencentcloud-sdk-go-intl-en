@@ -106,7 +106,7 @@ type CountryCodeItem struct {
 
 // Predefined struct for user
 type CreateAccountRequestParams struct {
-	// Account type of a new customer. Valid value: `business`.
+	// Account type of a new customer. Valid values: `personal`, `company`.
 	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
@@ -138,7 +138,7 @@ type CreateAccountRequestParams struct {
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Account type of a new customer. Valid value: `business`.
+	// Account type of a new customer. Valid values: `personal`, `company`.
 	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.

@@ -883,6 +883,56 @@ func (c *Client) CreateL7RuleCertsWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateNewL7RulesRequest() (request *CreateNewL7RulesRequest) {
+    request = &CreateNewL7RulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("antiddos", APIVersion, "CreateNewL7Rules")
+    
+    
+    return
+}
+
+func NewCreateNewL7RulesResponse() (response *CreateNewL7RulesResponse) {
+    response = &CreateNewL7RulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateNewL7Rules
+// This API is used to add layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateNewL7Rules(request *CreateNewL7RulesRequest) (response *CreateNewL7RulesResponse, err error) {
+    return c.CreateNewL7RulesWithContext(context.Background(), request)
+}
+
+// CreateNewL7Rules
+// This API is used to add layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateNewL7RulesWithContext(ctx context.Context, request *CreateNewL7RulesRequest) (response *CreateNewL7RulesResponse, err error) {
+    if request == nil {
+        request = NewCreateNewL7RulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNewL7Rules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNewL7RulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePacketFilterConfigRequest() (request *CreatePacketFilterConfigRequest) {
     request = &CreatePacketFilterConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1724,6 +1774,7 @@ func NewDeleteWaterPrintKeyResponse() (response *DeleteWaterPrintKeyResponse) {
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
     return c.DeleteWaterPrintKeyWithContext(context.Background(), request)
@@ -1734,6 +1785,7 @@ func (c *Client) DeleteWaterPrintKey(request *DeleteWaterPrintKeyRequest) (respo
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteWaterPrintKeyWithContext(ctx context.Context, request *DeleteWaterPrintKeyRequest) (response *DeleteWaterPrintKeyResponse, err error) {
     if request == nil {
@@ -1774,6 +1826,7 @@ func NewDescribeBasicDeviceStatusResponse() (response *DescribeBasicDeviceStatus
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
     return c.DescribeBasicDeviceStatusWithContext(context.Background(), request)
@@ -1784,6 +1837,7 @@ func (c *Client) DescribeBasicDeviceStatus(request *DescribeBasicDeviceStatusReq
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBasicDeviceStatusWithContext(ctx context.Context, request *DescribeBasicDeviceStatusRequest) (response *DescribeBasicDeviceStatusResponse, err error) {
     if request == nil {
@@ -1797,6 +1851,58 @@ func (c *Client) DescribeBasicDeviceStatusWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeBasicDeviceStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBgpBizTrendRequest() (request *DescribeBgpBizTrendRequest) {
+    request = &DescribeBgpBizTrendRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBgpBizTrend")
+    
+    
+    return
+}
+
+func NewDescribeBgpBizTrendResponse() (response *DescribeBgpBizTrendResponse) {
+    response = &DescribeBgpBizTrendResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBgpBizTrend
+// This API is used to obtain Anti-DDoS Pro traffic data.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBgpBizTrend(request *DescribeBgpBizTrendRequest) (response *DescribeBgpBizTrendResponse, err error) {
+    return c.DescribeBgpBizTrendWithContext(context.Background(), request)
+}
+
+// DescribeBgpBizTrend
+// This API is used to obtain Anti-DDoS Pro traffic data.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBgpBizTrendWithContext(ctx context.Context, request *DescribeBgpBizTrendRequest) (response *DescribeBgpBizTrendResponse, err error) {
+    if request == nil {
+        request = NewDescribeBgpBizTrendRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBgpBizTrend require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBgpBizTrendResponse()
     err = c.Send(request, response)
     return
 }
@@ -2422,6 +2528,7 @@ func NewDescribeCcGeoIPBlockConfigListResponse() (response *DescribeCcGeoIPBlock
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCcGeoIPBlockConfigList(request *DescribeCcGeoIPBlockConfigListRequest) (response *DescribeCcGeoIPBlockConfigListResponse, err error) {
     return c.DescribeCcGeoIPBlockConfigListWithContext(context.Background(), request)
@@ -2432,6 +2539,7 @@ func (c *Client) DescribeCcGeoIPBlockConfigList(request *DescribeCcGeoIPBlockCon
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeCcGeoIPBlockConfigListWithContext(ctx context.Context, request *DescribeCcGeoIPBlockConfigListRequest) (response *DescribeCcGeoIPBlockConfigListResponse, err error) {
     if request == nil {
@@ -2472,6 +2580,7 @@ func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     return c.DescribeDDoSTrendWithContext(context.Background(), request)
@@ -2482,6 +2591,7 @@ func (c *Client) DescribeDDoSTrend(request *DescribeDDoSTrendRequest) (response 
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDDoSTrendWithContext(ctx context.Context, request *DescribeDDoSTrendRequest) (response *DescribeDDoSTrendResponse, err error) {
     if request == nil {
@@ -2522,6 +2632,7 @@ func NewDescribeDefaultAlarmThresholdResponse() (response *DescribeDefaultAlarmT
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
     return c.DescribeDefaultAlarmThresholdWithContext(context.Background(), request)
@@ -2532,6 +2643,7 @@ func (c *Client) DescribeDefaultAlarmThreshold(request *DescribeDefaultAlarmThre
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDefaultAlarmThresholdWithContext(ctx context.Context, request *DescribeDefaultAlarmThresholdRequest) (response *DescribeDefaultAlarmThresholdResponse, err error) {
     if request == nil {
@@ -3417,6 +3529,68 @@ func (c *Client) DescribeListWaterPrintConfigWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeNewL7RulesRequest() (request *DescribeNewL7RulesRequest) {
+    request = &DescribeNewL7RulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeNewL7Rules")
+    
+    
+    return
+}
+
+func NewDescribeNewL7RulesResponse() (response *DescribeNewL7RulesResponse) {
+    response = &DescribeNewL7RulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeNewL7Rules
+// This API is used to obtain layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNewL7Rules(request *DescribeNewL7RulesRequest) (response *DescribeNewL7RulesResponse, err error) {
+    return c.DescribeNewL7RulesWithContext(context.Background(), request)
+}
+
+// DescribeNewL7Rules
+// This API is used to obtain layer-7 forwarding rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNewL7RulesWithContext(ctx context.Context, request *DescribeNewL7RulesRequest) (response *DescribeNewL7RulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNewL7RulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNewL7Rules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNewL7RulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOverviewDDoSEventListRequest() (request *DescribeOverviewDDoSEventListRequest) {
     request = &DescribeOverviewDDoSEventListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3930,6 +4104,7 @@ func NewModifyPacketFilterConfigResponse() (response *ModifyPacketFilterConfigRe
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyPacketFilterConfig(request *ModifyPacketFilterConfigRequest) (response *ModifyPacketFilterConfigResponse, err error) {
     return c.ModifyPacketFilterConfigWithContext(context.Background(), request)
 }
@@ -3939,6 +4114,7 @@ func (c *Client) ModifyPacketFilterConfig(request *ModifyPacketFilterConfigReque
 //
 // error code that may be returned:
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyPacketFilterConfigWithContext(ctx context.Context, request *ModifyPacketFilterConfigRequest) (response *ModifyPacketFilterConfigResponse, err error) {
     if request == nil {
         request = NewModifyPacketFilterConfigRequest()
@@ -3979,6 +4155,7 @@ func NewSwitchWaterPrintConfigResponse() (response *SwitchWaterPrintConfigRespon
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SwitchWaterPrintConfig(request *SwitchWaterPrintConfigRequest) (response *SwitchWaterPrintConfigResponse, err error) {
     return c.SwitchWaterPrintConfigWithContext(context.Background(), request)
@@ -3990,6 +4167,7 @@ func (c *Client) SwitchWaterPrintConfig(request *SwitchWaterPrintConfigRequest) 
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) SwitchWaterPrintConfigWithContext(ctx context.Context, request *SwitchWaterPrintConfigRequest) (response *SwitchWaterPrintConfigResponse, err error) {
     if request == nil {

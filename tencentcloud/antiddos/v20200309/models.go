@@ -286,7 +286,8 @@ type BGPIPInstance struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AnycastOutPackRelation *AnycastOutPackRelation `json:"AnycastOutPackRelation,omitempty" name:"AnycastOutPackRelation"`
 
-
+	// Edition of the instance
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	InstanceVersion *uint64 `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
 }
 
@@ -1563,6 +1564,84 @@ func (r *CreateL7RuleCertsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateNewL7RulesRequestParams struct {
+	// List of rules
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// List of resource IDs
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+
+	// List of resource IPs
+	VipList []*string `json:"VipList,omitempty" name:"VipList"`
+}
+
+type CreateNewL7RulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of rules
+	Rules []*L7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// List of resource IDs
+	IdList []*string `json:"IdList,omitempty" name:"IdList"`
+
+	// List of resource IPs
+	VipList []*string `json:"VipList,omitempty" name:"VipList"`
+}
+
+func (r *CreateNewL7RulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNewL7RulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Rules")
+	delete(f, "Business")
+	delete(f, "IdList")
+	delete(f, "VipList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNewL7RulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNewL7RulesResponseParams struct {
+	// Success code
+	Success *SuccessCode `json:"Success,omitempty" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateNewL7RulesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNewL7RulesResponseParams `json:"Response"`
+}
+
+func (r *CreateNewL7RulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNewL7RulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreatePacketFilterConfigRequestParams struct {
 	// Anti-DDoS instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2637,6 +2716,107 @@ func (r *DescribeBasicDeviceStatusResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBasicDeviceStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBgpBizTrendRequestParams struct {
+	// Anti-DDoS service code. `bgp-multip` indicates Anti-DDos Pro.
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End of the time range for the query, such as `2020-09-22 00:00:00`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical metric. Values: `intraffic`, `outtraffic`, `inpkg`, and `outpkg`.
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// `0`: Fixed time. `1`: Custom time.
+	Flag *uint64 `json:"Flag,omitempty" name:"Flag"`
+}
+
+type DescribeBgpBizTrendRequest struct {
+	*tchttp.BaseRequest
+	
+	// Anti-DDoS service code. `bgp-multip` indicates Anti-DDos Pro.
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End of the time range for the query, such as `2020-09-22 00:00:00`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Statistical metric. Values: `intraffic`, `outtraffic`, `inpkg`, and `outpkg`.
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// `0`: Fixed time. `1`: Custom time.
+	Flag *uint64 `json:"Flag,omitempty" name:"Flag"`
+}
+
+func (r *DescribeBgpBizTrendRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBgpBizTrendRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Business")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricName")
+	delete(f, "InstanceId")
+	delete(f, "Flag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBgpBizTrendRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBgpBizTrendResponseParams struct {
+	// Values of the samples
+	DataList []*uint64 `json:"DataList,omitempty" name:"DataList"`
+
+	// Number of samples
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Statistical metric
+	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
+
+	// Maximum value of the arrays returned
+	MaxData *uint64 `json:"MaxData,omitempty" name:"MaxData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBgpBizTrendResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBgpBizTrendResponseParams `json:"Response"`
+}
+
+func (r *DescribeBgpBizTrendResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBgpBizTrendResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4973,6 +5153,118 @@ func (r *DescribeListWaterPrintConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeNewL7RulesRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// (Optional) Searches by rule status. Valid values: `0` (Successfully configured), `1` (Being configured), `2` (Configuration failed), `3` (Being deleted), `5` (Deletion failed), `6` (awaiting configuration), `7` (awaiting deletion), and `8` (awaiting certificate configuration).
+	StatusList []*uint64 `json:"StatusList,omitempty" name:"StatusList"`
+
+	// (Optional) Searches by domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// (Optional) Searches by IP.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Number of items in a page. Returned results are not paged if you enter “0”.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the page. Value: (number of pages – 1) * items per page.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// (Optional) Searches by forwarding protocol. Values: [http, https, http/https]
+	ProtocolList []*string `json:"ProtocolList,omitempty" name:"ProtocolList"`
+
+	// CNAME of the Anti-DDoS Advanced instance
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+}
+
+type DescribeNewL7RulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// (Optional) Searches by rule status. Valid values: `0` (Successfully configured), `1` (Being configured), `2` (Configuration failed), `3` (Being deleted), `5` (Deletion failed), `6` (awaiting configuration), `7` (awaiting deletion), and `8` (awaiting certificate configuration).
+	StatusList []*uint64 `json:"StatusList,omitempty" name:"StatusList"`
+
+	// (Optional) Searches by domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// (Optional) Searches by IP.
+	Ip *string `json:"Ip,omitempty" name:"Ip"`
+
+	// Number of items in a page. Returned results are not paged if you enter “0”.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the page. Value: (number of pages – 1) * items per page.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// (Optional) Searches by forwarding protocol. Values: [http, https, http/https]
+	ProtocolList []*string `json:"ProtocolList,omitempty" name:"ProtocolList"`
+
+	// CNAME of the Anti-DDoS Advanced instance
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+}
+
+func (r *DescribeNewL7RulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNewL7RulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Business")
+	delete(f, "StatusList")
+	delete(f, "Domain")
+	delete(f, "Ip")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "ProtocolList")
+	delete(f, "Cname")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNewL7RulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNewL7RulesResponseParams struct {
+	// List of forwarding rules
+	Rules []*NewL7RuleEntry `json:"Rules,omitempty" name:"Rules"`
+
+	// List of health check settings
+	Healths []*L7RuleHealth `json:"Healths,omitempty" name:"Healths"`
+
+	// Total number of rules
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNewL7RulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNewL7RulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeNewL7RulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNewL7RulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeOverviewDDoSEventListRequestParams struct {
 	// Start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -5283,6 +5575,127 @@ type L4RuleSource struct {
 	// 8000
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Port *uint64 `json:"Port,omitempty" name:"Port"`
+
+	// Secondary origin server. `1`: secondary origin server; `0`: general origin server.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Backup *uint64 `json:"Backup,omitempty" name:"Backup"`
+}
+
+type L7RuleEntry struct {
+	// Session persistence duration, in seconds.
+	KeepTime *uint64 `json:"KeepTime,omitempty" name:"KeepTime"`
+
+	// Forwarding domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Forwarding protocol. Valid values: `http` and `https`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Forwarding method. Valid values: `1` (by domain name); `2` (by IP).
+	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
+
+	// Load balancing method. Valid value: `1` (weighed polling).
+	LbType *uint64 `json:"LbType,omitempty" name:"LbType"`
+
+	// List of origins
+	SourceList []*L4RuleSource `json:"SourceList,omitempty" name:"SourceList"`
+
+	// Whether session persistence is enabled. Valid values: `0` (disabled) and `1` (enabled).
+	KeepEnable *uint64 `json:"KeepEnable,omitempty" name:"KeepEnable"`
+
+	// Rule status. Valid values: `0` (the rule was successfully configured), `1` (configuring the rule), `2` (rule configuration failed), `3` (deleting the rule), `5` (failed to delete rule), `6` (rule awaiting configuration), `7` (rule awaiting deletion), and `8` (rule awaiting certificate configuration).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Rule ID. This field is not required for adding a rule, but is required for modifying or deleting a rule.
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// CC protection threshold based on HTTPS.
+	CCThreshold *uint64 `json:"CCThreshold,omitempty" name:"CCThreshold"`
+
+	// [Disused] When the certificate is an external certificate, the certificate key should be provided here. 
+	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+
+	// CC protection status based on HTTPS. Valid values: `0` (disabled) and `1` (enabled).
+	CCEnable *uint64 `json:"CCEnable,omitempty" name:"CCEnable"`
+
+	// Whether to enable **Forward HTTPS requests via HTTP**. Valid values: `0` (disable) and `1` (enable). It defaults to `0`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HttpsToHttpEnable *uint64 `json:"HttpsToHttpEnable,omitempty" name:"HttpsToHttpEnable"`
+
+	// Certificate source. When the forwarding protocol is HTTPS, this field must be set to `2` (Tencent Cloud managed certificate), and for HTTP protocol, it can be set to `0`.
+	CertType *uint64 `json:"CertType,omitempty" name:"CertType"`
+
+	// [Disused] When the certificate is an external certificate, the certificate content should be provided here. 
+	Cert *string `json:"Cert,omitempty" name:"Cert"`
+
+	// CC protection level based on HTTPS.
+	CCLevel *string `json:"CCLevel,omitempty" name:"CCLevel"`
+
+	// Rule description.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+	CCStatus *uint64 `json:"CCStatus,omitempty" name:"CCStatus"`
+
+	// Access port number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VirtualPort *uint64 `json:"VirtualPort,omitempty" name:"VirtualPort"`
+
+	// When the certificate is managed by Tencent Cloud, this field must be set to the ID of the managed certificate.
+	SSLId *string `json:"SSLId,omitempty" name:"SSLId"`
+
+	// ID of the rule
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Intelligent CC protection status. Valid values: `0` (disabled) and `1` (enabled).
+	CCAIEnable *uint64 `json:"CCAIEnable,omitempty" name:"CCAIEnable"`
+}
+
+type L7RuleHealth struct {
+	// Configuration status. Values: `0` (normal), `1` (configuration in progress) and `2` (configuration failed).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Switch. Values: `1`: Enable; `0`: Disable.
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+
+	// ID of the rule
+	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
+
+	// HTTP request path. The default value is /.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Health check interval. Unit: second.
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Healthy threshold, which specifies the number of consecutive successful health checks.
+	AliveNum *uint64 `json:"AliveNum,omitempty" name:"AliveNum"`
+
+	// Unhealthy threshold, which specifies the number of consecutive failed health checks.
+	KickNum *uint64 `json:"KickNum,omitempty" name:"KickNum"`
+
+	// HTTP request method. Values: `HEAD` and `GET`.
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Status code that signifies a normal state. Values: `1` (1xx), `2` (2xx), `4` (3xx), `8` (4xx), and `16` (5xx).
+	StatusCode *uint64 `json:"StatusCode,omitempty" name:"StatusCode"`
+
+	// Whether to deploy both HTTP and HTTPS health check rules
+	ProtocolFlag *uint64 `json:"ProtocolFlag,omitempty" name:"ProtocolFlag"`
+
+	// Enables passive detection. Values: `1` (enable) and `0` (disable).
+	PassiveEnable *uint64 `json:"PassiveEnable,omitempty" name:"PassiveEnable"`
+
+	// Blocking period in the passive detection configuration
+	BlockInter *uint64 `json:"BlockInter,omitempty" name:"BlockInter"`
+
+	// Time interval between passive detections
+	FailedCountInter *uint64 `json:"FailedCountInter,omitempty" name:"FailedCountInter"`
+
+	// Unhealthy threshold in the passive detection configuration
+	FailedThreshold *uint64 `json:"FailedThreshold,omitempty" name:"FailedThreshold"`
+
+	// Status code that signals that the passive detection considers the status normal. Values: `1` (1xx), `2` (2xx), `4` (3xx), `8` (4xx), and `16` (5xx).
+	PassiveStatusCode *uint64 `json:"PassiveStatusCode,omitempty" name:"PassiveStatusCode"`
 }
 
 type Layer4Rule struct {

@@ -57,13 +57,13 @@ type CreateApplicationRequestParams struct {
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Whether to use the default image service. 1: yes; 0: no
+	// Whether to use the default image service. `1`: yes; `0`: no
 	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitempty" name:"UseDefaultImageService"`
 
-	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
+	// Type of the bound repository. `0`: TCR Personal; `1`: TCR Enterprise
 	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
 
-	// Instance ID of Enterprise Edition image service
+	// TCR Enterprise instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Address of the bound image server
@@ -89,8 +89,11 @@ type CreateApplicationRequestParams struct {
 	// - WAR
 	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
 
-	// Whether to enable the call chain feature
+	// Whether to enable APM tracing for the Java application. `1`: Enable, `0`: Disable
 	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+
+	// Parameters of the default image service
+	UseDefaultImageServiceParameters *UseDefaultRepoParameters `json:"UseDefaultImageServiceParameters,omitempty" name:"UseDefaultImageServiceParameters"`
 }
 
 type CreateApplicationRequest struct {
@@ -102,13 +105,13 @@ type CreateApplicationRequest struct {
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Whether to use the default image service. 1: yes; 0: no
+	// Whether to use the default image service. `1`: yes; `0`: no
 	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitempty" name:"UseDefaultImageService"`
 
-	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
+	// Type of the bound repository. `0`: TCR Personal; `1`: TCR Enterprise
 	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
 
-	// Instance ID of Enterprise Edition image service
+	// TCR Enterprise instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Address of the bound image server
@@ -134,8 +137,11 @@ type CreateApplicationRequest struct {
 	// - WAR
 	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
 
-	// Whether to enable the call chain feature
+	// Whether to enable APM tracing for the Java application. `1`: Enable, `0`: Disable
 	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+
+	// Parameters of the default image service
+	UseDefaultImageServiceParameters *UseDefaultRepoParameters `json:"UseDefaultImageServiceParameters,omitempty" name:"UseDefaultImageServiceParameters"`
 }
 
 func (r *CreateApplicationRequest) ToJsonString() string {
@@ -162,6 +168,7 @@ func (r *CreateApplicationRequest) FromJsonString(s string) error {
 	delete(f, "CodingLanguage")
 	delete(f, "DeployMode")
 	delete(f, "EnableTracing")
+	delete(f, "UseDefaultImageServiceParameters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationRequest has unknown keys!", "")
 	}
@@ -170,7 +177,7 @@ func (r *CreateApplicationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateApplicationResponseParams struct {
-	// Service code
+	// ID of the created application
 	Result *string `json:"Result,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -507,13 +514,13 @@ type CronHorizontalAutoscalerSchedule struct {
 
 // Predefined struct for user
 type DeleteApplicationRequestParams struct {
-	// Service ID
+	// Application ID.
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Retain as default
+	// Source channel. Please keep the default value.
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
 
 	// Whether to delete this application automatically when there is no running version.
@@ -523,13 +530,13 @@ type DeleteApplicationRequestParams struct {
 type DeleteApplicationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Service ID
+	// Application ID.
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Retain as default
+	// Source channel. Please keep the default value.
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
 
 	// Whether to delete this application automatically when there is no running version.
@@ -560,7 +567,7 @@ func (r *DeleteApplicationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteApplicationResponseParams struct {
-	// Returned result
+	// Returned result.
 	Result *bool `json:"Result,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -797,8 +804,21 @@ type DeployApplicationRequestParams struct {
 	// Specifies whether to enable Prometheus metric
 	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
 
-	// `1`: Enable APM collection; `0`: Disable APM collection
+	// `1`: Enable APM tracing (Skywalking)
+	// `0`: Disable APM tracing
 	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+
+
+	EnableMetrics *int64 `json:"EnableMetrics,omitempty" name:"EnableMetrics"`
+
+
+	TcrInstanceId *string `json:"TcrInstanceId,omitempty" name:"TcrInstanceId"`
+
+
+	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
+
+
+	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
 }
 
 type DeployApplicationRequest struct {
@@ -938,8 +958,17 @@ type DeployApplicationRequest struct {
 	// Specifies whether to enable Prometheus metric
 	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
 
-	// `1`: Enable APM collection; `0`: Disable APM collection
+	// `1`: Enable APM tracing (Skywalking)
+	// `0`: Disable APM tracing
 	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+
+	EnableMetrics *int64 `json:"EnableMetrics,omitempty" name:"EnableMetrics"`
+
+	TcrInstanceId *string `json:"TcrInstanceId,omitempty" name:"TcrInstanceId"`
+
+	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
+
+	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
 }
 
 func (r *DeployApplicationRequest) ToJsonString() string {
@@ -995,6 +1024,10 @@ func (r *DeployApplicationRequest) FromJsonString(s string) error {
 	delete(f, "OsFlavour")
 	delete(f, "EnablePrometheusConf")
 	delete(f, "EnableTracing")
+	delete(f, "EnableMetrics")
+	delete(f, "TcrInstanceId")
+	delete(f, "RepoServer")
+	delete(f, "RepoType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployApplicationRequest has unknown keys!", "")
 	}
@@ -1539,6 +1572,70 @@ type DescribeRunPodPage struct {
 	PodList []*RunVersionPod `json:"PodList,omitempty" name:"PodList"`
 }
 
+// Predefined struct for user
+type DestroyEnvironmentRequestParams struct {
+	// Namespace ID.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Namespace
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DestroyEnvironmentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Namespace ID.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Namespace
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DestroyEnvironmentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyEnvironmentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DestroyEnvironmentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DestroyEnvironmentResponseParams struct {
+	// Returned result.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DestroyEnvironmentResponse struct {
+	*tchttp.BaseResponse
+	Response *DestroyEnvironmentResponseParams `json:"Response"`
+}
+
+func (r *DestroyEnvironmentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyEnvironmentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EksService struct {
 	// Service name
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -1851,7 +1948,7 @@ type ModifyApplicationInfoRequestParams struct {
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
 
-	// Whether to enable the call chain. Valid values: `0`: disable; `1`: enable
+	// (Disused) Whether to enable the call chain. 
 	EnableTracing *uint64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
 }
 
@@ -1867,7 +1964,7 @@ type ModifyApplicationInfoRequest struct {
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
 
-	// Whether to enable the call chain. Valid values: `0`: disable; `1`: enable
+	// (Disused) Whether to enable the call chain. 
 	EnableTracing *uint64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
 }
 
@@ -2134,6 +2231,9 @@ type PortMapping struct {
 
 	// TCP/UDP protocol stack.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// K8s service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
 }
 
 // Predefined struct for user
@@ -2660,4 +2760,18 @@ type TemNamespaceInfo struct {
 
 	// Whether the environment is locked. `1`: locked; `0`: not locked
 	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
+}
+
+type UseDefaultRepoParameters struct {
+	// TCR Enterprise instance name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnterpriseInstanceName *string `json:"EnterpriseInstanceName,omitempty" name:"EnterpriseInstanceName"`
+
+	// TCR Enterprise billing mode. `0`: Pay-as-you-go 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnterpriseInstanceChargeType *int64 `json:"EnterpriseInstanceChargeType,omitempty" name:"EnterpriseInstanceChargeType"`
+
+	// Edition of the TCR Enterprise. Values: `basic`, `standard`, `premium` (Advanced edition)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnterpriseInstanceType *string `json:"EnterpriseInstanceType,omitempty" name:"EnterpriseInstanceType"`
 }

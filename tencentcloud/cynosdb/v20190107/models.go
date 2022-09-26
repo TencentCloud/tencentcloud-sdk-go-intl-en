@@ -330,22 +330,22 @@ type Addr struct {
 }
 
 type BackupFileInfo struct {
-	// Snapshot file ID used for rollback
+	// Snapshot file ID, which is deprecated. You need to use `BackupId`.
 	SnapshotId *uint64 `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
-	// Snapshot file name
+	// Backup file name
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
 
-	// Snapshot file size
+	// Backup file size
 	FileSize *uint64 `json:"FileSize,omitempty" name:"FileSize"`
 
-	// Snapshot backup start time
+	// Backup start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Snapshot backup end time
+	// Backup end time
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 
-	// Backup type. snapshot: snapshot backup; timepoint: time point backup
+	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
 	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
 
 	// Back mode. auto: auto backup; manual: manual backup
@@ -356,6 +356,17 @@ type BackupFileInfo struct {
 
 	// Backup file time
 	SnapshotTime *string `json:"SnapshotTime,omitempty" name:"SnapshotTime"`
+
+	// Backup ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+
+
+	SnapShotType *string `json:"SnapShotType,omitempty" name:"SnapShotType"`
+
+	// Backup file alias
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
 }
 
 type BillingResourceInfo struct {
@@ -1647,15 +1658,39 @@ type DescribeBackupListRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Backup file list offset
+	// The number of results to be returned. Value range: (0,100]
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Backup file list start
+	// Record offset. Value range: [0,INF)
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Backup ID
+	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
+
+	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
+	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+
+	SnapShotType *string `json:"SnapShotType,omitempty" name:"SnapShotType"`
+
+	// Backup start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Backup end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+
+	FileNames []*string `json:"FileNames,omitempty" name:"FileNames"`
+
+	// Backup alias, which supports fuzzy query.
+	BackupNames []*string `json:"BackupNames,omitempty" name:"BackupNames"`
 }
 
 type DescribeBackupListRequest struct {
@@ -1664,15 +1699,37 @@ type DescribeBackupListRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Backup file list offset
+	// The number of results to be returned. Value range: (0,100]
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Backup file list start
+	// Record offset. Value range: [0,INF)
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Backup ID
+	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
+
+	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
+	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
+
+	SnapShotType *string `json:"SnapShotType,omitempty" name:"SnapShotType"`
+
+	// Backup start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Backup end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	FileNames []*string `json:"FileNames,omitempty" name:"FileNames"`
+
+	// Backup alias, which supports fuzzy query.
+	BackupNames []*string `json:"BackupNames,omitempty" name:"BackupNames"`
 }
 
 func (r *DescribeBackupListRequest) ToJsonString() string {
@@ -1691,6 +1748,14 @@ func (r *DescribeBackupListRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "DbType")
+	delete(f, "BackupIds")
+	delete(f, "BackupType")
+	delete(f, "BackupMethod")
+	delete(f, "SnapShotType")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "FileNames")
+	delete(f, "BackupNames")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupListRequest has unknown keys!", "")
 	}
