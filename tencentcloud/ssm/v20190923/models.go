@@ -208,6 +208,9 @@ type CreateSSHKeyPairSecretRequestParams struct {
 
 	// List of tags.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
+	SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
 }
 
 type CreateSSHKeyPairSecretRequest struct {
@@ -229,6 +232,9 @@ type CreateSSHKeyPairSecretRequest struct {
 
 	// List of tags.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
+	SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
 }
 
 func (r *CreateSSHKeyPairSecretRequest) ToJsonString() string {
@@ -248,6 +254,7 @@ func (r *CreateSSHKeyPairSecretRequest) FromJsonString(s string) error {
 	delete(f, "Description")
 	delete(f, "KmsKeyId")
 	delete(f, "Tags")
+	delete(f, "SSHKeyName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSSHKeyPairSecretRequest has unknown keys!", "")
 	}
@@ -1270,8 +1277,8 @@ type GetServiceStatusResponseParams struct {
 	// Invalid service type. `0`: not purchased; `1`: normal; `2`: suspended due to arrears; `3`: resource released
 	InvalidType *int64 `json:"InvalidType,omitempty" name:"InvalidType"`
 
-	// `true`: allow SSM to manage Tencent Cloud API key secrets.
-	// `false`: forbid SSM to manage Tencent Cloud API key secrets.
+	// `true`: Allow SSM to manage Tencent Cloud API key secrets.
+	// `false`: Forbid SSM to manage Tencent Cloud API key secrets.
 	AccessKeyEscrowEnabled *bool `json:"AccessKeyEscrowEnabled,omitempty" name:"AccessKeyEscrowEnabled"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

@@ -326,6 +326,16 @@ type Blueprint struct {
 	// ID of the Lighthouse image shared from a CVM image
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+	// URL of official website of the open-source project
+	CommunityUrl *string `json:"CommunityUrl,omitempty" name:"CommunityUrl"`
+
+	// Guide documentation URL
+	GuideUrl *string `json:"GuideUrl,omitempty" name:"GuideUrl"`
+
+	// Array of IDs of scenes associated with an image
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SceneIdSet []*string `json:"SceneIdSet,omitempty" name:"SceneIdSet"`
 }
 
 type BlueprintInstance struct {
@@ -646,19 +656,19 @@ func (r *CreateInstanceSnapshotResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
-	// ID of the Lighthouse package
+	// Bundle ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
-	// ID of the Lighthouse image
+	// Image ID
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
 
 	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
-	// The display name of the Lighthouse instance
+	// Instance display name.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+	// Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
 	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
 	// List of availability zones. A random AZ is selected by default.
@@ -679,24 +689,27 @@ type CreateInstancesRequestParams struct {
 
 	// Configuration of the containers to create
 	Containers []*DockerContainerConfiguration `json:"Containers,omitempty" name:"Containers"`
+
+	// Whether to use the vouchers automatically. It defaults to No.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 }
 
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the Lighthouse package
+	// Bundle ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
-	// ID of the Lighthouse image
+	// Image ID
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
 
 	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
-	// The display name of the Lighthouse instance
+	// Instance display name.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Number of the Lighthouse instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+	// Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
 	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
 	// List of availability zones. A random AZ is selected by default.
@@ -717,6 +730,9 @@ type CreateInstancesRequest struct {
 
 	// Configuration of the containers to create
 	Containers []*DockerContainerConfiguration `json:"Containers,omitempty" name:"Containers"`
+
+	// Whether to use the vouchers automatically. It defaults to No.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -741,6 +757,7 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ClientToken")
 	delete(f, "LoginConfiguration")
 	delete(f, "Containers")
+	delete(f, "AutoVoucher")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -838,7 +855,7 @@ type DataDiskPrice struct {
 	// Cloud disk unit price.
 	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitempty" name:"OriginalDiskPrice"`
 
-	// Total cloud disk price.
+	// Total price of cloud disk
 	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
 	// Discount.
@@ -1165,17 +1182,20 @@ type DescribeBlueprintsRequestParams struct {
 	// Type: String
 	// Required: no
 	// <li>blueprint-type</li>Filter by **image type**.
-	// Valid values: `APP_OS`: application image; `PURE_OS`: system image; `PRIVATE`: custom image; `SHARED`: shared image
+	// Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
 	// Type: String
 	// Required: no
-	// <li>platform-type</li>Filter by **image platform type**.
-	// Valid values: `LINUX_UNIX`: Linux or Unix; `WINDOWS`: Windows
+	// <li>platform-type</li>Filter by **image operating system**.
+	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
 	// Required: no
 	// <li>blueprint-name</li>Filter by **image name**.
 	// Type: String
 	// Required: no
 	// <li>blueprint-state</li>Filter by **image status**.
+	// Type: String
+	// Required: no
+	// <li>scene-id</li>Filter by **scene ID**.
 	// Type: String
 	// Required: no
 	// 
@@ -1200,17 +1220,20 @@ type DescribeBlueprintsRequest struct {
 	// Type: String
 	// Required: no
 	// <li>blueprint-type</li>Filter by **image type**.
-	// Valid values: `APP_OS`: application image; `PURE_OS`: system image; `PRIVATE`: custom image; `SHARED`: shared image
+	// Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
 	// Type: String
 	// Required: no
-	// <li>platform-type</li>Filter by **image platform type**.
-	// Valid values: `LINUX_UNIX`: Linux or Unix; `WINDOWS`: Windows
+	// <li>platform-type</li>Filter by **image operating system**.
+	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
 	// Required: no
 	// <li>blueprint-name</li>Filter by **image name**.
 	// Type: String
 	// Required: no
 	// <li>blueprint-state</li>Filter by **image status**.
+	// Type: String
+	// Required: no
+	// <li>scene-id</li>Filter by **scene ID**.
 	// Type: String
 	// Required: no
 	// 
@@ -1557,6 +1580,9 @@ type DescribeDiskDiscountRequestParams struct {
 
 	// Cloud disk size.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
 }
 
 type DescribeDiskDiscountRequest struct {
@@ -1567,6 +1593,9 @@ type DescribeDiskDiscountRequest struct {
 
 	// Cloud disk size.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
 }
 
 func (r *DescribeDiskDiscountRequest) ToJsonString() string {
@@ -1583,6 +1612,7 @@ func (r *DescribeDiskDiscountRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DiskType")
 	delete(f, "DiskSize")
+	delete(f, "DiskBackupQuota")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDiskDiscountRequest has unknown keys!", "")
 	}
@@ -1679,32 +1709,34 @@ type DescribeDisksRequestParams struct {
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
-	// Filter list.
+	// Filter list
 	// disk-id
 	// Filter by **cloud disk ID**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// instance-id
 	// Filter by **instance ID**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// disk-name
 	// Filter by **cloud disk name**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// zone
 	// Filter by **availability zone**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// disk-usage
 	// Filter by **cloud disk type**.
 	// Type: String
-	// Required: no
+	// Required: No
+	// Values: `SYSTEM_DISK` and `DATA_DISK`
 	// disk-state
 	// Filter by **cloud disk status**.
 	// Type: String
-	// Required: no
-	// Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `DiskIds` and `Filters` at the same time.
+	// Required: No
+	// Values: See `DiskState` in [Disk](https://intl.cloud.tencent.com/document/api/1207/47576?from_cn_redirect=1#Disk)
+	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. `DiskIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -1726,32 +1758,34 @@ type DescribeDisksRequest struct {
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
-	// Filter list.
+	// Filter list
 	// disk-id
 	// Filter by **cloud disk ID**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// instance-id
 	// Filter by **instance ID**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// disk-name
 	// Filter by **cloud disk name**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// zone
 	// Filter by **availability zone**.
 	// Type: String
-	// Required: no
+	// Required: No
 	// disk-usage
 	// Filter by **cloud disk type**.
 	// Type: String
-	// Required: no
+	// Required: No
+	// Values: `SYSTEM_DISK` and `DATA_DISK`
 	// disk-state
 	// Filter by **cloud disk status**.
 	// Type: String
-	// Required: no
-	// Each request can contain up to 10 filters, each of which can have 5 values. You cannot specify both `DiskIds` and `Filters` at the same time.
+	// Required: No
+	// Values: See `DiskState` in [Disk](https://intl.cloud.tencent.com/document/api/1207/47576?from_cn_redirect=1#Disk)
+	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. `DiskIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -2029,14 +2063,36 @@ func (r *DescribeFirewallRulesTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGeneralResourceQuotasRequestParams struct {
-	// List of resource names. Valid values: USER_KEY_PAIR, INSTANCE, SNAPSHOT.
+	// Resource name list. Values:
+	// - `GENERAL_BUNDLE_INSTANCE`: General bundle
+	// - `STORAGE_BUNDLE_INSTANCE`:  Storage bundle 
+	// - `ENTERPRISE_BUNDLE_INSTANCE`: Enterprise bundle 
+	// - `EXCLUSIVE_BUNDLE_INSTANCE`： Dedicated bundle
+	// - `BEFAST_BUNDLE_INSTANCE`: BeFast bundle
+	// - `USER_KEY_PAIR`: Key pair
+	// - `SNAPSHOT`: Snapshot
+	// - `BLUEPRINT`: Custom image
+	// - `FREE_BLUEPRINT`: Free custom image
+	// - `DATA_DISK`: Data disk
+	// - `FIREWALL_RULE`: Firewall rules
 	ResourceNames []*string `json:"ResourceNames,omitempty" name:"ResourceNames"`
 }
 
 type DescribeGeneralResourceQuotasRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of resource names. Valid values: USER_KEY_PAIR, INSTANCE, SNAPSHOT.
+	// Resource name list. Values:
+	// - `GENERAL_BUNDLE_INSTANCE`: General bundle
+	// - `STORAGE_BUNDLE_INSTANCE`:  Storage bundle 
+	// - `ENTERPRISE_BUNDLE_INSTANCE`: Enterprise bundle 
+	// - `EXCLUSIVE_BUNDLE_INSTANCE`： Dedicated bundle
+	// - `BEFAST_BUNDLE_INSTANCE`: BeFast bundle
+	// - `USER_KEY_PAIR`: Key pair
+	// - `SNAPSHOT`: Snapshot
+	// - `BLUEPRINT`: Custom image
+	// - `FREE_BLUEPRINT`: Free custom image
+	// - `DATA_DISK`: Data disk
+	// - `FIREWALL_RULE`: Firewall rules
 	ResourceNames []*string `json:"ResourceNames,omitempty" name:"ResourceNames"`
 }
 
@@ -2320,14 +2376,14 @@ type DescribeInstancesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Filter list
-	// <li>instance-name</li>Filter by the instance name
+	// Filter list.
+	// <li>instance-name</li>Filter by **instance name**.
 	// Type: String
 	// Required: no
-	// <li>private-ip-address</li>Filter by the private IP of instance primary ENI
+	// <li>private-ip-address</li>Filter by **private IP of instance primary ENI**.
 	// Type: String
 	// Required: no
-	// <li>public-ip-address</li>Filter by the public IP of instance primary ENI
+	// <li>public-ip-address</li>Filter by **public IP of instance primary ENI**.
 	// Type: String
 	// Required: no
 	// <li>zone</li>Filter by the availability zone
@@ -2336,7 +2392,7 @@ type DescribeInstancesRequestParams struct {
 	// <li>instance-state</li>Filter by **instance status**.
 	// Type: String
 	// Required: no
-	// Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
+	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -2352,14 +2408,14 @@ type DescribeInstancesRequest struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Filter list
-	// <li>instance-name</li>Filter by the instance name
+	// Filter list.
+	// <li>instance-name</li>Filter by **instance name**.
 	// Type: String
 	// Required: no
-	// <li>private-ip-address</li>Filter by the private IP of instance primary ENI
+	// <li>private-ip-address</li>Filter by **private IP of instance primary ENI**.
 	// Type: String
 	// Required: no
-	// <li>public-ip-address</li>Filter by the public IP of instance primary ENI
+	// <li>public-ip-address</li>Filter by **public IP of instance primary ENI**.
 	// Type: String
 	// Required: no
 	// <li>zone</li>Filter by the availability zone
@@ -2368,7 +2424,7 @@ type DescribeInstancesRequest struct {
 	// <li>instance-state</li>Filter by **instance status**.
 	// Type: String
 	// Required: no
-	// Each request can contain up to 10 filters, each of which can have 100 values. You cannot specify both `InstanceIds` and `Filters` at the same time.
+	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -2405,7 +2461,7 @@ type DescribeInstancesResponseParams struct {
 	// Number of eligible instances.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// List of instance details.
+	// List of instance details
 	InstanceSet []*Instance `json:"InstanceSet,omitempty" name:"InstanceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3114,7 +3170,7 @@ func (r *DescribeSnapshotsResponse) FromJsonString(s string) error {
 type DescribeZonesRequestParams struct {
 	// Sorting field. Valid values:
 	// <li>`ZONE`: Sort by the availability zone.
-	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
+	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by visibility labels (`HIDDEN`, `NORMAL` and `SELECTED`). Default: ['HIDDEN', 'NORMAL', 'SELECTED'].
 	// The default value is `ZONE`.
 	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
 
@@ -3130,7 +3186,7 @@ type DescribeZonesRequest struct {
 	
 	// Sorting field. Valid values:
 	// <li>`ZONE`: Sort by the availability zone.
-	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by the labels of availability zones. Labels include `HIDDEN`, `NORMAL` and `SELECTED`.
+	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by visibility labels (`HIDDEN`, `NORMAL` and `SELECTED`). Default: ['HIDDEN', 'NORMAL', 'SELECTED'].
 	// The default value is `ZONE`.
 	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
 
@@ -3297,6 +3353,25 @@ func (r *DetachDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DetailPrice struct {
+	// Values: 
+	// <li>"DiskSpace": Cloud disk space</li>
+	// <li>"DiskBackupQuota": Cloud disk backups</li>
+	PriceName *string `json:"PriceName,omitempty" name:"PriceName"`
+
+	// Official unit price of the billable item
+	OriginUnitPrice *float64 `json:"OriginUnitPrice,omitempty" name:"OriginUnitPrice"`
+
+	// Official total price of the billable item
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discount of the billable item
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+
+	// Discounted total price of the billable item
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
 // Predefined struct for user
 type DisassociateInstancesKeyPairsRequestParams struct {
 	// Key pair ID list. Each request can contain up to 100 key pairs.
@@ -3406,7 +3481,17 @@ type Disk struct {
 	// Renewal flag
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
-	// Disk status
+	// Disk status. Values: 
+	// <li>`PENDING`: Creating</li>
+	// <li>`UNATTACHED`: Not attached</li>
+	// <li>`ATTACHING`: Attaching</li>
+	// <li>`ATTACHED`: Attached</li>
+	// <li>`DETACHING`: Detaching</li>
+	// <li>`SHUTDOWN`: Isolated</li>
+	// <li>`CREATED_FAILED`: Failed to create</li>
+	// <li>`TERMINATING`: Terminating</li>
+	// <li>`DELETING`: Deleting</li>
+	// <li>`FREEZING`: Freezing</li>
 	DiskState *string `json:"DiskState,omitempty" name:"DiskState"`
 
 	// Whether the disk is attached to an instance
@@ -3424,16 +3509,25 @@ type Disk struct {
 	// Last request ID
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
 
-	// Creation time
+	// Creation time according to ISO 8601 standard. UTC time is used. 
+	// Format: YYYY-MM-DDThh:mm:ssZ.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Expiration date
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Expiration time according to ISO 8601 standard. UTC time is used. 
+	// Format: YYYY-MM-DDThh:mm:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpiredTime *string `json:"ExpiredTime,omitempty" name:"ExpiredTime"`
 
-	// Isolation time
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Isolation time according to ISO 8601 standard. UTC time is used. 
+	// Format: YYYY-MM-DDThh:mm:ssZ.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsolatedTime *string `json:"IsolatedTime,omitempty" name:"IsolatedTime"`
+
+	// Total disk backups
+	DiskBackupCount *int64 `json:"DiskBackupCount,omitempty" name:"DiskBackupCount"`
+
+	// Disk backup quota
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
 }
 
 type DiskChargePrepaid struct {
@@ -3487,6 +3581,9 @@ type DiskPrice struct {
 
 	// Discounted total price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Detailed billing items
+	DetailPrices []*DetailPrice `json:"DetailPrices,omitempty" name:"DetailPrices"`
 }
 
 type DiskReturnable struct {
@@ -3531,11 +3628,11 @@ type DockerContainerPublishPort struct {
 	ContainerPort *int64 `json:"ContainerPort,omitempty" name:"ContainerPort"`
 
 	// External IP. It defaults to 0.0.0.0.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
 	// The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
@@ -3737,6 +3834,9 @@ type InquirePriceCreateDisksRequestParams struct {
 
 	// Number of cloud disks. Default value: 1.
 	DiskCount *int64 `json:"DiskCount,omitempty" name:"DiskCount"`
+
+	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
 }
 
 type InquirePriceCreateDisksRequest struct {
@@ -3753,6 +3853,9 @@ type InquirePriceCreateDisksRequest struct {
 
 	// Number of cloud disks. Default value: 1.
 	DiskCount *int64 `json:"DiskCount,omitempty" name:"DiskCount"`
+
+	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
 }
 
 func (r *InquirePriceCreateDisksRequest) ToJsonString() string {
@@ -3771,6 +3874,7 @@ func (r *InquirePriceCreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "DiskType")
 	delete(f, "DiskChargePrepaid")
 	delete(f, "DiskCount")
+	delete(f, "DiskBackupQuota")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateDisksRequest has unknown keys!", "")
 	}
@@ -4003,7 +4107,7 @@ type InquirePriceRenewInstancesResponseParams struct {
 	Price *Price `json:"Price,omitempty" name:"Price"`
 
 	// List of data disk price information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitempty" name:"DataDiskPriceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4072,7 +4176,7 @@ type Instance struct {
 	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
 
 	// Instance status. Valid values: 
-	// <li>PENDING: creating</li><li>LAUNCH_FAILED: creation failed</li><li>RUNNING: running</li><li>STOPPED: shut down</li><li>STARTING: starting</li><li>STOPPING: shutting down</li><li>REBOOTING: rebooting</li><li>SHUTDOWN: shut down and to be terminated</li><li>TERMINATING: terminating</li>
+	// <li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting from the rescue mode</li>
 	InstanceState *string `json:"InstanceState,omitempty" name:"InstanceState"`
 
 	// Globally unique ID of instance.
@@ -4121,6 +4225,10 @@ type Instance struct {
 
 	// The list of tags associated with the instance
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Obtain instance status
+	// <li>NORMAL: The instance is normal</li><li>NETWORK_RESTRICT: The instance is blocked from the network.</li>
+	InstanceRestrictState *string `json:"InstanceRestrictState,omitempty" name:"InstanceRestrictState"`
 }
 
 type InstanceChargePrepaid struct {
@@ -4213,7 +4321,17 @@ type KeyPair struct {
 }
 
 type LoginConfiguration struct {
+	// <li>`YES`: Random password. In this case, `Password` cannot be specified. </li>
+	// <li>`No`: Custom. `Password` must be specified. </li>
+	AutoGeneratePassword *string `json:"AutoGeneratePassword,omitempty" name:"AutoGeneratePassword"`
 
+	// Instace login password.
+	// For Windows instances, the password must contain 12 to 30 characters of the following types. It cannot start with “/” and cannot include the username.
+	// <li>[a-z]</li>
+	// <li>[A-Z]</li>
+	// <li>[0-9]</li>
+	// <li>[()`~!@#$%^&*-+=_|{}[]:;' <>,.?/]</li>
+	Password *string `json:"Password,omitempty" name:"Password"`
 }
 
 type LoginSettings struct {
@@ -5310,10 +5428,10 @@ type SystemDisk struct {
 }
 
 type Tag struct {
-	// Tag key.
+	// Tag key
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// Tag value.
+	// Tag value
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
