@@ -5932,6 +5932,15 @@ type RumAreaInfo struct {
 
 	// Region key
 	AreaKey *string `json:"AreaKey,omitempty" name:"AreaKey"`
+
+	// Region ID.
+	AreaRegionID *string `json:"AreaRegionID,omitempty" name:"AreaRegionID"`
+
+	// Region code, such as “ap-xxx” (xxx is the region name).
+	AreaRegionCode *string `json:"AreaRegionCode,omitempty" name:"AreaRegionCode"`
+
+	// Region abbreviation.
+	AreaAbbr *string `json:"AreaAbbr,omitempty" name:"AreaAbbr"`
 }
 
 type RumProject struct {

@@ -22,7 +22,7 @@ import (
 
 // Predefined struct for user
 type TextTranslateRequestParams struct {
-	// The pure texts to be translated. It must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
+	// The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
 	SourceText *string `json:"SourceText,omitempty" name:"SourceText"`
 
 	// Supported source languages:
@@ -79,7 +79,7 @@ type TextTranslateRequestParams struct {
 type TextTranslateRequest struct {
 	*tchttp.BaseRequest
 	
-	// The pure texts to be translated. It must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
+	// The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
 	SourceText *string `json:"SourceText,omitempty" name:"SourceText"`
 
 	// Supported source languages:

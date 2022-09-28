@@ -421,6 +421,67 @@ func (r *DeleteDeviceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteDeviceShadowRequestParams struct {
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Device name
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+}
+
+type DeleteDeviceShadowRequest struct {
+	*tchttp.BaseRequest
+	
+	// Product ID
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Device name
+	DeviceName *string `json:"DeviceName,omitempty" name:"DeviceName"`
+}
+
+func (r *DeleteDeviceShadowRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDeviceShadowRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductId")
+	delete(f, "DeviceName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDeviceShadowRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDeviceShadowResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteDeviceShadowResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDeviceShadowResponseParams `json:"Response"`
+}
+
+func (r *DeleteDeviceShadowResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDeviceShadowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeletePrivateCARequestParams struct {
 	// Private CA certificate name
 	CertName *string `json:"CertName,omitempty" name:"CertName"`

@@ -70,6 +70,7 @@ func NewCreateDeviceResponse() (response *CreateDeviceResponse) {
 //  FAILEDOPERATION_ALREADYDISTRIBUTIONDEVICE = "FailedOperation.AlreadyDistributionDevice"
 //  FAILEDOPERATION_TIDWHITELISTNOTOPEN = "FailedOperation.TidWhiteListNotOpen"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DEFINEDPSKNOTBASE64 = "InvalidParameterValue.DefinedPskNotBase64"
 //  INVALIDPARAMETERVALUE_DEVICEALREADYEXIST = "InvalidParameterValue.DeviceAlreadyExist"
@@ -93,6 +94,7 @@ func (c *Client) CreateDevice(request *CreateDeviceRequest) (response *CreateDev
 //  FAILEDOPERATION_ALREADYDISTRIBUTIONDEVICE = "FailedOperation.AlreadyDistributionDevice"
 //  FAILEDOPERATION_TIDWHITELISTNOTOPEN = "FailedOperation.TidWhiteListNotOpen"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DEFINEDPSKNOTBASE64 = "InvalidParameterValue.DefinedPskNotBase64"
 //  INVALIDPARAMETERVALUE_DEVICEALREADYEXIST = "InvalidParameterValue.DeviceAlreadyExist"
@@ -143,6 +145,7 @@ func NewCreatePrivateCAResponse() (response *CreatePrivateCAResponse) {
 // This API is used to create a private CA certificate.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE_CACERTINVALID = "InvalidParameterValue.CACertInvalid"
 //  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
 //  LIMITEXCEEDED_CACERTNAMEREPEAT = "LimitExceeded.CACertNameRepeat"
@@ -155,6 +158,7 @@ func (c *Client) CreatePrivateCA(request *CreatePrivateCARequest) (response *Cre
 // This API is used to create a private CA certificate.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE_CACERTINVALID = "InvalidParameterValue.CACertInvalid"
 //  INVALIDPARAMETERVALUE_CACERTNOTMATCH = "InvalidParameterValue.CACertNotMatch"
 //  LIMITEXCEEDED_CACERTNAMEREPEAT = "LimitExceeded.CACertNameRepeat"
@@ -197,7 +201,9 @@ func NewCreateProductResponse() (response *CreateProductResponse) {
 // This API is used to create a new IoT communication product. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTISOLATED = "FailedOperation.AccountIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_PRODUCTALREADYEXIST = "InvalidParameterValue.ProductAlreadyExist"
 //  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
@@ -213,7 +219,9 @@ func (c *Client) CreateProduct(request *CreateProductRequest) (response *CreateP
 // This API is used to create a new IoT communication product. 
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTISOLATED = "FailedOperation.AccountIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_PRODUCTALREADYEXIST = "InvalidParameterValue.ProductAlreadyExist"
 //  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
@@ -260,6 +268,7 @@ func NewDeleteDeviceResponse() (response *DeleteDeviceResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
@@ -275,6 +284,7 @@ func (c *Client) DeleteDevice(request *DeleteDeviceRequest) (response *DeleteDev
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
@@ -293,6 +303,58 @@ func (c *Client) DeleteDeviceWithContext(ctx context.Context, request *DeleteDev
     request.SetContext(ctx)
     
     response = NewDeleteDeviceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDeviceShadowRequest() (request *DeleteDeviceShadowRequest) {
+    request = &DeleteDeviceShadowRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("iotcloud", APIVersion, "DeleteDeviceShadow")
+    
+    
+    return
+}
+
+func NewDeleteDeviceShadowResponse() (response *DeleteDeviceShadowResponse) {
+    response = &DeleteDeviceShadowResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteDeviceShadow
+// This API is used to delete a device shadow. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_DEVICESHADOWNOTEXIST = "ResourceNotFound.DeviceShadowNotExist"
+func (c *Client) DeleteDeviceShadow(request *DeleteDeviceShadowRequest) (response *DeleteDeviceShadowResponse, err error) {
+    return c.DeleteDeviceShadowWithContext(context.Background(), request)
+}
+
+// DeleteDeviceShadow
+// This API is used to delete a device shadow. 
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_DEVICESHADOWNOTEXIST = "ResourceNotFound.DeviceShadowNotExist"
+func (c *Client) DeleteDeviceShadowWithContext(ctx context.Context, request *DeleteDeviceShadowRequest) (response *DeleteDeviceShadowResponse, err error) {
+    if request == nil {
+        request = NewDeleteDeviceShadowRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDeviceShadow require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDeviceShadowResponse()
     err = c.Send(request, response)
     return
 }
@@ -319,6 +381,7 @@ func NewDeletePrivateCAResponse() (response *DeletePrivateCAResponse) {
 // This API is used to delete a private CA certificate.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  LIMITEXCEEDED_CAALREADYBINDPRODUCT = "LimitExceeded.CAAlreadyBindProduct"
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DeletePrivateCA(request *DeletePrivateCARequest) (response *DeletePrivateCAResponse, err error) {
@@ -329,6 +392,7 @@ func (c *Client) DeletePrivateCA(request *DeletePrivateCARequest) (response *Del
 // This API is used to delete a private CA certificate.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  LIMITEXCEEDED_CAALREADYBINDPRODUCT = "LimitExceeded.CAAlreadyBindProduct"
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DeletePrivateCAWithContext(ctx context.Context, request *DeletePrivateCARequest) (response *DeletePrivateCAResponse, err error) {
@@ -370,8 +434,10 @@ func NewDeleteProductResponse() (response *DeleteProductResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+//  UNAUTHORIZEDOPERATION_DELETETIDFAIL = "UnauthorizedOperation.DeleteTidFail"
 //  UNAUTHORIZEDOPERATION_DEVICESEXISTUNDERPRODUCT = "UnauthorizedOperation.DevicesExistUnderProduct"
 //  UNSUPPORTEDOPERATION_GATEWAYPRODUCTHASBINDEDPRODUCT = "UnsupportedOperation.GatewayProductHasBindedProduct"
 //  UNSUPPORTEDOPERATION_PRODUCTHASBINDGATEWAY = "UnsupportedOperation.ProductHasBindGateway"
@@ -385,8 +451,10 @@ func (c *Client) DeleteProduct(request *DeleteProductRequest) (response *DeleteP
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
+//  UNAUTHORIZEDOPERATION_DELETETIDFAIL = "UnauthorizedOperation.DeleteTidFail"
 //  UNAUTHORIZEDOPERATION_DEVICESEXISTUNDERPRODUCT = "UnauthorizedOperation.DevicesExistUnderProduct"
 //  UNSUPPORTEDOPERATION_GATEWAYPRODUCTHASBINDEDPRODUCT = "UnsupportedOperation.GatewayProductHasBindedProduct"
 //  UNSUPPORTEDOPERATION_PRODUCTHASBINDGATEWAY = "UnsupportedOperation.ProductHasBindGateway"
@@ -430,6 +498,7 @@ func NewDescribeDeviceResponse() (response *DescribeDeviceResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
@@ -442,6 +511,7 @@ func (c *Client) DescribeDevice(request *DescribeDeviceRequest) (response *Descr
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
@@ -484,6 +554,7 @@ func NewDescribeDevicesResponse() (response *DescribeDevicesResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeDevices(request *DescribeDevicesRequest) (response *DescribeDevicesResponse, err error) {
@@ -495,6 +566,7 @@ func (c *Client) DescribeDevices(request *DescribeDevicesRequest) (response *Des
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeDevicesWithContext(ctx context.Context, request *DescribeDevicesRequest) (response *DescribeDevicesResponse, err error) {
@@ -535,6 +607,7 @@ func NewDescribePrivateCAResponse() (response *DescribePrivateCAResponse) {
 // This API is used to query private CA certificate details.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DescribePrivateCA(request *DescribePrivateCARequest) (response *DescribePrivateCAResponse, err error) {
     return c.DescribePrivateCAWithContext(context.Background(), request)
@@ -544,6 +617,7 @@ func (c *Client) DescribePrivateCA(request *DescribePrivateCARequest) (response 
 // This API is used to query private CA certificate details.
 //
 // error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
 func (c *Client) DescribePrivateCAWithContext(ctx context.Context, request *DescribePrivateCARequest) (response *DescribePrivateCAResponse, err error) {
     if request == nil {
@@ -583,7 +657,7 @@ func NewDescribePrivateCABindedProductsResponse() (response *DescribePrivateCABi
 // This API is used to query the products bound to a private CA certificate.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 func (c *Client) DescribePrivateCABindedProducts(request *DescribePrivateCABindedProductsRequest) (response *DescribePrivateCABindedProductsResponse, err error) {
     return c.DescribePrivateCABindedProductsWithContext(context.Background(), request)
 }
@@ -592,7 +666,7 @@ func (c *Client) DescribePrivateCABindedProducts(request *DescribePrivateCABinde
 // This API is used to query the products bound to a private CA certificate.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 func (c *Client) DescribePrivateCABindedProductsWithContext(ctx context.Context, request *DescribePrivateCABindedProductsRequest) (response *DescribePrivateCABindedProductsResponse, err error) {
     if request == nil {
         request = NewDescribePrivateCABindedProductsRequest()
@@ -631,7 +705,7 @@ func NewDescribePrivateCAsResponse() (response *DescribePrivateCAsResponse) {
 // This API is used to get the list of private CA certificates.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 func (c *Client) DescribePrivateCAs(request *DescribePrivateCAsRequest) (response *DescribePrivateCAsResponse, err error) {
     return c.DescribePrivateCAsWithContext(context.Background(), request)
 }
@@ -640,7 +714,7 @@ func (c *Client) DescribePrivateCAs(request *DescribePrivateCAsRequest) (respons
 // This API is used to get the list of private CA certificates.
 //
 // error code that may be returned:
-//  RESOURCENOTFOUND_CACERTNOTEXIST = "ResourceNotFound.CACertNotExist"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 func (c *Client) DescribePrivateCAsWithContext(ctx context.Context, request *DescribePrivateCAsRequest) (response *DescribePrivateCAsResponse, err error) {
     if request == nil {
         request = NewDescribePrivateCAsRequest()
@@ -680,6 +754,7 @@ func NewDescribeProductResponse() (response *DescribeProductResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeProduct(request *DescribeProductRequest) (response *DescribeProductResponse, err error) {
@@ -691,6 +766,7 @@ func (c *Client) DescribeProduct(request *DescribeProductRequest) (response *Des
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeProductWithContext(ctx context.Context, request *DescribeProductRequest) (response *DescribeProductResponse, err error) {
@@ -732,6 +808,7 @@ func NewDescribeProductCAResponse() (response *DescribeProductCAResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeProductCA(request *DescribeProductCARequest) (response *DescribeProductCAResponse, err error) {
@@ -743,6 +820,7 @@ func (c *Client) DescribeProductCA(request *DescribeProductCARequest) (response 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 func (c *Client) DescribeProductCAWithContext(ctx context.Context, request *DescribeProductCARequest) (response *DescribeProductCAResponse, err error) {
@@ -784,6 +862,7 @@ func NewDescribeProductsResponse() (response *DescribeProductsResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeProducts(request *DescribeProductsRequest) (response *DescribeProductsResponse, err error) {
     return c.DescribeProductsWithContext(context.Background(), request)
@@ -794,6 +873,7 @@ func (c *Client) DescribeProducts(request *DescribeProductsRequest) (response *D
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeProductsWithContext(ctx context.Context, request *DescribeProductsRequest) (response *DescribeProductsResponse, err error) {
     if request == nil {
@@ -886,6 +966,7 @@ func NewUpdateDeviceLogLevelResponse() (response *UpdateDeviceLogLevelResponse) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEISNOTENABLED = "UnauthorizedOperation.DeviceIsNotEnabled"
 func (c *Client) UpdateDeviceLogLevel(request *UpdateDeviceLogLevelRequest) (response *UpdateDeviceLogLevelResponse, err error) {
@@ -897,6 +978,7 @@ func (c *Client) UpdateDeviceLogLevel(request *UpdateDeviceLogLevelRequest) (res
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEISNOTENABLED = "UnauthorizedOperation.DeviceIsNotEnabled"
 func (c *Client) UpdateDeviceLogLevelWithContext(ctx context.Context, request *UpdateDeviceLogLevelRequest) (response *UpdateDeviceLogLevelResponse, err error) {
@@ -938,10 +1020,12 @@ func NewUpdateDevicesEnableStateResponse() (response *UpdateDevicesEnableStateRe
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEHASALREADYBINDGATEWAY = "UnauthorizedOperation.DeviceHasAlreadyBindGateway"
+//  UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
 func (c *Client) UpdateDevicesEnableState(request *UpdateDevicesEnableStateRequest) (response *UpdateDevicesEnableStateResponse, err error) {
     return c.UpdateDevicesEnableStateWithContext(context.Background(), request)
 }
@@ -951,10 +1035,12 @@ func (c *Client) UpdateDevicesEnableState(request *UpdateDevicesEnableStateReque
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INVALIDPARAMETERVALUE_PRODUCTTYPENOTSUPPORT = "InvalidParameterValue.ProductTypeNotSupport"
 //  RESOURCENOTFOUND_DEVICENOTEXIST = "ResourceNotFound.DeviceNotExist"
 //  RESOURCENOTFOUND_PRODUCTNOTEXIST = "ResourceNotFound.ProductNotExist"
 //  UNAUTHORIZEDOPERATION_DEVICEHASALREADYBINDGATEWAY = "UnauthorizedOperation.DeviceHasAlreadyBindGateway"
+//  UNAUTHORIZEDOPERATION_PRODUCTISFORBIDDEN = "UnauthorizedOperation.ProductIsForbidden"
 func (c *Client) UpdateDevicesEnableStateWithContext(ctx context.Context, request *UpdateDevicesEnableStateRequest) (response *UpdateDevicesEnableStateResponse, err error) {
     if request == nil {
         request = NewUpdateDevicesEnableStateRequest()

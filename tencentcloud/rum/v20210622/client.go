@@ -134,6 +134,7 @@ func NewCreateOfflineLogConfigResponse() (response *CreateOfflineLogConfigRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateOfflineLogConfig(request *CreateOfflineLogConfigRequest) (response *CreateOfflineLogConfigResponse, err error) {
     return c.CreateOfflineLogConfigWithContext(context.Background(), request)
 }
@@ -143,6 +144,7 @@ func (c *Client) CreateOfflineLogConfig(request *CreateOfflineLogConfigRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateOfflineLogConfigWithContext(ctx context.Context, request *CreateOfflineLogConfigRequest) (response *CreateOfflineLogConfigResponse, err error) {
     if request == nil {
         request = NewCreateOfflineLogConfigRequest()
@@ -639,19 +641,7 @@ func NewDeleteLogExportResponse() (response *DeleteLogExportResponse) {
 // Default API request rate limit: 20 requests/sec.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteLogExport(request *DeleteLogExportRequest) (response *DeleteLogExportResponse, err error) {
     return c.DeleteLogExportWithContext(context.Background(), request)
 }
@@ -668,19 +658,7 @@ func (c *Client) DeleteLogExport(request *DeleteLogExportRequest) (response *Del
 // Default API request rate limit: 20 requests/sec.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteLogExportWithContext(ctx context.Context, request *DeleteLogExportRequest) (response *DeleteLogExportResponse, err error) {
     if request == nil {
         request = NewDeleteLogExportRequest()
@@ -807,27 +785,7 @@ func NewDeleteOfflineLogRecordResponse() (response *DeleteOfflineLogRecordRespon
 // This API is used to delete an offline log record.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
-//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteOfflineLogRecord(request *DeleteOfflineLogRecordRequest) (response *DeleteOfflineLogRecordResponse, err error) {
     return c.DeleteOfflineLogRecordWithContext(context.Background(), request)
 }
@@ -836,27 +794,7 @@ func (c *Client) DeleteOfflineLogRecord(request *DeleteOfflineLogRecordRequest) 
 // This API is used to delete an offline log record.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
-//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_NOINSTANCE = "ResourceNotFound.NoInstance"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteOfflineLogRecordWithContext(ctx context.Context, request *DeleteOfflineLogRecordRequest) (response *DeleteOfflineLogRecordResponse, err error) {
     if request == nil {
         request = NewDeleteOfflineLogRecordRequest()

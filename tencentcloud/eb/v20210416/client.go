@@ -196,6 +196,7 @@ func NewCreateConnectionResponse() (response *CreateConnectionResponse) {
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_CONNECTION = "LimitExceeded.Connection"
 //  LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
 //  OPERATIONDENIED_UNSUPPORTEDOPERATION = "OperationDenied.UnsupportedOperation"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
@@ -227,6 +228,7 @@ func (c *Client) CreateConnection(request *CreateConnectionRequest) (response *C
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_CONNECTION = "LimitExceeded.Connection"
 //  LIMITEXCEEDED_ROUTEOVERLIMIT = "LimitExceeded.RouteOverLimit"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
 //  OPERATIONDENIED_UNSUPPORTEDOPERATION = "OperationDenied.UnsupportedOperation"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
@@ -276,6 +278,8 @@ func NewCreateEventBusResponse() (response *CreateEventBusResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REGISTERCLSSERVICE = "FailedOperation.RegisterCLSService"
+//  FAILEDOPERATION_TAGRESOURCE = "FailedOperation.TagResource"
+//  FAILEDOPERATION_TAGRESOURCEALLOCATEQUOTAS = "FailedOperation.TagResourceAllocateQuotas"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
@@ -285,9 +289,13 @@ func NewCreateEventBusResponse() (response *CreateEventBusResponse) {
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_EVENTBUS = "LimitExceeded.EventBus"
 //  LIMITEXCEEDED_INSUFFICIENTBALANCE = "LimitExceeded.InsufficientBalance"
+//  OPERATIONDENIED_DEFAULTCLSRESOURCEUNSUPPORTED = "OperationDenied.DefaultCLSResourceUnsupported"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  RESOURCEINUSE_DEFAULTEVENTBUS = "ResourceInUse.DefaultEventBus"
 //  RESOURCEINUSE_EVENTBUS = "ResourceInUse.EventBus"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
+//  RESOURCEUNAVAILABLE_TARGET = "ResourceUnavailable.Target"
 func (c *Client) CreateEventBus(request *CreateEventBusRequest) (response *CreateEventBusResponse, err error) {
     return c.CreateEventBusWithContext(context.Background(), request)
 }
@@ -297,6 +305,8 @@ func (c *Client) CreateEventBus(request *CreateEventBusRequest) (response *Creat
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REGISTERCLSSERVICE = "FailedOperation.RegisterCLSService"
+//  FAILEDOPERATION_TAGRESOURCE = "FailedOperation.TagResource"
+//  FAILEDOPERATION_TAGRESOURCEALLOCATEQUOTAS = "FailedOperation.TagResourceAllocateQuotas"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EVENTBUSNAME = "InvalidParameterValue.EventBusName"
@@ -306,9 +316,13 @@ func (c *Client) CreateEventBus(request *CreateEventBusRequest) (response *Creat
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_EVENTBUS = "LimitExceeded.EventBus"
 //  LIMITEXCEEDED_INSUFFICIENTBALANCE = "LimitExceeded.InsufficientBalance"
+//  OPERATIONDENIED_DEFAULTCLSRESOURCEUNSUPPORTED = "OperationDenied.DefaultCLSResourceUnsupported"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  RESOURCEINUSE_DEFAULTEVENTBUS = "ResourceInUse.DefaultEventBus"
 //  RESOURCEINUSE_EVENTBUS = "ResourceInUse.EventBus"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
+//  RESOURCEUNAVAILABLE_TARGET = "ResourceUnavailable.Target"
 func (c *Client) CreateEventBusWithContext(ctx context.Context, request *CreateEventBusRequest) (response *CreateEventBusResponse, err error) {
     if request == nil {
         request = NewCreateEventBusRequest()
@@ -347,6 +361,8 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 // This API is used to create an event rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGRESOURCE = "FailedOperation.TagResource"
+//  FAILEDOPERATION_TAGRESOURCEALLOCATEQUOTAS = "FailedOperation.TagResourceAllocateQuotas"
 //  INVALIDPARAMETERVALUE_DEADLETTERCONFIG = "InvalidParameterValue.DeadLetterConfig"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EVENTPATTERN = "InvalidParameterValue.EventPattern"
@@ -355,6 +371,7 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_RULE = "LimitExceeded.Rule"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
 func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
     return c.CreateRuleWithContext(context.Background(), request)
 }
@@ -363,6 +380,8 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 // This API is used to create an event rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGRESOURCE = "FailedOperation.TagResource"
+//  FAILEDOPERATION_TAGRESOURCEALLOCATEQUOTAS = "FailedOperation.TagResourceAllocateQuotas"
 //  INVALIDPARAMETERVALUE_DEADLETTERCONFIG = "InvalidParameterValue.DeadLetterConfig"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_EVENTPATTERN = "InvalidParameterValue.EventPattern"
@@ -371,6 +390,7 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  LIMITEXCEEDED_RULE = "LimitExceeded.Rule"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
 func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
     if request == nil {
         request = NewCreateRuleRequest()
@@ -410,9 +430,12 @@ func NewCreateTargetResponse() (response *CreateTargetResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ADDPRIVATELINK = "FailedOperation.AddPrivateLink"
 //  FAILEDOPERATION_AUTHENTICATEUSERFAILED = "FailedOperation.AuthenticateUserFailed"
 //  FAILEDOPERATION_CREATETRIGGER = "FailedOperation.CreateTrigger"
+//  FAILEDOPERATION_ESINTERNALERROR = "FailedOperation.ESInternalError"
 //  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
+//  FAILEDOPERATION_ESTEMPLATECONFLICT = "FailedOperation.ESTemplateConflict"
 //  INVALIDPARAMETERVALUE_AMPPARAMS = "InvalidParameterValue.AMPParams"
 //  INVALIDPARAMETERVALUE_BATCHEVENTCOUNT = "InvalidParameterValue.BatchEventCount"
 //  INVALIDPARAMETERVALUE_BATCHTIMEOUT = "InvalidParameterValue.BatchTimeout"
@@ -429,19 +452,25 @@ func NewCreateTargetResponse() (response *CreateTargetResponse) {
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETDESCRIPTION = "InvalidParameterValue.TargetDescription"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_CLUSTERPRIVATELINKEXCEEDED = "LimitExceeded.ClusterPrivateLinkExceeded"
 //  LIMITEXCEEDED_LOGSET = "LimitExceeded.Logset"
 //  LIMITEXCEEDED_TARGET = "LimitExceeded.Target"
 //  LIMITEXCEEDED_TRIGGER = "LimitExceeded.Trigger"
+//  LIMITEXCEEDED_USERPRIVATELINKEXCEEDED = "LimitExceeded.UserPrivateLinkExceeded"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_DEFAULTCLSRESOURCEUNSUPPORTED = "OperationDenied.DefaultCLSResourceUnsupported"
+//  OPERATIONDENIED_ESVERSIONUNSUPPORTED = "OperationDenied.ESVersionUnsupported"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  OPERATIONDENIED_UNSUPPORTEDOPERATION = "OperationDenied.UnsupportedOperation"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_PRIVATELINKRESOURCE = "ResourceNotFound.PrivateLinkResource"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 //  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
+//  RESOURCEUNAVAILABLE_ESUNHEALTH = "ResourceUnavailable.ESUnhealth"
 //  RESOURCEUNAVAILABLE_TARGET = "ResourceUnavailable.Target"
 func (c *Client) CreateTarget(request *CreateTargetRequest) (response *CreateTargetResponse, err error) {
     return c.CreateTargetWithContext(context.Background(), request)
@@ -452,9 +481,12 @@ func (c *Client) CreateTarget(request *CreateTargetRequest) (response *CreateTar
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ADDPRIVATELINK = "FailedOperation.AddPrivateLink"
 //  FAILEDOPERATION_AUTHENTICATEUSERFAILED = "FailedOperation.AuthenticateUserFailed"
 //  FAILEDOPERATION_CREATETRIGGER = "FailedOperation.CreateTrigger"
+//  FAILEDOPERATION_ESINTERNALERROR = "FailedOperation.ESInternalError"
 //  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
+//  FAILEDOPERATION_ESTEMPLATECONFLICT = "FailedOperation.ESTemplateConflict"
 //  INVALIDPARAMETERVALUE_AMPPARAMS = "InvalidParameterValue.AMPParams"
 //  INVALIDPARAMETERVALUE_BATCHEVENTCOUNT = "InvalidParameterValue.BatchEventCount"
 //  INVALIDPARAMETERVALUE_BATCHTIMEOUT = "InvalidParameterValue.BatchTimeout"
@@ -471,19 +503,25 @@ func (c *Client) CreateTarget(request *CreateTargetRequest) (response *CreateTar
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETDESCRIPTION = "InvalidParameterValue.TargetDescription"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_CLUSTERPRIVATELINKEXCEEDED = "LimitExceeded.ClusterPrivateLinkExceeded"
 //  LIMITEXCEEDED_LOGSET = "LimitExceeded.Logset"
 //  LIMITEXCEEDED_TARGET = "LimitExceeded.Target"
 //  LIMITEXCEEDED_TRIGGER = "LimitExceeded.Trigger"
+//  LIMITEXCEEDED_USERPRIVATELINKEXCEEDED = "LimitExceeded.UserPrivateLinkExceeded"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_DEFAULTCLSRESOURCEUNSUPPORTED = "OperationDenied.DefaultCLSResourceUnsupported"
+//  OPERATIONDENIED_ESVERSIONUNSUPPORTED = "OperationDenied.ESVersionUnsupported"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  OPERATIONDENIED_UNSUPPORTEDOPERATION = "OperationDenied.UnsupportedOperation"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_PRIVATELINKRESOURCE = "ResourceNotFound.PrivateLinkResource"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 //  RESOURCENOTFOUND_TARGET = "ResourceNotFound.Target"
 //  RESOURCENOTFOUND_VERSION = "ResourceNotFound.Version"
+//  RESOURCEUNAVAILABLE_ESUNHEALTH = "ResourceUnavailable.ESUnhealth"
 //  RESOURCEUNAVAILABLE_TARGET = "ResourceUnavailable.Target"
 func (c *Client) CreateTargetWithContext(ctx context.Context, request *CreateTargetRequest) (response *CreateTargetResponse, err error) {
     if request == nil {
@@ -580,6 +618,7 @@ func NewDeleteConnectionResponse() (response *DeleteConnectionResponse) {
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_CONNECTIONDESCRIPTION = "InvalidParameterValue.ConnectionDescription"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  RESOURCENOTFOUND_CONNECTION = "ResourceNotFound.Connection"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
@@ -598,6 +637,7 @@ func (c *Client) DeleteConnection(request *DeleteConnectionRequest) (response *D
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_CONNECTIONDESCRIPTION = "InvalidParameterValue.ConnectionDescription"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  RESOURCENOTFOUND_CONNECTION = "ResourceNotFound.Connection"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
@@ -641,10 +681,13 @@ func NewDeleteEventBusResponse() (response *DeleteEventBusResponse) {
 // This API is used to delete an event bus.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UNTAGRESOURCE = "FailedOperation.UnTagResource"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
 //  RESOURCEINUSE_EVENTBUS = "ResourceInUse.EventBus"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
 func (c *Client) DeleteEventBus(request *DeleteEventBusRequest) (response *DeleteEventBusResponse, err error) {
     return c.DeleteEventBusWithContext(context.Background(), request)
 }
@@ -653,10 +696,13 @@ func (c *Client) DeleteEventBus(request *DeleteEventBusRequest) (response *Delet
 // This API is used to delete an event bus.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UNTAGRESOURCE = "FailedOperation.UnTagResource"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
 //  RESOURCEINUSE_EVENTBUS = "ResourceInUse.EventBus"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
 func (c *Client) DeleteEventBusWithContext(ctx context.Context, request *DeleteEventBusRequest) (response *DeleteEventBusResponse, err error) {
     if request == nil {
         request = NewDeleteEventBusRequest()
@@ -696,11 +742,13 @@ func NewDeleteRuleResponse() (response *DeleteRuleResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DELETERULE = "FailedOperation.DeleteRule"
+//  FAILEDOPERATION_UNTAGRESOURCE = "FailedOperation.UnTagResource"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  RESOURCEINUSE_RULE = "ResourceInUse.Rule"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
 func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleResponse, err error) {
     return c.DeleteRuleWithContext(context.Background(), request)
 }
@@ -710,11 +758,13 @@ func (c *Client) DeleteRule(request *DeleteRuleRequest) (response *DeleteRuleRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DELETERULE = "FailedOperation.DeleteRule"
+//  FAILEDOPERATION_UNTAGRESOURCE = "FailedOperation.UnTagResource"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  RESOURCEINUSE_RULE = "ResourceInUse.Rule"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
+//  RESOURCENOTFOUND_TAG = "ResourceNotFound.Tag"
 func (c *Client) DeleteRuleWithContext(ctx context.Context, request *DeleteRuleRequest) (response *DeleteRuleResponse, err error) {
     if request == nil {
         request = NewDeleteRuleRequest()
@@ -753,13 +803,19 @@ func NewDeleteTargetResponse() (response *DeleteTargetResponse) {
 // This API is used to delete a delivery target.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_AUTHENTICATEUSERFAILED = "FailedOperation.AuthenticateUserFailed"
+//  FAILEDOPERATION_DELETEPRIVATELINK = "FailedOperation.DeletePrivateLink"
+//  FAILEDOPERATION_ESINTERNALERROR = "FailedOperation.ESInternalError"
 //  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  OPERATIONDENIED_ESVERSIONUNSUPPORTED = "OperationDenied.ESVersionUnsupported"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_NETASSOCIATION = "ResourceNotFound.NetAssociation"
 //  RESOURCENOTFOUND_PRIVATELINKRESOURCE = "ResourceNotFound.PrivateLinkResource"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
@@ -772,13 +828,19 @@ func (c *Client) DeleteTarget(request *DeleteTargetRequest) (response *DeleteTar
 // This API is used to delete a delivery target.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_AUTHENTICATEUSERFAILED = "FailedOperation.AuthenticateUserFailed"
+//  FAILEDOPERATION_DELETEPRIVATELINK = "FailedOperation.DeletePrivateLink"
+//  FAILEDOPERATION_ESINTERNALERROR = "FailedOperation.ESInternalError"
 //  FAILEDOPERATION_ESREQUESTFAILED = "FailedOperation.ESRequestFailed"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  OPERATIONDENIED_ESVERSIONUNSUPPORTED = "OperationDenied.ESVersionUnsupported"
+//  OPERATIONDENIED_EVENTBUSRESOURCEISLOCKED = "OperationDenied.EventBusResourceIsLocked"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_NETASSOCIATION = "ResourceNotFound.NetAssociation"
 //  RESOURCENOTFOUND_PRIVATELINKRESOURCE = "ResourceNotFound.PrivateLinkResource"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
@@ -1154,6 +1216,7 @@ func NewListRulesResponse() (response *ListRulesResponse) {
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 func (c *Client) ListRules(request *ListRulesRequest) (response *ListRulesResponse, err error) {
     return c.ListRulesWithContext(context.Background(), request)
@@ -1166,6 +1229,7 @@ func (c *Client) ListRules(request *ListRulesRequest) (response *ListRulesRespon
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 func (c *Client) ListRulesWithContext(ctx context.Context, request *ListRulesRequest) (response *ListRulesResponse, err error) {
     if request == nil {
@@ -1459,6 +1523,7 @@ func NewUpdateTargetResponse() (response *UpdateTargetResponse) {
 //  INVALIDPARAMETERVALUE_CALLBACKWECOMURL = "InvalidParameterValue.CallbackWeComURL"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERCHANNEL = "InvalidParameterValue.NoticeReceiverChannel"
+//  INVALIDPARAMETERVALUE_NOTICERECEIVERTIMEWINDOW = "InvalidParameterValue.NoticeReceiverTimeWindow"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERUSERIDS = "InvalidParameterValue.NoticeReceiverUserIds"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
@@ -1480,6 +1545,7 @@ func (c *Client) UpdateTarget(request *UpdateTargetRequest) (response *UpdateTar
 //  INVALIDPARAMETERVALUE_CALLBACKWECOMURL = "InvalidParameterValue.CallbackWeComURL"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERCHANNEL = "InvalidParameterValue.NoticeReceiverChannel"
+//  INVALIDPARAMETERVALUE_NOTICERECEIVERTIMEWINDOW = "InvalidParameterValue.NoticeReceiverTimeWindow"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERUSERIDS = "InvalidParameterValue.NoticeReceiverUserIds"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"

@@ -1892,6 +1892,9 @@ type UpdateRuleRequestParams struct {
 	// Rule description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
+	// See [CKafka Target](https://intl.cloud.tencent.com/document/product/1359/56084?from_cn_redirect=1)
+	EventPattern *string `json:"EventPattern,omitempty" name:"EventPattern"`
+
 	// Event rule name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 }
@@ -1910,6 +1913,9 @@ type UpdateRuleRequest struct {
 
 	// Rule description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// See [CKafka Target](https://intl.cloud.tencent.com/document/product/1359/56084?from_cn_redirect=1)
+	EventPattern *string `json:"EventPattern,omitempty" name:"EventPattern"`
 
 	// Event rule name, which can contain 2–60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
@@ -1931,6 +1937,7 @@ func (r *UpdateRuleRequest) FromJsonString(s string) error {
 	delete(f, "EventBusId")
 	delete(f, "Enable")
 	delete(f, "Description")
+	delete(f, "EventPattern")
 	delete(f, "RuleName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateRuleRequest has unknown keys!", "")
