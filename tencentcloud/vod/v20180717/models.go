@@ -141,6 +141,11 @@ type AdaptiveDynamicStreamingInfoItem struct {
 	// <li>If the file is a DASH file, the value of this parameter is the sum of the size of the MPD and segment files.</li>
 	// <li><font color=red>Note</font>: For adaptive bitrate streaming files generated before 2022-01-10T16:00:00Z, the value of this parameter is `0`.</li>
 	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// The watermark type. Valid values:
+	// <li>Trace: Digital watermark</li>
+	// <li>None: Regular watermark</li>
+	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitempty" name:"DigitalWatermarkType"`
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
@@ -8502,10 +8507,12 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>SplitMedia: Video splitting</li>
 	// <li>ComposeMedia: Media file production</li>
 	// <li>WechatPublish: WeChat publishing</li>
+	// <li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
 	// <li>PullUpload: Pulling media files for upload</li>
 	// <li>FastClipMedia: Quick clipping</li>
 	// <li>RemoveWatermarkTask: Watermark removal</li>
 	// <li> ReviewAudioVideo: Moderation</li>
+	// <li> ReduceMediaBitrate: Bitrate reduction</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -8575,9 +8582,17 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RemoveWatermarkTask *RemoveWatermarkTask `json:"RemoveWatermarkTask,omitempty" name:"RemoveWatermarkTask"`
 
+	// The information of a digital watermark extraction task. This parameter is valid only if `TaskType` is `ExtractTraceWatermark`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtractTraceWatermarkTask *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkTask,omitempty" name:"ExtractTraceWatermarkTask"`
+
 	// The information of a moderation task. This parameter is valid only if `TaskType` is `ReviewAudioVideo`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoTask *ReviewAudioVideoTask `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
+
+	// The information of a bitrate reduction task. This parameter is valid only if `TaskType` is `ReduceMediaBitrate`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReduceMediaBitrateTask *ReduceMediaBitrateTask `json:"ReduceMediaBitrateTask,omitempty" name:"ReduceMediaBitrateTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9312,8 +9327,10 @@ type EventContent struct {
 	// <li>SplitMediaComplete: Finished video splitting.</li>
 	// <li>WechatPublishComplete: Published to WeChat.</li>
 	// <li>ComposeMediaComplete: Finished producing the media file.</li>
+	// <li>WechatMiniProgramPublishComplete: Finished publishing on WeChat Mini Program</li>
 	// <li>FastClipMediaComplete: Finished quick clipping.</li>
-	// <li>ReviewAudioVideoComplete: Finished moderation</li>
+	// <li>ReviewAudioVideoComplete: Finished moderation.</li>
+	// <li>ExtractTraceWatermarkComplete: Finished digital watermark extraction.</li>
 	// <b>v2017 task types:</b>
 	// <li>TranscodeComplete: Finished video transcoding.</li>
 	// <li>ConcatComplete: Finished video splicing.</li>
@@ -9386,9 +9403,17 @@ type EventContent struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	RestoreMediaCompleteEvent *RestoreMediaTask `json:"RestoreMediaCompleteEvent,omitempty" name:"RestoreMediaCompleteEvent"`
 
+	// The callback for the completion of digital watermark extraction. This parameter is valid only if `EventType` is `ExtractTraceWatermarkComplete`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtractTraceWatermarkCompleteEvent *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkCompleteEvent,omitempty" name:"ExtractTraceWatermarkCompleteEvent"`
+
 	// The callback for the completion of the moderation task. This parameter is valid only if `EventType` is `ReviewAudioVideoComplete`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoCompleteEvent *ReviewAudioVideoTask `json:"ReviewAudioVideoCompleteEvent,omitempty" name:"ReviewAudioVideoCompleteEvent"`
+
+	// The callback for the completion of bitrate reduction. This parameter is valid only if `EventType` is `ReduceMediaBitrateComplete`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReduceMediaBitrateCompleteEvent *ReduceMediaBitrateTask `json:"ReduceMediaBitrateCompleteEvent,omitempty" name:"ReduceMediaBitrateCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -9482,6 +9507,145 @@ func (r *ExecuteFunctionResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExtractTraceWatermarkRequestParams struct {
+	// The URL of the media on which digital watermark extraction is to be performed.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+type ExtractTraceWatermarkRequest struct {
+	*tchttp.BaseRequest
+	
+	// The URL of the media on which digital watermark extraction is to be performed.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+func (r *ExtractTraceWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractTraceWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Url")
+	delete(f, "SubAppId")
+	delete(f, "SessionContext")
+	delete(f, "SessionId")
+	delete(f, "TasksPriority")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExtractTraceWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExtractTraceWatermarkResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ExtractTraceWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *ExtractTraceWatermarkResponseParams `json:"Response"`
+}
+
+func (r *ExtractTraceWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractTraceWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ExtractTraceWatermarkTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The task status. Valid values:
+	// <li>PROCESSING</li>
+	// <li>FINISH</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. `0` indicates the task is successful. Other values indicate that the task failed.
+	// <li>40000: Invalid input parameter.</li>
+	// <li>60000: Source file error (e.g., video data is corrupted).</li>
+	// <li>70000: Internal server error. Please try again.</li>
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The information of a digital watermark extraction task.
+	Input *ExtractTraceWatermarkTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of a digital watermark extraction task.
+	Output *ExtractTraceWatermarkTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
+type ExtractTraceWatermarkTaskInput struct {
+	// The URL of the media on which digital watermark extraction is to be performed.
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+type ExtractTraceWatermarkTaskOutput struct {
+	// The distributor’s user ID, which is a six-digit hex number. This parameter is relevant when [digital watermarks](https://intl.cloud.tencent.com/document/product/266/75789?from_cn_redirect=1) are used.
+	Uv *string `json:"Uv,omitempty" name:"Uv"`
+
+	// This parameter has been deprecated.
+	Uid *string `json:"Uid,omitempty" name:"Uid"`
 }
 
 type FaceConfigureInfo struct {
@@ -11173,6 +11337,11 @@ type MediaTranscodeItem struct {
 	// Audio stream information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitempty" name:"AudioStreamSet"`
+
+	// The watermark type. Valid values:
+	// <li>Trace: Digital watermark</li>
+	// <li>None: Regular watermark</li>
+	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitempty" name:"DigitalWatermarkType"`
 }
 
 type MediaTransitionItem struct {
@@ -14993,6 +15162,105 @@ func (r *PushUrlCacheResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ReduceMediaBitrateAdaptiveDynamicStreamingResult struct {
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of an adaptive bitrate task.
+	Input *AdaptiveDynamicStreamingTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of an adaptive bitrate task.
+	Output *AdaptiveDynamicStreamingInfoItem `json:"Output,omitempty" name:"Output"`
+}
+
+type ReduceMediaBitrateMediaProcessTaskResult struct {
+	// The task type. Valid values:
+	// <li>Transcode</li>
+	// <li>AdaptiveDynamicStreaming</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The result of a transcoding task. This parameter is valid if `Type` is `Transcode`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranscodeTask *ReduceMediaBitrateTranscodeResult `json:"TranscodeTask,omitempty" name:"TranscodeTask"`
+
+	// The result of an adaptive bitrate task. This parameter is valid if `Type` is `AdaptiveDynamicStreaming`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdaptiveDynamicStreamingTask *ReduceMediaBitrateAdaptiveDynamicStreamingResult `json:"AdaptiveDynamicStreamingTask,omitempty" name:"AdaptiveDynamicStreamingTask"`
+}
+
+type ReduceMediaBitrateTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The task flow status. Valid values:
+	// <li>PROCESSING</li>
+	// <li>FINISH</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The ID of the media file.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The name of the media file.
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// The address of the media file.
+	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
+
+	// The metadata of the source video.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
+
+	// The execution status and result of the bitrate reduction task.
+	MediaProcessResultSet []*ReduceMediaBitrateMediaProcessTaskResult `json:"MediaProcessResultSet,omitempty" name:"MediaProcessResultSet"`
+
+	// The task priority, which can be a value from -10 to 10.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// The notification mode for the change of task status. Valid values:
+	// <li>Finish: Send a notification after the task is completed.</li>
+	// <li>None: Do not send status change notifications for this task.</li>
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitempty" name:"TasksNotifyMode"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+}
+
+type ReduceMediaBitrateTranscodeResult struct {
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of a transcoding task.
+	Input *TranscodeTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of a transcoding task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *MediaTranscodeItem `json:"Output,omitempty" name:"Output"`
+
+	// The transcoding progress. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+	// The start time of the transcoding task, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+	BeginProcessTime *string `json:"BeginProcessTime,omitempty" name:"BeginProcessTime"`
+
+	// The end time of the transcoding task, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+}
+
 type RefererAuthPolicy struct {
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/33985) status. Valid values:
 	// <li>Enabled</li>
@@ -16644,16 +16912,17 @@ type TaskSimpleInfo struct {
 	// Video ID
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
-	// Task type. Valid values:
-	// <li>Procedure: video processing task;</li>
-	// <li>EditMedia: video editing task</li>
-	// <li>WechatDistribute: release on WeChat task.</li>
-	// Task types compatible with v2017:
-	// <li>Transcode: transcoding task;</li>
-	// <li>SnapshotByTimeOffset: video screencapturing task</li>
-	// <li>Concat: video splicing task;</li>
-	// <li>Clip: video clipping task;</li>
-	// <li>ImageSprites: image sprite generating task.</li>
+	// The task type. Valid values:
+	// <li>Procedure: Video processing</li>
+	// <li>EditMedia: Video editing</li>
+	// <li> ReduceMediaBitrate: Bitrate reduction</li>
+	// <li>WechatDistribute: Publishing to WeChat</li>
+	// Task types for v2017:
+	// <li>Transcode: Transcoding</li>
+	// <li>SnapshotByTimeOffset: Screencapturing</li>
+	// <li>Concat: Video splicing</li>
+	// <li>Clip: Video clipping</li>
+	// <li>ImageSprites: Image sprite generating</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
@@ -16909,7 +17178,12 @@ type TimeRange struct {
 }
 
 type TraceWatermarkInput struct {
-	// The watermark template ID.
+	// Whether to use digital watermarks. This parameter is required. Valid values:
+	// <li>ON</li>
+	// <li>OFF</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// This parameter has been deprecated.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 

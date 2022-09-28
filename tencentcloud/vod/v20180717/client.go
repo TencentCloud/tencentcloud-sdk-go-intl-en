@@ -4909,6 +4909,66 @@ func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *Execut
     return
 }
 
+func NewExtractTraceWatermarkRequest() (request *ExtractTraceWatermarkRequest) {
+    request = &ExtractTraceWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ExtractTraceWatermark")
+    
+    
+    return
+}
+
+func NewExtractTraceWatermarkResponse() (response *ExtractTraceWatermarkResponse) {
+    response = &ExtractTraceWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ExtractTraceWatermark
+// This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ExtractTraceWatermark(request *ExtractTraceWatermarkRequest) (response *ExtractTraceWatermarkResponse, err error) {
+    return c.ExtractTraceWatermarkWithContext(context.Background(), request)
+}
+
+// ExtractTraceWatermark
+// This API is used to extract the user ID of a user that distributed a video containing a digital watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ExtractTraceWatermarkWithContext(ctx context.Context, request *ExtractTraceWatermarkRequest) (response *ExtractTraceWatermarkResponse, err error) {
+    if request == nil {
+        request = NewExtractTraceWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExtractTraceWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExtractTraceWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewForbidMediaDistributionRequest() (request *ForbidMediaDistributionRequest) {
     request = &ForbidMediaDistributionRequest{
         BaseRequest: &tchttp.BaseRequest{},
