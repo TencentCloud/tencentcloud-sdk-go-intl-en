@@ -136,6 +136,14 @@ type AddLiveDomainRequestParams struct {
 	// 1: LVB on Mini Program.
 	// Default value: 0.
 	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
+
+	// The domain verification type.
+	// Valid values (the value of this parameter must be the same as `VerifyType` of the `AuthenticateDomainOwner` API):
+	// dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
+	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
+	// dbCheck: Check whether the domain has already been verified.
+	// If you do not pass a value, `dbCheck` will be used.
+	VerifyOwnerType *string `json:"VerifyOwnerType,omitempty" name:"VerifyOwnerType"`
 }
 
 type AddLiveDomainRequest struct {
@@ -167,6 +175,14 @@ type AddLiveDomainRequest struct {
 	// 1: LVB on Mini Program.
 	// Default value: 0.
 	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitempty" name:"IsMiniProgramLive"`
+
+	// The domain verification type.
+	// Valid values (the value of this parameter must be the same as `VerifyType` of the `AuthenticateDomainOwner` API):
+	// dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
+	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
+	// dbCheck: Check whether the domain has already been verified.
+	// If you do not pass a value, `dbCheck` will be used.
+	VerifyOwnerType *string `json:"VerifyOwnerType,omitempty" name:"VerifyOwnerType"`
 }
 
 func (r *AddLiveDomainRequest) ToJsonString() string {
@@ -186,6 +202,7 @@ func (r *AddLiveDomainRequest) FromJsonString(s string) error {
 	delete(f, "PlayType")
 	delete(f, "IsDelayLive")
 	delete(f, "IsMiniProgramLive")
+	delete(f, "VerifyOwnerType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddLiveDomainRequest has unknown keys!", "")
 	}
@@ -309,6 +326,87 @@ func (r *AddLiveWatermarkResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *AddLiveWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AuthenticateDomainOwnerRequestParams struct {
+	// The domain to verify.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The verification type. Valid values:
+	// dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
+	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
+	// dbCheck: Check whether the domain has already been successfully verified.
+	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
+}
+
+type AuthenticateDomainOwnerRequest struct {
+	*tchttp.BaseRequest
+	
+	// The domain to verify.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The verification type. Valid values:
+	// dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
+	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
+	// dbCheck: Check whether the domain has already been successfully verified.
+	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
+}
+
+func (r *AuthenticateDomainOwnerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AuthenticateDomainOwnerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DomainName")
+	delete(f, "VerifyType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AuthenticateDomainOwnerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AuthenticateDomainOwnerResponseParams struct {
+	// The content verified.
+	// If `VerifyType` is `dnsCheck`, this is the TXT record that should be added for verification.
+	// If `VerifyType` is `fileCheck`, this is the file that should be uploaded for verification.
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// The verification status.
+	// If the value of this parameter is 0 or greater, the domain has been verified.
+	// If the value of this parameter is smaller than 0, the domain has not been verified.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The primary domain of the domain verified.
+	// Verification is not required if another domain under the same primary domain has been successfully verified.
+	MainDomain *string `json:"MainDomain,omitempty" name:"MainDomain"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AuthenticateDomainOwnerResponse struct {
+	*tchttp.BaseResponse
+	Response *AuthenticateDomainOwnerResponseParams `json:"Response"`
+}
+
+func (r *AuthenticateDomainOwnerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AuthenticateDomainOwnerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6769,8 +6867,8 @@ type DescribeStreamPlayInfoListRequestParams struct {
 	// Start time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
-	// The start time and end time cannot be more than 24 hours apart and must be within the last 15 days.
+	// The end time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
+	// The start time and end time cannot be more than 24 hours apart and must be within the past month.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name,
@@ -6796,8 +6894,8 @@ type DescribeStreamPlayInfoListRequest struct {
 	// Start time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS
-	// The start time and end time cannot be more than 24 hours apart and must be within the last 15 days.
+	// The end time (Beijing time) in the format of yyyy-mm-dd HH:MM:SS.
+	// The start time and end time cannot be more than 24 hours apart and must be within the past month.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name,
@@ -6986,6 +7084,77 @@ func (r *DescribeTopClientIpSumInfoListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTopClientIpSumInfoListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTranscodeTaskNumRequestParams struct {
+	// The start time in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time in the format of yyyy-mm-dd HH:MM:SS.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The push domains to query. If you do not pass a value, all push domains will be queried.
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
+}
+
+type DescribeTranscodeTaskNumRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start time in the format of yyyy-mm-dd HH:MM:SS.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time in the format of yyyy-mm-dd HH:MM:SS.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The push domains to query. If you do not pass a value, all push domains will be queried.
+	PushDomains []*string `json:"PushDomains,omitempty" name:"PushDomains"`
+}
+
+func (r *DescribeTranscodeTaskNumRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTranscodeTaskNumRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PushDomains")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTaskNumRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTranscodeTaskNumResponseParams struct {
+	// The number of tasks.
+	DataInfoList []*TranscodeTaskNum `json:"DataInfoList,omitempty" name:"DataInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTranscodeTaskNumResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTranscodeTaskNumResponseParams `json:"Response"`
+}
+
+func (r *DescribeTranscodeTaskNumResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTranscodeTaskNumResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8518,6 +8687,19 @@ type ModifyLiveSnapshotTemplateRequestParams struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
+	// The COS application ID.
+	// **Please note that this parameter is required now**.
+	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
+
+	// The COS bucket name.
+	// Note: Do not include the `-[appid]` part in the value of `CosBucket`.
+	// **Please note that this parameter is required now**.
+	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
+
+	// The COS region.
+	// **Please note that this parameter is required now**.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
 	// Template name.
 	// Maximum length: 255 bytes.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
@@ -8540,16 +8722,6 @@ type ModifyLiveSnapshotTemplateRequestParams struct {
 	// 0: do not enable.
 	// 1: enable.
 	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
-
-	// COS application ID.
-	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
-
-	// COS bucket name.
-	// Note: the value of `CosBucket` cannot contain `-[appid]`.
-	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
-
-	// COS region.
-	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
 	// COS bucket folder prefix.
 	CosPrefix *string `json:"CosPrefix,omitempty" name:"CosPrefix"`
@@ -8564,6 +8736,19 @@ type ModifyLiveSnapshotTemplateRequest struct {
 	// Template ID.
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
+	// The COS application ID.
+	// **Please note that this parameter is required now**.
+	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
+
+	// The COS bucket name.
+	// Note: Do not include the `-[appid]` part in the value of `CosBucket`.
+	// **Please note that this parameter is required now**.
+	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
+
+	// The COS region.
+	// **Please note that this parameter is required now**.
+	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
+
 	// Template name.
 	// Maximum length: 255 bytes.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
@@ -8586,16 +8771,6 @@ type ModifyLiveSnapshotTemplateRequest struct {
 	// 0: do not enable.
 	// 1: enable.
 	PornFlag *int64 `json:"PornFlag,omitempty" name:"PornFlag"`
-
-	// COS application ID.
-	CosAppId *int64 `json:"CosAppId,omitempty" name:"CosAppId"`
-
-	// COS bucket name.
-	// Note: the value of `CosBucket` cannot contain `-[appid]`.
-	CosBucket *string `json:"CosBucket,omitempty" name:"CosBucket"`
-
-	// COS region.
-	CosRegion *string `json:"CosRegion,omitempty" name:"CosRegion"`
 
 	// COS bucket folder prefix.
 	CosPrefix *string `json:"CosPrefix,omitempty" name:"CosPrefix"`
@@ -8617,15 +8792,15 @@ func (r *ModifyLiveSnapshotTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "TemplateId")
+	delete(f, "CosAppId")
+	delete(f, "CosBucket")
+	delete(f, "CosRegion")
 	delete(f, "TemplateName")
 	delete(f, "Description")
 	delete(f, "SnapshotInterval")
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "PornFlag")
-	delete(f, "CosAppId")
-	delete(f, "CosBucket")
-	delete(f, "CosRegion")
 	delete(f, "CosPrefix")
 	delete(f, "CosFileName")
 	if len(f) > 0 {
@@ -9886,6 +10061,17 @@ type TranscodeDetailInfo struct {
 
 	// Resolution.
 	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
+}
+
+type TranscodeTaskNum struct {
+	// The time of query.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// The bitrate.
+	CodeRate *uint64 `json:"CodeRate,omitempty" name:"CodeRate"`
+
+	// The number of tasks.
+	Num *uint64 `json:"Num,omitempty" name:"Num"`
 }
 
 type TranscodeTotalInfo struct {

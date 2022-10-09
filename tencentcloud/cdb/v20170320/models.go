@@ -1881,6 +1881,9 @@ type CreateParamTemplateRequestParams struct {
 
 	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+
+	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
 }
 
 type CreateParamTemplateRequest struct {
@@ -1903,6 +1906,9 @@ type CreateParamTemplateRequest struct {
 
 	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+
+	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
 }
 
 func (r *CreateParamTemplateRequest) ToJsonString() string {
@@ -1923,6 +1929,7 @@ func (r *CreateParamTemplateRequest) FromJsonString(s string) error {
 	delete(f, "TemplateId")
 	delete(f, "ParamList")
 	delete(f, "TemplateType")
+	delete(f, "EngineType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateParamTemplateRequest has unknown keys!", "")
 	}
@@ -4129,7 +4136,7 @@ type DescribeDBInstancesResponseParams struct {
 	// Number of eligible instances.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Instance details.
+	// List of instance details
 	Items []*InstanceInfo `json:"Items,omitempty" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

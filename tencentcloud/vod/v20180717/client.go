@@ -7611,6 +7611,78 @@ func (c *Client) RestoreMediaWithContext(ctx context.Context, request *RestoreMe
     return
 }
 
+func NewReviewAudioVideoRequest() (request *ReviewAudioVideoRequest) {
+    request = &ReviewAudioVideoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ReviewAudioVideo")
+    
+    
+    return
+}
+
+func NewReviewAudioVideoResponse() (response *ReviewAudioVideoResponse) {
+    response = &ReviewAudioVideoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ReviewAudioVideo
+// This API is used to start a moderation task on a file stored in VOD to detect non-compliant content in images, text, and speech.
+//
+// 
+//
+// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ReviewAudioVideo(request *ReviewAudioVideoRequest) (response *ReviewAudioVideoResponse, err error) {
+    return c.ReviewAudioVideoWithContext(context.Background(), request)
+}
+
+// ReviewAudioVideo
+// This API is used to start a moderation task on a file stored in VOD to detect non-compliant content in images, text, and speech.
+//
+// 
+//
+// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ReviewAudioVideoWithContext(ctx context.Context, request *ReviewAudioVideoRequest) (response *ReviewAudioVideoResponse, err error) {
+    if request == nil {
+        request = NewReviewAudioVideoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReviewAudioVideo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReviewAudioVideoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchMediaRequest() (request *SearchMediaRequest) {
     request = &SearchMediaRequest{
         BaseRequest: &tchttp.BaseRequest{},

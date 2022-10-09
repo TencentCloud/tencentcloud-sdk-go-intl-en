@@ -65,6 +65,15 @@ const (
 	// CDN configuration failed.
 	FAILEDOPERATION_CONFIGCDNFAILED = "FailedOperation.ConfigCDNFailed"
 
+	// The COS bucket does not exist.
+	FAILEDOPERATION_COSBUCKETNOTEXIST = "FailedOperation.CosBucketNotExist"
+
+	// You don’t have permission to access the COS bucket.
+	FAILEDOPERATION_COSBUCKETNOTPERMISSION = "FailedOperation.CosBucketNotPermission"
+
+	// The COS role does not exist.
+	FAILEDOPERATION_COSROLENOTEXISTS = "FailedOperation.CosRoleNotExists"
+
 	// The domain name cannot be deleted because it incurred traffic in the last 2 days and is in locked state.
 	FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
 
@@ -355,6 +364,9 @@ const (
 
 	// The domain name exceeds the length limit.
 	INVALIDPARAMETER_DOMAINTOOLONG = "InvalidParameter.DomainTooLong"
+
+	// The GOP of an adaptive bitrate template is required and must be the same for each stream.
+	INVALIDPARAMETER_GOPMUSTEQUALANDEXISTS = "InvalidParameter.GopMustEqualAndExists"
 
 	// The number of inputs exceeds the limit.
 	INVALIDPARAMETER_INPUTNUMLIMITEXCEEDED = "InvalidParameter.InputNumLimitExceeded"

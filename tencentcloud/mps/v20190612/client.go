@@ -1343,6 +1343,7 @@ func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
 // This API is used to delete image samples by image ID.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
 func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
@@ -1353,6 +1354,7 @@ func (c *Client) DeletePersonSample(request *DeletePersonSampleRequest) (respons
 // This API is used to delete image samples by image ID.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
 func (c *Client) DeletePersonSampleWithContext(ctx context.Context, request *DeletePersonSampleRequest) (response *DeletePersonSampleResponse, err error) {
@@ -2320,11 +2322,11 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
 }
 
 // DescribeTasks
-// * This API is used to query the task list;
+// * This API is used to query tasks.
 //
-// * If there are many data entries in the list, one single call of the API may not be able to pull the entire list. The `ScrollToken` parameter can be used to pull the list in batches;
+// * If the data is large, one API call may not be able to obtain all the tasks in the query. You can use the `ScrollToken` parameter to query tasks with multiple calls.
 //
-// * Only tasks in the last three days (72 hours) can be queried.
+// * Only tasks in the last seven days (168 hours) can be queried.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2336,11 +2338,11 @@ func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *Describ
 }
 
 // DescribeTasks
-// * This API is used to query the task list;
+// * This API is used to query tasks.
 //
-// * If there are many data entries in the list, one single call of the API may not be able to pull the entire list. The `ScrollToken` parameter can be used to pull the list in batches;
+// * If the data is large, one API call may not be able to obtain all the tasks in the query. You can use the `ScrollToken` parameter to query tasks with multiple calls.
 //
-// * Only tasks in the last three days (72 hours) can be queried.
+// * Only tasks in the last seven days (168 hours) can be queried.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2803,6 +2805,7 @@ func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
 // This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
@@ -2816,6 +2819,7 @@ func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *Exe
 // This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
@@ -3364,6 +3368,7 @@ func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
@@ -3378,6 +3383,7 @@ func (c *Client) ModifyPersonSample(request *ModifyPersonSampleRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"

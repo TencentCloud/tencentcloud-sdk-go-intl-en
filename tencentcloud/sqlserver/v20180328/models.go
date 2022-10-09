@@ -186,6 +186,50 @@ type BackupFile struct {
 	CrossBackupAddr []*CrossBackupAddr `json:"CrossBackupAddr,omitempty" name:"CrossBackupAddr"`
 }
 
+type BusinessIntelligenceFile struct {
+	// File name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// File type
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// File COS_URL
+	FileURL *string `json:"FileURL,omitempty" name:"FileURL"`
+
+	// The file path on the server
+	FilePath *string `json:"FilePath,omitempty" name:"FilePath"`
+
+	// File size in bytes
+	FileSize *int64 `json:"FileSize,omitempty" name:"FileSize"`
+
+	// File MD5 value
+	FileMd5 *string `json:"FileMd5,omitempty" name:"FileMd5"`
+
+	// File deployment status. Valid values: `1`(Initialize to be deployed), `2` (Deploying), `3` (Deployment successful), `4` (Deployment failed).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// File creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Start time of file deployment
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of file deployment
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Returned error message
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Business intelligence instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Operation information
+	Action *FileAction `json:"Action,omitempty" name:"Action"`
+}
+
 // Predefined struct for user
 type CloneDBRequestParams struct {
 	// Instance ID in the format of mssql-j8kv137v
@@ -247,6 +291,63 @@ func (r *CloneDBResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CloneDBResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseInterCommunicationRequestParams struct {
+	// IDs of instances with interconnection disabled
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+}
+
+type CloseInterCommunicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of instances with interconnection disabled
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+}
+
+func (r *CloseInterCommunicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseInterCommunicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIdSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseInterCommunicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseInterCommunicationResponseParams struct {
+	// IDs of instance and async task
+	InterInstanceFlowSet []*InterInstanceFlow `json:"InterInstanceFlowSet,omitempty" name:"InterInstanceFlowSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CloseInterCommunicationResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseInterCommunicationResponseParams `json:"Response"`
+}
+
+func (r *CloseInterCommunicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseInterCommunicationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -482,6 +583,238 @@ func (r *CreateBackupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateBackupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBusinessDBInstancesRequestParams struct {
+	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// The number of CPU cores of the instance you want to purchase.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The host type of purchased instance. Valid values: `CLOUD_PREMIUM` (virtual machine with premium cloud disk), `CLOUD_SSD` (virtual machine with SSD).
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Number of instances purchased this time. Default value: `1`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// VPC subnet ID in the format of subnet-bdoe83fa. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID in the format of vpc-dsp338hz. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// - Supported versions of business intelligence server. Valid values: `201603` (SQL Server 2016 Integration Services), `201703` (SQL Server 2017 Integration Services), `201903` (SQL Server 2019 Integration Services). Default value: `201903`. As the purchasable versions are region-specific, you can use the `DescribeProductConfig` API to query the information of purchasable versions in each region.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Security group list, which contains security group IDs in the format of sg-xxx.
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
+
+	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday).
+	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly"`
+
+	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours.
+	Span *int64 `json:"Span,omitempty" name:"Span"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+}
+
+type CreateBusinessDBInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// The number of CPU cores of the instance you want to purchase.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The host type of purchased instance. Valid values: `CLOUD_PREMIUM` (virtual machine with premium cloud disk), `CLOUD_SSD` (virtual machine with SSD).
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Number of instances purchased this time. Default value: `1`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// VPC subnet ID in the format of subnet-bdoe83fa. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID in the format of vpc-dsp338hz. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// - Supported versions of business intelligence server. Valid values: `201603` (SQL Server 2016 Integration Services), `201703` (SQL Server 2017 Integration Services), `201903` (SQL Server 2019 Integration Services). Default value: `201903`. As the purchasable versions are region-specific, you can use the `DescribeProductConfig` API to query the information of purchasable versions in each region.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Security group list, which contains security group IDs in the format of sg-xxx.
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
+
+	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday).
+	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly"`
+
+	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours.
+	Span *int64 `json:"Span,omitempty" name:"Span"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+}
+
+func (r *CreateBusinessDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBusinessDBInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "Cpu")
+	delete(f, "MachineType")
+	delete(f, "ProjectId")
+	delete(f, "GoodsNum")
+	delete(f, "SubnetId")
+	delete(f, "VpcId")
+	delete(f, "DBVersion")
+	delete(f, "SecurityGroupList")
+	delete(f, "Weekly")
+	delete(f, "StartTime")
+	delete(f, "Span")
+	delete(f, "ResourceTags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBusinessDBInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBusinessDBInstancesResponseParams struct {
+	// Order name
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateBusinessDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBusinessDBInstancesResponseParams `json:"Response"`
+}
+
+func (r *CreateBusinessDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBusinessDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBusinessIntelligenceFileRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+
+	FileURL *string `json:"FileURL,omitempty" name:"FileURL"`
+
+	// File type. Valid values: `FLAT` (flat file as data source), `SSIS` (.ispac SSIS package file)
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+type CreateBusinessIntelligenceFileRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	FileURL *string `json:"FileURL,omitempty" name:"FileURL"`
+
+	// File type. Valid values: `FLAT` (flat file as data source), `SSIS` (.ispac SSIS package file)
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+func (r *CreateBusinessIntelligenceFileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBusinessIntelligenceFileRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "FileURL")
+	delete(f, "FileType")
+	delete(f, "Remark")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBusinessIntelligenceFileRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBusinessIntelligenceFileResponseParams struct {
+	// File name
+	FileTaskId *string `json:"FileTaskId,omitempty" name:"FileTaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateBusinessIntelligenceFileResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBusinessIntelligenceFileResponseParams `json:"Response"`
+}
+
+func (r *CreateBusinessIntelligenceFileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBusinessIntelligenceFileResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1385,6 +1718,67 @@ func (r *DeleteBackupMigrationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteBusinessIntelligenceFileRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// File name set
+	FileNameSet []*string `json:"FileNameSet,omitempty" name:"FileNameSet"`
+}
+
+type DeleteBusinessIntelligenceFileRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// File name set
+	FileNameSet []*string `json:"FileNameSet,omitempty" name:"FileNameSet"`
+}
+
+func (r *DeleteBusinessIntelligenceFileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBusinessIntelligenceFileRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "FileNameSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBusinessIntelligenceFileRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBusinessIntelligenceFileResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteBusinessIntelligenceFileResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBusinessIntelligenceFileResponseParams `json:"Response"`
+}
+
+func (r *DeleteBusinessIntelligenceFileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBusinessIntelligenceFileResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteDBRequestParams struct {
 	// Instance ID in the format of mssql-rljoi3bf
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2166,6 +2560,115 @@ func (r *DescribeBackupsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBusinessIntelligenceFileRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// File name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// Migration task status set. Valid values: `1` (Initialize to be deployed), `2` (Deploying), `3` (Deployment successful), `4` (Deployment failed)
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet"`
+
+	// File type. Valid values: `FLAT` (flat files), `SSIS` (project file for business intelligence service).
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// The maximum number of results returned per page. Value range: 1-100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting field. Valid values: `file_name`, `create_time`, `start_time`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order: Valid values: `desc`, `asc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+type DescribeBusinessIntelligenceFileRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// File name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// Migration task status set. Valid values: `1` (Initialize to be deployed), `2` (Deploying), `3` (Deployment successful), `4` (Deployment failed)
+	StatusSet []*int64 `json:"StatusSet,omitempty" name:"StatusSet"`
+
+	// File type. Valid values: `FLAT` (flat files), `SSIS` (project file for business intelligence service).
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// The maximum number of results returned per page. Value range: 1-100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page number. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting field. Valid values: `file_name`, `create_time`, `start_time`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order: Valid values: `desc`, `asc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeBusinessIntelligenceFileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBusinessIntelligenceFileRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "FileName")
+	delete(f, "StatusSet")
+	delete(f, "FileType")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBusinessIntelligenceFileRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBusinessIntelligenceFileResponseParams struct {
+	// Total number of file deployment tasks
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// File deployment task set
+	BackupMigrationSet []*BusinessIntelligenceFile `json:"BackupMigrationSet,omitempty" name:"BackupMigrationSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBusinessIntelligenceFileResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBusinessIntelligenceFileResponseParams `json:"Response"`
+}
+
+func (r *DescribeBusinessIntelligenceFileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBusinessIntelligenceFileResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBCharsetsRequestParams struct {
 	// Instance ID in the format of mssql-j8kv137v
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2219,6 +2722,101 @@ func (r *DescribeDBCharsetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBCharsetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceInterRequestParams struct {
+	// The maximum number of results returned per page. Value range: 1-100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter by instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter by status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6` (Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of instance version numbers
+	VersionSet []*string `json:"VersionSet,omitempty" name:"VersionSet"`
+
+	// Instance AZ ID in the format of ap-guangzhou-2
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Page number. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribeDBInstanceInterRequest struct {
+	*tchttp.BaseRequest
+	
+	// The maximum number of results returned per page. Value range: 1-100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter by instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter by status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6` (Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of instance version numbers
+	VersionSet []*string `json:"VersionSet,omitempty" name:"VersionSet"`
+
+	// Instance AZ ID in the format of ap-guangzhou-2
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Page number. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeDBInstanceInterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceInterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "InstanceId")
+	delete(f, "Status")
+	delete(f, "VersionSet")
+	delete(f, "Zone")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceInterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceInterResponseParams struct {
+	// Number of records returned
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Details of instance in the interworking group
+	InterInstanceSet []*InterInstance `json:"InterInstanceSet,omitempty" name:"InterInstanceSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstanceInterResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceInterResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceInterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceInterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3521,6 +4119,14 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type FileAction struct {
+	// Allowed operations. Valid values: `view` (view list), `remark` (modify remark), `deploy` (deploy files), `delete` (delete files).
+	AllAction []*string `json:"AllAction,omitempty" name:"AllAction"`
+
+	// Operation allowed in the current status. If the subset of `AllAction` is empty, no operations will be allowed.
+	AllowedAction []*string `json:"AllowedAction,omitempty" name:"AllowedAction"`
+}
+
 // Predefined struct for user
 type InquiryPriceCreateDBInstancesRequestParams struct {
 	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API
@@ -3731,6 +4337,49 @@ type InstanceDBDetail struct {
 
 	// Database information list
 	DBDetails []*DBDetail `json:"DBDetails,omitempty" name:"DBDetails"`
+}
+
+type InterInstance struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance interworking IP, which can be accessed after the instance is added to the interworking group.
+	InterVip *string `json:"InterVip,omitempty" name:"InterVip"`
+
+	// Instance interworking port, which can be accessed after the instance is added to the interworking group.
+	InterPort *int64 `json:"InterPort,omitempty" name:"InterPort"`
+
+	// Instance interworking status. Valid values: `1` (Enabling interworking IP), `2` (Enabled interworking IP), `3` (Adding to interworking group), `4` (Added to interworking group), `5` (Reclaiming interworking IP), `6`(Reclaimed interworking IP), `7` (Removing from interworking group), `8` (Removed from interworking group).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance region, such as ap-guangzhou.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Instance AZ name, such as ap-guangzhou-1.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance version code
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Instance version
+	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
+
+	// Instance name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Instance access IP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Instance access port
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+}
+
+type InterInstanceFlow struct {
+	// Instance ID, such as mssql-sdf32n1d.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance task ID for enabling or disabling the interworking group. When `FlowId` is less than 0, the interworking group will be enabled or disabled successfully; otherwise, the operation failed.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 }
 
 type MigrateDB struct {
@@ -5042,6 +5691,63 @@ func (r *ModifyMigrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMigrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenInterCommunicationRequestParams struct {
+	// IDs of instances with interwoking group enabled
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+}
+
+type OpenInterCommunicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of instances with interwoking group enabled
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+}
+
+func (r *OpenInterCommunicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenInterCommunicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIdSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenInterCommunicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenInterCommunicationResponseParams struct {
+	// IDs of instance and async task
+	InterInstanceFlowSet []*InterInstanceFlow `json:"InterInstanceFlowSet,omitempty" name:"InterInstanceFlowSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type OpenInterCommunicationResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenInterCommunicationResponseParams `json:"Response"`
+}
+
+func (r *OpenInterCommunicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenInterCommunicationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

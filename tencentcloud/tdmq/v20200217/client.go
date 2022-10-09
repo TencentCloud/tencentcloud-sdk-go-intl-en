@@ -308,6 +308,7 @@ func NewCreateCmqQueueResponse() (response *CreateCmqQueueResponse) {
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCmqQueue(request *CreateCmqQueueRequest) (response *CreateCmqQueueResponse, err error) {
     return c.CreateCmqQueueWithContext(context.Background(), request)
 }
@@ -327,6 +328,7 @@ func (c *Client) CreateCmqQueue(request *CreateCmqQueueRequest) (response *Creat
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateCmqQueueWithContext(ctx context.Context, request *CreateCmqQueueRequest) (response *CreateCmqQueueResponse, err error) {
     if request == nil {
         request = NewCreateCmqQueueRequest()
@@ -641,6 +643,7 @@ func NewCreateRocketMQClusterResponse() (response *CreateRocketMQClusterResponse
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateRocketMQCluster(request *CreateRocketMQClusterRequest) (response *CreateRocketMQClusterResponse, err error) {
     return c.CreateRocketMQClusterWithContext(context.Background(), request)
 }
@@ -659,6 +662,7 @@ func (c *Client) CreateRocketMQCluster(request *CreateRocketMQClusterRequest) (r
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateRocketMQClusterWithContext(ctx context.Context, request *CreateRocketMQClusterRequest) (response *CreateRocketMQClusterResponse, err error) {
     if request == nil {
         request = NewCreateRocketMQClusterRequest()
@@ -824,9 +828,11 @@ func NewCreateRocketMQTopicResponse() (response *CreateRocketMQTopicResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATETOPIC = "FailedOperation.CreateTopic"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -841,9 +847,11 @@ func (c *Client) CreateRocketMQTopic(request *CreateRocketMQTopicRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATETOPIC = "FailedOperation.CreateTopic"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1316,6 +1324,7 @@ func NewDeleteEnvironmentRolesResponse() (response *DeleteEnvironmentRolesRespon
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEENVIRONMENTROLES = "FailedOperation.DeleteEnvironmentRoles"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
@@ -1330,6 +1339,7 @@ func (c *Client) DeleteEnvironmentRoles(request *DeleteEnvironmentRolesRequest) 
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEENVIRONMENTROLES = "FailedOperation.DeleteEnvironmentRoles"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
@@ -1616,6 +1626,7 @@ func NewDeleteRocketMQTopicResponse() (response *DeleteRocketMQTopicResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1628,6 +1639,7 @@ func (c *Client) DeleteRocketMQTopic(request *DeleteRocketMQTopicRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETETOPICS = "FailedOperation.DeleteTopics"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -2913,6 +2925,62 @@ func (c *Client) DescribeRocketMQTopicsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeRocketMQVipInstancesRequest() (request *DescribeRocketMQVipInstancesRequest) {
+    request = &DescribeRocketMQVipInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQVipInstances")
+    
+    
+    return
+}
+
+func NewDescribeRocketMQVipInstancesResponse() (response *DescribeRocketMQVipInstancesResponse) {
+    response = &DescribeRocketMQVipInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRocketMQVipInstances
+// This API is used to query the list of the purchased TDMQ for RocketMQ exclusive instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRocketMQVipInstances(request *DescribeRocketMQVipInstancesRequest) (response *DescribeRocketMQVipInstancesResponse, err error) {
+    return c.DescribeRocketMQVipInstancesWithContext(context.Background(), request)
+}
+
+// DescribeRocketMQVipInstances
+// This API is used to query the list of the purchased TDMQ for RocketMQ exclusive instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRocketMQVipInstancesWithContext(ctx context.Context, request *DescribeRocketMQVipInstancesRequest) (response *DescribeRocketMQVipInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRocketMQVipInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRocketMQVipInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRocketMQVipInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRolesRequest() (request *DescribeRolesRequest) {
     request = &DescribeRolesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3177,6 +3245,7 @@ func NewModifyCmqQueueAttributeResponse() (response *ModifyCmqQueueAttributeResp
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ModifyCmqQueueAttribute(request *ModifyCmqQueueAttributeRequest) (response *ModifyCmqQueueAttributeResponse, err error) {
     return c.ModifyCmqQueueAttributeWithContext(context.Background(), request)
 }
@@ -3191,6 +3260,7 @@ func (c *Client) ModifyCmqQueueAttribute(request *ModifyCmqQueueAttributeRequest
 //  INTERNALERROR_BROKERSERVICE = "InternalError.BrokerService"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ModifyCmqQueueAttributeWithContext(ctx context.Context, request *ModifyCmqQueueAttributeRequest) (response *ModifyCmqQueueAttributeResponse, err error) {
     if request == nil {
         request = NewModifyCmqQueueAttributeRequest()
@@ -3278,6 +3348,7 @@ func NewModifyCmqTopicAttributeResponse() (response *ModifyCmqTopicAttributeResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) ModifyCmqTopicAttribute(request *ModifyCmqTopicAttributeRequest) (response *ModifyCmqTopicAttributeResponse, err error) {
     return c.ModifyCmqTopicAttributeWithContext(context.Background(), request)
 }
@@ -3287,6 +3358,7 @@ func (c *Client) ModifyCmqTopicAttribute(request *ModifyCmqTopicAttributeRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) ModifyCmqTopicAttributeWithContext(ctx context.Context, request *ModifyCmqTopicAttributeRequest) (response *ModifyCmqTopicAttributeResponse, err error) {
     if request == nil {
         request = NewModifyCmqTopicAttributeRequest()
@@ -3524,6 +3596,7 @@ func NewModifyRocketMQGroupResponse() (response *ModifyRocketMQGroupResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRocketMQGroup(request *ModifyRocketMQGroupRequest) (response *ModifyRocketMQGroupResponse, err error) {
     return c.ModifyRocketMQGroupWithContext(context.Background(), request)
@@ -3536,6 +3609,7 @@ func (c *Client) ModifyRocketMQGroup(request *ModifyRocketMQGroupRequest) (respo
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRocketMQGroupWithContext(ctx context.Context, request *ModifyRocketMQGroupRequest) (response *ModifyRocketMQGroupResponse, err error) {
     if request == nil {
@@ -3576,6 +3650,7 @@ func NewModifyRocketMQNamespaceResponse() (response *ModifyRocketMQNamespaceResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -3592,6 +3667,7 @@ func (c *Client) ModifyRocketMQNamespace(request *ModifyRocketMQNamespaceRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SETTTL = "FailedOperation.SetTTL"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -3640,6 +3716,7 @@ func NewModifyRocketMQTopicResponse() (response *ModifyRocketMQTopicResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRocketMQTopic(request *ModifyRocketMQTopicRequest) (response *ModifyRocketMQTopicResponse, err error) {
@@ -3653,6 +3730,7 @@ func (c *Client) ModifyRocketMQTopic(request *ModifyRocketMQTopicRequest) (respo
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRocketMQTopicWithContext(ctx context.Context, request *ModifyRocketMQTopicRequest) (response *ModifyRocketMQTopicResponse, err error) {
@@ -3860,7 +3938,7 @@ func NewReceiveMessageResponse() (response *ReceiveMessageResponse) {
 }
 
 // ReceiveMessage
-// This API is used to receive messages sent to a specified topic. If this API is called when there are no messages in the topic, the `ReceiveTimeout` exception will be reported.
+// Currently, the `ReceiveMessage` API only supports partitioned topics. It is used to receive messages sent to a specified partitioned topic. If it is called when there are no messages in the partitioned topic, the `ReceiveTimeout` exception will be reported.
 //
 // 
 //
@@ -3868,7 +3946,7 @@ func NewReceiveMessageResponse() (response *ReceiveMessageResponse) {
 //
 // 
 //
-// `BatchReceive` has the three parameters:
+// `BatchReceive` has three parameters:
 //
 // 
 //
@@ -3917,7 +3995,7 @@ func (c *Client) ReceiveMessage(request *ReceiveMessageRequest) (response *Recei
 }
 
 // ReceiveMessage
-// This API is used to receive messages sent to a specified topic. If this API is called when there are no messages in the topic, the `ReceiveTimeout` exception will be reported.
+// Currently, the `ReceiveMessage` API only supports partitioned topics. It is used to receive messages sent to a specified partitioned topic. If it is called when there are no messages in the partitioned topic, the `ReceiveTimeout` exception will be reported.
 //
 // 
 //
@@ -3925,7 +4003,7 @@ func (c *Client) ReceiveMessage(request *ReceiveMessageRequest) (response *Recei
 //
 // 
 //
-// `BatchReceive` has the three parameters:
+// `BatchReceive` has three parameters:
 //
 // 
 //

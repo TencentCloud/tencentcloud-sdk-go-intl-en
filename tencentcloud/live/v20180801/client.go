@@ -329,6 +329,58 @@ func (c *Client) AddLiveWatermarkWithContext(ctx context.Context, request *AddLi
     return
 }
 
+func NewAuthenticateDomainOwnerRequest() (request *AuthenticateDomainOwnerRequest) {
+    request = &AuthenticateDomainOwnerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "AuthenticateDomainOwner")
+    
+    
+    return
+}
+
+func NewAuthenticateDomainOwnerResponse() (response *AuthenticateDomainOwnerResponse) {
+    response = &AuthenticateDomainOwnerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AuthenticateDomainOwner
+// This API is used to verify the ownership of a domain.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+func (c *Client) AuthenticateDomainOwner(request *AuthenticateDomainOwnerRequest) (response *AuthenticateDomainOwnerResponse, err error) {
+    return c.AuthenticateDomainOwnerWithContext(context.Background(), request)
+}
+
+// AuthenticateDomainOwner
+// This API is used to verify the ownership of a domain.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
+func (c *Client) AuthenticateDomainOwnerWithContext(ctx context.Context, request *AuthenticateDomainOwnerRequest) (response *AuthenticateDomainOwnerResponse, err error) {
+    if request == nil {
+        request = NewAuthenticateDomainOwnerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AuthenticateDomainOwner require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAuthenticateDomainOwnerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelCommonMixStreamRequest() (request *CancelCommonMixStreamRequest) {
     request = &CancelCommonMixStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1208,11 +1260,15 @@ func NewCreateLiveSnapshotTemplateResponse() (response *CreateLiveSnapshotTempla
 }
 
 // CreateLiveSnapshotTemplate
-// After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API and bind the template ID to the stream.
+// This API is used to create a screencapture template. After a template ID is returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API to bind the template ID to a stream. You can create up to 50 screencapture templates.
 //
-// <br>Screencapturing-related document: [LVB Screencapturing](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
+// <br>To learn more about the live screencapture feature, see [Live Screencapture](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_COSBUCKETNOTEXIST = "FailedOperation.CosBucketNotExist"
+//  FAILEDOPERATION_COSBUCKETNOTPERMISSION = "FailedOperation.CosBucketNotPermission"
+//  FAILEDOPERATION_COSROLENOTEXISTS = "FailedOperation.CosRoleNotExists"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
 //  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
@@ -1237,11 +1293,15 @@ func (c *Client) CreateLiveSnapshotTemplate(request *CreateLiveSnapshotTemplateR
 }
 
 // CreateLiveSnapshotTemplate
-// After a screencapturing template is created and a template ID is successfully returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API and bind the template ID to the stream.
+// This API is used to create a screencapture template. After a template ID is returned, you need to call the [CreateLiveSnapshotRule](https://intl.cloud.tencent.com/document/product/267/32625?from_cn_redirect=1) API to bind the template ID to a stream. You can create up to 50 screencapture templates.
 //
-// <br>Screencapturing-related document: [LVB Screencapturing](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
+// <br>To learn more about the live screencapture feature, see [Live Screencapture](https://intl.cloud.tencent.com/document/product/267/32737?from_cn_redirect=1).
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_COSBUCKETNOTEXIST = "FailedOperation.CosBucketNotExist"
+//  FAILEDOPERATION_COSBUCKETNOTPERMISSION = "FailedOperation.CosBucketNotPermission"
+//  FAILEDOPERATION_COSROLENOTEXISTS = "FailedOperation.CosRoleNotExists"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
 //  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
@@ -1405,6 +1465,7 @@ func NewCreateLiveTranscodeTemplateResponse() (response *CreateLiveTranscodeTemp
 //  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETER_GOPMUSTEQUALANDEXISTS = "InvalidParameter.GopMustEqualAndExists"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -1436,6 +1497,7 @@ func (c *Client) CreateLiveTranscodeTemplate(request *CreateLiveTranscodeTemplat
 //  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETER_GOPMUSTEQUALANDEXISTS = "InvalidParameter.GopMustEqualAndExists"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -5362,13 +5424,13 @@ func NewDescribeLiveTranscodeTotalInfoResponse() (response *DescribeLiveTranscod
 }
 
 // DescribeLiveTranscodeTotalInfo
-// This API is used to query your total usage of the transcoding service in the last 30 days.
+// This API is used to query transcoding usage. You can use it to query data in the past three months.
 //
 // Notes:
 //
 // If the start time and end time are on the same day, the data returned will be on a 5-minute basis.
 //
-// If not or if the data of specified domains is queried, the data returned will be on an hourly basis.
+// If the start time and end time are not on the same day or if the data of specified domains is queried, the data returned will be on an hourly basis.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5384,13 +5446,13 @@ func (c *Client) DescribeLiveTranscodeTotalInfo(request *DescribeLiveTranscodeTo
 }
 
 // DescribeLiveTranscodeTotalInfo
-// This API is used to query your total usage of the transcoding service in the last 30 days.
+// This API is used to query transcoding usage. You can use it to query data in the past three months.
 //
 // Notes:
 //
 // If the start time and end time are on the same day, the data returned will be on a 5-minute basis.
 //
-// If not or if the data of specified domains is queried, the data returned will be on an hourly basis.
+// If the start time and end time are not on the same day or if the data of specified domains is queried, the data returned will be on an hourly basis.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6073,6 +6135,60 @@ func (c *Client) DescribeTopClientIpSumInfoListWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeTopClientIpSumInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTranscodeTaskNumRequest() (request *DescribeTranscodeTaskNumRequest) {
+    request = &DescribeTranscodeTaskNumRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeTranscodeTaskNum")
+    
+    
+    return
+}
+
+func NewDescribeTranscodeTaskNumResponse() (response *DescribeTranscodeTaskNumResponse) {
+    response = &DescribeTranscodeTaskNumResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTranscodeTaskNum
+// This API is used to query the number of transcoding tasks.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeTranscodeTaskNum(request *DescribeTranscodeTaskNumRequest) (response *DescribeTranscodeTaskNumResponse, err error) {
+    return c.DescribeTranscodeTaskNumWithContext(context.Background(), request)
+}
+
+// DescribeTranscodeTaskNum
+// This API is used to query the number of transcoding tasks.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeTranscodeTaskNumWithContext(ctx context.Context, request *DescribeTranscodeTaskNumRequest) (response *DescribeTranscodeTaskNumResponse, err error) {
+    if request == nil {
+        request = NewDescribeTranscodeTaskNumRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTranscodeTaskNum require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTranscodeTaskNumResponse()
     err = c.Send(request, response)
     return
 }
@@ -7117,6 +7233,10 @@ func NewModifyLiveSnapshotTemplateResponse() (response *ModifyLiveSnapshotTempla
 // This API is used to modify the screencapturing template configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_COSBUCKETNOTEXIST = "FailedOperation.CosBucketNotExist"
+//  FAILEDOPERATION_COSBUCKETNOTPERMISSION = "FailedOperation.CosBucketNotPermission"
+//  FAILEDOPERATION_COSROLENOTEXISTS = "FailedOperation.CosRoleNotExists"
 //  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
@@ -7144,6 +7264,10 @@ func (c *Client) ModifyLiveSnapshotTemplate(request *ModifyLiveSnapshotTemplateR
 // This API is used to modify the screencapturing template configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
+//  FAILEDOPERATION_COSBUCKETNOTEXIST = "FailedOperation.CosBucketNotExist"
+//  FAILEDOPERATION_COSBUCKETNOTPERMISSION = "FailedOperation.CosBucketNotPermission"
+//  FAILEDOPERATION_COSROLENOTEXISTS = "FailedOperation.CosRoleNotExists"
 //  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
@@ -7209,10 +7333,13 @@ func NewModifyLiveTranscodeTemplateResponse() (response *ModifyLiveTranscodeTemp
 //  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
 //  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
 //  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_PROCESSORALREADYEXIST = "InternalError.ProcessorAlreadyExist"
 //  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
 //  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
 //  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETER_GOPMUSTEQUALANDEXISTS = "InvalidParameter.GopMustEqualAndExists"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -7235,10 +7362,13 @@ func (c *Client) ModifyLiveTranscodeTemplate(request *ModifyLiveTranscodeTemplat
 //  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
 //  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
 //  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
+//  INTERNALERROR_PROCESSORALREADYEXIST = "InternalError.ProcessorAlreadyExist"
 //  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
 //  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
 //  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ARGSNOTMATCH = "InvalidParameter.ArgsNotMatch"
+//  INVALIDPARAMETER_GOPMUSTEQUALANDEXISTS = "InvalidParameter.GopMustEqualAndExists"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"

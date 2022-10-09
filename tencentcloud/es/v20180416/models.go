@@ -2306,6 +2306,10 @@ type TaskDetail struct {
 
 	// Subtask
 	SubTasks []*SubTaskDetail `json:"SubTasks,omitempty" name:"SubTasks"`
+
+	// The task time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ElapsedTime *int64 `json:"ElapsedTime,omitempty" name:"ElapsedTime"`
 }
 
 // Predefined struct for user
@@ -2600,6 +2604,9 @@ type UpdateInstanceRequestParams struct {
 
 	// The maintenance time slot
 	OperationDuration *OperationDurationUpdated `json:"OperationDuration,omitempty" name:"OperationDuration"`
+
+	// Whether to enable the option for sending alerting messages over the public network.
+	KibanaAlteringPublicAccess *string `json:"KibanaAlteringPublicAccess,omitempty" name:"KibanaAlteringPublicAccess"`
 }
 
 type UpdateInstanceRequest struct {
@@ -2703,6 +2710,9 @@ type UpdateInstanceRequest struct {
 
 	// The maintenance time slot
 	OperationDuration *OperationDurationUpdated `json:"OperationDuration,omitempty" name:"OperationDuration"`
+
+	// Whether to enable the option for sending alerting messages over the public network.
+	KibanaAlteringPublicAccess *string `json:"KibanaAlteringPublicAccess,omitempty" name:"KibanaAlteringPublicAccess"`
 }
 
 func (r *UpdateInstanceRequest) ToJsonString() string {
@@ -2748,6 +2758,7 @@ func (r *UpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "CerebroPrivateAccess")
 	delete(f, "EsConfigSet")
 	delete(f, "OperationDuration")
+	delete(f, "KibanaAlteringPublicAccess")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateInstanceRequest has unknown keys!", "")
 	}
@@ -2952,6 +2963,9 @@ type UpgradeInstanceRequestParams struct {
 
 	// Whether to back up the cluster before version upgrade (no backup by default)
 	CosBackup *bool `json:"CosBackup,omitempty" name:"CosBackup"`
+
+	// Whether to skip the check and perform a force restart in the rolling mode. Default value: `false`.
+	SkipCheckForceRestart *bool `json:"SkipCheckForceRestart,omitempty" name:"SkipCheckForceRestart"`
 }
 
 type UpgradeInstanceRequest struct {
@@ -2977,6 +2991,9 @@ type UpgradeInstanceRequest struct {
 
 	// Whether to back up the cluster before version upgrade (no backup by default)
 	CosBackup *bool `json:"CosBackup,omitempty" name:"CosBackup"`
+
+	// Whether to skip the check and perform a force restart in the rolling mode. Default value: `false`.
+	SkipCheckForceRestart *bool `json:"SkipCheckForceRestart,omitempty" name:"SkipCheckForceRestart"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -2998,6 +3015,7 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 	delete(f, "BasicSecurityType")
 	delete(f, "UpgradeMode")
 	delete(f, "CosBackup")
+	delete(f, "SkipCheckForceRestart")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeInstanceRequest has unknown keys!", "")
 	}

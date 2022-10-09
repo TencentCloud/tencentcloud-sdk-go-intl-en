@@ -1094,7 +1094,7 @@ type CreateEnvironmentRequestParams struct {
 	// Environment (namespace) name, which can contain up to 16 letters, digits, hyphens, and underscores.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -1113,7 +1113,7 @@ type CreateEnvironmentRequest struct {
 	// Environment (namespace) name, which can contain up to 16 letters, digits, hyphens, and underscores.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -4403,6 +4403,80 @@ func (r *DescribeRocketMQTopicsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRocketMQVipInstancesRequestParams struct {
+	// Query condition filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of queried items, which defaults to 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribeRocketMQVipInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query condition filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of queried items, which defaults to 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeRocketMQVipInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRocketMQVipInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQVipInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRocketMQVipInstancesResponseParams struct {
+	// The total number of unpaginated items
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Instance information list
+	Instances []*RocketMQVipInstance `json:"Instances,omitempty" name:"Instances"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRocketMQVipInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRocketMQVipInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRocketMQVipInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRocketMQVipInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRolesRequestParams struct {
 	// Fuzzy query by role name
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
@@ -5208,7 +5282,7 @@ type ModifyEnvironmentAttributesRequestParams struct {
 	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -5227,7 +5301,7 @@ type ModifyEnvironmentAttributesRequest struct {
 	// Namespace name.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 
-	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s.
+	// Retention period for unconsumed messages in seconds. Value range: 60s to 1,296,000s (or 15 days).
 	MsgTTL *uint64 `json:"MsgTTL,omitempty" name:"MsgTTL"`
 
 	// Remarks (up to 128 characters).
@@ -6034,7 +6108,7 @@ type ReceiveMessageRequestParams struct {
 	// Default value: 1000. Messages received by the consumer will first be stored in the `receiverQueueSize` queue to tune the message receiving rate.
 	ReceiverQueueSize *int64 `json:"ReceiverQueueSize,omitempty" name:"ReceiverQueueSize"`
 
-	// Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
+	// A parameter used to determine the position where the consumer initially receives messages. Valid values: `Earliest` (default), `Latest`.
 	SubInitialPosition *string `json:"SubInitialPosition,omitempty" name:"SubInitialPosition"`
 
 	// This parameter is used to specify the maximum number of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
@@ -6059,7 +6133,7 @@ type ReceiveMessageRequest struct {
 	// Default value: 1000. Messages received by the consumer will first be stored in the `receiverQueueSize` queue to tune the message receiving rate.
 	ReceiverQueueSize *int64 `json:"ReceiverQueueSize,omitempty" name:"ReceiverQueueSize"`
 
-	// Default value: Latest. It is used to determine the position where the consumer initially receives messages. Valid values: Earliest, Latest.
+	// A parameter used to determine the position where the consumer initially receives messages. Valid values: `Earliest` (default), `Latest`.
 	SubInitialPosition *string `json:"SubInitialPosition,omitempty" name:"SubInitialPosition"`
 
 	// This parameter is used to specify the maximum number of received messages in a batch for `BatchReceivePolicy`. The default value is 0, indicating that `BatchReceivePolicy` is disabled.
@@ -6556,6 +6630,52 @@ type RocketMQTopic struct {
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type RocketMQVipInstance struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceVersion *string `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
+
+	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Number of nodes
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Instance specification name
+	ConfigDisplay *string `json:"ConfigDisplay,omitempty" name:"ConfigDisplay"`
+
+	// Peak TPS
+	MaxTps *uint64 `json:"MaxTps,omitempty" name:"MaxTps"`
+
+	// Peak bandwidth in Mbps
+	MaxBandWidth *uint64 `json:"MaxBandWidth,omitempty" name:"MaxBandWidth"`
+
+	// Storage capacity in GB
+	MaxStorage *uint64 `json:"MaxStorage,omitempty" name:"MaxStorage"`
+
+	// Instance expiration time in milliseconds
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Payment mode. 0: Postpaid; 1: Prepaid.
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Instance specification ID
+	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
+}
+
 type Role struct {
 	// Role name.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
@@ -6776,7 +6896,8 @@ type SendMessagesRequestParams struct {
 	// Token used for authentication, which is optional and will be automatically obtained by the system.
 	StringToken *string `json:"StringToken,omitempty" name:"StringToken"`
 
-	// Producer name, which must be globally unique. If it is not configured, the system will randomly generate one.
+	// Producer name, which is randomly generated and must be globally unique. If you set the producer name manually, the producer may fail to be created, causing message sending failure.
+	// This parameter is used only when a specific producer is allowed to produce messages. It won’t be used in most cases.
 	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
 
 	// Message sending timeout period, which is 30s by default.
@@ -6798,7 +6919,8 @@ type SendMessagesRequest struct {
 	// Token used for authentication, which is optional and will be automatically obtained by the system.
 	StringToken *string `json:"StringToken,omitempty" name:"StringToken"`
 
-	// Producer name, which must be globally unique. If it is not configured, the system will randomly generate one.
+	// Producer name, which is randomly generated and must be globally unique. If you set the producer name manually, the producer may fail to be created, causing message sending failure.
+	// This parameter is used only when a specific producer is allowed to produce messages. It won’t be used in most cases.
 	ProducerName *string `json:"ProducerName,omitempty" name:"ProducerName"`
 
 	// Message sending timeout period, which is 30s by default.

@@ -773,6 +773,7 @@ func NewCreateDBImportJobResponse() (response *CreateDBImportJobResponse) {
 //  CDBERROR_IMPORTERROR = "CdbError.ImportError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -798,6 +799,7 @@ func (c *Client) CreateDBImportJob(request *CreateDBImportJobRequest) (response 
 //  CDBERROR_IMPORTERROR = "CdbError.ImportError"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -5082,6 +5084,7 @@ func NewModifyAutoRenewFlagResponse() (response *ModifyAutoRenewFlagResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 func (c *Client) ModifyAutoRenewFlag(request *ModifyAutoRenewFlagRequest) (response *ModifyAutoRenewFlagResponse, err error) {
@@ -5095,6 +5098,7 @@ func (c *Client) ModifyAutoRenewFlag(request *ModifyAutoRenewFlagRequest) (respo
 //  AUTHFAILURE = "AuthFailure"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 func (c *Client) ModifyAutoRenewFlagWithContext(ctx context.Context, request *ModifyAutoRenewFlagRequest) (response *ModifyAutoRenewFlagResponse, err error) {
@@ -5769,6 +5773,7 @@ func NewModifyInstancePasswordComplexityResponse() (response *ModifyInstancePass
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyInstancePasswordComplexity(request *ModifyInstancePasswordComplexityRequest) (response *ModifyInstancePasswordComplexityResponse, err error) {
     return c.ModifyInstancePasswordComplexityWithContext(context.Background(), request)
@@ -5792,6 +5797,7 @@ func (c *Client) ModifyInstancePasswordComplexity(request *ModifyInstancePasswor
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyInstancePasswordComplexityWithContext(ctx context.Context, request *ModifyInstancePasswordComplexityRequest) (response *ModifyInstancePasswordComplexityResponse, err error) {
     if request == nil {
@@ -6022,6 +6028,7 @@ func NewModifyParamTemplateResponse() (response *ModifyParamTemplateResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
@@ -6036,6 +6043,7 @@ func (c *Client) ModifyParamTemplate(request *ModifyParamTemplateRequest) (respo
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCEEXISTS = "InvalidParameter.ResourceExists"
@@ -6221,6 +6229,7 @@ func NewOfflineIsolatedInstancesResponse() (response *OfflineIsolatedInstancesRe
 // Note that once an instance is deactivated, its resources and data will not be recoverable. Please do so with caution.
 //
 // error code that may be returned:
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
@@ -6240,6 +6249,7 @@ func (c *Client) OfflineIsolatedInstances(request *OfflineIsolatedInstancesReque
 // Note that once an instance is deactivated, its resources and data will not be recoverable. Please do so with caution.
 //
 // error code that may be returned:
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
@@ -6524,6 +6534,7 @@ func NewReleaseIsolatedDBInstancesResponse() (response *ReleaseIsolatedDBInstanc
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -6538,6 +6549,7 @@ func (c *Client) ReleaseIsolatedDBInstances(request *ReleaseIsolatedDBInstancesR
 //
 // error code that may be returned:
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"

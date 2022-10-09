@@ -7470,19 +7470,22 @@ type DescribeMediaProcessUsageDataRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The type of media processing task. Valid values:
-	// <li>Transcoding: General transcoding</li>
-	// <li>Transcoding-TESHD: TESHD transcoding</li>
-	// <li>Editing: Video editing</li>
-	// <li>Editing-TESHD: TESHD editing</li>
-	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
-	// <li>ContentAudit: Content moderation</li>
-	// <li>RemoveWatermark: Watermark removal</li>
-	// <li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The type of media processing task. Valid values:
+	// <li>Transcoding: General transcoding</li>
+	// <li>Transcoding-TESHD: Top Speed Codec transcoding</li>
+	// <li>Editing: Video editing</li>
+	// <li>Editing-TESHD: Top Speed Codec editing</li>
+	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+	// <li>ContentAudit: Content moderation</li>
+	// <li> ContentRecognition: Content recognition</li>
+	// <li>RemoveWatermark: Watermark removal</li>
+	// <li> ExtractTraceWatermark: Digital watermark extraction</li>
+	// <li> AddTraceWatermark: Digital watermarking</li>
+	// <li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 type DescribeMediaProcessUsageDataRequest struct {
@@ -7494,19 +7497,22 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The type of media processing task. Valid values:
-	// <li>Transcoding: General transcoding</li>
-	// <li>Transcoding-TESHD: TESHD transcoding</li>
-	// <li>Editing: Video editing</li>
-	// <li>Editing-TESHD: TESHD editing</li>
-	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
-	// <li>ContentAudit: Content moderation</li>
-	// <li>RemoveWatermark: Watermark removal</li>
-	// <li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
 	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The type of media processing task. Valid values:
+	// <li>Transcoding: General transcoding</li>
+	// <li>Transcoding-TESHD: Top Speed Codec transcoding</li>
+	// <li>Editing: Video editing</li>
+	// <li>Editing-TESHD: Top Speed Codec editing</li>
+	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+	// <li>ContentAudit: Content moderation</li>
+	// <li> ContentRecognition: Content recognition</li>
+	// <li>RemoveWatermark: Watermark removal</li>
+	// <li> ExtractTraceWatermark: Digital watermark extraction</li>
+	// <li> AddTraceWatermark: Digital watermarking</li>
+	// <li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 func (r *DescribeMediaProcessUsageDataRequest) ToJsonString() string {
@@ -7523,8 +7529,8 @@ func (r *DescribeMediaProcessUsageDataRequest) FromJsonString(s string) error {
 	}
 	delete(f, "StartTime")
 	delete(f, "EndTime")
-	delete(f, "Type")
 	delete(f, "SubAppId")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaProcessUsageDataRequest has unknown keys!", "")
 	}
@@ -15710,6 +15716,98 @@ type RestoreMediaTask struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+// Predefined struct for user
+type ReviewAudioVideoRequestParams struct {
+	// The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The session ID, which is used to identify duplicate requests. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+type ReviewAudioVideoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// The source context, which is used to pass through user request information. The `ReviewAudioVideoComplete` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The session ID, which is used to identify duplicate requests. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+func (r *ReviewAudioVideoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReviewAudioVideoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "SubAppId")
+	delete(f, "TasksPriority")
+	delete(f, "SessionContext")
+	delete(f, "SessionId")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReviewAudioVideoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReviewAudioVideoResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReviewAudioVideoResponse struct {
+	*tchttp.BaseResponse
+	Response *ReviewAudioVideoResponseParams `json:"Response"`
+}
+
+func (r *ReviewAudioVideoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReviewAudioVideoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ReviewAudioVideoSegmentItem struct {
 	// The start time offset (seconds) of the segment.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
@@ -15754,6 +15852,7 @@ type ReviewAudioVideoSegmentItem struct {
 	Form *string `json:"Form,omitempty" name:"Form"`
 
 	// The pixel coordinates ([x1, y1, x2, y2]) of the top-left corner and bottom-right corner of the suspicious text. This parameter is valid only if `Form` is `OCR`.
+	// <font color=red>Note</font>: This parameter is not supported currently.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
 
 	// The content of the suspicious text detected. This parameter is valid only if `Form` is `OCR` or `ASR`.
@@ -16944,13 +17043,16 @@ type TaskSimpleInfo struct {
 type TaskStatData struct {
 	// The task type.
 	// <li>Transcoding: General transcoding</li>
-	// <li>Transcoding-TESHD: TESHD transcoding</li>
+	// <li>Transcoding-TESHD: Top Speed Codec transcoding</li>
 	// <li>Editing: Video editing</li>
-	// <li>Editing-TESHD: TESHD editing</li>
+	// <li>Editing-TESHD: Top Speed Codec editing</li>
 	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
 	// <li>ContentAudit: Content moderation</li>
+	// <li> ContentRecognition: Content recognition</li>
 	// <li>RemoveWatermark: Watermark removal</li>
-	// <li>Transcode: Transcoding, including general transcoding, TESHD transcoding, and video editing. This value is not recommended.</li>
+	// <li> ExtractTraceWatermark: Digital watermark extraction</li>
+	// <li> AddTraceWatermark: Digital watermarking</li>
+	// <li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task statistics overview (usage unit: second).

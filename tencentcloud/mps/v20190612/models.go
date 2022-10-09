@@ -5366,6 +5366,9 @@ type EditMediaFileInfo struct {
 type EditMediaOutputConfig struct {
 	// Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`
 	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// The editing mode. Valid values are `normal` and `fast`. The default is `normal`, which indicates precise editing.
+	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
@@ -9791,6 +9794,9 @@ type TaskSimpleInfo struct {
 
 	// End time of a task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). If the task has not been completed yet, this field will be `0000-00-00T00:00:00Z`.
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+
+	// The subtask type.
+	SubTaskTypes []*string `json:"SubTaskTypes,omitempty" name:"SubTaskTypes"`
 }
 
 type TerrorismConfigureInfo struct {
@@ -10480,10 +10486,10 @@ type WorkflowTask struct {
 	// <li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Disused. Please use `ErrCode` of each specific task.
+	// If the value returned is not 0, there was a source error. If 0 is returned, refer to the error codes of the corresponding task type.
 	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
 
-	// Disused. Please use `Message` of each specific task.
+	// Except those for source errors, error messages vary with task type.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// The information of the file processed.
