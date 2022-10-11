@@ -308,6 +308,7 @@ func NewCompleteLifecycleActionResponse() (response *CompleteLifecycleActionResp
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
@@ -330,6 +331,7 @@ func (c *Client) CompleteLifecycleAction(request *CompleteLifecycleActionRequest
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
@@ -724,11 +726,15 @@ func NewCreateLifecycleHookResponse() (response *CreateLifecycleHookResponse) {
 }
 
 // CreateLifecycleHook
-// This API (CreateLifeCycleHook) is used to create a lifecycle hook.
+// This API is used to create a lifecycle hook.
 //
 // 
 //
-// * You can configure message notifications in the following format for lifecycle hooks, which will be sent to your CMQ queue by AS:
+// * You can configure notifications or automation commands (TAT) for the lifecycle hook.
+//
+// 
+//
+// If you configured a notification, Auto Scaling will notify the TDMQ queue of the following information:
 //
 // 
 //
@@ -788,11 +794,15 @@ func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (respo
 }
 
 // CreateLifecycleHook
-// This API (CreateLifeCycleHook) is used to create a lifecycle hook.
+// This API is used to create a lifecycle hook.
 //
 // 
 //
-// * You can configure message notifications in the following format for lifecycle hooks, which will be sent to your CMQ queue by AS:
+// * You can configure notifications or automation commands (TAT) for the lifecycle hook.
+//
+// 
+//
+// If you configured a notification, Auto Scaling will notify the TDMQ queue of the following information:
 //
 // 
 //
@@ -2900,6 +2910,7 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
@@ -2939,6 +2950,7 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
@@ -3063,6 +3075,7 @@ func NewModifyLoadBalancerTargetAttributesResponse() (response *ModifyLoadBalanc
 //  INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
@@ -3094,6 +3107,7 @@ func (c *Client) ModifyLoadBalancerTargetAttributes(request *ModifyLoadBalancerT
 //  INVALIDPARAMETERVALUE_FORWARDLB = "InvalidParameterValue.ForwardLb"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"

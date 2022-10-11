@@ -24,10 +24,10 @@ type AccessConfiguration struct {
 	// Acceleration region.
 	AccessRegion *string `json:"AccessRegion,omitempty" name:"AccessRegion"`
 
-	// Connection bandwidth upper limit in Mbps.
+	// Connection bandwidth cap. Unit: Mbps.
 	Bandwidth *uint64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
-	// Concurrent connection upper limit in 10,000 connections, which indicates the allowed number of concurrently online connections.
+	// Connection concurrence cap, which indicates the maximum number of simultaneous online connections. Unit: 10,000 connections.
 	Concurrent *uint64 `json:"Concurrent,omitempty" name:"Concurrent"`
 
 	// Network type. Valid values: `normal` (default), `cn2`
@@ -87,10 +87,10 @@ type AddRealServersRequestParams struct {
 	// IP or domain name corresponding to origin server
 	RealServerIP []*string `json:"RealServerIP,omitempty" name:"RealServerIP"`
 
-	// Origin server name
+	// Name of the origin server
 	RealServerName *string `json:"RealServerName,omitempty" name:"RealServerName"`
 
-	// Tag list
+	// List of tags
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 }
 
@@ -103,10 +103,10 @@ type AddRealServersRequest struct {
 	// IP or domain name corresponding to origin server
 	RealServerIP []*string `json:"RealServerIP,omitempty" name:"RealServerIP"`
 
-	// Origin server name
+	// Name of the origin server
 	RealServerName *string `json:"RealServerName,omitempty" name:"RealServerName"`
 
-	// Tag list
+	// List of tags
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 }
 
@@ -134,7 +134,7 @@ func (r *AddRealServersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AddRealServersResponseParams struct {
-	// Origin server information list
+	// An information list of origin server
 	RealServerSet []*NewRealServer `json:"RealServerSet,omitempty" name:"RealServerSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -252,6 +252,9 @@ type BindRealServer struct {
 
 	// If the origin server is a domain name, the domain name will be resolved to one or multiple IPs. This field indicates the exceptional IP list.
 	DownIPList []*string `json:"DownIPList,omitempty" name:"DownIPList"`
+
+	// Role of the origin server. Values: `master` (primary origin server); `slave` (secondary origin server). This parameter only takes effect when origin failover is enabled for the listener.
+	RealServerFailoverRole *string `json:"RealServerFailoverRole,omitempty" name:"RealServerFailoverRole"`
 }
 
 type BindRealServerInfo struct {
@@ -446,7 +449,7 @@ type CheckProxyCreateRequestParams struct {
 	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-border connection group).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -477,7 +480,7 @@ type CheckProxyCreateRequest struct {
 	// Package type of connection groups. Valid values: `Thunder` (general connection group), `Accelerator` (game accelerator connection group), and `CrossBorder` (cross-border connection group).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -1388,7 +1391,7 @@ type CreateProxyGroupRequestParams struct {
 	// Origin server region; Reference API: DescribeDestRegions; It returnes the `RegionId` of the parameter `RegionDetail`.
 	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
 
-	// Tag list
+	// List of tags
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// List of acceleration regions, including their names, bandwidth, and concurrence configuration.
@@ -1400,11 +1403,7 @@ type CreateProxyGroupRequestParams struct {
 	// Package type of connection group. Valid values: `Thunder` (default) and `Accelerator`.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values:
-	// `0`: disable HTTP3;
-	// `1`: enable HTTP3.
-	// Note that if HTTP3 is enabled for a connection, TCP/UDP access will not be allowed.
-	// After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -1420,7 +1419,7 @@ type CreateProxyGroupRequest struct {
 	// Origin server region; Reference API: DescribeDestRegions; It returnes the `RegionId` of the parameter `RegionDetail`.
 	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
 
-	// Tag list
+	// List of tags
 	TagSet []*TagPair `json:"TagSet,omitempty" name:"TagSet"`
 
 	// List of acceleration regions, including their names, bandwidth, and concurrence configuration.
@@ -1432,11 +1431,7 @@ type CreateProxyGroupRequest struct {
 	// Package type of connection group. Valid values: `Thunder` (default) and `Accelerator`.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values:
-	// `0`: disable HTTP3;
-	// `1`: enable HTTP3.
-	// Note that if HTTP3 is enabled for a connection, TCP/UDP access will not be allowed.
-	// After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -1468,7 +1463,7 @@ func (r *CreateProxyGroupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateProxyGroupResponseParams struct {
-	// Connection Group ID
+	// ID of the connection group
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1496,7 +1491,7 @@ type CreateProxyRequestParams struct {
 	// Project ID of connection.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Connection name.
+	// Name of the connection
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// Access region.
@@ -1511,7 +1506,7 @@ type CreateProxyRequestParams struct {
 	// Origin server region. If GroupId exists, the origin server region is the one of connection group, and this field is not required. If GroupId does not exist, this field is reuqired.
 	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
 
-	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
 	// For more information, please see How to Ensure Idempotence.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
@@ -1537,7 +1532,7 @@ type CreateProxyRequestParams struct {
 	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -1547,7 +1542,7 @@ type CreateProxyRequest struct {
 	// Project ID of connection.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Connection name.
+	// Name of the connection
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// Access region.
@@ -1562,7 +1557,7 @@ type CreateProxyRequest struct {
 	// Origin server region. If GroupId exists, the origin server region is the one of connection group, and this field is not required. If GroupId does not exist, this field is reuqired.
 	RealServerRegion *string `json:"RealServerRegion,omitempty" name:"RealServerRegion"`
 
-	// A string used to ensure the idempotency of the request, which is generated by the user and must be unique to each request. The maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
 	// For more information, please see How to Ensure Idempotence.
 	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
 
@@ -1588,7 +1583,7 @@ type CreateProxyRequest struct {
 	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -1664,7 +1659,7 @@ type CreateRuleRequestParams struct {
 	// The origin server type of the forwarding rule, which supports IP and DOMAIN types.
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
-	// Forwarding rules of origin server, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether the health check is enabled for rules. 1: enabled; 0: disabled.
@@ -1705,7 +1700,7 @@ type CreateRuleRequest struct {
 	// The origin server type of the forwarding rule, which supports IP and DOMAIN types.
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
-	// Forwarding rules of origin server, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether the health check is enabled for rules. 1: enabled; 0: disabled.
@@ -1929,13 +1924,13 @@ type CreateTCPListenersRequestParams struct {
 	// List of listener ports.
 	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
 
-	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether origin server has the health check enabled. 1: enabled; 0: disabled. UDP listeners do not support health check.
 	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// The origin server type of listeners, supporting IP or DOMAIN type. The DOMAIN origin servers do not support the weighted round robin.
+	// The origin server type. Values: `IP` (IP address); `DOMAIN` (domain name).
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
 	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
@@ -1975,13 +1970,13 @@ type CreateTCPListenersRequest struct {
 	// List of listener ports.
 	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
 
-	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether origin server has the health check enabled. 1: enabled; 0: disabled. UDP listeners do not support health check.
 	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// The origin server type of listeners, supporting IP or DOMAIN type. The DOMAIN origin servers do not support the weighted round robin.
+	// The origin server type. Values: `IP` (IP address); `DOMAIN` (domain name).
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
 	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
@@ -2077,10 +2072,10 @@ type CreateUDPListenersRequestParams struct {
 	// List of listener ports
 	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
 
-	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Origin server type of listeners, which supports IP or DOMAIN type.
+	// The origin server type. Values: `IP` (IP address); `DOMAIN` (domain name).
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
 	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
@@ -2091,6 +2086,39 @@ type CreateUDPListenersRequestParams struct {
 
 	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
 	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+
+	// Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// The health check type. Values: `PORT` (port); `PING` (ping).
+	CheckType *string `json:"CheckType,omitempty" name:"CheckType"`
+
+	// The health probe port.
+	CheckPort *int64 `json:"CheckPort,omitempty" name:"CheckPort"`
+
+	// The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+	ContextType *string `json:"ContextType,omitempty" name:"ContextType"`
+
+	// The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+	SendContext *string `json:"SendContext,omitempty" name:"SendContext"`
+
+	// The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
 }
 
 type CreateUDPListenersRequest struct {
@@ -2102,10 +2130,10 @@ type CreateUDPListenersRequest struct {
 	// List of listener ports
 	Ports []*uint64 `json:"Ports,omitempty" name:"Ports"`
 
-	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Origin server type of listeners, which supports IP or DOMAIN type.
+	// The origin server type. Values: `IP` (IP address); `DOMAIN` (domain name).
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
 	// Connection ID; Either `ProxyId` or `GroupId` must be set, but you cannot set both.
@@ -2116,6 +2144,39 @@ type CreateUDPListenersRequest struct {
 
 	// List of origin server ports, which only supports the listeners of version 1.0 and connection group.
 	RealServerPorts []*uint64 `json:"RealServerPorts,omitempty" name:"RealServerPorts"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+
+	// Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// The health check type. Values: `PORT` (port); `PING` (ping).
+	CheckType *string `json:"CheckType,omitempty" name:"CheckType"`
+
+	// The health probe port.
+	CheckPort *int64 `json:"CheckPort,omitempty" name:"CheckPort"`
+
+	// The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+	ContextType *string `json:"ContextType,omitempty" name:"ContextType"`
+
+	// The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+	SendContext *string `json:"SendContext,omitempty" name:"SendContext"`
+
+	// The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
 }
 
 func (r *CreateUDPListenersRequest) ToJsonString() string {
@@ -2137,6 +2198,17 @@ func (r *CreateUDPListenersRequest) FromJsonString(s string) error {
 	delete(f, "ProxyId")
 	delete(f, "GroupId")
 	delete(f, "RealServerPorts")
+	delete(f, "DelayLoop")
+	delete(f, "ConnectTimeout")
+	delete(f, "HealthyThreshold")
+	delete(f, "UnhealthyThreshold")
+	delete(f, "FailoverSwitch")
+	delete(f, "HealthCheck")
+	delete(f, "CheckType")
+	delete(f, "CheckPort")
+	delete(f, "ContextType")
+	delete(f, "SendContext")
+	delete(f, "RecvContext")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUDPListenersRequest has unknown keys!", "")
 	}
@@ -2436,8 +2508,8 @@ type DeleteProxyGroupRequestParams struct {
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Whether to enable forced deletion. Valid values:
-	// 0: no;
-	// 1: yes.
+	// `0`: No;
+	// `1`: Yes.
 	// Default value: 0. If there is a connection or listener/rule bound to an origin server in the connection group and `Force` is 0, the operation will return a failure.
 	Force *uint64 `json:"Force,omitempty" name:"Force"`
 }
@@ -2449,8 +2521,8 @@ type DeleteProxyGroupRequest struct {
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Whether to enable forced deletion. Valid values:
-	// 0: no;
-	// 1: yes.
+	// `0`: No;
+	// `1`: Yes.
 	// Default value: 0. If there is a connection or listener/rule bound to an origin server in the connection group and `Force` is 0, the operation will return a failure.
 	Force *uint64 `json:"Force,omitempty" name:"Force"`
 }
@@ -5814,6 +5886,13 @@ type HTTPSListener struct {
 	// Alias information of multiple client CA certificates.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PolyClientCertificateAliasInfo []*CertificateAliasInfo `json:"PolyClientCertificateAliasInfo,omitempty" name:"PolyClientCertificateAliasInfo"`
+
+	// Whether to support HTTP3. Values:
+	// `0`: Do not support HTTP3 access;
+	// `1`: Support HTTP3 access.
+	// If HTTP3 is supported for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
 type HttpHeaderParam struct {
@@ -5867,7 +5946,7 @@ type InquiryPriceCreateProxyRequestParams struct {
 	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -5904,7 +5983,7 @@ type InquiryPriceCreateProxyRequest struct {
 	// Package type of connection groups. Valid values: `Thunder` (general), `Accelerator` (specific for games), and `CrossBorder` (cross-MLC-border connection).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
-	// Specifies whether to enable HTTP3. Valid values: `0` (disable HTTP3); `1` (enable HTTP3). Note: If HTTP3 is enabled for a connection, TCP/UDP access will not be allowed. After the connection is created, you cannot change your HTTP3 setting.
+	// (Disused) HTTP3.0 is supported by default when `IPAddressVersion` is `IPv4`.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
 }
 
@@ -6886,10 +6965,7 @@ type ModifyRuleAttributeRequestParams struct {
 	// Forwarding rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
-	// Scheduling policy:
-	// rr: round robin;
-	// wrr: weighted round robin;
-	// lc: least connections.
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether to enable the origin server health check:
@@ -6930,10 +7006,7 @@ type ModifyRuleAttributeRequest struct {
 	// Forwarding rule ID
 	RuleId *string `json:"RuleId,omitempty" name:"RuleId"`
 
-	// Scheduling policy:
-	// rr: round robin;
-	// wrr: weighted round robin;
-	// lc: least connections.
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether to enable the origin server health check:
@@ -7134,7 +7207,7 @@ type ModifyTCPListenerAttributeRequestParams struct {
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
-	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
@@ -7171,7 +7244,7 @@ type ModifyTCPListenerAttributeRequest struct {
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
-	// Origin server scheduling policy of listeners, which supports round robin (rr), weighted round robin (wrr), and least connections (lc).
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
@@ -7258,8 +7331,41 @@ type ModifyUDPListenerAttributeRequestParams struct {
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
-	// Origin server scheduling policy of listeners
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+
+	// Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// The health check type. Values: `PORT` (port); `PING` (ping).
+	CheckType *string `json:"CheckType,omitempty" name:"CheckType"`
+
+	// The health probe port.
+	CheckPort *int64 `json:"CheckPort,omitempty" name:"CheckPort"`
+
+	// The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+	ContextType *string `json:"ContextType,omitempty" name:"ContextType"`
+
+	// The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+	SendContext *string `json:"SendContext,omitempty" name:"SendContext"`
+
+	// The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
 }
 
 type ModifyUDPListenerAttributeRequest struct {
@@ -7277,8 +7383,41 @@ type ModifyUDPListenerAttributeRequest struct {
 	// Listener name
 	ListenerName *string `json:"ListenerName,omitempty" name:"ListenerName"`
 
-	// Origin server scheduling policy of listeners
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+
+	// Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// The health check type. Values: `PORT` (port); `PING` (ping).
+	CheckType *string `json:"CheckType,omitempty" name:"CheckType"`
+
+	// The health probe port.
+	CheckPort *int64 `json:"CheckPort,omitempty" name:"CheckPort"`
+
+	// The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+	ContextType *string `json:"ContextType,omitempty" name:"ContextType"`
+
+	// The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+	SendContext *string `json:"SendContext,omitempty" name:"SendContext"`
+
+	// The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
 }
 
 func (r *ModifyUDPListenerAttributeRequest) ToJsonString() string {
@@ -7298,6 +7437,17 @@ func (r *ModifyUDPListenerAttributeRequest) FromJsonString(s string) error {
 	delete(f, "ProxyId")
 	delete(f, "ListenerName")
 	delete(f, "Scheduler")
+	delete(f, "DelayLoop")
+	delete(f, "ConnectTimeout")
+	delete(f, "HealthyThreshold")
+	delete(f, "UnhealthyThreshold")
+	delete(f, "FailoverSwitch")
+	delete(f, "HealthCheck")
+	delete(f, "CheckType")
+	delete(f, "CheckPort")
+	delete(f, "ContextType")
+	delete(f, "SendContext")
+	delete(f, "RecvContext")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUDPListenerAttributeRequest has unknown keys!", "")
 	}
@@ -7614,6 +7764,21 @@ type ProxyGroupDetail struct {
 	// `1`: Enable
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+
+	// Feature bitmap. Valid values:
+	// `0`: Feature not supported
+	// `1`: Feature supported
+	// Each bit in the bitmap represents a feature:
+	// 1st bit: Layer-4 acceleration;
+	// 2nd bit: Layer-7 acceleration;
+	// 3rd bit: HTTP3 access;
+	// 4th bit: IPv6;
+	// 5th bit: Dedicated BGP access;
+	// 6th bit: Non-BGP access;
+	// 7th bit: QoS acceleration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FeatureBitmap *int64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
 type ProxyGroupInfo struct {
@@ -7663,6 +7828,21 @@ type ProxyGroupInfo struct {
 	// `1`: Enable
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+
+	// Feature bitmap. Valid values:
+	// `0`: Feature not supported
+	// `1`: Feature supported
+	// Each bit in the bitmap represents a feature:
+	// 1st bit: Layer-4 acceleration;
+	// 2nd bit: Layer-7 acceleration;
+	// 3rd bit: HTTP3 access;
+	// 4th bit: IPv6;
+	// 5th bit: Dedicated BGP access;
+	// 6th bit: Non-BGP access;
+	// 7th bit: QoS acceleration.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	FeatureBitmap *int64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
 type ProxyIdDict struct {
@@ -7693,7 +7873,7 @@ type ProxyInfo struct {
 	// Bandwidth. Unit: Mbps.
 	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
 
-	// Concurrence. Unit: requests/second.
+	// Concurrence. Unit: 10K requests/second.
 	Concurrent *int64 `json:"Concurrent,omitempty" name:"Concurrent"`
 
 	// Connection status. Valid values:
@@ -7806,6 +7986,21 @@ type ProxyInfo struct {
 	// Indicates whether the origin server IP or domain name is in the blocklist. Valid values: `0` (no) and `1` (yes).
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	InBanBlacklist *int64 `json:"InBanBlacklist,omitempty" name:"InBanBlacklist"`
+
+	// Feature bitmap. Valid values:
+	// `0`: Feature not supported
+	// `1`: Feature supported
+	// Each bit in the bitmap represents a feature:
+	// 1st bit: Layer-4 acceleration;
+	// 2nd bit: Layer-7 acceleration;
+	// 3rd bit: HTTP3 access;
+	// 4th bit: IPv6;
+	// 5th bit: Dedicated BGP access;
+	// 6th bit: Non-BGP access;
+	// 7th bit: QoS acceleration.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FeatureBitmap *int64 `json:"FeatureBitmap,omitempty" name:"FeatureBitmap"`
 }
 
 type ProxySimpleInfo struct {
@@ -7868,7 +8063,7 @@ type RealServerBindSetReq struct {
 	// Origin server weight
 	RealServerWeight *uint64 `json:"RealServerWeight,omitempty" name:"RealServerWeight"`
 
-	// Origin server role: master (primary origin server); slave (secondary origin server). This parameter is applicable when the primary/secondary origin server mode is enabled for a TCP listener.
+	// Role of the origin server. Values: `master` (primary origin server); `slave` (secondary origin server). This parameter only takes effect when origin failover is enabled for the listener.
 	RealServerFailoverRole *string `json:"RealServerFailoverRole,omitempty" name:"RealServerFailoverRole"`
 }
 
@@ -8021,7 +8216,7 @@ type RuleInfo struct {
 	// Origin server type
 	RealServerType *string `json:"RealServerType,omitempty" name:"RealServerType"`
 
-	// Forwarding policy of the origin server
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether health check is enabled. 1: enabled, 0: disabled
@@ -8279,10 +8474,7 @@ type TCPListener struct {
 	// `4`: Adjusting configuration
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 
-	// Origin server access policy of listeners:
-	// `rr`: Round robin
-	// `wrr`: Weighted round robin
-	// `lc`: Least connection
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Response timeout of origin server health check (unit: seconds).
@@ -8376,7 +8568,7 @@ type UDPListener struct {
 	// `4`: Adjusting configuration
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
 
-	// Origin server access policy of listeners
+	// The strategy used by the listener to access the origin server. Values: `rr` (round-robin), `wrr` (weighted round-robin), `lc` (the least-connections strategy), `lrtt` (the least-response-time strategy).
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Origin server binding status of listeners. `0`: Normal; `1`: IP exception; `2`: Domain name resolution exception.
@@ -8391,4 +8583,48 @@ type UDPListener struct {
 	// Specifies whether to enable session persistence. Values: `0` (disable), `1` (enable)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SessionPersist *uint64 `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// Time interval of origin server health check (unit: seconds). Value range: [5, 300].
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	DelayLoop *uint64 `json:"DelayLoop,omitempty" name:"DelayLoop"`
+
+	// Response timeout of origin server health check (unit: seconds). Value range: [2, 60]. The timeout value shall be less than the time interval for health check DelayLoop.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ConnectTimeout *uint64 `json:"ConnectTimeout,omitempty" name:"ConnectTimeout"`
+
+	// Healthy threshold. The number of consecutive successful health checks required before considering an origin server healthy. Value range: 1 - 10.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HealthyThreshold *uint64 `json:"HealthyThreshold,omitempty" name:"HealthyThreshold"`
+
+	// Unhealthy threshold. The number of consecutive failed health checks required before considering an origin server unhealthy. Value range: 1 - 10.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	UnhealthyThreshold *uint64 `json:"UnhealthyThreshold,omitempty" name:"UnhealthyThreshold"`
+
+	// Whether to enable the primary/secondary origin server mode for failover. Values: `1` (enabled); `0` (disabled). It’s not available if the origin type is `DOMAIN`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FailoverSwitch *int64 `json:"FailoverSwitch,omitempty" name:"FailoverSwitch"`
+
+	// Whether the health check is enabled for the origin server. Values: `1` (enabled); `0` (disabled).
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	HealthCheck *uint64 `json:"HealthCheck,omitempty" name:"HealthCheck"`
+
+	// The health check type. Values: `PORT` (port); `PING` (ping).
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	CheckType *string `json:"CheckType,omitempty" name:"CheckType"`
+
+	// The health probe port.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	CheckPort *int64 `json:"CheckPort,omitempty" name:"CheckPort"`
+
+	// The UDP message type. Values: `TEXT` (text). This parameter is used only when `CheckType = PORT`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ContextType *string `json:"ContextType,omitempty" name:"ContextType"`
+
+	// The UDP message sent by the health probe port. This parameter is used only when `CheckType = PORT`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SendContext *string `json:"SendContext,omitempty" name:"SendContext"`
+
+	// The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
 }

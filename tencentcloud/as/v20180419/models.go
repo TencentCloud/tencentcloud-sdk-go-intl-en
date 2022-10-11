@@ -1162,14 +1162,17 @@ type CreateLifecycleHookRequestParams struct {
 	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
-	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default. Up to 1024 characters are allowed.
+	// Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: ""). Up to 1024 characters are allowed.
 	NotificationMetadata *string `json:"NotificationMetadata,omitempty" name:"NotificationMetadata"`
 
-	// Notification target
+	// Notification target. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
 	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
 
 	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
 	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
+
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 type CreateLifecycleHookRequest struct {
@@ -1190,14 +1193,17 @@ type CreateLifecycleHookRequest struct {
 	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
-	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default. Up to 1024 characters are allowed.
+	// Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: ""). Up to 1024 characters are allowed.
 	NotificationMetadata *string `json:"NotificationMetadata,omitempty" name:"NotificationMetadata"`
 
-	// Notification target
+	// Notification target. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
 	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
 
 	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
 	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
+
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 func (r *CreateLifecycleHookRequest) ToJsonString() string {
@@ -1220,6 +1226,7 @@ func (r *CreateLifecycleHookRequest) FromJsonString(s string) error {
 	delete(f, "NotificationMetadata")
 	delete(f, "NotificationTarget")
 	delete(f, "LifecycleTransitionType")
+	delete(f, "LifecycleCommand")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLifecycleHookRequest has unknown keys!", "")
 	}
@@ -3480,14 +3487,47 @@ type LifecycleActionResultInfo struct {
 	// ID of the instance
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether the notification is sent to CMQ successfully
+	// Execution task ID. You can query the result by using the [DescribeInvocations](https://intl.cloud.tencent.com/document/api/1340/52679?from_cn_redirect=1) API of TAT. 
+	InvocationId *string `json:"InvocationId,omitempty" name:"InvocationId"`
+
+	// Result of command invocation,
+	// <li>`SUCCESSFUL`: Successful command invocation. It does mean that the task is successfully. You can query the task result with the `InvocationId.</li>
+	// <li>`FAILED`: Failed to invoke the command</li>
+	// <li>`NONE`</li>
+	InvokeCommandResult *string `json:"InvokeCommandResult,omitempty" name:"InvokeCommandResult"`
+
+	// Notification result, which indicates whether it is successful to notify CMQ/TDMQ.<br>
+	// <li>SUCCESSFUL: It is successful to notify CMQ/TDMQ.</li>
+	// <li>FAILED: It is failed to notify CMQ/TDMQ.</li>
+	// <li>NONE</li>
 	NotificationResult *string `json:"NotificationResult,omitempty" name:"NotificationResult"`
 
 	// Result of the lifecyle hook action. Values: CONTINUE, ABANDON
 	LifecycleActionResult *string `json:"LifecycleActionResult,omitempty" name:"LifecycleActionResult"`
 
-	// Cause of the result
+	// Reason of the result <br>
+	// <li>`HEARTBEAT_TIMEOUT`: Heartbeat timed out. The setting of `DefaultResult` is used.</li>
+	// <li>`NOTIFICATION_FAILURE`: Failed to send the notification. The setting of `DefaultResult` is used.</li>
+	// <li>`CALL_INTERFACE`: Calls the `CompleteLifecycleAction` to set the result</li>
+	// <li>ANOTHER_ACTION_ABANDON: It has been set to `ABANDON` by another operation.</li>
+	// <li>COMMAND_CALL_FAILURE: Failed to call the command. The DefaultResult is applied.</li>
+	// <li>COMMAND_EXEC_FINISH: Command completed</li>
+	// <li>COMMAND_CALL_FAILURE: Failed to execute the command. The DefaultResult is applied.</li>
+	// <li>COMMAND_EXEC_RESULT_CHECK_FAILURE: Failed to check the command result. The DefaultResult is applied.</li>
 	ResultReason *string `json:"ResultReason,omitempty" name:"ResultReason"`
+}
+
+type LifecycleCommand struct {
+	// Remote command ID. It’s required to execute a command.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CommandId *string `json:"CommandId,omitempty" name:"CommandId"`
+
+	// Custom parameter. The field type is JSON encoded string. For example, {"varA": "222"}.
+	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
+	// If this parameter is not specified, the `DefaultParameters` of `Command` is used.
+	// Up to 20 customer parameters allowed. The parameter name can contain up to 64 characters, including [a-z], [A-Z], [0-9] and [-_].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Parameters *string `json:"Parameters,omitempty" name:"Parameters"`
 }
 
 type LifecycleHook struct {
@@ -3520,6 +3560,10 @@ type LifecycleHook struct {
 
 	// Applicable scenario of the lifecycle hook
 	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
+
+	// Remote command execution object.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 type LimitedLoginSettings struct {
@@ -4139,6 +4183,9 @@ type ModifyLifecycleHookRequestParams struct {
 
 	// Information of the notification target.
 	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
+
+	// Remote command execution object.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 type ModifyLifecycleHookRequest struct {
@@ -4171,6 +4218,9 @@ type ModifyLifecycleHookRequest struct {
 
 	// Information of the notification target.
 	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
+
+	// Remote command execution object.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 func (r *ModifyLifecycleHookRequest) ToJsonString() string {
@@ -4193,6 +4243,7 @@ func (r *ModifyLifecycleHookRequest) FromJsonString(s string) error {
 	delete(f, "NotificationMetadata")
 	delete(f, "LifecycleTransitionType")
 	delete(f, "NotificationTarget")
+	delete(f, "LifecycleCommand")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLifecycleHookRequest has unknown keys!", "")
 	}
@@ -5458,14 +5509,17 @@ type UpgradeLifecycleHookRequestParams struct {
 	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
-	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default.
+	// Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: "").
 	NotificationMetadata *string `json:"NotificationMetadata,omitempty" name:"NotificationMetadata"`
 
-	// Notification target
+	// Notification result. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
 	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
 
 	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
 	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
+
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 type UpgradeLifecycleHookRequest struct {
@@ -5486,14 +5540,17 @@ type UpgradeLifecycleHookRequest struct {
 	// The maximum length of time (in seconds) that can elapse before the lifecycle hook times out. Value range: 30-7200. Default value: 300
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitempty" name:"HeartbeatTimeout"`
 
-	// Additional information of a notification that Auto Scaling sends to targets. This parameter is left empty by default.
+	// Additional information of a notification that Auto Scaling sends to targets. This parameter is set when you configure a notification (default value: "").
 	NotificationMetadata *string `json:"NotificationMetadata,omitempty" name:"NotificationMetadata"`
 
-	// Notification target
+	// Notification result. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
 	NotificationTarget *NotificationTarget `json:"NotificationTarget,omitempty" name:"NotificationTarget"`
 
 	// The scenario where the lifecycle hook is applied. `EXTENSION`: the lifecycle hook will be triggered when AttachInstances, DetachInstances or RemoveInstaces is called. `NORMAL`: the lifecycle hook is not triggered by the above APIs. 
 	LifecycleTransitionType *string `json:"LifecycleTransitionType,omitempty" name:"LifecycleTransitionType"`
+
+	// Remote command execution object. `NotificationTarget` and `LifecycleCommand` cannot be specified at the same time.
+	LifecycleCommand *LifecycleCommand `json:"LifecycleCommand,omitempty" name:"LifecycleCommand"`
 }
 
 func (r *UpgradeLifecycleHookRequest) ToJsonString() string {
@@ -5516,6 +5573,7 @@ func (r *UpgradeLifecycleHookRequest) FromJsonString(s string) error {
 	delete(f, "NotificationMetadata")
 	delete(f, "NotificationTarget")
 	delete(f, "LifecycleTransitionType")
+	delete(f, "LifecycleCommand")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeLifecycleHookRequest has unknown keys!", "")
 	}
