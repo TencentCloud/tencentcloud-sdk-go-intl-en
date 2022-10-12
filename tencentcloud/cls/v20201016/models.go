@@ -3636,6 +3636,23 @@ type ExtractRuleInfo struct {
 	// Whether to be formatted as JSON (standard). Valid values: `0` (No) and `1` (Yes).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JsonStandard *int64 `json:"JsonStandard,omitempty" name:"JsonStandard"`
+
+	// Syslog protocol. Valid values: `tcp`, `udp`.
+	// This field can be used when you create/modify collection rule configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Listening address and port specified by the syslog collection. Format: [ip]:[port]. Example: 127.0.0.1:9000.
+	// This field can be used when you create/modify collection rule configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// `rfc3164`: Resolve logs by using the RFC3164 protocol during the syslog collection.
+	// `rfc5424`: Resolve logs by using the RFC5424 protocol during the syslog collection.
+	// `auto`: Automatically match either the RFC3164 or RFC5424 protocol.
+	// This field can be used when you create/modify collection rule configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ParseProtocol *string `json:"ParseProtocol,omitempty" name:"ParseProtocol"`
 }
 
 type Filter struct {

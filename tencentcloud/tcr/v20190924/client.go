@@ -121,6 +121,144 @@ func (c *Client) CheckInstanceWithContext(ctx context.Context, request *CheckIns
     return
 }
 
+func NewCheckInstanceNameRequest() (request *CheckInstanceNameRequest) {
+    request = &CheckInstanceNameRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CheckInstanceName")
+    
+    
+    return
+}
+
+func NewCheckInstanceNameResponse() (response *CheckInstanceNameResponse) {
+    response = &CheckInstanceNameResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CheckInstanceName
+// This API is used to check whether the name of the instance to be created meets the specifications.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CheckInstanceName(request *CheckInstanceNameRequest) (response *CheckInstanceNameResponse, err error) {
+    return c.CheckInstanceNameWithContext(context.Background(), request)
+}
+
+// CheckInstanceName
+// This API is used to check whether the name of the instance to be created meets the specifications.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CheckInstanceNameWithContext(ctx context.Context, request *CheckInstanceNameRequest) (response *CheckInstanceNameResponse, err error) {
+    if request == nil {
+        request = NewCheckInstanceNameRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckInstanceName require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckInstanceNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateImageAccelerationServiceRequest() (request *CreateImageAccelerationServiceRequest) {
+    request = &CreateImageAccelerationServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateImageAccelerationService")
+    
+    
+    return
+}
+
+func NewCreateImageAccelerationServiceResponse() (response *CreateImageAccelerationServiceResponse) {
+    response = &CreateImageAccelerationServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateImageAccelerationService
+// This API is used to create an image acceleration service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateImageAccelerationService(request *CreateImageAccelerationServiceRequest) (response *CreateImageAccelerationServiceResponse, err error) {
+    return c.CreateImageAccelerationServiceWithContext(context.Background(), request)
+}
+
+// CreateImageAccelerationService
+// This API is used to create an image acceleration service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateImageAccelerationServiceWithContext(ctx context.Context, request *CreateImageAccelerationServiceRequest) (response *CreateImageAccelerationServiceResponse, err error) {
+    if request == nil {
+        request = NewCreateImageAccelerationServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateImageAccelerationService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateImageAccelerationServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateImmutableTagRulesRequest() (request *CreateImmutableTagRulesRequest) {
     request = &CreateImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -175,6 +313,172 @@ func (c *Client) CreateImmutableTagRulesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
+    request = &CreateInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateInstance")
+    
+    
+    return
+}
+
+func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
+    response = &CreateInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateInstance
+// This API is used to create an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_TRADEFAILED = "FailedOperation.TradeFailed"
+//  FAILEDOPERATION_VALIDATEREGISTRYNAMEFAIL = "FailedOperation.ValidateRegistryNameFail"
+//  FAILEDOPERATION_VALIDATESUPPORTEDREGIONFAIL = "FailedOperation.ValidateSupportedRegionFail"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORNAMEILLEGAL = "InvalidParameter.ErrorNameIllegal"
+//  INVALIDPARAMETER_ERRORNAMERESERVED = "InvalidParameter.ErrorNameReserved"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_QUOTAOVERLIMIT = "OperationDenied.QuotaOverLimit"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *CreateInstanceResponse, err error) {
+    return c.CreateInstanceWithContext(context.Background(), request)
+}
+
+// CreateInstance
+// This API is used to create an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_TRADEFAILED = "FailedOperation.TradeFailed"
+//  FAILEDOPERATION_VALIDATEREGISTRYNAMEFAIL = "FailedOperation.ValidateRegistryNameFail"
+//  FAILEDOPERATION_VALIDATESUPPORTEDREGIONFAIL = "FailedOperation.ValidateSupportedRegionFail"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORNAMEILLEGAL = "InvalidParameter.ErrorNameIllegal"
+//  INVALIDPARAMETER_ERRORNAMERESERVED = "InvalidParameter.ErrorNameReserved"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_QUOTAOVERLIMIT = "OperationDenied.QuotaOverLimit"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInstanceWithContext(ctx context.Context, request *CreateInstanceRequest) (response *CreateInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateInstanceCustomizedDomainRequest() (request *CreateInstanceCustomizedDomainRequest) {
+    request = &CreateInstanceCustomizedDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateInstanceCustomizedDomain")
+    
+    
+    return
+}
+
+func NewCreateInstanceCustomizedDomainResponse() (response *CreateInstanceCustomizedDomainResponse) {
+    response = &CreateInstanceCustomizedDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateInstanceCustomizedDomain
+// This API is used to create a custom domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInstanceCustomizedDomain(request *CreateInstanceCustomizedDomainRequest) (response *CreateInstanceCustomizedDomainResponse, err error) {
+    return c.CreateInstanceCustomizedDomainWithContext(context.Background(), request)
+}
+
+// CreateInstanceCustomizedDomain
+// This API is used to create a custom domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInstanceCustomizedDomainWithContext(ctx context.Context, request *CreateInstanceCustomizedDomainRequest) (response *CreateInstanceCustomizedDomainResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceCustomizedDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstanceCustomizedDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceCustomizedDomainResponse()
     err = c.Send(request, response)
     return
 }
@@ -309,6 +613,88 @@ func (c *Client) CreateMultipleSecurityPolicyWithContext(ctx context.Context, re
     return
 }
 
+func NewCreateNamespaceRequest() (request *CreateNamespaceRequest) {
+    request = &CreateNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateNamespace")
+    
+    
+    return
+}
+
+func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
+    response = &CreateNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateNamespace
+// This API is used to create a namespace in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORTCRINVALIDMEDIATYPE = "FailedOperation.ErrorTcrInvalidMediaType"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
+    return c.CreateNamespaceWithContext(context.Background(), request)
+}
+
+// CreateNamespace
+// This API is used to create a namespace in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORTCRINVALIDMEDIATYPE = "FailedOperation.ErrorTcrInvalidMediaType"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateNamespaceWithContext(ctx context.Context, request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
+    if request == nil {
+        request = NewCreateNamespaceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateReplicationInstanceRequest() (request *CreateReplicationInstanceRequest) {
     request = &CreateReplicationInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -338,6 +724,7 @@ func NewCreateReplicationInstanceResponse() (response *CreateReplicationInstance
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_REPLICATIONEXISTS = "InvalidParameter.ReplicationExists"
 //  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -359,6 +746,7 @@ func (c *Client) CreateReplicationInstance(request *CreateReplicationInstanceReq
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_REPLICATIONEXISTS = "InvalidParameter.ReplicationExists"
 //  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -377,6 +765,644 @@ func (c *Client) CreateReplicationInstanceWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewCreateReplicationInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRepositoryRequest() (request *CreateRepositoryRequest) {
+    request = &CreateRepositoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateRepository")
+    
+    
+    return
+}
+
+func NewCreateRepositoryResponse() (response *CreateRepositoryResponse) {
+    response = &CreateRepositoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRepository
+// This API is used to create an image repository in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateRepository(request *CreateRepositoryRequest) (response *CreateRepositoryResponse, err error) {
+    return c.CreateRepositoryWithContext(context.Background(), request)
+}
+
+// CreateRepository
+// This API is used to create an image repository in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateRepositoryWithContext(ctx context.Context, request *CreateRepositoryRequest) (response *CreateRepositoryResponse, err error) {
+    if request == nil {
+        request = NewCreateRepositoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRepository require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRepositoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSecurityPoliciesRequest() (request *CreateSecurityPoliciesRequest) {
+    request = &CreateSecurityPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateSecurityPolicies")
+    
+    
+    return
+}
+
+func NewCreateSecurityPoliciesResponse() (response *CreateSecurityPoliciesResponse) {
+    response = &CreateSecurityPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSecurityPolicies
+// This API is used to create public network access allowlist policies for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSecurityPolicies(request *CreateSecurityPoliciesRequest) (response *CreateSecurityPoliciesResponse, err error) {
+    return c.CreateSecurityPoliciesWithContext(context.Background(), request)
+}
+
+// CreateSecurityPolicies
+// This API is used to create public network access allowlist policies for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSecurityPoliciesWithContext(ctx context.Context, request *CreateSecurityPoliciesRequest) (response *CreateSecurityPoliciesResponse, err error) {
+    if request == nil {
+        request = NewCreateSecurityPoliciesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSecurityPolicies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSecurityPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSecurityPolicyRequest() (request *CreateSecurityPolicyRequest) {
+    request = &CreateSecurityPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateSecurityPolicy")
+    
+    
+    return
+}
+
+func NewCreateSecurityPolicyResponse() (response *CreateSecurityPolicyResponse) {
+    response = &CreateSecurityPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSecurityPolicy
+// This API is used to create a public network access allowlist policy for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSecurityPolicy(request *CreateSecurityPolicyRequest) (response *CreateSecurityPolicyResponse, err error) {
+    return c.CreateSecurityPolicyWithContext(context.Background(), request)
+}
+
+// CreateSecurityPolicy
+// This API is used to create a public network access allowlist policy for an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSecurityPolicyWithContext(ctx context.Context, request *CreateSecurityPolicyRequest) (response *CreateSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateSecurityPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSecurityPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSignatureRequest() (request *CreateSignatureRequest) {
+    request = &CreateSignatureRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateSignature")
+    
+    
+    return
+}
+
+func NewCreateSignatureResponse() (response *CreateSignatureResponse) {
+    response = &CreateSignatureResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSignature
+// This API is used to create a signature for an image tag.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSignature(request *CreateSignatureRequest) (response *CreateSignatureResponse, err error) {
+    return c.CreateSignatureWithContext(context.Background(), request)
+}
+
+// CreateSignature
+// This API is used to create a signature for an image tag.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSignatureWithContext(ctx context.Context, request *CreateSignatureRequest) (response *CreateSignatureResponse, err error) {
+    if request == nil {
+        request = NewCreateSignatureRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSignature require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSignatureResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSignaturePolicyRequest() (request *CreateSignaturePolicyRequest) {
+    request = &CreateSignaturePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateSignaturePolicy")
+    
+    
+    return
+}
+
+func NewCreateSignaturePolicyResponse() (response *CreateSignaturePolicyResponse) {
+    response = &CreateSignaturePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSignaturePolicy
+// This API is used to create an image signature policy.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSignaturePolicy(request *CreateSignaturePolicyRequest) (response *CreateSignaturePolicyResponse, err error) {
+    return c.CreateSignaturePolicyWithContext(context.Background(), request)
+}
+
+// CreateSignaturePolicy
+// This API is used to create an image signature policy.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSignaturePolicyWithContext(ctx context.Context, request *CreateSignaturePolicyRequest) (response *CreateSignaturePolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateSignaturePolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSignaturePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSignaturePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTagRetentionExecutionRequest() (request *CreateTagRetentionExecutionRequest) {
+    request = &CreateTagRetentionExecutionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateTagRetentionExecution")
+    
+    
+    return
+}
+
+func NewCreateTagRetentionExecutionResponse() (response *CreateTagRetentionExecutionResponse) {
+    response = &CreateTagRetentionExecutionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateTagRetentionExecution
+// This API is used to execute tag retention manually.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateTagRetentionExecution(request *CreateTagRetentionExecutionRequest) (response *CreateTagRetentionExecutionResponse, err error) {
+    return c.CreateTagRetentionExecutionWithContext(context.Background(), request)
+}
+
+// CreateTagRetentionExecution
+// This API is used to execute tag retention manually.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateTagRetentionExecutionWithContext(ctx context.Context, request *CreateTagRetentionExecutionRequest) (response *CreateTagRetentionExecutionResponse, err error) {
+    if request == nil {
+        request = NewCreateTagRetentionExecutionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTagRetentionExecution require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTagRetentionExecutionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTagRetentionRuleRequest() (request *CreateTagRetentionRuleRequest) {
+    request = &CreateTagRetentionRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateTagRetentionRule")
+    
+    
+    return
+}
+
+func NewCreateTagRetentionRuleResponse() (response *CreateTagRetentionRuleResponse) {
+    response = &CreateTagRetentionRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateTagRetentionRule
+// This API is used to create a tag retention rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateTagRetentionRule(request *CreateTagRetentionRuleRequest) (response *CreateTagRetentionRuleResponse, err error) {
+    return c.CreateTagRetentionRuleWithContext(context.Background(), request)
+}
+
+// CreateTagRetentionRule
+// This API is used to create a tag retention rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateTagRetentionRuleWithContext(ctx context.Context, request *CreateTagRetentionRuleRequest) (response *CreateTagRetentionRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateTagRetentionRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTagRetentionRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTagRetentionRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateWebhookTriggerRequest() (request *CreateWebhookTriggerRequest) {
+    request = &CreateWebhookTriggerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateWebhookTrigger")
+    
+    
+    return
+}
+
+func NewCreateWebhookTriggerResponse() (response *CreateWebhookTriggerResponse) {
+    response = &CreateWebhookTriggerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateWebhookTrigger
+// This API is used to create a trigger.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) CreateWebhookTrigger(request *CreateWebhookTriggerRequest) (response *CreateWebhookTriggerResponse, err error) {
+    return c.CreateWebhookTriggerWithContext(context.Background(), request)
+}
+
+// CreateWebhookTrigger
+// This API is used to create a trigger.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) CreateWebhookTriggerWithContext(ctx context.Context, request *CreateWebhookTriggerRequest) (response *CreateWebhookTriggerResponse, err error) {
+    if request == nil {
+        request = NewCreateWebhookTriggerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWebhookTrigger require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateWebhookTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteImageRequest() (request *DeleteImageRequest) {
+    request = &DeleteImageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteImage")
+    
+    
+    return
+}
+
+func NewDeleteImageResponse() (response *DeleteImageResponse) {
+    response = &DeleteImageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteImage
+// This API is used to delete the specified image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteImage(request *DeleteImageRequest) (response *DeleteImageResponse, err error) {
+    return c.DeleteImageWithContext(context.Background(), request)
+}
+
+// DeleteImage
+// This API is used to delete the specified image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteImageWithContext(ctx context.Context, request *DeleteImageRequest) (response *DeleteImageResponse, err error) {
+    if request == nil {
+        request = NewDeleteImageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteImage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteImageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteImageAccelerateServiceRequest() (request *DeleteImageAccelerateServiceRequest) {
+    request = &DeleteImageAccelerateServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteImageAccelerateService")
+    
+    
+    return
+}
+
+func NewDeleteImageAccelerateServiceResponse() (response *DeleteImageAccelerateServiceResponse) {
+    response = &DeleteImageAccelerateServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteImageAccelerateService
+// This API is used to delete an image acceleration service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteImageAccelerateService(request *DeleteImageAccelerateServiceRequest) (response *DeleteImageAccelerateServiceResponse, err error) {
+    return c.DeleteImageAccelerateServiceWithContext(context.Background(), request)
+}
+
+// DeleteImageAccelerateService
+// This API is used to delete an image acceleration service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteImageAccelerateServiceWithContext(ctx context.Context, request *DeleteImageAccelerateServiceRequest) (response *DeleteImageAccelerateServiceResponse, err error) {
+    if request == nil {
+        request = NewDeleteImageAccelerateServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteImageAccelerateService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteImageAccelerateServiceResponse()
     err = c.Send(request, response)
     return
 }
@@ -433,6 +1459,202 @@ func (c *Client) DeleteImmutableTagRulesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
+    request = &DeleteInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteInstance")
+    
+    
+    return
+}
+
+func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
+    response = &DeleteInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteInstance
+// This API is used to delete a TCR Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (response *DeleteInstanceResponse, err error) {
+    return c.DeleteInstanceWithContext(context.Background(), request)
+}
+
+// DeleteInstance
+// This API is used to delete a TCR Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstanceWithContext(ctx context.Context, request *DeleteInstanceRequest) (response *DeleteInstanceResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteInstanceCustomizedDomainRequest() (request *DeleteInstanceCustomizedDomainRequest) {
+    request = &DeleteInstanceCustomizedDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteInstanceCustomizedDomain")
+    
+    
+    return
+}
+
+func NewDeleteInstanceCustomizedDomainResponse() (response *DeleteInstanceCustomizedDomainResponse) {
+    response = &DeleteInstanceCustomizedDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteInstanceCustomizedDomain
+// This API is used to delete a custom domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstanceCustomizedDomain(request *DeleteInstanceCustomizedDomainRequest) (response *DeleteInstanceCustomizedDomainResponse, err error) {
+    return c.DeleteInstanceCustomizedDomainWithContext(context.Background(), request)
+}
+
+// DeleteInstanceCustomizedDomain
+// This API is used to delete a custom domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstanceCustomizedDomainWithContext(ctx context.Context, request *DeleteInstanceCustomizedDomainRequest) (response *DeleteInstanceCustomizedDomainResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstanceCustomizedDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstanceCustomizedDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstanceCustomizedDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteInstanceTokenRequest() (request *DeleteInstanceTokenRequest) {
+    request = &DeleteInstanceTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteInstanceToken")
+    
+    
+    return
+}
+
+func NewDeleteInstanceTokenResponse() (response *DeleteInstanceTokenResponse) {
+    response = &DeleteInstanceTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteInstanceToken
+// This API is used to delete a long-term access credential.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstanceToken(request *DeleteInstanceTokenRequest) (response *DeleteInstanceTokenResponse, err error) {
+    return c.DeleteInstanceTokenWithContext(context.Background(), request)
+}
+
+// DeleteInstanceToken
+// This API is used to delete a long-term access credential.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstanceTokenWithContext(ctx context.Context, request *DeleteInstanceTokenRequest) (response *DeleteInstanceTokenResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstanceTokenRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstanceToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstanceTokenResponse()
     err = c.Send(request, response)
     return
 }
@@ -497,6 +1719,942 @@ func (c *Client) DeleteMultipleSecurityPolicyWithContext(ctx context.Context, re
     return
 }
 
+func NewDeleteNamespaceRequest() (request *DeleteNamespaceRequest) {
+    request = &DeleteNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteNamespace")
+    
+    
+    return
+}
+
+func NewDeleteNamespaceResponse() (response *DeleteNamespaceResponse) {
+    response = &DeleteNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteNamespace
+// This API is used to delete a namespace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteNamespace(request *DeleteNamespaceRequest) (response *DeleteNamespaceResponse, err error) {
+    return c.DeleteNamespaceWithContext(context.Background(), request)
+}
+
+// DeleteNamespace
+// This API is used to delete a namespace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteNamespaceWithContext(ctx context.Context, request *DeleteNamespaceRequest) (response *DeleteNamespaceResponse, err error) {
+    if request == nil {
+        request = NewDeleteNamespaceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteReplicationInstanceRequest() (request *DeleteReplicationInstanceRequest) {
+    request = &DeleteReplicationInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteReplicationInstance")
+    
+    
+    return
+}
+
+func NewDeleteReplicationInstanceResponse() (response *DeleteReplicationInstanceResponse) {
+    response = &DeleteReplicationInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteReplicationInstance
+// This API is used to delete a replica instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteReplicationInstance(request *DeleteReplicationInstanceRequest) (response *DeleteReplicationInstanceResponse, err error) {
+    return c.DeleteReplicationInstanceWithContext(context.Background(), request)
+}
+
+// DeleteReplicationInstance
+// This API is used to delete a replica instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteReplicationInstanceWithContext(ctx context.Context, request *DeleteReplicationInstanceRequest) (response *DeleteReplicationInstanceResponse, err error) {
+    if request == nil {
+        request = NewDeleteReplicationInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteReplicationInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteReplicationInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRepositoryRequest() (request *DeleteRepositoryRequest) {
+    request = &DeleteRepositoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteRepository")
+    
+    
+    return
+}
+
+func NewDeleteRepositoryResponse() (response *DeleteRepositoryResponse) {
+    response = &DeleteRepositoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRepository
+// This API is used to delete an image repository.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRepository(request *DeleteRepositoryRequest) (response *DeleteRepositoryResponse, err error) {
+    return c.DeleteRepositoryWithContext(context.Background(), request)
+}
+
+// DeleteRepository
+// This API is used to delete an image repository.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRepositoryWithContext(ctx context.Context, request *DeleteRepositoryRequest) (response *DeleteRepositoryResponse, err error) {
+    if request == nil {
+        request = NewDeleteRepositoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRepository require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRepositoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRepositoryTagsRequest() (request *DeleteRepositoryTagsRequest) {
+    request = &DeleteRepositoryTagsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteRepositoryTags")
+    
+    
+    return
+}
+
+func NewDeleteRepositoryTagsResponse() (response *DeleteRepositoryTagsResponse) {
+    response = &DeleteRepositoryTagsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRepositoryTags
+// This API is used to batch delete repository tags in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRepositoryTags(request *DeleteRepositoryTagsRequest) (response *DeleteRepositoryTagsResponse, err error) {
+    return c.DeleteRepositoryTagsWithContext(context.Background(), request)
+}
+
+// DeleteRepositoryTags
+// This API is used to batch delete repository tags in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRepositoryTagsWithContext(ctx context.Context, request *DeleteRepositoryTagsRequest) (response *DeleteRepositoryTagsResponse, err error) {
+    if request == nil {
+        request = NewDeleteRepositoryTagsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRepositoryTags require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRepositoryTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSecurityPolicyRequest() (request *DeleteSecurityPolicyRequest) {
+    request = &DeleteSecurityPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteSecurityPolicy")
+    
+    
+    return
+}
+
+func NewDeleteSecurityPolicyResponse() (response *DeleteSecurityPolicyResponse) {
+    response = &DeleteSecurityPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteSecurityPolicy
+// This API is used to delete a public network access allowlist policy of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSecurityPolicy(request *DeleteSecurityPolicyRequest) (response *DeleteSecurityPolicyResponse, err error) {
+    return c.DeleteSecurityPolicyWithContext(context.Background(), request)
+}
+
+// DeleteSecurityPolicy
+// This API is used to delete a public network access allowlist policy of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSecurityPolicyWithContext(ctx context.Context, request *DeleteSecurityPolicyRequest) (response *DeleteSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteSecurityPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSecurityPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSignaturePolicyRequest() (request *DeleteSignaturePolicyRequest) {
+    request = &DeleteSignaturePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteSignaturePolicy")
+    
+    
+    return
+}
+
+func NewDeleteSignaturePolicyResponse() (response *DeleteSignaturePolicyResponse) {
+    response = &DeleteSignaturePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteSignaturePolicy
+// This API is used to delete a namespace signing policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSignaturePolicy(request *DeleteSignaturePolicyRequest) (response *DeleteSignaturePolicyResponse, err error) {
+    return c.DeleteSignaturePolicyWithContext(context.Background(), request)
+}
+
+// DeleteSignaturePolicy
+// This API is used to delete a namespace signing policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSignaturePolicyWithContext(ctx context.Context, request *DeleteSignaturePolicyRequest) (response *DeleteSignaturePolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteSignaturePolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSignaturePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSignaturePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTagRetentionRuleRequest() (request *DeleteTagRetentionRuleRequest) {
+    request = &DeleteTagRetentionRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteTagRetentionRule")
+    
+    
+    return
+}
+
+func NewDeleteTagRetentionRuleResponse() (response *DeleteTagRetentionRuleResponse) {
+    response = &DeleteTagRetentionRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteTagRetentionRule
+// This API is used to delete a tag retention rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteTagRetentionRule(request *DeleteTagRetentionRuleRequest) (response *DeleteTagRetentionRuleResponse, err error) {
+    return c.DeleteTagRetentionRuleWithContext(context.Background(), request)
+}
+
+// DeleteTagRetentionRule
+// This API is used to delete a tag retention rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteTagRetentionRuleWithContext(ctx context.Context, request *DeleteTagRetentionRuleRequest) (response *DeleteTagRetentionRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteTagRetentionRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTagRetentionRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTagRetentionRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteWebhookTriggerRequest() (request *DeleteWebhookTriggerRequest) {
+    request = &DeleteWebhookTriggerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteWebhookTrigger")
+    
+    
+    return
+}
+
+func NewDeleteWebhookTriggerResponse() (response *DeleteWebhookTriggerResponse) {
+    response = &DeleteWebhookTriggerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteWebhookTrigger
+// This API is used to delete a trigger.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DeleteWebhookTrigger(request *DeleteWebhookTriggerRequest) (response *DeleteWebhookTriggerResponse, err error) {
+    return c.DeleteWebhookTriggerWithContext(context.Background(), request)
+}
+
+// DeleteWebhookTrigger
+// This API is used to delete a trigger.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DeleteWebhookTriggerWithContext(ctx context.Context, request *DeleteWebhookTriggerRequest) (response *DeleteWebhookTriggerResponse, err error) {
+    if request == nil {
+        request = NewDeleteWebhookTriggerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWebhookTrigger require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteWebhookTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeChartDownloadInfoRequest() (request *DescribeChartDownloadInfoRequest) {
+    request = &DescribeChartDownloadInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeChartDownloadInfo")
+    
+    
+    return
+}
+
+func NewDescribeChartDownloadInfoResponse() (response *DescribeChartDownloadInfoResponse) {
+    response = &DescribeChartDownloadInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeChartDownloadInfo
+// This API is used to return the chart download information in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeChartDownloadInfo(request *DescribeChartDownloadInfoRequest) (response *DescribeChartDownloadInfoResponse, err error) {
+    return c.DescribeChartDownloadInfoWithContext(context.Background(), request)
+}
+
+// DescribeChartDownloadInfo
+// This API is used to return the chart download information in an Enterprise Edition instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeChartDownloadInfoWithContext(ctx context.Context, request *DescribeChartDownloadInfoRequest) (response *DescribeChartDownloadInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeChartDownloadInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeChartDownloadInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeChartDownloadInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeExternalEndpointStatusRequest() (request *DescribeExternalEndpointStatusRequest) {
+    request = &DescribeExternalEndpointStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeExternalEndpointStatus")
+    
+    
+    return
+}
+
+func NewDescribeExternalEndpointStatusResponse() (response *DescribeExternalEndpointStatusResponse) {
+    response = &DescribeExternalEndpointStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeExternalEndpointStatus
+// This API is used to query the public network access entry status of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_GETTCRCLIENT = "FailedOperation.GetTcrClient"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeExternalEndpointStatus(request *DescribeExternalEndpointStatusRequest) (response *DescribeExternalEndpointStatusResponse, err error) {
+    return c.DescribeExternalEndpointStatusWithContext(context.Background(), request)
+}
+
+// DescribeExternalEndpointStatus
+// This API is used to query the public network access entry status of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_GETTCRCLIENT = "FailedOperation.GetTcrClient"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeExternalEndpointStatusWithContext(ctx context.Context, request *DescribeExternalEndpointStatusRequest) (response *DescribeExternalEndpointStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeExternalEndpointStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExternalEndpointStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeExternalEndpointStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGCJobsRequest() (request *DescribeGCJobsRequest) {
+    request = &DescribeGCJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeGCJobs")
+    
+    
+    return
+}
+
+func NewDescribeGCJobsResponse() (response *DescribeGCJobsResponse) {
+    response = &DescribeGCJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeGCJobs
+// This API is used to query the last ten garbage collection (GC) records.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGCJobs(request *DescribeGCJobsRequest) (response *DescribeGCJobsResponse, err error) {
+    return c.DescribeGCJobsWithContext(context.Background(), request)
+}
+
+// DescribeGCJobs
+// This API is used to query the last ten garbage collection (GC) records.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGCJobsWithContext(ctx context.Context, request *DescribeGCJobsRequest) (response *DescribeGCJobsResponse, err error) {
+    if request == nil {
+        request = NewDescribeGCJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGCJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGCJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageAccelerateServiceRequest() (request *DescribeImageAccelerateServiceRequest) {
+    request = &DescribeImageAccelerateServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeImageAccelerateService")
+    
+    
+    return
+}
+
+func NewDescribeImageAccelerateServiceResponse() (response *DescribeImageAccelerateServiceResponse) {
+    response = &DescribeImageAccelerateServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeImageAccelerateService
+// This API is used to query the status of an image acceleration service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeImageAccelerateService(request *DescribeImageAccelerateServiceRequest) (response *DescribeImageAccelerateServiceResponse, err error) {
+    return c.DescribeImageAccelerateServiceWithContext(context.Background(), request)
+}
+
+// DescribeImageAccelerateService
+// This API is used to query the status of an image acceleration service.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeImageAccelerateServiceWithContext(ctx context.Context, request *DescribeImageAccelerateServiceRequest) (response *DescribeImageAccelerateServiceResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageAccelerateServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageAccelerateService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageAccelerateServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageManifestsRequest() (request *DescribeImageManifestsRequest) {
+    request = &DescribeImageManifestsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeImageManifests")
+    
+    
+    return
+}
+
+func NewDescribeImageManifestsResponse() (response *DescribeImageManifestsResponse) {
+    response = &DescribeImageManifestsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeImageManifests
+// This API is used to query the manifest information of a container image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeImageManifests(request *DescribeImageManifestsRequest) (response *DescribeImageManifestsResponse, err error) {
+    return c.DescribeImageManifestsWithContext(context.Background(), request)
+}
+
+// DescribeImageManifests
+// This API is used to query the manifest information of a container image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeImageManifestsWithContext(ctx context.Context, request *DescribeImageManifestsRequest) (response *DescribeImageManifestsResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageManifestsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageManifests require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageManifestsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
+    request = &DescribeImagesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeImages")
+    
+    
+    return
+}
+
+func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
+    response = &DescribeImagesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeImages
+// This API is used to query the list of image tags or the information of the specified container image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *DescribeImagesResponse, err error) {
+    return c.DescribeImagesWithContext(context.Background(), request)
+}
+
+// DescribeImages
+// This API is used to query the list of image tags or the information of the specified container image.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeImagesWithContext(ctx context.Context, request *DescribeImagesRequest) (response *DescribeImagesResponse, err error) {
+    if request == nil {
+        request = NewDescribeImagesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImages require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImmutableTagRulesRequest() (request *DescribeImmutableTagRulesRequest) {
     request = &DescribeImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -557,6 +2715,602 @@ func (c *Client) DescribeImmutableTagRulesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeImmutableTagRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceAllRequest() (request *DescribeInstanceAllRequest) {
+    request = &DescribeInstanceAllRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstanceAll")
+    
+    
+    return
+}
+
+func NewDescribeInstanceAllResponse() (response *DescribeInstanceAllResponse) {
+    response = &DescribeInstanceAllResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstanceAll
+// This API is used to query the information of all instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceAll(request *DescribeInstanceAllRequest) (response *DescribeInstanceAllResponse, err error) {
+    return c.DescribeInstanceAllWithContext(context.Background(), request)
+}
+
+// DescribeInstanceAll
+// This API is used to query the information of all instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceAllWithContext(ctx context.Context, request *DescribeInstanceAllRequest) (response *DescribeInstanceAllResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceAllRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceAll require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceAllResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceAllNamespacesRequest() (request *DescribeInstanceAllNamespacesRequest) {
+    request = &DescribeInstanceAllNamespacesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstanceAllNamespaces")
+    
+    
+    return
+}
+
+func NewDescribeInstanceAllNamespacesResponse() (response *DescribeInstanceAllNamespacesResponse) {
+    response = &DescribeInstanceAllNamespacesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstanceAllNamespaces
+// This API is used to query the list of all instance namespaces.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceAllNamespaces(request *DescribeInstanceAllNamespacesRequest) (response *DescribeInstanceAllNamespacesResponse, err error) {
+    return c.DescribeInstanceAllNamespacesWithContext(context.Background(), request)
+}
+
+// DescribeInstanceAllNamespaces
+// This API is used to query the list of all instance namespaces.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceAllNamespacesWithContext(ctx context.Context, request *DescribeInstanceAllNamespacesRequest) (response *DescribeInstanceAllNamespacesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceAllNamespacesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceAllNamespaces require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceAllNamespacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceCustomizedDomainRequest() (request *DescribeInstanceCustomizedDomainRequest) {
+    request = &DescribeInstanceCustomizedDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstanceCustomizedDomain")
+    
+    
+    return
+}
+
+func NewDescribeInstanceCustomizedDomainResponse() (response *DescribeInstanceCustomizedDomainResponse) {
+    response = &DescribeInstanceCustomizedDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstanceCustomizedDomain
+// This API is used to query the list of custom domain names of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceCustomizedDomain(request *DescribeInstanceCustomizedDomainRequest) (response *DescribeInstanceCustomizedDomainResponse, err error) {
+    return c.DescribeInstanceCustomizedDomainWithContext(context.Background(), request)
+}
+
+// DescribeInstanceCustomizedDomain
+// This API is used to query the list of custom domain names of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceCustomizedDomainWithContext(ctx context.Context, request *DescribeInstanceCustomizedDomainRequest) (response *DescribeInstanceCustomizedDomainResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceCustomizedDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceCustomizedDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceCustomizedDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceStatusRequest() (request *DescribeInstanceStatusRequest) {
+    request = &DescribeInstanceStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstanceStatus")
+    
+    
+    return
+}
+
+func NewDescribeInstanceStatusResponse() (response *DescribeInstanceStatusResponse) {
+    response = &DescribeInstanceStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstanceStatus
+// This API is used to query the current status and process information of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceStatus(request *DescribeInstanceStatusRequest) (response *DescribeInstanceStatusResponse, err error) {
+    return c.DescribeInstanceStatusWithContext(context.Background(), request)
+}
+
+// DescribeInstanceStatus
+// This API is used to query the current status and process information of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceStatusWithContext(ctx context.Context, request *DescribeInstanceStatusRequest) (response *DescribeInstanceStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceTokenRequest() (request *DescribeInstanceTokenRequest) {
+    request = &DescribeInstanceTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstanceToken")
+    
+    
+    return
+}
+
+func NewDescribeInstanceTokenResponse() (response *DescribeInstanceTokenResponse) {
+    response = &DescribeInstanceTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstanceToken
+// This API is used to query the information of long-term access credentials.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceToken(request *DescribeInstanceTokenRequest) (response *DescribeInstanceTokenResponse, err error) {
+    return c.DescribeInstanceTokenWithContext(context.Background(), request)
+}
+
+// DescribeInstanceToken
+// This API is used to query the information of long-term access credentials.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstanceTokenWithContext(ctx context.Context, request *DescribeInstanceTokenRequest) (response *DescribeInstanceTokenResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceTokenRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
+    request = &DescribeInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstances")
+    
+    
+    return
+}
+
+func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
+    response = &DescribeInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInstances
+// This API is used to query the instance information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
+    return c.DescribeInstancesWithContext(context.Background(), request)
+}
+
+// DescribeInstances
+// This API is used to query the instance information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInternalEndpointsRequest() (request *DescribeInternalEndpointsRequest) {
+    request = &DescribeInternalEndpointsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInternalEndpoints")
+    
+    
+    return
+}
+
+func NewDescribeInternalEndpointsResponse() (response *DescribeInternalEndpointsResponse) {
+    response = &DescribeInternalEndpointsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeInternalEndpoints
+// This API is used to query the VPC URLs for private network access to an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInternalEndpoints(request *DescribeInternalEndpointsRequest) (response *DescribeInternalEndpointsResponse, err error) {
+    return c.DescribeInternalEndpointsWithContext(context.Background(), request)
+}
+
+// DescribeInternalEndpoints
+// This API is used to query the VPC URLs for private network access to an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInternalEndpointsWithContext(ctx context.Context, request *DescribeInternalEndpointsRequest) (response *DescribeInternalEndpointsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInternalEndpointsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInternalEndpoints require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInternalEndpointsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNamespacesRequest() (request *DescribeNamespacesRequest) {
+    request = &DescribeNamespacesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeNamespaces")
+    
+    
+    return
+}
+
+func NewDescribeNamespacesResponse() (response *DescribeNamespacesResponse) {
+    response = &DescribeNamespacesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeNamespaces
+// This API is used to query the namespace list or the information of the specified namespace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNamespaces(request *DescribeNamespacesRequest) (response *DescribeNamespacesResponse, err error) {
+    return c.DescribeNamespacesWithContext(context.Background(), request)
+}
+
+// DescribeNamespaces
+// This API is used to query the namespace list or the information of the specified namespace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
+//  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_OPERATIONCANCEL = "FailedOperation.OperationCancel"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNamespacesWithContext(ctx context.Context, request *DescribeNamespacesRequest) (response *DescribeNamespacesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNamespacesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNamespaces require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNamespacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
+    request = &DescribeRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeRegions")
+    
+    
+    return
+}
+
+func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
+    response = &DescribeRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRegions
+// This API is used to get the available regions in TCR.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
+    return c.DescribeRegionsWithContext(context.Background(), request)
+}
+
+// DescribeRegions
+// This API is used to get the available regions in TCR.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRegionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRegionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -741,6 +3495,664 @@ func (c *Client) DescribeReplicationInstancesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeReplicationInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRepositoriesRequest() (request *DescribeRepositoriesRequest) {
+    request = &DescribeRepositoriesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeRepositories")
+    
+    
+    return
+}
+
+func NewDescribeRepositoriesResponse() (response *DescribeRepositoriesResponse) {
+    response = &DescribeRepositoriesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRepositories
+// This API is used to query the image repository list or the information of the specified image repository.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRepositories(request *DescribeRepositoriesRequest) (response *DescribeRepositoriesResponse, err error) {
+    return c.DescribeRepositoriesWithContext(context.Background(), request)
+}
+
+// DescribeRepositories
+// This API is used to query the image repository list or the information of the specified image repository.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRepositoriesWithContext(ctx context.Context, request *DescribeRepositoriesRequest) (response *DescribeRepositoriesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRepositoriesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRepositories require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRepositoriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityPoliciesRequest() (request *DescribeSecurityPoliciesRequest) {
+    request = &DescribeSecurityPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeSecurityPolicies")
+    
+    
+    return
+}
+
+func NewDescribeSecurityPoliciesResponse() (response *DescribeSecurityPoliciesResponse) {
+    response = &DescribeSecurityPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSecurityPolicies
+// This API is used to query the public network access allowlist policies of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_GETSECURITYPOLICYFAIL = "FailedOperation.GetSecurityPolicyFail"
+//  FAILEDOPERATION_GETTCRCLIENT = "FailedOperation.GetTcrClient"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSecurityPolicies(request *DescribeSecurityPoliciesRequest) (response *DescribeSecurityPoliciesResponse, err error) {
+    return c.DescribeSecurityPoliciesWithContext(context.Background(), request)
+}
+
+// DescribeSecurityPolicies
+// This API is used to query the public network access allowlist policies of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
+//  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_GETSECURITYPOLICYFAIL = "FailedOperation.GetSecurityPolicyFail"
+//  FAILEDOPERATION_GETTCRCLIENT = "FailedOperation.GetTcrClient"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSecurityPoliciesWithContext(ctx context.Context, request *DescribeSecurityPoliciesRequest) (response *DescribeSecurityPoliciesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityPoliciesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityPolicies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecurityPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTagRetentionExecutionRequest() (request *DescribeTagRetentionExecutionRequest) {
+    request = &DescribeTagRetentionExecutionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeTagRetentionExecution")
+    
+    
+    return
+}
+
+func NewDescribeTagRetentionExecutionResponse() (response *DescribeTagRetentionExecutionResponse) {
+    response = &DescribeTagRetentionExecutionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTagRetentionExecution
+// This API is used to query tag retention execution records.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTagRetentionExecution(request *DescribeTagRetentionExecutionRequest) (response *DescribeTagRetentionExecutionResponse, err error) {
+    return c.DescribeTagRetentionExecutionWithContext(context.Background(), request)
+}
+
+// DescribeTagRetentionExecution
+// This API is used to query tag retention execution records.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTagRetentionExecutionWithContext(ctx context.Context, request *DescribeTagRetentionExecutionRequest) (response *DescribeTagRetentionExecutionResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagRetentionExecutionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTagRetentionExecution require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagRetentionExecutionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTagRetentionExecutionTaskRequest() (request *DescribeTagRetentionExecutionTaskRequest) {
+    request = &DescribeTagRetentionExecutionTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeTagRetentionExecutionTask")
+    
+    
+    return
+}
+
+func NewDescribeTagRetentionExecutionTaskResponse() (response *DescribeTagRetentionExecutionTaskResponse) {
+    response = &DescribeTagRetentionExecutionTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTagRetentionExecutionTask
+// This API is used to query tag retention execution tasks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTagRetentionExecutionTask(request *DescribeTagRetentionExecutionTaskRequest) (response *DescribeTagRetentionExecutionTaskResponse, err error) {
+    return c.DescribeTagRetentionExecutionTaskWithContext(context.Background(), request)
+}
+
+// DescribeTagRetentionExecutionTask
+// This API is used to query tag retention execution tasks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTagRetentionExecutionTaskWithContext(ctx context.Context, request *DescribeTagRetentionExecutionTaskRequest) (response *DescribeTagRetentionExecutionTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagRetentionExecutionTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTagRetentionExecutionTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagRetentionExecutionTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTagRetentionRulesRequest() (request *DescribeTagRetentionRulesRequest) {
+    request = &DescribeTagRetentionRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeTagRetentionRules")
+    
+    
+    return
+}
+
+func NewDescribeTagRetentionRulesResponse() (response *DescribeTagRetentionRulesResponse) {
+    response = &DescribeTagRetentionRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTagRetentionRules
+// This API is used to query tag retention rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTagRetentionRules(request *DescribeTagRetentionRulesRequest) (response *DescribeTagRetentionRulesResponse, err error) {
+    return c.DescribeTagRetentionRulesWithContext(context.Background(), request)
+}
+
+// DescribeTagRetentionRules
+// This API is used to query tag retention rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTagRetentionRulesWithContext(ctx context.Context, request *DescribeTagRetentionRulesRequest) (response *DescribeTagRetentionRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagRetentionRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTagRetentionRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagRetentionRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebhookTriggerRequest() (request *DescribeWebhookTriggerRequest) {
+    request = &DescribeWebhookTriggerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeWebhookTrigger")
+    
+    
+    return
+}
+
+func NewDescribeWebhookTriggerResponse() (response *DescribeWebhookTriggerResponse) {
+    response = &DescribeWebhookTriggerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeWebhookTrigger
+// This API is used to query triggers.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeWebhookTrigger(request *DescribeWebhookTriggerRequest) (response *DescribeWebhookTriggerResponse, err error) {
+    return c.DescribeWebhookTriggerWithContext(context.Background(), request)
+}
+
+// DescribeWebhookTrigger
+// This API is used to query triggers.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeWebhookTriggerWithContext(ctx context.Context, request *DescribeWebhookTriggerRequest) (response *DescribeWebhookTriggerResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebhookTriggerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebhookTrigger require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebhookTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebhookTriggerLogRequest() (request *DescribeWebhookTriggerLogRequest) {
+    request = &DescribeWebhookTriggerLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeWebhookTriggerLog")
+    
+    
+    return
+}
+
+func NewDescribeWebhookTriggerLogResponse() (response *DescribeWebhookTriggerLogResponse) {
+    response = &DescribeWebhookTriggerLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeWebhookTriggerLog
+// This API is used to get trigger logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeWebhookTriggerLog(request *DescribeWebhookTriggerLogRequest) (response *DescribeWebhookTriggerLogResponse, err error) {
+    return c.DescribeWebhookTriggerLogWithContext(context.Background(), request)
+}
+
+// DescribeWebhookTriggerLog
+// This API is used to get trigger logs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) DescribeWebhookTriggerLogWithContext(ctx context.Context, request *DescribeWebhookTriggerLogRequest) (response *DescribeWebhookTriggerLogResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebhookTriggerLogRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebhookTriggerLog require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebhookTriggerLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDownloadHelmChartRequest() (request *DownloadHelmChartRequest) {
+    request = &DownloadHelmChartRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DownloadHelmChart")
+    
+    
+    return
+}
+
+func NewDownloadHelmChartResponse() (response *DownloadHelmChartResponse) {
+    response = &DownloadHelmChartResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DownloadHelmChart
+// This API is used to download a Helm chart in TCR.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DownloadHelmChart(request *DownloadHelmChartRequest) (response *DownloadHelmChartResponse, err error) {
+    return c.DownloadHelmChartWithContext(context.Background(), request)
+}
+
+// DownloadHelmChart
+// This API is used to download a Helm chart in TCR.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DownloadHelmChartWithContext(ctx context.Context, request *DownloadHelmChartRequest) (response *DownloadHelmChartResponse, err error) {
+    if request == nil {
+        request = NewDownloadHelmChartRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DownloadHelmChart require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDownloadHelmChartResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewManageExternalEndpointRequest() (request *ManageExternalEndpointRequest) {
+    request = &ManageExternalEndpointRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ManageExternalEndpoint")
+    
+    
+    return
+}
+
+func NewManageExternalEndpointResponse() (response *ManageExternalEndpointResponse) {
+    response = &ManageExternalEndpointResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ManageExternalEndpoint
+// This API is used to manage the public network access of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ManageExternalEndpoint(request *ManageExternalEndpointRequest) (response *ManageExternalEndpointResponse, err error) {
+    return c.ManageExternalEndpointWithContext(context.Background(), request)
+}
+
+// ManageExternalEndpoint
+// This API is used to manage the public network access of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ManageExternalEndpointWithContext(ctx context.Context, request *ManageExternalEndpointRequest) (response *ManageExternalEndpointResponse, err error) {
+    if request == nil {
+        request = NewManageExternalEndpointRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ManageExternalEndpoint require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewManageExternalEndpointResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewManageInternalEndpointRequest() (request *ManageInternalEndpointRequest) {
+    request = &ManageInternalEndpointRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ManageInternalEndpoint")
+    
+    
+    return
+}
+
+func NewManageInternalEndpointResponse() (response *ManageInternalEndpointResponse) {
+    response = &ManageInternalEndpointResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ManageInternalEndpoint
+// This API is used to manage VPC URLs for private network access to an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORVPCDNSSTATUS = "ResourceInsufficient.ErrorVpcDnsStatus"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ManageInternalEndpoint(request *ManageInternalEndpointRequest) (response *ManageInternalEndpointResponse, err error) {
+    return c.ManageInternalEndpointWithContext(context.Background(), request)
+}
+
+// ManageInternalEndpoint
+// This API is used to manage VPC URLs for private network access to an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINSUFFICIENT_ERRORVPCDNSSTATUS = "ResourceInsufficient.ErrorVpcDnsStatus"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ManageInternalEndpointWithContext(ctx context.Context, request *ManageInternalEndpointRequest) (response *ManageInternalEndpointResponse, err error) {
+    if request == nil {
+        request = NewManageInternalEndpointRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ManageInternalEndpoint require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewManageInternalEndpointResponse()
     err = c.Send(request, response)
     return
 }
@@ -939,6 +4351,470 @@ func (c *Client) ModifyInstanceWithContext(ctx context.Context, request *ModifyI
     request.SetContext(ctx)
     
     response = NewModifyInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceTokenRequest() (request *ModifyInstanceTokenRequest) {
+    request = &ModifyInstanceTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyInstanceToken")
+    
+    
+    return
+}
+
+func NewModifyInstanceTokenResponse() (response *ModifyInstanceTokenResponse) {
+    response = &ModifyInstanceTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyInstanceToken
+// This API is used to update the status of the specified long-term access credential in an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceToken(request *ModifyInstanceTokenRequest) (response *ModifyInstanceTokenResponse, err error) {
+    return c.ModifyInstanceTokenWithContext(context.Background(), request)
+}
+
+// ModifyInstanceToken
+// This API is used to update the status of the specified long-term access credential in an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceTokenWithContext(ctx context.Context, request *ModifyInstanceTokenRequest) (response *ModifyInstanceTokenResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceTokenRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNamespaceRequest() (request *ModifyNamespaceRequest) {
+    request = &ModifyNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyNamespace")
+    
+    
+    return
+}
+
+func NewModifyNamespaceResponse() (response *ModifyNamespaceResponse) {
+    response = &ModifyNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNamespace
+// This API is used to update the information of a namespace. Currently, only the namespace access level can be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNamespace(request *ModifyNamespaceRequest) (response *ModifyNamespaceResponse, err error) {
+    return c.ModifyNamespaceWithContext(context.Background(), request)
+}
+
+// ModifyNamespace
+// This API is used to update the information of a namespace. Currently, only the namespace access level can be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNamespaceWithContext(ctx context.Context, request *ModifyNamespaceRequest) (response *ModifyNamespaceResponse, err error) {
+    if request == nil {
+        request = NewModifyNamespaceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRepositoryRequest() (request *ModifyRepositoryRequest) {
+    request = &ModifyRepositoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyRepository")
+    
+    
+    return
+}
+
+func NewModifyRepositoryResponse() (response *ModifyRepositoryResponse) {
+    response = &ModifyRepositoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRepository
+// This API is used to update the information of an image repository. The repository description can be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyRepository(request *ModifyRepositoryRequest) (response *ModifyRepositoryResponse, err error) {
+    return c.ModifyRepositoryWithContext(context.Background(), request)
+}
+
+// ModifyRepository
+// This API is used to update the information of an image repository. The repository description can be modified.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyRepositoryWithContext(ctx context.Context, request *ModifyRepositoryRequest) (response *ModifyRepositoryResponse, err error) {
+    if request == nil {
+        request = NewModifyRepositoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRepository require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRepositoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySecurityPolicyRequest() (request *ModifySecurityPolicyRequest) {
+    request = &ModifySecurityPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifySecurityPolicy")
+    
+    
+    return
+}
+
+func NewModifySecurityPolicyResponse() (response *ModifySecurityPolicyResponse) {
+    response = &ModifySecurityPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifySecurityPolicy
+// This API is used to update the public network access allowlist of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifySecurityPolicy(request *ModifySecurityPolicyRequest) (response *ModifySecurityPolicyResponse, err error) {
+    return c.ModifySecurityPolicyWithContext(context.Background(), request)
+}
+
+// ModifySecurityPolicy
+// This API is used to update the public network access allowlist of an instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifySecurityPolicyWithContext(ctx context.Context, request *ModifySecurityPolicyRequest) (response *ModifySecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewModifySecurityPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySecurityPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyTagRetentionRuleRequest() (request *ModifyTagRetentionRuleRequest) {
+    request = &ModifyTagRetentionRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyTagRetentionRule")
+    
+    
+    return
+}
+
+func NewModifyTagRetentionRuleResponse() (response *ModifyTagRetentionRuleResponse) {
+    response = &ModifyTagRetentionRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyTagRetentionRule
+// This API is used to update a tag retention rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyTagRetentionRule(request *ModifyTagRetentionRuleRequest) (response *ModifyTagRetentionRuleResponse, err error) {
+    return c.ModifyTagRetentionRuleWithContext(context.Background(), request)
+}
+
+// ModifyTagRetentionRule
+// This API is used to update a tag retention rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyTagRetentionRuleWithContext(ctx context.Context, request *ModifyTagRetentionRuleRequest) (response *ModifyTagRetentionRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyTagRetentionRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTagRetentionRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyTagRetentionRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyWebhookTriggerRequest() (request *ModifyWebhookTriggerRequest) {
+    request = &ModifyWebhookTriggerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyWebhookTrigger")
+    
+    
+    return
+}
+
+func NewModifyWebhookTriggerResponse() (response *ModifyWebhookTriggerResponse) {
+    response = &ModifyWebhookTriggerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyWebhookTrigger
+// This API is used to update a trigger.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) ModifyWebhookTrigger(request *ModifyWebhookTriggerRequest) (response *ModifyWebhookTriggerResponse, err error) {
+    return c.ModifyWebhookTriggerWithContext(context.Background(), request)
+}
+
+// ModifyWebhookTrigger
+// This API is used to update a trigger.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
+func (c *Client) ModifyWebhookTriggerWithContext(ctx context.Context, request *ModifyWebhookTriggerRequest) (response *ModifyWebhookTriggerResponse, err error) {
+    if request == nil {
+        request = NewModifyWebhookTriggerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWebhookTrigger require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyWebhookTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewInstanceRequest() (request *RenewInstanceRequest) {
+    request = &RenewInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "RenewInstance")
+    
+    
+    return
+}
+
+func NewRenewInstanceResponse() (response *RenewInstanceResponse) {
+    response = &RenewInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RenewInstance
+// This API is used to renew a prepaid instance or change the billing mode from pay-as-you-go billing to monthly subscription billing.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RenewInstance(request *RenewInstanceRequest) (response *RenewInstanceResponse, err error) {
+    return c.RenewInstanceWithContext(context.Background(), request)
+}
+
+// RenewInstance
+// This API is used to renew a prepaid instance or change the billing mode from pay-as-you-go billing to monthly subscription billing.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
+//  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
+//  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
+//  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORNAMEEXISTS = "InvalidParameter.ErrorNameExists"
+//  INVALIDPARAMETER_ERRORREGISTRYNAME = "InvalidParameter.ErrorRegistryName"
+//  INVALIDPARAMETER_ERRORTAGOVERLIMIT = "InvalidParameter.ErrorTagOverLimit"
+//  INVALIDPARAMETER_UNSUPPORTEDREGION = "InvalidParameter.UnsupportedRegion"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RenewInstanceWithContext(ctx context.Context, request *RenewInstanceRequest) (response *RenewInstanceResponse, err error) {
+    if request == nil {
+        request = NewRenewInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewInstanceResponse()
     err = c.Send(request, response)
     return
 }

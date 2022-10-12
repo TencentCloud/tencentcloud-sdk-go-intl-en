@@ -1567,6 +1567,9 @@ type CreateTopicRequestParams struct {
 
 	// Logset retention period (in days). Default: 30 days.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 }
 
 type CreateTopicRequest struct {
@@ -1583,6 +1586,9 @@ type CreateTopicRequest struct {
 
 	// Logset retention period (in days). Default: 30 days.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -1601,6 +1607,7 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "PartitionCount")
 	delete(f, "TopicType")
 	delete(f, "Period")
+	delete(f, "StorageType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -1983,10 +1990,10 @@ type DeleteRuleRequestParams struct {
 	// Array of IDs of the forwarding rules to be deleted
 	LocationIds []*string `json:"LocationIds,omitempty" name:"LocationIds"`
 
-	// Specifies the target domain name. Only one domain name is allowed. This field is invalid when `LocationIds` is specified.
+	// The domain name associated with the forwarding rule to delete. If the rule is associated with multiple domain names, specify any one of them.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
+	// The forwarding path of the forwarding rule to delete.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
@@ -2005,10 +2012,10 @@ type DeleteRuleRequest struct {
 	// Array of IDs of the forwarding rules to be deleted
 	LocationIds []*string `json:"LocationIds,omitempty" name:"LocationIds"`
 
-	// Specifies the target domain name. Only one domain name is allowed. This field is invalid when `LocationIds` is specified.
+	// The domain name associated with the forwarding rule to delete. If the rule is associated with multiple domain names, specify any one of them.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Forwarding path of the forwarding rule to be deleted. This parameter does not take effect if LocationIds is specified.
+	// The forwarding path of the forwarding rule to delete.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
@@ -3042,6 +3049,81 @@ func (r *DescribeCustomizedConfigListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCustomizedConfigListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeIdleLoadBalancersRequestParams struct {
+	// Data offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned CLB instances. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// CLB instance region
+	LoadBalancerRegion *string `json:"LoadBalancerRegion,omitempty" name:"LoadBalancerRegion"`
+}
+
+type DescribeIdleLoadBalancersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned CLB instances. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// CLB instance region
+	LoadBalancerRegion *string `json:"LoadBalancerRegion,omitempty" name:"LoadBalancerRegion"`
+}
+
+func (r *DescribeIdleLoadBalancersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIdleLoadBalancersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "LoadBalancerRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIdleLoadBalancersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeIdleLoadBalancersResponseParams struct {
+	// List of idle CLBs
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IdleLoadBalancers []*IdleLoadBalancer `json:"IdleLoadBalancers,omitempty" name:"IdleLoadBalancers"`
+
+	// Total number of idle CLB instances
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeIdleLoadBalancersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeIdleLoadBalancersResponseParams `json:"Response"`
+}
+
+func (r *DescribeIdleLoadBalancersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIdleLoadBalancersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4341,16 +4423,16 @@ type HealthCheck struct {
 	UnHealthNum *int64 `json:"UnHealthNum,omitempty" name:"UnHealthNum"`
 
 	// Health check status code (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Value range: 1-31. Default value: 31.
-	// 1 means that the return value of 1xx after detection means healthy, 2 for returning 2xx for healthy, 4 for returning 3xx for healthy, 8 for returning 4xx for healthy, and 16 for returning 5xx for healthy. If you want multiple return codes to represent healthy, sum up the corresponding values. Note: The HTTP health check mode of TCP listeners only supports specifying one kind of health check status code.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// `1`: Returns code 1xx for healthy status. `2`: Returns code 2xx for healthy status. `4`: Returns code 3xx for healthy status. `8`: Returns code 4xx for healthy status. `16`: Returns code 5xx for healthy status. If you want multiple return codes to represent healthy, sum up the corresponding values. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	HttpCode *int64 `json:"HttpCode,omitempty" name:"HttpCode"`
 
 	// Health check path (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpCheckPath *string `json:"HttpCheckPath,omitempty" name:"HttpCheckPath"`
 
-	// Health check domain name (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The target domain name for health check. It’s applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. It’s required for TCP listeners.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	HttpCheckDomain *string `json:"HttpCheckDomain,omitempty" name:"HttpCheckDomain"`
 
 	// Health check method (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Value range: HEAD, GET. Default value: HEAD.
@@ -4388,6 +4470,30 @@ type HealthCheck struct {
 	// GRPC health check status code, which is only applicable to rules with GRPC as the backend forwarding protocol. It can be a single number (such as `20`), multiple numbers (such as `20,25`) or a range (such as `0-99`). The default value is `12`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ExtendedCode *string `json:"ExtendedCode,omitempty" name:"ExtendedCode"`
+}
+
+type IdleLoadBalancer struct {
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB instance name
+	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
+
+	// CLB instance region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// CLB instance VIP
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// The reason why the load balancer is considered idle. `NO_RULES`: No rules configured. `NO_RS`: The rules are not associated with servers.
+	IdleReason *string `json:"IdleReason,omitempty" name:"IdleReason"`
+
+	// CLB instance status, including:
+	// `0`: Creating; `1`: Running.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// CLB type. Value range: `1` (CLB); `0` (classic CLB).
+	Forward *uint64 `json:"Forward,omitempty" name:"Forward"`
 }
 
 type InternetAccessible struct {
