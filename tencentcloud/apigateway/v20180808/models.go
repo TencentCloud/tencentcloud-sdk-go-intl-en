@@ -1960,6 +1960,14 @@ type CreateApiRsp struct {
 	ApiName *string `json:"ApiName,omitempty" name:"ApiName"`
 }
 
+type CreateApiRspSet struct {
+	// Total number of APIs
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information of created APIs
+	ApiSet []*CreateApiRsp `json:"ApiSet,omitempty" name:"ApiSet"`
+}
+
 // Predefined struct for user
 type CreateIPStrategyRequestParams struct {
 	// Unique service ID.
@@ -6566,6 +6574,84 @@ type IPStrategysStatus struct {
 	// Policy list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StrategySet []*IPStrategy `json:"StrategySet,omitempty" name:"StrategySet"`
+}
+
+// Predefined struct for user
+type ImportOpenApiRequestParams struct {
+	// The unique ID of the service associated with the API
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Content of the openAPI
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Format of the content. Values: `YAML` (default), `JSON`
+	EncodeType *string `json:"EncodeType,omitempty" name:"EncodeType"`
+
+	// Version of the content. It can only be `openAPI` for now.
+	ContentVersion *string `json:"ContentVersion,omitempty" name:"ContentVersion"`
+}
+
+type ImportOpenApiRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the service associated with the API
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Content of the openAPI
+	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Format of the content. Values: `YAML` (default), `JSON`
+	EncodeType *string `json:"EncodeType,omitempty" name:"EncodeType"`
+
+	// Version of the content. It can only be `openAPI` for now.
+	ContentVersion *string `json:"ContentVersion,omitempty" name:"ContentVersion"`
+}
+
+func (r *ImportOpenApiRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImportOpenApiRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ServiceId")
+	delete(f, "Content")
+	delete(f, "EncodeType")
+	delete(f, "ContentVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImportOpenApiRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImportOpenApiResponseParams struct {
+	// The result of importing the OpenAPI
+	Result *CreateApiRspSet `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ImportOpenApiResponse struct {
+	*tchttp.BaseResponse
+	Response *ImportOpenApiResponseParams `json:"Response"`
+}
+
+func (r *ImportOpenApiResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImportOpenApiResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type K8sLabel struct {

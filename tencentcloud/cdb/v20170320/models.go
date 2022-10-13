@@ -8254,6 +8254,12 @@ type ModifyInstanceParamRequestParams struct {
 
 	// When to perform the parameter adjustment task. Default value: 0. Valid values: 0 - execute immediately, 1 - execute during window. When its value is 1, only one instance ID can be passed in (i.e., only one `InstanceIds` can be passed in).
 	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
+
+	// Whether to sync the parameters to read-only instance of the source instance. Valid values: `true` (not sync), `false` (sync). Default value: `false`.
+	NotSyncRo *bool `json:"NotSyncRo,omitempty" name:"NotSyncRo"`
+
+	// Whether to sync the parameters to disaster recovery instance of the source instance. Valid values: `true` (not sync), `false` (sync). Default value: `false`.
+	NotSyncDr *bool `json:"NotSyncDr,omitempty" name:"NotSyncDr"`
 }
 
 type ModifyInstanceParamRequest struct {
@@ -8270,6 +8276,12 @@ type ModifyInstanceParamRequest struct {
 
 	// When to perform the parameter adjustment task. Default value: 0. Valid values: 0 - execute immediately, 1 - execute during window. When its value is 1, only one instance ID can be passed in (i.e., only one `InstanceIds` can be passed in).
 	WaitSwitch *int64 `json:"WaitSwitch,omitempty" name:"WaitSwitch"`
+
+	// Whether to sync the parameters to read-only instance of the source instance. Valid values: `true` (not sync), `false` (sync). Default value: `false`.
+	NotSyncRo *bool `json:"NotSyncRo,omitempty" name:"NotSyncRo"`
+
+	// Whether to sync the parameters to disaster recovery instance of the source instance. Valid values: `true` (not sync), `false` (sync). Default value: `false`.
+	NotSyncDr *bool `json:"NotSyncDr,omitempty" name:"NotSyncDr"`
 }
 
 func (r *ModifyInstanceParamRequest) ToJsonString() string {
@@ -8288,6 +8300,8 @@ func (r *ModifyInstanceParamRequest) FromJsonString(s string) error {
 	delete(f, "ParamList")
 	delete(f, "TemplateId")
 	delete(f, "WaitSwitch")
+	delete(f, "NotSyncRo")
+	delete(f, "NotSyncDr")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceParamRequest has unknown keys!", "")
 	}

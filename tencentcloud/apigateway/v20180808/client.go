@@ -72,6 +72,7 @@ func NewAttachPluginResponse() (response *AttachPluginResponse) {
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
 //  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -94,6 +95,7 @@ func (c *Client) AttachPlugin(request *AttachPluginRequest) (response *AttachPlu
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
 //  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -937,6 +939,7 @@ func NewCreateIPStrategyResponse() (response *CreateIPStrategyResponse) {
 // This API is used to create a service IP policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  LIMITEXCEEDED_IPSTRATEGYLIMITEXCEEDED = "LimitExceeded.IpStrategyLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
@@ -949,6 +952,7 @@ func (c *Client) CreateIPStrategy(request *CreateIPStrategyRequest) (response *C
 // This API is used to create a service IP policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  LIMITEXCEEDED_IPSTRATEGYLIMITEXCEEDED = "LimitExceeded.IpStrategyLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
@@ -992,6 +996,7 @@ func NewCreatePluginResponse() (response *CreatePluginResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_TAGBINDSERVICEERROR = "FailedOperation.TagBindServiceError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
@@ -1010,12 +1015,14 @@ func NewCreatePluginResponse() (response *CreatePluginResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
 //  INVALIDPARAMETERVALUE_INVALIDUPSTREAM = "InvalidParameterValue.InvalidUpstream"
 //  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
 //  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
 //  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUELIMITEXCEEDED = "InvalidParameterValue.ParameterValueLimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 //  MISSINGPARAMETER_BACKENDSPECIFICPARAM = "MissingParameter.BackendSpecificParam"
 //  MISSINGPARAMETER_PLUGINCONFIG = "MissingParameter.PluginConfig"
+//  UNAUTHORIZEDOPERATION_UNCERTIFIEDUSER = "UnauthorizedOperation.UncertifiedUser"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) CreatePlugin(request *CreatePluginRequest) (response *CreatePluginResponse, err error) {
     return c.CreatePluginWithContext(context.Background(), request)
@@ -1026,6 +1033,7 @@ func (c *Client) CreatePlugin(request *CreatePluginRequest) (response *CreatePlu
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_TAGBINDSERVICEERROR = "FailedOperation.TagBindServiceError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
@@ -1044,12 +1052,14 @@ func (c *Client) CreatePlugin(request *CreatePluginRequest) (response *CreatePlu
 //  INVALIDPARAMETERVALUE_INVALIDSERVICETYPE = "InvalidParameterValue.InvalidServiceType"
 //  INVALIDPARAMETERVALUE_INVALIDUPSTREAM = "InvalidParameterValue.InvalidUpstream"
 //  INVALIDPARAMETERVALUE_INVALIDURL = "InvalidParameterValue.InvalidUrl"
+//  INVALIDPARAMETERVALUE_INVALIDVPCCONFIG = "InvalidParameterValue.InvalidVpcConfig"
 //  INVALIDPARAMETERVALUE_LENGTHEXCEEDED = "InvalidParameterValue.LengthExceeded"
 //  INVALIDPARAMETERVALUE_NOTINOPTIONS = "InvalidParameterValue.NotInOptions"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUELIMITEXCEEDED = "InvalidParameterValue.ParameterValueLimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 //  MISSINGPARAMETER_BACKENDSPECIFICPARAM = "MissingParameter.BackendSpecificParam"
 //  MISSINGPARAMETER_PLUGINCONFIG = "MissingParameter.PluginConfig"
+//  UNAUTHORIZEDOPERATION_UNCERTIFIEDUSER = "UnauthorizedOperation.UncertifiedUser"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) CreatePluginWithContext(ctx context.Context, request *CreatePluginRequest) (response *CreatePluginResponse, err error) {
     if request == nil {
@@ -1115,6 +1125,7 @@ func NewCreateServiceResponse() (response *CreateServiceResponse) {
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_UNCERTIFIEDUSER = "UnauthorizedOperation.UncertifiedUser"
+//  UNSUPPORTEDOPERATION_ACCOUNTARREARS = "UnsupportedOperation.AccountArrears"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) CreateService(request *CreateServiceRequest) (response *CreateServiceResponse, err error) {
     return c.CreateServiceWithContext(context.Background(), request)
@@ -1150,6 +1161,7 @@ func (c *Client) CreateService(request *CreateServiceRequest) (response *CreateS
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_UNCERTIFIEDUSER = "UnauthorizedOperation.UncertifiedUser"
+//  UNSUPPORTEDOPERATION_ACCOUNTARREARS = "UnsupportedOperation.AccountArrears"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) CreateServiceWithContext(ctx context.Context, request *CreateServiceRequest) (response *CreateServiceResponse, err error) {
     if request == nil {
@@ -1276,6 +1288,7 @@ func NewCreateUsagePlanResponse() (response *CreateUsagePlanResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDMAXREQUESTNUM = "InvalidParameterValue.InvalidMaxRequestNum"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  LIMITEXCEEDED_USAGEPLANLIMITEXCEEDED = "LimitExceeded.UsagePlanLimitExceeded"
 func (c *Client) CreateUsagePlan(request *CreateUsagePlanRequest) (response *CreateUsagePlanResponse, err error) {
@@ -1289,6 +1302,7 @@ func (c *Client) CreateUsagePlan(request *CreateUsagePlanRequest) (response *Cre
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDMAXREQUESTNUM = "InvalidParameterValue.InvalidMaxRequestNum"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  LIMITEXCEEDED_USAGEPLANLIMITEXCEEDED = "LimitExceeded.UsagePlanLimitExceeded"
 func (c *Client) CreateUsagePlanWithContext(ctx context.Context, request *CreateUsagePlanRequest) (response *CreateUsagePlanResponse, err error) {
@@ -2094,6 +2108,7 @@ func NewDescribeAPIDocsResponse() (response *DescribeAPIDocsResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -2113,6 +2128,7 @@ func (c *Client) DescribeAPIDocs(request *DescribeAPIDocsRequest) (response *Des
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -2333,6 +2349,7 @@ func NewDescribeApiAppBindApisStatusResponse() (response *DescribeApiAppBindApis
 // error code that may be returned:
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribeApiAppBindApisStatus(request *DescribeApiAppBindApisStatusRequest) (response *DescribeApiAppBindApisStatusResponse, err error) {
     return c.DescribeApiAppBindApisStatusWithContext(context.Background(), request)
@@ -2344,6 +2361,7 @@ func (c *Client) DescribeApiAppBindApisStatus(request *DescribeApiAppBindApisSta
 // error code that may be returned:
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribeApiAppBindApisStatusWithContext(ctx context.Context, request *DescribeApiAppBindApisStatusRequest) (response *DescribeApiAppBindApisStatusResponse, err error) {
     if request == nil {
@@ -2975,6 +2993,7 @@ func NewDescribeLogSearchResponse() (response *DescribeLogSearchResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeLogSearch(request *DescribeLogSearchRequest) (response *DescribeLogSearchResponse, err error) {
     return c.DescribeLogSearchWithContext(context.Background(), request)
 }
@@ -2985,6 +3004,7 @@ func (c *Client) DescribeLogSearch(request *DescribeLogSearchRequest) (response 
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeLogSearchWithContext(ctx context.Context, request *DescribeLogSearchRequest) (response *DescribeLogSearchResponse, err error) {
     if request == nil {
         request = NewDescribeLogSearchRequest()
@@ -3077,6 +3097,7 @@ func NewDescribePluginApisResponse() (response *DescribePluginApisResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribePluginApis(request *DescribePluginApisRequest) (response *DescribePluginApisResponse, err error) {
@@ -3089,6 +3110,7 @@ func (c *Client) DescribePluginApis(request *DescribePluginApisRequest) (respons
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribePluginApisWithContext(ctx context.Context, request *DescribePluginApisRequest) (response *DescribePluginApisResponse, err error) {
@@ -3132,6 +3154,7 @@ func NewDescribeServiceResponse() (response *DescribeServiceResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -3148,6 +3171,7 @@ func (c *Client) DescribeService(request *DescribeServiceRequest) (response *Des
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -3778,6 +3802,7 @@ func NewDescribeUpstreamsResponse() (response *DescribeUpstreamsResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
@@ -3796,6 +3821,7 @@ func (c *Client) DescribeUpstreams(request *DescribeUpstreamsRequest) (response 
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
@@ -4247,6 +4273,78 @@ func (c *Client) GenerateApiDocumentWithContext(ctx context.Context, request *Ge
     return
 }
 
+func NewImportOpenApiRequest() (request *ImportOpenApiRequest) {
+    request = &ImportOpenApiRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apigateway", APIVersion, "ImportOpenApi")
+    
+    
+    return
+}
+
+func NewImportOpenApiResponse() (response *ImportOpenApiResponse) {
+    response = &ImportOpenApiResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ImportOpenApi
+// This API is used to import an OpenAPI to API gateway. 
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDPARAMETER = "InvalidParameterValue.UnsupportedParameter"
+//  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
+//  MISSINGPARAMETER_BACKENDSPECIFICPARAM = "MissingParameter.BackendSpecificParam"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) ImportOpenApi(request *ImportOpenApiRequest) (response *ImportOpenApiResponse, err error) {
+    return c.ImportOpenApiWithContext(context.Background(), request)
+}
+
+// ImportOpenApi
+// This API is used to import an OpenAPI to API gateway. 
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDPARAMETER = "InvalidParameterValue.UnsupportedParameter"
+//  LIMITEXCEEDED_APICOUNTLIMITEXCEEDED = "LimitExceeded.ApiCountLimitExceeded"
+//  MISSINGPARAMETER_BACKENDSPECIFICPARAM = "MissingParameter.BackendSpecificParam"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+func (c *Client) ImportOpenApiWithContext(ctx context.Context, request *ImportOpenApiRequest) (response *ImportOpenApiResponse, err error) {
+    if request == nil {
+        request = NewImportOpenApiRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImportOpenApi require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImportOpenApiResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAPIDocRequest() (request *ModifyAPIDocRequest) {
     request = &ModifyAPIDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4543,6 +4641,7 @@ func NewModifyApiEnvironmentStrategyResponse() (response *ModifyApiEnvironmentSt
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 func (c *Client) ModifyApiEnvironmentStrategy(request *ModifyApiEnvironmentStrategyRequest) (response *ModifyApiEnvironmentStrategyResponse, err error) {
@@ -4555,6 +4654,7 @@ func (c *Client) ModifyApiEnvironmentStrategy(request *ModifyApiEnvironmentStrat
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 func (c *Client) ModifyApiEnvironmentStrategyWithContext(ctx context.Context, request *ModifyApiEnvironmentStrategyRequest) (response *ModifyApiEnvironmentStrategyResponse, err error) {
@@ -4703,6 +4803,7 @@ func NewModifyPluginResponse() (response *ModifyPluginResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
@@ -4739,6 +4840,7 @@ func (c *Client) ModifyPlugin(request *ModifyPluginRequest) (response *ModifyPlu
 // error code that may be returned:
 //  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
@@ -4930,6 +5032,7 @@ func NewModifySubDomainResponse() (response *ModifySubDomainResponse) {
 //  FAILEDOPERATION_UNKNOWNPROTOCOLTYPEERROR = "FailedOperation.UnknownProtocolTypeError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_FORCEHTTPS = "UnsupportedOperation.ForceHttps"
 //  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
 func (c *Client) ModifySubDomain(request *ModifySubDomainRequest) (response *ModifySubDomainResponse, err error) {
@@ -4951,6 +5054,7 @@ func (c *Client) ModifySubDomain(request *ModifySubDomainRequest) (response *Mod
 //  FAILEDOPERATION_UNKNOWNPROTOCOLTYPEERROR = "FailedOperation.UnknownProtocolTypeError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_FORCEHTTPS = "UnsupportedOperation.ForceHttps"
 //  UNSUPPORTEDOPERATION_INVALIDSERVICETRADE = "UnsupportedOperation.InvalidServiceTrade"
 func (c *Client) ModifySubDomainWithContext(ctx context.Context, request *ModifySubDomainRequest) (response *ModifySubDomainResponse, err error) {
