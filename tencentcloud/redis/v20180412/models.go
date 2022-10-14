@@ -717,7 +717,7 @@ func (r *CreateInstanceAccountResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
-	// Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
+	// Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `15` (Redis 6.0 Memory Edition in standard architecture), `16` (Redis 6.0 Memory Edition in cluster architecture)
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
@@ -799,7 +799,7 @@ type CreateInstancesRequestParams struct {
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
+	// Instance type. Valid values: `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture), `15` (Redis 6.0 Memory Edition in standard architecture), `16` (Redis 6.0 Memory Edition in cluster architecture)
 	TypeId *uint64 `json:"TypeId,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
@@ -3638,20 +3638,23 @@ type DescribeSlowLogRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start time
+	// The start time
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// End time
+	// The end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Slow log threshold in microseconds
+	// The average execution time threshold of slow query in microseconds
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
-	// Number of entries per page
+	// Number of slow queries displayed per page. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`
+	// Slow query offset, which is an integral multiple of `Limit`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
+	Role *string `json:"Role,omitempty" name:"Role"`
 }
 
 type DescribeSlowLogRequest struct {
@@ -3660,20 +3663,23 @@ type DescribeSlowLogRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start time
+	// The start time
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// End time
+	// The end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Slow log threshold in microseconds
+	// The average execution time threshold of slow query in microseconds
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
-	// Number of entries per page
+	// Number of slow queries displayed per page. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`
+	// Slow query offset, which is an integral multiple of `Limit`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
+	Role *string `json:"Role,omitempty" name:"Role"`
 }
 
 func (r *DescribeSlowLogRequest) ToJsonString() string {
@@ -3694,6 +3700,7 @@ func (r *DescribeSlowLogRequest) FromJsonString(s string) error {
 	delete(f, "MinQueryTime")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "Role")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlowLogRequest has unknown keys!", "")
 	}
@@ -3702,10 +3709,10 @@ func (r *DescribeSlowLogRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSlowLogResponseParams struct {
-	// Total number of slow logs
+	// Total number of slow queries
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Slow log details
+	// Slow query details
 	InstanceSlowlogDetail []*InstanceSlowlogDetail `json:"InstanceSlowlogDetail,omitempty" name:"InstanceSlowlogDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4777,10 +4784,10 @@ type InstanceNode struct {
 }
 
 type InstanceParam struct {
-	// Sets a parameter name
+	// Parameter name, such as “timeout”. For supported custom parameters, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// Sets a parameter value
+	// Current parameter value. For example, if you set the current value of “timeout” to 120 (in seconds), the client connections that remain idle longer than 120 seconds will be closed. For more information on parameter values, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
@@ -5629,10 +5636,10 @@ func (r *ModifyInstanceParamsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstanceParamsResponseParams struct {
-	// Whether a modification is successfully made.
+	// Whether the parameter is modified successfully. <br><li>`True`: Yes<br><li>`False`: No<br>
 	Changed *bool `json:"Changed,omitempty" name:"Changed"`
 
-	// Task ID
+	// ID of the task
 	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

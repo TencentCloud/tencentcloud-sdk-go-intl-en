@@ -45,6 +45,84 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewApplyDiskBackupRequest() (request *ApplyDiskBackupRequest) {
+    request = &ApplyDiskBackupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "ApplyDiskBackup")
+    
+    
+    return
+}
+
+func NewApplyDiskBackupResponse() (response *ApplyDiskBackupResponse) {
+    response = &ApplyDiskBackupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ApplyDiskBackup
+// This API is used to roll back a backup point to the original cloud disk.
+//
+// 
+//
+// * Only rollback to the original cloud disk is supported. For a data disk backup point, if you want to copy the backup point data to another cloud disk, use the `CreateSnapshot` API to convert the backup point into a snapshot, use the `CreateDisks` API to create an elastic cloud disk, and then copy the snapshot data to it.
+//
+// * Only backup points in `NORMAL` status can be rolled back. To query the status of a backup point, call the `DescribeDiskBackups` API and see the `BackupState` field in the response.
+//
+// * For an elastic cloud disk, it must be in unattached status. To query the status of the cloud disk, call the `DescribeDisks` API and see the `Attached` field in the response. For a non-elastic cloud disk purchased together with an instance, the instance must be in shutdown status, which can be queried through the `DescribeInstancesStatus` API.
+//
+// error code that may be returned:
+//  INVALIDDISK_BUSY = "InvalidDisk.Busy"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+func (c *Client) ApplyDiskBackup(request *ApplyDiskBackupRequest) (response *ApplyDiskBackupResponse, err error) {
+    return c.ApplyDiskBackupWithContext(context.Background(), request)
+}
+
+// ApplyDiskBackup
+// This API is used to roll back a backup point to the original cloud disk.
+//
+// 
+//
+// * Only rollback to the original cloud disk is supported. For a data disk backup point, if you want to copy the backup point data to another cloud disk, use the `CreateSnapshot` API to convert the backup point into a snapshot, use the `CreateDisks` API to create an elastic cloud disk, and then copy the snapshot data to it.
+//
+// * Only backup points in `NORMAL` status can be rolled back. To query the status of a backup point, call the `DescribeDiskBackups` API and see the `BackupState` field in the response.
+//
+// * For an elastic cloud disk, it must be in unattached status. To query the status of the cloud disk, call the `DescribeDisks` API and see the `Attached` field in the response. For a non-elastic cloud disk purchased together with an instance, the instance must be in shutdown status, which can be queried through the `DescribeInstancesStatus` API.
+//
+// error code that may be returned:
+//  INVALIDDISK_BUSY = "InvalidDisk.Busy"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+func (c *Client) ApplyDiskBackupWithContext(ctx context.Context, request *ApplyDiskBackupRequest) (response *ApplyDiskBackupResponse, err error) {
+    if request == nil {
+        request = NewApplyDiskBackupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyDiskBackup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplyDiskBackupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewApplySnapshotRequest() (request *ApplySnapshotRequest) {
     request = &ApplySnapshotRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -480,13 +558,13 @@ func NewCreateDisksResponse() (response *CreateDisksResponse) {
 }
 
 // CreateDisks
-// This API is used to create one or more cloud disks.
+// This API is used to create cloud disks.
 //
 // 
 //
 // * This API supports creating a cloud disk with a data disk snapshot so that the snapshot data can be copied to the purchased cloud disk.
 //
-// * This API is an async API. A cloud disk ID list will be returned when a request is made successfully, but it does not mean that the creation has been completed. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query cloud disks by `DiskId`. If a new cloud disk can be found and its state is 'UNATTACHED' or 'ATTACHED', it means that the cloud disk has been created successfully.
+// * This API is async. A cloud disk ID list will be returned when a request is made successfully, but it does not mean that the creation has been completed. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query cloud disks by `DiskId`. If a new cloud disk can be found and its status is `UNATTACHED` or `ATTACHED`, the cloud disk has been created successfully.
 //
 // error code that may be returned:
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
@@ -508,13 +586,13 @@ func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisks
 }
 
 // CreateDisks
-// This API is used to create one or more cloud disks.
+// This API is used to create cloud disks.
 //
 // 
 //
 // * This API supports creating a cloud disk with a data disk snapshot so that the snapshot data can be copied to the purchased cloud disk.
 //
-// * This API is an async API. A cloud disk ID list will be returned when a request is made successfully, but it does not mean that the creation has been completed. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query cloud disks by `DiskId`. If a new cloud disk can be found and its state is 'UNATTACHED' or 'ATTACHED', it means that the cloud disk has been created successfully.
+// * This API is async. A cloud disk ID list will be returned when a request is made successfully, but it does not mean that the creation has been completed. You can call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API to query cloud disks by `DiskId`. If a new cloud disk can be found and its status is `UNATTACHED` or `ATTACHED`, the cloud disk has been created successfully.
 //
 // error code that may be returned:
 //  INTERNALERROR_COMPONENTERROR = "InternalError.ComponentError"
@@ -566,13 +644,15 @@ func NewCreateSnapshotResponse() (response *CreateSnapshotResponse) {
 }
 
 // CreateSnapshot
-// This API (CreateSnapshot) is used to create a snapshot of a specified cloud disk.
+// This API is used to create a snapshot for the specified cloud disk.
 //
 // 
 //
-// * Snapshots can only be created for cloud disks with the snapshot capability. To check whether a cloud disk has the snapshot capability, see the SnapshotAbility field returned by the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
+// * You can only create snapshots for cloud disks with the snapshot capability. To check whether a cloud disk is snapshot-enabled, call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API and see the `SnapshotAbility` field in the response.
 //
-// * For the number of snapshots that can be created, please see [Product Usage Restriction](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+// * For the maximum number of snapshots that can be created, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+//
+// * Currently, you can convert backup points into general snapshots. After the conversion, snapshot usage fees may be charged, backup points will not be retained, and the occupied backup point quota will be released.
 //
 // error code that may be returned:
 //  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
@@ -593,6 +673,7 @@ func NewCreateSnapshotResponse() (response *CreateSnapshotResponse) {
 //  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_DISKSNAPSHOTCHAINTOOLARGE = "ResourceUnavailable.DiskSnapshotChainTooLarge"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  RESOURCEUNAVAILABLE_TOOMANYCREATINGSNAPSHOT = "ResourceUnavailable.TooManyCreatingSnapshot"
@@ -602,13 +683,15 @@ func (c *Client) CreateSnapshot(request *CreateSnapshotRequest) (response *Creat
 }
 
 // CreateSnapshot
-// This API (CreateSnapshot) is used to create a snapshot of a specified cloud disk.
+// This API is used to create a snapshot for the specified cloud disk.
 //
 // 
 //
-// * Snapshots can only be created for cloud disks with the snapshot capability. To check whether a cloud disk has the snapshot capability, see the SnapshotAbility field returned by the API [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1).
+// * You can only create snapshots for cloud disks with the snapshot capability. To check whether a cloud disk is snapshot-enabled, call the [DescribeDisks](https://intl.cloud.tencent.com/document/product/362/16315?from_cn_redirect=1) API and see the `SnapshotAbility` field in the response.
 //
-// * For the number of snapshots that can be created, please see [Product Usage Restriction](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+// * For the maximum number of snapshots that can be created, see [Use Limits](https://intl.cloud.tencent.com/doc/product/362/5145?from_cn_redirect=1).
+//
+// * Currently, you can convert backup points into general snapshots. After the conversion, snapshot usage fees may be charged, backup points will not be retained, and the occupied backup point quota will be released.
 //
 // error code that may be returned:
 //  INSUFFICIENTSNAPSHOTQUOTA = "InsufficientSnapshotQuota"
@@ -629,6 +712,7 @@ func (c *Client) CreateSnapshot(request *CreateSnapshotRequest) (response *Creat
 //  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_OVERQUOTA = "ResourceInsufficient.OverQuota"
 //  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+//  RESOURCEUNAVAILABLE_DISKSNAPSHOTCHAINTOOLARGE = "ResourceUnavailable.DiskSnapshotChainTooLarge"
 //  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  RESOURCEUNAVAILABLE_TOOMANYCREATINGSNAPSHOT = "ResourceUnavailable.TooManyCreatingSnapshot"
@@ -707,6 +791,58 @@ func (c *Client) DeleteAutoSnapshotPoliciesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDeleteAutoSnapshotPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDiskBackupsRequest() (request *DeleteDiskBackupsRequest) {
+    request = &DeleteDiskBackupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "DeleteDiskBackups")
+    
+    
+    return
+}
+
+func NewDeleteDiskBackupsResponse() (response *DeleteDiskBackupsResponse) {
+    response = &DeleteDiskBackupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteDiskBackups
+// This API is used to delete the backup points of the specified cloud disk in batches.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+func (c *Client) DeleteDiskBackups(request *DeleteDiskBackupsRequest) (response *DeleteDiskBackupsResponse, err error) {
+    return c.DeleteDiskBackupsWithContext(context.Background(), request)
+}
+
+// DeleteDiskBackups
+// This API is used to delete the backup points of the specified cloud disk in batches.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_NOTFOUND = "ResourceNotFound.NotFound"
+func (c *Client) DeleteDiskBackupsWithContext(ctx context.Context, request *DeleteDiskBackupsRequest) (response *DeleteDiskBackupsResponse, err error) {
+    if request == nil {
+        request = NewDeleteDiskBackupsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDiskBackups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDiskBackupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -901,6 +1037,68 @@ func (c *Client) DescribeDiskAssociatedAutoSnapshotPolicyWithContext(ctx context
     request.SetContext(ctx)
     
     response = NewDescribeDiskAssociatedAutoSnapshotPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDiskBackupsRequest() (request *DescribeDiskBackupsRequest) {
+    request = &DescribeDiskBackupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "DescribeDiskBackups")
+    
+    
+    return
+}
+
+func NewDescribeDiskBackupsResponse() (response *DescribeDiskBackupsResponse) {
+    response = &DescribeDiskBackupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDiskBackups
+// This API is used to query the details of backup points.
+//
+// 
+//
+// You can filter results by backup point ID. You can also look for certain backup points by specifying the ID or type of the cloud disk for which the backup points are created. The relationship between different filters is logical `AND`. For more information on filters, see `Filter`.
+//
+// If the parameter is empty, a certain number (as specified by `Limit` and 20 by default) of backup points will be returned.
+//
+// error code that may be returned:
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDiskBackups(request *DescribeDiskBackupsRequest) (response *DescribeDiskBackupsResponse, err error) {
+    return c.DescribeDiskBackupsWithContext(context.Background(), request)
+}
+
+// DescribeDiskBackups
+// This API is used to query the details of backup points.
+//
+// 
+//
+// You can filter results by backup point ID. You can also look for certain backup points by specifying the ID or type of the cloud disk for which the backup points are created. The relationship between different filters is logical `AND`. For more information on filters, see `Filter`.
+//
+// If the parameter is empty, a certain number (as specified by `Limit` and 20 by default) of backup points will be returned.
+//
+// error code that may be returned:
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDiskBackupsWithContext(ctx context.Context, request *DescribeDiskBackupsRequest) (response *DescribeDiskBackupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDiskBackupsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDiskBackups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDiskBackupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1512,6 +1710,7 @@ func NewInitializeDisksResponse() (response *InitializeDisksResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCEBUSY = "ResourceBusy"
 func (c *Client) InitializeDisks(request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
     return c.InitializeDisksWithContext(context.Background(), request)
 }
@@ -1529,6 +1728,7 @@ func (c *Client) InitializeDisks(request *InitializeDisksRequest) (response *Ini
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCEBUSY = "ResourceBusy"
 func (c *Client) InitializeDisksWithContext(ctx context.Context, request *InitializeDisksRequest) (response *InitializeDisksResponse, err error) {
     if request == nil {
         request = NewInitializeDisksRequest()
@@ -1541,6 +1741,60 @@ func (c *Client) InitializeDisksWithContext(ctx context.Context, request *Initia
     request.SetContext(ctx)
     
     response = NewInitializeDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquirePriceModifyDiskBackupQuotaRequest() (request *InquirePriceModifyDiskBackupQuotaRequest) {
+    request = &InquirePriceModifyDiskBackupQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "InquirePriceModifyDiskBackupQuota")
+    
+    
+    return
+}
+
+func NewInquirePriceModifyDiskBackupQuotaResponse() (response *InquirePriceModifyDiskBackupQuotaResponse) {
+    response = &InquirePriceModifyDiskBackupQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquirePriceModifyDiskBackupQuota
+// This API is used to query the price of a cloud disk after its backup point quota is modified.
+//
+// error code that may be returned:
+//  INVALIDDISK_BUSY = "InvalidDisk.Busy"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) InquirePriceModifyDiskBackupQuota(request *InquirePriceModifyDiskBackupQuotaRequest) (response *InquirePriceModifyDiskBackupQuotaResponse, err error) {
+    return c.InquirePriceModifyDiskBackupQuotaWithContext(context.Background(), request)
+}
+
+// InquirePriceModifyDiskBackupQuota
+// This API is used to query the price of a cloud disk after its backup point quota is modified.
+//
+// error code that may be returned:
+//  INVALIDDISK_BUSY = "InvalidDisk.Busy"
+//  INVALIDDISK_NOTSUPPORTED = "InvalidDisk.NotSupported"
+//  INVALIDDISKID_NOTFOUND = "InvalidDiskId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) InquirePriceModifyDiskBackupQuotaWithContext(ctx context.Context, request *InquirePriceModifyDiskBackupQuotaRequest) (response *InquirePriceModifyDiskBackupQuotaResponse, err error) {
+    if request == nil {
+        request = NewInquirePriceModifyDiskBackupQuotaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquirePriceModifyDiskBackupQuota require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquirePriceModifyDiskBackupQuotaResponse()
     err = c.Send(request, response)
     return
 }
@@ -1620,11 +1874,11 @@ func NewInquiryPriceCreateDisksResponse() (response *InquiryPriceCreateDisksResp
 }
 
 // InquiryPriceCreateDisks
-// This API (InquiryPriceCreateDisks) is used to inquire the price for cloud disk creation.
+// This API is used to query the price of creating cloud disks.
 //
 // 
 //
-// * It supports inquiring the price for the creation of multiple cloud disks. The total price for the creation is returned.
+// * You can query the price of creating multiple cloud disks in a single request. In this case, the price returned will be the total price.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1634,11 +1888,11 @@ func (c *Client) InquiryPriceCreateDisks(request *InquiryPriceCreateDisksRequest
 }
 
 // InquiryPriceCreateDisks
-// This API (InquiryPriceCreateDisks) is used to inquire the price for cloud disk creation.
+// This API is used to query the price of creating cloud disks.
 //
 // 
 //
-// * It supports inquiring the price for the creation of multiple cloud disks. The total price for the creation is returned.
+// * You can query the price of creating multiple cloud disks in a single request. In this case, the price returned will be the total price.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1859,6 +2113,60 @@ func (c *Client) ModifyDiskAttributesWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifyDiskAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDiskBackupQuotaRequest() (request *ModifyDiskBackupQuotaRequest) {
+    request = &ModifyDiskBackupQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cbs", APIVersion, "ModifyDiskBackupQuota")
+    
+    
+    return
+}
+
+func NewModifyDiskBackupQuotaResponse() (response *ModifyDiskBackupQuotaResponse) {
+    response = &ModifyDiskBackupQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDiskBackupQuota
+// This API is used to modify the cloud disk backup point quota.
+//
+// error code that may be returned:
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
+func (c *Client) ModifyDiskBackupQuota(request *ModifyDiskBackupQuotaRequest) (response *ModifyDiskBackupQuotaResponse, err error) {
+    return c.ModifyDiskBackupQuotaWithContext(context.Background(), request)
+}
+
+// ModifyDiskBackupQuota
+// This API is used to modify the cloud disk backup point quota.
+//
+// error code that may be returned:
+//  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_NOTSUPPORTED = "ResourceUnavailable.NotSupported"
+//  UNAUTHORIZEDOPERATION_NOTHAVEPAYMENTRIGHT = "UnauthorizedOperation.NotHavePaymentRight"
+func (c *Client) ModifyDiskBackupQuotaWithContext(ctx context.Context, request *ModifyDiskBackupQuotaRequest) (response *ModifyDiskBackupQuotaResponse, err error) {
+    if request == nil {
+        request = NewModifyDiskBackupQuotaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDiskBackupQuota require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDiskBackupQuotaResponse()
     err = c.Send(request, response)
     return
 }
