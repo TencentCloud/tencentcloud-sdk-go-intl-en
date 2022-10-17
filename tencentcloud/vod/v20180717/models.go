@@ -11379,6 +11379,9 @@ type MediaVideoStreamItem struct {
 	// Frame rate in Hz.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
+
+	// The codec tag. This parameter is valid only if `Codec` is `hevc`.
+	CodecTag *string `json:"CodecTag,omitempty" name:"CodecTag"`
 }
 
 // Predefined struct for user
@@ -17695,6 +17698,12 @@ type VideoTemplateInfo struct {
 	// <li>OFF: Output an SDR video regardless of whether the source video is HDR.</li>
 	// Default value: OFF.
 	PreserveHDRSwitch *string `json:"PreserveHDRSwitch,omitempty" name:"PreserveHDRSwitch"`
+
+	// The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:
+	// <li>hvc1</li>
+	// <li>hev1</li>
+	// Default value: hvc1.
+	CodecTag *string `json:"CodecTag,omitempty" name:"CodecTag"`
 }
 
 type VideoTemplateInfoForUpdate struct {
@@ -17754,6 +17763,12 @@ type VideoTemplateInfoForUpdate struct {
 	// <li>ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.</li>
 	// <li>OFF: Output an SDR video regardless of whether the source video is HDR.</li>
 	PreserveHDRSwitch *string `json:"PreserveHDRSwitch,omitempty" name:"PreserveHDRSwitch"`
+
+	// The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:
+	// <li>hvc1</li>
+	// <li>hev1</li>
+	// Default value: hvc1.
+	CodecTag *string `json:"CodecTag,omitempty" name:"CodecTag"`
 }
 
 type VideoTrackItem struct {
