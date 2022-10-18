@@ -392,7 +392,7 @@ const (
 	// The resource is occupied.
 	RESOURCEINUSE = "ResourceInUse"
 
-	// 
+	// The resource already exists.
 	RESOURCEINUSE_RESOURCEEXISTALREADY = "ResourceInUse.ResourceExistAlready"
 
 	// The resource does not exist.

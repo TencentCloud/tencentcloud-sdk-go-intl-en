@@ -113,6 +113,62 @@ func (c *Client) CreateAppWithContext(ctx context.Context, request *CreateAppReq
     return
 }
 
+func NewDeleteRoomMemberRequest() (request *DeleteRoomMemberRequest) {
+    request = &DeleteRoomMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gme", APIVersion, "DeleteRoomMember")
+    
+    
+    return
+}
+
+func NewDeleteRoomMemberResponse() (response *DeleteRoomMemberResponse) {
+    response = &DeleteRoomMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRoomMember
+// This API is used to delete a room or remove members from the room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRoomMember(request *DeleteRoomMemberRequest) (response *DeleteRoomMemberResponse, err error) {
+    return c.DeleteRoomMemberWithContext(context.Background(), request)
+}
+
+// DeleteRoomMember
+// This API is used to delete a room or remove members from the room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRoomMemberWithContext(ctx context.Context, request *DeleteRoomMemberRequest) (response *DeleteRoomMemberResponse, err error) {
+    if request == nil {
+        request = NewDeleteRoomMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRoomMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRoomMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAppStatisticsRequest() (request *DescribeAppStatisticsRequest) {
     request = &DescribeAppStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},

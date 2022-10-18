@@ -444,6 +444,7 @@ func NewCheckInstancesUpgradeAbleResponse() (response *CheckInstancesUpgradeAble
 //
 // error code that may be returned:
 //  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_KUBECLIENTCONNECTION = "InternalError.KubeClientConnection"
@@ -463,6 +464,7 @@ func (c *Client) CheckInstancesUpgradeAble(request *CheckInstancesUpgradeAbleReq
 //
 // error code that may be returned:
 //  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_KUBECLIENTCONNECTION = "InternalError.KubeClientConnection"
@@ -678,7 +680,7 @@ func NewCreateClusterEndpointResponse() (response *CreateClusterEndpointResponse
 }
 
 // CreateClusterEndpoint
-// Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
+// This API is used to create a cluster access endpoint.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -707,7 +709,7 @@ func (c *Client) CreateClusterEndpoint(request *CreateClusterEndpointRequest) (r
 }
 
 // CreateClusterEndpoint
-// Create a cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
+// This API is used to create a cluster access endpoint.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1660,7 +1662,7 @@ func NewDeleteClusterEndpointResponse() (response *DeleteClusterEndpointResponse
 }
 
 // DeleteClusterEndpoint
-// Delete the cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
+// This API is used to delete a cluster access endpoint.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1690,7 +1692,7 @@ func (c *Client) DeleteClusterEndpoint(request *DeleteClusterEndpointRequest) (r
 }
 
 // DeleteClusterEndpoint
-// Delete the cluster access port (intranet / extranet access is enabled for independent clusters, and intranet access is supported for managed clusters)
+// This API is used to delete a cluster access endpoint.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2480,7 +2482,7 @@ func NewDescribeAvailableTKEEdgeVersionResponse() (response *DescribeAvailableTK
 }
 
 // DescribeAvailableTKEEdgeVersion
-// This API is used to query the K8s versions supported by TKE Edge.
+// This API is used to check the edge component versions and K8s versions supported by TKE Edge.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2498,7 +2500,7 @@ func (c *Client) DescribeAvailableTKEEdgeVersion(request *DescribeAvailableTKEEd
 }
 
 // DescribeAvailableTKEEdgeVersion
-// This API is used to query the K8s versions supported by TKE Edge.
+// This API is used to check the edge component versions and K8s versions supported by TKE Edge.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5685,6 +5687,7 @@ func NewModifyClusterAsGroupOptionAttributeResponse() (response *ModifyClusterAs
 // This API is used to modify cluster auto scaling attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -5710,6 +5713,7 @@ func (c *Client) ModifyClusterAsGroupOptionAttribute(request *ModifyClusterAsGro
 // This API is used to modify cluster auto scaling attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"

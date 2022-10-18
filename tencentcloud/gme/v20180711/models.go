@@ -210,6 +210,92 @@ func (r *CreateAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteResult struct {
+	// Status code. `0`: Succeeded. Others: Failed\
+	Code *int64 `json:"Code,omitempty" name:"Code"`
+
+	// Description
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+}
+
+// Predefined struct for user
+type DeleteRoomMemberRequestParams struct {
+	// ID of the target room
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// List of the members to remove
+	Uids []*string `json:"Uids,omitempty" name:"Uids"`
+
+	// Operation type. `1`: Delete a room; `2`: Remove members
+	DeleteType *uint64 `json:"DeleteType,omitempty" name:"DeleteType"`
+
+	// Application ID
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+}
+
+type DeleteRoomMemberRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the target room
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// List of the members to remove
+	Uids []*string `json:"Uids,omitempty" name:"Uids"`
+
+	// Operation type. `1`: Delete a room; `2`: Remove members
+	DeleteType *uint64 `json:"DeleteType,omitempty" name:"DeleteType"`
+
+	// Application ID
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+}
+
+func (r *DeleteRoomMemberRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRoomMemberRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoomId")
+	delete(f, "Uids")
+	delete(f, "DeleteType")
+	delete(f, "BizId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRoomMemberRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRoomMemberResponseParams struct {
+	// Result of the operation to delete a room or remove a member
+	DeleteResult *DeleteResult `json:"DeleteResult,omitempty" name:"DeleteResult"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteRoomMemberResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRoomMemberResponseParams `json:"Response"`
+}
+
+func (r *DeleteRoomMemberResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRoomMemberResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type DescribeAppStatisticsRequestParams struct {
 	// GME application ID

@@ -1093,7 +1093,7 @@ type CreateClusterEndpointRequestParams struct {
 	// The domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// The security group in use. Required only for public network access.
+	// The security group in use, which must be passed in when public access is enabled.
 	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
 	// The LB parameter. Required only for public network access.
@@ -1115,7 +1115,7 @@ type CreateClusterEndpointRequest struct {
 	// The domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// The security group in use. Required only for public network access.
+	// The security group in use, which must be passed in when public access is enabled.
 	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
 	// The LB parameter. Required only for public network access.
@@ -2112,6 +2112,12 @@ type CreateTKEEdgeClusterRequestParams struct {
 
 	// Cluster billing mode
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// Edge cluster version. It is the set of versions of all cluster components.
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+
+	// Prefix of the image registry of an edge component
+	RegistryPrefix *string `json:"RegistryPrefix,omitempty" name:"RegistryPrefix"`
 }
 
 type CreateTKEEdgeClusterRequest struct {
@@ -2151,6 +2157,12 @@ type CreateTKEEdgeClusterRequest struct {
 
 	// Cluster billing mode
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// Edge cluster version. It is the set of versions of all cluster components.
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+
+	// Prefix of the image registry of an edge component
+	RegistryPrefix *string `json:"RegistryPrefix,omitempty" name:"RegistryPrefix"`
 }
 
 func (r *CreateTKEEdgeClusterRequest) ToJsonString() string {
@@ -2177,6 +2189,8 @@ func (r *CreateTKEEdgeClusterRequest) FromJsonString(s string) error {
 	delete(f, "ClusterLevel")
 	delete(f, "AutoUpgradeClusterLevel")
 	delete(f, "ChargeType")
+	delete(f, "EdgeVersion")
+	delete(f, "RegistryPrefix")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTKEEdgeClusterRequest has unknown keys!", "")
 	}
@@ -3134,12 +3148,15 @@ func (r *DescribeAvailableClusterVersionResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeAvailableTKEEdgeVersionRequestParams struct {
-
+	// You can enter the `ClusterId` to query the current and latest versions of all cluster components.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
 type DescribeAvailableTKEEdgeVersionRequest struct {
 	*tchttp.BaseRequest
 	
+	// You can enter the `ClusterId` to query the current and latest versions of all cluster components.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
 func (r *DescribeAvailableTKEEdgeVersionRequest) ToJsonString() string {
@@ -3154,7 +3171,7 @@ func (r *DescribeAvailableTKEEdgeVersionRequest) FromJsonString(s string) error 
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "ClusterId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableTKEEdgeVersionRequest has unknown keys!", "")
 	}
@@ -3165,6 +3182,14 @@ func (r *DescribeAvailableTKEEdgeVersionRequest) FromJsonString(s string) error 
 type DescribeAvailableTKEEdgeVersionResponseParams struct {
 	// Version list
 	Versions []*string `json:"Versions,omitempty" name:"Versions"`
+
+	// Latest version of the edge cluster
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	EdgeVersionLatest *string `json:"EdgeVersionLatest,omitempty" name:"EdgeVersionLatest"`
+
+	// Current version of the edge cluster
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	EdgeVersionCurrent *string `json:"EdgeVersionCurrent,omitempty" name:"EdgeVersionCurrent"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

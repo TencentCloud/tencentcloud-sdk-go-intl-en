@@ -391,6 +391,9 @@ type BGPInstance struct {
 
 	// New edition of Anti-DDoS Pro
 	IpCountNewFlag *uint64 `json:"IpCountNewFlag,omitempty" name:"IpCountNewFlag"`
+
+	// The version of attack defense package
+	VitalityVersion *uint64 `json:"VitalityVersion,omitempty" name:"VitalityVersion"`
 }
 
 type BGPInstanceSpecification struct {
@@ -5149,6 +5152,73 @@ func (r *DescribeListWaterPrintConfigResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeListWaterPrintConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNewL7RulesErrHealthRequestParams struct {
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// List of rule IDs
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
+type DescribeNewL7RulesErrHealthRequest struct {
+	*tchttp.BaseRequest
+	
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// List of rule IDs
+	RuleIdList []*string `json:"RuleIdList,omitempty" name:"RuleIdList"`
+}
+
+func (r *DescribeNewL7RulesErrHealthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNewL7RulesErrHealthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Business")
+	delete(f, "RuleIdList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNewL7RulesErrHealthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNewL7RulesErrHealthResponseParams struct {
+	// List of rules with exceptions. `Key`: Rule ID, `Value`: Exception IPs and error message. 
+	ErrHealths []*KeyValue `json:"ErrHealths,omitempty" name:"ErrHealths"`
+
+	// Total number of rules with exceptions
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNewL7RulesErrHealthResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNewL7RulesErrHealthResponseParams `json:"Response"`
+}
+
+func (r *DescribeNewL7RulesErrHealthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNewL7RulesErrHealthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
