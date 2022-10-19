@@ -20,6 +20,47 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AutoSnapshotPolicyInfo struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// Snapshot policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Snapshot policy creation time
+	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+
+	// Number of bound file systems
+	FileSystemNums *uint64 `json:"FileSystemNums,omitempty" name:"FileSystemNums"`
+
+	// The day of the week on which to regularly back up the snapshot
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
+	// The hour of a day at which to regularly back up the snapshot
+	Hour *string `json:"Hour,omitempty" name:"Hour"`
+
+	// Whether to activate the scheduled snapshot feature
+	IsActivated *uint64 `json:"IsActivated,omitempty" name:"IsActivated"`
+
+	// Next time to trigger snapshot
+	NextActiveTime *string `json:"NextActiveTime,omitempty" name:"NextActiveTime"`
+
+	// Snapshot policy status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Account ID
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Retention period
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+
+	// Region
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// File system information
+	FileSystems []*FileSystemByPolicy `json:"FileSystems,omitempty" name:"FileSystems"`
+}
+
 type AvailableProtoStatus struct {
 	// Sale status. Valid values: sale_out (sold out), saling (purchasable), no_saling (non-purchasable)
 	SaleStatus *string `json:"SaleStatus,omitempty" name:"SaleStatus"`
@@ -71,6 +112,148 @@ type AvailableZone struct {
 
 	// Chinese and English names of an AZ
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+}
+
+// Predefined struct for user
+type BindAutoSnapshotPolicyRequestParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// List of file systems
+	FileSystemIds *string `json:"FileSystemIds,omitempty" name:"FileSystemIds"`
+}
+
+type BindAutoSnapshotPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// List of file systems
+	FileSystemIds *string `json:"FileSystemIds,omitempty" name:"FileSystemIds"`
+}
+
+func (r *BindAutoSnapshotPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoSnapshotPolicyId")
+	delete(f, "FileSystemIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindAutoSnapshotPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BindAutoSnapshotPolicyResponseParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type BindAutoSnapshotPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *BindAutoSnapshotPolicyResponseParams `json:"Response"`
+}
+
+func (r *BindAutoSnapshotPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindAutoSnapshotPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAutoSnapshotPolicyRequestParams struct {
+	// The day of the week on which to repeat the snapshot operation
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
+	// The time point when to repeat the snapshot operation
+	Hour *string `json:"Hour,omitempty" name:"Hour"`
+
+	// Policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Snapshot retention period
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+}
+
+type CreateAutoSnapshotPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// The day of the week on which to repeat the snapshot operation
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
+	// The time point when to repeat the snapshot operation
+	Hour *string `json:"Hour,omitempty" name:"Hour"`
+
+	// Policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// Snapshot retention period
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+}
+
+func (r *CreateAutoSnapshotPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAutoSnapshotPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DayOfWeek")
+	delete(f, "Hour")
+	delete(f, "PolicyName")
+	delete(f, "AliveDays")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoSnapshotPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAutoSnapshotPolicyResponseParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAutoSnapshotPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAutoSnapshotPolicyResponseParams `json:"Response"`
+}
+
+func (r *CreateAutoSnapshotPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAutoSnapshotPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -419,6 +602,134 @@ func (r *CreateCfsRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateCfsSnapshotRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// Snapshot tag
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
+}
+
+type CreateCfsSnapshotRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// Snapshot tag
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
+}
+
+func (r *CreateCfsSnapshotRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCfsSnapshotRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileSystemId")
+	delete(f, "SnapshotName")
+	delete(f, "ResourceTags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCfsSnapshotRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCfsSnapshotResponseParams struct {
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateCfsSnapshotResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCfsSnapshotResponseParams `json:"Response"`
+}
+
+func (r *CreateCfsSnapshotResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCfsSnapshotResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAutoSnapshotPolicyRequestParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+}
+
+type DeleteAutoSnapshotPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+}
+
+func (r *DeleteAutoSnapshotPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAutoSnapshotPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoSnapshotPolicyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAutoSnapshotPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAutoSnapshotPolicyResponseParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAutoSnapshotPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAutoSnapshotPolicyResponseParams `json:"Response"`
+}
+
+func (r *DeleteAutoSnapshotPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAutoSnapshotPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCfsFileSystemRequestParams struct {
 	// File system ID. Note: please call the `DeleteMountTarget` API to delete the mount target first before deleting a file system; otherwise, the delete operation will fail.
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
@@ -600,6 +911,63 @@ func (r *DeleteCfsRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteCfsSnapshotRequestParams struct {
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+}
+
+type DeleteCfsSnapshotRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+}
+
+func (r *DeleteCfsSnapshotRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCfsSnapshotRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SnapshotId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCfsSnapshotRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCfsSnapshotResponseParams struct {
+	// File system ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteCfsSnapshotResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCfsSnapshotResponseParams `json:"Response"`
+}
+
+func (r *DeleteCfsSnapshotResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCfsSnapshotResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteMountTargetRequestParams struct {
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
@@ -657,6 +1025,101 @@ func (r *DeleteMountTargetResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteMountTargetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoSnapshotPoliciesRequestParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// Page offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page length
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Ascending or descending order
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+}
+
+type DescribeAutoSnapshotPoliciesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// Page offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page length
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Ascending or descending order
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+}
+
+func (r *DescribeAutoSnapshotPoliciesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoSnapshotPoliciesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoSnapshotPolicyId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "OrderField")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoSnapshotPoliciesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoSnapshotPoliciesResponseParams struct {
+	// Total number of snapshot policies
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Snapshot policy information
+	AutoSnapshotPolicies []*AutoSnapshotPolicyInfo `json:"AutoSnapshotPolicies,omitempty" name:"AutoSnapshotPolicies"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAutoSnapshotPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAutoSnapshotPoliciesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAutoSnapshotPoliciesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoSnapshotPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1011,6 +1474,165 @@ func (r *DescribeCfsServiceStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCfsSnapshotOverviewRequestParams struct {
+
+}
+
+type DescribeCfsSnapshotOverviewRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeCfsSnapshotOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfsSnapshotOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCfsSnapshotOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfsSnapshotOverviewResponseParams struct {
+	// Statistics
+	StatisticsList []*SnapshotStatistics `json:"StatisticsList,omitempty" name:"StatisticsList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCfsSnapshotOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCfsSnapshotOverviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeCfsSnapshotOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfsSnapshotOverviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfsSnapshotsRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// The starting position of paging
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page length
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Order field
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sorting order (ascending or descending)
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+type DescribeCfsSnapshotsRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// The starting position of paging
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Page length
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filters
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Order field
+	OrderField *string `json:"OrderField,omitempty" name:"OrderField"`
+
+	// Sorting order (ascending or descending)
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+func (r *DescribeCfsSnapshotsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfsSnapshotsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileSystemId")
+	delete(f, "SnapshotId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "OrderField")
+	delete(f, "Order")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCfsSnapshotsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfsSnapshotsResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Snapshot information description
+	Snapshots []*SnapshotInfo `json:"Snapshots,omitempty" name:"Snapshots"`
+
+	// Total size of snapshots
+	TotalSize *uint64 `json:"TotalSize,omitempty" name:"TotalSize"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCfsSnapshotsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCfsSnapshotsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCfsSnapshotsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfsSnapshotsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeMountTargetsRequestParams struct {
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
@@ -1068,6 +1690,103 @@ func (r *DescribeMountTargetsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeMountTargetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSnapshotOperationLogsRequestParams struct {
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+type DescribeSnapshotOperationLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeSnapshotOperationLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSnapshotOperationLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SnapshotId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotOperationLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSnapshotOperationLogsResponseParams struct {
+	// Snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Operation log
+	SnapshotOperates []*SnapshotOperateLog `json:"SnapshotOperates,omitempty" name:"SnapshotOperates"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSnapshotOperationLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSnapshotOperationLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeSnapshotOperationLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSnapshotOperationLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type FileSystemByPolicy struct {
+	// File system name
+	CreationToken *string `json:"CreationToken,omitempty" name:"CreationToken"`
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// File system size
+	SizeByte *uint64 `json:"SizeByte,omitempty" name:"SizeByte"`
+
+	// Storage class
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Total snapshot size
+	TotalSnapshotSize *uint64 `json:"TotalSnapshotSize,omitempty" name:"TotalSnapshotSize"`
+
+	// File system creation time
+	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+
+	// Region ID of the file system
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 }
 
 type FileSystemClient struct {
@@ -1150,6 +1869,14 @@ type FileSystemInfo struct {
 
 	// File system tag list
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+}
+
+type Filter struct {
+	// Value
+	Values []*string `json:"Values,omitempty" name:"Values"`
+
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type MountInfo struct {
@@ -1263,7 +1990,7 @@ func (r *SignUpCfsServiceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SignUpCfsServiceResponseParams struct {
-	// Current status of the CFS service for this user. Valid values: none (not activated), creating (activating), created (activated)
+	// Current status of the CFS service for this user. Valid values: `creating` (activating); `created` (activated)
 	CfsServiceStatus *string `json:"CfsServiceStatus,omitempty" name:"CfsServiceStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1286,12 +2013,237 @@ func (r *SignUpCfsServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SnapshotInfo struct {
+	// Snapshot creation time
+	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+
+	// Snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// Snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// Snapshot status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Region name
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Snapshot size
+	Size *uint64 `json:"Size,omitempty" name:"Size"`
+
+	// Retention period in days
+	AliveDay *uint64 `json:"AliveDay,omitempty" name:"AliveDay"`
+
+	// Snapshot progress
+	Percent *uint64 `json:"Percent,omitempty" name:"Percent"`
+
+	// Account ID
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Snapshot deletion time
+	DeleteTime *string `json:"DeleteTime,omitempty" name:"DeleteTime"`
+
+	// File system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// Snapshot tag
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+}
+
+type SnapshotOperateLog struct {
+	// Operation type
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Operation time
+	ActionTime *string `json:"ActionTime,omitempty" name:"ActionTime"`
+
+	// Operation name
+	ActionName *string `json:"ActionName,omitempty" name:"ActionName"`
+
+	// Operator
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Result
+	Result *uint64 `json:"Result,omitempty" name:"Result"`
+}
+
+type SnapshotStatistics struct {
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Total number of snapshots
+	SnapshotNumber *uint64 `json:"SnapshotNumber,omitempty" name:"SnapshotNumber"`
+
+	// Total snapshot size
+	SnapshotSize *uint64 `json:"SnapshotSize,omitempty" name:"SnapshotSize"`
+}
+
 type TagInfo struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+// Predefined struct for user
+type UnbindAutoSnapshotPolicyRequestParams struct {
+	// List of IDs of the file systems to be unbound, separated by comma
+	FileSystemIds *string `json:"FileSystemIds,omitempty" name:"FileSystemIds"`
+
+	// ID of the snapshot to be unbound
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+}
+
+type UnbindAutoSnapshotPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of IDs of the file systems to be unbound, separated by comma
+	FileSystemIds *string `json:"FileSystemIds,omitempty" name:"FileSystemIds"`
+
+	// ID of the snapshot to be unbound
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+}
+
+func (r *UnbindAutoSnapshotPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindAutoSnapshotPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileSystemIds")
+	delete(f, "AutoSnapshotPolicyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindAutoSnapshotPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindAutoSnapshotPolicyResponseParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UnbindAutoSnapshotPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *UnbindAutoSnapshotPolicyResponseParams `json:"Response"`
+}
+
+func (r *UnbindAutoSnapshotPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindAutoSnapshotPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAutoSnapshotPolicyRequestParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// Snapshot policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// The day of the week on which to regularly back up the snapshot
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
+	// The hour of a day at which to regularly back up the snapshot
+	Hour *string `json:"Hour,omitempty" name:"Hour"`
+
+	// Snapshot retention period
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+
+	// Whether to activate the scheduled snapshot feature
+	IsActivated *uint64 `json:"IsActivated,omitempty" name:"IsActivated"`
+}
+
+type UpdateAutoSnapshotPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// Snapshot policy name
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// The day of the week on which to regularly back up the snapshot
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
+	// The hour of a day at which to regularly back up the snapshot
+	Hour *string `json:"Hour,omitempty" name:"Hour"`
+
+	// Snapshot retention period
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+
+	// Whether to activate the scheduled snapshot feature
+	IsActivated *uint64 `json:"IsActivated,omitempty" name:"IsActivated"`
+}
+
+func (r *UpdateAutoSnapshotPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAutoSnapshotPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoSnapshotPolicyId")
+	delete(f, "PolicyName")
+	delete(f, "DayOfWeek")
+	delete(f, "Hour")
+	delete(f, "AliveDays")
+	delete(f, "IsActivated")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAutoSnapshotPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAutoSnapshotPolicyResponseParams struct {
+	// Snapshot policy ID
+	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateAutoSnapshotPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAutoSnapshotPolicyResponseParams `json:"Response"`
+}
+
+func (r *UpdateAutoSnapshotPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAutoSnapshotPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1673,5 +2625,76 @@ func (r *UpdateCfsRuleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateCfsRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCfsSnapshotAttributeRequestParams struct {
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// File system snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// File system snapshot retention period in days
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+}
+
+type UpdateCfsSnapshotAttributeRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// File system snapshot name
+	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
+
+	// File system snapshot retention period in days
+	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+}
+
+func (r *UpdateCfsSnapshotAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCfsSnapshotAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SnapshotId")
+	delete(f, "SnapshotName")
+	delete(f, "AliveDays")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCfsSnapshotAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCfsSnapshotAttributeResponseParams struct {
+	// File system snapshot ID
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateCfsSnapshotAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCfsSnapshotAttributeResponseParams `json:"Response"`
+}
+
+func (r *UpdateCfsSnapshotAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCfsSnapshotAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }

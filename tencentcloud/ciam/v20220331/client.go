@@ -277,6 +277,7 @@ func NewCreateUserResponse() (response *CreateUserResponse) {
 //  FAILEDOPERATION_ATTRIBUTEFORMATERROR = "FailedOperation.AttributeFormatError"
 //  FAILEDOPERATION_EMAILALREADYEXISTS = "FailedOperation.EmailAlreadyExists"
 //  FAILEDOPERATION_EMAILISNULL = "FailedOperation.EmailIsNull"
+//  FAILEDOPERATION_INDEXEDATTRIBUTETOOLONG = "FailedOperation.IndexedAttributeTooLong"
 //  FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
 //  FAILEDOPERATION_INVALIDUSERSTORE = "FailedOperation.InvalidUserStore"
 //  FAILEDOPERATION_PASSWORDISNULL = "FailedOperation.PasswordIsNull"
@@ -320,6 +321,7 @@ func (c *Client) CreateUser(request *CreateUserRequest) (response *CreateUserRes
 //  FAILEDOPERATION_ATTRIBUTEFORMATERROR = "FailedOperation.AttributeFormatError"
 //  FAILEDOPERATION_EMAILALREADYEXISTS = "FailedOperation.EmailAlreadyExists"
 //  FAILEDOPERATION_EMAILISNULL = "FailedOperation.EmailIsNull"
+//  FAILEDOPERATION_INDEXEDATTRIBUTETOOLONG = "FailedOperation.IndexedAttributeTooLong"
 //  FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
 //  FAILEDOPERATION_INVALIDUSERSTORE = "FailedOperation.InvalidUserStore"
 //  FAILEDOPERATION_PASSWORDISNULL = "FailedOperation.PasswordIsNull"
@@ -459,6 +461,110 @@ func (c *Client) DeleteUsersWithContext(ctx context.Context, request *DeleteUser
     request.SetContext(ctx)
     
     response = NewDeleteUsersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserRequest() (request *DescribeUserRequest) {
+    request = &DescribeUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ciam", APIVersion, "DescribeUser")
+    
+    
+    return
+}
+
+func NewDescribeUserResponse() (response *DescribeUserResponse) {
+    response = &DescribeUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUser
+// This API is used to query the user information with multiple conditions.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
+//  FAILEDOPERATION_INVALIDUSERSTORE = "FailedOperation.InvalidUserStore"
+//  FAILEDOPERATION_QUERYUSERSPARAMETERMUSTINWHITELIST = "FailedOperation.QueryUsersParameterMustInWhitelist"
+//  FAILEDOPERATION_QUERYUSERSPARAMETERREPEAT = "FailedOperation.QueryUsersParameterRepeat"
+//  FAILEDOPERATION_QUERYUSERSSORTPARAMETERMUSTINWHITELIST = "FailedOperation.QueryUsersSortParameterMustInWhitelist"
+//  FAILEDOPERATION_QUOTALIMITEXCEEDED = "FailedOperation.QuotaLimitExceeded"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERILLEGAL = "InvalidParameter.ParameterIllegal"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  REQUESTLIMITEXCEEDED_FREQUENTREQUEST = "RequestLimitExceeded.FrequentRequest"
+//  REQUESTLIMITEXCEEDED_REPEATREQUEST = "RequestLimitExceeded.RepeatRequest"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_TENANTNOTACTIVATED = "UnauthorizedOperation.TenantNotActivated"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeUser(request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
+    return c.DescribeUserWithContext(context.Background(), request)
+}
+
+// DescribeUser
+// This API is used to query the user information with multiple conditions.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
+//  FAILEDOPERATION_INVALIDUSERSTORE = "FailedOperation.InvalidUserStore"
+//  FAILEDOPERATION_QUERYUSERSPARAMETERMUSTINWHITELIST = "FailedOperation.QueryUsersParameterMustInWhitelist"
+//  FAILEDOPERATION_QUERYUSERSPARAMETERREPEAT = "FailedOperation.QueryUsersParameterRepeat"
+//  FAILEDOPERATION_QUERYUSERSSORTPARAMETERMUSTINWHITELIST = "FailedOperation.QueryUsersSortParameterMustInWhitelist"
+//  FAILEDOPERATION_QUOTALIMITEXCEEDED = "FailedOperation.QuotaLimitExceeded"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERILLEGAL = "InvalidParameter.ParameterIllegal"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  REQUESTLIMITEXCEEDED_FREQUENTREQUEST = "RequestLimitExceeded.FrequentRequest"
+//  REQUESTLIMITEXCEEDED_REPEATREQUEST = "RequestLimitExceeded.RepeatRequest"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_TENANTNOTACTIVATED = "UnauthorizedOperation.TenantNotActivated"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserResponse()
     err = c.Send(request, response)
     return
 }
@@ -1296,6 +1402,7 @@ func NewUpdateUserResponse() (response *UpdateUserResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ATTRIBUTEFORMATERROR = "FailedOperation.AttributeFormatError"
 //  FAILEDOPERATION_EMAILALREADYEXISTS = "FailedOperation.EmailAlreadyExists"
+//  FAILEDOPERATION_INDEXEDATTRIBUTETOOLONG = "FailedOperation.IndexedAttributeTooLong"
 //  FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
 //  FAILEDOPERATION_INVALIDUSERSTORE = "FailedOperation.InvalidUserStore"
 //  FAILEDOPERATION_PHONENUMBERALREADYEXISTS = "FailedOperation.PhoneNumberAlreadyExists"
@@ -1336,6 +1443,7 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserRes
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ATTRIBUTEFORMATERROR = "FailedOperation.AttributeFormatError"
 //  FAILEDOPERATION_EMAILALREADYEXISTS = "FailedOperation.EmailAlreadyExists"
+//  FAILEDOPERATION_INDEXEDATTRIBUTETOOLONG = "FailedOperation.IndexedAttributeTooLong"
 //  FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
 //  FAILEDOPERATION_INVALIDUSERSTORE = "FailedOperation.InvalidUserStore"
 //  FAILEDOPERATION_PHONENUMBERALREADYEXISTS = "FailedOperation.PhoneNumberAlreadyExists"

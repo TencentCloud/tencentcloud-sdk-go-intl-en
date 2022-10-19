@@ -2445,6 +2445,7 @@ func NewDescribeAllNamespacesResponse() (response *DescribeAllNamespacesResponse
 // This API is used to query all namespaces.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAllNamespaces(request *DescribeAllNamespacesRequest) (response *DescribeAllNamespacesResponse, err error) {
     return c.DescribeAllNamespacesWithContext(context.Background(), request)
@@ -2454,6 +2455,7 @@ func (c *Client) DescribeAllNamespaces(request *DescribeAllNamespacesRequest) (r
 // This API is used to query all namespaces.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAllNamespacesWithContext(ctx context.Context, request *DescribeAllNamespacesRequest) (response *DescribeAllNamespacesResponse, err error) {
     if request == nil {
@@ -2493,6 +2495,7 @@ func NewDescribeBaseMetricsResponse() (response *DescribeBaseMetricsResponse) {
 // This API is used to get the attributes of basic metrics.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBaseMetrics(request *DescribeBaseMetricsRequest) (response *DescribeBaseMetricsResponse, err error) {
     return c.DescribeBaseMetricsWithContext(context.Background(), request)
@@ -2502,6 +2505,7 @@ func (c *Client) DescribeBaseMetrics(request *DescribeBaseMetricsRequest) (respo
 // This API is used to get the attributes of basic metrics.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBaseMetricsWithContext(ctx context.Context, request *DescribeBaseMetricsRequest) (response *DescribeBaseMetricsResponse, err error) {
     if request == nil {
@@ -2541,6 +2545,7 @@ func NewDescribeBasicAlarmListResponse() (response *DescribeBasicAlarmListRespon
 // This API is used to get the basic alarm list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2555,6 +2560,7 @@ func (c *Client) DescribeBasicAlarmList(request *DescribeBasicAlarmListRequest) 
 // This API is used to get the basic alarm list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2935,6 +2941,54 @@ func (c *Client) DescribeExporterIntegrationsWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeGrafanaChannelsRequest() (request *DescribeGrafanaChannelsRequest) {
+    request = &DescribeGrafanaChannelsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeGrafanaChannels")
+    
+    
+    return
+}
+
+func NewDescribeGrafanaChannelsResponse() (response *DescribeGrafanaChannelsResponse) {
+    response = &DescribeGrafanaChannelsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeGrafanaChannels
+// This API is used to list all Grafana alert channels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeGrafanaChannels(request *DescribeGrafanaChannelsRequest) (response *DescribeGrafanaChannelsResponse, err error) {
+    return c.DescribeGrafanaChannelsWithContext(context.Background(), request)
+}
+
+// DescribeGrafanaChannels
+// This API is used to list all Grafana alert channels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeGrafanaChannelsWithContext(ctx context.Context, request *DescribeGrafanaChannelsRequest) (response *DescribeGrafanaChannelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeGrafanaChannelsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGrafanaChannels require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGrafanaChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGrafanaConfigRequest() (request *DescribeGrafanaConfigRequest) {
     request = &DescribeGrafanaConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3055,6 +3109,7 @@ func NewDescribeGrafanaInstancesResponse() (response *DescribeGrafanaInstancesRe
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
 //  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 //  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
 //  FAILEDOPERATION_SENDREQUEST = "FailedOperation.SendRequest"
 func (c *Client) DescribeGrafanaInstances(request *DescribeGrafanaInstancesRequest) (response *DescribeGrafanaInstancesResponse, err error) {
@@ -3067,6 +3122,7 @@ func (c *Client) DescribeGrafanaInstances(request *DescribeGrafanaInstancesReque
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
 //  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 //  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
 //  FAILEDOPERATION_SENDREQUEST = "FailedOperation.SendRequest"
 func (c *Client) DescribeGrafanaInstancesWithContext(ctx context.Context, request *DescribeGrafanaInstancesRequest) (response *DescribeGrafanaInstancesResponse, err error) {
@@ -4508,13 +4564,19 @@ func NewGetMonitorDataResponse() (response *GetMonitorDataResponse) {
 }
 
 // GetMonitorData
-// This API is used to get the monitoring data of Tencent Cloud services except TKE. To pull TKE’s monitoring data, please use the API [DescribeStatisticData](https://intl.cloud.tencent.com/document/product/248/51845?from_cn_redirect=1).
+// This API is used to get the monitoring data of Tencent Cloud services except TKE. To pull TKE’s monitoring data, use the [DescribeStatisticData](https://www.tencentcloud.com/document/product/248/39481) API.
 //
 // You can get the monitoring data of a Tencent Cloud service by passing in its namespace, object dimension description, and monitoring metrics.
 //
 // API call rate limit: 20 calls/second (1,200 calls/minute). A single request can get the data of up to 10 instances for up to 1,440 data points.
 //
 // If you need to call a large number of APIs to pull metrics or objects at a time, some APIs may fail to be called due to the rate limit. We suggest you evenly arrange API calls at a time granularity.
+//
+// 
+//
+// >?
+//
+// >- Cloud Monitor has started billing the `GetMonitorData` API on September 1, 2022. Each root account has a free tier of one million call requests a month. If you want to call this API after the free tier is exceeded, you need to enable [pay-as-you-go billing for API requests](https://buy.cloud.tencent.com/APIRequestBuy). For billing rules, see [API billing documentation](https://intl.cloud.tencent.com/document/product/248/77914?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRNOTOPEN = "FailedOperation.ErrNotOpen"
@@ -4527,13 +4589,19 @@ func (c *Client) GetMonitorData(request *GetMonitorDataRequest) (response *GetMo
 }
 
 // GetMonitorData
-// This API is used to get the monitoring data of Tencent Cloud services except TKE. To pull TKE’s monitoring data, please use the API [DescribeStatisticData](https://intl.cloud.tencent.com/document/product/248/51845?from_cn_redirect=1).
+// This API is used to get the monitoring data of Tencent Cloud services except TKE. To pull TKE’s monitoring data, use the [DescribeStatisticData](https://www.tencentcloud.com/document/product/248/39481) API.
 //
 // You can get the monitoring data of a Tencent Cloud service by passing in its namespace, object dimension description, and monitoring metrics.
 //
 // API call rate limit: 20 calls/second (1,200 calls/minute). A single request can get the data of up to 10 instances for up to 1,440 data points.
 //
 // If you need to call a large number of APIs to pull metrics or objects at a time, some APIs may fail to be called due to the rate limit. We suggest you evenly arrange API calls at a time granularity.
+//
+// 
+//
+// >?
+//
+// >- Cloud Monitor has started billing the `GetMonitorData` API on September 1, 2022. Each root account has a free tier of one million call requests a month. If you want to call this API after the free tier is exceeded, you need to enable [pay-as-you-go billing for API requests](https://buy.cloud.tencent.com/APIRequestBuy). For billing rules, see [API billing documentation](https://intl.cloud.tencent.com/document/product/248/77914?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRNOTOPEN = "FailedOperation.ErrNotOpen"

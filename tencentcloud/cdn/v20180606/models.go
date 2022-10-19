@@ -870,7 +870,6 @@ type BandwidthAlert struct {
 	BpsThreshold *int64 `json:"BpsThreshold,omitempty" name:"BpsThreshold"`
 
 	// Action taken when threshold is reached
-	// `RESOLVE_DNS_TO_ORIGIN`: Requests will be forwarded to the origin server. This is only supported for domain names of external origin.
 	// `RETURN_404`: A 404 error will be returned for all requests.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CounterMeasure *string `json:"CounterMeasure,omitempty" name:"CounterMeasure"`
@@ -4401,10 +4400,10 @@ type GuetzliAdapter struct {
 }
 
 type HTTPHeader struct {
-
+	// Request header name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-
+	// Request header value
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
@@ -4493,11 +4492,10 @@ type Https struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// HTTP2 configuration switch
+	// Whether to enable HTTP2
 	// `on`: Enable
 	// `off`: Disable
-	// Enabling HTTPS acceleration for the first time will enable HTTP2 configuration by default.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Http2 *string `json:"Http2,omitempty" name:"Http2"`
 
 	// OCSP configuration switch
@@ -5946,7 +5944,7 @@ type PushUrlsCacheRequestParams struct {
 	// This feature is in beta test.
 	DisableRange *bool `json:"DisableRange,omitempty" name:"DisableRange"`
 
-
+	// Custom HTTP request headers (Up to 20). `Name`: Up to 128 characters. `Value`: Up to 1024 characters.
 	Headers []*HTTPHeader `json:"Headers,omitempty" name:"Headers"`
 
 	// Whether to encode the URL
@@ -5986,6 +5984,7 @@ type PushUrlsCacheRequest struct {
 	// This feature is in beta test.
 	DisableRange *bool `json:"DisableRange,omitempty" name:"DisableRange"`
 
+	// Custom HTTP request headers (Up to 20). `Name`: Up to 128 characters. `Value`: Up to 1024 characters.
 	Headers []*HTTPHeader `json:"Headers,omitempty" name:"Headers"`
 
 	// Whether to encode the URL

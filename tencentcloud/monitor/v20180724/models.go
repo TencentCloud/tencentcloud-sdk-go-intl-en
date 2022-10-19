@@ -31,6 +31,17 @@ type AlarmEvent struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
+type AlarmHierarchicalValue struct {
+
+	Remind *string `json:"Remind,omitempty" name:"Remind"`
+
+
+	Warn *string `json:"Warn,omitempty" name:"Warn"`
+
+
+	Serious *string `json:"Serious,omitempty" name:"Serious"`
+}
+
 type AlarmHistory struct {
 	// Alarm record ID
 	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
@@ -172,6 +183,10 @@ type AlarmNotice struct {
 	// Channel to push alarm notifications to CLS.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
+
+	// Tags bound to a notification template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type AlarmPolicy struct {
@@ -309,6 +324,14 @@ type AlarmPolicy struct {
 	// The number of advanced metrics.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AdvancedMetricNumber *int64 `json:"AdvancedMetricNumber,omitempty" name:"AdvancedMetricNumber"`
+
+	// Whether the policy is associated with all objects
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsBindAll *int64 `json:"IsBindAll,omitempty" name:"IsBindAll"`
+
+	// Policy tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type AlarmPolicyCondition struct {
@@ -411,6 +434,17 @@ type AlarmPolicyRule struct {
 	// Integration center product ID.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Maximum value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ValueMax *float64 `json:"ValueMax,omitempty" name:"ValueMax"`
+
+	// Minimum value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ValueMin *float64 `json:"ValueMin,omitempty" name:"ValueMin"`
+
+
+	HierarchicalValue *AlarmHierarchicalValue `json:"HierarchicalValue,omitempty" name:"HierarchicalValue"`
 }
 
 type AlarmPolicyTriggerTask struct {
@@ -705,8 +739,8 @@ type Condition struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CalcValue *string `json:"CalcValue,omitempty" name:"CalcValue"`
 
-	// Duration.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Duration in seconds.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContinueTime *string `json:"ContinueTime,omitempty" name:"ContinueTime"`
 
 	// Metric ID.
@@ -723,6 +757,16 @@ type Condition struct {
 
 	// Metric unit.
 	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Whether it is an advanced metric. Valid values: `0` (no), `1` (yes).
+	IsAdvanced *int64 `json:"IsAdvanced,omitempty" name:"IsAdvanced"`
+
+	// Whether the advance metric feature is enabled. Valid values: `0` (no), `1` (yes).
+	IsOpen *int64 `json:"IsOpen,omitempty" name:"IsOpen"`
+
+	// Product ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 }
 
 type ConditionsTemp struct {
@@ -761,6 +805,9 @@ type CreateAlarmNoticeRequestParams struct {
 
 	// The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
 	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
+
+	// Tags bound to a template
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type CreateAlarmNoticeRequest struct {
@@ -786,6 +833,9 @@ type CreateAlarmNoticeRequest struct {
 
 	// The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
 	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
+
+	// Tags bound to a template
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateAlarmNoticeRequest) ToJsonString() string {
@@ -807,6 +857,7 @@ func (r *CreateAlarmNoticeRequest) FromJsonString(s string) error {
 	delete(f, "UserNotices")
 	delete(f, "URLNotices")
 	delete(f, "CLSNotices")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmNoticeRequest has unknown keys!", "")
 	}
@@ -881,6 +932,12 @@ type CreateAlarmPolicyRequestParams struct {
 
 	// Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
 	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
+
+	// Tags bound to a template
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Log alarm information
+	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
 }
 
 type CreateAlarmPolicyRequest struct {
@@ -927,6 +984,12 @@ type CreateAlarmPolicyRequest struct {
 
 	// Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
 	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
+
+	// Tags bound to a template
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Log alarm information
+	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
 }
 
 func (r *CreateAlarmPolicyRequest) ToJsonString() string {
@@ -955,6 +1018,8 @@ func (r *CreateAlarmPolicyRequest) FromJsonString(s string) error {
 	delete(f, "TriggerTasks")
 	delete(f, "Filter")
 	delete(f, "GroupBy")
+	delete(f, "Tags")
+	delete(f, "LogAlarmReqInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmPolicyRequest has unknown keys!", "")
 	}
@@ -1342,7 +1407,8 @@ func (r *CreateGrafanaIntegrationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateGrafanaIntegrationResponseParams struct {
-
+	// Integration ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1373,16 +1439,16 @@ type CreateGrafanaNotificationChannelRequestParams struct {
 	// Channel name
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
-	// Organization ID
+	// Default value: `1`. This parameter has been deprecated. Please use `OrganizationIds` instead.
 	OrgId *int64 `json:"OrgId,omitempty" name:"OrgId"`
 
 	// Array of notification channel IDs
 	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
 
-	// Array of extra organization IDs
+	// Array of extra organization IDs. This parameter has been deprecated. Please use `OrganizationIds` instead.
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
 
-
+	// Array of all valid organization IDs. Default value: `1`.
 	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
@@ -1395,15 +1461,16 @@ type CreateGrafanaNotificationChannelRequest struct {
 	// Channel name
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
-	// Organization ID
+	// Default value: `1`. This parameter has been deprecated. Please use `OrganizationIds` instead.
 	OrgId *int64 `json:"OrgId,omitempty" name:"OrgId"`
 
 	// Array of notification channel IDs
 	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
 
-	// Array of extra organization IDs
+	// Array of extra organization IDs. This parameter has been deprecated. Please use `OrganizationIds` instead.
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
 
+	// Array of all valid organization IDs. Default value: `1`.
 	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
@@ -1433,7 +1500,8 @@ func (r *CreateGrafanaNotificationChannelRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateGrafanaNotificationChannelResponseParams struct {
-
+	// Channel ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2006,7 +2074,7 @@ func (r *CreateSSOAccountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSSOAccountResponseParams struct {
-
+	// The added user UIN
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3478,6 +3546,9 @@ type DescribeAlarmNoticesRequestParams struct {
 
 	// Filter by notification template ID. If an empty array is passed in or if this parameter is left empty, the filter operation will not be performed.
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Filter templates by tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type DescribeAlarmNoticesRequest struct {
@@ -3512,6 +3583,9 @@ type DescribeAlarmNoticesRequest struct {
 
 	// Filter by notification template ID. If an empty array is passed in or if this parameter is left empty, the filter operation will not be performed.
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Filter templates by tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeAlarmNoticesRequest) ToJsonString() string {
@@ -3536,6 +3610,7 @@ func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
 	delete(f, "UserIds")
 	delete(f, "GroupIds")
 	delete(f, "NoticeIds")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmNoticesRequest has unknown keys!", "")
 	}
@@ -3643,6 +3718,15 @@ type DescribeAlarmPoliciesRequestParams struct {
 
 	// Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. `ONECLICK`: Display quick alarm policies; `NOT_ONECLICK`: Display non-quick alarm policies.
 	OneClickPolicyType []*string `json:"OneClickPolicyType,omitempty" name:"OneClickPolicyType"`
+
+	// Whether the returned result filters policies associated with all objects. Valid values: `1` (Yes), `0` (No).
+	NotBindAll *int64 `json:"NotBindAll,omitempty" name:"NotBindAll"`
+
+	// Whether the returned result filters policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
+	NotInstanceGroup *int64 `json:"NotInstanceGroup,omitempty" name:"NotInstanceGroup"`
+
+	// Filter policies by tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type DescribeAlarmPoliciesRequest struct {
@@ -3719,6 +3803,15 @@ type DescribeAlarmPoliciesRequest struct {
 
 	// Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. `ONECLICK`: Display quick alarm policies; `NOT_ONECLICK`: Display non-quick alarm policies.
 	OneClickPolicyType []*string `json:"OneClickPolicyType,omitempty" name:"OneClickPolicyType"`
+
+	// Whether the returned result filters policies associated with all objects. Valid values: `1` (Yes), `0` (No).
+	NotBindAll *int64 `json:"NotBindAll,omitempty" name:"NotBindAll"`
+
+	// Whether the returned result filters policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
+	NotInstanceGroup *int64 `json:"NotInstanceGroup,omitempty" name:"NotInstanceGroup"`
+
+	// Filter policies by tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -3754,6 +3847,9 @@ func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "NeedCorrespondence")
 	delete(f, "TriggerTasks")
 	delete(f, "OneClickPolicyType")
+	delete(f, "NotBindAll")
+	delete(f, "NotInstanceGroup")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmPoliciesRequest has unknown keys!", "")
 	}
@@ -4533,6 +4629,9 @@ type DescribeConditionsTemplateListRequestParams struct {
 
 	// Sorting method by update time. `asc`: Ascending order; `desc`: Descending order.
 	UpdateTimeOrder *string `json:"UpdateTimeOrder,omitempty" name:"UpdateTimeOrder"`
+
+	// Sorting order based on the number of associated policies. Valid values: `asc` (ascending order), `desc` (descending order).
+	PolicyCountOrder *string `json:"PolicyCountOrder,omitempty" name:"PolicyCountOrder"`
 }
 
 type DescribeConditionsTemplateListRequest struct {
@@ -4558,6 +4657,9 @@ type DescribeConditionsTemplateListRequest struct {
 
 	// Sorting method by update time. `asc`: Ascending order; `desc`: Descending order.
 	UpdateTimeOrder *string `json:"UpdateTimeOrder,omitempty" name:"UpdateTimeOrder"`
+
+	// Sorting order based on the number of associated policies. Valid values: `asc` (ascending order), `desc` (descending order).
+	PolicyCountOrder *string `json:"PolicyCountOrder,omitempty" name:"PolicyCountOrder"`
 }
 
 func (r *DescribeConditionsTemplateListRequest) ToJsonString() string {
@@ -4579,6 +4681,7 @@ func (r *DescribeConditionsTemplateListRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "UpdateTimeOrder")
+	delete(f, "PolicyCountOrder")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConditionsTemplateListRequest has unknown keys!", "")
 	}
@@ -4759,6 +4862,98 @@ func (r *DescribeExporterIntegrationsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeExporterIntegrationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaChannelsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of items to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Channel ID.
+	ChannelIds []*string `json:"ChannelIds,omitempty" name:"ChannelIds"`
+
+	// Channel status
+	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
+}
+
+type DescribeGrafanaChannelsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of items to be queried
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Channel ID.
+	ChannelIds []*string `json:"ChannelIds,omitempty" name:"ChannelIds"`
+
+	// Channel status
+	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
+}
+
+func (r *DescribeGrafanaChannelsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaChannelsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "ChannelName")
+	delete(f, "ChannelIds")
+	delete(f, "ChannelState")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGrafanaChannelsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGrafanaChannelsResponseParams struct {
+	// Array of alert channels
+	NotificationChannelSet []*GrafanaChannel `json:"NotificationChannelSet,omitempty" name:"NotificationChannelSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeGrafanaChannelsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGrafanaChannelsResponseParams `json:"Response"`
+}
+
+func (r *DescribeGrafanaChannelsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGrafanaChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5198,6 +5393,9 @@ func (r *DescribeGrafanaWhiteListResponse) FromJsonString(s string) error {
 type DescribeInstalledPluginsRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter by plugin ID
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 }
 
 type DescribeInstalledPluginsRequest struct {
@@ -5205,6 +5403,9 @@ type DescribeInstalledPluginsRequest struct {
 	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter by plugin ID
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 }
 
 func (r *DescribeInstalledPluginsRequest) ToJsonString() string {
@@ -5220,6 +5421,7 @@ func (r *DescribeInstalledPluginsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "PluginId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstalledPluginsRequest has unknown keys!", "")
 	}
@@ -6796,6 +6998,9 @@ func (r *DescribeRecordingRulesResponse) FromJsonString(s string) error {
 type DescribeSSOAccountRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter by account UIN
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
 }
 
 type DescribeSSOAccountRequest struct {
@@ -6803,6 +7008,9 @@ type DescribeSSOAccountRequest struct {
 	
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Filter by account UIN
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
 }
 
 func (r *DescribeSSOAccountRequest) ToJsonString() string {
@@ -6818,6 +7026,7 @@ func (r *DescribeSSOAccountRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "UserId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSSOAccountRequest has unknown keys!", "")
 	}
@@ -7537,6 +7746,13 @@ type GrafanaAccountInfo struct {
 
 	// Creation time
 	CreateAt *string `json:"CreateAt,omitempty" name:"CreateAt"`
+
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// User’s root account UIN
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
 }
 
 type GrafanaAccountRole struct {
@@ -7545,6 +7761,27 @@ type GrafanaAccountRole struct {
 
 	// Permission
 	Role *string `json:"Role,omitempty" name:"Role"`
+}
+
+type GrafanaChannel struct {
+	// Channel ID
+	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
+
+	// Channel name
+	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
+
+	// Array of alert channel template IDs
+	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
+
+	// Creation time
+	CreatedAt *string `json:"CreatedAt,omitempty" name:"CreatedAt"`
+
+	// Update time
+	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+
+	// All valid organizations in an alert channel
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
 type GrafanaInstanceInfo struct {
@@ -7619,6 +7856,10 @@ type GrafanaIntegrationConfig struct {
 
 	// Integration description
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Grafana redirection address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GrafanaURL *string `json:"GrafanaURL,omitempty" name:"GrafanaURL"`
 }
 
 type GrafanaNotificationChannel struct {
@@ -7636,6 +7877,21 @@ type GrafanaNotificationChannel struct {
 
 	// Update time
 	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+
+	// Default valid organization. This parameter has been deprecated. Please use `OrganizationIds` instead.
+	OrgId *string `json:"OrgId,omitempty" name:"OrgId"`
+
+	// Extra valid organization. This parameter has been deprecated. Please use `OrganizationIds` instead.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
+
+	// Valid organization. This parameter has been deprecated. Please use `OrganizationIds` instead.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OrgIds *string `json:"OrgIds,omitempty" name:"OrgIds"`
+
+	// All valid organizations in an alert channel
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OrganizationIds *string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
 type GrafanaPlugin struct {
@@ -7688,7 +7944,8 @@ func (r *InstallPluginsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InstallPluginsResponseParams struct {
-
+	// ID of the installed plugin
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PluginIds []*string `json:"PluginIds,omitempty" name:"PluginIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7755,6 +8012,31 @@ type IntegrationConfiguration struct {
 
 	// Dashboard URL
 	GrafanaDashboardURL *string `json:"GrafanaDashboardURL,omitempty" name:"GrafanaDashboardURL"`
+}
+
+type LogAlarmReq struct {
+	// APM instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Search condition
+	Filter []*LogFilterInfo `json:"Filter,omitempty" name:"Filter"`
+
+	// The switch to enable/disable alarm merging
+	AlarmMerge *string `json:"AlarmMerge,omitempty" name:"AlarmMerge"`
+
+	// Alarm merging time
+	AlarmMergeTime *string `json:"AlarmMergeTime,omitempty" name:"AlarmMergeTime"`
+}
+
+type LogFilterInfo struct {
+	// Field name
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Comparison operator
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Field value
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type ManagementCommand struct {
@@ -8031,6 +8313,9 @@ type ModifyAlarmPolicyConditionRequestParams struct {
 
 	// Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
 	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
+
+	// Log alarm creation request parameters
+	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
 }
 
 type ModifyAlarmPolicyConditionRequest struct {
@@ -8056,6 +8341,9 @@ type ModifyAlarmPolicyConditionRequest struct {
 
 	// Aggregation dimension list, which is used to specify which dimension keys data is grouped by.
 	GroupBy []*string `json:"GroupBy,omitempty" name:"GroupBy"`
+
+	// Log alarm creation request parameters
+	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
 }
 
 func (r *ModifyAlarmPolicyConditionRequest) ToJsonString() string {
@@ -8077,6 +8365,7 @@ func (r *ModifyAlarmPolicyConditionRequest) FromJsonString(s string) error {
 	delete(f, "EventCondition")
 	delete(f, "Filter")
 	delete(f, "GroupBy")
+	delete(f, "LogAlarmReqInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmPolicyConditionRequest has unknown keys!", "")
 	}
@@ -9067,6 +9356,14 @@ type PrometheusInstancesItem struct {
 	// ID of the bound Grafana instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	GrafanaInstanceId *string `json:"GrafanaInstanceId,omitempty" name:"GrafanaInstanceId"`
+
+	// The alert rule limit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AlertRuleLimit *int64 `json:"AlertRuleLimit,omitempty" name:"AlertRuleLimit"`
+
+	// The recording rule limit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecordingRuleLimit *int64 `json:"RecordingRuleLimit,omitempty" name:"RecordingRuleLimit"`
 }
 
 type PrometheusRuleKV struct {
@@ -9281,7 +9578,7 @@ type RecordingRuleSet struct {
 	// Rule status code
 	RuleState *int64 `json:"RuleState,omitempty" name:"RuleState"`
 
-	// Rule name
+	// Group name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Rule group
@@ -9295,6 +9592,10 @@ type RecordingRuleSet struct {
 
 	// Rule update time
 	UpdatedAt *string `json:"UpdatedAt,omitempty" name:"UpdatedAt"`
+
+	// Rule name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 }
 
 // Predefined struct for user
@@ -9504,6 +9805,14 @@ func (r *SetDefaultAlarmPolicyResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SetDefaultAlarmPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Tag struct {
+	// Tag key
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Tag value
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type TagInstance struct {
@@ -10587,10 +10896,10 @@ type UpdateGrafanaNotificationChannelRequestParams struct {
 	// Array of notification channel IDs
 	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
 
-	// Array of extra organization IDs
+	// This parameter has been deprecated. Please use `OrganizationIds` instead.
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
 
-
+	// Array of valid organization IDs
 	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 
@@ -10609,9 +10918,10 @@ type UpdateGrafanaNotificationChannelRequest struct {
 	// Array of notification channel IDs
 	Receivers []*string `json:"Receivers,omitempty" name:"Receivers"`
 
-	// Array of extra organization IDs
+	// This parameter has been deprecated. Please use `OrganizationIds` instead.
 	ExtraOrgIds []*string `json:"ExtraOrgIds,omitempty" name:"ExtraOrgIds"`
 
+	// Array of valid organization IDs
 	OrganizationIds []*string `json:"OrganizationIds,omitempty" name:"OrganizationIds"`
 }
 

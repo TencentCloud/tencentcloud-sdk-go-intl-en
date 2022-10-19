@@ -91,7 +91,6 @@ type CreateFileExportUserJobRequestParams struct {
 
 	// Exported data type
 	// 
-	// <li> **JSON** </li>  JSON
 	// <li> **NDJSON** </li>  New-line Delimited JSON
 	// <li> **CSV** </li>  Comma-Separated Values
 	Format *string `json:"Format,omitempty" name:"Format"`
@@ -114,7 +113,6 @@ type CreateFileExportUserJobRequest struct {
 
 	// Exported data type
 	// 
-	// <li> **JSON** </li>  JSON
 	// <li> **NDJSON** </li>  New-line Delimited JSON
 	// <li> **CSV** </li>  Comma-Separated Values
 	Format *string `json:"Format,omitempty" name:"Format"`
@@ -207,6 +205,21 @@ type CreateUserRequestParams struct {
 
 	// Custom attribute
 	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+
+	// Index field 1
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+
+	// Index field 2
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+
+	// Index field 3
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+
+	// Index field 4
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+
+	// Index field 5
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
 }
 
 type CreateUserRequest struct {
@@ -241,6 +254,21 @@ type CreateUserRequest struct {
 
 	// Custom attribute
 	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+
+	// Index field 1
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+
+	// Index field 2
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+
+	// Index field 3
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+
+	// Index field 4
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+
+	// Index field 5
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
 }
 
 func (r *CreateUserRequest) ToJsonString() string {
@@ -265,6 +293,11 @@ func (r *CreateUserRequest) FromJsonString(s string) error {
 	delete(f, "UserGroup")
 	delete(f, "Birthdate")
 	delete(f, "CustomizationAttributes")
+	delete(f, "IndexedAttribute1")
+	delete(f, "IndexedAttribute2")
+	delete(f, "IndexedAttribute3")
+	delete(f, "IndexedAttribute4")
+	delete(f, "IndexedAttribute5")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUserRequest has unknown keys!", "")
 	}
@@ -366,7 +399,10 @@ type DescribeUserByIdRequestParams struct {
 	// User ID
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-
+	// Whether the content is passed through
+	// 
+	// <li> **false** </li>Default. The returned information is desensitized.
+	// <li> **true** </li>Return the original content.
 	Original *bool `json:"Original,omitempty" name:"Original"`
 }
 
@@ -379,6 +415,10 @@ type DescribeUserByIdRequest struct {
 	// User ID
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
+	// Whether the content is passed through
+	// 
+	// <li> **false** </li>Default. The returned information is desensitized.
+	// <li> **true** </li>Return the original content.
 	Original *bool `json:"Original,omitempty" name:"Original"`
 }
 
@@ -426,6 +466,100 @@ func (r *DescribeUserByIdResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeUserByIdResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRequestParams struct {
+	// User directory ID
+	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+
+	// Pagination data
+	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+
+	// Query condition (`propertycode` and `propertykey`)
+	Filters []*QueryUserFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Whether the plaintext is returned
+	Original *bool `json:"Original,omitempty" name:"Original"`
+
+	// Sorting configuration
+	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+}
+
+type DescribeUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// User directory ID
+	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+
+	// Pagination data
+	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+
+	// Query condition (`propertycode` and `propertykey`)
+	Filters []*QueryUserFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Whether the plaintext is returned
+	Original *bool `json:"Original,omitempty" name:"Original"`
+
+	// Sorting configuration
+	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+}
+
+func (r *DescribeUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserStoreId")
+	delete(f, "Pageable")
+	delete(f, "Filters")
+	delete(f, "Original")
+	delete(f, "Sort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserResponseParams struct {
+	// The total number of returned results.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Pagination object
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+
+	// User List
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Content []*User `json:"Content,omitempty" name:"Content"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeUserResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -545,6 +679,21 @@ type ImportUser struct {
 
 	// Password encryption method. Valid values: `SHA1`, `BCRYPT`.
 	PasswordEncryptTypeEnum *string `json:"PasswordEncryptTypeEnum,omitempty" name:"PasswordEncryptTypeEnum"`
+
+	// Index field 1
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+
+	// Index field 2
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+
+	// Index field 3
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+
+	// Index field 4
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+
+	// Index field 5
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
 }
 
 type Job struct {
@@ -570,10 +719,9 @@ type Job struct {
 
 	// Data type of the task
 	// 
-	// <li> **JSON** </li>  JSON
 	// <li> **NDJSON** </li>  New-line Delimited JSON
 	// <li> **CSV** </li>  Comma-Separated Values
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Task result download address
@@ -838,7 +986,7 @@ type ListUserByPropertyRequestParams struct {
 	// Attribute value
 	PropertyValue *string `json:"PropertyValue,omitempty" name:"PropertyValue"`
 
-
+	// Whether the content is passed through
 	Original *bool `json:"Original,omitempty" name:"Original"`
 }
 
@@ -857,6 +1005,7 @@ type ListUserByPropertyRequest struct {
 	// Attribute value
 	PropertyValue *string `json:"PropertyValue,omitempty" name:"PropertyValue"`
 
+	// Whether the content is passed through
 	Original *bool `json:"Original,omitempty" name:"Original"`
 }
 
@@ -922,7 +1071,7 @@ type ListUserRequestParams struct {
 	// <li> **userGroupId** </li>	Values = User group ID
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-
+	// Whether the content is passed through
 	Original *bool `json:"Original,omitempty" name:"Original"`
 }
 
@@ -941,6 +1090,7 @@ type ListUserRequest struct {
 	// <li> **userGroupId** </li>	Values = User group ID
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
+	// Whether the content is passed through
 	Original *bool `json:"Original,omitempty" name:"Original"`
 }
 
@@ -1090,6 +1240,20 @@ type Pageable struct {
 
 	// Current page number
 	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+}
+
+type QueryUserFilter struct {
+	// Property key
+	PropertyKey *string `json:"PropertyKey,omitempty" name:"PropertyKey"`
+
+	// Property value
+	PropertyValue *string `json:"PropertyValue,omitempty" name:"PropertyValue"`
+
+	// Logic value. `True` or `False`
+	Logic *bool `json:"Logic,omitempty" name:"Logic"`
+
+	// Operator. Values: `>`, `<`, `=`, `>=`, `<=`, `!=` and `between`. 
+	OperateLogic *string `json:"OperateLogic,omitempty" name:"OperateLogic"`
 }
 
 // Predefined struct for user
@@ -1245,6 +1409,14 @@ func (r *SetPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Sort struct {
+	// Key for sorting. See custom attributes
+	PropertyKey *string `json:"PropertyKey,omitempty" name:"PropertyKey"`
+
+	// `ASC` or `DESC`
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
 // Predefined struct for user
 type UpdateUserRequestParams struct {
 	// User ID
@@ -1276,6 +1448,21 @@ type UpdateUserRequestParams struct {
 
 	// Custom attribute
 	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+
+	// Index field 1
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+
+	// Index field 2
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+
+	// Index field 3
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+
+	// Index field 4
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+
+	// Index field 5
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
 }
 
 type UpdateUserRequest struct {
@@ -1310,6 +1497,21 @@ type UpdateUserRequest struct {
 
 	// Custom attribute
 	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+
+	// Index field 1
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+
+	// Index field 2
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+
+	// Index field 3
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+
+	// Index field 4
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+
+	// Index field 5
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
 }
 
 func (r *UpdateUserRequest) ToJsonString() string {
@@ -1334,6 +1536,11 @@ func (r *UpdateUserRequest) FromJsonString(s string) error {
 	delete(f, "UserGroup")
 	delete(f, "Birthdate")
 	delete(f, "CustomizationAttributes")
+	delete(f, "IndexedAttribute1")
+	delete(f, "IndexedAttribute2")
+	delete(f, "IndexedAttribute3")
+	delete(f, "IndexedAttribute4")
+	delete(f, "IndexedAttribute5")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateUserRequest has unknown keys!", "")
 	}
@@ -1582,4 +1789,24 @@ type User struct {
 	// Lock time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LockTime *int64 `json:"LockTime,omitempty" name:"LockTime"`
+
+	// Index field 1
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+
+	// Index field 2
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+
+	// Index field 3
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+
+	// Index field 4
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+
+	// Index field 5
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
 }
