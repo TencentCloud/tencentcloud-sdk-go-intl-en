@@ -77,6 +77,12 @@ const (
 	// The domain name does not exist or is not belong to this account.
 	INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
 
+	// 
+	INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
+
+	// 
+	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
+
 	// Invalid node cache.
 	INVALIDPARAMETER_INVALIDCACHEONLYONSWITCH = "InvalidParameter.InvalidCacheOnlyOnSwitch"
 
@@ -86,8 +92,17 @@ const (
 	// Invalid client IP request header.
 	INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
 
+	// 
+	INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
+
+	// 
+	INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
+
 	// Invalid origin server.
 	INVALIDPARAMETER_INVALIDORIGIN = "InvalidParameter.InvalidOrigin"
+
+	// 
+	INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 
 	// The speciThe plan does not support limiting the max upload size.
 	INVALIDPARAMETER_INVALIDPOSTMAXSIZEBILLING = "InvalidParameter.InvalidPostMaxSizeBilling"
@@ -102,6 +117,9 @@ const (
 	INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
 
 	// 
+	INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
+
+	// 
 	INVALIDPARAMETER_INVALIDRULEENGINETARGET = "InvalidParameter.InvalidRuleEngineTarget"
 
 	// 
@@ -109,6 +127,9 @@ const (
 
 	// 
 	INVALIDPARAMETER_INVALIDRULEENGINETARGETSURL = "InvalidParameter.InvalidRuleEngineTargetsUrl"
+
+	// 
+	INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 
 	// The target URL for URL rewrite is invalid.
 	INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
@@ -118,6 +139,9 @@ const (
 
 	// Parameter error.
 	INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+
+	// Invalid parameter.
+	INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
 
 	// Incorrect domain name configuration.
 	INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
@@ -176,14 +200,56 @@ const (
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
 
+	// 
+	OPERATIONDENIED_DOMAINISBLOCKED = "OperationDenied.DomainIsBlocked"
+
 	// The domain name doesn't have an ICP filing number.
 	OPERATIONDENIED_DOMAINNOICP = "OperationDenied.DomainNoICP"
+
+	// Operation failed: The L4 proxy is blocked.
+	OPERATIONDENIED_L4PROXYINBANNEDSTATUS = "OperationDenied.L4ProxyInBannedStatus"
+
+	// 
+	OPERATIONDENIED_MULTIPLECNAMEZONE = "OperationDenied.MultipleCnameZone"
 
 	// The resource is occupied.
 	RESOURCEINUSE = "ResourceInUse"
 
+	// 
+	RESOURCEINUSE_ALIASDOMAIN = "ResourceInUse.AliasDomain"
+
+	// 
+	RESOURCEINUSE_CNAME = "ResourceInUse.Cname"
+
+	// 
+	RESOURCEINUSE_DNS = "ResourceInUse.Dns"
+
+	// 
+	RESOURCEINUSE_HOST = "ResourceInUse.Host"
+
+	// 
+	RESOURCEINUSE_NS = "ResourceInUse.NS"
+
 	// The resource has been connected to EdgeOne by another user.
 	RESOURCEINUSE_OTHERS = "ResourceInUse.Others"
+
+	// 
+	RESOURCEINUSE_OTHERSALIASDOMAIN = "ResourceInUse.OthersAliasDomain"
+
+	// 
+	RESOURCEINUSE_OTHERSCNAME = "ResourceInUse.OthersCname"
+
+	// 
+	RESOURCEINUSE_OTHERSHOST = "ResourceInUse.OthersHost"
+
+	// 
+	RESOURCEINUSE_OTHERSNS = "ResourceInUse.OthersNS"
+
+	// 
+	RESOURCEINUSE_SELFANDOTHERSCNAME = "ResourceInUse.SelfAndOthersCname"
+
+	// Insufficient resource.
+	RESOURCEINSUFFICIENT = "ResourceInsufficient"
 
 	// The resource doesn’t exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
@@ -206,6 +272,9 @@ const (
 	// The site does not exist or is not belong to this account.
 	RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
 
+	// Unauthorized operation.
+	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
 	// CAM is not authorized.
 	UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 
@@ -217,4 +286,10 @@ const (
 
 	// An unknown error occurred in the backend server.
 	UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+
+	// Unknown parameter error.
+	UNKNOWNPARAMETER = "UnknownParameter"
+
+	// Unsupported operation.
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

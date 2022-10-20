@@ -581,7 +581,7 @@ type McuPublishCdnParam struct {
 	// The URLs of the CDNs to relay to.
 	PublishCdnUrl *string `json:"PublishCdnUrl,omitempty" name:"PublishCdnUrl"`
 
-	// Whether to relay to Tencent Cloud’s CDN. 0 (default): No; 1: Yes. An optimized route will be assigned if you relay to Tencent Cloud’s CDN.
+	// Whether to relay to Tencent Cloud’s CDN. 0 (default): Third-party CDN; 1: Tencent Cloud’s CDN. Note: Relaying to a third-party CDN will incur fees. If you are relaying to Tencent Cloud’s CDN, to avoid incurring fees, be sure to set this parameter to `1`. For details, see the API document.
 	IsTencentCdn *uint64 `json:"IsTencentCdn,omitempty" name:"IsTencentCdn"`
 }
 
@@ -1204,10 +1204,10 @@ type StorageFile struct {
 }
 
 type StorageParams struct {
-	// The third-party cloud storage information (not supported currently).
+	// The account information for third-party cloud storage. This parameter is not available currently. Please use `CloudVod` instead to save files to Tencent Cloud VOD.
 	CloudStorage *CloudStorage `json:"CloudStorage,omitempty" name:"CloudStorage"`
 
-	// The VOD information.
+	// The account information for saving files to Tencent Cloud VOD. This parameter is required. Currently, you can only save files to Tencent Cloud VOD.
 	CloudVod *CloudVod `json:"CloudVod,omitempty" name:"CloudVod"`
 }
 
