@@ -257,6 +257,9 @@ const (
 	// System error. When this error occurs, please contact customer service for assistance.
 	INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 
+	// Failed to enable transactions
+	INTERNALERROR_TRANSACTIOBEGINERROR = "InternalError.TransactioBeginError"
+
 	// Unknown error. When this error occurs, please contact customer service for assistance.
 	INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 

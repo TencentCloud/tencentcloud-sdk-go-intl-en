@@ -320,6 +320,10 @@ type CloneDBInstanceResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BillId *string `json:"BillId,omitempty" name:"BillId"`
 
+	// ID of the cloned instance, which will be returned only when the instance is pay-as-you-go.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -829,6 +833,24 @@ type CreateInstancesRequestParams struct {
 
 	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
 	KMSRegion *string `json:"KMSRegion,omitempty" name:"KMSRegion"`
+
+	// Database engine. Valid values:
+	// 1. `postgresql` (TencentDB for PostgreSQL)
+	// 2. `mssql_compatible`（MSSQL compatible-TencentDB for PostgreSQL)
+	// Default value: `postgresql`
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Configuration information of database engine in the following format:
+	// {"$key1":"$value1", "$key2":"$value2"}
+	// 
+	// Valid values:
+	// 1. mssql_compatible engine：
+	// `migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+	// `defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+	// "af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
+	// `serverCollationName`: Name of collation rule, which can’t be modified after the initialization. Default value: `sql_latin1_general_cp1_ci_as`. Valid values:
+	// "bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+	DBEngineConfig *string `json:"DBEngineConfig,omitempty" name:"DBEngineConfig"`
 }
 
 type CreateInstancesRequest struct {
@@ -914,6 +936,24 @@ type CreateInstancesRequest struct {
 
 	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
 	KMSRegion *string `json:"KMSRegion,omitempty" name:"KMSRegion"`
+
+	// Database engine. Valid values:
+	// 1. `postgresql` (TencentDB for PostgreSQL)
+	// 2. `mssql_compatible`（MSSQL compatible-TencentDB for PostgreSQL)
+	// Default value: `postgresql`
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Configuration information of database engine in the following format:
+	// {"$key1":"$value1", "$key2":"$value2"}
+	// 
+	// Valid values:
+	// 1. mssql_compatible engine：
+	// `migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+	// `defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+	// "af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
+	// `serverCollationName`: Name of collation rule, which can’t be modified after the initialization. Default value: `sql_latin1_general_cp1_ci_as`. Valid values:
+	// "bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+	DBEngineConfig *string `json:"DBEngineConfig,omitempty" name:"DBEngineConfig"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -955,6 +995,8 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "NeedSupportTDE")
 	delete(f, "KMSKeyId")
 	delete(f, "KMSRegion")
+	delete(f, "DBEngine")
+	delete(f, "DBEngineConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -997,9 +1039,6 @@ type CreateReadOnlyDBInstanceRequestParams struct {
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
-	// PostgreSQL kernel version, which must be the same as that of the primary instance
-	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
-
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
 
@@ -1018,7 +1057,10 @@ type CreateReadOnlyDBInstanceRequestParams struct {
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance billing mode. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go). If the source instance is pay-as-you-go, so is the read-only instance.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
 	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
@@ -1061,9 +1103,6 @@ type CreateReadOnlyDBInstanceRequest struct {
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
 
-	// PostgreSQL kernel version, which must be the same as that of the primary instance
-	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
-
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitempty" name:"Storage"`
 
@@ -1082,7 +1121,10 @@ type CreateReadOnlyDBInstanceRequest struct {
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Instance billing mode. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go). If the source instance is pay-as-you-go, so is the read-only instance.
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
 	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
@@ -1132,13 +1174,13 @@ func (r *CreateReadOnlyDBInstanceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "SpecCode")
-	delete(f, "DBVersion")
 	delete(f, "Storage")
 	delete(f, "InstanceCount")
 	delete(f, "Period")
 	delete(f, "MasterDBInstanceId")
 	delete(f, "Zone")
 	delete(f, "ProjectId")
+	delete(f, "DBVersion")
 	delete(f, "InstanceChargeType")
 	delete(f, "AutoVoucher")
 	delete(f, "VoucherIds")
@@ -1671,6 +1713,13 @@ type DBInstance struct {
 	// Whether the instance supports TDE data encryption. Valid values: 0 (no), 1 (yes)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsSupportTDE *int64 `json:"IsSupportTDE,omitempty" name:"IsSupportTDE"`
+
+
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Configuration information of database engine
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBEngineConfig *string `json:"DBEngineConfig,omitempty" name:"DBEngineConfig"`
 }
 
 type DBInstanceNetInfo struct {
@@ -3119,6 +3168,12 @@ func (r *DescribeParamsEventResponse) FromJsonString(s string) error {
 type DescribeProductConfigRequestParams struct {
 	// AZ name
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Database engines. Valid values:
+	// 1. `postgresql` (TencentDB for PostgreSQL)
+	// 2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL)
+	// Default value: `postgresql`
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
 }
 
 type DescribeProductConfigRequest struct {
@@ -3126,6 +3181,12 @@ type DescribeProductConfigRequest struct {
 	
 	// AZ name
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Database engines. Valid values:
+	// 1. `postgresql` (TencentDB for PostgreSQL)
+	// 2. `mssql_compatible` (MSSQL compatible-TencentDB for PostgreSQL)
+	// Default value: `postgresql`
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
 }
 
 func (r *DescribeProductConfigRequest) ToJsonString() string {
@@ -3141,6 +3202,7 @@ func (r *DescribeProductConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Zone")
+	delete(f, "DBEngine")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProductConfigRequest has unknown keys!", "")
 	}
@@ -4023,11 +4085,19 @@ type InquiryPriceCreateDBInstancesRequestParams struct {
 	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+	// [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
 	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
 
 	// Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Instance type. Default value: `primary`. Valid values:
+	// `primary` (dual-server high-availability, one-primary-one-standby)
+	// `readonly` (read-only instance)
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
 }
 
 type InquiryPriceCreateDBInstancesRequest struct {
@@ -4048,11 +4118,18 @@ type InquiryPriceCreateDBInstancesRequest struct {
 	// Length of purchase in months. Currently, only 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, and 36 are supported.
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
-	// Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
+	// [Disused] Billing ID, which can be obtained through the `Pid` field in the returned value of the `DescribeProductConfig` API.
 	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
 
 	// Instance billing type. Valid value: POSTPAID_BY_HOUR (pay-as-you-go)
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Instance type. Default value: `primary`. Valid values:
+	// `primary` (dual-server high-availability, one-primary-one-standby)
+	// `readonly` (read-only instance)
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
 }
 
 func (r *InquiryPriceCreateDBInstancesRequest) ToJsonString() string {
@@ -4074,6 +4151,8 @@ func (r *InquiryPriceCreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Period")
 	delete(f, "Pid")
 	delete(f, "InstanceChargeType")
+	delete(f, "InstanceType")
+	delete(f, "DBEngine")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -4082,13 +4161,13 @@ func (r *InquiryPriceCreateDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceCreateDBInstancesResponseParams struct {
-	// Original price in 0.01 CNY.
+	// Published price in US Cent
 	OriginalPrice *uint64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
-	// Discounted price in 0.01 CNY.
+	// Discounted total amount in US Cent
 	Price *uint64 `json:"Price,omitempty" name:"Price"`
 
-	// Currency, such as USD for US dollar.
+	// Currency, such as USD.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4158,7 +4237,7 @@ type InquiryPriceRenewDBInstanceResponseParams struct {
 	// Actual amount payable; for example, 24650 indicates 246.5 CNY
 	Price *int64 `json:"Price,omitempty" name:"Price"`
 
-	// Currency, such as USD for US dollar.
+	// Currency, such as USD.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4239,10 +4318,10 @@ type InquiryPriceUpgradeDBInstanceResponseParams struct {
 	// Total cost before discount.
 	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
-	// Actual amount payable
+	// Discounted total amount
 	Price *int64 `json:"Price,omitempty" name:"Price"`
 
-	// Currency, such as USD for US dollar.
+	// Currency, such as USD.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -6038,7 +6117,7 @@ type SpecItemInfo struct {
 	// Estimated QPS for this specification
 	Qps *uint64 `json:"Qps,omitempty" name:"Qps"`
 
-	// Billing ID for this specification
+	// (Disused)
 	Pid *uint64 `json:"Pid,omitempty" name:"Pid"`
 
 	// Machine type

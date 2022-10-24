@@ -1389,7 +1389,7 @@ type CreateLoadBalancingRequestParams struct {
 	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
 
 	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it’s not specified, the default value 600 will be used.
+	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
 
@@ -1420,7 +1420,7 @@ type CreateLoadBalancingRequest struct {
 	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
 
 	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it’s not specified, the default value 600 will be used.
+	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
@@ -11691,7 +11691,7 @@ type ModifyLoadBalancingRequestParams struct {
 	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
 
 	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it’s not specified, the default value 600 will be used.
+	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
 
@@ -11722,7 +11722,7 @@ type ModifyLoadBalancingRequest struct {
 	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
 
 	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it’s not specified, the default value 600 will be used.
+	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
