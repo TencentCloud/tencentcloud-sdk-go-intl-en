@@ -496,6 +496,18 @@ type BackupInfo struct {
 
 	// Backup retention type. Valid values: `save_mode_regular` (non-archive backup), save_mode_period`(archive backup).
 	SaveMode *string `json:"SaveMode,omitempty" name:"SaveMode"`
+
+	// The region where local backup resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Detailed information of remote backups
+	RemoteInfo []*RemoteBackupInfo `json:"RemoteInfo,omitempty" name:"RemoteInfo"`
+
+	// Storage method. Valid values: `0` (regular storage), `1`(archive storage). Default value: `0`.
+	CosStorageType *int64 `json:"CosStorageType,omitempty" name:"CosStorageType"`
+
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type BackupItem struct {
@@ -658,6 +670,21 @@ type BinlogInfo struct {
 
 	// Binlog file end time
 	BinlogFinishTime *string `json:"BinlogFinishTime,omitempty" name:"BinlogFinishTime"`
+
+	// The region where the binlog file resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Backup task status. Valid values: `SUCCESS` (backup succeeded), `FAILED` (backup failed), `RUNNING` (backup is in progress).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The detailed information of remote binlog backups
+	RemoteInfo []*RemoteBackupInfo `json:"RemoteInfo,omitempty" name:"RemoteInfo"`
+
+	// Storage method. Valid values: `0` (regular storage), `1`(archive storage). Default value: `0`.
+	CosStorageType *int64 `json:"CosStorageType,omitempty" name:"CosStorageType"`
+
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type CdbRegionSellConf struct {
@@ -2800,6 +2827,18 @@ type DescribeBackupConfigResponseParams struct {
 	// The start time in the format: yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
 	StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitempty" name:"StartBackupPeriodSaveDate"`
 
+	// Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBackupArchive *string `json:"EnableBackupArchive,omitempty" name:"EnableBackupArchive"`
+
+	// The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+	BackupArchiveDays *int64 `json:"BackupArchiveDays,omitempty" name:"BackupArchiveDays"`
+
+	// Whether to enable the archive backup of logs. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitempty" name:"EnableBinlogArchive"`
+
+	// The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+	BinlogArchiveDays *int64 `json:"BinlogArchiveDays,omitempty" name:"BinlogArchiveDays"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2931,6 +2970,14 @@ type DescribeBackupOverviewResponseParams struct {
 
 	// Backup capacity in the free tier of a user in the current region.
 	FreeVolume *int64 `json:"FreeVolume,omitempty" name:"FreeVolume"`
+
+	// Total capacity of backups of a user in the current region
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RemoteBackupVolume *int64 `json:"RemoteBackupVolume,omitempty" name:"RemoteBackupVolume"`
+
+	// Archive backup capacity, which includes data backups and log backups.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BackupArchiveVolume *int64 `json:"BackupArchiveVolume,omitempty" name:"BackupArchiveVolume"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3159,6 +3206,12 @@ type DescribeBinlogBackupOverviewResponseParams struct {
 
 	// Number of remote backups
 	RemoteBinlogCount *int64 `json:"RemoteBinlogCount,omitempty" name:"RemoteBinlogCount"`
+
+	// Capacity of archive log backups in bytes
+	BinlogArchiveVolume *int64 `json:"BinlogArchiveVolume,omitempty" name:"BinlogArchiveVolume"`
+
+	// Number of archived log backups
+	BinlogArchiveCount *int64 `json:"BinlogArchiveCount,omitempty" name:"BinlogArchiveCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4496,11 +4549,17 @@ type DescribeDataBackupOverviewResponseParams struct {
 	// Total number of manual backups in the current region.
 	ManualBackupCount *int64 `json:"ManualBackupCount,omitempty" name:"ManualBackupCount"`
 
-	// Total capacity of remote backups in the current region
+	// Total capacity of remote backups
 	RemoteBackupVolume *int64 `json:"RemoteBackupVolume,omitempty" name:"RemoteBackupVolume"`
 
-	// Total number of remote backups in the current region
+	// Total number of remote backups
 	RemoteBackupCount *int64 `json:"RemoteBackupCount,omitempty" name:"RemoteBackupCount"`
+
+	// Total capacity of archive backups in the current region
+	DataBackupArchiveVolume *int64 `json:"DataBackupArchiveVolume,omitempty" name:"DataBackupArchiveVolume"`
+
+	// Total number of archive backups in the current region
+	DataBackupArchiveCount *int64 `json:"DataBackupArchiveCount,omitempty" name:"DataBackupArchiveCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -7439,6 +7498,18 @@ type ModifyBackupConfigRequestParams struct {
 
 	// The start time in the format of yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
 	StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitempty" name:"StartBackupPeriodSaveDate"`
+
+	// Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBackupArchive *string `json:"EnableBackupArchive,omitempty" name:"EnableBackupArchive"`
+
+	// The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+	BackupArchiveDays *int64 `json:"BackupArchiveDays,omitempty" name:"BackupArchiveDays"`
+
+	// The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+	BinlogArchiveDays *int64 `json:"BinlogArchiveDays,omitempty" name:"BinlogArchiveDays"`
+
+	// Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitempty" name:"EnableBinlogArchive"`
 }
 
 type ModifyBackupConfigRequest struct {
@@ -7479,6 +7550,18 @@ type ModifyBackupConfigRequest struct {
 
 	// The start time in the format of yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
 	StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitempty" name:"StartBackupPeriodSaveDate"`
+
+	// Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBackupArchive *string `json:"EnableBackupArchive,omitempty" name:"EnableBackupArchive"`
+
+	// The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+	BackupArchiveDays *int64 `json:"BackupArchiveDays,omitempty" name:"BackupArchiveDays"`
+
+	// The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
+	BinlogArchiveDays *int64 `json:"BinlogArchiveDays,omitempty" name:"BinlogArchiveDays"`
+
+	// Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitempty" name:"EnableBinlogArchive"`
 }
 
 func (r *ModifyBackupConfigRequest) ToJsonString() string {
@@ -7505,6 +7588,10 @@ func (r *ModifyBackupConfigRequest) FromJsonString(s string) error {
 	delete(f, "BackupPeriodSaveInterval")
 	delete(f, "BackupPeriodSaveCount")
 	delete(f, "StartBackupPeriodSaveDate")
+	delete(f, "EnableBackupArchive")
+	delete(f, "BackupArchiveDays")
+	delete(f, "BinlogArchiveDays")
+	delete(f, "EnableBinlogArchive")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupConfigRequest has unknown keys!", "")
 	}
@@ -9554,6 +9641,26 @@ func (r *ReloadBalanceProxyNodeResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ReloadBalanceProxyNodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RemoteBackupInfo struct {
+	// ID of the remote backup subtask
+	SubBackupId []*int64 `json:"SubBackupId,omitempty" name:"SubBackupId"`
+
+	// The region where the remote backup resides
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Backup task status. Valid values: `SUCCESS` (backup succeeded), `FAILED` (backup failed), `RUNNING` (backup is in progress).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The start time of remote backup
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time of remote backup
+	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+
+	// The download address
+	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 // Predefined struct for user
