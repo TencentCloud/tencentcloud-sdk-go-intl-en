@@ -50,6 +50,9 @@ const (
 	// Failed to query the refund: the payment order is not found. Check whether the instance `ins-xxxxxxx` has expired.
 	FAILEDOPERATION_INQUIRYREFUNDPRICEFAILED = "FailedOperation.InquiryRefundPriceFailed"
 
+	// The image is busy. Please try again later.
+	FAILEDOPERATION_INVALIDIMAGESTATE = "FailedOperation.InvalidImageState"
+
 	// The EMR instance `ins-xxxxxxxx` does not support this operation.
 	FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
 
@@ -290,7 +293,7 @@ const (
 	// The specified bandwidth package does not exist.
 	INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDNOTFOUND = "InvalidParameterValue.BandwidthPackageIdNotFound"
 
-	// 
+	// Only VPC is supported. The network type of the instance is classic network, which cannot be changed.
 	INVALIDPARAMETERVALUE_BASICNETWORKINSTANCEFAMILY = "InvalidParameterValue.BasicNetworkInstanceFamily"
 
 	// The bucket does not exist.
@@ -338,7 +341,7 @@ const (
 	// Incorrect request parameter format.
 	INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
 
-	// 
+	// Invalid instance ID. Please enter a valid ID, such as ins-xxxxxxxx (“x” represents a lower-case letter or a number).
 	INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 
 	// The specified instance type does not exist.
@@ -707,8 +710,11 @@ const (
 	// The specified instance or network cannot use the bandwidth package.
 	UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 
-	// 
+	// An ENI is bound to the CVM. Please unbind the ENI from the CVM before switching to VPC.
 	UNSUPPORTEDOPERATION_ELASTICNETWORKINTERFACE = "UnsupportedOperation.ElasticNetworkInterface"
+
+	// Encrypted images are not supported.
+	UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
 
 	// You cannot change the model of a heterogeneous instance.
 	UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
@@ -752,7 +758,7 @@ const (
 	// Unable to isolate: the instance is isolated
 	UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 
-	// 
+	// The instance is failed to create, so the operation is not supported.
 	UNSUPPORTEDOPERATION_INSTANCESTATELAUNCHFAILED = "UnsupportedOperation.InstanceStateLaunchFailed"
 
 	// The instances are being created, and this operation is not supported.
@@ -821,6 +827,9 @@ const (
 	// The custom images created with the market images cannot be exported.
 	UNSUPPORTEDOPERATION_MARKETIMAGEEXPORTUNSUPPORTED = "UnsupportedOperation.MarketImageExportUnsupported"
 
+	// Encryption attributes of system disk cannot be modified. For example, you cannot reinstall the encrypted instance with a non-encrypted image.
+	UNSUPPORTEDOPERATION_MODIFYENCRYPTIONNOTSUPPORTED = "UnsupportedOperation.ModifyEncryptionNotSupported"
+
 	// An instance bound with CLB does not support modifying its VPC attributes.
 	UNSUPPORTEDOPERATION_MODIFYVPCWITHCLB = "UnsupportedOperation.ModifyVPCWithCLB"
 
@@ -847,6 +856,12 @@ const (
 
 	// This image does not support instance reinstallation.
 	UNSUPPORTEDOPERATION_RAWLOCALDISKINSREINSTALLTOQCOW2 = "UnsupportedOperation.RawLocalDiskInsReinstalltoQcow2"
+
+	// An instance with an enterprise operating system installed cannot be returned.
+	UNSUPPORTEDOPERATION_REDHATINSTANCETERMINATEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceTerminateUnsupported"
+
+	// The operating system of the instance is RedHat, so this operation is not supported.
+	UNSUPPORTEDOPERATION_REDHATINSTANCEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceUnsupported"
 
 	// The region is unsupported.
 	UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"

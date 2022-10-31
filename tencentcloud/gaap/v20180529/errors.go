@@ -164,7 +164,7 @@ const (
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
-	// 
+	// Mismatch between the certificate and the private key
 	INVALIDPARAMETERVALUE_CERTIFICATECONTENTNOTMATCHKEY = "InvalidParameterValue.CertificateContentNotMatchKey"
 
 	// The HTTP certificate does not match the domain name.

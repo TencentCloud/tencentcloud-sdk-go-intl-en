@@ -213,6 +213,9 @@ type AdaptiveDynamicStreamingTemplate struct {
 
 	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The segment type. This parameter is valid only if `Format` is `HLS`.
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 type AdaptiveStreamTemplate struct {
@@ -2962,6 +2965,12 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The segment type. This parameter is valid only if `Format` is `HLS`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	// Default: ts
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 type CreateAdaptiveDynamicStreamingTemplateRequest struct {
@@ -3009,6 +3018,12 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The segment type. This parameter is valid only if `Format` is `HLS`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	// Default: ts
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 func (r *CreateAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
@@ -3032,6 +3047,7 @@ func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	delete(f, "DisableHigherVideoBitrate")
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "Comment")
+	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAdaptiveDynamicStreamingTemplateRequest has unknown keys!", "")
 	}
@@ -4448,6 +4464,12 @@ type CreateTranscodeTemplateRequestParams struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	// Default: ts
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 type CreateTranscodeTemplateRequest struct {
@@ -4485,6 +4507,12 @@ type CreateTranscodeTemplateRequest struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	// Default: ts
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 func (r *CreateTranscodeTemplateRequest) ToJsonString() string {
@@ -4508,6 +4536,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
+	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -11664,6 +11693,11 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The segment type. This parameter is valid only if `Format` is `HLS`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
@@ -11699,6 +11733,11 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The segment type. This parameter is valid only if `Format` is `HLS`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
@@ -11721,6 +11760,7 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "StreamInfos")
 	delete(f, "Comment")
+	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAdaptiveDynamicStreamingTemplateRequest has unknown keys!", "")
 	}
@@ -13315,6 +13355,11 @@ type ModifyTranscodeTemplateRequestParams struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 type ModifyTranscodeTemplateRequest struct {
@@ -13353,6 +13398,11 @@ type ModifyTranscodeTemplateRequest struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// The segment type. This parameter is valid only if `Container` is `hls`. Valid values:
+	// <li>ts: TS segment</li>
+	// <li>fmp4: fMP4 segment</li>
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 func (r *ModifyTranscodeTemplateRequest) ToJsonString() string {
@@ -13377,6 +13427,7 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplate")
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
+	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -16776,11 +16827,12 @@ type StatDataItem struct {
 	// <li>For data at daily level, `2019-08-22T00:00:00+08:00` indicates statistics on August 22, 2019.</li>
 	Time *string `json:"Time,omitempty" name:"Time"`
 
-	// Data size.
+	// The data size.
 	// <li>Storage capacity in bytes.</li>
 	// <li>Transcoding duration in seconds.</li>
 	// <li>Traffic in bytes.</li>
 	// <li>Bandwidth in bps.</li>
+	// <li>Live stream clip duration in seconds.</li>
 	Value *int64 `json:"Value,omitempty" name:"Value"`
 }
 
@@ -17426,6 +17478,9 @@ type TranscodeTemplate struct {
 
 	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The segment type. This parameter is valid only if `Container` is `hls`
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
 }
 
 type TransitionOpertion struct {

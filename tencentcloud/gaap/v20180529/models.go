@@ -5833,6 +5833,14 @@ type HTTPListener struct {
 	// 3: adjusting origin server;
 	// 4: modifying configuration.
 	ListenerStatus *uint64 `json:"ListenerStatus,omitempty" name:"ListenerStatus"`
+
+	// Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 type HTTPSListener struct {
@@ -5893,6 +5901,14 @@ type HTTPSListener struct {
 	// If HTTP3 is supported for a connection, the listener will use the port that is originally accessed to UDP, and a UDP listener with the same port cannot be created.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Http3Supported *int64 `json:"Http3Supported,omitempty" name:"Http3Supported"`
+
+	// Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 type HttpHeaderParam struct {
@@ -8519,6 +8535,14 @@ type TCPListener struct {
 	// Specifies whether to enable session persistence. Values: `0` (disable), `1` (enable)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SessionPersist *uint64 `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 type TagPair struct {
@@ -8627,4 +8651,12 @@ type UDPListener struct {
 	// The UDP message received by the health probe port. This parameter is used only when `CheckType = PORT`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
+
+	// Connection ID of the listener. A null value is returned if the listener is associated with the connection group.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
+
+	// Connection group ID of the listener. A null value is returned if the listener is associated with a specific connection.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
