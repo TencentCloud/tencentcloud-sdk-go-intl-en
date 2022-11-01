@@ -7650,6 +7650,9 @@ type GetMonitorDataResponseParams struct {
 	// End time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
+	// Returned message
+	Msg *string `json:"Msg,omitempty" name:"Msg"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -9364,6 +9367,10 @@ type PrometheusInstancesItem struct {
 	// The recording rule limit
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RecordingRuleLimit *int64 `json:"RecordingRuleLimit,omitempty" name:"RecordingRuleLimit"`
+
+	// Migration status. 0: Not migrating; 1: Migrating from source instance; 2: Migrating to target instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MigrationType *int64 `json:"MigrationType,omitempty" name:"MigrationType"`
 }
 
 type PrometheusRuleKV struct {
