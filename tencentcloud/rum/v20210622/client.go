@@ -425,6 +425,7 @@ func NewCreateTawInstanceResponse() (response *CreateTawInstanceResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateTawInstance(request *CreateTawInstanceRequest) (response *CreateTawInstanceResponse, err error) {
     return c.CreateTawInstanceWithContext(context.Background(), request)
 }
@@ -437,6 +438,7 @@ func (c *Client) CreateTawInstance(request *CreateTawInstanceRequest) (response 
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateTawInstanceWithContext(ctx context.Context, request *CreateTawInstanceRequest) (response *CreateTawInstanceResponse, err error) {
     if request == nil {
         request = NewCreateTawInstanceRequest()
@@ -642,6 +644,7 @@ func NewDeleteLogExportResponse() (response *DeleteLogExportResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteLogExport(request *DeleteLogExportRequest) (response *DeleteLogExportResponse, err error) {
     return c.DeleteLogExportWithContext(context.Background(), request)
 }
@@ -659,6 +662,7 @@ func (c *Client) DeleteLogExport(request *DeleteLogExportRequest) (response *Del
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteLogExportWithContext(ctx context.Context, request *DeleteLogExportRequest) (response *DeleteLogExportResponse, err error) {
     if request == nil {
         request = NewDeleteLogExportRequest()
@@ -1410,7 +1414,7 @@ func NewDescribeDataFetchProjectResponse() (response *DescribeDataFetchProjectRe
 }
 
 // DescribeDataFetchProject
-// This API is used to get the DescribeDataFetchProject information.
+// This API is used to get the `DescribeDataFetchProject` information and has been deprecated. Use `DescribeDataFetchUrl` instead.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1440,7 +1444,7 @@ func (c *Client) DescribeDataFetchProject(request *DescribeDataFetchProjectReque
 }
 
 // DescribeDataFetchProject
-// This API is used to get the DescribeDataFetchProject information.
+// This API is used to get the `DescribeDataFetchProject` information and has been deprecated. Use `DescribeDataFetchUrl` instead.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

@@ -545,6 +545,68 @@ func (c *Client) ClearInstanceWithContext(ctx context.Context, request *ClearIns
     return
 }
 
+func NewCloseSSLRequest() (request *CloseSSLRequest) {
+    request = &CloseSSLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "CloseSSL")
+    
+    
+    return
+}
+
+func NewCloseSSLResponse() (response *CloseSSLResponse) {
+    response = &CloseSSLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CloseSSL
+// This API is used to disable SSL.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) CloseSSL(request *CloseSSLRequest) (response *CloseSSLResponse, err error) {
+    return c.CloseSSLWithContext(context.Background(), request)
+}
+
+// CloseSSL
+// This API is used to disable SSL.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) CloseSSLWithContext(ctx context.Context, request *CloseSSLRequest) (response *CloseSSLResponse, err error) {
+    if request == nil {
+        request = NewCloseSSLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseSSL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseSSLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateInstanceAccountRequest() (request *CreateInstanceAccountRequest) {
     request = &CreateInstanceAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3975,6 +4037,7 @@ func NewModifyNetworkConfigResponse() (response *ModifyNetworkConfigResponse) {
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKEDERROR = "ResourceUnavailable.InstanceLockedError"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
@@ -3992,6 +4055,7 @@ func (c *Client) ModifyNetworkConfig(request *ModifyNetworkConfigRequest) (respo
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKEDERROR = "ResourceUnavailable.InstanceLockedError"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
@@ -4063,6 +4127,68 @@ func (c *Client) ModifyParamTemplateWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenSSLRequest() (request *OpenSSLRequest) {
+    request = &OpenSSLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "OpenSSL")
+    
+    
+    return
+}
+
+func NewOpenSSLResponse() (response *OpenSSLResponse) {
+    response = &OpenSSLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// OpenSSL
+// This API is used to enable SSL.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) OpenSSL(request *OpenSSLRequest) (response *OpenSSLResponse, err error) {
+    return c.OpenSSLWithContext(context.Background(), request)
+}
+
+// OpenSSL
+// This API is used to enable SSL.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) OpenSSLWithContext(ctx context.Context, request *OpenSSLRequest) (response *OpenSSLResponse, err error) {
+    if request == nil {
+        request = NewOpenSSLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenSSL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenSSLResponse()
     err = c.Send(request, response)
     return
 }

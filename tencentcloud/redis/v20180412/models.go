@@ -172,7 +172,7 @@ func (r *ApplyParamsTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// ID of the security group to be associated in the format of sg-efil73jd.
@@ -185,7 +185,7 @@ type AssociateSecurityGroupsRequestParams struct {
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
 	// ID of the security group to be associated in the format of sg-efil73jd.
@@ -600,6 +600,63 @@ func (r *ClearInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ClearInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseSSLRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type CloseSSLRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *CloseSSLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseSSLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseSSLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseSSLResponseParams struct {
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CloseSSLResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseSSLResponseParams `json:"Response"`
+}
+
+func (r *CloseSSLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseSSLResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2812,64 +2869,64 @@ func (r *DescribeInstanceZoneInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
-	// Number of returned results. Default value: 20. Maximum value: 1000.
+	// Number of instances. Default value: 20. Maximum value: 1000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Instance ID, such as crs-6ubhgouj
+	// Instance ID, such as crs-6ubhgouj.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Enumerated values: projectId, createtime, instancename, type, curDeadline
+	// Instance sorting criteria. The enumerated values are as listed below: <ul><li>projectId: Project ID. </li><li>createtime: Instance creation time. </li><li>instancename: Instance name. </li><li>type: Instance type. </li><li>curDeadline: Instance expiration time. </li></ul>
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// 1: reverse; 0: sequential; reverse by default
+	// Instance sorting order. <ul><li>`1`: Descending. </li><li>`0`: Ascending. Default value: `1`.</li></ul>
 	OrderType *int64 `json:"OrderType,omitempty" name:"OrderType"`
 
-	// Array of VPC IDs such as 47525. The array subscript starts from 0. If this parameter is not passed in, the classic network will be selected by default
+	// Array of VPC IDs such as 47525. If this parameter is not passed in or the array is empty, the classic network will be selected by default. This parameter is retained and can be ignored. It is set based on `UniqVpcIds` parameter format.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
-	// Array of subnet IDs such as 56854. The array subscript starts from 0.
+	// Array of VPC subnet IDs such as 56854. This parameter is retained and can be ignored. It is set based on `UniqSubnetIds` parameter format.
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
-	// Array of project IDs. The array subscript starts from 0.
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
-
-	// ID of the instance to be searched for.
+	// Keywords for fuzzy query. which can be used to fuzzy query an instance by its ID or name.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Array of project IDs
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Array of VPC IDs such as vpc-sad23jfdfk. The array subscript starts from 0. If this parameter is not passed in, the classic network will be selected by default
+	// Array of VPC IDs such as vpc-sad23jfdfk. If this parameter is not passed in or or the array is empty, the classic network will be selected by default.
 	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds"`
 
-	// Array of subnet IDs such as subnet-fdj24n34j2. The array subscript starts from 0.
+	// Array of VPC subnet IDs such as subnet-fdj24n34j2
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds"`
 
-	// Region ID, which has already been disused. The corresponding region can be queried through the common parameter `Region`.
+	// Array of region IDs (disused). The corresponding region can be queried through the common parameter `Region`.
 	RegionIds []*int64 `json:"RegionIds,omitempty" name:"RegionIds"`
 
-	// Instance status. 0: to be initialized; 1: in process; 2: running; -2: isolated; -3: to be deleted
+	// Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
 	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
-	// Type edition. 1: Standalone Edition; 2: Master-Replica Edition; 3: Cluster Edition
+	// Instance architecture. <ul><li>`1`: Standalone edition. </li><li>`2`: Master-replica edition. </li><li>`3`: Cluster edition. </li></ul>
 	TypeVersion *int64 `json:"TypeVersion,omitempty" name:"TypeVersion"`
 
-	// Engine information: Redis-2.8, Redis-4.0, CKV
+	// Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
 	EngineName *string `json:"EngineName,omitempty" name:"EngineName"`
 
-	// Renewal mode. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+	// Renewal mode. <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: No auto-renewal (set by user)</ul>
 	AutoRenew []*int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
-	// Billing mode. postpaid: pay-as-you-go; prepaid: monthly subscription
+	// Billing mode. Only pay-as-you-go billing is supported.
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Replica Edition, 3: CKV Master-Replica Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Replica Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Replica Edition, 9: Redis 5.0 Cluster Edition
+	// Instance type. <ul><li>`1`: Legacy Redis cluster edition. </li><li>`2`: Redis 2.8 master-replica edition. </li><li>`3`: CKV master-replica edition. </li><li>`4`: CKV cluster edition. </li><li>`5`: Redis 2.8 standalone edition. </li><li>`6`: Redis 4.0 master-replica edition. </li><li>`7`: Redis 4.0 cluster edition. </li><li>8: Redis 5.0 master-replica edition. </li><li>`9`: Redis 5.0 cluster edition. </li></ul>
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
-	// Search keywords, which can be instance ID, instance name, or complete IP.
+	// Array of the search keywords, which can query the instance by its ID, name, IP address.
 	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys"`
 
 	// Internal parameter, which can be ignored.
@@ -2878,80 +2935,83 @@ type DescribeInstancesRequestParams struct {
 	// Internal parameter, which can be ignored.
 	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
 
-	// Filters resources by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
+	// Resources filter by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
 	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
-	// Filters resources by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
+	// Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
-	// Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
+	// Instance product version. If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default. <ul><li>`local`: local disk edition. </li><li>`cloud`: Cloud disk edition. </li><li>`cdc`: Dedicated cluster edition. </li></ul>
 	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
 
-	// The specified instances for batch query
+	// Batch query of the specified instances ID. The number of results returned is based on `Limit`.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// AZ deployment mode. <ul><li>`singleaz`: Single-AZ. </li><li>`1`: Multi-AZ. </li></ul>
+	AzMode *string `json:"AzMode,omitempty" name:"AzMode"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number of returned results. Default value: 20. Maximum value: 1000.
+	// Number of instances. Default value: 20. Maximum value: 1000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Instance ID, such as crs-6ubhgouj
+	// Instance ID, such as crs-6ubhgouj.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Enumerated values: projectId, createtime, instancename, type, curDeadline
+	// Instance sorting criteria. The enumerated values are as listed below: <ul><li>projectId: Project ID. </li><li>createtime: Instance creation time. </li><li>instancename: Instance name. </li><li>type: Instance type. </li><li>curDeadline: Instance expiration time. </li></ul>
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// 1: reverse; 0: sequential; reverse by default
+	// Instance sorting order. <ul><li>`1`: Descending. </li><li>`0`: Ascending. Default value: `1`.</li></ul>
 	OrderType *int64 `json:"OrderType,omitempty" name:"OrderType"`
 
-	// Array of VPC IDs such as 47525. The array subscript starts from 0. If this parameter is not passed in, the classic network will be selected by default
+	// Array of VPC IDs such as 47525. If this parameter is not passed in or the array is empty, the classic network will be selected by default. This parameter is retained and can be ignored. It is set based on `UniqVpcIds` parameter format.
 	VpcIds []*string `json:"VpcIds,omitempty" name:"VpcIds"`
 
-	// Array of subnet IDs such as 56854. The array subscript starts from 0.
+	// Array of VPC subnet IDs such as 56854. This parameter is retained and can be ignored. It is set based on `UniqSubnetIds` parameter format.
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
 
-	// Array of project IDs. The array subscript starts from 0.
-	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
-
-	// ID of the instance to be searched for.
+	// Keywords for fuzzy query. which can be used to fuzzy query an instance by its ID or name.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+
+	// Array of project IDs
+	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Array of VPC IDs such as vpc-sad23jfdfk. The array subscript starts from 0. If this parameter is not passed in, the classic network will be selected by default
+	// Array of VPC IDs such as vpc-sad23jfdfk. If this parameter is not passed in or or the array is empty, the classic network will be selected by default.
 	UniqVpcIds []*string `json:"UniqVpcIds,omitempty" name:"UniqVpcIds"`
 
-	// Array of subnet IDs such as subnet-fdj24n34j2. The array subscript starts from 0.
+	// Array of VPC subnet IDs such as subnet-fdj24n34j2
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitempty" name:"UniqSubnetIds"`
 
-	// Region ID, which has already been disused. The corresponding region can be queried through the common parameter `Region`.
+	// Array of region IDs (disused). The corresponding region can be queried through the common parameter `Region`.
 	RegionIds []*int64 `json:"RegionIds,omitempty" name:"RegionIds"`
 
-	// Instance status. 0: to be initialized; 1: in process; 2: running; -2: isolated; -3: to be deleted
+	// Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
 	Status []*int64 `json:"Status,omitempty" name:"Status"`
 
-	// Type edition. 1: Standalone Edition; 2: Master-Replica Edition; 3: Cluster Edition
+	// Instance architecture. <ul><li>`1`: Standalone edition. </li><li>`2`: Master-replica edition. </li><li>`3`: Cluster edition. </li></ul>
 	TypeVersion *int64 `json:"TypeVersion,omitempty" name:"TypeVersion"`
 
-	// Engine information: Redis-2.8, Redis-4.0, CKV
+	// Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
 	EngineName *string `json:"EngineName,omitempty" name:"EngineName"`
 
-	// Renewal mode. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
+	// Renewal mode. <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: No auto-renewal (set by user)</ul>
 	AutoRenew []*int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
-	// Billing mode. postpaid: pay-as-you-go; prepaid: monthly subscription
+	// Billing mode. Only pay-as-you-go billing is supported.
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance type. 1: legacy Redis Cluster Edition, 2: Redis 2.8 Master-Replica Edition, 3: CKV Master-Replica Edition, 4: CKV Cluster Edition, 5: Redis 2.8 Standalone Edition, 6: Redis 4.0 Master-Replica Edition, 7: Redis 4.0 Cluster Edition, 8: Redis 5.0 Master-Replica Edition, 9: Redis 5.0 Cluster Edition
+	// Instance type. <ul><li>`1`: Legacy Redis cluster edition. </li><li>`2`: Redis 2.8 master-replica edition. </li><li>`3`: CKV master-replica edition. </li><li>`4`: CKV cluster edition. </li><li>`5`: Redis 2.8 standalone edition. </li><li>`6`: Redis 4.0 master-replica edition. </li><li>`7`: Redis 4.0 cluster edition. </li><li>8: Redis 5.0 master-replica edition. </li><li>`9`: Redis 5.0 cluster edition. </li></ul>
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
-	// Search keywords, which can be instance ID, instance name, or complete IP.
+	// Array of the search keywords, which can query the instance by its ID, name, IP address.
 	SearchKeys []*string `json:"SearchKeys,omitempty" name:"SearchKeys"`
 
 	// Internal parameter, which can be ignored.
@@ -2960,17 +3020,20 @@ type DescribeInstancesRequest struct {
 	// Internal parameter, which can be ignored.
 	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
 
-	// Filters resources by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
+	// Resources filter by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
 	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
-	// Filters resources by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
+	// Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
-	// Product editions to be filtered. Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). If this parameter is not passed in, the product will not be filtered by default.
+	// Instance product version. If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default. <ul><li>`local`: local disk edition. </li><li>`cloud`: Cloud disk edition. </li><li>`cdc`: Dedicated cluster edition. </li></ul>
 	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
 
-	// The specified instances for batch query
+	// Batch query of the specified instances ID. The number of results returned is based on `Limit`.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// AZ deployment mode. <ul><li>`singleaz`: Single-AZ. </li><li>`1`: Multi-AZ. </li></ul>
+	AzMode *string `json:"AzMode,omitempty" name:"AzMode"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -2992,8 +3055,8 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "OrderType")
 	delete(f, "VpcIds")
 	delete(f, "SubnetIds")
-	delete(f, "ProjectIds")
 	delete(f, "SearchKey")
+	delete(f, "ProjectIds")
 	delete(f, "InstanceName")
 	delete(f, "UniqVpcIds")
 	delete(f, "UniqSubnetIds")
@@ -3011,6 +3074,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "TagKeys")
 	delete(f, "ProductVersions")
 	delete(f, "InstanceIds")
+	delete(f, "AzMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
@@ -3019,7 +3083,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesResponseParams struct {
-	// Number of instances
+	// Total number of instances
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// List of instance details
@@ -3371,16 +3435,16 @@ func (r *DescribeProjectSecurityGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProjectSecurityGroupsRequestParams struct {
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Project ID.
+	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Offset.
+	// Offset, which is an integral multiple of `Limit`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be pulled. Default value: 20
+	// The number of security groups to be pulled. Default value: `20`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Search criteria. You can enter a security group ID or name.
@@ -3390,16 +3454,16 @@ type DescribeProjectSecurityGroupsRequestParams struct {
 type DescribeProjectSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Project ID.
+	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Offset.
+	// Offset, which is an integral multiple of `Limit`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be pulled. Default value: 20
+	// The number of security groups to be pulled. Default value: `20`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Search criteria. You can enter a security group ID or name.
@@ -4210,10 +4274,10 @@ func (r *DisableReplicaReadonlyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DisassociateSecurityGroupsRequestParams struct {
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Security group ID.
+	// Security group ID
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// List of instance IDs, which is an array of one or more instance IDs.
@@ -4223,10 +4287,10 @@ type DisassociateSecurityGroupsRequestParams struct {
 type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Security group ID.
+	// Security group ID
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
 	// List of instance IDs, which is an array of one or more instance IDs.
@@ -4840,31 +4904,31 @@ type InstanceSet struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User `Appid`
+	// User's Appid
 	Appid *int64 `json:"Appid,omitempty" name:"Appid"`
 
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan
+	// Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan.
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Region ID
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// VPC ID, such as 75101
+	// VPC ID, such as 75101.
 	VpcId *int64 `json:"VpcId,omitempty" name:"VpcId"`
 
-	// VPC subnet ID, such as 46315
+	// VPC subnet ID, such as 46315.
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Current instance status. 0: to be initialized; 1: instance in process; 2: instance running; -2: instance isolated; -3: instance to be deleted
+	// Current instance status. <ul><li>`0`: To be initialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Instance VIP
 	WanIp *string `json:"WanIp,omitempty" name:"WanIp"`
 
-	// Port number of the instance
+	// Port number of an instance
 	Port *int64 `json:"Port,omitempty" name:"Port"`
 
 	// Instance creation time
@@ -4876,37 +4940,37 @@ type InstanceSet struct {
 	// This field has been disused
 	SizeUsed *float64 `json:"SizeUsed,omitempty" name:"SizeUsed"`
 
-	// Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture)
+	// Instance type. <ul><li>`1`: Redis 2.8 memory edition in cluster architecture. </li><li>`2`: Redis 2.8 memory edition in standard architecture. </li><li>`3`: CKV 3.2 memory edition in standard architecture. </li><li>`4`: CKV 3.2 memory edition in cluster architecture. </li><li>`5`: Redis 2.8 memory edition in standalone architecture. </li></li><li>`6`: Redis 4.0 memory edition in standard architecture. </li></li><li>`7`: Redis 4.0 memory edition in cluster architecture. </li></li><li>`8`: Redis 5.0 memory edition in standard architecture. </li></li><li>`9`: Redis 5.0 memory edition in cluster architecture. </li></ul>
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
-	// Whether to set the auto-renewal flag for the instance. 1: yes; 0: no
+	// Whether to set the auto-renewal flag for an instance. <ul><li>`1`: Auto-renewal set. </li><li>`0`: Auto-renewal not set.</li></ul>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
 	// Instance expiration time
 	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
 
-	// Engine: Redis Community Edition, Tencent Cloud CKV
+	// Engine: Redis community edition, Tencent Cloud CKV
 	Engine *string `json:"Engine,omitempty" name:"Engine"`
 
-	// Instance type. Valid values: standalone (Standard Edition); cluster (Cluster Edition)
+	// Product type. <ul><li>`standalone`: Standard edition. </li><li>`cluster`: Cluster edition. </li></ul>
 	ProductType *string `json:"ProductType,omitempty" name:"ProductType"`
 
-	// VPC ID, such as vpc-fk33jsf43kgv
+	// VPC ID, such as vpc-fk33jsf43kgv.
 	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID, such as subnet-fd3j6l35mm0
+	// VPC subnet ID, such as subnet-fd3j6l35mm0.
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Billing mode. 0: pay-as-you-go; 1: monthly subscription
+	// Billing mode. Only pay-as-you-go billing is supported.
 	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Description of the instance status, such as "instance running"
+	// Description of an instance status, such as "Running".
 	InstanceTitle *string `json:"InstanceTitle,omitempty" name:"InstanceTitle"`
 
-	// Planned elimination time
+	// Scheduled deactivation time
 	OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
 
-	// Sub-status returned for the instance in process
+	// Sub-status returned for an instance in process
 	SubStatus *int64 `json:"SubStatus,omitempty" name:"SubStatus"`
 
 	// Anti-affinity tag
@@ -4930,72 +4994,96 @@ type InstanceSet struct {
 	// Isolation time
 	CloseTime *string `json:"CloseTime,omitempty" name:"CloseTime"`
 
-	// Read weight of the replica node
+	// Read weight of a replica node
 	SlaveReadWeight *int64 `json:"SlaveReadWeight,omitempty" name:"SlaveReadWeight"`
 
 	// Instance tag information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitempty" name:"InstanceTags"`
 
 	// Project name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
 
-	// Whether the instance is password-free. true: yes; false: no.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether an instance is password-free. <ul><li>`true`: Yes. </li><li>`false`: No. </li></ul>
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
 
 	// Number of client connections
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ClientLimit *int64 `json:"ClientLimit,omitempty" name:"ClientLimit"`
 
 	// DTS status (internal parameter, which can be ignored)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	DtsStatus *int64 `json:"DtsStatus,omitempty" name:"DtsStatus"`
 
-	// Shard bandwidth cap in MB
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Upper shard bandwidth limit in MB
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	NetLimit *int64 `json:"NetLimit,omitempty" name:"NetLimit"`
 
 	// Password-free instance flag (internal parameter, which can be ignored)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	PasswordFree *int64 `json:"PasswordFree,omitempty" name:"PasswordFree"`
 
+	// Internal parameter, which can be ignored.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
+
 	// Read-only instance flag (internal parameter, which can be ignored)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ReadOnly *int64 `json:"ReadOnly,omitempty" name:"ReadOnly"`
 
 	// Internal parameter, which can be ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
-
-	// Internal parameter, which can be ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitempty" name:"RemainBandwidthDuration"`
 
-	// Disk size of the Tendis instance
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// This parameter can be ignored for Redis instance.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Monitoring version. Valid values: 1m (monitoring at 1-minute granularity); 5s (monitoring at 5-second granularity)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Monitoring granularity type. <ul><li>`1m`: Monitoring at 1-minute granularity). </li><li>`5s`: Monitoring at 5-second granularity. </li></ul>
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
 
-	// Minimum value for the range of maximum connections to the client
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The minimum number of max client connections
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ClientLimitMin *int64 `json:"ClientLimitMin,omitempty" name:"ClientLimitMin"`
 
-	// Maximum value for the range of maximum connections to the client
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The maximum number of max client connections
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ClientLimitMax *int64 `json:"ClientLimitMax,omitempty" name:"ClientLimitMax"`
 
 	// Instance node details
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet"`
 
-	// Instance region, such as ap-guangzhou
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Information of the region where the instance is deployed, such as `ap-guangzhou`.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Public IP
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	WanAddress *string `json:"WanAddress,omitempty" name:"WanAddress"`
+
+	// Polaris service address
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	PolarisServer *string `json:"PolarisServer,omitempty" name:"PolarisServer"`
+
+	// The current proxy version of an instance
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitempty" name:"CurrentProxyVersion"`
+
+	// The current cache minor version of an instance
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitempty" name:"CurrentRedisVersion"`
+
+	// Proxy version, which can be upgraded for the instance
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitempty" name:"UpgradeProxyVersion"`
+
+	// Cache minor version, which can be upgraded for the instance
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitempty" name:"UpgradeRedisVersion"`
 }
 
 type InstanceSlowlogDetail struct {
@@ -5430,10 +5518,10 @@ func (r *ModifyAutoBackupConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsRequestParams struct {
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// ID list of the security groups to be modified, which is an array of one or more security group IDs.
+	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
@@ -5443,10 +5531,10 @@ type ModifyDBInstanceSecurityGroupsRequestParams struct {
 type ModifyDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Database engine name: mariadb, cdb, cynosdb, dcdb, redis, mongodb, etc.
+	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// ID list of the security groups to be modified, which is an array of one or more security group IDs.
+	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
@@ -6073,6 +6161,63 @@ func (r *ModifyParamTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenSSLRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type OpenSSLRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *OpenSSLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenSSLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenSSLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenSSLResponseParams struct {
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type OpenSSLResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenSSLResponseParams `json:"Response"`
+}
+
+func (r *OpenSSLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenSSLResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7324,7 +7469,8 @@ type UpgradeVersionToMultiAvailabilityZonesRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to upgrade the proxy and Redis kernel. After the upgrade, the "Read Local Nodes Only" feature can be supported.
+	// Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
+	// ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
 	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitempty" name:"UpgradeProxyAndRedisServer"`
 }
 
@@ -7334,7 +7480,8 @@ type UpgradeVersionToMultiAvailabilityZonesRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to upgrade the proxy and Redis kernel. After the upgrade, the "Read Local Nodes Only" feature can be supported.
+	// Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
+	// ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
 	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitempty" name:"UpgradeProxyAndRedisServer"`
 }
 

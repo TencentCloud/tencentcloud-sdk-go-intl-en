@@ -2693,7 +2693,7 @@ type DescribeTopicRequestParams struct {
 	// Offset. If this parameter is left empty, 0 will be used by default
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20
+	// The number of results to be returned, which defaults to 20 if left empty. The maximum value is 50.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Name of the preset ACL rule.
@@ -2712,7 +2712,7 @@ type DescribeTopicRequest struct {
 	// Offset. If this parameter is left empty, 0 will be used by default
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of results to be returned. If this parameter is left empty, 10 will be used by default. The maximum value is 20
+	// The number of results to be returned, which defaults to 20 if left empty. The maximum value is 50.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Name of the preset ACL rule.

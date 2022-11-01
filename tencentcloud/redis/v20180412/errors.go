@@ -305,7 +305,7 @@ const (
 	// There is an error with the auto-renewal flag.
 	UNSUPPORTEDOPERATION_ISAUTORENEWERROR = "UnsupportedOperation.IsAutoRenewError"
 
-	// 
+	// The instance version is too low.
 	UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
 
 	// Only Cluster Edition instances support backup exporting.

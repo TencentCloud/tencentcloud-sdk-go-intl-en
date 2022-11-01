@@ -2028,6 +2028,9 @@ type DescribeDataFetchUrlRequestParams struct {
 
 	// retcode
 	Ret *string `json:"Ret,omitempty" name:"Ret"`
+
+	// Network status
+	NetStatus *string `json:"NetStatus,omitempty" name:"NetStatus"`
 }
 
 type DescribeDataFetchUrlRequest struct {
@@ -2107,6 +2110,9 @@ type DescribeDataFetchUrlRequest struct {
 
 	// retcode
 	Ret *string `json:"Ret,omitempty" name:"Ret"`
+
+	// Network status
+	NetStatus *string `json:"NetStatus,omitempty" name:"NetStatus"`
 }
 
 func (r *DescribeDataFetchUrlRequest) ToJsonString() string {
@@ -2146,6 +2152,7 @@ func (r *DescribeDataFetchUrlRequest) FromJsonString(s string) error {
 	delete(f, "Env")
 	delete(f, "Status")
 	delete(f, "Ret")
+	delete(f, "NetStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataFetchUrlRequest has unknown keys!", "")
 	}
@@ -2512,6 +2519,9 @@ type DescribeDataPerformancePageRequestParams struct {
 
 	// Environment variable
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// Network status
+	NetStatus *string `json:"NetStatus,omitempty" name:"NetStatus"`
 }
 
 type DescribeDataPerformancePageRequest struct {
@@ -2582,6 +2592,9 @@ type DescribeDataPerformancePageRequest struct {
 
 	// Environment variable
 	Env *string `json:"Env,omitempty" name:"Env"`
+
+	// Network status
+	NetStatus *string `json:"NetStatus,omitempty" name:"NetStatus"`
 }
 
 func (r *DescribeDataPerformancePageRequest) ToJsonString() string {
@@ -2618,6 +2631,7 @@ func (r *DescribeDataPerformancePageRequest) FromJsonString(s string) error {
 	delete(f, "From")
 	delete(f, "CostType")
 	delete(f, "Env")
+	delete(f, "NetStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataPerformancePageRequest has unknown keys!", "")
 	}
@@ -4573,56 +4587,56 @@ func (r *DescribeLogExportsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeLogListRequestParams struct {
-	// Sorting order. Valid values: desc, asc
+	// Sorting order (required). Valid values: `desc`, `asc`.
 	Sort *string `json:"Sort,omitempty" name:"Sort"`
 
-	// searchlog  histogram
+	// This parameter is required. Valid values: `searchlog`, `histogram`.
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
-	// Project ID
+	// Project ID (required)
 	ID *int64 `json:"ID,omitempty" name:"ID"`
 
-	// Start time
+	// Start time (required)
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Number of raw logs returned in a single query. Maximum value: 100
+	// The number of raw logs returned for a single query. This parameter is required. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-	// Query statement, which can contain up to 4,096 characters.
+	// Query statement, which is required and can contain up to 4,096 characters.
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// End time
+	// End time (required)
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type DescribeLogListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sorting order. Valid values: desc, asc
+	// Sorting order (required). Valid values: `desc`, `asc`.
 	Sort *string `json:"Sort,omitempty" name:"Sort"`
 
-	// searchlog  histogram
+	// This parameter is required. Valid values: `searchlog`, `histogram`.
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
-	// Project ID
+	// Project ID (required)
 	ID *int64 `json:"ID,omitempty" name:"ID"`
 
-	// Start time
+	// Start time (required)
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Number of raw logs returned in a single query. Maximum value: 100
+	// The number of raw logs returned for a single query. This parameter is required. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-	// Query statement, which can contain up to 4,096 characters.
+	// Query statement, which is required and can contain up to 4,096 characters.
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// End time
+	// End time (required)
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
