@@ -3555,7 +3555,7 @@ func (r *DescribeLoadBalancersDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeLoadBalancersRequestParams struct {
-	// CLB instance ID
+	// CLB instance IDs. There can be up to 20 IDs.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
 	// CLB instance network type:
@@ -3619,7 +3619,7 @@ type DescribeLoadBalancersRequestParams struct {
 type DescribeLoadBalancersRequest struct {
 	*tchttp.BaseRequest
 	
-	// CLB instance ID
+	// CLB instance IDs. There can be up to 20 IDs.
 	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
 
 	// CLB instance network type:
@@ -3796,6 +3796,84 @@ func (r *DescribeQuotaResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeQuotaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeResourcesRequestParams struct {
+	// Number of returned AZ resources. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the returned AZ resource list. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter to query the list of AZ resources as detailed below:
+	// <li> `zone` - String - Optional - Filter by AZ, such as "ap-guangzhou-1".</li>
+	// <li> `isp` -- String - Optional - Filter by the ISP. Values: `BGP`, `CMCC`, `CUCC` and `CTCC`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeResourcesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of returned AZ resources. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Starting offset of the returned AZ resource list. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Filter to query the list of AZ resources as detailed below:
+	// <li> `zone` - String - Optional - Filter by AZ, such as "ap-guangzhou-1".</li>
+	// <li> `isp` -- String - Optional - Filter by the ISP. Values: `BGP`, `CMCC`, `CUCC` and `CTCC`.</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeResourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeResourcesResponseParams struct {
+	// List of resources supported by the AZ
+	ZoneResourceSet []*ZoneResource `json:"ZoneResourceSet,omitempty" name:"ZoneResourceSet"`
+
+	// Number of entries in the AZ resource list.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeResourcesResponseParams `json:"Response"`
+}
+
+func (r *DescribeResourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResourcesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6581,6 +6659,14 @@ func (r *ReplaceCertForLoadBalancersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Resource struct {
+	// Specific ISP resource information, Vaules: `CMCC`, `CUCC`, `CTCC`, `BGP`, and `INTERNAL`.
+	Type []*string `json:"Type,omitempty" name:"Type"`
+
+	// ISP information, such as `CMCC`, `CUCC`, `CTCC`, `BGP`, and `INTERNAL`.
+	Isp *string `json:"Isp,omitempty" name:"Isp"`
+}
+
 type RewriteLocationMap struct {
 	// Source forwarding rule ID
 	SourceLocationId *string `json:"SourceLocationId,omitempty" name:"SourceLocationId"`
@@ -6810,6 +6896,91 @@ type RulesItems struct {
 
 	// Object bound to the real server.
 	Targets []*LbRsTargets `json:"Targets,omitempty" name:"Targets"`
+}
+
+// Predefined struct for user
+type SetCustomizedConfigForLoadBalancerRequestParams struct {
+	// Operation type: `ADD`, `DELETE`, `UPDATE`, `BIND`, `UNBIND`
+	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+
+	// This field is required except for creating custom configurations, such as "pz-1234abcd".
+	UconfigId *string `json:"UconfigId,omitempty" name:"UconfigId"`
+
+	// This field is required when creating or modifying custom configurations.
+	ConfigContent *string `json:"ConfigContent,omitempty" name:"ConfigContent"`
+
+	// This field is required when creating or renaming custom configurations.
+	ConfigName *string `json:"ConfigName,omitempty" name:"ConfigName"`
+
+	// This field is required when binding/unbinding resources.
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
+}
+
+type SetCustomizedConfigForLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Operation type: `ADD`, `DELETE`, `UPDATE`, `BIND`, `UNBIND`
+	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+
+	// This field is required except for creating custom configurations, such as "pz-1234abcd".
+	UconfigId *string `json:"UconfigId,omitempty" name:"UconfigId"`
+
+	// This field is required when creating or modifying custom configurations.
+	ConfigContent *string `json:"ConfigContent,omitempty" name:"ConfigContent"`
+
+	// This field is required when creating or renaming custom configurations.
+	ConfigName *string `json:"ConfigName,omitempty" name:"ConfigName"`
+
+	// This field is required when binding/unbinding resources.
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitempty" name:"LoadBalancerIds"`
+}
+
+func (r *SetCustomizedConfigForLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetCustomizedConfigForLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "OperationType")
+	delete(f, "UconfigId")
+	delete(f, "ConfigContent")
+	delete(f, "ConfigName")
+	delete(f, "LoadBalancerIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetCustomizedConfigForLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetCustomizedConfigForLoadBalancerResponseParams struct {
+	// Configuration ID, such as "pz-1234abcd"
+	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SetCustomizedConfigForLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *SetCustomizedConfigForLoadBalancerResponseParams `json:"Response"`
+}
+
+func (r *SetCustomizedConfigForLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetCustomizedConfigForLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -7218,5 +7389,27 @@ type ZoneInfo struct {
 
 	// Whether the AZ is the `LocalZone`, e.g., false.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
+}
+
+type ZoneResource struct {
+	// Primary AZ, such as "ap-guangzhou-1".
+	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// List of resources
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceSet []*Resource `json:"ResourceSet,omitempty" name:"ResourceSet"`
+
+	// Secondary AZ, such as "ap-guangzhou-2". 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// IP version. Values: `IPv4`, `IPv6`, and `IPv6_Nat`.
+	IPVersion *string `json:"IPVersion,omitempty" name:"IPVersion"`
+
+	// Region of the AZ, such as `ap-guangzhou`.
+	ZoneRegion *string `json:"ZoneRegion,omitempty" name:"ZoneRegion"`
+
+	// Whether the AZ is a `LocalZone`. Values: `true`, `false`.
 	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
 }

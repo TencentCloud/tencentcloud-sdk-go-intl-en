@@ -2853,6 +2853,70 @@ func (c *Client) DescribeQuotaWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDescribeResourcesRequest() (request *DescribeResourcesRequest) {
+    request = &DescribeResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "DescribeResources")
+    
+    
+    return
+}
+
+func NewDescribeResourcesResponse() (response *DescribeResourcesResponse) {
+    response = &DescribeResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeResources
+// This API is used to query the list of AZs and resources supported for the user in the current region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+func (c *Client) DescribeResources(request *DescribeResourcesRequest) (response *DescribeResourcesResponse, err error) {
+    return c.DescribeResourcesWithContext(context.Background(), request)
+}
+
+// DescribeResources
+// This API is used to query the list of AZs and resources supported for the user in the current region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+func (c *Client) DescribeResourcesWithContext(ctx context.Context, request *DescribeResourcesRequest) (response *DescribeResourcesResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRewriteRequest() (request *DescribeRewriteRequest) {
     request = &DescribeRewriteRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4513,6 +4577,72 @@ func (c *Client) ReplaceCertForLoadBalancersWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewReplaceCertForLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetCustomizedConfigForLoadBalancerRequest() (request *SetCustomizedConfigForLoadBalancerRequest) {
+    request = &SetCustomizedConfigForLoadBalancerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "SetCustomizedConfigForLoadBalancer")
+    
+    
+    return
+}
+
+func NewSetCustomizedConfigForLoadBalancerResponse() (response *SetCustomizedConfigForLoadBalancerResponse) {
+    response = &SetCustomizedConfigForLoadBalancerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetCustomizedConfigForLoadBalancer
+// This API is used to create or manage a user-defined CLB configuration template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetCustomizedConfigForLoadBalancer(request *SetCustomizedConfigForLoadBalancerRequest) (response *SetCustomizedConfigForLoadBalancerResponse, err error) {
+    return c.SetCustomizedConfigForLoadBalancerWithContext(context.Background(), request)
+}
+
+// SetCustomizedConfigForLoadBalancer
+// This API is used to create or manage a user-defined CLB configuration template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetCustomizedConfigForLoadBalancerWithContext(ctx context.Context, request *SetCustomizedConfigForLoadBalancerRequest) (response *SetCustomizedConfigForLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewSetCustomizedConfigForLoadBalancerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetCustomizedConfigForLoadBalancer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetCustomizedConfigForLoadBalancerResponse()
     err = c.Send(request, response)
     return
 }

@@ -314,6 +314,9 @@ type CreateInstanceRequestParams struct {
 
 	// Whether to enable the storage-computing separation feature.
 	EnableHybridStorage *bool `json:"EnableHybridStorage,omitempty" name:"EnableHybridStorage"`
+
+	// Whether to enable enhanced SSD
+	DiskEnhance *uint64 `json:"DiskEnhance,omitempty" name:"DiskEnhance"`
 }
 
 type CreateInstanceRequest struct {
@@ -422,6 +425,9 @@ type CreateInstanceRequest struct {
 
 	// Whether to enable the storage-computing separation feature.
 	EnableHybridStorage *bool `json:"EnableHybridStorage,omitempty" name:"EnableHybridStorage"`
+
+	// Whether to enable enhanced SSD
+	DiskEnhance *uint64 `json:"DiskEnhance,omitempty" name:"DiskEnhance"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -468,6 +474,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Protocol")
 	delete(f, "OperationDuration")
 	delete(f, "EnableHybridStorage")
+	delete(f, "DiskEnhance")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -1486,6 +1493,10 @@ type IndexPolicyField struct {
 	// Min age before data transitions to the frozen phase
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FrozenMinAge *string `json:"FrozenMinAge,omitempty" name:"FrozenMinAge"`
+
+	// /
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ColdAction *string `json:"ColdAction,omitempty" name:"ColdAction"`
 }
 
 type IndexSettingsField struct {
@@ -1527,7 +1538,7 @@ type InstanceInfo struct {
 	// UID of the subnet where the instance resides
 	SubnetUid *string `json:"SubnetUid,omitempty" name:"SubnetUid"`
 
-	// Instance status. 0: processing; 1: normal; -1: stopped; -2: terminating; -3: terminated
+	// Instance status. `0`: Processing; `1`: Normal; `-1`: `Stopped`; `-2`: Being terminated; `-3`: Terminated; `2`: Initializing during the cluster creation.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// This parameter is not used on the global website
@@ -1782,6 +1793,14 @@ type InstanceInfo struct {
 	// Whether the storage-computing separation feature is enabled.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnableHybridStorage *bool `json:"EnableHybridStorage,omitempty" name:"EnableHybridStorage"`
+
+	// The process progress
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProcessPercent *float64 `json:"ProcessPercent,omitempty" name:"ProcessPercent"`
+
+	// The alerting policy of Kibana over the public network. <li>`OPEN`: Enable the policy;</li><li>`CLOSE`: Disable the policy.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KibanaAlteringPublicAccess *string `json:"KibanaAlteringPublicAccess,omitempty" name:"KibanaAlteringPublicAccess"`
 }
 
 type InstanceLog struct {
@@ -1922,6 +1941,10 @@ type NodeInfo struct {
 	// Memory size in GB
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MemSize *int64 `json:"MemSize,omitempty" name:"MemSize"`
+
+	// /
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskEnhance *int64 `json:"DiskEnhance,omitempty" name:"DiskEnhance"`
 }
 
 type NodeView struct {

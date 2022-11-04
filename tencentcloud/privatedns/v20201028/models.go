@@ -870,6 +870,10 @@ type MetricData struct {
 
 	// Table data
 	DataSet []*DatePoint `json:"DataSet,omitempty" name:"DataSet"`
+
+	// The total number of requests within the query scope.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	MetricCount *int64 `json:"MetricCount,omitempty" name:"MetricCount"`
 }
 
 // Predefined struct for user
@@ -1124,6 +1128,83 @@ func (r *ModifyPrivateZoneVpcResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyPrivateZoneVpcResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordsStatusRequestParams struct {
+	// The private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The DNS record IDs.
+	RecordIds []*int64 `json:"RecordIds,omitempty" name:"RecordIds"`
+
+	// `enabled`: Enable; `disabled`: Disable.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+type ModifyRecordsStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// The private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The DNS record IDs.
+	RecordIds []*int64 `json:"RecordIds,omitempty" name:"RecordIds"`
+
+	// `enabled`: Enable; `disabled`: Disable.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *ModifyRecordsStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordsStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "RecordIds")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRecordsStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordsStatusResponseParams struct {
+	// The private domain ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The DNS record IDs.
+	RecordIds []*int64 `json:"RecordIds,omitempty" name:"RecordIds"`
+
+	// `enabled`: Enabled; `disabled`: Disabled.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRecordsStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRecordsStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyRecordsStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordsStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

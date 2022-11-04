@@ -487,8 +487,13 @@ type McuAudioParams struct {
 	// The audio encoding parameters.
 	AudioEncode *AudioEncode `json:"AudioEncode,omitempty" name:"AudioEncode"`
 
-	// The users whose audios are mixed. For the `StartPublishCdnStream` API, if you do not pass this parameter or leave it empty, the audios of all anchors will be mixed. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, TRTC will not change the users whose audios are mixed; if you pass in an empty string, the audios of all anchors will be mixed.
+	// The audio mix allowlist. For the `StartPublishCdnStream` API, if you do not pass this parameter or leave it empty, the audios of all anchors will be mixed. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, no changes will be made to the current allowlist; if you pass in an empty string, the audios of all anchors will be mixed.
+	// In cases where `SubscribeAudioList` and `UnSubscribeAudioList` are used at the same time, you need to specify both parameters. If you pass neither `SubscribeAudioList` nor `UnSubscribeAudioList`, no changes will be made. If a user is included in both parameters, the user’s audio will not be mixed.
 	SubscribeAudioList []*McuUserInfoParams `json:"SubscribeAudioList,omitempty" name:"SubscribeAudioList"`
+
+	// The audio mix blocklist. If you do not pass this parameter or leave it empty, there won’t be a blocklist. For the `UpdatePublishCdnStream` API, if you do not pass this parameter, no changes will be made to the current blocklist; if you pass in an empty string, the blocklist will be reset.
+	// In cases where `SubscribeAudioList` and `UnSubscribeAudioList` are used at the same time, you need to specify both parameters. If you pass neither `SubscribeAudioList` nor `UnSubscribeAudioList`, no changes will be made. If a user is included in both parameters, the user’s audio will not be mixed.
+	UnSubscribeAudioList []*McuUserInfoParams `json:"UnSubscribeAudioList,omitempty" name:"UnSubscribeAudioList"`
 }
 
 type McuCustomCrop struct {
@@ -503,6 +508,20 @@ type McuCustomCrop struct {
 
 	// The video height (pixels) after cropping. The sum of this parameter and `LocationY` cannot be greater than 10000.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
+}
+
+type McuFeedBackRoomParams struct {
+	// The room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The ID type of the room to which streams are relayed. `0` indicates integer, and `1` indicates string.
+	RoomIdType *uint64 `json:"RoomIdType,omitempty" name:"RoomIdType"`
+
+	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The signature (similar to login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
+	UserSig *string `json:"UserSig,omitempty" name:"UserSig"`
 }
 
 type McuLayout struct {
@@ -581,7 +600,7 @@ type McuPublishCdnParam struct {
 	// The URLs of the CDNs to relay to.
 	PublishCdnUrl *string `json:"PublishCdnUrl,omitempty" name:"PublishCdnUrl"`
 
-	// Whether to relay to Tencent Cloud’s CDN. 0 (default): Third-party CDN; 1: Tencent Cloud’s CDN. Note: Relaying to a third-party CDN will incur fees. If you are relaying to Tencent Cloud’s CDN, to avoid incurring fees, be sure to set this parameter to `1`. For details, see the API document.
+	// Whether to relay to Tencent Cloud’s CDN. 0: Third-party CDN; 1 (default): Tencent Cloud’s CDN. Relaying to a third-party CDN will incur fees. To avoid unexpected charges, we recommend you pass in a specific value. For details, see the API document.
 	IsTencentCdn *uint64 `json:"IsTencentCdn,omitempty" name:"IsTencentCdn"`
 }
 
@@ -1031,6 +1050,9 @@ type StartPublishCdnStreamRequestParams struct {
 
 	// The stream mixing SEI parameters.
 	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
+
+	// The information of the room to which streams are relayed.
+	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitempty" name:"FeedBackRoomParams"`
 }
 
 type StartPublishCdnStreamRequest struct {
@@ -1065,6 +1087,9 @@ type StartPublishCdnStreamRequest struct {
 
 	// The stream mixing SEI parameters.
 	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
+
+	// The information of the room to which streams are relayed.
+	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitempty" name:"FeedBackRoomParams"`
 }
 
 func (r *StartPublishCdnStreamRequest) ToJsonString() string {
@@ -1089,6 +1114,7 @@ func (r *StartPublishCdnStreamRequest) FromJsonString(s string) error {
 	delete(f, "SingleSubscribeParams")
 	delete(f, "PublishCdnParams")
 	delete(f, "SeiParams")
+	delete(f, "FeedBackRoomParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartPublishCdnStreamRequest has unknown keys!", "")
 	}
@@ -1280,6 +1306,9 @@ type UpdatePublishCdnStreamRequestParams struct {
 
 	// The stream mixing SEI parameters.
 	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
+
+	// The information of the room to which streams are relayed.
+	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitempty" name:"FeedBackRoomParams"`
 }
 
 type UpdatePublishCdnStreamRequest struct {
@@ -1311,6 +1340,9 @@ type UpdatePublishCdnStreamRequest struct {
 
 	// The stream mixing SEI parameters.
 	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
+
+	// The information of the room to which streams are relayed.
+	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitempty" name:"FeedBackRoomParams"`
 }
 
 func (r *UpdatePublishCdnStreamRequest) ToJsonString() string {
@@ -1334,6 +1366,7 @@ func (r *UpdatePublishCdnStreamRequest) FromJsonString(s string) error {
 	delete(f, "SingleSubscribeParams")
 	delete(f, "PublishCdnParams")
 	delete(f, "SeiParams")
+	delete(f, "FeedBackRoomParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePublishCdnStreamRequest has unknown keys!", "")
 	}

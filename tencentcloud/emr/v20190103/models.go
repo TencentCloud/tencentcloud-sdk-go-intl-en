@@ -1538,6 +1538,10 @@ type EmrListInstance struct {
 	// Whether it is a multi-AZ cluster
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	IsMultiZoneCluster *bool `json:"IsMultiZoneCluster,omitempty" name:"IsMultiZoneCluster"`
+
+	// Whether it is a manually deployed cluster
+	// Note: This field may return null, indicating that no valid value can be obtained. 
+	IsHandsCluster *bool `json:"IsHandsCluster,omitempty" name:"IsHandsCluster"`
 }
 
 type EmrProductConfigOutter struct {
@@ -2635,7 +2639,7 @@ type NodeHardwareInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CurrentTime *string `json:"CurrentTime,omitempty" name:"CurrentTime"`
 
-	// Whether the hardware node is used in a federation. Valid values: `0` (no), `1` (yes).
+	// Whether it is used in a federation. Valid values: `0` (no), `1` (yes).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsFederation *int64 `json:"IsFederation,omitempty" name:"IsFederation"`
 
@@ -3122,6 +3126,9 @@ type ScaleOutInstanceRequestParams struct {
 
 	// Pre-defined configuration set
 	ScaleOutServiceConfAssign *string `json:"ScaleOutServiceConfAssign,omitempty" name:"ScaleOutServiceConfAssign"`
+
+	// Whether to enable auto-renewal. Valid values: `0` (no), `1` (yes).
+	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 }
 
 type ScaleOutInstanceRequest struct {
@@ -3209,6 +3216,9 @@ type ScaleOutInstanceRequest struct {
 
 	// Pre-defined configuration set
 	ScaleOutServiceConfAssign *string `json:"ScaleOutServiceConfAssign,omitempty" name:"ScaleOutServiceConfAssign"`
+
+	// Whether to enable auto-renewal. Valid values: `0` (no), `1` (yes).
+	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 }
 
 func (r *ScaleOutInstanceRequest) ToJsonString() string {
@@ -3248,6 +3258,7 @@ func (r *ScaleOutInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "SubnetId")
 	delete(f, "ScaleOutServiceConfAssign")
+	delete(f, "AutoRenew")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutInstanceRequest has unknown keys!", "")
 	}

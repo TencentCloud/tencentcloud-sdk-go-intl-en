@@ -712,6 +712,8 @@ func NewStartPublishCdnStreamResponse() (response *StartPublishCdnStreamResponse
 //
 // 5. Configure a server-side callback to have Tencent Cloud send relay status updates to your server in the form of HTTP/HTTPS POST requests. To use the callback for relay events, please contact Technical Support.
 //
+// 6. The API supports four regions: Guangzhou, Shanghai, Beijing, and Hong Kong. If you relay to regions outside the Chinese mainland, select Hong Kong.
+//
 // Notes:
 //
 // 1. **Because On-Cloud MixTranscoding is a paid feature, calling this API will incur MixTranscoding fees. For details, see [Billing of MixTranscoding and Relay to CDN](https://intl.cloud.tencent.com/document/product/647/47631?lang=en&pg=).**
@@ -768,6 +770,8 @@ func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (r
 // 4. Publish audio/video streams to up to 10 CDNs at a time. You can use `PublishCdnParams.PublishCdnUrl` to specify the URLs of the CDNs to publish to. To publish to Tencent Cloud’s CDN, set `PublishCdnParams.IsTencentCdn` to 1.
 //
 // 5. Configure a server-side callback to have Tencent Cloud send relay status updates to your server in the form of HTTP/HTTPS POST requests. To use the callback for relay events, please contact Technical Support.
+//
+// 6. The API supports four regions: Guangzhou, Shanghai, Beijing, and Hong Kong. If you relay to regions outside the Chinese mainland, select Hong Kong.
 //
 // Notes:
 //
@@ -904,6 +908,8 @@ func NewUpdatePublishCdnStreamResponse() (response *UpdatePublishCdnStreamRespon
 // UpdatePublishCdnStream
 // This API is used to change the parameters of a relaying task.
 //
+// Note: If `WithTranscoding` is not changed, you can pass in only the parameters you want to update. If `WithTranscoding` is changed, you need to pass in all the parameters.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
@@ -922,6 +928,8 @@ func (c *Client) UpdatePublishCdnStream(request *UpdatePublishCdnStreamRequest) 
 
 // UpdatePublishCdnStream
 // This API is used to change the parameters of a relaying task.
+//
+// Note: If `WithTranscoding` is not changed, you can pass in only the parameters you want to update. If `WithTranscoding` is changed, you need to pass in all the parameters.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
