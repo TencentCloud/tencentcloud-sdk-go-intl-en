@@ -31,14 +31,27 @@ type AlarmEvent struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
-type AlarmHierarchicalValue struct {
+type AlarmHierarchicalNotice struct {
+	// Notification template ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoticeId *string `json:"NoticeId,omitempty" name:"NoticeId"`
 
+	// The list of alarm notification levels. The values `Remind` and `Serious` indicate that the notification template only sends alarms at the `Remind` and `Serious` levels.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Classification []*string `json:"Classification,omitempty" name:"Classification"`
+}
+
+type AlarmHierarchicalValue struct {
+	// Threshold for the `Remind` level
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remind *string `json:"Remind,omitempty" name:"Remind"`
 
-
+	// Threshold for the `Warn` level
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Warn *string `json:"Warn,omitempty" name:"Warn"`
 
-
+	// Threshold for the `Serious` level
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Serious *string `json:"Serious,omitempty" name:"Serious"`
 }
 
@@ -443,7 +456,8 @@ type AlarmPolicyRule struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ValueMin *float64 `json:"ValueMin,omitempty" name:"ValueMin"`
 
-
+	// The configuration of alarm level threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HierarchicalValue *AlarmHierarchicalValue `json:"HierarchicalValue,omitempty" name:"HierarchicalValue"`
 }
 
@@ -938,6 +952,12 @@ type CreateAlarmPolicyRequestParams struct {
 
 	// Log alarm information
 	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
+
+	// Notification rules for different alarm levels
+	HierarchicalNotices []*AlarmHierarchicalNotice `json:"HierarchicalNotices,omitempty" name:"HierarchicalNotices"`
+
+	// A dedicated field for migration policies. 0: Implement authentication logic; 1: Skip authentication logic.
+	MigrateFlag *int64 `json:"MigrateFlag,omitempty" name:"MigrateFlag"`
 }
 
 type CreateAlarmPolicyRequest struct {
@@ -990,6 +1010,12 @@ type CreateAlarmPolicyRequest struct {
 
 	// Log alarm information
 	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
+
+	// Notification rules for different alarm levels
+	HierarchicalNotices []*AlarmHierarchicalNotice `json:"HierarchicalNotices,omitempty" name:"HierarchicalNotices"`
+
+	// A dedicated field for migration policies. 0: Implement authentication logic; 1: Skip authentication logic.
+	MigrateFlag *int64 `json:"MigrateFlag,omitempty" name:"MigrateFlag"`
 }
 
 func (r *CreateAlarmPolicyRequest) ToJsonString() string {
@@ -1020,6 +1046,8 @@ func (r *CreateAlarmPolicyRequest) FromJsonString(s string) error {
 	delete(f, "GroupBy")
 	delete(f, "Tags")
 	delete(f, "LogAlarmReqInfo")
+	delete(f, "HierarchicalNotices")
+	delete(f, "MigrateFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmPolicyRequest has unknown keys!", "")
 	}
