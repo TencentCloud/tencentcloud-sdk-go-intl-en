@@ -7736,8 +7736,6 @@ func NewSearchMediaResponse() (response *SearchMediaResponse) {
 //
 // - Specify the stream IDs (`StreamIds`) of live recording files.
 //
-// - Specify the video IDs (`Vids`) of live recording files.
-//
 // - Specify a time range for search by file creation time.
 //
 // - Specify the TRTC application IDs.
@@ -7749,8 +7747,6 @@ func NewSearchMediaResponse() (response *SearchMediaResponse) {
 // - Specify one source (`SourceType`). (This is not recommended. Please use `SourceTypes` instead.)
 //
 // - Specify one stream ID (`StreamId`). (This is not recommended. Please use `StreamIds` instead.)
-//
-// - Specify one video ID (`Vid`). (This is not recommended. Please use `Vids` instead.)
 //
 // - Specify the start (`StartTime`) of the time range to search by creation time. (This is not recommended. Please use `CreateTime` instead.)
 //
@@ -7838,8 +7834,6 @@ func (c *Client) SearchMedia(request *SearchMediaRequest) (response *SearchMedia
 //
 // - Specify the stream IDs (`StreamIds`) of live recording files.
 //
-// - Specify the video IDs (`Vids`) of live recording files.
-//
 // - Specify a time range for search by file creation time.
 //
 // - Specify the TRTC application IDs.
@@ -7851,8 +7845,6 @@ func (c *Client) SearchMedia(request *SearchMediaRequest) (response *SearchMedia
 // - Specify one source (`SourceType`). (This is not recommended. Please use `SourceTypes` instead.)
 //
 // - Specify one stream ID (`StreamId`). (This is not recommended. Please use `StreamIds` instead.)
-//
-// - Specify one video ID (`Vid`). (This is not recommended. Please use `Vids` instead.)
 //
 // - Specify the start (`StartTime`) of the time range to search by creation time. (This is not recommended. Please use `CreateTime` instead.)
 //

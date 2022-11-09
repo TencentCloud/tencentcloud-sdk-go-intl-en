@@ -7462,6 +7462,74 @@ type DomainInfo struct {
 }
 
 // Predefined struct for user
+type DropLiveStreamRequestParams struct {
+	// The stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Your push domain.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+type DropLiveStreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// The stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Your push domain.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+func (r *DropLiveStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DropLiveStreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StreamName")
+	delete(f, "DomainName")
+	delete(f, "AppName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DropLiveStreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DropLiveStreamResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DropLiveStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *DropLiveStreamResponseParams `json:"Response"`
+}
+
+func (r *DropLiveStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DropLiveStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type EnableLiveDomainRequestParams struct {
 	// LVB domain name to be enabled.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -10053,7 +10121,7 @@ type TranscodeDetailInfo struct {
 	// Bitrate.
 	Bitrate *uint64 `json:"Bitrate,omitempty" name:"Bitrate"`
 
-	// Type. Valid values: Transcode, MixStream, WaterMark.
+	// The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Push domain name.
@@ -10061,6 +10129,11 @@ type TranscodeDetailInfo struct {
 
 	// Resolution.
 	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
+
+	// The region. Valid values:
+	// `Mainland`: Inside the Chinese mainland.
+	// `Overseas`: Outside the Chinese mainland.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
 }
 
 type TranscodeTaskNum struct {

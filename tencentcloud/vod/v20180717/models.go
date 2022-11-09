@@ -2106,6 +2106,11 @@ type AudioTrackItem struct {
 	// Audio segment duration in seconds. By default, the length of the material will be used, which means that the entire material will be captured.
 	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
 
+	// The target audio duration, in seconds.
+	// <li>If `TargetDuration` is empty or `0`, the target duration is the same as `Duration`.</li>
+	// <li>If `TargetDuration` is a value greater than 0, the playback speed will be changed to make the final audio duration the same as the value of `TargetDuration`.</li>
+	TargetDuration *float64 `json:"TargetDuration,omitempty" name:"TargetDuration"`
+
 	// Operation on audio segment, such as volume adjustment.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AudioOperations []*AudioTransform `json:"AudioOperations,omitempty" name:"AudioOperations"`
@@ -10697,10 +10702,11 @@ type MediaContentReviewSegmentItem struct {
 }
 
 type MediaDeleteItem struct {
-	// Type of files to delete. If this parameter is left empty, it will be invalid. Valid values:
-	// <li>`OriginalFiles`: original files. You cannot initiate transcoding, publishing on WeChat, or other video processing operations after deleting the original files.</li>
-	// <li>`TranscodeFiles`: transcoded files</li>
-	// <li>`WechatPublishFiles`: files for publishing on WeChat</li>
+	// The type of files to delete. If this parameter is left empty, it will be invalid. Valid values:
+	// <li>`OriginalFiles`: The original file. After deleting an original file, you can no longer perform operations such as transcoding or WeChat publishing on the file ID.</li>
+	// <li>`TranscodeFiles`: Transcoding outputs</li>
+	// <li>`AdaptiveDynamicStreamingFiles`: Adaptive bitrate outputs</li>
+	// <li>`WechatPublishFiles`: The file for WeChat publishing</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// ID of the template for which to delete the videos of the type specified by the `Type` parameter. For the template definition, please see [Transcoding Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.3Cspan-id-.3D-.22zm.22-.3E.3C.2Fspan.3E.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
@@ -16113,10 +16119,6 @@ type SearchMediaRequestParams struct {
 	// <li>Array length limit: 10</li>
 	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds"`
 
-	// Unique ID of LVB recording file. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
-	Vids []*string `json:"Vids,omitempty" name:"Vids"`
-
 	// Matches files created within the time period.
 	// <li>Includes specified start and end points in time.</li>
 	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -16184,10 +16186,6 @@ type SearchMediaRequestParams struct {
 	// The live stream code.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
-	// (This is not recommended. `Vids` should be used instead)
-	// Unique ID of LVB recording file.
-	Vid *string `json:"Vid,omitempty" name:"Vid"`
-
 	// (This is not recommended. `CreateTime` should be used instead)
 	// Start time in the creation time range.
 	// <li>After or at the start time.</li>
@@ -16201,6 +16199,12 @@ type SearchMediaRequestParams struct {
 	// <li>If `CreateTime.Before` also exists, it will be used first.</li>
 	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// This parameter is invalid now.
+	Vids []*string `json:"Vids,omitempty" name:"Vids"`
+
+	// This parameter is invalid now.
+	Vid *string `json:"Vid,omitempty" name:"Vid"`
 }
 
 type SearchMediaRequest struct {
@@ -16252,10 +16256,6 @@ type SearchMediaRequest struct {
 	// <li>Array length limit: 10</li>
 	StreamIds []*string `json:"StreamIds,omitempty" name:"StreamIds"`
 
-	// Unique ID of LVB recording file. Any element in the set can be matched.
-	// <li>Array length limit: 10.</li>
-	Vids []*string `json:"Vids,omitempty" name:"Vids"`
-
 	// Matches files created within the time period.
 	// <li>Includes specified start and end points in time.</li>
 	CreateTime *TimeRange `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -16323,10 +16323,6 @@ type SearchMediaRequest struct {
 	// The live stream code.
 	StreamId *string `json:"StreamId,omitempty" name:"StreamId"`
 
-	// (This is not recommended. `Vids` should be used instead)
-	// Unique ID of LVB recording file.
-	Vid *string `json:"Vid,omitempty" name:"Vid"`
-
 	// (This is not recommended. `CreateTime` should be used instead)
 	// Start time in the creation time range.
 	// <li>After or at the start time.</li>
@@ -16340,6 +16336,12 @@ type SearchMediaRequest struct {
 	// <li>If `CreateTime.Before` also exists, it will be used first.</li>
 	// <li>In ISO 8601 format. For more information, please see [ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).</li>
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// This parameter is invalid now.
+	Vids []*string `json:"Vids,omitempty" name:"Vids"`
+
+	// This parameter is invalid now.
+	Vid *string `json:"Vid,omitempty" name:"Vid"`
 }
 
 func (r *SearchMediaRequest) ToJsonString() string {
@@ -16364,7 +16366,6 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "Categories")
 	delete(f, "SourceTypes")
 	delete(f, "StreamIds")
-	delete(f, "Vids")
 	delete(f, "CreateTime")
 	delete(f, "ExpireTime")
 	delete(f, "Sort")
@@ -16378,9 +16379,10 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "Text")
 	delete(f, "SourceType")
 	delete(f, "StreamId")
-	delete(f, "Vid")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
+	delete(f, "Vids")
+	delete(f, "Vid")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchMediaRequest has unknown keys!", "")
 	}
@@ -17839,6 +17841,11 @@ type VideoTrackItem struct {
 	// Video segment duration in seconds. By default, the length of the video material will be used, which means that the entire material will be captured. If the source file is an image, `Duration` needs to be greater than 0.
 	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
 
+	// The target video duration, in seconds.
+	// <li>If `TargetDuration` is empty or `0`, the target duration is the same as `Duration`.</li>
+	// <li>If `TargetDuration` is a value greater than 0, the playback speed will be changed to make the final video duration the same as the value of `TargetDuration`.</li>
+	TargetDuration *float64 `json:"TargetDuration,omitempty" name:"TargetDuration"`
+
 	// Video origin position. Valid values:
 	// <li> Center: the origin of coordinates is the center position, such as the center of canvas.</li>
 	// Default value: Center.
@@ -17872,13 +17879,13 @@ type VideoTrackItem struct {
 	// <li>If `Width` is not empty, but `Height` is empty, `Height` will be proportionally scaled.</li>
 	Height *string `json:"Height,omitempty" name:"Height"`
 
-	// Operation on video image such as image rotation.
-	// Note: this field may return null, indicating that no valid values can be obtained.
-	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations"`
-
 	// Operation on audio such as muting.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AudioOperations []*AudioTransform `json:"AudioOperations,omitempty" name:"AudioOperations"`
+
+	// Operation on video image such as image rotation.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	ImageOperations []*ImageTransform `json:"ImageOperations,omitempty" name:"ImageOperations"`
 }
 
 type WatermarkCycleConfigForUpdate struct {
