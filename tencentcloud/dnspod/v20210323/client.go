@@ -67,8 +67,10 @@ func NewCreateDomainResponse() (response *CreateDomainResponse) {
 // This API is used to add a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINEXISTS = "FailedOperation.DomainExists"
 //  FAILEDOPERATION_DOMAINOWNEDBYOTHERUSER = "FailedOperation.DomainOwnedByOtherUser"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_ACCOUNTISBANNED = "InvalidParameter.AccountIsBanned"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
@@ -84,8 +86,10 @@ func (c *Client) CreateDomain(request *CreateDomainRequest) (response *CreateDom
 // This API is used to add a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINEXISTS = "FailedOperation.DomainExists"
 //  FAILEDOPERATION_DOMAINOWNEDBYOTHERUSER = "FailedOperation.DomainOwnedByOtherUser"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_ACCOUNTISBANNED = "InvalidParameter.AccountIsBanned"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
@@ -445,6 +449,7 @@ func NewDescribeDomainResponse() (response *DescribeDomainResponse) {
 // This API is used to get the information of a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
@@ -459,6 +464,7 @@ func (c *Client) DescribeDomain(request *DescribeDomainRequest) (response *Descr
 // This API is used to get the information of a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
@@ -567,6 +573,96 @@ func (c *Client) DescribeRecordWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRecordListRequest() (request *DescribeRecordListRequest) {
+    request = &DescribeRecordListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dnspod", APIVersion, "DescribeRecordList")
+    
+    
+    return
+}
+
+func NewDescribeRecordListResponse() (response *DescribeRecordListResponse) {
+    response = &DescribeRecordListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRecordList
+// This API is used to get DNS records of a domain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOTDOMAINOWNER = "FailedOperation.NotDomainOwner"
+//  FAILEDOPERATION_NOTREALNAMEDUSER = "FailedOperation.NotRealNamedUser"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
+//  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
+//  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
+//  INVALIDPARAMETER_OPERATEFAILED = "InvalidParameter.OperateFailed"
+//  INVALIDPARAMETER_PARAMINVALID = "InvalidParameter.ParamInvalid"
+//  INVALIDPARAMETER_RECORDLINEINVALID = "InvalidParameter.RecordLineInvalid"
+//  INVALIDPARAMETER_RECORDTYPEINVALID = "InvalidParameter.RecordTypeInvalid"
+//  INVALIDPARAMETER_RESULTMORETHAN500 = "InvalidParameter.ResultMoreThan500"
+//  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
+//  INVALIDPARAMETERVALUE_LIMITINVALID = "InvalidParameterValue.LimitInvalid"
+//  OPERATIONDENIED_NOPERMISSIONTOOPERATEDOMAIN = "OperationDenied.NoPermissionToOperateDomain"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  REQUESTLIMITEXCEEDED_REQUESTLIMITEXCEEDED = "RequestLimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND_NODATAOFRECORD = "ResourceNotFound.NoDataOfRecord"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRecordList(request *DescribeRecordListRequest) (response *DescribeRecordListResponse, err error) {
+    return c.DescribeRecordListWithContext(context.Background(), request)
+}
+
+// DescribeRecordList
+// This API is used to get DNS records of a domain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOTDOMAINOWNER = "FailedOperation.NotDomainOwner"
+//  FAILEDOPERATION_NOTREALNAMEDUSER = "FailedOperation.NotRealNamedUser"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
+//  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
+//  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
+//  INVALIDPARAMETER_OPERATEFAILED = "InvalidParameter.OperateFailed"
+//  INVALIDPARAMETER_PARAMINVALID = "InvalidParameter.ParamInvalid"
+//  INVALIDPARAMETER_RECORDLINEINVALID = "InvalidParameter.RecordLineInvalid"
+//  INVALIDPARAMETER_RECORDTYPEINVALID = "InvalidParameter.RecordTypeInvalid"
+//  INVALIDPARAMETER_RESULTMORETHAN500 = "InvalidParameter.ResultMoreThan500"
+//  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
+//  INVALIDPARAMETERVALUE_LIMITINVALID = "InvalidParameterValue.LimitInvalid"
+//  OPERATIONDENIED_NOPERMISSIONTOOPERATEDOMAIN = "OperationDenied.NoPermissionToOperateDomain"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  REQUESTLIMITEXCEEDED_REQUESTLIMITEXCEEDED = "RequestLimitExceeded.RequestLimitExceeded"
+//  RESOURCENOTFOUND_NODATAOFRECORD = "ResourceNotFound.NoDataOfRecord"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRecordListWithContext(ctx context.Context, request *DescribeRecordListRequest) (response *DescribeRecordListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordListResponse()
     err = c.Send(request, response)
     return
 }

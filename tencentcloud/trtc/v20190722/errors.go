@@ -41,6 +41,12 @@ const (
 	// The room does not exist.
 	FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
 
+	// The application ID does not exist.
+	FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+
+	// The user is not in the room.
+	FAILEDOPERATION_USERNOTEXIST = "FailedOperation.UserNotExist"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
@@ -52,6 +58,9 @@ const (
 
 	// Failed to get room information.
 	INTERNALERROR_GETROOMFROMCACHEERROR = "InternalError.GetRoomFromCacheError"
+
+	// The user is not in the room.
+	INTERNALERROR_USERNOTEXIST = "InternalError.UserNotExist"
 
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
@@ -65,6 +74,9 @@ const (
 	// `SdkAppId` is incorrect.
 	INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 
+	// Invalid `UserId`.
+	INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+
 	// `UserIds` is incorrect.
 	INVALIDPARAMETER_USERIDS = "InvalidParameter.UserIds"
 
@@ -76,6 +88,9 @@ const (
 
 	// `AccessKey` parameter missing.
 	MISSINGPARAMETER_ACCESSKEY = "MissingParameter.AccessKey"
+
+	// `AppId` missing.
+	MISSINGPARAMETER_APPID = "MissingParameter.AppId"
 
 	// `Bucket` parameter missing.
 	MISSINGPARAMETER_BUCKET = "MissingParameter.Bucket"

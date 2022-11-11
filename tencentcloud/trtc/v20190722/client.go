@@ -675,6 +675,148 @@ func (c *Client) RemoveUserByStrRoomIdWithContext(ctx context.Context, request *
     return
 }
 
+func NewSetUserBlockedRequest() (request *SetUserBlockedRequest) {
+    request = &SetUserBlockedRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "SetUserBlocked")
+    
+    
+    return
+}
+
+func NewSetUserBlockedResponse() (response *SetUserBlockedResponse) {
+    response = &SetUserBlockedResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetUserBlocked
+// This API is used to disable or enable the audio and video of a user. It can be used by an anchor, room owner, or admin to block or unblock a user. It supports platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API if the room ID is a number.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  FAILEDOPERATION_USERNOTEXIST = "FailedOperation.UserNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_USERNOTEXIST = "InternalError.UserNotExist"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+func (c *Client) SetUserBlocked(request *SetUserBlockedRequest) (response *SetUserBlockedResponse, err error) {
+    return c.SetUserBlockedWithContext(context.Background(), request)
+}
+
+// SetUserBlocked
+// This API is used to disable or enable the audio and video of a user. It can be used by an anchor, room owner, or admin to block or unblock a user. It supports platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API if the room ID is a number.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  FAILEDOPERATION_USERNOTEXIST = "FailedOperation.UserNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_USERNOTEXIST = "InternalError.UserNotExist"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+func (c *Client) SetUserBlockedWithContext(ctx context.Context, request *SetUserBlockedRequest) (response *SetUserBlockedResponse, err error) {
+    if request == nil {
+        request = NewSetUserBlockedRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetUserBlocked require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetUserBlockedResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetUserBlockedByStrRoomIdRequest() (request *SetUserBlockedByStrRoomIdRequest) {
+    request = &SetUserBlockedByStrRoomIdRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "SetUserBlockedByStrRoomId")
+    
+    
+    return
+}
+
+func NewSetUserBlockedByStrRoomIdResponse() (response *SetUserBlockedByStrRoomIdResponse) {
+    response = &SetUserBlockedByStrRoomIdResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetUserBlockedByStrRoomId
+// This API allows an anchor, room owner, admin to mute/unmute a user. It can be used on platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API when the room ID is a string.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  FAILEDOPERATION_USERNOTEXIST = "FailedOperation.UserNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_APPID = "MissingParameter.AppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+func (c *Client) SetUserBlockedByStrRoomId(request *SetUserBlockedByStrRoomIdRequest) (response *SetUserBlockedByStrRoomIdResponse, err error) {
+    return c.SetUserBlockedByStrRoomIdWithContext(context.Background(), request)
+}
+
+// SetUserBlockedByStrRoomId
+// This API allows an anchor, room owner, admin to mute/unmute a user. It can be used on platforms including Android, iOS, Windows, macOS, web, and WeChat Mini Program. Use this API when the room ID is a string.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROOMNOTEXIST = "FailedOperation.RoomNotExist"
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  FAILEDOPERATION_USERNOTEXIST = "FailedOperation.UserNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_APPID = "MissingParameter.AppId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+func (c *Client) SetUserBlockedByStrRoomIdWithContext(ctx context.Context, request *SetUserBlockedByStrRoomIdRequest) (response *SetUserBlockedByStrRoomIdResponse, err error) {
+    if request == nil {
+        request = NewSetUserBlockedByStrRoomIdRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetUserBlockedByStrRoomId require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetUserBlockedByStrRoomIdResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStartPublishCdnStreamRequest() (request *StartPublishCdnStreamRequest) {
     request = &StartPublishCdnStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},

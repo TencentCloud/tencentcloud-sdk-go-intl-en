@@ -412,6 +412,143 @@ func (r *DescribeDomainResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRecordListRequestParams struct {
+	// The domain for which DNS records are to be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The ID of the domain for which DNS records are to be obtained. If `DomainId` is passed in, the system will omit the parameter `Domain`.
+	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
+
+	// The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.
+	Subdomain *string `json:"Subdomain,omitempty" name:"Subdomain"`
+
+	// The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.
+	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
+
+	// The split zone name.
+	RecordLine *string `json:"RecordLine,omitempty" name:"RecordLine"`
+
+	// The split zone ID. If `RecordLineId` is passed in, the system will omit the parameter `RecordLine`.
+	RecordLineId *string `json:"RecordLineId,omitempty" name:"RecordLineId"`
+
+	// The group ID.
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The keyword for searching for DNS records. Host headers and record values are supported.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The sorting field. Available values: `name`, `line`, `type`, `value`, `weight`, `mx`, and `ttl,updated_on`.
+	SortField *string `json:"SortField,omitempty" name:"SortField"`
+
+	// The sorting type. Valid values: `ASC` (ascending, default), `DESC` (descending).
+	SortType *string `json:"SortType,omitempty" name:"SortType"`
+
+	// The offset. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The limit. It defaults to 100 and can be up to 3,000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeRecordListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The domain for which DNS records are to be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The ID of the domain for which DNS records are to be obtained. If `DomainId` is passed in, the system will omit the parameter `Domain`.
+	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
+
+	// The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.
+	Subdomain *string `json:"Subdomain,omitempty" name:"Subdomain"`
+
+	// The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.
+	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
+
+	// The split zone name.
+	RecordLine *string `json:"RecordLine,omitempty" name:"RecordLine"`
+
+	// The split zone ID. If `RecordLineId` is passed in, the system will omit the parameter `RecordLine`.
+	RecordLineId *string `json:"RecordLineId,omitempty" name:"RecordLineId"`
+
+	// The group ID.
+	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The keyword for searching for DNS records. Host headers and record values are supported.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The sorting field. Available values: `name`, `line`, `type`, `value`, `weight`, `mx`, and `ttl,updated_on`.
+	SortField *string `json:"SortField,omitempty" name:"SortField"`
+
+	// The sorting type. Valid values: `ASC` (ascending, default), `DESC` (descending).
+	SortType *string `json:"SortType,omitempty" name:"SortType"`
+
+	// The offset. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The limit. It defaults to 100 and can be up to 3,000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRecordListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "DomainId")
+	delete(f, "Subdomain")
+	delete(f, "RecordType")
+	delete(f, "RecordLine")
+	delete(f, "RecordLineId")
+	delete(f, "GroupId")
+	delete(f, "Keyword")
+	delete(f, "SortField")
+	delete(f, "SortType")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordListResponseParams struct {
+	// The record count info.
+	RecordCountInfo *RecordCountInfo `json:"RecordCountInfo,omitempty" name:"RecordCountInfo"`
+
+	// The record list result.
+	RecordList []*RecordListItem `json:"RecordList,omitempty" name:"RecordList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordListResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRecordRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
@@ -840,6 +977,17 @@ func (r *ModifyRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RecordCountInfo struct {
+	// The subdomain count.
+	SubdomainCount *uint64 `json:"SubdomainCount,omitempty" name:"SubdomainCount"`
+
+	// The count of records returned in the list.
+	ListCount *uint64 `json:"ListCount,omitempty" name:"ListCount"`
+
+	// The total record count.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+}
+
 type RecordInfo struct {
 	// Record ID.
 	Id *uint64 `json:"Id,omitempty" name:"Id"`
@@ -888,4 +1036,47 @@ type RecordInfo struct {
 
 	// Domain ID.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
+}
+
+type RecordListItem struct {
+	// The record ID.
+	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
+
+	// The record value.
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// The record status. Valid values: `ENABLE` (enabled), `DISABLE` (disabled).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The update time.
+	UpdatedOn *string `json:"UpdatedOn,omitempty" name:"UpdatedOn"`
+
+	// The host name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The record split zone.
+	Line *string `json:"Line,omitempty" name:"Line"`
+
+	// The split zone ID.
+	LineId *string `json:"LineId,omitempty" name:"LineId"`
+
+	// The record type.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The record weight, which is required for round-robin DNS records.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
+
+	// The monitoring status of the record. Valid values: `OK` (normal), `WARN` (warning), and `DOWN` (downtime). It is empty if no monitoring is set or the monitoring is suspended.
+	MonitorStatus *string `json:"MonitorStatus,omitempty" name:"MonitorStatus"`
+
+	// The record remarks.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// The record cache time.
+	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
+
+	// The MX value, applicable to the MX record only.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MX *uint64 `json:"MX,omitempty" name:"MX"`
 }

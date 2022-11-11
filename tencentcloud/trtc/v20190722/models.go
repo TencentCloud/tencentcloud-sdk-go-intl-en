@@ -567,7 +567,7 @@ type McuLayoutParams struct {
 	// The layout mode. Valid values: 1 (floating), 2 (screen sharing), 3 (grid), 4 (custom). Floating, screen sharing, and grid are dynamic layouts. Custom layouts are static layouts.
 	MixLayoutMode *uint64 `json:"MixLayoutMode,omitempty" name:"MixLayoutMode"`
 
-	// Whether to display users who publish only audio. 0: Yes; 1: No. This parameter is valid only if dynamic layouts are used. If you do not pass this parameter, 0 will be used.
+	// Whether to display users who publish only audio. 0: No; 1: Yes. This parameter is valid only if a dynamic layout is used. If you do not pass this parameter, 0 will be used.
 	PureAudioHoldPlaceMode *uint64 `json:"PureAudioHoldPlaceMode,omitempty" name:"PureAudioHoldPlaceMode"`
 
 	// The details of a custom layout.
@@ -1011,6 +1011,156 @@ func (r *RemoveUserResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RemoveUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetUserBlockedByStrRoomIdRequestParams struct {
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The room ID (string).
+	StrRoomId *string `json:"StrRoomId,omitempty" name:"StrRoomId"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	IsMute *uint64 `json:"IsMute,omitempty" name:"IsMute"`
+}
+
+type SetUserBlockedByStrRoomIdRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The room ID (string).
+	StrRoomId *string `json:"StrRoomId,omitempty" name:"StrRoomId"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	IsMute *uint64 `json:"IsMute,omitempty" name:"IsMute"`
+}
+
+func (r *SetUserBlockedByStrRoomIdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetUserBlockedByStrRoomIdRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StrRoomId")
+	delete(f, "UserId")
+	delete(f, "IsMute")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetUserBlockedByStrRoomIdRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetUserBlockedByStrRoomIdResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SetUserBlockedByStrRoomIdResponse struct {
+	*tchttp.BaseResponse
+	Response *SetUserBlockedByStrRoomIdResponseParams `json:"Response"`
+}
+
+func (r *SetUserBlockedByStrRoomIdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetUserBlockedByStrRoomIdResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetUserBlockedRequestParams struct {
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The room ID (number).
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	IsMute *uint64 `json:"IsMute,omitempty" name:"IsMute"`
+}
+
+type SetUserBlockedRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The room ID (number).
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	IsMute *uint64 `json:"IsMute,omitempty" name:"IsMute"`
+}
+
+func (r *SetUserBlockedRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetUserBlockedRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "UserId")
+	delete(f, "IsMute")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetUserBlockedRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetUserBlockedResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SetUserBlockedResponse struct {
+	*tchttp.BaseResponse
+	Response *SetUserBlockedResponseParams `json:"Response"`
+}
+
+func (r *SetUserBlockedResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetUserBlockedResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
