@@ -1669,7 +1669,7 @@ type CreateSubscriptionRequestParams struct {
 	// Topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Subscriber name, which can contain up to 150 letters, digits, hyphens, and underscores.
+	// Subscriber name, which can contain up to 128 characters.
 	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
 
 	// Whether the creation is idempotent; if not, you cannot create subscriptions with the same name.
@@ -1697,7 +1697,7 @@ type CreateSubscriptionRequest struct {
 	// Topic name.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Subscriber name, which can contain up to 150 letters, digits, hyphens, and underscores.
+	// Subscriber name, which can contain up to 128 characters.
 	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
 
 	// Whether the creation is idempotent; if not, you cannot create subscriptions with the same name.
@@ -3944,6 +3944,155 @@ func (r *DescribePublishersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRabbitMQNodeListRequestParams struct {
+	// TDMQ for RabbitMQ cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeRabbitMQNodeListRequest struct {
+	*tchttp.BaseRequest
+	
+	// TDMQ for RabbitMQ cluster ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRabbitMQNodeListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQNodeListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQNodeListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQNodeListResponseParams struct {
+	// The number of clusters
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Cluster list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	NodeList []*RabbitMQPrivateNode `json:"NodeList,omitempty" name:"NodeList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRabbitMQNodeListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRabbitMQNodeListResponseParams `json:"Response"`
+}
+
+func (r *DescribeRabbitMQNodeListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQNodeListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQVipInstancesRequestParams struct {
+	// Query condition filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of queried items, which defaults to 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribeRabbitMQVipInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query condition filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of queried items, which defaults to 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeRabbitMQVipInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQVipInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQVipInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQVipInstancesResponseParams struct {
+	// The total number of unpaginated items
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Instance information list
+	Instances []*RabbitMQVipInstance `json:"Instances,omitempty" name:"Instances"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRabbitMQVipInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRabbitMQVipInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRabbitMQVipInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQVipInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRocketMQClusterRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -6095,6 +6244,58 @@ type Publisher struct {
 	// Serial number of the topic partition connected to the producer.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+}
+
+type RabbitMQPrivateNode struct {
+	// Node name
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+}
+
+type RabbitMQVipInstance struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance version
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceVersion *string `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
+
+	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Number of nodes
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Instance specification name
+	ConfigDisplay *string `json:"ConfigDisplay,omitempty" name:"ConfigDisplay"`
+
+	// Peak TPS
+	MaxTps *uint64 `json:"MaxTps,omitempty" name:"MaxTps"`
+
+	// Peak bandwidth in Mbps
+	MaxBandWidth *uint64 `json:"MaxBandWidth,omitempty" name:"MaxBandWidth"`
+
+	// Storage capacity in GB
+	MaxStorage *uint64 `json:"MaxStorage,omitempty" name:"MaxStorage"`
+
+	// Instance expiration time in milliseconds
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Payment mode. `0`: Postpaid; `1`: Prepaid.
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Remarks
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Instance specification ID
+	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
 }
 
 // Predefined struct for user

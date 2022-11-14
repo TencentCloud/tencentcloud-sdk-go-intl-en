@@ -137,6 +137,9 @@ const (
 	// Invalid email address. Make sure the address format is correct.
 	INVALIDPARAMETERVALUE_ILLEGALEMAILADDRESS = "InvalidParameterValue.IllegalEmailAddress"
 
+	// The sender alias is incorrect.
+	INVALIDPARAMETERVALUE_ILLEGALSENDERNAME = "InvalidParameterValue.IllegalSenderName"
+
 	// Invalid domain value.
 	INVALIDPARAMETERVALUE_INVALIDEMAILIDENTITY = "InvalidParameterValue.InvalidEmailIdentity"
 
@@ -148,6 +151,9 @@ const (
 
 	// Invalid recipient group description. The description cannot contain special characters and must contain 1 to 300 characters.
 	INVALIDPARAMETERVALUE_RECEIVERDESCILLEGAL = "InvalidParameterValue.ReceiverDescIllegal"
+
+	// The recipient address is incorrect.
+	INVALIDPARAMETERVALUE_RECEIVEREMAILINVALID = "InvalidParameterValue.ReceiverEmailInvalid"
 
 	// Invalid recipient group name. Check the name and its size.
 	INVALIDPARAMETERVALUE_RECEIVERNAMEILLEGAL = "InvalidParameterValue.ReceiverNameIllegal"
@@ -173,6 +179,9 @@ const (
 	// Template parameters must be in JSON format.
 	INVALIDPARAMETERVALUE_TEMPLATEDATAERROR = "InvalidParameterValue.TemplateDataError"
 
+	// The name of a template parameter variable is not the same as the original name.
+	INVALIDPARAMETERVALUE_TEMPLATEDATAINCONSISTENT = "InvalidParameterValue.TemplateDataInconsistent"
+
 	// Invalid template name. Make sure the characters and length of the template name are valid.
 	INVALIDPARAMETERVALUE_TEMPLATENAMEILLEGAL = "InvalidParameterValue.TemplateNameIllegal"
 
@@ -191,11 +200,14 @@ const (
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
 
-	// The number of recipient email addresses exceeded the limit.
-	LIMITEXCEEDED_EXCEEDRECEIVERDETAILLIMIT = "LimitExceeded.ExceedReceiverDetailLimit"
-
 	// The number of recipient groups exceeded the limit.
 	LIMITEXCEEDED_EXCEEDRECEIVERLIMIT = "LimitExceeded.ExceedReceiverLimit"
+
+	// The number of recipient addresses in the recipient group exceeds the limit.
+	LIMITEXCEEDED_RECEIVERDETAILCOUNTLIMIT = "LimitExceeded.ReceiverDetailCountLimit"
+
+	// The number of recipient addresses requested exceeds the limit.
+	LIMITEXCEEDED_RECEIVERDETAILREQUESTLIMIT = "LimitExceeded.ReceiverDetailRequestLimit"
 
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
@@ -227,7 +239,7 @@ const (
 	// The number of sender addresses exceeds the upper limit.
 	OPERATIONDENIED_EXCEEDSENDERLIMIT = "OperationDenied.ExceedSenderLimit"
 
-	// The recipient group is being operated. Try again later.
+	// The recipient group is being uploaded. Try again later.
 	OPERATIONDENIED_RECEIVERISOPERATING = "OperationDenied.ReceiverIsOperating"
 
 	// The recipient group does not exist.
