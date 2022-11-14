@@ -1299,6 +1299,7 @@ func NewDescribeDcnDetailResponse() (response *DescribeDcnDetailResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -1312,6 +1313,7 @@ func (c *Client) DescribeDcnDetail(request *DescribeDcnDetailRequest) (response 
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -1435,6 +1437,66 @@ func (c *Client) DescribeInstanceNodeInfoWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeInstanceNodeInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogFileRetentionPeriodRequest() (request *DescribeLogFileRetentionPeriodRequest) {
+    request = &DescribeLogFileRetentionPeriodRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "DescribeLogFileRetentionPeriod")
+    
+    
+    return
+}
+
+func NewDescribeLogFileRetentionPeriodResponse() (response *DescribeLogFileRetentionPeriodResponse) {
+    response = &DescribeLogFileRetentionPeriodResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLogFileRetentionPeriod
+// This API is used to view the configured number of days for retention of database backup logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeLogFileRetentionPeriod(request *DescribeLogFileRetentionPeriodRequest) (response *DescribeLogFileRetentionPeriodResponse, err error) {
+    return c.DescribeLogFileRetentionPeriodWithContext(context.Background(), request)
+}
+
+// DescribeLogFileRetentionPeriod
+// This API is used to view the configured number of days for retention of database backup logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeLogFileRetentionPeriodWithContext(ctx context.Context, request *DescribeLogFileRetentionPeriodRequest) (response *DescribeLogFileRetentionPeriodResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogFileRetentionPeriodRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogFileRetentionPeriod require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogFileRetentionPeriodResponse()
     err = c.Send(request, response)
     return
 }
@@ -1919,6 +1981,7 @@ func NewModifyAccountPrivilegesResponse() (response *ModifyAccountPrivilegesResp
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_BADUSERRIGHT = "InvalidParameterValue.BadUserRight"
 //  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -1944,6 +2007,7 @@ func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_BADUSERRIGHT = "InvalidParameterValue.BadUserRight"
 //  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -2145,6 +2209,210 @@ func (c *Client) ModifyDBSyncModeWithContext(ctx context.Context, request *Modif
     request.SetContext(ctx)
     
     response = NewModifyDBSyncModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceNetworkRequest() (request *ModifyInstanceNetworkRequest) {
+    request = &ModifyInstanceNetworkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "ModifyInstanceNetwork")
+    
+    
+    return
+}
+
+func NewModifyInstanceNetworkResponse() (response *ModifyInstanceNetworkResponse) {
+    response = &ModifyInstanceNetworkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyInstanceNetwork
+// This API is used to modify instance network.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLYVIPFAILED = "FailedOperation.ApplyVipFailed"
+//  FAILEDOPERATION_WANSTATUSABNORMAL = "FailedOperation.WanStatusAbnormal"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_VPCOPERATIONFAILED = "InternalError.VpcOperationFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_SUBNETUNAVAILABLE = "InvalidParameter.SubnetUnavailable"
+//  INVALIDPARAMETER_VIPNOTINSUBNET = "InvalidParameter.VipNotInSubnet"
+//  INVALIDPARAMETER_VIPUSED = "InvalidParameter.VipUsed"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyInstanceNetwork(request *ModifyInstanceNetworkRequest) (response *ModifyInstanceNetworkResponse, err error) {
+    return c.ModifyInstanceNetworkWithContext(context.Background(), request)
+}
+
+// ModifyInstanceNetwork
+// This API is used to modify instance network.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLYVIPFAILED = "FailedOperation.ApplyVipFailed"
+//  FAILEDOPERATION_WANSTATUSABNORMAL = "FailedOperation.WanStatusAbnormal"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_VPCOPERATIONFAILED = "InternalError.VpcOperationFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_SUBNETUNAVAILABLE = "InvalidParameter.SubnetUnavailable"
+//  INVALIDPARAMETER_VIPNOTINSUBNET = "InvalidParameter.VipNotInSubnet"
+//  INVALIDPARAMETER_VIPUSED = "InvalidParameter.VipUsed"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyInstanceNetworkWithContext(ctx context.Context, request *ModifyInstanceNetworkRequest) (response *ModifyInstanceNetworkResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceNetworkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceNetwork require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceNetworkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceVipRequest() (request *ModifyInstanceVipRequest) {
+    request = &ModifyInstanceVipRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "ModifyInstanceVip")
+    
+    
+    return
+}
+
+func NewModifyInstanceVipResponse() (response *ModifyInstanceVipResponse) {
+    response = &ModifyInstanceVipResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyInstanceVip
+// This API is used to modify instance VIP.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLYVIPFAILED = "FailedOperation.ApplyVipFailed"
+//  FAILEDOPERATION_VIPNOTCHANGE = "FailedOperation.VipNotChange"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_VIPNOTINSUBNET = "InvalidParameter.VipNotInSubnet"
+//  INVALIDPARAMETER_VIPUSED = "InvalidParameter.VipUsed"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyInstanceVip(request *ModifyInstanceVipRequest) (response *ModifyInstanceVipResponse, err error) {
+    return c.ModifyInstanceVipWithContext(context.Background(), request)
+}
+
+// ModifyInstanceVip
+// This API is used to modify instance VIP.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLYVIPFAILED = "FailedOperation.ApplyVipFailed"
+//  FAILEDOPERATION_VIPNOTCHANGE = "FailedOperation.VipNotChange"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_VIPNOTINSUBNET = "InvalidParameter.VipNotInSubnet"
+//  INVALIDPARAMETER_VIPUSED = "InvalidParameter.VipUsed"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyInstanceVipWithContext(ctx context.Context, request *ModifyInstanceVipRequest) (response *ModifyInstanceVipResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceVipRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceVip require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceVipResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceVportRequest() (request *ModifyInstanceVportRequest) {
+    request = &ModifyInstanceVportRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "ModifyInstanceVport")
+    
+    
+    return
+}
+
+func NewModifyInstanceVportResponse() (response *ModifyInstanceVportResponse) {
+    response = &ModifyInstanceVportResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyInstanceVport
+// This API is used to modify instance Vport.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SGCHANGEVIP = "FailedOperation.SGChangeVip"
+//  FAILEDOPERATION_VPCADDSERVICEFAILED = "FailedOperation.VpcAddServiceFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_VIPUSED = "InvalidParameter.VipUsed"
+//  INVALIDPARAMETER_VPORTUSED = "InvalidParameter.VportUsed"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyInstanceVport(request *ModifyInstanceVportRequest) (response *ModifyInstanceVportResponse, err error) {
+    return c.ModifyInstanceVportWithContext(context.Background(), request)
+}
+
+// ModifyInstanceVport
+// This API is used to modify instance Vport.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SGCHANGEVIP = "FailedOperation.SGChangeVip"
+//  FAILEDOPERATION_VPCADDSERVICEFAILED = "FailedOperation.VpcAddServiceFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_VIPUSED = "InvalidParameter.VipUsed"
+//  INVALIDPARAMETER_VPORTUSED = "InvalidParameter.VportUsed"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyInstanceVportWithContext(ctx context.Context, request *ModifyInstanceVportRequest) (response *ModifyInstanceVportResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceVportRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceVport require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceVportResponse()
     err = c.Send(request, response)
     return
 }
