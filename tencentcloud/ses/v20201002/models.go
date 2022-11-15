@@ -918,6 +918,9 @@ type GetEmailTemplateResponseParams struct {
 	// Template status. Valid values: `0` (approved); `1` (pending approval); `2` (rejected).
 	TemplateStatus *uint64 `json:"TemplateStatus,omitempty" name:"TemplateStatus"`
 
+	// Template name
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
