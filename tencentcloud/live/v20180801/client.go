@@ -1452,6 +1452,7 @@ func NewCreateLiveTranscodeTemplateResponse() (response *CreateLiveTranscodeTemp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AITRANSCODEOPTIONFAIL = "FailedOperation.AiTranscodeOptionFail"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
 //  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
@@ -1484,6 +1485,7 @@ func (c *Client) CreateLiveTranscodeTemplate(request *CreateLiveTranscodeTemplat
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AITRANSCODEOPTIONFAIL = "FailedOperation.AiTranscodeOptionFail"
+//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
 //  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"

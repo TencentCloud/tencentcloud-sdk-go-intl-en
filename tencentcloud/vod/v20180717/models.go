@@ -10937,6 +10937,9 @@ type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
+	// The progress of the adaptive bitrate task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
 	// Input of adaptive bitrate streaming task.
 	Input *AdaptiveDynamicStreamingTaskInput `json:"Input,omitempty" name:"Input"`
 
@@ -16889,10 +16892,10 @@ type StickerTrackItem struct {
 }
 
 type StorageRegionInfo struct {
-	// Storage region.
+	// The storage region.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
-	// Description of the storage region.
+	// The description of the storage region.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Whether storage is enabled in the region. Valid values:
@@ -16902,6 +16905,11 @@ type StorageRegionInfo struct {
 
 	// Whether the region is the default storage region. Valid values: true, false.
 	IsDefault *bool `json:"IsDefault,omitempty" name:"IsDefault"`
+
+	// Whether the storage region is inside or outside the Chinese mainland. Valid values:
+	// <li>Chinese Mainland</li>
+	// <li>Outside Chinese Mainland</li>
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type StorageStatData struct {

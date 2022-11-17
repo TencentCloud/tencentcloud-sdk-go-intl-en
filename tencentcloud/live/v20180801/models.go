@@ -1050,6 +1050,7 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// The source type. Valid values:
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
+	// PullPicPushLive: Images
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 
 	// The source URL(s).
@@ -1168,6 +1169,12 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// 2. Make sure you use publicly accessible URLs for the watermark images.
 	// 3. Supported image formats include PNG, JPG, and GIF.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
+
+	// Whether to use local mode when the source type is video files. The default is `0`.
+	// 0: Do not use local mode
+	// 1: Use local mode
+	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
+	VodLocalMode *int64 `json:"VodLocalMode,omitempty" name:"VodLocalMode"`
 }
 
 type CreateLivePullStreamTaskRequest struct {
@@ -1176,6 +1183,7 @@ type CreateLivePullStreamTaskRequest struct {
 	// The source type. Valid values:
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
+	// PullPicPushLive: Images
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 
 	// The source URL(s).
@@ -1294,6 +1302,12 @@ type CreateLivePullStreamTaskRequest struct {
 	// 2. Make sure you use publicly accessible URLs for the watermark images.
 	// 3. Supported image formats include PNG, JPG, and GIF.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
+
+	// Whether to use local mode when the source type is video files. The default is `0`.
+	// 0: Do not use local mode
+	// 1: Use local mode
+	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
+	VodLocalMode *int64 `json:"VodLocalMode,omitempty" name:"VodLocalMode"`
 }
 
 func (r *CreateLivePullStreamTaskRequest) ToJsonString() string {
@@ -1327,6 +1341,7 @@ func (r *CreateLivePullStreamTaskRequest) FromJsonString(s string) error {
 	delete(f, "BackupSourceType")
 	delete(f, "BackupSourceUrl")
 	delete(f, "WatermarkList")
+	delete(f, "VodLocalMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLivePullStreamTaskRequest has unknown keys!", "")
 	}
@@ -8366,8 +8381,9 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// PullVodPushLive: Video files
 	// Notes:
 	// 1. Backup sources are supported only if the primary source type is live streaming.
-	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
-	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+	// 2. Leaving this parameter empty will reset the backup source.
+	// 3. When pull from the primary source is interrupted, the system will pull from the backup source.
+	// 4. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
 	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
@@ -8384,6 +8400,12 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// 6. If you want to stop using watermarks, pass in an empty array.
 	// 7. Currently, animated watermarks are not supported.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
+
+	// Whether to use local mode when the source type is video files. The default is `0`.
+	// 0: Do not use local mode
+	// 1: Use local mode
+	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
+	VodLocalMode *int64 `json:"VodLocalMode,omitempty" name:"VodLocalMode"`
 }
 
 type ModifyLivePullStreamTaskRequest struct {
@@ -8462,8 +8484,9 @@ type ModifyLivePullStreamTaskRequest struct {
 	// PullVodPushLive: Video files
 	// Notes:
 	// 1. Backup sources are supported only if the primary source type is live streaming.
-	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
-	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
+	// 2. Leaving this parameter empty will reset the backup source.
+	// 3. When pull from the primary source is interrupted, the system will pull from the backup source.
+	// 4. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
 	BackupSourceType *string `json:"BackupSourceType,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
@@ -8480,6 +8503,12 @@ type ModifyLivePullStreamTaskRequest struct {
 	// 6. If you want to stop using watermarks, pass in an empty array.
 	// 7. Currently, animated watermarks are not supported.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
+
+	// Whether to use local mode when the source type is video files. The default is `0`.
+	// 0: Do not use local mode
+	// 1: Use local mode
+	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
+	VodLocalMode *int64 `json:"VodLocalMode,omitempty" name:"VodLocalMode"`
 }
 
 func (r *ModifyLivePullStreamTaskRequest) ToJsonString() string {
@@ -8510,6 +8539,7 @@ func (r *ModifyLivePullStreamTaskRequest) FromJsonString(s string) error {
 	delete(f, "BackupSourceType")
 	delete(f, "BackupSourceUrl")
 	delete(f, "WatermarkList")
+	delete(f, "VodLocalMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLivePullStreamTaskRequest has unknown keys!", "")
 	}
@@ -9260,6 +9290,7 @@ type PullStreamTaskInfo struct {
 	// The source type. Valid values:
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
+	// PullPicPushLive: Images
 	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
 
 	// The source URL(s).
@@ -9382,6 +9413,12 @@ type PullStreamTaskInfo struct {
 	// The information of watermarks to add.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitempty" name:"WatermarkList"`
+
+	// Whether to use local mode when the source type is video files. The default is `0`.
+	// 0: Do not use local mode
+	// 1: Use local mode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VodLocalMode *int64 `json:"VodLocalMode,omitempty" name:"VodLocalMode"`
 }
 
 type PushAuthKeyInfo struct {

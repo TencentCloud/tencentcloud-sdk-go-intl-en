@@ -723,6 +723,56 @@ func (c *Client) DeleteAclWithContext(ctx context.Context, request *DeleteAclReq
     return
 }
 
+func NewDeleteInstancePreRequest() (request *DeleteInstancePreRequest) {
+    request = &DeleteInstancePreRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DeleteInstancePre")
+    
+    
+    return
+}
+
+func NewDeleteInstancePreResponse() (response *DeleteInstancePreResponse) {
+    response = &DeleteInstancePreResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteInstancePre
+// This API is used to delete a monthly subscribed (prepaid) instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstancePre(request *DeleteInstancePreRequest) (response *DeleteInstancePreResponse, err error) {
+    return c.DeleteInstancePreWithContext(context.Background(), request)
+}
+
+// DeleteInstancePre
+// This API is used to delete a monthly subscribed (prepaid) instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteInstancePreWithContext(ctx context.Context, request *DeleteInstancePreRequest) (response *DeleteInstancePreResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstancePreRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstancePre require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstancePreResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRouteRequest() (request *DeleteRouteRequest) {
     request = &DeleteRouteRequest{
         BaseRequest: &tchttp.BaseRequest{},
