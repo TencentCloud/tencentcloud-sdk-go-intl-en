@@ -2233,14 +2233,14 @@ func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeLogFileRetentionPeriodRequestParams struct {
-	// Instance ID in the format of `tdsql-ow728lmc`.
+	// Instance ID in the format of `tdsql-ow728lmc`
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeLogFileRetentionPeriodRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of `tdsql-ow728lmc`.
+	// Instance ID in the format of `tdsql-ow728lmc`
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -2265,7 +2265,7 @@ func (r *DescribeLogFileRetentionPeriodRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeLogFileRetentionPeriodResponseParams struct {
-	// Instance ID in the format of `tdsql-ow728lmc`.
+	// Instance ID in the format of `tdsql-ow728lmc`
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Backup log retention days
@@ -2725,6 +2725,120 @@ func (r *GrantAccountPrivilegesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GrantAccountPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDBInstanceRequestParams struct {
+	// Instance ID in the format of `tdsql-dasjkhd`. It is the same as the instance ID displayed on the TencentDB console. You can use the `DescribeDBInstances` API to query the ID, which is the value of the `InstanceId` output parameter.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+type IsolateDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsql-dasjkhd`. It is the same as the instance ID displayed on the TencentDB console. You can use the `DescribeDBInstances` API to query the ID, which is the value of the `InstanceId` output parameter.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *IsolateDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDBInstanceResponseParams struct {
+	// IDs of isolated instances
+	SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitempty" name:"SuccessInstanceIds"`
+
+	// IDs of instances failed to be isolated
+	FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type IsolateDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *IsolateDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDedicatedDBInstanceRequestParams struct {
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type IsolateDedicatedDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *IsolateDedicatedDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDedicatedDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateDedicatedDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDedicatedDBInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type IsolateDedicatedDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateDedicatedDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *IsolateDedicatedDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDedicatedDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3692,6 +3806,63 @@ type TablePrivilege struct {
 
 	// Permission information
 	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+}
+
+// Predefined struct for user
+type TerminateDedicatedDBInstanceRequestParams struct {
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type TerminateDedicatedDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *TerminateDedicatedDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateDedicatedDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateDedicatedDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TerminateDedicatedDBInstanceResponseParams struct {
+	// Async task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type TerminateDedicatedDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *TerminateDedicatedDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ViewPrivileges struct {

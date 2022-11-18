@@ -3102,6 +3102,60 @@ func (r *InitDCDBInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type IsolateDedicatedDBInstanceRequestParams struct {
+	// Instance ID in the format of `dcdbt-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type IsolateDedicatedDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `dcdbt-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *IsolateDedicatedDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDedicatedDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateDedicatedDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDedicatedDBInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type IsolateDedicatedDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateDedicatedDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *IsolateDedicatedDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDedicatedDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type IsolateHourDCDBInstanceRequestParams struct {
 	// Instance uuid list
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
@@ -4136,4 +4190,61 @@ type TableColumn struct {
 
 	// Column type
 	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+// Predefined struct for user
+type TerminateDedicatedDBInstanceRequestParams struct {
+	// Instance ID in the format of `dcdbt-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type TerminateDedicatedDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `dcdbt-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *TerminateDedicatedDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateDedicatedDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateDedicatedDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TerminateDedicatedDBInstanceResponseParams struct {
+	// Async task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type TerminateDedicatedDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *TerminateDedicatedDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }

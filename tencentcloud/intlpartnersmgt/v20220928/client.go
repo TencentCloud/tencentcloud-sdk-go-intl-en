@@ -380,7 +380,7 @@ func NewQueryCustomersCreditResponse() (response *QueryCustomersCreditResponse) 
 }
 
 // QueryCustomersCredit
-// This API is used for a partner to query a customer's credit and basic information.
+// This API is used for a partner to the credits and basic information of cutomers.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -389,7 +389,7 @@ func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (res
 }
 
 // QueryCustomersCredit
-// This API is used for a partner to query a customer's credit and basic information.
+// This API is used for a partner to the credits and basic information of cutomers.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -428,7 +428,7 @@ func NewQueryDirectCustomersCreditResponse() (response *QueryDirectCustomersCred
 }
 
 // QueryDirectCustomersCredit
-// This API is used to query a customer’s credit.
+// This API is used to query the credits of direct customers.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -440,7 +440,7 @@ func (c *Client) QueryDirectCustomersCredit(request *QueryDirectCustomersCreditR
 }
 
 // QueryDirectCustomersCredit
-// This API is used to query a customer’s credit.
+// This API is used to query the credits of direct customers.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

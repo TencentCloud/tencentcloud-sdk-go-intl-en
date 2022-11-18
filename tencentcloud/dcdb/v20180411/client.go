@@ -2129,6 +2129,66 @@ func (c *Client) InitDCDBInstancesWithContext(ctx context.Context, request *Init
     return
 }
 
+func NewIsolateDedicatedDBInstanceRequest() (request *IsolateDedicatedDBInstanceRequest) {
+    request = &IsolateDedicatedDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "IsolateDedicatedDBInstance")
+    
+    
+    return
+}
+
+func NewIsolateDedicatedDBInstanceResponse() (response *IsolateDedicatedDBInstanceResponse) {
+    response = &IsolateDedicatedDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// IsolateDedicatedDBInstance
+// This API is used to isolate a dedicated TencentDB instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) IsolateDedicatedDBInstance(request *IsolateDedicatedDBInstanceRequest) (response *IsolateDedicatedDBInstanceResponse, err error) {
+    return c.IsolateDedicatedDBInstanceWithContext(context.Background(), request)
+}
+
+// IsolateDedicatedDBInstance
+// This API is used to isolate a dedicated TencentDB instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) IsolateDedicatedDBInstanceWithContext(ctx context.Context, request *IsolateDedicatedDBInstanceRequest) (response *IsolateDedicatedDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewIsolateDedicatedDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateDedicatedDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolateDedicatedDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewIsolateHourDCDBInstanceRequest() (request *IsolateHourDCDBInstanceRequest) {
     request = &IsolateHourDCDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2901,6 +2961,64 @@ func (c *Client) SwitchDBInstanceHAWithContext(ctx context.Context, request *Swi
     request.SetContext(ctx)
     
     response = NewSwitchDBInstanceHAResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTerminateDedicatedDBInstanceRequest() (request *TerminateDedicatedDBInstanceRequest) {
+    request = &TerminateDedicatedDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "TerminateDedicatedDBInstance")
+    
+    
+    return
+}
+
+func NewTerminateDedicatedDBInstanceResponse() (response *TerminateDedicatedDBInstanceResponse) {
+    response = &TerminateDedicatedDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// TerminateDedicatedDBInstance
+// This API is used to terminate the isolated dedicated TDSQL instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) TerminateDedicatedDBInstance(request *TerminateDedicatedDBInstanceRequest) (response *TerminateDedicatedDBInstanceResponse, err error) {
+    return c.TerminateDedicatedDBInstanceWithContext(context.Background(), request)
+}
+
+// TerminateDedicatedDBInstance
+// This API is used to terminate the isolated dedicated TDSQL instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) TerminateDedicatedDBInstanceWithContext(ctx context.Context, request *TerminateDedicatedDBInstanceRequest) (response *TerminateDedicatedDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewTerminateDedicatedDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminateDedicatedDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTerminateDedicatedDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

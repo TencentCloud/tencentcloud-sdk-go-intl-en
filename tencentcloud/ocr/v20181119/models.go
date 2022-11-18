@@ -569,11 +569,10 @@ type HKIDCardOCRResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HeadImage *string `json:"HeadImage,omitempty" name:"HeadImage"`
 
-	// Multiple alarm codes. If the ID card is spoofed, photocopied, or doctored, the corresponding alarm code will be returned.
-	// -9102: alarm for photocopied document
-	// -9103: alarm for spoofed document
-	// -9104: alarm for doctored document
-	// -9105: alarm for forged document
+	// Multiple alarm codes. If the ID card is spoofed, photocopied, or photoshopped, the corresponding alarm code will be returned.
+	// -9102: Alarm for photocopied document
+	// -9103: Alarm for spoofed document
+	// -9104: Alarm for photoshopped document
 	WarningCode []*int64 `json:"WarningCode,omitempty" name:"WarningCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -796,9 +795,9 @@ type MLIDPassportOCRResponseParams struct {
 	// Country/region code
 	Nationality *string `json:"Nationality,omitempty" name:"Nationality"`
 
-	// Alarm code
-	// -9103 Alarm for spoofed card
-	// -9102 Alarm for photocopied card
+	// Alarm codes
+	// -9103 Alarm for spoofed document
+	// -9102 Alarm for photocopied document (including black & white and color ones)
 	// -9106 Alarm for covered card
 	Warn []*int64 `json:"Warn,omitempty" name:"Warn"`
 
