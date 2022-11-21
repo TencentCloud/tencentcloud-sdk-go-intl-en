@@ -461,14 +461,13 @@ type AiContentReviewTaskInput struct {
 }
 
 type AiRecognitionResult struct {
-	// Task type. Valid values:
-	// <li>FaceRecognition: Face recognition,</li>
-	// <li>AsrWordsRecognition: Speech keyword recognition,</li>
-	// <li>OcrWordsRecognition: Text keyword recognition,</li>
-	// <li>AsrFullTextRecognition: Full speech recognition,</li>
-	// <li>OcrFullTextRecognition: Full text recognition,</li>
-	// <li>HeadTailRecognition: Video opening and ending credits recognition,</li>
-	// <li>ObjectRecognition: Object recognition.</li>
+	// The task type. Valid values:
+	// <li>FaceRecognition: Face recognition</li>
+	// <li>AsrWordsRecognition: Speech keyword recognition</li>
+	// <li>OcrWordsRecognition: Text keyword recognition</li>
+	// <li>AsrFullTextRecognition: Full speech recognition</li>
+	// <li>OcrFullTextRecognition: Full text recognition</li>
+	// <li>TransTextRecognition: Speech translation</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Face recognition result, which is valid when `Type` is 
@@ -495,6 +494,11 @@ type AiRecognitionResult struct {
 	//  `OcrFullTextRecognition`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OcrFullTextTask *AiRecognitionTaskOcrFullTextResult `json:"OcrFullTextTask,omitempty" name:"OcrFullTextTask"`
+
+	// The translation result. This parameter is valid only if `Type` is
+	//  `TransTextRecognition`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TransTextTask *AiRecognitionTaskTransTextResult `json:"TransTextTask,omitempty" name:"TransTextTask"`
 }
 
 type AiRecognitionTaskAsrFullTextResult struct {
@@ -810,6 +814,60 @@ type AiRecognitionTaskOcrWordsSegmentItem struct {
 
 	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
+}
+
+type AiRecognitionTaskTransTextResult struct {
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://intl.cloud.tencent.com/document/product/1041/40249).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of the translation task.
+	Input *AiRecognitionTaskTransTextResultInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of the translation task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiRecognitionTaskTransTextResultOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiRecognitionTaskTransTextResultInput struct {
+	// The translation template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiRecognitionTaskTransTextResultOutput struct {
+	// The translated segments.
+	SegmentSet []*AiRecognitionTaskTransTextSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// The subtitle URL.
+	SubtitlePath *string `json:"SubtitlePath,omitempty" name:"SubtitlePath"`
+
+	// The subtitle storage location.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+}
+
+type AiRecognitionTaskTransTextSegmentItem struct {
+	// The confidence score for a segment. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The start time offset (seconds) of a segment.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// The end time offset (seconds) of a segment.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// The text transcript.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The translation.
+	Trans *string `json:"Trans,omitempty" name:"Trans"`
 }
 
 type AiReviewPoliticalAsrTaskInput struct {
@@ -1546,6 +1604,9 @@ type AudioTemplateInfoForUpdate struct {
 	// <li>6: Stereo</li>
 	// When the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.
 	AudioChannel *int64 `json:"AudioChannel,omitempty" name:"AudioChannel"`
+
+	// The audio tracks to retain. All audio tracks are retained by default.
+	StreamSelects []*int64 `json:"StreamSelects,omitempty" name:"StreamSelects"`
 }
 
 type ClassificationConfigureInfo struct {
@@ -2249,6 +2310,9 @@ type CreateImageSpriteTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format. Valid values: jpg (default), png, webp.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type CreateImageSpriteTemplateRequest struct {
@@ -2293,6 +2357,9 @@ type CreateImageSpriteTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format. Valid values: jpg (default), png, webp.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 func (r *CreateImageSpriteTemplateRequest) ToJsonString() string {
@@ -2317,6 +2384,7 @@ func (r *CreateImageSpriteTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ResolutionAdaptive")
 	delete(f, "FillType")
 	delete(f, "Comment")
+	delete(f, "Format")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateImageSpriteTemplateRequest has unknown keys!", "")
 	}
@@ -2475,7 +2543,7 @@ type CreateSampleSnapshotTemplateRequestParams struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Image format. Valid values: jpg; png. Default value: jpg.
+	// The image format. Valid values: jpg (default), png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -2518,7 +2586,7 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Image format. Valid values: jpg; png. Default value: jpg.
+	// The image format. Valid values: jpg (default), png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -2602,7 +2670,7 @@ type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Image format. Valid values: jpg; png. Default value: jpg.
+	// The image format. Valid values: jpg (default), png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -2635,7 +2703,7 @@ type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Image format. Valid values: jpg; png. Default value: jpg.
+	// The image format. Valid values: jpg (default), png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -5842,6 +5910,9 @@ type ImageSpriteTemplate struct {
 
 	// Template description.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type ImageWatermarkInput struct {
@@ -5917,12 +5988,13 @@ type LiveStreamAiRecognitionResultInfo struct {
 }
 
 type LiveStreamAiRecognitionResultItem struct {
-	// Result type. Valid values:
-	// <li>FaceRecognition: face recognition,</li>
-	// <li>AsrWordsRecognition: speech keyword recognition,</li>
-	// <li>OcrWordsRecognition: text keyword recognition,</li>
-	// <li>AsrFullTextRecognition: full speech recognition,</li>
-	// <li>OcrFullTextRecognition: full text recognition.</li>
+	// The result type. Valid values:
+	// <li>FaceRecognition: Face recognition</li>
+	// <li>AsrWordsRecognition: Speech keyword recognition</li>
+	// <li>OcrWordsRecognition: Text keyword recognition</li>
+	// <li>AsrFullTextRecognition: Full speech recognition</li>
+	// <li>OcrFullTextRecognition: Full text recognition</li>
+	// <li>TransTextRecognition: Speech translation</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Face recognition result, which is valid when `Type` is
@@ -5944,6 +6016,9 @@ type LiveStreamAiRecognitionResultItem struct {
 	// Full text recognition result, which is valid when `Type` is
 	// `OcrFullTextRecognition`.
 	OcrFullTextRecognitionResultSet []*LiveStreamOcrFullTextRecognitionResult `json:"OcrFullTextRecognitionResultSet,omitempty" name:"OcrFullTextRecognitionResultSet"`
+
+	// The translation result. This parameter is valid only if `Type` is `TransTextRecognition`.
+	TransTextRecognitionResultSet []*LiveStreamTransTextRecognitionResult `json:"TransTextRecognitionResultSet,omitempty" name:"TransTextRecognitionResultSet"`
 }
 
 type LiveStreamAiReviewImagePoliticalResult struct {
@@ -6227,6 +6302,23 @@ type LiveStreamTaskNotifyConfig struct {
 
 	// HTTP callback URL, required if `NotifyType` is set to `URL`
 	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
+}
+
+type LiveStreamTransTextRecognitionResult struct {
+	// The text transcript.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The PTS (seconds) of the start of a segment.
+	StartPtsTime *float64 `json:"StartPtsTime,omitempty" name:"StartPtsTime"`
+
+	// The PTS (seconds) of the end of a segment.
+	EndPtsTime *float64 `json:"EndPtsTime,omitempty" name:"EndPtsTime"`
+
+	// The confidence score for a segment. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The translation.
+	Trans *string `json:"Trans,omitempty" name:"Trans"`
 }
 
 type LowLightEnhanceConfig struct {
@@ -7536,6 +7628,9 @@ type ModifyImageSpriteTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format. Valid values: jpg, png, webp.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type ModifyImageSpriteTemplateRequest struct {
@@ -7583,6 +7678,9 @@ type ModifyImageSpriteTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format. Valid values: jpg, png, webp.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 func (r *ModifyImageSpriteTemplateRequest) ToJsonString() string {
@@ -7608,6 +7706,7 @@ func (r *ModifyImageSpriteTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ColumnCount")
 	delete(f, "FillType")
 	delete(f, "Comment")
+	delete(f, "Format")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyImageSpriteTemplateRequest has unknown keys!", "")
 	}
@@ -7768,7 +7867,7 @@ type ModifySampleSnapshotTemplateRequestParams struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
 
-	// Image format. Valid values: jpg; png.
+	// The image format. Valid values: jpg, png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -7814,7 +7913,7 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitempty" name:"SampleInterval"`
 
-	// Image format. Valid values: jpg; png.
+	// The image format. Valid values: jpg, png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -7899,7 +7998,7 @@ type ModifySnapshotByTimeOffsetTemplateRequestParams struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Image format. Valid values: jpg, png.
+	// The image format. Valid values: jpg, png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -7935,7 +8034,7 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// Image format. Valid values: jpg, png.
+	// The image format. Valid values: jpg, png, webp.
 	Format *string `json:"Format,omitempty" name:"Format"`
 
 	// Template description. Length limit: 256 characters.
@@ -8451,6 +8550,9 @@ type OverrideTranscodeParameter struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
+
+	// The subtitle settings.
+	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitempty" name:"SubtitleTemplate"`
 }
 
 // Predefined struct for user
@@ -8572,11 +8674,12 @@ type ParseNotificationResponseParams struct {
 	// <li>ScheduleTask (scheme)</li>
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
-	// Information of a video processing task. This field has a value only when `TaskType` is `WorkflowTask`.
+	// The information of a video processing task. Information will be returned only if `EventType` is `WorkflowTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WorkflowTaskEvent *WorkflowTask `json:"WorkflowTaskEvent,omitempty" name:"WorkflowTaskEvent"`
 
-	// Video editing task information. This field has a value only when `TaskType` is `EditMediaTask`.
+	// The information of a video editing task. Information will be returned only if `EventType` is `EditMediaTask`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EditMediaTaskEvent *EditMediaTask `json:"EditMediaTaskEvent,omitempty" name:"EditMediaTaskEvent"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -8585,7 +8688,7 @@ type ParseNotificationResponseParams struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
-	// The information of a scheme. This parameter is valid only if `TaskType` is `ScheduleTask`.
+	// The information of a scheme. Information will be returned only if `EventType` is `ScheduleTask`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScheduleTaskEvent *ScheduleTask `json:"ScheduleTaskEvent,omitempty" name:"ScheduleTaskEvent"`
 
@@ -8990,9 +9093,12 @@ type ProcessMediaRequestParams struct {
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// The scheme ID.
-	// Notes: 1. If output information is not specified for a scheme, the request parameters `OutputStorage` and `OutputDir` will be used.
-	// 2. If a notification is not configured for a scheme, the request parameter `TaskNotifyConfig` will be used.
-	// 3. The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	// Note 1: About `OutputStorage` and `OutputDir`
+	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
+	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
+	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+	// 
+	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
 	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 }
 
@@ -9033,9 +9139,12 @@ type ProcessMediaRequest struct {
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// The scheme ID.
-	// Notes: 1. If output information is not specified for a scheme, the request parameters `OutputStorage` and `OutputDir` will be used.
-	// 2. If a notification is not configured for a scheme, the request parameter `TaskNotifyConfig` will be used.
-	// 3. The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	// Note 1: About `OutputStorage` and `OutputDir`
+	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
+	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
+	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+	// 
+	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
 	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 }
 
@@ -9634,6 +9743,34 @@ type SnapshotByTimeOffsetTemplate struct {
 	// <li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
 	// Default value: black.
 	FillType *string `json:"FillType,omitempty" name:"FillType"`
+}
+
+type SubtitleTemplate struct {
+	// The URL of the subtitles to add to the video.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+	StreamIndex *int64 `json:"StreamIndex,omitempty" name:"StreamIndex"`
+
+	// The font. Valid values:
+	// <li>hei.ttf</li>
+	// <li>song.ttf</li>
+	// <li>simkai.ttf</li>
+	// <li>arial.ttf (for English only)</li>
+	// The default is `hei.ttf`.
+	FontType *string `json:"FontType,omitempty" name:"FontType"`
+
+	// The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+	FontSize *string `json:"FontSize,omitempty" name:"FontSize"`
+
+	// The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
+
+	// The text transparency. Value range: 0-1.
+	// <li>0: Completely transparent</li>
+	// <li>1: Completely opaque</li>
+	// Default value: 1.
+	FontAlpha *float64 `json:"FontAlpha,omitempty" name:"FontAlpha"`
 }
 
 type SuperResolutionConfig struct {

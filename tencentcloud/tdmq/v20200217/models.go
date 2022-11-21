@@ -579,6 +579,10 @@ type CmqTopic struct {
 	// Cluster status. 0: creating; 1: normal; 2: terminating; 3: deleted; 4. isolated; 5. creation failed; 6: deletion failed
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Valid values: `0` (Pulsar), `1` (RocketMQ).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BrokerType *int64 `json:"BrokerType,omitempty" name:"BrokerType"`
 }
 
 type CmqTransactionPolicy struct {
