@@ -432,6 +432,7 @@ func NewCreateAccountsResponse() (response *CreateAccountsResponse) {
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
 //  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
 //  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 //  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 //  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
@@ -472,6 +473,7 @@ func (c *Client) CreateAccounts(request *CreateAccountsRequest) (response *Creat
 //  INVALIDPARAMETERVALUE_VERIFYACCOUNTPRIVERROR = "InvalidParameterValue.VerifyAccountPrivError"
 //  MISSINGPARAMETER_ACCOUNTMISSINGPARAMETERERROR = "MissingParameter.AccountMissingParameterError"
 //  OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
+//  OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 //  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 //  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
@@ -634,7 +636,9 @@ func NewCreateBackupResponse() (response *CreateBackupResponse) {
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_OSSERROR = "InternalError.OssError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
@@ -656,7 +660,9 @@ func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBac
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_OSSERROR = "InternalError.OssError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
@@ -1891,7 +1897,9 @@ func NewDescribeBackupOverviewResponse() (response *DescribeBackupOverviewRespon
 // error code that may be returned:
 //  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
     return c.DescribeBackupOverviewWithContext(context.Background(), request)
@@ -1903,7 +1911,9 @@ func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) 
 // error code that may be returned:
 //  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeBackupOverviewWithContext(ctx context.Context, request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
     if request == nil {
@@ -2003,9 +2013,11 @@ func NewDescribeBackupsResponse() (response *DescribeBackupsResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
 //  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2023,9 +2035,11 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
 //  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2073,6 +2087,7 @@ func NewDescribeBinlogBackupOverviewResponse() (response *DescribeBinlogBackupOv
 // error code that may be returned:
 //  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
 func (c *Client) DescribeBinlogBackupOverview(request *DescribeBinlogBackupOverviewRequest) (response *DescribeBinlogBackupOverviewResponse, err error) {
@@ -2085,6 +2100,7 @@ func (c *Client) DescribeBinlogBackupOverview(request *DescribeBinlogBackupOverv
 // error code that may be returned:
 //  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SUBACCOUNTOPERATIONDENIED = "OperationDenied.SubAccountOperationDenied"
 func (c *Client) DescribeBinlogBackupOverviewWithContext(ctx context.Context, request *DescribeBinlogBackupOverviewRequest) (response *DescribeBinlogBackupOverviewResponse, err error) {
@@ -2126,6 +2142,7 @@ func NewDescribeBinlogsResponse() (response *DescribeBinlogsResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2141,6 +2158,7 @@ func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *Des
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2849,6 +2867,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsRequest) (response *DescribeDBSecurityGroupsResponse, err error) {
     return c.DescribeDBSecurityGroupsWithContext(context.Background(), request)
 }
@@ -2869,6 +2888,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDBSecurityGroupsWithContext(ctx context.Context, request *DescribeDBSecurityGroupsRequest) (response *DescribeDBSecurityGroupsResponse, err error) {
     if request == nil {
         request = NewDescribeDBSecurityGroupsRequest()
@@ -2967,6 +2987,7 @@ func NewDescribeDataBackupOverviewResponse() (response *DescribeDataBackupOvervi
 // error code that may be returned:
 //  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeDataBackupOverview(request *DescribeDataBackupOverviewRequest) (response *DescribeDataBackupOverviewResponse, err error) {
     return c.DescribeDataBackupOverviewWithContext(context.Background(), request)
@@ -2978,6 +2999,7 @@ func (c *Client) DescribeDataBackupOverview(request *DescribeDataBackupOverviewR
 // error code that may be returned:
 //  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 func (c *Client) DescribeDataBackupOverviewWithContext(ctx context.Context, request *DescribeDataBackupOverviewRequest) (response *DescribeDataBackupOverviewResponse, err error) {
     if request == nil {
@@ -4402,6 +4424,7 @@ func NewDescribeTimeWindowResponse() (response *DescribeTimeWindowResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 func (c *Client) DescribeTimeWindow(request *DescribeTimeWindowRequest) (response *DescribeTimeWindowResponse, err error) {
@@ -4413,6 +4436,7 @@ func (c *Client) DescribeTimeWindow(request *DescribeTimeWindowRequest) (respons
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 func (c *Client) DescribeTimeWindowWithContext(ctx context.Context, request *DescribeTimeWindowRequest) (response *DescribeTimeWindowResponse, err error) {
@@ -4564,7 +4588,7 @@ func NewInitDBInstancesResponse() (response *InitDBInstancesResponse) {
 }
 
 // InitDBInstances
-// This API (InitDBInstances) is used to initialize instances, including their password, default character set, and instance port number.
+// This API is used to initialize a TencentDB instance, including initial password, default character set, and instance port number. But it is disused and not recommended. You can now set the instance information by using the parameter `Password`, `ParamList`, and `Port` respectively in the `CreateDBInstance` and `CreateDBInstanceHour` APIs.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4577,7 +4601,7 @@ func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *Ini
 }
 
 // InitDBInstances
-// This API (InitDBInstances) is used to initialize instances, including their password, default character set, and instance port number.
+// This API is used to initialize a TencentDB instance, including initial password, default character set, and instance port number. But it is disused and not recommended. You can now set the instance information by using the parameter `Password`, `ParamList`, and `Port` respectively in the `CreateDBInstance` and `CreateDBInstanceHour` APIs.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -6552,6 +6576,7 @@ func NewReleaseIsolatedDBInstancesResponse() (response *ReleaseIsolatedDBInstanc
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCEUNSUPPORTEDOPERATEERROR = "OperationDenied.InstanceUnsupportedOperateError"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
 func (c *Client) ReleaseIsolatedDBInstances(request *ReleaseIsolatedDBInstancesRequest) (response *ReleaseIsolatedDBInstancesResponse, err error) {
@@ -6567,6 +6592,7 @@ func (c *Client) ReleaseIsolatedDBInstances(request *ReleaseIsolatedDBInstancesR
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCEUNSUPPORTEDOPERATEERROR = "OperationDenied.InstanceUnsupportedOperateError"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
 func (c *Client) ReleaseIsolatedDBInstancesWithContext(ctx context.Context, request *ReleaseIsolatedDBInstancesRequest) (response *ReleaseIsolatedDBInstancesResponse, err error) {

@@ -9593,6 +9593,9 @@ type ReleaseResult struct {
 type ReloadBalanceProxyNodeRequestParams struct {
 	// Proxy group ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Address ID of the proxy group
+	ProxyAddressId *string `json:"ProxyAddressId,omitempty" name:"ProxyAddressId"`
 }
 
 type ReloadBalanceProxyNodeRequest struct {
@@ -9600,6 +9603,9 @@ type ReloadBalanceProxyNodeRequest struct {
 	
 	// Proxy group ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Address ID of the proxy group
+	ProxyAddressId *string `json:"ProxyAddressId,omitempty" name:"ProxyAddressId"`
 }
 
 func (r *ReloadBalanceProxyNodeRequest) ToJsonString() string {
@@ -9615,6 +9621,7 @@ func (r *ReloadBalanceProxyNodeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ProxyGroupId")
+	delete(f, "ProxyAddressId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReloadBalanceProxyNodeRequest has unknown keys!", "")
 	}
