@@ -6734,6 +6734,14 @@ type RocketMQClusterInfo struct {
 	// Whether the namespace access point is supported.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SupportNamespaceEndpoint *bool `json:"SupportNamespaceEndpoint,omitempty" name:"SupportNamespaceEndpoint"`
+
+	// VPC Information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vpcs []*VpcConfig `json:"Vpcs,omitempty" name:"Vpcs"`
+
+	// Whether it is an exclusive instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsVip *bool `json:"IsVip,omitempty" name:"IsVip"`
 }
 
 type RocketMQClusterRecentStats struct {
@@ -7551,4 +7559,12 @@ type VpcBindRecord struct {
 	// Remarks (up to 128 characters)
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+type VpcConfig struct {
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }

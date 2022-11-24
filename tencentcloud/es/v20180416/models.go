@@ -2225,6 +2225,12 @@ type RestartNodesRequestParams struct {
 
 	// Whether to force restart
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// The restart mode. Valid values: `in-place` (default), `blue-green`.
+	RestartMode *string `json:"RestartMode,omitempty" name:"RestartMode"`
+
+	// The node status, applicable in the blue/green mode. The blue/green restart is risky if the node is offline.
+	IsOffline *bool `json:"IsOffline,omitempty" name:"IsOffline"`
 }
 
 type RestartNodesRequest struct {
@@ -2238,6 +2244,12 @@ type RestartNodesRequest struct {
 
 	// Whether to force restart
 	ForceRestart *bool `json:"ForceRestart,omitempty" name:"ForceRestart"`
+
+	// The restart mode. Valid values: `in-place` (default), `blue-green`.
+	RestartMode *string `json:"RestartMode,omitempty" name:"RestartMode"`
+
+	// The node status, applicable in the blue/green mode. The blue/green restart is risky if the node is offline.
+	IsOffline *bool `json:"IsOffline,omitempty" name:"IsOffline"`
 }
 
 func (r *RestartNodesRequest) ToJsonString() string {
@@ -2255,6 +2267,8 @@ func (r *RestartNodesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "NodeNames")
 	delete(f, "ForceRestart")
+	delete(f, "RestartMode")
+	delete(f, "IsOffline")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestartNodesRequest has unknown keys!", "")
 	}
