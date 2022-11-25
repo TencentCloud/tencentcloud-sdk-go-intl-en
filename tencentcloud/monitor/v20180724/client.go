@@ -4572,12 +4572,6 @@ func NewGetMonitorDataResponse() (response *GetMonitorDataResponse) {
 //
 // If you need to call a large number of APIs to pull metrics or objects at a time, some APIs may fail to be called due to the rate limit. We suggest you evenly arrange API calls at a time granularity.
 //
-// 
-//
-// >?
-//
-// >- Cloud Monitor has started billing the `GetMonitorData` API on September 1, 2022. Each root account has a free tier of one million call requests a month. If you want to call this API after the free tier is exceeded, you need to enable [pay-as-you-go billing for API requests](https://buy.cloud.tencent.com/APIRequestBuy). For billing rules, see [API billing documentation](https://intl.cloud.tencent.com/document/product/248/77914?from_cn_redirect=1).
-//
 // error code that may be returned:
 //  FAILEDOPERATION_ERRNOTOPEN = "FailedOperation.ErrNotOpen"
 //  FAILEDOPERATION_ERROWED = "FailedOperation.ErrOwed"
@@ -4596,12 +4590,6 @@ func (c *Client) GetMonitorData(request *GetMonitorDataRequest) (response *GetMo
 // API call rate limit: 20 calls/second (1,200 calls/minute). A single request can get the data of up to 10 instances for up to 1,440 data points.
 //
 // If you need to call a large number of APIs to pull metrics or objects at a time, some APIs may fail to be called due to the rate limit. We suggest you evenly arrange API calls at a time granularity.
-//
-// 
-//
-// >?
-//
-// >- Cloud Monitor has started billing the `GetMonitorData` API on September 1, 2022. Each root account has a free tier of one million call requests a month. If you want to call this API after the free tier is exceeded, you need to enable [pay-as-you-go billing for API requests](https://buy.cloud.tencent.com/APIRequestBuy). For billing rules, see [API billing documentation](https://intl.cloud.tencent.com/document/product/248/77914?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRNOTOPEN = "FailedOperation.ErrNotOpen"

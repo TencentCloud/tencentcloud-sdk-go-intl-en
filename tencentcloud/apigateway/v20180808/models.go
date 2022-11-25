@@ -706,6 +706,37 @@ type AttachedApiSummary struct {
 	AttachedApis []*AttachedApiInfo `json:"AttachedApis,omitempty" name:"AttachedApis"`
 }
 
+type AttachedPluginInfo struct {
+	// Plugin ID
+	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
+
+	// Environment information
+	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Binding time
+	AttachedTime *string `json:"AttachedTime,omitempty" name:"AttachedTime"`
+
+	// Plugin name
+	PluginName *string `json:"PluginName,omitempty" name:"PluginName"`
+
+	// Plugin type
+	PluginType *string `json:"PluginType,omitempty" name:"PluginType"`
+
+	// Plugin description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Plugin definition statement
+	PluginData *string `json:"PluginData,omitempty" name:"PluginData"`
+}
+
+type AttachedPluginSummary struct {
+	// Total number of bound plug-ins
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information of bound plug-ins
+	PluginSummary []*AttachedPluginInfo `json:"PluginSummary,omitempty" name:"PluginSummary"`
+}
+
 type AvailableApiInfo struct {
 	// API ID
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
@@ -4190,7 +4221,7 @@ type DescribeApisStatusRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
+	// API filter. Valid values: `ApiId`, `ApiName`, `ApiPath`, `ApiType`, `AuthRelationApiId`, `AuthType`, `ApiBuniessType`, `NotUsagePlanId`, `Environment`, `Tags` (whose values are the list of `$tag_key:tag_value`), `TagKeys` (whose values are the list of tag keys). Note that `NotUsagePlanId` and `Environment` must be used in the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -4206,7 +4237,7 @@ type DescribeApisStatusRequest struct {
 	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// API filter. Valid values: ApiId, ApiName, ApiPath, ApiType, AuthRelationApiId, AuthType, ApiBuniessType, NotUsagePlanId, Environment, Tags (whose values are the list of `$tag_key:tag_value`), TagKeys (whose values are the list of tag keys).
+	// API filter. Valid values: `ApiId`, `ApiName`, `ApiPath`, `ApiType`, `AuthRelationApiId`, `AuthType`, `ApiBuniessType`, `NotUsagePlanId`, `Environment`, `Tags` (whose values are the list of `$tag_key:tag_value`), `TagKeys` (whose values are the list of tag keys). Note that `NotUsagePlanId` and `Environment` must be used in the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -4813,6 +4844,91 @@ func (r *DescribePluginResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribePluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePluginsByApiRequestParams struct {
+	// ID of the API to query
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// ID of the service to query
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment information
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribePluginsByApiRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the API to query
+	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
+
+	// ID of the service to query
+	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
+
+	// Environment information
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribePluginsByApiRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePluginsByApiRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiId")
+	delete(f, "ServiceId")
+	delete(f, "EnvironmentName")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePluginsByApiRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePluginsByApiResponseParams struct {
+	// List of plug-ins bound with the API
+	Result *AttachedPluginSummary `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePluginsByApiResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePluginsByApiResponseParams `json:"Response"`
+}
+
+func (r *DescribePluginsByApiResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePluginsByApiResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
