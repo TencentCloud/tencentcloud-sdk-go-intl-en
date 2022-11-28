@@ -3511,6 +3511,13 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// The image format. Valid values:
+	// <li> jpg</li>
+	// <li> png</li>
+	// <li> webp</li>
+	// Default: jpg
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type CreateImageSpriteTemplateRequest struct {
@@ -3568,6 +3575,13 @@ type CreateImageSpriteTemplateRequest struct {
 	// <li>close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.</li>
 	// Default value: open.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
+
+	// The image format. Valid values:
+	// <li> jpg</li>
+	// <li> png</li>
+	// <li> webp</li>
+	// Default: jpg
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 func (r *CreateImageSpriteTemplateRequest) ToJsonString() string {
@@ -3593,6 +3607,7 @@ func (r *CreateImageSpriteTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Width")
 	delete(f, "Height")
 	delete(f, "ResolutionAdaptive")
+	delete(f, "Format")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateImageSpriteTemplateRequest has unknown keys!", "")
 	}
@@ -9982,6 +9997,9 @@ type ImageSpriteTemplate struct {
 
 	// Template description.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format.
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type ImageTransform struct {
@@ -12249,6 +12267,12 @@ type ModifyImageSpriteTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format. Valid values:
+	// <li> jpg</li>
+	// <li> png</li>
+	// <li> webp</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 type ModifyImageSpriteTemplateRequest struct {
@@ -12299,6 +12323,12 @@ type ModifyImageSpriteTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The image format. Valid values:
+	// <li> jpg</li>
+	// <li> png</li>
+	// <li> webp</li>
+	Format *string `json:"Format,omitempty" name:"Format"`
 }
 
 func (r *ModifyImageSpriteTemplateRequest) ToJsonString() string {
@@ -12325,6 +12355,7 @@ func (r *ModifyImageSpriteTemplateRequest) FromJsonString(s string) error {
 	delete(f, "ColumnCount")
 	delete(f, "FillType")
 	delete(f, "Comment")
+	delete(f, "Format")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyImageSpriteTemplateRequest has unknown keys!", "")
 	}
@@ -12386,7 +12417,7 @@ type ModifyMediaInfoRequestParams struct {
 	// In the same request, `ClearKeyFrameDescs` and `AddKeyFrameDescs` cannot be present at the same time.
 	ClearKeyFrameDescs *int64 `json:"ClearKeyFrameDescs,omitempty" name:"ClearKeyFrameDescs"`
 
-	// Set of tags to be added. Up to 16 tags can be added to one media file, and one tag can contain up to 16 characters. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
+	// The tags to add. Each file can have up to 16 tags. A tag can contain at most 32 characters. You cannot include the same tag in `AddTags` and `DeleteTags` at the same time.
 	AddTags []*string `json:"AddTags,omitempty" name:"AddTags"`
 
 	// Set of tags to be deleted. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
@@ -12441,7 +12472,7 @@ type ModifyMediaInfoRequest struct {
 	// In the same request, `ClearKeyFrameDescs` and `AddKeyFrameDescs` cannot be present at the same time.
 	ClearKeyFrameDescs *int64 `json:"ClearKeyFrameDescs,omitempty" name:"ClearKeyFrameDescs"`
 
-	// Set of tags to be added. Up to 16 tags can be added to one media file, and one tag can contain up to 16 characters. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
+	// The tags to add. Each file can have up to 16 tags. A tag can contain at most 32 characters. You cannot include the same tag in `AddTags` and `DeleteTags` at the same time.
 	AddTags []*string `json:"AddTags,omitempty" name:"AddTags"`
 
 	// Set of tags to be deleted. In the same request, the parameters of `AddTags` must be different from those of `DeleteTags`.
@@ -15001,7 +15032,7 @@ type PullUploadRequestParams struct {
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
-	// URL of video cover to be pulled. Only gif, jpeg, and png formats are supported.
+	// The URL of the video to pull. Supported formats include GIF, JPEG (JPG), and PNG.
 	CoverUrl *string `json:"CoverUrl,omitempty" name:"CoverUrl"`
 
 	// Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
@@ -15044,7 +15075,7 @@ type PullUploadRequest struct {
 	// Media name.
 	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
-	// URL of video cover to be pulled. Only gif, jpeg, and png formats are supported.
+	// The URL of the video to pull. Supported formats include GIF, JPEG (JPG), and PNG.
 	CoverUrl *string `json:"CoverUrl,omitempty" name:"CoverUrl"`
 
 	// Subsequent task for media. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1).
