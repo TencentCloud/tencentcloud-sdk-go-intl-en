@@ -141,30 +141,31 @@ type AclUserRule struct {
 
 type Action struct {
 	// Common feature operation. Features of this type include:
-	// <li>`AccessUrlRedirect`: Access URL rewrite.</li>
-	// <li>`UpstreamUrlRedirect`: Origin-pull URL rewrite.</li>
-	// <li>`QUIC`: QUIC.</li>
-	// <li>`WebSocket`: WebSocket.</li>
-	// <li>`VideoSeek`: Video dragging.</li>
-	// <li>`Authentication`: Token authentication.</li>
-	// <li>`CacheKey`: Custom cache key.</li>
-	// <li>`Cache`: Node cache TTL.</li>
-	// <li>`MaxAge`: Browser cache TTL.</li>
-	// <li>`OfflineCache`: Offline cache.</li>
-	// <li>`SmartRouting`: Smart acceleration.</li>
-	// <li>`RangeOriginPull`: Range GETs.</li>
-	// <li>`UpstreamHttp2`: HTTP/2 forwarding.</li>
-	// <li>`HostHeader`: Host header rewrite.</li>
-	// <li>`ForceRedirect`: Force HTTPS.</li>
-	// <li>`OriginPullProtocol`: Origin-pull HTTPS.</li>
-	// <li>`CachePrefresh`: Cache prefresh.</li>
-	// <li>`Compression`: Smart compression.</li>
-	// <li>`Hsts`.</li>
-	// <li>`ClientIpHeader`.</li>
-	// <li>`TlsVersion`.</li>
-	// <li>`OcspStapling`.</li>
-	// <li>`Http2`: HTTP/2 access.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <li>`AccessUrlRedirect`: Access URL rewrite</li>
+	// <li>`UpstreamUrlRedirect`: Origin-pull URL rewrite</li>
+	// <li>`QUIC`: QUIC</li>
+	// <li>`WebSocket`: WebSocket</li>
+	// <li>`VideoSeek`: Video dragging</li>
+	// <li>`Authentication`: Token authentication</li>
+	// <li>`CacheKey`: Custom cache key</li>
+	// <li>`Cache`: Node cache TTL</li>
+	// <li>`MaxAge`: Browser cache TTL</li>
+	// <li>`OfflineCache`: Offline cache</li>
+	// <li>`SmartRouting`: Smart acceleration</li>
+	// <li>`RangeOriginPull`: Range GETs</li>
+	// <li>`UpstreamHttp2`: HTTP/2 forwarding</li>
+	// <li>`HostHeader`: Host header rewrite</li>
+	// <li>`ForceRedirect`: Force HTTPS</li>
+	// <li>`OriginPullProtocol`: Origin-pull HTTPS</li>
+	// <li>`CachePrefresh`: Cache prefresh</li>
+	// <li>`Compression`: Smart compression</li>
+	// <li>`Hsts`</li>
+	// <li>`ClientIpHeader`</li>
+	// <li>`TlsVersion`</li>
+	// <li>`OcspStapling`</li>
+	// <li>`Http2`: HTTP/2 access</li>
+	// <li>`UpstreamFollowRedirect: Follow origin redirect</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	NormalAction *NormalAction `json:"NormalAction,omitempty" name:"NormalAction"`
 
 	// Feature operation with a request/response header. Features of this type include:
@@ -192,13 +193,13 @@ type AdvancedFilter struct {
 }
 
 type AdvancedOriginGroup struct {
-
+	// Matching condition. The "Target" field must be unique.
 	OriginGroupConditions []*OriginGroupCondition `json:"OriginGroupConditions,omitempty" name:"OriginGroupConditions"`
 
-
+	// ID of the primary origin server.
 	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
 
-
+	// ID of the secondary origin server.
 	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
 }
 
@@ -208,6 +209,36 @@ type AiRule struct {
 	// <li>`smart_status_open`: Block</li>
 	// <li>`smart_status_observe`: Observe</li>
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
+type AliasDomain struct {
+	// The alias domain name.
+	AliasName *string `json:"AliasName,omitempty" name:"AliasName"`
+
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The target domain name.
+	TargetName *string `json:"TargetName,omitempty" name:"TargetName"`
+
+	// Status of the alias domain name. Values:
+	// <li>`active`: Activated</li>
+	// <li>`pending`: Deploying</li>
+	// <li>`conflict`: Reclaimed</li>
+	// <li>`stop`: Stopped</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The blocking mode. Values:
+	// <li>`0`: Not blocked</li>
+	// <li>`11`: Blocked due to regulatory compliance</li>
+	// <li>`14`: Blocked due to ICP filing not obtained</li>
+	ForbidMode *int64 `json:"ForbidMode,omitempty" name:"ForbidMode"`
+
+	// Creation time of the alias domain name.
+	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+
+	// Modification time of the alias domain name.
+	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
 }
 
 type ApplicationProxy struct {
@@ -291,9 +322,9 @@ type ApplicationProxyRule struct {
 	// <li>`UDP`: UDP protocol.</li>
 	Proto *string `json:"Proto,omitempty" name:"Proto"`
 
-	// The port, which can be specified in the following formats:
-	// Single port, such as 80.
-	// Port range, such as 81-82.
+	// The access port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-82</li>
 	// Note that each rule can have up to 20 ports.
 	Port []*string `json:"Port,omitempty" name:"Port"`
 
@@ -302,12 +333,9 @@ type ApplicationProxyRule struct {
 	// <li>`origins`: Origin group</li>
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// Origin server information.
-	// When `OriginType=custom`, it indicates one or more origin servers. Example:
-	// OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-	// OriginValue=["test.com:80"];
-	// When `OriginType=origins`, it indicates an origin group ID. Example:
-	// OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+	// Origin server information:
+	// <li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+	// <li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
 	OriginValue []*string `json:"OriginValue,omitempty" name:"OriginValue"`
 
 	// The rule ID.
@@ -332,6 +360,11 @@ type ApplicationProxyRule struct {
 	// <li>`true`: Enable</li>
 	// <li>`false`: Disable</li>Default value: false
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// The origin port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-82</li>
+	OriginPort *string `json:"OriginPort,omitempty" name:"OriginPort"`
 }
 
 type AscriptionInfo struct {
@@ -345,16 +378,65 @@ type AscriptionInfo struct {
 	RecordValue *string `json:"RecordValue,omitempty" name:"RecordValue"`
 }
 
-type BillingDataFilter struct {
-	// Parameter name. Valid values:
-	// `zone`: Site name
-	// `host`: Domain name
-	// `proxy`: L4 proxy
-	// `plan`: Plan type
-	Type *string `json:"Type,omitempty" name:"Type"`
+// Predefined struct for user
+type BindZoneToPlanRequestParams struct {
+	// ID of the site to be bound.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Parameter value
-	Value *string `json:"Value,omitempty" name:"Value"`
+	// ID of the target plan.
+	PlanId *string `json:"PlanId,omitempty" name:"PlanId"`
+}
+
+type BindZoneToPlanRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site to be bound.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// ID of the target plan.
+	PlanId *string `json:"PlanId,omitempty" name:"PlanId"`
+}
+
+func (r *BindZoneToPlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindZoneToPlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "PlanId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindZoneToPlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BindZoneToPlanResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type BindZoneToPlanResponse struct {
+	*tchttp.BaseResponse
+	Response *BindZoneToPlanResponseParams `json:"Response"`
+}
+
+func (r *BindZoneToPlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindZoneToPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type BotConfig struct {
@@ -659,10 +741,13 @@ func (r *CheckCertificateResponse) FromJsonString(s string) error {
 }
 
 type ClientIpCountry struct {
-
+	// Whether to enable configuration. Values:
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Header name of ClientIpCountry. This field is valid only when `Switch=on`.
+	// If it is left empty, the default value `EO-Client-IPCountry` will be used.
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
 }
 
@@ -751,7 +836,9 @@ type ClsLogTopicInfo struct {
 	// <li>`overseas`: Global (outside the Chinese mainland).</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-
+	// Type of the shipping task. Values:
+	// <li>`cls`: Ship logs to CLS.</li>
+	// <li>`custom_endpoint`: Ship logs to custom APIs.</li>
 	LogSetType *string `json:"LogSetType,omitempty" name:"LogSetType"`
 }
 
@@ -774,6 +861,94 @@ type Compression struct {
 	// <li>`gzip`: Gzip algorithm</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms"`
+}
+
+// Predefined struct for user
+type CreateAliasDomainRequestParams struct {
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The alias domain name.
+	AliasName *string `json:"AliasName,omitempty" name:"AliasName"`
+
+	// The target domain name.
+	TargetName *string `json:"TargetName,omitempty" name:"TargetName"`
+
+	// Certificate configuration. Values:
+	// <li>`none`: Off</li>
+	// <li>`hosting`: Managed SSL certificate</li>
+	// <li>`apply`: Free certificate</li>Default value: none
+	CertType *string `json:"CertType,omitempty" name:"CertType"`
+
+	// The certificate ID. This field is required when `CertType=hosting`.
+	CertId []*string `json:"CertId,omitempty" name:"CertId"`
+}
+
+type CreateAliasDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The alias domain name.
+	AliasName *string `json:"AliasName,omitempty" name:"AliasName"`
+
+	// The target domain name.
+	TargetName *string `json:"TargetName,omitempty" name:"TargetName"`
+
+	// Certificate configuration. Values:
+	// <li>`none`: Off</li>
+	// <li>`hosting`: Managed SSL certificate</li>
+	// <li>`apply`: Free certificate</li>Default value: none
+	CertType *string `json:"CertType,omitempty" name:"CertType"`
+
+	// The certificate ID. This field is required when `CertType=hosting`.
+	CertId []*string `json:"CertId,omitempty" name:"CertId"`
+}
+
+func (r *CreateAliasDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAliasDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "AliasName")
+	delete(f, "TargetName")
+	delete(f, "CertType")
+	delete(f, "CertId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAliasDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAliasDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAliasDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAliasDomainResponseParams `json:"Response"`
+}
+
+func (r *CreateAliasDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAliasDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -926,22 +1101,19 @@ type CreateApplicationProxyRuleRequestParams struct {
 	// <li>`UDP`: UDP protocol</li>
 	Proto *string `json:"Proto,omitempty" name:"Proto"`
 
-	// The origin type. Values:
-	// <li>`custom`: Specified origins</li>
-	// <li>`origins`: Origin group</li>
+	// The access port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-90</li>
 	Port []*string `json:"Port,omitempty" name:"Port"`
 
 	// The origin type. Values:
-	// `custom`: Origin server, which is formatted as "IP:Port" or "Domain name:Port"
-	// `origins`: Origin group
+	// <li>`custom`: Specified origins</li>
+	// <li>`origins`: Origin group</li>
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
 	// Origin server information:
-	// When `OriginType=custom`, it indicates one or more origin servers. Example:
-	// OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-	// OriginValue=["test.com:80"];
-	// When `OriginType=origins`, it indicates an origin group ID. Example:
-	// OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+	// <li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+	// <li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
 	OriginValue []*string `json:"OriginValue,omitempty" name:"OriginValue"`
 
 	// Passes the client IP. Values:
@@ -955,6 +1127,11 @@ type CreateApplicationProxyRuleRequestParams struct {
 	// <li>`true`: Enable.</li>
 	// <li>`false`: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// The origin port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-82</li>
+	OriginPort *string `json:"OriginPort,omitempty" name:"OriginPort"`
 }
 
 type CreateApplicationProxyRuleRequest struct {
@@ -971,22 +1148,19 @@ type CreateApplicationProxyRuleRequest struct {
 	// <li>`UDP`: UDP protocol</li>
 	Proto *string `json:"Proto,omitempty" name:"Proto"`
 
-	// The origin type. Values:
-	// <li>`custom`: Specified origins</li>
-	// <li>`origins`: Origin group</li>
+	// The access port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-90</li>
 	Port []*string `json:"Port,omitempty" name:"Port"`
 
 	// The origin type. Values:
-	// `custom`: Origin server, which is formatted as "IP:Port" or "Domain name:Port"
-	// `origins`: Origin group
+	// <li>`custom`: Specified origins</li>
+	// <li>`origins`: Origin group</li>
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
 	// Origin server information:
-	// When `OriginType=custom`, it indicates one or more origin servers. Example:
-	// OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-	// OriginValue=["test.com:80"];
-	// When `OriginType=origins`, it indicates an origin group ID. Example:
-	// OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]。
+	// <li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+	// <li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
 	OriginValue []*string `json:"OriginValue,omitempty" name:"OriginValue"`
 
 	// Passes the client IP. Values:
@@ -1000,6 +1174,11 @@ type CreateApplicationProxyRuleRequest struct {
 	// <li>`true`: Enable.</li>
 	// <li>`false`: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// The origin port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-82</li>
+	OriginPort *string `json:"OriginPort,omitempty" name:"OriginPort"`
 }
 
 func (r *CreateApplicationProxyRuleRequest) ToJsonString() string {
@@ -1022,6 +1201,7 @@ func (r *CreateApplicationProxyRuleRequest) FromJsonString(s string) error {
 	delete(f, "OriginValue")
 	delete(f, "ForwardClientIp")
 	delete(f, "SessionPersist")
+	delete(f, "OriginPort")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationProxyRuleRequest has unknown keys!", "")
 	}
@@ -1392,10 +1572,12 @@ type CreateLoadBalancingRequestParams struct {
 	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
-
+	// The origin-pull type. Values:
+	// <li>`normal`: Primary/Secondary origin-pull</li>
+	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-
+	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
 	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
 }
 
@@ -1423,8 +1605,12 @@ type CreateLoadBalancingRequest struct {
 	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
+	// The origin-pull type. Values:
+	// <li>`normal`: Primary/Secondary origin-pull</li>
+	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
+	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
 	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
 }
 
@@ -1702,7 +1888,7 @@ type CreateOriginGroupRequestParams struct {
 	// Details of the origin record.
 	OriginRecords []*OriginRecord `json:"OriginRecords,omitempty" name:"OriginRecords"`
 
-
+	// The origin domain. This field can be specified only when `OriginType=self`.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
 }
 
@@ -1730,6 +1916,7 @@ type CreateOriginGroupRequest struct {
 	// Details of the origin record.
 	OriginRecords []*OriginRecord `json:"OriginRecords,omitempty" name:"OriginRecords"`
 
+	// The origin domain. This field can be specified only when `OriginType=self`.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
 }
 
@@ -1787,15 +1974,19 @@ type CreatePlanForZoneRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Plan options available for purchase. Values:
-	// <li>`sta`: Standard plan for global areas except Chinese mainland;</li>
-	// <li>`sta_with_bot`: Standard plan for global areas except Chinese mainland, with extra bot management;</li>
-	// <li>`sta_cm`: Standard plan for Chinese mainland;</li>
-	// <li>`sta_cm_with_bot`: Standard plan for Chinese mainland, with extra bot management;</li>
-	// <li>`ent`: Enterprise plan for global areas except Chinese mainland;</li>
-	// <li>`ent_with_bot`: Enterprise plan for global areas except Chinese mainland, with extra bot management;</li>
-	// <li>`ent_cm`: Enterprise plan for Chinese mainland;</li>
-	// <li>`ent_cm_with_bot`: Enterprise plan for Chinese mainland, with extra bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
+	// The plan option. Values:
+	// <li>`sta`: Standard plan that supports content delivery network outside the Chinese mainland.</li>
+	// <li>`sta_with_bot`: Standard plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+	// <li>`sta_cm`: Standard plan that supports content delivery network inside the Chinese mainland.</li>
+	// <li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+	// <li>`sta_global`: Standard plan that supports content delivery network over the globe.</li>
+	// <li>`sta_global_with_bot`: Standard plan that supports content delivery network over the globe and bot management.</li>
+	// <li>`ent`: Enterprise plan that supports content delivery network outside the Chinese mainland.</li>
+	// <li>`ent_with_bot`: Enterprise plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+	// <li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
+	// <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+	// <li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
+	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
 	PlanType *string `json:"PlanType,omitempty" name:"PlanType"`
 }
 
@@ -1805,15 +1996,19 @@ type CreatePlanForZoneRequest struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Plan options available for purchase. Values:
-	// <li>`sta`: Standard plan for global areas except Chinese mainland;</li>
-	// <li>`sta_with_bot`: Standard plan for global areas except Chinese mainland, with extra bot management;</li>
-	// <li>`sta_cm`: Standard plan for Chinese mainland;</li>
-	// <li>`sta_cm_with_bot`: Standard plan for Chinese mainland, with extra bot management;</li>
-	// <li>`ent`: Enterprise plan for global areas except Chinese mainland;</li>
-	// <li>`ent_with_bot`: Enterprise plan for global areas except Chinese mainland, with extra bot management;</li>
-	// <li>`ent_cm`: Enterprise plan for Chinese mainland;</li>
-	// <li>`ent_cm_with_bot`: Enterprise plan for Chinese mainland, with extra bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
+	// The plan option. Values:
+	// <li>`sta`: Standard plan that supports content delivery network outside the Chinese mainland.</li>
+	// <li>`sta_with_bot`: Standard plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+	// <li>`sta_cm`: Standard plan that supports content delivery network inside the Chinese mainland.</li>
+	// <li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+	// <li>`sta_global`: Standard plan that supports content delivery network over the globe.</li>
+	// <li>`sta_global_with_bot`: Standard plan that supports content delivery network over the globe and bot management.</li>
+	// <li>`ent`: Enterprise plan that supports content delivery network outside the Chinese mainland.</li>
+	// <li>`ent_with_bot`: Enterprise plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+	// <li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
+	// <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+	// <li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
+	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
 	PlanType *string `json:"PlanType,omitempty" name:"PlanType"`
 }
 
@@ -1954,22 +2149,25 @@ type CreatePurgeTaskRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Purging mode. Values:
-	// <li>`purge_url`: Purge URLs;</li>
-	// <li>`purge_prefix`: Purge prefixes;</li>
-	// <li>`purge_host`: Purge hostnames;</li>
-	// <li>`purge_all`: Purge all caches.</li>
+	// Mode of cache purging. Values:
+	// <li>`purge_url`: Purge by URL</li>
+	// <li>`purge_prefix`: Purge by prefix</li>
+	// <li>`purge_host`: Purge by hostname</li>
+	// <li>`purge_all`: Purge all caches</li>
+	// <li>`purge_cache_tag`: Purge by cache tag</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Target resource to be purged, which depends on the `Type` field.
 	// 1. When `Type = purge_host`:
-	// Hostnames are purged, such as www.example.com and foo.bar.example.com.
+	// Enter the hostname, such as www.example.com and foo.bar.example.com.
 	// 2. When `Type = purge_prefix`:
-	// Prefixes are purged, such as http://www.example.com/example.
+	// Enter the prefix, such as http://www.example.com/example.
 	// 3. When `Type = purge_url`:
-	// URLs are purged, such as https://www.example.com/example.jpg.
-	// 4. When `Type = purge_all`: All types of resources are purged.
-	// `Targets` is not a required field.
+	// Enter the URL, such as https://www.example.com/example.jpg.
+	// 4. When `Type = purge_all`:
+	// This field can be left empty.
+	// 5. When `Type = purge_cache_tag`:
+	// Enter the cache tag, such as tag1.
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -1983,22 +2181,25 @@ type CreatePurgeTaskRequest struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Purging mode. Values:
-	// <li>`purge_url`: Purge URLs;</li>
-	// <li>`purge_prefix`: Purge prefixes;</li>
-	// <li>`purge_host`: Purge hostnames;</li>
-	// <li>`purge_all`: Purge all caches.</li>
+	// Mode of cache purging. Values:
+	// <li>`purge_url`: Purge by URL</li>
+	// <li>`purge_prefix`: Purge by prefix</li>
+	// <li>`purge_host`: Purge by hostname</li>
+	// <li>`purge_all`: Purge all caches</li>
+	// <li>`purge_cache_tag`: Purge by cache tag</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Target resource to be purged, which depends on the `Type` field.
 	// 1. When `Type = purge_host`:
-	// Hostnames are purged, such as www.example.com and foo.bar.example.com.
+	// Enter the hostname, such as www.example.com and foo.bar.example.com.
 	// 2. When `Type = purge_prefix`:
-	// Prefixes are purged, such as http://www.example.com/example.
+	// Enter the prefix, such as http://www.example.com/example.
 	// 3. When `Type = purge_url`:
-	// URLs are purged, such as https://www.example.com/example.jpg.
-	// 4. When `Type = purge_all`: All types of resources are purged.
-	// `Targets` is not a required field.
+	// Enter the URL, such as https://www.example.com/example.jpg.
+	// 4. When `Type = purge_all`:
+	// This field can be left empty.
+	// 5. When `Type = purge_cache_tag`:
+	// Enter the cache tag, such as tag1.
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -2132,6 +2333,9 @@ type CreateRuleRequestParams struct {
 
 	// The rule content.
 	Rules []*Rule `json:"Rules,omitempty" name:"Rules"`
+
+	// Tag of the rule.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type CreateRuleRequest struct {
@@ -2150,6 +2354,9 @@ type CreateRuleRequest struct {
 
 	// The rule content.
 	Rules []*Rule `json:"Rules,omitempty" name:"Rules"`
+
+	// Tag of the rule.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateRuleRequest) ToJsonString() string {
@@ -2168,6 +2375,7 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 	delete(f, "RuleName")
 	delete(f, "Status")
 	delete(f, "Rules")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRuleRequest has unknown keys!", "")
 	}
@@ -2375,6 +2583,14 @@ type CreateZoneRequestParams struct {
 
 	// The resource tag.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to allow duplicate sites. Values:
+	// <li>`true`: Duplicate sites are allowed.</li>
+	// <li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
+	AllowDuplicates *bool `json:"AllowDuplicates,omitempty" name:"AllowDuplicates"`
+
+	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
 }
 
 type CreateZoneRequest struct {
@@ -2393,6 +2609,14 @@ type CreateZoneRequest struct {
 
 	// The resource tag.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to allow duplicate sites. Values:
+	// <li>`true`: Duplicate sites are allowed.</li>
+	// <li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
+	AllowDuplicates *bool `json:"AllowDuplicates,omitempty" name:"AllowDuplicates"`
+
+	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
 }
 
 func (r *CreateZoneRequest) ToJsonString() string {
@@ -2411,6 +2635,8 @@ func (r *CreateZoneRequest) FromJsonString(s string) error {
 	delete(f, "Type")
 	delete(f, "JumpStart")
 	delete(f, "Tags")
+	delete(f, "AllowDuplicates")
+	delete(f, "AliasZoneName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateZoneRequest has unknown keys!", "")
 	}
@@ -2874,17 +3100,80 @@ type DefaultServerCertInfo struct {
 	SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName"`
 
 	// Deployment status. Values:
-	// <li>`processing`: Deployment in progress;</li>
-	// <li>`deployed`: Deployed.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <li>`processing`: Deployment in progress</li>
+	// <li>`deployed`: Deployed</li>
+	// <li>`failed`: Deployment failed</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Failure description
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-
+	// Certificate algorithm.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	SignAlgo *string `json:"SignAlgo,omitempty" name:"SignAlgo"`
+}
+
+// Predefined struct for user
+type DeleteAliasDomainRequestParams struct {
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The alias domain name to be deleted. If it is left empty, the delete operation is not performed.
+	AliasNames []*string `json:"AliasNames,omitempty" name:"AliasNames"`
+}
+
+type DeleteAliasDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The alias domain name to be deleted. If it is left empty, the delete operation is not performed.
+	AliasNames []*string `json:"AliasNames,omitempty" name:"AliasNames"`
+}
+
+func (r *DeleteAliasDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAliasDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "AliasNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAliasDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAliasDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAliasDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAliasDomainResponseParams `json:"Response"`
+}
+
+func (r *DeleteAliasDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAliasDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -3143,7 +3432,7 @@ type DeleteLogTopicTaskRequestParams struct {
 	// ID of the shipping task to be deleted.
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
-	// Region of the logset.
+	// Region of the logset to be shipped. This field is only required when you configure CLS shipping tasks.
 	LogSetRegion *string `json:"LogSetRegion,omitempty" name:"LogSetRegion"`
 }
 
@@ -3153,7 +3442,7 @@ type DeleteLogTopicTaskRequest struct {
 	// ID of the shipping task to be deleted.
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
-	// Region of the logset.
+	// Region of the logset to be shipped. This field is only required when you configure CLS shipping tasks.
 	LogSetRegion *string `json:"LogSetRegion,omitempty" name:"LogSetRegion"`
 }
 
@@ -3456,6 +3745,89 @@ func (r *DescribeAddableEntityListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAliasDomainsRequestParams struct {
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter criteria. Each filter criteria can have up to 20 entries.
+	// <li>`target-name`:<br>   Filter by <strong>target domain name</strong><br>   Type: String<br>   Required: No</li><li>`alias-name`:<br>   Filter by <strong>alias domain name</strong><br>   Type: String<br>   Required: No</li>Only `alias-name` supports fuzzy query.
+	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeAliasDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Filter criteria. Each filter criteria can have up to 20 entries.
+	// <li>`target-name`:<br>   Filter by <strong>target domain name</strong><br>   Type: String<br>   Required: No</li><li>`alias-name`:<br>   Filter by <strong>alias domain name</strong><br>   Type: String<br>   Required: No</li>Only `alias-name` supports fuzzy query.
+	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeAliasDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAliasDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAliasDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAliasDomainsResponseParams struct {
+	// Total eligible alias domain names.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Information of the eligible alias domain names.
+	AliasDomains []*AliasDomain `json:"AliasDomains,omitempty" name:"AliasDomains"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAliasDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAliasDomainsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAliasDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAliasDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeApplicationProxiesRequestParams struct {
 	// The paginated query offset. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
@@ -3463,7 +3835,7 @@ type DescribeApplicationProxiesRequestParams struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No
+	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3476,7 +3848,7 @@ type DescribeApplicationProxiesRequest struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No
+	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3581,134 +3953,6 @@ func (r *DescribeAvailablePlansResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAvailablePlansResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeBillingDataRequestParams struct {
-	// Start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Time granularity. Values:
-	// <ul>
-	// <li>`min`: One minute</li>
-	// <li>`5min`: Five minutes</li>
-	// <li>`hour`: One hour</li>
-	// <li>`day`: One day</li>
-	// </ul>
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Metric item. Values:
-	// <ul>
-	// <li>`acc_flux`: Content acceleration traffic;</li>
-	// <li>`quic_request`: QUIC requests;</li>
-	// <li>`sec_flux`: Security traffic;</li>
-	// <li>`sec_request_clean`: Clean security requests.</li>
-	// </ul>
-	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-	// Filter item. Values:
-	// <ul>
-	// <li>`zone`: Site;</li>
-	// <li>`plan`: Service plan;</li>
-	// <li>`service`: L4 or L7;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
-	// </ul>
-	Filters []*BillingDataFilter `json:"Filters,omitempty" name:"Filters"`
-}
-
-type DescribeBillingDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// Start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Time granularity. Values:
-	// <ul>
-	// <li>`min`: One minute</li>
-	// <li>`5min`: Five minutes</li>
-	// <li>`hour`: One hour</li>
-	// <li>`day`: One day</li>
-	// </ul>
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Metric item. Values:
-	// <ul>
-	// <li>`acc_flux`: Content acceleration traffic;</li>
-	// <li>`quic_request`: QUIC requests;</li>
-	// <li>`sec_flux`: Security traffic;</li>
-	// <li>`sec_request_clean`: Clean security requests.</li>
-	// </ul>
-	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-	// Filter item. Values:
-	// <ul>
-	// <li>`zone`: Site;</li>
-	// <li>`plan`: Service plan;</li>
-	// <li>`service`: L4 or L7;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
-	// </ul>
-	Filters []*BillingDataFilter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeBillingDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBillingDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "Interval")
-	delete(f, "MetricName")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillingDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeBillingDataResponseParams struct {
-	// Data of the sampling point
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*DnsData `json:"Data,omitempty" name:"Data"`
-
-	// Time granularity of sampling
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeBillingDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeBillingDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeBillingDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBillingDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4242,45 +4486,51 @@ func (r *DescribeBotLogResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBotManagedRulesRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The subdomain name.
-	Entity *string `json:"Entity,omitempty" name:"Entity"`
-
 	// The page offset. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
+	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
 	// The rule type. Values:
 	// <li>`idcid`</li>
 	// <li>`sipbot`</li>
 	// <li>`uabot`</li>If no value or 0 is passed, all rule types will be selected.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// The template ID. You must specify either "ZoneId+Entity" or "TemplateId".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type DescribeBotManagedRulesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The subdomain name.
-	Entity *string `json:"Entity,omitempty" name:"Entity"`
-
 	// The page offset. Default value: 0
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
+	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
 	// The rule type. Values:
 	// <li>`idcid`</li>
 	// <li>`sipbot`</li>
 	// <li>`uabot`</li>If no value or 0 is passed, all rule types will be selected.
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+	// The template ID. You must specify either "ZoneId+Entity" or "TemplateId".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeBotManagedRulesRequest) ToJsonString() string {
@@ -4295,11 +4545,12 @@ func (r *DescribeBotManagedRulesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "ZoneId")
-	delete(f, "Entity")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "ZoneId")
+	delete(f, "Entity")
 	delete(f, "RuleType")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBotManagedRulesRequest has unknown keys!", "")
 	}
@@ -5571,7 +5822,7 @@ func (r *DescribeDDoSPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDefaultCertificatesRequestParams struct {
 	// Filter criteria. Each filter criteria can have up to 5 entries.
-	// <li>`zone-id`: <br>Filter by <strong>site ID</strong>. Format: zone-xxx
+	// <li>`zone-id`: <br>Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset for paginated queries. Default value: `0`
@@ -5585,7 +5836,7 @@ type DescribeDefaultCertificatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Filter criteria. Each filter criteria can have up to 5 entries.
-	// <li>`zone-id`: <br>Filter by <strong>site ID</strong>. Format: zone-xxx
+	// <li>`zone-id`: <br>Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset for paginated queries. Default value: `0`
@@ -5950,7 +6201,7 @@ type DescribeHostsSettingRequestParams struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No
+	// <li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -5967,7 +6218,7 @@ type DescribeHostsSettingRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No
+	// <li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6024,7 +6275,7 @@ func (r *DescribeHostsSettingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIdentificationsRequestParams struct {
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No
+	// <li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The page offset. Default value: 0
@@ -6038,7 +6289,7 @@ type DescribeIdentificationsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No
+	// <li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The page offset. Default value: 0
@@ -6107,8 +6358,8 @@ type DescribeLoadBalancingRequestParams struct {
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
 	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1a8df68z<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// <li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// <li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)
+	// </li><li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
+	// </li><li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6123,8 +6374,8 @@ type DescribeLoadBalancingRequest struct {
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
 	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1a8df68z<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// <li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// <li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)
+	// </li><li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
+	// </li><li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6632,7 +6883,7 @@ type DescribePrefetchTasksRequestParams struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`:<br>   Filter by the <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.
+	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6652,7 +6903,7 @@ type DescribePrefetchTasksRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`:<br>   Filter by the <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.
+	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6709,7 +6960,7 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
-	// ID of the site.
+	// Disused. Use "zone-id" in "Filters" instead.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Start time of the query.
@@ -6724,15 +6975,14 @@ type DescribePurgeTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`job-id`:<br> Filter by the <strong>Task ID</strong>, such as 1379afjk91u32h. Only one ID can be specified.<br>Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`target`:<br>   Filter by the <strong>resource address</strong>, such as http://www.qq.com/1.txt. Only one entry allowed.<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`domains`:<br>   Filter by the <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`statuses`:<br>   Filter by the <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: Tasks in progress<br>   `success`: Succeeded tasks<br>   `failed`: Failed tasks<br>   `timeout`: Timed-out tasks<li>`type`:<br>   Filter by the <strong>purging mode</strong>. Only one value allowed.<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge URLs.<br>   `purge_prefix`: Purge prefixes.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge hostnames.
+	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the site.
+	// Disused. Use "zone-id" in "Filters" instead.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Start time of the query.
@@ -6747,8 +6997,7 @@ type DescribePurgeTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`job-id`:<br> Filter by the <strong>Task ID</strong>, such as 1379afjk91u32h. Only one ID can be specified.<br>Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`target`:<br>   Filter by the <strong>resource address</strong>, such as http://www.qq.com/1.txt. Only one entry allowed.<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`domains`:<br>   Filter by the <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`statuses`:<br>   Filter by the <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: Tasks in progress<br>   `success`: Succeeded tasks<br>   `failed`: Failed tasks<br>   `timeout`: Timed-out tasks<li>`type`:<br>   Filter by the <strong>purging mode</strong>. Only one value allowed.<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge URLs.<br>   `purge_prefix`: Purge prefixes.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge hostnames.
+	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -6993,10 +7242,10 @@ func (r *DescribeRulesSettingResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSecurityGroupManagedRulesRequestParams struct {
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name/layer-4 proxy.
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
 
 	// The page offset. Default value: 0
@@ -7004,15 +7253,18 @@ type DescribeSecurityGroupManagedRulesRequestParams struct {
 
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The template ID. You must specify either this field or ZoneId+Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type DescribeSecurityGroupManagedRulesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name/layer-4 proxy.
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
 
 	// The page offset. Default value: 0
@@ -7020,6 +7272,9 @@ type DescribeSecurityGroupManagedRulesRequest struct {
 
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The template ID. You must specify either this field or ZoneId+Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeSecurityGroupManagedRulesRequest) ToJsonString() string {
@@ -7038,6 +7293,7 @@ func (r *DescribeSecurityGroupManagedRulesRequest) FromJsonString(s string) erro
 	delete(f, "Entity")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityGroupManagedRulesRequest has unknown keys!", "")
 	}
@@ -7204,8 +7460,11 @@ type DescribeSecurityPolicyRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name/layer-4 proxy.
+	// The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
+	// The template ID. You must specify either this field or "Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type DescribeSecurityPolicyRequest struct {
@@ -7214,8 +7473,11 @@ type DescribeSecurityPolicyRequest struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name/layer-4 proxy.
+	// The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
+	// The template ID. You must specify either this field or "Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeSecurityPolicyRequest) ToJsonString() string {
@@ -7232,6 +7494,7 @@ func (r *DescribeSecurityPolicyRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "Entity")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityPolicyRequest has unknown keys!", "")
 	}
@@ -7266,21 +7529,27 @@ func (r *DescribeSecurityPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSecurityPortraitRulesRequestParams struct {
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Subdomain name/Application name
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
+	// The template ID. You must specify either this field or "ZoneId+Entity". 
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type DescribeSecurityPortraitRulesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Subdomain name/Application name
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
+	// The template ID. You must specify either this field or "ZoneId+Entity". 
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeSecurityPortraitRulesRequest) ToJsonString() string {
@@ -7297,6 +7566,7 @@ func (r *DescribeSecurityPortraitRulesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "Entity")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityPortraitRulesRequest has unknown keys!", "")
 	}
@@ -9600,8 +9870,22 @@ type DescribeZonesRequestParams struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No<li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No<li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No<li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No<li>`Fuzzy`:<br>   Filter by <strong>values in fuzzy query</strong> (only `zone-name` allowed). Values limit: 1<br>   Type: Boolean<br>   Required: No<br>   Default value: false
+	// <li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li><li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No</li><li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li><li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>Only `zone-name` supports fuzzy query.
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// The sorting field. Values:
+	// <li>`type`: Access mode</li>
+	// <li>`area`: Acceleration region</li>
+	// <li>`create-time`: Creation date</li>
+	// <li>`zone-name`: Site name</li>
+	// <li>`use-time`: Last used date</li>
+	// <li>`active-status`: Activation status</li>If it is left empty, the default value `create-time` is used.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// The sorting direction. Values:
+	// <li>`asc`: From smallest to largest</li>
+	// <li>`desc`: From largest to smallest</li>If it is left empty, the default value `desc` is used.
+	Direction *string `json:"Direction,omitempty" name:"Direction"`
 }
 
 type DescribeZonesRequest struct {
@@ -9614,8 +9898,22 @@ type DescribeZonesRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No<li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No<li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No<li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No<li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No<li>`Fuzzy`:<br>   Filter by <strong>values in fuzzy query</strong> (only `zone-name` allowed). Values limit: 1<br>   Type: Boolean<br>   Required: No<br>   Default value: false
+	// <li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li><li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No</li><li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li><li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>Only `zone-name` supports fuzzy query.
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// The sorting field. Values:
+	// <li>`type`: Access mode</li>
+	// <li>`area`: Acceleration region</li>
+	// <li>`create-time`: Creation date</li>
+	// <li>`zone-name`: Site name</li>
+	// <li>`use-time`: Last used date</li>
+	// <li>`active-status`: Activation status</li>If it is left empty, the default value `create-time` is used.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// The sorting direction. Values:
+	// <li>`asc`: From smallest to largest</li>
+	// <li>`desc`: From largest to smallest</li>If it is left empty, the default value `desc` is used.
+	Direction *string `json:"Direction,omitempty" name:"Direction"`
 }
 
 func (r *DescribeZonesRequest) ToJsonString() string {
@@ -9633,6 +9931,8 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "Direction")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeZonesRequest has unknown keys!", "")
 	}
@@ -9752,7 +10052,8 @@ type DetailHost struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-
+	// Whether to carry the location information of the client IP during origin-pull.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
 }
 
@@ -10101,25 +10402,21 @@ type ExceptConfig struct {
 
 type ExceptUserRule struct {
 	// The rule name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
 	// The rule action. It only supports the value `skip`, which indicates skipping all managed rules.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Action *string `json:"Action,omitempty" name:"Action"`
 
 	// The rule status. Values:
 	// <li>`on`: Enabled</li>
 	// <li>`off`: Disabled</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RuleStatus *string `json:"RuleStatus,omitempty" name:"RuleStatus"`
 
-	// The rule ID, which is only used as an output parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The rule ID, which is automatically created and only used as an output parameter.
 	RuleID *int64 `json:"RuleID,omitempty" name:"RuleID"`
 
-	// The update time, which is only used as an output parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The update time. If it is null, the current date and time is recorded.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// The matching condition.
@@ -10130,8 +10427,7 @@ type ExceptUserRule struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExceptUserRuleScope *ExceptUserRuleScope `json:"ExceptUserRuleScope,omitempty" name:"ExceptUserRuleScope"`
 
-	// The rule priority. Value range: 0-100.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The rule priority. Value range: 0-100. If it is null, it defaults to 0.
 	RulePriority *int64 `json:"RulePriority,omitempty" name:"RulePriority"`
 }
 
@@ -10148,10 +10444,9 @@ type ExceptUserRuleCondition struct {
 	// <li>`method`: Request method</li>
 	// <li>`header`: Request header</li>
 	// <li>`sip_proto`: Network layer protocol</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	MatchFrom *string `json:"MatchFrom,omitempty" name:"MatchFrom"`
 
-	// The parameter of the field. When `MatchFrom = header`, the key contained in the header can be passed.
+	// The parameter of the field. Only when `MatchFrom = header`, the key contained in the header can be passed.
 	MatchParam *string `json:"MatchParam,omitempty" name:"MatchParam"`
 
 	// The logical operator. Values:
@@ -10171,26 +10466,31 @@ type ExceptUserRuleCondition struct {
 	// <li>`match_prefix`: Prefix matches</li>
 	// <li>`match_suffix`: Suffix matches</li>
 	// <li>`wildcard`: Wildcard</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
 	// The value of the parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	MatchContent *string `json:"MatchContent,omitempty" name:"MatchContent"`
 }
 
 type ExceptUserRuleScope struct {
-
+	// Exception mode. Values:
+	// <li>`complete`: Skip the exception rule for full requests.</li>
+	// <li>`partial`: Skip the exception rule for partial requests.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// The module that applies. Only WAF managed rules are supported currently.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The module to be activated. Values:
+	// <li>`waf`: Managed rules</li>
+	// <li>`cc`: Rate limiting rules</li>
+	// <li>`bot`: bot protection</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Modules []*string `json:"Modules,omitempty" name:"Modules"`
 
-
+	// Module settings of the exception rule. If it is null, the settings that were last configured will be used.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PartialModules []*PartialModule `json:"PartialModules,omitempty" name:"PartialModules"`
 
-
+	// Condition settings of the exception rule. If it is null, the settings that were last configured will be used.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	SkipConditions []*SkipCondition `json:"SkipConditions,omitempty" name:"SkipConditions"`
 }
 
@@ -10198,15 +10498,15 @@ type FailReason struct {
 	// Failure reason.
 	Reason *string `json:"Reason,omitempty" name:"Reason"`
 
-	// List of resources failed to be processed.
+	// List of resources failed to be processed. 
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 }
 
 type FileAscriptionInfo struct {
-
+	// Directory of the verification file.
 	IdentifyPath *string `json:"IdentifyPath,omitempty" name:"IdentifyPath"`
 
-
+	// Content of the verification file.
 	IdentifyContent *string `json:"IdentifyContent,omitempty" name:"IdentifyContent"`
 }
 
@@ -10223,6 +10523,14 @@ type FollowOrigin struct {
 	// <li>`on`: Enable</li>
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Sets the default cache time when the origin server does not return the Cache-Control header.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	DefaultCacheTime *int64 `json:"DefaultCacheTime,omitempty" name:"DefaultCacheTime"`
+
+	// Specifies whether to enable cache when the origin server does not return the Cache-Control header.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	DefaultCache *string `json:"DefaultCache,omitempty" name:"DefaultCache"`
 }
 
 type ForceRedirect struct {
@@ -10253,7 +10561,7 @@ type GeoIp struct {
 }
 
 type Header struct {
-	// HTTP header name
+	// HTTP header name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// HTTP header value
@@ -10311,6 +10619,12 @@ type Https struct {
 	// The certificate configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CertInfo []*ServerCertInfo `json:"CertInfo,omitempty" name:"CertInfo"`
+
+	// Whether the certificate is managed by EdgeOne. Values:
+	// <li>`apply`: Managed by EdgeOne.</li>
+	// <li>`none`: Not managed by EdgeOne.</li>If it is left empty, the default value `none` is used.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ApplyType *string `json:"ApplyType,omitempty" name:"ApplyType"`
 }
 
 type Identification struct {
@@ -10322,14 +10636,14 @@ type Identification struct {
 	// <li>`finished`: The verification completed.</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// The site ownership information.
+	// Details of the DNS record.
 	Ascription *AscriptionInfo `json:"Ascription,omitempty" name:"Ascription"`
 
 	// The NS record of the domain name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginalNameServers []*string `json:"OriginalNameServers,omitempty" name:"OriginalNameServers"`
 
-
+	// Details of the verification file.
 	FileAscription *FileAscriptionInfo `json:"FileAscription,omitempty" name:"FileAscription"`
 }
 
@@ -10367,10 +10681,10 @@ func (r *IdentifyZoneRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type IdentifyZoneResponseParams struct {
-	// The site ownership information.
+	// Details of the DNS record.
 	Ascription *AscriptionInfo `json:"Ascription,omitempty" name:"Ascription"`
 
-
+	// Details of the verification file.
 	FileAscription *FileAscriptionInfo `json:"FileAscription,omitempty" name:"FileAscription"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -10454,6 +10768,12 @@ type IpTableRule struct {
 
 	// The update time, which is only used as an output parameter.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The rule status. A null value indicates that the rule is enabled. Values:
+	// <li>`on`: Enabled</li>
+	// <li>`off`: Disabled</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type Ipv6 struct {
@@ -10543,10 +10863,13 @@ type LoadBalancing struct {
 	// The update time.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-
+	// The origin-pull type. Values:
+	// <li>`normal`: Primary/Secondary origin-pull</li>
+	// <li>`advanced`: Advanced origin-pull</li>
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-
+	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
 }
 
@@ -10792,6 +11115,166 @@ func (r *ModifyAlarmDefaultThresholdResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyAliasDomainRequestParams struct {
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The alias domain name.
+	AliasName *string `json:"AliasName,omitempty" name:"AliasName"`
+
+	// The target domain name.
+	TargetName *string `json:"TargetName,omitempty" name:"TargetName"`
+
+	// Certificate configuration. Values:
+	// <li>`none`: Off</li>
+	// <li>`hosting`: Managed SSL certificate</li>
+	// <li>`apply`: Free certificate</li>The original configuration will apply if this field is not specified.
+	CertType *string `json:"CertType,omitempty" name:"CertType"`
+
+	// The certificate ID. This field is required when `CertType=hosting`.
+	CertId []*string `json:"CertId,omitempty" name:"CertId"`
+}
+
+type ModifyAliasDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The alias domain name.
+	AliasName *string `json:"AliasName,omitempty" name:"AliasName"`
+
+	// The target domain name.
+	TargetName *string `json:"TargetName,omitempty" name:"TargetName"`
+
+	// Certificate configuration. Values:
+	// <li>`none`: Off</li>
+	// <li>`hosting`: Managed SSL certificate</li>
+	// <li>`apply`: Free certificate</li>The original configuration will apply if this field is not specified.
+	CertType *string `json:"CertType,omitempty" name:"CertType"`
+
+	// The certificate ID. This field is required when `CertType=hosting`.
+	CertId []*string `json:"CertId,omitempty" name:"CertId"`
+}
+
+func (r *ModifyAliasDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAliasDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "AliasName")
+	delete(f, "TargetName")
+	delete(f, "CertType")
+	delete(f, "CertId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAliasDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAliasDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAliasDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAliasDomainResponseParams `json:"Response"`
+}
+
+func (r *ModifyAliasDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAliasDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAliasDomainStatusRequestParams struct {
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Status of the alias domain name. Values:
+	// <li>`false`: Enable the alias domain name.</li>
+	// <li>`true`: Disable the alias domain name.</li>
+	Paused *bool `json:"Paused,omitempty" name:"Paused"`
+
+	// The alias domain name you want to modify its status. If it is left empty, the modify operation is not performed.
+	AliasNames []*string `json:"AliasNames,omitempty" name:"AliasNames"`
+}
+
+type ModifyAliasDomainStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Status of the alias domain name. Values:
+	// <li>`false`: Enable the alias domain name.</li>
+	// <li>`true`: Disable the alias domain name.</li>
+	Paused *bool `json:"Paused,omitempty" name:"Paused"`
+
+	// The alias domain name you want to modify its status. If it is left empty, the modify operation is not performed.
+	AliasNames []*string `json:"AliasNames,omitempty" name:"AliasNames"`
+}
+
+func (r *ModifyAliasDomainStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAliasDomainStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Paused")
+	delete(f, "AliasNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAliasDomainStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAliasDomainStatusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAliasDomainStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAliasDomainStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyAliasDomainStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAliasDomainStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyApplicationProxyRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -10904,9 +11387,9 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// <li>`origins`: Origin group</li></li>The original configuration will apply if this field is not specified.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// The port, which can be specified in the following formats:
-	// Single port, such as 80.
-	// Port range, such as 81-90. The original configuration will apply if this field is not specified.
+	// The access port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-90</li>
 	Port []*string `json:"Port,omitempty" name:"Port"`
 
 	// The protocol. Values:
@@ -10915,11 +11398,9 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	Proto *string `json:"Proto,omitempty" name:"Proto"`
 
 	// Origin server information:
-	// When `OriginType=custom`, it indicates one or more origin servers. Example:
-	// OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-	// OriginValue=["test.com:80"];
-	// When `OriginType=origins`, it indicates an origin group ID. Example:
-	// OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]
+	// <li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+	// <li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
+	// 
 	// The original configuration will apply if this field is not specified.
 	OriginValue []*string `json:"OriginValue,omitempty" name:"OriginValue"`
 
@@ -10932,8 +11413,13 @@ type ModifyApplicationProxyRuleRequestParams struct {
 
 	// Whether to enable session persistence. Values:
 	// <li>`true`: Enable</li>
-	// <li>`false`: Disable</li>The original configuration will apply if this field is not specified.
+	// <li>`false`: Disable</li>If it is left empty, the default value `false` is used.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// The origin port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-82</li>
+	OriginPort *string `json:"OriginPort,omitempty" name:"OriginPort"`
 }
 
 type ModifyApplicationProxyRuleRequest struct {
@@ -10953,9 +11439,9 @@ type ModifyApplicationProxyRuleRequest struct {
 	// <li>`origins`: Origin group</li></li>The original configuration will apply if this field is not specified.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-	// The port, which can be specified in the following formats:
-	// Single port, such as 80.
-	// Port range, such as 81-90. The original configuration will apply if this field is not specified.
+	// The access port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-90</li>
 	Port []*string `json:"Port,omitempty" name:"Port"`
 
 	// The protocol. Values:
@@ -10964,11 +11450,9 @@ type ModifyApplicationProxyRuleRequest struct {
 	Proto *string `json:"Proto,omitempty" name:"Proto"`
 
 	// Origin server information:
-	// When `OriginType=custom`, it indicates one or more origin servers. Example:
-	// OriginValue=["8.8.8.8:80","9.9.9.9:80"]
-	// OriginValue=["test.com:80"];
-	// When `OriginType=origins`, it indicates an origin group ID. Example:
-	// OriginValue=["origin-537f5b41-162a-11ed-abaa-525400c5da15"]
+	// <li>When `OriginType=custom`, it indicates one or more origin servers, such as ["8.8.8.8","9.9.9.9"] or ["test.com"].</li>
+	// <li>When `OriginType=origins`, it indicates an origin group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
+	// 
 	// The original configuration will apply if this field is not specified.
 	OriginValue []*string `json:"OriginValue,omitempty" name:"OriginValue"`
 
@@ -10981,8 +11465,13 @@ type ModifyApplicationProxyRuleRequest struct {
 
 	// Whether to enable session persistence. Values:
 	// <li>`true`: Enable</li>
-	// <li>`false`: Disable</li>The original configuration will apply if this field is not specified.
+	// <li>`false`: Disable</li>If it is left empty, the default value `false` is used.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
+
+	// The origin port, which can be:
+	// <li>A single port, such as 80</li>
+	// <li>A port range, such as 81-82</li>
+	OriginPort *string `json:"OriginPort,omitempty" name:"OriginPort"`
 }
 
 func (r *ModifyApplicationProxyRuleRequest) ToJsonString() string {
@@ -11006,6 +11495,7 @@ func (r *ModifyApplicationProxyRuleRequest) FromJsonString(s string) error {
 	delete(f, "OriginValue")
 	delete(f, "ForwardClientIp")
 	delete(f, "SessionPersist")
+	delete(f, "OriginPort")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationProxyRuleRequest has unknown keys!", "")
 	}
@@ -11613,6 +12103,11 @@ type ModifyHostsCertificateRequestParams struct {
 
 	// Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
 	ServerCertInfo []*ServerCertInfo `json:"ServerCertInfo,omitempty" name:"ServerCertInfo"`
+
+	// Whether the certificate is managed by EdgeOne. Values:
+	// <li>`apply`: Managed by EdgeOne</li>
+	// <li>`none`: Not managed by EdgeOne</li>If it is left empty, the default value `apply` is used.
+	ApplyType *string `json:"ApplyType,omitempty" name:"ApplyType"`
 }
 
 type ModifyHostsCertificateRequest struct {
@@ -11626,6 +12121,11 @@ type ModifyHostsCertificateRequest struct {
 
 	// Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
 	ServerCertInfo []*ServerCertInfo `json:"ServerCertInfo,omitempty" name:"ServerCertInfo"`
+
+	// Whether the certificate is managed by EdgeOne. Values:
+	// <li>`apply`: Managed by EdgeOne</li>
+	// <li>`none`: Not managed by EdgeOne</li>If it is left empty, the default value `apply` is used.
+	ApplyType *string `json:"ApplyType,omitempty" name:"ApplyType"`
 }
 
 func (r *ModifyHostsCertificateRequest) ToJsonString() string {
@@ -11643,6 +12143,7 @@ func (r *ModifyHostsCertificateRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "Hosts")
 	delete(f, "ServerCertInfo")
+	delete(f, "ApplyType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyHostsCertificateRequest has unknown keys!", "")
 	}
@@ -11694,10 +12195,13 @@ type ModifyLoadBalancingRequestParams struct {
 	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
-
+	// The origin-pull type. Values:
+	// <li>`normal`: Primary/Secondary origin-pull</li>
+	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-
+	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
+	// If it is left empty, this configuration is not used.
 	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
 }
 
@@ -11725,8 +12229,13 @@ type ModifyLoadBalancingRequest struct {
 	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
 	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
 
+	// The origin-pull type. Values:
+	// <li>`normal`: Primary/Secondary origin-pull</li>
+	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
+	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
+	// If it is left empty, this configuration is not used.
 	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
 }
 
@@ -12012,7 +12521,8 @@ type ModifyOriginGroupRequestParams struct {
 	// Details of the origin record.
 	OriginRecords []*OriginRecord `json:"OriginRecords,omitempty" name:"OriginRecords"`
 
-
+	// The origin domain. This field can be specified only when `OriginType=self`.
+	// If it is left empty, the existing configuration is used.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
 }
 
@@ -12043,6 +12553,8 @@ type ModifyOriginGroupRequest struct {
 	// Details of the origin record.
 	OriginRecords []*OriginRecord `json:"OriginRecords,omitempty" name:"OriginRecords"`
 
+	// The origin domain. This field can be specified only when `OriginType=self`.
+	// If it is left empty, the existing configuration is used.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
 }
 
@@ -12172,6 +12684,9 @@ type ModifyRuleRequestParams struct {
 	// <li>`enable`: Enabled</li>
 	// <li>`disable`: Disabled</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Tag of the rule.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type ModifyRuleRequest struct {
@@ -12193,6 +12708,9 @@ type ModifyRuleRequest struct {
 	// <li>`enable`: Enabled</li>
 	// <li>`disable`: Disabled</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Tag of the rule.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *ModifyRuleRequest) ToJsonString() string {
@@ -12212,6 +12730,7 @@ func (r *ModifyRuleRequest) FromJsonString(s string) error {
 	delete(f, "Rules")
 	delete(f, "RuleId")
 	delete(f, "Status")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRuleRequest has unknown keys!", "")
 	}
@@ -12248,11 +12767,14 @@ type ModifySecurityPolicyRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name/layer-4 proxy.
-	Entity *string `json:"Entity,omitempty" name:"Entity"`
-
 	// Security configuration.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitempty" name:"SecurityConfig"`
+
+	// The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
+	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
+	// The template ID. You must specify either this field or "Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type ModifySecurityPolicyRequest struct {
@@ -12261,11 +12783,14 @@ type ModifySecurityPolicyRequest struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name/layer-4 proxy.
-	Entity *string `json:"Entity,omitempty" name:"Entity"`
-
 	// Security configuration.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitempty" name:"SecurityConfig"`
+
+	// The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
+	Entity *string `json:"Entity,omitempty" name:"Entity"`
+
+	// The template ID. You must specify either this field or "Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *ModifySecurityPolicyRequest) ToJsonString() string {
@@ -12281,8 +12806,9 @@ func (r *ModifySecurityPolicyRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ZoneId")
-	delete(f, "Entity")
 	delete(f, "SecurityConfig")
+	delete(f, "Entity")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityPolicyRequest has unknown keys!", "")
 	}
@@ -12313,10 +12839,10 @@ func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySecurityWafGroupPolicyRequestParams struct {
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name.
+	// The subdomain name. You must specify either "ZoneId+Entity" or "TemplateId". 
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
 
 	// Switch. Values:
@@ -12345,15 +12871,18 @@ type ModifySecurityWafGroupPolicyRequestParams struct {
 
 	// The settings of the managed rule group. If not specified, it defaults to the settings that were last configured.
 	WafGroups []*WafGroup `json:"WafGroups,omitempty" name:"WafGroups"`
+
+	// The template ID. You must specify either this field or "ZoneId+Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type ModifySecurityWafGroupPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name.
+	// The subdomain name. You must specify either "ZoneId+Entity" or "TemplateId". 
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
 
 	// Switch. Values:
@@ -12382,6 +12911,9 @@ type ModifySecurityWafGroupPolicyRequest struct {
 
 	// The settings of the managed rule group. If not specified, it defaults to the settings that were last configured.
 	WafGroups []*WafGroup `json:"WafGroups,omitempty" name:"WafGroups"`
+
+	// The template ID. You must specify either this field or "ZoneId+Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *ModifySecurityWafGroupPolicyRequest) ToJsonString() string {
@@ -12404,6 +12936,7 @@ func (r *ModifySecurityWafGroupPolicyRequest) FromJsonString(s string) error {
 	delete(f, "WafRules")
 	delete(f, "AiRule")
 	delete(f, "WafGroups")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityWafGroupPolicyRequest has unknown keys!", "")
 	}
@@ -12509,6 +13042,9 @@ type ModifyZoneRequestParams struct {
 
 	// The custom name servers. If this field is not specified, the default name servers will be used.
 	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitempty" name:"VanityNameServers"`
+
+	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
 }
 
 type ModifyZoneRequest struct {
@@ -12524,6 +13060,9 @@ type ModifyZoneRequest struct {
 
 	// The custom name servers. If this field is not specified, the default name servers will be used.
 	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitempty" name:"VanityNameServers"`
+
+	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
 }
 
 func (r *ModifyZoneRequest) ToJsonString() string {
@@ -12541,6 +13080,7 @@ func (r *ModifyZoneRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "Type")
 	delete(f, "VanityNameServers")
+	delete(f, "AliasZoneName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyZoneRequest has unknown keys!", "")
 	}
@@ -12638,7 +13178,8 @@ type ModifyZoneSettingRequestParams struct {
 	// The original configuration will apply if this field is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-
+	// Whether to carry the location information of the client IP during origin-pull.
+	// The original configuration will apply if this field is not specified.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
 }
 
@@ -12712,6 +13253,8 @@ type ModifyZoneSettingRequest struct {
 	// The original configuration will apply if this field is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
+	// Whether to carry the location information of the client IP during origin-pull.
+	// The original configuration will apply if this field is not specified.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
 }
 
@@ -12889,12 +13432,14 @@ type Origin struct {
 	// Origin-pull protocol configuration. Values:
 	// <li>`http`: Force HTTP for origin-pull.</li>
 	// <li>`follow`: Follow protocol.</li>
-	// <li>`https`: Force HTTPS for origin-pull. This only supports port 443 on the origin server.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <li>`https`: Force HTTPS for origin-pull.</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
 
-	// When OriginType is COS, you can specify if access to private buckets is allowed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to allow private access to buckets when `OriginType=cos`. Values:
+	// <li>`on`: Allow private access.</li>
+	// <li>`off`: Allow public access.</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CosPrivateAccess *string `json:"CosPrivateAccess,omitempty" name:"CosPrivateAccess"`
 }
 
@@ -12929,18 +13474,22 @@ type OriginGroup struct {
 	// The update time of the origin group.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
-
+	// The origin domain when `OriginType=self`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
 }
 
 type OriginGroupCondition struct {
-
+	// Match type. Values:
+	// <li>`url`: Partial URL path under the current site, such as "/example" and "/example/foo.jpg". You can use an asterisk (*) to indicate all values and a question mark (?) to indicate any single character.
+	// </li>
 	Target *string `json:"Target,omitempty" name:"Target"`
 
-
+	// The operator. Values:
+	// <li>`equal`: Equals</li>
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
-
+	// Values of the match type.
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
@@ -12986,10 +13535,12 @@ type OriginRecord struct {
 }
 
 type PartialModule struct {
-
+	// The module. Values:
+	// <li>`waf`: Managed rules</li>
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-
+	// List of managed rule IDs to be skipped.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Include []*int64 `json:"Include,omitempty" name:"Include"`
 }
 
@@ -13010,15 +13561,19 @@ type PlanInfo struct {
 	// <li>`s`: Settled by second.</li>
 	Frequency *string `json:"Frequency,omitempty" name:"Frequency"`
 
-	// Plan option. Values:
-	// <li>`sta`: Standard plan that supports content delivery network outside Chinese mainland;</li>
-	// <li>`sta_with_bot`: Standard plan that supports content delivery network outside Chinese mainland and bot management;</li>
-	// <li>`sta_cm`: Standard plan that supports content delivery network inside Chinese mainland;</li>
-	// <li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside Chinese mainland and bot management;</li>
-	// <li>`ent`: Enterprise plan that supports content delivery network outside Chinese mainland;</li>
-	// <li>`ent_with_bot`: Enterprise plan that supports content delivery network outside Chinese mainland and bot management;</li>
-	// <li>`ent_cm`: Enterprise plan that supports content delivery network inside Chinese mainland;</li>
-	// <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside Chinese mainland and bot management.</li>
+	// The plan option. Values:
+	// <li>`sta`: Standard plan that supports content delivery network outside the Chinese mainland.</li>
+	// <li>`sta_with_bot`: Standard plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+	// <li>`sta_cm`: Standard plan that supports content delivery network inside the Chinese mainland.</li>
+	// <li>`sta_cm_with_bot`: Standard plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+	// <li>`sta`: Standard plan that supports content delivery network over the globe.</li>
+	// <li>`sta_global_with_bot`: Standard plan that supports content delivery network over the globe and bot management.</li>
+	// <li>`ent`: Enterprise plan that supports content delivery network outside the Chinese mainland.</li>
+	// <li>`ent_with_bot`: Enterprise plan that supports content delivery network outside the Chinese mainland and bot management.</li>
+	// <li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
+	// <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
+	// <li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
+	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>
 	PlanType *string `json:"PlanType,omitempty" name:"PlanType"`
 
 	// Plan price (in CNY fen/US cent). The price unit depends on the settlement currency.
@@ -13030,9 +13585,10 @@ type PlanInfo struct {
 	// Number of sites to be bound to the plan
 	SiteNumber *uint64 `json:"SiteNumber,omitempty" name:"SiteNumber"`
 
-	// Acceleration region. Values:
-	// <li>`mainland`: Chinese mainland;</li>
-	// <li>`overseas`: Global (Chinese mainland not included).</li>
+	// The acceleration region. Values:
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`overseas`: Global (Chinese mainland not included)</li>
+	// <li>`global`: Global (Chinese mainland included)</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -13084,14 +13640,14 @@ type QueryCondition struct {
 	Key *string `json:"Key,omitempty" name:"Key"`
 
 	// The conditional operator. Values:
-	// <li>`equals`: Equal to;</li>
-	// <li>`notEquals`: Not equal to;</li>
-	// <li>`include`: Contain;</li>
-	// <li>`notInclude`: Not contain;</li>
-	// <li>`startWith`: Start with;</li>
-	// <li>`notStartWith`: Not start with;</li>
-	// <li>`endWith`: End with;</li>
-	// <li>`notEndWith`: Not end with.</li>
+	// <li>`equals`: Equals</li>
+	// <li>`notEquals`: Does not equal</li>
+	// <li>`include`: Contains</li>
+	// <li>`notInclude`: Does not contain</li>
+	// <li>`startWith`: Starts with</li>
+	// <li>`notStartWith`: Does not start with</li>
+	// <li>`endWith`: Ends with</li>
+	// <li>`notEndWith`: Does not end with</li>
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
 	// The value of QueryCondition.
@@ -13132,11 +13688,12 @@ type Quota struct {
 	// Remaining daily submission quota.
 	DailyAvailable *int64 `json:"DailyAvailable,omitempty" name:"DailyAvailable"`
 
-	// Quota type. Values:
-	// <li>`purge_prefix`: Purge prefixes;</li>
-	// <li>`purge_url`: Purge URLs;</li>
-	// <li>`purge_host`: Purge hostnames;</li>
-	// <li>`purge_all`: Purge all caches.</li>
+	// Type of cache purging/pre-warming. Values:
+	// <li>`purge_prefix`: Purge by prefix</li>
+	// <li>`purge_url`: Purge by URL</li>
+	// <li>`purge_host`: Purge by hostname</li>
+	// <li>`purge_all`: Purge all caches</li>
+	// <li>`purge_cache_tag`: Purge by cache tag</li><li>`prefetch_url`: Pre-warm by URL</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -13200,7 +13757,9 @@ type RateLimitTemplate struct {
 	// <li>`close`: Off</li>
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
 
-
+	// The action. Values:
+	// <li>`alg`: JavaScript challenge</li>
+	// <li>`monitor`: Observe</li>If it is left empty, the default value `alg` is used.
 	Action *string `json:"Action,omitempty" name:"Action"`
 
 	// The settings of the rate limiting template. It is only used as an output parameter.
@@ -13215,18 +13774,20 @@ type RateLimitTemplateDetail struct {
 	// <li>`normal`: Moderate</li>
 	// <li>`strict`: Strict</li>
 	// <li>`close`: Off</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
 
 	// The unique ID.
 	ID *int64 `json:"ID,omitempty" name:"ID"`
 
-	// The action, which will be triggered when the specified threshold reaches.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The action. Values:
+	// <li>`alg`: JavaScript challenge</li>
+	// <li>`monitor`: Observe</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Action *string `json:"Action,omitempty" name:"Action"`
 
-	// The amount of time taken to perform the action. Value range: 0-172800 seconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The blocking duration, in seconds. Value range: 0-172800.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PunishTime *int64 `json:"PunishTime,omitempty" name:"PunishTime"`
 
 	// The request threshold. Value range: 0-4294967294.
@@ -13262,9 +13823,8 @@ type RateLimitUserRule struct {
 	PunishTimeUnit *string `json:"PunishTimeUnit,omitempty" name:"PunishTimeUnit"`
 
 	// The rule status. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// <li>Default value: on</li>
+	// <li>`on`: Enabled</li>
+	// <li>`off`: Disabled</li>Default value: on
 	RuleStatus *string `json:"RuleStatus,omitempty" name:"RuleStatus"`
 
 	// The rule details.
@@ -13278,7 +13838,6 @@ type RateLimitUserRule struct {
 	RuleID *int64 `json:"RuleID,omitempty" name:"RuleID"`
 
 	// The filter. Values:
-	// <li>`host`: Domain name</li>
 	// <li>`sip`: Client IP</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FreqFields []*string `json:"FreqFields,omitempty" name:"FreqFields"`
@@ -13286,6 +13845,73 @@ type RateLimitUserRule struct {
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The statistical dimension. Values:
+	// <li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
+	// <li>`client_to_eo`: Requests from the client to EdgeOne</li>
+	// Note: A null value indicates responses from the origin server to EdgeOne are recorded.
+	FreqScope []*string `json:"FreqScope,omitempty" name:"FreqScope"`
+}
+
+// Predefined struct for user
+type ReclaimAliasDomainRequestParams struct {
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The site name.
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+}
+
+type ReclaimAliasDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// The site name.
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+}
+
+func (r *ReclaimAliasDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReclaimAliasDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "ZoneName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReclaimAliasDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReclaimAliasDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReclaimAliasDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *ReclaimAliasDomainResponseParams `json:"Response"`
+}
+
+func (r *ReclaimAliasDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReclaimAliasDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -13392,12 +14018,15 @@ type RewriteAction struct {
 }
 
 type Rule struct {
+	// Feature to be executed.
+	Actions []*Action `json:"Actions,omitempty" name:"Actions"`
+
 	// Feature execution conditions.
 	// Note: If any condition in the array is met, the feature will run.
 	Conditions []*RuleAndConditions `json:"Conditions,omitempty" name:"Conditions"`
 
-	// Feature to be executed.
-	Actions []*Action `json:"Actions,omitempty" name:"Actions"`
+	// The nested rule.
+	SubRules []*SubRuleItem `json:"SubRules,omitempty" name:"SubRules"`
 }
 
 type RuleAndConditions struct {
@@ -13452,27 +14081,44 @@ type RuleCodeActionParams struct {
 
 type RuleCondition struct {
 	// Operator. Valid values:
-	// <li>equal: Equal to.</li>
-	// <li>notequal: Not equal to.</li>
+	// <li>`equals`: Equals</li>
+	// <li>`notEquals`: Does not equal</li>
+	// <li>`exist`: Exists</li>
+	// <li>`notexist`: Does not exist</li>
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
 	// Match type. Valid values:
-	// <li>`host`: All</li>
 	// <li>`filename`: File name</li>
 	// <li>`extension`: File extension</li>
-	// <li>`host`: HOST: .</li>
-	// <li>`full_url`: The full URL of the current site. It must contain the HTTP protocol, host, and path.</li>
-	// <li>`url`: The URL path of the current site.</li>
+	// <li>`host`: Host</li>
+	// <li>`full_url`: Full URL, which indicates the complete URL path under the current site and must contain the HTTP protocol, host, and path.</li>
+	// <li>`url`: Partial URL under the current site</li><li>`client_country`: Country/Region of the client</li>
+	// <li>`query_string`: Query string in the URL</li>
+	// <li>`request_header`: HTTP request header</li>
 	Target *string `json:"Target,omitempty" name:"Target"`
 
-	// Parameter values of the match type. Each match type has the following valid values:
-	// <li>`Target=extension`:  The extension of the file, such as `jpg` and `txt`.</li>
-	// <li>`Target=filename`: The file name without the extension.</li>
-	// <li>`Target=host`: Values can be `all` 
-	// or a host, such as `www.maxx55.com`.</li>
-	// <li>`Target=url`: A URL request path under the current site, such as `/example`.</li>
-	// <li>`Target=full_url`: A complete URL request under the current site. It must contain the protocol, host, and path, such as `https://www.maxx55.cn/example`.</li>
+	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+	// <li>When `Target=extension`, enter the file extension, such as "jpg" and "txt".</li>
+	// <li>When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".</li>
+	// <li>When `Target=all`, it indicates any site request.</li>
+	// <li>When `Target=host`, enter the host under the current site, such as "www.maxx55.com".</li>
+	// <li>When `Target=url`, enter the partial URL path under the current site, such as "/example".</li>
+	// <li>When `Target=full_url`, enter the complete URL  under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
+	// <li>When `Target=client_country`, enter the ISO-3166 country/region code.</li>
+	// <li>When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".</li>
+	// <li>When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
 	Values []*string `json:"Values,omitempty" name:"Values"`
+
+	// Whether the parameter value is case insensitive. Default value: false.
+	IgnoreCase *bool `json:"IgnoreCase,omitempty" name:"IgnoreCase"`
+
+	// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
+	// <li>`query_string`: Name of the query string, such as "lang" and "version" in "lang=cn&version=1".</li>
+	// <li>`request_header`: Name of the HTTP request header, such as "Accept-Language" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+
+	IgnoreNameCase *bool `json:"IgnoreNameCase,omitempty" name:"IgnoreNameCase"`
 }
 
 type RuleExtraParameter struct {
@@ -13509,6 +14155,9 @@ type RuleItem struct {
 
 	// The rule priority. The greater the value, the higher the priority. The minimum value is `1`.
 	RulePriority *int64 `json:"RulePriority,omitempty" name:"RulePriority"`
+
+	// Tag of the rule.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 }
 
 type RuleNormalActionParams struct {
@@ -13669,6 +14318,14 @@ type SecHitRuleInfo struct {
 
 	// The subdomain name.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The bot tag. Values:
+	// <li>`evil_bot`: Malicious bot</li>
+	// <li>`suspect_bot`: Suspected bot</li>
+	// <li>`good_bot`: Good bot</li>
+	// <li>`normal`: Normal request</li>
+	// <li>`none`: Uncategorized</li>
+	BotLabel *string `json:"BotLabel,omitempty" name:"BotLabel"`
 }
 
 type SecRuleRelatedInfo struct {
@@ -13701,6 +14358,10 @@ type SecRuleRelatedInfo struct {
 
 	// The rule type.
 	RuleTypeName *string `json:"RuleTypeName,omitempty" name:"RuleTypeName"`
+
+	// The attack content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AttackContent *string `json:"AttackContent,omitempty" name:"AttackContent"`
 }
 
 type SecurityConfig struct {
@@ -13735,6 +14396,10 @@ type SecurityConfig struct {
 	// The settings of the custom block page. If it is null, the settings that were last configured will be used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DropPageConfig *DropPageConfig `json:"DropPageConfig,omitempty" name:"DropPageConfig"`
+
+	// Security template settings
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	TemplateConfig *TemplateConfig `json:"TemplateConfig,omitempty" name:"TemplateConfig"`
 }
 
 type SecurityEntity struct {
@@ -13767,10 +14432,10 @@ type ServerCertInfo struct {
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
 	// Type of the certificate. Values:
-	// <li>`default`: Default certificate;</lil>
-	// <li>`upload`: Custom certificate;</li>
-	// <li>`managed`: Tencent Cloud-managed certificate.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <li>`default`: Default certificate</lil>
+	// <li>`upload`: Specified certificate</li>
+	// <li>`managed`: Tencent Cloud-managed certificate</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Time when the certificate expires.
@@ -13784,6 +14449,10 @@ type ServerCertInfo struct {
 	// Signature algorithm.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SignAlgo *string `json:"SignAlgo,omitempty" name:"SignAlgo"`
+
+	// Domain name of the certificate.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	CommonName *string `json:"CommonName,omitempty" name:"CommonName"`
 }
 
 type ShieldArea struct {
@@ -13832,22 +14501,41 @@ type SingleTypeValue struct {
 }
 
 type SkipCondition struct {
-
+	// The field type. Values:
+	// <li>`header_fields`: HTTP request header</li>
+	// <li>`cookie`: HTTP request cookie</li>
+	// <li>`query_string`: Query string in the HTTP request URL</li>
+	// <li>`uri`: HTTP request URI</li>
+	// <li>`body_raw`: HTTP request body</li>
+	// <li>`body_json`: JSON HTTP request body</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-
+	// The specific field. Values:
+	// <li>`args`: Query parameter in the URI, such as "?name1=jack&age=12"</li>
+	// <li>`path`: Partial path in the URI, such as "/path/to/resource.jpg"</li>
+	// <li>`full`: Full path in the URI, such as "example.com/path/to/resource.jpg?name1=jack&age=12"</li>
+	// <li>`upload_filename`: File path segment</li>
+	// <li>`keys`: All keys</li>
+	// <li>`values`: Values of all keys</li>
+	// <li>`key_value`: Key and its value</li>
 	Selector *string `json:"Selector,omitempty" name:"Selector"`
 
-
+	// The match method used to match the key. Values:
+	// <li>`equal`: Exact match</li>
+	// <li>`wildcard`: Wildcard match (only asterisks)</li>
 	MatchFromType *string `json:"MatchFromType,omitempty" name:"MatchFromType"`
 
-
+	// The value that matches the key.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	MatchFrom []*string `json:"MatchFrom,omitempty" name:"MatchFrom"`
 
-
+	// The match method used to match the content.
+	// <li>`equal`: Exact match</li>
+	// <li>`wildcard`: Wildcard match (only asterisks)</li>
 	MatchContentType *string `json:"MatchContentType,omitempty" name:"MatchContentType"`
 
-
+	// The value that matches the content.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	MatchContent []*string `json:"MatchContent,omitempty" name:"MatchContent"`
 }
 
@@ -14019,6 +14707,23 @@ type SpeedTestingStatus struct {
 	TimedOut *bool `json:"TimedOut,omitempty" name:"TimedOut"`
 }
 
+type SubRule struct {
+	// The condition that determines if a feature should run.
+	// Note: If any condition in the array is met, the feature will run.
+	Conditions []*RuleAndConditions `json:"Conditions,omitempty" name:"Conditions"`
+
+	// The feature to be executed.
+	Actions []*Action `json:"Actions,omitempty" name:"Actions"`
+}
+
+type SubRuleItem struct {
+	// Nested rule settings
+	Rules []*SubRule `json:"Rules,omitempty" name:"Rules"`
+
+	// Tag of the rule.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+}
+
 type Sv struct {
 	// The parameter key.
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -14127,6 +14832,14 @@ type Task struct {
 
 	// Completion time of the task.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type TemplateConfig struct {
+	// The template ID.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// The template name.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 }
 
 type TimingDataItem struct {
@@ -14441,9 +15154,9 @@ type Zone struct {
 	// Whether the site is disabled.
 	Paused *bool `json:"Paused,omitempty" name:"Paused"`
 
-	// Whether CNAME flattening is enabled. Valid values:
-	// <li>`enabled`: Enabled.</li>
-	// <li>`disabled`: Disabled.</li>
+	// Whether CNAME acceleration is enabled. Values:
+	// <li>`enabled`: Enabled</li>
+	// <li>`disabled`: Disabled</li>
 	CnameSpeedUp *string `json:"CnameSpeedUp,omitempty" name:"CnameSpeedUp"`
 
 	// CNAME record access status. Values:
@@ -14476,6 +15189,16 @@ type Zone struct {
 	// The custom name server IP information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitempty" name:"VanityNameServersIps"`
+
+	// Status of the proxy. Values:
+	// <li>`active`: Enabled</li>
+	// <li>`inactive`: Not activated</li>
+	// <li>`paused`: Disabled</li>
+	ActiveStatus *string `json:"ActiveStatus,omitempty" name:"ActiveStatus"`
+
+	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
 }
 
 type ZoneSetting struct {
@@ -14551,6 +15274,7 @@ type ZoneSetting struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
-
+	// Whether to carry the location information of the client IP during origin-pull.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
 }
