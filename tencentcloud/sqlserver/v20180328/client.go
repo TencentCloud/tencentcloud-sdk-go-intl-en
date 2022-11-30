@@ -4153,6 +4153,7 @@ func NewRestoreInstanceResponse() (response *RestoreInstanceResponse) {
 // This API is used to restore an instance from a backup file.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
@@ -4171,6 +4172,7 @@ func (c *Client) RestoreInstance(request *RestoreInstanceRequest) (response *Res
 // This API is used to restore an instance from a backup file.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"

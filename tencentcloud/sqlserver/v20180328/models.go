@@ -141,7 +141,7 @@ type Backup struct {
 	// Backup policy (0: instance backup, 1: multi-database backup)
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
 
-	// Backup mode. 0: scheduled, 1: manual
+	// Backup Mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup).
 	BackupWay *int64 `json:"BackupWay,omitempty" name:"BackupWay"`
 
 	// Backup task name (customizable)
@@ -853,7 +853,7 @@ type CreateDBInstancesRequestParams struct {
 	// Array of voucher IDs (currently, only one voucher can be used per order)
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
 
-	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). The version purchasable varies by region and can be queried by calling the `DescribeProductConfig` API. If this parameter is left empty, 2008R2 will be used by default.
+	// SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
@@ -923,7 +923,7 @@ type CreateDBInstancesRequest struct {
 	// Array of voucher IDs (currently, only one voucher can be used per order)
 	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
 
-	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). The version purchasable varies by region and can be queried by calling the `DescribeProductConfig` API. If this parameter is left empty, 2008R2 will be used by default.
+	// SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
 
 	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal. Default value: 1.
@@ -2438,7 +2438,7 @@ type DescribeBackupsRequestParams struct {
 	// Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
 
-	// Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+	// Filter by backup mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup). Default value: `2`.
 	BackupWay *int64 `json:"BackupWay,omitempty" name:"BackupWay"`
 
 	// Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
@@ -2481,7 +2481,7 @@ type DescribeBackupsRequest struct {
 	// Filter by backup policy. Valid values: 0 (instance backup), 1 (multi-database backup). If this parameter is left empty, backup policy will not be used in filtering.
 	Strategy *int64 `json:"Strategy,omitempty" name:"Strategy"`
 
-	// Filter by backup mode. Valid values: 0 (automatic backup on a regular basis), 1 (manual backup performed by the user at any time). If this parameter is left empty, backup mode will not be used in filtering.
+	// Filter by backup mode. Valid values: `0` (scheduled backup); `1` (manual backup); `2` (archive backup). Default value: `2`.
 	BackupWay *int64 `json:"BackupWay,omitempty" name:"BackupWay"`
 
 	// Filter by backup ID. If this parameter is left empty, backup ID will not be used in filtering.
@@ -4807,6 +4807,21 @@ type ModifyBackupStrategyRequestParams struct {
 
 	// Data (log) backup retention period. Value range: 3-1830 days, default value: 7 days.
 	BackupSaveDays *uint64 `json:"BackupSaveDays,omitempty" name:"BackupSaveDays"`
+
+	// Archive backup status. Valid values: `enable` (enabled); `disable` (disabled). Default value: `disable`.
+	RegularBackupEnable *string `json:"RegularBackupEnable,omitempty" name:"RegularBackupEnable"`
+
+	// Archive backup retention days. Value range: 90–3650 days. Default value: 365 days.
+	RegularBackupSaveDays *uint64 `json:"RegularBackupSaveDays,omitempty" name:"RegularBackupSaveDays"`
+
+	// Archive backup policy. Valid values: `years` (yearly); `quarters (quarterly); `months` (monthly); Default value: `months`.
+	RegularBackupStrategy *string `json:"RegularBackupStrategy,omitempty" name:"RegularBackupStrategy"`
+
+	// The number of retained archive backups. Default value: `1`.
+	RegularBackupCounts *uint64 `json:"RegularBackupCounts,omitempty" name:"RegularBackupCounts"`
+
+	// Archive backup start date in YYYY-MM-DD format, which is the current time by default.
+	RegularBackupStartTime *string `json:"RegularBackupStartTime,omitempty" name:"RegularBackupStartTime"`
 }
 
 type ModifyBackupStrategyRequest struct {
@@ -4832,6 +4847,21 @@ type ModifyBackupStrategyRequest struct {
 
 	// Data (log) backup retention period. Value range: 3-1830 days, default value: 7 days.
 	BackupSaveDays *uint64 `json:"BackupSaveDays,omitempty" name:"BackupSaveDays"`
+
+	// Archive backup status. Valid values: `enable` (enabled); `disable` (disabled). Default value: `disable`.
+	RegularBackupEnable *string `json:"RegularBackupEnable,omitempty" name:"RegularBackupEnable"`
+
+	// Archive backup retention days. Value range: 90–3650 days. Default value: 365 days.
+	RegularBackupSaveDays *uint64 `json:"RegularBackupSaveDays,omitempty" name:"RegularBackupSaveDays"`
+
+	// Archive backup policy. Valid values: `years` (yearly); `quarters (quarterly); `months` (monthly); Default value: `months`.
+	RegularBackupStrategy *string `json:"RegularBackupStrategy,omitempty" name:"RegularBackupStrategy"`
+
+	// The number of retained archive backups. Default value: `1`.
+	RegularBackupCounts *uint64 `json:"RegularBackupCounts,omitempty" name:"RegularBackupCounts"`
+
+	// Archive backup start date in YYYY-MM-DD format, which is the current time by default.
+	RegularBackupStartTime *string `json:"RegularBackupStartTime,omitempty" name:"RegularBackupStartTime"`
 }
 
 func (r *ModifyBackupStrategyRequest) ToJsonString() string {
@@ -4853,6 +4883,11 @@ func (r *ModifyBackupStrategyRequest) FromJsonString(s string) error {
 	delete(f, "BackupModel")
 	delete(f, "BackupCycle")
 	delete(f, "BackupSaveDays")
+	delete(f, "RegularBackupEnable")
+	delete(f, "RegularBackupSaveDays")
+	delete(f, "RegularBackupStrategy")
+	delete(f, "RegularBackupCounts")
+	delete(f, "RegularBackupStartTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupStrategyRequest has unknown keys!", "")
 	}
