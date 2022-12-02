@@ -408,6 +408,29 @@ type BusinessSummaryTotal struct {
 	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
+type CosDetailSets struct {
+	// Bucket name
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+
+	// The start time of the usage
+	DosageBeginTime *string `json:"DosageBeginTime,omitempty" name:"DosageBeginTime"`
+
+	// The end time of the usage
+	DosageEndTime *string `json:"DosageEndTime,omitempty" name:"DosageEndTime"`
+
+	// Sub-product name
+	SubProductCodeName *string `json:"SubProductCodeName,omitempty" name:"SubProductCodeName"`
+
+	// Billable item name
+	BillingItemCodeName *string `json:"BillingItemCodeName,omitempty" name:"BillingItemCodeName"`
+
+	// Usage
+	DosageValue *string `json:"DosageValue,omitempty" name:"DosageValue"`
+
+	// Unit of the billable item
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+}
+
 // Predefined struct for user
 type DescribeAccountBalanceRequestParams struct {
 
@@ -1257,6 +1280,77 @@ func (r *DescribeBillSummaryByTagResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBillSummaryByTagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDosageCosDetailByDateRequestParams struct {
+	// The start date of the usage query
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// The end date of the usage query (end date must be in the same month as the start date)
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+}
+
+type DescribeDosageCosDetailByDateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start date of the usage query
+	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+
+	// The end date of the usage query (end date must be in the same month as the start date)
+	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+
+	// Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+}
+
+func (r *DescribeDosageCosDetailByDateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDosageCosDetailByDateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartDate")
+	delete(f, "EndDate")
+	delete(f, "BucketName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDosageCosDetailByDateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDosageCosDetailByDateResponseParams struct {
+	// Array of usage
+	DetailSets []*CosDetailSets `json:"DetailSets,omitempty" name:"DetailSets"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDosageCosDetailByDateResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDosageCosDetailByDateResponseParams `json:"Response"`
+}
+
+func (r *DescribeDosageCosDetailByDateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDosageCosDetailByDateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

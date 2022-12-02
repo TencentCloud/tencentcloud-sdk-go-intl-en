@@ -485,6 +485,54 @@ func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeDosageCosDetailByDateRequest() (request *DescribeDosageCosDetailByDateRequest) {
+    request = &DescribeDosageCosDetailByDateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeDosageCosDetailByDate")
+    
+    
+    return
+}
+
+func NewDescribeDosageCosDetailByDateResponse() (response *DescribeDosageCosDetailByDateResponse) {
+    response = &DescribeDosageCosDetailByDateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDosageCosDetailByDate
+// This API is used to query COS usage details.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeDosageCosDetailByDate(request *DescribeDosageCosDetailByDateRequest) (response *DescribeDosageCosDetailByDateResponse, err error) {
+    return c.DescribeDosageCosDetailByDateWithContext(context.Background(), request)
+}
+
+// DescribeDosageCosDetailByDate
+// This API is used to query COS usage details.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeDosageCosDetailByDateWithContext(ctx context.Context, request *DescribeDosageCosDetailByDateRequest) (response *DescribeDosageCosDetailByDateResponse, err error) {
+    if request == nil {
+        request = NewDescribeDosageCosDetailByDateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDosageCosDetailByDate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDosageCosDetailByDateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVoucherInfoRequest() (request *DescribeVoucherInfoRequest) {
     request = &DescribeVoucherInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -511,6 +559,7 @@ func NewDescribeVoucherInfoResponse() (response *DescribeVoucherInfoResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) DescribeVoucherInfo(request *DescribeVoucherInfoRequest) (response *DescribeVoucherInfoResponse, err error) {
     return c.DescribeVoucherInfoWithContext(context.Background(), request)
 }
@@ -523,6 +572,7 @@ func (c *Client) DescribeVoucherInfo(request *DescribeVoucherInfoRequest) (respo
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) DescribeVoucherInfoWithContext(ctx context.Context, request *DescribeVoucherInfoRequest) (response *DescribeVoucherInfoResponse, err error) {
     if request == nil {
         request = NewDescribeVoucherInfoRequest()
