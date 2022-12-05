@@ -4159,6 +4159,12 @@ type DescribeListBGPInstancesRequestParams struct {
 	// Filters by Enterprise edition
 	FilterEnterpriseFlag *uint64 `json:"FilterEnterpriseFlag,omitempty" name:"FilterEnterpriseFlag"`
 
+	// Whether it’s a Lighthouse edition
+	FilterLightFlag *uint64 `json:"FilterLightFlag,omitempty" name:"FilterLightFlag"`
+
+	// Whether it’s a Channel edition
+	FilterChannelFlag *uint64 `json:"FilterChannelFlag,omitempty" name:"FilterChannelFlag"`
+
 	// Filters by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 }
@@ -4199,6 +4205,12 @@ type DescribeListBGPInstancesRequest struct {
 	// Filters by Enterprise edition
 	FilterEnterpriseFlag *uint64 `json:"FilterEnterpriseFlag,omitempty" name:"FilterEnterpriseFlag"`
 
+	// Whether it’s a Lighthouse edition
+	FilterLightFlag *uint64 `json:"FilterLightFlag,omitempty" name:"FilterLightFlag"`
+
+	// Whether it’s a Channel edition
+	FilterChannelFlag *uint64 `json:"FilterChannelFlag,omitempty" name:"FilterChannelFlag"`
+
 	// Filters by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
 }
@@ -4226,6 +4238,8 @@ func (r *DescribeListBGPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterBoundStatus")
 	delete(f, "FilterInstanceIdList")
 	delete(f, "FilterEnterpriseFlag")
+	delete(f, "FilterLightFlag")
+	delete(f, "FilterChannelFlag")
 	delete(f, "FilterTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPInstancesRequest has unknown keys!", "")
@@ -5423,6 +5437,72 @@ func (r *DescribeOverviewDDoSEventListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePendingRiskInfoRequestParams struct {
+
+}
+
+type DescribePendingRiskInfoRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribePendingRiskInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePendingRiskInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePendingRiskInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePendingRiskInfoResponseParams struct {
+	// Whether the user is a paid user
+	IsPaidUsr *bool `json:"IsPaidUsr,omitempty" name:"IsPaidUsr"`
+
+	// Number of resources being attacked
+	AttackingCount *int64 `json:"AttackingCount,omitempty" name:"AttackingCount"`
+
+	// Number of resource blocked
+	BlockingCount *int64 `json:"BlockingCount,omitempty" name:"BlockingCount"`
+
+	// Number of expired resources
+	ExpiredCount *int64 `json:"ExpiredCount,omitempty" name:"ExpiredCount"`
+
+	// Total pending risk events
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePendingRiskInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePendingRiskInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribePendingRiskInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePendingRiskInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DisassociateDDoSEipAddressRequestParams struct {
 	// Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -6516,6 +6596,9 @@ type PacketFilterConfig struct {
 
 	// A rule ID is generated after a feature filtering configuration is added successfully. Leave this field empty when adding a new feature filtering configuration.
 	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Byte threshold of the packet. Packets larger than the specified size are not returned. It must be an integer larger than 1.
+	PktLenGT *int64 `json:"PktLenGT,omitempty" name:"PktLenGT"`
 }
 
 type PacketFilterRelation struct {
@@ -6568,6 +6651,46 @@ type ProtectThresholdRelation struct {
 
 	// Domain name and protocol protection thresholds
 	ListenerCcThresholdList []*ListenerCcThreholdConfig `json:"ListenerCcThresholdList,omitempty" name:"ListenerCcThresholdList"`
+
+	// SYN traffic threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SynFloodThreshold *uint64 `json:"SynFloodThreshold,omitempty" name:"SynFloodThreshold"`
+
+	// SYN packet threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SynFloodPktThreshold *uint64 `json:"SynFloodPktThreshold,omitempty" name:"SynFloodPktThreshold"`
+
+	// UDP traffic threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UdpFloodThreshold *uint64 `json:"UdpFloodThreshold,omitempty" name:"UdpFloodThreshold"`
+
+	// UDP packet threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UdpFloodPktThreshold *uint64 `json:"UdpFloodPktThreshold,omitempty" name:"UdpFloodPktThreshold"`
+
+	// ACK traffic threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AckFloodThreshold *uint64 `json:"AckFloodThreshold,omitempty" name:"AckFloodThreshold"`
+
+	// ACK packet threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AckFloodPktThreshold *uint64 `json:"AckFloodPktThreshold,omitempty" name:"AckFloodPktThreshold"`
+
+	// SYNACK traffic threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SynAckFloodThreshold *uint64 `json:"SynAckFloodThreshold,omitempty" name:"SynAckFloodThreshold"`
+
+	// SYNACK packet threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SynAckFloodPktThreshold *uint64 `json:"SynAckFloodPktThreshold,omitempty" name:"SynAckFloodPktThreshold"`
+
+	// RST traffic threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RstFloodThreshold *uint64 `json:"RstFloodThreshold,omitempty" name:"RstFloodThreshold"`
+
+	// RST packet threshold
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RstFloodPktThreshold *uint64 `json:"RstFloodPktThreshold,omitempty" name:"RstFloodPktThreshold"`
 }
 
 type ProtocolBlockConfig struct {
@@ -6585,6 +6708,12 @@ type ProtocolBlockConfig struct {
 
 	// Null connection protection. Valid values: `0` (disabled), `1` (enabled).
 	CheckExceptNullConnect *int64 `json:"CheckExceptNullConnect,omitempty" name:"CheckExceptNullConnect"`
+
+	// PoD protection. Values: `0` (disable), `1` (enable).
+	PingOfDeath *int64 `json:"PingOfDeath,omitempty" name:"PingOfDeath"`
+
+	// Teardrop protection. Values: `0` (disable), `1` (enable).
+	TearDrop *int64 `json:"TearDrop,omitempty" name:"TearDrop"`
 }
 
 type ProtocolBlockRelation struct {

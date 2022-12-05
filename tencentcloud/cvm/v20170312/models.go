@@ -3268,7 +3268,7 @@ type EnhancedService struct {
 	// Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
 	MonitorService *RunMonitorServiceEnabled `json:"MonitorService,omitempty" name:"MonitorService"`
 
-	// Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+	// Whether to enable the TAT service. If this parameter is not specified, the TAT service is enabled for public images and disabled for other images by default.
 	AutomationService *RunAutomationServiceEnabled `json:"AutomationService,omitempty" name:"AutomationService"`
 }
 
@@ -5623,7 +5623,7 @@ type Placement struct {
 	// ID of the availability zone where the instance resides. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/35071) API and obtain the ID in the returned `Zone` field.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// ID of the project to which the instance belongs. To obtain the project IDs, you can call [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1) and look for the `projectId` fields in the response. If this parameter is not specified, the default project will be used.
+	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` returned by [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1). If this is left empty, the default project is used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
@@ -6082,6 +6082,9 @@ type ResetInstanceRequestParams struct {
 
 	// Host name of the CVM, editable during the system reinstallation. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>For Windows instances, the host name must consist of 2-15 characters , including uppercase and lowercase letters, numbers, or hyphens (-). It cannot contain periods (.) or contain only numbers.<br><li>For other instances, such as Linux instances, the host name must consist of 2-60 characters, including multiple periods (.), and allows uppercase and lowercase letters, numbers, or hyphens (-) between any two periods (.).
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
+	UserData *string `json:"UserData,omitempty" name:"UserData"`
 }
 
 type ResetInstanceRequest struct {
@@ -6105,6 +6108,9 @@ type ResetInstanceRequest struct {
 
 	// Host name of the CVM, editable during the system reinstallation. <br><li>Periods (.) or hyphens (-) cannot be the start or end of a host name or appear consecutively in a host name.<br><li>For Windows instances, the host name must consist of 2-15 characters , including uppercase and lowercase letters, numbers, or hyphens (-). It cannot contain periods (.) or contain only numbers.<br><li>For other instances, such as Linux instances, the host name must consist of 2-60 characters, including multiple periods (.), and allows uppercase and lowercase letters, numbers, or hyphens (-) between any two periods (.).
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
+	UserData *string `json:"UserData,omitempty" name:"UserData"`
 }
 
 func (r *ResetInstanceRequest) ToJsonString() string {
@@ -6125,6 +6131,7 @@ func (r *ResetInstanceRequest) FromJsonString(s string) error {
 	delete(f, "LoginSettings")
 	delete(f, "EnhancedService")
 	delete(f, "HostName")
+	delete(f, "UserData")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetInstanceRequest has unknown keys!", "")
 	}
@@ -6908,6 +6915,14 @@ type StorageBlock struct {
 	MaxSize *int64 `json:"MaxSize,omitempty" name:"MaxSize"`
 }
 
+type SyncImage struct {
+
+	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
+
+
+	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
 // Predefined struct for user
 type SyncImagesRequestParams struct {
 	// List of image IDs. You can obtain the image IDs in two ways: <br><li>Call the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) API and find the value of `ImageId` in the response. <br><li>Find the image IDs in the [Image Console](https://console.cloud.tencent.com/cvm/image). <br>The specified images must meet the following requirement: <br><li>the images must be in the `NORMAL` state. <br>For more information on image status, see [Image Data Table](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#Image).
@@ -6963,6 +6978,9 @@ func (r *SyncImagesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SyncImagesResponseParams struct {
+
+	ImageSet []*SyncImage `json:"ImageSet,omitempty" name:"ImageSet"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }

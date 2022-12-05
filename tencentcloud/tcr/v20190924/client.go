@@ -717,6 +717,7 @@ func NewCreateReplicationInstanceResponse() (response *CreateReplicationInstance
 // This API is used to create a replication instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
@@ -739,6 +740,7 @@ func (c *Client) CreateReplicationInstance(request *CreateReplicationInstanceReq
 // This API is used to create a replication instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
@@ -2238,6 +2240,7 @@ func NewDeleteWebhookTriggerResponse() (response *DeleteWebhookTriggerResponse) 
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 func (c *Client) DeleteWebhookTrigger(request *DeleteWebhookTriggerRequest) (response *DeleteWebhookTriggerResponse, err error) {
@@ -2253,6 +2256,7 @@ func (c *Client) DeleteWebhookTrigger(request *DeleteWebhookTriggerRequest) (res
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 func (c *Client) DeleteWebhookTriggerWithContext(ctx context.Context, request *DeleteWebhookTriggerRequest) (response *DeleteWebhookTriggerResponse, err error) {
@@ -2802,7 +2806,7 @@ func NewDescribeInstanceAllNamespacesResponse() (response *DescribeInstanceAllNa
 }
 
 // DescribeInstanceAllNamespaces
-// This API is used to query the list of all instance namespaces.
+// This API is used to query the list of all namespaces in an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
@@ -2825,7 +2829,7 @@ func (c *Client) DescribeInstanceAllNamespaces(request *DescribeInstanceAllNames
 }
 
 // DescribeInstanceAllNamespaces
-// This API is used to query the list of all instance namespaces.
+// This API is used to query the list of all namespaces in an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"

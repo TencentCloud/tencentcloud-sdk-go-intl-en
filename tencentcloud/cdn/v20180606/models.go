@@ -838,6 +838,12 @@ type AuthenticationTypeD struct {
 	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
+type AvifAdapter struct {
+	// Switch. Valid values: `on`, `off`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type AwsPrivateAccess struct {
 	// Switch, which can be set to on or off.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
@@ -2076,8 +2082,8 @@ type DescribeCdnDomainLogsRequestParams struct {
 	// Default value: `mainland`.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// The type of log to be downloaded.
-	// access: access logs
+	// Specifies the type of logs to download (only access logs supported).
+	// `access`: Access logs.
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 }
 
@@ -2106,8 +2112,8 @@ type DescribeCdnDomainLogsRequest struct {
 	// Default value: `mainland`.
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-	// The type of log to be downloaded.
-	// access: access logs
+	// Specifies the type of logs to download (only access logs supported).
+	// `access`: Access logs.
 	LogType *string `json:"LogType,omitempty" name:"LogType"`
 }
 
@@ -2138,7 +2144,8 @@ func (r *DescribeCdnDomainLogsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCdnDomainLogsResponseParams struct {
-	// Download link of the log package
+	// Download link of the log package.
+	// You can open the link to download a .gz log package that contains all log files without extension.
 	DomainLogs []*DomainLog `json:"DomainLogs,omitempty" name:"DomainLogs"`
 
 	// Total number of entries obtained
@@ -4573,6 +4580,10 @@ type ImageOptimization struct {
 	// `GuetzliAdapter` configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	GuetzliAdapter *GuetzliAdapter `json:"GuetzliAdapter,omitempty" name:"GuetzliAdapter"`
+
+	// AVIF adapter configuration
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	AvifAdapter *AvifAdapter `json:"AvifAdapter,omitempty" name:"AvifAdapter"`
 }
 
 type IpFilter struct {
@@ -5305,6 +5316,19 @@ type MaxAge struct {
 	// MaxAge rule
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	MaxAgeRules []*MaxAgeRule `json:"MaxAgeRules,omitempty" name:"MaxAgeRules"`
+
+	// MaxAge status code
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	MaxAgeCodeRule *MaxAgeCodeRule `json:"MaxAgeCodeRule,omitempty" name:"MaxAgeCodeRule"`
+}
+
+type MaxAgeCodeRule struct {
+	// Action to execute.
+	// `clear`: Clear the cache-control header.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Specifies the HTTP status code in the range 400-599.
+	StatusCodes []*string `json:"StatusCodes,omitempty" name:"StatusCodes"`
 }
 
 type MaxAgeRule struct {

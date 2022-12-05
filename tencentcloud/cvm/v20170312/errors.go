@@ -236,6 +236,9 @@ const (
 	// This API does not support instance images.
 	INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
 
+	// Unable to set the public network bandwidth. 
+	INVALIDPARAMETER_INTERNETACCESSIBLENOTSUPPORTED = "InvalidParameter.InternetAccessibleNotSupported"
+
 	// Invalid parameter dependency.
 	INVALIDPARAMETER_INVALIDDEPENDENCE = "InvalidParameter.InvalidDependence"
 
@@ -892,9 +895,6 @@ const (
 
 	// Non-ARM model instances cannot be changed to the ARM model.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILYTOARM = "UnsupportedOperation.UnsupportedChangeInstanceFamilyToARM"
-
-	// The target model (SA3) does not support configuration adjustment.
-	UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILYTOSA3 = "UnsupportedOperation.UnsupportedChangeInstanceFamilyToSA3"
 
 	// Changing to this model type for this instance is not allowed.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCETOTHISINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceToThisInstanceFamily"

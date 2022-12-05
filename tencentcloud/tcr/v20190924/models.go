@@ -2753,6 +2753,9 @@ type DescribeImagesRequestParams struct {
 
 	// Image digest specified for search
 	Digest *string `json:"Digest,omitempty" name:"Digest"`
+
+	// Whether to use exact matching. Valid values: `true` (exact matching), `null` (fuzzy matching).
+	ExactMatch *bool `json:"ExactMatch,omitempty" name:"ExactMatch"`
 }
 
 type DescribeImagesRequest struct {
@@ -2778,6 +2781,9 @@ type DescribeImagesRequest struct {
 
 	// Image digest specified for search
 	Digest *string `json:"Digest,omitempty" name:"Digest"`
+
+	// Whether to use exact matching. Valid values: `true` (exact matching), `null` (fuzzy matching).
+	ExactMatch *bool `json:"ExactMatch,omitempty" name:"ExactMatch"`
 }
 
 func (r *DescribeImagesRequest) ToJsonString() string {
@@ -2799,6 +2805,7 @@ func (r *DescribeImagesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "Digest")
+	delete(f, "ExactMatch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImagesRequest has unknown keys!", "")
 	}
@@ -2900,12 +2907,21 @@ func (r *DescribeImmutableTagRulesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceAllNamespacesRequestParams struct {
+	// Number of entries per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
+	// Start position offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceAllNamespacesRequest struct {
 	*tchttp.BaseRequest
 	
+	// Number of entries per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start position offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceAllNamespacesRequest) ToJsonString() string {
@@ -2920,7 +2936,8 @@ func (r *DescribeInstanceAllNamespacesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "Limit")
+	delete(f, "Offset")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceAllNamespacesRequest has unknown keys!", "")
 	}
