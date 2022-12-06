@@ -21,61 +21,83 @@ import (
 )
 
 type AppStatisticsItem struct {
-	// Voice chat statistics
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Voice Chat statistics
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	RealtimeSpeechStatisticsItem *RealTimeSpeechStatisticsItem `json:"RealtimeSpeechStatisticsItem,omitempty" name:"RealtimeSpeechStatisticsItem"`
 
-	// Voice messaging statistics
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Voice Message statistics
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	VoiceMessageStatisticsItem *VoiceMessageStatisticsItem `json:"VoiceMessageStatisticsItem,omitempty" name:"VoiceMessageStatisticsItem"`
 
-	// Phrase filtering statistics
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Phrase Filtering statistics
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	VoiceFilterStatisticsItem *VoiceFilterStatisticsItem `json:"VoiceFilterStatisticsItem,omitempty" name:"VoiceFilterStatisticsItem"`
 
-	// Statistical period
+	// Reference period
 	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Recording-to-Text usage statistics
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AudioTextStatisticsItem *AudioTextStatisticsItem `json:"AudioTextStatisticsItem,omitempty" name:"AudioTextStatisticsItem"`
+
+	// Stream-to-Text usage statistics
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StreamTextStatisticsItem *StreamTextStatisticsItem `json:"StreamTextStatisticsItem,omitempty" name:"StreamTextStatisticsItem"`
+
+	// Usage statistics of Voice-to-Text of outside-MLC requests
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	OverseaTextStatisticsItem *OverseaTextStatisticsItem `json:"OverseaTextStatisticsItem,omitempty" name:"OverseaTextStatisticsItem"`
+
+	// Real-time Voice-to-Text usage statistics
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RealtimeTextStatisticsItem *RealtimeTextStatisticsItem `json:"RealtimeTextStatisticsItem,omitempty" name:"RealtimeTextStatisticsItem"`
 }
 
 type ApplicationDataStatistics struct {
 	// Application ID
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// DAU data
+	// Number of DAU metrics
 	DauDataNum *uint64 `json:"DauDataNum,omitempty" name:"DauDataNum"`
 
-	// DAU in Chinese mainland
+	// DAUs in the Chinese mainland
 	DauDataMainland []*StatisticsItem `json:"DauDataMainland,omitempty" name:"DauDataMainland"`
 
-	// DAU outside Chinese mainland
+	// DAUs outside the Chinese mainland
 	DauDataOversea []*StatisticsItem `json:"DauDataOversea,omitempty" name:"DauDataOversea"`
 
-	// Total DAU
+	// Total DAUs
 	DauDataSum []*StatisticsItem `json:"DauDataSum,omitempty" name:"DauDataSum"`
 
-	// Number of voice chat metrics
+	// Number of Voice Chat metrics
 	DurationDataNum *uint64 `json:"DurationDataNum,omitempty" name:"DurationDataNum"`
 
-	// Duration of voice chat in Chinese mainland in minutes
+	// Duration of Voice Chat in the Chinese mainland (in minutes)
 	DurationDataMainland []*StatisticsItem `json:"DurationDataMainland,omitempty" name:"DurationDataMainland"`
 
-	// Duration of voice chat outside Chinese mainland in minutes
+	// Duration of Voice Chat outside the Chinese mainland (in minutes)
 	DurationDataOversea []*StatisticsItem `json:"DurationDataOversea,omitempty" name:"DurationDataOversea"`
 
-	// Total duration of voice chat in minutes
+	// Total duration of Voice Chat (in minutes)
 	DurationDataSum []*StatisticsItem `json:"DurationDataSum,omitempty" name:"DurationDataSum"`
 
-	// PCU data
+	// Number of PCU metrics
 	PcuDataNum *uint64 `json:"PcuDataNum,omitempty" name:"PcuDataNum"`
 
-	// PCU in Chinese mainland
+	// PCUs in the Chinese mainland
 	PcuDataMainland []*StatisticsItem `json:"PcuDataMainland,omitempty" name:"PcuDataMainland"`
 
-	// PCU outside Chinese mainland
+	// PCUs outside the Chinese mainland
 	PcuDataOversea []*StatisticsItem `json:"PcuDataOversea,omitempty" name:"PcuDataOversea"`
 
-	// Total PCU
+	// Total PCUs
 	PcuDataSum []*StatisticsItem `json:"PcuDataSum,omitempty" name:"PcuDataSum"`
+}
+
+type AudioTextStatisticsItem struct {
+	// Statistical value (in seconds)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Data *float64 `json:"Data,omitempty" name:"Data"`
 }
 
 // Predefined struct for user
@@ -83,7 +105,7 @@ type CreateAppRequestParams struct {
 	// Application name
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Tencent Cloud project ID. Default value: 0, which means the default project
+	// Tencent Cloud project ID. Default value: 0, which means that the default project is used.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// List of engines to be supported. All values are selected by default.
@@ -92,13 +114,13 @@ type CreateAppRequestParams struct {
 	// Service region list. All values are selected by default.
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
-	// Configuration information of voice chat
+	// Configuration information of Voice Chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
 
-	// Configuration information of voice messaging and speech-to-text
+	// Configuration information of Voice Message Service
 	VoiceMessageConf *VoiceMessageConf `json:"VoiceMessageConf,omitempty" name:"VoiceMessageConf"`
 
-	// Configuration information of phrase analysis
+	// Configuration information of Voice Analysis Service
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
 
 	// List of tags to be added
@@ -111,7 +133,7 @@ type CreateAppRequest struct {
 	// Application name
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
-	// Tencent Cloud project ID. Default value: 0, which means the default project
+	// Tencent Cloud project ID. Default value: 0, which means that the default project is used.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// List of engines to be supported. All values are selected by default.
@@ -120,13 +142,13 @@ type CreateAppRequest struct {
 	// Service region list. All values are selected by default.
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
-	// Configuration information of voice chat
+	// Configuration information of Voice Chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
 
-	// Configuration information of voice messaging and speech-to-text
+	// Configuration information of Voice Message Service
 	VoiceMessageConf *VoiceMessageConf `json:"VoiceMessageConf,omitempty" name:"VoiceMessageConf"`
 
-	// Configuration information of phrase analysis
+	// Configuration information of Voice Analysis Service
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
 
 	// List of tags to be added
@@ -160,28 +182,28 @@ func (r *CreateAppRequest) FromJsonString(s string) error {
 }
 
 type CreateAppResp struct {
-	// App ID, automatically generated by the backend.
+	// Application ID, automatically generated by the backend.
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// App name, the input of `AppName`.
+	// Application name, the input of `AppName`.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Project ID, the input of `ProjectId`.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// App key, used to initialize GME SDK.
+	// Application key, used to initialize GME SDK.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
 	// Timestamp, indicating when the service is created.
 	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Configuration information of voice chat
+	// Configuration information of Voice Chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
 
-	// Configuration information of voice messaging and speech-to-text
+	// Configuration information of Voice Message Service
 	VoiceMessageConf *VoiceMessageConf `json:"VoiceMessageConf,omitempty" name:"VoiceMessageConf"`
 
-	// Configuration information of phrase analysis
+	// Configuration information of Voice Analysis Service
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
 }
 
@@ -301,13 +323,13 @@ type DescribeAppStatisticsRequestParams struct {
 	// GME application ID
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
-	// List of services to be queried. Valid values: RealTimeSpeech, VoiceMessage, VoiceFilter
+	// List of services to be queried. Valid values: `RealTimeSpeech`, `VoiceMessage`, `VoiceFilter`, `SpeechToText`.
 	Services []*string `json:"Services,omitempty" name:"Services"`
 }
 
@@ -317,13 +339,13 @@ type DescribeAppStatisticsRequest struct {
 	// GME application ID
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data start date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data end date (GMT+8) in the format of yyyy-mm-dd, such as 2018-07-13.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
-	// List of services to be queried. Valid values: RealTimeSpeech, VoiceMessage, VoiceFilter
+	// List of services to be queried. Valid values: `RealTimeSpeech`, `VoiceMessage`, `VoiceFilter`, `SpeechToText`.
 	Services []*string `json:"Services,omitempty" name:"Services"`
 }
 
@@ -350,13 +372,13 @@ func (r *DescribeAppStatisticsRequest) FromJsonString(s string) error {
 }
 
 type DescribeAppStatisticsResp struct {
-	// App usage statistics
+	// Application usage statistics
 	AppStatistics []*AppStatisticsItem `json:"AppStatistics,omitempty" name:"AppStatistics"`
 }
 
 // Predefined struct for user
 type DescribeAppStatisticsResponseParams struct {
-	// App usage statistics
+	// Application usage statistics
 	Data *DescribeAppStatisticsResp `json:"Data,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -384,10 +406,10 @@ type DescribeApplicationDataRequestParams struct {
 	// Application ID
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Data start date in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data start date in the format of yyyy-mm-dd, such as 2018-07-13.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// Data end date in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data end date in the format of yyyy-mm-dd, such as 2018-07-13.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 }
 
@@ -397,10 +419,10 @@ type DescribeApplicationDataRequest struct {
 	// Application ID
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Data start date in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data start date in the format of yyyy-mm-dd, such as 2018-07-13.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// Data end date in the format of yyyy-mm-dd, such as 2018-07-13
+	// Data end date in the format of yyyy-mm-dd, such as 2018-07-13.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 }
 
@@ -467,29 +489,29 @@ type DescribeScanResult struct {
 	Live *bool `json:"Live,omitempty" name:"Live"`
 
 	// Business return description
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Msg *string `json:"Msg,omitempty" name:"Msg"`
 
 	// Detection result, which will be returned if `Code` is 0
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ScanPiece []*ScanPiece `json:"ScanPiece,omitempty" name:"ScanPiece"`
 
 	// Detection task submission timestamp
 	ScanStartTime *uint64 `json:"ScanStartTime,omitempty" name:"ScanStartTime"`
 
-	// Speech detection scenario, which corresponds to the `Scene` at the time of request
+	// Voice detection scenario, which corresponds to the `Scene` at the time of request
 	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
 
-	// Speech detection task ID, which is assigned by the backend
+	// Voice detection task ID, which is assigned by the backend
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 	// File or stream address
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// Detection task execution result task. Valid values:
-	// <li>Start: task started</li>
-	// <li>Success: task ended successfully</li>
-	// <li>Error: exceptional</li>
+	// Detection task execution result status. Valid values:
+	// <li>Start: Task started</li>
+	// <li>Success: Task ended successfully</li>
+	// <li>Error: An exception occurs</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// ID of the application submitted for detection
@@ -498,26 +520,26 @@ type DescribeScanResult struct {
 
 // Predefined struct for user
 type DescribeScanResultListRequestParams struct {
-	// Application ID, which is the `AppID` obtained when you create an application in the [console](https://console.cloud.tencent.com/gamegme)
+	// Application ID, which is obtained when you create an application in the [GME console](https://console.cloud.tencent.com/gamegme).
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
 	// List of IDs of the tasks to be queried. Up to 100 entries can be added in the ID list.
 	TaskIdList []*string `json:"TaskIdList,omitempty" name:"TaskIdList"`
 
-	// Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned
+	// Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
 type DescribeScanResultListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID, which is the `AppID` obtained when you create an application in the [console](https://console.cloud.tencent.com/gamegme)
+	// Application ID, which is obtained when you create an application in the [GME console](https://console.cloud.tencent.com/gamegme).
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
 	// List of IDs of the tasks to be queried. Up to 100 entries can be added in the ID list.
 	TaskIdList []*string `json:"TaskIdList,omitempty" name:"TaskIdList"`
 
-	// Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned
+	// Number of task results to be returned. Default value: 10. Maximum value: 500. This parameter will be ignored for large file tasks where all results will be returned.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -544,8 +566,8 @@ func (r *DescribeScanResultListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeScanResultListResponseParams struct {
-	// Result of the speech detection task to be queried
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result of the voice detection task to be queried
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Data []*DescribeScanResult `json:"Data,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -570,20 +592,20 @@ func (r *DescribeScanResultListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAppStatusRequestParams struct {
-	// Application ID, which is generated and returned by the backend after application creation.
+	// Application ID, which is generated and returned by the backend after the application creation.
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Application status. Valid values: open, close
+	// Application status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type ModifyAppStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID, which is generated and returned by the backend after application creation.
+	// Application ID, which is generated and returned by the backend after the application creation.
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Application status. Valid values: open, close
+	// Application status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -608,10 +630,10 @@ func (r *ModifyAppStatusRequest) FromJsonString(s string) error {
 }
 
 type ModifyAppStatusResp struct {
-	// GME app ID
+	// GME application ID
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// App status. Valid values: `open`, `close`
+	// Application status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
@@ -640,135 +662,147 @@ func (r *ModifyAppStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type OverseaTextStatisticsItem struct {
+	// Statistical value (in seconds)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Data *float64 `json:"Data,omitempty" name:"Data"`
+}
+
 type RealTimeSpeechStatisticsItem struct {
-	// DAU in Mainland China
+	// DAUs in the Chinese mainland
 	MainLandDau *uint64 `json:"MainLandDau,omitempty" name:"MainLandDau"`
 
-	// PCU in Mainland China
+	// PCUs in the Chinese mainland
 	MainLandPcu *uint64 `json:"MainLandPcu,omitempty" name:"MainLandPcu"`
 
-	// Total duration of use in Mainland China in minutes
+	// Total duration of use in the Chinese mainland (in minutes)
 	MainLandDuration *uint64 `json:"MainLandDuration,omitempty" name:"MainLandDuration"`
 
-	// DAU outside Mainland China
+	// DAUs outside the Chinese mainland
 	OverseaDau *uint64 `json:"OverseaDau,omitempty" name:"OverseaDau"`
 
-	// PCU outside Mainland China
+	// PCUs outside the Chinese mainland
 	OverseaPcu *uint64 `json:"OverseaPcu,omitempty" name:"OverseaPcu"`
 
-	// Total duration of use outside Mainland China in minutes
+	// Total duration of use outside the Chinese mainland (in minutes)
 	OverseaDuration *uint64 `json:"OverseaDuration,omitempty" name:"OverseaDuration"`
 }
 
 type RealtimeSpeechConf struct {
-	// Voice chat status. Valid values: open, close
+	// Voice Chat status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Voice chat sound quality. Valid value: `high`
+	// Voice Chat sound quality. Valid value: `high`.
 	Quality *string `json:"Quality,omitempty" name:"Quality"`
 }
 
+type RealtimeTextStatisticsItem struct {
+	// Statistical value (in seconds)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Data *float64 `json:"Data,omitempty" name:"Data"`
+}
+
 type ScanDetail struct {
-	// Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>
+	// Violation scenario. For more information, please see the definition of <a href="https://intl.cloud.tencent.com/document/product/607/37622?from_cn_redirect=1#Label_Value">Label</a>.
 	Label *string `json:"Label,omitempty" name:"Label"`
 
-	// Confidence score in scenario. Value range: [0.00,100.00]. The higher the score, the more likely the content is non-compliant
+	// Confidence score in scenario. Value range: [0.00,100.00]. The higher the score, the more likely the content is non-compliant.
 	Rate *string `json:"Rate,omitempty" name:"Rate"`
 
 	// Non-compliant keyword
 	KeyWord *string `json:"KeyWord,omitempty" name:"KeyWord"`
 
-	// Start time offset in milliseconds from 0 of keyword in audio
+	// Start time offset of keyword from 0 in audio (in milliseconds)
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time offset in milliseconds from 0 of keyword in audio
+	// End time offset of keyword from 0 in audio (in milliseconds)
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type ScanPiece struct {
-	// Audio retention address, which will be returned for stream detection. The audio will be retained for 30 minutes
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Audio retention address, which will be returned for stream detection. The audio will be retained for 30 minutes.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DumpUrl *string `json:"DumpUrl,omitempty" name:"DumpUrl"`
 
 	// Whether non-compliant information is detected
 	HitFlag *bool `json:"HitFlag,omitempty" name:"HitFlag"`
 
 	// Main non-compliant content type
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	MainType *string `json:"MainType,omitempty" name:"MainType"`
 
-	// Speech detection details
+	// Voice detection details
 	ScanDetail []*ScanDetail `json:"ScanDetail,omitempty" name:"ScanDetail"`
 
-	// GME voice chat room ID, which is the `RoomId` passed through when the task was submitted
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// GME Voice Chat room ID, which is the `RoomId` passed through when the task was submitted.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// GME voice chat user ID, which is the `OpenId` passed through when the task was submitted
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// GME Voice Chat user ID, which is the `OpenId` passed through when the task was submitted.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	OpenId *string `json:"OpenId,omitempty" name:"OpenId"`
 
 	// Remarks
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Info *string `json:"Info,omitempty" name:"Info"`
 
-	// Offset time in milliseconds of segment in stream during stream detection
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Offset time of multipart in stream during stream detection (in milliseconds)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Segment duration during stream detection
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Multipart duration during stream detection
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
 
-	// Segment detection start time
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Multipart detection start time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PieceStartTime *uint64 `json:"PieceStartTime,omitempty" name:"PieceStartTime"`
 }
 
 // Predefined struct for user
 type ScanVoiceRequestParams struct {
-	// Application ID, which is the `AppID` obtained when you create an application in [Console > Service Management](https://console.cloud.tencent.com/gamegme)
+	// Application ID, which is obtained when you create an application in the [GME console - Service Management](https://console.cloud.tencent.com/gamegme).
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, advertising, and other prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
+	// Voice detection scenario. It must be `default`. See the <a href="#Label_Value">Label description</a> as the result.
 	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
 
-	// Whether it is a live stream. false: audio file detection, true: audio stream detection.
+	// Whether it is a live stream. Values: `false` (voice file), `true` (live stream).
 	Live *bool `json:"Live,omitempty" name:"Live"`
 
-	// Speech detection task list. Up to 100 tasks can be added in the list. The structure contains:
-	// <li>DataId: unique data ID</li>
-	// <li>Url: URL-encoded data file URL, which is a pull address if the detected speech is a stream</li>
+	// Voice detection task list. Up to 100 tasks can be added in the list. 
+	// <li>`DataId`: Unique data ID</li>
+	// <li>`Url`: URL-encoded data file URL, which is a pull address if the detected voice is a stream</li>
 	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
 
-	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">callback description</a> above. (Note: if this field is empty, the detection result can only be obtained by calling the `DescribeScanResultList` API.)
+	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">Callback description</a> above. (Note: If this field is empty, the detection result can only be queried by calling the `DescribeScanResultList` API.)
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 
-	// The language. `jp` represents Japanese
+	// Language. `jp`: Japanese
 	Lang *string `json:"Lang,omitempty" name:"Lang"`
 }
 
 type ScanVoiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID, which is the `AppID` obtained when you create an application in [Console > Service Management](https://console.cloud.tencent.com/gamegme)
+	// Application ID, which is obtained when you create an application in the [GME console - Service Management](https://console.cloud.tencent.com/gamegme).
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
 
-	// Speech detection scenario. The value of this parameter is currently required to be `default`. Preset scenarios: abusive, pornographic, advertising, and other prohibited scenarios. For specific values, please see the <a href="#Label_Value">Label description</a> above.
+	// Voice detection scenario. It must be `default`. See the <a href="#Label_Value">Label description</a> as the result.
 	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
 
-	// Whether it is a live stream. false: audio file detection, true: audio stream detection.
+	// Whether it is a live stream. Values: `false` (voice file), `true` (live stream).
 	Live *bool `json:"Live,omitempty" name:"Live"`
 
-	// Speech detection task list. Up to 100 tasks can be added in the list. The structure contains:
-	// <li>DataId: unique data ID</li>
-	// <li>Url: URL-encoded data file URL, which is a pull address if the detected speech is a stream</li>
+	// Voice detection task list. Up to 100 tasks can be added in the list. 
+	// <li>`DataId`: Unique data ID</li>
+	// <li>`Url`: URL-encoded data file URL, which is a pull address if the detected voice is a stream</li>
 	Tasks []*Task `json:"Tasks,omitempty" name:"Tasks"`
 
-	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">callback description</a> above. (Note: if this field is empty, the detection result can only be obtained by calling the `DescribeScanResultList` API.)
+	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">Callback description</a> above. (Note: If this field is empty, the detection result can only be queried by calling the `DescribeScanResultList` API.)
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 
-	// The language. `jp` represents Japanese
+	// Language. `jp`: Japanese
 	Lang *string `json:"Lang,omitempty" name:"Lang"`
 }
 
@@ -798,8 +832,8 @@ func (r *ScanVoiceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ScanVoiceResponseParams struct {
-	// Speech detection return. The `Data` field is a JSON array where each element contains: <li>DataId: corresponding `DataId` in request.</li>
-	// <li>TaskID: detection task ID, which is used to poll the speech detection result.</li>
+	// Voice moderation result. <li>`DataId`: Corresponding `DataId` in request.</li>
+	// <li>`TaskID`: Moderation task ID, which is used to poll the voice detection result.</li>
 	Data []*ScanVoiceResult `json:"Data,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -834,17 +868,23 @@ type StatisticsItem struct {
 	// Date in the format of yyyy-mm-dd, such as 2018-07-13
 	StatDate *string `json:"StatDate,omitempty" name:"StatDate"`
 
-	// Statistics
+	// Statistical value
 	Data *uint64 `json:"Data,omitempty" name:"Data"`
+}
+
+type StreamTextStatisticsItem struct {
+	// Usage of the service (in seconds)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Data *float64 `json:"Data,omitempty" name:"Data"`
 }
 
 type Tag struct {
 	// Tag key
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Tag value
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
@@ -852,35 +892,35 @@ type Task struct {
 	// Unique data ID
 	DataId *string `json:"DataId,omitempty" name:"DataId"`
 
-	// URL-encoded data file URL, which is a pull address if the detected speech is a stream
+	// URL-encoded data file URL, which is a pull address if the detected voice is a stream.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// GME voice chat room ID, which is entered during speech detection by GME voice chat
+	// GME Voice Chat room ID, which is entered during voice analysis by GME Voice Chat.
 	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
 
-	// GME voice chat user ID, which is entered during speech detection by GME voice chat
+	// GME Voice Chat user ID, which is entered during voice analysis by GME Voice Chat.
 	OpenId *string `json:"OpenId,omitempty" name:"OpenId"`
 }
 
 type VoiceFilterConf struct {
-	// Phrase filtering status. Valid values: open, close
+	// Phrase Filtering status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type VoiceFilterStatisticsItem struct {
-	// Total duration of phrase filtering
+	// Total duration of phrase filtering (in minutes)
 	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
 }
 
 type VoiceMessageConf struct {
-	// Voice messaging and speech-to-text status. Valid values: open, close
+	// Voice Message Service status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Language supported for voice messaging and speech-to-text. Valid values: all (all languages), cnen (Chinese and English). Default value: cnen
+	// Language supported for Voice Message Service. Valid values: `all` (all languages), `cnen` (Chinese and English). Default value: `cnen`.
 	Language *string `json:"Language,omitempty" name:"Language"`
 }
 
 type VoiceMessageStatisticsItem struct {
-	// DAU of voice messaging and speech-to-text
+	// DAUs of Voice Message Service
 	Dau *uint64 `json:"Dau,omitempty" name:"Dau"`
 }

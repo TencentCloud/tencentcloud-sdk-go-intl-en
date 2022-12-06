@@ -98,6 +98,9 @@ const (
 	// A parameter is missing. One of the two parameters must be specified.
 	INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 
+	// 
+	INVALIDPARAMETER_PARAMETERDEPRECATED = "InvalidParameter.ParameterDeprecated"
+
 	// Some parameters cannot coexist and should be deleted.
 	INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
 
@@ -106,6 +109,9 @@ const (
 
 	// Wrong parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// 
+	INVALIDPARAMETERVALUE_ACCOUNTNOTSUPPORTBANDWIDTHPACKAGEID = "InvalidParameterValue.AccountNotSupportBandwidthPackageId"
 
 	// The specified base capacity cannot exceed the max capacity.
 	INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
@@ -145,6 +151,9 @@ const (
 
 	// Invalid hostname
 	INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
+
+	// 
+	INVALIDPARAMETERVALUE_IPV6INTERNETCHARGETYPE = "InvalidParameterValue.IPv6InternetChargeType"
 
 	// The specified image does not exist.
 	INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
@@ -203,6 +212,9 @@ const (
 	// The scheduled task name contains invalid characters.
 	INVALIDPARAMETERVALUE_INVALIDSCHEDULEDACTIONNAMEINCLUDEILLEGALCHAR = "InvalidParameterValue.InvalidScheduledActionNameIncludeIllegalChar"
 
+	// Invalid security group ID.
+	INVALIDPARAMETERVALUE_INVALIDSECURITYGROUPID = "InvalidParameterValue.InvalidSecurityGroupId"
+
 	// Invalid snapshot ID.
 	INVALIDPARAMETERVALUE_INVALIDSNAPSHOTID = "InvalidParameterValue.InvalidSnapshotId"
 
@@ -223,6 +235,9 @@ const (
 
 	// The value exceeds the limit.
 	INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+
+	// 
+	INVALIDPARAMETERVALUE_MISSINGBANDWIDTHPACKAGEID = "InvalidParameterValue.MissingBandwidthPackageId"
 
 	// No resource permission.
 	INVALIDPARAMETERVALUE_NORESOURCEPERMISSION = "InvalidParameterValue.NoResourcePermission"
@@ -352,6 +367,9 @@ const (
 
 	// The notification does not exist.
 	RESOURCENOTFOUND_AUTOSCALINGNOTIFICATIONNOTFOUND = "ResourceNotFound.AutoScalingNotificationNotFound"
+
+	// 
+	RESOURCENOTFOUND_BANDWIDTHPACKAGEIDNOTFOUND = "ResourceNotFound.BandwidthPackageIdNotFound"
 
 	// The specified CMQ queue does not exist.
 	RESOURCENOTFOUND_CMQQUEUENOTFOUND = "ResourceNotFound.CmqQueueNotFound"

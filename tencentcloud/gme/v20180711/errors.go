@@ -44,7 +44,7 @@ const (
 	// The number of created applications has reached the upper limit.
 	LIMITEXCEEDED_APPLICATION = "LimitExceeded.Application"
 
-	// Missing parameter.
+	// Parameter missing.
 	MISSINGPARAMETER = "MissingParameter"
 
 	// Operation denied.
@@ -56,10 +56,10 @@ const (
 	// Incorrect application ID.
 	RESOURCENOTFOUND_BIZIDISNOTFOUND = "ResourceNotFound.BizidIsNotFound"
 
-	// The resource is unavailable
+	// The resource is unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
-	// Unauthorized operation
+	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
 	// Application creation is not authorized.
@@ -68,7 +68,7 @@ const (
 	// Unverified user.
 	UNAUTHORIZEDOPERATION_UNREALNAMEAUTH = "UnauthorizedOperation.UnRealNameAuth"
 
-	// Unknown parameter.
+	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
 	// Operation unsupported.

@@ -2840,12 +2840,75 @@ func (r *DescribeMaintainPeriodResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeParamTemplatesRequestParams struct {
+	// Database engine version number
+	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
 
+	// Template name
+	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+
+	// Template ID
+	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
+
+	// Database Type. Valid values: `NORMAL`, `SERVERLESS`.
+	DbModes []*string `json:"DbModes,omitempty" name:"DbModes"`
+
+	// Offset for query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Limit on queries
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Product type of the queried template
+	Products []*string `json:"Products,omitempty" name:"Products"`
+
+	// Template type
+	TemplateTypes []*string `json:"TemplateTypes,omitempty" name:"TemplateTypes"`
+
+	// Version type
+	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
+
+	// The sorting order of the returned results
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `desc`, `asc `.
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
 }
 
 type DescribeParamTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// Database engine version number
+	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
+
+	// Template name
+	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+
+	// Template ID
+	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
+
+	// Database Type. Valid values: `NORMAL`, `SERVERLESS`.
+	DbModes []*string `json:"DbModes,omitempty" name:"DbModes"`
+
+	// Offset for query
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Limit on queries
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Product type of the queried template
+	Products []*string `json:"Products,omitempty" name:"Products"`
+
+	// Template type
+	TemplateTypes []*string `json:"TemplateTypes,omitempty" name:"TemplateTypes"`
+
+	// Version type
+	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
+
+	// The sorting order of the returned results
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `desc`, `asc `.
+	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
 }
 
 func (r *DescribeParamTemplatesRequest) ToJsonString() string {
@@ -2860,7 +2923,17 @@ func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "EngineVersions")
+	delete(f, "TemplateNames")
+	delete(f, "TemplateIds")
+	delete(f, "DbModes")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Products")
+	delete(f, "TemplateTypes")
+	delete(f, "EngineTypes")
+	delete(f, "OrderBy")
+	delete(f, "OrderDirection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParamTemplatesRequest has unknown keys!", "")
 	}
@@ -4466,6 +4539,13 @@ type ParamTemplateListInfo struct {
 
 	// Engine version
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// Database Type. Valid values: `NORMAL`, `SERVERLESS`.
+	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+
+	// Parameter template details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ParamInfoSet []*TemplateParamInfo `json:"ParamInfoSet,omitempty" name:"ParamInfoSet"`
 }
 
 // Predefined struct for user
@@ -4910,6 +4990,38 @@ type Tag struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TemplateParamInfo struct {
+	// Current value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Default value
+	Default *string `json:"Default,omitempty" name:"Default"`
+
+	// The collection of valid value types when parameter type is `enum`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+
+	// Maximum value when parameter type is `float` or `integer`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Max *string `json:"Max,omitempty" name:"Max"`
+
+	// Minimum value when parameter type is `float` or `integer`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Min *string `json:"Min,omitempty" name:"Min"`
+
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Whether to restart the instance for the parameter to take effect
+	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+
+	// Parameter description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Parameter type. Valid value: `integer`, `float`, `string`, `enum`.
+	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
 }
 
 type TradePrice struct {
