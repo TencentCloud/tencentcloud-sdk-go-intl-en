@@ -17,6 +17,9 @@ package v20180301
 const (
 	// error codes for specific actions
 
+	// CAM signature/authentication error.
+	AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+
 	// No motions of eye closing are detected.
 	FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
 

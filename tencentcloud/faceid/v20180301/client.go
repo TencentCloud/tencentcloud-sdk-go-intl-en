@@ -615,6 +615,7 @@ func NewLivenessCompareResponse() (response *LivenessCompareResponse) {
 // This API on the legacy version will continue to serve existing users but will be unavailable to new users. We recommend you use `VideoLivenessCompare` for better service quality.
 //
 // error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
 //  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
 //  FAILEDOPERATION_ACTIONFACECLOSE = "FailedOperation.ActionFaceClose"
 //  FAILEDOPERATION_ACTIONFACEFAR = "FailedOperation.ActionFaceFar"
@@ -677,6 +678,7 @@ func (c *Client) LivenessCompare(request *LivenessCompareRequest) (response *Liv
 // This API on the legacy version will continue to serve existing users but will be unavailable to new users. We recommend you use `VideoLivenessCompare` for better service quality.
 //
 // error code that may be returned:
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
 //  FAILEDOPERATION_ACTIONCLOSEEYE = "FailedOperation.ActionCloseEye"
 //  FAILEDOPERATION_ACTIONFACECLOSE = "FailedOperation.ActionFaceClose"
 //  FAILEDOPERATION_ACTIONFACEFAR = "FailedOperation.ActionFaceFar"

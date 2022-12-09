@@ -778,7 +778,7 @@ type ScanVoiceRequestParams struct {
 	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">Callback description</a> above. (Note: If this field is empty, the detection result can only be queried by calling the `DescribeScanResultList` API.)
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 
-	// Language. `jp`: Japanese
+	// Language. Chinese will be used if it is left empty.
 	Lang *string `json:"Lang,omitempty" name:"Lang"`
 }
 
@@ -802,7 +802,7 @@ type ScanVoiceRequest struct {
 	// Async callback address for detection result. For more information, please see the <a href="#Callback_Declare">Callback description</a> above. (Note: If this field is empty, the detection result can only be queried by calling the `DescribeScanResultList` API.)
 	Callback *string `json:"Callback,omitempty" name:"Callback"`
 
-	// Language. `jp`: Japanese
+	// Language. Chinese will be used if it is left empty.
 	Lang *string `json:"Lang,omitempty" name:"Lang"`
 }
 
