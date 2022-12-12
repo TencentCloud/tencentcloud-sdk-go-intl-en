@@ -2409,10 +2409,10 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSecurityDropPageRequestParams struct {
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name.
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
 
 	// Name of the block page file.
@@ -2430,15 +2430,18 @@ type CreateSecurityDropPageRequestParams struct {
 	// <li>`waf`: Managed rules</li>
 	// <li>`rate`: Custom rules</li>
 	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// The template ID. You must specify either this field or "ZoneId+Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 type CreateSecurityDropPageRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name.
+	// The subdomain name/L4 proxy. You must specify either "ZoneId+Entity" or "TemplateId".
 	Entity *string `json:"Entity,omitempty" name:"Entity"`
 
 	// Name of the block page file.
@@ -2456,6 +2459,9 @@ type CreateSecurityDropPageRequest struct {
 	// <li>`waf`: Managed rules</li>
 	// <li>`rate`: Custom rules</li>
 	Module *string `json:"Module,omitempty" name:"Module"`
+
+	// The template ID. You must specify either this field or "ZoneId+Entity".
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
 }
 
 func (r *CreateSecurityDropPageRequest) ToJsonString() string {
@@ -2476,6 +2482,7 @@ func (r *CreateSecurityDropPageRequest) FromJsonString(s string) error {
 	delete(f, "Content")
 	delete(f, "Type")
 	delete(f, "Module")
+	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityDropPageRequest has unknown keys!", "")
 	}
@@ -2575,7 +2582,7 @@ type CreateZoneRequestParams struct {
 
 	// The access mode. Values:
 	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record.</li>This field will be set to the default value `full` if not specified.
+	// <li>`partial`: Access through a CNAME record. Note that you should verify your site with the IdentifyZone API before starting site access.</li>If it is left empty, the default value `full` is used.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Whether to skip scanning the existing DNS records of the site. Default value: false.
@@ -2601,7 +2608,7 @@ type CreateZoneRequest struct {
 
 	// The access mode. Values:
 	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record.</li>This field will be set to the default value `full` if not specified.
+	// <li>`partial`: Access through a CNAME record. Note that you should verify your site with the IdentifyZone API before starting site access.</li>If it is left empty, the default value `full` is used.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Whether to skip scanning the existing DNS records of the site. Default value: false.
@@ -14087,13 +14094,13 @@ type RuleCondition struct {
 	// <li>`notexist`: Does not exist</li>
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
 
-	// Match type. Valid values:
+	// The match type. Values:
 	// <li>`filename`: File name</li>
 	// <li>`extension`: File extension</li>
 	// <li>`host`: Host</li>
 	// <li>`full_url`: Full URL, which indicates the complete URL path under the current site and must contain the HTTP protocol, host, and path.</li>
 	// <li>`url`: Partial URL under the current site</li><li>`client_country`: Country/Region of the client</li>
-	// <li>`query_string`: Query string in the URL</li>
+	// <li>`query_string`: Query string in the request URL</li>
 	// <li>`request_header`: HTTP request header</li>
 	Target *string `json:"Target,omitempty" name:"Target"`
 
@@ -14103,7 +14110,7 @@ type RuleCondition struct {
 	// <li>When `Target=all`, it indicates any site request.</li>
 	// <li>When `Target=host`, enter the host under the current site, such as "www.maxx55.com".</li>
 	// <li>When `Target=url`, enter the partial URL path under the current site, such as "/example".</li>
-	// <li>When `Target=full_url`, enter the complete URL  under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
+	// <li>When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
 	// <li>When `Target=client_country`, enter the ISO-3166 country/region code.</li>
 	// <li>When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".</li>
 	// <li>When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
@@ -14117,7 +14124,8 @@ type RuleCondition struct {
 	// <li>`request_header`: Name of the HTTP request header, such as "Accept-Language" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-
+	// Whether the parameter name is case insensitive. Default value: `false`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IgnoreNameCase *bool `json:"IgnoreNameCase,omitempty" name:"IgnoreNameCase"`
 }
 

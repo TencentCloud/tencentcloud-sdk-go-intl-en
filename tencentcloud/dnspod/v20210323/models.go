@@ -25,7 +25,7 @@ type CreateDomainRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain group ID
+	// The group ID of the domain. You can view the group information of this domain via the `DescribeDomainGroupList` API.
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Whether the domain is starred. Valid values: yes, no.
@@ -38,7 +38,7 @@ type CreateDomainRequest struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain group ID
+	// The group ID of the domain. You can view the group information of this domain via the `DescribeDomainGroupList` API.
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Whether the domain is starred. Valid values: yes, no.
@@ -223,7 +223,7 @@ type DeleteDomainRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -233,7 +233,7 @@ type DeleteDomainRequest struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -284,10 +284,10 @@ type DeleteRecordRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Record ID.
+	// The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
 	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -297,10 +297,10 @@ type DeleteRecordRequest struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Record ID.
+	// The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
 	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -352,7 +352,7 @@ type DescribeDomainRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -362,7 +362,7 @@ type DescribeDomainRequest struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -416,7 +416,7 @@ type DescribeRecordListRequestParams struct {
 	// The domain for which DNS records are to be obtained.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// The ID of the domain for which DNS records are to be obtained. If `DomainId` is passed in, the system will omit the parameter `Domain`.
+	// The ID of the domain whose DNS records are requested. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 
 	// The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.
@@ -425,13 +425,13 @@ type DescribeRecordListRequestParams struct {
 	// The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.
 	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
 
-	// The split zone name.
+	// The name of the split zone for which DNS records are requested. You can view split zones allowed by this domain via the `DescribeRecordLineList` API.
 	RecordLine *string `json:"RecordLine,omitempty" name:"RecordLine"`
 
-	// The split zone ID. If `RecordLineId` is passed in, the system will omit the parameter `RecordLine`.
+	// The ID of the split zone for which DNS records are requested. If `RecordLineId` is passed in, `RecordLine` is ignored. You can view split zones allowed by this domain via the `DescribeRecordLineList` API.
 	RecordLineId *string `json:"RecordLineId,omitempty" name:"RecordLineId"`
 
-	// The group ID.
+	// The group ID passed in to get DNS records in the group.
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// The keyword for searching for DNS records. Host headers and record values are supported.
@@ -456,7 +456,7 @@ type DescribeRecordListRequest struct {
 	// The domain for which DNS records are to be obtained.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// The ID of the domain for which DNS records are to be obtained. If `DomainId` is passed in, the system will omit the parameter `Domain`.
+	// The ID of the domain whose DNS records are requested. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 
 	// The host header of a DNS record. If this parameter is passed in, only the DNS record corresponding to this host header will be returned.
@@ -465,13 +465,13 @@ type DescribeRecordListRequest struct {
 	// The type of DNS record, such as A, CNAME, NS, AAAA, explicit URL, implicit URL, CAA, or SPF record.
 	RecordType *string `json:"RecordType,omitempty" name:"RecordType"`
 
-	// The split zone name.
+	// The name of the split zone for which DNS records are requested. You can view split zones allowed by this domain via the `DescribeRecordLineList` API.
 	RecordLine *string `json:"RecordLine,omitempty" name:"RecordLine"`
 
-	// The split zone ID. If `RecordLineId` is passed in, the system will omit the parameter `RecordLine`.
+	// The ID of the split zone for which DNS records are requested. If `RecordLineId` is passed in, `RecordLine` is ignored. You can view split zones allowed by this domain via the `DescribeRecordLineList` API.
 	RecordLineId *string `json:"RecordLineId,omitempty" name:"RecordLineId"`
 
-	// The group ID.
+	// The group ID passed in to get DNS records in the group.
 	GroupId *uint64 `json:"GroupId,omitempty" name:"GroupId"`
 
 	// The keyword for searching for DNS records. Host headers and record values are supported.
@@ -553,10 +553,10 @@ type DescribeRecordRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Record ID.
+	// The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
 	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -566,10 +566,10 @@ type DescribeRecordRequest struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Record ID.
+	// The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
 	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -712,7 +712,7 @@ type ModifyDomainRemarkRequestParams struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 
 	// Domain remarks. To delete the remarks, submit empty content.
@@ -725,7 +725,7 @@ type ModifyDomainRemarkRequest struct {
 	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 
 	// Domain remarks. To delete the remarks, submit empty content.
@@ -783,7 +783,7 @@ type ModifyDomainStatusRequestParams struct {
 	// Domain status. Valid values: enable; disable.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -796,7 +796,7 @@ type ModifyDomainStatusRequest struct {
 	// Domain status. Valid values: enable; disable.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 }
 
@@ -857,10 +857,10 @@ type ModifyRecordRequestParams struct {
 	// Record value, such as `IP : 200.200.200.200`, `CNAME : cname.dnspod.com`, and `MX : mail.dnspod.com`.
 	Value *string `json:"Value,omitempty" name:"Value"`
 
-	// Record ID.
+	// The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
 	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 
 	// Host record such as `www`. If it is not passed in, it will be `@` by default.
@@ -897,10 +897,10 @@ type ModifyRecordRequest struct {
 	// Record value, such as `IP : 200.200.200.200`, `CNAME : cname.dnspod.com`, and `MX : mail.dnspod.com`.
 	Value *string `json:"Value,omitempty" name:"Value"`
 
-	// Record ID.
+	// The record ID. You can view all DNS records and their IDs via the `DescribeRecordList` API.
 	RecordId *uint64 `json:"RecordId,omitempty" name:"RecordId"`
 
-	// Domain ID. The `DomainId` parameter has a higher priority than `Domain`. If `DomainId` is passed in, `Domain` will be ignored.
+	// The domain ID. `DomainId` takes priority over `Domain`. If `DomainId` is passed in, `Domain` is ignored. You can view all `Domain` and `DomainId` values via the `DescribeDomainList` API.
 	DomainId *uint64 `json:"DomainId,omitempty" name:"DomainId"`
 
 	// Host record such as `www`. If it is not passed in, it will be `@` by default.

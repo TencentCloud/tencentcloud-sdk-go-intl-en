@@ -596,7 +596,7 @@ func NewDescribeRecordListResponse() (response *DescribeRecordListResponse) {
 }
 
 // DescribeRecordList
-// This API is used to get DNS records of a domain.
+// This API is used to get the DNS records of a domain.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -626,7 +626,7 @@ func (c *Client) DescribeRecordList(request *DescribeRecordListRequest) (respons
 }
 
 // DescribeRecordList
-// This API is used to get DNS records of a domain.
+// This API is used to get the DNS records of a domain.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
