@@ -863,6 +863,10 @@ type DataDiskPrice struct {
 
 	// Discounted total price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// ID of the instance to which the data disk is mounted.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 // Predefined struct for user
@@ -1107,6 +1111,80 @@ type DeniedAction struct {
 }
 
 // Predefined struct for user
+type DescribeAllScenesRequestParams struct {
+	// List of scene IDs
+	SceneIds []*string `json:"SceneIds,omitempty" name:"SceneIds"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeAllScenesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of scene IDs
+	SceneIds []*string `json:"SceneIds,omitempty" name:"SceneIds"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeAllScenesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllScenesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SceneIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllScenesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllScenesResponseParams struct {
+	// List of scenes
+	SceneInfoSet []*SceneInfo `json:"SceneInfoSet,omitempty" name:"SceneInfoSet"`
+
+	// Total count of scenes
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAllScenesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllScenesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllScenesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllScenesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBlueprintInstancesRequestParams struct {
 	// Instance ID list, which currently can contain only one instance.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
@@ -1178,28 +1256,28 @@ type DescribeBlueprintsRequestParams struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter list
-	// <li>blueprint-id</li>Filter by **image ID**.
+	// <li>blueprint-id</li>Filter by the **image ID**.
 	// Type: String
 	// Required: no
-	// <li>blueprint-type</li>Filter by **image type**.
+	// <li>blueprint-type</li>Filter by the **image type**.
 	// Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
 	// Type: String
 	// Required: no
-	// <li>platform-type</li>Filter by **image operating system**.
+	// <li>platform-type</li>Filter by the **image operating system**.
 	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
 	// Required: no
-	// <li>blueprint-name</li>Filter by **image name**.
+	// <li>blueprint-name</li>Filter by the **image name**.
 	// Type: String
 	// Required: no
-	// <li>blueprint-state</li>Filter by **image status**.
+	// <li>blueprint-state</li>Filter by the **image status**.
 	// Type: String
 	// Required: no
-	// <li>scene-id</li>Filter by **scene ID**.
+	// <li>scene-id</li>Filter by the **scene ID**.
 	// Type: String
 	// Required: no
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+	// Each request can contain up to 10 `Filters`, each of which can contain up to 00 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -1216,28 +1294,28 @@ type DescribeBlueprintsRequest struct {
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter list
-	// <li>blueprint-id</li>Filter by **image ID**.
+	// <li>blueprint-id</li>Filter by the **image ID**.
 	// Type: String
 	// Required: no
-	// <li>blueprint-type</li>Filter by **image type**.
+	// <li>blueprint-type</li>Filter by the **image type**.
 	// Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
 	// Type: String
 	// Required: no
-	// <li>platform-type</li>Filter by **image operating system**.
+	// <li>platform-type</li>Filter by the **image operating system**.
 	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
 	// Required: no
-	// <li>blueprint-name</li>Filter by **image name**.
+	// <li>blueprint-name</li>Filter by the **image name**.
 	// Type: String
 	// Required: no
-	// <li>blueprint-state</li>Filter by **image status**.
+	// <li>blueprint-state</li>Filter by the **image status**.
 	// Type: String
 	// Required: no
-	// <li>scene-id</li>Filter by **scene ID**.
+	// <li>scene-id</li>Filter by the **scene ID**.
 	// Type: String
 	// Required: no
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+	// Each request can contain up to 10 `Filters`, each of which can contain up to 00 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -1362,15 +1440,23 @@ type DescribeBundlesRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter list.
-	// <li>bundle-id</li>Filter by **package ID**.
+	// Filter list
+	// <li>bundle-id</li>Filter by the **bundle ID**.
 	// Type: String
-	// Required: no
-	// <li>support-platform-type</li>Filter by **system type**.
-	// Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+	// Required: No
+	// <li>support-platform-type</li>Filter by the **OS type**.
+	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
-	// Required: no
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
+	// Required: No
+	// <li>bundle-type</li>Filter by the **bundle type**.
+	// Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+	// Type: String
+	// Required: No
+	// <li>bundle-state</li>Filter by the **bundle status**.
+	// Valid values: `ONLINE`, `OFFLINE`
+	// Type: String
+	// Required: No
+	// Each request can contain up to 10 `Filters`, and up to 5 `Filter.Values` for each filter. You cannot specify both `BundleIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// AZ list, which contains all AZs by default.
@@ -1389,15 +1475,23 @@ type DescribeBundlesRequest struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter list.
-	// <li>bundle-id</li>Filter by **package ID**.
+	// Filter list
+	// <li>bundle-id</li>Filter by the **bundle ID**.
 	// Type: String
-	// Required: no
-	// <li>support-platform-type</li>Filter by **system type**.
-	// Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+	// Required: No
+	// <li>support-platform-type</li>Filter by the **OS type**.
+	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
-	// Required: no
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
+	// Required: No
+	// <li>bundle-type</li>Filter by the **bundle type**.
+	// Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+	// Type: String
+	// Required: No
+	// <li>bundle-state</li>Filter by the **bundle status**.
+	// Valid values: `ONLINE`, `OFFLINE`
+	// Type: String
+	// Required: No
+	// Each request can contain up to 10 `Filters`, and up to 5 `Filter.Values` for each filter. You cannot specify both `BundleIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// AZ list, which contains all AZs by default.
@@ -2643,14 +2737,14 @@ type DescribeKeyPairsRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter list
+	// Filter list.
 	// <li>key-id</li>Filter by **key pair ID**.
 	// Type: String
 	// Required: no
-	// <li>key-name</li>Filter by **key pair name**.
+	// <li>key-name</li>Filter by the **key pair name**. Fuzzy match is supported.
 	// Type: String
 	// Required: no
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `KeyIds` and `Filters` cannot be specified at the same time.
+	// Each request can contain up to 10 `Filters` and up to 5 `Filter.Values` for each filter. `KeyIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -2666,14 +2760,14 @@ type DescribeKeyPairsRequest struct {
 	// Number of returned results. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter list
+	// Filter list.
 	// <li>key-id</li>Filter by **key pair ID**.
 	// Type: String
 	// Required: no
-	// <li>key-name</li>Filter by **key pair name**.
+	// <li>key-name</li>Filter by the **key pair name**. Fuzzy match is supported.
 	// Type: String
 	// Required: no
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `KeyIds` and `Filters` cannot be specified at the same time.
+	// Each request can contain up to 10 `Filters` and up to 5 `Filter.Values` for each filter. `KeyIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -2732,15 +2826,23 @@ type DescribeModifyInstanceBundlesRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filter list.
-	// <li>bundle-id</li>Filter by **package ID**.
+	// Filter list
+	// <li>bundle-id</li>Filter by the **bundle ID**.
 	// Type: String
-	// Required: no
-	// <li>support-platform-type</li>Filter by **system type**.
-	// Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+	// Required: No
+	// <li>support-platform-type</li>Filter by the **OS type**.
+	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
-	// Required: no
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// Required: No
+	// <li>bundle-type</li>Filter by the **bundle type**.
+	// Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+	// Type: String
+	// Required: No
+	// <li>bundle-state</li>Filter by the **bundle status**.
+	// Valid values: `ONLINE`, `OFFLINE`
+	// Type: String
+	// Required: No
+	// Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -2756,15 +2858,23 @@ type DescribeModifyInstanceBundlesRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filter list.
-	// <li>bundle-id</li>Filter by **package ID**.
+	// Filter list
+	// <li>bundle-id</li>Filter by the **bundle ID**.
 	// Type: String
-	// Required: no
-	// <li>support-platform-type</li>Filter by **system type**.
-	// Valid values: LINUX_UNIX (Linux/Unix), WINDOWS ( Windows)
+	// Required: No
+	// <li>support-platform-type</li>Filter by the **OS type**.
+	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
 	// Type: String
-	// Required: no
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// Required: No
+	// <li>bundle-type</li>Filter by the **bundle type**.
+	// Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+	// Type: String
+	// Required: No
+	// <li>bundle-state</li>Filter by the **bundle status**.
+	// Valid values: `ONLINE`, `OFFLINE`
+	// Type: String
+	// Required: No
+	// Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
@@ -2997,6 +3107,80 @@ func (r *DescribeResetInstanceBlueprintsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeResetInstanceBlueprintsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScenesRequestParams struct {
+	// List of scene IDs
+	SceneIds []*string `json:"SceneIds,omitempty" name:"SceneIds"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeScenesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of scene IDs
+	SceneIds []*string `json:"SceneIds,omitempty" name:"SceneIds"`
+
+	// Offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeScenesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScenesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SceneIds")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScenesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScenesResponseParams struct {
+	// List of scenes
+	SceneSet []*Scene `json:"SceneSet,omitempty" name:"SceneSet"`
+
+	// Total number of scenes
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeScenesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeScenesResponseParams `json:"Response"`
+}
+
+func (r *DescribeScenesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScenesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4050,32 +4234,32 @@ func (r *InquirePriceRenewDisksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquirePriceRenewInstancesRequestParams struct {
-	// Instance to be renewed.
+	// IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
-	// Whether to renew the data disk
+	// Whether to renew the data disk. Default: `false`.
 	RenewDataDisk *bool `json:"RenewDataDisk,omitempty" name:"RenewDataDisk"`
 
-	// Whether the data disk has the same expiration time as the instance
+	// Whether to align the data disk expiration with the instance expiration time. Default: `false`.
 	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitempty" name:"AlignInstanceExpiredTime"`
 }
 
 type InquirePriceRenewInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance to be renewed.
+	// IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
-	// Whether to renew the data disk
+	// Whether to renew the data disk. Default: `false`.
 	RenewDataDisk *bool `json:"RenewDataDisk,omitempty" name:"RenewDataDisk"`
 
-	// Whether the data disk has the same expiration time as the instance
+	// Whether to align the data disk expiration with the instance expiration time. Default: `false`.
 	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitempty" name:"AlignInstanceExpiredTime"`
 }
 
@@ -4103,12 +4287,19 @@ func (r *InquirePriceRenewInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquirePriceRenewInstancesResponseParams struct {
-	// Price query information.
+	// Price information. It defaults to the price information of the first instance in the list.
 	Price *Price `json:"Price,omitempty" name:"Price"`
 
 	// List of data disk price information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitempty" name:"DataDiskPriceSet"`
+
+	// Price list of the instances to be renewed.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	InstancePriceDetailSet []*InstancePriceDetail `json:"InstancePriceDetailSet,omitempty" name:"InstancePriceDetailSet"`
+
+	// Total price
+	TotalPrice *TotalPrice `json:"TotalPrice,omitempty" name:"TotalPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4260,6 +4451,19 @@ type InstancePrice struct {
 
 	// Discounted price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+}
+
+type InstancePriceDetail struct {
+	// Instance ID.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Price query information.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	InstancePrice *InstancePrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
+
+
+	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
 }
 
 type InstanceReturnable struct {
@@ -5223,6 +5427,28 @@ func (r *ResetInstancesPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Scene struct {
+	// Scene ID
+	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
+
+	// Display name of the scene
+	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+
+	// Scene description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type SceneInfo struct {
+	// Scene ID
+	SceneId *string `json:"SceneId,omitempty" name:"SceneId"`
+
+	// Display name of the scene
+	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+
+	// Scene description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
 type Snapshot struct {
 	// Snapshot ID.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
@@ -5541,6 +5767,16 @@ func (r *TerminateInstancesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *TerminateInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TotalPrice struct {
+	// Total original price
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Total discounted price
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 }
 
 type TrafficPackage struct {

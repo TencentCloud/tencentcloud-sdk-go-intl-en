@@ -28,8 +28,8 @@ type DetailResults struct {
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
 
-	// This field returns the matched keywords. This parameter can include multiple returned values, which means multiple keywords are matched. If no keyword is returned but there is a `Score`, it means that the result of `Label` is determined by a semantic model.
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Returns the information of keywords hit in the text. When no value is returned and `Score` is not empty, it means the `Label` is determined by the semantic-based detection model.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Keywords []*string `json:"Keywords,omitempty" name:"Keywords"`
 
 	// This field indicates the convincing level of the `Label`, ranging from `0` (lowest) to `100` (highest). 
@@ -51,6 +51,10 @@ type DetailResults struct {
 	// The field returns the second-level labels under the current label.
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// Returns the keywords, label, sub-label and the score.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type Device struct {
@@ -84,6 +88,20 @@ type RiskDetails struct {
 
 	// This field returns the risk levels after account information detection. Valid values: **1** (suspected to be at risk) and **2** (malicious risk).
 	Level *int64 `json:"Level,omitempty" name:"Level"`
+}
+
+type Tag struct {
+	// Returns the hit keywords.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// Returns the sub-tags.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// Returns the score for the sub-label
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Score *int64 `json:"Score,omitempty" name:"Score"`
 }
 
 // Predefined struct for user
@@ -184,6 +202,10 @@ type TextModerationResponseParams struct {
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
 
+	// Returns the context text.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ContextText *string `json:"ContextText,omitempty" name:"ContextText"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -237,4 +259,13 @@ type User struct {
 
 	// This field indicates the profile information of service subscribers. It can contain up to 5,000 characters, including Chinese characters, letters and special symbols.
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
+
+	// Room ID of the group chat.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// Receiver ID.
+	ReceiverId *string `json:"ReceiverId,omitempty" name:"ReceiverId"`
+
+	// Generation time of the message, in ms.
+	SendTime *int64 `json:"SendTime,omitempty" name:"SendTime"`
 }

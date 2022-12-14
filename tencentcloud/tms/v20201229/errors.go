@@ -32,7 +32,7 @@ const (
 	// InvalidParameter.ParameterError
 	INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
 
-	// 
+	// Invalid FileContent: Unable to convert Base64-encoded content to the UTF-8 format
 	INVALIDPARAMETERVALUE_ERRFILECONTENT = "InvalidParameterValue.ErrFileContent"
 
 	// The text in the request is too long.
@@ -41,6 +41,6 @@ const (
 	// The text in the request is in the incorrect format (base64-encoded text is required).
 	INVALIDPARAMETERVALUE_ERRTEXTCONTENTTYPE = "InvalidParameterValue.ErrTextContentType"
 
-	// Not authorized for this API
+	// Operation not authorized/No valid package/The account is overdue
 	UNAUTHORIZEDOPERATION_UNAUTHORIZED = "UnauthorizedOperation.Unauthorized"
 )

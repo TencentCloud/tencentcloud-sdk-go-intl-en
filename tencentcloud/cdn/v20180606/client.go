@@ -1328,7 +1328,7 @@ func NewDescribeIpStatusResponse() (response *DescribeIpStatusResponse) {
 }
 
 // DescribeIpStatus
-// This API is used to query the status of the edge nodes and intermediate nodes. Note: Edge nodes are only available for beta users now.
+// This API is used to query the IP details of edge nodes (available soon) and intermediate nodes. Note that there is a certain delay in data availability.
 //
 // 
 //
@@ -1352,7 +1352,7 @@ func (c *Client) DescribeIpStatus(request *DescribeIpStatusRequest) (response *D
 }
 
 // DescribeIpStatus
-// This API is used to query the status of the edge nodes and intermediate nodes. Note: Edge nodes are only available for beta users now.
+// This API is used to query the IP details of edge nodes (available soon) and intermediate nodes. Note that there is a certain delay in data availability.
 //
 // 
 //
