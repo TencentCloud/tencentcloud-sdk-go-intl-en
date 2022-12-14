@@ -1745,6 +1745,10 @@ type DBInstanceNetInfo struct {
 	// Subnet ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Database connection protocol type. Valid values: `postgresql`, `mssql` (MSSQL-compatible)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProtocolType *string `json:"ProtocolType,omitempty" name:"ProtocolType"`
 }
 
 type DBNode struct {
@@ -4231,10 +4235,10 @@ func (r *InquiryPriceRenewDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquiryPriceRenewDBInstanceResponseParams struct {
-	// Total cost before discount; for example, 24650 indicates 246.5 CNY
+	// Published price in cents. For example, 24650 indicates 246.5 USD.
 	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
 
-	// Actual amount payable; for example, 24650 indicates 246.5 CNY
+	// Discounted total amount. For example, 24650 indicates 246.5 USD.
 	Price *int64 `json:"Price,omitempty" name:"Price"`
 
 	// Currency, such as USD.
@@ -5397,8 +5401,8 @@ type ParamInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ParamValueType *string `json:"ParamValueType,omitempty" name:"ParamValueType"`
 
-	// Value unit of the parameter. If the parameter has no unit, this field will return an empty string.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Unit *string `json:"Unit,omitempty" name:"Unit"`
 
 	// Default value of the parameter, which is returned as a string
@@ -5409,13 +5413,13 @@ type ParamInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
-	// Value range of the enum parameter
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
-
 	// The maximum value of the `integer` or `real` parameter
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Max *float64 `json:"Max,omitempty" name:"Max"`
+
+	// Value range of the enum parameter
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
 	// The minimum value of the `integer` or `real` parameter
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -5452,6 +5456,78 @@ type ParamInfo struct {
 	// The last modified time of the parameter
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LastModifyTime *string `json:"LastModifyTime,omitempty" name:"LastModifyTime"`
+
+	// Primary-standby constraint. Valid values: `0` (no constraint), `1` (The parameter value of the standby server must be greater than that of the primary server), `2` (The parameter value of the primary server must be greater than that of the standby server.)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StandbyRelated *int64 `json:"StandbyRelated,omitempty" name:"StandbyRelated"`
+
+	// Associated parameter version information, which refers to the detailed parameter information of the kernel version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VersionRelationSet []*ParamVersionRelation `json:"VersionRelationSet,omitempty" name:"VersionRelationSet"`
+
+	// Associated parameter specification information, which refers to the detailed parameter information of the specifications.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecRelationSet []*ParamSpecRelation `json:"SpecRelationSet,omitempty" name:"SpecRelationSet"`
+}
+
+type ParamSpecRelation struct {
+	// Parameter name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The specification that corresponds to the parameter information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Memory *string `json:"Memory,omitempty" name:"Memory"`
+
+	// The default parameter value under this specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// The maximum value of the `integer` or `real` parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Max *float64 `json:"Max,omitempty" name:"Max"`
+
+	// The minimum value of the `integer` or `real` parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Min *float64 `json:"Min,omitempty" name:"Min"`
+
+	// Value range of the enum parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+}
+
+type ParamVersionRelation struct {
+	// Parameter name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The kernel version that corresponds to the parameter information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBKernelVersion *string `json:"DBKernelVersion,omitempty" name:"DBKernelVersion"`
+
+	// Default parameter value under the kernel version and specification of the instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Unit of the parameter value. If the parameter has no unit, this field will return null.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// The maximum value of the `integer` or `real` parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Max *float64 `json:"Max,omitempty" name:"Max"`
+
+	// The minimum value of the `integer` or `real` parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Min *float64 `json:"Min,omitempty" name:"Min"`
+
+	// Value range of the enum parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 }
 
 type PgDeal struct {

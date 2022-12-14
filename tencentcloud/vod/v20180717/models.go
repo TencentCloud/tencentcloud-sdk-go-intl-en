@@ -306,6 +306,9 @@ type AiAnalysisTaskClassificationResult struct {
 	// Output of intelligent categorization task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskClassificationOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an intelligent categorization task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiAnalysisTaskCoverInput struct {
@@ -344,6 +347,9 @@ type AiAnalysisTaskCoverResult struct {
 	// Output of intelligent cover generating task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskCoverOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an intelligent thumbnail generation task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiAnalysisTaskFrameTagInput struct {
@@ -382,6 +388,9 @@ type AiAnalysisTaskFrameTagResult struct {
 	// Output of intelligent frame-specific tagging task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskFrameTagOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an intelligent labeling by frame task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiAnalysisTaskHighlightInput struct {
@@ -420,6 +429,9 @@ type AiAnalysisTaskHighlightResult struct {
 	// Output of an intelligent highlight generating task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskHighlightOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an intelligent highlight generation task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiAnalysisTaskInput struct {
@@ -463,6 +475,9 @@ type AiAnalysisTaskTagResult struct {
 	// Output of intelligent tagging task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiAnalysisTaskTagOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an intelligent labeling task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiContentReviewResult struct {
@@ -664,6 +679,9 @@ type AiRecognitionTaskAsrWordsResult struct {
 	// Output information of speech keyword recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskAsrWordsResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a speech keyword recognition task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskAsrWordsResultInput struct {
@@ -721,6 +739,9 @@ type AiRecognitionTaskFaceResult struct {
 	// Output information of face recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskFaceResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a face recognition task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskFaceResultInput struct {
@@ -789,6 +810,9 @@ type AiRecognitionTaskHeadTailResult struct {
 	// Output information of video opening and ending credits recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskHeadTailResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an opening/closing segment recognition task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskHeadTailResultInput struct {
@@ -834,6 +858,9 @@ type AiRecognitionTaskObjectResult struct {
 	// Output information of object recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskObjectResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an object recognition task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskObjectResultInput struct {
@@ -894,6 +921,9 @@ type AiRecognitionTaskOcrFullTextResult struct {
 	// Output information of full text recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskOcrFullTextResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a full text recognition task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskOcrFullTextResultInput struct {
@@ -954,6 +984,9 @@ type AiRecognitionTaskOcrWordsResult struct {
 	// Output information of text keyword recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskOcrWordsResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a text keyword recognition task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskOcrWordsResultInput struct {
@@ -1015,6 +1048,9 @@ type AiRecognitionTaskSegmentResult struct {
 	// Output information of video splitting task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskSegmentResultOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a video splitting task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskSegmentResultInput struct {
@@ -1298,6 +1334,9 @@ type AiReviewTaskPoliticalAsrResult struct {
 
 	// Output for ASR-based recognition of politically sensitive content
 	Output *AiReviewPoliticalAsrTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an ASR-based moderation task (politically sensitive content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskPoliticalOcrResult struct {
@@ -1342,6 +1381,9 @@ type AiReviewTaskPoliticalResult struct {
 	// Output for intelligent recognition of politically sensitive content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPoliticalTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a moderation task (politically sensitive content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskPornAsrResult struct {
@@ -1364,6 +1406,9 @@ type AiReviewTaskPornAsrResult struct {
 	// Output for ASR-based recognition of pornographic content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPornAsrTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an ASR-based moderation task (pornographic content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskPornOcrResult struct {
@@ -1386,6 +1431,9 @@ type AiReviewTaskPornOcrResult struct {
 	// Output for OCR-based recognition of pornographic content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPornOcrTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an OCR-based moderation task (pornographic content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskPornResult struct {
@@ -1408,6 +1456,9 @@ type AiReviewTaskPornResult struct {
 	// Output for intelligent recognition of pornographic content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPornTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a moderation task (pornographic content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskProhibitedAsrResult struct {
@@ -1429,6 +1480,9 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Output for ASR-based recognition of banned content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewProhibitedAsrTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an ASR-based moderation task (banned content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskProhibitedOcrResult struct {
@@ -1450,6 +1504,9 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Output for OCR-based recognition of banned content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewProhibitedOcrTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an OCR-based moderation task (banned content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskTerrorismOcrResult struct {
@@ -1471,6 +1528,9 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Output for OCR-based recognition of terrorism content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an OCR-based moderation task (terrorist content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTaskTerrorismResult struct {
@@ -1493,6 +1553,9 @@ type AiReviewTaskTerrorismResult struct {
 	// Output for intelligent recognition of terrorism content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewTerrorismTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a moderation task (terrorist content). Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type AiReviewTerrorismOcrTaskInput struct {
@@ -3422,6 +3485,86 @@ func (r *CreateContentReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateImageProcessingTemplateRequestParams struct {
+	// An array of image processing operations. The operations will be performed in the specified order.
+	// <li>Length limit: 3.</li>
+	Operations []*ImageOperation `json:"Operations,omitempty" name:"Operations"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The name of the image processing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+type CreateImageProcessingTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// An array of image processing operations. The operations will be performed in the specified order.
+	// <li>Length limit: 3.</li>
+	Operations []*ImageOperation `json:"Operations,omitempty" name:"Operations"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The name of the image processing template. Length limit: 64 characters.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description. Length limit: 256 characters.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+func (r *CreateImageProcessingTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateImageProcessingTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Operations")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateImageProcessingTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateImageProcessingTemplateResponseParams struct {
+	// The template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateImageProcessingTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateImageProcessingTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateImageProcessingTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateImageProcessingTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateImageSpriteTask2017 struct {
 	// Image sprite generating task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -5266,6 +5409,67 @@ func (r *DeleteContentReviewTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteImageProcessingTemplateRequestParams struct {
+	// The template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type DeleteImageProcessingTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DeleteImageProcessingTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteImageProcessingTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteImageProcessingTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteImageProcessingTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteImageProcessingTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteImageProcessingTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteImageProcessingTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteImageProcessingTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteImageSpriteTemplateRequestParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
@@ -7083,6 +7287,135 @@ func (r *DescribeDrmKeyProviderInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeFileAttributesTask struct {
+
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+
+	Output *DescribeFileAttributesTaskOutput `json:"Output,omitempty" name:"Output"`
+
+
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+}
+
+type DescribeFileAttributesTaskOutput struct {
+
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
+}
+
+// Predefined struct for user
+type DescribeImageProcessingTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The IDs of the templates to query. Length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// The template type. Valid values:
+	// <li>Preset</li>
+	// <li>Custom</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of records to return. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeImageProcessingTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The IDs of the templates to query. Length limit: 100.
+	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// The template type. Valid values:
+	// <li>Preset</li>
+	// <li>Custom</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of records to return. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeImageProcessingTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageProcessingTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "Definitions")
+	delete(f, "Type")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageProcessingTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageProcessingTemplatesResponseParams struct {
+	// The total number of records that meet the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The information of the queried image processing templates.
+	ImageProcessingTemplateSet []*ImageProcessingTemplate `json:"ImageProcessingTemplateSet,omitempty" name:"ImageProcessingTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeImageProcessingTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageProcessingTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageProcessingTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageProcessingTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type DescribeImageReviewUsageDataRequestParams struct {
 	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
@@ -8567,7 +8900,6 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>FastClipMedia: Quick clipping</li>
 	// <li>RemoveWatermarkTask: Watermark removal</li>
 	// <li> ReviewAudioVideo: Moderation</li>
-	// <li> ReduceMediaBitrate: Bitrate reduction</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -8645,9 +8977,12 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoTask *ReviewAudioVideoTask `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 
-	// The information of a bitrate reduction task. This parameter is valid only if `TaskType` is `ReduceMediaBitrate`.
+	// This parameter is invalid now.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateTask *ReduceMediaBitrateTask `json:"ReduceMediaBitrateTask,omitempty" name:"ReduceMediaBitrateTask"`
+
+
+	DescribeFileAttributesTask *DescribeFileAttributesTask `json:"DescribeFileAttributesTask,omitempty" name:"DescribeFileAttributesTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -9466,9 +9801,12 @@ type EventContent struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoCompleteEvent *ReviewAudioVideoTask `json:"ReviewAudioVideoCompleteEvent,omitempty" name:"ReviewAudioVideoCompleteEvent"`
 
-	// The callback for the completion of bitrate reduction. This parameter is valid only if `EventType` is `ReduceMediaBitrateComplete`.
+	// This parameter is invalid now.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateCompleteEvent *ReduceMediaBitrateTask `json:"ReduceMediaBitrateCompleteEvent,omitempty" name:"ReduceMediaBitrateCompleteEvent"`
+
+
+	DescribeFileAttributesCompleteEvent *DescribeFileAttributesTask `json:"DescribeFileAttributesCompleteEvent,omitempty" name:"DescribeFileAttributesCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -9924,12 +10262,86 @@ type HighlightsConfigureInfoForUpdate struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type ImageCenterCut struct {
+	// The cropping type. Valid values:
+	// <li>Circle: Cropping to circle. `Radius` specifies the radius of the output image.</li>
+	// <li>Rectangle: Cropping to rectangle. `Width` and `Height` specify the width and height of the output image.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The width (pixels) of the output image. This parameter is valid if `Type` is `Rectangle`.
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// The height (pixels) of the output image. This parameter is valid if `Type` is `Rectangle`.
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+
+	// The radius of the output image. This parameter is valid if `Type` is `Circle`.
+	Radius *int64 `json:"Radius,omitempty" name:"Radius"`
+}
+
+type ImageOperation struct {
+	// The image processing type. Valid values:
+	// <li>`Scale`: Scaling</li>
+	// <li>`CenterCut`: Cropping</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The scaling details. This parameter is valid only if `Type` is `Scale`.
+	Scale *ImageScale `json:"Scale,omitempty" name:"Scale"`
+
+	// The cropping details. This parameter is valid only if `Type` is `CenterCut`.
+	CenterCut *ImageCenterCut `json:"CenterCut,omitempty" name:"CenterCut"`
+}
+
+type ImageProcessingTemplate struct {
+	// The template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The template type. Valid values:
+	// <li>Preset</li>
+	// <li>Custom</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// An array of image processing operations. The operations will be performed in the specified order.
+	// <li>Length limit: 3.</li>
+	Operations []*ImageOperation `json:"Operations,omitempty" name:"Operations"`
+
+	// The template creation time in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?lang=en&pg=#iso-date-format).
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
 type ImageReviewUsageDataItem struct {
 	// The start time (in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)) of the data returned. For example, if the granularity is a day, `2018-12-01T00:00:00+08:00` indicates that the data is for the whole day of December 1, 2018.
 	Time *string `json:"Time,omitempty" name:"Time"`
 
 	// The number of times the image recognition feature is used.
 	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
+type ImageScale struct {
+	// The scaling type. Valid values:
+	// <li>`WidthFirst`: Specify the width and proportionally scale the height.</li>
+	// <li>`HeightFirst`: Specify the height and proportionally scale the width.</li>
+	// <li>`LongEdgeFirst`: Specify the long side (`LongEdge`) and proportionally scale the short side.</li>
+	// <li>`ShortEdgeFirst`: Specify the short side (`ShortEdge`) and proportionally scale the long side.</li>
+	// <li>Force: Specify both the height and width. The output image may be distorted.</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The image height (pixels). This parameter is valid only if `Type` is `HeightFirst` or `Force`.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// The image width (pixels). This parameter is valid only if `Type` is `WidthFirst` or `Force`.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// The long side of the output image (pixels). This parameter is valid only if `Type` is `LongEdgeFirst`.
+	LongEdge *uint64 `json:"LongEdge,omitempty" name:"LongEdge"`
+
+	// The short side of the output image (pixels). This parameter is valid only if `Type` is `ShortEdgeFirst`.
+	ShortEdge *uint64 `json:"ShortEdge,omitempty" name:"ShortEdge"`
 }
 
 type ImageSpriteTaskInput struct {
@@ -10985,6 +11397,9 @@ type MediaProcessTaskAnimatedGraphicResult struct {
 	// Output of animated image generating task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *MediaAnimatedGraphicsItem `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an animated image generation task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaProcessTaskCoverBySnapshotResult struct {
@@ -11006,6 +11421,9 @@ type MediaProcessTaskCoverBySnapshotResult struct {
 
 	// Output of cover generating task.
 	Output *CoverBySnapshotTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a video screenshot (thumbnail) task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaProcessTaskImageSpriteResult struct {
@@ -11028,6 +11446,9 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Output of image sprite generating task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *MediaImageSpriteItem `json:"Output,omitempty" name:"Output"`
+
+	// The progress of an image sprite generation task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaProcessTaskInput struct {
@@ -11120,6 +11541,9 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Output of sampled screencapturing task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *MediaSampleSnapshotItem `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a sampled screenshot task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaProcessTaskSnapshotByTimeOffsetResult struct {
@@ -11142,6 +11566,9 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Output of time point screencapturing task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *MediaSnapshotByTimeOffsetItem `json:"Output,omitempty" name:"Output"`
+
+	// The progress of a time point screenshot task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type MediaProcessTaskTranscodeResult struct {
@@ -14491,6 +14918,14 @@ type ProcedureTask struct {
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The operator. Valid values:
+	// <li>`SYSTEM`: The task is triggered by the system.</li>
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// The operation type. Valid values:
+	// <li>`TSC`: TSC-based smart bitrate reduction</li>
+	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
 }
 
 type ProcedureTemplate struct {
@@ -15199,6 +15634,9 @@ type PullUploadTask struct {
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The progress of a pull and upload task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 // Predefined struct for user
@@ -16820,6 +17258,9 @@ type SplitMediaTask struct {
 
 	// ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or set to an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The progress of a video splitting task. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
 type SplitMediaTaskInput struct {

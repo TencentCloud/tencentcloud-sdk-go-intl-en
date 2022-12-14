@@ -401,27 +401,19 @@ type ClusterInstancesInfo struct {
 
 // Predefined struct for user
 type CreateInstanceRequestParams struct {
-	// Product ID. Different product IDs represent different EMR product versions. Valid values:
-	// <li>1: EMR v1.3.1</li>
-	// <li>2: EMR v2.0.1</li>
-	// <li>4: EMR v2.1.0</li>
-	// <li>7: EMR v3.0.0</li>
-	// <li>9: EMR v2.2.0</li>
-	// <li>11: ClickHouse v1.0.0</li>
-	// <li>13: Druid v1.0.0</li>
-	// <li>15: EMR v2.2.1</li>
+	// The product ID. Different product IDs represent different EMR product versions. Valid values:
 	// <li>16: EMR v2.3.0</li>
-	// <li>17: ClickHouse v1.1.0</li>
-	// <li>19: EMR v2.4.0</li>
 	// <li>20: EMR v2.5.0</li>
-	// <li>22: ClickHouse v1.2.0</li>
-	// <li>24: EMR TianQiong v1.0.0</li>
 	// <li>25: EMR v3.1.0</li>
-	// <li>26: Doris v1.0.0</li>
 	// <li>27: Kafka v1.0.0</li>
-	// <li>28: EMR v3.2.0</li>
-	// <li>29: EMR v2.5.1</li>
 	// <li>30: EMR v2.6.0</li>
+	// <li>33: EMR v3.2.1</li>
+	// <li>34: EMR v3.3.0</li>
+	// <li>36: StarRocks v1.0.0</li>
+	// <li>37: EMR v3.4.0</li>
+	// <li>38: EMR v2.7.0</li>
+	// <li>39: StarRocks v1.1.0</li>
+	// <li>41: Druid v1.1.0</li>
 	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
 
 	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
@@ -545,27 +537,19 @@ type CreateInstanceRequestParams struct {
 type CreateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Product ID. Different product IDs represent different EMR product versions. Valid values:
-	// <li>1: EMR v1.3.1</li>
-	// <li>2: EMR v2.0.1</li>
-	// <li>4: EMR v2.1.0</li>
-	// <li>7: EMR v3.0.0</li>
-	// <li>9: EMR v2.2.0</li>
-	// <li>11: ClickHouse v1.0.0</li>
-	// <li>13: Druid v1.0.0</li>
-	// <li>15: EMR v2.2.1</li>
+	// The product ID. Different product IDs represent different EMR product versions. Valid values:
 	// <li>16: EMR v2.3.0</li>
-	// <li>17: ClickHouse v1.1.0</li>
-	// <li>19: EMR v2.4.0</li>
 	// <li>20: EMR v2.5.0</li>
-	// <li>22: ClickHouse v1.2.0</li>
-	// <li>24: EMR TianQiong v1.0.0</li>
 	// <li>25: EMR v3.1.0</li>
-	// <li>26: Doris v1.0.0</li>
 	// <li>27: Kafka v1.0.0</li>
-	// <li>28: EMR v3.2.0</li>
-	// <li>29: EMR v2.5.1</li>
 	// <li>30: EMR v2.6.0</li>
+	// <li>33: EMR v3.2.1</li>
+	// <li>34: EMR v3.3.0</li>
+	// <li>36: StarRocks v1.0.0</li>
+	// <li>37: EMR v3.4.0</li>
+	// <li>38: EMR v2.7.0</li>
+	// <li>39: StarRocks v1.1.0</li>
+	// <li>41: Druid v1.1.0</li>
 	ProductId *uint64 `json:"ProductId,omitempty" name:"ProductId"`
 
 	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
@@ -2148,6 +2132,9 @@ type InquiryPriceUpdateInstanceRequestParams struct {
 
 	// Currency.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// The resource ID list for batch configuration change.
+	ResourceIdList []*string `json:"ResourceIdList,omitempty" name:"ResourceIdList"`
 }
 
 type InquiryPriceUpdateInstanceRequest struct {
@@ -2173,6 +2160,9 @@ type InquiryPriceUpdateInstanceRequest struct {
 
 	// Currency.
 	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// The resource ID list for batch configuration change.
+	ResourceIdList []*string `json:"ResourceIdList,omitempty" name:"ResourceIdList"`
 }
 
 func (r *InquiryPriceUpdateInstanceRequest) ToJsonString() string {
@@ -2193,6 +2183,7 @@ func (r *InquiryPriceUpdateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "PayMode")
 	delete(f, "Placement")
 	delete(f, "Currency")
+	delete(f, "ResourceIdList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceUpdateInstanceRequest has unknown keys!", "")
 	}
@@ -2218,6 +2209,10 @@ type InquiryPriceUpdateInstanceResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
+	// Pricing details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PriceDetail []*PriceDetail `json:"PriceDetail,omitempty" name:"PriceDetail"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2239,10 +2234,10 @@ func (r *InquiryPriceUpdateInstanceResponse) FromJsonString(s string) error {
 }
 
 type LoginSettings struct {
-	// Password
+	// The login password of the instance, which contains 8 to 16 uppercase letters, lowercase letters, digits, and special characters (only !@%^*) and cannot start with a special character.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Public Key
+	// The key ID. After an instance is associated with a key, you can access it with the private key in the key pair. You can call [DescribeKeyPairs](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `PublicKeyId`.
 	PublicKeyId *string `json:"PublicKeyId,omitempty" name:"PublicKeyId"`
 }
 
@@ -2300,6 +2295,10 @@ type ModifyResourceScheduleConfigResponseParams struct {
 	// Verification error information. If it is not null, the verification fails and thus the configuration fails.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// The response data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *string `json:"Data,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2650,6 +2649,14 @@ type NodeHardwareInfo struct {
 	// Service
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServiceClient *string `json:"ServiceClient,omitempty" name:"ServiceClient"`
+
+	// Enabling instance protection for this instance. Valid values: `true` (enable) and `false` (disable).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DisableApiTermination *bool `json:"DisableApiTermination,omitempty" name:"DisableApiTermination"`
+
+	// The billing version. Valid values: `0` (original billing) and `1` (new billing)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TradeVersion *int64 `json:"TradeVersion,omitempty" name:"TradeVersion"`
 }
 
 type OutterResource struct {
@@ -2705,11 +2712,11 @@ type PersistentVolumeContext struct {
 }
 
 type Placement struct {
-	// ID of the project to which the instance belongs. This parameter can be obtained from the `projectId` field in the return value of the `DescribeProject` API. If 0 is entered, the default project will be used.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
-
-	// AZ where the instance resides, such as ap-guangzhou-1. You can call the `DescribeZones` API and see the `Zone` field to get the value of this parameter.
+	// The ID of the availability zone where the instance resides, such as `ap-guangzhou-1`. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain this ID from the `Zone` field in the response.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The ID of the project to which the instance belongs. You can call the [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1) and obtain this ID from the `projectId` field in the response. If this is left empty, the ID of the default project is used.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
 type PodParameter struct {
@@ -2926,6 +2933,20 @@ type PreExecuteFileSettings struct {
 
 	// COS `appid`, which has been disused
 	AppId *string `json:"AppId,omitempty" name:"AppId"`
+}
+
+type PriceDetail struct {
+	// The node ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// The price formula
+	Formula *string `json:"Formula,omitempty" name:"Formula"`
+
+	// The original price
+	OriginalCost *float64 `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// The discount price
+	DiscountCost *float64 `json:"DiscountCost,omitempty" name:"DiscountCost"`
 }
 
 type PriceResource struct {

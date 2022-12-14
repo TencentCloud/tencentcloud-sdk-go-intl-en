@@ -316,7 +316,7 @@ func NewDescribeClusterNodesResponse() (response *DescribeClusterNodesResponse) 
 }
 
 // DescribeClusterNodes
-// This API is used to query the information of a hardware node.
+// This API is used to query the information of nodes in a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -349,7 +349,7 @@ func (c *Client) DescribeClusterNodes(request *DescribeClusterNodesRequest) (res
 }
 
 // DescribeClusterNodes
-// This API is used to query the information of a hardware node.
+// This API is used to query the information of nodes in a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -462,7 +462,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 }
 
 // DescribeInstances
-// This API is used to query EMR instances.
+// This API is used to query the information of instances in a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -497,7 +497,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 }
 
 // DescribeInstances
-// This API is used to query EMR instances.
+// This API is used to query the information of instances in a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -562,7 +562,7 @@ func NewDescribeInstancesListResponse() (response *DescribeInstancesListResponse
 }
 
 // DescribeInstancesList
-// This API is used to query EMR cluster instances.
+// This API is used to query the cluster list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -594,7 +594,7 @@ func (c *Client) DescribeInstancesList(request *DescribeInstancesListRequest) (r
 }
 
 // DescribeInstancesList
-// This API is used to query EMR cluster instances.
+// This API is used to query the cluster list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -656,7 +656,7 @@ func NewDescribeResourceScheduleResponse() (response *DescribeResourceScheduleRe
 }
 
 // DescribeResourceSchedule
-// This API is used to get data from the YARN Resource Scheduling page.
+// This API is used to query the data of YARN Resource Scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -669,7 +669,7 @@ func (c *Client) DescribeResourceSchedule(request *DescribeResourceScheduleReque
 }
 
 // DescribeResourceSchedule
-// This API is used to get data from the YARN Resource Scheduling page.
+// This API is used to query the data of YARN Resource Scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -718,6 +718,7 @@ func NewDescribeUsersForUserManagerResponse() (response *DescribeUsersForUserMan
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) DescribeUsersForUserManager(request *DescribeUsersForUserManagerRequest) (response *DescribeUsersForUserManagerResponse, err error) {
     return c.DescribeUsersForUserManagerWithContext(context.Background(), request)
@@ -730,6 +731,7 @@ func (c *Client) DescribeUsersForUserManager(request *DescribeUsersForUserManage
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 func (c *Client) DescribeUsersForUserManagerWithContext(ctx context.Context, request *DescribeUsersForUserManagerRequest) (response *DescribeUsersForUserManagerResponse, err error) {
     if request == nil {
@@ -1317,6 +1319,8 @@ func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
 // This API is used to scale out instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CHECKIFSUPPORTPODSTRETCH = "FailedOperation.CheckIfSupportPodStretch"
 //  FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
 //  FAILEDOPERATION_NOTSUPPORTPOD = "FailedOperation.NotSupportPod"
 //  INTERNALERROR = "InternalError"
@@ -1329,6 +1333,7 @@ func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
 //  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_EKSERROR = "InternalError.EKSError"
 //  INTERNALERROR_KMSERROR = "InternalError.KmsError"
 //  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
 //  INTERNALERROR_SGERROR = "InternalError.SgError"
@@ -1376,6 +1381,8 @@ func (c *Client) ScaleOutInstance(request *ScaleOutInstanceRequest) (response *S
 // This API is used to scale out instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CHECKIFSUPPORTPODSTRETCH = "FailedOperation.CheckIfSupportPodStretch"
 //  FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
 //  FAILEDOPERATION_NOTSUPPORTPOD = "FailedOperation.NotSupportPod"
 //  INTERNALERROR = "InternalError"
@@ -1388,6 +1395,7 @@ func (c *Client) ScaleOutInstance(request *ScaleOutInstanceRequest) (response *S
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
 //  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_EKSERROR = "InternalError.EKSError"
 //  INTERNALERROR_KMSERROR = "InternalError.KmsError"
 //  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
 //  INTERNALERROR_SGERROR = "InternalError.SgError"

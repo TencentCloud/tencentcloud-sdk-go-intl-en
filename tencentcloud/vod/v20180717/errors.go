@@ -53,6 +53,9 @@ const (
 	// Network error.
 	FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
 
+	// No need to reduce the bitrate.
+	FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
+
 	// Operation failed: the parent category ID does not exist.
 	FAILEDOPERATION_PARENTIDNOFOUND = "FailedOperation.ParentIdNoFound"
 
@@ -199,6 +202,9 @@ const (
 
 	// Incorrect parameter value: cover URL.
 	INVALIDPARAMETERVALUE_COVERURL = "InvalidParameterValue.CoverUrl"
+
+	// Parameter error: Invalid `CutAndCrops` value.
+	INVALIDPARAMETERVALUE_CUTANDCROPS = "InvalidParameterValue.CutAndCrops"
 
 	// Incorrect parameter value: time granularity.
 	INVALIDPARAMETERVALUE_DATAINTERVAL = "InvalidParameterValue.DataInterval"
@@ -524,6 +530,9 @@ const (
 	// Invalid parameter: text template.
 	INVALIDPARAMETERVALUE_TEXTTEMPLATE = "InvalidParameterValue.TextTemplate"
 
+	// Parameter error: Invalid `Thumbnail` value.
+	INVALIDPARAMETERVALUE_THUMBNAILS = "InvalidParameterValue.Thumbnails"
+
 	// Incorrect parameter value: TimeType.
 	INVALIDPARAMETERVALUE_TIMETYPE = "InvalidParameterValue.TimeType"
 
@@ -565,6 +574,9 @@ const (
 
 	// Incorrect parameter value: VOD session.
 	INVALIDPARAMETERVALUE_VODSESSIONKEY = "InvalidParameterValue.VodSessionKey"
+
+	// Parameter error: Invalid `Watermarks` value.
+	INVALIDPARAMETERVALUE_WATERMARKS = "InvalidParameterValue.Watermarks"
 
 	// Invalid parameter: width.
 	INVALIDPARAMETERVALUE_WIDTH = "InvalidParameterValue.Width"

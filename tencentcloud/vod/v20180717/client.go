@@ -491,6 +491,7 @@ func NewCreateAIRecognitionTemplateResponse() (response *CreateAIRecognitionTemp
 // This API is used to create a custom video content recognition template. Up to 50 templates can be created.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
@@ -514,6 +515,7 @@ func (c *Client) CreateAIRecognitionTemplate(request *CreateAIRecognitionTemplat
 // This API is used to create a custom video content recognition template. Up to 50 templates can be created.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
@@ -851,6 +853,74 @@ func (c *Client) CreateContentReviewTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewCreateContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateImageProcessingTemplateRequest() (request *CreateImageProcessingTemplateRequest) {
+    request = &CreateImageProcessingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateImageProcessingTemplate")
+    
+    
+    return
+}
+
+func NewCreateImageProcessingTemplateResponse() (response *CreateImageProcessingTemplateResponse) {
+    response = &CreateImageProcessingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateImageProcessingTemplate
+// This API is used to create a custom image processing template. You can create up to 16 templates, and each template can contain up to three operations, for example, cropping, scaling, and cropping again.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CUTANDCROPS = "InvalidParameterValue.CutAndCrops"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_THUMBNAILS = "InvalidParameterValue.Thumbnails"
+//  INVALIDPARAMETERVALUE_WATERMARKS = "InvalidParameterValue.Watermarks"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateImageProcessingTemplate(request *CreateImageProcessingTemplateRequest) (response *CreateImageProcessingTemplateResponse, err error) {
+    return c.CreateImageProcessingTemplateWithContext(context.Background(), request)
+}
+
+// CreateImageProcessingTemplate
+// This API is used to create a custom image processing template. You can create up to 16 templates, and each template can contain up to three operations, for example, cropping, scaling, and cropping again.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CUTANDCROPS = "InvalidParameterValue.CutAndCrops"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_THUMBNAILS = "InvalidParameterValue.Thumbnails"
+//  INVALIDPARAMETERVALUE_WATERMARKS = "InvalidParameterValue.Watermarks"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateImageProcessingTemplateWithContext(ctx context.Context, request *CreateImageProcessingTemplateRequest) (response *CreateImageProcessingTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateImageProcessingTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateImageProcessingTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateImageProcessingTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2023,6 +2093,66 @@ func (c *Client) DeleteContentReviewTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDeleteContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteImageProcessingTemplateRequest() (request *DeleteImageProcessingTemplateRequest) {
+    request = &DeleteImageProcessingTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteImageProcessingTemplate")
+    
+    
+    return
+}
+
+func NewDeleteImageProcessingTemplateResponse() (response *DeleteImageProcessingTemplateResponse) {
+    response = &DeleteImageProcessingTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteImageProcessingTemplate
+// This API is used to delete an image processing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteImageProcessingTemplate(request *DeleteImageProcessingTemplateRequest) (response *DeleteImageProcessingTemplateResponse, err error) {
+    return c.DeleteImageProcessingTemplateWithContext(context.Background(), request)
+}
+
+// DeleteImageProcessingTemplate
+// This API is used to delete an image processing template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteImageProcessingTemplateWithContext(ctx context.Context, request *DeleteImageProcessingTemplateRequest) (response *DeleteImageProcessingTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteImageProcessingTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteImageProcessingTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteImageProcessingTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -3437,6 +3567,68 @@ func (c *Client) DescribeDrmKeyProviderInfoWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeDrmKeyProviderInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageProcessingTemplatesRequest() (request *DescribeImageProcessingTemplatesRequest) {
+    request = &DescribeImageProcessingTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeImageProcessingTemplates")
+    
+    
+    return
+}
+
+func NewDescribeImageProcessingTemplatesResponse() (response *DescribeImageProcessingTemplatesResponse) {
+    response = &DescribeImageProcessingTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeImageProcessingTemplates
+// This API is used to query image processing templates. You can specify the filters as well as the offset to start returning records from.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeImageProcessingTemplates(request *DescribeImageProcessingTemplatesRequest) (response *DescribeImageProcessingTemplatesResponse, err error) {
+    return c.DescribeImageProcessingTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeImageProcessingTemplates
+// This API is used to query image processing templates. You can specify the filters as well as the offset to start returning records from.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeImageProcessingTemplatesWithContext(ctx context.Context, request *DescribeImageProcessingTemplatesRequest) (response *DescribeImageProcessingTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageProcessingTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageProcessingTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageProcessingTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -6854,31 +7046,20 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 //
 // 7. Adaptive bitrate streaming and encryption
 //
-// 8. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+// 8. Detecting pornographic, terrorist, and politically sensitive content
 //
-// 9. Intelligent content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
+// 9. Content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
 //
-// 10. Recognition of opening and closing credits, faces, full text, text keywords, full speech, speech keywords, and objects
+// 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
 //
 // 
 //
 // If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
-// 
-//
-// A digital watermark has the following restrictions:
-//
-// <li>Digital watermarks can only be image watermarks.</li>
-//
-// <li>Digital watermarks must be looped.</li>
-//
-// <li>If you use digital watermarks, the output video must be in HLS format.</li>
-//
-// <li>Digital watermarks can only be displayed in the upper half of a video.</li>
-//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
 //  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -6913,31 +7094,20 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 //
 // 7. Adaptive bitrate streaming and encryption
 //
-// 8. Intelligent recognition of pornographic, terrorism, and politically sensitive content
+// 8. Detecting pornographic, terrorist, and politically sensitive content
 //
-// 9. Intelligent content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
+// 9. Content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
 //
-// 10. Recognition of opening and closing credits, faces, full text, text keywords, full speech, speech keywords, and objects
+// 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
 //
 // 
 //
 // If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
-// 
-//
-// A digital watermark has the following restrictions:
-//
-// <li>Digital watermarks can only be image watermarks.</li>
-//
-// <li>Digital watermarks must be looped.</li>
-//
-// <li>If you use digital watermarks, the output video must be in HLS format.</li>
-//
-// <li>Digital watermarks can only be displayed in the upper half of a video.</li>
-//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
 //  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
