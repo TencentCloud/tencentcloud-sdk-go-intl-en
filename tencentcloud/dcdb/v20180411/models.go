@@ -601,6 +601,231 @@ func (r *CreateAccountResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDCDBInstanceRequestParams struct {
+	// AZs to deploy shard nodes. You can specify up to two AZs. When the shard specification is 1-source-2-replica, two of the nodes are deployed in the first AZ.
+	// The current purchasable AZ needs be pulled through `DescribeDCDBSaleInfo` API.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Validity period in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Shard memory size in GB, which can be obtained 
+	//  by querying the instance specification through `DescribeShardSpec` API.
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage size in GB, which can be obtained
+	//  by querying the instance specification through `DescribeShardSpec` API.
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+
+	// Number of nodes in a single shard, which can be obtained
+	//  by querying the instance specification through `DescribeShardSpec` API.
+	ShardNodeCount *int64 `json:"ShardNodeCount,omitempty" name:"ShardNodeCount"`
+
+	// The number of shards in the instance. Value range: 2-8. You can increase up to 64 shards by upgrading your instance.
+	ShardCount *int64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// The number of instances to be purchased
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID. If this parameter is left empty or not passed in, the instance will be created on the classic network.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID, which is required when `VpcId` is specified.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Database engine version. Valid values: 8.0.18, 10.1.9, 5.7.17.
+	// 8.0.18 - MySQL 8.0.18；
+	// 10.1.9: MariaDB 10.1.9;
+	// 5.7.17: Percona 5.7.17.
+	// If this parameter is left empty, `5.7.17` will be used.
+	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
+
+	// Whether to automatically use vouchers. This option is disabled by default.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Custom name of the instance
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Whether IPv6 is supported
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
+
+	// Array of tag key-value pairs
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync; default value: `2`).
+	InitParams []*DBParamValue `json:"InitParams,omitempty" name:"InitParams"`
+
+	// DCN source region
+	DcnRegion *string `json:"DcnRegion,omitempty" name:"DcnRegion"`
+
+	// DCN source instance ID
+	DcnInstanceId *string `json:"DcnInstanceId,omitempty" name:"DcnInstanceId"`
+
+	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users). If no renewal is required, set it to `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Security group IDs in array. This parameter is compatible with the old parameter `SecurityGroupId`.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+type CreateDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZs to deploy shard nodes. You can specify up to two AZs. When the shard specification is 1-source-2-replica, two of the nodes are deployed in the first AZ.
+	// The current purchasable AZ needs be pulled through `DescribeDCDBSaleInfo` API.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Validity period in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Shard memory size in GB, which can be obtained 
+	//  by querying the instance specification through `DescribeShardSpec` API.
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage size in GB, which can be obtained
+	//  by querying the instance specification through `DescribeShardSpec` API.
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+
+	// Number of nodes in a single shard, which can be obtained
+	//  by querying the instance specification through `DescribeShardSpec` API.
+	ShardNodeCount *int64 `json:"ShardNodeCount,omitempty" name:"ShardNodeCount"`
+
+	// The number of shards in the instance. Value range: 2-8. You can increase up to 64 shards by upgrading your instance.
+	ShardCount *int64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// The number of instances to be purchased
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// VPC ID. If this parameter is left empty or not passed in, the instance will be created on the classic network.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID, which is required when `VpcId` is specified.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Database engine version. Valid values: 8.0.18, 10.1.9, 5.7.17.
+	// 8.0.18 - MySQL 8.0.18；
+	// 10.1.9: MariaDB 10.1.9;
+	// 5.7.17: Percona 5.7.17.
+	// If this parameter is left empty, `5.7.17` will be used.
+	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
+
+	// Whether to automatically use vouchers. This option is disabled by default.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Voucher ID list. Currently, you can specify only one voucher.
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Custom name of the instance
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Whether IPv6 is supported
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
+
+	// Array of tag key-value pairs
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync; default value: `2`).
+	InitParams []*DBParamValue `json:"InitParams,omitempty" name:"InitParams"`
+
+	// DCN source region
+	DcnRegion *string `json:"DcnRegion,omitempty" name:"DcnRegion"`
+
+	// DCN source instance ID
+	DcnInstanceId *string `json:"DcnInstanceId,omitempty" name:"DcnInstanceId"`
+
+	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users). If no renewal is required, set it to `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Security group IDs in array. This parameter is compatible with the old parameter `SecurityGroupId`.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+}
+
+func (r *CreateDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zones")
+	delete(f, "Period")
+	delete(f, "ShardMemory")
+	delete(f, "ShardStorage")
+	delete(f, "ShardNodeCount")
+	delete(f, "ShardCount")
+	delete(f, "Count")
+	delete(f, "ProjectId")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "DbVersionId")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "SecurityGroupId")
+	delete(f, "InstanceName")
+	delete(f, "Ipv6Flag")
+	delete(f, "ResourceTags")
+	delete(f, "InitParams")
+	delete(f, "DcnRegion")
+	delete(f, "DcnInstanceId")
+	delete(f, "AutoRenewFlag")
+	delete(f, "SecurityGroupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDCDBInstanceResponseParams struct {
+	// Long order ID, which is used to call the `DescribeOrders` API.
+	//  The parameter can be used to either query order details or call the user account APIs to make another payment when this payment fails.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDCDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDCDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateHourDCDBInstanceRequestParams struct {
 	// Shard memory in GB, which can be obtained through the `DescribeShardSpec` API.
 	//   
@@ -3212,6 +3437,84 @@ func (r *IsolateHourDCDBInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *IsolateHourDCDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type KillSessionRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of session IDs
+	SessionId []*int64 `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Shard ID. Either `ShardId` or `ShardSerialId` is required.
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// Shard sequence ID. Either `ShardId` or `ShardSerialId` is required.
+	ShardSerialId *string `json:"ShardSerialId,omitempty" name:"ShardSerialId"`
+}
+
+type KillSessionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// List of session IDs
+	SessionId []*int64 `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Shard ID. Either `ShardId` or `ShardSerialId` is required.
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// Shard sequence ID. Either `ShardId` or `ShardSerialId` is required.
+	ShardSerialId *string `json:"ShardSerialId,omitempty" name:"ShardSerialId"`
+}
+
+func (r *KillSessionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillSessionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "SessionId")
+	delete(f, "ShardId")
+	delete(f, "ShardSerialId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KillSessionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type KillSessionResponseParams struct {
+	// Task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type KillSessionResponse struct {
+	*tchttp.BaseResponse
+	Response *KillSessionResponseParams `json:"Response"`
+}
+
+func (r *KillSessionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KillSessionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

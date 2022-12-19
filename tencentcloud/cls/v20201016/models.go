@@ -327,6 +327,10 @@ type ConfigInfo struct {
 	// Collection rule configuration ID
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 
+	// Name of the collection rule configuration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
 	// Log formatting method
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LogFormat *string `json:"LogFormat,omitempty" name:"LogFormat"`
@@ -1283,7 +1287,7 @@ type CreateTopicRequestParams struct {
 	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
-	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
@@ -1311,7 +1315,7 @@ type CreateTopicRequest struct {
 	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
-	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
+	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 }
 
@@ -2741,7 +2745,7 @@ type DescribeLogHistogramRequestParams struct {
 	// Query statement
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// Time interval in milliseconds
+	// Interval in milliseconds. Condition: (To – From) / Interval ≤ 200
 	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
 }
 
@@ -2760,7 +2764,7 @@ type DescribeLogHistogramRequest struct {
 	// Query statement
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// Time interval in milliseconds
+	// Interval in milliseconds. Condition: (To – From) / Interval ≤ 200
 	Interval *int64 `json:"Interval,omitempty" name:"Interval"`
 }
 
@@ -3638,19 +3642,19 @@ type ExtractRuleInfo struct {
 	JsonStandard *int64 `json:"JsonStandard,omitempty" name:"JsonStandard"`
 
 	// Syslog protocol. Valid values: `tcp`, `udp`.
-	// This field can be used when you create/modify collection rule configurations.
+	// This field can be used when you create or modify collection rule configurations.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Listening address and port specified by the syslog collection. Format: [ip]:[port]. Example: 127.0.0.1:9000.
-	// This field can be used when you create/modify collection rule configurations.
+	// This field can be used when you create or modify collection rule configurations.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Address *string `json:"Address,omitempty" name:"Address"`
 
-	// `rfc3164`: Resolve logs by using the RFC3164 protocol during the syslog collection.
-	// `rfc5424`: Resolve logs by using the RFC5424 protocol during the syslog collection.
-	// `auto`: Automatically match either the RFC3164 or RFC5424 protocol.
-	// This field can be used when you create/modify collection rule configurations.
+	// `rfc3164`: Resolve logs by using the RFC 3164 protocol during the syslog collection.
+	// `rfc5424`: Resolve logs by using the RFC 5424 protocol during the syslog collection.
+	// `auto`: Automatically match either the RFC 3164 or RFC 5424 protocol.
+	// This field can be used when you create or modify collection rule configurations.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ParseProtocol *string `json:"ParseProtocol,omitempty" name:"ParseProtocol"`
 }
@@ -3924,6 +3928,10 @@ type LogsetInfo struct {
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
+	// Cloud product identifier. If the logset is created by another cloud product, this field returns the name of the cloud product, such as `CDN` or `TKE`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AssumerName *string `json:"AssumerName,omitempty" name:"AssumerName"`
+
 	// Tag bound to logset
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
@@ -3931,7 +3939,7 @@ type LogsetInfo struct {
 	// Number of log topics in logset
 	TopicCount *int64 `json:"TopicCount,omitempty" name:"TopicCount"`
 
-	// If `AssumerUin` is not empty, it indicates the service provider who creates the logset
+	// If `AssumerName` is not empty, it indicates the service provider who creates the logset.
 	RoleName *string `json:"RoleName,omitempty" name:"RoleName"`
 }
 
@@ -5226,6 +5234,13 @@ type SearchLogRequestParams struct {
 	// If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
 	// The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
 	UseNewAnalysis *bool `json:"UseNewAnalysis,omitempty" name:"UseNewAnalysis"`
+
+	// Indicates whether to sample raw logs before statistical analysis (`Query` includes SQL statements).
+	// `0`: Auto-sample.
+	// `0–1`: Sample by the specified sample rate, such as `0.02`.
+	// `1`: Precise analysis without sampling.
+	// Default value: `1`
+	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
 }
 
 type SearchLogRequest struct {
@@ -5267,6 +5282,13 @@ type SearchLogRequest struct {
 	// If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
 	// The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
 	UseNewAnalysis *bool `json:"UseNewAnalysis,omitempty" name:"UseNewAnalysis"`
+
+	// Indicates whether to sample raw logs before statistical analysis (`Query` includes SQL statements).
+	// `0`: Auto-sample.
+	// `0–1`: Sample by the specified sample rate, such as `0.02`.
+	// `1`: Precise analysis without sampling.
+	// Default value: `1`
+	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
 }
 
 func (r *SearchLogRequest) ToJsonString() string {
@@ -5289,6 +5311,7 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 	delete(f, "Context")
 	delete(f, "Sort")
 	delete(f, "UseNewAnalysis")
+	delete(f, "SamplingRate")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchLogRequest has unknown keys!", "")
 	}
@@ -5530,6 +5553,10 @@ type TopicInfo struct {
 	// Whether index is enabled
 	Index *bool `json:"Index,omitempty" name:"Index"`
 
+	// Cloud product identifier. If the log topic is created by another cloud product, this field returns the name of the cloud product, such as `CDN` or `TKE`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AssumerName *string `json:"AssumerName,omitempty" name:"AssumerName"`
+
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
@@ -5555,6 +5582,14 @@ type TopicInfo struct {
 	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
 	// Note: This field may return `null`, indicating that no valid value was found.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Cloud product sub-identifier. If the log topic is created by another cloud product, this field returns the name of the cloud product and its log type, such as `TKE-Audit` or `TKE-Event`. Some products only return the cloud product identifier (`AssumerName`), without this field.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubAssumerName *string `json:"SubAssumerName,omitempty" name:"SubAssumerName"`
+
+	// Log topic description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Describes *string `json:"Describes,omitempty" name:"Describes"`
 }
 
 // Predefined struct for user

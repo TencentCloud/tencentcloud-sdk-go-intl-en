@@ -26,6 +26,9 @@ const (
 	// Recognition by the engine timed out.
 	FAILEDOPERATION_ENGINERECOGNIZETIMEOUT = "FailedOperation.EngineRecognizeTimeout"
 
+	// Invalid bank card information.
+	FAILEDOPERATION_ILLEGALBANKCARDERROR = "FailedOperation.IllegalBankCardError"
+
 	// The image is blurry.
 	FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
 
@@ -40,6 +43,9 @@ const (
 
 	// The input language is not supported.
 	FAILEDOPERATION_LANGUAGENOTSUPPORT = "FailedOperation.LanguageNotSupport"
+
+	// No bank card found.
+	FAILEDOPERATION_NOBANKCARDERROR = "FailedOperation.NoBankCardError"
 
 	// Not a Hong Kong identity card.
 	FAILEDOPERATION_NOHKIDCARD = "FailedOperation.NoHKIDCard"

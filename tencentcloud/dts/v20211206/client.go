@@ -226,7 +226,7 @@ func NewCreateCheckSyncJobResponse() (response *CreateCheckSyncJobResponse) {
 }
 
 // CreateCheckSyncJob
-// This API is used to verify a sync task by checking required parameters and peripheral information.
+// This API is used to verify a sync task by checking required parameters and peripheral configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -238,7 +238,7 @@ func (c *Client) CreateCheckSyncJob(request *CreateCheckSyncJobRequest) (respons
 }
 
 // CreateCheckSyncJob
-// This API is used to verify a sync task by checking required parameters and peripheral information.
+// This API is used to verify a sync task by checking required parameters and peripheral configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -638,13 +638,14 @@ func NewDeleteCompareTaskResponse() (response *DeleteCompareTaskResponse) {
 }
 
 // DeleteCompareTask
-// This API is used to delete a data consistency check task.
+// This API is used to delete a data consistency check task, which can be called when the task status is `success`, `failed`, or `canceled`.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
 //  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
 //  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
@@ -664,13 +665,14 @@ func (c *Client) DeleteCompareTask(request *DeleteCompareTaskRequest) (response 
 }
 
 // DeleteCompareTask
-// This API is used to delete a data consistency check task.
+// This API is used to delete a data consistency check task, which can be called when the task status is `success`, `failed`, or `canceled`.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
 //  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
 //  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
@@ -1132,7 +1134,7 @@ func NewDescribeMigrationDetailResponse() (response *DescribeMigrationDetailResp
 }
 
 // DescribeMigrationDetail
-// This API is used to query the details of a data migration task.
+// This API is used to query the details of a migration task.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
@@ -1159,7 +1161,7 @@ func (c *Client) DescribeMigrationDetail(request *DescribeMigrationDetailRequest
 }
 
 // DescribeMigrationDetail
-// This API is used to query the details of a data migration task.
+// This API is used to query the details of a migration task.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
@@ -1635,6 +1637,7 @@ func NewModifyCompareTaskResponse() (response *ModifyCompareTaskResponse) {
 //  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
@@ -1661,6 +1664,7 @@ func (c *Client) ModifyCompareTask(request *ModifyCompareTaskRequest) (response 
 //  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
@@ -2232,7 +2236,7 @@ func NewResumeMigrateJobResponse() (response *ResumeMigrateJobResponse) {
 }
 
 // ResumeMigrateJob
-// This API is used to retry a failed Redis data migration task. Note that this operation will skip the check stage and directly start the task, just like by calling `StartMigrationJob`. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
+// This API is used to retry an abnormal or failed Redis data migration task. Note that this operation will skip the check stage and directly start the task, just like by calling `StartMigrationJob`. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
@@ -2263,7 +2267,7 @@ func (c *Client) ResumeMigrateJob(request *ResumeMigrateJobRequest) (response *R
 }
 
 // ResumeMigrateJob
-// This API is used to retry a failed Redis data migration task. Note that this operation will skip the check stage and directly start the task, just like by calling `StartMigrationJob`. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
+// This API is used to retry an abnormal or failed Redis data migration task. Note that this operation will skip the check stage and directly start the task, just like by calling `StartMigrationJob`. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
@@ -2804,7 +2808,7 @@ func NewStopSyncJobResponse() (response *StopSyncJobResponse) {
 }
 
 // StopSyncJob
-// This API is used to stop a sync task.
+// This API is used to stop a sync task. After calling this API, you can call the `DescribeSyncJobs` API to query the latest task status.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -2814,7 +2818,7 @@ func (c *Client) StopSyncJob(request *StopSyncJobRequest) (response *StopSyncJob
 }
 
 // StopSyncJob
-// This API is used to stop a sync task.
+// This API is used to stop a sync task. After calling this API, you can call the `DescribeSyncJobs` API to query the latest task status.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"

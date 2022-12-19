@@ -949,6 +949,33 @@ type DBParamValue struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+type DCNReplicaConfig struct {
+	// DCN running status. Valid values: `START` (running), `STOP` (pause)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoReplicationMode *string `json:"RoReplicationMode,omitempty" name:"RoReplicationMode"`
+
+	// Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DelayReplicationType *string `json:"DelayReplicationType,omitempty" name:"DelayReplicationType"`
+
+	// Specified time for delayed replication
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DueTime *string `json:"DueTime,omitempty" name:"DueTime"`
+
+	// The number of seconds to delay the replication
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicationDelay *int64 `json:"ReplicationDelay,omitempty" name:"ReplicationDelay"`
+}
+
+type DCNReplicaStatus struct {
+	// DCN running status. Valid values: `START` (running), `STOP` (pause).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The current delay, which takes the delay value of the replica instance.
+	Delay *int64 `json:"Delay,omitempty" name:"Delay"`
+}
+
 type Database struct {
 	// Database name
 	DbName *string `json:"DbName,omitempty" name:"DbName"`
@@ -1036,6 +1063,17 @@ type DcnDetailItem struct {
 
 	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance)
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Configuration information of DCN replication. This field is null for a primary instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaConfig *DCNReplicaConfig `json:"ReplicaConfig,omitempty" name:"ReplicaConfig"`
+
+	// DCN replication status. This field is null for the primary instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaStatus *DCNReplicaStatus `json:"ReplicaStatus,omitempty" name:"ReplicaStatus"`
+
+	// Whether KMS is enabled.
+	EncryptStatus *int64 `json:"EncryptStatus,omitempty" name:"EncryptStatus"`
 }
 
 type Deal struct {
@@ -1051,7 +1089,7 @@ type Deal struct {
 	// ID of the associated process, which can be used to query the process execution status.
 	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 
-	// This field is populated only for orders that create instances, indicating the ID of the created instance.
+	// The ID of the created instance, which is required only for the order that creates an instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
@@ -2348,6 +2386,129 @@ func (r *DescribeOrdersResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOrdersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePriceRequestParams struct {
+	// AZ ID of the purchased instance.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instance nodes, which can be obtained 
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Memory size in GB, which can be obtained 
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Storage capacity in GB. The maximum and minimum storage space can be obtained 
+	//  by querying instance specification through the `DescribeDBInstanceSpecs` API.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Purchase period in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// The number of instances to be purchased. Only one instance is queried for price by default.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
+	Paymode *string `json:"Paymode,omitempty" name:"Paymode"`
+
+	// Price unit. Valid values:   
+	// `* pent` (cent), 
+	// `* microPent` (microcent).
+	AmountUnit *string `json:"AmountUnit,omitempty" name:"AmountUnit"`
+}
+
+type DescribePriceRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ ID of the purchased instance.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Number of instance nodes, which can be obtained 
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Memory size in GB, which can be obtained 
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Storage capacity in GB. The maximum and minimum storage space can be obtained 
+	//  by querying instance specification through the `DescribeDBInstanceSpecs` API.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Purchase period in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// The number of instances to be purchased. Only one instance is queried for price by default.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
+	Paymode *string `json:"Paymode,omitempty" name:"Paymode"`
+
+	// Price unit. Valid values:   
+	// `* pent` (cent), 
+	// `* microPent` (microcent).
+	AmountUnit *string `json:"AmountUnit,omitempty" name:"AmountUnit"`
+}
+
+func (r *DescribePriceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePriceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "NodeCount")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "Period")
+	delete(f, "Count")
+	delete(f, "Paymode")
+	delete(f, "AmountUnit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePriceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePriceResponseParams struct {
+	// Original price  
+	// * Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+	// * Currency: CNY (Chinese site), USD (international site)
+	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// The actual price may be different from the original price due to discounts. 
+	// * Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+	// * Currency: CNY (Chinese site), USD (international site)
+	Price *int64 `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePriceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePriceResponseParams `json:"Response"`
+}
+
+func (r *DescribePriceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePriceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -611,7 +611,7 @@ type CreateMigrationServiceRequestParams struct {
 	// Target instance region, such as `ap-guangzhou`. Note that it must be the same as the API request region.
 	DstRegion *string `json:"DstRegion,omitempty" name:"DstRegion"`
 
-	// Instance specification. Valid values: `micro`, `small`, `medium`, `large`, `xlarge`, `2xlarge`.
+	// Instance specification. Valid values: `small`, `medium`, `large`, `xlarge`, `2xlarge`.
 	InstanceClass *string `json:"InstanceClass,omitempty" name:"InstanceClass"`
 
 	// Quantity. Value range: [1,15]. Default value: `1`.
@@ -639,7 +639,7 @@ type CreateMigrationServiceRequest struct {
 	// Target instance region, such as `ap-guangzhou`. Note that it must be the same as the API request region.
 	DstRegion *string `json:"DstRegion,omitempty" name:"DstRegion"`
 
-	// Instance specification. Valid values: `micro`, `small`, `medium`, `large`, `xlarge`, `2xlarge`.
+	// Instance specification. Valid values: `small`, `medium`, `large`, `xlarge`, `2xlarge`.
 	InstanceClass *string `json:"InstanceClass,omitempty" name:"InstanceClass"`
 
 	// Quantity. Value range: [1,15]. Default value: `1`.
@@ -724,19 +724,19 @@ type CreateSyncJobRequestParams struct {
 	// Sync task specification, such as `Standard`.
 	Specification *string `json:"Specification,omitempty" name:"Specification"`
 
-	// Tag
+	// Tag information
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 
-	// Number of sync tasks
+	// The number of sync tasks purchased at a time. Value range: [1, 10]. Default value: `1`.
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
 
-	// Auto-renewal flag
+	// Auto-renewal flag, which takes effect if `PayMode` is `PrePay`. Valid values: `1` (auto-renewal enabled); `0` (auto-renewal disabled). Default value: `0`.
 	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
-	// Sync link specification
+	// Sync link specification, such as `micro`, `small`, `medium`, and `large`. Default value: `medium`.
 	InstanceClass *string `json:"InstanceClass,omitempty" name:"InstanceClass"`
 
-	// Sync link name
+	// Sync task name
 	JobName *string `json:"JobName,omitempty" name:"JobName"`
 
 	// ID of the existing task used to create a similar task
@@ -764,19 +764,19 @@ type CreateSyncJobRequest struct {
 	// Sync task specification, such as `Standard`.
 	Specification *string `json:"Specification,omitempty" name:"Specification"`
 
-	// Tag
+	// Tag information
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 
-	// Number of sync tasks
+	// The number of sync tasks purchased at a time. Value range: [1, 10]. Default value: `1`.
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
 
-	// Auto-renewal flag
+	// Auto-renewal flag, which takes effect if `PayMode` is `PrePay`. Valid values: `1` (auto-renewal enabled); `0` (auto-renewal disabled). Default value: `0`.
 	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
-	// Sync link specification
+	// Sync link specification, such as `micro`, `small`, `medium`, and `large`. Default value: `medium`.
 	InstanceClass *string `json:"InstanceClass,omitempty" name:"InstanceClass"`
 
-	// Sync link name
+	// Sync task name
 	JobName *string `json:"JobName,omitempty" name:"JobName"`
 
 	// ID of the existing task used to create a similar task
@@ -1102,11 +1102,11 @@ type DatabaseTableObject struct {
 }
 
 type DdlOption struct {
-	// DDL type, such as database, table, and view.
+	// DDL type, such as database, table, view, and index.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DdlObject *string `json:"DdlObject,omitempty" name:"DdlObject"`
 
-	// Specific DDL value, such as `Create` or `Drop`.
+	// DDL value. Valid values: [Create,Drop,Alter] for database <br>[Create,Drop,Alter,Truncate,Rename] for table <br/>[Create,Drop] for view <br/>[Create,Drop] for index
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DdlValue []*string `json:"DdlValue,omitempty" name:"DdlValue"`
 }
@@ -1944,7 +1944,7 @@ func (r *DescribeMigrationJobsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSyncJobsRequestParams struct {
-	// Sync task ID
+	// Sync task ID, such as `sync-werwfs23`.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// Sync task name
@@ -1981,7 +1981,7 @@ type DescribeSyncJobsRequestParams struct {
 type DescribeSyncJobsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sync task ID
+	// Sync task ID, such as `sync-werwfs23`.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// Sync task name
@@ -2356,6 +2356,10 @@ type Endpoint struct {
 	// Temporary token, which is required if the operation is performed across accounts.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TmpToken *string `json:"TmpToken,omitempty" name:"TmpToken"`
+
+	// External role ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleExternalId *string `json:"RoleExternalId,omitempty" name:"RoleExternalId"`
 }
 
 type ErrorInfoItem struct {
@@ -3681,6 +3685,10 @@ type StepTip struct {
 	// Help document
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HelpDoc *string `json:"HelpDoc,omitempty" name:"HelpDoc"`
+
+	// Whether the current step is skipped
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SkipInfo *string `json:"SkipInfo,omitempty" name:"SkipInfo"`
 }
 
 // Predefined struct for user
@@ -3887,7 +3895,7 @@ type SyncDetailInfo struct {
 }
 
 type SyncJobInfo struct {
-	// Sync task ID
+	// Sync task ID, such as `sync-btso140`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
@@ -3895,15 +3903,15 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobName *string `json:"JobName,omitempty" name:"JobName"`
 
-	// Billing mode
+	// Billing mode. Valid values: `PostPay` (pay-as-you-go); `PrePay` (monthly subscription).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
 
-	// Running mode
+	// Running mode. Valid values: `Immediate`, `Timed`. Default value: `Immediate`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RunMode *string `json:"RunMode,omitempty" name:"RunMode"`
 
-	// Expected execution time
+	// Expected execution time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpectRunTime *string `json:"ExpectRunTime,omitempty" name:"ExpectRunTime"`
 
@@ -3927,19 +3935,19 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Specification *string `json:"Specification,omitempty" name:"Specification"`
 
-	// Expiration time
+	// Expiration time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-	// Source database region
+	// Source database region, such as `ap-guangzhou`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcRegion *string `json:"SrcRegion,omitempty" name:"SrcRegion"`
 
-	// Source database type
+	// Source database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
 
-	// Source database access type
+	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
@@ -3947,15 +3955,15 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
-	// Target database region
+	// Target database region, such as `ap-guangzhou`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstRegion *string `json:"DstRegion,omitempty" name:"DstRegion"`
 
-	// Target database type
+	// Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
 
-	// Target database access type
+	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
 
@@ -3963,29 +3971,45 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
 
-	// Creation time
+	// Creation time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Start time
+	// Start time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Task status
+	// Task status. Valid values: `UnInitialized`, `Initialized`, `Checking`, `CheckPass`, `CheckNotPass`, `ReadyRunning`, `Running`, `Pausing`, `Paused`, `Stopping`, `Stopped`, `ResumableErr`, `Resuming`, `Failed`, `Released`, `Resetting`, `Unknown`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Tag
+	// End time in the format of `yyyy-mm-dd hh:mm:ss`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Tag information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
 
 	// Step information of the sync task
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Detail *SyncDetailInfo `json:"Detail,omitempty" name:"Detail"`
+
+	// Billing status. Valid values: `Normal`, `Resizing`, `Renewing`, `Isolating`, `Isolated`, `Offlining`, `Offlined`, `NotBilled`, `Recovering`, `PostPay2Prepaying`, `PrePay2Postpaying`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TradeStatus *string `json:"TradeStatus,omitempty" name:"TradeStatus"`
+
+	// Sync link specification, such as `micro`, `small`, `medium`, and `large`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceClass *string `json:"InstanceClass,omitempty" name:"InstanceClass"`
+
+	// Auto-renewal flag, which takes effect if `PayMode` is `PrePay`. Valid values: `1` (auto-renewal enabled); `0` (auto-renewal disabled).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// Deletion time in the format of `yyyy-mm-dd hh:mm:ss`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
 }
 
 type Table struct {

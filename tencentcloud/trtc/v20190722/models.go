@@ -600,7 +600,7 @@ type McuPublishCdnParam struct {
 	// The URLs of the CDNs to relay to.
 	PublishCdnUrl *string `json:"PublishCdnUrl,omitempty" name:"PublishCdnUrl"`
 
-	// Whether to relay to Tencent Cloud’s CDN. 0: Third-party CDN; 1 (default): Tencent Cloud’s CDN. Relaying to a third-party CDN will incur fees. To avoid unexpected charges, we recommend you pass in a specific value. For details, see the API document.
+	// Whether to relay to Tencent Cloud’s CDN. `0`: Third-party CDN; `1` (default): Tencent Cloud’s CDN. Relaying to a third-party CDN will incur fees. To avoid unexpected charges, we recommend you pass in a specific value. For details, see the API document.
 	IsTencentCdn *uint64 `json:"IsTencentCdn,omitempty" name:"IsTencentCdn"`
 }
 
@@ -749,11 +749,17 @@ type MixLayoutParams struct {
 	// The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is defined the same as `RenderMode` in `MixLayoufList`.
 	BackgroundImageRenderMode *uint64 `json:"BackgroundImageRenderMode,omitempty" name:"BackgroundImageRenderMode"`
 
-	// The download URL of the default background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+	// The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
 	DefaultSubBackgroundImage *string `json:"DefaultSubBackgroundImage,omitempty" name:"DefaultSubBackgroundImage"`
 
 	// The watermark layout. Up to 25 watermarks are supported.
 	WaterMarkList []*WaterMark `json:"WaterMarkList,omitempty" name:"WaterMarkList"`
+
+	// The render mode to use when the aspect ratio of a video is different from that of the window. This parameter is invalid if a custom layout is used. It is defined the same as `RenderMode` in `MixLayoufList`.
+	RenderMode *uint64 `json:"RenderMode,omitempty" name:"RenderMode"`
+
+	// This parameter is valid only if the screen sharing layout is used. If you set it to `1`, the large video window will appear on the right and the small window on the left. The default value is `0`.
+	MaxResolutionUserAlign *uint64 `json:"MaxResolutionUserAlign,omitempty" name:"MaxResolutionUserAlign"`
 }
 
 type MixTranscodeParams struct {
@@ -859,7 +865,7 @@ type RecordParams struct {
 	// 2: Mixed-stream recording. Mixes the audios and videos of subscribed users (`UserId`) in a room, records the mixed stream, and saves the recording files to the cloud.
 	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
 
-	// The time period (seconds) to wait after there are no anchors in a room to stop recording automatically. The value cannot be smaller than 5 or larger than 86400 (24 hours). Default value: 30.
+	// The time period (seconds) to wait to automatically stop recording after there are no anchors (users who publish streams) in a room. Value range: 5-86400 (max 24 hours). Default value: 30.
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitempty" name:"MaxIdleTime"`
 
 	// The media type of the streams to record.
@@ -871,11 +877,15 @@ type RecordParams struct {
 	// The allowlist/blocklist for stream subscription.
 	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitempty" name:"SubscribeStreamUserIds"`
 
-	// The output format. 0 (default): HLS; 1: HLS + MP4 (recorded in HLS and converted to MP4). This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
+	// The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
 	OutputFormat *uint64 `json:"OutputFormat,omitempty" name:"OutputFormat"`
 
 	// Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
 	AvMerge *uint64 `json:"AvMerge,omitempty" name:"AvMerge"`
+
+	// The maximum file duration allowed (minutes). If the output format is AAC or MP4, and the maximum file duration is exceeded, the file will be segmented. Value range: 1-1440. Default value: 1440 (24 hours). The maximum file size allowed is 2 GB. If the file size exceeds 2 GB, or the file duration exceeds 24 hours, the file will also be segmented.
+	// This parameter is invalid if the output format is HLS.
+	MaxMediaFileDuration *uint64 `json:"MaxMediaFileDuration,omitempty" name:"MaxMediaFileDuration"`
 }
 
 // Predefined struct for user
@@ -1424,8 +1434,11 @@ type TencentVod struct {
 	// The upload context, which is passed through after upload is completed.
 	SourceContext *string `json:"SourceContext,omitempty" name:"SourceContext"`
 
-	// The format of recording files saved to VOD. 0 (default): MP4; 1: HLS.
+	// The format of recording files uploaded to VOD. `0` (default): MP4; `1`: HLS; `2`: AAC (valid only if `StreamType` is `1`).
 	MediaType *uint64 `json:"MediaType,omitempty" name:"MediaType"`
+
+	// The custom prefix of recording files. This parameter is valid only if recording files are uploaded to VOD. It can contain letters, numbers, underscores, and hyphens and cannot exceed 64 bytes. This prefix and the automatically generated filename are connected with `__UserId_u_`.
+	UserDefineRecordId *string `json:"UserDefineRecordId,omitempty" name:"UserDefineRecordId"`
 }
 
 // Predefined struct for user

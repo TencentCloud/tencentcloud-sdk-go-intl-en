@@ -53,11 +53,20 @@ const (
 	// Failed to unassociate the security group.
 	FAILEDOPERATION_DISASSOCIATESECURITYGROUPSFAILED = "FailedOperation.DisassociateSecurityGroupsFailed"
 
+	// 
+	FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
+
 	// Failed to modify account permissions.
 	FAILEDOPERATION_MODIFYRIGHTFAILED = "FailedOperation.ModifyRightFailed"
 
+	// 
+	FAILEDOPERATION_OSSISOLATEINSTANCEFAILED = "FailedOperation.OssIsolateInstanceFailed"
+
 	// Failed to request the backend API.
 	FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+
+	// Failed to make order payment.
+	FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
 
 	// Failed to reset the account password.
 	FAILEDOPERATION_RESETPASSWORDFAILED = "FailedOperation.ResetPasswordFailed"
@@ -67,6 +76,9 @@ const (
 
 	// Failed to set a rule.
 	FAILEDOPERATION_SETRULELOCATIONFAILED = "FailedOperation.SetRuleLocationFailed"
+
+	// 
+	FAILEDOPERATION_SETSVCLOCATIONFAILED = "FailedOperation.SetSvcLocationFailed"
 
 	// Either tag key/value verification or tag API authentication failed.
 	FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
@@ -182,6 +194,9 @@ const (
 	// An error occurred when reading data from the database.
 	INTERNALERROR_READDATABASEFAILED = "InternalError.ReadDatabaseFailed"
 
+	// 
+	INTERNALERROR_RETREATETIME = "InternalError.RetreateTime"
+
 	// Route not found.
 	INTERNALERROR_ROUTENOTFOUND = "InternalError.RouteNotFound"
 
@@ -230,6 +245,9 @@ const (
 	// Security group validity test failed.
 	INVALIDPARAMETER_SGCHECKFAIL = "InvalidParameter.SGCheckFail"
 
+	// 
+	INVALIDPARAMETER_SPECNOTFOUND = "InvalidParameter.SpecNotFound"
+
 	// The specified VPC subnet was not found.
 	INVALIDPARAMETER_SUBNETNOTFOUND = "InvalidParameter.SubnetNotFound"
 
@@ -269,17 +287,26 @@ const (
 	// An error occurred while initializing database instance parameters.
 	INVALIDPARAMETERVALUE_ILLEGALINITPARAM = "InvalidParameterValue.IllegalInitParam"
 
+	// The number of products exceeds the upper limit.
+	INVALIDPARAMETERVALUE_ILLEGALQUANTITY = "InvalidParameterValue.IllegalQuantity"
+
 	// Incorrect permission parameter
 	INVALIDPARAMETERVALUE_ILLEGALRIGHTPARAM = "InvalidParameterValue.IllegalRightParam"
 
 	// The specified AZ was not found.
 	INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 
+	// 
+	INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+
 	// The specification information of the database instance was not found.
 	INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
 
 	// Operations by a system user are not allowed.
 	INVALIDPARAMETERVALUE_SUPERUSERFORBIDDEN = "InvalidParameterValue.SuperUserForbidden"
+
+	// 
+	INVALIDPARAMETERVALUE_SYNCMODENOTALLOWED = "InvalidParameterValue.SyncModeNotAllowed"
 
 	// The specified account does not exist.
 	RESOURCENOTFOUND_ACCOUNTDOESNOTEXIST = "ResourceNotFound.AccountDoesNotExist"
@@ -307,6 +334,9 @@ const (
 
 	// Incorrect database instance status. Operations are not allowed.
 	RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+
+	// 
+	RESOURCEUNAVAILABLE_SGCHECKFAIL = "ResourceUnavailable.SGCheckFail"
 
 	// You have no permission to manipulate this API or resource.
 	UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"

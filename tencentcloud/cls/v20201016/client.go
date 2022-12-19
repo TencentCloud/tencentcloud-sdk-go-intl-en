@@ -2182,7 +2182,7 @@ func NewDescribeLogHistogramResponse() (response *DescribeLogHistogramResponse) 
 }
 
 // DescribeLogHistogram
-// This API is used to build a histogram.
+// This API is used to get a log count histogram. 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2206,7 +2206,7 @@ func (c *Client) DescribeLogHistogram(request *DescribeLogHistogramRequest) (res
 }
 
 // DescribeLogHistogram
-// This API is used to build a histogram.
+// This API is used to get a log count histogram. 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4247,6 +4247,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *UploadLogResponse, err error) {
     return c.UploadLogWithContext(context.Background(), request, data)
 }
@@ -4583,6 +4584,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UploadLogWithContext(ctx context.Context, request *UploadLogRequest, data []byte) (response *UploadLogResponse, err error) {
     if request == nil {
         request = NewUploadLogRequest()
