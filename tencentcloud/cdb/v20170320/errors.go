@@ -83,9 +83,6 @@ const (
 	// Log query failed.
 	FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
 
-	// The proxy is being created or already exists. You cannot create it again.
-	FAILEDOPERATION_REPEATCREATEPROXYERROR = "FailedOperation.RepeatCreateProxyError"
-
 	// Exception with the backend request for the service. Please contact customer service.
 	FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
 

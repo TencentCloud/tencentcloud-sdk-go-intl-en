@@ -184,113 +184,6 @@ type Address struct {
 }
 
 // Predefined struct for user
-type ApplyCDBProxyRequestParams struct {
-	// Unique ID of the source instance
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// VPC ID
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
-
-	// VPC subnet ID
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
-
-	// Number of nodes in the proxy group
-	ProxyCount *uint64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
-
-	// Number of CPU cores
-	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
-
-	// Memory
-	Mem *uint64 `json:"Mem,omitempty" name:"Mem"`
-
-	// Security group
-	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
-
-	// Description (up to 256 characters)
-	Desc *string `json:"Desc,omitempty" name:"Desc"`
-}
-
-type ApplyCDBProxyRequest struct {
-	*tchttp.BaseRequest
-	
-	// Unique ID of the source instance
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// VPC ID
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
-
-	// VPC subnet ID
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
-
-	// Number of nodes in the proxy group
-	ProxyCount *uint64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
-
-	// Number of CPU cores
-	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
-
-	// Memory
-	Mem *uint64 `json:"Mem,omitempty" name:"Mem"`
-
-	// Security group
-	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
-
-	// Description (up to 256 characters)
-	Desc *string `json:"Desc,omitempty" name:"Desc"`
-}
-
-func (r *ApplyCDBProxyRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ApplyCDBProxyRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "UniqVpcId")
-	delete(f, "UniqSubnetId")
-	delete(f, "ProxyCount")
-	delete(f, "Cpu")
-	delete(f, "Mem")
-	delete(f, "SecurityGroup")
-	delete(f, "Desc")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCDBProxyRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ApplyCDBProxyResponseParams struct {
-	// Async request ID
-	// Note: this field may return `null`, indicating that no valid value can be found.
-	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ApplyCDBProxyResponse struct {
-	*tchttp.BaseResponse
-	Response *ApplyCDBProxyResponseParams `json:"Response"`
-}
-
-func (r *ApplyCDBProxyResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ApplyCDBProxyResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
 	// Security group ID.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
@@ -508,6 +401,10 @@ type BackupInfo struct {
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether the backup file is encrypted. Valid values: `on` (encrypted), `off` (unencrypted).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptionFlag *string `json:"EncryptionFlag,omitempty" name:"EncryptionFlag"`
 }
 
 type BackupItem struct {
@@ -729,7 +626,7 @@ type CdbSellConfig struct {
 	// Status. The value `0` indicates that this specification is available.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance).
+	// Instance type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance), `BASIC_V2` (basic v2 instance).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
 
@@ -7854,109 +7751,6 @@ func (r *ModifyCDBProxyDescResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyCDBProxyRequestParams struct {
-	// Unique ID of the database proxy group
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
-
-	// Whether to remove delayed read-only instances from the proxy group. Valid values: `true`, `false`. Default value: `false`.
-	IsKickout *bool `json:"IsKickout,omitempty" name:"IsKickout"`
-
-	// The minimum number of read-only instances allowed by the proxy group. Minimum value: 1; maximum value: The number of instances.
-	MinCount *uint64 `json:"MinCount,omitempty" name:"MinCount"`
-
-	// Delay threshold. If `IsKickOut` is set to `true`, this parameter is required.
-	MaxDelay *uint64 `json:"MaxDelay,omitempty" name:"MaxDelay"`
-
-	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
-
-	// Read-Only weight of an instance
-	RoWeightValues *RoWeight `json:"RoWeightValues,omitempty" name:"RoWeightValues"`
-
-	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`. Default value: `false`.
-	FailOver *bool `json:"FailOver,omitempty" name:"FailOver"`
-
-	// Whether to automatically add newly created read-only instances to the proxy group. Valid values: `true`, `false` Default value: `false`.
-	AutoAddRo *bool `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
-}
-
-type ModifyCDBProxyRequest struct {
-	*tchttp.BaseRequest
-	
-	// Unique ID of the database proxy group
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
-
-	// Whether to remove delayed read-only instances from the proxy group. Valid values: `true`, `false`. Default value: `false`.
-	IsKickout *bool `json:"IsKickout,omitempty" name:"IsKickout"`
-
-	// The minimum number of read-only instances allowed by the proxy group. Minimum value: 1; maximum value: The number of instances.
-	MinCount *uint64 `json:"MinCount,omitempty" name:"MinCount"`
-
-	// Delay threshold. If `IsKickOut` is set to `true`, this parameter is required.
-	MaxDelay *uint64 `json:"MaxDelay,omitempty" name:"MaxDelay"`
-
-	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
-
-	// Read-Only weight of an instance
-	RoWeightValues *RoWeight `json:"RoWeightValues,omitempty" name:"RoWeightValues"`
-
-	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`. Default value: `false`.
-	FailOver *bool `json:"FailOver,omitempty" name:"FailOver"`
-
-	// Whether to automatically add newly created read-only instances to the proxy group. Valid values: `true`, `false` Default value: `false`.
-	AutoAddRo *bool `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
-}
-
-func (r *ModifyCDBProxyRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyCDBProxyRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ProxyGroupId")
-	delete(f, "IsKickout")
-	delete(f, "MinCount")
-	delete(f, "MaxDelay")
-	delete(f, "WeightMode")
-	delete(f, "RoWeightValues")
-	delete(f, "FailOver")
-	delete(f, "AutoAddRo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCDBProxyRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyCDBProxyResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyCDBProxyResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyCDBProxyResponseParams `json:"Response"`
-}
-
-func (r *ModifyCDBProxyResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyCDBProxyResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type ModifyCDBProxyVipVPortRequestParams struct {
 	// Proxy group ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
@@ -8425,7 +8219,7 @@ type ModifyInstancePasswordComplexityRequestParams struct {
 	// Instance ID list
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// List of parameters to be modified. Every element is a pair of `Name` (parameter name) and `CurrentValue` (new value).
+	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.lengt`, `validate_password.mixed_case_coun`, `validate_password.number_coun`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validate_password_polic`, `validate_password_lengt` `validate_password_mixed_case_coun`, `validate_password_number_coun`, `validate_password_special_char_coun`.
 	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
 }
 
@@ -8435,7 +8229,7 @@ type ModifyInstancePasswordComplexityRequest struct {
 	// Instance ID list
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// List of parameters to be modified. Every element is a pair of `Name` (parameter name) and `CurrentValue` (new value).
+	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.lengt`, `validate_password.mixed_case_coun`, `validate_password.number_coun`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validate_password_polic`, `validate_password_lengt` `validate_password_mixed_case_coun`, `validate_password_number_coun`, `validate_password_special_char_coun`.
 	ParamList []*Parameter `json:"ParamList,omitempty" name:"ParamList"`
 }
 
@@ -9942,10 +9736,6 @@ type RoVipInfo struct {
 
 	// VIP of the read-only instance
 	RoVip *string `json:"RoVip,omitempty" name:"RoVip"`
-}
-
-type RoWeight struct {
-
 }
 
 type RoWeightValue struct {

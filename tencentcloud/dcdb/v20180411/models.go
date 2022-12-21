@@ -20,6 +20,14 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type Account struct {
+	// Account name
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Host address
+	Host *string `json:"Host,omitempty" name:"Host"`
+}
+
 // Predefined struct for user
 type ActiveHourDCDBInstanceRequestParams struct {
 	// List of instance IDs in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
@@ -370,6 +378,20 @@ func (r *CloseDBExtranetAccessResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CloseDBExtranetAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ColumnPrivilege struct {
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Table name
+	Table *string `json:"Table,omitempty" name:"Table"`
+
+	// Column name
+	Column *string `json:"Column,omitempty" name:"Column"`
+
+	// Permission information
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 }
 
 type ConstraintRange struct {
@@ -1334,6 +1356,14 @@ type DatabaseFunction struct {
 	Func *string `json:"Func,omitempty" name:"Func"`
 }
 
+type DatabasePrivilege struct {
+	// Permission information
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+}
+
 type DatabaseProcedure struct {
 	// Stored procedure name
 	Proc *string `json:"Proc,omitempty" name:"Proc"`
@@ -1403,6 +1433,9 @@ type DcnDetailItem struct {
 
 	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), and `4` (dedicated disaster recovery instance).
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Whether KMS is enabled.
+	EncryptStatus *int64 `json:"EncryptStatus,omitempty" name:"EncryptStatus"`
 }
 
 type Deal struct {
@@ -1419,7 +1452,7 @@ type Deal struct {
 	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
 
 	// The ID of the created instance, which is required only for the order that creates an instance.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
 	// Billing mode. Valid values: `0` (postpaid), `1` (prepaid).
@@ -2329,6 +2362,136 @@ func (r *DescribeDCDBInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDCDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDCDBPriceRequestParams struct {
+	// AZ ID of the purchased instance.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The number of instances to be purchased. You can purchase 1-10 instances.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Validity period in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of nodes in a single shard, which can be obtained
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	ShardNodeCount *int64 `json:"ShardNodeCount,omitempty" name:"ShardNodeCount"`
+
+	// Shard memory size in GB, which can be obtained 
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage size in GB, which can be obtained
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+
+	// The number of shards in the instance. Value range: 2-8. Upgrade your instance to have up to 64 shards if you require more.
+	ShardCount *int64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
+	Paymode *string `json:"Paymode,omitempty" name:"Paymode"`
+
+	// Price unit. Valid values:   
+	// `* pent` (cent), 
+	// `* microPent` (microcent).
+	AmountUnit *string `json:"AmountUnit,omitempty" name:"AmountUnit"`
+}
+
+type DescribeDCDBPriceRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ ID of the purchased instance.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The number of instances to be purchased. You can purchase 1-10 instances.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// Validity period in months
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of nodes in a single shard, which can be obtained
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	ShardNodeCount *int64 `json:"ShardNodeCount,omitempty" name:"ShardNodeCount"`
+
+	// Shard memory size in GB, which can be obtained 
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage size in GB, which can be obtained
+	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+
+	// The number of shards in the instance. Value range: 2-8. Upgrade your instance to have up to 64 shards if you require more.
+	ShardCount *int64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
+	Paymode *string `json:"Paymode,omitempty" name:"Paymode"`
+
+	// Price unit. Valid values:   
+	// `* pent` (cent), 
+	// `* microPent` (microcent).
+	AmountUnit *string `json:"AmountUnit,omitempty" name:"AmountUnit"`
+}
+
+func (r *DescribeDCDBPriceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDCDBPriceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "Count")
+	delete(f, "Period")
+	delete(f, "ShardNodeCount")
+	delete(f, "ShardMemory")
+	delete(f, "ShardStorage")
+	delete(f, "ShardCount")
+	delete(f, "Paymode")
+	delete(f, "AmountUnit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDCDBPriceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDCDBPriceResponseParams struct {
+	// Original price  
+	// * Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+	// * Currency: CNY (Chinese site), USD (international site)
+	OriginalPrice *int64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// The actual price may be different from the original price due to discounts. 
+	// * Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
+	// * Currency: CNY (Chinese site), USD (international site)
+	Price *int64 `json:"Price,omitempty" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDCDBPriceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDCDBPriceResponseParams `json:"Response"`
+}
+
+func (r *DescribeDCDBPriceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDCDBPriceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3608,6 +3771,115 @@ func (r *ModifyAccountDescriptionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyAccountPrivilegesRequestParams struct {
+	// Instance ID in the format of tdsql-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database account, including username and host address.
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
+
+	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
+	// Note: If the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
+
+	// Database permission. Value range: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".	
+	// Note: If the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted database permissions, set `Privileges` to an empty array.
+	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
+
+	// Database table permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+	// Note: If the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
+
+	// Column permission in the table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
+	// Note: If the parameter is not passed in, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
+	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges"`
+
+	// Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+	// Note: If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted view permissions, set `Privileges` to an empty array.
+	ViewPrivileges []*ViewPrivileges `json:"ViewPrivileges,omitempty" name:"ViewPrivileges"`
+}
+
+type ModifyAccountPrivilegesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of tdsql-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Database account, including username and host address.
+	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
+
+	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".
+	// Note: If the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
+
+	// Database permission. Value range: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "REFERENCES", "INDEX", "ALTER", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER".	
+	// Note: If the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted database permissions, set `Privileges` to an empty array.
+	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
+
+	// Database table permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+	// Note: If the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
+
+	// Column permission in the table. Valid values: "SELECT", "INSERT", "UPDATE", "REFERENCES".
+	// Note: If the parameter is not passed in, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
+	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitempty" name:"ColumnPrivileges"`
+
+	// Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
+	// Note: If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted view permissions, set `Privileges` to an empty array.
+	ViewPrivileges []*ViewPrivileges `json:"ViewPrivileges,omitempty" name:"ViewPrivileges"`
+}
+
+func (r *ModifyAccountPrivilegesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountPrivilegesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Accounts")
+	delete(f, "GlobalPrivileges")
+	delete(f, "DatabasePrivileges")
+	delete(f, "TablePrivileges")
+	delete(f, "ColumnPrivileges")
+	delete(f, "ViewPrivileges")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccountPrivilegesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAccountPrivilegesResponseParams struct {
+	// Async task ID, which can be used in the [DescribeFlow](https://www.tencentcloud.com/document/product/237/16177) API to query the async task result.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAccountPrivilegesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAccountPrivilegesResponseParams `json:"Response"`
+}
+
+func (r *ModifyAccountPrivilegesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceNameRequestParams struct {
 	// Instance ID in the format of tdsql-hdaprz0v
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -4495,6 +4767,17 @@ type TableColumn struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type TablePrivilege struct {
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// Table name
+	Table *string `json:"Table,omitempty" name:"Table"`
+
+	// Permission information
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+}
+
 // Predefined struct for user
 type TerminateDedicatedDBInstanceRequestParams struct {
 	// Instance ID in the format of `dcdbt-ow728lmc`
@@ -4550,4 +4833,15 @@ func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ViewPrivileges struct {
+	// Database name
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// View name
+	View *string `json:"View,omitempty" name:"View"`
+
+	// Permission information
+	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 }
