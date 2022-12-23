@@ -1479,6 +1479,13 @@ type DBInstance struct {
 
 	// System time zone. Default value: `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+
+	// Whether the instance is deployed across AZs
+	IsDrZone *bool `json:"IsDrZone,omitempty" name:"IsDrZone"`
+
+	// Replica AZ information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SlaveZones *SlaveZones `json:"SlaveZones,omitempty" name:"SlaveZones"`
 }
 
 type DBPrivilege struct {
@@ -1974,6 +1981,15 @@ type DescribeAccountsRequestParams struct {
 
 	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Account ID
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sorting by `createTime`, `updateTime`, or `passTime`. Default value: `createTime` (desc).
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
 type DescribeAccountsRequest struct {
@@ -1987,6 +2003,15 @@ type DescribeAccountsRequest struct {
 
 	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Account ID
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sorting by `createTime`, `updateTime`, or `passTime`. Default value: `createTime` (desc).
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
 func (r *DescribeAccountsRequest) ToJsonString() string {
@@ -2004,6 +2029,9 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "Name")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountsRequest has unknown keys!", "")
 	}
@@ -3079,6 +3107,12 @@ type DescribeDBsRequestParams struct {
 
 	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Database name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
 type DescribeDBsRequest struct {
@@ -3092,6 +3126,12 @@ type DescribeDBsRequest struct {
 
 	// Page number. Default value: 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Database name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
 func (r *DescribeDBsRequest) ToJsonString() string {
@@ -3109,6 +3149,8 @@ func (r *DescribeDBsRequest) FromJsonString(s string) error {
 	delete(f, "InstanceIdSet")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "Name")
+	delete(f, "OrderByType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBsRequest has unknown keys!", "")
 	}
@@ -6287,6 +6329,14 @@ func (r *RunMigrationResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RunMigrationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SlaveZones struct {
+	// Replica AZ region code
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// Replica AZ
+	SlaveZoneName *string `json:"SlaveZoneName,omitempty" name:"SlaveZoneName"`
 }
 
 type SlowlogInfo struct {

@@ -483,6 +483,86 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     return
 }
 
+func NewCreateDBInstanceRequest() (request *CreateDBInstanceRequest) {
+    request = &CreateDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "CreateDBInstance")
+    
+    
+    return
+}
+
+func NewCreateDBInstanceResponse() (response *CreateDBInstanceResponse) {
+    response = &CreateDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateDBInstance
+// This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, validity period, and quantity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
+//  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_CHECKVIPSTATUSFAILED = "InternalError.CheckVipStatusFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  INVALIDPARAMETER_SUBNETNOTFOUND = "InvalidParameter.SubnetNotFound"
+//  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALCOUNT = "InvalidParameterValue.IllegalCount"
+//  INVALIDPARAMETERVALUE_ILLEGALQUANTITY = "InvalidParameterValue.IllegalQuantity"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateDBInstance(request *CreateDBInstanceRequest) (response *CreateDBInstanceResponse, err error) {
+    return c.CreateDBInstanceWithContext(context.Background(), request)
+}
+
+// CreateDBInstance
+// This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, validity period, and quantity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
+//  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_CHECKVIPSTATUSFAILED = "InternalError.CheckVipStatusFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  INVALIDPARAMETER_SUBNETNOTFOUND = "InvalidParameter.SubnetNotFound"
+//  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALCOUNT = "InvalidParameterValue.IllegalCount"
+//  INVALIDPARAMETERVALUE_ILLEGALQUANTITY = "InvalidParameterValue.IllegalQuantity"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateDBInstanceWithContext(ctx context.Context, request *CreateDBInstanceRequest) (response *CreateDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateHourDBInstanceRequest() (request *CreateHourDBInstanceRequest) {
     request = &CreateHourDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2077,6 +2157,60 @@ func (c *Client) IsolateDedicatedDBInstanceWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewIsolateDedicatedDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewKillSessionRequest() (request *KillSessionRequest) {
+    request = &KillSessionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "KillSession")
+    
+    
+    return
+}
+
+func NewKillSessionResponse() (response *KillSessionResponse) {
+    response = &KillSessionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// KillSession
+// This API is used to kill the specified session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) KillSession(request *KillSessionRequest) (response *KillSessionResponse, err error) {
+    return c.KillSessionWithContext(context.Background(), request)
+}
+
+// KillSession
+// This API is used to kill the specified session.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) KillSessionWithContext(ctx context.Context, request *KillSessionRequest) (response *KillSessionResponse, err error) {
+    if request == nil {
+        request = NewKillSessionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("KillSession require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewKillSessionResponse()
     err = c.Send(request, response)
     return
 }
