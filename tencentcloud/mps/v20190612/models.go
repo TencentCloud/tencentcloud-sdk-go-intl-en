@@ -6297,7 +6297,9 @@ type LiveStreamTaskNotifyConfig struct {
 	// This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 
-	// Notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+	// The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+	// 
+	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
 	NotifyType *string `json:"NotifyType,omitempty" name:"NotifyType"`
 
 	// HTTP callback URL, required if `NotifyType` is set to `URL`
@@ -6662,7 +6664,7 @@ type MediaImageSpriteItem struct {
 }
 
 type MediaInputInfo struct {
-	// The type of video processing input object, which supports COS and URL.
+	// The input type, which can be `COS` or `URL`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
@@ -9100,6 +9102,11 @@ type ProcessMediaRequestParams struct {
 	// 
 	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
 	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+
+	// The task type.
+	// <li> `Online` (default): A task that is executed immediately.</li>
+	// <li> `Offline`: A task that is executed when the system is idle (within three days by default).</li>
+	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 }
 
 type ProcessMediaRequest struct {
@@ -9146,6 +9153,11 @@ type ProcessMediaRequest struct {
 	// 
 	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
 	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+
+	// The task type.
+	// <li> `Online` (default): A task that is executed immediately.</li>
+	// <li> `Offline`: A task that is executed when the system is idle (within three days by default).</li>
+	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 }
 
 func (r *ProcessMediaRequest) ToJsonString() string {
@@ -9172,6 +9184,7 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "ScheduleId")
+	delete(f, "TaskType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
 	}
@@ -9894,11 +9907,11 @@ type TaskNotifyConfig struct {
 	NotifyMode *string `json:"NotifyMode,omitempty" name:"NotifyMode"`
 
 	// The notification type. Valid values:
-	// <li>CMQ: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
-	// <li>TDMQ-CMQ: Message queue</li>
-	// <li>URL: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
-	// <li>SCF: We do not recommend this notification type, which you need to configure in the SCF console.</li>
-	// Default value: `TDMQ-CMQ`.
+	// <li>`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
+	// <li>`TDMQ-CMQ`: Message queue</li>
+	// <li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
+	// <li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
+	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
 	NotifyType *string `json:"NotifyType,omitempty" name:"NotifyType"`
 
 	// HTTP callback URL, required if `NotifyType` is set to `URL`

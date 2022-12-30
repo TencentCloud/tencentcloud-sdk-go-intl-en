@@ -448,6 +448,12 @@ type CreateTawInstanceRequestParams struct {
 
 	// Instance purchase channel. Valid value: `cdn`.
 	BuyingChannel *string `json:"BuyingChannel,omitempty" name:"BuyingChannel"`
+
+
+	ResourcePackageType *uint64 `json:"ResourcePackageType,omitempty" name:"ResourcePackageType"`
+
+
+	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitempty" name:"ResourcePackageNum"`
 }
 
 type CreateTawInstanceRequest struct {
@@ -479,6 +485,10 @@ type CreateTawInstanceRequest struct {
 
 	// Instance purchase channel. Valid value: `cdn`.
 	BuyingChannel *string `json:"BuyingChannel,omitempty" name:"BuyingChannel"`
+
+	ResourcePackageType *uint64 `json:"ResourcePackageType,omitempty" name:"ResourcePackageType"`
+
+	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitempty" name:"ResourcePackageNum"`
 }
 
 func (r *CreateTawInstanceRequest) ToJsonString() string {
@@ -502,6 +512,8 @@ func (r *CreateTawInstanceRequest) FromJsonString(s string) error {
 	delete(f, "CountNum")
 	delete(f, "PeriodRetain")
 	delete(f, "BuyingChannel")
+	delete(f, "ResourcePackageType")
+	delete(f, "ResourcePackageNum")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTawInstanceRequest has unknown keys!", "")
 	}
@@ -590,6 +602,9 @@ func (r *CreateWhitelistRequest) FromJsonString(s string) error {
 type CreateWhitelistResponseParams struct {
 	// Message
 	Msg *string `json:"Msg,omitempty" name:"Msg"`
+
+	// Allowlist ID
+	ID *uint64 `json:"ID,omitempty" name:"ID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4605,7 +4620,7 @@ type DescribeLogListRequestParams struct {
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-	// Query statement, which is required and can contain up to 4,096 characters.
+	// Query statement, which is required and can contain up to 4,096 characters, such as "id:120001 AND type:\"log\"".
 	Query *string `json:"Query,omitempty" name:"Query"`
 
 	// End time (required)
@@ -4633,7 +4648,7 @@ type DescribeLogListRequest struct {
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-	// Query statement, which is required and can contain up to 4,096 characters.
+	// Query statement, which is required and can contain up to 4,096 characters, such as "id:120001 AND type:\"log\"".
 	Query *string `json:"Query,omitempty" name:"Query"`
 
 	// End time (required)

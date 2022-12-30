@@ -6742,6 +6742,22 @@ type RocketMQClusterInfo struct {
 	// Whether it is an exclusive instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsVip *bool `json:"IsVip,omitempty" name:"IsVip"`
+
+	// TDMQ for RocketMQ cluster type flag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RocketMQFlag *bool `json:"RocketMQFlag,omitempty" name:"RocketMQFlag"`
+
+
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+
+	IsolateTime *int64 `json:"IsolateTime,omitempty" name:"IsolateTime"`
+
+
+	HttpPublicEndpoint *string `json:"HttpPublicEndpoint,omitempty" name:"HttpPublicEndpoint"`
+
+
+	HttpVpcEndpoint *string `json:"HttpVpcEndpoint,omitempty" name:"HttpVpcEndpoint"`
 }
 
 type RocketMQClusterRecentStats struct {

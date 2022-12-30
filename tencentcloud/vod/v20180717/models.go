@@ -7287,40 +7287,136 @@ func (r *DescribeDrmKeyProviderInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DescribeFileAttributesTask struct {
-
-	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-
-	Status *string `json:"Status,omitempty" name:"Status"`
-
-
-	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
-
-
-	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
-
-
-	Message *string `json:"Message,omitempty" name:"Message"`
-
-
-	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
-
-
+// Predefined struct for user
+type DescribeFileAttributesRequestParams struct {
+	// The file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	Output *DescribeFileAttributesTaskOutput `json:"Output,omitempty" name:"Output"`
-
-
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
+	// The task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+type DescribeFileAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The file ID.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+func (r *DescribeFileAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFileAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "SubAppId")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFileAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeFileAttributesResponseParams struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeFileAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeFileAttributesResponseParams `json:"Response"`
+}
+
+func (r *DescribeFileAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFileAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeFileAttributesTask struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. `0` indicates the task is successful. Other values indicate that the task failed.
+	// <li>`40000`: Invalid input parameter.</li>
+	// <li>`60000`: Source file error (e.g., video data is corrupted).</li>
+	// <li>`70000`: Internal server error. Please try again.</li>
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error code. An empty string indicates the task is successful; other values indicate that the task failed. For details, see [Video processing error codes](https://intl.cloud.tencent.com/document/product/266/39145?lang=en&pg=#video-processing).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The task progress. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+
+	// The file ID
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The output of the task to get file attributes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *DescribeFileAttributesTaskOutput `json:"Output,omitempty" name:"Output"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 }
 
 type DescribeFileAttributesTaskOutput struct {
-
+	// The MD5 hash of the file.
 	Md5 *string `json:"Md5,omitempty" name:"Md5"`
 }
 
@@ -8890,16 +8986,17 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTaskDetailResponseParams struct {
 	// The task type. Valid values:
-	// <li>Procedure: Video processing</li>
-	// <li>EditMedia: Video editing</li>
-	// <li>SplitMedia: Video splitting</li>
-	// <li>ComposeMedia: Media file production</li>
-	// <li>WechatPublish: WeChat publishing</li>
-	// <li>WechatMiniProgramPublish: Publishing videos on WeChat Mini Program</li>
-	// <li>PullUpload: Pulling media files for upload</li>
-	// <li>FastClipMedia: Quick clipping</li>
-	// <li>RemoveWatermarkTask: Watermark removal</li>
-	// <li> ReviewAudioVideo: Moderation</li>
+	// <li>`Procedure`: Video processing</li>
+	// <li>`EditMedia`: Video editing</li>
+	// <li>`SplitMedia`: Video splitting</li>
+	// <li>`ComposeMedia`: Media file production</li>
+	// <li>`WechatPublish`: WeChat publishing</li>
+	// <li>`WechatMiniProgramPublish`: Publishing videos on WeChat Mini Program</li>
+	// <li>`PullUpload`: Pulling media files for upload</li>
+	// <li>`FastClipMedia`: Quick clipping</li>
+	// <li>`RemoveWatermarkTask`: Watermark removal</li>
+	// <li>`DescribeFileAttributesTask`: Getting file attributes</li>
+	// <li> `ReviewAudioVideo`: Moderation</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -8981,7 +9078,8 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateTask *ReduceMediaBitrateTask `json:"ReduceMediaBitrateTask,omitempty" name:"ReduceMediaBitrateTask"`
 
-
+	// The information of a task to get file attributes. This parameter is valid only if `TaskType` is `DescribeFileAttributes`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DescribeFileAttributesTask *DescribeFileAttributesTask `json:"DescribeFileAttributesTask,omitempty" name:"DescribeFileAttributesTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9709,24 +9807,25 @@ type EventContent struct {
 	EventHandle *string `json:"EventHandle,omitempty" name:"EventHandle"`
 
 	// <b>Supported event types:</b>
-	// <li>NewFileUpload: Video uploaded.</li>
-	// <li>ProcedureStateChanged: Task flow status changed.</li>
-	// <li>FileDeleted: Video deleted.</li>
-	// <li>PullComplete: Finished video pulling.</li>
-	// <li>EditMediaComplete: Finished video editing.</li>
-	// <li>SplitMediaComplete: Finished video splitting.</li>
-	// <li>WechatPublishComplete: Published to WeChat.</li>
-	// <li>ComposeMediaComplete: Finished producing the media file.</li>
-	// <li>WechatMiniProgramPublishComplete: Finished publishing on WeChat Mini Program</li>
-	// <li>FastClipMediaComplete: Finished quick clipping.</li>
-	// <li>ReviewAudioVideoComplete: Finished moderation.</li>
-	// <li>ExtractTraceWatermarkComplete: Finished digital watermark extraction.</li>
+	// <li>`NewFileUpload`: Video uploaded.</li>
+	// <li>`ProcedureStateChanged`: Task flow status changed.</li>
+	// <li>`FileDeleted`: Video deleted.</li>
+	// <li>`PullComplete`: Finished video pulling.</li>
+	// <li>`EditMediaComplete`: Finished video editing.</li>
+	// <li>`SplitMediaComplete`: Finished video splitting.</li>
+	// <li>`WechatPublishComplete`: Published to WeChat.</li>
+	// <li>`ComposeMediaComplete`: Finished producing the media file.</li>
+	// <li>`WechatMiniProgramPublishComplete`: Finished publishing on WeChat Mini Program.</li>
+	// <li>`FastClipMediaComplete`: Finished quick clipping.</li>
+	// <li>`ReviewAudioVideoComplete`: Finished moderation.</li>
+	// <li>`ExtractTraceWatermarkComplete`: Finished digital watermark extraction.</li>
+	// <li>`DescribeFileAttributesComplete`: Finished getting file attributes.</li>
 	// <b>v2017 task types:</b>
-	// <li>TranscodeComplete: Finished video transcoding.</li>
-	// <li>ConcatComplete: Finished video splicing.</li>
-	// <li>ClipComplete: Finished video clipping.</li>
-	// <li>CreateImageSpriteComplete: Finished image sprite generation.</li>
-	// <li>CreateSnapshotByTimeOffsetComplete: Finished time point screencapturing.</li>
+	// <li>`TranscodeComplete`: Finished video transcoding.</li>
+	// <li>`ConcatComplete`: Finished video splicing.</li>
+	// <li>`ClipComplete`: Finished video clipping.</li>
+	// <li>`CreateImageSpriteComplete`: Finished image sprite generation.</li>
+	// <li>`CreateSnapshotByTimeOffsetComplete`: Finished time point screencapturing.</li>
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// Video upload completion event, which is valid if the event type is `NewFileUpload`.
@@ -9805,7 +9904,8 @@ type EventContent struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateCompleteEvent *ReduceMediaBitrateTask `json:"ReduceMediaBitrateCompleteEvent,omitempty" name:"ReduceMediaBitrateCompleteEvent"`
 
-
+	// The event of finishing getting file attributes. This parameter is valid only if `EventType` is `DescribeFileAttributesComplete`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DescribeFileAttributesCompleteEvent *DescribeFileAttributesTask `json:"DescribeFileAttributesCompleteEvent,omitempty" name:"DescribeFileAttributesCompleteEvent"`
 }
 
@@ -11294,6 +11394,10 @@ type MediaMetaData struct {
 	// Audio duration in seconds.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AudioDuration *float64 `json:"AudioDuration,omitempty" name:"AudioDuration"`
+
+	// The MD5 hash of the file.
+	// <li><font color=red>Note</font>: To get the MD5 hash of a file, call the `DescribeFileAttributes` API. The information will be returned after the task is completed.</li>
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
 }
 
 type MediaMiniProgramReviewElem struct {
@@ -16256,6 +16360,10 @@ type ReviewAudioVideoRequestParams struct {
 	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
+	// The moderation template ID. Valid values:
+	// <li>`10` (default): The preset template, which can detect inappropriate information with labels including pornographic (`Porn`), terrorist (`Terror`), and politically sensitive (`Polity`).</li>
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
 	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
 
@@ -16277,6 +16385,10 @@ type ReviewAudioVideoRequest struct {
 
 	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The moderation template ID. Valid values:
+	// <li>`10` (default): The preset template, which can detect inappropriate information with labels including pornographic (`Porn`), terrorist (`Terror`), and politically sensitive (`Polity`).</li>
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
 	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
@@ -16305,6 +16417,7 @@ func (r *ReviewAudioVideoRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FileId")
 	delete(f, "SubAppId")
+	delete(f, "Definition")
 	delete(f, "TasksPriority")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
@@ -16392,6 +16505,13 @@ type ReviewAudioVideoSegmentItem struct {
 
 	// The keywords that match the suspicious text. This parameter is valid only if `Form` is `OCR` or `ASR`.
 	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
+
+	// The URL of a suspected image (which will be deleted
+	//  after `PicUrlExpireTime`).
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// The expiration time of the suspected image URL in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitempty" name:"PicUrlExpireTime"`
 }
 
 type ReviewAudioVideoTask struct {
@@ -16427,6 +16547,9 @@ type ReviewAudioVideoTask struct {
 type ReviewAudioVideoTaskInput struct {
 	// The ID of the media file.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The moderation template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 }
 
 type ReviewAudioVideoTaskOutput struct {

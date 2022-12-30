@@ -1090,7 +1090,7 @@ type DescribeInstancesRequestParams struct {
 	// Number of entries per page. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Sort by field <li>1: instance ID </li><li>2: instance name </li><li>3: AZ </li><li>4: creation time </li>If `orderKey` is not passed in, sort by creation time in descending order
+	// The sorting field. <li>1: Instance ID </li><li>2: Instance name </li><li>3: AZ </li><li>4: Creation time </li>If `OrderByKey` is not passed in, sorting is performed by creation time in descending order.
 	OrderByKey *uint64 `json:"OrderByKey,omitempty" name:"OrderByKey"`
 
 	// Sorting order <li>0: ascending </li><li>1: descending </li>If orderByKey is passed in but orderByType is not, ascending order is used by default
@@ -1105,7 +1105,7 @@ type DescribeInstancesRequestParams struct {
 	// List of availability zones
 	ZoneList []*string `json:"ZoneList,omitempty" name:"ZoneList"`
 
-	// Health status filter list
+	// The health status filter. Valid values: `0` (green), `1` (yellow), `2` (red), `-1` (unknown).
 	HealthStatus []*int64 `json:"HealthStatus,omitempty" name:"HealthStatus"`
 
 	// VPC IDs
@@ -1130,7 +1130,7 @@ type DescribeInstancesRequest struct {
 	// Number of entries per page. Default value: 20
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Sort by field <li>1: instance ID </li><li>2: instance name </li><li>3: AZ </li><li>4: creation time </li>If `orderKey` is not passed in, sort by creation time in descending order
+	// The sorting field. <li>1: Instance ID </li><li>2: Instance name </li><li>3: AZ </li><li>4: Creation time </li>If `OrderByKey` is not passed in, sorting is performed by creation time in descending order.
 	OrderByKey *uint64 `json:"OrderByKey,omitempty" name:"OrderByKey"`
 
 	// Sorting order <li>0: ascending </li><li>1: descending </li>If orderByKey is passed in but orderByType is not, ascending order is used by default
@@ -1145,7 +1145,7 @@ type DescribeInstancesRequest struct {
 	// List of availability zones
 	ZoneList []*string `json:"ZoneList,omitempty" name:"ZoneList"`
 
-	// Health status filter list
+	// The health status filter. Valid values: `0` (green), `1` (yellow), `2` (red), `-1` (unknown).
 	HealthStatus []*int64 `json:"HealthStatus,omitempty" name:"HealthStatus"`
 
 	// VPC IDs
@@ -1437,6 +1437,10 @@ type IndexMetaField struct {
 	// Cluster APP ID
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+
+	// The number of index docs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IndexDocs *uint64 `json:"IndexDocs,omitempty" name:"IndexDocs"`
 }
 
 type IndexOptionsField struct {
@@ -2559,7 +2563,7 @@ type UpdateInstanceRequestParams struct {
 	// Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Access control list
+	// The policy for visual component (Kibana and Cerebro) access over public network.
 	EsAcl *EsAcl `json:"EsAcl,omitempty" name:"EsAcl"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
@@ -2591,16 +2595,22 @@ type UpdateInstanceRequestParams struct {
 	// Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
 	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
 
-	// Public network access status
+	// The status of ES cluster access over public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	PublicAccess *string `json:"PublicAccess,omitempty" name:"PublicAccess"`
 
 	// Public network ACL
 	EsPublicAcl *EsPublicAcl `json:"EsPublicAcl,omitempty" name:"EsPublicAcl"`
 
-	// Public network access status of Kibana
+	// The status of Kibana access over public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	KibanaPublicAccess *string `json:"KibanaPublicAccess,omitempty" name:"KibanaPublicAccess"`
 
-	// Private network access status of Kibana
+	// The status of Kibana access over private network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	KibanaPrivateAccess *string `json:"KibanaPrivateAccess,omitempty" name:"KibanaPrivateAccess"`
 
 	// Enables or disables user authentication for ES Basic Edition v6.8 and above
@@ -2630,10 +2640,14 @@ type UpdateInstanceRequestParams struct {
 	// Whether to enable Cerebro
 	EnableCerebro *bool `json:"EnableCerebro,omitempty" name:"EnableCerebro"`
 
-	// Cerebro public network access status
+	// The status of Cerebro access over public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	CerebroPublicAccess *string `json:"CerebroPublicAccess,omitempty" name:"CerebroPublicAccess"`
 
-	// Cerebro private network access status
+	// The status of Cerebro access over private network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	CerebroPrivateAccess *string `json:"CerebroPrivateAccess,omitempty" name:"CerebroPrivateAccess"`
 
 	// Added or modified configuration set information
@@ -2643,6 +2657,8 @@ type UpdateInstanceRequestParams struct {
 	OperationDuration *OperationDurationUpdated `json:"OperationDuration,omitempty" name:"OperationDuration"`
 
 	// Whether to enable the option for sending alerting messages over the public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	KibanaAlteringPublicAccess *string `json:"KibanaAlteringPublicAccess,omitempty" name:"KibanaAlteringPublicAccess"`
 }
 
@@ -2665,7 +2681,7 @@ type UpdateInstanceRequest struct {
 	// Password of the default user 'elastic', which must contain 8 to 16 characters, including at least two of the following three types of characters: [a-z,A-Z], [0-9] and [-!@#$%&^*+=_:;,.?]
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Access control list
+	// The policy for visual component (Kibana and Cerebro) access over public network.
 	EsAcl *EsAcl `json:"EsAcl,omitempty" name:"EsAcl"`
 
 	// This parameter has been disused. Please use `NodeInfoList`
@@ -2697,16 +2713,22 @@ type UpdateInstanceRequest struct {
 	// Node information list. You can pass in only the nodes to be updated and their corresponding specification information. Supported operations include: <li>modifying the number of nodes in the same type </li><li>modifying the specification and disk size of nodes in the same type </li><li>adding a node type (you must also specify the node type, quantity, specification, disk, etc.) </li>The above operations can only be performed one at a time, and the disk type cannot be modified
 	NodeInfoList []*NodeInfo `json:"NodeInfoList,omitempty" name:"NodeInfoList"`
 
-	// Public network access status
+	// The status of ES cluster access over public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	PublicAccess *string `json:"PublicAccess,omitempty" name:"PublicAccess"`
 
 	// Public network ACL
 	EsPublicAcl *EsPublicAcl `json:"EsPublicAcl,omitempty" name:"EsPublicAcl"`
 
-	// Public network access status of Kibana
+	// The status of Kibana access over public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	KibanaPublicAccess *string `json:"KibanaPublicAccess,omitempty" name:"KibanaPublicAccess"`
 
-	// Private network access status of Kibana
+	// The status of Kibana access over private network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	KibanaPrivateAccess *string `json:"KibanaPrivateAccess,omitempty" name:"KibanaPrivateAccess"`
 
 	// Enables or disables user authentication for ES Basic Edition v6.8 and above
@@ -2736,10 +2758,14 @@ type UpdateInstanceRequest struct {
 	// Whether to enable Cerebro
 	EnableCerebro *bool `json:"EnableCerebro,omitempty" name:"EnableCerebro"`
 
-	// Cerebro public network access status
+	// The status of Cerebro access over public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	CerebroPublicAccess *string `json:"CerebroPublicAccess,omitempty" name:"CerebroPublicAccess"`
 
-	// Cerebro private network access status
+	// The status of Cerebro access over private network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	CerebroPrivateAccess *string `json:"CerebroPrivateAccess,omitempty" name:"CerebroPrivateAccess"`
 
 	// Added or modified configuration set information
@@ -2749,6 +2775,8 @@ type UpdateInstanceRequest struct {
 	OperationDuration *OperationDurationUpdated `json:"OperationDuration,omitempty" name:"OperationDuration"`
 
 	// Whether to enable the option for sending alerting messages over the public network.
+	// `OPEN`: Enabled.
+	// `CLOSE`: Disabled.
 	KibanaAlteringPublicAccess *string `json:"KibanaAlteringPublicAccess,omitempty" name:"KibanaAlteringPublicAccess"`
 }
 

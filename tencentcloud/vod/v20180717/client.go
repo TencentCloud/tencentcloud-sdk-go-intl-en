@@ -3571,6 +3571,86 @@ func (c *Client) DescribeDrmKeyProviderInfoWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeFileAttributesRequest() (request *DescribeFileAttributesRequest) {
+    request = &DescribeFileAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeFileAttributes")
+    
+    
+    return
+}
+
+func NewDescribeFileAttributesResponse() (response *DescribeFileAttributesResponse) {
+    response = &DescribeFileAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeFileAttributes
+// This API is used to get file attributes asynchronously.
+//
+// - Currently, this API can only get the MD5 hash of a file.
+//
+// - If the file queried is in HLS or DASH format, the attributes of the index file will be returned.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETFILEINFOERROR = "InternalError.GetFileInfoError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeFileAttributes(request *DescribeFileAttributesRequest) (response *DescribeFileAttributesResponse, err error) {
+    return c.DescribeFileAttributesWithContext(context.Background(), request)
+}
+
+// DescribeFileAttributes
+// This API is used to get file attributes asynchronously.
+//
+// - Currently, this API can only get the MD5 hash of a file.
+//
+// - If the file queried is in HLS or DASH format, the attributes of the index file will be returned.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETFILEINFOERROR = "InternalError.GetFileInfoError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeFileAttributesWithContext(ctx context.Context, request *DescribeFileAttributesRequest) (response *DescribeFileAttributesResponse, err error) {
+    if request == nil {
+        request = NewDescribeFileAttributesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeFileAttributes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeFileAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImageProcessingTemplatesRequest() (request *DescribeImageProcessingTemplatesRequest) {
     request = &DescribeImageProcessingTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},

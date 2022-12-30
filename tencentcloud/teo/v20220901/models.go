@@ -192,17 +192,6 @@ type AdvancedFilter struct {
 	Fuzzy *bool `json:"Fuzzy,omitempty" name:"Fuzzy"`
 }
 
-type AdvancedOriginGroup struct {
-	// Matching condition. The "Target" field must be unique.
-	OriginGroupConditions []*OriginGroupCondition `json:"OriginGroupConditions,omitempty" name:"OriginGroupConditions"`
-
-	// ID of the primary origin server.
-	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
-
-	// ID of the secondary origin server.
-	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
-}
-
 type AiRule struct {
 	// The status of the AI rule engine. Values:
 	// <li>`smart_status_close`: Disabled</li>
@@ -1363,125 +1352,6 @@ func (r *CreateCustomErrorPageResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateDnsRecordRequestParams struct {
-	// The site ID of the DNS record.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The DNS record type. Values:
-	// <li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
-	// <li>`AAAA`: Point a domain name to an IPv6 address.</li>
-	// <li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
-	// <li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
-	// <li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
-	// <li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
-	// <li>`CAA`: Specify CAs to issue certificates for sites.</li>
-	// <li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The DNS record name.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// The DNS record content.
-	Content *string `json:"Content,omitempty" name:"Content"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300
-	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
-
-	// Specifies a value in the range 1–50 when you make changes to the MX records. A smaller value indicates higher priority. Note that the default value 0 will be used if this field is not specified.
-	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-}
-
-type CreateDnsRecordRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID of the DNS record.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The DNS record type. Values:
-	// <li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
-	// <li>`AAAA`: Point a domain name to an IPv6 address.</li>
-	// <li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
-	// <li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
-	// <li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
-	// <li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
-	// <li>`CAA`: Specify CAs to issue certificates for sites.</li>
-	// <li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The DNS record name.
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// The DNS record content.
-	Content *string `json:"Content,omitempty" name:"Content"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300
-	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
-
-	// Specifies a value in the range 1–50 when you make changes to the MX records. A smaller value indicates higher priority. Note that the default value 0 will be used if this field is not specified.
-	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-}
-
-func (r *CreateDnsRecordRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateDnsRecordRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Type")
-	delete(f, "Name")
-	delete(f, "Content")
-	delete(f, "Mode")
-	delete(f, "TTL")
-	delete(f, "Priority")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDnsRecordRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateDnsRecordResponseParams struct {
-	// The DNS record ID.
-	DnsRecordId *string `json:"DnsRecordId,omitempty" name:"DnsRecordId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateDnsRecordResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateDnsRecordResponseParams `json:"Response"`
-}
-
-func (r *CreateDnsRecordResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateDnsRecordResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CreateIpTableListRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -1546,122 +1416,6 @@ func (r *CreateIpTableListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateIpTableListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateLoadBalancingRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancing hostname.
-	Host *string `json:"Host,omitempty" name:"Host"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The ID of the primary origin group.
-	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
-
-	// The ID of the secondary origin group (only available when `Type=proxied`). If not specified, it indicates that secondary origins are not used.
-	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
-
-	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
-	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
-
-	// The origin-pull type. Values:
-	// <li>`normal`: Primary/Secondary origin-pull</li>
-	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
-	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
-
-	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
-	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
-}
-
-type CreateLoadBalancingRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancing hostname.
-	Host *string `json:"Host,omitempty" name:"Host"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The ID of the primary origin group.
-	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
-
-	// The ID of the secondary origin group (only available when `Type=proxied`). If not specified, it indicates that secondary origins are not used.
-	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
-
-	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
-	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
-
-	// The origin-pull type. Values:
-	// <li>`normal`: Primary/Secondary origin-pull</li>
-	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
-	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
-
-	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
-	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
-}
-
-func (r *CreateLoadBalancingRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateLoadBalancingRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Host")
-	delete(f, "Type")
-	delete(f, "OriginGroupId")
-	delete(f, "BackupOriginGroupId")
-	delete(f, "TTL")
-	delete(f, "OriginType")
-	delete(f, "AdvancedOriginGroups")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLoadBalancingRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateLoadBalancingResponseParams struct {
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateLoadBalancingResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateLoadBalancingResponseParams `json:"Response"`
-}
-
-func (r *CreateLoadBalancingResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateLoadBalancingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3309,128 +3063,6 @@ func (r *DeleteApplicationProxyRuleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteApplicationProxyRuleResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteDnsRecordsRequestParams struct {
-	// The site ID of the DNS record to be deleted.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The ID of the DNS record to be deleted.
-	DnsRecordIds []*string `json:"DnsRecordIds,omitempty" name:"DnsRecordIds"`
-}
-
-type DeleteDnsRecordsRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID of the DNS record to be deleted.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The ID of the DNS record to be deleted.
-	DnsRecordIds []*string `json:"DnsRecordIds,omitempty" name:"DnsRecordIds"`
-}
-
-func (r *DeleteDnsRecordsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteDnsRecordsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "DnsRecordIds")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDnsRecordsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteDnsRecordsResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DeleteDnsRecordsResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteDnsRecordsResponseParams `json:"Response"`
-}
-
-func (r *DeleteDnsRecordsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteDnsRecordsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteLoadBalancingRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-}
-
-type DeleteLoadBalancingRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-}
-
-func (r *DeleteLoadBalancingRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteLoadBalancingRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "LoadBalancingId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLoadBalancingRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteLoadBalancingResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DeleteLoadBalancingResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteLoadBalancingResponseParams `json:"Response"`
-}
-
-func (r *DeleteLoadBalancingResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteLoadBalancingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5392,12 +5024,12 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// The statistical metric. Values:
-	// <li>`ddos_attackFlux_protocol`: Top-ranked protocols by DDoS attack traffic.</li>
-	// <li>`ddos_attackPackageNum_protocol`: Top-ranked protocols by DDoS attack packets.</li>
-	// <li>`ddos_attackNum_attackType`: Top-ranked attack types by DDoS attacks.</li>
-	// <li>`ddos_attackNum_sregion`: Top-ranked attack source regions by DDoS attacks.</li>
-	// <li>`ddos_attackFlux_sip`: Top-ranked attacker IPs by DDoS attack traffic.</li>
-	// <li>`ddos_attackFlux_sregion`: Top-ranked attack source regions by DDoS attack traffic.</li>
+	// <li>`ddos_attackFlux_protocol`: Rank protocols by the attack traffic.</li>
+	// <li>`ddos_attackPackageNum_protocol`: Rank protocols by the number of attack packets.</li>
+	// <li>`ddos_attackNum_attackType`: Rank attack types by the number of attacks.</li>
+	// <li>`ddos_attackNum_sregion`: Rank attacker regions by the number of attacks.</li>
+	// <li>`ddos_attackFlux_sip`: Rank attacker IPs by the number of attacks.</li>
+	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// List of site IDs to be queried. All sites will be selected if this field is not specified.
@@ -5440,12 +5072,12 @@ type DescribeDDoSAttackTopDataRequest struct {
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// The statistical metric. Values:
-	// <li>`ddos_attackFlux_protocol`: Top-ranked protocols by DDoS attack traffic.</li>
-	// <li>`ddos_attackPackageNum_protocol`: Top-ranked protocols by DDoS attack packets.</li>
-	// <li>`ddos_attackNum_attackType`: Top-ranked attack types by DDoS attacks.</li>
-	// <li>`ddos_attackNum_sregion`: Top-ranked attack source regions by DDoS attacks.</li>
-	// <li>`ddos_attackFlux_sip`: Top-ranked attacker IPs by DDoS attack traffic.</li>
-	// <li>`ddos_attackFlux_sregion`: Top-ranked attack source regions by DDoS attack traffic.</li>
+	// <li>`ddos_attackFlux_protocol`: Rank protocols by the attack traffic.</li>
+	// <li>`ddos_attackPackageNum_protocol`: Rank protocols by the number of attack packets.</li>
+	// <li>`ddos_attackNum_attackType`: Rank attack types by the number of attacks.</li>
+	// <li>`ddos_attackNum_sregion`: Rank attacker regions by the number of attacks.</li>
+	// <li>`ddos_attackFlux_sip`: Rank attacker IPs by the number of attacks.</li>
+	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// List of site IDs to be queried. All sites will be selected if this field is not specified.
@@ -5903,6 +5535,129 @@ func (r *DescribeDefaultCertificatesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDistributionL4AccessDataRequestParams struct {
+	// Query start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Query metric. Vaules: 
+	// <li>`l4Flow_connection_distribution`: Distribution of connection duration</li>
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// IDs of sites to be queried. All sites will be selected if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The query granularity. Values:
+	// <li>`min`: 1 minute</li>
+	// <li>`5min`: 5 minutes</li>
+	// <li>`hour`: 1 hour</li>
+	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. **Query period ≤ 1 hour**: 1-minute granularity; **1 hour < query period ≤ 2 days**: 5-minute granularity; **2 days < query period ≤ 7 days**: 1 hour granularity; **Query period > 7 days**: 1 day granularity.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Filter conditions. See below for details: 
+	// <li>`ruleId`:<br>   Filter by the <strong>forwarding rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`proxyId`:<br>   Filter by the <strong>L4 proxy ID</strong><br>   Type: String<br>   Required: No</li>
+	QueryConditions []*QueryCondition `json:"QueryConditions,omitempty" name:"QueryConditions"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+type DescribeDistributionL4AccessDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Query metric. Vaules: 
+	// <li>`l4Flow_connection_distribution`: Distribution of connection duration</li>
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// IDs of sites to be queried. All sites will be selected if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The query granularity. Values:
+	// <li>`min`: 1 minute</li>
+	// <li>`5min`: 5 minutes</li>
+	// <li>`hour`: 1 hour</li>
+	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. **Query period ≤ 1 hour**: 1-minute granularity; **1 hour < query period ≤ 2 days**: 5-minute granularity; **2 days < query period ≤ 7 days**: 1 hour granularity; **Query period > 7 days**: 1 day granularity.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Filter conditions. See below for details: 
+	// <li>`ruleId`:<br>   Filter by the <strong>forwarding rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`proxyId`:<br>   Filter by the <strong>L4 proxy ID</strong><br>   Type: String<br>   Required: No</li>
+	QueryConditions []*QueryCondition `json:"QueryConditions,omitempty" name:"QueryConditions"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+func (r *DescribeDistributionL4AccessDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDistributionL4AccessDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricNames")
+	delete(f, "ZoneIds")
+	delete(f, "Interval")
+	delete(f, "QueryConditions")
+	delete(f, "Area")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDistributionL4AccessDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDistributionL4AccessDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Distribution of connection duration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TopDataRecords []*TopDataRecord `json:"TopDataRecords,omitempty" name:"TopDataRecords"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDistributionL4AccessDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDistributionL4AccessDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeDistributionL4AccessDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDistributionL4AccessDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDnsDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -5995,138 +5750,6 @@ func (r *DescribeDnsDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDnsDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeDnsRecordsRequestParams struct {
-	// The site ID of the DNS record. All sites’ DNS records will be returned if this field is not specified.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`record-id`:<br>   Filter by <strong>DNS record ID</strong>, such as record-1a8df68z<br>   Type: String<br>Required: No
-	// <li>`record-name`:<br>   Filter by <strong>DNS record name</strong><br>   Type: String<br>Required: No
-	// <li>`record-type`:<br>   Filter by <strong>DNS record type</strong><br>   Type: String<br>Required: No<br>   Values:<br>   `A`: Point a domain name to an IPv4 address, such as 8.8.8.8.<br>   `AAAA`: Point a domain name to an IPv6 address.<br>   `CNAME`: Point a domain name to another domain name that can be resolved to an IP address.<br>   `TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).<br>   `NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.<br>   `CAA`: Specify CAs to issue certificates for sites.<br>   `SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.<br>  `MX`: Specify the mail server for receiving emails.
-	// <li>`mode`:<br>   Filter by <strong>proxy mode</strong><br>   Type: String<br>Required: No<br>   Values:<br>   `dns_only`: Only DNS<br>   `proxied`: Proxied
-	// <li>`ttl`:<br>   Filter by <strong>TTL</strong><br>   Type: String<br>Required: No
-	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
-
-	// The sorting order. Values:
-	// <li>`ASC`: Ascending order</li>
-	// <li>`desc`: Descending order</li> Default value: asc
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
-
-	// The match mode. Values:
-	// <li>`all`: Return all records that match the specified filter.</li>
-	// <li>`any`: Return any record that matches the specified filter.</li>Default value: all.
-	Match *string `json:"Match,omitempty" name:"Match"`
-
-	// The paginated query limit. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// The sorting criteria. Values:
-	// <li>`content`: DNS record content.</li>
-	// <li>`created_on`: Creation time of the DNS record.</li>
-	// <li>`mode`: Proxy mode.</li>
-	// <li>`record-name`: DNS record name.</li>
-	// <li>`ttl`: DNS TTL.</li>
-	// <li>`record-type`: DNS record type.</li>If this field is not specified, the DNS records are sorted based on `record-type` and `recrod-name`.
-	Order *string `json:"Order,omitempty" name:"Order"`
-}
-
-type DescribeDnsRecordsRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID of the DNS record. All sites’ DNS records will be returned if this field is not specified.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`record-id`:<br>   Filter by <strong>DNS record ID</strong>, such as record-1a8df68z<br>   Type: String<br>Required: No
-	// <li>`record-name`:<br>   Filter by <strong>DNS record name</strong><br>   Type: String<br>Required: No
-	// <li>`record-type`:<br>   Filter by <strong>DNS record type</strong><br>   Type: String<br>Required: No<br>   Values:<br>   `A`: Point a domain name to an IPv4 address, such as 8.8.8.8.<br>   `AAAA`: Point a domain name to an IPv6 address.<br>   `CNAME`: Point a domain name to another domain name that can be resolved to an IP address.<br>   `TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).<br>   `NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.<br>   `CAA`: Specify CAs to issue certificates for sites.<br>   `SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.<br>  `MX`: Specify the mail server for receiving emails.
-	// <li>`mode`:<br>   Filter by <strong>proxy mode</strong><br>   Type: String<br>Required: No<br>   Values:<br>   `dns_only`: Only DNS<br>   `proxied`: Proxied
-	// <li>`ttl`:<br>   Filter by <strong>TTL</strong><br>   Type: String<br>Required: No
-	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
-
-	// The sorting order. Values:
-	// <li>`ASC`: Ascending order</li>
-	// <li>`desc`: Descending order</li> Default value: asc
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
-
-	// The match mode. Values:
-	// <li>`all`: Return all records that match the specified filter.</li>
-	// <li>`any`: Return any record that matches the specified filter.</li>Default value: all.
-	Match *string `json:"Match,omitempty" name:"Match"`
-
-	// The paginated query limit. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// The sorting criteria. Values:
-	// <li>`content`: DNS record content.</li>
-	// <li>`created_on`: Creation time of the DNS record.</li>
-	// <li>`mode`: Proxy mode.</li>
-	// <li>`record-name`: DNS record name.</li>
-	// <li>`ttl`: DNS TTL.</li>
-	// <li>`record-type`: DNS record type.</li>If this field is not specified, the DNS records are sorted based on `record-type` and `recrod-name`.
-	Order *string `json:"Order,omitempty" name:"Order"`
-}
-
-func (r *DescribeDnsRecordsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDnsRecordsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Filters")
-	delete(f, "Direction")
-	delete(f, "Match")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Order")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDnsRecordsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeDnsRecordsResponseParams struct {
-	// Total number of DNS records.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// List of DNS records
-	DnsRecords []*DnsRecord `json:"DnsRecords,omitempty" name:"DnsRecords"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeDnsRecordsResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeDnsRecordsResponseParams `json:"Response"`
-}
-
-func (r *DescribeDnsRecordsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDnsRecordsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6352,86 +5975,6 @@ func (r *DescribeIdentificationsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIdentificationsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeLoadBalancingRequestParams struct {
-	// Offset for paginated queries. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Limit on paginated queries. Value range: 1-1000. Default value: 10.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1a8df68z<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// </li><li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// </li><li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)</li>
-	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
-}
-
-type DescribeLoadBalancingRequest struct {
-	*tchttp.BaseRequest
-	
-	// Offset for paginated queries. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Limit on paginated queries. Value range: 1-1000. Default value: 10.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1a8df68z<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// </li><li>`load-balancing-id`<br>   Filter by <strong>load balancer ID</strong>, such as lb-d21bfaf7-8d72-11ec-841d-00ff977fb3c8<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported
-	// </li><li>`host`:<br>   Filter by <strong>load balancing hostname</strong>, such as lb.tencent.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one hostname allowed in a query)</li>
-	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
-}
-
-func (r *DescribeLoadBalancingRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLoadBalancingRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLoadBalancingRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeLoadBalancingResponseParams struct {
-	// Total number of records.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// Load balancer information.
-	Data []*LoadBalancing `json:"Data,omitempty" name:"Data"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeLoadBalancingResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeLoadBalancingResponseParams `json:"Response"`
-}
-
-func (r *DescribeLoadBalancingResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLoadBalancingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6761,15 +6304,16 @@ type DescribeOverviewL7DataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`tagKey`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`tagValue`<br>  Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
+	// Filter conditions. See below for details: 
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type DescribeOverviewL7DataRequest struct {
@@ -6808,15 +6352,16 @@ type DescribeOverviewL7DataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`tagKey`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`tagValue`<br>  Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
+	// Filter conditions. See below for details: 
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *DescribeOverviewL7DataRequest) ToJsonString() string {
@@ -6838,8 +6383,8 @@ func (r *DescribeOverviewL7DataRequest) FromJsonString(s string) error {
 	delete(f, "Domains")
 	delete(f, "Protocol")
 	delete(f, "Interval")
-	delete(f, "Area")
 	delete(f, "Filters")
+	delete(f, "Area")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOverviewL7DataRequest has unknown keys!", "")
 	}
@@ -7705,12 +7250,12 @@ type DescribeSingleL7AnalysisDataRequestParams struct {
 	// List of sites to be queried. All sites will be selected if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`country`: Country/Region;</li>
-	// <li>`domain`: Domain name;</li>
-	// <li>`protocol`: Protocol type;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -7720,9 +7265,10 @@ type DescribeSingleL7AnalysisDataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -7742,12 +7288,12 @@ type DescribeSingleL7AnalysisDataRequest struct {
 	// List of sites to be queried. All sites will be selected if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`country`: Country/Region;</li>
-	// <li>`domain`: Domain name;</li>
-	// <li>`protocol`: Protocol type;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -7757,9 +7303,10 @@ type DescribeSingleL7AnalysisDataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -7989,6 +7536,129 @@ func (r *DescribeSpeedTestingQuotaResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTimingL4AccessDataRequestParams struct {
+	// Query start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Metric to query. Values:
+	// <li>`l4Flow_connections`: Number of connections</li>
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// IDs of sites to be queried. All sites will be selected if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The query granularity. Values:
+	// <li>`min`: 1 minute</li>
+	// <li>`5min`: 5 minutes</li>
+	// <li>`hour`: 1 hour</li>
+	// <li>`day`: 1 day</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Filter conditions. See below for details: 
+	// <li>`ruleId`:<br>   Filter by the <strong>forwarding rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`proxyId`:<br>   Filter by the <strong>L4 proxy ID</strong><br>   Type: String<br>   Required: No</li>
+	QueryConditions []*QueryCondition `json:"QueryConditions,omitempty" name:"QueryConditions"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+type DescribeTimingL4AccessDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Metric to query. Values:
+	// <li>`l4Flow_connections`: Number of connections</li>
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// IDs of sites to be queried. All sites will be selected if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The query granularity. Values:
+	// <li>`min`: 1 minute</li>
+	// <li>`5min`: 5 minutes</li>
+	// <li>`hour`: 1 hour</li>
+	// <li>`day`: 1 day</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Filter conditions. See below for details: 
+	// <li>`ruleId`:<br>   Filter by the <strong>forwarding rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`proxyId`:<br>   Filter by the <strong>L4 proxy ID</strong><br>   Type: String<br>   Required: No</li>
+	QueryConditions []*QueryCondition `json:"QueryConditions,omitempty" name:"QueryConditions"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+func (r *DescribeTimingL4AccessDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTimingL4AccessDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricNames")
+	delete(f, "ZoneIds")
+	delete(f, "Interval")
+	delete(f, "QueryConditions")
+	delete(f, "Area")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTimingL4AccessDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTimingL4AccessDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Number of L4 connections over time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TimingDataRecords []*TimingDataRecord `json:"TimingDataRecords,omitempty" name:"TimingDataRecords"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTimingL4AccessDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTimingL4AccessDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTimingL4AccessDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTimingL4AccessDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTimingL4DataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -8017,14 +7687,15 @@ type DescribeTimingL4DataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`ruleId`: Filter by rule ID;</li>
-	// <li>`proxyId`: Filter by connection ID.</li>
+	// Filter conditions. See below for details: 
+	// <li>`ruleId`:<br>   Filter by the <strong>forwarding rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`proxyId`:<br>   Filter by the <strong>L4 proxy ID</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8058,14 +7729,15 @@ type DescribeTimingL4DataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`ruleId`: Filter by rule ID;</li>
-	// <li>`proxyId`: Filter by connection ID.</li>
+	// Filter conditions. See below for details: 
+	// <li>`ruleId`:<br>   Filter by the <strong>forwarding rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`proxyId`:<br>   Filter by the <strong>L4 proxy ID</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8148,26 +7820,29 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`country`: Country/Region;</li>
-	// <li>`domain`: Domain name;</li>
-	// <li>`protocol`: Protocol type;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`statusCode`: Status code;</li>
-	// <li>`browserType`: Browser type;</li>
-	// <li>`deviceType`: Device type;</li>
-	// <li>`operatingSystemType`: OS type;</li>
-	// <li>`tlsVersion`: TLS version;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`referer`: Refer header;</li>
-	// <li>`ipVersion`: IP version;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
+	// <li>`province`<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
+	// <li>`isp`<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`referer`<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8196,26 +7871,29 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`country`: Country/Region;</li>
-	// <li>`domain`: Domain name;</li>
-	// <li>`protocol`: Protocol type;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`statusCode`: Status code;</li>
-	// <li>`browserType`: Browser type;</li>
-	// <li>`deviceType`: Device type;</li>
-	// <li>`operatingSystemType`: OS type;</li>
-	// <li>`tlsVersion`: TLS version;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`referer`: Refer header;</li>
-	// <li>`ipVersion`: IP version;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
+	// <li>`province`<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
+	// <li>`isp`<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`referer`<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8290,13 +7968,14 @@ type DescribeTimingL7CacheDataRequestParams struct {
 	// List of sites to be queried. All sites will be selected if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`cacheType`: Cache type;</li>
-	// <li>`domain`: Host/domain name;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>cacheType<br>  Filter by the <strong>cache hit result</strong>.<br> Type: String<br>   Required: No<br>   Values: <br>   `hit`: Cache hit; <br>   `dynamic`: Resource non-cacheable; <br>   `miss`: Cache miss</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -8306,9 +7985,10 @@ type DescribeTimingL7CacheDataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8330,13 +8010,14 @@ type DescribeTimingL7CacheDataRequest struct {
 	// List of sites to be queried. All sites will be selected if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`cacheType`: Cache type;</li>
-	// <li>`domain`: Host/domain name;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>cacheType<br>  Filter by the <strong>cache hit result</strong>.<br> Type: String<br>   Required: No<br>   Values: <br>   `hit`: Cache hit; <br>   `dynamic`: Resource non-cacheable; <br>   `miss`: Cache miss</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -8346,9 +8027,10 @@ type DescribeTimingL7CacheDataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8433,21 +8115,23 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`country`: Country/Region;</li>
-	// <li>`domain`: Domain name;</li>
-	// <li>`protocol`: Protocol type;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`statusCode`: Status code;</li>
-	// <li>`browserType`: Browser type;</li>
-	// <li>`deviceType`: Device type;</li>
-	// <li>`operatingSystemType`: OS type;</li>
-	// <li>`tlsVersion`: TLS version;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`referer`: Refer header;</li>
-	// <li>`ipVersion`: IP version;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
+	// <li>`province`<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
+	// <li>`isp`<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`referer`<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -8457,9 +8141,10 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8491,21 +8176,23 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`country`: Country/Region;</li>
-	// <li>`domain`: Domain name;</li>
-	// <li>`protocol`: Protocol type;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`statusCode`: Status code;</li>
-	// <li>`browserType`: Browser type;</li>
-	// <li>`deviceType`: Device type;</li>
-	// <li>`operatingSystemType`: OS type;</li>
-	// <li>`tlsVersion`: TLS version;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`referer`: Refer header;</li>
-	// <li>`ipVersion`: IP version;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
+	// <li>`province`<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
+	// <li>`isp`<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`referer`<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -8515,9 +8202,10 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8597,13 +8285,14 @@ type DescribeTopL7CacheDataRequestParams struct {
 	// Queries the top rows of data. Top 10 rows of data will be queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`cacheType`: Cache type;</li>
-	// <li>`domain`: Host/domain name;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>cacheType<br>  Filter by the <strong>cache hit result</strong>.<br> Type: String<br>   Required: No<br>   Values: <br>   `hit`: Cache hit; <br>   `dynamic`: Resource non-cacheable; <br>   `miss`: Cache miss</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -8613,9 +8302,10 @@ type DescribeTopL7CacheDataRequestParams struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -8641,13 +8331,14 @@ type DescribeTopL7CacheDataRequest struct {
 	// Queries the top rows of data. Top 10 rows of data will be queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`cacheType`: Cache type;</li>
-	// <li>`domain`: Host/domain name;</li>
-	// <li>`resourceType`: Resource type;</li>
-	// <li>`url`: URL address;</li>
-	// <li>`tagKey`: Tag key;</li>
-	// <li>`tagValue`: Tag value.</li>
+	// Filter conditions. See below for details: 
+	// <li>`domain`<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
+	// <li>`url`<br>   Filter by the <strong>URL</strong>, such as `/content`. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
+	// <li>`resourceType`<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
+	// <li>cacheType<br>  Filter by the <strong>cache hit result</strong>.<br> Type: String<br>   Required: No<br>   Values: <br>   `hit`: Cache hit; <br>   `dynamic`: Resource non-cacheable; <br>   `miss`: Cache miss</li>
+	// <li>`statusCode`<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`tagValue`<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -8657,9 +8348,10 @@ type DescribeTopL7CacheDataRequest struct {
 	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -10080,69 +9772,6 @@ type DnsData struct {
 	Value *uint64 `json:"Value,omitempty" name:"Value"`
 }
 
-type DnsRecord struct {
-	// The record ID.
-	DnsRecordId *string `json:"DnsRecordId,omitempty" name:"DnsRecordId"`
-
-	// The DNS record type. Values:
-	// <li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
-	// <li>`AAAA`: Point a domain name to an IPv6 address.</li>
-	// <li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
-	// <li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
-	// <li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
-	// <li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
-	// <li>`CAA`: Specify CAs to issue certificates for sites.</li>
-	// <li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
-	DnsRecordType *string `json:"DnsRecordType,omitempty" name:"DnsRecordType"`
-
-	// The record name.
-	DnsRecordName *string `json:"DnsRecordName,omitempty" name:"DnsRecordName"`
-
-	// The record value.
-	Content *string `json:"Content,omitempty" name:"Content"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect.
-	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
-
-	// The MX record priority. The smaller the value, the higher the priority.
-	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-
-	// The creation time.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
-
-	// The modification time.
-	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
-
-	// The lock status of the domain name.
-	Locked *bool `json:"Locked,omitempty" name:"Locked"`
-
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-
-	// The DNS record status. Values:
-	// <li>`active`: Activated</li>
-	// <li>`pending`: Deactivated</li>
-	Status *string `json:"Status,omitempty" name:"Status"`
-
-	// The CNAME address.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Cname *string `json:"Cname,omitempty" name:"Cname"`
-
-	// The service used by the domain name. Values:
-	// <li>`lb`: Load balancing</li>
-	// <li>`security`: Security protection</li>
-	// <li>`l4`: L4 proxy</li>
-	DomainStatus []*string `json:"DomainStatus,omitempty" name:"DomainStatus"`
-}
-
 type DnssecInfo struct {
 	// Flag
 	Flags *int64 `json:"Flags,omitempty" name:"Flags"`
@@ -10538,6 +10167,10 @@ type FollowOrigin struct {
 	// Specifies whether to enable cache when the origin server does not return the Cache-Control header.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	DefaultCache *string `json:"DefaultCache,omitempty" name:"DefaultCache"`
+
+	// Specifies whether to use the default caching policy when Cache-Control is not returned from the origin
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	DefaultCacheStrategy *string `json:"DefaultCacheStrategy,omitempty" name:"DefaultCacheStrategy"`
 }
 
 type ForceRedirect struct {
@@ -10565,6 +10198,13 @@ type GeoIp struct {
 
 	// The state/province.
 	Province *string `json:"Province,omitempty" name:"Province"`
+}
+
+type Grpc struct {
+	// Whether to enable gRPC support
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type Header struct {
@@ -10833,51 +10473,6 @@ type L7OfflineLog struct {
 	// <li>`mainland`: Chinese mainland;</li>
 	// <li>`overseas`: Global (outside the Chinese mainland);</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type LoadBalancing struct {
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Subdomain name. You can use @ to represent the root domain.
-	Host *string `json:"Host,omitempty" name:"Host"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The cache time of DNS records when `Type=dns_only`.
-	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
-
-	// The load balancer status. Values:
-	// <li>`online`: Deployed</li>
-	// <li>`process`: Deployment in progress</li>
-	Status *string `json:"Status,omitempty" name:"Status"`
-
-	// Schedules domain names.
-	Cname *string `json:"Cname,omitempty" name:"Cname"`
-
-	// The ID of the primary origin group.
-	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
-
-	// The ID of the secondary origin group. If not specified, it indicates that secondary origins are not used.
-	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
-
-	// The update time.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
-
-	// The origin-pull type. Values:
-	// <li>`normal`: Primary/Secondary origin-pull</li>
-	// <li>`advanced`: Advanced origin-pull</li>
-	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
-
-	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
 }
 
 type LogSetInfo struct {
@@ -11913,129 +11508,6 @@ func (r *ModifyDefaultCertificateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyDnsRecordRequestParams struct {
-	// The record ID.
-	DnsRecordId *string `json:"DnsRecordId,omitempty" name:"DnsRecordId"`
-
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The DNS record type. Values:
-	// <li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
-	// <li>`AAAA`: Point a domain name to an IPv6 address.</li>
-	// <li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
-	// <li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
-	// <li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
-	// <li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
-	// <li>`CAA`: Specify CAs to issue certificates for sites.</li>
-	// <li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
-	DnsRecordType *string `json:"DnsRecordType,omitempty" name:"DnsRecordType"`
-
-	// The record name, which consists of the host record and site name. Note that the original configuration will be used if this field is not specified.
-	DnsRecordName *string `json:"DnsRecordName,omitempty" name:"DnsRecordName"`
-
-	// The record content. Note that the original configuration will be used if this field is not specified.
-	Content *string `json:"Content,omitempty" name:"Content"`
-
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300. Note that the original configuration will be used if this field is not specified.
-	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
-
-	// Specifies a value in the range 1–50 when you make changes to the MX records. A smaller value indicates higher priority. Note that the default value 0 will be used if this field is not specified.
-	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li></li>The original configuration will apply if this field is not specified.
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-}
-
-type ModifyDnsRecordRequest struct {
-	*tchttp.BaseRequest
-	
-	// The record ID.
-	DnsRecordId *string `json:"DnsRecordId,omitempty" name:"DnsRecordId"`
-
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The DNS record type. Values:
-	// <li>`A`: Point a domain name to an IPv4 address, such as 8.8.8.8.</li>
-	// <li>`AAAA`: Point a domain name to an IPv6 address.</li>
-	// <li>`MX`: It is used for email servers. The record value and priority parameters are provided by email service providers. If there are multiple MX records, the lower the priority value, the higher the priority.</li>
-	// <li>`CNAME`: Point a domain name to another domain name that can be resolved to an IP address.</li>
-	// <li>`TXT`: Identify and describe a domain name. It is usually used for domain verification and as SPF records (for anti-spam).</li>
-	// <li>`NS`: If you need to authorize a subdomain name to another DNS service provider for DNS resolution, you need to add an NS record. You cannot add an NS record for a root domain name.</li>
-	// <li>`CAA`: Specify CAs to issue certificates for sites.</li>
-	// <li>`SRV`: Identify a service used by a server. It is commonly used in Microsoft directory management.</li>
-	DnsRecordType *string `json:"DnsRecordType,omitempty" name:"DnsRecordType"`
-
-	// The record name, which consists of the host record and site name. Note that the original configuration will be used if this field is not specified.
-	DnsRecordName *string `json:"DnsRecordName,omitempty" name:"DnsRecordName"`
-
-	// The record content. Note that the original configuration will be used if this field is not specified.
-	Content *string `json:"Content,omitempty" name:"Content"`
-
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300. Note that the original configuration will be used if this field is not specified.
-	TTL *int64 `json:"TTL,omitempty" name:"TTL"`
-
-	// Specifies a value in the range 1–50 when you make changes to the MX records. A smaller value indicates higher priority. Note that the default value 0 will be used if this field is not specified.
-	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li></li>The original configuration will apply if this field is not specified.
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-}
-
-func (r *ModifyDnsRecordRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyDnsRecordRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "DnsRecordId")
-	delete(f, "ZoneId")
-	delete(f, "DnsRecordType")
-	delete(f, "DnsRecordName")
-	delete(f, "Content")
-	delete(f, "TTL")
-	delete(f, "Priority")
-	delete(f, "Mode")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDnsRecordRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyDnsRecordResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyDnsRecordResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyDnsRecordResponseParams `json:"Response"`
-}
-
-func (r *ModifyDnsRecordResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyDnsRecordResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type ModifyDnssecRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -12176,193 +11648,6 @@ func (r *ModifyHostsCertificateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyHostsCertificateResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyLoadBalancingRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The ID of the primary origin group.
-	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
-
-	// The ID of the secondary origin group (only available when `Type=proxied`). If not specified, it indicates that secondary origins are not used.
-	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
-
-	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
-	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
-
-	// The origin-pull type. Values:
-	// <li>`normal`: Primary/Secondary origin-pull</li>
-	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
-	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
-
-	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
-	// If it is left empty, this configuration is not used.
-	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
-}
-
-type ModifyLoadBalancingRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-
-	// The proxy mode. Values:
-	// <li>`dns_only`: Only DNS</li>
-	// <li>`proxied`: Proxied</li>
-	Type *string `json:"Type,omitempty" name:"Type"`
-
-	// The ID of the primary origin group.
-	OriginGroupId *string `json:"OriginGroupId,omitempty" name:"OriginGroupId"`
-
-	// The ID of the secondary origin group (only available when `Type=proxied`). If not specified, it indicates that secondary origins are not used.
-	BackupOriginGroupId *string `json:"BackupOriginGroupId,omitempty" name:"BackupOriginGroupId"`
-
-	// When `Type=dns_only`, it indicates the amount of time that DNS records remain in the cache of a DNS server.
-	// Value range: 60-86400 (in seconds). If it's not specified, the default value 600 will be used.
-	TTL *uint64 `json:"TTL,omitempty" name:"TTL"`
-
-	// The origin-pull type. Values:
-	// <li>`normal`: Primary/Secondary origin-pull</li>
-	// <li>`advanced`: Advanced origin-pull (only used when `Type=proxied`)</li>If it is left empty, primary/secondary origin-pull is applied.
-	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
-
-	// Advanced origin-pull configuration. This field is valid when `OriginType=advanced`.
-	// If it is left empty, this configuration is not used.
-	AdvancedOriginGroups []*AdvancedOriginGroup `json:"AdvancedOriginGroups,omitempty" name:"AdvancedOriginGroups"`
-}
-
-func (r *ModifyLoadBalancingRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyLoadBalancingRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "LoadBalancingId")
-	delete(f, "Type")
-	delete(f, "OriginGroupId")
-	delete(f, "BackupOriginGroupId")
-	delete(f, "TTL")
-	delete(f, "OriginType")
-	delete(f, "AdvancedOriginGroups")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancingRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyLoadBalancingResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyLoadBalancingResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyLoadBalancingResponseParams `json:"Response"`
-}
-
-func (r *ModifyLoadBalancingResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyLoadBalancingResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyLoadBalancingStatusRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-
-	// The load balancer status. Values:
-	// <li>`online`: Enabled</li>
-	// <li>`offline`: Disabled</li>
-	Status *string `json:"Status,omitempty" name:"Status"`
-}
-
-type ModifyLoadBalancingStatusRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The load balancer ID.
-	LoadBalancingId *string `json:"LoadBalancingId,omitempty" name:"LoadBalancingId"`
-
-	// The load balancer status. Values:
-	// <li>`online`: Enabled</li>
-	// <li>`offline`: Disabled</li>
-	Status *string `json:"Status,omitempty" name:"Status"`
-}
-
-func (r *ModifyLoadBalancingStatusRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyLoadBalancingStatusRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "LoadBalancingId")
-	delete(f, "Status")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancingStatusRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyLoadBalancingStatusResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyLoadBalancingStatusResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyLoadBalancingStatusResponseParams `json:"Response"`
-}
-
-func (r *ModifyLoadBalancingStatusResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyLoadBalancingStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -13188,6 +12473,10 @@ type ModifyZoneSettingRequestParams struct {
 	// Whether to carry the location information of the client IP during origin-pull.
 	// The original configuration will apply if this field is not specified.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
+
+	// Configuration of gRPC support
+	// The original configuration will apply if this field is not specified.
+	Grpc *Grpc `json:"Grpc,omitempty" name:"Grpc"`
 }
 
 type ModifyZoneSettingRequest struct {
@@ -13263,6 +12552,10 @@ type ModifyZoneSettingRequest struct {
 	// Whether to carry the location information of the client IP during origin-pull.
 	// The original configuration will apply if this field is not specified.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
+
+	// Configuration of gRPC support
+	// The original configuration will apply if this field is not specified.
+	Grpc *Grpc `json:"Grpc,omitempty" name:"Grpc"`
 }
 
 func (r *ModifyZoneSettingRequest) ToJsonString() string {
@@ -13295,6 +12588,7 @@ func (r *ModifyZoneSettingRequest) FromJsonString(s string) error {
 	delete(f, "CachePrefresh")
 	delete(f, "Ipv6")
 	delete(f, "ClientIpCountry")
+	delete(f, "Grpc")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyZoneSettingRequest has unknown keys!", "")
 	}
@@ -13484,20 +12778,6 @@ type OriginGroup struct {
 	// The origin domain when `OriginType=self`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
-}
-
-type OriginGroupCondition struct {
-	// Match type. Values:
-	// <li>`url`: Partial URL path under the current site, such as "/example" and "/example/foo.jpg". You can use an asterisk (*) to indicate all values and a question mark (?) to indicate any single character.
-	// </li>
-	Target *string `json:"Target,omitempty" name:"Target"`
-
-	// The operator. Values:
-	// <li>`equal`: Equals</li>
-	Operator *string `json:"Operator,omitempty" name:"Operator"`
-
-	// Values of the match type.
-	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 type OriginRecord struct {
@@ -15285,4 +14565,8 @@ type ZoneSetting struct {
 	// Whether to carry the location information of the client IP during origin-pull.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
+
+	// Configuration of gRPC support
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Grpc *Grpc `json:"Grpc,omitempty" name:"Grpc"`
 }

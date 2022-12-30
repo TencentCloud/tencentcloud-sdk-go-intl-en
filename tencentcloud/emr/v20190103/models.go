@@ -89,6 +89,40 @@ func (r *AddUsersForUserManagerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AllNodeResourceSpec struct {
+	// The description of master nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MasterResourceSpec *NodeResourceSpec `json:"MasterResourceSpec,omitempty" name:"MasterResourceSpec"`
+
+	// The description of core nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoreResourceSpec *NodeResourceSpec `json:"CoreResourceSpec,omitempty" name:"CoreResourceSpec"`
+
+	// The description of task nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskResourceSpec *NodeResourceSpec `json:"TaskResourceSpec,omitempty" name:"TaskResourceSpec"`
+
+	// The description of common nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CommonResourceSpec *NodeResourceSpec `json:"CommonResourceSpec,omitempty" name:"CommonResourceSpec"`
+
+	// The number of master nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MasterCount *int64 `json:"MasterCount,omitempty" name:"MasterCount"`
+
+	// The number of core nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoreCount *int64 `json:"CoreCount,omitempty" name:"CoreCount"`
+
+	// The number of task nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskCount *int64 `json:"TaskCount,omitempty" name:"TaskCount"`
+
+	// The number of common nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CommonCount *int64 `json:"CommonCount,omitempty" name:"CommonCount"`
+}
+
 type ApplicationStatics struct {
 	// Queue name
 	Queue *string `json:"Queue,omitempty" name:"Queue"`
@@ -397,6 +431,235 @@ type ClusterInstancesInfo struct {
 	// Multi-AZ cluster
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsMultiZoneCluster *bool `json:"IsMultiZoneCluster,omitempty" name:"IsMultiZoneCluster"`
+}
+
+// Predefined struct for user
+type CreateClusterRequestParams struct {
+	// The EMR version, such as `EMR-V2.3.0` that indicates the version 2.3.0 of EMR. You can query the EMR version [here](https://intl.cloud.tencent.com/document/product/589/66338?from_cn_redirect=1).
+	ProductVersion *string `json:"ProductVersion,omitempty" name:"ProductVersion"`
+
+	// Whether to enable high availability for nodes. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false`: Disable</li>
+	EnableSupportHAFlag *bool `json:"EnableSupportHAFlag,omitempty" name:"EnableSupportHAFlag"`
+
+	// The instance name.
+	// <li>Length limit: 6–36 characters.</li>
+	// <li>Can contain only Chinese characters, letters, digits, hyphens (-), and underscores (_).</li>
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// The instance billing mode. Valid values:
+	// <li>`PREPAID`: The prepaid mode, namely monthly subscription.</li>
+	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// The instance login setting. This parameter allows you to set a login password or key for your purchased node.
+	// <li>If a key is set, the password will be used for login to the native component WebUI only.</li>
+	// <li>If no key is set, the password will be used for login to all purchased nodes and the native component WebUI.</li>
+	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
+
+	// The configuration of cluster application scenario and supported components.
+	SceneSoftwareConfig *SceneSoftwareConfig `json:"SceneSoftwareConfig,omitempty" name:"SceneSoftwareConfig"`
+
+	// The details of the monthly subscription, including the instance period and auto-renewal. It is required if `InstanceChargeType` is `PREPAID`.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// The ID of the security group to which the instance belongs, in the format of `sg-xxxxxxxx`. You can call the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API and obtain this parameter from the `SecurityGroupId` field in the response.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
+	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitempty" name:"ScriptBootstrapActionConfig"`
+
+	// A unique random token, which is valid for 5 minutes and needs to be specified by the caller to prevent the client from repeatedly creating resources. An example value is `a9a90aa6-751a-41b6-aad6-fae360632808`.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Whether to enable public IP access for master nodes. Valid values:
+	// <li>`NEED_MASTER_WAN`: Enable public IP for master nodes.</li>
+	// <li>`NOT_NEED_MASTER_WAN`: Disable.</li>The public IP is enabled for master nodes by default.
+	NeedMasterWan *string `json:"NeedMasterWan,omitempty" name:"NeedMasterWan"`
+
+	// Whether to enable remote login over the public network. It is invalid if `SecurityGroupId` is passed in. It is disabled by default. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false`: Disable</li>
+	EnableRemoteLoginFlag *bool `json:"EnableRemoteLoginFlag,omitempty" name:"EnableRemoteLoginFlag"`
+
+	// Whether to enable Kerberos authentication. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false` (default): Disable</li>
+	EnableKerberosFlag *bool `json:"EnableKerberosFlag,omitempty" name:"EnableKerberosFlag"`
+
+	// [Custom software configuration](https://intl.cloud.tencent.com/document/product/589/35655?from_cn_redirect=1?from_cn_redirect=1)
+	CustomConf *string `json:"CustomConf,omitempty" name:"CustomConf"`
+
+	// The tag description list. This parameter is used to bind a tag to a resource instance.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The list of spread placement group IDs. Only one can be specified.
+	// You can call the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/product/213/17810?from_cn_redirect=1) API and obtain this parameter from the `DisasterRecoverGroupId` field in the response.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Whether to enable the cluster-level CBS encryption. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false` (default): Disable</li>
+	EnableCbsEncryptFlag *bool `json:"EnableCbsEncryptFlag,omitempty" name:"EnableCbsEncryptFlag"`
+
+	// The metadatabase information. If `MetaType` is `EMR_NEW_META`, `MetaDataJdbcUrl`, `MetaDataUser`, `MetaDataPass`, and `UnifyMetaInstanceId` are not required.
+	// If `MetaType` is `EMR_EXIT_META`, `UnifyMetaInstanceId` is required.
+	// If `MetaType` is `USER_CUSTOM_META`, `MetaDataJdbcUrl`, `MetaDataUser`, and `MetaDataPass` are required.
+	MetaDBInfo *CustomMetaDBInfo `json:"MetaDBInfo,omitempty" name:"MetaDBInfo"`
+
+	// The shared component information.
+	DependService []*DependService `json:"DependService,omitempty" name:"DependService"`
+
+	// The node resource specs. A spec is specified for each AZ, with the first spec for the primary AZ, the second for the backup AZ, and the third for the arbitrator AZ. If the multi-AZ mode is not enabled, only one spec is required.
+	ZoneResourceConfiguration []*ZoneResourceConfiguration `json:"ZoneResourceConfiguration,omitempty" name:"ZoneResourceConfiguration"`
+}
+
+type CreateClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	// The EMR version, such as `EMR-V2.3.0` that indicates the version 2.3.0 of EMR. You can query the EMR version [here](https://intl.cloud.tencent.com/document/product/589/66338?from_cn_redirect=1).
+	ProductVersion *string `json:"ProductVersion,omitempty" name:"ProductVersion"`
+
+	// Whether to enable high availability for nodes. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false`: Disable</li>
+	EnableSupportHAFlag *bool `json:"EnableSupportHAFlag,omitempty" name:"EnableSupportHAFlag"`
+
+	// The instance name.
+	// <li>Length limit: 6–36 characters.</li>
+	// <li>Can contain only Chinese characters, letters, digits, hyphens (-), and underscores (_).</li>
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// The instance billing mode. Valid values:
+	// <li>`PREPAID`: The prepaid mode, namely monthly subscription.</li>
+	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// The instance login setting. This parameter allows you to set a login password or key for your purchased node.
+	// <li>If a key is set, the password will be used for login to the native component WebUI only.</li>
+	// <li>If no key is set, the password will be used for login to all purchased nodes and the native component WebUI.</li>
+	LoginSettings *LoginSettings `json:"LoginSettings,omitempty" name:"LoginSettings"`
+
+	// The configuration of cluster application scenario and supported components.
+	SceneSoftwareConfig *SceneSoftwareConfig `json:"SceneSoftwareConfig,omitempty" name:"SceneSoftwareConfig"`
+
+	// The details of the monthly subscription, including the instance period and auto-renewal. It is required if `InstanceChargeType` is `PREPAID`.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// The ID of the security group to which the instance belongs, in the format of `sg-xxxxxxxx`. You can call the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API and obtain this parameter from the `SecurityGroupId` field in the response.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
+	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitempty" name:"ScriptBootstrapActionConfig"`
+
+	// A unique random token, which is valid for 5 minutes and needs to be specified by the caller to prevent the client from repeatedly creating resources. An example value is `a9a90aa6-751a-41b6-aad6-fae360632808`.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Whether to enable public IP access for master nodes. Valid values:
+	// <li>`NEED_MASTER_WAN`: Enable public IP for master nodes.</li>
+	// <li>`NOT_NEED_MASTER_WAN`: Disable.</li>The public IP is enabled for master nodes by default.
+	NeedMasterWan *string `json:"NeedMasterWan,omitempty" name:"NeedMasterWan"`
+
+	// Whether to enable remote login over the public network. It is invalid if `SecurityGroupId` is passed in. It is disabled by default. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false`: Disable</li>
+	EnableRemoteLoginFlag *bool `json:"EnableRemoteLoginFlag,omitempty" name:"EnableRemoteLoginFlag"`
+
+	// Whether to enable Kerberos authentication. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false` (default): Disable</li>
+	EnableKerberosFlag *bool `json:"EnableKerberosFlag,omitempty" name:"EnableKerberosFlag"`
+
+	// [Custom software configuration](https://intl.cloud.tencent.com/document/product/589/35655?from_cn_redirect=1?from_cn_redirect=1)
+	CustomConf *string `json:"CustomConf,omitempty" name:"CustomConf"`
+
+	// The tag description list. This parameter is used to bind a tag to a resource instance.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The list of spread placement group IDs. Only one can be specified.
+	// You can call the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/product/213/17810?from_cn_redirect=1) API and obtain this parameter from the `DisasterRecoverGroupId` field in the response.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Whether to enable the cluster-level CBS encryption. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false` (default): Disable</li>
+	EnableCbsEncryptFlag *bool `json:"EnableCbsEncryptFlag,omitempty" name:"EnableCbsEncryptFlag"`
+
+	// The metadatabase information. If `MetaType` is `EMR_NEW_META`, `MetaDataJdbcUrl`, `MetaDataUser`, `MetaDataPass`, and `UnifyMetaInstanceId` are not required.
+	// If `MetaType` is `EMR_EXIT_META`, `UnifyMetaInstanceId` is required.
+	// If `MetaType` is `USER_CUSTOM_META`, `MetaDataJdbcUrl`, `MetaDataUser`, and `MetaDataPass` are required.
+	MetaDBInfo *CustomMetaDBInfo `json:"MetaDBInfo,omitempty" name:"MetaDBInfo"`
+
+	// The shared component information.
+	DependService []*DependService `json:"DependService,omitempty" name:"DependService"`
+
+	// The node resource specs. A spec is specified for each AZ, with the first spec for the primary AZ, the second for the backup AZ, and the third for the arbitrator AZ. If the multi-AZ mode is not enabled, only one spec is required.
+	ZoneResourceConfiguration []*ZoneResourceConfiguration `json:"ZoneResourceConfiguration,omitempty" name:"ZoneResourceConfiguration"`
+}
+
+func (r *CreateClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductVersion")
+	delete(f, "EnableSupportHAFlag")
+	delete(f, "InstanceName")
+	delete(f, "InstanceChargeType")
+	delete(f, "LoginSettings")
+	delete(f, "SceneSoftwareConfig")
+	delete(f, "InstanceChargePrepaid")
+	delete(f, "SecurityGroupIds")
+	delete(f, "ScriptBootstrapActionConfig")
+	delete(f, "ClientToken")
+	delete(f, "NeedMasterWan")
+	delete(f, "EnableRemoteLoginFlag")
+	delete(f, "EnableKerberosFlag")
+	delete(f, "CustomConf")
+	delete(f, "Tags")
+	delete(f, "DisasterRecoverGroupIds")
+	delete(f, "EnableCbsEncryptFlag")
+	delete(f, "MetaDBInfo")
+	delete(f, "DependService")
+	delete(f, "ZoneResourceConfiguration")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClusterResponseParams struct {
+	// The instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateClusterResponseParams `json:"Response"`
+}
+
+func (r *CreateClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -745,6 +1008,26 @@ func (r *CreateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CustomMetaDBInfo struct {
+	// The JDBC URL of the custom metadatabase instance. Example: jdbc:mysql://10.10.10.10:3306/dbname
+	MetaDataJdbcUrl *string `json:"MetaDataJdbcUrl,omitempty" name:"MetaDataJdbcUrl"`
+
+	// The custom metadatabase instance username.
+	MetaDataUser *string `json:"MetaDataUser,omitempty" name:"MetaDataUser"`
+
+	// The custom metadatabase instance password.
+	MetaDataPass *string `json:"MetaDataPass,omitempty" name:"MetaDataPass"`
+
+	// The Hive-shared metadatabase type. Valid values:
+	// <li>`EMR_NEW_META`: The cluster creates a metadatabase by default.</li>
+	// <li>`EMR_EXIST_META`: The cluster uses a specified EMR-MetaDB instance.</li>
+	// <li>`USER_CUSTOM_META`: The cluster uses a custom metadatabase instance.</li>
+	MetaType *string `json:"MetaType,omitempty" name:"MetaType"`
+
+	// The EMR-MetaDB instance.
+	UnifyMetaInstanceId *string `json:"UnifyMetaInstanceId,omitempty" name:"UnifyMetaInstanceId"`
+}
+
 type CustomMetaInfo struct {
 	// JDBC connection to custom MetaDB instance beginning with `jdbc:mysql://`
 	MetaDataJdbcUrl *string `json:"MetaDataJdbcUrl,omitempty" name:"MetaDataJdbcUrl"`
@@ -762,6 +1045,14 @@ type CustomServiceDefine struct {
 
 	// Custom parameter value
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type DependService struct {
+	// The shared component name.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// The cluster to which the shared component belongs.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 // Predefined struct for user
@@ -1408,6 +1699,35 @@ func (r *DescribeUsersForUserManagerResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeUsersForUserManagerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DiskSpecInfo struct {
+	// The number of disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+
+	// The system disk type. Valid values:
+	// <li>`CLOUD_SSD`: Cloud SSD</li>
+	// <li>`CLOUD_PREMIUM`: Premium cloud disk</li>
+	// <li>`CLOUD_BASIC`: Cloud HDD</li>
+	// <li>`LOCAL_BASIC`: Local disk</li>
+	// <li>`LOCAL_SSD`: Local SSD</li>
+	// 
+	// The data disk type. Valid values:
+	// <li>`CLOUD_SSD`: Cloud SSD</li>
+	// <li>`CLOUD_PREMIUM`: Premium cloud disk</li>
+	// <li>`CLOUD_BASIC`: Cloud HDD</li>
+	// <li>`LOCAL_BASIC`: Local disk</li>
+	// <li>`LOCAL_SSD`: Local SSD</li>
+	// <li>`CLOUD_HSSD`: Enhanced SSD</li>
+	// <li>`CLOUD_THROUGHPUT`: Throughput HDD</li>
+	// <li>CLOUD_TSSD: ulTra SSD</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// The disk capacity in GB.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 }
 
 type DynamicPodSpec struct {
@@ -2233,6 +2553,17 @@ func (r *InquiryPriceUpdateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InstanceChargePrepaid struct {
+	// The period of monthly subscription, which defaults to 1 and is expressed in month.
+	// Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether to enable auto-renewal. Valid values:
+	// <li>`true`: Enable</li>
+	// <li>`false` (default): Disable</li>
+	RenewFlag *bool `json:"RenewFlag,omitempty" name:"RenewFlag"`
+}
+
 type LoginSettings struct {
 	// The login password of the instance, which contains 8 to 16 uppercase letters, lowercase letters, digits, and special characters (only !@%^*) and cannot start with a special character.
 	Password *string `json:"Password,omitempty" name:"Password"`
@@ -2659,6 +2990,28 @@ type NodeHardwareInfo struct {
 	TradeVersion *int64 `json:"TradeVersion,omitempty" name:"TradeVersion"`
 }
 
+type NodeResourceSpec struct {
+	// The spec type, such as `S2.MEDIUM8`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The system disk, which can be up to 1 PCS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SystemDisk []*DiskSpecInfo `json:"SystemDisk,omitempty" name:"SystemDisk"`
+
+	// The list of tags to be bound.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The cloud data disk, which can be up to 15 PCS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataDisk []*DiskSpecInfo `json:"DataDisk,omitempty" name:"DataDisk"`
+
+	// The local data disk.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LocalDataDisk []*DiskSpecInfo `json:"LocalDataDisk,omitempty" name:"LocalDataDisk"`
+}
+
 type OutterResource struct {
 	// Specification
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -2717,6 +3070,169 @@ type Placement struct {
 
 	// The ID of the project to which the instance belongs. You can call the [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1) and obtain this ID from the `projectId` field in the response. If this is left empty, the ID of the default project is used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
+type PodNewParameter struct {
+	// The TKE or EKS cluster ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Custom permissions
+	// Examples:
+	// {
+	//   "apiVersion": "v1",
+	//   "clusters": [
+	//     {
+	//       "cluster": {
+	//         "certificate-authority-data": "xxxxxx==",
+	//         "server": "https://xxxxx.com"
+	//       },
+	//       "name": "cls-xxxxx"
+	//     }
+	//   ],
+	//   "contexts": [
+	//     {
+	//       "context": {
+	//         "cluster": "cls-xxxxx",
+	//         "user": "100014xxxxx"
+	//       },
+	//       "name": "cls-a44yhcxxxxxxxxxx"
+	//     }
+	//   ],
+	//   "current-context": "cls-a4xxxx-context-default",
+	//   "kind": "Config",
+	//   "preferences": {},
+	//   "users": [
+	//     {
+	//       "name": "100014xxxxx",
+	//       "user": {
+	//         "client-certificate-data": "xxxxxx",
+	//         "client-key-data": "xxxxxx"
+	//       }
+	//     }
+	//   ]
+	// }
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// Custom parameters
+	// Examples:
+	// {
+	//     "apiVersion": "apps/v1",
+	//     "kind": "Deployment",
+	//     "metadata": {
+	//       "name": "test-deployment",
+	//       "labels": {
+	//         "app": "test"
+	//       }
+	//     },
+	//     "spec": {
+	//       "replicas": 3,
+	//       "selector": {
+	//         "matchLabels": {
+	//           "app": "test-app"
+	//         }
+	//       },
+	//       "template": {
+	//         "metadata": {
+	//           "annotations": {
+	//             "your-organization.com/department-v1": "test-example-v1",
+	//             "your-organization.com/department-v2": "test-example-v2"
+	//           },
+	//           "labels": {
+	//             "app": "test-app",
+	//             "environment": "production"
+	//           }
+	//         },
+	//         "spec": {
+	//           "nodeSelector": {
+	//             "your-organization/node-test": "test-node"
+	//           },
+	//           "containers": [
+	//             {
+	//               "name": "nginx",
+	//               "image": "nginx:1.14.2",
+	//               "ports": [
+	//                 {
+	//                   "containerPort": 80
+	//                 }
+	//               ]
+	//             }
+	//           ],
+	//           "affinity": {
+	//             "nodeAffinity": {
+	//               "requiredDuringSchedulingIgnoredDuringExecution": {
+	//                 "nodeSelectorTerms": [
+	//                   {
+	//                     "matchExpressions": [
+	//                       {
+	//                         "key": "disk-type",
+	//                         "operator": "In",
+	//                         "values": [
+	//                           "ssd",
+	//                           "sas"
+	//                         ]
+	//                       },
+	//                       {
+	//                         "key": "cpu-num",
+	//                         "operator": "Gt",
+	//                         "values": [
+	//                           "6"
+	//                         ]
+	//                       }
+	//                     ]
+	//                   }
+	//                 ]
+	//               }
+	//             }
+	//           }
+	//         }
+	//       }
+	//     }
+	//   }
+	Parameter *string `json:"Parameter,omitempty" name:"Parameter"`
+}
+
+type PodNewSpec struct {
+	// The identifier of an external resource provider, such as "cls-a1cd23fa".
+	ResourceProviderIdentifier *string `json:"ResourceProviderIdentifier,omitempty" name:"ResourceProviderIdentifier"`
+
+	// The type of the external resource provider, such as "tke". Currently, only "tke" is supported.
+	ResourceProviderType *string `json:"ResourceProviderType,omitempty" name:"ResourceProviderType"`
+
+	// The purpose of the resource, which means the node type and can only be "TASK".
+	NodeFlag *string `json:"NodeFlag,omitempty" name:"NodeFlag"`
+
+	// The number of CPUs.
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The memory size in GB.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// The EKS cluster - CPU type. Valid values: `intel` and `amd`.
+	CpuType *string `json:"CpuType,omitempty" name:"CpuType"`
+
+	// The data directory mounting information of the pod node.
+	PodVolumes []*PodVolume `json:"PodVolumes,omitempty" name:"PodVolumes"`
+
+	// Whether the dynamic spec is used. Valid values:
+	// <li>`true`: Yes</li>
+	// <li>`false` (default): No</li>
+	EnableDynamicSpecFlag *bool `json:"EnableDynamicSpecFlag,omitempty" name:"EnableDynamicSpecFlag"`
+
+	// The dynamic spec.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DynamicPodSpec *DynamicPodSpec `json:"DynamicPodSpec,omitempty" name:"DynamicPodSpec"`
+
+	// The unique VPC ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The unique VPC subnet ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The pod name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PodName *string `json:"PodName,omitempty" name:"PodName"`
 }
 
 type PodParameter struct {
@@ -2881,6 +3397,14 @@ type PodSpec struct {
 	// pod name
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PodName *string `json:"PodName,omitempty" name:"PodName"`
+}
+
+type PodSpecInfo struct {
+	// The specified information such as pod spec and source for scale-out with pod resources.
+	PodSpec *PodNewSpec `json:"PodSpec,omitempty" name:"PodSpec"`
+
+	// The custom pod permission and parameter.
+	PodParameter *PodNewParameter `json:"PodParameter,omitempty" name:"PodParameter"`
 }
 
 type PodVolume struct {
@@ -3061,6 +3585,209 @@ type Resource struct {
 	// Number of local disks, such as 2
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DiskNum *uint64 `json:"DiskNum,omitempty" name:"DiskNum"`
+}
+
+// Predefined struct for user
+type ScaleOutClusterRequestParams struct {
+	// The node billing mode. Valid values:
+	// <li>`PREPAID`：The prepaid mode, namely monthly subscription.</li>
+	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
+	// <li>`SPOTPAID`: The spot instance mode (for task nodes only).</li>
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// The cluster instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The type and number of nodes to be added.
+	ScaleOutNodeConfig *ScaleOutNodeConfig `json:"ScaleOutNodeConfig,omitempty" name:"ScaleOutNodeConfig"`
+
+	// A unique random token, which is valid for 5 minutes and needs to be specified by the caller to prevent the client from repeatedly creating resources. An example value is `a9a90aa6-751a-41b6-aad6-fae36063280`.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// The details of the monthly subscription, including the instance period and auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
+	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitempty" name:"ScriptBootstrapActionConfig"`
+
+	// The services to be deployed for new nodes. By default, new nodes will inherit all services deployed for the current node type. Deployed services include default optional services. This parameter only supports optional services. For example, if `HDFS`, `YARN`, and `Impala` have been deployed for existing task nodes, only `HDFS` and `YARN` are passed in with this parameter if `Impala` is not deployed during the task node scale-out with API.
+	SoftDeployInfo []*int64 `json:"SoftDeployInfo,omitempty" name:"SoftDeployInfo"`
+
+	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, `HDFS`, `YARN`, and `Impala` have been deployed for current task nodes, and default services are `DataNode`, `NodeManager`, and `ImpalaServer`; if you want to change deployed processes, you can set this parameter to `DataNode,NodeManager,ImpalaServerCoordinator` or `DataNode,NodeManager,ImpalaServerExecutor`.
+	ServiceNodeInfo []*int64 `json:"ServiceNodeInfo,omitempty" name:"ServiceNodeInfo"`
+
+	// The list of spread placement group IDs. Only one can be specified.
+	// You can call the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/product/213/17810?from_cn_redirect=1) API and obtain this parameter from the `DisasterRecoverGroupId` field in the response.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// The list of tags bound to added nodes.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The type of resources to add. Valid values: `host` (general CVM resources) and `pod` (resources provided by a TKE or EKS cluster).
+	HardwareSourceType *string `json:"HardwareSourceType,omitempty" name:"HardwareSourceType"`
+
+	// The pod resource information.
+	PodSpecInfo *PodSpecInfo `json:"PodSpecInfo,omitempty" name:"PodSpecInfo"`
+
+	// The server group name selected for ClickHouse cluster scale-out.
+	ClickHouseClusterName *string `json:"ClickHouseClusterName,omitempty" name:"ClickHouseClusterName"`
+
+	// The server group type selected for ClickHouse cluster scale-out. Valid values: `new` (create a group) and `old` (select an existing group).
+	ClickHouseClusterType *string `json:"ClickHouseClusterType,omitempty" name:"ClickHouseClusterType"`
+
+	// The YARN node label specified for scale-out.
+	YarnNodeLabel *string `json:"YarnNodeLabel,omitempty" name:"YarnNodeLabel"`
+
+	// Whether to start services after scale-out.
+	// <li>`true`: Yes</li>
+	// <li>`false` (default): No</li>
+	EnableStartServiceFlag *bool `json:"EnableStartServiceFlag,omitempty" name:"EnableStartServiceFlag"`
+
+	// The spec settings.
+	ResourceSpec *NodeResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
+
+	// The ID of the AZ where the instance resides, such as `ap-guangzhou-1`. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain this ID from the `Zone` field in the response.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The subnet, which defaults to the subnet used when the cluster is created.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type ScaleOutClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	// The node billing mode. Valid values:
+	// <li>`PREPAID`：The prepaid mode, namely monthly subscription.</li>
+	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
+	// <li>`SPOTPAID`: The spot instance mode (for task nodes only).</li>
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// The cluster instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The type and number of nodes to be added.
+	ScaleOutNodeConfig *ScaleOutNodeConfig `json:"ScaleOutNodeConfig,omitempty" name:"ScaleOutNodeConfig"`
+
+	// A unique random token, which is valid for 5 minutes and needs to be specified by the caller to prevent the client from repeatedly creating resources. An example value is `a9a90aa6-751a-41b6-aad6-fae36063280`.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// The details of the monthly subscription, including the instance period and auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
+	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
+	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitempty" name:"ScriptBootstrapActionConfig"`
+
+	// The services to be deployed for new nodes. By default, new nodes will inherit all services deployed for the current node type. Deployed services include default optional services. This parameter only supports optional services. For example, if `HDFS`, `YARN`, and `Impala` have been deployed for existing task nodes, only `HDFS` and `YARN` are passed in with this parameter if `Impala` is not deployed during the task node scale-out with API.
+	SoftDeployInfo []*int64 `json:"SoftDeployInfo,omitempty" name:"SoftDeployInfo"`
+
+	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, `HDFS`, `YARN`, and `Impala` have been deployed for current task nodes, and default services are `DataNode`, `NodeManager`, and `ImpalaServer`; if you want to change deployed processes, you can set this parameter to `DataNode,NodeManager,ImpalaServerCoordinator` or `DataNode,NodeManager,ImpalaServerExecutor`.
+	ServiceNodeInfo []*int64 `json:"ServiceNodeInfo,omitempty" name:"ServiceNodeInfo"`
+
+	// The list of spread placement group IDs. Only one can be specified.
+	// You can call the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/product/213/17810?from_cn_redirect=1) API and obtain this parameter from the `DisasterRecoverGroupId` field in the response.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// The list of tags bound to added nodes.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// The type of resources to add. Valid values: `host` (general CVM resources) and `pod` (resources provided by a TKE or EKS cluster).
+	HardwareSourceType *string `json:"HardwareSourceType,omitempty" name:"HardwareSourceType"`
+
+	// The pod resource information.
+	PodSpecInfo *PodSpecInfo `json:"PodSpecInfo,omitempty" name:"PodSpecInfo"`
+
+	// The server group name selected for ClickHouse cluster scale-out.
+	ClickHouseClusterName *string `json:"ClickHouseClusterName,omitempty" name:"ClickHouseClusterName"`
+
+	// The server group type selected for ClickHouse cluster scale-out. Valid values: `new` (create a group) and `old` (select an existing group).
+	ClickHouseClusterType *string `json:"ClickHouseClusterType,omitempty" name:"ClickHouseClusterType"`
+
+	// The YARN node label specified for scale-out.
+	YarnNodeLabel *string `json:"YarnNodeLabel,omitempty" name:"YarnNodeLabel"`
+
+	// Whether to start services after scale-out.
+	// <li>`true`: Yes</li>
+	// <li>`false` (default): No</li>
+	EnableStartServiceFlag *bool `json:"EnableStartServiceFlag,omitempty" name:"EnableStartServiceFlag"`
+
+	// The spec settings.
+	ResourceSpec *NodeResourceSpec `json:"ResourceSpec,omitempty" name:"ResourceSpec"`
+
+	// The ID of the AZ where the instance resides, such as `ap-guangzhou-1`. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain this ID from the `Zone` field in the response.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// The subnet, which defaults to the subnet used when the cluster is created.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+func (r *ScaleOutClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ScaleOutClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceChargeType")
+	delete(f, "InstanceId")
+	delete(f, "ScaleOutNodeConfig")
+	delete(f, "ClientToken")
+	delete(f, "InstanceChargePrepaid")
+	delete(f, "ScriptBootstrapActionConfig")
+	delete(f, "SoftDeployInfo")
+	delete(f, "ServiceNodeInfo")
+	delete(f, "DisasterRecoverGroupIds")
+	delete(f, "Tags")
+	delete(f, "HardwareSourceType")
+	delete(f, "PodSpecInfo")
+	delete(f, "ClickHouseClusterName")
+	delete(f, "ClickHouseClusterType")
+	delete(f, "YarnNodeLabel")
+	delete(f, "EnableStartServiceFlag")
+	delete(f, "ResourceSpec")
+	delete(f, "Zone")
+	delete(f, "SubnetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ScaleOutClusterResponseParams struct {
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The client token.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// The scale-out workflow ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ScaleOutClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *ScaleOutClusterResponseParams `json:"Response"`
+}
+
+func (r *ScaleOutClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ScaleOutClusterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -3327,6 +4054,49 @@ func (r *ScaleOutInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ScaleOutNodeConfig struct {
+	// Valid values of node type:
+	//   <li>MASTER</li>
+	//   <li>TASK</li>
+	//   <li>CORE</li>
+	//   <li>ROUTER</li>
+	NodeFlag *string `json:"NodeFlag,omitempty" name:"NodeFlag"`
+
+	// The number of nodes.
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+}
+
+type SceneSoftwareConfig struct {
+	// The list of deployed components. The list of component options varies by `ProductVersion` (EMR version). For more information, see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
+	// The instance type, `hive` or `flink`.
+	Software []*string `json:"Software,omitempty" name:"Software"`
+
+	// The scenario name, which defaults to `Hadoop-Default`. For more details, see [here](https://intl.cloud.tencent.com/document/product/589/14624?from_cn_redirect=1). Valid values:
+	// Hadoop-Kudu
+	// Hadoop-Zookeeper
+	// Hadoop-Presto
+	// Hadoop-Hbase
+	// Hadoop-Default
+	SceneName *string `json:"SceneName,omitempty" name:"SceneName"`
+}
+
+type ScriptBootstrapActionConfig struct {
+	// The COS URL of the script, in the format of `https://beijing-111111.cos.ap-beijing.myqcloud.com/data/test.sh`. For the COS bucket list, see [Bucket List](https://console.cloud.tencent.com/cos/bucket).
+	CosFileURI *string `json:"CosFileURI,omitempty" name:"CosFileURI"`
+
+	// The execution time of the bootstrap action script. Valid values:
+	// <li>`resourceAfter`: After node initialization</li>
+	// <li>`clusterAfter`: After cluster start</li>
+	// <li>`clusterBefore`: Before cluster start</li>
+	ExecutionMoment *string `json:"ExecutionMoment,omitempty" name:"ExecutionMoment"`
+
+	// The execution script parameter. The parameter format must comply with standard shell specifications.
+	Args []*string `json:"Args,omitempty" name:"Args"`
+
+	// The script file name.
+	CosFileName *string `json:"CosFileName,omitempty" name:"CosFileName"`
+}
+
 type SearchItem struct {
 	// Searchable type
 	SearchType *string `json:"SearchType,omitempty" name:"SearchType"`
@@ -3565,4 +4335,33 @@ type VPCSettings struct {
 
 	// Subnet ID
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type VirtualPrivateCloud struct {
+	// The VPC ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The subnet ID.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type ZoneResourceConfiguration struct {
+	// The VPC configuration information. This parameter is used to specify the VPC ID, subnet ID and other information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VirtualPrivateCloud *VirtualPrivateCloud `json:"VirtualPrivateCloud,omitempty" name:"VirtualPrivateCloud"`
+
+	// The instance location. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
+
+	// The specs of all nodes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AllNodeResourceSpec *AllNodeResourceSpec `json:"AllNodeResourceSpec,omitempty" name:"AllNodeResourceSpec"`
+
+	// For a single AZ, `ZoneTag` can be left out. For a double-AZ mode, `ZoneTag` is set to `master` and `standby` for the first and second AZs, respectively. If there are three AZs, `ZoneTag` is set to `master`, `standby`, and `third-party` for the first, second, and third AZs, respectively. Valid values:
+	//   <li>master</li>
+	//   <li>standby</li>
+	//   <li>third-party</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneTag *string `json:"ZoneTag,omitempty" name:"ZoneTag"`
 }

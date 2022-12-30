@@ -469,80 +469,6 @@ func (c *Client) CreateCustomErrorPageWithContext(ctx context.Context, request *
     return
 }
 
-func NewCreateDnsRecordRequest() (request *CreateDnsRecordRequest) {
-    request = &CreateDnsRecordRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "CreateDnsRecord")
-    
-    
-    return
-}
-
-func NewCreateDnsRecordResponse() (response *CreateDnsRecordResponse) {
-    response = &CreateDnsRecordResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateDnsRecord
-// This API is used to create a DNS record.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_CONFLICTRECORD = "InvalidParameterValue.ConflictRecord"
-//  INVALIDPARAMETERVALUE_CONFLICTWITHDNSSEC = "InvalidParameterValue.ConflictWithDNSSEC"
-//  INVALIDPARAMETERVALUE_CONFLICTWITHLBRECORD = "InvalidParameterValue.ConflictWithLBRecord"
-//  INVALIDPARAMETERVALUE_CONFLICTWITHNSRECORD = "InvalidParameterValue.ConflictWithNSRecord"
-//  INVALIDPARAMETERVALUE_INVALIDDNSCONTENT = "InvalidParameterValue.InvalidDNSContent"
-//  INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYNAME = "InvalidParameterValue.InvalidProxyName"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
-//  INVALIDPARAMETERVALUE_RECORDALREADYEXISTS = "InvalidParameterValue.RecordAlreadyExists"
-//  INVALIDPARAMETERVALUE_RECORDNOTALLOWED = "InvalidParameterValue.RecordNotAllowed"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_DOMAINNOICP = "OperationDenied.DomainNoICP"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-func (c *Client) CreateDnsRecord(request *CreateDnsRecordRequest) (response *CreateDnsRecordResponse, err error) {
-    return c.CreateDnsRecordWithContext(context.Background(), request)
-}
-
-// CreateDnsRecord
-// This API is used to create a DNS record.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_CONFLICTRECORD = "InvalidParameterValue.ConflictRecord"
-//  INVALIDPARAMETERVALUE_CONFLICTWITHDNSSEC = "InvalidParameterValue.ConflictWithDNSSEC"
-//  INVALIDPARAMETERVALUE_CONFLICTWITHLBRECORD = "InvalidParameterValue.ConflictWithLBRecord"
-//  INVALIDPARAMETERVALUE_CONFLICTWITHNSRECORD = "InvalidParameterValue.ConflictWithNSRecord"
-//  INVALIDPARAMETERVALUE_INVALIDDNSCONTENT = "InvalidParameterValue.InvalidDNSContent"
-//  INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYNAME = "InvalidParameterValue.InvalidProxyName"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
-//  INVALIDPARAMETERVALUE_RECORDALREADYEXISTS = "InvalidParameterValue.RecordAlreadyExists"
-//  INVALIDPARAMETERVALUE_RECORDNOTALLOWED = "InvalidParameterValue.RecordNotAllowed"
-//  OPERATIONDENIED = "OperationDenied"
-//  OPERATIONDENIED_DOMAINNOICP = "OperationDenied.DomainNoICP"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-func (c *Client) CreateDnsRecordWithContext(ctx context.Context, request *CreateDnsRecordRequest) (response *CreateDnsRecordResponse, err error) {
-    if request == nil {
-        request = NewCreateDnsRecordRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateDnsRecord require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateDnsRecordResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateIpTableListRequest() (request *CreateIpTableListRequest) {
     request = &CreateIpTableListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -597,56 +523,6 @@ func (c *Client) CreateIpTableListWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateIpTableListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateLoadBalancingRequest() (request *CreateLoadBalancingRequest) {
-    request = &CreateLoadBalancingRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "CreateLoadBalancing")
-    
-    
-    return
-}
-
-func NewCreateLoadBalancingResponse() (response *CreateLoadBalancingResponse) {
-    response = &CreateLoadBalancingResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateLoadBalancing
-// This API is used to create a CLB instance.
-//
-// error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) CreateLoadBalancing(request *CreateLoadBalancingRequest) (response *CreateLoadBalancingResponse, err error) {
-    return c.CreateLoadBalancingWithContext(context.Background(), request)
-}
-
-// CreateLoadBalancing
-// This API is used to create a CLB instance.
-//
-// error code that may be returned:
-//  LIMITEXCEEDED = "LimitExceeded"
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) CreateLoadBalancingWithContext(ctx context.Context, request *CreateLoadBalancingRequest) (response *CreateLoadBalancingResponse, err error) {
-    if request == nil {
-        request = NewCreateLoadBalancingRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateLoadBalancing require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateLoadBalancingResponse()
     err = c.Send(request, response)
     return
 }
@@ -947,6 +823,7 @@ func NewCreatePurgeTaskResponse() (response *CreatePurgeTaskResponse) {
 // error code that may be returned:
 //  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
 //  INTERNALERROR_DOMAINCONFIG = "InternalError.DomainConfig"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INTERNALERROR_QUOTASYSTEM = "InternalError.QuotaSystem"
 //  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
 //  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
@@ -966,6 +843,7 @@ func (c *Client) CreatePurgeTask(request *CreatePurgeTaskRequest) (response *Cre
 // error code that may be returned:
 //  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
 //  INTERNALERROR_DOMAINCONFIG = "InternalError.DomainConfig"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INTERNALERROR_QUOTASYSTEM = "InternalError.QuotaSystem"
 //  INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
 //  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
@@ -1063,7 +941,10 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 // This API is used to create a rule in the rule engine.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
 //  INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 //  INVALIDPARAMETER_ERRINVALIDACTIONTYPE = "InvalidParameter.ErrInvalidActionType"
@@ -1071,14 +952,17 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUECONTAINFILENAMEEXTENSION = "InvalidParameter.ErrInvalidConditionValueBadValueContainFileNameExtension"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOLONGVALUE = "InvalidParameter.ErrInvalidConditionValueTooLongValue"
+//  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYWILDCARD = "InvalidParameter.ErrInvalidConditionValueTooManyWildcard"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEZEROLENGTH = "InvalidParameter.ErrInvalidConditionValueZeroLength"
 //  INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 //  INVALIDPARAMETER_INVALIDCACHEKEY = "InvalidParameter.InvalidCacheKey"
+//  INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
 //  INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
 //  INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
 //  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
+//  INVALIDPARAMETER_INVALIDPOSTSIZEVALUE = "InvalidParameter.InvalidPostSizeValue"
 //  INVALIDPARAMETER_INVALIDREQUESTHEADERNAME = "InvalidParameter.InvalidRequestHeaderName"
 //  INVALIDPARAMETER_INVALIDRESPONSEHEADERNAME = "InvalidParameter.InvalidResponseHeaderName"
 //  INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
@@ -1088,8 +972,10 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
+//  INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
     return c.CreateRuleWithContext(context.Background(), request)
 }
@@ -1098,7 +984,10 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 // This API is used to create a rule in the rule engine.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
 //  INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 //  INVALIDPARAMETER_ERRINVALIDACTIONTYPE = "InvalidParameter.ErrInvalidActionType"
@@ -1106,14 +995,17 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUECONTAINFILENAMEEXTENSION = "InvalidParameter.ErrInvalidConditionValueBadValueContainFileNameExtension"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOLONGVALUE = "InvalidParameter.ErrInvalidConditionValueTooLongValue"
+//  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYWILDCARD = "InvalidParameter.ErrInvalidConditionValueTooManyWildcard"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEZEROLENGTH = "InvalidParameter.ErrInvalidConditionValueZeroLength"
 //  INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 //  INVALIDPARAMETER_INVALIDCACHEKEY = "InvalidParameter.InvalidCacheKey"
+//  INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
 //  INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
 //  INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
 //  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
+//  INVALIDPARAMETER_INVALIDPOSTSIZEVALUE = "InvalidParameter.InvalidPostSizeValue"
 //  INVALIDPARAMETER_INVALIDREQUESTHEADERNAME = "InvalidParameter.InvalidRequestHeaderName"
 //  INVALIDPARAMETER_INVALIDRESPONSEHEADERNAME = "InvalidParameter.InvalidResponseHeaderName"
 //  INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
@@ -1123,8 +1015,10 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
+//  INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateRuleWithContext(ctx context.Context, request *CreateRuleRequest) (response *CreateRuleResponse, err error) {
     if request == nil {
         request = NewCreateRuleRequest()
@@ -1163,7 +1057,10 @@ func NewCreateSecurityDropPageResponse() (response *CreateSecurityDropPageRespon
 // This API is used to create a custom block page.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
 //  INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 //  INVALIDPARAMETER_ERRINVALIDACTIONTYPE = "InvalidParameter.ErrInvalidActionType"
@@ -1171,14 +1068,17 @@ func NewCreateSecurityDropPageResponse() (response *CreateSecurityDropPageRespon
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUECONTAINFILENAMEEXTENSION = "InvalidParameter.ErrInvalidConditionValueBadValueContainFileNameExtension"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOLONGVALUE = "InvalidParameter.ErrInvalidConditionValueTooLongValue"
+//  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYWILDCARD = "InvalidParameter.ErrInvalidConditionValueTooManyWildcard"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEZEROLENGTH = "InvalidParameter.ErrInvalidConditionValueZeroLength"
 //  INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 //  INVALIDPARAMETER_INVALIDCACHEKEY = "InvalidParameter.InvalidCacheKey"
+//  INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
 //  INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
 //  INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
 //  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
+//  INVALIDPARAMETER_INVALIDPOSTSIZEVALUE = "InvalidParameter.InvalidPostSizeValue"
 //  INVALIDPARAMETER_INVALIDREQUESTHEADERNAME = "InvalidParameter.InvalidRequestHeaderName"
 //  INVALIDPARAMETER_INVALIDRESPONSEHEADERNAME = "InvalidParameter.InvalidResponseHeaderName"
 //  INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
@@ -1188,8 +1088,10 @@ func NewCreateSecurityDropPageResponse() (response *CreateSecurityDropPageRespon
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
+//  INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateSecurityDropPage(request *CreateSecurityDropPageRequest) (response *CreateSecurityDropPageResponse, err error) {
     return c.CreateSecurityDropPageWithContext(context.Background(), request)
 }
@@ -1198,7 +1100,10 @@ func (c *Client) CreateSecurityDropPage(request *CreateSecurityDropPageRequest) 
 // This API is used to create a custom block page.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
 //  INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 //  INVALIDPARAMETER_ERRINVALIDACTIONTYPE = "InvalidParameter.ErrInvalidActionType"
@@ -1206,14 +1111,17 @@ func (c *Client) CreateSecurityDropPage(request *CreateSecurityDropPageRequest) 
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUECONTAINFILENAMEEXTENSION = "InvalidParameter.ErrInvalidConditionValueBadValueContainFileNameExtension"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOLONGVALUE = "InvalidParameter.ErrInvalidConditionValueTooLongValue"
+//  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYWILDCARD = "InvalidParameter.ErrInvalidConditionValueTooManyWildcard"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEZEROLENGTH = "InvalidParameter.ErrInvalidConditionValueZeroLength"
 //  INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 //  INVALIDPARAMETER_INVALIDCACHEKEY = "InvalidParameter.InvalidCacheKey"
+//  INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
 //  INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
 //  INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
 //  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
+//  INVALIDPARAMETER_INVALIDPOSTSIZEVALUE = "InvalidParameter.InvalidPostSizeValue"
 //  INVALIDPARAMETER_INVALIDREQUESTHEADERNAME = "InvalidParameter.InvalidRequestHeaderName"
 //  INVALIDPARAMETER_INVALIDRESPONSEHEADERNAME = "InvalidParameter.InvalidResponseHeaderName"
 //  INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
@@ -1223,8 +1131,10 @@ func (c *Client) CreateSecurityDropPage(request *CreateSecurityDropPageRequest) 
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTHOST = "InvalidParameter.InvalidUrlRedirectHost"
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
+//  INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) CreateSecurityDropPageWithContext(ctx context.Context, request *CreateSecurityDropPageRequest) (response *CreateSecurityDropPageResponse, err error) {
     if request == nil {
         request = NewCreateSecurityDropPageRequest()
@@ -1405,6 +1315,7 @@ func NewDeleteAliasDomainResponse() (response *DeleteAliasDomainResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteAliasDomain(request *DeleteAliasDomainRequest) (response *DeleteAliasDomainResponse, err error) {
     return c.DeleteAliasDomainWithContext(context.Background(), request)
@@ -1416,6 +1327,7 @@ func (c *Client) DeleteAliasDomain(request *DeleteAliasDomainRequest) (response 
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteAliasDomainWithContext(ctx context.Context, request *DeleteAliasDomainRequest) (response *DeleteAliasDomainResponse, err error) {
     if request == nil {
@@ -1529,106 +1441,6 @@ func (c *Client) DeleteApplicationProxyRuleWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDeleteApplicationProxyRuleResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteDnsRecordsRequest() (request *DeleteDnsRecordsRequest) {
-    request = &DeleteDnsRecordsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "DeleteDnsRecords")
-    
-    
-    return
-}
-
-func NewDeleteDnsRecordsResponse() (response *DeleteDnsRecordsResponse) {
-    response = &DeleteDnsRecordsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteDnsRecords
-// This API is used to delete DNS records in batches.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DeleteDnsRecords(request *DeleteDnsRecordsRequest) (response *DeleteDnsRecordsResponse, err error) {
-    return c.DeleteDnsRecordsWithContext(context.Background(), request)
-}
-
-// DeleteDnsRecords
-// This API is used to delete DNS records in batches.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DeleteDnsRecordsWithContext(ctx context.Context, request *DeleteDnsRecordsRequest) (response *DeleteDnsRecordsResponse, err error) {
-    if request == nil {
-        request = NewDeleteDnsRecordsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteDnsRecords require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteDnsRecordsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteLoadBalancingRequest() (request *DeleteLoadBalancingRequest) {
-    request = &DeleteLoadBalancingRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "DeleteLoadBalancing")
-    
-    
-    return
-}
-
-func NewDeleteLoadBalancingResponse() (response *DeleteLoadBalancingResponse) {
-    response = &DeleteLoadBalancingResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DeleteLoadBalancing
-// This API is used to delete a CLB instance.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) DeleteLoadBalancing(request *DeleteLoadBalancingRequest) (response *DeleteLoadBalancingResponse, err error) {
-    return c.DeleteLoadBalancingWithContext(context.Background(), request)
-}
-
-// DeleteLoadBalancing
-// This API is used to delete a CLB instance.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) DeleteLoadBalancingWithContext(ctx context.Context, request *DeleteLoadBalancingRequest) (response *DeleteLoadBalancingResponse, err error) {
-    if request == nil {
-        request = NewDeleteLoadBalancingRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteLoadBalancing require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteLoadBalancingResponse()
     err = c.Send(request, response)
     return
 }
@@ -1753,9 +1565,11 @@ func NewDeleteRulesResponse() (response *DeleteRulesResponse) {
 // This API is used to batch delete rules from the rule engine.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 //  INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DeleteRules(request *DeleteRulesRequest) (response *DeleteRulesResponse, err error) {
     return c.DeleteRulesWithContext(context.Background(), request)
 }
@@ -1764,9 +1578,11 @@ func (c *Client) DeleteRules(request *DeleteRulesRequest) (response *DeleteRules
 // This API is used to batch delete rules from the rule engine.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 //  INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) DeleteRulesWithContext(ctx context.Context, request *DeleteRulesRequest) (response *DeleteRulesResponse, err error) {
     if request == nil {
         request = NewDeleteRulesRequest()
@@ -1902,6 +1718,7 @@ func NewDescribeAliasDomainsResponse() (response *DescribeAliasDomainsResponse) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeAliasDomains(request *DescribeAliasDomainsRequest) (response *DescribeAliasDomainsResponse, err error) {
     return c.DescribeAliasDomainsWithContext(context.Background(), request)
@@ -1912,6 +1729,7 @@ func (c *Client) DescribeAliasDomains(request *DescribeAliasDomainsRequest) (res
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeAliasDomainsWithContext(ctx context.Context, request *DescribeAliasDomainsRequest) (response *DescribeAliasDomainsResponse, err error) {
     if request == nil {
@@ -2006,9 +1824,6 @@ func NewDescribeAvailablePlansResponse() (response *DescribeAvailablePlansRespon
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
-//  OPERATIONDENIED = "OperationDenied"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeAvailablePlans(request *DescribeAvailablePlansRequest) (response *DescribeAvailablePlansResponse, err error) {
     return c.DescribeAvailablePlansWithContext(context.Background(), request)
 }
@@ -2018,9 +1833,6 @@ func (c *Client) DescribeAvailablePlans(request *DescribeAvailablePlansRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
-//  OPERATIONDENIED = "OperationDenied"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeAvailablePlansWithContext(ctx context.Context, request *DescribeAvailablePlansRequest) (response *DescribeAvailablePlansResponse, err error) {
     if request == nil {
         request = NewDescribeAvailablePlansRequest()
@@ -2429,6 +2241,7 @@ func NewDescribeContentQuotaResponse() (response *DescribeContentQuotaResponse) 
 // This API is used to query content management quotas.
 //
 // error code that may be returned:
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeContentQuota(request *DescribeContentQuotaRequest) (response *DescribeContentQuotaResponse, err error) {
     return c.DescribeContentQuotaWithContext(context.Background(), request)
@@ -2438,6 +2251,7 @@ func (c *Client) DescribeContentQuota(request *DescribeContentQuotaRequest) (res
 // This API is used to query content management quotas.
 //
 // error code that may be returned:
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeContentQuotaWithContext(ctx context.Context, request *DescribeContentQuotaRequest) (response *DescribeContentQuotaResponse, err error) {
     if request == nil {
@@ -2477,6 +2291,7 @@ func NewDescribeDDoSAttackDataResponse() (response *DescribeDDoSAttackDataRespon
 // This API is used to query the DDoS attack data recorded over time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -2489,6 +2304,7 @@ func (c *Client) DescribeDDoSAttackData(request *DescribeDDoSAttackDataRequest) 
 // This API is used to query the DDoS attack data recorded over time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -2531,6 +2347,7 @@ func NewDescribeDDoSAttackEventResponse() (response *DescribeDDoSAttackEventResp
 // This API is used to query the list of DDoS attack events.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
@@ -2544,6 +2361,7 @@ func (c *Client) DescribeDDoSAttackEvent(request *DescribeDDoSAttackEventRequest
 // This API is used to query the list of DDoS attack events.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
@@ -2687,6 +2505,7 @@ func NewDescribeDDoSAttackTopDataResponse() (response *DescribeDDoSAttackTopData
 // This API is used to query the top-ranked DDoS attack data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -2698,6 +2517,7 @@ func (c *Client) DescribeDDoSAttackTopData(request *DescribeDDoSAttackTopDataReq
 // This API is used to query the top-ranked DDoS attack data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -2739,6 +2559,7 @@ func NewDescribeDDoSBlockListResponse() (response *DescribeDDoSBlockListResponse
 // This API is used to query the list of DDoS blocking data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -2750,6 +2571,7 @@ func (c *Client) DescribeDDoSBlockList(request *DescribeDDoSBlockListRequest) (r
 // This API is used to query the list of DDoS blocking data.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -2939,6 +2761,58 @@ func (c *Client) DescribeDefaultCertificatesWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeDistributionL4AccessDataRequest() (request *DescribeDistributionL4AccessDataRequest) {
+    request = &DescribeDistributionL4AccessDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeDistributionL4AccessData")
+    
+    
+    return
+}
+
+func NewDescribeDistributionL4AccessDataResponse() (response *DescribeDistributionL4AccessDataResponse) {
+    response = &DescribeDistributionL4AccessDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDistributionL4AccessData
+// This API is used to query the data of L4 connection duration over time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDistributionL4AccessData(request *DescribeDistributionL4AccessDataRequest) (response *DescribeDistributionL4AccessDataResponse, err error) {
+    return c.DescribeDistributionL4AccessDataWithContext(context.Background(), request)
+}
+
+// DescribeDistributionL4AccessData
+// This API is used to query the data of L4 connection duration over time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeDistributionL4AccessDataWithContext(ctx context.Context, request *DescribeDistributionL4AccessDataRequest) (response *DescribeDistributionL4AccessDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeDistributionL4AccessDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDistributionL4AccessData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDistributionL4AccessDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDnsDataRequest() (request *DescribeDnsDataRequest) {
     request = &DescribeDnsDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2989,60 +2863,6 @@ func (c *Client) DescribeDnsDataWithContext(ctx context.Context, request *Descri
     return
 }
 
-func NewDescribeDnsRecordsRequest() (request *DescribeDnsRecordsRequest) {
-    request = &DescribeDnsRecordsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "DescribeDnsRecords")
-    
-    
-    return
-}
-
-func NewDescribeDnsRecordsResponse() (response *DescribeDnsRecordsResponse) {
-    response = &DescribeDnsRecordsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeDnsRecords
-// This API is used to query DNS records. Paging, sorting and filtering are supported.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
-//  OPERATIONDENIED = "OperationDenied"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
-func (c *Client) DescribeDnsRecords(request *DescribeDnsRecordsRequest) (response *DescribeDnsRecordsResponse, err error) {
-    return c.DescribeDnsRecordsWithContext(context.Background(), request)
-}
-
-// DescribeDnsRecords
-// This API is used to query DNS records. Paging, sorting and filtering are supported.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
-//  OPERATIONDENIED = "OperationDenied"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
-func (c *Client) DescribeDnsRecordsWithContext(ctx context.Context, request *DescribeDnsRecordsRequest) (response *DescribeDnsRecordsResponse, err error) {
-    if request == nil {
-        request = NewDescribeDnsRecordsRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeDnsRecords require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeDnsRecordsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeDnssecRequest() (request *DescribeDnssecRequest) {
     request = &DescribeDnssecRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3065,10 +2885,7 @@ func NewDescribeDnssecResponse() (response *DescribeDnssecResponse) {
 // This API is used to query DNSSEC information.
 //
 // error code that may be returned:
-//  INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
-//  OPERATIONDENIED = "OperationDenied"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeDnssec(request *DescribeDnssecRequest) (response *DescribeDnssecResponse, err error) {
     return c.DescribeDnssecWithContext(context.Background(), request)
 }
@@ -3077,10 +2894,7 @@ func (c *Client) DescribeDnssec(request *DescribeDnssecRequest) (response *Descr
 // This API is used to query DNSSEC information.
 //
 // error code that may be returned:
-//  INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
-//  OPERATIONDENIED = "OperationDenied"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeDnssecWithContext(ctx context.Context, request *DescribeDnssecRequest) (response *DescribeDnssecResponse, err error) {
     if request == nil {
         request = NewDescribeDnssecRequest()
@@ -3119,6 +2933,7 @@ func NewDescribeHostsSettingResponse() (response *DescribeHostsSettingResponse) 
 // This API is used to query detailed domain name configuration.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -3132,6 +2947,7 @@ func (c *Client) DescribeHostsSetting(request *DescribeHostsSettingRequest) (res
 // This API is used to query detailed domain name configuration.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -3201,56 +3017,6 @@ func (c *Client) DescribeIdentificationsWithContext(ctx context.Context, request
     return
 }
 
-func NewDescribeLoadBalancingRequest() (request *DescribeLoadBalancingRequest) {
-    request = &DescribeLoadBalancingRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "DescribeLoadBalancing")
-    
-    
-    return
-}
-
-func NewDescribeLoadBalancingResponse() (response *DescribeLoadBalancingResponse) {
-    response = &DescribeLoadBalancingResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeLoadBalancing
-// This API is used to obtain a list of CLB instances.
-//
-// error code that may be returned:
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
-func (c *Client) DescribeLoadBalancing(request *DescribeLoadBalancingRequest) (response *DescribeLoadBalancingResponse, err error) {
-    return c.DescribeLoadBalancingWithContext(context.Background(), request)
-}
-
-// DescribeLoadBalancing
-// This API is used to obtain a list of CLB instances.
-//
-// error code that may be returned:
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
-func (c *Client) DescribeLoadBalancingWithContext(ctx context.Context, request *DescribeLoadBalancingRequest) (response *DescribeLoadBalancingResponse, err error) {
-    if request == nil {
-        request = NewDescribeLoadBalancingRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeLoadBalancing require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeLoadBalancingResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeLogSetsRequest() (request *DescribeLogSetsRequest) {
     request = &DescribeLogSetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3273,8 +3039,7 @@ func NewDescribeLogSetsResponse() (response *DescribeLogSetsResponse) {
 // This API is used to get a list of logsets.
 //
 // error code that may be returned:
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeLogSets(request *DescribeLogSetsRequest) (response *DescribeLogSetsResponse, err error) {
     return c.DescribeLogSetsWithContext(context.Background(), request)
 }
@@ -3283,8 +3048,7 @@ func (c *Client) DescribeLogSets(request *DescribeLogSetsRequest) (response *Des
 // This API is used to get a list of logsets.
 //
 // error code that may be returned:
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeLogSetsWithContext(ctx context.Context, request *DescribeLogSetsRequest) (response *DescribeLogSetsResponse, err error) {
     if request == nil {
         request = NewDescribeLogSetsRequest()
@@ -3371,7 +3135,7 @@ func NewDescribeLogTopicTasksResponse() (response *DescribeLogTopicTasksResponse
 // This API is used to get a list of shipping tasks.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 func (c *Client) DescribeLogTopicTasks(request *DescribeLogTopicTasksRequest) (response *DescribeLogTopicTasksResponse, err error) {
     return c.DescribeLogTopicTasksWithContext(context.Background(), request)
 }
@@ -3380,7 +3144,7 @@ func (c *Client) DescribeLogTopicTasks(request *DescribeLogTopicTasksRequest) (r
 // This API is used to get a list of shipping tasks.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 func (c *Client) DescribeLogTopicTasksWithContext(ctx context.Context, request *DescribeLogTopicTasksRequest) (response *DescribeLogTopicTasksResponse, err error) {
     if request == nil {
         request = NewDescribeLogTopicTasksRequest()
@@ -3419,7 +3183,7 @@ func NewDescribeOriginGroupResponse() (response *DescribeOriginGroupResponse) {
 // This API is used to obtain a list of origin groups.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 func (c *Client) DescribeOriginGroup(request *DescribeOriginGroupRequest) (response *DescribeOriginGroupResponse, err error) {
     return c.DescribeOriginGroupWithContext(context.Background(), request)
 }
@@ -3428,7 +3192,7 @@ func (c *Client) DescribeOriginGroup(request *DescribeOriginGroupRequest) (respo
 // This API is used to obtain a list of origin groups.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 func (c *Client) DescribeOriginGroupWithContext(ctx context.Context, request *DescribeOriginGroupRequest) (response *DescribeOriginGroupResponse, err error) {
     if request == nil {
         request = NewDescribeOriginGroupRequest()
@@ -3681,10 +3445,7 @@ func NewDescribeRulesResponse() (response *DescribeRulesResponse) {
 // This API is used to query the rules in the rule engine.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 func (c *Client) DescribeRules(request *DescribeRulesRequest) (response *DescribeRulesResponse, err error) {
     return c.DescribeRulesWithContext(context.Background(), request)
 }
@@ -3693,10 +3454,7 @@ func (c *Client) DescribeRules(request *DescribeRulesRequest) (response *Describ
 // This API is used to query the rules in the rule engine.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 func (c *Client) DescribeRulesWithContext(ctx context.Context, request *DescribeRulesRequest) (response *DescribeRulesResponse, err error) {
     if request == nil {
         request = NewDescribeRulesRequest()
@@ -3735,10 +3493,7 @@ func NewDescribeRulesSettingResponse() (response *DescribeRulesSettingResponse) 
 // This API is used to return the list of the settings of the rule engine that can be used for request match and their detailed recommended configuration information.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 func (c *Client) DescribeRulesSetting(request *DescribeRulesSettingRequest) (response *DescribeRulesSettingResponse, err error) {
     return c.DescribeRulesSettingWithContext(context.Background(), request)
 }
@@ -3747,10 +3502,7 @@ func (c *Client) DescribeRulesSetting(request *DescribeRulesSettingRequest) (res
 // This API is used to return the list of the settings of the rule engine that can be used for request match and their detailed recommended configuration information.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 func (c *Client) DescribeRulesSettingWithContext(ctx context.Context, request *DescribeRulesSettingRequest) (response *DescribeRulesSettingResponse, err error) {
     if request == nil {
         request = NewDescribeRulesSettingRequest()
@@ -3840,7 +3592,6 @@ func NewDescribeSecurityPolicyResponse() (response *DescribeSecurityPolicyRespon
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSecurityPolicy(request *DescribeSecurityPolicyRequest) (response *DescribeSecurityPolicyResponse, err error) {
     return c.DescribeSecurityPolicyWithContext(context.Background(), request)
 }
@@ -3850,7 +3601,6 @@ func (c *Client) DescribeSecurityPolicy(request *DescribeSecurityPolicyRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSecurityPolicyWithContext(ctx context.Context, request *DescribeSecurityPolicyRequest) (response *DescribeSecurityPolicyResponse, err error) {
     if request == nil {
         request = NewDescribeSecurityPolicyRequest()
@@ -3939,6 +3689,7 @@ func NewDescribeSecurityPolicyRegionsResponse() (response *DescribeSecurityPolic
 // This API is used to query information of all regions.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  OPERATIONDENIED = "OperationDenied"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeSecurityPolicyRegions(request *DescribeSecurityPolicyRegionsRequest) (response *DescribeSecurityPolicyRegionsResponse, err error) {
@@ -3949,6 +3700,7 @@ func (c *Client) DescribeSecurityPolicyRegions(request *DescribeSecurityPolicyRe
 // This API is used to query information of all regions.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  OPERATIONDENIED = "OperationDenied"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeSecurityPolicyRegionsWithContext(ctx context.Context, request *DescribeSecurityPolicyRegionsRequest) (response *DescribeSecurityPolicyRegionsResponse, err error) {
@@ -3989,6 +3741,7 @@ func NewDescribeSecurityPortraitRulesResponse() (response *DescribeSecurityPortr
 // This API is used to query user profiling rules.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSecurityPortraitRules(request *DescribeSecurityPortraitRulesRequest) (response *DescribeSecurityPortraitRulesResponse, err error) {
@@ -3999,6 +3752,7 @@ func (c *Client) DescribeSecurityPortraitRules(request *DescribeSecurityPortrait
 // This API is used to query user profiling rules.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSecurityPortraitRulesWithContext(ctx context.Context, request *DescribeSecurityPortraitRulesRequest) (response *DescribeSecurityPortraitRulesResponse, err error) {
@@ -4039,6 +3793,7 @@ func NewDescribeSecurityRuleIdResponse() (response *DescribeSecurityRuleIdRespon
 // This API is used to query a security rule.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSecurityRuleId(request *DescribeSecurityRuleIdRequest) (response *DescribeSecurityRuleIdResponse, err error) {
@@ -4049,6 +3804,7 @@ func (c *Client) DescribeSecurityRuleId(request *DescribeSecurityRuleIdRequest) 
 // This API is used to query a security rule.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSecurityRuleIdWithContext(ctx context.Context, request *DescribeSecurityRuleIdRequest) (response *DescribeSecurityRuleIdResponse, err error) {
@@ -4092,6 +3848,7 @@ func NewDescribeSingleL7AnalysisDataResponse() (response *DescribeSingleL7Analys
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSingleL7AnalysisData(request *DescribeSingleL7AnalysisDataRequest) (response *DescribeSingleL7AnalysisDataResponse, err error) {
@@ -4105,6 +3862,7 @@ func (c *Client) DescribeSingleL7AnalysisData(request *DescribeSingleL7AnalysisD
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSingleL7AnalysisDataWithContext(ctx context.Context, request *DescribeSingleL7AnalysisDataRequest) (response *DescribeSingleL7AnalysisDataResponse, err error) {
@@ -4148,6 +3906,7 @@ func NewDescribeSpeedTestingDetailsResponse() (response *DescribeSpeedTestingDet
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSpeedTestingDetails(request *DescribeSpeedTestingDetailsRequest) (response *DescribeSpeedTestingDetailsResponse, err error) {
@@ -4161,6 +3920,7 @@ func (c *Client) DescribeSpeedTestingDetails(request *DescribeSpeedTestingDetail
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeSpeedTestingDetailsWithContext(ctx context.Context, request *DescribeSpeedTestingDetailsRequest) (response *DescribeSpeedTestingDetailsResponse, err error) {
@@ -4279,6 +4039,58 @@ func (c *Client) DescribeSpeedTestingQuotaWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeTimingL4AccessDataRequest() (request *DescribeTimingL4AccessDataRequest) {
+    request = &DescribeTimingL4AccessDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeTimingL4AccessData")
+    
+    
+    return
+}
+
+func NewDescribeTimingL4AccessDataResponse() (response *DescribeTimingL4AccessDataResponse) {
+    response = &DescribeTimingL4AccessDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTimingL4AccessData
+// This API is used to query the number of L4 connections over time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeTimingL4AccessData(request *DescribeTimingL4AccessDataRequest) (response *DescribeTimingL4AccessDataResponse, err error) {
+    return c.DescribeTimingL4AccessDataWithContext(context.Background(), request)
+}
+
+// DescribeTimingL4AccessData
+// This API is used to query the number of L4 connections over time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeTimingL4AccessDataWithContext(ctx context.Context, request *DescribeTimingL4AccessDataRequest) (response *DescribeTimingL4AccessDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTimingL4AccessDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTimingL4AccessData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTimingL4AccessDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTimingL4DataRequest() (request *DescribeTimingL4DataRequest) {
     request = &DescribeTimingL4DataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4365,6 +4177,7 @@ func NewDescribeTimingL7AnalysisDataResponse() (response *DescribeTimingL7Analys
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeTimingL7AnalysisData(request *DescribeTimingL7AnalysisDataRequest) (response *DescribeTimingL7AnalysisDataResponse, err error) {
@@ -4379,6 +4192,7 @@ func (c *Client) DescribeTimingL7AnalysisData(request *DescribeTimingL7AnalysisD
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeTimingL7AnalysisDataWithContext(ctx context.Context, request *DescribeTimingL7AnalysisDataRequest) (response *DescribeTimingL7AnalysisDataResponse, err error) {
@@ -4475,6 +4289,7 @@ func NewDescribeTopL7AnalysisDataResponse() (response *DescribeTopL7AnalysisData
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeTopL7AnalysisData(request *DescribeTopL7AnalysisDataRequest) (response *DescribeTopL7AnalysisDataResponse, err error) {
@@ -4489,6 +4304,7 @@ func (c *Client) DescribeTopL7AnalysisData(request *DescribeTopL7AnalysisDataReq
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeTopL7AnalysisDataWithContext(ctx context.Context, request *DescribeTopL7AnalysisDataRequest) (response *DescribeTopL7AnalysisDataResponse, err error) {
@@ -4683,6 +4499,7 @@ func NewDescribeWebManagedRulesLogResponse() (response *DescribeWebManagedRulesL
 // This API is used to query web attack logs.
 //
 // error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeWebManagedRulesLog(request *DescribeWebManagedRulesLogRequest) (response *DescribeWebManagedRulesLogResponse, err error) {
     return c.DescribeWebManagedRulesLogWithContext(context.Background(), request)
@@ -4692,6 +4509,7 @@ func (c *Client) DescribeWebManagedRulesLog(request *DescribeWebManagedRulesLogR
 // This API is used to query web attack logs.
 //
 // error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeWebManagedRulesLogWithContext(ctx context.Context, request *DescribeWebManagedRulesLogRequest) (response *DescribeWebManagedRulesLogResponse, err error) {
     if request == nil {
@@ -5039,6 +4857,7 @@ func NewDescribeZoneSettingResponse() (response *DescribeZoneSettingResponse) {
 // This API is used to query the site configuration.
 //
 // error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
 //  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5052,6 +4871,7 @@ func (c *Client) DescribeZoneSetting(request *DescribeZoneSettingRequest) (respo
 // This API is used to query the site configuration.
 //
 // error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
 //  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5095,6 +4915,7 @@ func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
 // This API is used to query the list of user sites.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  OPERATIONDENIED = "OperationDenied"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -5106,6 +4927,7 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
 // This API is used to query the list of user sites.
 //
 // error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  OPERATIONDENIED = "OperationDenied"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -5839,76 +5661,6 @@ func (c *Client) ModifyDefaultCertificateWithContext(ctx context.Context, reques
     return
 }
 
-func NewModifyDnsRecordRequest() (request *ModifyDnsRecordRequest) {
-    request = &ModifyDnsRecordRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "ModifyDnsRecord")
-    
-    
-    return
-}
-
-func NewModifyDnsRecordResponse() (response *ModifyDnsRecordResponse) {
-    response = &ModifyDnsRecordResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyDnsRecord
-// This API is used to modify DNS records.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_CONFLICTRECORD = "InvalidParameterValue.ConflictRecord"
-//  INVALIDPARAMETERVALUE_INVALIDDNSCONTENT = "InvalidParameterValue.InvalidDNSContent"
-//  INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
-//  INVALIDPARAMETERVALUE_INVALIDDOMAINSTATUS = "InvalidParameterValue.InvalidDomainStatus"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYNAME = "InvalidParameterValue.InvalidProxyName"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
-//  INVALIDPARAMETERVALUE_RECORDALREADYEXISTS = "InvalidParameterValue.RecordAlreadyExists"
-//  INVALIDPARAMETERVALUE_RECORDNOTALLOWED = "InvalidParameterValue.RecordNotAllowed"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-func (c *Client) ModifyDnsRecord(request *ModifyDnsRecordRequest) (response *ModifyDnsRecordResponse, err error) {
-    return c.ModifyDnsRecordWithContext(context.Background(), request)
-}
-
-// ModifyDnsRecord
-// This API is used to modify DNS records.
-//
-// error code that may be returned:
-//  INVALIDPARAMETERVALUE_CONFLICTRECORD = "InvalidParameterValue.ConflictRecord"
-//  INVALIDPARAMETERVALUE_INVALIDDNSCONTENT = "InvalidParameterValue.InvalidDNSContent"
-//  INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
-//  INVALIDPARAMETERVALUE_INVALIDDOMAINSTATUS = "InvalidParameterValue.InvalidDomainStatus"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYNAME = "InvalidParameterValue.InvalidProxyName"
-//  INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
-//  INVALIDPARAMETERVALUE_RECORDALREADYEXISTS = "InvalidParameterValue.RecordAlreadyExists"
-//  INVALIDPARAMETERVALUE_RECORDNOTALLOWED = "InvalidParameterValue.RecordNotAllowed"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
-func (c *Client) ModifyDnsRecordWithContext(ctx context.Context, request *ModifyDnsRecordRequest) (response *ModifyDnsRecordResponse, err error) {
-    if request == nil {
-        request = NewModifyDnsRecordRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyDnsRecord require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyDnsRecordResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewModifyDnssecRequest() (request *ModifyDnssecRequest) {
     request = &ModifyDnssecRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5982,9 +5734,13 @@ func NewModifyHostsCertificateResponse() (response *ModifyHostsCertificateRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDZONESTATUS = "FailedOperation.InvalidZoneStatus"
 //  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_CERTNOTMATCHDOMAIN = "InvalidParameter.CertNotMatchDomain"
+//  INVALIDPARAMETER_CERTTOEXPIRE = "InvalidParameter.CertToExpire"
+//  INVALIDPARAMETER_CERTTOOSHORTKEYSIZE = "InvalidParameter.CertTooShortKeySize"
+//  INVALIDPARAMETER_HOSTSTATUSNOTALLOWAPPLYCERTIFICATE = "InvalidParameter.HostStatusNotAllowApplyCertificate"
 //  INVALIDPARAMETER_INVALIDCERTINFO = "InvalidParameter.InvalidCertInfo"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5998,9 +5754,13 @@ func (c *Client) ModifyHostsCertificate(request *ModifyHostsCertificateRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDZONESTATUS = "FailedOperation.InvalidZoneStatus"
 //  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_CERTNOTMATCHDOMAIN = "InvalidParameter.CertNotMatchDomain"
+//  INVALIDPARAMETER_CERTTOEXPIRE = "InvalidParameter.CertToExpire"
+//  INVALIDPARAMETER_CERTTOOSHORTKEYSIZE = "InvalidParameter.CertTooShortKeySize"
+//  INVALIDPARAMETER_HOSTSTATUSNOTALLOWAPPLYCERTIFICATE = "InvalidParameter.HostStatusNotAllowApplyCertificate"
 //  INVALIDPARAMETER_INVALIDCERTINFO = "InvalidParameter.InvalidCertInfo"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
@@ -6017,104 +5777,6 @@ func (c *Client) ModifyHostsCertificateWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModifyHostsCertificateResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyLoadBalancingRequest() (request *ModifyLoadBalancingRequest) {
-    request = &ModifyLoadBalancingRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "ModifyLoadBalancing")
-    
-    
-    return
-}
-
-func NewModifyLoadBalancingResponse() (response *ModifyLoadBalancingResponse) {
-    response = &ModifyLoadBalancingResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyLoadBalancing
-// This API is used to modify a CLB instance.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) ModifyLoadBalancing(request *ModifyLoadBalancingRequest) (response *ModifyLoadBalancingResponse, err error) {
-    return c.ModifyLoadBalancingWithContext(context.Background(), request)
-}
-
-// ModifyLoadBalancing
-// This API is used to modify a CLB instance.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) ModifyLoadBalancingWithContext(ctx context.Context, request *ModifyLoadBalancingRequest) (response *ModifyLoadBalancingResponse, err error) {
-    if request == nil {
-        request = NewModifyLoadBalancingRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyLoadBalancing require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyLoadBalancingResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyLoadBalancingStatusRequest() (request *ModifyLoadBalancingStatusRequest) {
-    request = &ModifyLoadBalancingStatusRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("teo", APIVersion, "ModifyLoadBalancingStatus")
-    
-    
-    return
-}
-
-func NewModifyLoadBalancingStatusResponse() (response *ModifyLoadBalancingStatusResponse) {
-    response = &ModifyLoadBalancingStatusResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyLoadBalancingStatus
-// This API is used to modify the status of a CLB instance.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) ModifyLoadBalancingStatus(request *ModifyLoadBalancingStatusRequest) (response *ModifyLoadBalancingStatusResponse, err error) {
-    return c.ModifyLoadBalancingStatusWithContext(context.Background(), request)
-}
-
-// ModifyLoadBalancingStatus
-// This API is used to modify the status of a CLB instance.
-//
-// error code that may be returned:
-//  OPERATIONDENIED = "OperationDenied"
-func (c *Client) ModifyLoadBalancingStatusWithContext(ctx context.Context, request *ModifyLoadBalancingStatusRequest) (response *ModifyLoadBalancingStatusResponse, err error) {
-    if request == nil {
-        request = NewModifyLoadBalancingStatusRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyLoadBalancingStatus require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyLoadBalancingStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -6244,6 +5906,7 @@ func NewModifyRuleResponse() (response *ModifyRuleResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_ERRACTIONUNSUPPORTTARGET = "InvalidParameter.ErrActionUnsupportTarget"
 //  INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAMDUPLICATENAME = "InvalidParameter.ErrInvalidActionParamDuplicateName"
@@ -6269,6 +5932,7 @@ func NewModifyRuleResponse() (response *ModifyRuleResponse) {
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
 //  INVALIDPARAMETER_KEYRULESINVALIDQUERYSTRINGVALUE = "InvalidParameter.KeyRulesInvalidQueryStringValue"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyRule(request *ModifyRuleRequest) (response *ModifyRuleResponse, err error) {
     return c.ModifyRuleWithContext(context.Background(), request)
 }
@@ -6278,6 +5942,7 @@ func (c *Client) ModifyRule(request *ModifyRuleRequest) (response *ModifyRuleRes
 //
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_ERRACTIONUNSUPPORTTARGET = "InvalidParameter.ErrActionUnsupportTarget"
 //  INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 //  INVALIDPARAMETER_ERRINVALIDACTIONPARAMDUPLICATENAME = "InvalidParameter.ErrInvalidActionParamDuplicateName"
@@ -6303,6 +5968,7 @@ func (c *Client) ModifyRule(request *ModifyRuleRequest) (response *ModifyRuleRes
 //  INVALIDPARAMETER_INVALIDURLREDIRECTURL = "InvalidParameter.InvalidUrlRedirectUrl"
 //  INVALIDPARAMETER_KEYRULESINVALIDQUERYSTRINGVALUE = "InvalidParameter.KeyRulesInvalidQueryStringValue"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyRuleWithContext(ctx context.Context, request *ModifyRuleRequest) (response *ModifyRuleResponse, err error) {
     if request == nil {
         request = NewModifyRuleRequest()
@@ -6341,10 +6007,12 @@ func NewModifyRulePriorityResponse() (response *ModifyRulePriorityResponse) {
 // This API is used to modify the priority of a rule in the rule engine.
 //
 // error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 //  INVALIDPARAMETER_INVALIDRULEENGINE = "InvalidParameter.InvalidRuleEngine"
 //  INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyRulePriority(request *ModifyRulePriorityRequest) (response *ModifyRulePriorityResponse, err error) {
     return c.ModifyRulePriorityWithContext(context.Background(), request)
 }
@@ -6353,10 +6021,12 @@ func (c *Client) ModifyRulePriority(request *ModifyRulePriorityRequest) (respons
 // This API is used to modify the priority of a rule in the rule engine.
 //
 // error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 //  INVALIDPARAMETER_INVALIDRULEENGINE = "InvalidParameter.InvalidRuleEngine"
 //  INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 func (c *Client) ModifyRulePriorityWithContext(ctx context.Context, request *ModifyRulePriorityRequest) (response *ModifyRulePriorityResponse, err error) {
     if request == nil {
         request = NewModifyRulePriorityRequest()
@@ -6607,11 +6277,16 @@ func NewModifyZoneSettingResponse() (response *ModifyZoneSettingResponse) {
 // This API is used to modify the site configuration.
 //
 // error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
+//  INVALIDPARAMETER_GRPCREQUIREHTTP2 = "InvalidParameter.GrpcRequireHttp2"
+//  INVALIDPARAMETER_INVALIDCACHECONFIGFOLLOWORIGIN = "InvalidParameter.InvalidCacheConfigFollowOrigin"
 //  INVALIDPARAMETER_INVALIDCACHEKEYQUERYSTRINGVALUE = "InvalidParameter.InvalidCacheKeyQueryStringValue"
 //  INVALIDPARAMETER_INVALIDCACHEONLYONSWITCH = "InvalidParameter.InvalidCacheOnlyOnSwitch"
 //  INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
+//  INVALIDPARAMETER_INVALIDDYNAMICROUTINEBILLING = "InvalidParameter.InvalidDynamicRoutineBilling"
 //  INVALIDPARAMETER_INVALIDHTTPSHSTSMAXAGE = "InvalidParameter.InvalidHttpsHstsMaxAge"
 //  INVALIDPARAMETER_INVALIDHTTPSTLSVERSION = "InvalidParameter.InvalidHttpsTlsVersion"
 //  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
@@ -6625,6 +6300,7 @@ func NewModifyZoneSettingResponse() (response *ModifyZoneSettingResponse) {
 //  INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
 //  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) ModifyZoneSetting(request *ModifyZoneSettingRequest) (response *ModifyZoneSettingResponse, err error) {
@@ -6635,11 +6311,16 @@ func (c *Client) ModifyZoneSetting(request *ModifyZoneSettingRequest) (response 
 // This API is used to modify the site configuration.
 //
 // error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
+//  INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
+//  INVALIDPARAMETER_GRPCREQUIREHTTP2 = "InvalidParameter.GrpcRequireHttp2"
+//  INVALIDPARAMETER_INVALIDCACHECONFIGFOLLOWORIGIN = "InvalidParameter.InvalidCacheConfigFollowOrigin"
 //  INVALIDPARAMETER_INVALIDCACHEKEYQUERYSTRINGVALUE = "InvalidParameter.InvalidCacheKeyQueryStringValue"
 //  INVALIDPARAMETER_INVALIDCACHEONLYONSWITCH = "InvalidParameter.InvalidCacheOnlyOnSwitch"
 //  INVALIDPARAMETER_INVALIDCLIENTIPHEADERNAME = "InvalidParameter.InvalidClientIpHeaderName"
+//  INVALIDPARAMETER_INVALIDDYNAMICROUTINEBILLING = "InvalidParameter.InvalidDynamicRoutineBilling"
 //  INVALIDPARAMETER_INVALIDHTTPSHSTSMAXAGE = "InvalidParameter.InvalidHttpsHstsMaxAge"
 //  INVALIDPARAMETER_INVALIDHTTPSTLSVERSION = "InvalidParameter.InvalidHttpsTlsVersion"
 //  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
@@ -6653,6 +6334,7 @@ func (c *Client) ModifyZoneSetting(request *ModifyZoneSettingRequest) (response 
 //  INVALIDPARAMETER_SETTINGINVALIDPARAM = "InvalidParameter.SettingInvalidParam"
 //  INVALIDPARAMETER_ZONENOTFOUND = "InvalidParameter.ZoneNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) ModifyZoneSettingWithContext(ctx context.Context, request *ModifyZoneSettingRequest) (response *ModifyZoneSettingResponse, err error) {

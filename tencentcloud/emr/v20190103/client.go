@@ -105,6 +105,74 @@ func (c *Client) AddUsersForUserManagerWithContext(ctx context.Context, request 
     return
 }
 
+func NewCreateClusterRequest() (request *CreateClusterRequest) {
+    request = &CreateClusterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "CreateCluster")
+    
+    
+    return
+}
+
+func NewCreateClusterResponse() (response *CreateClusterResponse) {
+    response = &CreateClusterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCluster
+// This API is used to create an EMR cluster instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INCORRECTMASTERCOUNT = "InvalidParameter.IncorrectMasterCount"
+//  INVALIDPARAMETER_INVALIDALLNODERESOURCESPEC = "InvalidParameter.InvalidAllNodeResourceSpec"
+//  INVALIDPARAMETER_INVALIDDEPENDSERVICEANDENABLEKERBEROSCONFLICT = "InvalidParameter.InvalidDependServiceAndEnableKerberosConflict"
+//  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
+//  INVALIDPARAMETER_INVALIDPRODUCTVERSION = "InvalidParameter.InvalidProductVersion"
+//  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
+//  INVALIDPARAMETER_INVALIDSCRIPTBOOTSTRAPACTIONCONFIG = "InvalidParameter.InvalidScriptBootstrapActionConfig"
+//  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
+//  INVALIDPARAMETER_KERBEROSSUPPORT = "InvalidParameter.KerberosSupport"
+//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
+    return c.CreateClusterWithContext(context.Background(), request)
+}
+
+// CreateCluster
+// This API is used to create an EMR cluster instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INCORRECTMASTERCOUNT = "InvalidParameter.IncorrectMasterCount"
+//  INVALIDPARAMETER_INVALIDALLNODERESOURCESPEC = "InvalidParameter.InvalidAllNodeResourceSpec"
+//  INVALIDPARAMETER_INVALIDDEPENDSERVICEANDENABLEKERBEROSCONFLICT = "InvalidParameter.InvalidDependServiceAndEnableKerberosConflict"
+//  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
+//  INVALIDPARAMETER_INVALIDPRODUCTVERSION = "InvalidParameter.InvalidProductVersion"
+//  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
+//  INVALIDPARAMETER_INVALIDSCRIPTBOOTSTRAPACTIONCONFIG = "InvalidParameter.InvalidScriptBootstrapActionConfig"
+//  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
+//  INVALIDPARAMETER_KERBEROSSUPPORT = "InvalidParameter.KerberosSupport"
+//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
+    if request == nil {
+        request = NewCreateClusterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCluster require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateClusterResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
     request = &CreateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -147,6 +215,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 //  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
 //  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_HALESSMASTERCOUNT = "InvalidParameter.HALessMasterCount"
 //  INVALIDPARAMETER_INCORRECTCOMMONCOUNT = "InvalidParameter.IncorrectCommonCount"
@@ -228,6 +297,7 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
 //  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
 //  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_HALESSMASTERCOUNT = "InvalidParameter.HALessMasterCount"
 //  INVALIDPARAMETER_INCORRECTCOMMONCOUNT = "InvalidParameter.IncorrectCommonCount"
@@ -1293,6 +1363,56 @@ func (c *Client) ModifyResourceSchedulerWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyResourceSchedulerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewScaleOutClusterRequest() (request *ScaleOutClusterRequest) {
+    request = &ScaleOutClusterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "ScaleOutCluster")
+    
+    
+    return
+}
+
+func NewScaleOutClusterResponse() (response *ScaleOutClusterResponse) {
+    response = &ScaleOutClusterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ScaleOutCluster
+// This API is used to scale out a cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
+func (c *Client) ScaleOutCluster(request *ScaleOutClusterRequest) (response *ScaleOutClusterResponse, err error) {
+    return c.ScaleOutClusterWithContext(context.Background(), request)
+}
+
+// ScaleOutCluster
+// This API is used to scale out a cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
+func (c *Client) ScaleOutClusterWithContext(ctx context.Context, request *ScaleOutClusterRequest) (response *ScaleOutClusterResponse, err error) {
+    if request == nil {
+        request = NewScaleOutClusterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ScaleOutCluster require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewScaleOutClusterResponse()
     err = c.Send(request, response)
     return
 }
