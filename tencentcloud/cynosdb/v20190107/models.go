@@ -715,7 +715,7 @@ type CreateClustersRequestParams struct {
 	// Multi-AZ address
 	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 
-
+	// Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
 	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitempty" name:"InstanceInitInfos"`
 }
 
@@ -863,6 +863,7 @@ type CreateClustersRequest struct {
 	// Multi-AZ address
 	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
 
+	// Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
 	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitempty" name:"InstanceInitInfos"`
 }
 
@@ -3648,16 +3649,16 @@ func (r *InquirePriceRenewResponse) FromJsonString(s string) error {
 }
 
 type InstanceInitInfo struct {
-
+	// Instance CPU
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-
+	// Instance memory
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-
+	// Instance type. Valid values:`rw`, `ro`.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-
+	// Number of the instances. Value range: 1-15.
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 }
 
