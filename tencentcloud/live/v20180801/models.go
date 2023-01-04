@@ -478,6 +478,10 @@ type CallBackTemplateInfo struct {
 
 	// Callback authentication key.
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+
+	// The push error callback URL.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 // Predefined struct for user
@@ -950,6 +954,9 @@ type CreateLiveCallbackTemplateRequestParams struct {
 
 	// Disused
 	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
+
+	// The push error callback URL.
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 type CreateLiveCallbackTemplateRequest struct {
@@ -991,6 +998,9 @@ type CreateLiveCallbackTemplateRequest struct {
 
 	// Disused
 	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitempty" name:"StreamMixNotifyUrl"`
+
+	// The push error callback URL.
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 func (r *CreateLiveCallbackTemplateRequest) ToJsonString() string {
@@ -1014,6 +1024,7 @@ func (r *CreateLiveCallbackTemplateRequest) FromJsonString(s string) error {
 	delete(f, "PornCensorshipNotifyUrl")
 	delete(f, "CallbackKey")
 	delete(f, "StreamMixNotifyUrl")
+	delete(f, "PushExceptionNotifyUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLiveCallbackTemplateRequest has unknown keys!", "")
 	}
@@ -3400,6 +3411,73 @@ func (r *DeleteRecordTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteRecordTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllStreamPlayInfoListRequestParams struct {
+	// The time point to query in the format of “yyyy-mm-dd HH:MM:00”(accurate to the minute). You can query data from the last month. Because there is a five-minute delay in the data, if you want to get the latest data, we recommend you pass in a time point five minutes earlier than the current time.
+	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// The playback domains to query. If you leave this empty, all playback domains will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
+}
+
+type DescribeAllStreamPlayInfoListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The time point to query in the format of “yyyy-mm-dd HH:MM:00”(accurate to the minute). You can query data from the last month. Because there is a five-minute delay in the data, if you want to get the latest data, we recommend you pass in a time point five minutes earlier than the current time.
+	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// The playback domains to query. If you leave this empty, all playback domains will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
+}
+
+func (r *DescribeAllStreamPlayInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllStreamPlayInfoListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "QueryTime")
+	delete(f, "PlayDomains")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllStreamPlayInfoListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllStreamPlayInfoListResponseParams struct {
+	// The time point queried, whose value is the same as that of the corresponding request parameter.
+	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// The playback data.
+	DataInfoList []*MonitorStreamPlayInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAllStreamPlayInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllStreamPlayInfoListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllStreamPlayInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllStreamPlayInfoListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6980,6 +7058,91 @@ func (r *DescribeStreamPlayInfoListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeStreamPushInfoListRequestParams struct {
+	// The stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The start time (UTC+8) in the format of “yyyy-mm-dd HH:MM:SS”.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time (UTC+8) in the format of “yyyy-mm-dd HH:MM:SS”. You can query data from the past seven days for a period of preferably not longer than three hours.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The push domain.
+	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
+
+	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+type DescribeStreamPushInfoListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The start time (UTC+8) in the format of “yyyy-mm-dd HH:MM:SS”.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time (UTC+8) in the format of “yyyy-mm-dd HH:MM:SS”. You can query data from the past seven days for a period of preferably not longer than three hours.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The push domain.
+	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
+
+	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+}
+
+func (r *DescribeStreamPushInfoListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPushInfoListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StreamName")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PushDomain")
+	delete(f, "AppName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPushInfoListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPushInfoListResponseParams struct {
+	// Returned data list.
+	DataInfoList []*PushQualityData `json:"DataInfoList,omitempty" name:"DataInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPushInfoListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPushInfoListResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPushInfoListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPushInfoListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTopClientIpSumInfoListRequestParams struct {
 	// Start point in time in the format of `yyyy-mm-dd HH:MM:SS`.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -7893,6 +8056,9 @@ type ModifyLiveCallbackTemplateRequestParams struct {
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+
+	// The push error callback URL.
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 type ModifyLiveCallbackTemplateRequest struct {
@@ -7925,6 +8091,9 @@ type ModifyLiveCallbackTemplateRequest struct {
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+
+	// The push error callback URL.
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 func (r *ModifyLiveCallbackTemplateRequest) ToJsonString() string {
@@ -7948,6 +8117,7 @@ func (r *ModifyLiveCallbackTemplateRequest) FromJsonString(s string) error {
 	delete(f, "SnapshotNotifyUrl")
 	delete(f, "PornCensorshipNotifyUrl")
 	delete(f, "CallbackKey")
+	delete(f, "PushExceptionNotifyUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLiveCallbackTemplateRequest has unknown keys!", "")
 	}
@@ -9167,6 +9337,29 @@ func (r *ModifyLiveTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MonitorStreamPlayInfo struct {
+	// The playback domain.
+	PlayDomain *string `json:"PlayDomain,omitempty" name:"PlayDomain"`
+
+	// The stream ID.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The playback bitrate. `0` indicates the original bitrate.
+	Rate *uint64 `json:"Rate,omitempty" name:"Rate"`
+
+	// The playback protocol. Valid values: `Unknown`, `Flv`, `Hls`, `Rtmp`, `Huyap2p`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// The bandwidth (Mbps).
+	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// The number of online users, which is represented by the number of TCP connections (data collected every minute).
+	Online *uint64 `json:"Online,omitempty" name:"Online"`
+
+	// The number of requests.
+	Request *uint64 `json:"Request,omitempty" name:"Request"`
+}
+
 type PlayAuthKeyInfo struct {
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -9329,11 +9522,19 @@ type PullStreamTaskInfo struct {
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The region of the source (please choose the nearest region).
-	// ap-beijing: North China (Beijing)
-	// ap-shanghai: East China (Shanghai)
-	// ap-guangzhou: South China (Guangzhou)
-	// ap-mumbai: India
+	// The region where the task was created.
+	// `ap-beijing`: North China (Beijing)
+	// `ap-shanghai`: East China (Shanghai)
+	// `ap-guangzhou`: South China (Guangzhou)
+	// `ap-mumbai`: India
+	// `ap-hongkong`: Hong Kong
+	// `eu-frankfurt`: Germany
+	// `ap-seoul`: Korea
+	// `ap-bangkok`: Thailand
+	// `ap-singapore`: Singapore
+	// `na-siliconvalley`: Western US
+	// `na-ashburn`: Eastern US
+	// `ap-tokyo`: Japan
 	Region *string `json:"Region,omitempty" name:"Region"`
 
 	// The number of times to loop video files.
@@ -9491,6 +9692,78 @@ type PushDataInfo struct {
 
 	// Frame rate in `metadata`.
 	MetaFps *uint64 `json:"MetaFps,omitempty" name:"MetaFps"`
+}
+
+type PushQualityData struct {
+	// The time of the data in the format of “%Y-%m-%d %H:%M:%S.%ms” (accurate to the millisecond).
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// The push domain.
+	PushDomain *string `json:"PushDomain,omitempty" name:"PushDomain"`
+
+	// The push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The IP address of the push client.
+	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
+
+	// The push start time in the format of “%Y-%m-%d %H:%M:%S.%ms” (accurate to the millisecond).
+	BeginPushTime *string `json:"BeginPushTime,omitempty" name:"BeginPushTime"`
+
+	// The resolution.
+	Resolution *string `json:"Resolution,omitempty" name:"Resolution"`
+
+	// The video codec.
+	VCodec *string `json:"VCodec,omitempty" name:"VCodec"`
+
+	// The audio codec.
+	ACodec *string `json:"ACodec,omitempty" name:"ACodec"`
+
+	// The push sequence number, which uniquely identifies a push.
+	Sequence *string `json:"Sequence,omitempty" name:"Sequence"`
+
+	// The video frame rate.
+	VideoFps *uint64 `json:"VideoFps,omitempty" name:"VideoFps"`
+
+	// The video bitrate (bps).
+	VideoRate *uint64 `json:"VideoRate,omitempty" name:"VideoRate"`
+
+	// The audio frame rate.
+	AudioFps *uint64 `json:"AudioFps,omitempty" name:"AudioFps"`
+
+	// The audio bitrate (bps).
+	AudioRate *uint64 `json:"AudioRate,omitempty" name:"AudioRate"`
+
+	// The local elapsed time (milliseconds). The greater the difference between the local elapsed time and audio/video elapsed time, the poorer the push quality and the more severe the upstream lag.
+	LocalTs *uint64 `json:"LocalTs,omitempty" name:"LocalTs"`
+
+	// The video elapsed time (milliseconds).
+	VideoTs *uint64 `json:"VideoTs,omitempty" name:"VideoTs"`
+
+	// The audio elapsed time (milliseconds).
+	AudioTs *uint64 `json:"AudioTs,omitempty" name:"AudioTs"`
+
+	// The video bitrate (Kbps) in the metadata.
+	MetaVideoRate *uint64 `json:"MetaVideoRate,omitempty" name:"MetaVideoRate"`
+
+	// The audio bitrate (Kbps) in the metadata.
+	MetaAudioRate *uint64 `json:"MetaAudioRate,omitempty" name:"MetaAudioRate"`
+
+	// The frame rate in the metadata.
+	MateFps *uint64 `json:"MateFps,omitempty" name:"MateFps"`
+
+	// The push parameter.
+	StreamParam *string `json:"StreamParam,omitempty" name:"StreamParam"`
+
+	// The bandwidth (Mbps).
+	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// The traffic (MB).
+	Flux *float64 `json:"Flux,omitempty" name:"Flux"`
+
+	// The IP address of the push client.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServerIp *string `json:"ServerIp,omitempty" name:"ServerIp"`
 }
 
 type RecentPullInfo struct {

@@ -652,11 +652,11 @@ func NewCreateLiveCallbackTemplateResponse() (response *CreateLiveCallbackTempla
 }
 
 // CreateLiveCallbackTemplate
-// After a callback template is created and a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](https://intl.cloud.tencent.com/document/product/267/32638?from_cn_redirect=1) API and bind the template ID to the domain name/path.
+// This API is used to create a callback template. Up to 50 templates can be created. After the template ID is returned, you need to call the [CreateLiveCallbackRule](https://intl.cloud.tencent.com/document/product/267/32638?from_cn_redirect=1) API to bind the template ID to a domain name/path.
 //
-// <br>Callback protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+// <br>For information about callback protocols, see [How to Receive Event Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 //
-// Note: at least enter one callback URL.
+// Note: You need to specify at least one callback URL.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
@@ -688,11 +688,11 @@ func (c *Client) CreateLiveCallbackTemplate(request *CreateLiveCallbackTemplateR
 }
 
 // CreateLiveCallbackTemplate
-// After a callback template is created and a template ID is successfully returned, you need to call the [CreateLiveCallbackRule](https://intl.cloud.tencent.com/document/product/267/32638?from_cn_redirect=1) API and bind the template ID to the domain name/path.
+// This API is used to create a callback template. Up to 50 templates can be created. After the template ID is returned, you need to call the [CreateLiveCallbackRule](https://intl.cloud.tencent.com/document/product/267/32638?from_cn_redirect=1) API to bind the template ID to a domain name/path.
 //
-// <br>Callback protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
+// <br>For information about callback protocols, see [How to Receive Event Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
 //
-// Note: at least enter one callback URL.
+// Note: You need to specify at least one callback URL.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONFINUSED = "FailedOperation.ConfInUsed"
@@ -1890,6 +1890,7 @@ func NewDeleteLiveDomainResponse() (response *DeleteLiveDomainResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
 //  FAILEDOPERATION_JIFEINOENOUGHFUND = "FailedOperation.JiFeiNoEnoughFund"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
 //  FAILEDOPERATION_TAGUNBINDERROR = "FailedOperation.TagUnbindError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
@@ -1912,6 +1913,7 @@ func (c *Client) DeleteLiveDomain(request *DeleteLiveDomainRequest) (response *D
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DELETEDOMAININLOCKEDTIME = "FailedOperation.DeleteDomainInLockedTime"
 //  FAILEDOPERATION_JIFEINOENOUGHFUND = "FailedOperation.JiFeiNoEnoughFund"
+//  FAILEDOPERATION_NOTFOUND = "FailedOperation.NotFound"
 //  FAILEDOPERATION_TAGUNBINDERROR = "FailedOperation.TagUnbindError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CONNECTDBERROR = "InternalError.ConnectDbError"
@@ -2793,6 +2795,68 @@ func (c *Client) DeleteRecordTaskWithContext(ctx context.Context, request *Delet
     request.SetContext(ctx)
     
     response = NewDeleteRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAllStreamPlayInfoListRequest() (request *DescribeAllStreamPlayInfoListRequest) {
+    request = &DescribeAllStreamPlayInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeAllStreamPlayInfoList")
+    
+    
+    return
+}
+
+func NewDescribeAllStreamPlayInfoListResponse() (response *DescribeAllStreamPlayInfoListResponse) {
+    response = &DescribeAllStreamPlayInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAllStreamPlayInfoList
+// This API is used to get the playback data of all streams at a specified time point (accurate to the minute).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeAllStreamPlayInfoList(request *DescribeAllStreamPlayInfoListRequest) (response *DescribeAllStreamPlayInfoListResponse, err error) {
+    return c.DescribeAllStreamPlayInfoListWithContext(context.Background(), request)
+}
+
+// DescribeAllStreamPlayInfoList
+// This API is used to get the playback data of all streams at a specified time point (accurate to the minute).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeAllStreamPlayInfoListWithContext(ctx context.Context, request *DescribeAllStreamPlayInfoListRequest) (response *DescribeAllStreamPlayInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllStreamPlayInfoListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllStreamPlayInfoList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllStreamPlayInfoListResponse()
     err = c.Send(request, response)
     return
 }
@@ -6077,6 +6141,66 @@ func (c *Client) DescribeStreamPlayInfoListWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeStreamPlayInfoListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPushInfoListRequest() (request *DescribeStreamPushInfoListRequest) {
+    request = &DescribeStreamPushInfoListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeStreamPushInfoList")
+    
+    
+    return
+}
+
+func NewDescribeStreamPushInfoListResponse() (response *DescribeStreamPushInfoListResponse) {
+    response = &DescribeStreamPushInfoListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeStreamPushInfoList
+// This API is used to get the push data of a stream, including the audio/video frame rate, bitrate, elapsed time, and codec.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeStreamPushInfoList(request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
+    return c.DescribeStreamPushInfoListWithContext(context.Background(), request)
+}
+
+// DescribeStreamPushInfoList
+// This API is used to get the push data of a stream, including the audio/video frame rate, bitrate, elapsed time, and codec.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeStreamPushInfoListWithContext(ctx context.Context, request *DescribeStreamPushInfoListRequest) (response *DescribeStreamPushInfoListResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPushInfoListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPushInfoList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPushInfoListResponse()
     err = c.Send(request, response)
     return
 }

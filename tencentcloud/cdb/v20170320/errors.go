@@ -161,6 +161,9 @@ const (
 	// Exceptional HTTP request
 	INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 
+	// Import failed
+	INTERNALERROR_IMPORTERROR = "InternalError.ImportError"
+
 	// Internal service error
 	INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
 

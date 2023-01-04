@@ -737,6 +737,7 @@ func NewCreateDBImportJobResponse() (response *CreateDBImportJobResponse) {
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
+//  INTERNALERROR_IMPORTERROR = "InternalError.ImportError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -763,6 +764,7 @@ func (c *Client) CreateDBImportJob(request *CreateDBImportJobRequest) (response 
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_EXECUTESQLERROR = "InternalError.ExecuteSQLError"
+//  INTERNALERROR_IMPORTERROR = "InternalError.ImportError"
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -3679,6 +3681,54 @@ func (c *Client) DescribeProxyCustomConfWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeRemoteBackupConfigRequest() (request *DescribeRemoteBackupConfigRequest) {
+    request = &DescribeRemoteBackupConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeRemoteBackupConfig")
+    
+    
+    return
+}
+
+func NewDescribeRemoteBackupConfigResponse() (response *DescribeRemoteBackupConfigResponse) {
+    response = &DescribeRemoteBackupConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRemoteBackupConfig
+// This API is used to query the configuration information of a remote TencentDB instance backup.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+func (c *Client) DescribeRemoteBackupConfig(request *DescribeRemoteBackupConfigRequest) (response *DescribeRemoteBackupConfigResponse, err error) {
+    return c.DescribeRemoteBackupConfigWithContext(context.Background(), request)
+}
+
+// DescribeRemoteBackupConfig
+// This API is used to query the configuration information of a remote TencentDB instance backup.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
+func (c *Client) DescribeRemoteBackupConfigWithContext(ctx context.Context, request *DescribeRemoteBackupConfigRequest) (response *DescribeRemoteBackupConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeRemoteBackupConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRemoteBackupConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRemoteBackupConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRoGroupsRequest() (request *DescribeRoGroupsRequest) {
     request = &DescribeRoGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5997,6 +6047,56 @@ func (c *Client) ModifyParamTemplateWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRemoteBackupConfigRequest() (request *ModifyRemoteBackupConfigRequest) {
+    request = &ModifyRemoteBackupConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyRemoteBackupConfig")
+    
+    
+    return
+}
+
+func NewModifyRemoteBackupConfigResponse() (response *ModifyRemoteBackupConfigResponse) {
+    response = &ModifyRemoteBackupConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRemoteBackupConfig
+// This API is used to modify the configuration information of a remote TencentDB instance backup.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) ModifyRemoteBackupConfig(request *ModifyRemoteBackupConfigRequest) (response *ModifyRemoteBackupConfigResponse, err error) {
+    return c.ModifyRemoteBackupConfigWithContext(context.Background(), request)
+}
+
+// ModifyRemoteBackupConfig
+// This API is used to modify the configuration information of a remote TencentDB instance backup.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) ModifyRemoteBackupConfigWithContext(ctx context.Context, request *ModifyRemoteBackupConfigRequest) (response *ModifyRemoteBackupConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyRemoteBackupConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRemoteBackupConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRemoteBackupConfigResponse()
     err = c.Send(request, response)
     return
 }

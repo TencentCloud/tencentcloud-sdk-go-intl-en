@@ -638,7 +638,7 @@ type CdbSellConfig struct {
 }
 
 type CdbSellType struct {
-	// Name of the purchasable instance
+	// Name of the purchasable instance. Valid values: `Z3` (High-availability instance. `DeviceType`:`UNIVERSAL`, `EXCLUSIVE`; `CVM` (basic instance. `DeviceType`: `BASIC`); `TKE` (basic v2 instance. `DeviceType`: `BASIC_V2`).
 	TypeName *string `json:"TypeName,omitempty" name:"TypeName"`
 
 	// Engine version number
@@ -2736,6 +2736,18 @@ type DescribeBackupConfigResponseParams struct {
 	// The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
 	BinlogArchiveDays *int64 `json:"BinlogArchiveDays,omitempty" name:"BinlogArchiveDays"`
 
+	// Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBackupStandby *string `json:"EnableBackupStandby,omitempty" name:"EnableBackupStandby"`
+
+	// The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+	BackupStandbyDays *int64 `json:"BackupStandbyDays,omitempty" name:"BackupStandbyDays"`
+
+	// Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBinlogStandby *string `json:"EnableBinlogStandby,omitempty" name:"EnableBinlogStandby"`
+
+	// The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+	BinlogStandbyDays *int64 `json:"BinlogStandbyDays,omitempty" name:"BinlogStandbyDays"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2875,6 +2887,10 @@ type DescribeBackupOverviewResponseParams struct {
 	// Archive backup capacity, which includes data backups and log backups.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	BackupArchiveVolume *int64 `json:"BackupArchiveVolume,omitempty" name:"BackupArchiveVolume"`
+
+	// Backup capacity of standard storage, which includes data backups and log backups.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BackupStandbyVolume *int64 `json:"BackupStandbyVolume,omitempty" name:"BackupStandbyVolume"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3109,6 +3125,12 @@ type DescribeBinlogBackupOverviewResponseParams struct {
 
 	// Number of archived log backups
 	BinlogArchiveCount *int64 `json:"BinlogArchiveCount,omitempty" name:"BinlogArchiveCount"`
+
+	// Log backup capacity of standard storage in bytes
+	BinlogStandbyVolume *int64 `json:"BinlogStandbyVolume,omitempty" name:"BinlogStandbyVolume"`
+
+	// Number of log backups of standard storage
+	BinlogStandbyCount *int64 `json:"BinlogStandbyCount,omitempty" name:"BinlogStandbyCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4458,6 +4480,12 @@ type DescribeDataBackupOverviewResponseParams struct {
 	// Total number of archive backups in the current region
 	DataBackupArchiveCount *int64 `json:"DataBackupArchiveCount,omitempty" name:"DataBackupArchiveCount"`
 
+	// Total backup capacity of standard storage in current region
+	DataBackupStandbyVolume *int64 `json:"DataBackupStandbyVolume,omitempty" name:"DataBackupStandbyVolume"`
+
+	// Total number of standard storage backups in current region
+	DataBackupStandbyCount *int64 `json:"DataBackupStandbyCount,omitempty" name:"DataBackupStandbyCount"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -5368,6 +5396,75 @@ func (r *DescribeProxyCustomConfResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeProxyCustomConfResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRemoteBackupConfigRequestParams struct {
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeRemoteBackupConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeRemoteBackupConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRemoteBackupConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRemoteBackupConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRemoteBackupConfigResponseParams struct {
+	// Remote backup retention period in days
+	ExpireDays *int64 `json:"ExpireDays,omitempty" name:"ExpireDays"`
+
+	// Remote data backup. Valid values:`off` (disable), `on` (enable).
+	RemoteBackupSave *string `json:"RemoteBackupSave,omitempty" name:"RemoteBackupSave"`
+
+	// Remote log backup. Valid values: `off` (disable), `on` (enable). Only when the parameter `RemoteBackupSave` is `on`, the `RemoteBinlogSave` parameter can be set to `on`.
+	RemoteBinlogSave *string `json:"RemoteBinlogSave,omitempty" name:"RemoteBinlogSave"`
+
+	// List of configured remote backup regions
+	RemoteRegion []*string `json:"RemoteRegion,omitempty" name:"RemoteRegion"`
+
+	// List of remote backup regions
+	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRemoteBackupConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRemoteBackupConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeRemoteBackupConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRemoteBackupConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7407,6 +7504,18 @@ type ModifyBackupConfigRequestParams struct {
 
 	// Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
 	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitempty" name:"EnableBinlogArchive"`
+
+	// Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBackupStandby *string `json:"EnableBackupStandby,omitempty" name:"EnableBackupStandby"`
+
+	// The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+	BackupStandbyDays *int64 `json:"BackupStandbyDays,omitempty" name:"BackupStandbyDays"`
+
+	// Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBinlogStandby *string `json:"EnableBinlogStandby,omitempty" name:"EnableBinlogStandby"`
+
+	// The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+	BinlogStandbyDays *int64 `json:"BinlogStandbyDays,omitempty" name:"BinlogStandbyDays"`
 }
 
 type ModifyBackupConfigRequest struct {
@@ -7459,6 +7568,18 @@ type ModifyBackupConfigRequest struct {
 
 	// Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
 	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitempty" name:"EnableBinlogArchive"`
+
+	// Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBackupStandby *string `json:"EnableBackupStandby,omitempty" name:"EnableBackupStandby"`
+
+	// The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+	BackupStandbyDays *int64 `json:"BackupStandbyDays,omitempty" name:"BackupStandbyDays"`
+
+	// Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	EnableBinlogStandby *string `json:"EnableBinlogStandby,omitempty" name:"EnableBinlogStandby"`
+
+	// The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
+	BinlogStandbyDays *int64 `json:"BinlogStandbyDays,omitempty" name:"BinlogStandbyDays"`
 }
 
 func (r *ModifyBackupConfigRequest) ToJsonString() string {
@@ -7489,6 +7610,10 @@ func (r *ModifyBackupConfigRequest) FromJsonString(s string) error {
 	delete(f, "BackupArchiveDays")
 	delete(f, "BinlogArchiveDays")
 	delete(f, "EnableBinlogArchive")
+	delete(f, "EnableBackupStandby")
+	delete(f, "BackupStandbyDays")
+	delete(f, "EnableBinlogStandby")
+	delete(f, "BinlogStandbyDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupConfigRequest has unknown keys!", "")
 	}
@@ -8554,6 +8679,88 @@ func (r *ModifyParamTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRemoteBackupConfigRequestParams struct {
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Remote data backup. Valid values:`off` (disable), `on` (enable).
+	RemoteBackupSave *string `json:"RemoteBackupSave,omitempty" name:"RemoteBackupSave"`
+
+	// Remote log backup. Valid values: `off` (disable), `on` (enable). Only when the parameter `RemoteBackupSave` is `on`, the `RemoteBinlogSave` parameter can be set to `on`.
+	RemoteBinlogSave *string `json:"RemoteBinlogSave,omitempty" name:"RemoteBinlogSave"`
+
+	// The custom backup region list
+	RemoteRegion []*string `json:"RemoteRegion,omitempty" name:"RemoteRegion"`
+
+	// Remote backup retention period in days
+	ExpireDays *int64 `json:"ExpireDays,omitempty" name:"ExpireDays"`
+}
+
+type ModifyRemoteBackupConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Remote data backup. Valid values:`off` (disable), `on` (enable).
+	RemoteBackupSave *string `json:"RemoteBackupSave,omitempty" name:"RemoteBackupSave"`
+
+	// Remote log backup. Valid values: `off` (disable), `on` (enable). Only when the parameter `RemoteBackupSave` is `on`, the `RemoteBinlogSave` parameter can be set to `on`.
+	RemoteBinlogSave *string `json:"RemoteBinlogSave,omitempty" name:"RemoteBinlogSave"`
+
+	// The custom backup region list
+	RemoteRegion []*string `json:"RemoteRegion,omitempty" name:"RemoteRegion"`
+
+	// Remote backup retention period in days
+	ExpireDays *int64 `json:"ExpireDays,omitempty" name:"ExpireDays"`
+}
+
+func (r *ModifyRemoteBackupConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRemoteBackupConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RemoteBackupSave")
+	delete(f, "RemoteBinlogSave")
+	delete(f, "RemoteRegion")
+	delete(f, "ExpireDays")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRemoteBackupConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRemoteBackupConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRemoteBackupConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRemoteBackupConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyRemoteBackupConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRemoteBackupConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
