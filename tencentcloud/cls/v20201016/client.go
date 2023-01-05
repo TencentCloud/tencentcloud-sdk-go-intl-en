@@ -45,6 +45,56 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAddMachineGroupInfoRequest() (request *AddMachineGroupInfoRequest) {
+    request = &AddMachineGroupInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "AddMachineGroupInfo")
+    
+    
+    return
+}
+
+func NewAddMachineGroupInfoResponse() (response *AddMachineGroupInfoResponse) {
+    response = &AddMachineGroupInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AddMachineGroupInfo
+// This API is used to add machine group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+func (c *Client) AddMachineGroupInfo(request *AddMachineGroupInfoRequest) (response *AddMachineGroupInfoResponse, err error) {
+    return c.AddMachineGroupInfoWithContext(context.Background(), request)
+}
+
+// AddMachineGroupInfo
+// This API is used to add machine group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+func (c *Client) AddMachineGroupInfoWithContext(ctx context.Context, request *AddMachineGroupInfoRequest) (response *AddMachineGroupInfoResponse, err error) {
+    if request == nil {
+        request = NewAddMachineGroupInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddMachineGroupInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddMachineGroupInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewApplyConfigToMachineGroupRequest() (request *ApplyConfigToMachineGroupRequest) {
     request = &ApplyConfigToMachineGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1485,6 +1535,54 @@ func (c *Client) DeleteMachineGroupWithContext(ctx context.Context, request *Del
     return
 }
 
+func NewDeleteMachineGroupInfoRequest() (request *DeleteMachineGroupInfoRequest) {
+    request = &DeleteMachineGroupInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteMachineGroupInfo")
+    
+    
+    return
+}
+
+func NewDeleteMachineGroupInfoResponse() (response *DeleteMachineGroupInfoResponse) {
+    response = &DeleteMachineGroupInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteMachineGroupInfo
+// This API is used to delete machine group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteMachineGroupInfo(request *DeleteMachineGroupInfoRequest) (response *DeleteMachineGroupInfoResponse, err error) {
+    return c.DeleteMachineGroupInfoWithContext(context.Background(), request)
+}
+
+// DeleteMachineGroupInfo
+// This API is used to delete machine group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteMachineGroupInfoWithContext(ctx context.Context, request *DeleteMachineGroupInfoRequest) (response *DeleteMachineGroupInfoResponse, err error) {
+    if request == nil {
+        request = NewDeleteMachineGroupInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMachineGroupInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMachineGroupInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteShipperRequest() (request *DeleteShipperRequest) {
     request = &DeleteShipperRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1849,6 +1947,7 @@ func NewDescribeConfigsResponse() (response *DescribeConfigsResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *DescribeConfigsResponse, err error) {
     return c.DescribeConfigsWithContext(context.Background(), request)
 }
@@ -1867,6 +1966,7 @@ func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *Des
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeConfigsWithContext(ctx context.Context, request *DescribeConfigsRequest) (response *DescribeConfigsResponse, err error) {
     if request == nil {
         request = NewDescribeConfigsRequest()
@@ -2759,6 +2859,7 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_ANALYSISSWITCHCLOSE = "OperationDenied.AnalysisSwitchClose"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
     return c.DescribeTopicsWithContext(context.Background(), request)
@@ -2780,6 +2881,7 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_ANALYSISSWITCHCLOSE = "OperationDenied.AnalysisSwitchClose"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopicsWithContext(ctx context.Context, request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
     if request == nil {

@@ -808,7 +808,7 @@ type ClusterAsGroupOption struct {
 }
 
 type ClusterBasicSettings struct {
-	// Cluster operating system. Public image (enter the image ID) and custom image (enter the image name) are supported. For details, see https://intl.cloud.tencent.com/document/product/457/68289?from_cn_redirect=1
+	// Cluster operating system. Public image (enter the image name) and custom image (enter the image ID) are supported. For details, see https://intl.cloud.tencent.com/document/product/457/68289?from_cn_redirect=1
 	ClusterOs *string `json:"ClusterOs,omitempty" name:"ClusterOs"`
 
 	// Cluster version. The default value is 1.10.5.
@@ -1311,78 +1311,14 @@ func (r *CreateClusterInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateClusterNodePoolFromExistingAsgRequestParams struct {
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Scaling group ID
-	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
-}
-
-type CreateClusterNodePoolFromExistingAsgRequest struct {
-	*tchttp.BaseRequest
-	
-	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
-
-	// Scaling group ID
-	AutoscalingGroupId *string `json:"AutoscalingGroupId,omitempty" name:"AutoscalingGroupId"`
-}
-
-func (r *CreateClusterNodePoolFromExistingAsgRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateClusterNodePoolFromExistingAsgRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ClusterId")
-	delete(f, "AutoscalingGroupId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterNodePoolFromExistingAsgRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateClusterNodePoolFromExistingAsgResponseParams struct {
-	// Node pool ID
-	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateClusterNodePoolFromExistingAsgResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateClusterNodePoolFromExistingAsgResponseParams `json:"Response"`
-}
-
-func (r *CreateClusterNodePoolFromExistingAsgResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateClusterNodePoolFromExistingAsgResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CreateClusterNodePoolRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// AS group parameters
+	// AS group parameters. For details, see https://intl.cloud.tencent.com/document/product/377/20440?from_cn_redirect=1
 	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
 
-	// Running parameters
+	// Running parameters. For details, see https://intl.cloud.tencent.com/document/product/377/20447?from_cn_redirect=1
 	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
 
 	// Sample parameters
@@ -1425,10 +1361,10 @@ type CreateClusterNodePoolRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// AS group parameters
+	// AS group parameters. For details, see https://intl.cloud.tencent.com/document/product/377/20440?from_cn_redirect=1
 	AutoScalingGroupPara *string `json:"AutoScalingGroupPara,omitempty" name:"AutoScalingGroupPara"`
 
-	// Running parameters
+	// Running parameters. For details, see https://intl.cloud.tencent.com/document/product/377/20447?from_cn_redirect=1
 	LaunchConfigurePara *string `json:"LaunchConfigurePara,omitempty" name:"LaunchConfigurePara"`
 
 	// Sample parameters
@@ -3392,6 +3328,10 @@ type DescribeClusterAuthenticationOptionsResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LatestOperationState *string `json:"LatestOperationState,omitempty" name:"LatestOperationState"`
 
+	// OIDC authentication configurations
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	OIDCConfig *OIDCConfigAuthenticationOptions `json:"OIDCConfig,omitempty" name:"OIDCConfig"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -4944,6 +4884,87 @@ func (r *DescribeEdgeClusterInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeEdgeClusterUpgradeInfoRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Target TKEEdge version
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+}
+
+type DescribeEdgeClusterUpgradeInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Target TKEEdge version
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+}
+
+func (r *DescribeEdgeClusterUpgradeInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeClusterUpgradeInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "EdgeVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdgeClusterUpgradeInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdgeClusterUpgradeInfoResponseParams struct {
+	// Upgradeable cluster component
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ComponentVersion *string `json:"ComponentVersion,omitempty" name:"ComponentVersion"`
+
+	// Current version of the edge cluster
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	EdgeVersionCurrent *string `json:"EdgeVersionCurrent,omitempty" name:"EdgeVersionCurrent"`
+
+	// Prefix of the image registry of an edge component (including domain name and namespace)
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RegistryPrefix *string `json:"RegistryPrefix,omitempty" name:"RegistryPrefix"`
+
+	// Cluster upgrade status. Valid values: `Running`, `Updating`, `Failed`
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ClusterUpgradeStatus *string `json:"ClusterUpgradeStatus,omitempty" name:"ClusterUpgradeStatus"`
+
+	// Reason for `Updating` or `Failed`
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ClusterUpgradeStatusReason *string `json:"ClusterUpgradeStatusReason,omitempty" name:"ClusterUpgradeStatusReason"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEdgeClusterUpgradeInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdgeClusterUpgradeInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdgeClusterUpgradeInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdgeClusterUpgradeInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeEdgeLogSwitchesRequestParams struct {
 	// List of cluster IDs
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
@@ -6185,6 +6206,10 @@ type EdgeCluster struct {
 	// Cluster advanced settings
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ClusterAdvancedSettings *EdgeClusterAdvancedSettings `json:"ClusterAdvancedSettings,omitempty" name:"ClusterAdvancedSettings"`
+
+	// TKE edge cluster level
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Level *string `json:"Level,omitempty" name:"Level"`
 }
 
 type EdgeClusterAdvancedSettings struct {
@@ -6378,7 +6403,7 @@ type EnhancedService struct {
 	// Enables cloud monitor service. If this parameter is not specified, the cloud monitor service will be enabled by default.
 	MonitorService *RunMonitorServiceEnabled `json:"MonitorService,omitempty" name:"MonitorService"`
 
-	// Enables the TAT service. If this parameter is not specified, the TAT service will not be enabled.
+	// Whether to enable the TAT service. If this parameter is not specified, the TAT service is enabled for public images and disabled for other images by default.
 	AutomationService *RunAutomationServiceEnabled `json:"AutomationService,omitempty" name:"AutomationService"`
 }
 
@@ -7027,8 +7052,8 @@ type LoginSettings struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. A key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call [`DescribeKeyPairs`](https://intl.cloud.tencent.com/document/api/213/15699?from_cn_redirect=1) to obtain `KeyId`. You cannot specify a key and a password at the same time. Windows instances do not support keys.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	KeyIds []*string `json:"KeyIds,omitempty" name:"KeyIds"`
 
 	// Whether to keep the original settings of an image. You cannot specify this parameter and `Password` or `KeyIds.N` at the same time. You can specify this parameter as `TRUE` only when you create an instance using a custom image, a shared image, or an imported image. Valid values: <br><li>TRUE: keep the login settings of the image <br><li>FALSE: do not keep the login settings of the image <br><br>Default value: FALSE.
@@ -7299,6 +7324,9 @@ type ModifyClusterAuthenticationOptionsRequestParams struct {
 
 	// ServiceAccount authentication configuration
 	ServiceAccounts *ServiceAccountAuthenticationOptions `json:"ServiceAccounts,omitempty" name:"ServiceAccounts"`
+
+	// OIDC authentication configurations
+	OIDCConfig *OIDCConfigAuthenticationOptions `json:"OIDCConfig,omitempty" name:"OIDCConfig"`
 }
 
 type ModifyClusterAuthenticationOptionsRequest struct {
@@ -7309,6 +7337,9 @@ type ModifyClusterAuthenticationOptionsRequest struct {
 
 	// ServiceAccount authentication configuration
 	ServiceAccounts *ServiceAccountAuthenticationOptions `json:"ServiceAccounts,omitempty" name:"ServiceAccounts"`
+
+	// OIDC authentication configurations
+	OIDCConfig *OIDCConfigAuthenticationOptions `json:"OIDCConfig,omitempty" name:"OIDCConfig"`
 }
 
 func (r *ModifyClusterAuthenticationOptionsRequest) ToJsonString() string {
@@ -7325,6 +7356,7 @@ func (r *ModifyClusterAuthenticationOptionsRequest) FromJsonString(s string) err
 	}
 	delete(f, "ClusterId")
 	delete(f, "ServiceAccounts")
+	delete(f, "OIDCConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterAuthenticationOptionsRequest has unknown keys!", "")
 	}
@@ -7453,6 +7485,15 @@ type ModifyClusterNodePoolRequestParams struct {
 	// Image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 
+	// GPU driver version, CUDA version, cuDNN version and wether to enable MIG
+	GPUArgs *GPUArgs `json:"GPUArgs,omitempty" name:"GPUArgs"`
+
+	// Base64-encoded custom script
+	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
+
+	// Ignore existing nodes when update `Label` and `Taint`
+	IgnoreExistedNode *bool `json:"IgnoreExistedNode,omitempty" name:"IgnoreExistedNode"`
+
 	// Node custom parameter
 	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 
@@ -7464,6 +7505,9 @@ type ModifyClusterNodePoolRequestParams struct {
 
 	// Whether Deletion Protection is enabled
 	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+
+	// Specified value of dockerd --graph. Default value: /var/lib/docker
+	DockerGraphPath *string `json:"DockerGraphPath,omitempty" name:"DockerGraphPath"`
 }
 
 type ModifyClusterNodePoolRequest struct {
@@ -7499,6 +7543,15 @@ type ModifyClusterNodePoolRequest struct {
 	// Image tag, `DOCKER_CUSTOMIZE` (container customized tag), `GENERAL` (general tag, default value)
 	OsCustomizeType *string `json:"OsCustomizeType,omitempty" name:"OsCustomizeType"`
 
+	// GPU driver version, CUDA version, cuDNN version and wether to enable MIG
+	GPUArgs *GPUArgs `json:"GPUArgs,omitempty" name:"GPUArgs"`
+
+	// Base64-encoded custom script
+	UserScript *string `json:"UserScript,omitempty" name:"UserScript"`
+
+	// Ignore existing nodes when update `Label` and `Taint`
+	IgnoreExistedNode *bool `json:"IgnoreExistedNode,omitempty" name:"IgnoreExistedNode"`
+
 	// Node custom parameter
 	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
 
@@ -7510,6 +7563,9 @@ type ModifyClusterNodePoolRequest struct {
 
 	// Whether Deletion Protection is enabled
 	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+
+	// Specified value of dockerd --graph. Default value: /var/lib/docker
+	DockerGraphPath *string `json:"DockerGraphPath,omitempty" name:"DockerGraphPath"`
 }
 
 func (r *ModifyClusterNodePoolRequest) ToJsonString() string {
@@ -7534,10 +7590,14 @@ func (r *ModifyClusterNodePoolRequest) FromJsonString(s string) error {
 	delete(f, "EnableAutoscale")
 	delete(f, "OsName")
 	delete(f, "OsCustomizeType")
+	delete(f, "GPUArgs")
+	delete(f, "UserScript")
+	delete(f, "IgnoreExistedNode")
 	delete(f, "ExtraArgs")
 	delete(f, "Tags")
 	delete(f, "Unschedulable")
 	delete(f, "DeletionProtection")
+	delete(f, "DockerGraphPath")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterNodePoolRequest has unknown keys!", "")
 	}
@@ -7786,6 +7846,20 @@ type NodePoolOption struct {
 
 	// Whether to inherit the node pool configuration.
 	InheritConfigurationFromNodePool *bool `json:"InheritConfigurationFromNodePool,omitempty" name:"InheritConfigurationFromNodePool"`
+}
+
+type OIDCConfigAuthenticationOptions struct {
+	// Creating an identity provider
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoCreateOIDCConfig *bool `json:"AutoCreateOIDCConfig,omitempty" name:"AutoCreateOIDCConfig"`
+
+	// Creating ClientId of the identity provider
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoCreateClientId []*string `json:"AutoCreateClientId,omitempty" name:"AutoCreateClientId"`
+
+	// Creating the PodIdentityWebhook component
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	AutoInstallPodIdentityWebhookAddon *bool `json:"AutoInstallPodIdentityWebhookAddon,omitempty" name:"AutoInstallPodIdentityWebhookAddon"`
 }
 
 type PodLimitsByType struct {
@@ -8419,6 +8493,81 @@ func (r *UpdateClusterVersionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateClusterVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateEdgeClusterVersionRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Target version
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+
+	// Prefix of the image repository of a custom edge component
+	RegistryPrefix *string `json:"RegistryPrefix,omitempty" name:"RegistryPrefix"`
+
+	// Whether to skip precheck
+	SkipPreCheck *bool `json:"SkipPreCheck,omitempty" name:"SkipPreCheck"`
+}
+
+type UpdateEdgeClusterVersionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Target version
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+
+	// Prefix of the image repository of a custom edge component
+	RegistryPrefix *string `json:"RegistryPrefix,omitempty" name:"RegistryPrefix"`
+
+	// Whether to skip precheck
+	SkipPreCheck *bool `json:"SkipPreCheck,omitempty" name:"SkipPreCheck"`
+}
+
+func (r *UpdateEdgeClusterVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateEdgeClusterVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "EdgeVersion")
+	delete(f, "RegistryPrefix")
+	delete(f, "SkipPreCheck")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateEdgeClusterVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateEdgeClusterVersionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateEdgeClusterVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateEdgeClusterVersionResponseParams `json:"Response"`
+}
+
+func (r *UpdateEdgeClusterVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateEdgeClusterVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

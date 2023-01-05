@@ -65,12 +65,18 @@ func NewBindPrometheusManagedGrafanaResponse() (response *BindPrometheusManagedG
 
 // BindPrometheusManagedGrafana
 // This API is used to bind a Grafana instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
 func (c *Client) BindPrometheusManagedGrafana(request *BindPrometheusManagedGrafanaRequest) (response *BindPrometheusManagedGrafanaResponse, err error) {
     return c.BindPrometheusManagedGrafanaWithContext(context.Background(), request)
 }
 
 // BindPrometheusManagedGrafana
 // This API is used to bind a Grafana instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
 func (c *Client) BindPrometheusManagedGrafanaWithContext(ctx context.Context, request *BindPrometheusManagedGrafanaRequest) (response *BindPrometheusManagedGrafanaResponse, err error) {
     if request == nil {
         request = NewBindPrometheusManagedGrafanaRequest()
@@ -3108,6 +3114,7 @@ func NewDescribeGrafanaInstancesResponse() (response *DescribeGrafanaInstancesRe
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
 //  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 //  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
@@ -3121,6 +3128,7 @@ func (c *Client) DescribeGrafanaInstances(request *DescribeGrafanaInstancesReque
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
 //  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 //  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
@@ -4009,6 +4017,60 @@ func (c *Client) DescribePrometheusScrapeJobsWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribePrometheusScrapeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusZonesRequest() (request *DescribePrometheusZonesRequest) {
+    request = &DescribePrometheusZonesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusZones")
+    
+    
+    return
+}
+
+func NewDescribePrometheusZonesResponse() (response *DescribePrometheusZonesResponse) {
+    response = &DescribePrometheusZonesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusZones
+// This API is used to list the AZs of Tencent Managed Service for Prometheus (TMP).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribePrometheusZones(request *DescribePrometheusZonesRequest) (response *DescribePrometheusZonesResponse, err error) {
+    return c.DescribePrometheusZonesWithContext(context.Background(), request)
+}
+
+// DescribePrometheusZones
+// This API is used to list the AZs of Tencent Managed Service for Prometheus (TMP).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribePrometheusZonesWithContext(ctx context.Context, request *DescribePrometheusZonesRequest) (response *DescribePrometheusZonesResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusZonesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusZones require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusZonesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4929,6 +4991,7 @@ func NewModifyAlarmPolicyNoticeResponse() (response *ModifyAlarmPolicyNoticeResp
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAlarmPolicyNotice(request *ModifyAlarmPolicyNoticeRequest) (response *ModifyAlarmPolicyNoticeResponse, err error) {
     return c.ModifyAlarmPolicyNoticeWithContext(context.Background(), request)
 }
@@ -4941,6 +5004,7 @@ func (c *Client) ModifyAlarmPolicyNotice(request *ModifyAlarmPolicyNoticeRequest
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyAlarmPolicyNoticeWithContext(ctx context.Context, request *ModifyAlarmPolicyNoticeRequest) (response *ModifyAlarmPolicyNoticeResponse, err error) {
     if request == nil {
         request = NewModifyAlarmPolicyNoticeRequest()

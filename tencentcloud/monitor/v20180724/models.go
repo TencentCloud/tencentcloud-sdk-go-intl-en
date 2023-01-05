@@ -6921,6 +6921,64 @@ func (r *DescribePrometheusScrapeJobsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePrometheusZonesRequestParams struct {
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+}
+
+type DescribePrometheusZonesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+}
+
+func (r *DescribePrometheusZonesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusZonesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegionId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrometheusZonesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusZonesResponseParams struct {
+	// Region list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneSet []*PrometheusZoneItem `json:"ZoneSet,omitempty" name:"ZoneSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePrometheusZonesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePrometheusZonesResponseParams `json:"Response"`
+}
+
+func (r *DescribePrometheusZonesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusZonesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRecordingRulesRequestParams struct {
 	// Prometheus instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -9482,6 +9540,23 @@ type PrometheusTag struct {
 	// Tag value
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type PrometheusZoneItem struct {
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// AZ ID
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// AZ status. Valid values: `0`(Unavailable), `1` (Available).
+	ZoneState *int64 `json:"ZoneState,omitempty" name:"ZoneState"`
+
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// AZ name
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 }
 
 // Predefined struct for user

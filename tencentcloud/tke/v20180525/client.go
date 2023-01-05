@@ -147,6 +147,7 @@ func NewAddExistedInstancesResponse() (response *AddExistedInstancesResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
 //  FAILEDOPERATION_NETWORKSCALEERROR = "FailedOperation.NetworkScaleError"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
@@ -173,6 +174,7 @@ func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (respo
 // error code that may be returned:
 //  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
 //  FAILEDOPERATION_NETWORKSCALEERROR = "FailedOperation.NetworkScaleError"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
@@ -575,6 +577,7 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 //  INVALIDPARAMETER_CIDRINVALID = "InvalidParameter.CidrInvalid"
 //  INVALIDPARAMETER_INVALIDPRIVATENETWORKCIDR = "InvalidParameter.InvalidPrivateNetworkCIDR"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     return c.CreateClusterWithContext(context.Background(), request)
 }
@@ -645,6 +648,7 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
 //  INVALIDPARAMETER_CIDRINVALID = "InvalidParameter.CidrInvalid"
 //  INVALIDPARAMETER_INVALIDPRIVATENETWORKCIDR = "InvalidParameter.InvalidPrivateNetworkCIDR"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     if request == nil {
         request = NewCreateClusterRequest()
@@ -889,6 +893,7 @@ func NewCreateClusterInstancesResponse() (response *CreateClusterInstancesRespon
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -936,6 +941,7 @@ func (c *Client) CreateClusterInstances(request *CreateClusterInstancesRequest) 
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -981,6 +987,8 @@ func NewCreateClusterNodePoolResponse() (response *CreateClusterNodePoolResponse
 // error code that may be returned:
 //  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_POLICYSERVERCOMMONERROR = "FailedOperation.PolicyServerCommonError"
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -1001,6 +1009,8 @@ func (c *Client) CreateClusterNodePool(request *CreateClusterNodePoolRequest) (r
 // error code that may be returned:
 //  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_POLICYSERVERCOMMONERROR = "FailedOperation.PolicyServerCommonError"
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -1023,58 +1033,6 @@ func (c *Client) CreateClusterNodePoolWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewCreateClusterNodePoolResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateClusterNodePoolFromExistingAsgRequest() (request *CreateClusterNodePoolFromExistingAsgRequest) {
-    request = &CreateClusterNodePoolFromExistingAsgRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tke", APIVersion, "CreateClusterNodePoolFromExistingAsg")
-    
-    
-    return
-}
-
-func NewCreateClusterNodePoolFromExistingAsgResponse() (response *CreateClusterNodePoolFromExistingAsgResponse) {
-    response = &CreateClusterNodePoolFromExistingAsgResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateClusterNodePoolFromExistingAsg
-// This API is used to upgrade a scaling group to a node pool.
-//
-// error code that may be returned:
-//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
-//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) CreateClusterNodePoolFromExistingAsg(request *CreateClusterNodePoolFromExistingAsgRequest) (response *CreateClusterNodePoolFromExistingAsgResponse, err error) {
-    return c.CreateClusterNodePoolFromExistingAsgWithContext(context.Background(), request)
-}
-
-// CreateClusterNodePoolFromExistingAsg
-// This API is used to upgrade a scaling group to a node pool.
-//
-// error code that may be returned:
-//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
-//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) CreateClusterNodePoolFromExistingAsgWithContext(ctx context.Context, request *CreateClusterNodePoolFromExistingAsgRequest) (response *CreateClusterNodePoolFromExistingAsgResponse, err error) {
-    if request == nil {
-        request = NewCreateClusterNodePoolFromExistingAsgRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateClusterNodePoolFromExistingAsg require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateClusterNodePoolFromExistingAsgResponse()
     err = c.Send(request, response)
     return
 }
@@ -1917,6 +1875,7 @@ func NewDeleteClusterNodePoolResponse() (response *DeleteClusterNodePoolResponse
 // This API is used to delete a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -1930,6 +1889,7 @@ func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (r
 // This API is used to delete a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -3006,6 +2966,7 @@ func NewDescribeClusterEndpointsResponse() (response *DescribeClusterEndpointsRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
@@ -3025,6 +2986,7 @@ func (c *Client) DescribeClusterEndpoints(request *DescribeClusterEndpointsReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
@@ -3085,6 +3047,7 @@ func NewDescribeClusterInstancesResponse() (response *DescribeClusterInstancesRe
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClusterInstances(request *DescribeClusterInstancesRequest) (response *DescribeClusterInstancesResponse, err error) {
     return c.DescribeClusterInstancesWithContext(context.Background(), request)
 }
@@ -3105,6 +3068,7 @@ func (c *Client) DescribeClusterInstances(request *DescribeClusterInstancesReque
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeClusterInstancesWithContext(ctx context.Context, request *DescribeClusterInstancesRequest) (response *DescribeClusterInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeClusterInstancesRequest()
@@ -3144,6 +3108,7 @@ func NewDescribeClusterKubeconfigResponse() (response *DescribeClusterKubeconfig
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
@@ -3172,6 +3137,7 @@ func (c *Client) DescribeClusterKubeconfig(request *DescribeClusterKubeconfigReq
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
@@ -3554,6 +3520,7 @@ func NewDescribeClusterSecurityResponse() (response *DescribeClusterSecurityResp
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_LBCOMMON = "FailedOperation.LbCommon"
@@ -3576,6 +3543,7 @@ func NewDescribeClusterSecurityResponse() (response *DescribeClusterSecurityResp
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_KUBERESOURCENOTFOUND = "ResourceNotFound.KubeResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
@@ -3592,6 +3560,7 @@ func (c *Client) DescribeClusterSecurity(request *DescribeClusterSecurityRequest
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  FAILEDOPERATION_LBCOMMON = "FailedOperation.LbCommon"
@@ -3614,6 +3583,7 @@ func (c *Client) DescribeClusterSecurity(request *DescribeClusterSecurityRequest
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_KUBERESOURCENOTFOUND = "ResourceNotFound.KubeResourceNotFound"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_CLUSTERINABNORMALSTAT = "ResourceUnavailable.ClusterInAbnormalStat"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
@@ -3662,6 +3632,7 @@ func NewDescribeClusterStatusResponse() (response *DescribeClusterStatusResponse
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
@@ -3686,6 +3657,7 @@ func (c *Client) DescribeClusterStatus(request *DescribeClusterStatusRequest) (r
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
@@ -3735,6 +3707,7 @@ func NewDescribeClustersResponse() (response *DescribeClustersResponse) {
 // This API is used to query clusters list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -3758,6 +3731,7 @@ func (c *Client) DescribeClusters(request *DescribeClustersRequest) (response *D
 // This API is used to query clusters list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -4105,6 +4079,58 @@ func (c *Client) DescribeEdgeClusterInstancesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeEdgeClusterInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeEdgeClusterUpgradeInfoRequest() (request *DescribeEdgeClusterUpgradeInfoRequest) {
+    request = &DescribeEdgeClusterUpgradeInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeEdgeClusterUpgradeInfo")
+    
+    
+    return
+}
+
+func NewDescribeEdgeClusterUpgradeInfoResponse() (response *DescribeEdgeClusterUpgradeInfoResponse) {
+    response = &DescribeEdgeClusterUpgradeInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeEdgeClusterUpgradeInfo
+// This API is used to query the upgrade information of an edge cluster, including the upgradeable components, the current upgrade status, and errors occur during the upgrade.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeEdgeClusterUpgradeInfo(request *DescribeEdgeClusterUpgradeInfoRequest) (response *DescribeEdgeClusterUpgradeInfoResponse, err error) {
+    return c.DescribeEdgeClusterUpgradeInfoWithContext(context.Background(), request)
+}
+
+// DescribeEdgeClusterUpgradeInfo
+// This API is used to query the upgrade information of an edge cluster, including the upgradeable components, the current upgrade status, and errors occur during the upgrade.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeEdgeClusterUpgradeInfoWithContext(ctx context.Context, request *DescribeEdgeClusterUpgradeInfoRequest) (response *DescribeEdgeClusterUpgradeInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeEdgeClusterUpgradeInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEdgeClusterUpgradeInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEdgeClusterUpgradeInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -4522,6 +4548,7 @@ func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
 //  INTERNALERROR_DBAFFECTIVEDROWS = "InternalError.DbAffectivedRows"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -4547,6 +4574,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
 //  INTERNALERROR_DBAFFECTIVEDROWS = "InternalError.DbAffectivedRows"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -4652,6 +4680,7 @@ func NewDescribeRouteTableConflictsResponse() (response *DescribeRouteTableConfl
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CIDRMASKSIZEOUTOFRANGE = "InternalError.CidrMaskSizeOutOfRange"
 //  INTERNALERROR_INVALIDPRIVATENETWORKCIDR = "InternalError.InvalidPrivateNetworkCidr"
@@ -4668,6 +4697,7 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CIDRMASKSIZEOUTOFRANGE = "InternalError.CidrMaskSizeOutOfRange"
 //  INTERNALERROR_INVALIDPRIVATENETWORKCIDR = "InternalError.InvalidPrivateNetworkCidr"
@@ -5494,6 +5524,7 @@ func NewGetUpgradeInstanceProgressResponse() (response *GetUpgradeInstanceProgre
 //
 // error code that may be returned:
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) GetUpgradeInstanceProgress(request *GetUpgradeInstanceProgressRequest) (response *GetUpgradeInstanceProgressResponse, err error) {
     return c.GetUpgradeInstanceProgressWithContext(context.Background(), request)
@@ -5504,6 +5535,7 @@ func (c *Client) GetUpgradeInstanceProgress(request *GetUpgradeInstanceProgressR
 //
 // error code that may be returned:
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) GetUpgradeInstanceProgressWithContext(ctx context.Context, request *GetUpgradeInstanceProgressRequest) (response *GetUpgradeInstanceProgressResponse, err error) {
     if request == nil {
@@ -5688,6 +5720,7 @@ func NewModifyClusterAsGroupOptionAttributeResponse() (response *ModifyClusterAs
 //
 // error code that may be returned:
 //  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -5714,6 +5747,7 @@ func (c *Client) ModifyClusterAsGroupOptionAttribute(request *ModifyClusterAsGro
 //
 // error code that may be returned:
 //  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -5771,6 +5805,7 @@ func NewModifyClusterAttributeResponse() (response *ModifyClusterAttributeRespon
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -5796,6 +5831,7 @@ func (c *Client) ModifyClusterAttribute(request *ModifyClusterAttributeRequest) 
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
+//  FAILEDOPERATION_UNEXPECTEDERROR = "FailedOperation.UnexpectedError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -5849,6 +5885,7 @@ func NewModifyClusterAuthenticationOptionsResponse() (response *ModifyClusterAut
 // This API is used to modify cluster authentication configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
@@ -5862,6 +5899,7 @@ func (c *Client) ModifyClusterAuthenticationOptions(request *ModifyClusterAuthen
 // This API is used to modify cluster authentication configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
@@ -6352,6 +6390,7 @@ func NewUpdateClusterVersionResponse() (response *UpdateClusterVersionResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CLUSTERUPGRADENODEVERSION = "FailedOperation.ClusterUpgradeNodeVersion"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -6369,6 +6408,7 @@ func (c *Client) UpdateClusterVersion(request *UpdateClusterVersionRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CLUSTERUPGRADENODEVERSION = "FailedOperation.ClusterUpgradeNodeVersion"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -6389,6 +6429,72 @@ func (c *Client) UpdateClusterVersionWithContext(ctx context.Context, request *U
     request.SetContext(ctx)
     
     response = NewUpdateClusterVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateEdgeClusterVersionRequest() (request *UpdateEdgeClusterVersionRequest) {
+    request = &UpdateEdgeClusterVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "UpdateEdgeClusterVersion")
+    
+    
+    return
+}
+
+func NewUpdateEdgeClusterVersionResponse() (response *UpdateEdgeClusterVersionResponse) {
+    response = &UpdateEdgeClusterVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateEdgeClusterVersion
+// This API is used to upgrade an edge cluster component to a TKE Edge version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERUPGRADENODEVERSION = "FailedOperation.ClusterUpgradeNodeVersion"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) UpdateEdgeClusterVersion(request *UpdateEdgeClusterVersionRequest) (response *UpdateEdgeClusterVersionResponse, err error) {
+    return c.UpdateEdgeClusterVersionWithContext(context.Background(), request)
+}
+
+// UpdateEdgeClusterVersion
+// This API is used to upgrade an edge cluster component to a TKE Edge version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLUSTERUPGRADENODEVERSION = "FailedOperation.ClusterUpgradeNodeVersion"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CLUSTERUPGRADENODEVERSION = "InternalError.ClusterUpgradeNodeVersion"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) UpdateEdgeClusterVersionWithContext(ctx context.Context, request *UpdateEdgeClusterVersionRequest) (response *UpdateEdgeClusterVersionResponse, err error) {
+    if request == nil {
+        request = NewUpdateEdgeClusterVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateEdgeClusterVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateEdgeClusterVersionResponse()
     err = c.Send(request, response)
     return
 }

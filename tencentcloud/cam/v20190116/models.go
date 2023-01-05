@@ -31,6 +31,20 @@ type AccessKey struct {
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
+type AccessKeyDetail struct {
+	// Access key ID
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// Access key, which is visible only when it is created. Keep it properly.
+	SecretAccessKey *string `json:"SecretAccessKey,omitempty" name:"SecretAccessKey"`
+
+	// Key status. Valid values: `Active` (activated), `Inactive` (not activated).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
 // Predefined struct for user
 type AddUserRequestParams struct {
 	// Sub-user username
@@ -593,6 +607,64 @@ func (r *ConsumeCustomMFATokenResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ConsumeCustomMFATokenResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessKeyRequestParams struct {
+	// UIN of the specified user. If this parameter is left empty, the access key will be created for the current user by default.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+type CreateAccessKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// UIN of the specified user. If this parameter is left empty, the access key will be created for the current user by default.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+func (r *CreateAccessKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TargetUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccessKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessKeyResponseParams struct {
+	// Access key
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessKey *AccessKeyDetail `json:"AccessKey,omitempty" name:"AccessKey"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAccessKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccessKeyResponseParams `json:"Response"`
+}
+
+func (r *CreateAccessKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1290,6 +1362,67 @@ func (r *CreateUserSAMLConfigResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateUserSAMLConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAccessKeyRequestParams struct {
+	// ID of the specified access key that needs to be deleted
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// UIN of the specified user. If this parameter is left empty, the access key will be deleted for the current user by default.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+type DeleteAccessKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the specified access key that needs to be deleted
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// UIN of the specified user. If this parameter is left empty, the access key will be deleted for the current user by default.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+func (r *DeleteAccessKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccessKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AccessKeyId")
+	delete(f, "TargetUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAccessKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAccessKeyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAccessKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAccessKeyResponseParams `json:"Response"`
+}
+
+func (r *DeleteAccessKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccessKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2401,10 +2534,10 @@ type DetachRolePolicyRequestParams struct {
 	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	// Role ID, which is used to specify a role. The input parameter is either `DetachRoleId` or `DetachRoleName`.
 	DetachRoleId *string `json:"DetachRoleId,omitempty" name:"DetachRoleId"`
 
-	// Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	// Role name, which is used to specify a role. The input parameter is either `DetachRoleId` or `DetachRoleName`.
 	DetachRoleName *string `json:"DetachRoleName,omitempty" name:"DetachRoleName"`
 
 	// Policy name. Either `PolicyId` or `PolicyName` must be entered
@@ -2417,10 +2550,10 @@ type DetachRolePolicyRequest struct {
 	// Policy ID. Either `PolicyId` or `PolicyName` must be entered
 	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
 
-	// Role ID, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	// Role ID, which is used to specify a role. The input parameter is either `DetachRoleId` or `DetachRoleName`.
 	DetachRoleId *string `json:"DetachRoleId,omitempty" name:"DetachRoleId"`
 
-	// Role name, used to specify a role. Input either `AttachRoleId` or `AttachRoleName`
+	// Role name, which is used to specify a role. The input parameter is either `DetachRoleId` or `DetachRoleName`.
 	DetachRoleName *string `json:"DetachRoleName,omitempty" name:"DetachRoleName"`
 
 	// Policy name. Either `PolicyId` or `PolicyName` must be entered
@@ -5163,6 +5296,74 @@ func (r *UntagRoleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UntagRoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAccessKeyRequestParams struct {
+	// ID of the specified access key that needs to be updated
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// Key status. Valid values: `Active` (activated), `Inactive` (not activated).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// UIN of the specified user. If this parameter is left empty, the access key will be updated for the current user by default.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+type UpdateAccessKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the specified access key that needs to be updated
+	AccessKeyId *string `json:"AccessKeyId,omitempty" name:"AccessKeyId"`
+
+	// Key status. Valid values: `Active` (activated), `Inactive` (not activated).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// UIN of the specified user. If this parameter is left empty, the access key will be updated for the current user by default.
+	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+}
+
+func (r *UpdateAccessKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAccessKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AccessKeyId")
+	delete(f, "Status")
+	delete(f, "TargetUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAccessKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAccessKeyResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateAccessKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAccessKeyResponseParams `json:"Response"`
+}
+
+func (r *UpdateAccessKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAccessKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

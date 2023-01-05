@@ -210,12 +210,51 @@ func (r *CreateAuditResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAuditTrackRequestParams struct {
+	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
+	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Tracking set status (0: Not enabled; 1: Enabled)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
+	EventNames []*string `json:"EventNames,omitempty" name:"EventNames"`
+
+	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	Storage *Storage `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitempty" name:"TrackForAllMembers"`
 }
 
 type CreateAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
+	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Tracking set status (0: Not enabled; 1: Enabled)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
+	EventNames []*string `json:"EventNames,omitempty" name:"EventNames"`
+
+	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	Storage *Storage `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitempty" name:"TrackForAllMembers"`
 }
 
 func (r *CreateAuditTrackRequest) ToJsonString() string {
@@ -230,7 +269,13 @@ func (r *CreateAuditTrackRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "Name")
+	delete(f, "ActionType")
+	delete(f, "ResourceType")
+	delete(f, "Status")
+	delete(f, "EventNames")
+	delete(f, "Storage")
+	delete(f, "TrackForAllMembers")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAuditTrackRequest has unknown keys!", "")
 	}
@@ -239,6 +284,9 @@ func (r *CreateAuditTrackRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAuditTrackResponseParams struct {
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -318,12 +366,15 @@ func (r *DeleteAuditResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAuditTrackRequestParams struct {
-
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
 }
 
 type DeleteAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
 }
 
 func (r *DeleteAuditTrackRequest) ToJsonString() string {
@@ -338,7 +389,7 @@ func (r *DeleteAuditTrackRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "TrackId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAuditTrackRequest has unknown keys!", "")
 	}
@@ -461,13 +512,101 @@ func (r *DescribeAuditResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeAuditTracksRequestParams struct {
+type DescribeAuditTrackRequestParams struct {
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
+}
 
+type DescribeAuditTrackRequest struct {
+	*tchttp.BaseRequest
+	
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
+}
+
+func (r *DescribeAuditTrackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditTrackRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TrackId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditTrackRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditTrackResponseParams struct {
+	// Tracking set name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// The product to which the tracking set event belongs, such as `cos`, or `*` that indicates all products
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Tracking set status (0: Not enabled; 1: Enabled)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of API names of tracking set events (`*`: All)
+	EventNames []*string `json:"EventNames,omitempty" name:"EventNames"`
+
+	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	Storage *Storage `json:"Storage,omitempty" name:"Storage"`
+
+	// Creation time of the tracking set
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitempty" name:"TrackForAllMembers"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditTrackResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditTrackResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditTrackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditTrackResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditTracksRequestParams struct {
+	// Page number
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of tracking sets per page
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 }
 
 type DescribeAuditTracksRequest struct {
 	*tchttp.BaseRequest
 	
+	// Page number
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of tracking sets per page
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 }
 
 func (r *DescribeAuditTracksRequest) ToJsonString() string {
@@ -482,7 +621,8 @@ func (r *DescribeAuditTracksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditTracksRequest has unknown keys!", "")
 	}
@@ -491,6 +631,12 @@ func (r *DescribeAuditTracksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAuditTracksResponseParams struct {
+	// Tracking set list
+	Tracks []*Tracks `json:"Tracks,omitempty" name:"Tracks"`
+
+	// Total number of tracking sets
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -525,7 +671,7 @@ type DescribeEventsRequestParams struct {
 	// Max number of returned logs (up to 50).
 	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
 
-	// Search criterion. Valid values: RequestId, EventName, ActionType (write/read), PrincipalId (sub-account), ResourceType, ResourceName, AccessKeyId, SensitiveAction, ApiErrorCode, and CamErrorCode.
+	// Search condition. Valid values: `RequestId`, `EventName`, `ActionType` (write/read), `PrincipalId` (sub-account), `ResourceType`, `ResourceName`, `AccessKeyId`, `SensitiveAction`, `ApiErrorCode`, `CamErrorCode`, and `Tags` (Format of AttributeValue: [{"key":"*","value":"*"}])
 	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes"`
 
 	// Whether to return the IP location. `1`: yes, `0`: no.
@@ -547,7 +693,7 @@ type DescribeEventsRequest struct {
 	// Max number of returned logs (up to 50).
 	MaxResults *uint64 `json:"MaxResults,omitempty" name:"MaxResults"`
 
-	// Search criterion. Valid values: RequestId, EventName, ActionType (write/read), PrincipalId (sub-account), ResourceType, ResourceName, AccessKeyId, SensitiveAction, ApiErrorCode, and CamErrorCode.
+	// Search condition. Valid values: `RequestId`, `EventName`, `ActionType` (write/read), `PrincipalId` (sub-account), `ResourceType`, `ResourceName`, `AccessKeyId`, `SensitiveAction`, `ApiErrorCode`, `CamErrorCode`, and `Tags` (Format of AttributeValue: [{"key":"*","value":"*"}])
 	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitempty" name:"LookupAttributes"`
 
 	// Whether to return the IP location. `1`: yes, `0`: no.
@@ -580,7 +726,7 @@ func (r *DescribeEventsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEventsResponseParams struct {
-	// Whether the logset ends.
+	// Whether the log list has come to an end. `true`: Yes. Pagination is not required.
 	ListOver *bool `json:"ListOver,omitempty" name:"ListOver"`
 
 	// Credential for viewing more logs.
@@ -590,8 +736,8 @@ type DescribeEventsResponseParams struct {
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	Events []*Event `json:"Events,omitempty" name:"Events"`
 
-	// Total number of events.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// This parameter has been deprecated. Please use `ListOver` and `NextToken` for pagination, and read data of the next page when the value of `ListOver` is `false`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1062,12 +1208,57 @@ type LookupAttribute struct {
 
 // Predefined struct for user
 type ModifyAuditTrackRequestParams struct {
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
 
+	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Tracking set status (0: Not enabled; 1: Enabled)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
+	EventNames []*string `json:"EventNames,omitempty" name:"EventNames"`
+
+	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	Storage *Storage `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitempty" name:"TrackForAllMembers"`
 }
 
 type ModifyAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
+
+	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Tracking set status (0: Not enabled; 1: Enabled)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
+	EventNames []*string `json:"EventNames,omitempty" name:"EventNames"`
+
+	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	Storage *Storage `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitempty" name:"TrackForAllMembers"`
 }
 
 func (r *ModifyAuditTrackRequest) ToJsonString() string {
@@ -1082,7 +1273,14 @@ func (r *ModifyAuditTrackRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "TrackId")
+	delete(f, "Name")
+	delete(f, "ActionType")
+	delete(f, "ResourceType")
+	delete(f, "Status")
+	delete(f, "EventNames")
+	delete(f, "Storage")
+	delete(f, "TrackForAllMembers")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAuditTrackRequest has unknown keys!", "")
 	}
@@ -1232,6 +1430,46 @@ func (r *StopLoggingResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StopLoggingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Storage struct {
+	// Storage type (Valid values: cos, cls)
+	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
+
+	// Storage region
+	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
+
+	// Storage name. For COS, the storage name is the custom bucket name, which can contain up to 50 lowercase letters, digits, and hyphens. It cannot contain "-APPID" and cannot start or end with a hyphen. For CLS, the storage name is the log topic ID, which can contain 1-50 characters.
+	StorageName *string `json:"StorageName,omitempty" name:"StorageName"`
+
+	// Storage directory prefix. The COS log file prefix can only contain 3-40 letters and digits.
+	StoragePrefix *string `json:"StoragePrefix,omitempty" name:"StoragePrefix"`
+}
+
+type Tracks struct {
+	// Tracking set name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// The product to which the tracking set event belongs, such as `cos`, or `*` that indicates all products
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Tracking set status (0: Not enabled; 1: Enabled)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The list of API names of tracking set events (`*`: All)
+	EventNames []*string `json:"EventNames,omitempty" name:"EventNames"`
+
+	// Storage type of shipped data. Valid values: `cos`, `cls`.
+	Storage *Storage `json:"Storage,omitempty" name:"Storage"`
+
+	// Creation time of the tracking set
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Tracking set ID
+	TrackId *uint64 `json:"TrackId,omitempty" name:"TrackId"`
 }
 
 // Predefined struct for user

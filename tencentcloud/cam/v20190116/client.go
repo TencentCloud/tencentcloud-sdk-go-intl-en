@@ -67,6 +67,7 @@ func NewAddUserResponse() (response *AddUserResponse) {
 // This API is used to add sub-users.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
@@ -82,6 +83,7 @@ func (c *Client) AddUser(request *AddUserRequest) (response *AddUserResponse, er
 // This API is used to add sub-users.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
@@ -127,6 +129,7 @@ func NewAddUserToGroupResponse() (response *AddUserToGroupResponse) {
 // This API is used to add users to a user group.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
 //  INVALIDPARAMETER_GROUPUSERFULL = "InvalidParameter.GroupUserFull"
@@ -141,6 +144,7 @@ func (c *Client) AddUserToGroup(request *AddUserToGroupRequest) (response *AddUs
 // This API is used to add users to a user group.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
 //  INVALIDPARAMETER_GROUPUSERFULL = "InvalidParameter.GroupUserFull"
@@ -401,6 +405,66 @@ func (c *Client) ConsumeCustomMFATokenWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateAccessKeyRequest() (request *CreateAccessKeyRequest) {
+    request = &CreateAccessKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cam", APIVersion, "CreateAccessKey")
+    
+    
+    return
+}
+
+func NewCreateAccessKeyResponse() (response *CreateAccessKeyResponse) {
+    response = &CreateAccessKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateAccessKey
+// This API is used to create an access key for a CAM user.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+//  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
+//  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+func (c *Client) CreateAccessKey(request *CreateAccessKeyRequest) (response *CreateAccessKeyResponse, err error) {
+    return c.CreateAccessKeyWithContext(context.Background(), request)
+}
+
+// CreateAccessKey
+// This API is used to create an access key for a CAM user.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+//  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
+//  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+func (c *Client) CreateAccessKeyWithContext(ctx context.Context, request *CreateAccessKeyRequest) (response *CreateAccessKeyResponse, err error) {
+    if request == nil {
+        request = NewCreateAccessKeyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAccessKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAccessKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateGroupRequest() (request *CreateGroupRequest) {
     request = &CreateGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -425,6 +489,7 @@ func NewCreateGroupResponse() (response *CreateGroupResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETER_GROUPFULL = "InvalidParameter.GroupFull"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) CreateGroup(request *CreateGroupRequest) (response *CreateGroupResponse, err error) {
     return c.CreateGroupWithContext(context.Background(), request)
 }
@@ -435,6 +500,7 @@ func (c *Client) CreateGroup(request *CreateGroupRequest) (response *CreateGroup
 // error code that may be returned:
 //  INVALIDPARAMETER_GROUPFULL = "InvalidParameter.GroupFull"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) CreateGroupWithContext(ctx context.Context, request *CreateGroupRequest) (response *CreateGroupResponse, err error) {
     if request == nil {
         request = NewCreateGroupRequest()
@@ -663,6 +729,7 @@ func NewCreatePolicyVersionResponse() (response *CreatePolicyVersionResponse) {
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -706,6 +773,7 @@ func (c *Client) CreatePolicyVersion(request *CreatePolicyVersionRequest) (respo
 //  INVALIDPARAMETER_POLICYIDNOTEXIST = "InvalidParameter.PolicyIdNotExist"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_PRINCIPALERROR = "InvalidParameter.PrincipalError"
+//  INVALIDPARAMETER_PRINCIPALQCSNOTEXIST = "InvalidParameter.PrincipalQcsNotExist"
 //  INVALIDPARAMETER_RESOURCECONTENTERROR = "InvalidParameter.ResourceContentError"
 //  INVALIDPARAMETER_RESOURCEERROR = "InvalidParameter.ResourceError"
 //  INVALIDPARAMETER_RESOURCEPROJECTERROR = "InvalidParameter.ResourceProjectError"
@@ -908,6 +976,7 @@ func NewCreateServiceLinkedRoleResponse() (response *CreateServiceLinkedRoleResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TAGRESOURCEFAILED = "FailedOperation.TagResourceFailed"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
 //  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
 //  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
@@ -931,6 +1000,7 @@ func (c *Client) CreateServiceLinkedRole(request *CreateServiceLinkedRoleRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TAGRESOURCEFAILED = "FailedOperation.TagResourceFailed"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_CONDITIONCONTENTERROR = "InvalidParameter.ConditionContentError"
 //  INVALIDPARAMETER_CONDITIONERROR = "InvalidParameter.ConditionError"
 //  INVALIDPARAMETER_CONDITIONTYPEERROR = "InvalidParameter.ConditionTypeError"
@@ -1043,6 +1113,7 @@ func NewCreateUserSAMLConfigResponse() (response *CreateUserSAMLConfigResponse) 
 // This API is used to create user SAML configurations.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 func (c *Client) CreateUserSAMLConfig(request *CreateUserSAMLConfigRequest) (response *CreateUserSAMLConfigResponse, err error) {
     return c.CreateUserSAMLConfigWithContext(context.Background(), request)
@@ -1052,6 +1123,7 @@ func (c *Client) CreateUserSAMLConfig(request *CreateUserSAMLConfigRequest) (res
 // This API is used to create user SAML configurations.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_IDENTITYNAMEINUSE = "InvalidParameter.IdentityNameInUse"
 //  INVALIDPARAMETERVALUE_METADATAERROR = "InvalidParameterValue.MetadataError"
 func (c *Client) CreateUserSAMLConfigWithContext(ctx context.Context, request *CreateUserSAMLConfigRequest) (response *CreateUserSAMLConfigResponse, err error) {
     if request == nil {
@@ -1065,6 +1137,70 @@ func (c *Client) CreateUserSAMLConfigWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateUserSAMLConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAccessKeyRequest() (request *DeleteAccessKeyRequest) {
+    request = &DeleteAccessKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cam", APIVersion, "DeleteAccessKey")
+    
+    
+    return
+}
+
+func NewDeleteAccessKeyResponse() (response *DeleteAccessKeyResponse) {
+    response = &DeleteAccessKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteAccessKey
+// This API is used to delete an access key for a CAM user.
+//
+// Calling this API is a high-risk operation because the key cannot be recovered once deleted and Tencent Cloud will deny all requests that use this key. Proceed with caution.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+//  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
+//  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+func (c *Client) DeleteAccessKey(request *DeleteAccessKeyRequest) (response *DeleteAccessKeyResponse, err error) {
+    return c.DeleteAccessKeyWithContext(context.Background(), request)
+}
+
+// DeleteAccessKey
+// This API is used to delete an access key for a CAM user.
+//
+// Calling this API is a high-risk operation because the key cannot be recovered once deleted and Tencent Cloud will deny all requests that use this key. Proceed with caution.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+//  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
+//  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+func (c *Client) DeleteAccessKeyWithContext(ctx context.Context, request *DeleteAccessKeyRequest) (response *DeleteAccessKeyResponse, err error) {
+    if request == nil {
+        request = NewDeleteAccessKeyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAccessKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAccessKeyResponse()
     err = c.Send(request, response)
     return
 }
@@ -1351,6 +1487,7 @@ func NewDeleteRoleResponse() (response *DeleteRoleResponse) {
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
+//  INVALIDPARAMETER_TAGPARAMERROR = "InvalidParameter.TagParamError"
 func (c *Client) DeleteRole(request *DeleteRoleRequest) (response *DeleteRoleResponse, err error) {
     return c.DeleteRoleWithContext(context.Background(), request)
 }
@@ -1363,6 +1500,7 @@ func (c *Client) DeleteRole(request *DeleteRoleRequest) (response *DeleteRoleRes
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_POLICYNAMEERROR = "InvalidParameter.PolicyNameError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
+//  INVALIDPARAMETER_TAGPARAMERROR = "InvalidParameter.TagParamError"
 func (c *Client) DeleteRoleWithContext(ctx context.Context, request *DeleteRoleRequest) (response *DeleteRoleResponse, err error) {
     if request == nil {
         request = NewDeleteRoleRequest()
@@ -1565,6 +1703,7 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 // This API is used to delete a sub-user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_HAVEKEYS = "OperationDenied.HaveKeys"
 //  REQUESTLIMITEXCEEDED_UINLIMITEXCEEDED = "RequestLimitExceeded.UinLimitExceeded"
@@ -1578,6 +1717,7 @@ func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserRes
 // This API is used to delete a sub-user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_HAVEKEYS = "OperationDenied.HaveKeys"
 //  REQUESTLIMITEXCEEDED_UINLIMITEXCEEDED = "RequestLimitExceeded.UinLimitExceeded"
@@ -1731,6 +1871,7 @@ func NewDescribeRoleListResponse() (response *DescribeRoleListResponse) {
 // This API (DescribeRoleList) is used to get the role list under the account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
@@ -1741,6 +1882,7 @@ func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *D
 // This API (DescribeRoleList) is used to get the role list under the account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
@@ -2717,6 +2859,7 @@ func NewGetUserResponse() (response *GetUserResponse) {
 // This API is used to query sub-users.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetUser(request *GetUserRequest) (response *GetUserResponse, err error) {
@@ -2727,6 +2870,7 @@ func (c *Client) GetUser(request *GetUserRequest) (response *GetUserResponse, er
 // This API is used to query sub-users.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) GetUserWithContext(ctx context.Context, request *GetUserRequest) (response *GetUserResponse, err error) {
@@ -2824,6 +2968,7 @@ func NewListAccessKeysResponse() (response *ListAccessKeysResponse) {
 //  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 //  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
 //  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListAccessKeysResponse, err error) {
     return c.ListAccessKeysWithContext(context.Background(), request)
 }
@@ -2839,6 +2984,7 @@ func (c *Client) ListAccessKeys(request *ListAccessKeysRequest) (response *ListA
 //  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
 //  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
 //  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
 func (c *Client) ListAccessKeysWithContext(ctx context.Context, request *ListAccessKeysRequest) (response *ListAccessKeysResponse, err error) {
     if request == nil {
         request = NewListAccessKeysRequest()
@@ -3229,6 +3375,7 @@ func NewListGroupsForUserResponse() (response *ListGroupsForUserResponse) {
 // This API is used to list user groups associated with a user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) ListGroupsForUser(request *ListGroupsForUserRequest) (response *ListGroupsForUserResponse, err error) {
@@ -3239,6 +3386,7 @@ func (c *Client) ListGroupsForUser(request *ListGroupsForUserRequest) (response 
 // This API is used to list user groups associated with a user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) ListGroupsForUserWithContext(ctx context.Context, request *ListGroupsForUserRequest) (response *ListGroupsForUserResponse, err error) {
@@ -3284,6 +3432,7 @@ func NewListPoliciesResponse() (response *ListPoliciesResponse) {
 //  INVALIDPARAMETER_KEYWORDERROR = "InvalidParameter.KeywordError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_SCOPEERROR = "InvalidParameter.ScopeError"
+//  INVALIDPARAMETER_SEARCHKEYWORDLENGTHERROR = "InvalidParameter.SearchKeywordLengthError"
 //  INVALIDPARAMETER_SERVICETYPEERROR = "InvalidParameter.ServiceTypeError"
 //  INVALIDPARAMETER_UINERROR = "InvalidParameter.UinError"
 func (c *Client) ListPolicies(request *ListPoliciesRequest) (response *ListPoliciesResponse, err error) {
@@ -3299,6 +3448,7 @@ func (c *Client) ListPolicies(request *ListPoliciesRequest) (response *ListPolic
 //  INVALIDPARAMETER_KEYWORDERROR = "InvalidParameter.KeywordError"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_SCOPEERROR = "InvalidParameter.ScopeError"
+//  INVALIDPARAMETER_SEARCHKEYWORDLENGTHERROR = "InvalidParameter.SearchKeywordLengthError"
 //  INVALIDPARAMETER_SERVICETYPEERROR = "InvalidParameter.ServiceTypeError"
 //  INVALIDPARAMETER_UINERROR = "InvalidParameter.UinError"
 func (c *Client) ListPoliciesWithContext(ctx context.Context, request *ListPoliciesRequest) (response *ListPoliciesResponse, err error) {
@@ -3671,6 +3821,7 @@ func NewRemoveUserFromGroupResponse() (response *RemoveUserFromGroupResponse) {
 // This API is used to delete users from a user group.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_USERUINANDUINNOTALLNULL = "InvalidParameter.UserUinAndUinNotAllNull"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -3682,6 +3833,7 @@ func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (respo
 // This API is used to delete users from a user group.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_USERUINANDUINNOTALLNULL = "InvalidParameter.UserUinAndUinNotAllNull"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
@@ -3910,6 +4062,7 @@ func NewTagRoleResponse() (response *TagRoleResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 //  INVALIDPARAMETER_TAGLIMITEXCEEDED = "InvalidParameter.TagLimitExceeded"
 //  INVALIDPARAMETER_TAGPARAMERROR = "InvalidParameter.TagParamError"
@@ -3926,6 +4079,7 @@ func (c *Client) TagRole(request *TagRoleRequest) (response *TagRoleResponse, er
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_ROLENOTEXIST = "InvalidParameter.RoleNotExist"
 //  INVALIDPARAMETER_TAGLIMITEXCEEDED = "InvalidParameter.TagLimitExceeded"
 //  INVALIDPARAMETER_TAGPARAMERROR = "InvalidParameter.TagParamError"
@@ -4005,6 +4159,68 @@ func (c *Client) UntagRoleWithContext(ctx context.Context, request *UntagRoleReq
     request.SetContext(ctx)
     
     response = NewUntagRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAccessKeyRequest() (request *UpdateAccessKeyRequest) {
+    request = &UpdateAccessKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cam", APIVersion, "UpdateAccessKey")
+    
+    
+    return
+}
+
+func NewUpdateAccessKeyResponse() (response *UpdateAccessKeyResponse) {
+    response = &UpdateAccessKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateAccessKey
+// This API is used to update an access key for a CAM user.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+//  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
+//  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
+func (c *Client) UpdateAccessKey(request *UpdateAccessKeyRequest) (response *UpdateAccessKeyResponse, err error) {
+    return c.UpdateAccessKeyWithContext(context.Background(), request)
+}
+
+// UpdateAccessKey
+// This API is used to update an access key for a CAM user.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_ACCESSKEY = "FailedOperation.Accesskey"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETER_USERNOTEXIST = "InvalidParameter.UserNotExist"
+//  OPERATIONDENIED_ACCESSKEYOVERLIMIT = "OperationDenied.AccessKeyOverLimit"
+//  OPERATIONDENIED_SUBUIN = "OperationDenied.SubUin"
+//  OPERATIONDENIED_UINNOTMATCH = "OperationDenied.UinNotMatch"
+//  RESOURCENOTFOUND_SECRETNOTEXIST = "ResourceNotFound.SecretNotExist"
+func (c *Client) UpdateAccessKeyWithContext(ctx context.Context, request *UpdateAccessKeyRequest) (response *UpdateAccessKeyResponse, err error) {
+    if request == nil {
+        request = NewUpdateAccessKeyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAccessKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAccessKeyResponse()
     err = c.Send(request, response)
     return
 }
@@ -4118,6 +4334,7 @@ func NewUpdateGroupResponse() (response *UpdateGroupResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroupResponse, err error) {
     return c.UpdateGroupWithContext(context.Background(), request)
@@ -4130,6 +4347,7 @@ func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroup
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_GROUPNAMEINUSE = "InvalidParameter.GroupNameInUse"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 func (c *Client) UpdateGroupWithContext(ctx context.Context, request *UpdateGroupRequest) (response *UpdateGroupResponse, err error) {
     if request == nil {
@@ -4511,7 +4729,10 @@ func NewUpdateUserResponse() (response *UpdateUserResponse) {
 // This API is used to update a sub-user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
+//  INVALIDPARAMETER_USERNAMEILLEGAL = "InvalidParameter.UserNameIllegal"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserResponse, err error) {
     return c.UpdateUserWithContext(context.Background(), request)
@@ -4521,7 +4742,10 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserRes
 // This API is used to update a sub-user.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_PASSWORDVIOLATEDRULES = "InvalidParameter.PasswordViolatedRules"
+//  INVALIDPARAMETER_USERNAMEILLEGAL = "InvalidParameter.UserNameIllegal"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUserWithContext(ctx context.Context, request *UpdateUserRequest) (response *UpdateUserResponse, err error) {
     if request == nil {

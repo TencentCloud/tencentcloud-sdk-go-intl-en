@@ -20,6 +20,69 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+// Predefined struct for user
+type AddMachineGroupInfoRequestParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Machine group type
+	// Supported types: `ip` and `label`
+	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitempty" name:"MachineGroupType"`
+}
+
+type AddMachineGroupInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Machine group type
+	// Supported types: `ip` and `label`
+	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitempty" name:"MachineGroupType"`
+}
+
+func (r *AddMachineGroupInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddMachineGroupInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	delete(f, "MachineGroupType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddMachineGroupInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddMachineGroupInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AddMachineGroupInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *AddMachineGroupInfoResponseParams `json:"Response"`
+}
+
+func (r *AddMachineGroupInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddMachineGroupInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AlarmAnalysisConfig struct {
 	// Key
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -1824,6 +1887,69 @@ func (r *DeleteLogsetResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteLogsetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMachineGroupInfoRequestParams struct {
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Machine group type
+	// Supported types: `ip` and `label`
+	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitempty" name:"MachineGroupType"`
+}
+
+type DeleteMachineGroupInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Machine group ID
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Machine group type
+	// Supported types: `ip` and `label`
+	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitempty" name:"MachineGroupType"`
+}
+
+func (r *DeleteMachineGroupInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMachineGroupInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	delete(f, "MachineGroupType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMachineGroupInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMachineGroupInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteMachineGroupInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteMachineGroupInfoResponseParams `json:"Response"`
+}
+
+func (r *DeleteMachineGroupInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMachineGroupInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3682,9 +3808,9 @@ type FullTextInfo struct {
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
-	// Separator of the full-text index. Each character represents a separator;
-	// Supports only English punctuation marks and (\n\t\r);
-	// We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\) as separators;
+	// Separator of the full-text index. Each character represents a separator.
+	// Only symbols, \n\t\r, and escape character \ are supported.
+	// Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
 	Tokenizer *string `json:"Tokenizer,omitempty" name:"Tokenizer"`
 
 	// Whether Chinese characters are contained
@@ -5664,10 +5790,10 @@ type ValueInfo struct {
 	// Field type. Valid values: `long`, `text`, `double`
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Separator of fields. Each character represents a separator;
-	// Supports only English punctuation marks and (\n\t\r);
-	// `long` and `double` fields need to be null;
-	// We recommend you use (@&?|#()='",;:<>[]{}/ \n\t\r\\) as separators for `text` fields;
+	// Separator of fields. Each character represents a separator.
+	// Only symbols, \n\t\r, and escape character \ are supported.
+	// `long` and `double` fields need to be null.
+	// Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
 	Tokenizer *string `json:"Tokenizer,omitempty" name:"Tokenizer"`
 
 	// Whether the analysis feature is enabled for the field

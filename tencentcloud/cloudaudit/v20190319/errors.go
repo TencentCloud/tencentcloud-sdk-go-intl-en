@@ -17,8 +17,23 @@ package v20190319
 const (
 	// error codes for specific actions
 
+	// Operation failed.
+	FAILEDOPERATION = "FailedOperation"
+
+	// Failed to check whether the CLS log topic exists
+	FAILEDOPERATION_CHECKCLSTOPICISEXISTFAILED = "FailedOperation.CheckClsTopicIsExistFailed"
+
+	// Failed to check whether the COS bucket exists
+	FAILEDOPERATION_CHECKCOSBUCKETISEXISTFAILED = "FailedOperation.CheckCosBucketIsExistFailed"
+
 	// Failed to create the COS bucket.
 	FAILEDOPERATION_CREATEBUCKETFAIL = "FailedOperation.CreateBucketFail"
+
+	// Failed to pull the CLS log topic
+	FAILEDOPERATION_GETCLSTOPICFAILED = "FailedOperation.GetClsTopicFailed"
+
+	// Failed to pull the COS bucket list
+	FAILEDOPERATION_GETCOSBUCKETLISTFAILED = "FailedOperation.GetCosBucketListFailed"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
@@ -70,6 +85,9 @@ const (
 
 	// The tracking set name is non-compliant.
 	INVALIDPARAMETERVALUE_AUDITNAMEERROR = "InvalidParameterValue.AuditNameError"
+
+	// The tracking set name cannot be modified.
+	INVALIDPARAMETERVALUE_AUDITTRACKNAMENOTSUPPORTMODIFY = "InvalidParameterValue.AuditTrackNameNotSupportModify"
 
 	// CloudAudit currently does not support the entered CMQ region.
 	INVALIDPARAMETERVALUE_CMQREGIONERROR = "InvalidParameterValue.CmqRegionError"
@@ -137,6 +155,12 @@ const (
 	// The COS bucket already exists.
 	RESOURCEINUSE_COSBUCKETEXISTS = "ResourceInUse.CosBucketExists"
 
+	// The resource doesn’t exist.
+	RESOURCENOTFOUND = "ResourceNotFound"
+
 	// The tracking set does not exist.
 	RESOURCENOTFOUND_AUDITNOTEXIST = "ResourceNotFound.AuditNotExist"
+
+	// The role doesn’t exist.
+	RESOURCENOTFOUND_ROLENOTEXIST = "ResourceNotFound.RoleNotExist"
 )
