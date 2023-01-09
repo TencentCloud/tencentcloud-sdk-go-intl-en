@@ -673,3 +673,226 @@ func (r *QueryPartnerCreditResponse) ToJsonString() string {
 func (r *QueryPartnerCreditResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
+
+type QueryVoucherAmountByUinItem struct {
+	// Customer UIN
+	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+
+	// Voucher quota
+	TotalAmount *float64 `json:"TotalAmount,omitempty" name:"TotalAmount"`
+
+	// Voucher amount
+	RemainAmount *float64 `json:"RemainAmount,omitempty" name:"RemainAmount"`
+}
+
+// Predefined struct for user
+type QueryVoucherAmountByUinRequestParams struct {
+	// Customer UIN list
+	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+}
+
+type QueryVoucherAmountByUinRequest struct {
+	*tchttp.BaseRequest
+	
+	// Customer UIN list
+	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+}
+
+func (r *QueryVoucherAmountByUinRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryVoucherAmountByUinRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClientUins")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryVoucherAmountByUinRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryVoucherAmountByUinResponseParams struct {
+	// Customer voucher quota information
+	Data []*QueryVoucherAmountByUinItem `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type QueryVoucherAmountByUinResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryVoucherAmountByUinResponseParams `json:"Response"`
+}
+
+func (r *QueryVoucherAmountByUinResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryVoucherAmountByUinResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryVoucherListByUinItem struct {
+	// Customer UIN
+	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+
+	// The total number of vouchers
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Voucher details
+	Data []*QueryVoucherListByUinVoucherItem `json:"Data,omitempty" name:"Data"`
+}
+
+// Predefined struct for user
+type QueryVoucherListByUinRequestParams struct {
+	// Customer UIN list
+	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+
+	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+type QueryVoucherListByUinRequest struct {
+	*tchttp.BaseRequest
+	
+	// Customer UIN list
+	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+
+	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *QueryVoucherListByUinRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryVoucherListByUinRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClientUins")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryVoucherListByUinRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryVoucherListByUinResponseParams struct {
+	// Customer voucher information
+	Data []*QueryVoucherListByUinItem `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type QueryVoucherListByUinResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryVoucherListByUinResponseParams `json:"Response"`
+}
+
+func (r *QueryVoucherListByUinResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryVoucherListByUinResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type QueryVoucherListByUinVoucherItem struct {
+	// Voucher ID
+	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+
+	// Voucher status
+	VoucherStatus *string `json:"VoucherStatus,omitempty" name:"VoucherStatus"`
+
+	// Voucher value
+	TotalAmount *float64 `json:"TotalAmount,omitempty" name:"TotalAmount"`
+
+	// Balance
+	RemainAmount *float64 `json:"RemainAmount,omitempty" name:"RemainAmount"`
+}
+
+// Predefined struct for user
+type QueryVoucherPoolRequestParams struct {
+
+}
+
+type QueryVoucherPoolRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *QueryVoucherPoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryVoucherPoolRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryVoucherPoolRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryVoucherPoolResponseParams struct {
+	// Reseller name
+	AgentName *string `json:"AgentName,omitempty" name:"AgentName"`
+
+	// Reseller role type (1: Reseller; 2: Distributor; 3: Second-level reseller)
+	AccountType *int64 `json:"AccountType,omitempty" name:"AccountType"`
+
+	// Total quota
+	TotalQuota *float64 `json:"TotalQuota,omitempty" name:"TotalQuota"`
+
+	// Remaining quota
+	RemainingQuota *float64 `json:"RemainingQuota,omitempty" name:"RemainingQuota"`
+
+	// The number of issued vouchers
+	IssuedNum *int64 `json:"IssuedNum,omitempty" name:"IssuedNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type QueryVoucherPoolResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryVoucherPoolResponseParams `json:"Response"`
+}
+
+func (r *QueryVoucherPoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryVoucherPoolResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}

@@ -449,10 +449,10 @@ type CreateTawInstanceRequestParams struct {
 	// Instance purchase channel. Valid value: `cdn`.
 	BuyingChannel *string `json:"BuyingChannel,omitempty" name:"BuyingChannel"`
 
-
+	// Type of prepaid resource pack (only required for prepaid mode)
 	ResourcePackageType *uint64 `json:"ResourcePackageType,omitempty" name:"ResourcePackageType"`
 
-
+	// The number of prepaid resource packs (only required for prepaid mode)
 	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitempty" name:"ResourcePackageNum"`
 }
 
@@ -486,8 +486,10 @@ type CreateTawInstanceRequest struct {
 	// Instance purchase channel. Valid value: `cdn`.
 	BuyingChannel *string `json:"BuyingChannel,omitempty" name:"BuyingChannel"`
 
+	// Type of prepaid resource pack (only required for prepaid mode)
 	ResourcePackageType *uint64 `json:"ResourcePackageType,omitempty" name:"ResourcePackageType"`
 
+	// The number of prepaid resource packs (only required for prepaid mode)
 	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitempty" name:"ResourcePackageNum"`
 }
 
@@ -524,6 +526,10 @@ func (r *CreateTawInstanceRequest) FromJsonString(s string) error {
 type CreateTawInstanceResponseParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ID of prepaid order
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

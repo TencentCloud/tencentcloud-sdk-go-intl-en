@@ -349,6 +349,80 @@ func (c *Client) CreateConsumerWithContext(ctx context.Context, request *CreateC
     return
 }
 
+func NewCreateInstancePostRequest() (request *CreateInstancePostRequest) {
+    request = &CreateInstancePostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "CreateInstancePost")
+    
+    
+    return
+}
+
+func NewCreateInstancePostResponse() (response *CreateInstancePostResponse) {
+    response = &CreateInstancePostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateInstancePost
+// This API is used to create a pay-as-you-go instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) CreateInstancePost(request *CreateInstancePostRequest) (response *CreateInstancePostResponse, err error) {
+    return c.CreateInstancePostWithContext(context.Background(), request)
+}
+
+// CreateInstancePost
+// This API is used to create a pay-as-you-go instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
+//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
+//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
+//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
+//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
+func (c *Client) CreateInstancePostWithContext(ctx context.Context, request *CreateInstancePostRequest) (response *CreateInstancePostResponse, err error) {
+    if request == nil {
+        request = NewCreateInstancePostRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstancePost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInstancePostResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePartitionRequest() (request *CreatePartitionRequest) {
     request = &CreatePartitionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -525,6 +599,7 @@ func NewCreateTopicIpWhiteListResponse() (response *CreateTopicIpWhiteListRespon
 // This API is used to create a topic IP allowlist.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -546,6 +621,7 @@ func (c *Client) CreateTopicIpWhiteList(request *CreateTopicIpWhiteListRequest) 
 // This API is used to create a topic IP allowlist.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -2553,6 +2629,64 @@ func (c *Client) FetchMessageListByOffsetWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewFetchMessageListByOffsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquireCkafkaPriceRequest() (request *InquireCkafkaPriceRequest) {
+    request = &InquireCkafkaPriceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "InquireCkafkaPrice")
+    
+    
+    return
+}
+
+func NewInquireCkafkaPriceResponse() (response *InquireCkafkaPriceResponse) {
+    response = &InquireCkafkaPriceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// InquireCkafkaPrice
+// This API is used to purchase a CKafka instance or query the instance renewal price.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) InquireCkafkaPrice(request *InquireCkafkaPriceRequest) (response *InquireCkafkaPriceResponse, err error) {
+    return c.InquireCkafkaPriceWithContext(context.Background(), request)
+}
+
+// InquireCkafkaPrice
+// This API is used to purchase a CKafka instance or query the instance renewal price.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) InquireCkafkaPriceWithContext(ctx context.Context, request *InquireCkafkaPriceRequest) (response *InquireCkafkaPriceResponse, err error) {
+    if request == nil {
+        request = NewInquireCkafkaPriceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquireCkafkaPrice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquireCkafkaPriceResponse()
     err = c.Send(request, response)
     return
 }

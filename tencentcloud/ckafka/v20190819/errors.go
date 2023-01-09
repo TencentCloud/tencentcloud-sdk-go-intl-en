@@ -62,6 +62,9 @@ const (
 	// The quota limit has been reached.
 	LIMITEXCEEDED = "LimitExceeded"
 
+	// Missing parameter
+	MISSINGPARAMETER = "MissingParameter"
+
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
 

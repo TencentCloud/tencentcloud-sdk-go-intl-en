@@ -510,3 +510,147 @@ func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *Que
     err = c.Send(request, response)
     return
 }
+
+func NewQueryVoucherAmountByUinRequest() (request *QueryVoucherAmountByUinRequest) {
+    request = &QueryVoucherAmountByUinRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryVoucherAmountByUin")
+    
+    
+    return
+}
+
+func NewQueryVoucherAmountByUinResponse() (response *QueryVoucherAmountByUinResponse) {
+    response = &QueryVoucherAmountByUinResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryVoucherAmountByUin
+// This API is used to query the voucher quota based on the customer UIN.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
+    return c.QueryVoucherAmountByUinWithContext(context.Background(), request)
+}
+
+// QueryVoucherAmountByUin
+// This API is used to query the voucher quota based on the customer UIN.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryVoucherAmountByUinWithContext(ctx context.Context, request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
+    if request == nil {
+        request = NewQueryVoucherAmountByUinRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryVoucherAmountByUin require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryVoucherAmountByUinResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryVoucherListByUinRequest() (request *QueryVoucherListByUinRequest) {
+    request = &QueryVoucherListByUinRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryVoucherListByUin")
+    
+    
+    return
+}
+
+func NewQueryVoucherListByUinResponse() (response *QueryVoucherListByUinResponse) {
+    response = &QueryVoucherListByUinResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryVoucherListByUin
+// This API is used to query the voucher list based on the customer UIN.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
+    return c.QueryVoucherListByUinWithContext(context.Background(), request)
+}
+
+// QueryVoucherListByUin
+// This API is used to query the voucher list based on the customer UIN.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryVoucherListByUinWithContext(ctx context.Context, request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
+    if request == nil {
+        request = NewQueryVoucherListByUinRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryVoucherListByUin require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryVoucherListByUinResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryVoucherPoolRequest() (request *QueryVoucherPoolRequest) {
+    request = &QueryVoucherPoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryVoucherPool")
+    
+    
+    return
+}
+
+func NewQueryVoucherPoolResponse() (response *QueryVoucherPoolResponse) {
+    response = &QueryVoucherPoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryVoucherPool
+// This API is used to query the voucher quota pool.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
+    return c.QueryVoucherPoolWithContext(context.Background(), request)
+}
+
+// QueryVoucherPool
+// This API is used to query the voucher quota pool.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) QueryVoucherPoolWithContext(ctx context.Context, request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
+    if request == nil {
+        request = NewQueryVoucherPoolRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryVoucherPool require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryVoucherPoolResponse()
+    err = c.Send(request, response)
+    return
+}

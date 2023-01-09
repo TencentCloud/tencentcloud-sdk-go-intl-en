@@ -1035,6 +1035,84 @@ func (r *CreateInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateParameterTemplateRequestParams struct {
+	// Template name, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@).
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// The major database version number, such as 11, 12, 13.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// Database engine, such as postgresql, mssql_compatible.
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@).
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+}
+
+type CreateParameterTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Template name, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@).
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// The major database version number, such as 11, 12, 13.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// Database engine, such as postgresql, mssql_compatible.
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@).
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+}
+
+func (r *CreateParameterTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateParameterTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateName")
+	delete(f, "DBMajorVersion")
+	delete(f, "DBEngine")
+	delete(f, "TemplateDescription")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateParameterTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateParameterTemplateResponseParams struct {
+	// Parameter template ID, which uniquely identifies a parameter template.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateParameterTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateParameterTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateParameterTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateParameterTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateReadOnlyDBInstanceRequestParams struct {
 	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
 	SpecCode *string `json:"SpecCode,omitempty" name:"SpecCode"`
@@ -1841,6 +1919,60 @@ func (r *DeleteDBInstanceNetworkAccessResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteParameterTemplateRequestParams struct {
+	// Parameter template ID, which uniquely identifies the parameter template to be operated.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+type DeleteParameterTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter template ID, which uniquely identifies the parameter template to be operated.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DeleteParameterTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteParameterTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteParameterTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteParameterTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteParameterTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteParameterTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteParameterTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteParameterTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteReadOnlyGroupNetworkAccessRequestParams struct {
 	// RO group ID in the format of pgro-4t9c6g7k.
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
@@ -2639,6 +2771,70 @@ func (r *DescribeDBInstanceParametersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBInstanceSecurityGroupsRequestParams struct {
+	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID. Either this parameter or `DBInstanceId` must be passed in. To query the security groups associated with the RO groups, only pass in `ReadOnlyGroupId`.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+type DescribeDBInstanceSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID. Either this parameter or `DBInstanceId` must be passed in. To query the security groups associated with the RO groups, only pass in `ReadOnlyGroupId`.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+func (r *DescribeDBInstanceSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "ReadOnlyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceSecurityGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceSecurityGroupsResponseParams struct {
+	// Information of security groups in array
+	SecurityGroupSet []*SecurityGroup `json:"SecurityGroupSet,omitempty" name:"SecurityGroupSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstanceSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceSecurityGroupsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceSecurityGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBInstancesRequestParams struct {
 	// Filter instances using one or more criteria. Valid filter names:
 	// db-instance-id: filter by instance ID (in string format)
@@ -2991,6 +3187,74 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDefaultParametersRequestParams struct {
+	// The major database version number, such as 11, 12, 13.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// Database engine, such as postgresql, mssql_compatible.
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+}
+
+type DescribeDefaultParametersRequest struct {
+	*tchttp.BaseRequest
+	
+	// The major database version number, such as 11, 12, 13.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// Database engine, such as postgresql, mssql_compatible.
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+}
+
+func (r *DescribeDefaultParametersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDefaultParametersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBMajorVersion")
+	delete(f, "DBEngine")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDefaultParametersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDefaultParametersResponseParams struct {
+	// Number of parameters
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Parameter information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ParamInfoSet []*ParamInfo `json:"ParamInfoSet,omitempty" name:"ParamInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDefaultParametersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDefaultParametersResponseParams `json:"Response"`
+}
+
+func (r *DescribeDefaultParametersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDefaultParametersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeEncryptionKeysRequestParams struct {
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
@@ -3105,6 +3369,176 @@ func (r *DescribeOrdersResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeOrdersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeParameterTemplateAttributesRequestParams struct {
+	// Parameter template ID
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+type DescribeParameterTemplateAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter template ID
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+}
+
+func (r *DescribeParameterTemplateAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParameterTemplateAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParameterTemplateAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeParameterTemplateAttributesResponseParams struct {
+	// Parameter template ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Number of parameters contained in the parameter template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Parameter information contained in the parameter template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ParamInfoSet []*ParamInfo `json:"ParamInfoSet,omitempty" name:"ParamInfoSet"`
+
+	// Parameter template name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Database version applicable to a parameter template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// Database engine applicable to a parameter template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Parameter template description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeParameterTemplateAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeParameterTemplateAttributesResponseParams `json:"Response"`
+}
+
+func (r *DescribeParameterTemplateAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParameterTemplateAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeParameterTemplatesRequestParams struct {
+	// Filter conditions. Valid values: `TemplateName`, `TemplateId`, `DBMajorVersion`, `DBEngine`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of results returned per page. Value range: 0-100. Default: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Data offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting metric. Valid values: `CreateTime`, `TemplateName`, `DBMajorVersion`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `asc` (ascending order),`desc` (descending order).
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+type DescribeParameterTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter conditions. Valid values: `TemplateName`, `TemplateId`, `DBMajorVersion`, `DBEngine`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of results returned per page. Value range: 0-100. Default: `20`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Data offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting metric. Valid values: `CreateTime`, `TemplateName`, `DBMajorVersion`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `asc` (ascending order),`desc` (descending order).
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeParameterTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParameterTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeParameterTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeParameterTemplatesResponseParams struct {
+	// The total number of eligible parameter templates
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Parameter template list
+	ParameterTemplateSet []*ParameterTemplate `json:"ParameterTemplateSet,omitempty" name:"ParameterTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeParameterTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeParameterTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeParameterTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeParameterTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4828,6 +5262,74 @@ func (r *ModifyDBInstanceReadOnlyGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDBInstanceSecurityGroupsRequestParams struct {
+	// The list of security groups to be associated with the instance or RO groups
+	SecurityGroupIdSet []*string `json:"SecurityGroupIdSet,omitempty" name:"SecurityGroupIdSet"`
+
+	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID. Either this parameter or `DBInstanceId` must be passed in. To modify  the security groups associated with the RO groups, only pass in `ReadOnlyGroupId`.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+type ModifyDBInstanceSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The list of security groups to be associated with the instance or RO groups
+	SecurityGroupIdSet []*string `json:"SecurityGroupIdSet,omitempty" name:"SecurityGroupIdSet"`
+
+	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// RO group ID. Either this parameter or `DBInstanceId` must be passed in. To modify  the security groups associated with the RO groups, only pass in `ReadOnlyGroupId`.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+}
+
+func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecurityGroupIdSet")
+	delete(f, "DBInstanceId")
+	delete(f, "ReadOnlyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSecurityGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceSecurityGroupsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyDBInstanceSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceSecurityGroupsResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceSpecRequestParams struct {
 	// Instance ID in the format of postgres-6bwgamo3.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
@@ -5004,6 +5506,88 @@ func (r *ModifyDBInstancesProjectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyDBInstancesProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyParameterTemplateRequestParams struct {
+	// Parameter template ID, which uniquely identifies a parameter template and cannot be modified.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Parameter template name, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@). If this field is empty, the original parameter template name will be used.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@). If this parameter is not passed in, the original parameter template description will be used.
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+
+	// The set of parameters to be modified or added. A parameter cannot be put to `ModifyParamEntrySet` and `DeleteParamSet` at the same time, that is, it cannot be modified/added and deleted at the same time.
+	ModifyParamEntrySet []*ParamEntry `json:"ModifyParamEntrySet,omitempty" name:"ModifyParamEntrySet"`
+
+	// The set of parameters to be deleted in the template. A parameter cannot be put to `ModifyParamEntrySet` and `DeleteParamSet` at the same time, that is, it cannot be modified/added and deleted at the same time.
+	DeleteParamSet []*string `json:"DeleteParamSet,omitempty" name:"DeleteParamSet"`
+}
+
+type ModifyParameterTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter template ID, which uniquely identifies a parameter template and cannot be modified.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Parameter template name, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@). If this field is empty, the original parameter template name will be used.
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Parameter template description, which can contain 1-60 letters, digits, and symbols (-_./()[]()+=:@). If this parameter is not passed in, the original parameter template description will be used.
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+
+	// The set of parameters to be modified or added. A parameter cannot be put to `ModifyParamEntrySet` and `DeleteParamSet` at the same time, that is, it cannot be modified/added and deleted at the same time.
+	ModifyParamEntrySet []*ParamEntry `json:"ModifyParamEntrySet,omitempty" name:"ModifyParamEntrySet"`
+
+	// The set of parameters to be deleted in the template. A parameter cannot be put to `ModifyParamEntrySet` and `DeleteParamSet` at the same time, that is, it cannot be modified/added and deleted at the same time.
+	DeleteParamSet []*string `json:"DeleteParamSet,omitempty" name:"DeleteParamSet"`
+}
+
+func (r *ModifyParameterTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyParameterTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TemplateId")
+	delete(f, "TemplateName")
+	delete(f, "TemplateDescription")
+	delete(f, "ModifyParamEntrySet")
+	delete(f, "DeleteParamSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyParameterTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyParameterTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyParameterTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyParameterTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyParameterTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyParameterTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5530,6 +6114,23 @@ type ParamVersionRelation struct {
 	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 }
 
+type ParameterTemplate struct {
+	// Parameter template ID
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Parameter template name
+	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+
+	// Database version applicable to a parameter template
+	DBMajorVersion *string `json:"DBMajorVersion,omitempty" name:"DBMajorVersion"`
+
+	// Database engine applicable to a parameter template
+	DBEngine *string `json:"DBEngine,omitempty" name:"DBEngine"`
+
+	// Parameter template description
+	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+}
+
 type PgDeal struct {
 	// Order name
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
@@ -5548,6 +6149,23 @@ type PgDeal struct {
 
 	// Instance ID array
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitempty" name:"DBInstanceIdSet"`
+}
+
+type PolicyRule struct {
+	// Policy, Valid values: `ACCEPT`, `DROP`.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// Source or destination IP or IP range, such as 172.16.0.0/12.
+	CidrIp *string `json:"CidrIp,omitempty" name:"CidrIp"`
+
+	// Port
+	PortRange *string `json:"PortRange,omitempty" name:"PortRange"`
+
+	// Network protocol. UDP and TCP are supported.
+	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+
+	// The rule description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type RawSlowQuery struct {
@@ -5970,6 +6588,29 @@ func (r *RestartDBInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RestartDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SecurityGroup struct {
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Inbound rule
+	Inbound []*PolicyRule `json:"Inbound,omitempty" name:"Inbound"`
+
+	// Outbound rule
+	Outbound []*PolicyRule `json:"Outbound,omitempty" name:"Outbound"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group name
+	SecurityGroupName *string `json:"SecurityGroupName,omitempty" name:"SecurityGroupName"`
+
+	// Security group remarks
+	SecurityGroupDescription *string `json:"SecurityGroupDescription,omitempty" name:"SecurityGroupDescription"`
 }
 
 type ServerlessDBAccount struct {

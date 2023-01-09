@@ -740,6 +740,105 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateInstancePostRequestParams struct {
+	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance bandwidth
+	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
+
+	// VPC ID. If this parameter is left empty, the classic network will be used by default.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID, which is required for a VPC but not for the classic network.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The maximum retention period for instance logs in minutes. Default value: 1,440 minutes (1 day). Max value: 12960 minutes (90 days). This parameter is optional.
+	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitempty" name:"MsgRetentionTime"`
+
+	// AZ
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Cluster ID, which can be selected when you create an instance.
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type CreateInstancePostRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance bandwidth
+	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
+
+	// VPC ID. If this parameter is left empty, the classic network will be used by default.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID, which is required for a VPC but not for the classic network.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The maximum retention period for instance logs in minutes. Default value: 1,440 minutes (1 day). Max value: 12960 minutes (90 days). This parameter is optional.
+	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitempty" name:"MsgRetentionTime"`
+
+	// AZ
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Cluster ID, which can be selected when you create an instance.
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *CreateInstancePostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancePostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceName")
+	delete(f, "BandWidth")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "MsgRetentionTime")
+	delete(f, "ZoneId")
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancePostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateInstancePostResponseParams struct {
+	// Returned result
+	Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateInstancePostResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateInstancePostResponseParams `json:"Response"`
+}
+
+func (r *CreateInstancePostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInstancePostResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CreateInstancePreData struct {
 	// The value returned by `CreateInstancePre` is 0, which is fixed and cannot be used as the query condition of `CheckTaskStatus`. It is only used to ensure the consistency with the backend data structure.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -3375,6 +3474,291 @@ type GroupResponse struct {
 	GroupList []*DescribeGroup `json:"GroupList,omitempty" name:"GroupList"`
 }
 
+// Predefined struct for user
+type InquireCkafkaPriceRequestParams struct {
+	// `standard`: Standard Edition; `profession`: Pro Edition
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the monthly subscription mode will be displayed by default.
+	InstanceChargeParam *InstanceChargeParam `json:"InstanceChargeParam,omitempty" name:"InstanceChargeParam"`
+
+	// The number of instances to be purchased or renewed. If this parameter is left empty, the default value is `1`.
+	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+
+	// Private network bandwidth in MB/sec, which is required when you purchase an instance.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Disk type and size, which is required when you purchase an instance.
+	InquiryDiskParam *InquiryDiskParam `json:"InquiryDiskParam,omitempty" name:"InquiryDiskParam"`
+
+	// Message retention period in hours, which is required when you purchase an instance.
+	MessageRetention *int64 `json:"MessageRetention,omitempty" name:"MessageRetention"`
+
+	// The number of instance topics to be purchased, which is required when you purchase an instance.
+	Topic *int64 `json:"Topic,omitempty" name:"Topic"`
+
+	// The number of instance partitions to be purchased, which is required when you purchase an instance.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// The region for instance purchase, which can be obtained via the `DescribeCkafkaZone` API.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// Operation type flag. `purchase`: Making new purchases; `renew`: Renewing an instance. The default value is `purchase` if this parameter is left empty.
+	CategoryAction *string `json:"CategoryAction,omitempty" name:"CategoryAction"`
+
+	// This field is not required.
+	BillType *string `json:"BillType,omitempty" name:"BillType"`
+
+	// Billing mode for public network bandwidth, which is required when you purchase public network bandwidth. Currently, public network bandwidth is only supported for Pro Edition.
+	PublicNetworkParam *InquiryPublicNetworkParam `json:"PublicNetworkParam,omitempty" name:"PublicNetworkParam"`
+
+	// ID of the instance to be renewed, which is required when you renew an instance.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type InquireCkafkaPriceRequest struct {
+	*tchttp.BaseRequest
+	
+	// `standard`: Standard Edition; `profession`: Pro Edition
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Billing mode for instance purchase/renewal. If this parameter is left empty when you purchase an instance, the fees for one month under the monthly subscription mode will be displayed by default.
+	InstanceChargeParam *InstanceChargeParam `json:"InstanceChargeParam,omitempty" name:"InstanceChargeParam"`
+
+	// The number of instances to be purchased or renewed. If this parameter is left empty, the default value is `1`.
+	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+
+	// Private network bandwidth in MB/sec, which is required when you purchase an instance.
+	Bandwidth *int64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Disk type and size, which is required when you purchase an instance.
+	InquiryDiskParam *InquiryDiskParam `json:"InquiryDiskParam,omitempty" name:"InquiryDiskParam"`
+
+	// Message retention period in hours, which is required when you purchase an instance.
+	MessageRetention *int64 `json:"MessageRetention,omitempty" name:"MessageRetention"`
+
+	// The number of instance topics to be purchased, which is required when you purchase an instance.
+	Topic *int64 `json:"Topic,omitempty" name:"Topic"`
+
+	// The number of instance partitions to be purchased, which is required when you purchase an instance.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// The region for instance purchase, which can be obtained via the `DescribeCkafkaZone` API.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// Operation type flag. `purchase`: Making new purchases; `renew`: Renewing an instance. The default value is `purchase` if this parameter is left empty.
+	CategoryAction *string `json:"CategoryAction,omitempty" name:"CategoryAction"`
+
+	// This field is not required.
+	BillType *string `json:"BillType,omitempty" name:"BillType"`
+
+	// Billing mode for public network bandwidth, which is required when you purchase public network bandwidth. Currently, public network bandwidth is only supported for Pro Edition.
+	PublicNetworkParam *InquiryPublicNetworkParam `json:"PublicNetworkParam,omitempty" name:"PublicNetworkParam"`
+
+	// ID of the instance to be renewed, which is required when you renew an instance.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *InquireCkafkaPriceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquireCkafkaPriceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceType")
+	delete(f, "InstanceChargeParam")
+	delete(f, "InstanceNum")
+	delete(f, "Bandwidth")
+	delete(f, "InquiryDiskParam")
+	delete(f, "MessageRetention")
+	delete(f, "Topic")
+	delete(f, "Partition")
+	delete(f, "ZoneIds")
+	delete(f, "CategoryAction")
+	delete(f, "BillType")
+	delete(f, "PublicNetworkParam")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquireCkafkaPriceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquireCkafkaPriceResp struct {
+	// Instance price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstancePrice *InquiryPrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
+
+	// Public network bandwidth price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PublicNetworkBandwidthPrice *InquiryPrice `json:"PublicNetworkBandwidthPrice,omitempty" name:"PublicNetworkBandwidthPrice"`
+}
+
+// Predefined struct for user
+type InquireCkafkaPriceResponseParams struct {
+	// Output parameters
+	Result *InquireCkafkaPriceResp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type InquireCkafkaPriceResponse struct {
+	*tchttp.BaseResponse
+	Response *InquireCkafkaPriceResponseParams `json:"Response"`
+}
+
+func (r *InquireCkafkaPriceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquireCkafkaPriceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InquiryBasePrice struct {
+	// Original unit price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Discounted unit price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Original price in total
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discounted price in total
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Discount (%)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+
+	// Number of purchased items
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Currency for payment
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Dedicated disk response parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Validity period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Unit of the validity period (`m`: Month; `h`: Hour)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Purchase quantity
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *int64 `json:"Value,omitempty" name:"Value"`
+}
+
+type InquiryDetailPrice struct {
+	// Price of additional private network bandwidth
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BandwidthPrice *InquiryBasePrice `json:"BandwidthPrice,omitempty" name:"BandwidthPrice"`
+
+	// Disk price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskPrice *InquiryBasePrice `json:"DiskPrice,omitempty" name:"DiskPrice"`
+
+	// Price of additional partitions
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PartitionPrice *InquiryBasePrice `json:"PartitionPrice,omitempty" name:"PartitionPrice"`
+
+	// Price of additional topics
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicPrice *InquiryBasePrice `json:"TopicPrice,omitempty" name:"TopicPrice"`
+
+	// Instance package price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceTypePrice *InquiryBasePrice `json:"InstanceTypePrice,omitempty" name:"InstanceTypePrice"`
+}
+
+type InquiryDiskParam struct {
+	// Disk type. Valid values: `SSD` (SSD), `CLOUD_SSD` (SSD cloud disk), `CLOUD_PREMIUM` (Premium cloud disk), `CLOUD_BASIC` (Cloud disk).
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Size of the purchased disk in GB
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+}
+
+type InquiryPrice struct {
+	// Original unit price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Discounted unit price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Original price in total
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discounted price in total
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Discount (%)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+
+	// Number of purchased items
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// Currency for payment
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Dedicated disk response parameter
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Validity period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// Unit of the validity period (`m`: Month; `h`: Hour)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// Purchase quantity
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *int64 `json:"Value,omitempty" name:"Value"`
+
+	// Prices of different purchased items
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DetailPrices *InquiryDetailPrice `json:"DetailPrices,omitempty" name:"DetailPrices"`
+}
+
+type InquiryPublicNetworkParam struct {
+	// Public network bandwidth billing mode (`BANDWIDTH_PREPAID`: Monthly subscription; `BANDWIDTH_POSTPAID_BY_HOUR`: Bill-by-hour)
+	PublicNetworkChargeType *string `json:"PublicNetworkChargeType,omitempty" name:"PublicNetworkChargeType"`
+
+	// Public network bandwidth in MB
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitempty" name:"PublicNetworkMonthly"`
+}
+
 type Instance struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3510,6 +3894,14 @@ type InstanceAttributesResponse struct {
 	// Dynamic disk expansion policy.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	DynamicDiskConfig *DynamicDiskConfig `json:"DynamicDiskConfig,omitempty" name:"DynamicDiskConfig"`
+}
+
+type InstanceChargeParam struct {
+	// Instance billing mode (`PREPAID`: Monthly subscription; `POSTPAID_BY_HOUR`: Pay-as-you-go)
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Validity period, which is only required for the monthly subscription billing mode
+	InstanceChargePeriod *int64 `json:"InstanceChargePeriod,omitempty" name:"InstanceChargePeriod"`
 }
 
 type InstanceConfigDO struct {

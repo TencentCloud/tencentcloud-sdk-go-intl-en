@@ -29,12 +29,6 @@ const (
 	// The certificate does not exist.
 	FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 
-	// Failed to create the logset: The logset name already exists.
-	FAILEDOPERATION_CREATECLSLOGSETFAILED = "FailedOperation.CreateClsLogSetFailed"
-
-	// Failed to create the log topic: The topic/task name already exists.
-	FAILEDOPERATION_CREATECLSLOGTOPICTASKFAILED = "FailedOperation.CreateClsLogTopicTaskFailed"
-
 	// The site status is invalid.
 	FAILEDOPERATION_INVALIDZONESTATUS = "FailedOperation.InvalidZoneStatus"
 
@@ -128,6 +122,9 @@ const (
 	// Invalid operation: Invalid parameter.
 	INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 
+	// 
+	INVALIDPARAMETER_ERRINVALIDACTIONPARAMBADVALUETYPE = "InvalidParameter.ErrInvalidActionParamBadValueType"
+
 	// Invalid parameter: Duplicate parameter names.
 	INVALIDPARAMETER_ERRINVALIDACTIONPARAMDUPLICATENAME = "InvalidParameter.ErrInvalidActionParamDuplicateName"
 
@@ -142,6 +139,9 @@ const (
 
 	// Invalid condition: The match type is not supported by this parameter.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONNAMETARGETNOTSUPPORTNAME = "InvalidParameter.ErrInvalidConditionNameTargetNotSupportName"
+
+	// 
+	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADREGULAR = "InvalidParameter.ErrInvalidConditionValueBadRegular"
 
 	// Invalid condition: The parameter value is invalid.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
@@ -184,6 +184,9 @@ const (
 
 	// Invalid node cache.
 	INVALIDPARAMETER_INVALIDCACHEONLYONSWITCH = "InvalidParameter.InvalidCacheOnlyOnSwitch"
+
+	// 
+	INVALIDPARAMETER_INVALIDCACHETIME = "InvalidParameter.InvalidCacheTime"
 
 	// Incorrect certificate information.
 	INVALIDPARAMETER_INVALIDCERTINFO = "InvalidParameter.InvalidCertInfo"
@@ -389,9 +392,6 @@ const (
 	// The resource is unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
-	// No domain names available.
-	RESOURCEUNAVAILABLE_AVAILABLEDOMAINNOTFOUND = "ResourceUnavailable.AvailableDomainNotFound"
-
 	// The certificate does not exist or is not authorized.
 	RESOURCEUNAVAILABLE_CERTNOTFOUND = "ResourceUnavailable.CertNotFound"
 
@@ -418,9 +418,6 @@ const (
 
 	// An unknown error occurred in the backend server.
 	UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
-
-	// Unknown parameter error.
-	UNKNOWNPARAMETER = "UnknownParameter"
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
