@@ -1565,6 +1565,60 @@ func (c *Client) UpdateEmailIdentityWithContext(ctx context.Context, request *Up
     return
 }
 
+func NewUpdateEmailSmtpPassWordRequest() (request *UpdateEmailSmtpPassWordRequest) {
+    request = &UpdateEmailSmtpPassWordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ses", APIVersion, "UpdateEmailSmtpPassWord")
+    
+    
+    return
+}
+
+func NewUpdateEmailSmtpPassWordResponse() (response *UpdateEmailSmtpPassWordResponse) {
+    response = &UpdateEmailSmtpPassWordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateEmailSmtpPassWord
+// This API is used to set the SMTP password. Initially, no SMTP password is set for your email address, so emails cannot be sent over SMTP. To send emails over SMTP, you must set the SMTP password. The set password can be changed subsequently.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDSMTPPASSWORD = "InvalidParameterValue.InvalidSmtpPassWord"
+//  INVALIDPARAMETERVALUE_NOSUCHSENDER = "InvalidParameterValue.NoSuchSender"
+//  OPERATIONDENIED_REPEATPASSWORD = "OperationDenied.RepeatPassWord"
+func (c *Client) UpdateEmailSmtpPassWord(request *UpdateEmailSmtpPassWordRequest) (response *UpdateEmailSmtpPassWordResponse, err error) {
+    return c.UpdateEmailSmtpPassWordWithContext(context.Background(), request)
+}
+
+// UpdateEmailSmtpPassWord
+// This API is used to set the SMTP password. Initially, no SMTP password is set for your email address, so emails cannot be sent over SMTP. To send emails over SMTP, you must set the SMTP password. The set password can be changed subsequently.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_INVALIDSMTPPASSWORD = "InvalidParameterValue.InvalidSmtpPassWord"
+//  INVALIDPARAMETERVALUE_NOSUCHSENDER = "InvalidParameterValue.NoSuchSender"
+//  OPERATIONDENIED_REPEATPASSWORD = "OperationDenied.RepeatPassWord"
+func (c *Client) UpdateEmailSmtpPassWordWithContext(ctx context.Context, request *UpdateEmailSmtpPassWordRequest) (response *UpdateEmailSmtpPassWordResponse, err error) {
+    if request == nil {
+        request = NewUpdateEmailSmtpPassWordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateEmailSmtpPassWord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateEmailSmtpPassWordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateEmailTemplateRequest() (request *UpdateEmailTemplateRequest) {
     request = &UpdateEmailTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
