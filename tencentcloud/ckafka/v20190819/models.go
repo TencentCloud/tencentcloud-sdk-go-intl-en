@@ -4203,7 +4203,7 @@ type ModifyInstanceAttributesRequestParams struct {
 	// Modification of the rebalancing time after upgrade
 	RebalanceTime *int64 `json:"RebalanceTime,omitempty" name:"RebalanceTime"`
 
-	// Timestamp
+	// Public network bandwidth
 	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
 
 	// Dynamic disk expansion policy configuration.
@@ -4234,7 +4234,7 @@ type ModifyInstanceAttributesRequest struct {
 	// Modification of the rebalancing time after upgrade
 	RebalanceTime *int64 `json:"RebalanceTime,omitempty" name:"RebalanceTime"`
 
-	// Timestamp
+	// Public network bandwidth
 	PublicNetwork *int64 `json:"PublicNetwork,omitempty" name:"PublicNetwork"`
 
 	// Dynamic disk expansion policy configuration.

@@ -449,7 +449,6 @@ type CreateClusterRequestParams struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// The instance billing mode. Valid values:
-	// <li>`PREPAID`: The prepaid mode, namely monthly subscription.</li>
 	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
@@ -532,7 +531,6 @@ type CreateClusterRequest struct {
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// The instance billing mode. Valid values:
-	// <li>`PREPAID`: The prepaid mode, namely monthly subscription.</li>
 	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 
@@ -1846,6 +1844,32 @@ type EmrListInstance struct {
 	// Whether it is a manually deployed cluster
 	// Note: This field may return null, indicating that no valid value can be obtained. 
 	IsHandsCluster *bool `json:"IsHandsCluster,omitempty" name:"IsHandsCluster"`
+
+	// Client component information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutSideSoftInfo []*SoftDependInfo `json:"OutSideSoftInfo,omitempty" name:"OutSideSoftInfo"`
+}
+
+type EmrPrice struct {
+	// The published price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// The discounted price.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiscountCost *string `json:"DiscountCost,omitempty" name:"DiscountCost"`
+
+	// The unit of the billable item.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// The queried spec.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PriceSpec *PriceResource `json:"PriceSpec,omitempty" name:"PriceSpec"`
+
+	// Whether spot instances are supported.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SupportSpotPaid *bool `json:"SupportSpotPaid,omitempty" name:"SupportSpotPaid"`
 }
 
 type EmrProductConfigOutter struct {
@@ -2158,6 +2182,10 @@ type InquiryPriceCreateInstanceResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
+	// The price list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PriceList []*ZoneDetailPriceResult `json:"PriceList,omitempty" name:"PriceList"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2409,6 +2437,10 @@ type InquiryPriceScaleOutInstanceResponseParams struct {
 	// Node spec queried for price.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PriceSpec *PriceResource `json:"PriceSpec,omitempty" name:"PriceSpec"`
+
+	// The inquiry results corresponding to the specs specified by the input parameter `MultipleResources`, with the result of the first spec returned by other output parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MultipleEmrPrice []*EmrPrice `json:"MultipleEmrPrice,omitempty" name:"MultipleEmrPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2788,6 +2820,15 @@ type NewResourceSpec struct {
 	CommonCount *int64 `json:"CommonCount,omitempty" name:"CommonCount"`
 }
 
+type NodeDetailPriceResult struct {
+	// The node type. Valid values: `master`, `core`, `task`, `common`, `router`, `mysql`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodeType *string `json:"NodeType,omitempty" name:"NodeType"`
+
+	// Price details by node part
+	PartDetailPrice []*PartDetailPriceItem `json:"PartDetailPrice,omitempty" name:"PartDetailPrice"`
+}
+
 type NodeHardwareInfo struct {
 	// User `APPID`
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -3050,6 +3091,32 @@ type OutterResource struct {
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
+type PartDetailPriceItem struct {
+	// The type. Valid values: `node` (node); `rootDisk` (system disk); `dataDisk` and `metaDB` (cloud data disk)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Rate (original)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Price *float64 `json:"Price,omitempty" name:"Price"`
+
+	// Rate (discounted)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RealCost *float64 `json:"RealCost,omitempty" name:"RealCost"`
+
+	// Total price (discounted)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RealTotalCost *float64 `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Discount
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Policy *float64 `json:"Policy,omitempty" name:"Policy"`
+
+	// Quantity
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+}
+
 type PersistentVolumeContext struct {
 	// Disk size in GB.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -3068,7 +3135,7 @@ type Placement struct {
 	// The ID of the availability zone where the instance resides, such as `ap-guangzhou-1`. You can call the [DescribeZones](https://intl.cloud.tencent.com/document/product/213/15707?from_cn_redirect=1) API and obtain this ID from the `Zone` field in the response.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// The ID of the project to which the instance belongs. You can call the [DescribeProject](https://intl.cloud.tencent.com/document/api/651/78725?from_cn_redirect=1) and obtain this ID from the `projectId` field in the response. If this is left empty, the ID of the default project is used.
+	// Project ID of the instance. If no ID is passed in, the default project ID is used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 }
 
@@ -3590,7 +3657,6 @@ type Resource struct {
 // Predefined struct for user
 type ScaleOutClusterRequestParams struct {
 	// The node billing mode. Valid values:
-	// <li>`PREPAID`：The prepaid mode, namely monthly subscription.</li>
 	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
 	// <li>`SPOTPAID`: The spot instance mode (for task nodes only).</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
@@ -3657,7 +3723,6 @@ type ScaleOutClusterRequest struct {
 	*tchttp.BaseRequest
 	
 	// The node billing mode. Valid values:
-	// <li>`PREPAID`：The prepaid mode, namely monthly subscription.</li>
 	// <li>`POSTPAID_BY_HOUR`: The postpaid mode by hour.</li>
 	// <li>`SPOTPAID`: The spot instance mode (for task nodes only).</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
@@ -4115,6 +4180,14 @@ type ShortNodeInfo struct {
 	NodeSize *uint64 `json:"NodeSize,omitempty" name:"NodeSize"`
 }
 
+type SoftDependInfo struct {
+	// The component name.
+	SoftName *string `json:"SoftName,omitempty" name:"SoftName"`
+
+	// Whether the component is required.
+	Required *bool `json:"Required,omitempty" name:"Required"`
+}
+
 type SubnetInfo struct {
 	// Subnet information (name)
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
@@ -4343,6 +4416,15 @@ type VirtualPrivateCloud struct {
 
 	// The subnet ID.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+}
+
+type ZoneDetailPriceResult struct {
+	// AZ ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Price details by node
+	NodeDetailPrice []*NodeDetailPriceResult `json:"NodeDetailPrice,omitempty" name:"NodeDetailPrice"`
 }
 
 type ZoneResourceConfiguration struct {

@@ -20,6 +20,22 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type Ability struct {
+	// Whether secondary AZ is supported
+	IsSupportSlaveZone *string `json:"IsSupportSlaveZone,omitempty" name:"IsSupportSlaveZone"`
+
+	// The reason why secondary AZ is not supported
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NonsupportSlaveZoneReason *string `json:"NonsupportSlaveZoneReason,omitempty" name:"NonsupportSlaveZoneReason"`
+
+	// Whether read-only instance is supported
+	IsSupportRo *string `json:"IsSupportRo,omitempty" name:"IsSupportRo"`
+
+	// The reason why read-only instance is not supported
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NonsupportRoReason *string `json:"NonsupportRoReason,omitempty" name:"NonsupportRoReason"`
+}
+
 type Account struct {
 	// Database account name
 	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
@@ -209,6 +225,12 @@ type AddInstancesRequestParams struct {
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
 	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
+	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitempty" name:"InstanceParams"`
 }
 
 type AddInstancesRequest struct {
@@ -253,6 +275,12 @@ type AddInstancesRequest struct {
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
 	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
+	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitempty" name:"InstanceParams"`
 }
 
 func (r *AddInstancesRequest) ToJsonString() string {
@@ -280,6 +308,8 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DbType")
 	delete(f, "OrderSource")
 	delete(f, "DealMode")
+	delete(f, "ParamTemplateId")
+	delete(f, "InstanceParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddInstancesRequest has unknown keys!", "")
 	}
@@ -330,6 +360,29 @@ type Addr struct {
 
 	// Port
 	Port *int64 `json:"Port,omitempty" name:"Port"`
+}
+
+type AuditRuleFilters struct {
+	// Audit rule
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+}
+
+type AuditRuleTemplateInfo struct {
+	// Rule template ID
+	RuleTemplateId *string `json:"RuleTemplateId,omitempty" name:"RuleTemplateId"`
+
+	// Rule template name
+	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+
+	// Filter of the rule template
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+
+	// Description of a rule template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time of a rule template
+	CreateAt *string `json:"CreateAt,omitempty" name:"CreateAt"`
 }
 
 type BackupFileInfo struct {
@@ -400,6 +453,60 @@ type BinlogItem struct {
 	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
 }
 
+// Predefined struct for user
+type CloseAuditServiceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type CloseAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *CloseAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseAuditServiceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CloseAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *CloseAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ClusterInstanceDetail struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -424,6 +531,9 @@ type ClusterInstanceDetail struct {
 
 	// Disk
 	InstanceStorage *int64 `json:"InstanceStorage,omitempty" name:"InstanceStorage"`
+
+	// Instance role
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
 }
 
 // Predefined struct for user
@@ -484,6 +594,78 @@ func (r *CreateAccountsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAuditRuleTemplateRequestParams struct {
+	// Audit rule
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+
+	// Rule template name
+	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+
+	// Rule template description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type CreateAuditRuleTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Audit rule
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+
+	// Rule template name
+	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+
+	// Rule template description.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *CreateAuditRuleTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAuditRuleTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleFilters")
+	delete(f, "RuleTemplateName")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAuditRuleTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAuditRuleTemplateResponseParams struct {
+	// The generated rule template ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleTemplateId *string `json:"RuleTemplateId,omitempty" name:"RuleTemplateId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAuditRuleTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAuditRuleTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateAuditRuleTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAuditRuleTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1002,85 +1184,143 @@ type CynosdbCluster struct {
 	// Number of instances
 	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
 
-	// User `uin`
+	// User UIN
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Uin *string `json:"Uin,omitempty" name:"Uin"`
 
 	// Engine type
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DbType *string `json:"DbType,omitempty" name:"DbType"`
 
 	// User `appid`
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
 	// Cluster status description
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
 
 	// Cluster creation time
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Billing mode. 0: pay-as-you-go; 1: monthly subscription
+	// Billing mode. `0`: Pay-as-you-go; `1`: Monthly subscription.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
 
 	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
 
 	// Cluster read-write VIP
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
 	// Cluster read-write vport
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
 
 	// Project ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
 
 	// VPC ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Subnet ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// TDSQL-C kernel version
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
 
 	// Storage capacity
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
 
 	// Renewal flag
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
 
 	// Task in progress
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessingTask *string `json:"ProcessingTask,omitempty" name:"ProcessingTask"`
 
-	// Array of tasks in cluster
+	// Array of tasks in the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
 
-	// Array of tags bound to cluster
+	// Array of tags bound to the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
 
-	// Database type (`NORMAL` or `SERVERLESS`)
+	// Database type. Valid values: `NORMAL`, `SERVERLESS`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
 
 	// Serverless cluster status when the database type is `SERVERLESS`. Valid values:
-	// resume
-	// pause
+	// `resume`
+	// `pause`
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
 
-	// Prepaid cluster storage
+	// Prepaid cluster storage capacity
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
 
 	// Cluster storage ID used in prepaid storage modification
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
 
-	// Billing mode of cluster storage. Valid values: `0` (postpaid), `1` (prepaid)
+	// Billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
 
-	// The minimum storage corresponding to the compute specifications of the cluster
+	// The minimum storage corresponding to the compute specification of the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MinStorageSize *int64 `json:"MinStorageSize,omitempty" name:"MinStorageSize"`
 
-	// The maximum storage corresponding to the compute specifications of the cluster
+	// The maximum storage corresponding to the compute specification of the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxStorageSize *int64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
 
 	// Network information of the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NetAddrs []*NetAddr `json:"NetAddrs,omitempty" name:"NetAddrs"`
+
+	// Physical AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+
+	// Primary AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// Whether there is a secondary AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasSlaveZone *string `json:"HasSlaveZone,omitempty" name:"HasSlaveZone"`
+
+	// Secondary AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+
+	// Business type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
+
+	// Whether to freeze
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsFreeze *string `json:"IsFreeze,omitempty" name:"IsFreeze"`
+
+	// Order source
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+
+	// Capability
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ability *Ability `json:"Ability,omitempty" name:"Ability"`
 }
 
 type CynosdbClusterDetail struct {
@@ -1159,6 +1399,94 @@ type CynosdbClusterDetail struct {
 	// pause
 	// pausing
 	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+
+	// Binlog switch. Valid values: `ON`, `OFF`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogBin *string `json:"LogBin,omitempty" name:"LogBin"`
+
+	// PITR type. Valid values: `normal`, `redo_pitr`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PitrType *string `json:"PitrType,omitempty" name:"PitrType"`
+
+	// Physical AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+
+	// Storage ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+
+	// Storage capacity in GB
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Maximum storage specification in GB
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxStorageSize *int64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
+
+	// Minimum storage specification in GB
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MinStorageSize *int64 `json:"MinStorageSize,omitempty" name:"MinStorageSize"`
+
+	// Storage billing mode. Valid values: `1` (monthly subscription), `0` (pay-as-you-go).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+
+	// Database type. Valid values: `normal`, `serverless`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+
+	// Maximum storage space
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+
+	// Features supported by the cluster
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ability *Ability `json:"Ability,omitempty" name:"Ability"`
+
+	// TDSQL-C version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+
+	// Business type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
+
+	// Whether there is a secondary AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasSlaveZone *string `json:"HasSlaveZone,omitempty" name:"HasSlaveZone"`
+
+	// Whether to freeze
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsFreeze *string `json:"IsFreeze,omitempty" name:"IsFreeze"`
+
+	// Task list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+
+	// Primary AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// Secondary AZ list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+
+	// Proxy status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProxyStatus *string `json:"ProxyStatus,omitempty" name:"ProxyStatus"`
+
+	// Whether to skip the transaction
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSkipTrade *string `json:"IsSkipTrade,omitempty" name:"IsSkipTrade"`
+
+	// Whether to enable password complexity
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsOpenPasswordComplexity *string `json:"IsOpenPasswordComplexity,omitempty" name:"IsOpenPasswordComplexity"`
+
+	// Network type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkStatus *string `json:"NetworkStatus,omitempty" name:"NetworkStatus"`
 }
 
 type CynosdbInstance struct {
@@ -1418,7 +1746,7 @@ type CynosdbInstanceDetail struct {
 }
 
 type CynosdbInstanceGrp struct {
-	// appId
+	// User `appId`
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
 	// Cluster ID
@@ -1462,6 +1790,27 @@ type CynosdbInstanceGrp struct {
 
 	// Information of instances contained in instance group
 	InstanceSet []*CynosdbInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
+
+	// VPC ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Subnet ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Information of the old IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OldAddrInfo *OldAddrInfo `json:"OldAddrInfo,omitempty" name:"OldAddrInfo"`
+
+	// Task in progress
+	ProcessingTasks []*string `json:"ProcessingTasks,omitempty" name:"ProcessingTasks"`
+
+	// Task list
+	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+
+	// biz_net_service table ID
+	NetServiceId *int64 `json:"NetServiceId,omitempty" name:"NetServiceId"`
 }
 
 type DatabaseTables struct {
@@ -1475,12 +1824,69 @@ type DatabaseTables struct {
 }
 
 // Predefined struct for user
+type DeleteAuditRuleTemplatesRequestParams struct {
+	// Audit rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+}
+
+type DeleteAuditRuleTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Audit rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+}
+
+func (r *DeleteAuditRuleTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAuditRuleTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleTemplateIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAuditRuleTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAuditRuleTemplatesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAuditRuleTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAuditRuleTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DeleteAuditRuleTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAuditRuleTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteBackupRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Backup file ID
+	// Backup file ID. This field is used by legacy versions and thus not recommended.
 	SnapshotIdList []*int64 `json:"SnapshotIdList,omitempty" name:"SnapshotIdList"`
+
+	// Backup file ID. This field is recommended.
+	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
 }
 
 type DeleteBackupRequest struct {
@@ -1489,8 +1895,11 @@ type DeleteBackupRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 
-	// Backup file ID
+	// Backup file ID. This field is used by legacy versions and thus not recommended.
 	SnapshotIdList []*int64 `json:"SnapshotIdList,omitempty" name:"SnapshotIdList"`
+
+	// Backup file ID. This field is recommended.
+	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
 }
 
 func (r *DeleteBackupRequest) ToJsonString() string {
@@ -1507,6 +1916,7 @@ func (r *DeleteBackupRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	delete(f, "SnapshotIdList")
+	delete(f, "BackupIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBackupRequest has unknown keys!", "")
 	}
@@ -1632,6 +2042,149 @@ func (r *DescribeAccountsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccountsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditRuleTemplatesRequestParams struct {
+	// Rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+
+	// Rule template name
+	RuleTemplateNames []*string `json:"RuleTemplateNames,omitempty" name:"RuleTemplateNames"`
+
+	// Number of results returned per request. Default value: `20`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribeAuditRuleTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+
+	// Rule template name
+	RuleTemplateNames []*string `json:"RuleTemplateNames,omitempty" name:"RuleTemplateNames"`
+
+	// Number of results returned per request. Default value: `20`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset. Default value: `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeAuditRuleTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditRuleTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleTemplateIds")
+	delete(f, "RuleTemplateNames")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditRuleTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditRuleTemplatesResponseParams struct {
+	// Number of eligible instances
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of rule template details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*AuditRuleTemplateInfo `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditRuleTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditRuleTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditRuleTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditRuleTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditRuleWithInstanceIdsRequestParams struct {
+	// Instance ID. Currently, only one single instance can be queried.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+type DescribeAuditRuleWithInstanceIdsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. Currently, only one single instance can be queried.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *DescribeAuditRuleWithInstanceIdsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditRuleWithInstanceIdsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditRuleWithInstanceIdsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditRuleWithInstanceIdsResponseParams struct {
+	// None
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Audit rule information of the instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*InstanceAuditRule `json:"Items,omitempty" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditRuleWithInstanceIdsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditRuleWithInstanceIdsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditRuleWithInstanceIdsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditRuleWithInstanceIdsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3648,6 +4201,19 @@ func (r *InquirePriceRenewResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InstanceAuditRule struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether the audit is rule audit. Valid values: `true` (rule audit), `false` (full audit).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuditRule *bool `json:"AuditRule,omitempty" name:"AuditRule"`
+
+	// Audit rule details, which is valid only when `AuditRule` is `true`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+}
+
 type InstanceInitInfo struct {
 	// Instance CPU
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
@@ -3690,6 +4256,10 @@ type InstanceSpec struct {
 	// Inventory information in a region
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ZoneStockInfos []*ZoneStockInfo `json:"ZoneStockInfos,omitempty" name:"ZoneStockInfos"`
+
+	// Quantity in stock
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StockCount *int64 `json:"StockCount,omitempty" name:"StockCount"`
 }
 
 // Predefined struct for user
@@ -3838,6 +4408,170 @@ func (r *IsolateInstanceResponse) FromJsonString(s string) error {
 
 type ModifiableInfo struct {
 
+}
+
+// Predefined struct for user
+type ModifyAuditRuleTemplatesRequestParams struct {
+	// Audit rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+
+	// Audit rule after modification
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+
+	// New name of the rule template
+	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+
+	// New description of the rule template
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type ModifyAuditRuleTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Audit rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+
+	// Audit rule after modification
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+
+	// New name of the rule template
+	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+
+	// New description of the rule template
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *ModifyAuditRuleTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAuditRuleTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleTemplateIds")
+	delete(f, "RuleFilters")
+	delete(f, "RuleTemplateName")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAuditRuleTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAuditRuleTemplatesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAuditRuleTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAuditRuleTemplatesResponseParams `json:"Response"`
+}
+
+func (r *ModifyAuditRuleTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAuditRuleTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAuditServiceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Log retention period
+	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+
+	// Frequent log retention period
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+
+	// The parameter used to change the audit rule of the instance to full audit
+	AuditAll *bool `json:"AuditAll,omitempty" name:"AuditAll"`
+
+	// Rule audit
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+
+	// Rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+}
+
+type ModifyAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Log retention period
+	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+
+	// Frequent log retention period
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+
+	// The parameter used to change the audit rule of the instance to full audit
+	AuditAll *bool `json:"AuditAll,omitempty" name:"AuditAll"`
+
+	// Rule audit
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+
+	// Rule template ID
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+}
+
+func (r *ModifyAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LogExpireDay")
+	delete(f, "HighLogExpireDay")
+	delete(f, "AuditAll")
+	delete(f, "AuditRuleFilters")
+	delete(f, "RuleTemplateIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAuditServiceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *ModifyAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -4404,6 +5138,18 @@ func (r *ModifyMaintainPeriodConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyParamItem struct {
+	// Parameter name
+	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+
+	// Current parameter value
+	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+
+	// Old parameter value, which is used only in output parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+}
+
 type NetAddr struct {
 	// Private network IP
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -4436,13 +5182,21 @@ type NetAddr struct {
 	// Description
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Public IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
+
+	// Public network status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
 }
 
 type NewAccount struct {
-	// Account name
+	// Account name, which can contain 1-16 letters, digits, and underscores. It must begin with a letter and end with a letter or digit.
 	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
 
-	// Password
+	// Password, which can contain 8-64 characters.
 	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
 
 	// Host
@@ -4450,6 +5204,9 @@ type NewAccount struct {
 
 	// Description
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Maximum number of user connections, which cannot be above 10,240.
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 type ObjectTask struct {
@@ -4592,6 +5349,102 @@ func (r *OfflineInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *OfflineInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type OldAddrInfo struct {
+	// IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Port
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Expected valid hours of old IPs
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReturnTime *string `json:"ReturnTime,omitempty" name:"ReturnTime"`
+}
+
+// Predefined struct for user
+type OpenAuditServiceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Log retention period
+	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+
+	// Frequent log retention period
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+
+	// Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+
+	// Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+}
+
+type OpenAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Log retention period
+	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+
+	// Frequent log retention period
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+
+	// Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+
+	// Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+}
+
+func (r *OpenAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LogExpireDay")
+	delete(f, "HighLogExpireDay")
+	delete(f, "AuditRuleFilters")
+	delete(f, "RuleTemplateIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenAuditServiceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type OpenAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *OpenAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenAuditServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4988,6 +5841,17 @@ type RollbackTimeRange struct {
 
 	// End time
 	TimeRangeEnd *string `json:"TimeRangeEnd,omitempty" name:"TimeRangeEnd"`
+}
+
+type RuleFilters struct {
+	// Filter parameter name of the audit rule. Valid values: `host` (client IP), `user` (database account), `dbName` (database name), `sqlType` (SQL type), `sql` (SQL statement).
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Filter match type of the audit rule. Valid values: `INC` (including), `EXC` (excluding), `EQS` (equal to), `NEQ` (not equal to).
+	Compare *string `json:"Compare,omitempty" name:"Compare"`
+
+	// Filter match value of the audit rule
+	Value []*string `json:"Value,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
@@ -5627,4 +6491,7 @@ type ZoneStockInfo struct {
 
 	// Whether there is an inventory.
 	HasStock *bool `json:"HasStock,omitempty" name:"HasStock"`
+
+	// Quantity in stock
+	StockCount *int64 `json:"StockCount,omitempty" name:"StockCount"`
 }
