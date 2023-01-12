@@ -20,6 +20,64 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type Autoscaler struct {
+	// Minimum number of instances in a scaling group
+	MinReplicas *int64 `json:"MinReplicas,omitempty" name:"MinReplicas"`
+
+	// Maximum number of instances in a scaling group
+	MaxReplicas *int64 `json:"MaxReplicas,omitempty" name:"MaxReplicas"`
+
+	// Policy of the scaling rule
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	HorizontalAutoscaler []*HorizontalAutoscaler `json:"HorizontalAutoscaler,omitempty" name:"HorizontalAutoscaler"`
+
+	// Scheduled auto-scaler policy
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CronHorizontalAutoscaler []*CronHorizontalAutoscaler `json:"CronHorizontalAutoscaler,omitempty" name:"CronHorizontalAutoscaler"`
+
+	// Scaling rule ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+
+	// Scaling rule name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AutoscalerName *string `json:"AutoscalerName,omitempty" name:"AutoscalerName"`
+
+	// Description of the scaling rule
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Modification time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ModifyDate *string `json:"ModifyDate,omitempty" name:"ModifyDate"`
+
+	// Start Time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnableDate *string `json:"EnableDate,omitempty" name:"EnableDate"`
+
+	// Whether it is enabled
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+}
+
+type ConfigData struct {
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// List of associated applications
+	RelatedApplications []*TemService `json:"RelatedApplications,omitempty" name:"RelatedApplications"`
+
+	// Configuration item
+	Data []*Pair `json:"Data,omitempty" name:"Data"`
+}
+
 type CosToken struct {
 	// Unique request ID
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -47,6 +105,85 @@ type CosToken struct {
 
 	// Full package path
 	FullPath *string `json:"FullPath,omitempty" name:"FullPath"`
+}
+
+// Predefined struct for user
+type CreateApplicationAutoscalerRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Auto scaling rule
+	Autoscaler *Autoscaler `json:"Autoscaler,omitempty" name:"Autoscaler"`
+}
+
+type CreateApplicationAutoscalerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Auto scaling rule
+	Autoscaler *Autoscaler `json:"Autoscaler,omitempty" name:"Autoscaler"`
+}
+
+func (r *CreateApplicationAutoscalerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationAutoscalerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "Autoscaler")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationAutoscalerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateApplicationAutoscalerResponseParams struct {
+	// Scaling rule ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateApplicationAutoscalerResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateApplicationAutoscalerResponseParams `json:"Response"`
+}
+
+func (r *CreateApplicationAutoscalerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationAutoscalerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -94,6 +231,9 @@ type CreateApplicationRequestParams struct {
 
 	// Parameters of the default image service
 	UseDefaultImageServiceParameters *UseDefaultRepoParameters `json:"UseDefaultImageServiceParameters,omitempty" name:"UseDefaultImageServiceParameters"`
+
+	// Tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type CreateApplicationRequest struct {
@@ -142,6 +282,9 @@ type CreateApplicationRequest struct {
 
 	// Parameters of the default image service
 	UseDefaultImageServiceParameters *UseDefaultRepoParameters `json:"UseDefaultImageServiceParameters,omitempty" name:"UseDefaultImageServiceParameters"`
+
+	// Tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 func (r *CreateApplicationRequest) ToJsonString() string {
@@ -169,6 +312,7 @@ func (r *CreateApplicationRequest) FromJsonString(s string) error {
 	delete(f, "DeployMode")
 	delete(f, "EnableTracing")
 	delete(f, "UseDefaultImageServiceParameters")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationRequest has unknown keys!", "")
 	}
@@ -197,6 +341,163 @@ func (r *CreateApplicationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateApplicationServiceRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Details of the access policy
+	Service *ServicePortMapping `json:"Service,omitempty" name:"Service"`
+}
+
+type CreateApplicationServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Details of the access policy
+	Service *ServicePortMapping `json:"Service,omitempty" name:"Service"`
+}
+
+func (r *CreateApplicationServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "Service")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateApplicationServiceResponseParams struct {
+	// Whether the action succeeded 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateApplicationServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateApplicationServiceResponseParams `json:"Response"`
+}
+
+func (r *CreateApplicationServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConfigDataRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Configuration information
+	Data []*Pair `json:"Data,omitempty" name:"Data"`
+}
+
+type CreateConfigDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Configuration information
+	Data []*Pair `json:"Data,omitempty" name:"Data"`
+}
+
+func (r *CreateConfigDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConfigDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "SourceChannel")
+	delete(f, "Data")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConfigDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConfigDataResponseParams struct {
+	// Whether the creation is successful
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateConfigDataResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateConfigDataResponseParams `json:"Response"`
+}
+
+func (r *CreateConfigDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConfigDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -308,6 +609,15 @@ type CreateEnvironmentRequestParams struct {
 
 	// Whether to enable the TSW service
 	EnableTswTraceService *bool `json:"EnableTswTraceService,omitempty" name:"EnableTswTraceService"`
+
+	// Tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Environment type. Values: `test`, `pre`, `prod`
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// The region to create the environment
+	CreateRegion *string `json:"CreateRegion,omitempty" name:"CreateRegion"`
 }
 
 type CreateEnvironmentRequest struct {
@@ -333,6 +643,15 @@ type CreateEnvironmentRequest struct {
 
 	// Whether to enable the TSW service
 	EnableTswTraceService *bool `json:"EnableTswTraceService,omitempty" name:"EnableTswTraceService"`
+
+	// Tag
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Environment type. Values: `test`, `pre`, `prod`
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// The region to create the environment
+	CreateRegion *string `json:"CreateRegion,omitempty" name:"CreateRegion"`
 }
 
 func (r *CreateEnvironmentRequest) ToJsonString() string {
@@ -354,6 +673,9 @@ func (r *CreateEnvironmentRequest) FromJsonString(s string) error {
 	delete(f, "K8sVersion")
 	delete(f, "SourceChannel")
 	delete(f, "EnableTswTraceService")
+	delete(f, "Tags")
+	delete(f, "EnvType")
+	delete(f, "CreateRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEnvironmentRequest has unknown keys!", "")
 	}
@@ -383,6 +705,133 @@ func (r *CreateEnvironmentResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateEnvironmentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateLogConfigRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Collection type. Values: `container_stdout` (standard); `container_file` (file)
+	InputType *string `json:"InputType,omitempty" name:"InputType"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Log withdrawal mode. Values: `minimalist_log` (full text in a single line); `multiline_log` (full text in multiple lines); `json_log` (JSON); `fullregex_log` (regex in a single line); `multiline_fullregex_log` (regex in multiple lines)
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// The first line regex. It’s valid when `LogType` is `multiline_log`.
+	BeginningRegex *string `json:"BeginningRegex,omitempty" name:"BeginningRegex"`
+
+	// Directory of files to collect. It’s valid when `InputType` is `container_file`.
+	LogPath *string `json:"LogPath,omitempty" name:"LogPath"`
+
+	// Name pattern of files to collect. It’s valid when `InputType` is `container_file`.
+	FilePattern *string `json:"FilePattern,omitempty" name:"FilePattern"`
+
+	// Export
+	ExtractRule *LogConfigExtractRule `json:"ExtractRule,omitempty" name:"ExtractRule"`
+}
+
+type CreateLogConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Collection type. Values: `container_stdout` (standard); `container_file` (file)
+	InputType *string `json:"InputType,omitempty" name:"InputType"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Log withdrawal mode. Values: `minimalist_log` (full text in a single line); `multiline_log` (full text in multiple lines); `json_log` (JSON); `fullregex_log` (regex in a single line); `multiline_fullregex_log` (regex in multiple lines)
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// The first line regex. It’s valid when `LogType` is `multiline_log`.
+	BeginningRegex *string `json:"BeginningRegex,omitempty" name:"BeginningRegex"`
+
+	// Directory of files to collect. It’s valid when `InputType` is `container_file`.
+	LogPath *string `json:"LogPath,omitempty" name:"LogPath"`
+
+	// Name pattern of files to collect. It’s valid when `InputType` is `container_file`.
+	FilePattern *string `json:"FilePattern,omitempty" name:"FilePattern"`
+
+	// Export
+	ExtractRule *LogConfigExtractRule `json:"ExtractRule,omitempty" name:"ExtractRule"`
+}
+
+func (r *CreateLogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "InputType")
+	delete(f, "ApplicationId")
+	delete(f, "LogsetId")
+	delete(f, "TopicId")
+	delete(f, "LogType")
+	delete(f, "BeginningRegex")
+	delete(f, "LogPath")
+	delete(f, "FilePattern")
+	delete(f, "ExtractRule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateLogConfigResponseParams struct {
+	// Whether the creation is successful
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateLogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateLogConfigResponseParams `json:"Response"`
+}
+
+func (r *CreateLogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLogConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -513,6 +962,85 @@ type CronHorizontalAutoscalerSchedule struct {
 }
 
 // Predefined struct for user
+type DeleteApplicationAutoscalerRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+}
+
+type DeleteApplicationAutoscalerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+}
+
+func (r *DeleteApplicationAutoscalerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationAutoscalerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "AutoscalerId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteApplicationAutoscalerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteApplicationAutoscalerResponseParams struct {
+	// Whether the action is successful
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteApplicationAutoscalerResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteApplicationAutoscalerResponseParams `json:"Response"`
+}
+
+func (r *DeleteApplicationAutoscalerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationAutoscalerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteApplicationRequestParams struct {
 	// Application ID.
 	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
@@ -587,6 +1115,85 @@ func (r *DeleteApplicationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteApplicationServiceRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+}
+
+type DeleteApplicationServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Service name
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+}
+
+func (r *DeleteApplicationServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "SourceChannel")
+	delete(f, "EnvironmentId")
+	delete(f, "ServiceName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteApplicationServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteApplicationServiceResponseParams struct {
+	// Whether the action succeeded 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteApplicationServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteApplicationServiceResponseParams `json:"Response"`
+}
+
+func (r *DeleteApplicationServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationServiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -801,23 +1408,24 @@ type DeployApplicationRequestParams struct {
 	// - TENCENTOS
 	OsFlavour *string `json:"OsFlavour,omitempty" name:"OsFlavour"`
 
-	// Specifies whether to enable Prometheus metric
+	// Configuration of metrics of this application
 	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
 
-	// `1`: Enable APM tracing (Skywalking)
+	// `1`: Automatically enable APM tracing (Skywalking)
 	// `0`: Disable APM tracing
 	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
 
-
+	// `1`: Automatically enable metrics collection (open-telemetry)
+	// `0`: Disable metrics collection
 	EnableMetrics *int64 `json:"EnableMetrics,omitempty" name:"EnableMetrics"`
 
-
+	// ID of the TCR instance used for image deployment
 	TcrInstanceId *string `json:"TcrInstanceId,omitempty" name:"TcrInstanceId"`
 
-
+	// Image server address for image deployment
 	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
 
-
+	// Type of the repository. `0`: TCR Personal; `1`: TCR Enterprise; `2`: Public repository; `3`: TEM hosted repository; `4`: Demo repository
 	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
 }
 
@@ -955,19 +1563,24 @@ type DeployApplicationRequest struct {
 	// - TENCENTOS
 	OsFlavour *string `json:"OsFlavour,omitempty" name:"OsFlavour"`
 
-	// Specifies whether to enable Prometheus metric
+	// Configuration of metrics of this application
 	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
 
-	// `1`: Enable APM tracing (Skywalking)
+	// `1`: Automatically enable APM tracing (Skywalking)
 	// `0`: Disable APM tracing
 	EnableTracing *int64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
 
+	// `1`: Automatically enable metrics collection (open-telemetry)
+	// `0`: Disable metrics collection
 	EnableMetrics *int64 `json:"EnableMetrics,omitempty" name:"EnableMetrics"`
 
+	// ID of the TCR instance used for image deployment
 	TcrInstanceId *string `json:"TcrInstanceId,omitempty" name:"TcrInstanceId"`
 
+	// Image server address for image deployment
 	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
 
+	// Type of the repository. `0`: TCR Personal; `1`: TCR Enterprise; `2`: Public repository; `3`: TEM hosted repository; `4`: Demo repository
 	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
 }
 
@@ -1080,6 +1693,149 @@ type DeployStrategyConf struct {
 }
 
 // Predefined struct for user
+type DescribeApplicationAutoscalerListRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DescribeApplicationAutoscalerListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DescribeApplicationAutoscalerListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationAutoscalerListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationAutoscalerListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationAutoscalerListResponseParams struct {
+	// Scaling rule
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Result []*Autoscaler `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationAutoscalerListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationAutoscalerListResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationAutoscalerListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationAutoscalerListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationInfoRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+}
+
+type DescribeApplicationInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+}
+
+func (r *DescribeApplicationInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "SourceChannel")
+	delete(f, "EnvironmentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationInfoResponseParams struct {
+	// Returned result.
+	Result *TemServiceVersionInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeApplicationPodsRequestParams struct {
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
@@ -1185,6 +1941,183 @@ func (r *DescribeApplicationPodsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeApplicationServiceListRequestParams struct {
+	// ID of the environment
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// ID of the application
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// xx
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DescribeApplicationServiceListRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the environment
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// ID of the application
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// xx
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DescribeApplicationServiceListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationServiceListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "ApplicationId")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationServiceListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationServiceListResponseParams struct {
+	// Application EKS service list
+	Result *EksService `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationServiceListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationServiceListResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationServiceListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationServiceListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationsRequestParams struct {
+	// ID of the environment
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Keyword for searching.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// Filters for query 
+	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting field
+	SortInfo *SortType `json:"SortInfo,omitempty" name:"SortInfo"`
+}
+
+type DescribeApplicationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the environment
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Keyword for searching.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// Filters for query 
+	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting field
+	SortInfo *SortType `json:"SortInfo,omitempty" name:"SortInfo"`
+}
+
+func (r *DescribeApplicationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "SourceChannel")
+	delete(f, "ApplicationId")
+	delete(f, "Keyword")
+	delete(f, "Filters")
+	delete(f, "SortInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationsResponseParams struct {
+	// Returned result.
+	Result *ServicePage `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationsResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeApplicationsStatusRequestParams struct {
 	// Source channel. Please keep the default value.
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
@@ -1248,6 +2181,296 @@ func (r *DescribeApplicationsStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeConfigDataListPage struct {
+	// Record
+	Records []*ConfigData `json:"Records,omitempty" name:"Records"`
+
+	// Paging cursor
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ContinueToken *string `json:"ContinueToken,omitempty" name:"ContinueToken"`
+
+	// Remaining number
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RemainingCount *int64 `json:"RemainingCount,omitempty" name:"RemainingCount"`
+}
+
+// Predefined struct for user
+type DescribeConfigDataListRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Paging cursor
+	ContinueToken *string `json:"ContinueToken,omitempty" name:"ContinueToken"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeConfigDataListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Paging cursor
+	ContinueToken *string `json:"ContinueToken,omitempty" name:"ContinueToken"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeConfigDataListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigDataListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "ContinueToken")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConfigDataListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigDataListResponseParams struct {
+	// Configuration list.
+	Result *DescribeConfigDataListPage `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeConfigDataListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConfigDataListResponseParams `json:"Response"`
+}
+
+func (r *DescribeConfigDataListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigDataListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigDataRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DescribeConfigDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DescribeConfigDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConfigDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigDataResponseParams struct {
+	// Configuration
+	Result *ConfigData `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeConfigDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConfigDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeConfigDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEnvironmentRequestParams struct {
+	// Namespace ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DescribeEnvironmentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Namespace ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DescribeEnvironmentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnvironmentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnvironmentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEnvironmentResponseParams struct {
+	// Environment information
+	Result *NamespaceInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEnvironmentResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEnvironmentResponseParams `json:"Response"`
+}
+
+func (r *DescribeEnvironmentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnvironmentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEnvironmentStatusRequestParams struct {
+	// ID of the environment
+	EnvironmentIds []*string `json:"EnvironmentIds,omitempty" name:"EnvironmentIds"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DescribeEnvironmentStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the environment
+	EnvironmentIds []*string `json:"EnvironmentIds,omitempty" name:"EnvironmentIds"`
+
+	// Source channel
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DescribeEnvironmentStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnvironmentStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentIds")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnvironmentStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEnvironmentStatusResponseParams struct {
+	// List of environment status
+	Result []*NamespaceStatusInfo `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEnvironmentStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEnvironmentStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeEnvironmentStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnvironmentStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type DescribeEnvironmentsRequestParams struct {
 	// Pagination limit
@@ -1258,6 +2481,15 @@ type DescribeEnvironmentsRequestParams struct {
 
 	// Source
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Filters for query 
+	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting field
+	SortInfo *SortType `json:"SortInfo,omitempty" name:"SortInfo"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 }
 
 type DescribeEnvironmentsRequest struct {
@@ -1271,6 +2503,15 @@ type DescribeEnvironmentsRequest struct {
 
 	// Source
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Filters for query 
+	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting field
+	SortInfo *SortType `json:"SortInfo,omitempty" name:"SortInfo"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
 }
 
 func (r *DescribeEnvironmentsRequest) ToJsonString() string {
@@ -1288,6 +2529,9 @@ func (r *DescribeEnvironmentsRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "SourceChannel")
+	delete(f, "Filters")
+	delete(f, "SortInfo")
+	delete(f, "EnvironmentId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnvironmentsRequest has unknown keys!", "")
 	}
@@ -1477,6 +2721,169 @@ func (r *DescribeIngressesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeLogConfigRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
+type DescribeLogConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
+func (r *DescribeLogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "ApplicationId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogConfigResponseParams struct {
+	// Configuration
+	Result *LogConfig `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLogConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeLogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePagedLogConfigListRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Application name
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Name of the rule
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Number of entries per page. Default value: 20
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Paging cursor
+	ContinueToken *string `json:"ContinueToken,omitempty" name:"ContinueToken"`
+}
+
+type DescribePagedLogConfigListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Application name
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Name of the rule
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Number of entries per page. Default value: 20
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Paging cursor
+	ContinueToken *string `json:"ContinueToken,omitempty" name:"ContinueToken"`
+}
+
+func (r *DescribePagedLogConfigListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePagedLogConfigListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "ApplicationId")
+	delete(f, "ApplicationName")
+	delete(f, "Name")
+	delete(f, "Limit")
+	delete(f, "ContinueToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePagedLogConfigListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePagedLogConfigListResponseParams struct {
+	// List of log collecting configurations
+	Result *LogConfigListPage `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePagedLogConfigListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePagedLogConfigListResponseParams `json:"Response"`
+}
+
+func (r *DescribePagedLogConfigListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePagedLogConfigListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRelatedIngressesRequestParams struct {
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
@@ -1573,6 +2980,77 @@ type DescribeRunPodPage struct {
 }
 
 // Predefined struct for user
+type DestroyConfigDataRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+type DestroyConfigDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+}
+
+func (r *DestroyConfigDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyConfigDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "SourceChannel")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DestroyConfigDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DestroyConfigDataResponseParams struct {
+	// Returned result.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DestroyConfigDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DestroyConfigDataResponseParams `json:"Response"`
+}
+
+func (r *DestroyConfigDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyConfigDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DestroyEnvironmentRequestParams struct {
 	// Namespace ID.
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
@@ -1636,6 +3114,156 @@ func (r *DestroyEnvironmentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DestroyLogConfigRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
+type DestroyLogConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
+func (r *DestroyLogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyLogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "ApplicationId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DestroyLogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DestroyLogConfigResponseParams struct {
+	// Returned result.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DestroyLogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DestroyLogConfigResponseParams `json:"Response"`
+}
+
+func (r *DestroyLogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyLogConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableApplicationAutoscalerRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+}
+
+type DisableApplicationAutoscalerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+}
+
+func (r *DisableApplicationAutoscalerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableApplicationAutoscalerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "AutoscalerId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableApplicationAutoscalerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableApplicationAutoscalerResponseParams struct {
+	// Whether the action succeeded 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DisableApplicationAutoscalerResponse struct {
+	*tchttp.BaseResponse
+	Response *DisableApplicationAutoscalerResponseParams `json:"Response"`
+}
+
+func (r *DisableApplicationAutoscalerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableApplicationAutoscalerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EksService struct {
 	// Service name
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -1680,6 +3308,105 @@ type EksService struct {
 	// Port mapping
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	PortMappings []*PortMapping `json:"PortMappings,omitempty" name:"PortMappings"`
+
+	// Details of each type of access configuration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ServicePortMappingList []*ServicePortMapping `json:"ServicePortMappingList,omitempty" name:"ServicePortMappingList"`
+
+	// Flush all types
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FlushAll *bool `json:"FlushAll,omitempty" name:"FlushAll"`
+
+	// `0`: Do not inject. `1`: Inject registry information automatically for the next deployment
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnableRegistryNextDeploy *int64 `json:"EnableRegistryNextDeploy,omitempty" name:"EnableRegistryNextDeploy"`
+
+	// The application ID returned.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Whether all the application IPs are ready
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AllIpDone *bool `json:"AllIpDone,omitempty" name:"AllIpDone"`
+}
+
+// Predefined struct for user
+type EnableApplicationAutoscalerRequestParams struct {
+	// Service ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+}
+
+type EnableApplicationAutoscalerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+}
+
+func (r *EnableApplicationAutoscalerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableApplicationAutoscalerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "AutoscalerId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableApplicationAutoscalerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableApplicationAutoscalerResponseParams struct {
+	// Whether the action succeeded 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EnableApplicationAutoscalerResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableApplicationAutoscalerResponseParams `json:"Response"`
+}
+
+func (r *EnableApplicationAutoscalerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableApplicationAutoscalerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type EnablePrometheusConf struct {
@@ -1819,14 +3546,32 @@ type HorizontalAutoscaler struct {
 	// (Optional) Maximum number of instances
 	MaxReplicas *int64 `json:"MaxReplicas,omitempty" name:"MaxReplicas"`
 
-	// Metrics (CPU or memory)
+	// Metric measurement
+	// `CPU`: CPU utilization (%)
+	// `MEMORY`: Memory utilization (%)
+	// `CPU_CORE_USED`: CPU usage (core)
+	// `MEMORY_SIZE_USED`: Memory usage (MiB)
+	// `NETWORK_BANDWIDTH_RECEIVE`: Network bandwidth in (Mbps)
+	// `NETWORK_BANDWIDTH_TRANSMIT`: Network bandwidth out (Mbps)
+	// `NETWORK_TRAFFIC_RECEIVE`: Network traffic in (MiB/s)
+	// `NETWORK_TRAFFIC_TRANSMIT`: Network traffic  out (MiB/s)
+	// `NETWORK_PACKETS_RECEIVE`: Network packets in (packets/sec)
+	// `NETWORK_PACKETS_TRANSMIT`: Network packets out (packets/sec)
+	// `FS_IOPS_WRITE`: Disk writes (count/sec)
+	// `FS_IOPS_READ`: Disk reads (count/sec)
+	// `FS_SIZE_WRITE`: Disk write size (MiB/s)
+	// `FS_SIZE_READ`: Disk read size (MiB/s)
 	Metrics *string `json:"Metrics,omitempty" name:"Metrics"`
 
-	// Threshold (percentage)
+	// The value of threshold (integer)
 	Threshold *int64 `json:"Threshold,omitempty" name:"Threshold"`
 
 	// Whether it is enabled
 	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
+
+	// The value of threshold (demical)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DoubleThreshold *float64 `json:"DoubleThreshold,omitempty" name:"DoubleThreshold"`
 }
 
 type IngressInfo struct {
@@ -1920,6 +3665,105 @@ type IngressTls struct {
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
 }
 
+type LogConfig struct {
+	// Name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Collection type. Values: `container_stdout` (standard); `container_file` (file)
+	InputType *string `json:"InputType,omitempty" name:"InputType"`
+
+	// Logset ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Log withdrawal mode. Values: `minimalist_log` (full text in a single line); `multiline_log` (full text in multiple lines); `fullregex_log` (regex in a single line); `multiline_fullregex_log` (regex in multiple lines), `json_log` (JSON); 
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// First line regex. It’s valid when `LogType` is `multiline_log` or `multiline_fullregex_log`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	BeginningRegex *string `json:"BeginningRegex,omitempty" name:"BeginningRegex"`
+
+	// Directory of files to collect. It’s valid when `InputType` is `container_file`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LogPath *string `json:"LogPath,omitempty" name:"LogPath"`
+
+	// Name pattern of files to collect. It’s valid when `InputType` is `container_file`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FilePattern *string `json:"FilePattern,omitempty" name:"FilePattern"`
+
+	// Creation time.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Update time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ModifyDate *string `json:"ModifyDate,omitempty" name:"ModifyDate"`
+
+	// Application ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Application name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Export rules
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ExtractRule *LogConfigExtractRule `json:"ExtractRule,omitempty" name:"ExtractRule"`
+}
+
+type LogConfigExtractRule struct {
+	// First line regex
+	// Note: This field may return `null`, indicating that no valid value was found.
+	BeginningRegex *string `json:"BeginningRegex,omitempty" name:"BeginningRegex"`
+
+	// Withdrawl result
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Keys []*string `json:"Keys,omitempty" name:"Keys"`
+
+	// Filter keys
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FilterKeys []*string `json:"FilterKeys,omitempty" name:"FilterKeys"`
+
+	// Filter values
+	// Note: This field may return `null`, indicating that no valid value was found.
+	FilterRegex []*string `json:"FilterRegex,omitempty" name:"FilterRegex"`
+
+	// Log regex
+	// Note: This field may return `null`, indicating that no valid value was found.
+	LogRegex *string `json:"LogRegex,omitempty" name:"LogRegex"`
+
+	// Time field
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
+
+	// Time Format
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+	// - Enable the upload of the log that failed to parse
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UnMatchUpload *string `json:"UnMatchUpload,omitempty" name:"UnMatchUpload"`
+
+	// Key of log failed to be parsed
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UnMatchedKey *string `json:"UnMatchedKey,omitempty" name:"UnMatchedKey"`
+}
+
+type LogConfigListPage struct {
+	// Record
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Records []*LogConfig `json:"Records,omitempty" name:"Records"`
+
+	// Paging cursor
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ContinueToken *string `json:"ContinueToken,omitempty" name:"ContinueToken"`
+}
+
 type LogOutputConf struct {
 	// Log consumer type
 	OutputType *string `json:"OutputType,omitempty" name:"OutputType"`
@@ -1935,6 +3779,92 @@ type LogOutputConf struct {
 
 	// CLS log topic name
 	ClsLogTopicName *string `json:"ClsLogTopicName,omitempty" name:"ClsLogTopicName"`
+}
+
+// Predefined struct for user
+type ModifyApplicationAutoscalerRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+
+	// Auto scaling policy
+	Autoscaler *Autoscaler `json:"Autoscaler,omitempty" name:"Autoscaler"`
+}
+
+type ModifyApplicationAutoscalerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Scaling rule ID
+	AutoscalerId *string `json:"AutoscalerId,omitempty" name:"AutoscalerId"`
+
+	// Auto scaling policy
+	Autoscaler *Autoscaler `json:"Autoscaler,omitempty" name:"Autoscaler"`
+}
+
+func (r *ModifyApplicationAutoscalerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApplicationAutoscalerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "AutoscalerId")
+	delete(f, "Autoscaler")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationAutoscalerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyApplicationAutoscalerResponseParams struct {
+	// Whether the action is successful
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyApplicationAutoscalerResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyApplicationAutoscalerResponseParams `json:"Response"`
+}
+
+func (r *ModifyApplicationAutoscalerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApplicationAutoscalerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -2017,6 +3947,170 @@ func (r *ModifyApplicationInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyApplicationServiceRequestParams struct {
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Full access mode settings
+	Service *EksService `json:"Service,omitempty" name:"Service"`
+
+	// Single entry access mode settings
+	Data *ServicePortMapping `json:"Data,omitempty" name:"Data"`
+}
+
+type ModifyApplicationServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Full access mode settings
+	Service *EksService `json:"Service,omitempty" name:"Service"`
+
+	// Single entry access mode settings
+	Data *ServicePortMapping `json:"Data,omitempty" name:"Data"`
+}
+
+func (r *ModifyApplicationServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApplicationServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApplicationId")
+	delete(f, "EnvironmentId")
+	delete(f, "SourceChannel")
+	delete(f, "Service")
+	delete(f, "Data")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyApplicationServiceResponseParams struct {
+	// Whether the action succeeded 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyApplicationServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyApplicationServiceResponseParams `json:"Response"`
+}
+
+func (r *ModifyApplicationServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApplicationServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConfigDataRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Configuration information
+	Data []*Pair `json:"Data,omitempty" name:"Data"`
+}
+
+type ModifyConfigDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Source channel. Please keep the default value.
+	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Configuration information
+	Data []*Pair `json:"Data,omitempty" name:"Data"`
+}
+
+func (r *ModifyConfigDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConfigDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "SourceChannel")
+	delete(f, "Data")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConfigDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConfigDataResponseParams struct {
+	// Result of the modification
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyConfigDataResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConfigDataResponseParams `json:"Response"`
+}
+
+func (r *ModifyConfigDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConfigDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyEnvironmentRequestParams struct {
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
@@ -2035,6 +4129,9 @@ type ModifyEnvironmentRequestParams struct {
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment type. Values: `test`, `pre`, `prod`
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
 }
 
 type ModifyEnvironmentRequest struct {
@@ -2057,6 +4154,9 @@ type ModifyEnvironmentRequest struct {
 
 	// Source channel
 	SourceChannel *int64 `json:"SourceChannel,omitempty" name:"SourceChannel"`
+
+	// Environment type. Values: `test`, `pre`, `prod`
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
 }
 
 func (r *ModifyEnvironmentRequest) ToJsonString() string {
@@ -2077,6 +4177,7 @@ func (r *ModifyEnvironmentRequest) FromJsonString(s string) error {
 	delete(f, "Vpc")
 	delete(f, "SubnetIds")
 	delete(f, "SourceChannel")
+	delete(f, "EnvType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEnvironmentRequest has unknown keys!", "")
 	}
@@ -2174,6 +4275,84 @@ func (r *ModifyIngressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyLogConfigRequestParams struct {
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Log collector configuration
+	Data *LogConfig `json:"Data,omitempty" name:"Data"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
+type ModifyLogConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Environment ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Log collector configuration
+	Data *LogConfig `json:"Data,omitempty" name:"Data"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+}
+
+func (r *ModifyLogConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLogConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EnvironmentId")
+	delete(f, "Name")
+	delete(f, "Data")
+	delete(f, "ApplicationId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLogConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLogConfigResponseParams struct {
+	// Result of the modification
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyLogConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLogConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyLogConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLogConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type MountedSettingConf struct {
 	// Configuration name
 	ConfigDataName *string `json:"ConfigDataName,omitempty" name:"ConfigDataName"`
@@ -2188,6 +4367,49 @@ type MountedSettingConf struct {
 	SecretDataName *string `json:"SecretDataName,omitempty" name:"SecretDataName"`
 }
 
+type NamespaceInfo struct {
+	// ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// (Disused) Name
+	NamespaceName *string `json:"NamespaceName,omitempty" name:"NamespaceName"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// vpc id
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Array of subnet IDs
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Creation time
+	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+
+	// Environment name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// APM instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApmInstanceId *string `json:"ApmInstanceId,omitempty" name:"ApmInstanceId"`
+
+	// Whether the environment is locked. `1`: Locked, `0`: Not locked
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
+
+	// Tag
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Environment type. Values: `test`, `pre`, `prod`
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+}
+
 type NamespacePage struct {
 	// Details of the returned records
 	Records []*TemNamespaceInfo `json:"Records,omitempty" name:"Records"`
@@ -2200,6 +4422,53 @@ type NamespacePage struct {
 
 	// Total number of pages
 	Pages *int64 `json:"Pages,omitempty" name:"Pages"`
+
+	// Current entry
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Current *int64 `json:"Current,omitempty" name:"Current"`
+}
+
+type NamespaceStatusInfo struct {
+	// ID of the environment
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Environment name
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// TCB envId | EKS clusterId
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Environment status
+	ClusterStatus *string `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
+
+	// Whether the environment is being started. `null` is returned if it’s not being started.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnvironmentStartingStatus *TemEnvironmentStartingStatus `json:"EnvironmentStartingStatus,omitempty" name:"EnvironmentStartingStatus"`
+
+	// Whether the environment is being stopped. `null` is returned if it’s not being stopped.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnvironmentStoppingStatus *TemEnvironmentStoppingStatus `json:"EnvironmentStoppingStatus,omitempty" name:"EnvironmentStoppingStatus"`
+}
+
+type NodeInfo struct {
+	// Node name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Availability zone of the node
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Node subnet ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Number of available IPs
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AvailableIpCount *string `json:"AvailableIpCount,omitempty" name:"AvailableIpCount"`
+
+	// CIDR block
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Cidr *string `json:"Cidr,omitempty" name:"Cidr"`
 }
 
 type Pair struct {
@@ -2234,6 +4503,14 @@ type PortMapping struct {
 
 	// K8s service name
 	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+}
+
+type QueryFilter struct {
+	// Name of the field to query
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Value of the field to query
+	Value []*string `json:"Value,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
@@ -2562,6 +4839,104 @@ type RunVersionPod struct {
 	// Container status
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ContainerState *string `json:"ContainerState,omitempty" name:"ContainerState"`
+
+	// Information of the node whether the instance locates
+	// Note: This field may return `null`, indicating that no valid value was found.
+	NodeInfo *NodeInfo `json:"NodeInfo,omitempty" name:"NodeInfo"`
+
+	// Start time
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Whether the status is unhealthy or healthy
+	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	Unhealthy *bool `json:"Unhealthy,omitempty" name:"Unhealthy"`
+
+	// Warning message when the result is unhealthy
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UnhealthyWarningMsg *string `json:"UnhealthyWarningMsg,omitempty" name:"UnhealthyWarningMsg"`
+
+	// Version ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+
+	// Application name
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+}
+
+type ServicePage struct {
+	// List of applications
+	Records []*TemService `json:"Records,omitempty" name:"Records"`
+
+	// Total number of applications
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Number of applications per page
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// Total number of pages
+	Pages *int64 `json:"Pages,omitempty" name:"Pages"`
+
+	// Number of current entries
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Current *int64 `json:"Current,omitempty" name:"Current"`
+}
+
+type ServicePortMapping struct {
+	// Specifies how a layer-4 proxy is created.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Application name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// VIP for access within the environment
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterIp *string `json:"ClusterIp,omitempty" name:"ClusterIp"`
+
+	// Cluster external IP
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExternalIp *string `json:"ExternalIp,omitempty" name:"ExternalIp"`
+
+	// Subnet ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Load balancer ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LoadBalanceId *string `json:"LoadBalanceId,omitempty" name:"LoadBalanceId"`
+
+	// YAML contents
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Yaml *string `json:"Yaml,omitempty" name:"Yaml"`
+
+	// List of exposed ports
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Ports []*int64 `json:"Ports,omitempty" name:"Ports"`
+
+	// Port mapping array 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PortMappingItemList []*ServicePortMappingItem `json:"PortMappingItemList,omitempty" name:"PortMappingItemList"`
+}
+
+type ServicePortMappingItem struct {
+	// Application access port
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Application listening port
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TargetPort *int64 `json:"TargetPort,omitempty" name:"TargetPort"`
+
+	// Protocol type
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 }
 
 type ServiceVersionBrief struct {
@@ -2615,6 +4990,38 @@ type ServiceVersionBrief struct {
 	// Whether the application is being deployed
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UnderDeploying *bool `json:"UnderDeploying,omitempty" name:"UnderDeploying"`
+
+	// Status of batch deployment
+	// Note: This field may return `null`, indicating that no valid value was found.
+	BatchDeployStatus *string `json:"BatchDeployStatus,omitempty" name:"BatchDeployStatus"`
+
+	// Availability zones
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Node information
+	// Note: This field may return `null`, indicating that no valid value was found.
+	NodeInfos []*NodeInfo `json:"NodeInfos,omitempty" name:"NodeInfos"`
+
+	// Pod information
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PodList *DescribeRunPodPage `json:"PodList,omitempty" name:"PodList"`
+
+	// Workload information
+	// Note: This field may return `null`, indicating that no valid value was found.
+	WorkloadInfo *WorkloadInfo `json:"WorkloadInfo,omitempty" name:"WorkloadInfo"`
+
+	// Creation time
+	// Note: This field may return `null`, indicating that no valid value was found.
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+}
+
+type SortType struct {
+	// Name of the sorting field
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// `0`: Ascending; `1`: Descending 
+	Type *int64 `json:"Type,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
@@ -2708,6 +5115,36 @@ type StorageMountConf struct {
 	MountPath *string `json:"MountPath,omitempty" name:"MountPath"`
 }
 
+type Tag struct {
+	// The tag key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// The tag value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TemEnvironmentStartingStatus struct {
+	// Number of applications to start
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationNumNeedToStart *int64 `json:"ApplicationNumNeedToStart,omitempty" name:"ApplicationNumNeedToStart"`
+
+	// Number of started applictions
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StartedApplicationNum *int64 `json:"StartedApplicationNum,omitempty" name:"StartedApplicationNum"`
+}
+
+type TemEnvironmentStoppingStatus struct {
+	// Number of applications to stop
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationNumNeedToStop *int64 `json:"ApplicationNumNeedToStop,omitempty" name:"ApplicationNumNeedToStop"`
+
+	// Number of stopped applications
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StoppedApplicationNum *int64 `json:"StoppedApplicationNum,omitempty" name:"StoppedApplicationNum"`
+}
+
 type TemNamespaceInfo struct {
 	// Environment ID
 	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
@@ -2760,6 +5197,440 @@ type TemNamespaceInfo struct {
 
 	// Whether the environment is locked. `1`: locked; `0`: not locked
 	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
+
+	// User AppId
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppId *string `json:"AppId,omitempty" name:"AppId"`
+
+	// User UIN
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// The UIN of sub-account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubAccountUin *string `json:"SubAccountUin,omitempty" name:"SubAccountUin"`
+
+	// Application ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Tag.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether it’s authorized to access the resource
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasAuthority *bool `json:"HasAuthority,omitempty" name:"HasAuthority"`
+
+	// Environment type. Values: `test`, `pre`, `prod`
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EnvType *string `json:"EnvType,omitempty" name:"EnvType"`
+
+	// Region code
+	// Note: This field may return `null`, indicating that no valid value was found.
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+}
+
+type TemService struct {
+	// Version ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Application name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Description
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// ID of the environment
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Creation time.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Modification time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ModifyDate *string `json:"ModifyDate,omitempty" name:"ModifyDate"`
+
+	// Modifier
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Modifier *string `json:"Modifier,omitempty" name:"Modifier"`
+
+	// Creator account
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Creator *string `json:"Creator,omitempty" name:"Creator"`
+
+	// TCR Individual or TCR Enterprise
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RepoType *int64 `json:"RepoType,omitempty" name:"RepoType"`
+
+	// ID of the TCR Enterprise instance
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Name of the TCR instance
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RepoName *string `json:"RepoName,omitempty" name:"RepoName"`
+
+	// Programming Language
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CodingLanguage *string `json:"CodingLanguage,omitempty" name:"CodingLanguage"`
+
+	// Deployment mode
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Environment name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// The instance information where the application is running
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ActiveVersions []*ServiceVersionBrief `json:"ActiveVersions,omitempty" name:"ActiveVersions"`
+
+	// Whether to enable link tracing
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnableTracing *uint64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+
+	// Tag
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether it’s authorized to access the resource
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasAuthority *bool `json:"HasAuthority,omitempty" name:"HasAuthority"`
+}
+
+type TemServiceVersionInfo struct {
+	// Version ID
+	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+
+	// Application ID
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+
+	// Deployment mode
+	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// JDK version
+	JdkVersion *string `json:"JdkVersion,omitempty" name:"JdkVersion"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Deployed version
+	DeployVersion *string `json:"DeployVersion,omitempty" name:"DeployVersion"`
+
+	// Publish mode
+	PublishMode *string `json:"PublishMode,omitempty" name:"PublishMode"`
+
+	// Launch parameter
+	JvmOpts *string `json:"JvmOpts,omitempty" name:"JvmOpts"`
+
+	// Number of initial pods
+	InitPodNum *int64 `json:"InitPodNum,omitempty" name:"InitPodNum"`
+
+	// CPU specification
+	CpuSpec *float64 `json:"CpuSpec,omitempty" name:"CpuSpec"`
+
+	// Memory specification
+	MemorySpec *float64 `json:"MemorySpec,omitempty" name:"MemorySpec"`
+
+	// Image path
+	ImgRepo *string `json:"ImgRepo,omitempty" name:"ImgRepo"`
+
+	// Image name
+	ImgName *string `json:"ImgName,omitempty" name:"ImgName"`
+
+	// Image version
+	ImgVersion *string `json:"ImgVersion,omitempty" name:"ImgVersion"`
+
+	// Scaling configuration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EsInfo *EsInfo `json:"EsInfo,omitempty" name:"EsInfo"`
+
+	// Environment configuration
+	EnvConf []*Pair `json:"EnvConf,omitempty" name:"EnvConf"`
+
+	// Storage configuration
+	StorageConfs []*StorageConf `json:"StorageConfs,omitempty" name:"StorageConfs"`
+
+	// Running status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// VPC
+	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
+
+	// Subnets
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Creation time
+	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Modification time
+	ModifyDate *string `json:"ModifyDate,omitempty" name:"ModifyDate"`
+
+	// Mounting configuration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitempty" name:"StorageMountConfs"`
+
+	// Version name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
+
+	// Log output configuration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitempty" name:"LogOutputConf"`
+
+	// Application name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Application description
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationDescription *string `json:"ApplicationDescription,omitempty" name:"ApplicationDescription"`
+
+	// Environment name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
+
+	// Environment ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Public network address
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PublicDomain *string `json:"PublicDomain,omitempty" name:"PublicDomain"`
+
+	// Whether to enable public network access
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnablePublicAccess *bool `json:"EnablePublicAccess,omitempty" name:"EnablePublicAccess"`
+
+	// Number of current instances
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CurrentInstances *int64 `json:"CurrentInstances,omitempty" name:"CurrentInstances"`
+
+	// Number of expected instances
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExpectedInstances *int64 `json:"ExpectedInstances,omitempty" name:"ExpectedInstances"`
+
+	// Programming Language
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CodingLanguage *string `json:"CodingLanguage,omitempty" name:"CodingLanguage"`
+
+	// Program package name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PkgName *string `json:"PkgName,omitempty" name:"PkgName"`
+
+	// Whether to enable auto scaling
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EsEnable *int64 `json:"EsEnable,omitempty" name:"EsEnable"`
+
+	// Auto scaling policy
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EsStrategy *int64 `json:"EsStrategy,omitempty" name:"EsStrategy"`
+
+	// Image tag
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ImageTag *string `json:"ImageTag,omitempty" name:"ImageTag"`
+
+	// Whether to enable logging
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LogEnable *int64 `json:"LogEnable,omitempty" name:"LogEnable"`
+
+	// Minimum number of instances
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	MinAliveInstances *string `json:"MinAliveInstances,omitempty" name:"MinAliveInstances"`
+
+	// Security group IDs
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Image command
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ImageCommand *string `json:"ImageCommand,omitempty" name:"ImageCommand"`
+
+	// Image command parameters
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ImageArgs []*string `json:"ImageArgs,omitempty" name:"ImageArgs"`
+
+	// Whether to use the default registry configurations
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitempty" name:"UseRegistryDefaultConfig"`
+
+	// EKS access configuration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Service *EksService `json:"Service,omitempty" name:"Service"`
+
+	// Mounting configurations
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitempty" name:"SettingConfs"`
+
+	// Log path information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LogConfs []*string `json:"LogConfs,omitempty" name:"LogConfs"`
+
+	// The script to execute right after the startup
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PostStart *string `json:"PostStart,omitempty" name:"PostStart"`
+
+	// The script to run before stop
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PreStop *string `json:"PreStop,omitempty" name:"PreStop"`
+
+	// Configuration of aliveness probe
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Liveness *HealthCheckConfig `json:"Liveness,omitempty" name:"Liveness"`
+
+	// Configuration of readiness probe
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Readiness *HealthCheckConfig `json:"Readiness,omitempty" name:"Readiness"`
+
+	// Auto scaling policy
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	HorizontalAutoscaler []*HorizontalAutoscaler `json:"HorizontalAutoscaler,omitempty" name:"HorizontalAutoscaler"`
+
+	// Scheduled auto scaling policy
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	CronHorizontalAutoscaler []*CronHorizontalAutoscaler `json:"CronHorizontalAutoscaler,omitempty" name:"CronHorizontalAutoscaler"`
+
+	// Availability zone of the application
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// The latest deployment time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LastDeployDate *string `json:"LastDeployDate,omitempty" name:"LastDeployDate"`
+
+	// The latest successful deployment time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LastDeploySuccessDate *string `json:"LastDeploySuccessDate,omitempty" name:"LastDeploySuccessDate"`
+
+	// Information of the node whether the application is deployed
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	NodeInfos []*NodeInfo `json:"NodeInfos,omitempty" name:"NodeInfos"`
+
+	// Image type. Values: `0` (Demo image), `1` (Normal image)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ImageType *int64 `json:"ImageType,omitempty" name:"ImageType"`
+
+	// Whether to 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnableTracing *uint64 `json:"EnableTracing,omitempty" name:"EnableTracing"`
+
+	// (Disused) Whether to enable linkage tracing and report. It only takes effect when EnableTracing = `1`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableTracingReport *uint64 `json:"EnableTracingReport,omitempty" name:"EnableTracingReport"`
+
+	// Image type. `0`: Individual image; `1`: Enterprise image; `2`: Public image
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RepoType *uint64 `json:"RepoType,omitempty" name:"RepoType"`
+
+	// Status of batch deployment: `batch_updating`, `batch_updating_waiting_confirm`
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BatchDeployStatus *string `json:"BatchDeployStatus,omitempty" name:"BatchDeployStatus"`
+
+	// APM instance ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApmInstanceId *string `json:"ApmInstanceId,omitempty" name:"ApmInstanceId"`
+
+	// Workload information 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	WorkloadInfo *WorkloadInfo `json:"WorkloadInfo,omitempty" name:"WorkloadInfo"`
+
+	// Whether to enable application acceleration
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SpeedUp *bool `json:"SpeedUp,omitempty" name:"SpeedUp"`
+
+	// Configuration of the startup probe
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StartupProbe *HealthCheckConfig `json:"StartupProbe,omitempty" name:"StartupProbe"`
+
+	// OS version. Values:
+	// - ALPINE
+	// - CENTOS
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	OsFlavour *string `json:"OsFlavour,omitempty" name:"OsFlavour"`
+
+	// Image repository server
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RepoServer *string `json:"RepoServer,omitempty" name:"RepoServer"`
+
+	// Whether the application is being deployed
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UnderDeploying *bool `json:"UnderDeploying,omitempty" name:"UnderDeploying"`
+
+	// Whether to enable application metric monitoring 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnablePrometheusConf *EnablePrometheusConf `json:"EnablePrometheusConf,omitempty" name:"EnablePrometheusConf"`
+
+	// Whether it’s stopped manually
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StoppedManually *bool `json:"StoppedManually,omitempty" name:"StoppedManually"`
+
+	// TCR instance ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TcrInstanceId *string `json:"TcrInstanceId,omitempty" name:"TcrInstanceId"`
+
+	// `1`: Automatically enable metrics collection (open-telemetry)
+	// `0`: Disable metrics collection
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableMetrics *int64 `json:"EnableMetrics,omitempty" name:"EnableMetrics"`
+
+	// User AppId
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AppId *string `json:"AppId,omitempty" name:"AppId"`
+
+	// Sub Account UIN
+	// Note: This field may return `null`, indicating that no valid value was found.
+	SubAccountUin *string `json:"SubAccountUin,omitempty" name:"SubAccountUin"`
+
+	// User UIN
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Uin *string `json:"Uin,omitempty" name:"Uin"`
+
+	// Region
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Application group ID
+	// Note: This field may return `null`, indicating that no valid value was found.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether to enable registry
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EnableRegistry *int64 `json:"EnableRegistry,omitempty" name:"EnableRegistry"`
+
+	// Array of scaling rules
+	// Note: This field may return `null`, indicating that no valid value was found.
+	AutoscalerList []*Autoscaler `json:"AutoscalerList,omitempty" name:"AutoscalerList"`
+
+	// Modifier
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Modifier *string `json:"Modifier,omitempty" name:"Modifier"`
+
+	// Creator
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Creator *string `json:"Creator,omitempty" name:"Creator"`
+
+	// Deployment strategy
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitempty" name:"DeployStrategyConf"`
+
+	// List of pods
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PodList *DescribeRunPodPage `json:"PodList,omitempty" name:"PodList"`
+
+	// Whether the configuration has been changed during deployment
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ConfEdited *bool `json:"ConfEdited,omitempty" name:"ConfEdited"`
+
+	// Tag
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type UseDefaultRepoParameters struct {
@@ -2774,4 +5645,42 @@ type UseDefaultRepoParameters struct {
 	// Edition of the TCR Enterprise. Values: `basic`, `standard`, `premium` (Advanced edition)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnterpriseInstanceType *string `json:"EnterpriseInstanceType,omitempty" name:"EnterpriseInstanceType"`
+}
+
+type WorkloadInfo struct {
+	// The resource ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Application name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+
+	// Version name
+	// Note: This field may return `null`, indicating that no valid value was found.
+	VersionName *string `json:"VersionName,omitempty" name:"VersionName"`
+
+	// Number of ready replicas
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ReadyReplicas *int64 `json:"ReadyReplicas,omitempty" name:"ReadyReplicas"`
+
+	// Number of replicas
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Replicas *int64 `json:"Replicas,omitempty" name:"Replicas"`
+
+	// Number of updated replicas
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UpdatedReplicas *int64 `json:"UpdatedReplicas,omitempty" name:"UpdatedReplicas"`
+
+	// Number of replicas ready for update
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UpdatedReadyReplicas *int64 `json:"UpdatedReadyReplicas,omitempty" name:"UpdatedReadyReplicas"`
+
+	// ## Version Updates
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UpdateRevision *string `json:"UpdateRevision,omitempty" name:"UpdateRevision"`
+
+	// Current Version
+	// Note: This field may return `null`, indicating that no valid value was found.
+	CurrentRevision *string `json:"CurrentRevision,omitempty" name:"CurrentRevision"`
 }

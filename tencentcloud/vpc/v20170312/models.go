@@ -205,7 +205,7 @@ type Address struct {
 	// Whether the EIP supports direct connection mode. `True` indicates the EIP supports direct connection. `False` indicates that the resource does not support direct connection.
 	IsEipDirectConnection *bool `json:"IsEipDirectConnection,omitempty" name:"IsEipDirectConnection"`
 
-	// EIP resource type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (elastic IP) and `AnycastEIP` (accelerated EIP).
+	// IP type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (general elastic IP), `AnycastEIP` (accelerated EIP), and `AntiDDoSEIP` (Anti DDoS EIP).
 	AddressType *string `json:"AddressType,omitempty" name:"AddressType"`
 
 	// Whether the EIP is automatically released after being unbound. `True` indicates the EIP will be automatically released after being unbound. `False` indicates the EIP will not be automatically released after being unbound.
@@ -435,6 +435,9 @@ type AllocateAddressesRequestParams struct {
 
 	// EIP name, which is the custom EIP name given by the user when applying for the EIP. Default: not named
 	AddressName *string `json:"AddressName,omitempty" name:"AddressName"`
+
+	// Network egress. It defaults to `center_egress1`.
+	Egress *string `json:"Egress,omitempty" name:"Egress"`
 }
 
 type AllocateAddressesRequest struct {
@@ -491,6 +494,9 @@ type AllocateAddressesRequest struct {
 
 	// EIP name, which is the custom EIP name given by the user when applying for the EIP. Default: not named
 	AddressName *string `json:"AddressName,omitempty" name:"AddressName"`
+
+	// Network egress. It defaults to `center_egress1`.
+	Egress *string `json:"Egress,omitempty" name:"Egress"`
 }
 
 func (r *AllocateAddressesRequest) ToJsonString() string {
@@ -516,6 +522,7 @@ func (r *AllocateAddressesRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "BandwidthPackageId")
 	delete(f, "AddressName")
+	delete(f, "Egress")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AllocateAddressesRequest has unknown keys!", "")
 	}
@@ -833,7 +840,7 @@ type AssociateAddressRequestParams struct {
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
-	// The ID of the instance to be bound, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
+	// The ID of the instance to be bound, such as `ins-11112222`, `lb-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The ID of the ENI to be bonud, such as `eni-11112222`. `NetworkInterfaceId` and `InstanceId` cannot be specified at the same time. You can query the ENI ID by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `networkInterfaceId` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
@@ -852,7 +859,7 @@ type AssociateAddressRequest struct {
 	// The unique ID of the EIP, such as `eip-11112222`.
 	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
 
-	// The ID of the instance to be bound, such as `ins-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
+	// The ID of the instance to be bound, such as `ins-11112222`, `lb-11112222`. You can query the instance ID by logging into the [Console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The ID of the ENI to be bonud, such as `eni-11112222`. `NetworkInterfaceId` and `InstanceId` cannot be specified at the same time. You can query the ENI ID by logging into the [Console](https://console.cloud.tencent.com/vpc/eni). You can also obtain the parameter value from the `networkInterfaceId` field in the returned result of [DescribeNetworkInterfaces](https://intl.cloud.tencent.com/document/api/215/15817?from_cn_redirect=1) API.
@@ -4526,8 +4533,11 @@ type CreateVpcEndPointServiceRequestParams struct {
 	// Real server ID, such as `lb-xxx`.
 	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
 
-	// Whether it is of the type `PassService`. Valid values: true: yes; false: no. Default value: false
+	// (Disused) Whether it’s a PaaS service
 	IsPassService *bool `json:"IsPassService,omitempty" name:"IsPassService"`
+
+	// Mounted PaaS service type. Values: `CLB` (default), `CDB`, `CRS`
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 }
 
 type CreateVpcEndPointServiceRequest struct {
@@ -4545,8 +4555,11 @@ type CreateVpcEndPointServiceRequest struct {
 	// Real server ID, such as `lb-xxx`.
 	ServiceInstanceId *string `json:"ServiceInstanceId,omitempty" name:"ServiceInstanceId"`
 
-	// Whether it is of the type `PassService`. Valid values: true: yes; false: no. Default value: false
+	// (Disused) Whether it’s a PaaS service
 	IsPassService *bool `json:"IsPassService,omitempty" name:"IsPassService"`
+
+	// Mounted PaaS service type. Values: `CLB` (default), `CDB`, `CRS`
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 }
 
 func (r *CreateVpcEndPointServiceRequest) ToJsonString() string {
@@ -4566,6 +4579,7 @@ func (r *CreateVpcEndPointServiceRequest) FromJsonString(s string) error {
 	delete(f, "AutoAcceptFlag")
 	delete(f, "ServiceInstanceId")
 	delete(f, "IsPassService")
+	delete(f, "ServiceType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVpcEndPointServiceRequest has unknown keys!", "")
 	}
@@ -4670,7 +4684,7 @@ type CreateVpcRequestParams struct {
 	// The VPC name. The maximum length is 60 bytes.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
-	// VPC CIDR blocks, which must fall within the following three private network IP ranges: 10.0.0.0/16, 172.16.0.0/16 and 192.168.0.0/16.
+	// VPC CIDR block, which must fall within the following three private network IP ranges: 10.0.0.0/12, 172.16.0.0/12, and 192.168.0.0/16.
 	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 
 	// Whether multicast is enabled. `true`: Enabled. `false`: Not enabled.
@@ -4692,7 +4706,7 @@ type CreateVpcRequest struct {
 	// The VPC name. The maximum length is 60 bytes.
 	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
 
-	// VPC CIDR blocks, which must fall within the following three private network IP ranges: 10.0.0.0/16, 172.16.0.0/16 and 192.168.0.0/16.
+	// VPC CIDR block, which must fall within the following three private network IP ranges: 10.0.0.0/12, 172.16.0.0/12, and 192.168.0.0/16.
 	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 
 	// Whether multicast is enabled. `true`: Enabled. `false`: Not enabled.
@@ -10287,19 +10301,21 @@ type DescribeNetworkInterfacesRequestParams struct {
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
 	// Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-	// <li>`vpc-id` - String - VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	// <li>`subnet-id` - String - Subnet instance ID, such as `subnet-f49l6u0z`.</li>
-	// <li>`network-interface-id` - String - ENI instance ID, such as `eni-5k56k7k7`.</li>
-	// <li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
-	// <li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+	// <li>`vpc-id` - String - VPC ID, such as `vpc-f49l6u0z`.</li>
+	// <li>`subnet-id` - String - Subnet ID, such as `subnet-f49l6u0z`.</li>
+	// <li>`network-interface-id` - String - ENI ID, such as `eni-5k56k7k7`.</li>
+	// <li>`attachment.instance-id` - String - ID of the bound CVM, such as `ins-3nqpdn3i`.</li>
+	// <li>`groups.security-group-id` - String - IDs of associated security groups, such as `sg-f9ekbxeq`.</li>
 	// <li>`network-interface-name` - String - ENI instance name.</li>
 	// <li>`network-interface-description` - String - ENI instance description.</li>
 	// <li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
 	// <li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
-	// <li>`tag-key` - String - Optional - Filter by tag key. See Example 2 for the detailed usage.</li>
-	// <li>`tag:tag-key` - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-	// <li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
-	// <li>`eni-type` - String - Optional - Filter by ENI type. "0" - secondary ENI, "1" - primary ENI, "2": relayed ENI</li>
+	// <li>`tag-key` - String - Optional - Filter by the tag key. See Example 2 for the detailed usage.</li>
+	// <li>`tag:tag-key` - String - Optional - Filter by the tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
+	// <li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. Values: `true`, `false`. If this parameter is not specified, filter the both.</li>
+	// <li>`eni-type` - String - Optional - Filter by the ENI type. Values: `0` (Secondary ENI), `1` (Primary ENI), `2` (Relayed ENI)</li>
+	// <li>`eni-qos` - String - Optional - Filter by the ENI service level. Values: `AG` (Bronze), `AU` (Silver)</li>
+	// <li>`address-ipv6` - String - Optional - Filter by the private IPv6 address. Multiple IPv6 addresses can be used for query. If this field is used together with `address-ip`, their intersection will be used.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
@@ -10316,19 +10332,21 @@ type DescribeNetworkInterfacesRequest struct {
 	NetworkInterfaceIds []*string `json:"NetworkInterfaceIds,omitempty" name:"NetworkInterfaceIds"`
 
 	// Filter. `NetworkInterfaceIds` and `Filters` cannot be specified at the same time.
-	// <li>`vpc-id` - String - VPC instance ID, such as `vpc-f49l6u0z`.</li>
-	// <li>`subnet-id` - String - Subnet instance ID, such as `subnet-f49l6u0z`.</li>
-	// <li>`network-interface-id` - String - ENI instance ID, such as `eni-5k56k7k7`.</li>
-	// <li>`attachment.instance-id` - String - ID of the bound CVM instance, such as `ins-3nqpdn3i`.</li>
-	// <li>`groups.security-group-id` - String - ID of the bound security group, such as `sg-f9ekbxeq`.</li>
+	// <li>`vpc-id` - String - VPC ID, such as `vpc-f49l6u0z`.</li>
+	// <li>`subnet-id` - String - Subnet ID, such as `subnet-f49l6u0z`.</li>
+	// <li>`network-interface-id` - String - ENI ID, such as `eni-5k56k7k7`.</li>
+	// <li>`attachment.instance-id` - String - ID of the bound CVM, such as `ins-3nqpdn3i`.</li>
+	// <li>`groups.security-group-id` - String - IDs of associated security groups, such as `sg-f9ekbxeq`.</li>
 	// <li>`network-interface-name` - String - ENI instance name.</li>
 	// <li>`network-interface-description` - String - ENI instance description.</li>
 	// <li>`address-ip` - String - Private IPv4 address. A single IP will be fuzzily matched with the suffix, while multiple IPs will be exactly matched. It can be used with `ip-exact-match` to query and exactly match a single IP.</li>
 	// <li>`ip-exact-match` - Boolean - Exact match by private IPv4 address. The first value will be returned if multiple values are found.</li>
-	// <li>`tag-key` - String - Optional - Filter by tag key. See Example 2 for the detailed usage.</li>
-	// <li>`tag:tag-key` - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-	// <li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. If the value is `true`, filter only the primary ENI. If the value is `false`, filter only the secondary ENI. If this parameter is not specified, filter the both.</li>
-	// <li>`eni-type` - String - Optional - Filter by ENI type. "0" - secondary ENI, "1" - primary ENI, "2": relayed ENI</li>
+	// <li>`tag-key` - String - Optional - Filter by the tag key. See Example 2 for the detailed usage.</li>
+	// <li>`tag:tag-key` - String - Optional - Filter by the tag key pair. Use a specific tag key to replace `tag-key`. See Example 2 for the detailed usage.</li>
+	// <li>`is-primary` - Boolean - Optional - Filter based on whether it is a primary ENI. Values: `true`, `false`. If this parameter is not specified, filter the both.</li>
+	// <li>`eni-type` - String - Optional - Filter by the ENI type. Values: `0` (Secondary ENI), `1` (Primary ENI), `2` (Relayed ENI)</li>
+	// <li>`eni-qos` - String - Optional - Filter by the ENI service level. Values: `AG` (Bronze), `AU` (Silver)</li>
+	// <li>`address-ipv6` - String - Optional - Filter by the private IPv6 address. Multiple IPv6 addresses can be used for query. If this field is used together with `address-ip`, their intersection will be used.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
@@ -10543,16 +10561,16 @@ type DescribeSecurityGroupPoliciesRequestParams struct {
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
-	// Filter conditions. `SecurityGroupId` and `Filters` cannot be specified at the same time.
-	// <li>security-group-id - String - Security group ID.</li>
-	// <li>ip - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
-	// <li>address-module - String - IP address or address group template ID.</li>
-	// <li>service-module - String - Protocol port or port group template ID.</li>
-	// <li>protocol-type - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
-	// <li>port - String - Optional - Protocol port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
-	// <li>poly - String - Protocol policy. Valid values: `ALL` (means "all policies"), `ACCEPT` (means "allow") and `DROP` (means "reject").</li>
-	// <li>direction - String - Protocol rule. Valid values: `ALL` (means "all rules"), `INBOUND`(means "inbound rules") and `OUTBOUND` (means "outbound rules").</li>
-	// <li>description - String - Protocol description. Fuzzy matching is supported in this filter condition.</li>
+	// Filters
+	// <li>`security-group-id` - String - Security group ID in the rule.</li>
+	// <li>`ip` - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
+	// <li>`address-module` - String - IP address or address group template ID.</li>
+	// <li>`service-module` - String - Protocol port or port group template ID.</li>
+	// <li>`protocol-type` - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
+	// <li>`port` - String - Optional - Port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
+	// <li>`poly` - String - Policy type. Valid values: `ALL`, `ACCEPT` and `DROP`.</li>
+	// <li>`direction` - String - Direction of the rule. Valid values: `ALL`, `INBOUND` and `OUTBOUND`.</li>
+	// <li>`description` - String - Policy description. Fuzzy matching is supported.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -10562,16 +10580,16 @@ type DescribeSecurityGroupPoliciesRequest struct {
 	// The security group instance ID, such as `sg-33ocnj9n`. It can be obtained through DescribeSecurityGroups.
 	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
 
-	// Filter conditions. `SecurityGroupId` and `Filters` cannot be specified at the same time.
-	// <li>security-group-id - String - Security group ID.</li>
-	// <li>ip - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
-	// <li>address-module - String - IP address or address group template ID.</li>
-	// <li>service-module - String - Protocol port or port group template ID.</li>
-	// <li>protocol-type - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
-	// <li>port - String - Optional - Protocol port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
-	// <li>poly - String - Protocol policy. Valid values: `ALL` (means "all policies"), `ACCEPT` (means "allow") and `DROP` (means "reject").</li>
-	// <li>direction - String - Protocol rule. Valid values: `ALL` (means "all rules"), `INBOUND`(means "inbound rules") and `OUTBOUND` (means "outbound rules").</li>
-	// <li>description - String - Protocol description. Fuzzy matching is supported in this filter condition.</li>
+	// Filters
+	// <li>`security-group-id` - String - Security group ID in the rule.</li>
+	// <li>`ip` - String - IP. IPV4 and IPV6 fuzzy matching is supported.</li>
+	// <li>`address-module` - String - IP address or address group template ID.</li>
+	// <li>`service-module` - String - Protocol port or port group template ID.</li>
+	// <li>`protocol-type` - String - Protocol supported by the security group policy. Valid values: `TCP`, `UDP`, `ICMP`, `ICMPV6`, `GRE`, `ALL`.</li>
+	// <li>`port` - String - Optional - Port. Fuzzy matching is supported. Query all ports when the protocol value is `ALL`.</li>
+	// <li>`poly` - String - Policy type. Valid values: `ALL`, `ACCEPT` and `DROP`.</li>
+	// <li>`direction` - String - Direction of the rule. Valid values: `ALL`, `INBOUND` and `OUTBOUND`.</li>
+	// <li>`description` - String - Policy description. Fuzzy matching is supported.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -11094,6 +11112,93 @@ func (r *DescribeTaskResultResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTaskResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTrafficPackagesRequestParams struct {
+	// Traffic package IDs. Multiple values can be used.
+	TrafficPackageIds []*string `json:"TrafficPackageIds,omitempty" name:"TrafficPackageIds"`
+
+	// Each request can have up to 10 `Filters`. `TrafficPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li> `traffic-package_id` - String - Optional - Filter by the traffic package ID.</li>
+	// <li> `traffic-package-name` - String - Optional - Filter by the traffic package name. Fuzzy match is not supported.</li>
+	// <li> `status` - String - Optional - Filter by the traffic package status. Values: [AVAILABLE|EXPIRED|EXHAUSTED].</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Pagination parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination parameter
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeTrafficPackagesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Traffic package IDs. Multiple values can be used.
+	TrafficPackageIds []*string `json:"TrafficPackageIds,omitempty" name:"TrafficPackageIds"`
+
+	// Each request can have up to 10 `Filters`. `TrafficPackageIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li> `traffic-package_id` - String - Optional - Filter by the traffic package ID.</li>
+	// <li> `traffic-package-name` - String - Optional - Filter by the traffic package name. Fuzzy match is not supported.</li>
+	// <li> `status` - String - Optional - Filter by the traffic package status. Values: [AVAILABLE|EXPIRED|EXHAUSTED].</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Pagination parameter
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination parameter
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTrafficPackagesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrafficPackagesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TrafficPackageIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTrafficPackagesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTrafficPackagesResponseParams struct {
+	// Number of eligible traffic packages
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Traffic package information
+	TrafficPackageSet []*TrafficPackage `json:"TrafficPackageSet,omitempty" name:"TrafficPackageSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTrafficPackagesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTrafficPackagesResponseParams `json:"Response"`
+}
+
+func (r *DescribeTrafficPackagesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrafficPackagesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -13396,6 +13501,9 @@ type EndPointService struct {
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Mounted PaaS service type. Values: `CLB`, `CDB`, `CRS`
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
 }
 
 type Filter struct {
@@ -14732,11 +14840,9 @@ type ModifyBandwidthPackageAttributeRequestParams struct {
 	// The name of the bandwidth package.
 	BandwidthPackageName *string `json:"BandwidthPackageName,omitempty" name:"BandwidthPackageName"`
 
-	// The billing mode of the bandwidth package.
+	// The billing mode of the bandwidth package. Values: 
+	// `TOP5_POSTPAID_BY_MONTH`: Bill by the top 5 bandwidth value of the current month in a postpaid manner
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
-
-	// When a monthly-subscribed bandwidth package is returned, whether to convert it to a pay-as-you-go bandwidth packages. Default value: `No`
-	MigrateOnRefund *bool `json:"MigrateOnRefund,omitempty" name:"MigrateOnRefund"`
 }
 
 type ModifyBandwidthPackageAttributeRequest struct {
@@ -14748,11 +14854,9 @@ type ModifyBandwidthPackageAttributeRequest struct {
 	// The name of the bandwidth package.
 	BandwidthPackageName *string `json:"BandwidthPackageName,omitempty" name:"BandwidthPackageName"`
 
-	// The billing mode of the bandwidth package.
+	// The billing mode of the bandwidth package. Values: 
+	// `TOP5_POSTPAID_BY_MONTH`: Bill by the top 5 bandwidth value of the current month in a postpaid manner
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
-
-	// When a monthly-subscribed bandwidth package is returned, whether to convert it to a pay-as-you-go bandwidth packages. Default value: `No`
-	MigrateOnRefund *bool `json:"MigrateOnRefund,omitempty" name:"MigrateOnRefund"`
 }
 
 func (r *ModifyBandwidthPackageAttributeRequest) ToJsonString() string {
@@ -14770,7 +14874,6 @@ func (r *ModifyBandwidthPackageAttributeRequest) FromJsonString(s string) error 
 	delete(f, "BandwidthPackageId")
 	delete(f, "BandwidthPackageName")
 	delete(f, "ChargeType")
-	delete(f, "MigrateOnRefund")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBandwidthPackageAttributeRequest has unknown keys!", "")
 	}
@@ -17248,6 +17351,10 @@ type NatGateway struct {
 	// Bandwidth of the gateway cluster where the dedicated NAT Gateway resides. Unit: Mbps. This field does not exist when the `IsExclusive` field is set to `false`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ExclusiveGatewayBandwidth *uint64 `json:"ExclusiveGatewayBandwidth,omitempty" name:"ExclusiveGatewayBandwidth"`
+
+	// Whether the NAT gateway is blocked. Values: `NORMAL`, `RESTRICTED`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RestrictState *string `json:"RestrictState,omitempty" name:"RestrictState"`
 }
 
 type NatGatewayAddress struct {
@@ -17545,6 +17652,18 @@ type NetworkInterface struct {
 	// ENI type. Valid values: `0` (standard); `1` (extension). Default value: `0`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AttachType *uint64 `json:"AttachType,omitempty" name:"AttachType"`
+
+	// The ID of resource to retain the ENI primary IP. It’s used as the request parameters for deleting an ENI.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+
+	// Service level
+	// <li>`DEFAULT`: Default level</lil>
+	// <li>`PT`: Gold</li>
+	// <li>`AU`: Silver</li>
+	// <li>`AG`: Bronze</li>
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 }
 
 type NetworkInterfaceAttachment struct {
@@ -18709,6 +18828,60 @@ type ResourceDashboard struct {
 	RouteTable *uint64 `json:"RouteTable,omitempty" name:"RouteTable"`
 }
 
+// Predefined struct for user
+type ReturnNormalAddressesRequestParams struct {
+	// 1
+	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps"`
+}
+
+type ReturnNormalAddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// 1
+	AddressIps []*string `json:"AddressIps,omitempty" name:"AddressIps"`
+}
+
+func (r *ReturnNormalAddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReturnNormalAddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AddressIps")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReturnNormalAddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReturnNormalAddressesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReturnNormalAddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *ReturnNormalAddressesResponseParams `json:"Response"`
+}
+
+func (r *ReturnNormalAddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReturnNormalAddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Route struct {
 	// Destination IP range, such as 112.20.51.0/24. Values cannot be in the VPC IP range.
 	DestinationCidrBlock *string `json:"DestinationCidrBlock,omitempty" name:"DestinationCidrBlock"`
@@ -18726,7 +18899,6 @@ type Route struct {
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
 
 	// Next hop address. You simply need to specify the gateway ID of a different next hop type, and the system will automatically match the next hop address.
-	// Important note: When the GatewayType is EIP, the GatewayId has a fixed value `0`
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
 	// Routing policy ID. The IPv4 routing policy will have a meaningful value, while the IPv6 routing policy is always 0. We recommend using the unique ID `RouteItemId` for the routing policy.
@@ -19028,6 +19200,76 @@ func (r *SetCcnRegionBandwidthLimitsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetVpnGatewaysRenewFlagRequestParams struct {
+	// VPN gateway IDs
+	VpnGatewayIds []*string `json:"VpnGatewayIds,omitempty" name:"VpnGatewayIds"`
+
+	// Status of auto-renewal
+	// Values: `0` (Follow original), `1` (Enable auto-renewal), `2` (Disable auto-renewal) 
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// VPNGW type: `IPSEC`, `SSL`
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+type SetVpnGatewaysRenewFlagRequest struct {
+	*tchttp.BaseRequest
+	
+	// VPN gateway IDs
+	VpnGatewayIds []*string `json:"VpnGatewayIds,omitempty" name:"VpnGatewayIds"`
+
+	// Status of auto-renewal
+	// Values: `0` (Follow original), `1` (Enable auto-renewal), `2` (Disable auto-renewal) 
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// VPNGW type: `IPSEC`, `SSL`
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
+func (r *SetVpnGatewaysRenewFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetVpnGatewaysRenewFlagRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpnGatewayIds")
+	delete(f, "AutoRenewFlag")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetVpnGatewaysRenewFlagRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetVpnGatewaysRenewFlagResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SetVpnGatewaysRenewFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *SetVpnGatewaysRenewFlagResponseParams `json:"Response"`
+}
+
+func (r *SetVpnGatewaysRenewFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetVpnGatewaysRenewFlagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SourceIpTranslationNatRule struct {
 	// Resource ID
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
@@ -19140,6 +19382,40 @@ type Tag struct {
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
+type TrafficPackage struct {
+	// Unique traffic package ID
+	TrafficPackageId *string `json:"TrafficPackageId,omitempty" name:"TrafficPackageId"`
+
+	// Traffic package name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrafficPackageName *string `json:"TrafficPackageName,omitempty" name:"TrafficPackageName"`
+
+	// Traffic package size in GB
+	TotalAmount *float64 `json:"TotalAmount,omitempty" name:"TotalAmount"`
+
+	// Traffic package balance in GB
+	RemainingAmount *float64 `json:"RemainingAmount,omitempty" name:"RemainingAmount"`
+
+	// Traffic package status. Valid values: `AVAILABLE`, `EXPIRED`, `EXHAUSTED`, `REFUNDED`, `DELETED`
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Traffic package creation time
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+
+	// Traffic package expiration time
+	Deadline *string `json:"Deadline,omitempty" name:"Deadline"`
+
+	// Used traffic in GB
+	UsedAmount *float64 `json:"UsedAmount,omitempty" name:"UsedAmount"`
+
+	// Traffic package tag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
+
+	// Traffic package type (idle-time or full-time)
+	DeductType *string `json:"DeductType,omitempty" name:"DeductType"`
+}
+
 // Predefined struct for user
 type TransformAddressRequestParams struct {
 	// The ID of the instance with a common public IP to be operated on, such as `ins-11112222`. You can query the instance ID by logging into the [CVM console](https://console.cloud.tencent.com/cvm). You can also obtain the parameter value from the `InstanceId` field in the returned result of the API [DescribeInstances](https://intl.cloud.tencent.com/document/product/213/33256).
@@ -19174,6 +19450,12 @@ func (r *TransformAddressRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type TransformAddressResponseParams struct {
+
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+
+	AddressId *string `json:"AddressId,omitempty" name:"AddressId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
