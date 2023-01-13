@@ -79,12 +79,17 @@ func NewApplyCertificateResponse() (response *ApplyCertificateResponse) {
 //  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
 //  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_MAINDOMAINCERTIFICATECOUNTLIMIT = "FailedOperation.MainDomainCertificateCountLimit"
 //  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  FAILEDOPERATION_PACKAGECOUNTLIMIT = "FailedOperation.PackageCountLimit"
+//  FAILEDOPERATION_PACKAGEEXPIRED = "FailedOperation.PackageExpired"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PACKAGEIDSINVALID = "InvalidParameter.PackageIdsInvalid"
 func (c *Client) ApplyCertificate(request *ApplyCertificateRequest) (response *ApplyCertificateResponse, err error) {
     return c.ApplyCertificateWithContext(context.Background(), request)
 }
@@ -105,12 +110,17 @@ func (c *Client) ApplyCertificate(request *ApplyCertificateRequest) (response *A
 //  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
 //  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_MAINDOMAINCERTIFICATECOUNTLIMIT = "FailedOperation.MainDomainCertificateCountLimit"
 //  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  FAILEDOPERATION_PACKAGECOUNTLIMIT = "FailedOperation.PackageCountLimit"
+//  FAILEDOPERATION_PACKAGEEXPIRED = "FailedOperation.PackageExpired"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PACKAGEIDSINVALID = "InvalidParameter.PackageIdsInvalid"
 func (c *Client) ApplyCertificateWithContext(ctx context.Context, request *ApplyCertificateRequest) (response *ApplyCertificateResponse, err error) {
     if request == nil {
         request = NewApplyCertificateRequest()
@@ -220,6 +230,7 @@ func NewCommitCertificateInformationResponse() (response *CommitCertificateInfor
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
 func (c *Client) CommitCertificateInformation(request *CommitCertificateInformationRequest) (response *CommitCertificateInformationResponse, err error) {
     return c.CommitCertificateInformationWithContext(context.Background(), request)
 }
@@ -237,6 +248,7 @@ func (c *Client) CommitCertificateInformation(request *CommitCertificateInformat
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
 func (c *Client) CommitCertificateInformationWithContext(ctx context.Context, request *CommitCertificateInformationRequest) (response *CommitCertificateInformationResponse, err error) {
     if request == nil {
         request = NewCommitCertificateInformationRequest()
@@ -275,6 +287,7 @@ func NewDeleteCertificateResponse() (response *DeleteCertificateResponse) {
 // This API is used to delete a certificate.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
@@ -283,6 +296,7 @@ func NewDeleteCertificateResponse() (response *DeleteCertificateResponse) {
 //  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
 //  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_DELETERESOURCEFAILED = "FailedOperation.DeleteResourceFailed"
 //  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
 //  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
@@ -292,6 +306,7 @@ func NewDeleteCertificateResponse() (response *DeleteCertificateResponse) {
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response *DeleteCertificateResponse, err error) {
     return c.DeleteCertificateWithContext(context.Background(), request)
 }
@@ -300,6 +315,7 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
 // This API is used to delete a certificate.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
@@ -308,6 +324,7 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
 //  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
 //  FAILEDOPERATION_CERTIFICATEMISMATCH = "FailedOperation.CertificateMismatch"
 //  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_DELETERESOURCEFAILED = "FailedOperation.DeleteResourceFailed"
 //  FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
 //  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
@@ -317,6 +334,7 @@ func (c *Client) DeleteCertificate(request *DeleteCertificateRequest) (response 
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DeleteCertificateWithContext(ctx context.Context, request *DeleteCertificateRequest) (response *DeleteCertificateResponse, err error) {
     if request == nil {
         request = NewDeleteCertificateRequest()
@@ -373,6 +391,7 @@ func NewDescribeCertificateResponse() (response *DescribeCertificateResponse) {
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificate(request *DescribeCertificateRequest) (response *DescribeCertificateResponse, err error) {
     return c.DescribeCertificateWithContext(context.Background(), request)
 }
@@ -399,6 +418,7 @@ func (c *Client) DescribeCertificate(request *DescribeCertificateRequest) (respo
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificateWithContext(ctx context.Context, request *DescribeCertificateRequest) (response *DescribeCertificateResponse, err error) {
     if request == nil {
         request = NewDescribeCertificateRequest()
@@ -444,6 +464,8 @@ func NewDescribeCertificateDetailResponse() (response *DescribeCertificateDetail
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEEMPTY = "InternalError.BackendResponseEmpty"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailRequest) (response *DescribeCertificateDetailResponse, err error) {
     return c.DescribeCertificateDetailWithContext(context.Background(), request)
 }
@@ -459,6 +481,8 @@ func (c *Client) DescribeCertificateDetail(request *DescribeCertificateDetailReq
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEEMPTY = "InternalError.BackendResponseEmpty"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificateDetailWithContext(ctx context.Context, request *DescribeCertificateDetailRequest) (response *DescribeCertificateDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCertificateDetailRequest()
@@ -553,6 +577,7 @@ func NewDescribeCertificatesResponse() (response *DescribeCertificatesResponse) 
 // This API is used to get the certificate list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
@@ -569,7 +594,9 @@ func NewDescribeCertificatesResponse() (response *DescribeCertificatesResponse) 
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
     return c.DescribeCertificatesWithContext(context.Background(), request)
 }
@@ -578,6 +605,7 @@ func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (res
 // This API is used to get the certificate list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
@@ -594,7 +622,9 @@ func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (res
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
     if request == nil {
         request = NewDescribeCertificatesRequest()
@@ -719,6 +749,7 @@ func NewModifyCertificateAliasResponse() (response *ModifyCertificateAliasRespon
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ModifyCertificateAlias(request *ModifyCertificateAliasRequest) (response *ModifyCertificateAliasResponse, err error) {
     return c.ModifyCertificateAliasWithContext(context.Background(), request)
 }
@@ -733,6 +764,7 @@ func (c *Client) ModifyCertificateAlias(request *ModifyCertificateAliasRequest) 
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ModifyCertificateAliasWithContext(ctx context.Context, request *ModifyCertificateAliasRequest) (response *ModifyCertificateAliasResponse, err error) {
     if request == nil {
         request = NewModifyCertificateAliasRequest()
@@ -969,7 +1001,11 @@ func NewUploadCertificateResponse() (response *UploadCertificateResponse) {
 // This API is used to upload a certificate.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
 //  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
@@ -987,6 +1023,8 @@ func NewUploadCertificateResponse() (response *UploadCertificateResponse) {
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) UploadCertificate(request *UploadCertificateRequest) (response *UploadCertificateResponse, err error) {
     return c.UploadCertificateWithContext(context.Background(), request)
 }
@@ -995,7 +1033,11 @@ func (c *Client) UploadCertificate(request *UploadCertificateRequest) (response 
 // This API is used to upload a certificate.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
 //  FAILEDOPERATION_CANNOTBEDELETEDWITHINHOUR = "FailedOperation.CannotBeDeletedWithinHour"
@@ -1013,6 +1055,8 @@ func (c *Client) UploadCertificate(request *UploadCertificateRequest) (response 
 //  FAILEDOPERATION_ORDERALREADYREPLACED = "FailedOperation.OrderAlreadyReplaced"
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) UploadCertificateWithContext(ctx context.Context, request *UploadCertificateRequest) (response *UploadCertificateResponse, err error) {
     if request == nil {
         request = NewUploadCertificateRequest()

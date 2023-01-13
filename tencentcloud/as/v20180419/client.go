@@ -405,6 +405,7 @@ func NewCreateAutoScalingGroupResponse() (response *CreateAutoScalingGroupRespon
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
+//  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONEMISMATCHREGION = "InvalidParameterValue.ZoneMismatchRegion"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -454,6 +455,7 @@ func (c *Client) CreateAutoScalingGroup(request *CreateAutoScalingGroupRequest) 
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
+//  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONEMISMATCHREGION = "InvalidParameterValue.ZoneMismatchRegion"
 //  LIMITEXCEEDED = "LimitExceeded"
@@ -1095,6 +1097,7 @@ func NewCreateScalingPolicyResponse() (response *CreateScalingPolicyResponse) {
 // This API (CreateScalingPolicy) is used to create an alarm trigger policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLMONITORERROR = "InternalError.CallMonitorError"
 //  INTERNALERROR_CALLNOTIFICATIONERROR = "InternalError.CallNotificationError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
@@ -1116,6 +1119,7 @@ func (c *Client) CreateScalingPolicy(request *CreateScalingPolicyRequest) (respo
 // This API (CreateScalingPolicy) is used to create an alarm trigger policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLMONITORERROR = "InternalError.CallMonitorError"
 //  INTERNALERROR_CALLNOTIFICATIONERROR = "InternalError.CallNotificationError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"

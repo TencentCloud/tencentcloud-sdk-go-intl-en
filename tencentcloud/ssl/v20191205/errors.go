@@ -17,11 +17,20 @@ package v20191205
 const (
 	// error codes for specific actions
 
+	// A CAM signature/authentication error occurred.
+	AUTHFAILURE = "AuthFailure"
+
+	// The operation is unauthorized.
+	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
 	// You do not have permission to perform this operation.
 	FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+
+	// A CAM authentication error occurred.
+	FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
 
 	// Failed to cancel the order.
 	FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
@@ -47,6 +56,9 @@ const (
 	// The certificate does not exist.
 	FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 
+	// The certificate is associated with a Tencent Cloud resource and cannot be deleted.
+	FAILEDOPERATION_DELETERESOURCEFAILED = "FailedOperation.DeleteResourceFailed"
+
 	// The number of free certificates exceeds the maximum value.
 	FAILEDOPERATION_EXCEEDSFREELIMIT = "FailedOperation.ExceedsFreeLimit"
 
@@ -55,6 +67,9 @@ const (
 
 	// Incorrect parameters.
 	FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+
+	// The number of free certificates applied for under the primary domain name (%s) has reached the upper limit of %s. Please purchase a paid certificate.
+	FAILEDOPERATION_MAINDOMAINCERTIFICATECOUNTLIMIT = "FailedOperation.MainDomainCertificateCountLimit"
 
 	// The CA system is busy. Try again later.
 	FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
@@ -71,6 +86,33 @@ const (
 	// Failed to reissue a certificate.
 	FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 
+	// The remaining benefit points are insufficient.
+	FAILEDOPERATION_PACKAGECOUNTLIMIT = "FailedOperation.PackageCountLimit"
+
+	// The benefit package has expired.
+	FAILEDOPERATION_PACKAGEEXPIRED = "FailedOperation.PackageExpired"
+
+	// A system error occurred.
+	FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
+
+	// The backend service response is empty.
+	INTERNALERROR_BACKENDRESPONSEEMPTY = "InternalError.BackendResponseEmpty"
+
+	// An error occurred with the backend service response.
+	INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
+
+	// The parameter is incorrect.
+	INVALIDPARAMETER = "InvalidParameter"
+
+	// The list of benefit point IDs is invalid.
+	INVALIDPARAMETER_PACKAGEIDSINVALID = "InvalidParameter.PackageIdsInvalid"
+
+	// The parameter is incorrect.
+	INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+
+	// The API rate limit is reached.
+	LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 )

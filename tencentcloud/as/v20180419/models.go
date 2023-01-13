@@ -990,6 +990,9 @@ type CreateLaunchConfigurationRequestParams struct {
 	// HPC ID<br>
 	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
+
+	// IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 type CreateLaunchConfigurationRequest struct {
@@ -1077,6 +1080,9 @@ type CreateLaunchConfigurationRequest struct {
 	// HPC ID<br>
 	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
+
+	// IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 func (r *CreateLaunchConfigurationRequest) ToJsonString() string {
@@ -1114,6 +1120,7 @@ func (r *CreateLaunchConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "InstanceChargePrepaid")
 	delete(f, "DiskTypePolicy")
 	delete(f, "HpcClusterId")
+	delete(f, "IPv6InternetAccessible")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchConfigurationRequest has unknown keys!", "")
 	}
@@ -3125,7 +3132,7 @@ type EnhancedService struct {
 	// Deprecated parameter.
 	AutomationService []*RunAutomationServiceEnabled `json:"AutomationService,omitempty" name:"AutomationService"`
 
-
+	// Enable TAT service. If this parameter is not specified, the default logic is the same as that of the CVM instance. Note: This field may return `null`, indicating that no valid values can be obtained.
 	AutomationToolsService *RunAutomationServiceEnabled `json:"AutomationToolsService,omitempty" name:"AutomationToolsService"`
 }
 
@@ -3249,6 +3256,22 @@ type HostNameSettings struct {
 	// <br><li> UNIQUE. The HostName set in input parameters is the prefix of a host name. Auto Scaling and CVM expand it. The HostName of an instance in the auto scaling group is unique.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HostNameStyle *string `json:"HostNameStyle,omitempty" name:"HostNameStyle"`
+}
+
+type IPv6InternetAccessible struct {
+	// Network billing mode. Valid values: TRAFFIC_POSTPAID_BY_HOUR, BANDWIDTH_PACKAGE. Default value: TRAFFIC_POSTPAID_BY_HOUR. For the current account type, see [Account Type Description](https://intl.cloud.tencent.com/document/product/1199/49090?from_cn_redirect=1#judge).
+	// <br><li> IPv6 supports `TRAFFIC_POSTPAID_BY_HOUR` under a bill-by-IP account.
+	// <br><li> IPv6 supports `BANDWIDTH_PACKAGE` under a bill-by-CVM account.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
+
+	// Maximum outbound bandwidth of the public network, in Mbps. <br>The default value is 0, and no public network bandwidth is allocated to IPv6. The maximum bandwidth varies with the model, availability zone and billing mode. For more information, see [Public Network Bandwidth Cap](https://intl.cloud.tencent.com/document/product/213/12523?from_cn_redirect=1).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Bandwidth package ID. You can obtain the ID from the `BandwidthPackageId` field in the response of the [DescribeBandwidthPackages](https://intl.cloud.tencent.com/document/api/215/19209?from_cn_redirect=1) API.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 }
 
 type Instance struct {
@@ -3484,6 +3507,9 @@ type LaunchConfiguration struct {
 	// HPC ID<br>
 	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
+
+	// IPv6 public network bandwidth configuration.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 type LifecycleActionResultInfo struct {
@@ -4013,6 +4039,9 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	// HPC ID<br>
 	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
+
+	// IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 type ModifyLaunchConfigurationAttributesRequest struct {
@@ -4099,6 +4128,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// HPC ID<br>
 	// Note: This field is default to empty
 	HpcClusterId *string `json:"HpcClusterId,omitempty" name:"HpcClusterId"`
+
+	// IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -4132,6 +4164,7 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "EnhancedService")
 	delete(f, "CamRoleName")
 	delete(f, "HpcClusterId")
+	delete(f, "IPv6InternetAccessible")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -5365,6 +5398,9 @@ type UpgradeLaunchConfigurationRequestParams struct {
 	// <br><li>ORIGINAL: uses the configured cloud disk type
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
+
+	// IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 type UpgradeLaunchConfigurationRequest struct {
@@ -5441,6 +5477,9 @@ type UpgradeLaunchConfigurationRequest struct {
 	// <br><li>ORIGINAL: uses the configured cloud disk type
 	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitempty" name:"DiskTypePolicy"`
+
+	// IPv6 public network bandwidth configuration. If the IPv6 address is available in the new instance, public network bandwidth can be allocated to the IPv6 address. This parameter is invalid if `Ipv6AddressCount` of the scaling group associated with the launch configuration is 0.
+	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitempty" name:"IPv6InternetAccessible"`
 }
 
 func (r *UpgradeLaunchConfigurationRequest) ToJsonString() string {
@@ -5476,6 +5515,7 @@ func (r *UpgradeLaunchConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "InstanceNameSettings")
 	delete(f, "InstanceChargePrepaid")
 	delete(f, "DiskTypePolicy")
+	delete(f, "IPv6InternetAccessible")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeLaunchConfigurationRequest has unknown keys!", "")
 	}

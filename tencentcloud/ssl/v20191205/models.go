@@ -57,6 +57,12 @@ type ApplyCertificateRequestParams struct {
 
 	// Original certificate ID, which is used to apply for a new certificate.
 	OldCertificateId *string `json:"OldCertificateId,omitempty" name:"OldCertificateId"`
+
+	// Benefit package ID, which is used to expand the free certificate package
+	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+
+	// Whether to delete the automatic domain name verification record after issuance, which is no by default. This parameter can be passed in only for domain names of the DNS_AUTO verification type.
+	DeleteDnsAutoRecord *bool `json:"DeleteDnsAutoRecord,omitempty" name:"DeleteDnsAutoRecord"`
 }
 
 type ApplyCertificateRequest struct {
@@ -97,6 +103,12 @@ type ApplyCertificateRequest struct {
 
 	// Original certificate ID, which is used to apply for a new certificate.
 	OldCertificateId *string `json:"OldCertificateId,omitempty" name:"OldCertificateId"`
+
+	// Benefit package ID, which is used to expand the free certificate package
+	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+
+	// Whether to delete the automatic domain name verification record after issuance, which is no by default. This parameter can be passed in only for domain names of the DNS_AUTO verification type.
+	DeleteDnsAutoRecord *bool `json:"DeleteDnsAutoRecord,omitempty" name:"DeleteDnsAutoRecord"`
 }
 
 func (r *ApplyCertificateRequest) ToJsonString() string {
@@ -123,6 +135,8 @@ func (r *ApplyCertificateRequest) FromJsonString(s string) error {
 	delete(f, "CsrKeyPassword")
 	delete(f, "Alias")
 	delete(f, "OldCertificateId")
+	delete(f, "PackageId")
+	delete(f, "DeleteDnsAutoRecord")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCertificateRequest has unknown keys!", "")
 	}
@@ -266,8 +280,8 @@ type Certificates struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 
-	// Status value. `0`: reviewing; `1`: approved; `2`: unapproved; `3`: expired; `4`: DNS record added; `5`: OV/EV certificate, information to be submitted; `6`: canceling order; `7`: canceled; `8`: information submitted, pending confirmation letter upload
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Status. `0`: Reviewing; `1`: Approved; `2`: Unapproved; `3`: Expired; `4`: DNS record added for domain names of the DNS_AUTO verification type; `5`: Enterprise-grade certificate, pending submission; `6`: Canceling order; `7`: Canceled; `8`: Information submitted, pending confirmation letter upload; `9`: Revoking certificate; `10`: Revoked; `11`: Reissuing; `12`: Pending revocation confirmation letter upload; `13`: Pending information submission for the free certificate; `14`: Refunded.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Extended information of the certificate
@@ -353,6 +367,38 @@ type Certificates struct {
 	// List of tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tags `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether the expiration notification was ignored
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsIgnore *bool `json:"IsIgnore,omitempty" name:"IsIgnore"`
+
+	// Whether the certificate is a Chinese SM certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSM *bool `json:"IsSM,omitempty" name:"IsSM"`
+
+	// Certificate algorithm
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptAlgorithm *string `json:"EncryptAlgorithm,omitempty" name:"EncryptAlgorithm"`
+
+	// Encryption algorithm of the uploaded CA certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CAEncryptAlgorithms []*string `json:"CAEncryptAlgorithms,omitempty" name:"CAEncryptAlgorithms"`
+
+	// Expiration time of the uploaded CA certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CAEndTimes []*string `json:"CAEndTimes,omitempty" name:"CAEndTimes"`
+
+	// Generic name of the uploaded CA certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CACommonNames []*string `json:"CACommonNames,omitempty" name:"CACommonNames"`
+
+	// Prereview information of the certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PreAuditInfo *PreAuditInfo `json:"PreAuditInfo,omitempty" name:"PreAuditInfo"`
+
+	// Whether auto-renewal is enabled.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 }
 
 // Predefined struct for user
@@ -606,12 +652,12 @@ type DescribeCertificateDetailResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StatusName *string `json:"StatusName,omitempty" name:"StatusName"`
 
-	// Domain names associated with the certificate (including the primary domain name)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Multiple domain names included in the certificate (excluding the primary domain name, which uses the `Domain` field)
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubjectAltName []*string `json:"SubjectAltName,omitempty" name:"SubjectAltName"`
 
-	// Whether the customer is a VIP customer
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Whether the certificate is a paid one.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsVip *bool `json:"IsVip,omitempty" name:"IsVip"`
 
 	// Whether the certificate is a wildcard certificate
@@ -630,8 +676,8 @@ type DescribeCertificateDetailResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SubmittedData *SubmittedData `json:"SubmittedData,omitempty" name:"SubmittedData"`
 
-	// Whether the certificate can be reissued
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Whether the certificate can be renewed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RenewAble *bool `json:"RenewAble,omitempty" name:"RenewAble"`
 
 	// Whether the certificate can be deployed
@@ -641,6 +687,30 @@ type DescribeCertificateDetailResponseParams struct {
 	// List of associated tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tags `json:"Tags,omitempty" name:"Tags"`
+
+	// Root certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RootCert *RootCertificates `json:"RootCert,omitempty" name:"RootCert"`
+
+	// Chinese SM encryption certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptCert *string `json:"EncryptCert,omitempty" name:"EncryptCert"`
+
+	// Private key of Chinese SM encryption
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptPrivateKey *string `json:"EncryptPrivateKey,omitempty" name:"EncryptPrivateKey"`
+
+	// SHA1 fingerprint of the signature certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertFingerprint *string `json:"CertFingerprint,omitempty" name:"CertFingerprint"`
+
+	// SHA1 fingerprint of the encryption certificate (for Chinese SM certificates only)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptCertFingerprint *string `json:"EncryptCertFingerprint,omitempty" name:"EncryptCertFingerprint"`
+
+	// Certificate algorithm
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptAlgorithm *string `json:"EncryptAlgorithm,omitempty" name:"EncryptAlgorithm"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -934,7 +1004,7 @@ type DescribeCertificatesRequestParams struct {
 	// Pagination offset, starting from 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of certificates on each page. The default value is 20.
+	// Number of entries per page. Default value: `20`. Maximum value: `1000`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Keyword for search, which can be a certificate ID, alias, or domain name, for example, a8xHcaIs
@@ -949,11 +1019,26 @@ type DescribeCertificatesRequestParams struct {
 	// Sorting by expiration time. `DESC`: descending; `ASC`: ascending
 	ExpirationSort *string `json:"ExpirationSort,omitempty" name:"ExpirationSort"`
 
-	// Certificate status
+	// Certificate status. `0`: Reviewing; `1`: Approved; `2`: Unapproved; `3`: Expired; `4`: DNS record added; `5`: Enterprise-grade certificate, pending submission; `6`: Canceling order; `7`: Canceled; `8`: Information submitted, pending confirmation letter upload; `9`: Revoking certificate; `10`: Revoked; `11`: Reissuing; `12`: Pending revocation confirmation letter upload; `13`: Pending information submission for the free certificate.
 	CertificateStatus []*uint64 `json:"CertificateStatus,omitempty" name:"CertificateStatus"`
 
 	// Whether the certificate can be deployed. `1`: yes; `0`: no
 	Deployable *uint64 `json:"Deployable,omitempty" name:"Deployable"`
+
+	// Whether to filter uploaded hosted certificates. `1`: Yes; `0`: No.
+	Upload *int64 `json:"Upload,omitempty" name:"Upload"`
+
+	// Whether to filter renewable certificates. `1`: Yes; `0`: No.
+	Renew *int64 `json:"Renew,omitempty" name:"Renew"`
+
+	// Filter by source. `upload`: Uploaded certificate; `buy`: Tencent Cloud certificate. If this parameter is left empty, all certificates will be queried.
+	FilterSource *string `json:"FilterSource,omitempty" name:"FilterSource"`
+
+	// Whether to filter Chinese SM certificates. `1`: Yes; `0`: No.
+	IsSM *int64 `json:"IsSM,omitempty" name:"IsSM"`
+
+	// Whether to filter expiring certificates. `1`: Yes; `0`: No.
+	FilterExpiring *uint64 `json:"FilterExpiring,omitempty" name:"FilterExpiring"`
 }
 
 type DescribeCertificatesRequest struct {
@@ -962,7 +1047,7 @@ type DescribeCertificatesRequest struct {
 	// Pagination offset, starting from 0
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Number of certificates on each page. The default value is 20.
+	// Number of entries per page. Default value: `20`. Maximum value: `1000`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Keyword for search, which can be a certificate ID, alias, or domain name, for example, a8xHcaIs
@@ -977,11 +1062,26 @@ type DescribeCertificatesRequest struct {
 	// Sorting by expiration time. `DESC`: descending; `ASC`: ascending
 	ExpirationSort *string `json:"ExpirationSort,omitempty" name:"ExpirationSort"`
 
-	// Certificate status
+	// Certificate status. `0`: Reviewing; `1`: Approved; `2`: Unapproved; `3`: Expired; `4`: DNS record added; `5`: Enterprise-grade certificate, pending submission; `6`: Canceling order; `7`: Canceled; `8`: Information submitted, pending confirmation letter upload; `9`: Revoking certificate; `10`: Revoked; `11`: Reissuing; `12`: Pending revocation confirmation letter upload; `13`: Pending information submission for the free certificate.
 	CertificateStatus []*uint64 `json:"CertificateStatus,omitempty" name:"CertificateStatus"`
 
 	// Whether the certificate can be deployed. `1`: yes; `0`: no
 	Deployable *uint64 `json:"Deployable,omitempty" name:"Deployable"`
+
+	// Whether to filter uploaded hosted certificates. `1`: Yes; `0`: No.
+	Upload *int64 `json:"Upload,omitempty" name:"Upload"`
+
+	// Whether to filter renewable certificates. `1`: Yes; `0`: No.
+	Renew *int64 `json:"Renew,omitempty" name:"Renew"`
+
+	// Filter by source. `upload`: Uploaded certificate; `buy`: Tencent Cloud certificate. If this parameter is left empty, all certificates will be queried.
+	FilterSource *string `json:"FilterSource,omitempty" name:"FilterSource"`
+
+	// Whether to filter Chinese SM certificates. `1`: Yes; `0`: No.
+	IsSM *int64 `json:"IsSM,omitempty" name:"IsSM"`
+
+	// Whether to filter expiring certificates. `1`: Yes; `0`: No.
+	FilterExpiring *uint64 `json:"FilterExpiring,omitempty" name:"FilterExpiring"`
 }
 
 func (r *DescribeCertificatesRequest) ToJsonString() string {
@@ -1004,6 +1104,11 @@ func (r *DescribeCertificatesRequest) FromJsonString(s string) error {
 	delete(f, "ExpirationSort")
 	delete(f, "CertificateStatus")
 	delete(f, "Deployable")
+	delete(f, "Upload")
+	delete(f, "Renew")
+	delete(f, "FilterSource")
+	delete(f, "IsSM")
+	delete(f, "FilterExpiring")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCertificatesRequest has unknown keys!", "")
 	}
@@ -1295,6 +1400,20 @@ type OperationLog struct {
 	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
 }
 
+type PreAuditInfo struct {
+	// Total number of years of the certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPeriod *int64 `json:"TotalPeriod,omitempty" name:"TotalPeriod"`
+
+	// Current year of the certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NowPeriod *int64 `json:"NowPeriod,omitempty" name:"NowPeriod"`
+
+	// Certificate prereview manager ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ManagerId *string `json:"ManagerId,omitempty" name:"ManagerId"`
+}
+
 type ProjectInfo struct {
 	// Project name
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1411,6 +1530,20 @@ func (r *ReplaceCertificateResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ReplaceCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RootCertificates struct {
+	// Chinese SM signature certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sign *string `json:"Sign,omitempty" name:"Sign"`
+
+	// Chinese SM encryption certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Encrypt *string `json:"Encrypt,omitempty" name:"Encrypt"`
+
+	// Standard certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Standard *string `json:"Standard,omitempty" name:"Standard"`
 }
 
 // Predefined struct for user
