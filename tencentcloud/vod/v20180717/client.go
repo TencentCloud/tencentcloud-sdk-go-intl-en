@@ -802,7 +802,9 @@ func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemp
 }
 
 // CreateContentReviewTemplate
-// This API is used to create custom intelligent video content recognition templates. Up to 50 templates can be created.
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [CreateReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84391?from_cn_redirect=1).
+//
+// This API is used to create a custom audio/video moderation template. Up to 50 templates can be created in total.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -824,7 +826,9 @@ func (c *Client) CreateContentReviewTemplate(request *CreateContentReviewTemplat
 }
 
 // CreateContentReviewTemplate
-// This API is used to create custom intelligent video content recognition templates. Up to 50 templates can be created.
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [CreateReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84391?from_cn_redirect=1).
+//
+// This API is used to create a custom audio/video moderation template. Up to 50 templates can be created in total.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1111,6 +1115,78 @@ func (c *Client) CreateProcedureTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateProcedureTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateReviewTemplateRequest() (request *CreateReviewTemplateRequest) {
+    request = &CreateReviewTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateReviewTemplate")
+    
+    
+    return
+}
+
+func NewCreateReviewTemplateResponse() (response *CreateReviewTemplateResponse) {
+    response = &CreateReviewTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateReviewTemplate
+// This API is used to create a custom moderation template. Up to 50 templates can be created in total.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETER_LABELS = "InvalidParameter.Labels"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELS = "InvalidParameterValue.Labels"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateReviewTemplate(request *CreateReviewTemplateRequest) (response *CreateReviewTemplateResponse, err error) {
+    return c.CreateReviewTemplateWithContext(context.Background(), request)
+}
+
+// CreateReviewTemplate
+// This API is used to create a custom moderation template. Up to 50 templates can be created in total.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETER_LABELS = "InvalidParameter.Labels"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELS = "InvalidParameterValue.Labels"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateReviewTemplateWithContext(ctx context.Context, request *CreateReviewTemplateRequest) (response *CreateReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateReviewTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateReviewTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateReviewTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2060,7 +2136,9 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
 }
 
 // DeleteContentReviewTemplate
-// This API is used to delete custom intelligent video content recognition templates.
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DeleteReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84390?from_cn_redirect=1).
+//
+// This API is used to delete a custom audio/video moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2073,7 +2151,9 @@ func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplat
 }
 
 // DeleteContentReviewTemplate
-// This API is used to delete custom intelligent video content recognition templates.
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DeleteReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84390?from_cn_redirect=1).
+//
+// This API is used to delete a custom audio/video moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2379,6 +2459,66 @@ func (c *Client) DeleteProcedureTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteProcedureTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteReviewTemplateRequest() (request *DeleteReviewTemplateRequest) {
+    request = &DeleteReviewTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteReviewTemplate")
+    
+    
+    return
+}
+
+func NewDeleteReviewTemplateResponse() (response *DeleteReviewTemplateResponse) {
+    response = &DeleteReviewTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteReviewTemplate
+// This API is used to delete a custom moderation template.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteReviewTemplate(request *DeleteReviewTemplateRequest) (response *DeleteReviewTemplateResponse, err error) {
+    return c.DeleteReviewTemplateWithContext(context.Background(), request)
+}
+
+// DeleteReviewTemplate
+// This API is used to delete a custom moderation template.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteReviewTemplateWithContext(ctx context.Context, request *DeleteReviewTemplateRequest) (response *DeleteReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteReviewTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteReviewTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteReviewTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -3392,7 +3532,9 @@ func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentRevie
 }
 
 // DescribeContentReviewTemplates
-// This API is used to get the list of intelligent video content recognition template details according to unique template IDs. The return result includes all eligible custom and [preset intelligent video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33932).
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DescribeReviewTemplates](https://intl.cloud.tencent.com/document/api/266/84389?from_cn_redirect=1).
+//
+// This API is used to get the information of custom and [preset](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF) audio/video moderation templates based on template IDs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3408,7 +3550,9 @@ func (c *Client) DescribeContentReviewTemplates(request *DescribeContentReviewTe
 }
 
 // DescribeContentReviewTemplates
-// This API is used to get the list of intelligent video content recognition template details according to unique template IDs. The return result includes all eligible custom and [preset intelligent video content recognition templates](https://intl.cloud.tencent.com/document/product/266/33932).
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [DescribeReviewTemplates](https://intl.cloud.tencent.com/document/api/266/84389?from_cn_redirect=1).
+//
+// This API is used to get the information of custom and [preset](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.AE.A1.E6.A0.B8.E6.A8.A1.E6.9D.BF) audio/video moderation templates based on template IDs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3924,27 +4068,29 @@ func NewDescribeMediaInfosResponse() (response *DescribeMediaInfosResponse) {
 }
 
 // DescribeMediaInfos
-// 1. This API can get multiple types of information of multiple media files, including:
+// 1. This API is used to get the information of multiple media files. Specifically, the information returned is as follows:
 //
-//     1. Basic information (basicInfo): media name, category, playback address, cover image, etc.
+//     1. `basicInfo`: Basic information including the file name, category, playback URL, and thumbnail.
 //
-//     2. Metadata (metaData): size, duration, video stream information, audio stream information, etc.
+//     2. `metaData`: Metadata including the file size, duration, video stream information, and audio stream information.
 //
-//     3. Information of the transcoding result (transcodeInfo): addresses, video stream parameters, and audio stream parameters of the media files with various specifications generated by transcoding a media file.
+//     3. `transcodeInfo`: Transcoding information including the URLs, video stream parameters, and audio stream parameters of transcoding outputs.
 //
-//     4. Information of the animated image generating result (animatedGraphicsInfo): information of an animated image (such as .gif) generated from a video.
+//     4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
 //
-//     5. Information of a sampled screenshot (sampleSnapshotInfo): information of a sampled screenshot of a video.
+//     5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
 //
-//     6. Information of an image sprite (imageSpriteInfo): information of an image sprite generated from a video.
+//     6. `imageSpriteInfo`: The information of the image sprites generated.
 //
-//     7. Information of a time point screenshot (snapshotByTimeOffsetInfo): information of a time point screenshot of a video.
+//     7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
 //
-//     8. Information of a timestamp (keyFrameDescInfo): information of a timestamp set for a video.
+//     8. `keyFrameDescInfo`: The video timestamp information.
 //
-//     9. Information of transcoding to adaptive bitrate streaming (adaptiveDynamicStreamingInfo): specification, encryption type, container format, etc.
+//     9. `adaptiveDynamicStreamingInfo`: Adaptive bitrate information including the specifications, encryption type, and formats of the streams.
 //
-// 2. The return packet can be configured to only contain certain information.
+//     10. `reviewInfo`: Moderation details for audio/video content and thumbnails.
+//
+// 2. You can specify what information to return.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3960,27 +4106,29 @@ func (c *Client) DescribeMediaInfos(request *DescribeMediaInfosRequest) (respons
 }
 
 // DescribeMediaInfos
-// 1. This API can get multiple types of information of multiple media files, including:
+// 1. This API is used to get the information of multiple media files. Specifically, the information returned is as follows:
 //
-//     1. Basic information (basicInfo): media name, category, playback address, cover image, etc.
+//     1. `basicInfo`: Basic information including the file name, category, playback URL, and thumbnail.
 //
-//     2. Metadata (metaData): size, duration, video stream information, audio stream information, etc.
+//     2. `metaData`: Metadata including the file size, duration, video stream information, and audio stream information.
 //
-//     3. Information of the transcoding result (transcodeInfo): addresses, video stream parameters, and audio stream parameters of the media files with various specifications generated by transcoding a media file.
+//     3. `transcodeInfo`: Transcoding information including the URLs, video stream parameters, and audio stream parameters of transcoding outputs.
 //
-//     4. Information of the animated image generating result (animatedGraphicsInfo): information of an animated image (such as .gif) generated from a video.
+//     4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
 //
-//     5. Information of a sampled screenshot (sampleSnapshotInfo): information of a sampled screenshot of a video.
+//     5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
 //
-//     6. Information of an image sprite (imageSpriteInfo): information of an image sprite generated from a video.
+//     6. `imageSpriteInfo`: The information of the image sprites generated.
 //
-//     7. Information of a time point screenshot (snapshotByTimeOffsetInfo): information of a time point screenshot of a video.
+//     7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
 //
-//     8. Information of a timestamp (keyFrameDescInfo): information of a timestamp set for a video.
+//     8. `keyFrameDescInfo`: The video timestamp information.
 //
-//     9. Information of transcoding to adaptive bitrate streaming (adaptiveDynamicStreamingInfo): specification, encryption type, container format, etc.
+//     9. `adaptiveDynamicStreamingInfo`: Adaptive bitrate information including the specifications, encryption type, and formats of the streams.
 //
-// 2. The return packet can be configured to only contain certain information.
+//     10. `reviewInfo`: Moderation details for audio/video content and thumbnails.
+//
+// 2. You can specify what information to return.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4325,6 +4473,70 @@ func (c *Client) DescribeReviewDetailsWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeReviewDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReviewTemplatesRequest() (request *DescribeReviewTemplatesRequest) {
+    request = &DescribeReviewTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeReviewTemplates")
+    
+    
+    return
+}
+
+func NewDescribeReviewTemplatesResponse() (response *DescribeReviewTemplatesResponse) {
+    response = &DescribeReviewTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeReviewTemplates
+// This API is used to get the information of moderation templates.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeReviewTemplates(request *DescribeReviewTemplatesRequest) (response *DescribeReviewTemplatesResponse, err error) {
+    return c.DescribeReviewTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeReviewTemplates
+// This API is used to get the information of moderation templates.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeReviewTemplatesWithContext(ctx context.Context, request *DescribeReviewTemplatesRequest) (response *DescribeReviewTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeReviewTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReviewTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReviewTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -5930,7 +6142,9 @@ func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemp
 }
 
 // ModifyContentReviewTemplate
-// This API is used to modify custom intelligent video content recognition templates.
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [ModifyReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84388?from_cn_redirect=1).
+//
+// This API is used to modify a custom audio/video moderation template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5952,7 +6166,9 @@ func (c *Client) ModifyContentReviewTemplate(request *ModifyContentReviewTemplat
 }
 
 // ModifyContentReviewTemplate
-// This API is used to modify custom intelligent video content recognition templates.
+// We have <font color=red>stopped updating</font> this API. Our new moderation templates can moderate audio/video as well as images. For details, see [ModifyReviewTemplate](https://intl.cloud.tencent.com/document/api/266/84388?from_cn_redirect=1).
+//
+// This API is used to modify a custom audio/video moderation template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6381,6 +6597,72 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyPersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyReviewTemplateRequest() (request *ModifyReviewTemplateRequest) {
+    request = &ModifyReviewTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyReviewTemplate")
+    
+    
+    return
+}
+
+func NewModifyReviewTemplateResponse() (response *ModifyReviewTemplateResponse) {
+    response = &ModifyReviewTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyReviewTemplate
+// This API is used to modify a custom moderation template.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELS = "InvalidParameterValue.Labels"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyReviewTemplate(request *ModifyReviewTemplateRequest) (response *ModifyReviewTemplateResponse, err error) {
+    return c.ModifyReviewTemplateWithContext(context.Background(), request)
+}
+
+// ModifyReviewTemplate
+// This API is used to modify a custom moderation template.
+//
+// > The templates can only be used by the APIs [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) and [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELS = "InvalidParameterValue.Labels"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyReviewTemplateWithContext(ctx context.Context, request *ModifyReviewTemplateRequest) (response *ModifyReviewTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyReviewTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyReviewTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyReviewTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -7126,9 +7408,9 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 //
 // 7. Adaptive bitrate streaming and encryption
 //
-// 8. Detecting pornographic, terrorist, and politically sensitive content
+// 8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
 //
-// 9. Content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
+// 9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
 //
 // 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
 //
@@ -7174,9 +7456,9 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 //
 // 7. Adaptive bitrate streaming and encryption
 //
-// 8. Detecting pornographic, terrorist, and politically sensitive content
+// 8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
 //
-// 9. Content analysis for labeling, categorization, thumbnail generation, or frame-specific labeling
+// 9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
 //
 // 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
 //
@@ -7236,13 +7518,17 @@ func NewProcessMediaByProcedureResponse() (response *ProcessMediaByProcedureResp
 }
 
 // ProcessMediaByProcedure
-// This API is used to initiate a processing task for a VOD video with a task flow template.
+// This API is used to start a task flow on a video.
 //
 // There are two ways to create a task flow template:
 //
 // 1. Create and modify a task flow template in the console;
 //
-// 2. Create a task flow template through the task flow template API.
+// 2. Create a task flow template using the `CreateProcedureTemplate` API.
+//
+// 
+//
+// If event notifications are used, the event type for moderation tasks is [ReviewAudioVideoComplete](https://intl.cloud.tencent.com/document/product/266/81258?from_cn_redirect=1), and that for other tasks is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7263,13 +7549,17 @@ func (c *Client) ProcessMediaByProcedure(request *ProcessMediaByProcedureRequest
 }
 
 // ProcessMediaByProcedure
-// This API is used to initiate a processing task for a VOD video with a task flow template.
+// This API is used to start a task flow on a video.
 //
 // There are two ways to create a task flow template:
 //
 // 1. Create and modify a task flow template in the console;
 //
-// 2. Create a task flow template through the task flow template API.
+// 2. Create a task flow template using the `CreateProcedureTemplate` API.
+//
+// 
+//
+// If event notifications are used, the event type for moderation tasks is [ReviewAudioVideoComplete](https://intl.cloud.tencent.com/document/product/266/81258?from_cn_redirect=1), and that for other tasks is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7758,7 +8048,7 @@ func NewResetProcedureTemplateResponse() (response *ResetProcedureTemplateRespon
 }
 
 // ResetProcedureTemplate
-// This API is used to reset a custom task flow template.  
+// This API is used to modify a custom task flow template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7773,7 +8063,7 @@ func (c *Client) ResetProcedureTemplate(request *ResetProcedureTemplateRequest) 
 }
 
 // ResetProcedureTemplate
-// This API is used to reset a custom task flow template.  
+// This API is used to modify a custom task flow template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7945,6 +8235,66 @@ func (c *Client) ReviewAudioVideoWithContext(ctx context.Context, request *Revie
     request.SetContext(ctx)
     
     response = NewReviewAudioVideoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReviewImageRequest() (request *ReviewImageRequest) {
+    request = &ReviewImageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ReviewImage")
+    
+    
+    return
+}
+
+func NewReviewImageResponse() (response *ReviewImageResponse) {
+    response = &ReviewImageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ReviewImage
+// This API is used to moderate an image stored in VOD (detect pornographic and terrorist content).><li>The image file must be smaller than 5 MB.</li> ><li>To ensure the accuracy of moderation results, the image resolution must be higher than 256 x 256 px.</li> ><li>The format must be PNG, JPG, JPEG, BMP, GIF, or WEBP.</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ReviewImage(request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
+    return c.ReviewImageWithContext(context.Background(), request)
+}
+
+// ReviewImage
+// This API is used to moderate an image stored in VOD (detect pornographic and terrorist content).><li>The image file must be smaller than 5 MB.</li> ><li>To ensure the accuracy of moderation results, the image resolution must be higher than 256 x 256 px.</li> ><li>The format must be PNG, JPG, JPEG, BMP, GIF, or WEBP.</li>
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ReviewImageWithContext(ctx context.Context, request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
+    if request == nil {
+        request = NewReviewImageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReviewImage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReviewImageResponse()
     err = c.Send(request, response)
     return
 }

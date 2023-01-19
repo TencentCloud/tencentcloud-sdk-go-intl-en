@@ -432,10 +432,12 @@ type BatchDomainOperateErrors struct {
 }
 
 type CallBackRuleInfo struct {
-	// Rule creation time.
+	// The rule creation time.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Rule update time.
+	// The rule update time.
+	// Note: Beijing time (UTC+8) is used.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Template ID.
@@ -567,7 +569,8 @@ type CertInfo struct {
 	// Description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Creation time in UTC format.
+	// The creation time in UTC format.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Certificate content.
@@ -578,7 +581,8 @@ type CertInfo struct {
 	// 1: Tencent Cloud-hosted certificate
 	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
 
-	// Certificate expiration time in UTC format.
+	// The certificate expiration time in UTC format.
+	// Note: Beijing time (UTC+8) is used.
 	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
 
 	// List of domain names that use this certificate.
@@ -7558,7 +7562,8 @@ type DomainCertInfo struct {
 	// Description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
-	// Creation time in UTC format.
+	// The creation time in UTC format.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Certificate content.
@@ -7569,7 +7574,8 @@ type DomainCertInfo struct {
 	// 1: Tencent Cloud-hosted certificate.
 	CertType *int64 `json:"CertType,omitempty" name:"CertType"`
 
-	// Certificate expiration time in UTC format.
+	// The certificate expiration time in UTC format.
+	// Note: Beijing time (UTC+8) is used.
 	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
 
 	// Domain name that uses this certificate.
@@ -7602,7 +7608,8 @@ type DomainInfo struct {
 	// 1: activated.
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// Creation time.
+	// The time when the domain was added.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Whether there is a CNAME record pointing to a fixed rule domain name:
@@ -7630,7 +7637,8 @@ type DomainInfo struct {
 	// Disused parameter, which can be ignored.
 	RentTag *int64 `json:"RentTag,omitempty" name:"RentTag"`
 
-	// Disused parameter, which can be ignored.
+	// A disused parameter.
+	// Note: Beijing time (UTC+8) is used.
 	RentExpireTime *string `json:"RentExpireTime,omitempty" name:"RentExpireTime"`
 
 	// 0: LVB.
@@ -7916,10 +7924,12 @@ type ForbidStreamInfo struct {
 	// Stream name.
 	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
 
-	// Creation time.
+	// The creation time.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Forbidding expiration time.
+	// The end time.
+	// Note: Beijing time (UTC+8) is used.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
 	// The push path.
@@ -8013,7 +8023,8 @@ type LiveDomainCertBindings struct {
 	// 0: Disabled
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// The expiration time of the certificate.
+	// The certificate expiration time.
+	// Note: Beijing time (UTC+8) is used.
 	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
 
 	// The certificate ID.
@@ -8023,6 +8034,7 @@ type LiveDomainCertBindings struct {
 	CloudCertId *string `json:"CloudCertId,omitempty" name:"CloudCertId"`
 
 	// The last updated time.
+	// Note: Beijing time (UTC+8) is used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
@@ -10031,10 +10043,12 @@ func (r *ResumeLiveStreamResponse) FromJsonString(s string) error {
 }
 
 type RuleInfo struct {
-	// Rule creation time.
+	// The rule creation time.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Rule update time.
+	// The rule update time.
+	// Note: Beijing time (UTC+8) is used.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 
 	// Template ID.
@@ -10670,7 +10684,8 @@ type WatermarkInfo struct {
 	// Current status. 0: not used. 1: in use.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Creation time.
+	// The time when the watermark was added.
+	// Note: Beijing time (UTC+8) is used.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Watermark width.

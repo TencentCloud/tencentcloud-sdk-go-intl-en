@@ -2664,6 +2664,58 @@ func (r *ConfirmEventsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ContentReviewOcrResult struct {
+	// The confidence score for the OCR-based moderation result. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The suggestion for handling the suspicious content detected based on OCR. Valid values:
+	// <li>pass/li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The list of suspicious keywords detected based on OCR.
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
+
+	// The coordinates (pixel) of the top-left and bottom-right corners of the frame where a suspicious keyword appears. Format: [x1, y1, x2, y2].
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
+}
+
+type ContentReviewResult struct {
+	// The result type. Valid values:
+	// <li>Porn.Image: Pornographic content in the image</li>
+	// <li>Terrorism.Image: Terrorist content in the image</li>
+	// <li>Political.Image: Politically sensitive content in the image</li>
+	// <li>Porn.Ocr: Pornographic content in the image based on OCR</li>
+	// <li>Terrorism.Ocr: Terrorist content in the image based on OCR</li>
+	// <li>Political.Ocr: Politically sensitive content in the image based on OCR</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The pornographic content detected in the image. This parameter is valid if `Type` is `Porn.Image`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PornImageResult *PornImageResult `json:"PornImageResult,omitempty" name:"PornImageResult"`
+
+	// The terrorist content detected in the image. This parameter is valid if `Type` is `Terrorism.Image`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TerrorismImageResult *TerrorismImageResult `json:"TerrorismImageResult,omitempty" name:"TerrorismImageResult"`
+
+	// The politically sensitive content detected in the image. This parameter is valid if `Type` is `Political.Image`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PoliticalImageResult *PoliticalImageResult `json:"PoliticalImageResult,omitempty" name:"PoliticalImageResult"`
+
+	// The pornographic content detected in the image based on OCR. This parameter is valid if `Type` is `Porn.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PornOcrResult *ContentReviewOcrResult `json:"PornOcrResult,omitempty" name:"PornOcrResult"`
+
+	// The terrorist content detected in the image based on OCR. This parameter is valid if `Type` is `Terrorism.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	TerrorismOcrResult *ContentReviewOcrResult `json:"TerrorismOcrResult,omitempty" name:"TerrorismOcrResult"`
+
+	// The politically sensitive content detected in the image based on OCR. This parameter is valid if `Type` is `Political.Ocr`.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PoliticalOcrResult *ContentReviewOcrResult `json:"PoliticalOcrResult,omitempty" name:"PoliticalOcrResult"`
+}
+
 type ContentReviewTemplateItem struct {
 	// Unique ID of an intelligent recognition template
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
@@ -3894,13 +3946,17 @@ type CreateProcedureTemplateRequestParams struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Intelligent recognition task
+	// The information of the intelligent moderation task\*.
+	// <font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -3909,8 +3965,8 @@ type CreateProcedureTemplateRequestParams struct {
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+	// The information of the moderation task.
+	ReviewAudioVideoTask *ProcedureReviewAudioVideoTaskInput `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 }
 
 type CreateProcedureTemplateRequest struct {
@@ -3919,13 +3975,17 @@ type CreateProcedureTemplateRequest struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Intelligent recognition task
+	// The information of the intelligent moderation task\*.
+	// <font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -3934,8 +3994,8 @@ type CreateProcedureTemplateRequest struct {
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+	// The information of the moderation task.
+	ReviewAudioVideoTask *ProcedureReviewAudioVideoTaskInput `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 }
 
 func (r *CreateProcedureTemplateRequest) ToJsonString() string {
@@ -3951,12 +4011,13 @@ func (r *CreateProcedureTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "SubAppId")
 	delete(f, "Comment")
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiAnalysisTask")
 	delete(f, "AiRecognitionTask")
-	delete(f, "SubAppId")
+	delete(f, "ReviewAudioVideoTask")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProcedureTemplateRequest has unknown keys!", "")
 	}
@@ -3982,6 +4043,81 @@ func (r *CreateProcedureTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateProcedureTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateReviewTemplateRequestParams struct {
+	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>Polity: Politically sensitive content</li> <li>`Moan`: Moaning</li>
+	Labels []*string `json:"Labels,omitempty" name:"Labels"`
+
+
+	SubAppId *string `json:"SubAppId,omitempty" name:"SubAppId"`
+
+
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+type CreateReviewTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>Polity: Politically sensitive content</li> <li>`Moan`: Moaning</li>
+	Labels []*string `json:"Labels,omitempty" name:"Labels"`
+
+	SubAppId *string `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+func (r *CreateReviewTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReviewTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Labels")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReviewTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateReviewTemplateResponseParams struct {
+
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateReviewTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateReviewTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateReviewTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5717,6 +5853,67 @@ func (r *DeleteProcedureTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteProcedureTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteReviewTemplateRequestParams struct {
+	// The unique ID of the moderation template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type DeleteReviewTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the moderation template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DeleteReviewTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteReviewTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteReviewTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteReviewTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteReviewTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteReviewTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteReviewTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7760,21 +7957,23 @@ type DescribeMediaInfosRequestParams struct {
 	// List of media file IDs. N starts from 0 and can be up to 19.
 	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
-	// Specifies information entry that needs to be returned by all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-	// <li>basicInfo (basic video information).</li>
-	// <li>metaData (video metadata).</li>
-	// <li>transcodeInfo (result information of video transcoding).</li>
-	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
-	// <li>imageSpriteInfo (image sprite information).</li>
-	// <li>snapshotByTimeOffsetInfo (time point screenshot information).</li>
-	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
-	// <li>keyFrameDescInfo (timestamp information).</li>
-	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-	Filters []*string `json:"Filters,omitempty" name:"Filters"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
+	// <li>`basicInfo` (basic information)</li>
+	// <li>`metaData` (video metadata)</li>
+	// <li>`transcodeInfo` (transcoding information)</li>
+	// <li>`animatedGraphicsInfo` (animated image information)</li>
+	// <li>`imageSpriteInfo` (image sprite information)</li>
+	// <li>`snapshotByTimeOffsetInfo` (time point screenshot information)</li>
+	// <li>`sampleSnapshotInfo` (sampled screenshot information)</li>
+	// <li>`keyFrameDescInfo` (timestamp information)</li>
+	// <li>`adaptiveDynamicStreamingInfo` (adaptive bitrate information)</li>
+	// <li>`miniProgramReviewInfo` (WeChat Mini Program moderation information)</li>
+	// <li>`subtitleInfo` (subtitle information)</li>
+	// <li>`reviewInfo` (moderation information)</li>
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribeMediaInfosRequest struct {
@@ -7783,21 +7982,23 @@ type DescribeMediaInfosRequest struct {
 	// List of media file IDs. N starts from 0 and can be up to 19.
 	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
-	// Specifies information entry that needs to be returned by all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-	// <li>basicInfo (basic video information).</li>
-	// <li>metaData (video metadata).</li>
-	// <li>transcodeInfo (result information of video transcoding).</li>
-	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
-	// <li>imageSpriteInfo (image sprite information).</li>
-	// <li>snapshotByTimeOffsetInfo (time point screenshot information).</li>
-	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
-	// <li>keyFrameDescInfo (timestamp information).</li>
-	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-	Filters []*string `json:"Filters,omitempty" name:"Filters"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
+	// <li>`basicInfo` (basic information)</li>
+	// <li>`metaData` (video metadata)</li>
+	// <li>`transcodeInfo` (transcoding information)</li>
+	// <li>`animatedGraphicsInfo` (animated image information)</li>
+	// <li>`imageSpriteInfo` (image sprite information)</li>
+	// <li>`snapshotByTimeOffsetInfo` (time point screenshot information)</li>
+	// <li>`sampleSnapshotInfo` (sampled screenshot information)</li>
+	// <li>`keyFrameDescInfo` (timestamp information)</li>
+	// <li>`adaptiveDynamicStreamingInfo` (adaptive bitrate information)</li>
+	// <li>`miniProgramReviewInfo` (WeChat Mini Program moderation information)</li>
+	// <li>`subtitleInfo` (subtitle information)</li>
+	// <li>`reviewInfo` (moderation information)</li>
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeMediaInfosRequest) ToJsonString() string {
@@ -7813,8 +8014,8 @@ func (r *DescribeMediaInfosRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileIds")
-	delete(f, "Filters")
 	delete(f, "SubAppId")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMediaInfosRequest has unknown keys!", "")
 	}
@@ -8154,6 +8355,9 @@ func (r *DescribePersonSamplesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProcedureTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name filter of task flow template. Array length limit: 100.
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
@@ -8167,14 +8371,14 @@ type DescribeProcedureTemplatesRequestParams struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 type DescribeProcedureTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Name filter of task flow template. Array length limit: 100.
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
@@ -8188,9 +8392,6 @@ type DescribeProcedureTemplatesRequest struct {
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
 func (r *DescribeProcedureTemplatesRequest) ToJsonString() string {
@@ -8205,11 +8406,11 @@ func (r *DescribeProcedureTemplatesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "Names")
 	delete(f, "Type")
 	delete(f, "Offset")
 	delete(f, "Limit")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProcedureTemplatesRequest has unknown keys!", "")
 	}
@@ -8318,6 +8519,98 @@ func (r *DescribeReviewDetailsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeReviewDetailsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReviewTemplatesRequestParams struct {
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *int64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The IDs of the moderation templates to query. Array length limit: 100.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// The template type. Valid values:
+	// <li>Preset</li>
+	// <li>Custom</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of records to return. Default value: 10. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeReviewTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *int64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The IDs of the moderation templates to query. Array length limit: 100.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// The template type. Valid values:
+	// <li>Preset</li>
+	// <li>Custom</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of records to return. Default value: 10. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeReviewTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReviewTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "Definitions")
+	delete(f, "Type")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReviewTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReviewTemplatesResponseParams struct {
+	// The total number of records that meet the conditions.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The details of the moderation templates.
+	ReviewTemplateSet []*ReviewTemplate `json:"ReviewTemplateSet,omitempty" name:"ReviewTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeReviewTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeReviewTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeReviewTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReviewTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9680,6 +9973,18 @@ type DrmStreamingsInfoForUpdate struct {
 	FairPlayDefinition *uint64 `json:"FairPlayDefinition,omitempty" name:"FairPlayDefinition"`
 }
 
+type DynamicRangeInfo struct {
+	// The dynamic range information. Valid values:
+	// <li>`SDR`: Standard Dynamic Range</li>
+	// <li>`HDR`: High Dynamic Range</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The HDR type. This parameter is valid only if `Type` is `HDR`. Valid values:
+	// <li>`hdr10`</li>
+	// <li>`hlg`</li>
+	HDRType *string `json:"HDRType,omitempty" name:"HDRType"`
+}
+
 type EditMediaFileInfo struct {
 	// Video ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
@@ -9744,9 +10049,11 @@ type EditMediaTask struct {
 	// The metadata of the output video.
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 
-	// If a video processing flow is specified when a video editing task is initiated, this field will be the ID of the task flow.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
 	ProcedureTaskId *string `json:"ProcedureTaskId,omitempty" name:"ProcedureTaskId"`
+
+	// The task ID for the task type `ReviewAudioVideo`. If a task flow (`ProcedureName`) is specified by [EditMedia](https://intl.cloud.tencent.com/document/api/266/34783?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+	ReviewAudioVideoTaskId *string `json:"ReviewAudioVideoTaskId,omitempty" name:"ReviewAudioVideoTaskId"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -10007,6 +10314,10 @@ type ExtractTraceWatermarkRequestParams struct {
 	// The URL of the media on which digital watermark extraction is to be performed.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
+	// The ID of the file specified by `Url`.
+	// <li><font color=red>Note</font>: This parameter is required.</li>
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
@@ -10028,6 +10339,10 @@ type ExtractTraceWatermarkRequest struct {
 	
 	// The URL of the media on which digital watermark extraction is to be performed.
 	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// The ID of the file specified by `Url`.
+	// <li><font color=red>Note</font>: This parameter is required.</li>
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -10058,6 +10373,7 @@ func (r *ExtractTraceWatermarkRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Url")
+	delete(f, "FileId")
 	delete(f, "SubAppId")
 	delete(f, "SessionContext")
 	delete(f, "SessionId")
@@ -10211,6 +10527,20 @@ type FileDeleteTask struct {
 	FileDeleteResultInfo []*FileDeleteResultItem `json:"FileDeleteResultInfo,omitempty" name:"FileDeleteResultInfo"`
 }
 
+type FileReviewInfo struct {
+	// Audio/Video moderation details\*.
+	// 
+	// \* This parameter only contains the information of moderation tasks initiated by the [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) API.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MediaReviewInfo *ReviewInfo `json:"MediaReviewInfo,omitempty" name:"MediaReviewInfo"`
+
+	// Thumbnail moderation details\*.
+	// 
+	// \* This parameter only contains the information of moderation tasks initiated by the [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) API.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoverReviewInfo *ReviewInfo `json:"CoverReviewInfo,omitempty" name:"CoverReviewInfo"`
+}
+
 type FileUploadTask struct {
 	// Unique file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
@@ -10218,9 +10548,11 @@ type FileUploadTask struct {
 	// Basic information of media file generated after upload is completed.
 	MediaBasicInfo *MediaBasicInfo `json:"MediaBasicInfo,omitempty" name:"MediaBasicInfo"`
 
-	// If a video processing flow is specified when a video is uploaded, this field will be the ID of the task flow.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The task ID for the task type `Procedure`. If a task flow is specified for [uploaded media](https://intl.cloud.tencent.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E5.8F.91.E8.B5.B7), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
 	ProcedureTaskId *string `json:"ProcedureTaskId,omitempty" name:"ProcedureTaskId"`
+
+	// The task ID for the task type `ReviewAudioVideo`. If a task flow is specified for [uploaded media](https://intl.cloud.tencent.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E5.8F.91.E8.B5.B7), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+	ReviewAudioVideoTaskId *string `json:"ReviewAudioVideoTaskId,omitempty" name:"ReviewAudioVideoTaskId"`
 
 	// Metadata, such as size, duration, video stream information, audio stream information, etc.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -11323,6 +11655,10 @@ type MediaInfo struct {
 
 	// Unique ID of media file.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// Moderation details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReviewInfo *FileReviewInfo `json:"ReviewInfo,omitempty" name:"ReviewInfo"`
 }
 
 type MediaInputInfo struct {
@@ -11969,6 +12305,10 @@ type MediaVideoStreamItem struct {
 
 	// The codec tag. This parameter is valid only if `Codec` is `hevc`.
 	CodecTag *string `json:"CodecTag,omitempty" name:"CodecTag"`
+
+	// Dynamic range information.
+	// <li><font color=red>Note</font>: This parameter is valid for transcoding files generated after 2023-01-10T00:00:00Z.</li>
+	DynamicRangeInfo *DynamicRangeInfo `json:"DynamicRangeInfo,omitempty" name:"DynamicRangeInfo"`
 }
 
 // Predefined struct for user
@@ -13290,6 +13630,84 @@ func (r *ModifyPersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyPersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyReviewTemplateRequestParams struct {
+
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>Polity: Politically sensitive content</li> <li>`Moan`: Moaning</li>
+	Labels []*string `json:"Labels,omitempty" name:"Labels"`
+}
+
+type ModifyReviewTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>Polity: Politically sensitive content</li> <li>`Moan`: Moaning</li>
+	Labels []*string `json:"Labels,omitempty" name:"Labels"`
+}
+
+func (r *ModifyReviewTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyReviewTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "Labels")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyReviewTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyReviewTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyReviewTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyReviewTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyReviewTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyReviewTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -14761,6 +15179,23 @@ type PoliticalConfigureInfoForUpdate struct {
 	OcrReviewInfo *PoliticalOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
+type PoliticalImageResult struct {
+	// The confidence score for the moderation result. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The suggestion for handling the detected politically sensitive content. Valid values:
+	// <li>pass/li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The name of the politically sensitive content or banned icon detected.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The coordinates (pixel) of the top-left and bottom-right corners of the frame where the politically sensitive content or banned icon appears. Format: [x1, y1, x2, y2].
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
+}
+
 type PoliticalImgReviewTemplateInfo struct {
 	// Whether to enable recognition of politically sensitive content in images. Valid values:
 	// <li>ON</li>
@@ -14886,6 +15321,24 @@ type PornConfigureInfoForUpdate struct {
 	OcrReviewInfo *PornOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
 }
 
+type PornImageResult struct {
+	// The confidence score for the moderation result. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The suggestion for handling the detected pornographic content. Valid values:
+	// <li>pass/li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The label for the detected pornographic content. Valid values:
+	// <li>porn</li>
+	// <li>sexy</li>
+	// <li>vulgar</li>
+	// <li>intimacy</li>
+	Label *string `json:"Label,omitempty" name:"Label"`
+}
+
 type PornImgReviewTemplateInfo struct {
 	// Whether to enable recognition of pornographic content in images. Valid values:
 	// <li>ON</li>
@@ -14950,6 +15403,17 @@ type PornOcrReviewTemplateInfoForUpdate struct {
 
 	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type ProcedureReviewAudioVideoTaskInput struct {
+	// The moderation template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The type of moderated content. Valid values:
+	// <li>`Media`: The original audio/video.</li>
+	// <li>`Cover`: Thumbnails.</li>
+	// If this parameter is not specified or an empty array is passed in, `Media` will be used.
+	ReviewContents []*string `json:"ReviewContents,omitempty" name:"ReviewContents"`
 }
 
 type ProcedureTask struct {
@@ -15048,8 +15512,9 @@ type ProcedureTemplate struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Intelligent recognition task
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// The information of the intelligent moderation task\*.
+	// <font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -15063,6 +15528,10 @@ type ProcedureTemplate struct {
 	// Parameter of a release on WeChat Mini Program task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	MiniProgramPublishTask *WechatMiniProgramPublishTaskInput `json:"MiniProgramPublishTask,omitempty" name:"MiniProgramPublishTask"`
+
+	// The information of the moderation task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReviewAudioVideoTask *ProcedureReviewAudioVideoTaskInput `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 
 	// Creation time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
@@ -15154,8 +15623,11 @@ func (r *ProcessMediaByProcedureRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessMediaByProcedureResponseParams struct {
-	// Task ID.
+	// The task ID for the task type `Procedure`, if the task flow specified by `ProcedureName` includes one or more of `MediaProcessTask`, `AiAnalysisTask`, `AiRecognitionTask`, the task specified by this parameter will be executed.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The task ID for the task type `ReviewAudioVideo`, if the task flow specified by `ProcedureName` includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+	ReviewAudioVideoTaskId *string `json:"ReviewAudioVideoTaskId,omitempty" name:"ReviewAudioVideoTaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -15308,7 +15780,8 @@ type ProcessMediaRequestParams struct {
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Parameters for intelligent recognition
+	// The information of the audio/video moderation task\*.
+	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Video content analysis task parameter.
@@ -15345,7 +15818,8 @@ type ProcessMediaRequest struct {
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Parameters for intelligent recognition
+	// The information of the audio/video moderation task\*.
+	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Video content analysis task parameter.
@@ -15700,7 +16174,7 @@ func (r *PullUploadResponse) FromJsonString(s string) error {
 }
 
 type PullUploadTask struct {
-	// Pull for upload task ID.
+	// The task ID.
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
 
 	// Task flow status. Valid values:
@@ -15717,29 +16191,32 @@ type PullUploadTask struct {
 	// Error message.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
-	// ID of video generated after pull for upload is completed.
+	// The ID of the uploaded file.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
-	// Basic information of media file generated after pull for upload is completed.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The basic information of the uploaded file.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MediaBasicInfo *MediaBasicInfo `json:"MediaBasicInfo,omitempty" name:"MediaBasicInfo"`
 
 	// The metadata of the output video.
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 
-	// Playback address generated after pull for upload is completed.
+	// The playback address of the uploaded file.
 	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
 
-	// If a video processing flow is specified when a video is pulled for upload, this parameter will be the ID of the task flow.
+	// The task ID for the task type `Procedure`. If a task flow is specified by [PullUpload](https://intl.cloud.tencent.com/document/api/266/35575?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
 	ProcedureTaskId *string `json:"ProcedureTaskId,omitempty" name:"ProcedureTaskId"`
 
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	// The task ID for the task type `ReviewAudioVideo`. If a task flow is specified by [PullUpload](https://intl.cloud.tencent.com/document/api/266/35575?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+	ReviewAudioVideoTaskId *string `json:"ReviewAudioVideoTaskId,omitempty" name:"ReviewAudioVideoTaskId"`
+
+	// The source context, which is used to pass through user request information. The [PullComplete](https://intl.cloud.tencent.com/document/product/266/7831?from_cn_redirect=1) callback will return the value of this parameter. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or a blank string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-	// The progress of a pull and upload task. Value range: 0-100.
+	// The progress of the pull and upload task. Value range: 1-100.
 	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
@@ -16132,13 +16609,17 @@ type ResetProcedureTemplateRequestParams struct {
 	// Task flow name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Parameter of AI-based content audit task.
+	// The information of an intelligent moderation task\*.
+	// <font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -16147,8 +16628,8 @@ type ResetProcedureTemplateRequestParams struct {
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+	// The information of the moderation task.
+	ReviewAudioVideoTask *ProcedureReviewAudioVideoTaskInput `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 }
 
 type ResetProcedureTemplateRequest struct {
@@ -16157,13 +16638,17 @@ type ResetProcedureTemplateRequest struct {
 	// Task flow name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitempty" name:"Comment"`
 
 	// Parameter of video processing task.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
 
-	// Parameter of AI-based content audit task.
+	// The information of an intelligent moderation task\*.
+	// <font color=red>\*: This parameter is used by our old moderation templates and is not recommended. Please use `ReviewAudioVideoTask` instead.</font> 
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
 
 	// Parameter of AI-based content analysis task.
@@ -16172,8 +16657,8 @@ type ResetProcedureTemplateRequest struct {
 	// Type parameter of AI-based content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+	// The information of the moderation task.
+	ReviewAudioVideoTask *ProcedureReviewAudioVideoTaskInput `json:"ReviewAudioVideoTask,omitempty" name:"ReviewAudioVideoTask"`
 }
 
 func (r *ResetProcedureTemplateRequest) ToJsonString() string {
@@ -16189,12 +16674,13 @@ func (r *ResetProcedureTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "SubAppId")
 	delete(f, "Comment")
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiAnalysisTask")
 	delete(f, "AiRecognitionTask")
-	delete(f, "SubAppId")
+	delete(f, "ReviewAudioVideoTask")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetProcedureTemplateRequest has unknown keys!", "")
 	}
@@ -16360,8 +16846,13 @@ type ReviewAudioVideoRequestParams struct {
 	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	// The moderation template ID. Valid values:
-	// <li>`10` (default): The preset template, which can detect inappropriate information with labels including pornographic (`Porn`), terrorist (`Terror`), and politically sensitive (`Polity`).</li>
+	// The type of moderated content. Valid values:
+	// <li>`Media`: The original audio/video.</li>
+	// <li>`Cover`: Thumbnails.</li>
+	// If this parameter is not specified or an empty array is passed in, `Media` will be used.
+	ReviewContents []*string `json:"ReviewContents,omitempty" name:"ReviewContents"`
+
+	// The moderation template ID. Valid values: <li>10 (default): The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
 	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
@@ -16386,8 +16877,13 @@ type ReviewAudioVideoRequest struct {
 	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
-	// The moderation template ID. Valid values:
-	// <li>`10` (default): The preset template, which can detect inappropriate information with labels including pornographic (`Porn`), terrorist (`Terror`), and politically sensitive (`Polity`).</li>
+	// The type of moderated content. Valid values:
+	// <li>`Media`: The original audio/video.</li>
+	// <li>`Cover`: Thumbnails.</li>
+	// If this parameter is not specified or an empty array is passed in, `Media` will be used.
+	ReviewContents []*string `json:"ReviewContents,omitempty" name:"ReviewContents"`
+
+	// The moderation template ID. Valid values: <li>10 (default): The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
 
 	// The priority of a task flow. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
@@ -16417,6 +16913,7 @@ func (r *ReviewAudioVideoRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FileId")
 	delete(f, "SubAppId")
+	delete(f, "ReviewContents")
 	delete(f, "Definition")
 	delete(f, "TasksPriority")
 	delete(f, "SessionContext")
@@ -16550,6 +17047,11 @@ type ReviewAudioVideoTaskInput struct {
 
 	// The moderation template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The type of moderated content. Valid values:
+	// <li>`Media`: The original audio/video.</li>
+	// <li>`Cover`: Thumbnails.</li>
+	ReviewContents []*string `json:"ReviewContents,omitempty" name:"ReviewContents"`
 }
 
 type ReviewAudioVideoTaskOutput struct {
@@ -16580,6 +17082,197 @@ type ReviewAudioVideoTaskOutput struct {
 
 	// The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
 	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
+
+	// The thumbnail moderation result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoverReviewResult *ReviewImageResult `json:"CoverReviewResult,omitempty" name:"CoverReviewResult"`
+}
+
+// Predefined struct for user
+type ReviewImageRequestParams struct {
+	// The unique ID of the media file. For this API to work, the file must be an image.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>	
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type ReviewImageRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of the media file. For this API to work, the file must be an image.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>	
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ReviewImageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReviewImageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReviewImageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReviewImageResponseParams struct {
+	// The image moderation result. <font color=red>Note: This parameter is no longer used. Please use `MediaReviewResult` instead.</font>
+	ReviewResultSet []*ContentReviewResult `json:"ReviewResultSet,omitempty" name:"ReviewResultSet"`
+
+	// The image moderation result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MediaReviewResult *ReviewImageResult `json:"MediaReviewResult,omitempty" name:"MediaReviewResult"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReviewImageResponse struct {
+	*tchttp.BaseResponse
+	Response *ReviewImageResponseParams `json:"Response"`
+}
+
+func (r *ReviewImageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReviewImageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ReviewImageResult struct {
+	// The suggestion. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The most likely label for the suspicious content. This parameter is valid if `Suggestion` is `review` or `block`. Valid values: <li>`Porn`</li> <li>`Terror`</li>
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// The most likely type of the suspicious content. This parameter is valid only if `Suggestion` is `review` or `block`.
+	// <li>`Image` (people or icons in images)</li>
+	// <li>`OCR` (text in images)</li>
+	Form *string `json:"Form,omitempty" name:"Form"`
+
+	// A list of the suspicious segments detected.
+	// <font color=red>Note</font>: Only the first 10 results will be returned at most. You can get all the results from the file specified by `SegmentSetFileUrl`.
+	SegmentSet []*ReviewImageSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
+
+	// The URL of the file that contains suspicious segments. The file is in JSON format and has the same data structure as `SegmentSet`. Instead of being saved permanently, the file is deleted upon the expiration time (`SegmentSetFileUrlExpireTime`).
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitempty" name:"SegmentSetFileUrl"`
+
+	// The expiration time of the file that contains suspicious segments, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitempty" name:"SegmentSetFileUrlExpireTime"`
+}
+
+type ReviewImageSegmentItem struct {
+	// The confidence score for the suspicious segment.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The suggestion. Valid values:
+	// <li>`review`: The content may be non-compliant and needs to be reviewed.</li>
+	// <li>`block`: The content is non-compliant and should be blocked.</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The most likely label for the suspicious content. Valid values: <li>`Porn`</li> <li>`Terror`</li>
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// The sub-label.
+	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+
+	// The type of the suspicious segment. Valid values:
+	// <li>`Image` (people or icons in images)</li>
+	// <li>`OCR` (text in images)</li>
+	Form *string `json:"Form,omitempty" name:"Form"`
+
+	// The pixel coordinates of the suspicious people, icons, or text. The format is [x1, y1, x2, y2], which indicates the coordinates of the top-left and bottom-right corners.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
+
+	// The content of the suspicious text detected. This parameter is valid only if `Form` is `OCR`.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The keywords that match the suspicious text. This parameter is valid only if `Form` is `OCR`.
+	KeywordSet []*string `json:"KeywordSet,omitempty" name:"KeywordSet"`
+}
+
+type ReviewInfo struct {
+	// The moderation template ID.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The suggestion. Valid values:
+	// <li>pass</li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The moderation type in the format of `Form.Label`. This parameter is valid if `Suggestion` is `review` or `block`.
+	// `Form` indicates the type of inappropriate content detected. Valid values:
+	// <li>`Image` (people or icons in images)</li>
+	// <li>`OCR` (text in images)</li>
+	// <li>`ASR` (speech)</li>
+	// <li>`Voice`</li>
+	// `Label` indicates the violation label. Valid values:
+	// <li>`Porn` (pornographic content)</li>
+	// <li>`Terror` (terrorist content)</li>
+	// <li>Polity (politically sensitive content)</li>
+	// <li>`Ad`</li>
+	// <li>`Illegal` (illegal content)</li>
+	// <li>`Religion`</li>
+	// <li>`Abuse`</li>
+	// <li>`Moan`</li>
+	TypeSet []*string `json:"TypeSet,omitempty" name:"TypeSet"`
+
+	// The moderation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	ReviewTime *string `json:"ReviewTime,omitempty" name:"ReviewTime"`
+}
+
+type ReviewTemplate struct {
+	// The unique ID of the moderation template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The template type. Valid values:
+	// <li>Preset</li>
+	// <li>Custom</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The violation labels used.
+	Labels []*string `json:"Labels,omitempty" name:"Labels"`
+
+	// The template creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The last updated time of the template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type SDMCDrmKeyProviderInfo struct {
@@ -16676,13 +17369,13 @@ type SearchMediaRequestParams struct {
 	// <li>ID length limit: 40 characters.</li>
 	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
-	// Filename set. Filenames of media files are fuzzily matched. The higher the match rate, the higher-ranked the result.
-	// <li>Filename length limit: 40 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// The file names to use for fuzzy search, which are sorted by relevance in descending order.
+	// <li>Name length limit: 100 characters.</li>
+	// <li>Array length limit: 10</li>
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
-	// Filename prefix, which matches the filenames of media files.
-	// <li>Filename prefix length limit: 20 characters.</li>
+	// The file name prefixes to search.
+	// <li>Prefix length limit: 100 characters.</li>
 	// <li>Array length limit: 10.</li>
 	NamePrefixes []*string `json:"NamePrefixes,omitempty" name:"NamePrefixes"`
 
@@ -16695,9 +17388,9 @@ type SearchMediaRequestParams struct {
 	// <li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds"`
 
-	// The tag set. A file is considered a match if it has any of the tags in the tag set.
-	// <li>Tag length limit: 16 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// The tags to search. A file is considered a match if it has any of the tags specified.
+	// <li>Tag length limit: 32 characters.</li>
+	// <li>Array length limit: 16.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// File type. Any element in the set can be matched.
@@ -16813,13 +17506,13 @@ type SearchMediaRequest struct {
 	// <li>ID length limit: 40 characters.</li>
 	FileIds []*string `json:"FileIds,omitempty" name:"FileIds"`
 
-	// Filename set. Filenames of media files are fuzzily matched. The higher the match rate, the higher-ranked the result.
-	// <li>Filename length limit: 40 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// The file names to use for fuzzy search, which are sorted by relevance in descending order.
+	// <li>Name length limit: 100 characters.</li>
+	// <li>Array length limit: 10</li>
 	Names []*string `json:"Names,omitempty" name:"Names"`
 
-	// Filename prefix, which matches the filenames of media files.
-	// <li>Filename prefix length limit: 20 characters.</li>
+	// The file name prefixes to search.
+	// <li>Prefix length limit: 100 characters.</li>
 	// <li>Array length limit: 10.</li>
 	NamePrefixes []*string `json:"NamePrefixes,omitempty" name:"NamePrefixes"`
 
@@ -16832,9 +17525,9 @@ type SearchMediaRequest struct {
 	// <li>Array length limit: 10.</li>
 	ClassIds []*int64 `json:"ClassIds,omitempty" name:"ClassIds"`
 
-	// The tag set. A file is considered a match if it has any of the tags in the tag set.
-	// <li>Tag length limit: 16 characters.</li>
-	// <li>Array length limit: 10.</li>
+	// The tags to search. A file is considered a match if it has any of the tags specified.
+	// <li>Tag length limit: 32 characters.</li>
+	// <li>Array length limit: 16.</li>
 	Tags []*string `json:"Tags,omitempty" name:"Tags"`
 
 	// File type. Any element in the set can be matched.
@@ -17417,8 +18110,11 @@ type SplitMediaTaskSegmentInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Output *TaskOutputMediaInfo `json:"Output,omitempty" name:"Output"`
 
-	// If a video processing flow is specified when a video splitting task is initiated, this field will be the task flow ID.
+	// The task ID for the task type `Procedure`. If a task flow (`ProcedureName`) is specified by [SplitMedia](https://intl.cloud.tencent.com/document/api/266/51098?from_cn_redirect=1), and the task flow includes one or more of `MediaProcessTask`, `AiAnalysisTask`, and `AiRecognitionTask`, the task specified by this parameter will be executed.
 	ProcedureTaskId *string `json:"ProcedureTaskId,omitempty" name:"ProcedureTaskId"`
+
+	// The task ID for the task type `ReviewAudioVideo`. If a task flow (`ProcedureName`) is specified by [SplitMedia](https://intl.cloud.tencent.com/document/api/266/51098?from_cn_redirect=1), and the task flow includes `ReviewAudioVideoTask`, the task specified by this parameter will be executed.
+	ReviewAudioVideoTaskId *string `json:"ReviewAudioVideoTaskId,omitempty" name:"ReviewAudioVideoTaskId"`
 }
 
 type StatDataItem struct {
@@ -17672,16 +18368,17 @@ type TaskSimpleInfo struct {
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
 
 	// The task type. Valid values:
-	// <li>Procedure: Video processing</li>
-	// <li>EditMedia: Video editing</li>
-	// <li> ReduceMediaBitrate: Bitrate reduction</li>
-	// <li>WechatDistribute: Publishing to WeChat</li>
+	// <li>`Procedure`: Video processing</li>
+	// <li>`EditMedia`: Video editing</li>
+	// <li>`ReduceMediaBitrate`: Bitrate reduction</li>
+	// <li>`WechatDistribute`: Publishing to Weixin</li>
+	// <li> `ReviewAudioVideo`: Moderation</li>
 	// Task types for v2017:
-	// <li>Transcode: Transcoding</li>
-	// <li>SnapshotByTimeOffset: Screencapturing</li>
-	// <li>Concat: Video splicing</li>
-	// <li>Clip: Video clipping</li>
-	// <li>ImageSprites: Image sprite generating</li>
+	// <li>`Transcode`: Transcoding</li>
+	// <li>`SnapshotByTimeOffset`: Screencapturing</li>
+	// <li>`Concat`: Video splicing</li>
+	// <li>`Clip`: Video clipping</li>
+	// <li>`ImageSprites`: Image sprite generating</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Creation time of task in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
@@ -17814,6 +18511,27 @@ type TerrorismConfigureInfoForUpdate struct {
 
 	// Parameters for OCR-based recognition of terrorism content
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfoForUpdate `json:"OcrReviewInfo,omitempty" name:"OcrReviewInfo"`
+}
+
+type TerrorismImageResult struct {
+	// The confidence score for the moderation result. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The suggestion for handling the detected terrorist content. Valid values:
+	// <li>pass/li>
+	// <li>review</li>
+	// <li>block</li>
+	Suggestion *string `json:"Suggestion,omitempty" name:"Suggestion"`
+
+	// The label for the detected terrorist content. Valid values:
+	// <li>`guns`</li>
+	// <li>`crowd`</li>
+	// <li>`police`</li>
+	// <li>`bloody`</li>
+	// <li>`banners`</li>
+	// <li>`explosion`</li>
+	// <li>`scenario` (terrorist scenes) </li>
+	Label *string `json:"Label,omitempty" name:"Label"`
 }
 
 type TerrorismImgReviewTemplateInfo struct {
