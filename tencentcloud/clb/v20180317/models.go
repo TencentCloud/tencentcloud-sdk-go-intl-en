@@ -498,6 +498,20 @@ type CertIdRelatedWithLoadBalancers struct {
 	LoadBalancers []*LoadBalancer `json:"LoadBalancers,omitempty" name:"LoadBalancers"`
 }
 
+type CertInfo struct {
+	// ID of the certificate. If it's not specified, `CertContent` and `CertKey` are required. For a server certificate, you also need to specify `CertName`. 
+	CertId *string `json:"CertId,omitempty" name:"CertId"`
+
+	// Name of the uploaded certificate. It's required if `CertId` is not specified.
+	CertName *string `json:"CertName,omitempty" name:"CertName"`
+
+	// Public key of the uploaded certificate. It's required if `CertId` is not specified.
+	CertContent *string `json:"CertContent,omitempty" name:"CertContent"`
+
+	// Private key of the uploaded server certificate. It's required if `CertId` is not specified.
+	CertKey *string `json:"CertKey,omitempty" name:"CertKey"`
+}
+
 type CertificateInput struct {
 	// Authentication type. Value range: UNIDIRECTIONAL (unidirectional authentication), MUTUAL (mutual authentication)
 	SSLMode *string `json:"SSLMode,omitempty" name:"SSLMode"`
@@ -962,7 +976,7 @@ type CreateListenerRequestParams struct {
 	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled.
+	// Certificate information. This parameter is only applicable to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
@@ -989,6 +1003,15 @@ type CreateListenerRequestParams struct {
 
 	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
 	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
+
+	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
+
+
+	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
+
+
+	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
 type CreateListenerRequest struct {
@@ -1009,7 +1032,7 @@ type CreateListenerRequest struct {
 	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is applicable only to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled.
+	// Certificate information. This parameter is only applicable to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
@@ -1036,6 +1059,13 @@ type CreateListenerRequest struct {
 
 	// Whether to send the TCP RST packet to the client when unbinding a real server. This parameter is applicable to TCP listeners only.
 	DeregisterTargetRst *bool `json:"DeregisterTargetRst,omitempty" name:"DeregisterTargetRst"`
+
+	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
+
+	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
+
+	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
 func (r *CreateListenerRequest) ToJsonString() string {
@@ -1064,6 +1094,9 @@ func (r *CreateListenerRequest) FromJsonString(s string) error {
 	delete(f, "KeepaliveEnable")
 	delete(f, "EndPort")
 	delete(f, "DeregisterTargetRst")
+	delete(f, "MultiCertInfo")
+	delete(f, "MaxConn")
+	delete(f, "MaxCps")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateListenerRequest has unknown keys!", "")
 	}
@@ -3574,10 +3607,10 @@ type DescribeLoadBalancersRequestParams struct {
 	// VIP address of a CLB instance (there can be multiple addresses)
 	LoadBalancerVips []*string `json:"LoadBalancerVips,omitempty" name:"LoadBalancerVips"`
 
-	// Public IP of the real server bound to a CLB.
+	// Public IPs of the backend services bound with the load balancer. Only the public IPs of CVMs are supported now.
 	BackendPublicIps []*string `json:"BackendPublicIps,omitempty" name:"BackendPublicIps"`
 
-	// Private IP of the real server bound to a CLB.
+	// Private IPs of the backend services bound with the load balancer. Only the private IPs of CVMs are supported now.
 	BackendPrivateIps []*string `json:"BackendPrivateIps,omitempty" name:"BackendPrivateIps"`
 
 	// Data offset. Default value: 0.
@@ -3638,10 +3671,10 @@ type DescribeLoadBalancersRequest struct {
 	// VIP address of a CLB instance (there can be multiple addresses)
 	LoadBalancerVips []*string `json:"LoadBalancerVips,omitempty" name:"LoadBalancerVips"`
 
-	// Public IP of the real server bound to a CLB.
+	// Public IPs of the backend services bound with the load balancer. Only the public IPs of CVMs are supported now.
 	BackendPublicIps []*string `json:"BackendPublicIps,omitempty" name:"BackendPublicIps"`
 
-	// Private IP of the real server bound to a CLB.
+	// Private IPs of the backend services bound with the load balancer. Only the private IPs of CVMs are supported now.
 	BackendPrivateIps []*string `json:"BackendPrivateIps,omitempty" name:"BackendPrivateIps"`
 
 	// Data offset. Default value: 0.
@@ -5409,7 +5442,7 @@ type ModifyDomainAttributesRequestParams struct {
 	// The one domain name to modify. `NewDomain` and `NewDomains` can not be both specified.
 	NewDomain *string `json:"NewDomain,omitempty" name:"NewDomain"`
 
-	// Domain name certificate information. Note: This is only applicable to SNI-enabled listeners.
+	// Certificate information of the domain name. It is only applicable to listeners with SNI enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Whether to enable HTTP/2. Note: HTTP/2 can be enabled only for HTTPS domain names.
@@ -5423,6 +5456,9 @@ type ModifyDomainAttributesRequestParams struct {
 
 	// The new domain names to modify. `NewDomain` and `NewDomains` can not be both specified.
 	NewDomains []*string `json:"NewDomains,omitempty" name:"NewDomains"`
+
+	// Certificate information of the domain name. It is only applicable to listeners with SNI enabled. You can specify multiple server-side certificates with different algorithm types. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 }
 
 type ModifyDomainAttributesRequest struct {
@@ -5440,7 +5476,7 @@ type ModifyDomainAttributesRequest struct {
 	// The one domain name to modify. `NewDomain` and `NewDomains` can not be both specified.
 	NewDomain *string `json:"NewDomain,omitempty" name:"NewDomain"`
 
-	// Domain name certificate information. Note: This is only applicable to SNI-enabled listeners.
+	// Certificate information of the domain name. It is only applicable to listeners with SNI enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Whether to enable HTTP/2. Note: HTTP/2 can be enabled only for HTTPS domain names.
@@ -5454,6 +5490,9 @@ type ModifyDomainAttributesRequest struct {
 
 	// The new domain names to modify. `NewDomain` and `NewDomains` can not be both specified.
 	NewDomains []*string `json:"NewDomains,omitempty" name:"NewDomains"`
+
+	// Certificate information of the domain name. It is only applicable to listeners with SNI enabled. You can specify multiple server-side certificates with different algorithm types. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 }
 
 func (r *ModifyDomainAttributesRequest) ToJsonString() string {
@@ -5477,6 +5516,7 @@ func (r *ModifyDomainAttributesRequest) FromJsonString(s string) error {
 	delete(f, "DefaultServer")
 	delete(f, "NewDefaultServerDomain")
 	delete(f, "NewDomains")
+	delete(f, "MultiCertInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDomainAttributesRequest has unknown keys!", "")
 	}
@@ -5597,7 +5637,7 @@ type ModifyListenerRequestParams struct {
 	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is applicable only to HTTPS and TCP_SSL listeners.
+	// Certificate information. This parameter is only applicable to HTTPS/TCP_SSL listeners. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
@@ -5618,6 +5658,15 @@ type ModifyListenerRequestParams struct {
 
 	// Session persistence type. `NORMAL`: default session persistence type (L4/L7 session persistence); `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners.
 	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
+
+	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
+
+
+	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
+
+
+	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
 type ModifyListenerRequest struct {
@@ -5638,7 +5687,7 @@ type ModifyListenerRequest struct {
 	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is applicable only to HTTPS and TCP_SSL listeners.
+	// Certificate information. This parameter is only applicable to HTTPS/TCP_SSL listeners. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
@@ -5659,6 +5708,13 @@ type ModifyListenerRequest struct {
 
 	// Session persistence type. `NORMAL`: default session persistence type (L4/L7 session persistence); `QUIC_CID`: session persistence by QUIC connection ID. The `QUIC_CID` value can only be configured in UDP listeners.
 	SessionType *string `json:"SessionType,omitempty" name:"SessionType"`
+
+	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
+
+	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
+
+	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
 func (r *ModifyListenerRequest) ToJsonString() string {
@@ -5685,6 +5741,9 @@ func (r *ModifyListenerRequest) FromJsonString(s string) error {
 	delete(f, "KeepaliveEnable")
 	delete(f, "DeregisterTargetRst")
 	delete(f, "SessionType")
+	delete(f, "MultiCertInfo")
+	delete(f, "MaxConn")
+	delete(f, "MaxCps")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyListenerRequest has unknown keys!", "")
 	}
@@ -6368,6 +6427,14 @@ func (r *ModifyTargetWeightResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MultiCertInfo struct {
+	// Authentication type. Values: `UNIDIRECTIONAL` (one-way authentication), `MUTUAL` (two-way authentication)
+	SSLMode *string `json:"SSLMode,omitempty" name:"SSLMode"`
+
+	// List of listener or rule certificates. One-way and two-way authentication are supported. Only one certificate can be specified for one algorithm. If `SSLMode` is `MUTUAL` (two-way authentication), at least one CA certificate is required. 
+	CertList []*CertInfo `json:"CertList,omitempty" name:"CertList"`
+}
+
 type Quota struct {
 	// Quota name. Valid values:
 	// <li> `TOTAL_OPEN_CLB_QUOTA`: Quota of public network CLB instances in the current region</li>
@@ -6758,7 +6825,7 @@ type RuleInput struct {
 	// Health check information. For more information, please see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1)
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information
+	// Certificate information. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Request forwarding method of the rule. Value range: WRR, LEAST_CONN, IP_HASH
@@ -6788,6 +6855,9 @@ type RuleInput struct {
 
 	// The domain name associated with the forwarding rule. Each contain 1-80 characters. If you only need to enter one domain name, use `Domain` instead.
 	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// Certificate information. You can specify multiple server-side certificates with different algorithm types. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 }
 
 type RuleOutput struct {

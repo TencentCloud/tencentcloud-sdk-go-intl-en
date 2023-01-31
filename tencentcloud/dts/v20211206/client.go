@@ -287,6 +287,7 @@ func NewCreateCompareTaskResponse() (response *CreateCompareTaskResponse) {
 //  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
@@ -313,6 +314,7 @@ func (c *Client) CreateCompareTask(request *CreateCompareTaskRequest) (response 
 //  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
@@ -577,7 +579,9 @@ func NewCreateSyncJobResponse() (response *CreateSyncJobResponse) {
 // This API is used to create a sync task.
 //
 // error code that may be returned:
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
 //  INTERNALERROR_INTERNALINNERCOMMONERROR = "InternalError.InternalInnerCommonError"
 //  INTERNALERROR_INTERNALTRADEERROR = "InternalError.InternalTradeError"
 //  INTERNALERROR_NOTENOUGHMONEYERROR = "InternalError.NotEnoughMoneyError"
@@ -594,7 +598,9 @@ func (c *Client) CreateSyncJob(request *CreateSyncJobRequest) (response *CreateS
 // This API is used to create a sync task.
 //
 // error code that may be returned:
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATIONERROR = "AuthFailure.UnauthorizedOperationError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
 //  INTERNALERROR_INTERNALINNERCOMMONERROR = "InternalError.InternalInnerCommonError"
 //  INTERNALERROR_INTERNALTRADEERROR = "InternalError.InternalTradeError"
 //  INTERNALERROR_NOTENOUGHMONEYERROR = "InternalError.NotEnoughMoneyError"
@@ -2353,6 +2359,124 @@ func (c *Client) ResumeSyncJobWithContext(ctx context.Context, request *ResumeSy
     request.SetContext(ctx)
     
     response = NewResumeSyncJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSkipCheckItemRequest() (request *SkipCheckItemRequest) {
+    request = &SkipCheckItemRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "SkipCheckItem")
+    
+    
+    return
+}
+
+func NewSkipCheckItemResponse() (response *SkipCheckItemResponse) {
+    response = &SkipCheckItemResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SkipCheckItem
+// This API is used for the backend to skip a failed check item. Theoretically, to execute a migration task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+func (c *Client) SkipCheckItem(request *SkipCheckItemRequest) (response *SkipCheckItemResponse, err error) {
+    return c.SkipCheckItemWithContext(context.Background(), request)
+}
+
+// SkipCheckItem
+// This API is used for the backend to skip a failed check item. Theoretically, to execute a migration task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+func (c *Client) SkipCheckItemWithContext(ctx context.Context, request *SkipCheckItemRequest) (response *SkipCheckItemResponse, err error) {
+    if request == nil {
+        request = NewSkipCheckItemRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SkipCheckItem require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSkipCheckItemResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSkipSyncCheckItemRequest() (request *SkipSyncCheckItemRequest) {
+    request = &SkipSyncCheckItemRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "SkipSyncCheckItem")
+    
+    
+    return
+}
+
+func NewSkipSyncCheckItemResponse() (response *SkipSyncCheckItemResponse) {
+    response = &SkipSyncCheckItemResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SkipSyncCheckItem
+// This API is used for the backend to skip a failed check item. Theoretically, to execute a sync task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+//
+// error code that may be returned:
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SkipSyncCheckItem(request *SkipSyncCheckItemRequest) (response *SkipSyncCheckItemResponse, err error) {
+    return c.SkipSyncCheckItemWithContext(context.Background(), request)
+}
+
+// SkipSyncCheckItem
+// This API is used for the backend to skip a failed check item. Theoretically, to execute a sync task normally, any check step cannot be skipped, and the check must be passed. For products or links that support check item skipping, see [Check Item Overview](https://www.tencentcloud.com/document/product/571/42551).
+//
+// error code that may be returned:
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DATABASEERROR = "InternalError.DatabaseError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SkipSyncCheckItemWithContext(ctx context.Context, request *SkipSyncCheckItemRequest) (response *SkipSyncCheckItemResponse, err error) {
+    if request == nil {
+        request = NewSkipSyncCheckItemRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SkipSyncCheckItem require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSkipSyncCheckItemResponse()
     err = c.Send(request, response)
     return
 }

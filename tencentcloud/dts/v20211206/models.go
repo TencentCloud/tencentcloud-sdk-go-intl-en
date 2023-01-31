@@ -281,14 +281,8 @@ type ConfigureSyncJobRequestParams struct {
 	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
-	// Source database information
-	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
-
 	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
-
-	// Target database information
-	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
 
 	// Sync task options
 	Options *Options `json:"Options,omitempty" name:"Options"`
@@ -299,11 +293,23 @@ type ConfigureSyncJobRequestParams struct {
 	// Sync task name
 	JobName *string `json:"JobName,omitempty" name:"JobName"`
 
+	// Enumerated values: `liteMode`: Lite mode; `fullMode`: Standard mode
+	JobMode *string `json:"JobMode,omitempty" name:"JobMode"`
+
 	// Running mode. Valid values: `Immediate`, `Timed`. Default value: `Immediate`.
 	RunMode *string `json:"RunMode,omitempty" name:"RunMode"`
 
 	// Expected start time in the format of "2006-01-02 15:04:05", which is required if `RunMode` is `Timed`.
 	ExpectRunTime *string `json:"ExpectRunTime,omitempty" name:"ExpectRunTime"`
+
+	// Source database information. This parameter is used by single-node databases.
+	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
+
+	// Target database information. This parameter is used by single-node databases.
+	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
 type ConfigureSyncJobRequest struct {
@@ -315,14 +321,8 @@ type ConfigureSyncJobRequest struct {
 	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
-	// Source database information
-	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
-
 	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
-
-	// Target database information
-	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
 
 	// Sync task options
 	Options *Options `json:"Options,omitempty" name:"Options"`
@@ -333,11 +333,23 @@ type ConfigureSyncJobRequest struct {
 	// Sync task name
 	JobName *string `json:"JobName,omitempty" name:"JobName"`
 
+	// Enumerated values: `liteMode`: Lite mode; `fullMode`: Standard mode
+	JobMode *string `json:"JobMode,omitempty" name:"JobMode"`
+
 	// Running mode. Valid values: `Immediate`, `Timed`. Default value: `Immediate`.
 	RunMode *string `json:"RunMode,omitempty" name:"RunMode"`
 
 	// Expected start time in the format of "2006-01-02 15:04:05", which is required if `RunMode` is `Timed`.
 	ExpectRunTime *string `json:"ExpectRunTime,omitempty" name:"ExpectRunTime"`
+
+	// Source database information. This parameter is used by single-node databases.
+	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
+
+	// Target database information. This parameter is used by single-node databases.
+	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
 func (r *ConfigureSyncJobRequest) ToJsonString() string {
@@ -354,14 +366,16 @@ func (r *ConfigureSyncJobRequest) FromJsonString(s string) error {
 	}
 	delete(f, "JobId")
 	delete(f, "SrcAccessType")
-	delete(f, "SrcInfo")
 	delete(f, "DstAccessType")
-	delete(f, "DstInfo")
 	delete(f, "Options")
 	delete(f, "Objects")
 	delete(f, "JobName")
+	delete(f, "JobMode")
 	delete(f, "RunMode")
 	delete(f, "ExpectRunTime")
+	delete(f, "SrcInfo")
+	delete(f, "DstInfo")
+	delete(f, "AutoRetryTimeRangeMinutes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureSyncJobRequest has unknown keys!", "")
 	}
@@ -1085,6 +1099,22 @@ type Database struct {
 	// This parameter is required if `ProcedureMode` is `Partial`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Procedures []*string `json:"Procedures,omitempty" name:"Procedures"`
+
+	// Trigger migration mode (`all`: All objects; `partial`: Some objects)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TriggerMode *string `json:"TriggerMode,omitempty" name:"TriggerMode"`
+
+	// This parameter is used to specify the names of the triggers to be migrated when the value of `TriggerMode` is `partial`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Triggers []*string `json:"Triggers,omitempty" name:"Triggers"`
+
+	// Event migration mode (`all`: All objects; `partial`: Some objects)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EventMode *string `json:"EventMode,omitempty" name:"EventMode"`
+
+	// This parameter is used to specify the names of the events to be migrated when the value of `EventMode` is `partial`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Events []*string `json:"Events,omitempty" name:"Events"`
 }
 
 type DatabaseTableObject struct {
@@ -2273,6 +2303,10 @@ type Endpoint struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
+	// Node type of TDSQL for MySQL. Enumerated values: `proxy`, `set`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Role *string `json:"Role,omitempty" name:"Role"`
+
 	// Database kernel type, which is used to distinguish between different kernels in TDSQL. Valid values: `percona`, `mariadb`, `mysql`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DbKernel *string `json:"DbKernel,omitempty" name:"DbKernel"`
@@ -2333,17 +2367,21 @@ type Endpoint struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
-	// The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	AccountMode *string `json:"AccountMode,omitempty" name:"AccountMode"`
-
 	// Instance account, which is required if the operation is performed across accounts.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Account *string `json:"Account,omitempty" name:"Account"`
 
+	// The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccountMode *string `json:"AccountMode,omitempty" name:"AccountMode"`
+
 	// The role used for cross-account sync, which can contain [a-zA-Z0-9\-\_]+ and is required if the operation is performed across accounts.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AccountRole *string `json:"AccountRole,omitempty" name:"AccountRole"`
+
+	// External role ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleExternalId *string `json:"RoleExternalId,omitempty" name:"RoleExternalId"`
 
 	// ID of the temporary key, which is required if the operation is performed across accounts.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2357,9 +2395,9 @@ type Endpoint struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TmpToken *string `json:"TmpToken,omitempty" name:"TmpToken"`
 
-	// External role ID
+	// Whether to enable encrypted transfer (`UnEncrypted`: No; `Encrypted`: Yes). Default value: `UnEncrypted`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RoleExternalId *string `json:"RoleExternalId,omitempty" name:"RoleExternalId"`
+	EncryptConn *string `json:"EncryptConn,omitempty" name:"EncryptConn"`
 }
 
 type ErrorInfoItem struct {
@@ -2556,6 +2594,10 @@ type JobItem struct {
 	// Tag information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
+
+	// Information of automatic retry time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
 type KeyValuePairOption struct {
@@ -2948,6 +2990,9 @@ type ModifyMigrationJobRequestParams struct {
 
 	// Tag information
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
+
+	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
 type ModifyMigrationJobRequest struct {
@@ -2976,6 +3021,9 @@ type ModifyMigrationJobRequest struct {
 
 	// Tag information
 	Tags []*TagItem `json:"Tags,omitempty" name:"Tags"`
+
+	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
 func (r *ModifyMigrationJobRequest) ToJsonString() string {
@@ -2998,6 +3046,7 @@ func (r *ModifyMigrationJobRequest) FromJsonString(s string) error {
 	delete(f, "JobName")
 	delete(f, "ExpectRunTime")
 	delete(f, "Tags")
+	delete(f, "AutoRetryTimeRangeMinutes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMigrationJobRequest has unknown keys!", "")
 	}
@@ -3038,6 +3087,13 @@ type Objects struct {
 	// Advanced object type, such as function and procedure. If you need to sync advanced objects, the initialization type must include structure initialization; that is, `Options.InitType` must be `Structure` or `Full`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedObjects []*string `json:"AdvancedObjects,omitempty" name:"AdvancedObjects"`
+
+
+	OnlineDDL *OnlineDDL `json:"OnlineDDL,omitempty" name:"OnlineDDL"`
+}
+
+type OnlineDDL struct {
+
 }
 
 type Options struct {
@@ -3402,6 +3458,137 @@ type RoleItem struct {
 	// Role name after migration
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NewRoleName *string `json:"NewRoleName,omitempty" name:"NewRoleName"`
+}
+
+// Predefined struct for user
+type SkipCheckItemRequestParams struct {
+	// Data migration task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// ID of the check step to be skipped, which is obtained in the `StepInfo[i].StepId` field returned by the `DescribeMigrationCheckJob` API, such as "OptimizeCheck".
+	StepIds []*string `json:"StepIds,omitempty" name:"StepIds"`
+
+
+	ForeignKeyFlag *string `json:"ForeignKeyFlag,omitempty" name:"ForeignKeyFlag"`
+}
+
+type SkipCheckItemRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data migration task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// ID of the check step to be skipped, which is obtained in the `StepInfo[i].StepId` field returned by the `DescribeMigrationCheckJob` API, such as "OptimizeCheck".
+	StepIds []*string `json:"StepIds,omitempty" name:"StepIds"`
+
+	ForeignKeyFlag *string `json:"ForeignKeyFlag,omitempty" name:"ForeignKeyFlag"`
+}
+
+func (r *SkipCheckItemRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SkipCheckItemRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "StepIds")
+	delete(f, "ForeignKeyFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SkipCheckItemRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SkipCheckItemResponseParams struct {
+
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SkipCheckItemResponse struct {
+	*tchttp.BaseResponse
+	Response *SkipCheckItemResponseParams `json:"Response"`
+}
+
+func (r *SkipCheckItemResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SkipCheckItemResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SkipSyncCheckItemRequestParams struct {
+	// Task ID, such as "sync-4ddgid2".
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// ID of the check step to be skipped, which is obtained in the `StepInfos[i].StepId` field returned by the `DescribeCheckSyncJobResult` API, such as "OptimizeCheck".
+	StepIds []*string `json:"StepIds,omitempty" name:"StepIds"`
+}
+
+type SkipSyncCheckItemRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID, such as "sync-4ddgid2".
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// ID of the check step to be skipped, which is obtained in the `StepInfos[i].StepId` field returned by the `DescribeCheckSyncJobResult` API, such as "OptimizeCheck".
+	StepIds []*string `json:"StepIds,omitempty" name:"StepIds"`
+}
+
+func (r *SkipSyncCheckItemRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SkipSyncCheckItemRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "StepIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SkipSyncCheckItemRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SkipSyncCheckItemResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SkipSyncCheckItemResponse struct {
+	*tchttp.BaseResponse
+	Response *SkipSyncCheckItemResponseParams `json:"Response"`
+}
+
+func (r *SkipSyncCheckItemResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SkipSyncCheckItemResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SkippedDetail struct {
@@ -3951,7 +4138,7 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
-	// Source database information
+	// Source database information. This parameter is used by single-node databases.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
@@ -3967,7 +4154,7 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
 
-	// Target database information
+	// Target database information. This parameter is used by single-node databases.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
 
@@ -4010,6 +4197,10 @@ type SyncJobInfo struct {
 	// Deletion time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitempty" name:"OfflineTime"`
+
+	// Settings of automatic retry time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
 type Table struct {
@@ -4027,7 +4218,7 @@ type Table struct {
 }
 
 type TableItem struct {
-	// Name of the table to be migrated
+	// Name of the migrated table, which is case-sensitive
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TableName *string `json:"TableName,omitempty" name:"TableName"`
 
