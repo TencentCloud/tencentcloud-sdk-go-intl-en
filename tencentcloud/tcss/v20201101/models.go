@@ -3005,6 +3005,170 @@ type ContainerNetwork struct {
 }
 
 // Predefined struct for user
+type CreateAbnormalProcessRulesExportJobRequestParams struct {
+	// Filter conditions
+	// <li>`RuleType` - String  - Optional - Rule type</li>
+	// <li>`Status` - String - Optional - Status</li>
+	Filters []*RunTimeFilters `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting order
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field
+	By *string `json:"By,omitempty" name:"By"`
+
+	// Fields to export
+	ExportField []*string `json:"ExportField,omitempty" name:"ExportField"`
+}
+
+type CreateAbnormalProcessRulesExportJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter conditions
+	// <li>`RuleType` - String  - Optional - Rule type</li>
+	// <li>`Status` - String - Optional - Status</li>
+	Filters []*RunTimeFilters `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting order
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field
+	By *string `json:"By,omitempty" name:"By"`
+
+	// Fields to export
+	ExportField []*string `json:"ExportField,omitempty" name:"ExportField"`
+}
+
+func (r *CreateAbnormalProcessRulesExportJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAbnormalProcessRulesExportJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "ExportField")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAbnormalProcessRulesExportJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAbnormalProcessRulesExportJobResponseParams struct {
+	// ID of the exportation task. You can query the task progress by using this ID in the console.
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAbnormalProcessRulesExportJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAbnormalProcessRulesExportJobResponseParams `json:"Response"`
+}
+
+func (r *CreateAbnormalProcessRulesExportJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAbnormalProcessRulesExportJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessControlsRuleExportJobRequestParams struct {
+	// Filter conditions
+	// <li>`RuleType` - String  - Optional - Rule type</li>
+	// <li>`Status` - String - Optional - Status</li>
+	Filters []*RunTimeFilters `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting order
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field
+	By []*string `json:"By,omitempty" name:"By"`
+
+	// Fields to export
+	ExportField []*string `json:"ExportField,omitempty" name:"ExportField"`
+}
+
+type CreateAccessControlsRuleExportJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter conditions
+	// <li>`RuleType` - String  - Optional - Rule type</li>
+	// <li>`Status` - String - Optional - Status</li>
+	Filters []*RunTimeFilters `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting order
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sorting field
+	By []*string `json:"By,omitempty" name:"By"`
+
+	// Fields to export
+	ExportField []*string `json:"ExportField,omitempty" name:"ExportField"`
+}
+
+func (r *CreateAccessControlsRuleExportJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessControlsRuleExportJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "ExportField")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccessControlsRuleExportJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccessControlsRuleExportJobResponseParams struct {
+	// ID of the exportation task. You can query the task progress by using this ID in the console.
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAccessControlsRuleExportJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccessControlsRuleExportJobResponseParams `json:"Response"`
+}
+
+func (r *CreateAccessControlsRuleExportJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccessControlsRuleExportJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateAssetImageRegistryScanTaskOneKeyRequestParams struct {
 	// Whether to scan all images
 	All *bool `json:"All,omitempty" name:"All"`

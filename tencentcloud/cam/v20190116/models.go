@@ -4915,6 +4915,10 @@ type SecretIdLastUsed struct {
 	// The date when the key ID was last used (the value is obtained one day later).
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
 	LastUsedDate *string `json:"LastUsedDate,omitempty" name:"LastUsedDate"`
+
+	// The most recent date the key was accessed
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastSecretUsedDate *uint64 `json:"LastSecretUsedDate,omitempty" name:"LastSecretUsedDate"`
 }
 
 // Predefined struct for user

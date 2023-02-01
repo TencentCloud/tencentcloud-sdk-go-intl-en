@@ -1346,6 +1346,12 @@ type CreateRocketMQGroupRequestParams struct {
 
 	// Remarks (up to 128 characters)
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Group type (`TCP`, `HTTP`)
+	GroupType *string `json:"GroupType,omitempty" name:"GroupType"`
+
+	// The maximum number of retries for a group
+	RetryMaxTimes *uint64 `json:"RetryMaxTimes,omitempty" name:"RetryMaxTimes"`
 }
 
 type CreateRocketMQGroupRequest struct {
@@ -1368,6 +1374,12 @@ type CreateRocketMQGroupRequest struct {
 
 	// Remarks (up to 128 characters)
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Group type (`TCP`, `HTTP`)
+	GroupType *string `json:"GroupType,omitempty" name:"GroupType"`
+
+	// The maximum number of retries for a group
+	RetryMaxTimes *uint64 `json:"RetryMaxTimes,omitempty" name:"RetryMaxTimes"`
 }
 
 func (r *CreateRocketMQGroupRequest) ToJsonString() string {
@@ -1388,6 +1400,8 @@ func (r *CreateRocketMQGroupRequest) FromJsonString(s string) error {
 	delete(f, "BroadcastEnable")
 	delete(f, "ClusterId")
 	delete(f, "Remark")
+	delete(f, "GroupType")
+	delete(f, "RetryMaxTimes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRocketMQGroupRequest has unknown keys!", "")
 	}
@@ -4291,6 +4305,9 @@ type DescribeRocketMQGroupsRequestParams struct {
 
 	// Subscription group name. After it is specified, the information of only this subscription group will be returned.
 	FilterOneGroup *string `json:"FilterOneGroup,omitempty" name:"FilterOneGroup"`
+
+	// Group type
+	Types []*string `json:"Types,omitempty" name:"Types"`
 }
 
 type DescribeRocketMQGroupsRequest struct {
@@ -4322,6 +4339,9 @@ type DescribeRocketMQGroupsRequest struct {
 
 	// Subscription group name. After it is specified, the information of only this subscription group will be returned.
 	FilterOneGroup *string `json:"FilterOneGroup,omitempty" name:"FilterOneGroup"`
+
+	// Group type
+	Types []*string `json:"Types,omitempty" name:"Types"`
 }
 
 func (r *DescribeRocketMQGroupsRequest) ToJsonString() string {
@@ -4345,6 +4365,7 @@ func (r *DescribeRocketMQGroupsRequest) FromJsonString(s string) error {
 	delete(f, "SortedBy")
 	delete(f, "SortOrder")
 	delete(f, "FilterOneGroup")
+	delete(f, "Types")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQGroupsRequest has unknown keys!", "")
 	}
@@ -5688,6 +5709,9 @@ type ModifyRocketMQGroupRequestParams struct {
 
 	// Whether to enable broadcast consumption
 	BroadcastEnable *bool `json:"BroadcastEnable,omitempty" name:"BroadcastEnable"`
+
+	// The maximum number of retries
+	RetryMaxTimes *uint64 `json:"RetryMaxTimes,omitempty" name:"RetryMaxTimes"`
 }
 
 type ModifyRocketMQGroupRequest struct {
@@ -5710,6 +5734,9 @@ type ModifyRocketMQGroupRequest struct {
 
 	// Whether to enable broadcast consumption
 	BroadcastEnable *bool `json:"BroadcastEnable,omitempty" name:"BroadcastEnable"`
+
+	// The maximum number of retries
+	RetryMaxTimes *uint64 `json:"RetryMaxTimes,omitempty" name:"RetryMaxTimes"`
 }
 
 func (r *ModifyRocketMQGroupRequest) ToJsonString() string {
@@ -5730,6 +5757,7 @@ func (r *ModifyRocketMQGroupRequest) FromJsonString(s string) error {
 	delete(f, "Remark")
 	delete(f, "ReadEnable")
 	delete(f, "BroadcastEnable")
+	delete(f, "RetryMaxTimes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRocketMQGroupRequest has unknown keys!", "")
 	}
@@ -6747,16 +6775,20 @@ type RocketMQClusterInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RocketMQFlag *bool `json:"RocketMQFlag,omitempty" name:"RocketMQFlag"`
 
-
+	// Billing status (`1`: Normal; `2`: Service suspended; `3`: Terminated)
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-
+	// Service suspension time in milliseconds
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *int64 `json:"IsolateTime,omitempty" name:"IsolateTime"`
 
-
+	// HTTP-based public network access address
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpPublicEndpoint *string `json:"HttpPublicEndpoint,omitempty" name:"HttpPublicEndpoint"`
 
-
+	// HTTP-based VPC access address
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpVpcEndpoint *string `json:"HttpVpcEndpoint,omitempty" name:"HttpVpcEndpoint"`
 }
 
@@ -6816,6 +6848,14 @@ type RocketMQGroup struct {
 
 	// Whether to enable broadcast consumption.
 	BroadcastEnabled *bool `json:"BroadcastEnabled,omitempty" name:"BroadcastEnabled"`
+
+	// Group type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GroupType *string `json:"GroupType,omitempty" name:"GroupType"`
+
+	// The number of retries
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RetryMaxTimes *uint64 `json:"RetryMaxTimes,omitempty" name:"RetryMaxTimes"`
 }
 
 type RocketMQNamespace struct {
@@ -6844,6 +6884,12 @@ type RocketMQNamespace struct {
 type RocketMQTopic struct {
 	// Topic name.
 	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Topic type. Enumerated values: `Normal`, `GlobalOrder`, `PartitionedOrder`, `Transaction`, `Retry`, and `DeadLetter`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The number of subscription groups
+	GroupNum *uint64 `json:"GroupNum,omitempty" name:"GroupNum"`
 
 	// Description.
 	// Note: This field may return null, indicating that no valid values can be obtained.
