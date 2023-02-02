@@ -564,6 +564,12 @@ type BindingPolicyObjectRequestParams struct {
 
 	// Dimensions of an object to be bound.
 	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
+
+	// Whether the event alert has been configured
+	EbEventFlag *int64 `json:"EbEventFlag,omitempty" name:"EbEventFlag"`
 }
 
 type BindingPolicyObjectRequest struct {
@@ -583,6 +589,12 @@ type BindingPolicyObjectRequest struct {
 
 	// Dimensions of an object to be bound.
 	Dimensions []*BindingPolicyObjectDimension `json:"Dimensions,omitempty" name:"Dimensions"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
+
+	// Whether the event alert has been configured
+	EbEventFlag *int64 `json:"EbEventFlag,omitempty" name:"EbEventFlag"`
 }
 
 func (r *BindingPolicyObjectRequest) ToJsonString() string {
@@ -602,6 +614,8 @@ func (r *BindingPolicyObjectRequest) FromJsonString(s string) error {
 	delete(f, "PolicyId")
 	delete(f, "InstanceGroupId")
 	delete(f, "Dimensions")
+	delete(f, "EbSubject")
+	delete(f, "EbEventFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindingPolicyObjectRequest has unknown keys!", "")
 	}
@@ -646,14 +660,14 @@ type CLSNotice struct {
 
 // Predefined struct for user
 type CleanGrafanaInstanceRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type CleanGrafanaInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -958,6 +972,9 @@ type CreateAlarmPolicyRequestParams struct {
 
 	// A dedicated field for migration policies. 0: Implement authentication logic; 1: Skip authentication logic.
 	MigrateFlag *int64 `json:"MigrateFlag,omitempty" name:"MigrateFlag"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
 }
 
 type CreateAlarmPolicyRequest struct {
@@ -1016,6 +1033,9 @@ type CreateAlarmPolicyRequest struct {
 
 	// A dedicated field for migration policies. 0: Implement authentication logic; 1: Skip authentication logic.
 	MigrateFlag *int64 `json:"MigrateFlag,omitempty" name:"MigrateFlag"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
 }
 
 func (r *CreateAlarmPolicyRequest) ToJsonString() string {
@@ -1048,6 +1068,7 @@ func (r *CreateAlarmPolicyRequest) FromJsonString(s string) error {
 	delete(f, "LogAlarmReqInfo")
 	delete(f, "HierarchicalNotices")
 	delete(f, "MigrateFlag")
+	delete(f, "EbSubject")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmPolicyRequest has unknown keys!", "")
 	}
@@ -1084,13 +1105,13 @@ func (r *CreateAlarmPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAlertRuleRequestParams struct {
-	// Prometheus instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Rule name
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
-	// Rule expression
+	// Alerting rule expression. For more information, see <a href="https://www.tencentcloud.com/document/product/1116/43192?lang=en&pg=">Alerting Rule Description</a>
 	Expr *string `json:"Expr,omitempty" name:"Expr"`
 
 	// List of alert notification template IDs
@@ -1119,13 +1140,13 @@ type CreateAlertRuleRequestParams struct {
 type CreateAlertRuleRequest struct {
 	*tchttp.BaseRequest
 	
-	// Prometheus instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Rule name
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
-	// Rule expression
+	// Alerting rule expression. For more information, see <a href="https://www.tencentcloud.com/document/product/1116/43192?lang=en&pg=">Alerting Rule Description</a>
 	Expr *string `json:"Expr,omitempty" name:"Expr"`
 
 	// List of alert notification template IDs
@@ -1389,26 +1410,26 @@ func (r *CreateGrafanaInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateGrafanaIntegrationRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Type
+	// Integration type, such as “tencent-cloud-prometheus”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	Kind *string `json:"Kind,omitempty" name:"Kind"`
 
-	// Configuration
+	// Integration configuration
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
 type CreateGrafanaIntegrationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Type
+	// Integration type, such as “tencent-cloud-prometheus”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	Kind *string `json:"Kind,omitempty" name:"Kind"`
 
-	// Configuration
+	// Integration configuration
 	Content *string `json:"Content,omitempty" name:"Content"`
 }
 
@@ -1461,10 +1482,10 @@ func (r *CreateGrafanaIntegrationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateGrafanaNotificationChannelRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
 	// Default value: `1`. This parameter has been deprecated. Please use `OrganizationIds` instead.
@@ -1483,10 +1504,10 @@ type CreateGrafanaNotificationChannelRequestParams struct {
 type CreateGrafanaNotificationChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
 	// Default value: `1`. This parameter has been deprecated. Please use `OrganizationIds` instead.
@@ -1891,26 +1912,26 @@ func (r *CreatePrometheusMultiTenantInstancePostPayModeResponse) FromJsonString(
 
 // Predefined struct for user
 type CreatePrometheusScrapeJobRequestParams struct {
-	// Instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Agent ID
+	// Agent ID, such as “agent-abcd1234”. It can be obtained on the **Agent Management** page in the console.
 	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
 
-	// Task content
+	// Scrape task ID in the format of “job_name:xx”
 	Config *string `json:"Config,omitempty" name:"Config"`
 }
 
 type CreatePrometheusScrapeJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Agent ID
+	// Agent ID, such as “agent-abcd1234”. It can be obtained on the **Agent Management** page in the console.
 	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
 
-	// Task content
+	// Scrape task ID in the format of “job_name:xx”
 	Config *string `json:"Config,omitempty" name:"Config"`
 }
 
@@ -2049,10 +2070,10 @@ func (r *CreateRecordingRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSSOAccountRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User account ID
+	// User account ID, such as “10000000”.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// Permission
@@ -2065,10 +2086,10 @@ type CreateSSOAccountRequestParams struct {
 type CreateSSOAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User account ID
+	// User account ID, such as “10000000”.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// Permission
@@ -2236,6 +2257,9 @@ type DeleteAlarmNoticesRequestParams struct {
 
 	// Alarm notification template ID list
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Binding between a notification template and a policy
+	NoticeBindPolicys []*NoticeBindPolicys `json:"NoticeBindPolicys,omitempty" name:"NoticeBindPolicys"`
 }
 
 type DeleteAlarmNoticesRequest struct {
@@ -2246,6 +2270,9 @@ type DeleteAlarmNoticesRequest struct {
 
 	// Alarm notification template ID list
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Binding between a notification template and a policy
+	NoticeBindPolicys []*NoticeBindPolicys `json:"NoticeBindPolicys,omitempty" name:"NoticeBindPolicys"`
 }
 
 func (r *DeleteAlarmNoticesRequest) ToJsonString() string {
@@ -2262,6 +2289,7 @@ func (r *DeleteAlarmNoticesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Module")
 	delete(f, "NoticeIds")
+	delete(f, "NoticeBindPolicys")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAlarmNoticesRequest has unknown keys!", "")
 	}
@@ -2556,20 +2584,20 @@ func (r *DeleteGrafanaInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteGrafanaIntegrationRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Integration ID
+	// Integration ID, such as “integration-abcd1234”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
 }
 
 type DeleteGrafanaIntegrationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Integration ID
+	// Integration ID, such as “integration-abcd1234”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
 }
 
@@ -2617,20 +2645,20 @@ func (r *DeleteGrafanaIntegrationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteGrafanaNotificationChannelRequestParams struct {
-	// Array of channel IDs
+	// Array of channel IDs, such as “nchannel-abcd1234”.
 	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
 
-	// Instance name
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DeleteGrafanaNotificationChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Array of channel IDs
+	// Array of channel IDs, such as “nchannel-abcd1234”.
 	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
 
-	// Instance name
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -2868,20 +2896,20 @@ func (r *DeleteRecordingRulesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteSSOAccountRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User account ID
+	// User account ID, such as “10000000”.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 }
 
 type DeleteSSOAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User account ID
+	// User account ID, such as “10000000”.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 }
 
@@ -4747,14 +4775,14 @@ func (r *DescribeConditionsTemplateListResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeDNSConfigRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeDNSConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -4895,7 +4923,7 @@ func (r *DescribeExporterIntegrationsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaChannelsRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Offset.
@@ -4904,20 +4932,20 @@ type DescribeGrafanaChannelsRequestParams struct {
 	// Number of items to be queried
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
-	// Channel ID.
+	// Alert channel ID, such as “nchannel-abcd1234”.
 	ChannelIds []*string `json:"ChannelIds,omitempty" name:"ChannelIds"`
 
-	// Channel status
+	// Alert channel status
 	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
 }
 
 type DescribeGrafanaChannelsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Offset.
@@ -4926,13 +4954,13 @@ type DescribeGrafanaChannelsRequest struct {
 	// Number of items to be queried
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
-	// Channel ID.
+	// Alert channel ID, such as “nchannel-abcd1234”.
 	ChannelIds []*string `json:"ChannelIds,omitempty" name:"ChannelIds"`
 
-	// Channel status
+	// Alert channel status
 	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
 }
 
@@ -4987,14 +5015,14 @@ func (r *DescribeGrafanaChannelsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaConfigRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeGrafanaConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -5044,14 +5072,14 @@ func (r *DescribeGrafanaConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaEnvironmentsRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeGrafanaEnvironmentsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -5107,10 +5135,10 @@ type DescribeGrafanaInstancesRequestParams struct {
 	// Number of items to be queried
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Array of instance IDs
+	// Array of TCMG instance IDs
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Instance name, which supports fuzzy search by prefix.
+	// TCMG instance name, which can be fuzzily matched by prefix.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Query status
@@ -5129,10 +5157,10 @@ type DescribeGrafanaInstancesRequest struct {
 	// Number of items to be queried
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Array of instance IDs
+	// Array of TCMG instance IDs
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Instance name, which supports fuzzy search by prefix.
+	// TCMG instance name, which can be fuzzily matched by prefix.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
 	// Query status
@@ -5270,7 +5298,7 @@ func (r *DescribeGrafanaIntegrationsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGrafanaNotificationChannelsRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Offset
@@ -5279,20 +5307,20 @@ type DescribeGrafanaNotificationChannelsRequestParams struct {
 	// Number of items to be queried
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
-	// Channel ID
+	// Alert channel ID, such as “nchannel-abcd1234”.
 	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
 
-	// Status
+	// Alert channel status
 	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
 }
 
 type DescribeGrafanaNotificationChannelsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Offset
@@ -5301,13 +5329,13 @@ type DescribeGrafanaNotificationChannelsRequest struct {
 	// Number of items to be queried
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
-	// Channel ID
+	// Alert channel ID, such as “nchannel-abcd1234”.
 	ChannelIDs []*string `json:"ChannelIDs,omitempty" name:"ChannelIDs"`
 
-	// Status
+	// Alert channel status
 	ChannelState *int64 `json:"ChannelState,omitempty" name:"ChannelState"`
 }
 
@@ -5362,14 +5390,14 @@ func (r *DescribeGrafanaNotificationChannelsResponse) FromJsonString(s string) e
 
 // Predefined struct for user
 type DescribeGrafanaWhiteListRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeGrafanaWhiteListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -5419,20 +5447,20 @@ func (r *DescribeGrafanaWhiteListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstalledPluginsRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-kleu3gt0”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filter by plugin ID
+	// Filter by plugin ID such as “grafana-piechart-panel”. You can view the IDs of installed plugins through the `DescribeInstalledPlugins` API.
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 }
 
 type DescribeInstalledPluginsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-kleu3gt0”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filter by plugin ID
+	// Filter by plugin ID such as “grafana-piechart-panel”. You can view the IDs of installed plugins through the `DescribeInstalledPlugins` API.
 	PluginId *string `json:"PluginId,omitempty" name:"PluginId"`
 }
 
@@ -6684,6 +6712,78 @@ func (r *DescribePrometheusAgentsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePrometheusInstanceUsageRequestParams struct {
+	// Query by one or more instance IDs. Instance ID is in the format of `prom-xxxxxxxx`. Up to 100 instances can be queried in one request.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Start time
+	StartCalcDate *string `json:"StartCalcDate,omitempty" name:"StartCalcDate"`
+
+	// End time
+	EndCalcDate *string `json:"EndCalcDate,omitempty" name:"EndCalcDate"`
+}
+
+type DescribePrometheusInstanceUsageRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query by one or more instance IDs. Instance ID is in the format of `prom-xxxxxxxx`. Up to 100 instances can be queried in one request.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Start time
+	StartCalcDate *string `json:"StartCalcDate,omitempty" name:"StartCalcDate"`
+
+	// End time
+	EndCalcDate *string `json:"EndCalcDate,omitempty" name:"EndCalcDate"`
+}
+
+func (r *DescribePrometheusInstanceUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusInstanceUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "StartCalcDate")
+	delete(f, "EndCalcDate")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrometheusInstanceUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePrometheusInstanceUsageResponseParams struct {
+	// Usage list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UsageSet []*PrometheusInstanceTenantUsage `json:"UsageSet,omitempty" name:"UsageSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePrometheusInstanceUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePrometheusInstanceUsageResponseParams `json:"Response"`
+}
+
+func (r *DescribePrometheusInstanceUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePrometheusInstanceUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribePrometheusInstancesRequestParams struct {
 	// Queries by instance ID or IDs. Instance ID is in the format of `prom-xxxxxxxx`. Up to 100 instances can be queried in one request.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
@@ -7082,20 +7182,20 @@ func (r *DescribeRecordingRulesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSSOAccountRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filter by account UIN
+	// Filter by account ID such as “10000”
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 }
 
 type DescribeSSOAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Filter by account UIN
+	// Filter by account ID such as “10000”
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 }
 
@@ -7452,20 +7552,20 @@ type DimensionsDesc struct {
 
 // Predefined struct for user
 type EnableGrafanaInternetRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-kleu3gt0”.
 	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
 
-	// Enable or disable
+	// Whether to enable public network access (`true`: Yes; `false`: No)
 	EnableInternet *bool `json:"EnableInternet,omitempty" name:"EnableInternet"`
 }
 
 type EnableGrafanaInternetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-kleu3gt0”.
 	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
 
-	// Enable or disable
+	// Whether to enable public network access (`true`: Yes; `false`: No)
 	EnableInternet *bool `json:"EnableInternet,omitempty" name:"EnableInternet"`
 }
 
@@ -7513,20 +7613,20 @@ func (r *EnableGrafanaInternetResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EnableGrafanaSSORequestParams struct {
-	// Whether to enable SSO
+	// Whether to enable SSO (`true`: Yes; `false`: No)
 	EnableSSO *bool `json:"EnableSSO,omitempty" name:"EnableSSO"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type EnableGrafanaSSORequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to enable SSO
+	// Whether to enable SSO (`true`: Yes; `false`: No)
 	EnableSSO *bool `json:"EnableSSO,omitempty" name:"EnableSSO"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -7574,20 +7674,20 @@ func (r *EnableGrafanaSSOResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EnableSSOCamCheckRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to enable CAM authentication
+	// Whether to enable CAM authentication (`true`: Yes; `false`: No)
 	EnableSSOCamCheck *bool `json:"EnableSSOCamCheck,omitempty" name:"EnableSSOCamCheck"`
 }
 
 type EnableSSOCamCheckRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to enable CAM authentication
+	// Whether to enable CAM authentication (`true`: Yes; `false`: No)
 	EnableSSOCamCheck *bool `json:"EnableSSOCamCheck,omitempty" name:"EnableSSOCamCheck"`
 }
 
@@ -7997,7 +8097,7 @@ type InstallPluginsRequestParams struct {
 	// Plugin information
 	Plugins []*GrafanaPlugin `json:"Plugins,omitempty" name:"Plugins"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -8007,7 +8107,7 @@ type InstallPluginsRequest struct {
 	// Plugin information
 	Plugins []*GrafanaPlugin `json:"Plugins,omitempty" name:"Plugins"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -8302,6 +8402,9 @@ type ModifyAlarmNoticeRequestParams struct {
 
 	// The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
 	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
+
+	// List of IDs of the alerting rules bound to an alarm notification template
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 }
 
 type ModifyAlarmNoticeRequest struct {
@@ -8330,6 +8433,9 @@ type ModifyAlarmNoticeRequest struct {
 
 	// The operation of pushing alarm notifications to CLS. Up to one CLS log topic can be configured.
 	CLSNotices []*CLSNotice `json:"CLSNotices,omitempty" name:"CLSNotices"`
+
+	// List of IDs of the alerting rules bound to an alarm notification template
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
 }
 
 func (r *ModifyAlarmNoticeRequest) ToJsonString() string {
@@ -8352,6 +8458,7 @@ func (r *ModifyAlarmNoticeRequest) FromJsonString(s string) error {
 	delete(f, "UserNotices")
 	delete(f, "URLNotices")
 	delete(f, "CLSNotices")
+	delete(f, "PolicyIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmNoticeRequest has unknown keys!", "")
 	}
@@ -8405,6 +8512,18 @@ type ModifyAlarmPolicyConditionRequestParams struct {
 
 	// Log alarm creation request parameters
 	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
+
+	// Template ID, which is dedicated to TMP.
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Status (`0`: Disabled; `1`: Enabled)
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Name of the policy dedicated to TMP
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
 }
 
 type ModifyAlarmPolicyConditionRequest struct {
@@ -8433,6 +8552,18 @@ type ModifyAlarmPolicyConditionRequest struct {
 
 	// Log alarm creation request parameters
 	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
+
+	// Template ID, which is dedicated to TMP.
+	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
+
+	// Status (`0`: Disabled; `1`: Enabled)
+	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Name of the policy dedicated to TMP
+	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
 }
 
 func (r *ModifyAlarmPolicyConditionRequest) ToJsonString() string {
@@ -8455,6 +8586,10 @@ func (r *ModifyAlarmPolicyConditionRequest) FromJsonString(s string) error {
 	delete(f, "Filter")
 	delete(f, "GroupBy")
 	delete(f, "LogAlarmReqInfo")
+	delete(f, "NoticeIds")
+	delete(f, "Enable")
+	delete(f, "PolicyName")
+	delete(f, "EbSubject")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmPolicyConditionRequest has unknown keys!", "")
 	}
@@ -8839,20 +8974,20 @@ func (r *ModifyAlarmReceiversResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyGrafanaInstanceRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// TCMG instance name, such as “test”.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 }
 
 type ModifyGrafanaInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// TCMG instance name, such as “test”.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 }
 
@@ -9131,6 +9266,14 @@ type MonitorTypeNamespace struct {
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 }
 
+type NoticeBindPolicys struct {
+	// Alert notification template ID
+	NoticeId *string `json:"NoticeId,omitempty" name:"NoticeId"`
+
+	// List of IDs of the alerting rules bound to an alarm notification template
+	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
+}
+
 type Operator struct {
 	// Operator ID
 	Id *string `json:"Id,omitempty" name:"Id"`
@@ -9303,6 +9446,28 @@ type PrometheusInstanceGrantInfo struct {
 
 	// Whether there is permission to display the API information. Valid values: 1 (yes), 2 (no).
 	HasApiOperation *int64 `json:"HasApiOperation,omitempty" name:"HasApiOperation"`
+}
+
+type PrometheusInstanceTenantUsage struct {
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Billing cycle
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CalcDate *string `json:"CalcDate,omitempty" name:"CalcDate"`
+
+	// Total usage
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *float64 `json:"Total,omitempty" name:"Total"`
+
+	// Usage of basic (free) metrics
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Basic *float64 `json:"Basic,omitempty" name:"Basic"`
+
+	// Usage of paid metrics
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Fee *float64 `json:"Fee,omitempty" name:"Fee"`
 }
 
 type PrometheusInstancesItem struct {
@@ -9710,14 +9875,14 @@ type RecordingRuleSet struct {
 
 // Predefined struct for user
 type ResumeGrafanaInstanceRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type ResumeGrafanaInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -10083,6 +10248,12 @@ type UnBindingAllPolicyObjectRequestParams struct {
 
 	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
+
+	// Whether the event alert has been configured
+	EbEventFlag *int64 `json:"EbEventFlag,omitempty" name:"EbEventFlag"`
 }
 
 type UnBindingAllPolicyObjectRequest struct {
@@ -10096,6 +10267,12 @@ type UnBindingAllPolicyObjectRequest struct {
 
 	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
+
+	// Whether the event alert has been configured
+	EbEventFlag *int64 `json:"EbEventFlag,omitempty" name:"EbEventFlag"`
 }
 
 func (r *UnBindingAllPolicyObjectRequest) ToJsonString() string {
@@ -10113,6 +10290,8 @@ func (r *UnBindingAllPolicyObjectRequest) FromJsonString(s string) error {
 	delete(f, "Module")
 	delete(f, "GroupId")
 	delete(f, "PolicyId")
+	delete(f, "EbSubject")
+	delete(f, "EbEventFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnBindingAllPolicyObjectRequest has unknown keys!", "")
 	}
@@ -10157,6 +10336,12 @@ type UnBindingPolicyObjectRequestParams struct {
 
 	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
+
+	// Whether the event alert has been configured
+	EbEventFlag *int64 `json:"EbEventFlag,omitempty" name:"EbEventFlag"`
 }
 
 type UnBindingPolicyObjectRequest struct {
@@ -10176,6 +10361,12 @@ type UnBindingPolicyObjectRequest struct {
 
 	// Alarm policy ID. If this parameter is used, `GroupId` will be ignored.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The alert configured for an event
+	EbSubject *string `json:"EbSubject,omitempty" name:"EbSubject"`
+
+	// Whether the event alert has been configured
+	EbEventFlag *int64 `json:"EbEventFlag,omitempty" name:"EbEventFlag"`
 }
 
 func (r *UnBindingPolicyObjectRequest) ToJsonString() string {
@@ -10195,6 +10386,8 @@ func (r *UnBindingPolicyObjectRequest) FromJsonString(s string) error {
 	delete(f, "UniqueId")
 	delete(f, "InstanceGroupId")
 	delete(f, "PolicyId")
+	delete(f, "EbSubject")
+	delete(f, "EbEventFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnBindingPolicyObjectRequest has unknown keys!", "")
 	}
@@ -10381,20 +10574,20 @@ func (r *UninstallGrafanaDashboardResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UninstallGrafanaPluginsRequestParams struct {
-	// Array of plugin IDs
+	// Array of plugin IDs, such as "PluginIds": [ "grafana-clock-panel" ]. The plugin ID can be obtained through the `DescribePluginOverviews` API.
 	PluginIds []*string `json:"PluginIds,omitempty" name:"PluginIds"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefg”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type UninstallGrafanaPluginsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Array of plugin IDs
+	// Array of plugin IDs, such as "PluginIds": [ "grafana-clock-panel" ]. The plugin ID can be obtained through the `DescribePluginOverviews` API.
 	PluginIds []*string `json:"PluginIds,omitempty" name:"PluginIds"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefg”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -10648,7 +10841,7 @@ func (r *UpdateAlertRuleStateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateDNSConfigRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of DNS servers
@@ -10658,7 +10851,7 @@ type UpdateDNSConfigRequestParams struct {
 type UpdateDNSConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Array of DNS servers
@@ -10858,7 +11051,7 @@ func (r *UpdateGrafanaConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateGrafanaEnvironmentsRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Environment variable string
@@ -10868,7 +11061,7 @@ type UpdateGrafanaEnvironmentsRequestParams struct {
 type UpdateGrafanaEnvironmentsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Environment variable string
@@ -10919,13 +11112,13 @@ func (r *UpdateGrafanaEnvironmentsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateGrafanaIntegrationRequestParams struct {
-	// Integration ID
+	// Integration ID, such as “integration-abcd1234”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Integration type
+	// Integration type, such as “tencent-cloud-prometheus”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	Kind *string `json:"Kind,omitempty" name:"Kind"`
 
 	// Integration content
@@ -10935,13 +11128,13 @@ type UpdateGrafanaIntegrationRequestParams struct {
 type UpdateGrafanaIntegrationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Integration ID
+	// Integration ID, such as “integration-abcd1234”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	IntegrationId *string `json:"IntegrationId,omitempty" name:"IntegrationId"`
 
-	// Instance ID
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Integration type
+	// Integration type, such as “tencent-cloud-prometheus”. You can view it by going to the instance details page and clicking **Tencent Cloud Service Integration** > **Integration List**.
 	Kind *string `json:"Kind,omitempty" name:"Kind"`
 
 	// Integration content
@@ -10994,13 +11187,13 @@ func (r *UpdateGrafanaIntegrationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateGrafanaNotificationChannelRequestParams struct {
-	// Channel ID
+	// Channel ID, such as “nchannel-abcd1234”.
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
 	// Array of notification channel IDs
@@ -11016,13 +11209,13 @@ type UpdateGrafanaNotificationChannelRequestParams struct {
 type UpdateGrafanaNotificationChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Channel ID
+	// Channel ID, such as “nchannel-abcd1234”.
 	ChannelId *string `json:"ChannelId,omitempty" name:"ChannelId"`
 
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Channel name
+	// Alert channel name, such as “test”.
 	ChannelName *string `json:"ChannelName,omitempty" name:"ChannelName"`
 
 	// Array of notification channel IDs
@@ -11083,20 +11276,20 @@ func (r *UpdateGrafanaNotificationChannelResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type UpdateGrafanaWhiteListRequestParams struct {
-	// Instance name
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Allowlist in array
+	// Array of public IPs (such as “127.0.0.1”) in the allowlist, which can be viewed through the `DescribeGrafanaWhiteList` API.
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 }
 
 type UpdateGrafanaWhiteListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance name
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Allowlist in array
+	// Array of public IPs (such as “127.0.0.1”) in the allowlist, which can be viewed through the `DescribeGrafanaWhiteList` API.
 	Whitelist []*string `json:"Whitelist,omitempty" name:"Whitelist"`
 }
 
@@ -11144,10 +11337,10 @@ func (r *UpdateGrafanaWhiteListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdatePrometheusAgentStatusRequestParams struct {
-	// Instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List of agent IDs
+	// List of agent IDs such as “agent-abcd1234”, which can be obtained on the **Agent Management** page in the console.
 	AgentIds []*string `json:"AgentIds,omitempty" name:"AgentIds"`
 
 	// Status to update
@@ -11159,10 +11352,10 @@ type UpdatePrometheusAgentStatusRequestParams struct {
 type UpdatePrometheusAgentStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List of agent IDs
+	// List of agent IDs such as “agent-abcd1234”, which can be obtained on the **Agent Management** page in the console.
 	AgentIds []*string `json:"AgentIds,omitempty" name:"AgentIds"`
 
 	// Status to update
@@ -11216,32 +11409,32 @@ func (r *UpdatePrometheusAgentStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdatePrometheusScrapeJobRequestParams struct {
-	// Instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Agent ID
+	// Agent ID such as “agent-abcd1234”, which can be obtained on the **Agent Management** page in the console
 	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
 
-	// Scrape task ID
+	// Scrape task ID such as “job-abcd1234”. You can go to the **Agent Management** page and obtain the ID in the pop-up **Create Scrape Task** window.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
-	// Scrape task configuration
+	// Scrape task ID in the format of “job_name:xx”
 	Config *string `json:"Config,omitempty" name:"Config"`
 }
 
 type UpdatePrometheusScrapeJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TMP instance ID, such as “prom-abcd1234”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Agent ID
+	// Agent ID such as “agent-abcd1234”, which can be obtained on the **Agent Management** page in the console
 	AgentId *string `json:"AgentId,omitempty" name:"AgentId"`
 
-	// Scrape task ID
+	// Scrape task ID such as “job-abcd1234”. You can go to the **Agent Management** page and obtain the ID in the pop-up **Create Scrape Task** window.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
-	// Scrape task configuration
+	// Scrape task ID in the format of “job_name:xx”
 	Config *string `json:"Config,omitempty" name:"Config"`
 }
 
@@ -11385,10 +11578,10 @@ func (r *UpdateRecordingRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateSSOAccountRequestParams struct {
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User account ID
+	// User account ID, such as “10000000”.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// Permission
@@ -11401,10 +11594,10 @@ type UpdateSSOAccountRequestParams struct {
 type UpdateSSOAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User account ID
+	// User account ID, such as “10000000”.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
 	// Permission
@@ -11555,20 +11748,20 @@ func (r *UpgradeGrafanaDashboardResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeGrafanaInstanceRequestParams struct {
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Version alias
+	// Version alias, such as v7.4.2.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 }
 
 type UpgradeGrafanaInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// TCMG instance ID, such as “grafana-12345678”.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Version alias
+	// Version alias, such as v7.4.2.
 	Alias *string `json:"Alias,omitempty" name:"Alias"`
 }
 

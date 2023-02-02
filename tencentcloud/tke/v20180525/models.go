@@ -1647,6 +1647,208 @@ func (r *CreateClusterRouteTableResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateClusterVirtualNodePoolRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of subnet IDs
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// List of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Virtual node labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
+
+	// Virtual node taint
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
+
+	// List of nodes
+	VirtualNodes []*VirtualNodeSpec `json:"VirtualNodes,omitempty" name:"VirtualNodes"`
+
+	// Setting of deletion protection
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+
+	// Node pool OS:
+	// - `linux` (default value)
+	// - `windows`
+	OS *string `json:"OS,omitempty" name:"OS"`
+}
+
+type CreateClusterVirtualNodePoolRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// List of subnet IDs
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// List of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Virtual node labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
+
+	// Virtual node taint
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
+
+	// List of nodes
+	VirtualNodes []*VirtualNodeSpec `json:"VirtualNodes,omitempty" name:"VirtualNodes"`
+
+	// Setting of deletion protection
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+
+	// Node pool OS:
+	// - `linux` (default value)
+	// - `windows`
+	OS *string `json:"OS,omitempty" name:"OS"`
+}
+
+func (r *CreateClusterVirtualNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterVirtualNodePoolRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Name")
+	delete(f, "SubnetIds")
+	delete(f, "SecurityGroupIds")
+	delete(f, "Labels")
+	delete(f, "Taints")
+	delete(f, "VirtualNodes")
+	delete(f, "DeletionProtection")
+	delete(f, "OS")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterVirtualNodePoolRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClusterVirtualNodePoolResponseParams struct {
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateClusterVirtualNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateClusterVirtualNodePoolResponseParams `json:"Response"`
+}
+
+func (r *CreateClusterVirtualNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterVirtualNodePoolResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClusterVirtualNodeRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Subnet
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// List of subnet IDs (this parameter and `SubnetId` are mutually exclusive)
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// List of virtual nodes
+	VirtualNodes []*VirtualNodeSpec `json:"VirtualNodes,omitempty" name:"VirtualNodes"`
+}
+
+type CreateClusterVirtualNodeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Subnet
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// List of subnet IDs (this parameter and `SubnetId` are mutually exclusive)
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// List of virtual nodes
+	VirtualNodes []*VirtualNodeSpec `json:"VirtualNodes,omitempty" name:"VirtualNodes"`
+}
+
+func (r *CreateClusterVirtualNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterVirtualNodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodePoolId")
+	delete(f, "SubnetId")
+	delete(f, "SubnetIds")
+	delete(f, "VirtualNodes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterVirtualNodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClusterVirtualNodeResponseParams struct {
+	// Virtual node name
+	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateClusterVirtualNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateClusterVirtualNodeResponseParams `json:"Response"`
+}
+
+func (r *CreateClusterVirtualNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterVirtualNodeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateECMInstancesRequestParams struct {
 	// Cluster ID
 	ClusterID *string `json:"ClusterID,omitempty" name:"ClusterID"`
@@ -2712,6 +2914,142 @@ func (r *DeleteClusterRouteTableResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteClusterRouteTableResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteClusterVirtualNodePoolRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of virtual node pool IDs
+	NodePoolIds []*string `json:"NodePoolIds,omitempty" name:"NodePoolIds"`
+
+	// Whether to forcibly delete the nodes with pods. Values: `true`, `false`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+type DeleteClusterVirtualNodePoolRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of virtual node pool IDs
+	NodePoolIds []*string `json:"NodePoolIds,omitempty" name:"NodePoolIds"`
+
+	// Whether to forcibly delete the nodes with pods. Values: `true`, `false`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+func (r *DeleteClusterVirtualNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteClusterVirtualNodePoolRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodePoolIds")
+	delete(f, "Force")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterVirtualNodePoolRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteClusterVirtualNodePoolResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteClusterVirtualNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteClusterVirtualNodePoolResponseParams `json:"Response"`
+}
+
+func (r *DeleteClusterVirtualNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteClusterVirtualNodePoolResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteClusterVirtualNodeRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of virtual nodes
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames"`
+
+	// Whether to forcibly delete running pods in the virtual node. Values: `true`, `false`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+type DeleteClusterVirtualNodeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of virtual nodes
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames"`
+
+	// Whether to forcibly delete running pods in the virtual node. Values: `true`, `false`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+func (r *DeleteClusterVirtualNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteClusterVirtualNodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodeNames")
+	delete(f, "Force")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterVirtualNodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteClusterVirtualNodeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteClusterVirtualNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteClusterVirtualNodeResponseParams `json:"Response"`
+}
+
+func (r *DeleteClusterVirtualNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteClusterVirtualNodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4375,6 +4713,144 @@ func (r *DescribeClusterStatusResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeClusterStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterVirtualNodePoolsRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeClusterVirtualNodePoolsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeClusterVirtualNodePoolsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterVirtualNodePoolsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterVirtualNodePoolsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterVirtualNodePoolsResponseParams struct {
+	// Total number of node pools
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of virtual node pools
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodePoolSet []*VirtualNodePool `json:"NodePoolSet,omitempty" name:"NodePoolSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterVirtualNodePoolsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterVirtualNodePoolsResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterVirtualNodePoolsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterVirtualNodePoolsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterVirtualNodeRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node name
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames"`
+}
+
+type DescribeClusterVirtualNodeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node name
+	NodeNames []*string `json:"NodeNames,omitempty" name:"NodeNames"`
+}
+
+func (r *DescribeClusterVirtualNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterVirtualNodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodePoolId")
+	delete(f, "NodeNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterVirtualNodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterVirtualNodeResponseParams struct {
+	// List of nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nodes []*VirtualNode `json:"Nodes,omitempty" name:"Nodes"`
+
+	// Total number of nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterVirtualNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterVirtualNodeResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterVirtualNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterVirtualNodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6088,6 +6564,67 @@ func (r *DisableClusterDeletionProtectionResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DrainClusterVirtualNodeRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node name
+	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+}
+
+type DrainClusterVirtualNodeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node name
+	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+}
+
+func (r *DrainClusterVirtualNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DrainClusterVirtualNodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodeName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DrainClusterVirtualNodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DrainClusterVirtualNodeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DrainClusterVirtualNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *DrainClusterVirtualNodeResponseParams `json:"Response"`
+}
+
+func (r *DrainClusterVirtualNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DrainClusterVirtualNodeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DriverVersion struct {
 	// Version of GPU driver or CUDA
 	Version *string `json:"Version,omitempty" name:"Version"`
@@ -7627,6 +8164,95 @@ func (r *ModifyClusterNodePoolResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyClusterVirtualNodePoolRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Virtual node labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
+
+	// Virtual node taint
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
+
+	// Setting of deletion protection
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+}
+
+type ModifyClusterVirtualNodePoolRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Virtual node labels
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
+
+	// Virtual node taint
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
+
+	// Setting of deletion protection
+	DeletionProtection *bool `json:"DeletionProtection,omitempty" name:"DeletionProtection"`
+}
+
+func (r *ModifyClusterVirtualNodePoolRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterVirtualNodePoolRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NodePoolId")
+	delete(f, "Name")
+	delete(f, "Labels")
+	delete(f, "Taints")
+	delete(f, "DeletionProtection")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterVirtualNodePoolRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyClusterVirtualNodePoolResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyClusterVirtualNodePoolResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyClusterVirtualNodePoolResponseParams `json:"Response"`
+}
+
+func (r *ModifyClusterVirtualNodePoolResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterVirtualNodePoolResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyNodePoolInstanceTypesRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -8611,6 +9237,9 @@ type UpgradeClusterInstancesRequestParams struct {
 
 	// The maximum tolerable proportion of unavailable pods
 	MaxNotReadyPercent *float64 `json:"MaxNotReadyPercent,omitempty" name:"MaxNotReadyPercent"`
+
+	// Whether to upgrade node runtime. Values: `true`, `false` (default).
+	UpgradeRunTime *bool `json:"UpgradeRunTime,omitempty" name:"UpgradeRunTime"`
 }
 
 type UpgradeClusterInstancesRequest struct {
@@ -8642,6 +9271,9 @@ type UpgradeClusterInstancesRequest struct {
 
 	// The maximum tolerable proportion of unavailable pods
 	MaxNotReadyPercent *float64 `json:"MaxNotReadyPercent,omitempty" name:"MaxNotReadyPercent"`
+
+	// Whether to upgrade node runtime. Values: `true`, `false` (default).
+	UpgradeRunTime *bool `json:"UpgradeRunTime,omitempty" name:"UpgradeRunTime"`
 }
 
 func (r *UpgradeClusterInstancesRequest) ToJsonString() string {
@@ -8663,6 +9295,7 @@ func (r *UpgradeClusterInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ResetParam")
 	delete(f, "SkipPreCheck")
 	delete(f, "MaxNotReadyPercent")
+	delete(f, "UpgradeRunTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeClusterInstancesRequest has unknown keys!", "")
 	}
@@ -8717,4 +9350,50 @@ type VersionInstance struct {
 	// Remark
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+type VirtualNode struct {
+	// Virtual node name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Subnet of the virtual node
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Virtual node status
+	Phase *string `json:"Phase,omitempty" name:"Phase"`
+
+	// Creation time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+}
+
+type VirtualNodePool struct {
+	// Node pool ID
+	NodePoolId *string `json:"NodePoolId,omitempty" name:"NodePoolId"`
+
+	// List of subnets
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+
+	// Node pool name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Node pool lifecycle status
+	LifeState *string `json:"LifeState,omitempty" name:"LifeState"`
+
+	// Virtual node labels
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*Label `json:"Labels,omitempty" name:"Labels"`
+
+	// Virtual node taint
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
+}
+
+type VirtualNodeSpec struct {
+	// Node display name
+	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }

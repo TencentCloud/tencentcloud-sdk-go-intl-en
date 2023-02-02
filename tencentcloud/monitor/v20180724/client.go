@@ -3871,6 +3871,74 @@ func (c *Client) DescribePrometheusAgentsWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribePrometheusInstanceUsageRequest() (request *DescribePrometheusInstanceUsageRequest) {
+    request = &DescribePrometheusInstanceUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusInstanceUsage")
+    
+    
+    return
+}
+
+func NewDescribePrometheusInstanceUsageResponse() (response *DescribePrometheusInstanceUsageResponse) {
+    response = &DescribePrometheusInstanceUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusInstanceUsage
+//  This API is used to query the usage of a pay-as-you-go Tencent Managed Service for Prometheus (TMP) instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusInstanceUsage(request *DescribePrometheusInstanceUsageRequest) (response *DescribePrometheusInstanceUsageResponse, err error) {
+    return c.DescribePrometheusInstanceUsageWithContext(context.Background(), request)
+}
+
+// DescribePrometheusInstanceUsage
+//  This API is used to query the usage of a pay-as-you-go Tencent Managed Service for Prometheus (TMP) instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusInstanceUsageWithContext(ctx context.Context, request *DescribePrometheusInstanceUsageRequest) (response *DescribePrometheusInstanceUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusInstanceUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusInstanceUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusInstanceUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePrometheusInstancesRequest() (request *DescribePrometheusInstancesRequest) {
     request = &DescribePrometheusInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},

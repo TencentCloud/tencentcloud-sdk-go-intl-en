@@ -447,6 +447,7 @@ func NewCheckInstancesUpgradeAbleResponse() (response *CheckInstancesUpgradeAble
 // error code that may be returned:
 //  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  FAILEDOPERATION_POLICYSERVERCOMMONERROR = "FailedOperation.PolicyServerCommonError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_KUBECLIENTCONNECTION = "InternalError.KubeClientConnection"
@@ -467,6 +468,7 @@ func (c *Client) CheckInstancesUpgradeAble(request *CheckInstancesUpgradeAbleReq
 // error code that may be returned:
 //  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  FAILEDOPERATION_POLICYSERVERCOMMONERROR = "FailedOperation.PolicyServerCommonError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_KUBECLIENTCONNECTION = "InternalError.KubeClientConnection"
@@ -1111,6 +1113,128 @@ func (c *Client) CreateClusterRouteTableWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateClusterRouteTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateClusterVirtualNodeRequest() (request *CreateClusterVirtualNodeRequest) {
+    request = &CreateClusterVirtualNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateClusterVirtualNode")
+    
+    
+    return
+}
+
+func NewCreateClusterVirtualNodeResponse() (response *CreateClusterVirtualNodeResponse) {
+    response = &CreateClusterVirtualNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateClusterVirtualNode
+// This API is used to create a virtual node.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE_SUBNETALREADYEXIST = "ResourceInUse.SubnetAlreadyExist"
+//  RESOURCEUNAVAILABLE_NODEPOOLSTATENOTNORMAL = "ResourceUnavailable.NodePoolStateNotNormal"
+//  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTINSTALLVIRTUALKUBELET = "UnsupportedOperation.NotSupportInstallVirtualKubelet"
+func (c *Client) CreateClusterVirtualNode(request *CreateClusterVirtualNodeRequest) (response *CreateClusterVirtualNodeResponse, err error) {
+    return c.CreateClusterVirtualNodeWithContext(context.Background(), request)
+}
+
+// CreateClusterVirtualNode
+// This API is used to create a virtual node.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE_SUBNETALREADYEXIST = "ResourceInUse.SubnetAlreadyExist"
+//  RESOURCEUNAVAILABLE_NODEPOOLSTATENOTNORMAL = "ResourceUnavailable.NodePoolStateNotNormal"
+//  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTINSTALLVIRTUALKUBELET = "UnsupportedOperation.NotSupportInstallVirtualKubelet"
+func (c *Client) CreateClusterVirtualNodeWithContext(ctx context.Context, request *CreateClusterVirtualNodeRequest) (response *CreateClusterVirtualNodeResponse, err error) {
+    if request == nil {
+        request = NewCreateClusterVirtualNodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterVirtualNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateClusterVirtualNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateClusterVirtualNodePoolRequest() (request *CreateClusterVirtualNodePoolRequest) {
+    request = &CreateClusterVirtualNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateClusterVirtualNodePool")
+    
+    
+    return
+}
+
+func NewCreateClusterVirtualNodePoolResponse() (response *CreateClusterVirtualNodePoolResponse) {
+    response = &CreateClusterVirtualNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateClusterVirtualNodePool
+// This API is used to create a virtual node pool.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_SUBNETINVALIDERROR = "InvalidParameter.SubnetInvalidError"
+//  INVALIDPARAMETER_SUBNETNOTEXIST = "InvalidParameter.SubnetNotExist"
+//  RESOURCEINUSE_SUBNETALREADYEXIST = "ResourceInUse.SubnetAlreadyExist"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTINSTALLVIRTUALKUBELET = "UnsupportedOperation.NotSupportInstallVirtualKubelet"
+func (c *Client) CreateClusterVirtualNodePool(request *CreateClusterVirtualNodePoolRequest) (response *CreateClusterVirtualNodePoolResponse, err error) {
+    return c.CreateClusterVirtualNodePoolWithContext(context.Background(), request)
+}
+
+// CreateClusterVirtualNodePool
+// This API is used to create a virtual node pool.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_SUBNETINVALIDERROR = "InvalidParameter.SubnetInvalidError"
+//  INVALIDPARAMETER_SUBNETNOTEXIST = "InvalidParameter.SubnetNotExist"
+//  RESOURCEINUSE_SUBNETALREADYEXIST = "ResourceInUse.SubnetAlreadyExist"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTINSTALLVIRTUALKUBELET = "UnsupportedOperation.NotSupportInstallVirtualKubelet"
+func (c *Client) CreateClusterVirtualNodePoolWithContext(ctx context.Context, request *CreateClusterVirtualNodePoolRequest) (response *CreateClusterVirtualNodePoolResponse, err error) {
+    if request == nil {
+        request = NewCreateClusterVirtualNodePoolRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterVirtualNodePool require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateClusterVirtualNodePoolResponse()
     err = c.Send(request, response)
     return
 }
@@ -2025,6 +2149,116 @@ func (c *Client) DeleteClusterRouteTableWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteClusterRouteTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteClusterVirtualNodeRequest() (request *DeleteClusterVirtualNodeRequest) {
+    request = &DeleteClusterVirtualNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterVirtualNode")
+    
+    
+    return
+}
+
+func NewDeleteClusterVirtualNodeResponse() (response *DeleteClusterVirtualNodeResponse) {
+    response = &DeleteClusterVirtualNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteClusterVirtualNode
+// This API is used to delete a virtual node.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE_EXISTRUNNINGPOD = "ResourceInUse.ExistRunningPod"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DeleteClusterVirtualNode(request *DeleteClusterVirtualNodeRequest) (response *DeleteClusterVirtualNodeResponse, err error) {
+    return c.DeleteClusterVirtualNodeWithContext(context.Background(), request)
+}
+
+// DeleteClusterVirtualNode
+// This API is used to delete a virtual node.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE_EXISTRUNNINGPOD = "ResourceInUse.ExistRunningPod"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DeleteClusterVirtualNodeWithContext(ctx context.Context, request *DeleteClusterVirtualNodeRequest) (response *DeleteClusterVirtualNodeResponse, err error) {
+    if request == nil {
+        request = NewDeleteClusterVirtualNodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterVirtualNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteClusterVirtualNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteClusterVirtualNodePoolRequest() (request *DeleteClusterVirtualNodePoolRequest) {
+    request = &DeleteClusterVirtualNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DeleteClusterVirtualNodePool")
+    
+    
+    return
+}
+
+func NewDeleteClusterVirtualNodePoolResponse() (response *DeleteClusterVirtualNodePoolResponse) {
+    response = &DeleteClusterVirtualNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteClusterVirtualNodePool
+// This API is used to delete a virtual node pool.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCEINUSE_EXISTRUNNINGPOD = "ResourceInUse.ExistRunningPod"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DeleteClusterVirtualNodePool(request *DeleteClusterVirtualNodePoolRequest) (response *DeleteClusterVirtualNodePoolResponse, err error) {
+    return c.DeleteClusterVirtualNodePoolWithContext(context.Background(), request)
+}
+
+// DeleteClusterVirtualNodePool
+// This API is used to delete a virtual node pool.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCEINUSE_EXISTRUNNINGPOD = "ResourceInUse.ExistRunningPod"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DeleteClusterVirtualNodePoolWithContext(ctx context.Context, request *DeleteClusterVirtualNodePoolRequest) (response *DeleteClusterVirtualNodePoolResponse, err error) {
+    if request == nil {
+        request = NewDeleteClusterVirtualNodePoolRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteClusterVirtualNodePool require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteClusterVirtualNodePoolResponse()
     err = c.Send(request, response)
     return
 }
@@ -3685,6 +3919,116 @@ func (c *Client) DescribeClusterStatusWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeClusterVirtualNodeRequest() (request *DescribeClusterVirtualNodeRequest) {
+    request = &DescribeClusterVirtualNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterVirtualNode")
+    
+    
+    return
+}
+
+func NewDescribeClusterVirtualNodeResponse() (response *DescribeClusterVirtualNodeResponse) {
+    response = &DescribeClusterVirtualNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterVirtualNode
+// This API is used to query the list of virtual nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  INTERNALERROR_KUBERNETESLISTOPERATIONERROR = "InternalError.KubernetesListOperationError"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DescribeClusterVirtualNode(request *DescribeClusterVirtualNodeRequest) (response *DescribeClusterVirtualNodeResponse, err error) {
+    return c.DescribeClusterVirtualNodeWithContext(context.Background(), request)
+}
+
+// DescribeClusterVirtualNode
+// This API is used to query the list of virtual nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  INTERNALERROR_KUBERNETESLISTOPERATIONERROR = "InternalError.KubernetesListOperationError"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DescribeClusterVirtualNodeWithContext(ctx context.Context, request *DescribeClusterVirtualNodeRequest) (response *DescribeClusterVirtualNodeResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterVirtualNodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterVirtualNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterVirtualNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterVirtualNodePoolsRequest() (request *DescribeClusterVirtualNodePoolsRequest) {
+    request = &DescribeClusterVirtualNodePoolsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterVirtualNodePools")
+    
+    
+    return
+}
+
+func NewDescribeClusterVirtualNodePoolsResponse() (response *DescribeClusterVirtualNodePoolsResponse) {
+    response = &DescribeClusterVirtualNodePoolsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterVirtualNodePools
+// This API is used to query the list of virtual node pools.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DescribeClusterVirtualNodePools(request *DescribeClusterVirtualNodePoolsRequest) (response *DescribeClusterVirtualNodePoolsResponse, err error) {
+    return c.DescribeClusterVirtualNodePoolsWithContext(context.Background(), request)
+}
+
+// DescribeClusterVirtualNodePools
+// This API is used to query the list of virtual node pools.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+func (c *Client) DescribeClusterVirtualNodePoolsWithContext(ctx context.Context, request *DescribeClusterVirtualNodePoolsRequest) (response *DescribeClusterVirtualNodePoolsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterVirtualNodePoolsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterVirtualNodePools require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterVirtualNodePoolsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClustersRequest() (request *DescribeClustersRequest) {
     request = &DescribeClustersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5271,6 +5615,56 @@ func (c *Client) DisableClusterDeletionProtectionWithContext(ctx context.Context
     return
 }
 
+func NewDrainClusterVirtualNodeRequest() (request *DrainClusterVirtualNodeRequest) {
+    request = &DrainClusterVirtualNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DrainClusterVirtualNode")
+    
+    
+    return
+}
+
+func NewDrainClusterVirtualNodeResponse() (response *DrainClusterVirtualNodeResponse) {
+    response = &DrainClusterVirtualNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DrainClusterVirtualNode
+// This API is used to drain a virtual node.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DrainClusterVirtualNode(request *DrainClusterVirtualNodeRequest) (response *DrainClusterVirtualNodeResponse, err error) {
+    return c.DrainClusterVirtualNodeWithContext(context.Background(), request)
+}
+
+// DrainClusterVirtualNode
+// This API is used to drain a virtual node.
+//
+// error code that may be returned:
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DrainClusterVirtualNodeWithContext(ctx context.Context, request *DrainClusterVirtualNodeRequest) (response *DrainClusterVirtualNodeResponse, err error) {
+    if request == nil {
+        request = NewDrainClusterVirtualNodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DrainClusterVirtualNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDrainClusterVirtualNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewEnableClusterDeletionProtectionRequest() (request *EnableClusterDeletionProtectionRequest) {
     request = &EnableClusterDeletionProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6069,6 +6463,60 @@ func (c *Client) ModifyClusterNodePoolWithContext(ctx context.Context, request *
     return
 }
 
+func NewModifyClusterVirtualNodePoolRequest() (request *ModifyClusterVirtualNodePoolRequest) {
+    request = &ModifyClusterVirtualNodePoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterVirtualNodePool")
+    
+    
+    return
+}
+
+func NewModifyClusterVirtualNodePoolResponse() (response *ModifyClusterVirtualNodePoolResponse) {
+    response = &ModifyClusterVirtualNodePoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyClusterVirtualNodePool
+// This API is used to modify a virtual node pool.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEUNAVAILABLE_NODEPOOLSTATENOTNORMAL = "ResourceUnavailable.NodePoolStateNotNormal"
+func (c *Client) ModifyClusterVirtualNodePool(request *ModifyClusterVirtualNodePoolRequest) (response *ModifyClusterVirtualNodePoolResponse, err error) {
+    return c.ModifyClusterVirtualNodePoolWithContext(context.Background(), request)
+}
+
+// ModifyClusterVirtualNodePool
+// This API is used to modify a virtual node pool.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEUNAVAILABLE_NODEPOOLSTATENOTNORMAL = "ResourceUnavailable.NodePoolStateNotNormal"
+func (c *Client) ModifyClusterVirtualNodePoolWithContext(ctx context.Context, request *ModifyClusterVirtualNodePoolRequest) (response *ModifyClusterVirtualNodePoolResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterVirtualNodePoolRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterVirtualNodePool require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClusterVirtualNodePoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyNodePoolInstanceTypesRequest() (request *ModifyNodePoolInstanceTypesRequest) {
     request = &ModifyNodePoolInstanceTypesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6518,7 +6966,7 @@ func NewUpgradeClusterInstancesResponse() (response *UpgradeClusterInstancesResp
 }
 
 // UpgradeClusterInstances
-// This API is used to upgrade one or more work nodes in the cluster. 
+// This API is used to upgrade work nodes in a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TASKALREADYRUNNING = "FailedOperation.TaskAlreadyRunning"
@@ -6536,7 +6984,7 @@ func (c *Client) UpgradeClusterInstances(request *UpgradeClusterInstancesRequest
 }
 
 // UpgradeClusterInstances
-// This API is used to upgrade one or more work nodes in the cluster. 
+// This API is used to upgrade work nodes in a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_TASKALREADYRUNNING = "FailedOperation.TaskAlreadyRunning"
