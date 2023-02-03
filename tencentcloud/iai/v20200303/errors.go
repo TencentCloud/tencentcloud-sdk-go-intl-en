@@ -74,11 +74,17 @@ const (
 	// The backend service timed out.
 	FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
 
+	// The RPC call failed.
+	FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
+
 	// The number of faces searched for exceeds the limit.
 	FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 
 	// The algorithm service is exceptional. Please retry.
 	FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+
+	// An internal error occurred.
+	FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
@@ -226,6 +232,9 @@ const (
 
 	// Invalid URL format.
 	INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
+
+	// The quota limit is reached.
+	LIMITEXCEEDED = "LimitExceeded"
 
 	// The number of faces exceeds the limit.
 	LIMITEXCEEDED_ERRORFACENUMEXCEED = "LimitExceeded.ErrorFaceNumExceed"

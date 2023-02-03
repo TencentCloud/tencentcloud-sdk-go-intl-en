@@ -89,6 +89,7 @@ func NewAnalyzeFaceResponse() (response *AnalyzeFaceResponse) {
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -173,6 +174,7 @@ func (c *Client) AnalyzeFace(request *AnalyzeFaceRequest) (response *AnalyzeFace
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -290,8 +292,10 @@ func NewCompareFaceResponse() (response *CompareFaceResponse) {
 //  FAILEDOPERATION_IMAGERESOLUTIONTOOSMALL = "FailedOperation.ImageResolutionTooSmall"
 //  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -341,6 +345,7 @@ func NewCompareFaceResponse() (response *CompareFaceResponse) {
 //  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
 //  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 //  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_LOWBALANCE = "ResourceUnavailable.LowBalance"
 //  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
 //  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
 //  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
@@ -380,8 +385,10 @@ func (c *Client) CompareFace(request *CompareFaceRequest) (response *CompareFace
 //  FAILEDOPERATION_IMAGERESOLUTIONTOOSMALL = "FailedOperation.ImageResolutionTooSmall"
 //  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -431,6 +438,7 @@ func (c *Client) CompareFace(request *CompareFaceRequest) (response *CompareFace
 //  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
 //  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 //  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_LOWBALANCE = "ResourceUnavailable.LowBalance"
 //  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
 //  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
 //  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
@@ -481,6 +489,7 @@ func NewCopyPersonResponse() (response *CopyPersonResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_ACROSSVERSIONSERROR = "FailedOperation.AcrossVersionsError"
 //  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
+//  FAILEDOPERATION_CREATEFACECONCURRENT = "FailedOperation.CreateFaceConcurrent"
 //  FAILEDOPERATION_DUPLICATEDGROUPDESCRIPTION = "FailedOperation.DuplicatedGroupDescription"
 //  FAILEDOPERATION_GROUPINDELETEDSTATE = "FailedOperation.GroupInDeletedState"
 //  FAILEDOPERATION_GROUPPERSONMAPEXIST = "FailedOperation.GroupPersonMapExist"
@@ -560,6 +569,7 @@ func (c *Client) CopyPerson(request *CopyPersonRequest) (response *CopyPersonRes
 // error code that may be returned:
 //  FAILEDOPERATION_ACROSSVERSIONSERROR = "FailedOperation.AcrossVersionsError"
 //  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
+//  FAILEDOPERATION_CREATEFACECONCURRENT = "FailedOperation.CreateFaceConcurrent"
 //  FAILEDOPERATION_DUPLICATEDGROUPDESCRIPTION = "FailedOperation.DuplicatedGroupDescription"
 //  FAILEDOPERATION_GROUPINDELETEDSTATE = "FailedOperation.GroupInDeletedState"
 //  FAILEDOPERATION_GROUPPERSONMAPEXIST = "FailedOperation.GroupPersonMapExist"
@@ -2043,6 +2053,7 @@ func NewDetectFaceResponse() (response *DetectFaceResponse) {
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -2154,6 +2165,7 @@ func (c *Client) DetectFace(request *DetectFaceRequest) (response *DetectFaceRes
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -2250,41 +2262,41 @@ func NewDetectFaceAttributesResponse() (response *DetectFaceAttributesResponse) 
 //
 //  
 //
-// The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommended evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
+// The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommend evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
 //
 // 
 //
-// 1. [Creating](https://intl.cloud.tencent.com/document/product/867/32793?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/32795?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
+// 1. [Creating](https://intl.cloud.tencent.com/document/api/1059/36964)/[Adding](https://intl.cloud.tencent.com/document/api/1059/36966) a person in a group: This is to ensure the quality of the face information to facilitate subsequent processing.
 //
 // 
 //
-// 2. [Face search](https://intl.cloud.tencent.com/document/product/867/32798?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
+// 2. [Face search](https://intl.cloud.tencent.com/document/api/1059/36977): This is to ensure the quality of the input image to quickly find the corresponding person.
 //
 // 
 //
-// 3. [Face verification](https://intl.cloud.tencent.com/document/product/867/32806?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
+// 3. [Face verification](https://intl.cloud.tencent.com/document/api/1059/36972): This is to ensure the quality of the face information to avoid cases where the verification fails unexpectedly.
 //
 // 
 //
-// 4. [Face fusion](https://intl.cloud.tencent.com/product/facefusion?from_cn_redirect=1): this is to ensure the quality of the uploaded face images to improve the fusion effect.
+// 4. Face fusion: This is to ensure the quality of the uploaded face images to improve the fusion effect.
 //
 // 
 //
 // >     
 //
-// - This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/product/867/44989?from_cn_redirect=1) in the following terms:
+// - This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/api/1059/36979); specifically:
 //
 // 1. This API can be used to specify the face attributes that need to be computed and returned, which avoids ineffective computation and reduces time consumption.
 //
 // 2. This API supports more detailed attribute items and will continue providing new features in the future.
 //
-// Please use this API for corresponding face detection and attribute analysis.
+// Use this API for corresponding face detection and attribute analysis.
 //
 // 
 //
 // >     
 //
-// - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+// - Use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the parameter `SignatureMethod` to `TC3-HMAC-SHA256`.
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
@@ -2296,7 +2308,9 @@ func NewDetectFaceAttributesResponse() (response *DetectFaceAttributesResponse) 
 //  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
 //  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_FACEMODELVERSIONILLEGAL = "InvalidParameterValue.FaceModelVersionIllegal"
@@ -2325,41 +2339,41 @@ func (c *Client) DetectFaceAttributes(request *DetectFaceAttributesRequest) (res
 //
 //  
 //
-// The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommended evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
+// The face quality information is mainly used to evaluate the quality of the input face image. When using the Face Recognition service, we recommend evaluating the quality of the input face image first to improve the effects of subsequent processing. Application scenarios of this feature include:
 //
 // 
 //
-// 1. [Creating](https://intl.cloud.tencent.com/document/product/867/32793?from_cn_redirect=1)/[Adding](https://intl.cloud.tencent.com/document/product/867/32795?from_cn_redirect=1) a person in a group: this is to ensure the quality of the face information to facilitate subsequent processing.
+// 1. [Creating](https://intl.cloud.tencent.com/document/api/1059/36964)/[Adding](https://intl.cloud.tencent.com/document/api/1059/36966) a person in a group: This is to ensure the quality of the face information to facilitate subsequent processing.
 //
 // 
 //
-// 2. [Face search](https://intl.cloud.tencent.com/document/product/867/32798?from_cn_redirect=1): this is to ensure the quality of the input image to quickly find the corresponding person.
+// 2. [Face search](https://intl.cloud.tencent.com/document/api/1059/36977): This is to ensure the quality of the input image to quickly find the corresponding person.
 //
 // 
 //
-// 3. [Face verification](https://intl.cloud.tencent.com/document/product/867/32806?from_cn_redirect=1): this is to ensure the quality of the face information to avoid cases where the verification incorrectly fails.
+// 3. [Face verification](https://intl.cloud.tencent.com/document/api/1059/36972): This is to ensure the quality of the face information to avoid cases where the verification fails unexpectedly.
 //
 // 
 //
-// 4. [Face fusion](https://intl.cloud.tencent.com/product/facefusion?from_cn_redirect=1): this is to ensure the quality of the uploaded face images to improve the fusion effect.
+// 4. Face fusion: This is to ensure the quality of the uploaded face images to improve the fusion effect.
 //
 // 
 //
 // >     
 //
-// - This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/product/867/44989?from_cn_redirect=1) in the following terms:
+// - This API is an upgrade of [DetectFace](https://intl.cloud.tencent.com/document/api/1059/36979); specifically:
 //
 // 1. This API can be used to specify the face attributes that need to be computed and returned, which avoids ineffective computation and reduces time consumption.
 //
 // 2. This API supports more detailed attribute items and will continue providing new features in the future.
 //
-// Please use this API for corresponding face detection and attribute analysis.
+// Use this API for corresponding face detection and attribute analysis.
 //
 // 
 //
 // >     
 //
-// - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
+// - Use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the parameter `SignatureMethod` to `TC3-HMAC-SHA256`.
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
@@ -2371,7 +2385,9 @@ func (c *Client) DetectFaceAttributes(request *DetectFaceAttributesRequest) (res
 //  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
 //  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_FACEMODELVERSIONILLEGAL = "InvalidParameterValue.FaceModelVersionIllegal"
@@ -2464,8 +2480,10 @@ func NewDetectLiveFaceResponse() (response *DetectLiveFaceResponse) {
 //  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
 //  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -2565,8 +2583,10 @@ func (c *Client) DetectLiveFace(request *DetectLiveFaceRequest) (response *Detec
 //  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
 //  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
 //  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 //  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
@@ -2637,6 +2657,212 @@ func (c *Client) DetectLiveFaceWithContext(ctx context.Context, request *DetectL
     return
 }
 
+func NewDetectLiveFaceAccurateRequest() (request *DetectLiveFaceAccurateRequest) {
+    request = &DetectLiveFaceAccurateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("iai", APIVersion, "DetectLiveFaceAccurate")
+    
+    
+    return
+}
+
+func NewDetectLiveFaceAccurateResponse() (response *DetectLiveFaceAccurateResponse) {
+    response = &DetectLiveFaceAccurateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DetectLiveFaceAccurate
+// This API is used to detect the liveness of faces in images uploaded by users and determine whether these images are photographed.
+//
+// 
+//
+// Compared with normal Image-based Liveness Detection services, this API enhances the defense capability against attacks from HD screens, printed photos, and 3D masks, as well as improves attack blocking four to five times the competing products, while maintaining high accuracy. It also supports face verification in different use cases, and satisfies the image-based liveness detection needs on mobile or PCs, making it ideal for liveness detection applications in various industries.
+//
+// 
+//
+// Pay-as-you-go billing officially started for this API at 00:00, August 1, 2022. For more information, see [Billing Overview](https://intl.cloud.tencent.com/document/product/867/17640?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
+//  FAILEDOPERATION_DUPLICATEDGROUPDESCRIPTION = "FailedOperation.DuplicatedGroupDescription"
+//  FAILEDOPERATION_FACESIZETOOSMALL = "FailedOperation.FaceSizeTooSmall"
+//  FAILEDOPERATION_GROUPINDELETEDSTATE = "FailedOperation.GroupInDeletedState"
+//  FAILEDOPERATION_GROUPPERSONMAPEXIST = "FailedOperation.GroupPersonMapExist"
+//  FAILEDOPERATION_GROUPPERSONMAPNOTEXIST = "FailedOperation.GroupPersonMapNotExist"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGEDOWNLOADERROR = "FailedOperation.ImageDownloadError"
+//  FAILEDOPERATION_IMAGEFACEDETECTFAILED = "FailedOperation.ImageFacedetectFailed"
+//  FAILEDOPERATION_IMAGERESOLUTIONEXCEED = "FailedOperation.ImageResolutionExceed"
+//  FAILEDOPERATION_IMAGERESOLUTIONTOOSMALL = "FailedOperation.ImageResolutionTooSmall"
+//  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
+//  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
+//  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
+//  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
+//  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
+//  INVALIDPARAMETERVALUE_DELETEFACENUMEXCEED = "InvalidParameterValue.DeleteFaceNumExceed"
+//  INVALIDPARAMETERVALUE_FACEMODELVERSIONILLEGAL = "InvalidParameterValue.FaceModelVersionIllegal"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSEXCEED = "InvalidParameterValue.GroupExDescriptionsExceed"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.GroupExDescriptionsNameIdentical"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.GroupExDescriptionsNameIllegal"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.GroupExDescriptionsNameTooLong"
+//  INVALIDPARAMETERVALUE_GROUPFACENUMEXCEED = "InvalidParameterValue.GroupFaceNumExceed"
+//  INVALIDPARAMETERVALUE_GROUPIDALREADYEXIST = "InvalidParameterValue.GroupIdAlreadyExist"
+//  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
+//  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
+//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
+//  INVALIDPARAMETERVALUE_GROUPIDSEXCEED = "InvalidParameterValue.GroupIdsExceed"
+//  INVALIDPARAMETERVALUE_GROUPNAMEALREADYEXIST = "InvalidParameterValue.GroupNameAlreadyExist"
+//  INVALIDPARAMETERVALUE_GROUPNAMEILLEGAL = "InvalidParameterValue.GroupNameIllegal"
+//  INVALIDPARAMETERVALUE_GROUPNAMETOOLONG = "InvalidParameterValue.GroupNameTooLong"
+//  INVALIDPARAMETERVALUE_GROUPNUMEXCEED = "InvalidParameterValue.GroupNumExceed"
+//  INVALIDPARAMETERVALUE_GROUPNUMPERPERSONEXCEED = "InvalidParameterValue.GroupNumPerPersonExceed"
+//  INVALIDPARAMETERVALUE_GROUPTAGILLEGAL = "InvalidParameterValue.GroupTagIllegal"
+//  INVALIDPARAMETERVALUE_GROUPTAGTOOLONG = "InvalidParameterValue.GroupTagTooLong"
+//  INVALIDPARAMETERVALUE_IMAGEEMPTY = "InvalidParameterValue.ImageEmpty"
+//  INVALIDPARAMETERVALUE_LIMITEXCEED = "InvalidParameterValue.LimitExceed"
+//  INVALIDPARAMETERVALUE_NOFACEINGROUPS = "InvalidParameterValue.NoFaceInGroups"
+//  INVALIDPARAMETERVALUE_NOFACEINPHOTO = "InvalidParameterValue.NoFaceInPhoto"
+//  INVALIDPARAMETERVALUE_OFFSETEXCEED = "InvalidParameterValue.OffsetExceed"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONINFOSEXCEED = "InvalidParameterValue.PersonExDescriptionInfosExceed"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.PersonExDescriptionsNameIdentical"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.PersonExDescriptionsNameIllegal"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.PersonExDescriptionsNameTooLong"
+//  INVALIDPARAMETERVALUE_PERSONEXISTINGROUP = "InvalidParameterValue.PersonExistInGroup"
+//  INVALIDPARAMETERVALUE_PERSONFACENUMEXCEED = "InvalidParameterValue.PersonFaceNumExceed"
+//  INVALIDPARAMETERVALUE_PERSONGENDERILLEGAL = "InvalidParameterValue.PersonGenderIllegal"
+//  INVALIDPARAMETERVALUE_PERSONIDALREADYEXIST = "InvalidParameterValue.PersonIdAlreadyExist"
+//  INVALIDPARAMETERVALUE_PERSONIDILLEGAL = "InvalidParameterValue.PersonIdIllegal"
+//  INVALIDPARAMETERVALUE_PERSONIDNOTEXIST = "InvalidParameterValue.PersonIdNotExist"
+//  INVALIDPARAMETERVALUE_PERSONIDTOOLONG = "InvalidParameterValue.PersonIdTooLong"
+//  INVALIDPARAMETERVALUE_PERSONNAMEILLEGAL = "InvalidParameterValue.PersonNameIllegal"
+//  INVALIDPARAMETERVALUE_PERSONNAMETOOLONG = "InvalidParameterValue.PersonNameTooLong"
+//  INVALIDPARAMETERVALUE_SEARCHPERSONSEXCEED = "InvalidParameterValue.SearchPersonsExceed"
+//  INVALIDPARAMETERVALUE_UPLOADFACENUMEXCEED = "InvalidParameterValue.UploadFaceNumExceed"
+//  INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
+//  LIMITEXCEEDED_ERRORFACENUMEXCEED = "LimitExceeded.ErrorFaceNumExceed"
+//  MISSINGPARAMETER_ERRORPARAMETEREMPTY = "MissingParameter.ErrorParameterEmpty"
+//  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
+//  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
+//  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
+//  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
+//  RESOURCEUNAVAILABLE_UNKNOWNSTATUS = "ResourceUnavailable.UnknownStatus"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNSUPPORTEDOPERATION_UNKNOWMETHOD = "UnsupportedOperation.UnknowMethod"
+func (c *Client) DetectLiveFaceAccurate(request *DetectLiveFaceAccurateRequest) (response *DetectLiveFaceAccurateResponse, err error) {
+    return c.DetectLiveFaceAccurateWithContext(context.Background(), request)
+}
+
+// DetectLiveFaceAccurate
+// This API is used to detect the liveness of faces in images uploaded by users and determine whether these images are photographed.
+//
+// 
+//
+// Compared with normal Image-based Liveness Detection services, this API enhances the defense capability against attacks from HD screens, printed photos, and 3D masks, as well as improves attack blocking four to five times the competing products, while maintaining high accuracy. It also supports face verification in different use cases, and satisfies the image-based liveness detection needs on mobile or PCs, making it ideal for liveness detection applications in various industries.
+//
+// 
+//
+// Pay-as-you-go billing officially started for this API at 00:00, August 1, 2022. For more information, see [Billing Overview](https://intl.cloud.tencent.com/document/product/867/17640?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
+//  FAILEDOPERATION_DUPLICATEDGROUPDESCRIPTION = "FailedOperation.DuplicatedGroupDescription"
+//  FAILEDOPERATION_FACESIZETOOSMALL = "FailedOperation.FaceSizeTooSmall"
+//  FAILEDOPERATION_GROUPINDELETEDSTATE = "FailedOperation.GroupInDeletedState"
+//  FAILEDOPERATION_GROUPPERSONMAPEXIST = "FailedOperation.GroupPersonMapExist"
+//  FAILEDOPERATION_GROUPPERSONMAPNOTEXIST = "FailedOperation.GroupPersonMapNotExist"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGEDOWNLOADERROR = "FailedOperation.ImageDownloadError"
+//  FAILEDOPERATION_IMAGEFACEDETECTFAILED = "FailedOperation.ImageFacedetectFailed"
+//  FAILEDOPERATION_IMAGERESOLUTIONEXCEED = "FailedOperation.ImageResolutionExceed"
+//  FAILEDOPERATION_IMAGERESOLUTIONTOOSMALL = "FailedOperation.ImageResolutionTooSmall"
+//  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
+//  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
+//  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
+//  FAILEDOPERATION_RPCFAIL = "FailedOperation.RpcFail"
+//  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
+//  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
+//  INVALIDPARAMETERVALUE_DELETEFACENUMEXCEED = "InvalidParameterValue.DeleteFaceNumExceed"
+//  INVALIDPARAMETERVALUE_FACEMODELVERSIONILLEGAL = "InvalidParameterValue.FaceModelVersionIllegal"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSEXCEED = "InvalidParameterValue.GroupExDescriptionsExceed"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.GroupExDescriptionsNameIdentical"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.GroupExDescriptionsNameIllegal"
+//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.GroupExDescriptionsNameTooLong"
+//  INVALIDPARAMETERVALUE_GROUPFACENUMEXCEED = "InvalidParameterValue.GroupFaceNumExceed"
+//  INVALIDPARAMETERVALUE_GROUPIDALREADYEXIST = "InvalidParameterValue.GroupIdAlreadyExist"
+//  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
+//  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
+//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
+//  INVALIDPARAMETERVALUE_GROUPIDSEXCEED = "InvalidParameterValue.GroupIdsExceed"
+//  INVALIDPARAMETERVALUE_GROUPNAMEALREADYEXIST = "InvalidParameterValue.GroupNameAlreadyExist"
+//  INVALIDPARAMETERVALUE_GROUPNAMEILLEGAL = "InvalidParameterValue.GroupNameIllegal"
+//  INVALIDPARAMETERVALUE_GROUPNAMETOOLONG = "InvalidParameterValue.GroupNameTooLong"
+//  INVALIDPARAMETERVALUE_GROUPNUMEXCEED = "InvalidParameterValue.GroupNumExceed"
+//  INVALIDPARAMETERVALUE_GROUPNUMPERPERSONEXCEED = "InvalidParameterValue.GroupNumPerPersonExceed"
+//  INVALIDPARAMETERVALUE_GROUPTAGILLEGAL = "InvalidParameterValue.GroupTagIllegal"
+//  INVALIDPARAMETERVALUE_GROUPTAGTOOLONG = "InvalidParameterValue.GroupTagTooLong"
+//  INVALIDPARAMETERVALUE_IMAGEEMPTY = "InvalidParameterValue.ImageEmpty"
+//  INVALIDPARAMETERVALUE_LIMITEXCEED = "InvalidParameterValue.LimitExceed"
+//  INVALIDPARAMETERVALUE_NOFACEINGROUPS = "InvalidParameterValue.NoFaceInGroups"
+//  INVALIDPARAMETERVALUE_NOFACEINPHOTO = "InvalidParameterValue.NoFaceInPhoto"
+//  INVALIDPARAMETERVALUE_OFFSETEXCEED = "InvalidParameterValue.OffsetExceed"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONINFOSEXCEED = "InvalidParameterValue.PersonExDescriptionInfosExceed"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.PersonExDescriptionsNameIdentical"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.PersonExDescriptionsNameIllegal"
+//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.PersonExDescriptionsNameTooLong"
+//  INVALIDPARAMETERVALUE_PERSONEXISTINGROUP = "InvalidParameterValue.PersonExistInGroup"
+//  INVALIDPARAMETERVALUE_PERSONFACENUMEXCEED = "InvalidParameterValue.PersonFaceNumExceed"
+//  INVALIDPARAMETERVALUE_PERSONGENDERILLEGAL = "InvalidParameterValue.PersonGenderIllegal"
+//  INVALIDPARAMETERVALUE_PERSONIDALREADYEXIST = "InvalidParameterValue.PersonIdAlreadyExist"
+//  INVALIDPARAMETERVALUE_PERSONIDILLEGAL = "InvalidParameterValue.PersonIdIllegal"
+//  INVALIDPARAMETERVALUE_PERSONIDNOTEXIST = "InvalidParameterValue.PersonIdNotExist"
+//  INVALIDPARAMETERVALUE_PERSONIDTOOLONG = "InvalidParameterValue.PersonIdTooLong"
+//  INVALIDPARAMETERVALUE_PERSONNAMEILLEGAL = "InvalidParameterValue.PersonNameIllegal"
+//  INVALIDPARAMETERVALUE_PERSONNAMETOOLONG = "InvalidParameterValue.PersonNameTooLong"
+//  INVALIDPARAMETERVALUE_SEARCHPERSONSEXCEED = "InvalidParameterValue.SearchPersonsExceed"
+//  INVALIDPARAMETERVALUE_UPLOADFACENUMEXCEED = "InvalidParameterValue.UploadFaceNumExceed"
+//  INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
+//  LIMITEXCEEDED_ERRORFACENUMEXCEED = "LimitExceeded.ErrorFaceNumExceed"
+//  MISSINGPARAMETER_ERRORPARAMETEREMPTY = "MissingParameter.ErrorParameterEmpty"
+//  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
+//  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
+//  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
+//  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
+//  RESOURCEUNAVAILABLE_UNKNOWNSTATUS = "ResourceUnavailable.UnknownStatus"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNSUPPORTEDOPERATION_UNKNOWMETHOD = "UnsupportedOperation.UnknowMethod"
+func (c *Client) DetectLiveFaceAccurateWithContext(ctx context.Context, request *DetectLiveFaceAccurateRequest) (response *DetectLiveFaceAccurateResponse, err error) {
+    if request == nil {
+        request = NewDetectLiveFaceAccurateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetectLiveFaceAccurate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDetectLiveFaceAccurateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetGroupInfoRequest() (request *GetGroupInfoRequest) {
     request = &GetGroupInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2664,6 +2890,7 @@ func NewGetGroupInfoResponse() (response *GetGroupInfoResponse) {
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
 //  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
 //  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
+//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
 //  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
 //  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
 //  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
@@ -2681,6 +2908,7 @@ func (c *Client) GetGroupInfo(request *GetGroupInfoRequest) (response *GetGroupI
 //  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
 //  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
 //  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
+//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
 //  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
 //  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
 //  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
@@ -3763,184 +3991,6 @@ func (c *Client) ModifyGroupWithContext(ctx context.Context, request *ModifyGrou
     request.SetContext(ctx)
     
     response = NewModifyGroupResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyPersonBaseInfoRequest() (request *ModifyPersonBaseInfoRequest) {
-    request = &ModifyPersonBaseInfoRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("iai", APIVersion, "ModifyPersonBaseInfo")
-    
-    
-    return
-}
-
-func NewModifyPersonBaseInfoResponse() (response *ModifyPersonBaseInfoResponse) {
-    response = &ModifyPersonBaseInfoResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyPersonBaseInfo
-// This API is used to modify the information of a person, including name, gender, etc. The changes of person name and gender will be synced to all the groups that contain the person.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
-//  FAILEDOPERATION_DUPLICATEDGROUPDESCRIPTION = "FailedOperation.DuplicatedGroupDescription"
-//  FAILEDOPERATION_GROUPINDELETEDSTATE = "FailedOperation.GroupInDeletedState"
-//  FAILEDOPERATION_GROUPPERSONMAPEXIST = "FailedOperation.GroupPersonMapExist"
-//  FAILEDOPERATION_GROUPPERSONMAPNOTEXIST = "FailedOperation.GroupPersonMapNotExist"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGEDOWNLOADERROR = "FailedOperation.ImageDownloadError"
-//  FAILEDOPERATION_IMAGEFACEDETECTFAILED = "FailedOperation.ImageFacedetectFailed"
-//  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
-//  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
-//  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
-//  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
-//  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
-//  INVALIDPARAMETERVALUE_DELETEFACENUMEXCEED = "InvalidParameterValue.DeleteFaceNumExceed"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSEXCEED = "InvalidParameterValue.GroupExDescriptionsExceed"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.GroupExDescriptionsNameIdentical"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.GroupExDescriptionsNameIllegal"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.GroupExDescriptionsNameTooLong"
-//  INVALIDPARAMETERVALUE_GROUPFACENUMEXCEED = "InvalidParameterValue.GroupFaceNumExceed"
-//  INVALIDPARAMETERVALUE_GROUPIDALREADYEXIST = "InvalidParameterValue.GroupIdAlreadyExist"
-//  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
-//  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
-//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
-//  INVALIDPARAMETERVALUE_GROUPIDSEXCEED = "InvalidParameterValue.GroupIdsExceed"
-//  INVALIDPARAMETERVALUE_GROUPNAMEALREADYEXIST = "InvalidParameterValue.GroupNameAlreadyExist"
-//  INVALIDPARAMETERVALUE_GROUPNAMEILLEGAL = "InvalidParameterValue.GroupNameIllegal"
-//  INVALIDPARAMETERVALUE_GROUPNAMETOOLONG = "InvalidParameterValue.GroupNameTooLong"
-//  INVALIDPARAMETERVALUE_GROUPNUMEXCEED = "InvalidParameterValue.GroupNumExceed"
-//  INVALIDPARAMETERVALUE_GROUPNUMPERPERSONEXCEED = "InvalidParameterValue.GroupNumPerPersonExceed"
-//  INVALIDPARAMETERVALUE_GROUPTAGILLEGAL = "InvalidParameterValue.GroupTagIllegal"
-//  INVALIDPARAMETERVALUE_GROUPTAGTOOLONG = "InvalidParameterValue.GroupTagTooLong"
-//  INVALIDPARAMETERVALUE_IMAGEEMPTY = "InvalidParameterValue.ImageEmpty"
-//  INVALIDPARAMETERVALUE_LIMITEXCEED = "InvalidParameterValue.LimitExceed"
-//  INVALIDPARAMETERVALUE_NOFACEINGROUPS = "InvalidParameterValue.NoFaceInGroups"
-//  INVALIDPARAMETERVALUE_NOFACEINPHOTO = "InvalidParameterValue.NoFaceInPhoto"
-//  INVALIDPARAMETERVALUE_OFFSETEXCEED = "InvalidParameterValue.OffsetExceed"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONINFOSEXCEED = "InvalidParameterValue.PersonExDescriptionInfosExceed"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.PersonExDescriptionsNameIdentical"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.PersonExDescriptionsNameIllegal"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.PersonExDescriptionsNameTooLong"
-//  INVALIDPARAMETERVALUE_PERSONEXISTINGROUP = "InvalidParameterValue.PersonExistInGroup"
-//  INVALIDPARAMETERVALUE_PERSONFACENUMEXCEED = "InvalidParameterValue.PersonFaceNumExceed"
-//  INVALIDPARAMETERVALUE_PERSONGENDERILLEGAL = "InvalidParameterValue.PersonGenderIllegal"
-//  INVALIDPARAMETERVALUE_PERSONIDALREADYEXIST = "InvalidParameterValue.PersonIdAlreadyExist"
-//  INVALIDPARAMETERVALUE_PERSONIDILLEGAL = "InvalidParameterValue.PersonIdIllegal"
-//  INVALIDPARAMETERVALUE_PERSONIDNOTEXIST = "InvalidParameterValue.PersonIdNotExist"
-//  INVALIDPARAMETERVALUE_PERSONIDTOOLONG = "InvalidParameterValue.PersonIdTooLong"
-//  INVALIDPARAMETERVALUE_PERSONNAMEILLEGAL = "InvalidParameterValue.PersonNameIllegal"
-//  INVALIDPARAMETERVALUE_PERSONNAMETOOLONG = "InvalidParameterValue.PersonNameTooLong"
-//  INVALIDPARAMETERVALUE_SEARCHPERSONSEXCEED = "InvalidParameterValue.SearchPersonsExceed"
-//  INVALIDPARAMETERVALUE_UPLOADFACENUMEXCEED = "InvalidParameterValue.UploadFaceNumExceed"
-//  INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
-//  LIMITEXCEEDED_ERRORFACENUMEXCEED = "LimitExceeded.ErrorFaceNumExceed"
-//  MISSINGPARAMETER_ERRORPARAMETEREMPTY = "MissingParameter.ErrorParameterEmpty"
-//  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
-//  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
-//  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
-//  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
-//  RESOURCEUNAVAILABLE_UNKNOWNSTATUS = "ResourceUnavailable.UnknownStatus"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-//  UNSUPPORTEDOPERATION_UNKNOWMETHOD = "UnsupportedOperation.UnknowMethod"
-func (c *Client) ModifyPersonBaseInfo(request *ModifyPersonBaseInfoRequest) (response *ModifyPersonBaseInfoResponse, err error) {
-    return c.ModifyPersonBaseInfoWithContext(context.Background(), request)
-}
-
-// ModifyPersonBaseInfo
-// This API is used to modify the information of a person, including name, gender, etc. The changes of person name and gender will be synced to all the groups that contain the person.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
-//  FAILEDOPERATION_DUPLICATEDGROUPDESCRIPTION = "FailedOperation.DuplicatedGroupDescription"
-//  FAILEDOPERATION_GROUPINDELETEDSTATE = "FailedOperation.GroupInDeletedState"
-//  FAILEDOPERATION_GROUPPERSONMAPEXIST = "FailedOperation.GroupPersonMapExist"
-//  FAILEDOPERATION_GROUPPERSONMAPNOTEXIST = "FailedOperation.GroupPersonMapNotExist"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGEDOWNLOADERROR = "FailedOperation.ImageDownloadError"
-//  FAILEDOPERATION_IMAGEFACEDETECTFAILED = "FailedOperation.ImageFacedetectFailed"
-//  FAILEDOPERATION_IMAGESIZEEXCEED = "FailedOperation.ImageSizeExceed"
-//  FAILEDOPERATION_REQUESTLIMITEXCEEDED = "FailedOperation.RequestLimitExceeded"
-//  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeout"
-//  FAILEDOPERATION_SEARCHFACESEXCEED = "FailedOperation.SearchFacesExceed"
-//  FAILEDOPERATION_SERVERERROR = "FailedOperation.ServerError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETERVALUE_ACCOUNTFACENUMEXCEED = "InvalidParameterValue.AccountFaceNumExceed"
-//  INVALIDPARAMETERVALUE_DELETEFACENUMEXCEED = "InvalidParameterValue.DeleteFaceNumExceed"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSEXCEED = "InvalidParameterValue.GroupExDescriptionsExceed"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.GroupExDescriptionsNameIdentical"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.GroupExDescriptionsNameIllegal"
-//  INVALIDPARAMETERVALUE_GROUPEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.GroupExDescriptionsNameTooLong"
-//  INVALIDPARAMETERVALUE_GROUPFACENUMEXCEED = "InvalidParameterValue.GroupFaceNumExceed"
-//  INVALIDPARAMETERVALUE_GROUPIDALREADYEXIST = "InvalidParameterValue.GroupIdAlreadyExist"
-//  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
-//  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
-//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
-//  INVALIDPARAMETERVALUE_GROUPIDSEXCEED = "InvalidParameterValue.GroupIdsExceed"
-//  INVALIDPARAMETERVALUE_GROUPNAMEALREADYEXIST = "InvalidParameterValue.GroupNameAlreadyExist"
-//  INVALIDPARAMETERVALUE_GROUPNAMEILLEGAL = "InvalidParameterValue.GroupNameIllegal"
-//  INVALIDPARAMETERVALUE_GROUPNAMETOOLONG = "InvalidParameterValue.GroupNameTooLong"
-//  INVALIDPARAMETERVALUE_GROUPNUMEXCEED = "InvalidParameterValue.GroupNumExceed"
-//  INVALIDPARAMETERVALUE_GROUPNUMPERPERSONEXCEED = "InvalidParameterValue.GroupNumPerPersonExceed"
-//  INVALIDPARAMETERVALUE_GROUPTAGILLEGAL = "InvalidParameterValue.GroupTagIllegal"
-//  INVALIDPARAMETERVALUE_GROUPTAGTOOLONG = "InvalidParameterValue.GroupTagTooLong"
-//  INVALIDPARAMETERVALUE_IMAGEEMPTY = "InvalidParameterValue.ImageEmpty"
-//  INVALIDPARAMETERVALUE_LIMITEXCEED = "InvalidParameterValue.LimitExceed"
-//  INVALIDPARAMETERVALUE_NOFACEINGROUPS = "InvalidParameterValue.NoFaceInGroups"
-//  INVALIDPARAMETERVALUE_NOFACEINPHOTO = "InvalidParameterValue.NoFaceInPhoto"
-//  INVALIDPARAMETERVALUE_OFFSETEXCEED = "InvalidParameterValue.OffsetExceed"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONINFOSEXCEED = "InvalidParameterValue.PersonExDescriptionInfosExceed"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEIDENTICAL = "InvalidParameterValue.PersonExDescriptionsNameIdentical"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMEILLEGAL = "InvalidParameterValue.PersonExDescriptionsNameIllegal"
-//  INVALIDPARAMETERVALUE_PERSONEXDESCRIPTIONSNAMETOOLONG = "InvalidParameterValue.PersonExDescriptionsNameTooLong"
-//  INVALIDPARAMETERVALUE_PERSONEXISTINGROUP = "InvalidParameterValue.PersonExistInGroup"
-//  INVALIDPARAMETERVALUE_PERSONFACENUMEXCEED = "InvalidParameterValue.PersonFaceNumExceed"
-//  INVALIDPARAMETERVALUE_PERSONGENDERILLEGAL = "InvalidParameterValue.PersonGenderIllegal"
-//  INVALIDPARAMETERVALUE_PERSONIDALREADYEXIST = "InvalidParameterValue.PersonIdAlreadyExist"
-//  INVALIDPARAMETERVALUE_PERSONIDILLEGAL = "InvalidParameterValue.PersonIdIllegal"
-//  INVALIDPARAMETERVALUE_PERSONIDNOTEXIST = "InvalidParameterValue.PersonIdNotExist"
-//  INVALIDPARAMETERVALUE_PERSONIDTOOLONG = "InvalidParameterValue.PersonIdTooLong"
-//  INVALIDPARAMETERVALUE_PERSONNAMEILLEGAL = "InvalidParameterValue.PersonNameIllegal"
-//  INVALIDPARAMETERVALUE_PERSONNAMETOOLONG = "InvalidParameterValue.PersonNameTooLong"
-//  INVALIDPARAMETERVALUE_SEARCHPERSONSEXCEED = "InvalidParameterValue.SearchPersonsExceed"
-//  INVALIDPARAMETERVALUE_UPLOADFACENUMEXCEED = "InvalidParameterValue.UploadFaceNumExceed"
-//  INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
-//  LIMITEXCEEDED_ERRORFACENUMEXCEED = "LimitExceeded.ErrorFaceNumExceed"
-//  MISSINGPARAMETER_ERRORPARAMETEREMPTY = "MissingParameter.ErrorParameterEmpty"
-//  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
-//  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
-//  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
-//  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
-//  RESOURCEUNAVAILABLE_UNKNOWNSTATUS = "ResourceUnavailable.UnknownStatus"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-//  UNSUPPORTEDOPERATION_UNKNOWMETHOD = "UnsupportedOperation.UnknowMethod"
-func (c *Client) ModifyPersonBaseInfoWithContext(ctx context.Context, request *ModifyPersonBaseInfoRequest) (response *ModifyPersonBaseInfoResponse, err error) {
-    if request == nil {
-        request = NewModifyPersonBaseInfoRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyPersonBaseInfo require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyPersonBaseInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -5223,6 +5273,7 @@ func NewVerifyPersonResponse() (response *VerifyPersonResponse) {
 //  INVALIDPARAMETERVALUE_QUALITYCONTROLILLEGAL = "InvalidParameterValue.QualityControlIllegal"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDGROUPFACEMODELVERSION = "InvalidParameterValue.UnsupportedGroupFaceModelVersion"
 //  INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEUNAVAILABLE_CHARGESTATUSEXCEPTION = "ResourceUnavailable.ChargeStatusException"
 //  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 //  RESOURCEUNAVAILABLE_GETAUTHINFOERROR = "ResourceUnavailable.GetAuthInfoError"
@@ -5279,6 +5330,7 @@ func (c *Client) VerifyPerson(request *VerifyPersonRequest) (response *VerifyPer
 //  INVALIDPARAMETERVALUE_QUALITYCONTROLILLEGAL = "InvalidParameterValue.QualityControlIllegal"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDGROUPFACEMODELVERSION = "InvalidParameterValue.UnsupportedGroupFaceModelVersion"
 //  INVALIDPARAMETERVALUE_URLILLEGAL = "InvalidParameterValue.UrlIllegal"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEUNAVAILABLE_CHARGESTATUSEXCEPTION = "ResourceUnavailable.ChargeStatusException"
 //  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 //  RESOURCEUNAVAILABLE_GETAUTHINFOERROR = "ResourceUnavailable.GetAuthInfoError"

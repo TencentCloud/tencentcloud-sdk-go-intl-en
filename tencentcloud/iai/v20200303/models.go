@@ -156,7 +156,7 @@ type Candidate struct {
 	// Person ID
 	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
 
-	// Face ID
+	// Face ID, which is valid only when returned by the `SearchFaces` or `SearchFacesReturnsByGroup` API. User search APIs use facial feature fusion to search for users, for which this field is meaningless.
 	FaceId *string `json:"FaceId,omitempty" name:"FaceId"`
 
 	// Match score of candidate. 
@@ -1117,11 +1117,11 @@ type DetectFaceAttributesRequestParams struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Whether to return attributes such as age, gender, and emotion. 
-	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, 
-	// Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
-	// Default value: None, indicating that no attributes need to be returned. 
-	// You need to combine the attributes into a string and separate them with commas. The sequence of the attributes is not limited. 
-	// For more information on the attributes, please see the output parameters as described below. 
+	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
+	//   
+	// `None` indicates that no attributes need to be returned, which is the default value; that is, if the `FaceAttributesType` attribute is empty, the values of all attributes will be `0`.
+	// You need to combine the attributes into a string and separate them by comma. The sequence of the attributes is not limited. 
+	// For more information on the attributes, see the output parameters as described below. 
 	// The face attribute information of up to 5 largest faces in the image will be returned, and `AttributesInfo` of the 6th and rest faces is meaningless.
 	FaceAttributesType *string `json:"FaceAttributesType,omitempty" name:"FaceAttributesType"`
 
@@ -1155,11 +1155,11 @@ type DetectFaceAttributesRequest struct {
 	Url *string `json:"Url,omitempty" name:"Url"`
 
 	// Whether to return attributes such as age, gender, and emotion. 
-	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, 
-	// Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
-	// Default value: None, indicating that no attributes need to be returned. 
-	// You need to combine the attributes into a string and separate them with commas. The sequence of the attributes is not limited. 
-	// For more information on the attributes, please see the output parameters as described below. 
+	// Valid values (case-insensitive): None, Age, Beauty, Emotion, Eye, Eyebrow, Gender, Hair, Hat, Headpose, Mask, Mouth, Moustache, Nose, Shape, Skin, Smile. 
+	//   
+	// `None` indicates that no attributes need to be returned, which is the default value; that is, if the `FaceAttributesType` attribute is empty, the values of all attributes will be `0`.
+	// You need to combine the attributes into a string and separate them by comma. The sequence of the attributes is not limited. 
+	// For more information on the attributes, see the output parameters as described below. 
 	// The face attribute information of up to 5 largest faces in the image will be returned, and `AttributesInfo` of the 6th and rest faces is meaningless.
 	FaceAttributesType *string `json:"FaceAttributesType,omitempty" name:"FaceAttributesType"`
 
@@ -1388,6 +1388,100 @@ func (r *DetectFaceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DetectFaceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectLiveFaceAccurateRequestParams struct {
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats. 
+	// The recommended image aspect ratio is 3:4 (generally, the aspect ratio of images taken by mobile phones).
+	// The face must be greater than 100*100 px in size.
+	// Supported image formats are PNG, JPG, JPEG, and BMP. GIF is currently not supported.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+	// The recommended image aspect ratio is 3:4 (generally, the aspect ratio of images taken by mobile phones).
+	// The face must be greater than 100*100 px in size.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// Supported image formats are PNG, JPG, JPEG, and BMP. GIF is currently not supported.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Algorithm model version used for face recognition. Valid value: `3.0`.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
+type DetectLiveFaceAccurateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Base64-encoded image data, which cannot exceed 5 MB.
+	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats. 
+	// The recommended image aspect ratio is 3:4 (generally, the aspect ratio of images taken by mobile phones).
+	// The face must be greater than 100*100 px in size.
+	// Supported image formats are PNG, JPG, JPEG, and BMP. GIF is currently not supported.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// Image URL. The image cannot exceed 5 MB in size after being Base64-encoded.
+	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats.
+	// Either `Url` or `Image` must be provided; if both are provided, only `Url` will be used. 
+	// The recommended image aspect ratio is 3:4 (generally, the aspect ratio of images taken by mobile phones).
+	// The face must be greater than 100*100 px in size.
+	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
+	// Supported image formats are PNG, JPG, JPEG, and BMP. GIF is currently not supported.
+	Url *string `json:"Url,omitempty" name:"Url"`
+
+	// Algorithm model version used for face recognition. Valid value: `3.0`.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+}
+
+func (r *DetectLiveFaceAccurateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectLiveFaceAccurateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Image")
+	delete(f, "Url")
+	delete(f, "FaceModelVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectLiveFaceAccurateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectLiveFaceAccurateResponseParams struct {
+	// Liveness score. Value range: [0, 100]. You can set several thresholds such as 5, 10, 40, 70 and 90 to determine whether the image is photographed. We recommend you use the threshold of 40.
+	Score *float64 `json:"Score,omitempty" name:"Score"`
+
+	// Algorithm model version used for face recognition.
+	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DetectLiveFaceAccurateResponse struct {
+	*tchttp.BaseResponse
+	Response *DetectLiveFaceAccurateResponseParams `json:"Response"`
+}
+
+func (r *DetectLiveFaceAccurateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectLiveFaceAccurateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2386,74 +2480,6 @@ func (r *ModifyGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyPersonBaseInfoRequestParams struct {
-	// Person ID, which is the `PersonId` in the `CreatePerson` API.
-	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
-
-	// Name of the person to be modified
-	PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
-
-	// Gender of the person to be modified. 1: male; 2: female.
-	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
-}
-
-type ModifyPersonBaseInfoRequest struct {
-	*tchttp.BaseRequest
-	
-	// Person ID, which is the `PersonId` in the `CreatePerson` API.
-	PersonId *string `json:"PersonId,omitempty" name:"PersonId"`
-
-	// Name of the person to be modified
-	PersonName *string `json:"PersonName,omitempty" name:"PersonName"`
-
-	// Gender of the person to be modified. 1: male; 2: female.
-	Gender *int64 `json:"Gender,omitempty" name:"Gender"`
-}
-
-func (r *ModifyPersonBaseInfoRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyPersonBaseInfoRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "PersonId")
-	delete(f, "PersonName")
-	delete(f, "Gender")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPersonBaseInfoRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyPersonBaseInfoResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyPersonBaseInfoResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyPersonBaseInfoResponseParams `json:"Response"`
-}
-
-func (r *ModifyPersonBaseInfoResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyPersonBaseInfoResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type ModifyPersonGroupInfoRequestParams struct {
 	// Group ID, which is the `GroupId` in the `CreateGroup` API.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
@@ -2789,7 +2815,7 @@ type SearchFacesReturnsByGroupRequestParams struct {
 	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
 
 	// Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
-	// For example, if `MaxFaceNum` is 3 and `MaxPersonNum` is 5, up to 15 (3 * 5) persons will be returned.
+	// For example, if `MaxFaceNum` is 3, `MaxPersonNumPerGroup` is 5, and the `GroupIds` length is 3, up to 45 (3 * 5 * 3) persons will be returned.
 	MaxPersonNumPerGroup *uint64 `json:"MaxPersonNumPerGroup,omitempty" name:"MaxPersonNumPerGroup"`
 
 	// Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default.
@@ -2843,7 +2869,7 @@ type SearchFacesReturnsByGroupRequest struct {
 	MinFaceSize *uint64 `json:"MinFaceSize,omitempty" name:"MinFaceSize"`
 
 	// Detected faces, which is corresponding to the maximum number of returned most matching persons. Default value: 5. Maximum value: 10.  
-	// For example, if `MaxFaceNum` is 3 and `MaxPersonNum` is 5, up to 15 (3 * 5) persons will be returned.
+	// For example, if `MaxFaceNum` is 3, `MaxPersonNumPerGroup` is 5, and the `GroupIds` length is 3, up to 45 (3 * 5 * 3) persons will be returned.
 	MaxPersonNumPerGroup *uint64 `json:"MaxPersonNumPerGroup,omitempty" name:"MaxPersonNumPerGroup"`
 
 	// Whether to return person details. 0: no; 1: yes. Default value: 0. Other values will be considered as 0 by default.
@@ -3353,10 +3379,10 @@ type VerifyFaceResponseParams struct {
 	// The 0.1%, 0.01%, and 0.001% FARs on v2.0 correspond to scores of 70, 80, and 90, respectively. Generally, if the score is above 80, it can be judged that they are the same person.
 	Score *float64 `json:"Score,omitempty" name:"Score"`
 
-	// Whether the person in the image matches the `PersonId`.
+	// Whether the person is the one in the image. The fixed threshold score is 60. If you want to adjust the threshold more flexibly, you can take the returned `Score` parameter value for judgment.
 	IsMatch *bool `json:"IsMatch,omitempty" name:"IsMatch"`
 
-	// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
+	// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3479,7 +3505,7 @@ type VerifyPersonResponseParams struct {
 	// Whether the person in the image matches the `PersonId`.
 	IsMatch *bool `json:"IsMatch,omitempty" name:"IsMatch"`
 
-	// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created. For more information, please see [Algorithm Model Version](https://intl.cloud.tencent.com/document/product/867/40042?from_cn_redirect=1)
+	// Algorithm model version used for face recognition in the group where the `Person` is, which is set when the group is created.
 	FaceModelVersion *string `json:"FaceModelVersion,omitempty" name:"FaceModelVersion"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
