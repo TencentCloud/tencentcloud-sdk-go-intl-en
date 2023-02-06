@@ -400,6 +400,9 @@ type CreateInstanceRequestParams struct {
 	// Instance billing mode. Valid values: 0: Pay-as-you-go billing; 1: Prepaid. Default value: 0.
 	RegistryChargeType *int64 `json:"RegistryChargeType,omitempty" name:"RegistryChargeType"`
 
+	// Auto-renewal setting and purchase period
+	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitempty" name:"RegistryChargePrepaid"`
+
 	// Whether to sync TCR cloud tags to the COS bucket
 	SyncTag *bool `json:"SyncTag,omitempty" name:"SyncTag"`
 }
@@ -418,6 +421,9 @@ type CreateInstanceRequest struct {
 
 	// Instance billing mode. Valid values: 0: Pay-as-you-go billing; 1: Prepaid. Default value: 0.
 	RegistryChargeType *int64 `json:"RegistryChargeType,omitempty" name:"RegistryChargeType"`
+
+	// Auto-renewal setting and purchase period
+	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitempty" name:"RegistryChargePrepaid"`
 
 	// Whether to sync TCR cloud tags to the COS bucket
 	SyncTag *bool `json:"SyncTag,omitempty" name:"SyncTag"`
@@ -439,6 +445,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "RegistryType")
 	delete(f, "TagSpecification")
 	delete(f, "RegistryChargeType")
+	delete(f, "RegistryChargePrepaid")
 	delete(f, "SyncTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
@@ -849,77 +856,6 @@ func (r *CreateRepositoryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateRepositoryResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateSecurityPoliciesRequestParams struct {
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
-
-	// 192.168.0.0/24
-	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
-
-	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
-}
-
-type CreateSecurityPoliciesRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
-
-	// 192.168.0.0/24
-	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
-
-	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
-}
-
-func (r *CreateSecurityPoliciesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateSecurityPoliciesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "RegistryId")
-	delete(f, "CidrBlock")
-	delete(f, "Description")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityPoliciesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateSecurityPoliciesResponseParams struct {
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitempty" name:"RegistryId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateSecurityPoliciesResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateSecurityPoliciesResponseParams `json:"Response"`
-}
-
-func (r *CreateSecurityPoliciesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateSecurityPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

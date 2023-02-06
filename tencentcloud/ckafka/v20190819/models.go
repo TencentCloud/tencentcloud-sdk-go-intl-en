@@ -1956,6 +1956,20 @@ func (r *DescribeCkafkaZoneResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeConnectInfoResultDTO struct {
+	// IP address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IpAddr *string `json:"IpAddr,omitempty" name:"IpAddr"`
+
+	// Connection time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Whether it is a supported version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsUnSupportVersion *bool `json:"IsUnSupportVersion,omitempty" name:"IsUnSupportVersion"`
+}
+
 // Predefined struct for user
 type DescribeConsumerGroupRequestParams struct {
 	// CKafka instance ID.
@@ -2835,6 +2849,70 @@ func (r *DescribeTopicDetailResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTopicDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopicProduceConnectionRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
+type DescribeTopicProduceConnectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
+func (r *DescribeTopicProduceConnectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicProduceConnectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "TopicName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicProduceConnectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopicProduceConnectionResponseParams struct {
+	// Result set of returned connection information
+	Result []*DescribeConnectInfoResultDTO `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTopicProduceConnectionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTopicProduceConnectionResponseParams `json:"Response"`
+}
+
+func (r *DescribeTopicProduceConnectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicProduceConnectionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

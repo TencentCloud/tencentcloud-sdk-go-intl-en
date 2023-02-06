@@ -839,66 +839,6 @@ func (c *Client) CreateRepositoryWithContext(ctx context.Context, request *Creat
     return
 }
 
-func NewCreateSecurityPoliciesRequest() (request *CreateSecurityPoliciesRequest) {
-    request = &CreateSecurityPoliciesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcr", APIVersion, "CreateSecurityPolicies")
-    
-    
-    return
-}
-
-func NewCreateSecurityPoliciesResponse() (response *CreateSecurityPoliciesResponse) {
-    response = &CreateSecurityPoliciesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// CreateSecurityPolicies
-// This API is used to create public network access allowlist policies for an instance.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  MISSINGPARAMETER = "MissingParameter"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) CreateSecurityPolicies(request *CreateSecurityPoliciesRequest) (response *CreateSecurityPoliciesResponse, err error) {
-    return c.CreateSecurityPoliciesWithContext(context.Background(), request)
-}
-
-// CreateSecurityPolicies
-// This API is used to create public network access allowlist policies for an instance.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  MISSINGPARAMETER = "MissingParameter"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) CreateSecurityPoliciesWithContext(ctx context.Context, request *CreateSecurityPoliciesRequest) (response *CreateSecurityPoliciesResponse, err error) {
-    if request == nil {
-        request = NewCreateSecurityPoliciesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateSecurityPolicies require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateSecurityPoliciesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateSecurityPolicyRequest() (request *CreateSecurityPolicyRequest) {
     request = &CreateSecurityPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -993,6 +933,7 @@ func NewCreateSignatureResponse() (response *CreateSignatureResponse) {
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateSignature(request *CreateSignatureRequest) (response *CreateSignatureResponse, err error) {
     return c.CreateSignatureWithContext(context.Background(), request)
@@ -1012,6 +953,7 @@ func (c *Client) CreateSignature(request *CreateSignatureRequest) (response *Cre
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateSignatureWithContext(ctx context.Context, request *CreateSignatureRequest) (response *CreateSignatureResponse, err error) {
     if request == nil {
@@ -3525,6 +3467,7 @@ func NewDescribeRepositoriesResponse() (response *DescribeRepositoriesResponse) 
 // This API is used to query the image repository list or the information of the specified image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_EMPTYCOREBODY = "FailedOperation.EmptyCoreBody"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
@@ -3535,6 +3478,7 @@ func NewDescribeRepositoriesResponse() (response *DescribeRepositoriesResponse) 
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRepositories(request *DescribeRepositoriesRequest) (response *DescribeRepositoriesResponse, err error) {
     return c.DescribeRepositoriesWithContext(context.Background(), request)
@@ -3544,6 +3488,7 @@ func (c *Client) DescribeRepositories(request *DescribeRepositoriesRequest) (res
 // This API is used to query the image repository list or the information of the specified image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_EMPTYCOREBODY = "FailedOperation.EmptyCoreBody"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
@@ -3554,6 +3499,7 @@ func (c *Client) DescribeRepositories(request *DescribeRepositoriesRequest) (res
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TCRRESOURCENOTFOUND = "ResourceNotFound.TcrResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRepositoriesWithContext(ctx context.Context, request *DescribeRepositoriesRequest) (response *DescribeRepositoriesResponse, err error) {
     if request == nil {
@@ -3805,6 +3751,7 @@ func NewDescribeTagRetentionRulesResponse() (response *DescribeTagRetentionRules
 // This API is used to query tag retention rules.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_EMPTYCOREBODY = "FailedOperation.EmptyCoreBody"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
@@ -3826,6 +3773,7 @@ func (c *Client) DescribeTagRetentionRules(request *DescribeTagRetentionRulesReq
 // This API is used to query tag retention rules.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_EMPTYCOREBODY = "FailedOperation.EmptyCoreBody"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
@@ -4113,6 +4061,7 @@ func NewManageInternalEndpointResponse() (response *ManageInternalEndpointRespon
 // This API is used to manage VPC URLs for private network access to an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
@@ -4133,6 +4082,7 @@ func (c *Client) ManageInternalEndpoint(request *ManageInternalEndpointRequest) 
 // This API is used to manage VPC URLs for private network access to an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"

@@ -6385,6 +6385,10 @@ type ScoreInfo struct {
 
 	// Duration
 	PageDuration *string `json:"PageDuration,omitempty" name:"PageDuration"`
+
+	// Time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 // Predefined struct for user

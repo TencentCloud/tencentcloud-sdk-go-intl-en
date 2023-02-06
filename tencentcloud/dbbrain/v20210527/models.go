@@ -1782,7 +1782,7 @@ type DescribeProxyProcessStatisticsRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// `ProxyID` under the current instance.
+	// The proxy ID you want to query under the instance
 	InstanceProxyId *string `json:"InstanceProxyId,omitempty" name:"InstanceProxyId"`
 
 	// Number of returned results.
@@ -1807,7 +1807,7 @@ type DescribeProxyProcessStatisticsRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// `ProxyID` under the current instance.
+	// The proxy ID you want to query under the instance
 	InstanceProxyId *string `json:"InstanceProxyId,omitempty" name:"InstanceProxyId"`
 
 	// Number of returned results.
@@ -3421,13 +3421,13 @@ type MySqlProcess struct {
 }
 
 type ProcessStatistic struct {
-
+	// Array of session details
 	Items []*SessionItem `json:"Items,omitempty" name:"Items"`
 
-
+	// The total number of connections
 	AllConnSum *int64 `json:"AllConnSum,omitempty" name:"AllConnSum"`
 
-
+	// The total number of active connections
 	ActiveConnSum *int64 `json:"ActiveConnSum,omitempty" name:"ActiveConnSum"`
 }
 
@@ -3570,13 +3570,13 @@ type SecLogExportTaskInfo struct {
 }
 
 type SessionItem struct {
-
+	// Access source
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
-
+	// The number of active connections from the current access source
 	ActiveConn *string `json:"ActiveConn,omitempty" name:"ActiveConn"`
 
-
+	// The total number of connections from the current access source
 	AllConn *int64 `json:"AllConn,omitempty" name:"AllConn"`
 }
 

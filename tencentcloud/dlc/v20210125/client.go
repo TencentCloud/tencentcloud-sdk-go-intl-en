@@ -67,6 +67,7 @@ func NewCancelTaskResponse() (response *CancelTaskResponse) {
 // This API is used to cancel a task.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ANOTHERREQUESTPROCESSING = "FailedOperation.AnotherRequestProcessing"
 //  FAILEDOPERATION_HTTPCLIENTDOREQUESTFAILED = "FailedOperation.HttpClientDoRequestFailed"
 //  INTERNALERROR = "InternalError"
@@ -80,6 +81,7 @@ func (c *Client) CancelTask(request *CancelTaskRequest) (response *CancelTaskRes
 // This API is used to cancel a task.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ANOTHERREQUESTPROCESSING = "FailedOperation.AnotherRequestProcessing"
 //  FAILEDOPERATION_HTTPCLIENTDOREQUESTFAILED = "FailedOperation.HttpClientDoRequestFailed"
 //  INTERNALERROR = "InternalError"
@@ -591,6 +593,7 @@ func NewDescribeTaskResultResponse() (response *DescribeTaskResultResponse) {
 //  FAILEDOPERATION_HTTPCLIENTDOREQUESTFAILED = "FailedOperation.HttpClientDoRequestFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDMAXRESULTS = "InvalidParameter.InvalidMaxResults"
 //  INVALIDPARAMETER_INVALIDTASKID = "InvalidParameter.InvalidTaskId"
 func (c *Client) DescribeTaskResult(request *DescribeTaskResultRequest) (response *DescribeTaskResultResponse, err error) {
     return c.DescribeTaskResultWithContext(context.Background(), request)
@@ -604,6 +607,7 @@ func (c *Client) DescribeTaskResult(request *DescribeTaskResultRequest) (respons
 //  FAILEDOPERATION_HTTPCLIENTDOREQUESTFAILED = "FailedOperation.HttpClientDoRequestFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDMAXRESULTS = "InvalidParameter.InvalidMaxResults"
 //  INVALIDPARAMETER_INVALIDTASKID = "InvalidParameter.InvalidTaskId"
 func (c *Client) DescribeTaskResultWithContext(ctx context.Context, request *DescribeTaskResultRequest) (response *DescribeTaskResultResponse, err error) {
     if request == nil {
@@ -721,6 +725,60 @@ func (c *Client) ModifySparkAppWithContext(ctx context.Context, request *ModifyS
     request.SetContext(ctx)
     
     response = NewModifySparkAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSuspendResumeDataEngineRequest() (request *SuspendResumeDataEngineRequest) {
+    request = &SuspendResumeDataEngineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "SuspendResumeDataEngine")
+    
+    
+    return
+}
+
+func NewSuspendResumeDataEngineResponse() (response *SuspendResumeDataEngineResponse) {
+    response = &SuspendResumeDataEngineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SuspendResumeDataEngine
+// This API is used to suspend or resume a data engine.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  UNAUTHORIZEDOPERATION_OPERATECOMPUTINGENGINE = "UnauthorizedOperation.OperateComputingEngine"
+func (c *Client) SuspendResumeDataEngine(request *SuspendResumeDataEngineRequest) (response *SuspendResumeDataEngineResponse, err error) {
+    return c.SuspendResumeDataEngineWithContext(context.Background(), request)
+}
+
+// SuspendResumeDataEngine
+// This API is used to suspend or resume a data engine.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  UNAUTHORIZEDOPERATION_OPERATECOMPUTINGENGINE = "UnauthorizedOperation.OperateComputingEngine"
+func (c *Client) SuspendResumeDataEngineWithContext(ctx context.Context, request *SuspendResumeDataEngineRequest) (response *SuspendResumeDataEngineResponse, err error) {
+    if request == nil {
+        request = NewSuspendResumeDataEngineRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SuspendResumeDataEngine require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSuspendResumeDataEngineResponse()
     err = c.Send(request, response)
     return
 }

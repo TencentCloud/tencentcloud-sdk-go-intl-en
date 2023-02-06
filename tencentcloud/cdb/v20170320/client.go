@@ -789,6 +789,122 @@ func (c *Client) CreateDBImportJobWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateDBInstanceRequest() (request *CreateDBInstanceRequest) {
+    request = &CreateDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "CreateDBInstance")
+    
+    
+    return
+}
+
+func NewCreateDBInstanceResponse() (response *CreateDBInstanceResponse) {
+    response = &CreateDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateDBInstance
+// This API is used to create a monthly subscribed TencentDB instance (which can be a source, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, purchased duration, and quantity.
+//
+// 
+//
+// This is an asynchronous API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance details. If the output parameter `Status` is `1` and the output parameter `TaskStatus` is `0`, the instance has been successfully delivered.
+//
+// 
+//
+// 1. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances.
+//
+// 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months.
+//
+// 3. MySQL v5.5, v5.6, v5.7, and v8.0 are supported.
+//
+// 4. Source instances, read-only instances, and disaster recovery instances can be created.
+//
+// 5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance (excluding basic instances) will be initialized.
+//
+// 6. If `Port`, `ParamTemplateId`, or `AlarmPolicyList` is specified in the input parameters, you need to update your SDK to the latest version.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_OTHERODERINPROCESS = "OperationDenied.OtherOderInProcess"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
+func (c *Client) CreateDBInstance(request *CreateDBInstanceRequest) (response *CreateDBInstanceResponse, err error) {
+    return c.CreateDBInstanceWithContext(context.Background(), request)
+}
+
+// CreateDBInstance
+// This API is used to create a monthly subscribed TencentDB instance (which can be a source, disaster recovery, or read-only instance) by passing in information such as instance specifications, MySQL version number, purchased duration, and quantity.
+//
+// 
+//
+// This is an asynchronous API. You can also use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance details. If the output parameter `Status` is `1` and the output parameter `TaskStatus` is `0`, the instance has been successfully delivered.
+//
+// 
+//
+// 1. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the purchasable instance specifications, and then use the [DescribeDBPrice](https://intl.cloud.tencent.com/document/api/236/18566?from_cn_redirect=1) API to query the prices of the purchasable instances.
+//
+// 2. You can create up to 100 instances at a time, with an instance validity period of up to 36 months.
+//
+// 3. MySQL v5.5, v5.6, v5.7, and v8.0 are supported.
+//
+// 4. Source instances, read-only instances, and disaster recovery instances can be created.
+//
+// 5. If `Port`, `ParamList`, or `Password` is specified in the input parameters, the instance (excluding basic instances) will be initialized.
+//
+// 6. If `Port`, `ParamTemplateId`, or `AlarmPolicyList` is specified in the input parameters, you need to update your SDK to the latest version.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_CAUTHERROR = "InternalError.CauthError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_DFWERROR = "InternalError.DfwError"
+//  INTERNALERROR_FTPERROR = "InternalError.FtpError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_OTHERODERINPROCESS = "OperationDenied.OtherOderInProcess"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  OPERATIONDENIED_WRONGPASSWORD = "OperationDenied.WrongPassword"
+func (c *Client) CreateDBInstanceWithContext(ctx context.Context, request *CreateDBInstanceRequest) (response *CreateDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBInstanceHourRequest() (request *CreateDBInstanceHourRequest) {
     request = &CreateDBInstanceHourRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -922,6 +1038,7 @@ func NewCreateParamTemplateResponse() (response *CreateParamTemplateResponse) {
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDNAME = "InvalidParameter.InvalidName"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -938,6 +1055,7 @@ func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (respo
 //  CDBERROR_DATABASEERROR = "CdbError.DatabaseError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_PARAMERROR = "InternalError.ParamError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDNAME = "InvalidParameter.InvalidName"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -1965,6 +2083,7 @@ func NewDescribeBackupsResponse() (response *DescribeBackupsResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
@@ -1988,6 +2107,7 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
@@ -6205,6 +6325,7 @@ func NewModifyTimeWindowResponse() (response *ModifyTimeWindowResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 func (c *Client) ModifyTimeWindow(request *ModifyTimeWindowRequest) (response *ModifyTimeWindowResponse, err error) {
     return c.ModifyTimeWindowWithContext(context.Background(), request)
@@ -6220,6 +6341,7 @@ func (c *Client) ModifyTimeWindow(request *ModifyTimeWindowRequest) (response *M
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 func (c *Client) ModifyTimeWindowWithContext(ctx context.Context, request *ModifyTimeWindowRequest) (response *ModifyTimeWindowResponse, err error) {
     if request == nil {
@@ -6657,6 +6779,66 @@ func (c *Client) ReloadBalanceProxyNodeWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewReloadBalanceProxyNodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewDBInstanceRequest() (request *RenewDBInstanceRequest) {
+    request = &RenewDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "RenewDBInstance")
+    
+    
+    return
+}
+
+func NewRenewDBInstanceResponse() (response *RenewDBInstanceResponse) {
+    response = &RenewDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RenewDBInstance
+// This API is used to renew a monthly subscribed TencentDB instance, and a pay-as-you-go instance can be renewed as a monthly subscribed one by this API.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) RenewDBInstance(request *RenewDBInstanceRequest) (response *RenewDBInstanceResponse, err error) {
+    return c.RenewDBInstanceWithContext(context.Background(), request)
+}
+
+// RenewDBInstance
+// This API is used to renew a monthly subscribed TencentDB instance, and a pay-as-you-go instance can be renewed as a monthly subscribed one by this API.
+//
+// error code that may be returned:
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
+//  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+func (c *Client) RenewDBInstanceWithContext(ctx context.Context, request *RenewDBInstanceRequest) (response *RenewDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewRenewDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

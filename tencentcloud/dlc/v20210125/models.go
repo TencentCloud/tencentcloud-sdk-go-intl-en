@@ -1462,6 +1462,70 @@ type StreamingStatistics struct {
 	AverageTotalDelay *float64 `json:"AverageTotalDelay,omitempty" name:"AverageTotalDelay"`
 }
 
+// Predefined struct for user
+type SuspendResumeDataEngineRequestParams struct {
+	// The name of a virtual cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The operation type: `suspend` or `resume`.
+	Operate *string `json:"Operate,omitempty" name:"Operate"`
+}
+
+type SuspendResumeDataEngineRequest struct {
+	*tchttp.BaseRequest
+	
+	// The name of a virtual cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The operation type: `suspend` or `resume`.
+	Operate *string `json:"Operate,omitempty" name:"Operate"`
+}
+
+func (r *SuspendResumeDataEngineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SuspendResumeDataEngineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DataEngineName")
+	delete(f, "Operate")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SuspendResumeDataEngineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SuspendResumeDataEngineResponseParams struct {
+	// The details of the virtual cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SuspendResumeDataEngineResponse struct {
+	*tchttp.BaseResponse
+	Response *SuspendResumeDataEngineResponseParams `json:"Response"`
+}
+
+func (r *SuspendResumeDataEngineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SuspendResumeDataEngineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Task struct {
 	// SQL query task
 	SQLTask *SQLTask `json:"SQLTask,omitempty" name:"SQLTask"`

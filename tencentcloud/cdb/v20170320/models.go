@@ -910,6 +910,15 @@ type CommonTimeWindow struct {
 
 	// Time window on Sunday in the format of 02:00-06:00
 	Sunday *string `json:"Sunday,omitempty" name:"Sunday"`
+
+	// Non-archive backup retention policy. Valid values: `weekly` (back up by week), monthly (back up by month), default value: `weekly`.
+	BackupPeriodStrategy *string `json:"BackupPeriodStrategy,omitempty" name:"BackupPeriodStrategy"`
+
+	// If `BackupPeriodStrategy` is `monthly`, you need to pass in the specific backup dates. The time interval between any two adjacent dates cannot exceed 2 days, for example, [1,4,7,9,11,14,17,19,22,25,28,30,31].
+	Days []*int64 `json:"Days,omitempty" name:"Days"`
+
+	// Backup time by month in the format of 02:00–06:00, which is required when `BackupPeriodStrategy` is `monthly`.
+	BackupPeriodTime *string `json:"BackupPeriodTime,omitempty" name:"BackupPeriodTime"`
 }
 
 type ConnectionPoolInfo struct {
@@ -1783,6 +1792,325 @@ func (r *CreateDBInstanceHourResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDBInstanceRequestParams struct {
+	// Instance memory size in MB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Instance validity period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of instances. Value range: 1-100. Default value: `1`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// AZ information. The system will automatically select an AZ by default. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. You can use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Project ID. If this is left empty, the default project will be used. If read-only instances or disaster recovery instances are purchased, the project ID will be the same as the source instance ID by default.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Custom port. Value range: 1024-65535.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Instance typeA. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance).
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// Instance ID. It is required when purchasing a read-only instance, which is the same as the source instance ID. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance ID.
+	MasterInstanceId *string `json:"MasterInstanceId,omitempty" name:"MasterInstanceId"`
+
+	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported versions.
+	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// The root account password. It can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing a replica instance and is invalid for read-only or disaster recovery instances.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
+	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Information of replica AZ 1, which is the `Zone` value by default.
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// List of parameters in the format of ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList"`
+
+	// Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
+
+	// Auto-renewal flag. Valid values: `0` (auto-renewal not enabled), `1` (auto-renewal enabled).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
+
+	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// Read-only instance parameter. This parameter must be passed in when purchasing read-only instances.
+	RoGroup *RoGroup `json:"RoGroup,omitempty" name:"RoGroup"`
+
+	// Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance tag information
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Placement group ID
+	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
+
+	// A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
+
+	// The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
+
+	// The number of the instance CPU cores. If this parameter is left empty, it will be subject to the `Memory` value.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitempty" name:"AutoSyncFlag"`
+
+	// Financial cage ID.
+	CageId *string `json:"CageId,omitempty" name:"CageId"`
+
+	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	ParamTemplateType *string `json:"ParamTemplateType,omitempty" name:"ParamTemplateType"`
+
+	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitempty" name:"AlarmPolicyIdList"`
+
+	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
+	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	Vips []*string `json:"Vips,omitempty" name:"Vips"`
+}
+
+type CreateDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance memory size in MB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+
+	// Instance validity period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Number of instances. Value range: 1-100. Default value: `1`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// AZ information. The system will automatically select an AZ by default. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. You can use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Project ID. If this is left empty, the default project will be used. If read-only instances or disaster recovery instances are purchased, the project ID will be the same as the source instance ID by default.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Custom port. Value range: 1024-65535.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Instance typeA. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance).
+	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// Instance ID. It is required when purchasing a read-only instance, which is the same as the source instance ID. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance ID.
+	MasterInstanceId *string `json:"MasterInstanceId,omitempty" name:"MasterInstanceId"`
+
+	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported versions.
+	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+
+	// The root account password. It can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing a replica instance and is invalid for read-only or disaster recovery instances.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
+	ProtectMode *int64 `json:"ProtectMode,omitempty" name:"ProtectMode"`
+
+	// Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
+	DeployMode *int64 `json:"DeployMode,omitempty" name:"DeployMode"`
+
+	// Information of replica AZ 1, which is the `Zone` value by default.
+	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// List of parameters in the format of ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+	ParamList []*ParamInfo `json:"ParamList,omitempty" name:"ParamList"`
+
+	// Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+	BackupZone *string `json:"BackupZone,omitempty" name:"BackupZone"`
+
+	// Auto-renewal flag. Valid values: `0` (auto-renewal not enabled), `1` (auto-renewal enabled).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
+
+	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
+
+	// Read-only instance parameter. This parameter must be passed in when purchasing read-only instances.
+	RoGroup *RoGroup `json:"RoGroup,omitempty" name:"RoGroup"`
+
+	// Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance tag information
+	ResourceTags []*TagInfo `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Placement group ID
+	DeployGroupId *string `json:"DeployGroupId,omitempty" name:"DeployGroupId"`
+
+	// A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+
+	// Instance isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// Parameter template ID
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+
+	// Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
+
+	// The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+	InstanceNodes *int64 `json:"InstanceNodes,omitempty" name:"InstanceNodes"`
+
+	// The number of the instance CPU cores. If this parameter is left empty, it will be subject to the `Memory` value.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitempty" name:"AutoSyncFlag"`
+
+	// Financial cage ID.
+	CageId *string `json:"CageId,omitempty" name:"CageId"`
+
+	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	ParamTemplateType *string `json:"ParamTemplateType,omitempty" name:"ParamTemplateType"`
+
+	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitempty" name:"AlarmPolicyIdList"`
+
+	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	DryRun *bool `json:"DryRun,omitempty" name:"DryRun"`
+
+	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
+	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	Vips []*string `json:"Vips,omitempty" name:"Vips"`
+}
+
+func (r *CreateDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Memory")
+	delete(f, "Volume")
+	delete(f, "Period")
+	delete(f, "GoodsNum")
+	delete(f, "Zone")
+	delete(f, "UniqVpcId")
+	delete(f, "UniqSubnetId")
+	delete(f, "ProjectId")
+	delete(f, "Port")
+	delete(f, "InstanceRole")
+	delete(f, "MasterInstanceId")
+	delete(f, "EngineVersion")
+	delete(f, "Password")
+	delete(f, "ProtectMode")
+	delete(f, "DeployMode")
+	delete(f, "SlaveZone")
+	delete(f, "ParamList")
+	delete(f, "BackupZone")
+	delete(f, "AutoRenewFlag")
+	delete(f, "MasterRegion")
+	delete(f, "SecurityGroup")
+	delete(f, "RoGroup")
+	delete(f, "InstanceName")
+	delete(f, "ResourceTags")
+	delete(f, "DeployGroupId")
+	delete(f, "ClientToken")
+	delete(f, "DeviceType")
+	delete(f, "ParamTemplateId")
+	delete(f, "AlarmPolicyList")
+	delete(f, "InstanceNodes")
+	delete(f, "Cpu")
+	delete(f, "AutoSyncFlag")
+	delete(f, "CageId")
+	delete(f, "ParamTemplateType")
+	delete(f, "AlarmPolicyIdList")
+	delete(f, "DryRun")
+	delete(f, "EngineType")
+	delete(f, "Vips")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDBInstanceResponseParams struct {
+	// Short order ID
+	DealIds []*string `json:"DealIds,omitempty" name:"DealIds"`
+
+	// List of instance IDs
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3951,6 +4279,12 @@ type DescribeDBInstancesRequestParams struct {
 
 	// Tag key value
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Database proxy IP
+	ProxyVips []*string `json:"ProxyVips,omitempty" name:"ProxyVips"`
+
+	// Database proxy ID
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 type DescribeDBInstancesRequest struct {
@@ -4051,6 +4385,12 @@ type DescribeDBInstancesRequest struct {
 
 	// Tag key value
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Database proxy IP
+	ProxyVips []*string `json:"ProxyVips,omitempty" name:"ProxyVips"`
+
+	// Database proxy ID
+	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -4097,6 +4437,8 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "UniqueVpcIds")
 	delete(f, "UniqSubnetIds")
 	delete(f, "Tags")
+	delete(f, "ProxyVips")
+	delete(f, "ProxyIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -9669,6 +10011,77 @@ type RemoteBackupInfo struct {
 
 	// The download address
 	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+// Predefined struct for user
+type RenewDBInstanceRequestParams struct {
+	// ID of the instance to be renewed in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed in the TencentDB console. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+	ModifyPayType *string `json:"ModifyPayType,omitempty" name:"ModifyPayType"`
+}
+
+type RenewDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the instance to be renewed in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed in the TencentDB console. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Renewal period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// To renew a pay-as-you-go instance to a monthly subscribed one, you need to set this parameter to `PREPAID`.
+	ModifyPayType *string `json:"ModifyPayType,omitempty" name:"ModifyPayType"`
+}
+
+func (r *RenewDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "TimeSpan")
+	delete(f, "ModifyPayType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewDBInstanceResponseParams struct {
+	// Order ID
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RenewDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *RenewDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *RenewDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
