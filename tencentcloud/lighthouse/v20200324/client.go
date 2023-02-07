@@ -595,6 +595,7 @@ func NewCreateInstanceSnapshotResponse() (response *CreateInstanceSnapshotRespon
 // This API is used to create a system disk snapshot of the specified instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_GETSNAPSHOTALLOCQUOTALOCKERROR = "InternalError.GetSnapshotAllocQuotaLockError"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -617,6 +618,7 @@ func (c *Client) CreateInstanceSnapshot(request *CreateInstanceSnapshotRequest) 
 // This API is used to create a system disk snapshot of the specified instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_GETSNAPSHOTALLOCQUOTALOCKERROR = "InternalError.GetSnapshotAllocQuotaLockError"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -1245,6 +1247,8 @@ func NewDescribeBlueprintsResponse() (response *DescribeBlueprintsResponse) {
 // This API is used to query the information of an image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEBLUEPRINTSFAILED = "FailedOperation.DescribeBlueprintsFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
 //  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
@@ -1262,6 +1266,8 @@ func NewDescribeBlueprintsResponse() (response *DescribeBlueprintsResponse) {
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  RESOURCENOTFOUND_SCENEIDNOTFOUND = "ResourceNotFound.SceneIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
     return c.DescribeBlueprintsWithContext(context.Background(), request)
@@ -1271,6 +1277,8 @@ func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (respons
 // This API is used to query the information of an image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEBLUEPRINTSFAILED = "FailedOperation.DescribeBlueprintsFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
 //  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
@@ -1288,6 +1296,8 @@ func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (respons
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
+//  RESOURCENOTFOUND_SCENEIDNOTFOUND = "ResourceNotFound.SceneIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeBlueprintsWithContext(ctx context.Context, request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
     if request == nil {
@@ -1327,6 +1337,8 @@ func NewDescribeBundleDiscountResponse() (response *DescribeBundleDiscountRespon
 // This API is used to query the discount information of a package.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
@@ -1339,6 +1351,8 @@ func (c *Client) DescribeBundleDiscount(request *DescribeBundleDiscountRequest) 
 // This API is used to query the discount information of a package.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
@@ -1381,6 +1395,8 @@ func NewDescribeBundlesResponse() (response *DescribeBundlesResponse) {
 // This API is used to query the information of a package.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
@@ -1408,6 +1424,8 @@ func (c *Client) DescribeBundles(request *DescribeBundlesRequest) (response *Des
 // This API is used to query the information of a package.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
@@ -1647,6 +1665,10 @@ func NewDescribeDisksResponse() (response *DescribeDisksResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_REGIONNOTFOUND = "InvalidParameterValue.RegionNotFound"
+//  INVALIDPARAMETERVALUE_REGIONNOTMATCH = "InvalidParameterValue.RegionNotMatch"
+//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
+//  INVALIDPARAMETERVALUE_REGIONUNAVAILABLE = "InvalidParameterValue.RegionUnavailable"
 //  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
 //  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -1672,6 +1694,10 @@ func (c *Client) DescribeDisks(request *DescribeDisksRequest) (response *Describ
 //  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
+//  INVALIDPARAMETERVALUE_REGIONNOTFOUND = "InvalidParameterValue.RegionNotFound"
+//  INVALIDPARAMETERVALUE_REGIONNOTMATCH = "InvalidParameterValue.RegionNotMatch"
+//  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
+//  INVALIDPARAMETERVALUE_REGIONUNAVAILABLE = "InvalidParameterValue.RegionUnavailable"
 //  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
 //  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -1713,6 +1739,8 @@ func NewDescribeDisksDeniedActionsResponse() (response *DescribeDisksDeniedActio
 // This API is used to query the list of operation limits of one or more cloud disks.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
@@ -1725,6 +1753,8 @@ func (c *Client) DescribeDisksDeniedActions(request *DescribeDisksDeniedActionsR
 // This API is used to query the list of operation limits of one or more cloud disks.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
@@ -2051,6 +2081,7 @@ func NewDescribeInstanceVncUrlResponse() (response *DescribeInstanceVncUrlRespon
 // ```
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -2093,6 +2124,7 @@ func (c *Client) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest) 
 // ```
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -2151,6 +2183,8 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 // * The latest operation (LatestOperation) and the latest operation status (LatestOperationState) of the instance can be queried.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
@@ -2189,6 +2223,8 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 // * The latest operation (LatestOperation) and the latest operation status (LatestOperationState) of the instance can be queried.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
@@ -2247,6 +2283,7 @@ func NewDescribeInstancesDeniedActionsResponse() (response *DescribeInstancesDen
 // This API is used to query the list of operation limits of one or more instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -2263,6 +2300,7 @@ func (c *Client) DescribeInstancesDeniedActions(request *DescribeInstancesDenied
 // This API is used to query the list of operation limits of one or more instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -2365,6 +2403,8 @@ func NewDescribeInstancesReturnableResponse() (response *DescribeInstancesReturn
 // This API is used to query whether the specified instance can be returned.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
+//  FAILEDOPERATION_DESCRIBEINSTANCESRETURNABLEERROR = "FailedOperation.DescribeInstancesReturnableError"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESRETURNABLEERROR = "InternalError.DescribeInstancesReturnableError"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -2382,6 +2422,8 @@ func (c *Client) DescribeInstancesReturnable(request *DescribeInstancesReturnabl
 // This API is used to query whether the specified instance can be returned.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
+//  FAILEDOPERATION_DESCRIBEINSTANCESRETURNABLEERROR = "FailedOperation.DescribeInstancesReturnableError"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESRETURNABLEERROR = "InternalError.DescribeInstancesReturnableError"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -2429,6 +2471,8 @@ func NewDescribeInstancesTrafficPackagesResponse() (response *DescribeInstancesT
 // This API is used to query the traffic package details of one or more instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "FailedOperation.DescribeInstancesTrafficPackagesFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "InternalError.DescribeInstancesTrafficPackagesFailed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -2444,6 +2488,8 @@ func (c *Client) DescribeInstancesTrafficPackages(request *DescribeInstancesTraf
 // This API is used to query the traffic package details of one or more instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "FailedOperation.DescribeInstancesTrafficPackagesFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "InternalError.DescribeInstancesTrafficPackagesFailed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -2551,6 +2597,9 @@ func NewDescribeModifyInstanceBundlesResponse() (response *DescribeModifyInstanc
 // This API is used to query the list of package options of an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESMODIFICATIONERROR = "FailedOperation.DescribeInstancesModificationError"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESMODIFICATION = "InternalError.DescribeInstancesModification"
 //  INTERNALERROR_DESCRIBEINSTANCESMODIFICATIONERROR = "InternalError.DescribeInstancesModificationError"
@@ -2584,6 +2633,9 @@ func (c *Client) DescribeModifyInstanceBundles(request *DescribeModifyInstanceBu
 // This API is used to query the list of package options of an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESMODIFICATIONERROR = "FailedOperation.DescribeInstancesModificationError"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESMODIFICATION = "InternalError.DescribeInstancesModification"
 //  INTERNALERROR_DESCRIBEINSTANCESMODIFICATIONERROR = "InternalError.DescribeInstancesModificationError"
@@ -2647,31 +2699,7 @@ func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
 // This API is used to query the information of regions.
 //
 // error code that may be returned:
-//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
-//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATION = "InternalError.DescribeInstancesModification"
-//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATIONERROR = "InternalError.DescribeInstancesModificationError"
-//  INTERNALERROR_INVALIDBUNDLEPRICE = "InternalError.InvalidBundlePrice"
-//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
-//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
-//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
-//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
-//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
-//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
-//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
-//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
-//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
-//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
-//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
-//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
-//  INVALIDPARAMETERVALUE_INVALIDCONSOLEDISPLAYTYPES = "InvalidParameterValue.InvalidConsoleDisplayTypes"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
-//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
-//  OPERATIONDENIED_BUNDLENOTSUPPORTMODIFY = "OperationDenied.BundleNotSupportModify"
-//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
-//  UNSUPPORTEDOPERATION_INSTANCEEXPIRED = "UnsupportedOperation.InstanceExpired"
-//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
     return c.DescribeRegionsWithContext(context.Background(), request)
 }
@@ -2680,31 +2708,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
 // This API is used to query the information of regions.
 //
 // error code that may be returned:
-//  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
-//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATION = "InternalError.DescribeInstancesModification"
-//  INTERNALERROR_DESCRIBEINSTANCESMODIFICATIONERROR = "InternalError.DescribeInstancesModificationError"
-//  INTERNALERROR_INVALIDBUNDLEPRICE = "InternalError.InvalidBundlePrice"
-//  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
-//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
-//  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
-//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
-//  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
-//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
-//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
-//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
-//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
-//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
-//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
-//  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTPLATFORMTYPE = "InvalidParameterValue.InvalidBlueprintPlatformType"
-//  INVALIDPARAMETERVALUE_INVALIDCONSOLEDISPLAYTYPES = "InvalidParameterValue.InvalidConsoleDisplayTypes"
-//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
-//  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
-//  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
-//  OPERATIONDENIED_BUNDLENOTSUPPORTMODIFY = "OperationDenied.BundleNotSupportModify"
-//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
-//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
-//  UNSUPPORTEDOPERATION_INSTANCEEXPIRED = "UnsupportedOperation.InstanceExpired"
-//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *DescribeRegionsRequest) (response *DescribeRegionsResponse, err error) {
     if request == nil {
         request = NewDescribeRegionsRequest()
@@ -2743,6 +2747,7 @@ func NewDescribeResetInstanceBlueprintsResponse() (response *DescribeResetInstan
 // This API is used to query the image information of a reset instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
 //  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 //  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
@@ -2769,6 +2774,7 @@ func (c *Client) DescribeResetInstanceBlueprints(request *DescribeResetInstanceB
 // This API is used to query the image information of a reset instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
 //  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 //  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
@@ -2963,6 +2969,7 @@ func NewDescribeSnapshotsDeniedActionsResponse() (response *DescribeSnapshotsDen
 // This API is used to query the list of operation limits of one or more snapshots.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -2976,6 +2983,7 @@ func (c *Client) DescribeSnapshotsDeniedActions(request *DescribeSnapshotsDenied
 // This API is used to query the list of operation limits of one or more snapshots.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -3467,6 +3475,8 @@ func NewInquirePriceCreateInstancesResponse() (response *InquirePriceCreateInsta
 // This API is used to query the price of a created instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
@@ -3483,6 +3493,8 @@ func (c *Client) InquirePriceCreateInstances(request *InquirePriceCreateInstance
 // This API is used to query the price of a created instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
@@ -3587,6 +3599,8 @@ func NewInquirePriceRenewInstancesResponse() (response *InquirePriceRenewInstanc
 // This API is used to query the price of renewing one or more instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -3603,6 +3617,8 @@ func (c *Client) InquirePriceRenewInstances(request *InquirePriceRenewInstancesR
 // This API is used to query the price of renewing one or more instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INTERNALERROR_TRADEGETPRICEFAILED = "InternalError.TradeGetPriceFailed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -4050,6 +4066,7 @@ func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETER_ONLYALLOWMODIFYONEATTRIBUTE = "InvalidParameter.OnlyAllowModifyOneAttribute"
@@ -4079,6 +4096,7 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETER_ONLYALLOWMODIFYONEATTRIBUTE = "InvalidParameter.OnlyAllowModifyOneAttribute"
@@ -4341,6 +4359,7 @@ func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -4373,6 +4392,7 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -4493,6 +4513,7 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -4534,6 +4555,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -4605,6 +4627,7 @@ func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordRespon
 // Note: Just like powering off a physical PC, a forced shutdown may cause data loss or the corruption of file system.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -4641,6 +4664,7 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
 // Note: Just like powering off a physical PC, a forced shutdown may cause data loss or the corruption of file system.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -4707,6 +4731,7 @@ func NewStartInstancesResponse() (response *StartInstancesResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -4738,6 +4763,7 @@ func (c *Client) StartInstances(request *StartInstancesRequest) (response *Start
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -4797,6 +4823,7 @@ func NewStopInstancesResponse() (response *StopInstancesResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -4826,6 +4853,7 @@ func (c *Client) StopInstances(request *StopInstancesRequest) (response *StopIns
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"

@@ -2307,7 +2307,8 @@ type ComplianceAffectedAsset struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VerifyInfo *string `json:"VerifyInfo,omitempty" name:"VerifyInfo"`
 
-
+	// Instance ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -2413,7 +2414,8 @@ type ComplianceAssetInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CheckResult *string `json:"CheckResult,omitempty" name:"CheckResult"`
 
-
+	// Node instance ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -26400,7 +26402,7 @@ type ModifyK8sApiAbnormalRuleStatusRequestParams struct {
 	// Rule ID
 	RuleID *string `json:"RuleID,omitempty" name:"RuleID"`
 
-	// Status (true: Enable; false: Disable)
+	// Status of the rule. Values: `true` (Enabled), `false` (Disabled)
 	Status *bool `json:"Status,omitempty" name:"Status"`
 }
 
@@ -26410,7 +26412,7 @@ type ModifyK8sApiAbnormalRuleStatusRequest struct {
 	// Rule ID
 	RuleID *string `json:"RuleID,omitempty" name:"RuleID"`
 
-	// Status (true: Enable; false: Disable)
+	// Status of the rule. Values: `true` (Enabled), `false` (Disabled)
 	Status *bool `json:"Status,omitempty" name:"Status"`
 }
 

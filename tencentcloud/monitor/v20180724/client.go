@@ -145,6 +145,62 @@ func (c *Client) BindingPolicyObjectWithContext(ctx context.Context, request *Bi
     return
 }
 
+func NewCheckIsPrometheusNewUserRequest() (request *CheckIsPrometheusNewUserRequest) {
+    request = &CheckIsPrometheusNewUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "CheckIsPrometheusNewUser")
+    
+    
+    return
+}
+
+func NewCheckIsPrometheusNewUserResponse() (response *CheckIsPrometheusNewUserResponse) {
+    response = &CheckIsPrometheusNewUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CheckIsPrometheusNewUser
+// This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) CheckIsPrometheusNewUser(request *CheckIsPrometheusNewUserRequest) (response *CheckIsPrometheusNewUserResponse, err error) {
+    return c.CheckIsPrometheusNewUserWithContext(context.Background(), request)
+}
+
+// CheckIsPrometheusNewUser
+// This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) CheckIsPrometheusNewUserWithContext(ctx context.Context, request *CheckIsPrometheusNewUserRequest) (response *CheckIsPrometheusNewUserResponse, err error) {
+    if request == nil {
+        request = NewCheckIsPrometheusNewUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckIsPrometheusNewUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckIsPrometheusNewUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCleanGrafanaInstanceRequest() (request *CleanGrafanaInstanceRequest) {
     request = &CleanGrafanaInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -825,6 +881,72 @@ func (c *Client) CreatePrometheusMultiTenantInstancePostPayModeWithContext(ctx c
     return
 }
 
+func NewCreatePrometheusRecordRuleYamlRequest() (request *CreatePrometheusRecordRuleYamlRequest) {
+    request = &CreatePrometheusRecordRuleYamlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusRecordRuleYaml")
+    
+    
+    return
+}
+
+func NewCreatePrometheusRecordRuleYamlResponse() (response *CreatePrometheusRecordRuleYamlResponse) {
+    response = &CreatePrometheusRecordRuleYamlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePrometheusRecordRuleYaml
+// This API is used to create a recording rule in the YAML way.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreatePrometheusRecordRuleYaml(request *CreatePrometheusRecordRuleYamlRequest) (response *CreatePrometheusRecordRuleYamlResponse, err error) {
+    return c.CreatePrometheusRecordRuleYamlWithContext(context.Background(), request)
+}
+
+// CreatePrometheusRecordRuleYaml
+// This API is used to create a recording rule in the YAML way.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreatePrometheusRecordRuleYamlWithContext(ctx context.Context, request *CreatePrometheusRecordRuleYamlRequest) (response *CreatePrometheusRecordRuleYamlResponse, err error) {
+    if request == nil {
+        request = NewCreatePrometheusRecordRuleYamlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusRecordRuleYaml require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrometheusRecordRuleYamlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePrometheusScrapeJobRequest() (request *CreatePrometheusScrapeJobRequest) {
     request = &CreatePrometheusScrapeJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -891,6 +1013,60 @@ func (c *Client) CreatePrometheusScrapeJobWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewCreatePrometheusScrapeJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePrometheusTempRequest() (request *CreatePrometheusTempRequest) {
+    request = &CreatePrometheusTempRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "CreatePrometheusTemp")
+    
+    
+    return
+}
+
+func NewCreatePrometheusTempResponse() (response *CreatePrometheusTempResponse) {
+    response = &CreatePrometheusTempResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreatePrometheusTemp
+// This API is used to create a TMP template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) CreatePrometheusTemp(request *CreatePrometheusTempRequest) (response *CreatePrometheusTempResponse, err error) {
+    return c.CreatePrometheusTempWithContext(context.Background(), request)
+}
+
+// CreatePrometheusTemp
+// This API is used to create a TMP template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) CreatePrometheusTempWithContext(ctx context.Context, request *CreatePrometheusTempRequest) (response *CreatePrometheusTempResponse, err error) {
+    if request == nil {
+        request = NewCreatePrometheusTempRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePrometheusTemp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePrometheusTempResponse()
     err = c.Send(request, response)
     return
 }
@@ -1639,6 +1815,60 @@ func (c *Client) DeletePolicyGroupWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeletePrometheusRecordRuleYamlRequest() (request *DeletePrometheusRecordRuleYamlRequest) {
+    request = &DeletePrometheusRecordRuleYamlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DeletePrometheusRecordRuleYaml")
+    
+    
+    return
+}
+
+func NewDeletePrometheusRecordRuleYamlResponse() (response *DeletePrometheusRecordRuleYamlResponse) {
+    response = &DeletePrometheusRecordRuleYamlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeletePrometheusRecordRuleYaml
+// This API is used to delete a recording instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DeletePrometheusRecordRuleYaml(request *DeletePrometheusRecordRuleYamlRequest) (response *DeletePrometheusRecordRuleYamlResponse, err error) {
+    return c.DeletePrometheusRecordRuleYamlWithContext(context.Background(), request)
+}
+
+// DeletePrometheusRecordRuleYaml
+// This API is used to delete a recording instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DeletePrometheusRecordRuleYamlWithContext(ctx context.Context, request *DeletePrometheusRecordRuleYamlRequest) (response *DeletePrometheusRecordRuleYamlResponse, err error) {
+    if request == nil {
+        request = NewDeletePrometheusRecordRuleYamlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrometheusRecordRuleYaml require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePrometheusRecordRuleYamlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeletePrometheusScrapeJobsRequest() (request *DeletePrometheusScrapeJobsRequest) {
     request = &DeletePrometheusScrapeJobsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1705,6 +1935,128 @@ func (c *Client) DeletePrometheusScrapeJobsWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDeletePrometheusScrapeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePrometheusTempRequest() (request *DeletePrometheusTempRequest) {
+    request = &DeletePrometheusTempRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DeletePrometheusTemp")
+    
+    
+    return
+}
+
+func NewDeletePrometheusTempResponse() (response *DeletePrometheusTempResponse) {
+    response = &DeletePrometheusTempResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeletePrometheusTemp
+// This API is used to delete a TMP template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+func (c *Client) DeletePrometheusTemp(request *DeletePrometheusTempRequest) (response *DeletePrometheusTempResponse, err error) {
+    return c.DeletePrometheusTempWithContext(context.Background(), request)
+}
+
+// DeletePrometheusTemp
+// This API is used to delete a TMP template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+func (c *Client) DeletePrometheusTempWithContext(ctx context.Context, request *DeletePrometheusTempRequest) (response *DeletePrometheusTempResponse, err error) {
+    if request == nil {
+        request = NewDeletePrometheusTempRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrometheusTemp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePrometheusTempResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePrometheusTempSyncRequest() (request *DeletePrometheusTempSyncRequest) {
+    request = &DeletePrometheusTempSyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DeletePrometheusTempSync")
+    
+    
+    return
+}
+
+func NewDeletePrometheusTempSyncResponse() (response *DeletePrometheusTempSyncResponse) {
+    response = &DeletePrometheusTempSyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeletePrometheusTempSync
+// This API is used to unsync a template, which will delete the configuration generated by the template in the target. It takes effect for v2 instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+func (c *Client) DeletePrometheusTempSync(request *DeletePrometheusTempSyncRequest) (response *DeletePrometheusTempSyncResponse, err error) {
+    return c.DeletePrometheusTempSyncWithContext(context.Background(), request)
+}
+
+// DeletePrometheusTempSync
+// This API is used to unsync a template, which will delete the configuration generated by the template in the target. It takes effect for v2 instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+func (c *Client) DeletePrometheusTempSyncWithContext(ctx context.Context, request *DeletePrometheusTempSyncRequest) (response *DeletePrometheusTempSyncResponse, err error) {
+    if request == nil {
+        request = NewDeletePrometheusTempSyncRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrometheusTempSync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePrometheusTempSyncResponse()
     err = c.Send(request, response)
     return
 }
@@ -3807,6 +4159,60 @@ func (c *Client) DescribeProductEventListWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribePrometheusAgentInstancesRequest() (request *DescribePrometheusAgentInstancesRequest) {
+    request = &DescribePrometheusAgentInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusAgentInstances")
+    
+    
+    return
+}
+
+func NewDescribePrometheusAgentInstancesResponse() (response *DescribePrometheusAgentInstancesResponse) {
+    response = &DescribePrometheusAgentInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusAgentInstances
+// This API is used to get the list of instances associated with the target cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribePrometheusAgentInstances(request *DescribePrometheusAgentInstancesRequest) (response *DescribePrometheusAgentInstancesResponse, err error) {
+    return c.DescribePrometheusAgentInstancesWithContext(context.Background(), request)
+}
+
+// DescribePrometheusAgentInstances
+// This API is used to get the list of instances associated with the target cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribePrometheusAgentInstancesWithContext(ctx context.Context, request *DescribePrometheusAgentInstancesRequest) (response *DescribePrometheusAgentInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusAgentInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusAgentInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusAgentInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePrometheusAgentsRequest() (request *DescribePrometheusAgentsRequest) {
     request = &DescribePrometheusAgentsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3867,6 +4273,268 @@ func (c *Client) DescribePrometheusAgentsWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribePrometheusAgentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusAlertPolicyRequest() (request *DescribePrometheusAlertPolicyRequest) {
+    request = &DescribePrometheusAlertPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusAlertPolicy")
+    
+    
+    return
+}
+
+func NewDescribePrometheusAlertPolicyResponse() (response *DescribePrometheusAlertPolicyResponse) {
+    response = &DescribePrometheusAlertPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusAlertPolicy
+// This API is used to get the list of v2.0 instance alerting rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusAlertPolicy(request *DescribePrometheusAlertPolicyRequest) (response *DescribePrometheusAlertPolicyResponse, err error) {
+    return c.DescribePrometheusAlertPolicyWithContext(context.Background(), request)
+}
+
+// DescribePrometheusAlertPolicy
+// This API is used to get the list of v2.0 instance alerting rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusAlertPolicyWithContext(ctx context.Context, request *DescribePrometheusAlertPolicyRequest) (response *DescribePrometheusAlertPolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusAlertPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusAlertPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusAlertPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusConfigRequest() (request *DescribePrometheusConfigRequest) {
+    request = &DescribePrometheusConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusConfig")
+    
+    
+    return
+}
+
+func NewDescribePrometheusConfigResponse() (response *DescribePrometheusConfigResponse) {
+    response = &DescribePrometheusConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusConfig
+// This API is used to get the Prometheus configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusConfig(request *DescribePrometheusConfigRequest) (response *DescribePrometheusConfigResponse, err error) {
+    return c.DescribePrometheusConfigWithContext(context.Background(), request)
+}
+
+// DescribePrometheusConfig
+// This API is used to get the Prometheus configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusConfigWithContext(ctx context.Context, request *DescribePrometheusConfigRequest) (response *DescribePrometheusConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusInstanceDetailRequest() (request *DescribePrometheusInstanceDetailRequest) {
+    request = &DescribePrometheusInstanceDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusInstanceDetail")
+    
+    
+    return
+}
+
+func NewDescribePrometheusInstanceDetailResponse() (response *DescribePrometheusInstanceDetailResponse) {
+    response = &DescribePrometheusInstanceDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusInstanceDetail
+// This API is used to get the details of a TMP instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusInstanceDetail(request *DescribePrometheusInstanceDetailRequest) (response *DescribePrometheusInstanceDetailResponse, err error) {
+    return c.DescribePrometheusInstanceDetailWithContext(context.Background(), request)
+}
+
+// DescribePrometheusInstanceDetail
+// This API is used to get the details of a TMP instance.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusInstanceDetailWithContext(ctx context.Context, request *DescribePrometheusInstanceDetailRequest) (response *DescribePrometheusInstanceDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusInstanceDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusInstanceDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusInstanceDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusInstanceInitStatusRequest() (request *DescribePrometheusInstanceInitStatusRequest) {
+    request = &DescribePrometheusInstanceInitStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusInstanceInitStatus")
+    
+    
+    return
+}
+
+func NewDescribePrometheusInstanceInitStatusResponse() (response *DescribePrometheusInstanceInitStatusResponse) {
+    response = &DescribePrometheusInstanceInitStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusInstanceInitStatus
+// This API is used to get the initialization task status of a v2.0 instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribePrometheusInstanceInitStatus(request *DescribePrometheusInstanceInitStatusRequest) (response *DescribePrometheusInstanceInitStatusResponse, err error) {
+    return c.DescribePrometheusInstanceInitStatusWithContext(context.Background(), request)
+}
+
+// DescribePrometheusInstanceInitStatus
+// This API is used to get the initialization task status of a v2.0 instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribePrometheusInstanceInitStatusWithContext(ctx context.Context, request *DescribePrometheusInstanceInitStatusRequest) (response *DescribePrometheusInstanceInitStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusInstanceInitStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusInstanceInitStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusInstanceInitStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -3969,6 +4637,7 @@ func NewDescribePrometheusInstancesResponse() (response *DescribePrometheusInsta
 // </ul>
 //
 // error code that may be returned:
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
@@ -3995,6 +4664,7 @@ func (c *Client) DescribePrometheusInstances(request *DescribePrometheusInstance
 // </ul>
 //
 // error code that may be returned:
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSTAGFAIL = "FailedOperation.AccessTagFail"
@@ -4017,6 +4687,202 @@ func (c *Client) DescribePrometheusInstancesWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribePrometheusInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusInstancesOverviewRequest() (request *DescribePrometheusInstancesOverviewRequest) {
+    request = &DescribePrometheusInstancesOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusInstancesOverview")
+    
+    
+    return
+}
+
+func NewDescribePrometheusInstancesOverviewResponse() (response *DescribePrometheusInstancesOverviewResponse) {
+    response = &DescribePrometheusInstancesOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusInstancesOverview
+// This API is used to get the list of CM-integrated instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribePrometheusInstancesOverview(request *DescribePrometheusInstancesOverviewRequest) (response *DescribePrometheusInstancesOverviewResponse, err error) {
+    return c.DescribePrometheusInstancesOverviewWithContext(context.Background(), request)
+}
+
+// DescribePrometheusInstancesOverview
+// This API is used to get the list of CM-integrated instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribePrometheusInstancesOverviewWithContext(ctx context.Context, request *DescribePrometheusInstancesOverviewRequest) (response *DescribePrometheusInstancesOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusInstancesOverviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusInstancesOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusInstancesOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusRecordRuleYamlRequest() (request *DescribePrometheusRecordRuleYamlRequest) {
+    request = &DescribePrometheusRecordRuleYamlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusRecordRuleYaml")
+    
+    
+    return
+}
+
+func NewDescribePrometheusRecordRuleYamlResponse() (response *DescribePrometheusRecordRuleYamlResponse) {
+    response = &DescribePrometheusRecordRuleYamlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusRecordRuleYaml
+// This API is used to get the YAML list of Prometheus recording rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusRecordRuleYaml(request *DescribePrometheusRecordRuleYamlRequest) (response *DescribePrometheusRecordRuleYamlResponse, err error) {
+    return c.DescribePrometheusRecordRuleYamlWithContext(context.Background(), request)
+}
+
+// DescribePrometheusRecordRuleYaml
+// This API is used to get the YAML list of Prometheus recording rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusRecordRuleYamlWithContext(ctx context.Context, request *DescribePrometheusRecordRuleYamlRequest) (response *DescribePrometheusRecordRuleYamlResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusRecordRuleYamlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusRecordRuleYaml require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusRecordRuleYamlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusRecordRulesRequest() (request *DescribePrometheusRecordRulesRequest) {
+    request = &DescribePrometheusRecordRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusRecordRules")
+    
+    
+    return
+}
+
+func NewDescribePrometheusRecordRulesResponse() (response *DescribePrometheusRecordRulesResponse) {
+    response = &DescribePrometheusRecordRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusRecordRules
+// This API is used to get the list of recording rules, including those created by CRD resources in the associated cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusRecordRules(request *DescribePrometheusRecordRulesRequest) (response *DescribePrometheusRecordRulesResponse, err error) {
+    return c.DescribePrometheusRecordRulesWithContext(context.Background(), request)
+}
+
+// DescribePrometheusRecordRules
+// This API is used to get the list of recording rules, including those created by CRD resources in the associated cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) DescribePrometheusRecordRulesWithContext(ctx context.Context, request *DescribePrometheusRecordRulesRequest) (response *DescribePrometheusRecordRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusRecordRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusRecordRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusRecordRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4085,6 +4951,120 @@ func (c *Client) DescribePrometheusScrapeJobsWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribePrometheusScrapeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusTempRequest() (request *DescribePrometheusTempRequest) {
+    request = &DescribePrometheusTempRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusTemp")
+    
+    
+    return
+}
+
+func NewDescribePrometheusTempResponse() (response *DescribePrometheusTempResponse) {
+    response = &DescribePrometheusTempResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusTemp
+// This API is used to get the list of templates, where the default template is always on top.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribePrometheusTemp(request *DescribePrometheusTempRequest) (response *DescribePrometheusTempResponse, err error) {
+    return c.DescribePrometheusTempWithContext(context.Background(), request)
+}
+
+// DescribePrometheusTemp
+// This API is used to get the list of templates, where the default template is always on top.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribePrometheusTempWithContext(ctx context.Context, request *DescribePrometheusTempRequest) (response *DescribePrometheusTempResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusTempRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusTemp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusTempResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrometheusTempSyncRequest() (request *DescribePrometheusTempSyncRequest) {
+    request = &DescribePrometheusTempSyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusTempSync")
+    
+    
+    return
+}
+
+func NewDescribePrometheusTempSyncResponse() (response *DescribePrometheusTempSyncResponse) {
+    response = &DescribePrometheusTempSyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePrometheusTempSync
+// This API is used to get the information of instances associated with a template. It takes effect for v2 instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusTempSync(request *DescribePrometheusTempSyncRequest) (response *DescribePrometheusTempSyncResponse, err error) {
+    return c.DescribePrometheusTempSyncWithContext(context.Background(), request)
+}
+
+// DescribePrometheusTempSync
+// This API is used to get the information of instances associated with a template. It takes effect for v2 instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrometheusTempSyncWithContext(ctx context.Context, request *DescribePrometheusTempSyncRequest) (response *DescribePrometheusTempSyncResponse, err error) {
+    if request == nil {
+        request = NewDescribePrometheusTempSyncRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrometheusTempSync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrometheusTempSyncResponse()
     err = c.Send(request, response)
     return
 }
@@ -5461,6 +6441,124 @@ func (c *Client) ModifyPrometheusInstanceAttributesWithContext(ctx context.Conte
     return
 }
 
+func NewModifyPrometheusRecordRuleYamlRequest() (request *ModifyPrometheusRecordRuleYamlRequest) {
+    request = &ModifyPrometheusRecordRuleYamlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "ModifyPrometheusRecordRuleYaml")
+    
+    
+    return
+}
+
+func NewModifyPrometheusRecordRuleYamlResponse() (response *ModifyPrometheusRecordRuleYamlResponse) {
+    response = &ModifyPrometheusRecordRuleYamlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyPrometheusRecordRuleYaml
+// This API is used to modify a Prometheus recording instance through YAML.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) ModifyPrometheusRecordRuleYaml(request *ModifyPrometheusRecordRuleYamlRequest) (response *ModifyPrometheusRecordRuleYamlResponse, err error) {
+    return c.ModifyPrometheusRecordRuleYamlWithContext(context.Background(), request)
+}
+
+// ModifyPrometheusRecordRuleYaml
+// This API is used to modify a Prometheus recording instance through YAML.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) ModifyPrometheusRecordRuleYamlWithContext(ctx context.Context, request *ModifyPrometheusRecordRuleYamlRequest) (response *ModifyPrometheusRecordRuleYamlResponse, err error) {
+    if request == nil {
+        request = NewModifyPrometheusRecordRuleYamlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrometheusRecordRuleYaml require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyPrometheusRecordRuleYamlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyPrometheusTempRequest() (request *ModifyPrometheusTempRequest) {
+    request = &ModifyPrometheusTempRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "ModifyPrometheusTemp")
+    
+    
+    return
+}
+
+func NewModifyPrometheusTempResponse() (response *ModifyPrometheusTempResponse) {
+    response = &ModifyPrometheusTempResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyPrometheusTemp
+// This API is used to modify a template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyPrometheusTemp(request *ModifyPrometheusTempRequest) (response *ModifyPrometheusTempResponse, err error) {
+    return c.ModifyPrometheusTempWithContext(context.Background(), request)
+}
+
+// ModifyPrometheusTemp
+// This API is used to modify a template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyPrometheusTempWithContext(ctx context.Context, request *ModifyPrometheusTempRequest) (response *ModifyPrometheusTempResponse, err error) {
+    if request == nil {
+        request = NewModifyPrometheusTempRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPrometheusTemp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyPrometheusTempResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPutMonitorDataRequest() (request *PutMonitorDataRequest) {
     request = &PutMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5645,6 +6743,60 @@ func (c *Client) ResumeGrafanaInstanceWithContext(ctx context.Context, request *
     return
 }
 
+func NewRunPrometheusInstanceRequest() (request *RunPrometheusInstanceRequest) {
+    request = &RunPrometheusInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "RunPrometheusInstance")
+    
+    
+    return
+}
+
+func NewRunPrometheusInstanceResponse() (response *RunPrometheusInstanceResponse) {
+    response = &RunPrometheusInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RunPrometheusInstance
+// This API is used to initialize a TMP instance, which is called when the integration center is enabled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) RunPrometheusInstance(request *RunPrometheusInstanceRequest) (response *RunPrometheusInstanceResponse, err error) {
+    return c.RunPrometheusInstanceWithContext(context.Background(), request)
+}
+
+// RunPrometheusInstance
+// This API is used to initialize a TMP instance, which is called when the integration center is enabled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+func (c *Client) RunPrometheusInstanceWithContext(ctx context.Context, request *RunPrometheusInstanceRequest) (response *RunPrometheusInstanceResponse, err error) {
+    if request == nil {
+        request = NewRunPrometheusInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RunPrometheusInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRunPrometheusInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSendCustomAlarmMsgRequest() (request *SendCustomAlarmMsgRequest) {
     request = &SendCustomAlarmMsgRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5767,6 +6919,74 @@ func (c *Client) SetDefaultAlarmPolicyWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewSetDefaultAlarmPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSyncPrometheusTempRequest() (request *SyncPrometheusTempRequest) {
+    request = &SyncPrometheusTempRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "SyncPrometheusTemp")
+    
+    
+    return
+}
+
+func NewSyncPrometheusTempResponse() (response *SyncPrometheusTempResponse) {
+    response = &SyncPrometheusTempResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SyncPrometheusTemp
+// This API is used to sync a template to an instance or cluster. It takes effect for v2 instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SyncPrometheusTemp(request *SyncPrometheusTempRequest) (response *SyncPrometheusTempResponse, err error) {
+    return c.SyncPrometheusTempWithContext(context.Background(), request)
+}
+
+// SyncPrometheusTemp
+// This API is used to sync a template to an instance or cluster. It takes effect for v2 instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SyncPrometheusTempWithContext(ctx context.Context, request *SyncPrometheusTempRequest) (response *SyncPrometheusTempResponse, err error) {
+    if request == nil {
+        request = NewSyncPrometheusTempRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SyncPrometheusTemp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSyncPrometheusTempResponse()
     err = c.Send(request, response)
     return
 }

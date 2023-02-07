@@ -71,6 +71,15 @@ const (
 	// The YAML format is incorrect.
 	FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
 
+	// FailedOperation.ComponentClientCommon
+	FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+
+	// FailedOperation.ComponentClientHttp
+	FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+
+	// FailedOperation.ComponentClientUnpack
+	FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+
 	// Failed to create the instance.
 	FAILEDOPERATION_CREATEINSTANCE = "FailedOperation.CreateInstance"
 
@@ -86,6 +95,9 @@ const (
 	// The data table doesn't exist.
 	FAILEDOPERATION_DATATABLENOTFOUND = "FailedOperation.DataTableNotFound"
 
+	// FailedOperation.Db
+	FAILEDOPERATION_DB = "FailedOperation.Db"
+
 	// Failed to query the database.
 	FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 
@@ -94,6 +106,9 @@ const (
 
 	// Failed to delete the database record.
 	FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+
+	// FailedOperation.DbRecordNotFound
+	FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 
 	// Failed to update the database record.
 	FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
@@ -137,6 +152,12 @@ const (
 	// Internal service error.
 	FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
 
+	// FailedOperation.KubeClientConf
+	FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
+
+	// FailedOperation.KubeCommon
+	FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+
 	// The region is unavailable.
 	FAILEDOPERATION_REGIONUNAVAILABLE = "FailedOperation.RegionUnavailable"
 
@@ -173,6 +194,12 @@ const (
 	// Error with the callback.
 	INTERNALERROR_CALLBACKFAIL = "InternalError.CallbackFail"
 
+	// InternalError.Db
+	INTERNALERROR_DB = "InternalError.Db"
+
+	// InternalError.DbRecordNotFound
+	INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+
 	// Error with another dependent API.
 	INTERNALERROR_DEPENDSAPI = "InternalError.DependsApi"
 
@@ -185,14 +212,26 @@ const (
 	// Execution timed out.
 	INTERNALERROR_EXETIMEOUT = "InternalError.ExeTimeout"
 
+	// InternalError.Param
+	INTERNALERROR_PARAM = "InternalError.Param"
+
 	// System error.
 	INTERNALERROR_SYSTEM = "InternalError.System"
+
+	// InternalError.TaskNotFound
+	INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 
 	// An error occurred while parsing the task result.
 	INTERNALERROR_TASKRESULTFORMAT = "InternalError.TaskResultFormat"
 
+	// InternalError.UnexpectedInternal
+	INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
+
+	// InvalidParameter.ClusterNotFound
+	INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 
 	// The task has already been submitted.
 	INVALIDPARAMETER_DUPTASK = "InvalidParameter.DupTask"
@@ -206,8 +245,20 @@ const (
 	// The platform configuration is missing.
 	INVALIDPARAMETER_MISSAKSK = "InvalidParameter.MissAKSK"
 
+	// InvalidParameter.Param
+	INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+
 	// Incorrect parameter.
 	INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+
+	// InvalidParameter.PromClusterNotFound
+	INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+
+	// InvalidParameter.PromInstanceNotFound
+	INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+
+	// InvalidParameter.ResourceNotFound
+	INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 
 	// Error with the platform configuration.
 	INVALIDPARAMETER_SECRETIDORSECRETKEYERROR = "InvalidParameter.SecretIdOrSecretKeyError"

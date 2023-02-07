@@ -318,6 +318,7 @@ func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INTERNALOPERATIONFAILURE = "FailedOperation.InternalOperationFailure"
+//  FAILEDOPERATION_INVALIDSTATUS = "FailedOperation.InvalidStatus"
 //  FAILEDOPERATION_OPERATIONNOTALLOW = "FailedOperation.OperationNotAllow"
 //  FAILEDOPERATION_PRIVATEIPADDRESSUNAVAILABLE = "FailedOperation.PrivateIpAddressUnavailable"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -359,6 +360,7 @@ func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *A
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INTERNALOPERATIONFAILURE = "FailedOperation.InternalOperationFailure"
+//  FAILEDOPERATION_INVALIDSTATUS = "FailedOperation.InvalidStatus"
 //  FAILEDOPERATION_OPERATIONNOTALLOW = "FailedOperation.OperationNotAllow"
 //  FAILEDOPERATION_PRIVATEIPADDRESSUNAVAILABLE = "FailedOperation.PrivateIpAddressUnavailable"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1043,6 +1045,7 @@ func NewCreateLoadBalancerResponse() (response *CreateLoadBalancerResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDLOADBALANCERNUM = "InvalidParameterValue.InvalidLoadBalancerNum"
 //  INVALIDPARAMETERVALUE_INVALIDLOADBALANCERTYPE = "InvalidParameterValue.InvalidLoadBalancerType"
 //  INVALIDPARAMETERVALUE_INVALIDPUBLICPARAM = "InvalidParameterValue.InvalidPublicParam"
+//  INVALIDPARAMETERVALUE_INVALIDSUBNETINZONE = "InvalidParameterValue.InvalidSubnetInZone"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TAGNUMOUTOFRANGE = "InvalidParameterValue.TagNumOutOfRange"
@@ -1072,6 +1075,7 @@ func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (respons
 //  INVALIDPARAMETERVALUE_INVALIDLOADBALANCERNUM = "InvalidParameterValue.InvalidLoadBalancerNum"
 //  INVALIDPARAMETERVALUE_INVALIDLOADBALANCERTYPE = "InvalidParameterValue.InvalidLoadBalancerType"
 //  INVALIDPARAMETERVALUE_INVALIDPUBLICPARAM = "InvalidParameterValue.InvalidPublicParam"
+//  INVALIDPARAMETERVALUE_INVALIDSUBNETINZONE = "InvalidParameterValue.InvalidSubnetInZone"
 //  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TAGNUMOUTOFRANGE = "InvalidParameterValue.TagNumOutOfRange"
@@ -2004,6 +2008,7 @@ func NewDeleteLoadBalancerListenersResponse() (response *DeleteLoadBalancerListe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INTERNALOPERATIONFAILURE = "FailedOperation.InternalOperationFailure"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETER_INVALIDDATAFORMAT = "InvalidParameter.InvalidDataFormat"
 //  INVALIDPARAMETERVALUE_INVALIDPUBLICPARAM = "InvalidParameterValue.InvalidPublicParam"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -2016,6 +2021,7 @@ func (c *Client) DeleteLoadBalancerListeners(request *DeleteLoadBalancerListener
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INTERNALOPERATIONFAILURE = "FailedOperation.InternalOperationFailure"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETER_INVALIDDATAFORMAT = "InvalidParameter.InvalidDataFormat"
 //  INVALIDPARAMETERVALUE_INVALIDPUBLICPARAM = "InvalidParameterValue.InvalidPublicParam"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -5501,6 +5507,7 @@ func NewModifyAddressAttributeResponse() (response *ModifyAddressAttributeRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceID"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUETOOLARGE = "InvalidParameterValue.ParameterValueTooLarge"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -5521,6 +5528,7 @@ func (c *Client) ModifyAddressAttribute(request *ModifyAddressAttributeRequest) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceID"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  INVALIDPARAMETERVALUE_PARAMETERVALUETOOLARGE = "InvalidParameterValue.ParameterValueTooLarge"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -5635,6 +5643,7 @@ func NewModifyDefaultSubnetResponse() (response *ModifyDefaultSubnetResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_INTERNALOPERATIONFAILURE = "FailedOperation.InternalOperationFailure"
 //  INVALIDPARAMETER_INVALIDDATAFORMAT = "InvalidParameter.InvalidDataFormat"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -5648,6 +5657,7 @@ func (c *Client) ModifyDefaultSubnet(request *ModifyDefaultSubnetRequest) (respo
 // error code that may be returned:
 //  FAILEDOPERATION_INTERNALOPERATIONFAILURE = "FailedOperation.InternalOperationFailure"
 //  INVALIDPARAMETER_INVALIDDATAFORMAT = "InvalidParameter.InvalidDataFormat"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -6972,6 +6982,7 @@ func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDISPINNODE = "InvalidParameterValue.InvalidISPInNode"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceID"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUETOOLARGE = "InvalidParameterValue.ParameterValueTooLarge"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  RESOURCENOTFOUND_INSTANCENOTEXIST = "ResourceNotFound.InstanceNotExist"
 //  RESOURCEUNAVAILABLE_INSTANCENOTRUNNING = "ResourceUnavailable.InstanceNotRunning"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -6990,6 +7001,7 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
 //  INVALIDPARAMETERVALUE_INVALIDISPINNODE = "InvalidParameterValue.InvalidISPInNode"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceID"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUETOOLARGE = "InvalidParameterValue.ParameterValueTooLarge"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  RESOURCENOTFOUND_INSTANCENOTEXIST = "ResourceNotFound.InstanceNotExist"
 //  RESOURCEUNAVAILABLE_INSTANCENOTRUNNING = "ResourceUnavailable.InstanceNotRunning"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
@@ -7113,6 +7125,7 @@ func NewReleaseIpv6AddressesResponse() (response *ReleaseIpv6AddressesResponse) 
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  MISSINGPARAMETER_MISSINGMODULEPARAMETER = "MissingParameter.MissingModuleParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
 func (c *Client) ReleaseIpv6Addresses(request *ReleaseIpv6AddressesRequest) (response *ReleaseIpv6AddressesResponse, err error) {
     return c.ReleaseIpv6AddressesWithContext(context.Background(), request)
 }
@@ -7127,6 +7140,7 @@ func (c *Client) ReleaseIpv6Addresses(request *ReleaseIpv6AddressesRequest) (res
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  MISSINGPARAMETER_MISSINGMODULEPARAMETER = "MissingParameter.MissingModuleParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
 func (c *Client) ReleaseIpv6AddressesWithContext(ctx context.Context, request *ReleaseIpv6AddressesRequest) (response *ReleaseIpv6AddressesResponse, err error) {
     if request == nil {
         request = NewReleaseIpv6AddressesRequest()
@@ -7725,6 +7739,7 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDZONEINSTANCETYPE = "InvalidParameterValue.InvalidZoneInstanceType"
 //  INVALIDPARAMETERVALUE_NODENOTSUPPORTIPV6 = "InvalidParameterValue.NodeNotSupportIPv6"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUETOOLARGE = "InvalidParameterValue.ParameterValueTooLarge"
+//  INVALIDPARAMETERVALUE_SUBNETNOTEXIST = "InvalidParameterValue.SubnetNotExist"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_UNMATCHEDBILLINGTYPE = "InvalidParameterValue.UnmatchedBillingType"
 //  INVALIDPARAMETERVALUE_USERNOTSUPPORTIPV6 = "InvalidParameterValue.UserNotSupportIPv6"
@@ -7738,6 +7753,7 @@ func NewRunInstancesResponse() (response *RunInstancesResponse) {
 //  RESOURCEINSUFFICIENT_IPQUOTANOTENOUGH = "ResourceInsufficient.IPQuotaNotEnough"
 //  RESOURCEINSUFFICIENT_INSTANCEQUOTANOTENOUGH = "ResourceInsufficient.InstanceQuotaNotEnough"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
 //  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTIMAGE = "UnsupportedOperation.InstanceTypeNotSupportImage"
 func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstancesResponse, err error) {
@@ -7790,6 +7806,7 @@ func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstan
 //  INVALIDPARAMETERVALUE_INVALIDZONEINSTANCETYPE = "InvalidParameterValue.InvalidZoneInstanceType"
 //  INVALIDPARAMETERVALUE_NODENOTSUPPORTIPV6 = "InvalidParameterValue.NodeNotSupportIPv6"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUETOOLARGE = "InvalidParameterValue.ParameterValueTooLarge"
+//  INVALIDPARAMETERVALUE_SUBNETNOTEXIST = "InvalidParameterValue.SubnetNotExist"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_UNMATCHEDBILLINGTYPE = "InvalidParameterValue.UnmatchedBillingType"
 //  INVALIDPARAMETERVALUE_USERNOTSUPPORTIPV6 = "InvalidParameterValue.UserNotSupportIPv6"
@@ -7803,6 +7820,7 @@ func (c *Client) RunInstances(request *RunInstancesRequest) (response *RunInstan
 //  RESOURCEINSUFFICIENT_IPQUOTANOTENOUGH = "ResourceInsufficient.IPQuotaNotEnough"
 //  RESOURCEINSUFFICIENT_INSTANCEQUOTANOTENOUGH = "ResourceInsufficient.InstanceQuotaNotEnough"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"
 //  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTIMAGE = "UnsupportedOperation.InstanceTypeNotSupportImage"
 func (c *Client) RunInstancesWithContext(ctx context.Context, request *RunInstancesRequest) (response *RunInstancesResponse, err error) {

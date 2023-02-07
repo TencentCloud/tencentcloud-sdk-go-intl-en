@@ -4451,6 +4451,10 @@ type InstancePrice struct {
 
 	// Discounted price.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Currency unit. Valid values: `CNY` and `USD`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
 }
 
 type InstancePriceDetail struct {
@@ -4462,7 +4466,8 @@ type InstancePriceDetail struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	InstancePrice *InstancePrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
 
-
+	// Tiered-pricing details. The information of each tier includes the billable period, discount percentage, total price, discounted price, and discount details (`UserDiscount`, `CommonDiscount` and `FinalDiscount`).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitempty" name:"DiscountDetail"`
 }
 
@@ -5140,6 +5145,15 @@ type PolicyDetail struct {
 
 	// Final discount.
 	FinalDiscount *int64 `json:"FinalDiscount,omitempty" name:"FinalDiscount"`
+
+	// Activity discount. The value `null` indicates no discount.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ActivityDiscount *float64 `json:"ActivityDiscount,omitempty" name:"ActivityDiscount"`
+
+	// Discount type.
+	// Valid values: `user` (user discount), `common` (discount displayed on the official website), `activity` (activity discount), `null` (no discount).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DiscountType *string `json:"DiscountType,omitempty" name:"DiscountType"`
 }
 
 type Price struct {

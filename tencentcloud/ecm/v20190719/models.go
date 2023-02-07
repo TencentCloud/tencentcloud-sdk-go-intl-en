@@ -1247,6 +1247,12 @@ type CreateLoadBalancerRequestParams struct {
 
 	// Security groups.
 	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
+
+	// IP version. Valid values: `IPV4` (default), `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
+	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
+
+	// Subnet ID. This parameter is required for IPv6 CLB instances.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 type CreateLoadBalancerRequest struct {
@@ -1279,6 +1285,12 @@ type CreateLoadBalancerRequest struct {
 
 	// Security groups.
 	SecurityGroups []*string `json:"SecurityGroups,omitempty" name:"SecurityGroups"`
+
+	// IP version. Valid values: `IPV4` (default), `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
+	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
+
+	// Subnet ID. This parameter is required for IPv6 CLB instances.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
@@ -1302,6 +1314,8 @@ func (r *CreateLoadBalancerRequest) FromJsonString(s string) error {
 	delete(f, "InternetAccessible")
 	delete(f, "Tags")
 	delete(f, "SecurityGroups")
+	delete(f, "AddressIPVersion")
+	delete(f, "SubnetId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLoadBalancerRequest has unknown keys!", "")
 	}
@@ -4790,6 +4804,13 @@ type DescribePriceRunInstanceRequestParams struct {
 
 	// Data disk information
 	DataDisk []*DataDisk `json:"DataDisk,omitempty" name:"DataDisk"`
+
+	// Instance billing type. Valid values:
+	// `0`: Bill by daily resource usage peak (CPU, memory, and disk). It applies only to non-GNR models;
+	// `1`: Bill by usage hours of an instance. It applies only to GNR models. It’s available to beta users now. To enable it, submit a ticket;
+	// `2`: Bill by usage month of an instance. It applies only to GNR models.
+	// If this field is left empty, `0` is selected by default for non-GNR models, and `2` is selected by default for GNR models.
+	InstanceChargeType *int64 `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 }
 
 type DescribePriceRunInstanceRequest struct {
@@ -4806,6 +4827,13 @@ type DescribePriceRunInstanceRequest struct {
 
 	// Data disk information
 	DataDisk []*DataDisk `json:"DataDisk,omitempty" name:"DataDisk"`
+
+	// Instance billing type. Valid values:
+	// `0`: Bill by daily resource usage peak (CPU, memory, and disk). It applies only to non-GNR models;
+	// `1`: Bill by usage hours of an instance. It applies only to GNR models. It’s available to beta users now. To enable it, submit a ticket;
+	// `2`: Bill by usage month of an instance. It applies only to GNR models.
+	// If this field is left empty, `0` is selected by default for non-GNR models, and `2` is selected by default for GNR models.
+	InstanceChargeType *int64 `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
 }
 
 func (r *DescribePriceRunInstanceRequest) ToJsonString() string {
@@ -4824,6 +4852,7 @@ func (r *DescribePriceRunInstanceRequest) FromJsonString(s string) error {
 	delete(f, "SystemDisk")
 	delete(f, "InstanceCount")
 	delete(f, "DataDisk")
+	delete(f, "InstanceChargeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePriceRunInstanceRequest has unknown keys!", "")
 	}
@@ -7045,6 +7074,10 @@ type LoadBalancer struct {
 	// Whether the real server opens the traffic from ELB to the internet.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
+
+	// IPv6 address of a CLB instance
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AddressIPv6 *string `json:"AddressIPv6,omitempty" name:"AddressIPv6"`
 }
 
 type LoadBalancerHealth struct {

@@ -218,10 +218,10 @@ const (
 	// The billing mode is invalid.
 	INVALIDPARAMETERVALUE_INVALIDINTERNETCHARGETYPE = "InvalidParameterValue.InvalidInternetChargeType"
 
-	// The key ID is invalid.
+	// Invalid key ID.
 	INVALIDPARAMETERVALUE_INVALIDKEYPAIRID = "InvalidParameterValue.InvalidKeyPairId"
 
-	// The key name is exceptional.
+	// Invalid key name.
 	INVALIDPARAMETERVALUE_INVALIDKEYPAIRNAME = "InvalidParameterValue.InvalidKeyPairName"
 
 	// The number of CLB instances is invalid.
@@ -259,6 +259,9 @@ const (
 
 	// InvalidParameterValue.InvalidSnapshotId
 	INVALIDPARAMETERVALUE_INVALIDSNAPSHOTID = "InvalidParameterValue.InvalidSnapshotId"
+
+	// The node does not exist in this subnet.
+	INVALIDPARAMETERVALUE_INVALIDSUBNETINZONE = "InvalidParameterValue.InvalidSubnetInZone"
 
 	// The system disk size is invalid.
 	INVALIDPARAMETERVALUE_INVALIDSYSTEMDISKSIZE = "InvalidParameterValue.InvalidSystemDiskSize"
@@ -310,6 +313,9 @@ const (
 
 	// The specified CIDR block conflicts with another subnet in the same VPC.
 	INVALIDPARAMETERVALUE_SUBNETCONFLICT = "InvalidParameterValue.SubnetConflict"
+
+	// 
+	INVALIDPARAMETERVALUE_SUBNETNOTEXIST = "InvalidParameterValue.SubnetNotExist"
 
 	// The subnet IP range is invalid.
 	INVALIDPARAMETERVALUE_SUBNETRANGE = "InvalidParameterValue.SubnetRange"
@@ -442,6 +448,9 @@ const (
 
 	// CLB instances have been sold out.
 	RESOURCESSOLDOUT_LOADBALANCERSOLDOUT = "ResourcesSoldOut.LoadBalancerSoldOut"
+
+	// 
+	RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 
 	// You don't have the permission to perform this operation.
 	UNAUTHORIZEDOPERATION_FORBIDDENOPERATION = "UnauthorizedOperation.ForbiddenOperation"

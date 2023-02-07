@@ -10608,7 +10608,7 @@ func NewDescribeK8sApiAbnormalRuleScopeListResponse() (response *DescribeK8sApiA
 }
 
 // DescribeK8sApiAbnormalRuleScopeList
-// This API is used to query the list of ranges in K8sApi abnormal rules.
+// This API is used to query rules for K8s API exceptions. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10618,7 +10618,7 @@ func (c *Client) DescribeK8sApiAbnormalRuleScopeList(request *DescribeK8sApiAbno
 }
 
 // DescribeK8sApiAbnormalRuleScopeList
-// This API is used to query the list of ranges in K8sApi abnormal rules.
+// This API is used to query rules for K8s API exceptions. 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -16861,6 +16861,7 @@ func NewModifyK8sApiAbnormalEventStatusResponse() (response *ModifyK8sApiAbnorma
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyK8sApiAbnormalEventStatus(request *ModifyK8sApiAbnormalEventStatusRequest) (response *ModifyK8sApiAbnormalEventStatusResponse, err error) {
     return c.ModifyK8sApiAbnormalEventStatusWithContext(context.Background(), request)
 }
@@ -16871,6 +16872,7 @@ func (c *Client) ModifyK8sApiAbnormalEventStatus(request *ModifyK8sApiAbnormalEv
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyK8sApiAbnormalEventStatusWithContext(ctx context.Context, request *ModifyK8sApiAbnormalEventStatusRequest) (response *ModifyK8sApiAbnormalEventStatusResponse, err error) {
     if request == nil {
         request = NewModifyK8sApiAbnormalEventStatusRequest()
