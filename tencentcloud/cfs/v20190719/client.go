@@ -1053,6 +1053,7 @@ func NewDescribeAvailableZoneInfoResponse() (response *DescribeAvailableZoneInfo
 // This API is used to query the availability of a region.
 //
 // error code that may be returned:
+//  AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GETACCOUNTSTATUSFAILED = "InternalError.GetAccountStatusFailed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -1066,6 +1067,7 @@ func (c *Client) DescribeAvailableZoneInfo(request *DescribeAvailableZoneInfoReq
 // This API is used to query the availability of a region.
 //
 // error code that may be returned:
+//  AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GETACCOUNTSTATUSFAILED = "InternalError.GetAccountStatusFailed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"

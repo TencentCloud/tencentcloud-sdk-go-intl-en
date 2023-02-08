@@ -20,6 +20,9 @@ const (
 	// A CAM signature/authentication error occurred.
 	AUTHFAILURE = "AuthFailure"
 
+	// 
+	AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
+
 	// Request unauthorized.
 	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 
