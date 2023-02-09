@@ -25,7 +25,7 @@ type ApplyConcurrentRequestParams struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The user’s IP address.
+	// Public IP of user’s application client, which is used for nearby scheduling.
 	UserIp *string `json:"UserIp,omitempty" name:"UserIp"`
 
 	// The project ID.
@@ -33,6 +33,9 @@ type ApplyConcurrentRequestParams struct {
 
 	// The application version ID.
 	ApplicationVersionId *string `json:"ApplicationVersionId,omitempty" name:"ApplicationVersionId"`
+
+	// Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 }
 
 type ApplyConcurrentRequest struct {
@@ -41,7 +44,7 @@ type ApplyConcurrentRequest struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The user’s IP address.
+	// Public IP of user’s application client, which is used for nearby scheduling.
 	UserIp *string `json:"UserIp,omitempty" name:"UserIp"`
 
 	// The project ID.
@@ -49,6 +52,9 @@ type ApplyConcurrentRequest struct {
 
 	// The application version ID.
 	ApplicationVersionId *string `json:"ApplicationVersionId,omitempty" name:"ApplicationVersionId"`
+
+	// Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
+	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
 }
 
 func (r *ApplyConcurrentRequest) ToJsonString() string {
@@ -67,6 +73,7 @@ func (r *ApplyConcurrentRequest) FromJsonString(s string) error {
 	delete(f, "UserIp")
 	delete(f, "ProjectId")
 	delete(f, "ApplicationVersionId")
+	delete(f, "ApplicationId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyConcurrentRequest has unknown keys!", "")
 	}
@@ -100,7 +107,7 @@ type CreateSessionRequestParams struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The user’s IP address.
+	// Public IP of user’s application client, which is used for nearby scheduling.
 	UserIp *string `json:"UserIp,omitempty" name:"UserIp"`
 
 	// The client-side session data, which is obtained from the SDK.
@@ -118,7 +125,7 @@ type CreateSessionRequest struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The user’s IP address.
+	// Public IP of user’s application client, which is used for nearby scheduling.
 	UserIp *string `json:"UserIp,omitempty" name:"UserIp"`
 
 	// The client-side session data, which is obtained from the SDK.
