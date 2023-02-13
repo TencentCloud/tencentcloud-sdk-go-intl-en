@@ -62,6 +62,12 @@ const (
 	// Not found.
 	INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 
+	// Callback key format error.
+	INVALIDPARAMETER_NOTIFYKEY = "InvalidParameter.NotifyKey"
+
+	// Callback URL format error.
+	INVALIDPARAMETER_NOTIFYURL = "InvalidParameter.NotifyUrl"
+
 	// Invalid `OutputGroups`.
 	INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 

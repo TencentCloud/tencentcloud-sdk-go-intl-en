@@ -76,6 +76,8 @@ func NewCreateStreamLiveChannelResponse() (response *CreateStreamLiveChannelResp
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_NOTIFYKEY = "InvalidParameter.NotifyKey"
+//  INVALIDPARAMETER_NOTIFYURL = "InvalidParameter.NotifyUrl"
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
 func (c *Client) CreateStreamLiveChannel(request *CreateStreamLiveChannelRequest) (response *CreateStreamLiveChannelResponse, err error) {
@@ -95,6 +97,8 @@ func (c *Client) CreateStreamLiveChannel(request *CreateStreamLiveChannelRequest
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_NOTIFYKEY = "InvalidParameter.NotifyKey"
+//  INVALIDPARAMETER_NOTIFYURL = "InvalidParameter.NotifyUrl"
 //  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
 //  INVALIDPARAMETER_VIDEOTEMPLATES = "InvalidParameter.VideoTemplates"
 func (c *Client) CreateStreamLiveChannelWithContext(ctx context.Context, request *CreateStreamLiveChannelRequest) (response *CreateStreamLiveChannelResponse, err error) {
@@ -1635,6 +1639,60 @@ func (c *Client) ModifyStreamLiveWatermarkWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewModifyStreamLiveWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryInputStreamStateRequest() (request *QueryInputStreamStateRequest) {
+    request = &QueryInputStreamStateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdl", APIVersion, "QueryInputStreamState")
+    
+    
+    return
+}
+
+func NewQueryInputStreamStateResponse() (response *QueryInputStreamStateResponse) {
+    response = &QueryInputStreamStateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryInputStreamState
+// This API is used to query the stream status of a StreamLive input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) QueryInputStreamState(request *QueryInputStreamStateRequest) (response *QueryInputStreamStateResponse, err error) {
+    return c.QueryInputStreamStateWithContext(context.Background(), request)
+}
+
+// QueryInputStreamState
+// This API is used to query the stream status of a StreamLive input.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) QueryInputStreamStateWithContext(ctx context.Context, request *QueryInputStreamStateRequest) (response *QueryInputStreamStateResponse, err error) {
+    if request == nil {
+        request = NewQueryInputStreamStateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryInputStreamState require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryInputStreamStateResponse()
     err = c.Send(request, response)
     return
 }

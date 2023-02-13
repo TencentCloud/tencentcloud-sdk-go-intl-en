@@ -63,6 +63,18 @@ type AVTemplate struct {
 
 	// Watermark ID
 	WatermarkId *string `json:"WatermarkId,omitempty" name:"WatermarkId"`
+
+	// Whether to convert audio to text. `0` (default): No; `1`: Yes.
+	SmartSubtitles *uint64 `json:"SmartSubtitles,omitempty" name:"SmartSubtitles"`
+
+	// The subtitle settings. Currently, the following subtitles are supported:
+	// `eng2eng`: English speech to English text.
+	// `eng2chs`: English speech to Chinese text. 
+	// `eng2chseng`: English speech to English and Chinese text. 
+	// `chs2chs`: Chinese speech to Chinese text.   
+	// `chs2eng`: Chinese speech to English text. 
+	// `chs2chseng`: Chinese speech to Chinese and English text.
+	SubtitleConfiguration *string `json:"SubtitleConfiguration,omitempty" name:"SubtitleConfiguration"`
 }
 
 type AttachedInput struct {
@@ -212,6 +224,9 @@ type CreateStreamLiveChannelRequestParams struct {
 
 	// Event settings
 	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+
+	// The callback settings.
+	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitempty" name:"EventNotifySettings"`
 }
 
 type CreateStreamLiveChannelRequest struct {
@@ -237,6 +252,9 @@ type CreateStreamLiveChannelRequest struct {
 
 	// Event settings
 	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+
+	// The callback settings.
+	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitempty" name:"EventNotifySettings"`
 }
 
 func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
@@ -258,6 +276,7 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplates")
 	delete(f, "AVTemplates")
 	delete(f, "PlanSettings")
+	delete(f, "EventNotifySettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -603,6 +622,9 @@ type DashRemuxSettingsInfo struct {
 
 	// Whether to enable multi-period. Valid values: CLOSE/OPEN. Default value: CLOSE.
 	PeriodTriggers *string `json:"PeriodTriggers,omitempty" name:"PeriodTriggers"`
+
+	// The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
+	H265PackageType *string `json:"H265PackageType,omitempty" name:"H265PackageType"`
 }
 
 // Predefined struct for user
@@ -1977,6 +1999,10 @@ type DrmKey struct {
 	// Note: uppercase letters in the string will be automatically converted to lowercase ones.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Iv *string `json:"Iv,omitempty" name:"Iv"`
+
+	// The URI of the license server when AES-128 is used. This parameter may be empty.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	KeyUri *string `json:"KeyUri,omitempty" name:"KeyUri"`
 }
 
 type DrmSettingsInfo struct {
@@ -2000,6 +2026,15 @@ type DrmSettingsInfo struct {
 	// SDMC key configuration. This parameter is used when `Scheme` is set to `SDMCDRM`.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	SDMCSettings *SDMCSettingsInfo `json:"SDMCSettings,omitempty" name:"SDMCSettings"`
+
+	// The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`. For HLS, this can be `FAIRPLAY` or `AES128`. For DASH, this can only be `WIDEVINE`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DrmType *string `json:"DrmType,omitempty" name:"DrmType"`
+}
+
+type EventNotifySetting struct {
+	// The callback configuration for push events.
+	PushEventSettings *PushEventSetting `json:"PushEventSettings,omitempty" name:"PushEventSettings"`
 }
 
 type EventSettingsDestinationReq struct {
@@ -2073,6 +2108,13 @@ type HlsRemuxSettingsInfo struct {
 
 	// Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
+
+	// The segment type. Valid values: `ts` (default), `fmp4`.
+	// Currently, fMP4 segments do not support DRM or time shifting.
+	SegmentType *string `json:"SegmentType,omitempty" name:"SegmentType"`
+
+	// The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
+	H265PackageType *string `json:"H265PackageType,omitempty" name:"H265PackageType"`
 }
 
 type InputInfo struct {
@@ -2143,6 +2185,18 @@ type InputSettingInfo struct {
 	// The value must be a multiple of 1,000.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	DelayTime *int64 `json:"DelayTime,omitempty" name:"DelayTime"`
+
+	// The domain of an SRT_PUSH address. If this is a request parameter, you don’t need to specify it.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	InputDomain *string `json:"InputDomain,omitempty" name:"InputDomain"`
+
+	// The username, which is used for authentication.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// The password, which is used for authentication.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Password *string `json:"Password,omitempty" name:"Password"`
 }
 
 type InputStatistics struct {
@@ -2151,6 +2205,20 @@ type InputStatistics struct {
 
 	// Input statistics of pipeline 1.
 	Pipeline1 []*PipelineInputStatistics `json:"Pipeline1,omitempty" name:"Pipeline1"`
+}
+
+type InputStreamInfo struct {
+	// The input stream address.
+	InputAddress *string `json:"InputAddress,omitempty" name:"InputAddress"`
+
+	// The input stream path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The input stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The input stream status. `1` indicates the stream is active.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type LogInfo struct {
@@ -2196,6 +2264,9 @@ type ModifyStreamLiveChannelRequestParams struct {
 
 	// Event settings
 	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+
+	// The callback settings.
+	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitempty" name:"EventNotifySettings"`
 }
 
 type ModifyStreamLiveChannelRequest struct {
@@ -2224,6 +2295,9 @@ type ModifyStreamLiveChannelRequest struct {
 
 	// Event settings
 	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+
+	// The callback settings.
+	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitempty" name:"EventNotifySettings"`
 }
 
 func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
@@ -2246,6 +2320,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "VideoTemplates")
 	delete(f, "AVTemplates")
 	delete(f, "PlanSettings")
+	delete(f, "EventNotifySettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -2592,6 +2667,85 @@ type PlanSettings struct {
 	TimedRecordSettings *TimedRecordSettings `json:"TimedRecordSettings,omitempty" name:"TimedRecordSettings"`
 }
 
+type PushEventSetting struct {
+	// The callback URL (required).
+	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
+
+	// The callback key (optional).
+	NotifyKey *string `json:"NotifyKey,omitempty" name:"NotifyKey"`
+}
+
+type QueryDispatchInputInfo struct {
+	// The input ID.
+	InputID *string `json:"InputID,omitempty" name:"InputID"`
+
+	// The input name.
+	InputName *string `json:"InputName,omitempty" name:"InputName"`
+
+	// The input protocol.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// The stream status of the input.
+	InputStreamInfoList []*InputStreamInfo `json:"InputStreamInfoList,omitempty" name:"InputStreamInfoList"`
+}
+
+// Predefined struct for user
+type QueryInputStreamStateRequestParams struct {
+	// The StreamLive input ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+type QueryInputStreamStateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The StreamLive input ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+}
+
+func (r *QueryInputStreamStateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryInputStreamStateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryInputStreamStateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryInputStreamStateResponseParams struct {
+	// The information of the StreamLive input queried.
+	Info *QueryDispatchInputInfo `json:"Info,omitempty" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type QueryInputStreamStateResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryInputStreamStateResponseParams `json:"Response"`
+}
+
+func (r *QueryInputStreamStateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryInputStreamStateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RegionInfo struct {
 	// Region name
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -2804,6 +2958,10 @@ type StreamLiveChannelInfo struct {
 	// Event settings
 	// Note: This field may return `null`, indicating that no valid value was found.
 	PlanSettings *PlanSettings `json:"PlanSettings,omitempty" name:"PlanSettings"`
+
+	// The callback settings.
+	// Note: This field may return `null`, indicating that no valid value was found.
+	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitempty" name:"EventNotifySettings"`
 }
 
 type StreamLiveOutputGroupsInfo struct {
