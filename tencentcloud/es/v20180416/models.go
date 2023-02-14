@@ -317,6 +317,9 @@ type CreateInstanceRequestParams struct {
 
 	// Whether to enable enhanced SSD
 	DiskEnhance *uint64 `json:"DiskEnhance,omitempty" name:"DiskEnhance"`
+
+	// Whether to enable smart inspection.
+	EnableDiagnose *bool `json:"EnableDiagnose,omitempty" name:"EnableDiagnose"`
 }
 
 type CreateInstanceRequest struct {
@@ -428,6 +431,9 @@ type CreateInstanceRequest struct {
 
 	// Whether to enable enhanced SSD
 	DiskEnhance *uint64 `json:"DiskEnhance,omitempty" name:"DiskEnhance"`
+
+	// Whether to enable smart inspection.
+	EnableDiagnose *bool `json:"EnableDiagnose,omitempty" name:"EnableDiagnose"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -475,6 +481,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "OperationDuration")
 	delete(f, "EnableHybridStorage")
 	delete(f, "DiskEnhance")
+	delete(f, "EnableDiagnose")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
