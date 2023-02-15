@@ -88,6 +88,17 @@ func (r *ActiveHourDCDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AddShardConfig struct {
+	// The number of shards to be added
+	ShardCount *int64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// Shard memory capacity in GB
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage capacity in GB
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+}
+
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
 	// Database engine name. Valid value: `dcdb`.
@@ -3313,6 +3324,20 @@ func (r *DisassociateSecurityGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ExpandShardConfig struct {
+	// Shard IDs in array
+	ShardInstanceIds []*string `json:"ShardInstanceIds,omitempty" name:"ShardInstanceIds"`
+
+	// Shard memory capacity in GB
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage capacity in GB
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+
+	// Number of shard nodes
+	ShardNodeCount *int64 `json:"ShardNodeCount,omitempty" name:"ShardNodeCount"`
+}
+
 // Predefined struct for user
 type GrantAccountPrivilegesRequestParams struct {
 	// Instance ID in the format of dcdbt-ow728lmc.
@@ -4695,6 +4720,20 @@ type SlowLogData struct {
 	Host *string `json:"Host,omitempty" name:"Host"`
 }
 
+type SplitShardConfig struct {
+	// Shard IDs in array
+	ShardInstanceIds []*string `json:"ShardInstanceIds,omitempty" name:"ShardInstanceIds"`
+
+	// Data split ratio at 50% (fixed)
+	SplitRate *int64 `json:"SplitRate,omitempty" name:"SplitRate"`
+
+	// Shard memory capacity in GB
+	ShardMemory *int64 `json:"ShardMemory,omitempty" name:"ShardMemory"`
+
+	// Shard storage capacity in GB
+	ShardStorage *int64 `json:"ShardStorage,omitempty" name:"ShardStorage"`
+}
+
 // Predefined struct for user
 type SwitchDBInstanceHARequestParams struct {
 	// Instance ID in the format of tdsql-ow728lmc
@@ -4832,6 +4871,122 @@ func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeHourDCDBInstanceRequestParams struct {
+	// Instance ID to be upgraded in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Upgrade type. Valid values: 
+	// <li> `ADD`: Add a new shard </li> 
+	//  <li> `EXPAND`: Upgrade the existing shads</li> 
+	//  <li> `SPLIT`: Split data of the existing shads to the new ones</li>
+	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+
+	// Add shards when `UpgradeType` is `ADD`.
+	AddShardConfig *AddShardConfig `json:"AddShardConfig,omitempty" name:"AddShardConfig"`
+
+	// Expand shard when `UpgradeType` is `EXPAND`.
+	ExpandShardConfig *ExpandShardConfig `json:"ExpandShardConfig,omitempty" name:"ExpandShardConfig"`
+
+	// Split shard when `UpgradeType` is `SPLIT`.
+	SplitShardConfig *SplitShardConfig `json:"SplitShardConfig,omitempty" name:"SplitShardConfig"`
+
+	// Switch start time in the format of "2019-12-12 07:00:00", which is no less than one hour and within 3 days from the current time.
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// Switch end time in the format of "2019-12-12 07:15:00", which must be later than the start time.
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+
+	// Whether to retry automatically. Valid values: `0` (no), `1` (yes).
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitempty" name:"SwitchAutoRetry"`
+
+	// The list of new AZs specified in deployment modification. The first one is the source AZ, and the rest are replica AZs.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+}
+
+type UpgradeHourDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID to be upgraded in the format of dcdbt-ow728lmc, which can be obtained through the `DescribeDCDBInstances` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Upgrade type. Valid values: 
+	// <li> `ADD`: Add a new shard </li> 
+	//  <li> `EXPAND`: Upgrade the existing shads</li> 
+	//  <li> `SPLIT`: Split data of the existing shads to the new ones</li>
+	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+
+	// Add shards when `UpgradeType` is `ADD`.
+	AddShardConfig *AddShardConfig `json:"AddShardConfig,omitempty" name:"AddShardConfig"`
+
+	// Expand shard when `UpgradeType` is `EXPAND`.
+	ExpandShardConfig *ExpandShardConfig `json:"ExpandShardConfig,omitempty" name:"ExpandShardConfig"`
+
+	// Split shard when `UpgradeType` is `SPLIT`.
+	SplitShardConfig *SplitShardConfig `json:"SplitShardConfig,omitempty" name:"SplitShardConfig"`
+
+	// Switch start time in the format of "2019-12-12 07:00:00", which is no less than one hour and within 3 days from the current time.
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// Switch end time in the format of "2019-12-12 07:15:00", which must be later than the start time.
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+
+	// Whether to retry automatically. Valid values: `0` (no), `1` (yes).
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitempty" name:"SwitchAutoRetry"`
+
+	// The list of new AZs specified in deployment modification. The first one is the source AZ, and the rest are replica AZs.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+}
+
+func (r *UpgradeHourDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeHourDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UpgradeType")
+	delete(f, "AddShardConfig")
+	delete(f, "ExpandShardConfig")
+	delete(f, "SplitShardConfig")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
+	delete(f, "SwitchAutoRetry")
+	delete(f, "Zones")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeHourDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeHourDCDBInstanceResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpgradeHourDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeHourDCDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *UpgradeHourDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeHourDCDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
