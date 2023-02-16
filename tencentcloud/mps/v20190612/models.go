@@ -364,6 +364,11 @@ type AiAnalysisTaskFrameTagResult struct {
 type AiAnalysisTaskInput struct {
 	// Video content analysis template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// An extended parameter, whose value is a stringfied JSON.
+	// Note: This parameter is for customers with special requirements. It needs to be customized offline.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtendedParameter *string `json:"ExtendedParameter,omitempty" name:"ExtendedParameter"`
 }
 
 type AiAnalysisTaskTagInput struct {

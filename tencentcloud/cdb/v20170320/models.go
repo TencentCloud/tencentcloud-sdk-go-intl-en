@@ -1818,7 +1818,7 @@ type CreateDBInstanceRequestParams struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Project ID. If this is left empty, the default project will be used. If read-only instances or disaster recovery instances are purchased, the project ID will be the same as the source instance ID by default.
+	// Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Custom port. Value range: 1024-65535.
@@ -1936,7 +1936,7 @@ type CreateDBInstanceRequest struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. You can use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
 	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
 
-	// Project ID. If this is left empty, the default project will be used. If read-only instances or disaster recovery instances are purchased, the project ID will be the same as the source instance ID by default.
+	// Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Custom port. Value range: 1024-65535.
@@ -3772,6 +3772,87 @@ func (r *DescribeCloneListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBFeaturesRequestParams struct {
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeDBFeaturesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBFeaturesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBFeaturesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBFeaturesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBFeaturesResponseParams struct {
+	// Whether database audit is supported
+	IsSupportAudit *bool `json:"IsSupportAudit,omitempty" name:"IsSupportAudit"`
+
+	// Whether enabling audit requires a kernel version upgrade
+	AuditNeedUpgrade *bool `json:"AuditNeedUpgrade,omitempty" name:"AuditNeedUpgrade"`
+
+	// Whether database encryption is supported
+	IsSupportEncryption *bool `json:"IsSupportEncryption,omitempty" name:"IsSupportEncryption"`
+
+	// Whether enabling encryption requires a kernel version upgrade
+	EncryptionNeedUpgrade *bool `json:"EncryptionNeedUpgrade,omitempty" name:"EncryptionNeedUpgrade"`
+
+	// Whether the instance is a remote read-only instance
+	IsRemoteRo *bool `json:"IsRemoteRo,omitempty" name:"IsRemoteRo"`
+
+	// Region of the source instance
+	MasterRegion *string `json:"MasterRegion,omitempty" name:"MasterRegion"`
+
+	// Whether minor version upgrade is supported
+	IsSupportUpdateSubVersion *bool `json:"IsSupportUpdateSubVersion,omitempty" name:"IsSupportUpdateSubVersion"`
+
+	// The current kernel version
+	CurrentSubVersion *string `json:"CurrentSubVersion,omitempty" name:"CurrentSubVersion"`
+
+	// Available kernel version for upgrade
+	TargetSubVersion *string `json:"TargetSubVersion,omitempty" name:"TargetSubVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDBFeaturesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBFeaturesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBFeaturesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBFeaturesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBImportRecordsRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -4193,7 +4274,7 @@ type DescribeDBInstancesRequestParams struct {
 	// Private IP address of the instance.
 	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 
-	// Instance status. Value range: <br>0 - creating <br>1 - running <br>4 - isolating <br>5 - isolated (the instance can be restored and started in the recycle bin)
+	// Instance status. Valid values: <br>`0` (creating) <br>`1` (running) <br>`4` (isolating) <br>`5` (isolated; the instance can be restored and started in the recycle bin)
 	Status []*uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Offset. Default value: 0.
@@ -4299,7 +4380,7 @@ type DescribeDBInstancesRequest struct {
 	// Private IP address of the instance.
 	Vips []*string `json:"Vips,omitempty" name:"Vips"`
 
-	// Instance status. Value range: <br>0 - creating <br>1 - running <br>4 - isolating <br>5 - isolated (the instance can be restored and started in the recycle bin)
+	// Instance status. Valid values: <br>`0` (creating) <br>`1` (running) <br>`4` (isolating) <br>`5` (isolated; the instance can be restored and started in the recycle bin)
 	Status []*uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Offset. Default value: 0.
@@ -7133,7 +7214,7 @@ type InstanceInfo struct {
 	// Memory capacity in MB
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Instance status. Value range: 0 (creating), 1 (running), 4 (isolating), 5 (isolated)
+	// Instance status. Valid values: `0` (creating), `1` (running), `4` (isolating), `5` (isolated).
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// VPC ID, such as 51102
@@ -11545,7 +11626,7 @@ type UpgradeDBInstanceRequestParams struct {
 	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes), `2` (QuickChange preferred). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
 	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
 
 	// Delay threshold. Value range: 1-10. Default value: `10`.
@@ -11597,7 +11678,7 @@ type UpgradeDBInstanceRequest struct {
 	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes), `2` (QuickChange preferred). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
 	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
 
 	// Delay threshold. Value range: 1-10. Default value: `10`.

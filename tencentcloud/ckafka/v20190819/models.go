@@ -2360,7 +2360,7 @@ type DescribeInstancesDetailRequestParams struct {
 	// (Filter) filter by instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// (Filter) filter by instance name. Fuzzy search is supported
+	// Filter by instance name, instance ID, AZ, VPC ID, or subnet ID. Fuzzy query is supported.
 	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
 
 	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
@@ -2391,7 +2391,7 @@ type DescribeInstancesDetailRequest struct {
 	// (Filter) filter by instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// (Filter) filter by instance name. Fuzzy search is supported
+	// Filter by instance name, instance ID, AZ, VPC ID, or subnet ID. Fuzzy query is supported.
 	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
 
 	// (Filter) instance status. 0: creating, 1: running, 2: deleting. If this parameter is left empty, all instances will be returned by default
@@ -3550,6 +3550,10 @@ type GroupResponse struct {
 	// GroupList
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	GroupList []*DescribeGroup `json:"GroupList,omitempty" name:"GroupList"`
+
+	// Consumer group quota
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GroupCountQuota *uint64 `json:"GroupCountQuota,omitempty" name:"GroupCountQuota"`
 }
 
 // Predefined struct for user

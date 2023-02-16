@@ -371,6 +371,7 @@ func NewCreateInstancePostResponse() (response *CreateInstancePostResponse) {
 // This API is used to create a pay-as-you-go instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -393,6 +394,7 @@ func (c *Client) CreateInstancePost(request *CreateInstancePostRequest) (respons
 // This API is used to create a pay-as-you-go instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
