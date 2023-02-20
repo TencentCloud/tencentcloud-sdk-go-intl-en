@@ -289,6 +289,18 @@ type BGPIPInstance struct {
 	// Edition of the instance
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	InstanceVersion *uint64 `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
+
+	// Convoy instance ID
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ConvoyId *string `json:"ConvoyId,omitempty" name:"ConvoyId"`
+
+	// Pay-as-you-go bandwidth
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	ElasticBandwidth *uint64 `json:"ElasticBandwidth,omitempty" name:"ElasticBandwidth"`
+
+	// Whether it’s the IP broadcasted by EdgeOne. Values: `1` (yes), `0` (no)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EOFlag *uint64 `json:"EOFlag,omitempty" name:"EOFlag"`
 }
 
 type BGPIPInstanceSpecification struct {
@@ -394,6 +406,13 @@ type BGPInstance struct {
 
 	// The version of attack defense package
 	VitalityVersion *uint64 `json:"VitalityVersion,omitempty" name:"VitalityVersion"`
+
+	// Network line
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Line *uint64 `json:"Line,omitempty" name:"Line"`
+
+	// Whether to enable elastic bandwidth
+	ElasticServiceBandwidth *uint64 `json:"ElasticServiceBandwidth,omitempty" name:"ElasticServiceBandwidth"`
 }
 
 type BGPInstanceSpecification struct {
@@ -1124,7 +1143,7 @@ type CreateCcGeoIPBlockConfigRequestParams struct {
 	// Protocol type
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Region blocking configuration. The configuration ID should be cleared when you set this parameter.
+	// CC regional blocking configuration
 	CcGeoIPBlockConfig *CcGeoIPBlockConfig `json:"CcGeoIPBlockConfig,omitempty" name:"CcGeoIPBlockConfig"`
 }
 
@@ -1143,7 +1162,7 @@ type CreateCcGeoIPBlockConfigRequest struct {
 	// Protocol type
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Region blocking configuration. The configuration ID should be cleared when you set this parameter.
+	// CC regional blocking configuration
 	CcGeoIPBlockConfig *CcGeoIPBlockConfig `json:"CcGeoIPBlockConfig,omitempty" name:"CcGeoIPBlockConfig"`
 }
 
@@ -2824,6 +2843,112 @@ func (r *DescribeBgpBizTrendResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBizHttpStatusRequestParams struct {
+	// Statistical mode. Value: `sum`.
+	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Statistical period in seconds. Valid values: `60`, `300`, `1800`, `3600`, `21600`, and `86400`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time, such as `2020-02-01 12:04:12`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time, such as `2020-02-03 18:03:23`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The resource ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Specific domain name query
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Protocol and port list, which is valid when the metric is `connum`, `new_conn` or `inactive_conn`. Valid protocols: `TCP`, `UDP`, `HTTP`, `HTTPS`
+	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo"`
+}
+
+type DescribeBizHttpStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Statistical mode. Value: `sum`.
+	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
+
+	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
+	Business *string `json:"Business,omitempty" name:"Business"`
+
+	// Statistical period in seconds. Valid values: `60`, `300`, `1800`, `3600`, `21600`, and `86400`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Statistics start time, such as `2020-02-01 12:04:12`
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Statistics end time, such as `2020-02-03 18:03:23`
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The resource ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Specific domain name query
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Protocol and port list, which is valid when the metric is `connum`, `new_conn` or `inactive_conn`. Valid protocols: `TCP`, `UDP`, `HTTP`, `HTTPS`
+	ProtoInfo []*ProtocolPort `json:"ProtoInfo,omitempty" name:"ProtoInfo"`
+}
+
+func (r *DescribeBizHttpStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBizHttpStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Statistics")
+	delete(f, "Business")
+	delete(f, "Period")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Id")
+	delete(f, "Domain")
+	delete(f, "ProtoInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBizHttpStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBizHttpStatusResponseParams struct {
+	// Statistics on the HTTP status codes of business traffic
+	HttpStatusMap *HttpStatusMap `json:"HttpStatusMap,omitempty" name:"HttpStatusMap"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBizHttpStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBizHttpStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeBizHttpStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBizHttpStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBizTrendRequestParams struct {
 	// Statistical method. Valid values: `max`, `min`, `avg`, `sum`. It can only be `max` if the statistical dimension is traffic rate or packet rate.
 	Statistics *string `json:"Statistics,omitempty" name:"Statistics"`
@@ -2831,7 +2956,7 @@ type DescribeBizTrendRequestParams struct {
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
-	// Sampling interval. Valid values: `300`, `1800`, `3600`, `21600`, `86400`
+	// Sampling interval in seconds. Valid values: `60`, `300`, `1800`, `3600`, `21600`, `86400`
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
@@ -2862,7 +2987,7 @@ type DescribeBizTrendRequest struct {
 	// Anti-DDoS service type (`bgpip`: Anti-DDoS Advanced)
 	Business *string `json:"Business,omitempty" name:"Business"`
 
-	// Sampling interval. Valid values: `300`, `1800`, `3600`, `21600`, `86400`
+	// Sampling interval in seconds. Valid values: `60`, `300`, `1800`, `3600`, `21600`, `86400`
 	Period *uint64 `json:"Period,omitempty" name:"Period"`
 
 	// Beginning of the time range for the query, such as `2020-09-22 00:00:00`.
@@ -3992,7 +4117,7 @@ type DescribeListBGPIPInstancesRequestParams struct {
 	// Whether to obtain only Anti-DDoS instances with Sec-MCA enabled. Valid values: `1` (only obtain Anti-DDoS instances with Sec-MCA enabled) and `0` (obtain other Anti-DDoS instances).
 	FilterDamDDoSStatus *int64 `json:"FilterDamDDoSStatus,omitempty" name:"FilterDamDDoSStatus"`
 
-	// Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+	// Filters by the status of bound resources. Values: `idle` (normal), `attacking` (being attacked), `blocking` (being blocked), `trial` (in trial)
 	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
 
 	// Filters by the instance CNAME
@@ -4006,6 +4131,9 @@ type DescribeListBGPIPInstancesRequestParams struct {
 
 	// Filters by package type.
 	FilterPackType []*string `json:"FilterPackType,omitempty" name:"FilterPackType"`
+
+	// Filters out Convoy instances
+	FilterConvoy *uint64 `json:"FilterConvoy,omitempty" name:"FilterConvoy"`
 }
 
 type DescribeListBGPIPInstancesRequest struct {
@@ -4047,7 +4175,7 @@ type DescribeListBGPIPInstancesRequest struct {
 	// Whether to obtain only Anti-DDoS instances with Sec-MCA enabled. Valid values: `1` (only obtain Anti-DDoS instances with Sec-MCA enabled) and `0` (obtain other Anti-DDoS instances).
 	FilterDamDDoSStatus *int64 `json:"FilterDamDDoSStatus,omitempty" name:"FilterDamDDoSStatus"`
 
-	// Filters by status of bound resources. `idle`: normal; `attacking`: being attacked; `blocking`: blocked
+	// Filters by the status of bound resources. Values: `idle` (normal), `attacking` (being attacked), `blocking` (being blocked), `trial` (in trial)
 	FilterStatus *string `json:"FilterStatus,omitempty" name:"FilterStatus"`
 
 	// Filters by the instance CNAME
@@ -4061,6 +4189,9 @@ type DescribeListBGPIPInstancesRequest struct {
 
 	// Filters by package type.
 	FilterPackType []*string `json:"FilterPackType,omitempty" name:"FilterPackType"`
+
+	// Filters out Convoy instances
+	FilterConvoy *uint64 `json:"FilterConvoy,omitempty" name:"FilterConvoy"`
 }
 
 func (r *DescribeListBGPIPInstancesRequest) ToJsonString() string {
@@ -4090,6 +4221,7 @@ func (r *DescribeListBGPIPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterInstanceIdList")
 	delete(f, "FilterTag")
 	delete(f, "FilterPackType")
+	delete(f, "FilterConvoy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPIPInstancesRequest has unknown keys!", "")
 	}
@@ -4156,7 +4288,7 @@ type DescribeListBGPInstancesRequestParams struct {
 	// Array of instance IDs
 	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
 
-	// Filters by Enterprise edition
+	// Enterprise edition. Values: `1` (the Convoy package included), `2` (the Convoy package not included)
 	FilterEnterpriseFlag *uint64 `json:"FilterEnterpriseFlag,omitempty" name:"FilterEnterpriseFlag"`
 
 	// Whether it’s a Lighthouse edition
@@ -4167,6 +4299,15 @@ type DescribeListBGPInstancesRequestParams struct {
 
 	// Filters by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
+
+	// Filters out trial instances. Values: `1` (emergency protection instances), `2` (PLG instances)
+	FilterTrialFlag *uint64 `json:"FilterTrialFlag,omitempty" name:"FilterTrialFlag"`
+
+	// Filters out Convoy instances
+	FilterConvoy *uint64 `json:"FilterConvoy,omitempty" name:"FilterConvoy"`
+
+	// Whether to exclude the advanced information (such as `InstanceList[0].Usage`). Values: `true` (exclude), `false` (do not exclude). The default value is `false`.
+	ExcludeAdvancedInfo *bool `json:"ExcludeAdvancedInfo,omitempty" name:"ExcludeAdvancedInfo"`
 }
 
 type DescribeListBGPInstancesRequest struct {
@@ -4202,7 +4343,7 @@ type DescribeListBGPInstancesRequest struct {
 	// Array of instance IDs
 	FilterInstanceIdList []*string `json:"FilterInstanceIdList,omitempty" name:"FilterInstanceIdList"`
 
-	// Filters by Enterprise edition
+	// Enterprise edition. Values: `1` (the Convoy package included), `2` (the Convoy package not included)
 	FilterEnterpriseFlag *uint64 `json:"FilterEnterpriseFlag,omitempty" name:"FilterEnterpriseFlag"`
 
 	// Whether it’s a Lighthouse edition
@@ -4213,6 +4354,15 @@ type DescribeListBGPInstancesRequest struct {
 
 	// Filters by tag
 	FilterTag *TagFilter `json:"FilterTag,omitempty" name:"FilterTag"`
+
+	// Filters out trial instances. Values: `1` (emergency protection instances), `2` (PLG instances)
+	FilterTrialFlag *uint64 `json:"FilterTrialFlag,omitempty" name:"FilterTrialFlag"`
+
+	// Filters out Convoy instances
+	FilterConvoy *uint64 `json:"FilterConvoy,omitempty" name:"FilterConvoy"`
+
+	// Whether to exclude the advanced information (such as `InstanceList[0].Usage`). Values: `true` (exclude), `false` (do not exclude). The default value is `false`.
+	ExcludeAdvancedInfo *bool `json:"ExcludeAdvancedInfo,omitempty" name:"ExcludeAdvancedInfo"`
 }
 
 func (r *DescribeListBGPInstancesRequest) ToJsonString() string {
@@ -4241,6 +4391,9 @@ func (r *DescribeListBGPInstancesRequest) FromJsonString(s string) error {
 	delete(f, "FilterLightFlag")
 	delete(f, "FilterChannelFlag")
 	delete(f, "FilterTag")
+	delete(f, "FilterTrialFlag")
+	delete(f, "FilterConvoy")
+	delete(f, "ExcludeAdvancedInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeListBGPInstancesRequest has unknown keys!", "")
 	}
@@ -5467,7 +5620,7 @@ func (r *DescribePendingRiskInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePendingRiskInfoResponseParams struct {
-	// Whether the user is a paid user
+	// Whether the user is a paid user. Values: `true`, `false`.
 	IsPaidUsr *bool `json:"IsPaidUsr,omitempty" name:"IsPaidUsr"`
 
 	// Number of resources being attacked
@@ -5634,6 +5787,38 @@ type ForwardListener struct {
 	FrontendPortEnd *int64 `json:"FrontendPortEnd,omitempty" name:"FrontendPortEnd"`
 }
 
+type HttpStatusMap struct {
+	// HTTP 2xx Forwarding status code
+	SourceHttp2xx []*float64 `json:"SourceHttp2xx,omitempty" name:"SourceHttp2xx"`
+
+	// HTTP 5xx Status code
+	Http5xx []*float64 `json:"Http5xx,omitempty" name:"Http5xx"`
+
+	// HTTP 5xx Forwarding status code
+	SourceHttp5xx []*float64 `json:"SourceHttp5xx,omitempty" name:"SourceHttp5xx"`
+
+	// HTTP 404 Forwarding status code
+	SourceHttp404 []*float64 `json:"SourceHttp404,omitempty" name:"SourceHttp404"`
+
+	// HTTP 4xx Status code
+	Http4xx []*float64 `json:"Http4xx,omitempty" name:"Http4xx"`
+
+	// HTTP 4xx Forwarding status code
+	SourceHttp4xx []*float64 `json:"SourceHttp4xx,omitempty" name:"SourceHttp4xx"`
+
+	// HTTP 2xx Status code
+	Http2xx []*float64 `json:"Http2xx,omitempty" name:"Http2xx"`
+
+	// HTTP 404 Status code
+	Http404 []*float64 `json:"Http404,omitempty" name:"Http404"`
+
+	// HTTP 3xx Forwarding status code
+	SourceHttp3xx []*float64 `json:"SourceHttp3xx,omitempty" name:"SourceHttp3xx"`
+
+	// HTTP 3xx Status code
+	Http3xx []*float64 `json:"Http3xx,omitempty" name:"Http3xx"`
+}
+
 type IPAlarmThresholdRelation struct {
 	// Alarm threshold type. Valid values:
 	// `1`: alarm threshold for inbound traffic
@@ -5669,7 +5854,8 @@ type IPLineInfo struct {
 }
 
 type InsL7Rules struct {
-	// Rule status. Valid values: `0` (the rule is working), `1` (the rule goes into effect), `2` (rule configuration failed), `3` (the rule is being deleted), `5` (rule deletion failed), `6` (waiting to add rules), `7` (waiting to delete rules), `8` (waiting to upload certificates), `9` (resources for the rule not found), `10` (waiting to modify rules), `11` (the rule is being modifying).
+	// Rules can only be modified when the status is `0`, `2`, or `8`.
+	// Rule status. Values: `0` (Normal), `1` (Being configured), `2` (Configuration failed), `3` (Being deleted), `5` (Failed to be deleted), `6` (Pending add), `7` (Pending delete), `8` (Pending certificate upload), `9` (Associated resource not exist), `10` (Pending modify), `11` (Being modified).
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Domain name
@@ -6446,6 +6632,10 @@ type NewL7RuleEntry struct {
 
 	// Returns an error code when the rule configuration fails (only valid when `Status=2`). `1001`: The certificate does not exist. `1002`: Failed to obtain the certificate. `1003`: Failed to upload the certificate. `1004`: The certificate has expired.
 	ErrCode *uint64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// Version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Version *uint64 `json:"Version,omitempty" name:"Version"`
 }
 
 type OverviewDDoSEvent struct {
@@ -6852,6 +7042,9 @@ type SwitchWaterPrintConfigRequestParams struct {
 
 	// Watermark status. `1`: enabled; `0`: disabled.
 	OpenStatus *int64 `json:"OpenStatus,omitempty" name:"OpenStatus"`
+
+	// Whether to enable proxy. Values: `1` (Enable proxy and ignore IP+port verification), `0` (Do not enable proxy and IP+port verification is required)
+	CloudSdkProxy *int64 `json:"CloudSdkProxy,omitempty" name:"CloudSdkProxy"`
 }
 
 type SwitchWaterPrintConfigRequest struct {
@@ -6862,6 +7055,9 @@ type SwitchWaterPrintConfigRequest struct {
 
 	// Watermark status. `1`: enabled; `0`: disabled.
 	OpenStatus *int64 `json:"OpenStatus,omitempty" name:"OpenStatus"`
+
+	// Whether to enable proxy. Values: `1` (Enable proxy and ignore IP+port verification), `0` (Do not enable proxy and IP+port verification is required)
+	CloudSdkProxy *int64 `json:"CloudSdkProxy,omitempty" name:"CloudSdkProxy"`
 }
 
 func (r *SwitchWaterPrintConfigRequest) ToJsonString() string {
@@ -6878,6 +7074,7 @@ func (r *SwitchWaterPrintConfigRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "OpenStatus")
+	delete(f, "CloudSdkProxy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchWaterPrintConfigRequest has unknown keys!", "")
 	}
@@ -6943,6 +7140,10 @@ type WaterPrintConfig struct {
 	// `shortfpcheckall`: compact mode
 	// ]
 	Verify *string `json:"Verify,omitempty" name:"Verify"`
+
+	// Whether to enable proxy. Values: `1` (Enable proxy and ignore IP+port verification), `0` (Do not enable proxy and IP+port verification is required)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CloudSdkProxy *int64 `json:"CloudSdkProxy,omitempty" name:"CloudSdkProxy"`
 }
 
 type WaterPrintKey struct {

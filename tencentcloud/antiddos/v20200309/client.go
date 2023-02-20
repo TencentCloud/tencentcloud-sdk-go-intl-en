@@ -597,6 +597,7 @@ func NewCreateDDoSAIResponse() (response *CreateDDoSAIResponse) {
 // This API is used to set Anti-DDoS AI protection switches.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDDoSAI(request *CreateDDoSAIRequest) (response *CreateDDoSAIResponse, err error) {
     return c.CreateDDoSAIWithContext(context.Background(), request)
@@ -606,6 +607,7 @@ func (c *Client) CreateDDoSAI(request *CreateDDoSAIRequest) (response *CreateDDo
 // This API is used to set Anti-DDoS AI protection switches.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateDDoSAIWithContext(ctx context.Context, request *CreateDDoSAIRequest) (response *CreateDDoSAIResponse, err error) {
     if request == nil {
@@ -1530,6 +1532,7 @@ func NewDeleteCcGeoIPBlockConfigResponse() (response *DeleteCcGeoIPBlockConfigRe
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteCcGeoIPBlockConfig(request *DeleteCcGeoIPBlockConfigRequest) (response *DeleteCcGeoIPBlockConfigResponse, err error) {
     return c.DeleteCcGeoIPBlockConfigWithContext(context.Background(), request)
@@ -1540,6 +1543,7 @@ func (c *Client) DeleteCcGeoIPBlockConfig(request *DeleteCcGeoIPBlockConfigReque
 //
 // error code that may be returned:
 //  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteCcGeoIPBlockConfigWithContext(ctx context.Context, request *DeleteCcGeoIPBlockConfigRequest) (response *DeleteCcGeoIPBlockConfigResponse, err error) {
     if request == nil {
@@ -1675,6 +1679,7 @@ func NewDeletePacketFilterConfigResponse() (response *DeletePacketFilterConfigRe
 // This API is used to delete Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeletePacketFilterConfig(request *DeletePacketFilterConfigRequest) (response *DeletePacketFilterConfigResponse, err error) {
     return c.DeletePacketFilterConfigWithContext(context.Background(), request)
@@ -1684,6 +1689,7 @@ func (c *Client) DeletePacketFilterConfig(request *DeletePacketFilterConfigReque
 // This API is used to delete Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeletePacketFilterConfigWithContext(ctx context.Context, request *DeletePacketFilterConfigRequest) (response *DeletePacketFilterConfigResponse, err error) {
     if request == nil {
@@ -1903,6 +1909,72 @@ func (c *Client) DescribeBgpBizTrendWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeBgpBizTrendResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBizHttpStatusRequest() (request *DescribeBizHttpStatusRequest) {
+    request = &DescribeBizHttpStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBizHttpStatus")
+    
+    
+    return
+}
+
+func NewDescribeBizHttpStatusResponse() (response *DescribeBizHttpStatusResponse) {
+    response = &DescribeBizHttpStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBizHttpStatus
+// This API is used to get the statistics on the status codes of business traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeBizHttpStatus(request *DescribeBizHttpStatusRequest) (response *DescribeBizHttpStatusResponse, err error) {
+    return c.DescribeBizHttpStatusWithContext(context.Background(), request)
+}
+
+// DescribeBizHttpStatus
+// This API is used to get the statistics on the status codes of business traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeBizHttpStatusWithContext(ctx context.Context, request *DescribeBizHttpStatusRequest) (response *DescribeBizHttpStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeBizHttpStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBizHttpStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBizHttpStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -2745,14 +2817,7 @@ func NewDescribeListBGPIPInstancesResponse() (response *DescribeListBGPIPInstanc
 // This API is used to get a list of Anti-DDoS Advanced instances.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListBGPIPInstances(request *DescribeListBGPIPInstancesRequest) (response *DescribeListBGPIPInstancesResponse, err error) {
     return c.DescribeListBGPIPInstancesWithContext(context.Background(), request)
 }
@@ -2761,14 +2826,7 @@ func (c *Client) DescribeListBGPIPInstances(request *DescribeListBGPIPInstancesR
 // This API is used to get a list of Anti-DDoS Advanced instances.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListBGPIPInstancesWithContext(ctx context.Context, request *DescribeListBGPIPInstancesRequest) (response *DescribeListBGPIPInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeListBGPIPInstancesRequest()
@@ -2804,33 +2862,19 @@ func NewDescribeListBGPInstancesResponse() (response *DescribeListBGPInstancesRe
 }
 
 // DescribeListBGPInstances
-// This API is used to get a list of Anti-DDoS Pro instances.
+// This API is used to get the list of Anti-DDoS Pro instances.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListBGPInstances(request *DescribeListBGPInstancesRequest) (response *DescribeListBGPInstancesResponse, err error) {
     return c.DescribeListBGPInstancesWithContext(context.Background(), request)
 }
 
 // DescribeListBGPInstances
-// This API is used to get a list of Anti-DDoS Pro instances.
+// This API is used to get the list of Anti-DDoS Pro instances.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListBGPInstancesWithContext(ctx context.Context, request *DescribeListBGPInstancesRequest) (response *DescribeListBGPInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeListBGPInstancesRequest()
@@ -2869,14 +2913,7 @@ func NewDescribeListBlackWhiteIpListResponse() (response *DescribeListBlackWhite
 // This API is used to get a list of Anti-DDoS IP blocklists/allowlists.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListBlackWhiteIpList(request *DescribeListBlackWhiteIpListRequest) (response *DescribeListBlackWhiteIpListResponse, err error) {
     return c.DescribeListBlackWhiteIpListWithContext(context.Background(), request)
 }
@@ -2885,14 +2922,7 @@ func (c *Client) DescribeListBlackWhiteIpList(request *DescribeListBlackWhiteIpL
 // This API is used to get a list of Anti-DDoS IP blocklists/allowlists.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListBlackWhiteIpListWithContext(ctx context.Context, request *DescribeListBlackWhiteIpListRequest) (response *DescribeListBlackWhiteIpListResponse, err error) {
     if request == nil {
         request = NewDescribeListBlackWhiteIpListRequest()
@@ -2931,14 +2961,7 @@ func NewDescribeListDDoSAIResponse() (response *DescribeListDDoSAIResponse) {
 // This API is used to get a list of Anti-DDoS AI protection switches.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListDDoSAI(request *DescribeListDDoSAIRequest) (response *DescribeListDDoSAIResponse, err error) {
     return c.DescribeListDDoSAIWithContext(context.Background(), request)
 }
@@ -2947,14 +2970,7 @@ func (c *Client) DescribeListDDoSAI(request *DescribeListDDoSAIRequest) (respons
 // This API is used to get a list of Anti-DDoS AI protection switches.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListDDoSAIWithContext(ctx context.Context, request *DescribeListDDoSAIRequest) (response *DescribeListDDoSAIResponse, err error) {
     if request == nil {
         request = NewDescribeListDDoSAIRequest()
@@ -2993,14 +3009,7 @@ func NewDescribeListDDoSGeoIPBlockConfigResponse() (response *DescribeListDDoSGe
 // This API is used to get a list of Anti-DDoS region blocking configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListDDoSGeoIPBlockConfig(request *DescribeListDDoSGeoIPBlockConfigRequest) (response *DescribeListDDoSGeoIPBlockConfigResponse, err error) {
     return c.DescribeListDDoSGeoIPBlockConfigWithContext(context.Background(), request)
 }
@@ -3009,14 +3018,7 @@ func (c *Client) DescribeListDDoSGeoIPBlockConfig(request *DescribeListDDoSGeoIP
 // This API is used to get a list of Anti-DDoS region blocking configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListDDoSGeoIPBlockConfigWithContext(ctx context.Context, request *DescribeListDDoSGeoIPBlockConfigRequest) (response *DescribeListDDoSGeoIPBlockConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListDDoSGeoIPBlockConfigRequest()
@@ -3055,14 +3057,7 @@ func NewDescribeListDDoSSpeedLimitConfigResponse() (response *DescribeListDDoSSp
 // This API is used to get a list of Anti-DDoS access rate limit configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListDDoSSpeedLimitConfig(request *DescribeListDDoSSpeedLimitConfigRequest) (response *DescribeListDDoSSpeedLimitConfigResponse, err error) {
     return c.DescribeListDDoSSpeedLimitConfigWithContext(context.Background(), request)
 }
@@ -3071,14 +3066,7 @@ func (c *Client) DescribeListDDoSSpeedLimitConfig(request *DescribeListDDoSSpeed
 // This API is used to get a list of Anti-DDoS access rate limit configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListDDoSSpeedLimitConfigWithContext(ctx context.Context, request *DescribeListDDoSSpeedLimitConfigRequest) (response *DescribeListDDoSSpeedLimitConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListDDoSSpeedLimitConfigRequest()
@@ -3117,14 +3105,7 @@ func NewDescribeListIPAlarmConfigResponse() (response *DescribeListIPAlarmConfig
 // This API is used to get a list of IP alarm threshold configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListIPAlarmConfig(request *DescribeListIPAlarmConfigRequest) (response *DescribeListIPAlarmConfigResponse, err error) {
     return c.DescribeListIPAlarmConfigWithContext(context.Background(), request)
 }
@@ -3133,14 +3114,7 @@ func (c *Client) DescribeListIPAlarmConfig(request *DescribeListIPAlarmConfigReq
 // This API is used to get a list of IP alarm threshold configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListIPAlarmConfigWithContext(ctx context.Context, request *DescribeListIPAlarmConfigRequest) (response *DescribeListIPAlarmConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListIPAlarmConfigRequest()
@@ -3179,14 +3153,7 @@ func NewDescribeListListenerResponse() (response *DescribeListListenerResponse) 
 // This API is used to get a list of forwarding listeners.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListListener(request *DescribeListListenerRequest) (response *DescribeListListenerResponse, err error) {
     return c.DescribeListListenerWithContext(context.Background(), request)
 }
@@ -3195,14 +3162,7 @@ func (c *Client) DescribeListListener(request *DescribeListListenerRequest) (res
 // This API is used to get a list of forwarding listeners.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListListenerWithContext(ctx context.Context, request *DescribeListListenerRequest) (response *DescribeListListenerResponse, err error) {
     if request == nil {
         request = NewDescribeListListenerRequest()
@@ -3241,14 +3201,7 @@ func NewDescribeListPacketFilterConfigResponse() (response *DescribeListPacketFi
 // This API is used to get a list of Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListPacketFilterConfig(request *DescribeListPacketFilterConfigRequest) (response *DescribeListPacketFilterConfigResponse, err error) {
     return c.DescribeListPacketFilterConfigWithContext(context.Background(), request)
 }
@@ -3257,14 +3210,7 @@ func (c *Client) DescribeListPacketFilterConfig(request *DescribeListPacketFilte
 // This API is used to get a list of Anti-DDoS feature filtering rules.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListPacketFilterConfigWithContext(ctx context.Context, request *DescribeListPacketFilterConfigRequest) (response *DescribeListPacketFilterConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListPacketFilterConfigRequest()
@@ -3303,14 +3249,7 @@ func NewDescribeListProtectThresholdConfigResponse() (response *DescribeListProt
 // This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListProtectThresholdConfig(request *DescribeListProtectThresholdConfigRequest) (response *DescribeListProtectThresholdConfigResponse, err error) {
     return c.DescribeListProtectThresholdConfigWithContext(context.Background(), request)
 }
@@ -3319,14 +3258,7 @@ func (c *Client) DescribeListProtectThresholdConfig(request *DescribeListProtect
 // This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListProtectThresholdConfigWithContext(ctx context.Context, request *DescribeListProtectThresholdConfigRequest) (response *DescribeListProtectThresholdConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListProtectThresholdConfigRequest()
@@ -3365,14 +3297,7 @@ func NewDescribeListProtocolBlockConfigResponse() (response *DescribeListProtoco
 // This API is used to get a list of Anti-DDoS protocol blocking configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListProtocolBlockConfig(request *DescribeListProtocolBlockConfigRequest) (response *DescribeListProtocolBlockConfigResponse, err error) {
     return c.DescribeListProtocolBlockConfigWithContext(context.Background(), request)
 }
@@ -3381,14 +3306,7 @@ func (c *Client) DescribeListProtocolBlockConfig(request *DescribeListProtocolBl
 // This API is used to get a list of Anti-DDoS protocol blocking configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListProtocolBlockConfigWithContext(ctx context.Context, request *DescribeListProtocolBlockConfigRequest) (response *DescribeListProtocolBlockConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListProtocolBlockConfigRequest()
@@ -3427,14 +3345,7 @@ func NewDescribeListSchedulingDomainResponse() (response *DescribeListScheduling
 // This API is used to get a list of intelligent scheduling domain names.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListSchedulingDomain(request *DescribeListSchedulingDomainRequest) (response *DescribeListSchedulingDomainResponse, err error) {
     return c.DescribeListSchedulingDomainWithContext(context.Background(), request)
 }
@@ -3443,14 +3354,7 @@ func (c *Client) DescribeListSchedulingDomain(request *DescribeListSchedulingDom
 // This API is used to get a list of intelligent scheduling domain names.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListSchedulingDomainWithContext(ctx context.Context, request *DescribeListSchedulingDomainRequest) (response *DescribeListSchedulingDomainResponse, err error) {
     if request == nil {
         request = NewDescribeListSchedulingDomainRequest()
@@ -3489,14 +3393,7 @@ func NewDescribeListWaterPrintConfigResponse() (response *DescribeListWaterPrint
 // This API is used to get a list of Anti-DDoS watermark configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListWaterPrintConfig(request *DescribeListWaterPrintConfigRequest) (response *DescribeListWaterPrintConfigResponse, err error) {
     return c.DescribeListWaterPrintConfigWithContext(context.Background(), request)
 }
@@ -3505,14 +3402,7 @@ func (c *Client) DescribeListWaterPrintConfig(request *DescribeListWaterPrintCon
 // This API is used to get a list of Anti-DDoS watermark configurations.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeListWaterPrintConfigWithContext(ctx context.Context, request *DescribeListWaterPrintConfigRequest) (response *DescribeListWaterPrintConfigResponse, err error) {
     if request == nil {
         request = NewDescribeListWaterPrintConfigRequest()
@@ -3551,14 +3441,7 @@ func NewDescribeNewL7RulesResponse() (response *DescribeNewL7RulesResponse) {
 // This API is used to obtain layer-7 forwarding rules.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeNewL7Rules(request *DescribeNewL7RulesRequest) (response *DescribeNewL7RulesResponse, err error) {
     return c.DescribeNewL7RulesWithContext(context.Background(), request)
 }
@@ -3567,14 +3450,7 @@ func (c *Client) DescribeNewL7Rules(request *DescribeNewL7RulesRequest) (respons
 // This API is used to obtain layer-7 forwarding rules.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeNewL7RulesWithContext(ctx context.Context, request *DescribeNewL7RulesRequest) (response *DescribeNewL7RulesResponse, err error) {
     if request == nil {
         request = NewDescribeNewL7RulesRequest()
@@ -3613,14 +3489,7 @@ func NewDescribeNewL7RulesErrHealthResponse() (response *DescribeNewL7RulesErrHe
 // This API is used to getting the exception results of the health check on layer-7 forwarding rules.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeNewL7RulesErrHealth(request *DescribeNewL7RulesErrHealthRequest) (response *DescribeNewL7RulesErrHealthResponse, err error) {
     return c.DescribeNewL7RulesErrHealthWithContext(context.Background(), request)
 }
@@ -3629,14 +3498,7 @@ func (c *Client) DescribeNewL7RulesErrHealth(request *DescribeNewL7RulesErrHealt
 // This API is used to getting the exception results of the health check on layer-7 forwarding rules.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  AUTHFAILURE = "AuthFailure"
 func (c *Client) DescribeNewL7RulesErrHealthWithContext(ctx context.Context, request *DescribeNewL7RulesErrHealthRequest) (response *DescribeNewL7RulesErrHealthResponse, err error) {
     if request == nil {
         request = NewDescribeNewL7RulesErrHealthRequest()

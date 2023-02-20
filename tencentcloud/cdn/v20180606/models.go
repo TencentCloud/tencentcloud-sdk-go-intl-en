@@ -3903,6 +3903,10 @@ type DetailDomain struct {
 	// Access authentication for QiNiu Cloud Kodo origin
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
+
+	// HTTPS service
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
 }
 
 // Predefined struct for user
@@ -4564,6 +4568,11 @@ type Https struct {
 	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion"`
 }
 
+type HttpsBilling struct {
+	// HTTPS Service
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type HwPrivateAccess struct {
 	// Whether to enable access authentication. Valid values: `on`, `off`.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
@@ -4621,9 +4630,8 @@ type IpFilter struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules"`
 
-	// HTTP code returned when the IP allowlist/blocklist verification fails
-	// Valid values: 400-499
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// [Unavailable soon] The code returned when the IP blocklist/allowlist verification fails.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
 }
 
@@ -6100,8 +6108,8 @@ type QueryStringKey struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Reorder *string `json:"Reorder,omitempty" name:"Reorder"`
 
-	// Include/exclude query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeAll`
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Includes/excludes query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeCustom`
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Action *string `json:"Action,omitempty" name:"Action"`
 
 	// Array of included/excluded query strings (separated by ';')
@@ -7299,6 +7307,9 @@ type UpdateDomainConfigRequestParams struct {
 
 	// Access authentication for QiNiu Cloud Kodo origin
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
+
+	// HTTPS service
+	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
 }
 
 type UpdateDomainConfigRequest struct {
@@ -7452,6 +7463,9 @@ type UpdateDomainConfigRequest struct {
 
 	// Access authentication for QiNiu Cloud Kodo origin
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
+
+	// HTTPS service
+	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -7513,6 +7527,7 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "ShareCname")
 	delete(f, "HwPrivateAccess")
 	delete(f, "QnPrivateAccess")
+	delete(f, "HttpsBilling")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDomainConfigRequest has unknown keys!", "")
 	}
