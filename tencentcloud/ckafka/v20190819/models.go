@@ -554,6 +554,10 @@ type ConsumerRecord struct {
 	// Message timestamp
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// Message headers
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Headers *string `json:"Headers,omitempty" name:"Headers"`
 }
 
 // Predefined struct for user
