@@ -2295,6 +2295,58 @@ func (c *Client) DescribeRollbackTimeValidityWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
+    request = &DescribeZonesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeZones")
+    
+    
+    return
+}
+
+func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
+    response = &DescribeZonesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeZones
+// This API is used to query the AZ information in a purchasable region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *DescribeZonesResponse, err error) {
+    return c.DescribeZonesWithContext(context.Background(), request)
+}
+
+// DescribeZones
+// This API is used to query the AZ information in a purchasable region.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeZonesWithContext(ctx context.Context, request *DescribeZonesRequest) (response *DescribeZonesResponse, err error) {
+    if request == nil {
+        request = NewDescribeZonesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeZones require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeZonesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExportInstanceSlowQueriesRequest() (request *ExportInstanceSlowQueriesRequest) {
     request = &ExportInstanceSlowQueriesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3957,6 +4009,66 @@ func (c *Client) SetRenewFlagWithContext(ctx context.Context, request *SetRenewF
     request.SetContext(ctx)
     
     response = NewSetRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSwitchClusterVpcRequest() (request *SwitchClusterVpcRequest) {
+    request = &SwitchClusterVpcRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "SwitchClusterVpc")
+    
+    
+    return
+}
+
+func NewSwitchClusterVpcResponse() (response *SwitchClusterVpcResponse) {
+    response = &SwitchClusterVpcResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SwitchClusterVpc
+// This API is used to modify the cluster VPC.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) SwitchClusterVpc(request *SwitchClusterVpcRequest) (response *SwitchClusterVpcResponse, err error) {
+    return c.SwitchClusterVpcWithContext(context.Background(), request)
+}
+
+// SwitchClusterVpc
+// This API is used to modify the cluster VPC.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) SwitchClusterVpcWithContext(ctx context.Context, request *SwitchClusterVpcRequest) (response *SwitchClusterVpcResponse, err error) {
+    if request == nil {
+        request = NewSwitchClusterVpcRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SwitchClusterVpc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSwitchClusterVpcResponse()
     err = c.Send(request, response)
     return
 }

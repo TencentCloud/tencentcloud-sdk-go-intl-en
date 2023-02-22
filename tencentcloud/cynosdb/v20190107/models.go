@@ -3940,6 +3940,70 @@ func (r *DescribeRollbackTimeValidityResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeZonesRequestParams struct {
+	// Whether the virtual zone is included.–
+	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitempty" name:"IncludeVirtualZones"`
+
+	// Whether to display all AZs in a region and the user’s permissions in each AZ.
+	ShowPermission *bool `json:"ShowPermission,omitempty" name:"ShowPermission"`
+}
+
+type DescribeZonesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Whether the virtual zone is included.–
+	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitempty" name:"IncludeVirtualZones"`
+
+	// Whether to display all AZs in a region and the user’s permissions in each AZ.
+	ShowPermission *bool `json:"ShowPermission,omitempty" name:"ShowPermission"`
+}
+
+func (r *DescribeZonesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeZonesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IncludeVirtualZones")
+	delete(f, "ShowPermission")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeZonesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeZonesResponseParams struct {
+	// Region information
+	RegionSet []*SaleRegion `json:"RegionSet,omitempty" name:"RegionSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeZonesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeZonesResponseParams `json:"Response"`
+}
+
+func (r *DescribeZonesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeZonesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ExportInstanceSlowQueriesRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -5207,6 +5271,14 @@ type ModifyParamItem struct {
 	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
 }
 
+type Module struct {
+	// Whether it is supported. Valid values: `yes`, `no`.
+	IsDisable *string `json:"IsDisable,omitempty" name:"IsDisable"`
+
+	// Module name
+	ModuleName *string `json:"ModuleName,omitempty" name:"ModuleName"`
+}
+
 type NetAddr struct {
 	// Private network IP
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -5968,6 +6040,57 @@ type RuleFilters struct {
 	Value []*string `json:"Value,omitempty" name:"Value"`
 }
 
+type SaleRegion struct {
+	// Region name
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Numeric ID of a region
+	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Region name
+	RegionZh *string `json:"RegionZh,omitempty" name:"RegionZh"`
+
+	// List of purchasable AZs
+	ZoneSet []*SaleZone `json:"ZoneSet,omitempty" name:"ZoneSet"`
+
+	// Engine type
+	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Supported modules in a region
+	Modules []*Module `json:"Modules,omitempty" name:"Modules"`
+}
+
+type SaleZone struct {
+	// AZ name
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Numeric ID of an AZ
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// AZ name
+	ZoneZh *string `json:"ZoneZh,omitempty" name:"ZoneZh"`
+
+	// Whether serverless cluster is supported. Valid values: <br>
+	// `0`: No<br>
+	// `1`: Yes
+	IsSupportServerless *int64 `json:"IsSupportServerless,omitempty" name:"IsSupportServerless"`
+
+	// Whether standard cluster is supported. Valid values: <br>
+	// `0`: No<br>
+	// `1`: Yes
+	IsSupportNormal *int64 `json:"IsSupportNormal,omitempty" name:"IsSupportNormal"`
+
+	// Physical zone
+	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+
+	// Whether the user has AZ permission
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasPermission *bool `json:"HasPermission,omitempty" name:"HasPermission"`
+
+	// Whether it is a full-linkage RDMA AZ.
+	IsWholeRdmaZone *string `json:"IsWholeRdmaZone,omitempty" name:"IsWholeRdmaZone"`
+}
+
 // Predefined struct for user
 type SearchClusterDatabasesRequestParams struct {
 	// The cluster ID
@@ -6249,6 +6372,84 @@ type SlowQueriesItem struct {
 
 	// MD5 value of the SQL statement
 	SqlMd5 *string `json:"SqlMd5,omitempty" name:"SqlMd5"`
+}
+
+// Predefined struct for user
+type SwitchClusterVpcRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// VPC ID in string
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Subnet ID in string
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Valid hours of old IP
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+}
+
+type SwitchClusterVpcRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// VPC ID in string
+	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+
+	// Subnet ID in string
+	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+
+	// Valid hours of old IP
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+}
+
+func (r *SwitchClusterVpcRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchClusterVpcRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "UniqVpcId")
+	delete(f, "UniqSubnetId")
+	delete(f, "OldIpReserveHours")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchClusterVpcRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SwitchClusterVpcResponseParams struct {
+	// Async task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SwitchClusterVpcResponse struct {
+	*tchttp.BaseResponse
+	Response *SwitchClusterVpcResponseParams `json:"Response"`
+}
+
+func (r *SwitchClusterVpcResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchClusterVpcResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
