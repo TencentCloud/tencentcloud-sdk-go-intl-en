@@ -293,6 +293,130 @@ func (c *Client) DescribeApplicationDataWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeRecordInfoRequest() (request *DescribeRecordInfoRequest) {
+    request = &DescribeRecordInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gme", APIVersion, "DescribeRecordInfo")
+    
+    
+    return
+}
+
+func NewDescribeRecordInfoResponse() (response *DescribeRecordInfoResponse) {
+    response = &DescribeRecordInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRecordInfo
+// This API is used to query a recording task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDTASKID = "InvalidParameterValue.InvalidTaskId"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) DescribeRecordInfo(request *DescribeRecordInfoRequest) (response *DescribeRecordInfoResponse, err error) {
+    return c.DescribeRecordInfoWithContext(context.Background(), request)
+}
+
+// DescribeRecordInfo
+// This API is used to query a recording task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDTASKID = "InvalidParameterValue.InvalidTaskId"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) DescribeRecordInfoWithContext(ctx context.Context, request *DescribeRecordInfoRequest) (response *DescribeRecordInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTaskInfoRequest() (request *DescribeTaskInfoRequest) {
+    request = &DescribeTaskInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gme", APIVersion, "DescribeTaskInfo")
+    
+    
+    return
+}
+
+func NewDescribeTaskInfoResponse() (response *DescribeTaskInfoResponse) {
+    response = &DescribeTaskInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTaskInfo
+// This API is used to query the recording task in a room.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDROOMID = "InvalidParameterValue.InvalidRoomId"
+//  RESOURCENOTFOUND_ROOMNOTFOUND = "ResourceNotFound.RoomNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) DescribeTaskInfo(request *DescribeTaskInfoRequest) (response *DescribeTaskInfoResponse, err error) {
+    return c.DescribeTaskInfoWithContext(context.Background(), request)
+}
+
+// DescribeTaskInfo
+// This API is used to query the recording task in a room.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDROOMID = "InvalidParameterValue.InvalidRoomId"
+//  RESOURCENOTFOUND_ROOMNOTFOUND = "ResourceNotFound.RoomNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) DescribeTaskInfoWithContext(ctx context.Context, request *DescribeTaskInfoRequest) (response *DescribeTaskInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeTaskInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTaskInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTaskInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAppStatusRequest() (request *ModifyAppStatusRequest) {
     request = &ModifyAppStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -355,6 +479,212 @@ func (c *Client) ModifyAppStatusWithContext(ctx context.Context, request *Modify
     request.SetContext(ctx)
     
     response = NewModifyAppStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRecordInfoRequest() (request *ModifyRecordInfoRequest) {
+    request = &ModifyRecordInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gme", APIVersion, "ModifyRecordInfo")
+    
+    
+    return
+}
+
+func NewModifyRecordInfoResponse() (response *ModifyRecordInfoResponse) {
+    response = &ModifyRecordInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRecordInfo
+// This API is used to modify recording configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDRECORDMODE = "InvalidParameterValue.InvalidRecordMode"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBERECORDUSERIDS = "InvalidParameterValue.InvalidSubscribeRecordUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidSubscribeUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDTASKID = "InvalidParameterValue.InvalidTaskId"
+//  INVALIDPARAMETERVALUE_INVALIDUNSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidUNSubscribeUserIds"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) ModifyRecordInfo(request *ModifyRecordInfoRequest) (response *ModifyRecordInfoResponse, err error) {
+    return c.ModifyRecordInfoWithContext(context.Background(), request)
+}
+
+// ModifyRecordInfo
+// This API is used to modify recording configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDRECORDMODE = "InvalidParameterValue.InvalidRecordMode"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBERECORDUSERIDS = "InvalidParameterValue.InvalidSubscribeRecordUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidSubscribeUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDTASKID = "InvalidParameterValue.InvalidTaskId"
+//  INVALIDPARAMETERVALUE_INVALIDUNSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidUNSubscribeUserIds"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) ModifyRecordInfoWithContext(ctx context.Context, request *ModifyRecordInfoRequest) (response *ModifyRecordInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyRecordInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRecordInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRecordInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartRecordRequest() (request *StartRecordRequest) {
+    request = &StartRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gme", APIVersion, "StartRecord")
+    
+    
+    return
+}
+
+func NewStartRecordResponse() (response *StartRecordResponse) {
+    response = &StartRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StartRecord
+// This API is used to start recording.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDRECORDMODE = "InvalidParameterValue.InvalidRecordMode"
+//  INVALIDPARAMETERVALUE_INVALIDROOMID = "InvalidParameterValue.InvalidRoomId"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBERECORDUSERIDS = "InvalidParameterValue.InvalidSubscribeRecordUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidSubscribeUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDUNSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidUNSubscribeUserIds"
+//  RESOURCEINUSE_TASKINUSE = "ResourceInUse.TaskInUse"
+//  RESOURCENOTFOUND_ROOMNOTFOUND = "ResourceNotFound.RoomNotFound"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) StartRecord(request *StartRecordRequest) (response *StartRecordResponse, err error) {
+    return c.StartRecordWithContext(context.Background(), request)
+}
+
+// StartRecord
+// This API is used to start recording.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDRECORDMODE = "InvalidParameterValue.InvalidRecordMode"
+//  INVALIDPARAMETERVALUE_INVALIDROOMID = "InvalidParameterValue.InvalidRoomId"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBERECORDUSERIDS = "InvalidParameterValue.InvalidSubscribeRecordUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidSubscribeUserIds"
+//  INVALIDPARAMETERVALUE_INVALIDUNSUBSCRIBEUSERIDS = "InvalidParameterValue.InvalidUNSubscribeUserIds"
+//  RESOURCEINUSE_TASKINUSE = "ResourceInUse.TaskInUse"
+//  RESOURCENOTFOUND_ROOMNOTFOUND = "ResourceNotFound.RoomNotFound"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) StartRecordWithContext(ctx context.Context, request *StartRecordRequest) (response *StartRecordResponse, err error) {
+    if request == nil {
+        request = NewStartRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopRecordRequest() (request *StopRecordRequest) {
+    request = &StopRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gme", APIVersion, "StopRecord")
+    
+    
+    return
+}
+
+func NewStopRecordResponse() (response *StopRecordResponse) {
+    response = &StopRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StopRecord
+// This API is used to stop recording.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDTASKID = "InvalidParameterValue.InvalidTaskId"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) StopRecord(request *StopRecordRequest) (response *StopRecordResponse, err error) {
+    return c.StopRecordWithContext(context.Background(), request)
+}
+
+// StopRecord
+// This API is used to stop recording.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
+//  INVALIDPARAMETERVALUE_INVALIDTASKID = "InvalidParameterValue.InvalidTaskId"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SERVICENOTOPENED = "UnsupportedOperation.ServiceNotOpened"
+func (c *Client) StopRecordWithContext(ctx context.Context, request *StopRecordRequest) (response *StopRecordResponse, err error) {
+    if request == nil {
+        request = NewStopRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopRecordResponse()
     err = c.Send(request, response)
     return
 }

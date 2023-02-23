@@ -431,6 +431,10 @@ type ClusterInstancesInfo struct {
 	// Multi-AZ cluster
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsMultiZoneCluster *bool `json:"IsMultiZoneCluster,omitempty" name:"IsMultiZoneCluster"`
+
+	// Whether the feature of automatic abnormal node replacement is enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsCvmReplace *bool `json:"IsCvmReplace,omitempty" name:"IsCvmReplace"`
 }
 
 // Predefined struct for user
@@ -1017,8 +1021,8 @@ type CustomMetaDBInfo struct {
 	MetaDataPass *string `json:"MetaDataPass,omitempty" name:"MetaDataPass"`
 
 	// The Hive-shared metadatabase type. Valid values:
-	// <li>`EMR_NEW_META`: The cluster creates a metadatabase by default.</li>
-	// <li>`EMR_EXIST_META`: The cluster uses a specified EMR-MetaDB instance.</li>
+	// <li>`EMR_DEFAULT_META`: The cluster creates one by default.</li>
+	// <li>`EMR_EXIST_META`: The cluster uses the specified EMR metadatabase instance.</li>
 	// <li>`USER_CUSTOM_META`: The cluster uses a custom metadatabase instance.</li>
 	MetaType *string `json:"MetaType,omitempty" name:"MetaType"`
 

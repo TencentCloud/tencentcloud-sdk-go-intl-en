@@ -473,6 +473,150 @@ func (r *DescribeApplicationDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRecordInfoRequestParams struct {
+	// ID of the ongoing task, which is returned from the `StartRecord` API.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+}
+
+type DescribeRecordInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the ongoing task, which is returned from the `StartRecord` API.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+}
+
+func (r *DescribeRecordInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "BizId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordInfoResponseParams struct {
+	// Information about the recording task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecordInfo []*RecordInfo `json:"RecordInfo,omitempty" name:"RecordInfo"`
+
+	// Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
+
+	// Room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTaskInfoRequestParams struct {
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+type DescribeTaskInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+func (r *DescribeTaskInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTaskInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BizId")
+	delete(f, "RoomId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTaskInfoResponseParams struct {
+	// ID of the ongoing task, which is returned from the `StartRecord` API.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
+
+	// Allowlist or blocklist for stream subscription.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubscribeRecordUserIds *SubscribeRecordUserIds `json:"SubscribeRecordUserIds,omitempty" name:"SubscribeRecordUserIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTaskInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTaskInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeTaskInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTaskInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyAppStatusRequestParams struct {
 	// Application ID, which is generated and returned by the backend after the application creation.
 	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
@@ -544,6 +688,81 @@ func (r *ModifyAppStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyRecordInfoRequestParams struct {
+	// ID of the ongoing task, which is returned from the `StartRecord` API.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
+
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Allowlist or blocklist for stream subscription.
+	SubscribeRecordUserIds *SubscribeRecordUserIds `json:"SubscribeRecordUserIds,omitempty" name:"SubscribeRecordUserIds"`
+}
+
+type ModifyRecordInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the ongoing task, which is returned from the `StartRecord` API.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
+
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Allowlist or blocklist for stream subscription.
+	SubscribeRecordUserIds *SubscribeRecordUserIds `json:"SubscribeRecordUserIds,omitempty" name:"SubscribeRecordUserIds"`
+}
+
+func (r *ModifyRecordInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "RecordMode")
+	delete(f, "BizId")
+	delete(f, "SubscribeRecordUserIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRecordInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRecordInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRecordInfoResponseParams `json:"Response"`
+}
+
+func (r *ModifyRecordInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type OverseaTextStatisticsItem struct {
 	// Statistical value (in seconds)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -584,6 +803,98 @@ type RealtimeTextStatisticsItem struct {
 	Data *float64 `json:"Data,omitempty" name:"Data"`
 }
 
+type RecordInfo struct {
+	// User ID. The value is `0` in mixed streams recording mode.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Recording filename.
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// Recording start time, which is a Unix timestamp. Example: 1234567868.
+	RecordBeginTime *uint64 `json:"RecordBeginTime,omitempty" name:"RecordBeginTime"`
+
+	// Recording status. Valid values: `2`: recording; `10`: to be transcoded; `11`: transcoding; `12`: uploading; `13`: uploaded; `14`: user notified.
+	RecordStatus *uint64 `json:"RecordStatus,omitempty" name:"RecordStatus"`
+}
+
+// Predefined struct for user
+type StartRecordRequestParams struct {
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
+
+	// Allowlist or blocklist for stream subscription. If you do not specify this parameter, the audio streams of all the users in the room are subscribed to by default.
+	SubscribeRecordUserIds *SubscribeRecordUserIds `json:"SubscribeRecordUserIds,omitempty" name:"SubscribeRecordUserIds"`
+}
+
+type StartRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+
+	// Room ID.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// Recording mode. Valid values: `1`: single stream; `2`: mixed streams; `3`: single stream and mixed streams.
+	RecordMode *uint64 `json:"RecordMode,omitempty" name:"RecordMode"`
+
+	// Allowlist or blocklist for stream subscription. If you do not specify this parameter, the audio streams of all the users in the room are subscribed to by default.
+	SubscribeRecordUserIds *SubscribeRecordUserIds `json:"SubscribeRecordUserIds,omitempty" name:"SubscribeRecordUserIds"`
+}
+
+func (r *StartRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BizId")
+	delete(f, "RoomId")
+	delete(f, "RecordMode")
+	delete(f, "SubscribeRecordUserIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartRecordResponseParams struct {
+	// Task ID.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *StartRecordResponseParams `json:"Response"`
+}
+
+func (r *StartRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type StatisticsItem struct {
 	// Date in the format of yyyy-mm-dd, such as 2018-07-13
 	StatDate *string `json:"StatDate,omitempty" name:"StatDate"`
@@ -592,10 +903,81 @@ type StatisticsItem struct {
 	Data *uint64 `json:"Data,omitempty" name:"Data"`
 }
 
+// Predefined struct for user
+type StopRecordRequestParams struct {
+	// Task ID.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+}
+
+type StopRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID.
+	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Application ID.
+	BizId *uint64 `json:"BizId,omitempty" name:"BizId"`
+}
+
+func (r *StopRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "BizId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopRecordResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StopRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *StopRecordResponseParams `json:"Response"`
+}
+
+func (r *StopRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type StreamTextStatisticsItem struct {
 	// Usage of the service (in seconds)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Data *float64 `json:"Data,omitempty" name:"Data"`
+}
+
+type SubscribeRecordUserIds struct {
+	// Blocklist for audio subscription. For example, `["1", "2", "3"]` means to not subscribe to the audio streams of users 1, 2, and 3. If this parameter is left empty, the audio streams of all users (max 20) in the room will not be subscribed to.
+	// Note: You cannot specify `UnSubscribeAudioUserIds` and `SubscribeAudioUserIds` at the same time.
+	UnSubscribeUserIds []*string `json:"UnSubscribeUserIds,omitempty" name:"UnSubscribeUserIds"`
+
+	// Allowlist for audio subscription. For example, `["1", "2", "3"]` means to subscribe to the audio streams of users 1, 2, and 3. If this parameter is left empty, the audio streams of all users (max 20) in the room will be subscribed to.
+	// Note: You cannot specify `UnSubscribeAudioUserIds` and `SubscribeAudioUserIds` at the same time.
+	SubscribeUserIds []*string `json:"SubscribeUserIds,omitempty" name:"SubscribeUserIds"`
 }
 
 type Tag struct {

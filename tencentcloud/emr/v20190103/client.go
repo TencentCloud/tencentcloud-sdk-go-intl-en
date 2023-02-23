@@ -128,16 +128,22 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INVALIDPARAMETER_HALESSMASTERCOUNT = "InvalidParameter.HALessMasterCount"
 //  INVALIDPARAMETER_INCORRECTMASTERCOUNT = "InvalidParameter.IncorrectMasterCount"
 //  INVALIDPARAMETER_INVALIDALLNODERESOURCESPEC = "InvalidParameter.InvalidAllNodeResourceSpec"
 //  INVALIDPARAMETER_INVALIDDEPENDSERVICEANDENABLEKERBEROSCONFLICT = "InvalidParameter.InvalidDependServiceAndEnableKerberosConflict"
 //  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
+//  INVALIDPARAMETER_INVALIDINSTANCETYPE = "InvalidParameter.InvalidInstanceType"
+//  INVALIDPARAMETER_INVALIDMETATYPE = "InvalidParameter.InvalidMetaType"
+//  INVALIDPARAMETER_INVALIDPASSWORD = "InvalidParameter.InvalidPassword"
 //  INVALIDPARAMETER_INVALIDPRODUCTVERSION = "InvalidParameter.InvalidProductVersion"
 //  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
 //  INVALIDPARAMETER_INVALIDSCRIPTBOOTSTRAPACTIONCONFIG = "InvalidParameter.InvalidScriptBootstrapActionConfig"
 //  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
 //  INVALIDPARAMETER_KERBEROSSUPPORT = "InvalidParameter.KerberosSupport"
 //  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
 func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     return c.CreateClusterWithContext(context.Background(), request)
 }
@@ -147,16 +153,22 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INVALIDPARAMETER_HALESSMASTERCOUNT = "InvalidParameter.HALessMasterCount"
 //  INVALIDPARAMETER_INCORRECTMASTERCOUNT = "InvalidParameter.IncorrectMasterCount"
 //  INVALIDPARAMETER_INVALIDALLNODERESOURCESPEC = "InvalidParameter.InvalidAllNodeResourceSpec"
 //  INVALIDPARAMETER_INVALIDDEPENDSERVICEANDENABLEKERBEROSCONFLICT = "InvalidParameter.InvalidDependServiceAndEnableKerberosConflict"
 //  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
+//  INVALIDPARAMETER_INVALIDINSTANCETYPE = "InvalidParameter.InvalidInstanceType"
+//  INVALIDPARAMETER_INVALIDMETATYPE = "InvalidParameter.InvalidMetaType"
+//  INVALIDPARAMETER_INVALIDPASSWORD = "InvalidParameter.InvalidPassword"
 //  INVALIDPARAMETER_INVALIDPRODUCTVERSION = "InvalidParameter.InvalidProductVersion"
 //  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
 //  INVALIDPARAMETER_INVALIDSCRIPTBOOTSTRAPACTIONCONFIG = "InvalidParameter.InvalidScriptBootstrapActionConfig"
 //  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
 //  INVALIDPARAMETER_KERBEROSSUPPORT = "InvalidParameter.KerberosSupport"
 //  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
+//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
 func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateClusterRequest) (response *CreateClusterResponse, err error) {
     if request == nil {
         request = NewCreateClusterRequest()
@@ -1202,6 +1214,7 @@ func NewInquiryPriceUpdateInstanceResponse() (response *InquiryPriceUpdateInstan
 //  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
 //  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
 //  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDVPCID = "InvalidParameter.InvalidVpcId"
 //  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
 //  INVALIDPARAMETER_ZONERESOURCENOTMATCH = "InvalidParameter.ZoneResourceNotMatch"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
@@ -1237,6 +1250,7 @@ func (c *Client) InquiryPriceUpdateInstance(request *InquiryPriceUpdateInstanceR
 //  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
 //  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
 //  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDVPCID = "InvalidParameter.InvalidVpcId"
 //  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
 //  INVALIDPARAMETER_ZONERESOURCENOTMATCH = "InvalidParameter.ZoneResourceNotMatch"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
@@ -1593,6 +1607,7 @@ func NewTerminateInstanceResponse() (response *TerminateInstanceResponse) {
 // This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REFUNDCVMFAILED = "FailedOperation.RefundCvmFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
 //  INTERNALERROR_CVMERROR = "InternalError.CvmError"
@@ -1612,6 +1627,7 @@ func (c *Client) TerminateInstance(request *TerminateInstanceRequest) (response 
 // This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REFUNDCVMFAILED = "FailedOperation.RefundCvmFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
 //  INTERNALERROR_CVMERROR = "InternalError.CvmError"
