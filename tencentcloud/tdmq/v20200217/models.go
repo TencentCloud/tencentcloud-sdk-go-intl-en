@@ -1520,7 +1520,7 @@ type CreateRocketMQTopicRequestParams struct {
 	// Topic namespace. Currently, you can create topics only in one single namespace.
 	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces"`
 
-	// Topic type. Valid values: Normal, GlobalOrder, PartitionedOrder.
+	// Topic type. Valid values: `Normal`, `PartitionedOrder`, `Transaction`, `DelayScheduled`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Cluster ID
@@ -1542,7 +1542,7 @@ type CreateRocketMQTopicRequest struct {
 	// Topic namespace. Currently, you can create topics only in one single namespace.
 	Namespaces []*string `json:"Namespaces,omitempty" name:"Namespaces"`
 
-	// Topic type. Valid values: Normal, GlobalOrder, PartitionedOrder.
+	// Topic type. Valid values: `Normal`, `PartitionedOrder`, `Transaction`, `DelayScheduled`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Cluster ID
@@ -3971,6 +3971,23 @@ type DescribeRabbitMQNodeListRequestParams struct {
 
 	// The maximum entries per page
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Node name for fuzzy search
+	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+
+	// Name and value of a filter.
+	// Currently, only the `nodeStatus` filter is supported.
+	// Valid values: `running`, `down`.
+	// It is an array type and can contain multiple filters.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting by a specified element.
+	// Valid values: `cpuUsage`, `diskUsage`.
+	SortElement *string `json:"SortElement,omitempty" name:"SortElement"`
+
+	// Sorting order.
+	// Valid values: `ascend`, `descend`.
+	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
 }
 
 type DescribeRabbitMQNodeListRequest struct {
@@ -3984,6 +4001,23 @@ type DescribeRabbitMQNodeListRequest struct {
 
 	// The maximum entries per page
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Node name for fuzzy search
+	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+
+	// Name and value of a filter.
+	// Currently, only the `nodeStatus` filter is supported.
+	// Valid values: `running`, `down`.
+	// It is an array type and can contain multiple filters.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// Sorting by a specified element.
+	// Valid values: `cpuUsage`, `diskUsage`.
+	SortElement *string `json:"SortElement,omitempty" name:"SortElement"`
+
+	// Sorting order.
+	// Valid values: `ascend`, `descend`.
+	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
 }
 
 func (r *DescribeRabbitMQNodeListRequest) ToJsonString() string {
@@ -4001,6 +4035,10 @@ func (r *DescribeRabbitMQNodeListRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "NodeName")
+	delete(f, "Filters")
+	delete(f, "SortElement")
+	delete(f, "SortOrder")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQNodeListRequest has unknown keys!", "")
 	}
@@ -6282,6 +6320,26 @@ type RabbitMQPrivateNode struct {
 	// Node name
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+
+	// Node status
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	NodeStatus *string `json:"NodeStatus,omitempty" name:"NodeStatus"`
+
+	// CPU utilization
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CPUUsage *string `json:"CPUUsage,omitempty" name:"CPUUsage"`
+
+	// Memory usage in MB
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Disk utilization
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiskUsage *string `json:"DiskUsage,omitempty" name:"DiskUsage"`
+
+	// The number of RabbitMQ Erlang processes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProcessNumber *uint64 `json:"ProcessNumber,omitempty" name:"ProcessNumber"`
 }
 
 type RabbitMQVipInstance struct {
@@ -6328,6 +6386,10 @@ type RabbitMQVipInstance struct {
 
 	// Instance specification ID
 	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
+
+	// Cluster exception
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExceptionInformation *string `json:"ExceptionInformation,omitempty" name:"ExceptionInformation"`
 }
 
 // Predefined struct for user
@@ -6722,6 +6784,10 @@ type RocketMQClusterConfig struct {
 
 	// Maximum message delay in milliseconds
 	MaxLatencyTime *uint64 `json:"MaxLatencyTime,omitempty" name:"MaxLatencyTime"`
+
+	// The maximum number of queues in a single topic
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxQueuesPerTopic *uint64 `json:"MaxQueuesPerTopic,omitempty" name:"MaxQueuesPerTopic"`
 }
 
 type RocketMQClusterDetail struct {
@@ -6916,7 +6982,7 @@ type RocketMQVipInstance struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceVersion *string `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
 
-	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal).
+	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
 	// Number of nodes

@@ -1585,6 +1585,7 @@ func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
 //  OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 //  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
 func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
@@ -1629,6 +1630,7 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
 //  OPERATIONDENIED_INSTTYPENOTSUPPORT = "OperationDenied.InstTypeNotSupport"
 //  OPERATIONDENIED_NOTSUPPORTMODIFYLOCALROOTHOSTERROR = "OperationDenied.NotSupportModifyLocalRootHostError"
 //  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
 func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *DescribeAccountsRequest) (response *DescribeAccountsResponse, err error) {
@@ -1943,6 +1945,56 @@ func (c *Client) DescribeBackupDownloadRestrictionWithContext(ctx context.Contex
     return
 }
 
+func NewDescribeBackupEncryptionStatusRequest() (request *DescribeBackupEncryptionStatusRequest) {
+    request = &DescribeBackupEncryptionStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeBackupEncryptionStatus")
+    
+    
+    return
+}
+
+func NewDescribeBackupEncryptionStatusResponse() (response *DescribeBackupEncryptionStatusResponse) {
+    response = &DescribeBackupEncryptionStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupEncryptionStatus
+// This API is used to query the default encryption status of an instance backup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeBackupEncryptionStatus(request *DescribeBackupEncryptionStatusRequest) (response *DescribeBackupEncryptionStatusResponse, err error) {
+    return c.DescribeBackupEncryptionStatusWithContext(context.Background(), request)
+}
+
+// DescribeBackupEncryptionStatus
+// This API is used to query the default encryption status of an instance backup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeBackupEncryptionStatusWithContext(ctx context.Context, request *DescribeBackupEncryptionStatusRequest) (response *DescribeBackupEncryptionStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupEncryptionStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupEncryptionStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupEncryptionStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest) {
     request = &DescribeBackupOverviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2217,8 +2269,10 @@ func NewDescribeBinlogsResponse() (response *DescribeBinlogsResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -2234,8 +2288,10 @@ func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *Des
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -5012,6 +5068,7 @@ func NewModifyAccountMaxUserConnectionsResponse() (response *ModifyAccountMaxUse
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 func (c *Client) ModifyAccountMaxUserConnections(request *ModifyAccountMaxUserConnectionsRequest) (response *ModifyAccountMaxUserConnectionsResponse, err error) {
     return c.ModifyAccountMaxUserConnectionsWithContext(context.Background(), request)
 }
@@ -5025,6 +5082,7 @@ func (c *Client) ModifyAccountMaxUserConnections(request *ModifyAccountMaxUserCo
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_ACCOUNTHOSTRULEERROR = "InvalidParameterValue.AccountHostRuleError"
+//  RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 func (c *Client) ModifyAccountMaxUserConnectionsWithContext(ctx context.Context, request *ModifyAccountMaxUserConnectionsRequest) (response *ModifyAccountMaxUserConnectionsResponse, err error) {
     if request == nil {
         request = NewModifyAccountMaxUserConnectionsRequest()
@@ -5441,6 +5499,74 @@ func (c *Client) ModifyBackupDownloadRestrictionWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewModifyBackupDownloadRestrictionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBackupEncryptionStatusRequest() (request *ModifyBackupEncryptionStatusRequest) {
+    request = &ModifyBackupEncryptionStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "ModifyBackupEncryptionStatus")
+    
+    
+    return
+}
+
+func NewModifyBackupEncryptionStatusResponse() (response *ModifyBackupEncryptionStatusResponse) {
+    response = &ModifyBackupEncryptionStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyBackupEncryptionStatus
+// This API is used to set the default encryption status of an instance backup. 
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTOPERATIONDENIED = "OperationDenied.AccountOperationDenied"
+//  OPERATIONDENIED_NOTSUPPORTBASIC = "OperationDenied.NotSupportBasic"
+func (c *Client) ModifyBackupEncryptionStatus(request *ModifyBackupEncryptionStatusRequest) (response *ModifyBackupEncryptionStatusResponse, err error) {
+    return c.ModifyBackupEncryptionStatusWithContext(context.Background(), request)
+}
+
+// ModifyBackupEncryptionStatus
+// This API is used to set the default encryption status of an instance backup. 
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTOPERATIONDENIED = "OperationDenied.AccountOperationDenied"
+//  OPERATIONDENIED_NOTSUPPORTBASIC = "OperationDenied.NotSupportBasic"
+func (c *Client) ModifyBackupEncryptionStatusWithContext(ctx context.Context, request *ModifyBackupEncryptionStatusRequest) (response *ModifyBackupEncryptionStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyBackupEncryptionStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBackupEncryptionStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBackupEncryptionStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -6553,6 +6679,104 @@ func (c *Client) OpenAuditServiceWithContext(ctx context.Context, request *OpenA
     return
 }
 
+func NewOpenDBInstanceEncryptionRequest() (request *OpenDBInstanceEncryptionRequest) {
+    request = &OpenDBInstanceEncryptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "OpenDBInstanceEncryption")
+    
+    
+    return
+}
+
+func NewOpenDBInstanceEncryptionResponse() (response *OpenDBInstanceEncryptionResponse) {
+    response = &OpenDBInstanceEncryptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// OpenDBInstanceEncryption
+// This API is used to enable the encryption feature for instance data storage, and custom keys are supported.
+//
+// 
+//
+// Note: Before enabling data storage encryption for an instance, you need to perform the following operations:
+//
+// 
+//
+// 1. [Initialize an instance](https://intl.cloud.tencent.com/document/api/236/15873?from_cn_redirect=1).
+//
+// 
+//
+// 2. Enable [KMS service](https://console.cloud.tencent.com/kms2)
+//
+// 
+//
+// 3. [Grant permission to access KMS](https://console.cloud.tencent.com/cam/role) for TencentDB for MySQL. The role name is `MySQL_QCSRole`, and the preset policy name is `QcloudAccessForMySQLRole`.
+//
+// 
+//
+// This API calling may take up to 10 seconds, causing the client to time out. If it returns `InternalError`, call `DescribeDBInstanceInfo` to confirm whether the backend encryption is enabled successfully.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) OpenDBInstanceEncryption(request *OpenDBInstanceEncryptionRequest) (response *OpenDBInstanceEncryptionResponse, err error) {
+    return c.OpenDBInstanceEncryptionWithContext(context.Background(), request)
+}
+
+// OpenDBInstanceEncryption
+// This API is used to enable the encryption feature for instance data storage, and custom keys are supported.
+//
+// 
+//
+// Note: Before enabling data storage encryption for an instance, you need to perform the following operations:
+//
+// 
+//
+// 1. [Initialize an instance](https://intl.cloud.tencent.com/document/api/236/15873?from_cn_redirect=1).
+//
+// 
+//
+// 2. Enable [KMS service](https://console.cloud.tencent.com/kms2)
+//
+// 
+//
+// 3. [Grant permission to access KMS](https://console.cloud.tencent.com/cam/role) for TencentDB for MySQL. The role name is `MySQL_QCSRole`, and the preset policy name is `QcloudAccessForMySQLRole`.
+//
+// 
+//
+// This API calling may take up to 10 seconds, causing the client to time out. If it returns `InternalError`, call `DescribeDBInstanceInfo` to confirm whether the backend encryption is enabled successfully.
+//
+// error code that may be returned:
+//  CDBERROR = "CdbError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) OpenDBInstanceEncryptionWithContext(ctx context.Context, request *OpenDBInstanceEncryptionRequest) (response *OpenDBInstanceEncryptionResponse, err error) {
+    if request == nil {
+        request = NewOpenDBInstanceEncryptionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenDBInstanceEncryption require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenDBInstanceEncryptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenDBInstanceGTIDRequest() (request *OpenDBInstanceGTIDRequest) {
     request = &OpenDBInstanceGTIDRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7561,66 +7785,6 @@ func (c *Client) SwitchForUpgradeWithContext(ctx context.Context, request *Switc
     request.SetContext(ctx)
     
     response = NewSwitchForUpgradeResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpgradeCDBProxyRequest() (request *UpgradeCDBProxyRequest) {
-    request = &UpgradeCDBProxyRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "UpgradeCDBProxy")
-    
-    
-    return
-}
-
-func NewUpgradeCDBProxyResponse() (response *UpgradeCDBProxyResponse) {
-    response = &UpgradeCDBProxyResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// UpgradeCDBProxy
-// 接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置
-//
-// 
-//
-// This API is used to upgrade the configuration of database proxy.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
-func (c *Client) UpgradeCDBProxy(request *UpgradeCDBProxyRequest) (response *UpgradeCDBProxyResponse, err error) {
-    return c.UpgradeCDBProxyWithContext(context.Background(), request)
-}
-
-// UpgradeCDBProxy
-// 接口已经废弃，请使用AdjustCdbProxy进行数据库代理的配置
-//
-// 
-//
-// This API is used to upgrade the configuration of database proxy.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
-func (c *Client) UpgradeCDBProxyWithContext(ctx context.Context, request *UpgradeCDBProxyRequest) (response *UpgradeCDBProxyResponse, err error) {
-    if request == nil {
-        request = NewUpgradeCDBProxyRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("UpgradeCDBProxy require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewUpgradeCDBProxyResponse()
     err = c.Send(request, response)
     return
 }

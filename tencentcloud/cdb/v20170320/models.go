@@ -1117,7 +1117,7 @@ type CreateBackupRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup method of target instance. Value range: logical (logical cold backup), physical (physical cold backup).
+	// Target backup method. Valid values: `logical` (logical cold backup), `physical` (physical cold backup), `snapshot` (snapshot backup). Basic Edition instances only support snapshot backups.
 	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
 
 	// Information of the table to be backed up. If this parameter is not set, the entire instance will be backed up by default. It can be set only in logical backup (i.e., BackupMethod = logical). The specified table must exist; otherwise, backup may fail.
@@ -1134,7 +1134,7 @@ type CreateBackupRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup method of target instance. Value range: logical (logical cold backup), physical (physical cold backup).
+	// Target backup method. Valid values: `logical` (logical cold backup), `physical` (physical cold backup), `snapshot` (snapshot backup). Basic Edition instances only support snapshot backups.
 	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
 
 	// Information of the table to be backed up. If this parameter is not set, the entire instance will be backed up by default. It can be set only in logical backup (i.e., BackupMethod = logical). The specified table must exist; otherwise, backup may fail.
@@ -3163,6 +3163,63 @@ func (r *DescribeBackupDownloadRestrictionResponse) FromJsonString(s string) err
 }
 
 // Predefined struct for user
+type DescribeBackupEncryptionStatusRequestParams struct {
+	// Instance ID in the format of cdb-XXXX, which is the same as that displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeBackupEncryptionStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of cdb-XXXX, which is the same as that displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeBackupEncryptionStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupEncryptionStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupEncryptionStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupEncryptionStatusResponseParams struct {
+	// Whether the physical cold backup is enabled for the instance. Valid values: `on`, `off`.
+	EncryptionStatus *string `json:"EncryptionStatus,omitempty" name:"EncryptionStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupEncryptionStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupEncryptionStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupEncryptionStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupEncryptionStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBackupOverviewRequestParams struct {
 	// TencentDB product type to be queried. Currently, only `mysql` is supported.
 	Product *string `json:"Product,omitempty" name:"Product"`
@@ -5158,10 +5215,10 @@ type DescribeErrorLogDataRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start timestamp.
+	// Start timestamp, such as 1585142640.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End timestamp.
+	// End timestamp, such as 1585142640.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// List of keywords to match. Up to 15 keywords are supported.
@@ -5183,10 +5240,10 @@ type DescribeErrorLogDataRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start timestamp.
+	// Start timestamp, such as 1585142640.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End timestamp.
+	// End timestamp, such as 1585142640.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// List of keywords to match. Up to 15 keywords are supported.
@@ -6162,10 +6219,10 @@ type DescribeSlowLogDataRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start timestamp.
+	// Start timestamp, such as 1585142640.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End timestamp.
+	// End timestamp, such as 1585142640.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Client `Host` list.
@@ -6199,10 +6256,10 @@ type DescribeSlowLogDataRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start timestamp.
+	// Start timestamp, such as 1585142640.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End timestamp.
+	// End timestamp, such as 1585142640.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Client `Host` list.
@@ -8148,6 +8205,67 @@ func (r *ModifyBackupDownloadRestrictionResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type ModifyBackupEncryptionStatusRequestParams struct {
+	// Instance ID in the format of cdb-XXXX, which is the same as that displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Default encryption status for the new auto-generated physical backup files. Valid values: `on`, `off`.
+	EncryptionStatus *string `json:"EncryptionStatus,omitempty" name:"EncryptionStatus"`
+}
+
+type ModifyBackupEncryptionStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of cdb-XXXX, which is the same as that displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Default encryption status for the new auto-generated physical backup files. Valid values: `on`, `off`.
+	EncryptionStatus *string `json:"EncryptionStatus,omitempty" name:"EncryptionStatus"`
+}
+
+func (r *ModifyBackupEncryptionStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupEncryptionStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EncryptionStatus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupEncryptionStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBackupEncryptionStatusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyBackupEncryptionStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBackupEncryptionStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyBackupEncryptionStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupEncryptionStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyCDBProxyConnectionPoolRequestParams struct {
 	// Database proxy ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
@@ -9491,6 +9609,74 @@ func (r *OpenAuditServiceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *OpenAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenDBInstanceEncryptionRequestParams struct {
+	// TencentDB instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Custom key ID, which is the unique CMK ID. If this value is empty, the key KMS-CDB auto-generated by Tencent Cloud will be used.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Custom storage region, such as ap-guangzhou. When `KeyId` is not empty, this parameter is required.
+	KeyRegion *string `json:"KeyRegion,omitempty" name:"KeyRegion"`
+}
+
+type OpenDBInstanceEncryptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// TencentDB instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Custom key ID, which is the unique CMK ID. If this value is empty, the key KMS-CDB auto-generated by Tencent Cloud will be used.
+	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// Custom storage region, such as ap-guangzhou. When `KeyId` is not empty, this parameter is required.
+	KeyRegion *string `json:"KeyRegion,omitempty" name:"KeyRegion"`
+}
+
+func (r *OpenDBInstanceEncryptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenDBInstanceEncryptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "KeyId")
+	delete(f, "KeyRegion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenDBInstanceEncryptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenDBInstanceEncryptionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type OpenDBInstanceEncryptionResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenDBInstanceEncryptionResponseParams `json:"Response"`
+}
+
+func (r *OpenDBInstanceEncryptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenDBInstanceEncryptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11315,106 +11501,6 @@ type TaskDetail struct {
 
 	// Async task request ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-}
-
-// Predefined struct for user
-type UpgradeCDBProxyRequestParams struct {
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Database proxy ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
-
-	// Number of proxy nodes
-	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
-
-	// Number of CPU cores per proxy node
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
-
-	// Memory per proxy node
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
-
-	// Load rebalance mode. Valid values: `auto`, `manual`
-	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
-
-	// Upgrade time. Valid values: `nowTime` (upgrade immediately), `timeWindow` (upgrade during instance maintenance time)
-	UpgradeTime *string `json:"UpgradeTime,omitempty" name:"UpgradeTime"`
-}
-
-type UpgradeCDBProxyRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Database proxy ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
-
-	// Number of proxy nodes
-	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
-
-	// Number of CPU cores per proxy node
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
-
-	// Memory per proxy node
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
-
-	// Load rebalance mode. Valid values: `auto`, `manual`
-	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
-
-	// Upgrade time. Valid values: `nowTime` (upgrade immediately), `timeWindow` (upgrade during instance maintenance time)
-	UpgradeTime *string `json:"UpgradeTime,omitempty" name:"UpgradeTime"`
-}
-
-func (r *UpgradeCDBProxyRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpgradeCDBProxyRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "ProxyGroupId")
-	delete(f, "ProxyCount")
-	delete(f, "Cpu")
-	delete(f, "Mem")
-	delete(f, "ReloadBalance")
-	delete(f, "UpgradeTime")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeCDBProxyRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type UpgradeCDBProxyResponseParams struct {
-	// Async request ID
-	// Note: this field may return `null`, indicating that no valid value can be found.
-	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type UpgradeCDBProxyResponse struct {
-	*tchttp.BaseResponse
-	Response *UpgradeCDBProxyResponseParams `json:"Response"`
-}
-
-func (r *UpgradeCDBProxyResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpgradeCDBProxyResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

@@ -20,6 +20,9 @@ const (
 	// CAM signature/authentication error.
 	AUTHFAILURE = "AuthFailure"
 
+	// Invalid authorization
+	AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+
 	// The sub-account has no permissions.
 	AUTHFAILURE_SUBACCOUNTDENIED = "AuthFailure.SubAccountDenied"
 
@@ -185,6 +188,9 @@ const (
 	// Failed to parse JSON.
 	INTERNALERROR_JSONERROR = "InternalError.JSONError"
 
+	// Failed to enable encryption
+	INTERNALERROR_KMSERROR = "InternalError.KmsError"
+
 	// Network error
 	INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 
@@ -281,6 +287,9 @@ const (
 	// The resource is not found.
 	INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 
+	// Invalid parameter value
+	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
 	// The account description contains special characters.
 	INVALIDPARAMETERVALUE_ACCOUNTDESCRIPTIONCHARACTERERROR = "InvalidParameterValue.AccountDescriptionCharacterError"
 
@@ -334,6 +343,9 @@ const (
 
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
+
+	// The Tencent Cloud account is not allowed to perform the operation due to insufficient permissions.
+	OPERATIONDENIED_ACCOUNTOPERATIONDENIED = "OperationDenied.AccountOperationDenied"
 
 	// The instance is performing another task.
 	OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
