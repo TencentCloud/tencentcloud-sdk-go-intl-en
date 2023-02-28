@@ -1087,8 +1087,8 @@ type DescribeWhiteBoxKeyDetailsResponseParams struct {
 	// White-box key information list
 	KeyInfos []*WhiteboxKeyInfo `json:"KeyInfos,omitempty" name:"KeyInfos"`
 
-	// Total number of keys
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Total white-box keys.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1559,6 +1559,9 @@ func (r *EnableKeyResponse) FromJsonString(s string) error {
 type EnableKeyRotationRequestParams struct {
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// The interval between each key rotation in days. Value range: 7 - 365 (default).
+	RotateDays *uint64 `json:"RotateDays,omitempty" name:"RotateDays"`
 }
 
 type EnableKeyRotationRequest struct {
@@ -1566,6 +1569,9 @@ type EnableKeyRotationRequest struct {
 	
 	// Unique CMK ID
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+
+	// The interval between each key rotation in days. Value range: 7 - 365 (default).
+	RotateDays *uint64 `json:"RotateDays,omitempty" name:"RotateDays"`
 }
 
 func (r *EnableKeyRotationRequest) ToJsonString() string {
@@ -1581,6 +1587,7 @@ func (r *EnableKeyRotationRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "KeyId")
+	delete(f, "RotateDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableKeyRotationRequest has unknown keys!", "")
 	}
@@ -2370,8 +2377,8 @@ type GetServiceStatusResponseParams struct {
 	// 0: Basic Edition, 1: Ultimate Edition
 	UserLevel *uint64 `json:"UserLevel,omitempty" name:"UserLevel"`
 
-	// Ultimate Edition expiration time
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Expiration time of the KMS Ultimate edition. It’s represented in a Unix Epoch timestamp.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProExpireTime *uint64 `json:"ProExpireTime,omitempty" name:"ProExpireTime"`
 
 	// Whether to automatically renew Ultimate Edition. 0: no, 1: yes

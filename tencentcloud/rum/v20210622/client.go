@@ -180,7 +180,7 @@ func NewCreateProjectResponse() (response *CreateProjectResponse) {
 }
 
 // CreateProject
-// This API is used to create a project (owned by the specified team).
+// This API is used to create a RUM application which belongs to a specific team.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -197,7 +197,7 @@ func (c *Client) CreateProject(request *CreateProjectRequest) (response *CreateP
 }
 
 // CreateProject
-// This API is used to create a project (owned by the specified team).
+// This API is used to create a RUM application which belongs to a specific team.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -418,7 +418,7 @@ func NewCreateTawInstanceResponse() (response *CreateTawInstanceResponse) {
 }
 
 // CreateTawInstance
-// This API is used to create a RUM instance.
+// This API is used to create a RUM business system.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -435,7 +435,7 @@ func (c *Client) CreateTawInstance(request *CreateTawInstanceRequest) (response 
 }
 
 // CreateTawInstance
-// This API is used to create a RUM instance.
+// This API is used to create a RUM business system.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2924,7 +2924,7 @@ func NewDescribeLogListResponse() (response *DescribeLogListResponse) {
 }
 
 // DescribeLogList
-// This API is used to get the list of logs in a project (created by an instance).
+// This API is used to get the log list. It has been deprecated. Use `DescribeRumLogList` instead.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2952,7 +2952,7 @@ func (c *Client) DescribeLogList(request *DescribeLogListRequest) (response *Des
 }
 
 // DescribeLogList
-// This API is used to get the list of logs in a project (created by an instance).
+// This API is used to get the log list. It has been deprecated. Use `DescribeRumLogList` instead.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3154,7 +3154,7 @@ func NewDescribeProjectLimitsResponse() (response *DescribeProjectLimitsResponse
 }
 
 // DescribeProjectLimits
-// This API is used to get the list of project reporting rates.
+// This API is used to get the sampling information of an application’s reporting APIs.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3184,7 +3184,7 @@ func (c *Client) DescribeProjectLimits(request *DescribeProjectLimitsRequest) (r
 }
 
 // DescribeProjectLimits
-// This API is used to get the list of project reporting rates.
+// This API is used to get the sampling information of an application’s reporting APIs.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3484,7 +3484,7 @@ func NewDescribeReleaseFilesResponse() (response *DescribeReleaseFilesResponse) 
 }
 
 // DescribeReleaseFiles
-// This API is used to get the list of sourcemap files of a project.
+// This API is used to get the list of source maps of an application.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3513,7 +3513,7 @@ func (c *Client) DescribeReleaseFiles(request *DescribeReleaseFilesRequest) (res
 }
 
 // DescribeReleaseFiles
-// This API is used to get the list of sourcemap files of a project.
+// This API is used to get the list of source maps of an application.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3635,6 +3635,178 @@ func (c *Client) DescribeRumGroupLogWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeRumGroupLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRumLogExportRequest() (request *DescribeRumLogExportRequest) {
+    request = &DescribeRumLogExportRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeRumLogExport")
+    
+    
+    return
+}
+
+func NewDescribeRumLogExportResponse() (response *DescribeRumLogExportResponse) {
+    response = &DescribeRumLogExportResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRumLogExport
+// This API is used to get the list of logs in a project (created by an instance).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRumLogExport(request *DescribeRumLogExportRequest) (response *DescribeRumLogExportResponse, err error) {
+    return c.DescribeRumLogExportWithContext(context.Background(), request)
+}
+
+// DescribeRumLogExport
+// This API is used to get the list of logs in a project (created by an instance).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRumLogExportWithContext(ctx context.Context, request *DescribeRumLogExportRequest) (response *DescribeRumLogExportResponse, err error) {
+    if request == nil {
+        request = NewDescribeRumLogExportRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRumLogExport require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRumLogExportResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRumLogExportsRequest() (request *DescribeRumLogExportsRequest) {
+    request = &DescribeRumLogExportsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "DescribeRumLogExports")
+    
+    
+    return
+}
+
+func NewDescribeRumLogExportsResponse() (response *DescribeRumLogExportsResponse) {
+    response = &DescribeRumLogExportsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRumLogExports
+// This API is used to get the list of exported logs in a project.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRumLogExports(request *DescribeRumLogExportsRequest) (response *DescribeRumLogExportsResponse, err error) {
+    return c.DescribeRumLogExportsWithContext(context.Background(), request)
+}
+
+// DescribeRumLogExports
+// This API is used to get the list of exported logs in a project.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSCALLFAIL = "FailedOperation.ClsCallFail"
+//  FAILEDOPERATION_DATABASEEXCEPTION = "FailedOperation.DataBaseException"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRumLogExportsWithContext(ctx context.Context, request *DescribeRumLogExportsRequest) (response *DescribeRumLogExportsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRumLogExportsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRumLogExports require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRumLogExportsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4140,7 +4312,7 @@ func NewModifyInstanceResponse() (response *ModifyInstanceResponse) {
 }
 
 // ModifyInstance
-// This API is used to modify an instance.
+// This API is used to modify a RUM business system.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4160,7 +4332,7 @@ func (c *Client) ModifyInstance(request *ModifyInstanceRequest) (response *Modif
 }
 
 // ModifyInstance
-// This API is used to modify an instance.
+// This API is used to modify a RUM business system.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4210,7 +4382,7 @@ func NewModifyProjectResponse() (response *ModifyProjectResponse) {
 }
 
 // ModifyProject
-// This API is used to modify a RUM project.
+// This API is used to modify the RUM application information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4220,7 +4392,7 @@ func (c *Client) ModifyProject(request *ModifyProjectRequest) (response *ModifyP
 }
 
 // ModifyProject
-// This API is used to modify a RUM project.
+// This API is used to modify the RUM application information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4350,7 +4522,7 @@ func NewResumeInstanceResponse() (response *ResumeInstanceResponse) {
 }
 
 // ResumeInstance
-// This API is used to resume an instance.
+// This API is used to recover a RUM business system so that you can use the application to report data normally.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4371,7 +4543,7 @@ func (c *Client) ResumeInstance(request *ResumeInstanceRequest) (response *Resum
 }
 
 // ResumeInstance
-// This API is used to resume an instance.
+// This API is used to recover a RUM business system so that you can use the application to report data normally.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4399,6 +4571,78 @@ func (c *Client) ResumeInstanceWithContext(ctx context.Context, request *ResumeI
     request.SetContext(ctx)
     
     response = NewResumeInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResumeProjectRequest() (request *ResumeProjectRequest) {
+    request = &ResumeProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rum", APIVersion, "ResumeProject")
+    
+    
+    return
+}
+
+func NewResumeProjectResponse() (response *ResumeProjectResponse) {
+    response = &ResumeProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ResumeProject
+// This API is used to recover an application and resume data reporting.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ResumeProject(request *ResumeProjectRequest) (response *ResumeProjectResponse, err error) {
+    return c.ResumeProjectWithContext(context.Background(), request)
+}
+
+// ResumeProject
+// This API is used to recover an application and resume data reporting.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ResumeProjectWithContext(ctx context.Context, request *ResumeProjectRequest) (response *ResumeProjectResponse, err error) {
+    if request == nil {
+        request = NewResumeProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResumeProjectResponse()
     err = c.Send(request, response)
     return
 }

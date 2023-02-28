@@ -1503,6 +1503,7 @@ func NewEnableKeyRotationResponse() (response *EnableKeyRotationResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
@@ -1519,6 +1520,7 @@ func (c *Client) EnableKeyRotation(request *EnableKeyRotationRequest) (response 
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
@@ -2199,6 +2201,7 @@ func NewGetServiceStatusResponse() (response *GetServiceStatusResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetServiceStatus(request *GetServiceStatusRequest) (response *GetServiceStatusResponse, err error) {
     return c.GetServiceStatusWithContext(context.Background(), request)
 }
@@ -2209,6 +2212,7 @@ func (c *Client) GetServiceStatus(request *GetServiceStatusRequest) (response *G
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetServiceStatusWithContext(ctx context.Context, request *GetServiceStatusRequest) (response *GetServiceStatusResponse, err error) {
     if request == nil {
         request = NewGetServiceStatusRequest()

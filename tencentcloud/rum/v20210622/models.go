@@ -5356,11 +5356,174 @@ func (r *DescribeRumGroupLogResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRumLogExportRequestParams struct {
+	// Export identifier name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Start time (required)
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query statement, which is required and can contain up to 4,096 characters.
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// End time (required)
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Project ID (required)
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+
+	// Filter field
+	Fields []*string `json:"Fields,omitempty" name:"Fields"`
+}
+
+type DescribeRumLogExportRequest struct {
+	*tchttp.BaseRequest
+	
+	// Export identifier name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Start time (required)
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query statement, which is required and can contain up to 4,096 characters.
+	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// End time (required)
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Project ID (required)
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+
+	// Filter field
+	Fields []*string `json:"Fields,omitempty" name:"Fields"`
+}
+
+func (r *DescribeRumLogExportRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRumLogExportRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "StartTime")
+	delete(f, "Query")
+	delete(f, "EndTime")
+	delete(f, "ID")
+	delete(f, "Fields")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRumLogExportRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRumLogExportResponseParams struct {
+	// Response string
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRumLogExportResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRumLogExportResponseParams `json:"Response"`
+}
+
+func (r *DescribeRumLogExportResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRumLogExportResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRumLogExportsRequestParams struct {
+	// Page size
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Page number
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Project ID (required)
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+}
+
+type DescribeRumLogExportsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page size
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// Page number
+	PageNum *int64 `json:"PageNum,omitempty" name:"PageNum"`
+
+	// Project ID (required)
+	ID *int64 `json:"ID,omitempty" name:"ID"`
+}
+
+func (r *DescribeRumLogExportsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRumLogExportsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageSize")
+	delete(f, "PageNum")
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRumLogExportsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRumLogExportsResponseParams struct {
+	// Response string
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRumLogExportsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRumLogExportsResponseParams `json:"Response"`
+}
+
+func (r *DescribeRumLogExportsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRumLogExportsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRumLogListRequestParams struct {
 	// Sorting order (required). Valid values: `desc`, `asc`.
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// Start time (required)
+	// Start time in milliseconds. It is in timestamp format and is required.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
@@ -5372,7 +5535,7 @@ type DescribeRumLogListRequestParams struct {
 	// Query statement, which is required and can contain up to 4,096 characters.
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// End time (required)
+	// End time in milliseconds. It is in timestamp format and is required.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Project ID (required)
@@ -5385,7 +5548,7 @@ type DescribeRumLogListRequest struct {
 	// Sorting order (required). Valid values: `desc`, `asc`.
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
-	// Start time (required)
+	// Start time in milliseconds. It is in timestamp format and is required.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
@@ -5397,7 +5560,7 @@ type DescribeRumLogListRequest struct {
 	// Query statement, which is required and can contain up to 4,096 characters.
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// End time (required)
+	// End time in milliseconds. It is in timestamp format and is required.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Project ID (required)
@@ -6242,6 +6405,60 @@ func (r *ResumeInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ResumeInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeProjectRequestParams struct {
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
+type ResumeProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+}
+
+func (r *ResumeProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeProjectResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ResumeProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeProjectResponseParams `json:"Response"`
+}
+
+func (r *ResumeProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -32,7 +32,7 @@ const (
 	// Encryption failed.
 	FAILEDOPERATION_ENCRYPTIONERROR = "FailedOperation.EncryptionError"
 
-	// 
+	// Tagging error.
 	FAILEDOPERATION_TAGGINGERROR = "FailedOperation.TaggingError"
 
 	// Internal error.
@@ -136,6 +136,9 @@ const (
 
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
+	// 
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
 	// External CMKs cannot be rotated.
 	UNSUPPORTEDOPERATION_EXTERNALCMKCANNOTROTATE = "UnsupportedOperation.ExternalCmkCanNotRotate"
