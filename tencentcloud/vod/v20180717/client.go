@@ -1191,6 +1191,64 @@ func (c *Client) CreateReviewTemplateWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateRoundPlayRequest() (request *CreateRoundPlayRequest) {
+    request = &CreateRoundPlayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateRoundPlay")
+    
+    
+    return
+}
+
+func NewCreateRoundPlayResponse() (response *CreateRoundPlayResponse) {
+    response = &CreateRoundPlayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRoundPlay
+// This API is used to create a playlist. You can create at most 100 playlists.
+//
+// For each video on the list, you can either use the original file or a transcoding file.
+//
+// The files must be in HLS format. Preferably, they should have the same bitrate and resolution.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRoundPlay(request *CreateRoundPlayRequest) (response *CreateRoundPlayResponse, err error) {
+    return c.CreateRoundPlayWithContext(context.Background(), request)
+}
+
+// CreateRoundPlay
+// This API is used to create a playlist. You can create at most 100 playlists.
+//
+// For each video on the list, you can either use the original file or a transcoding file.
+//
+// The files must be in HLS format. Preferably, they should have the same bitrate and resolution.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRoundPlayWithContext(ctx context.Context, request *CreateRoundPlayRequest) (response *CreateRoundPlayResponse, err error) {
+    if request == nil {
+        request = NewCreateRoundPlayRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRoundPlay require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRoundPlayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSampleSnapshotTemplateRequest() (request *CreateSampleSnapshotTemplateRequest) {
     request = &CreateSampleSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2519,6 +2577,60 @@ func (c *Client) DeleteReviewTemplateWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRoundPlayRequest() (request *DeleteRoundPlayRequest) {
+    request = &DeleteRoundPlayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteRoundPlay")
+    
+    
+    return
+}
+
+func NewDeleteRoundPlayResponse() (response *DeleteRoundPlayResponse) {
+    response = &DeleteRoundPlayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRoundPlay
+// This API is used to delete a playlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRoundPlay(request *DeleteRoundPlayRequest) (response *DeleteRoundPlayResponse, err error) {
+    return c.DeleteRoundPlayWithContext(context.Background(), request)
+}
+
+// DeleteRoundPlay
+// This API is used to delete a playlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRoundPlayWithContext(ctx context.Context, request *DeleteRoundPlayRequest) (response *DeleteRoundPlayResponse, err error) {
+    if request == nil {
+        request = NewDeleteRoundPlayRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRoundPlay require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRoundPlayResponse()
     err = c.Send(request, response)
     return
 }
@@ -4502,12 +4614,6 @@ func NewDescribeReviewTemplatesResponse() (response *DescribeReviewTemplatesResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
-//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeReviewTemplates(request *DescribeReviewTemplatesRequest) (response *DescribeReviewTemplatesResponse, err error) {
     return c.DescribeReviewTemplatesWithContext(context.Background(), request)
 }
@@ -4519,12 +4625,6 @@ func (c *Client) DescribeReviewTemplates(request *DescribeReviewTemplatesRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
-//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeReviewTemplatesWithContext(ctx context.Context, request *DescribeReviewTemplatesRequest) (response *DescribeReviewTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeReviewTemplatesRequest()
@@ -4537,6 +4637,60 @@ func (c *Client) DescribeReviewTemplatesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeReviewTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRoundPlaysRequest() (request *DescribeRoundPlaysRequest) {
+    request = &DescribeRoundPlaysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeRoundPlays")
+    
+    
+    return
+}
+
+func NewDescribeRoundPlaysResponse() (response *DescribeRoundPlaysResponse) {
+    response = &DescribeRoundPlaysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRoundPlays
+// This API is used to query playlists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRoundPlays(request *DescribeRoundPlaysRequest) (response *DescribeRoundPlaysResponse, err error) {
+    return c.DescribeRoundPlaysWithContext(context.Background(), request)
+}
+
+// DescribeRoundPlays
+// This API is used to query playlists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRoundPlaysWithContext(ctx context.Context, request *DescribeRoundPlaysRequest) (response *DescribeRoundPlaysResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoundPlaysRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRoundPlays require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRoundPlaysResponse()
     err = c.Send(request, response)
     return
 }
@@ -6667,6 +6821,64 @@ func (c *Client) ModifyReviewTemplateWithContext(ctx context.Context, request *M
     return
 }
 
+func NewModifyRoundPlayRequest() (request *ModifyRoundPlayRequest) {
+    request = &ModifyRoundPlayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyRoundPlay")
+    
+    
+    return
+}
+
+func NewModifyRoundPlayResponse() (response *ModifyRoundPlayResponse) {
+    response = &ModifyRoundPlayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRoundPlay
+// This API is used to modify a playlist.
+//
+// The modification will only take effect for new playback requests. For ongoing playback, the old playlist will be playable for seven days after the modification.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRoundPlay(request *ModifyRoundPlayRequest) (response *ModifyRoundPlayResponse, err error) {
+    return c.ModifyRoundPlayWithContext(context.Background(), request)
+}
+
+// ModifyRoundPlay
+// This API is used to modify a playlist.
+//
+// The modification will only take effect for new playback requests. For ongoing playback, the old playlist will be playable for seven days after the modification.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRoundPlayWithContext(ctx context.Context, request *ModifyRoundPlayRequest) (response *ModifyRoundPlayResponse, err error) {
+    if request == nil {
+        request = NewModifyRoundPlayRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRoundPlay require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRoundPlayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySampleSnapshotTemplateRequest() (request *ModifySampleSnapshotTemplateRequest) {
     request = &ModifySampleSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7887,6 +8099,54 @@ func (c *Client) PushUrlCacheWithContext(ctx context.Context, request *PushUrlCa
     request.SetContext(ctx)
     
     response = NewPushUrlCacheResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRebuildMediaRequest() (request *RebuildMediaRequest) {
+    request = &RebuildMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "RebuildMedia")
+    
+    
+    return
+}
+
+func NewRebuildMediaResponse() (response *RebuildMediaResponse) {
+    response = &RebuildMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RebuildMedia
+// This API is used to remaster audio/video.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+func (c *Client) RebuildMedia(request *RebuildMediaRequest) (response *RebuildMediaResponse, err error) {
+    return c.RebuildMediaWithContext(context.Background(), request)
+}
+
+// RebuildMedia
+// This API is used to remaster audio/video.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+func (c *Client) RebuildMediaWithContext(ctx context.Context, request *RebuildMediaRequest) (response *RebuildMediaResponse, err error) {
+    if request == nil {
+        request = NewRebuildMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RebuildMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRebuildMediaResponse()
     err = c.Send(request, response)
     return
 }

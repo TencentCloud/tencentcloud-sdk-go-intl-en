@@ -33,11 +33,14 @@ type AccountCreateInfo struct {
 	// Account remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Whether it is an admin account. Default value: no
+	// Whether it is an admin account. Valid values: `true` (Yes. It is an admin account when the instance is a basic edition type and `AccountType` is `L0`; it is a privileged account when the instance is a dual-server high availability edition type and `AccountType` is `L1`.), `false` (No. It is a standard account when `AccountType` is `L3`.)
 	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
 
 	// Valid values: `win-windows authentication`, `sql-sqlserver authentication`. Default value: `sql-sqlserver authentication`
 	Authentication *string `json:"Authentication,omitempty" name:"Authentication"`
+
+	// Account type, which is an extension field of `IsAdmin`. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account, default)
+	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 }
 
 type AccountDetail struct {
@@ -73,6 +76,9 @@ type AccountDetail struct {
 
 	// The host required for `win-windows authentication` account
 	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Account type. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account).
+	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 }
 
 type AccountPassword struct {
@@ -87,8 +93,11 @@ type AccountPrivilege struct {
 	// Database username
 	UserName *string `json:"UserName,omitempty" name:"UserName"`
 
-	// Database permissions. ReadWrite: read/write, ReadOnly: read-only
+	// Database permission. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `Delete` (delete the database permissions of this account), `DBOwner` (owner).
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
+
+	// Account name. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account).
+	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 }
 
 type AccountPrivilegeModifyInfo struct {
@@ -98,8 +107,11 @@ type AccountPrivilegeModifyInfo struct {
 	// Account permission change information
 	DBPrivileges []*DBPrivilegeModifyInfo `json:"DBPrivileges,omitempty" name:"DBPrivileges"`
 
-	// Whether it is an admin account
+	// Whether the account has the admin permission. Valid values: `true` (Yes. It is an admin account when the instance is a basic edition type and `AccountType` is `L0`; it is a privileged account when the instance is a dual-server high availability edition type and `AccountType` is `L1`.), `false` (No. The admin permission is disabled by default).
 	IsAdmin *bool `json:"IsAdmin,omitempty" name:"IsAdmin"`
+
+	// Account type, which is an extension field of `IsAdmin`. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account, default)
+	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
 }
 
 type AccountRemark struct {
@@ -1492,7 +1504,7 @@ type DBPrivilege struct {
 	// Database name
 	DBName *string `json:"DBName,omitempty" name:"DBName"`
 
-	// Database permissions. ReadWrite: read/write, ReadOnly: read-only
+	// Database permissions. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `DBOwner` (owner)
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
 }
 
@@ -1500,7 +1512,7 @@ type DBPrivilegeModifyInfo struct {
 	// Database name
 	DBName *string `json:"DBName,omitempty" name:"DBName"`
 
-	// Permission change information. ReadWrite: read/write, ReadOnly: read-only, Delete: the account has the permission to delete this database
+	// Permission modification information. Valid values: `ReadWrite` (read-write), `ReadOnly` (read-only), `Delete` (delete the account's permission to this database), `DBOwner` (owner).
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
 }
 
@@ -1510,6 +1522,14 @@ type DBRemark struct {
 
 	// Remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+}
+
+type DBRenameRes struct {
+	// Name of the new database
+	NewName *string `json:"NewName,omitempty" name:"NewName"`
+
+	// Name of the old database
+	OldName *string `json:"OldName,omitempty" name:"OldName"`
 }
 
 type DbNormalDetail struct {
@@ -1566,6 +1586,9 @@ type DbNormalDetail struct {
 
 	// User type
 	UserAccessDesc *string `json:"UserAccessDesc,omitempty" name:"UserAccessDesc"`
+
+	// Database creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type DbRollbackTimeInfo struct {
@@ -4571,6 +4594,10 @@ type Migration struct {
 	// Whether this is the final restoration. For a full import task, this field will be left empty.
 	// Note: this field may return ‘null’, indicating that no valid values can be obtained.
 	IsRecovery *string `json:"IsRecovery,omitempty" name:"IsRecovery"`
+
+	// Name set of renamed databases
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DBRename []*DBRenameRes `json:"DBRename,omitempty" name:"DBRename"`
 }
 
 type MigrationAction struct {
@@ -4754,6 +4781,9 @@ type ModifyBackupMigrationRequestParams struct {
 
 	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
 	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
+
+	// Name set of databases to be renamed
+	DBRename []*RenameRestoreDatabase `json:"DBRename,omitempty" name:"DBRename"`
 }
 
 type ModifyBackupMigrationRequest struct {
@@ -4776,6 +4806,9 @@ type ModifyBackupMigrationRequest struct {
 
 	// If the UploadType is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
 	BackupFiles []*string `json:"BackupFiles,omitempty" name:"BackupFiles"`
+
+	// Name set of databases to be renamed
+	DBRename []*RenameRestoreDatabase `json:"DBRename,omitempty" name:"DBRename"`
 }
 
 func (r *ModifyBackupMigrationRequest) ToJsonString() string {
@@ -4796,6 +4829,7 @@ func (r *ModifyBackupMigrationRequest) FromJsonString(s string) error {
 	delete(f, "RecoveryType")
 	delete(f, "UploadType")
 	delete(f, "BackupFiles")
+	delete(f, "DBRename")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupMigrationRequest has unknown keys!", "")
 	}
