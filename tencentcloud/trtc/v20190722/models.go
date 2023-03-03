@@ -886,6 +886,10 @@ type RecordParams struct {
 	// The maximum file duration allowed (minutes). If the output format is AAC or MP4, and the maximum file duration is exceeded, the file will be segmented. Value range: 1-1440. Default value: 1440 (24 hours). The maximum file size allowed is 2 GB. If the file size exceeds 2 GB, or the file duration exceeds 24 hours, the file will also be segmented.
 	// This parameter is invalid if the output format is HLS.
 	MaxMediaFileDuration *uint64 `json:"MaxMediaFileDuration,omitempty" name:"MaxMediaFileDuration"`
+
+	// The type of stream to record. `0`: The primary stream and substream; `1`: The primary stream; `2`: The substream.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MediaId *uint64 `json:"MediaId,omitempty" name:"MediaId"`
 }
 
 // Predefined struct for user

@@ -525,6 +525,70 @@ func (r *CreateAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDiskBackupRequestParams struct {
+	// Name of the cloud disk for which to create a backup point.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Name of the cloud disk backup point, which can contain up to 100 characters.
+	DiskBackupName *string `json:"DiskBackupName,omitempty" name:"DiskBackupName"`
+}
+
+type CreateDiskBackupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name of the cloud disk for which to create a backup point.
+	DiskId *string `json:"DiskId,omitempty" name:"DiskId"`
+
+	// Name of the cloud disk backup point, which can contain up to 100 characters.
+	DiskBackupName *string `json:"DiskBackupName,omitempty" name:"DiskBackupName"`
+}
+
+func (r *CreateDiskBackupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDiskBackupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskId")
+	delete(f, "DiskBackupName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDiskBackupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDiskBackupResponseParams struct {
+	// ID of the cloud disk backup point.
+	DiskBackupId *string `json:"DiskBackupId,omitempty" name:"DiskBackupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDiskBackupResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDiskBackupResponseParams `json:"Response"`
+}
+
+func (r *CreateDiskBackupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDiskBackupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateDisksRequestParams struct {
 	// Location of the instance. You can use this parameter to specify the attributes of the instance, such as its availability zone and project. If no project is specified, the default project will be used.
 	Placement *Placement `json:"Placement,omitempty" name:"Placement"`
@@ -1944,11 +2008,20 @@ type Disk struct {
 	// Delete the associated non-permanently reserved snapshots upon deletion of the source cloud disk. `0`: No (default). `1`: Yes. To check whether a snapshot is permanently reserved, refer to the `IsPermanent` field returned by the `DescribeSnapshots` API. 
 	DeleteSnapshot *int64 `json:"DeleteSnapshot,omitempty" name:"DeleteSnapshot"`
 
+	// Quota of cloud disk backup points, i.e., the maximum number of backup points that a cloud disk can have.
+	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
+
 	// Number of used cloud disk backups.
 	DiskBackupCount *uint64 `json:"DiskBackupCount,omitempty" name:"DiskBackupCount"`
 
 	// Type of the instance mounted to the cloud disk. Valid values: <br><li>CVM<br><li>EKS
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+
+	LastAttachInsId *string `json:"LastAttachInsId,omitempty" name:"LastAttachInsId"`
+
+
+	ErrorPrompt *string `json:"ErrorPrompt,omitempty" name:"ErrorPrompt"`
 }
 
 type DiskBackup struct {
@@ -3192,9 +3265,21 @@ type SnapshotCopyResult struct {
 }
 
 type SnapshotOperationLog struct {
+	// Status of operation. Value range:
+	// SUCCESS: Operation successful 
+	// FAILED: Operation failed 
+	// PROCESSING: Operation in process
+	OperationState *string `json:"OperationState,omitempty" name:"OperationState"`
+
+	// Start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
 	// UIN of operator.
 	// Note: This field may return null, indicating that no valid value was found.
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// ID of snapshot being operated.
+	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
 	// Operation type. Value range:
 	// SNAP_OPERATION_DELETE: Delete snapshot
@@ -3205,18 +3290,6 @@ type SnapshotOperationLog struct {
 	// ASP_OPERATION_CREATE_SNAP: Create snapshot with scheduled snapshot policy
 	// ASP_OPERATION_DELETE_SNAP: Delete snapshot from scheduled snapshot policy
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
-
-	// ID of snapshot being operated.
-	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
-
-	// Status of operation. Value range:
-	// SUCCESS: Operation successful 
-	// FAILED: Operation failed 
-	// PROCESSING: Operation in process
-	OperationState *string `json:"OperationState,omitempty" name:"OperationState"`
-
-	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// End time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`

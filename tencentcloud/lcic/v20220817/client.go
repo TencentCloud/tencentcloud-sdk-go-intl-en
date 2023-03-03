@@ -45,6 +45,558 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAddGroupMemberRequest() (request *AddGroupMemberRequest) {
+    request = &AddGroupMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "AddGroupMember")
+    
+    
+    return
+}
+
+func NewAddGroupMemberResponse() (response *AddGroupMemberResponse) {
+    response = &AddGroupMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AddGroupMember
+// This API is used to add users to a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddGroupMember(request *AddGroupMemberRequest) (response *AddGroupMemberResponse, err error) {
+    return c.AddGroupMemberWithContext(context.Background(), request)
+}
+
+// AddGroupMember
+// This API is used to add users to a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddGroupMemberWithContext(ctx context.Context, request *AddGroupMemberRequest) (response *AddGroupMemberResponse, err error) {
+    if request == nil {
+        request = NewAddGroupMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddGroupMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddGroupMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchAddGroupMemberRequest() (request *BatchAddGroupMemberRequest) {
+    request = &BatchAddGroupMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchAddGroupMember")
+    
+    
+    return
+}
+
+func NewBatchAddGroupMemberResponse() (response *BatchAddGroupMemberResponse) {
+    response = &BatchAddGroupMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchAddGroupMember
+// This API is used to add users to multiple groups at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BatchAddGroupMember(request *BatchAddGroupMemberRequest) (response *BatchAddGroupMemberResponse, err error) {
+    return c.BatchAddGroupMemberWithContext(context.Background(), request)
+}
+
+// BatchAddGroupMember
+// This API is used to add users to multiple groups at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BatchAddGroupMemberWithContext(ctx context.Context, request *BatchAddGroupMemberRequest) (response *BatchAddGroupMemberResponse, err error) {
+    if request == nil {
+        request = NewBatchAddGroupMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchAddGroupMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchAddGroupMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchCreateGroupWithMembersRequest() (request *BatchCreateGroupWithMembersRequest) {
+    request = &BatchCreateGroupWithMembersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchCreateGroupWithMembers")
+    
+    
+    return
+}
+
+func NewBatchCreateGroupWithMembersResponse() (response *BatchCreateGroupWithMembersResponse) {
+    response = &BatchCreateGroupWithMembersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchCreateGroupWithMembers
+// This API is used to create multiple groups at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BatchCreateGroupWithMembers(request *BatchCreateGroupWithMembersRequest) (response *BatchCreateGroupWithMembersResponse, err error) {
+    return c.BatchCreateGroupWithMembersWithContext(context.Background(), request)
+}
+
+// BatchCreateGroupWithMembers
+// This API is used to create multiple groups at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BatchCreateGroupWithMembersWithContext(ctx context.Context, request *BatchCreateGroupWithMembersRequest) (response *BatchCreateGroupWithMembersResponse, err error) {
+    if request == nil {
+        request = NewBatchCreateGroupWithMembersRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchCreateGroupWithMembers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchCreateGroupWithMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchCreateRoomRequest() (request *BatchCreateRoomRequest) {
+    request = &BatchCreateRoomRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchCreateRoom")
+    
+    
+    return
+}
+
+func NewBatchCreateRoomResponse() (response *BatchCreateRoomResponse) {
+    response = &BatchCreateRoomResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchCreateRoom
+// This API is used to create multiple rooms at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BatchCreateRoom(request *BatchCreateRoomRequest) (response *BatchCreateRoomResponse, err error) {
+    return c.BatchCreateRoomWithContext(context.Background(), request)
+}
+
+// BatchCreateRoom
+// This API is used to create multiple rooms at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BatchCreateRoomWithContext(ctx context.Context, request *BatchCreateRoomRequest) (response *BatchCreateRoomResponse, err error) {
+    if request == nil {
+        request = NewBatchCreateRoomRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchCreateRoom require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchCreateRoomResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchDeleteGroupMemberRequest() (request *BatchDeleteGroupMemberRequest) {
+    request = &BatchDeleteGroupMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchDeleteGroupMember")
+    
+    
+    return
+}
+
+func NewBatchDeleteGroupMemberResponse() (response *BatchDeleteGroupMemberResponse) {
+    response = &BatchDeleteGroupMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchDeleteGroupMember
+// This API is used to remove users from multiple groups at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) BatchDeleteGroupMember(request *BatchDeleteGroupMemberRequest) (response *BatchDeleteGroupMemberResponse, err error) {
+    return c.BatchDeleteGroupMemberWithContext(context.Background(), request)
+}
+
+// BatchDeleteGroupMember
+// This API is used to remove users from multiple groups at a time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) BatchDeleteGroupMemberWithContext(ctx context.Context, request *BatchDeleteGroupMemberRequest) (response *BatchDeleteGroupMemberResponse, err error) {
+    if request == nil {
+        request = NewBatchDeleteGroupMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchDeleteGroupMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchDeleteGroupMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchDeleteRecordRequest() (request *BatchDeleteRecordRequest) {
+    request = &BatchDeleteRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchDeleteRecord")
+    
+    
+    return
+}
+
+func NewBatchDeleteRecordResponse() (response *BatchDeleteRecordResponse) {
+    response = &BatchDeleteRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchDeleteRecord
+// This API is used to delete the recordings of multiple rooms.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) BatchDeleteRecord(request *BatchDeleteRecordRequest) (response *BatchDeleteRecordResponse, err error) {
+    return c.BatchDeleteRecordWithContext(context.Background(), request)
+}
+
+// BatchDeleteRecord
+// This API is used to delete the recordings of multiple rooms.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) BatchDeleteRecordWithContext(ctx context.Context, request *BatchDeleteRecordRequest) (response *BatchDeleteRecordResponse, err error) {
+    if request == nil {
+        request = NewBatchDeleteRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchDeleteRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchDeleteRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewBatchRegisterRequest() (request *BatchRegisterRequest) {
+    request = &BatchRegisterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchRegister")
+    
+    
+    return
+}
+
+func NewBatchRegisterResponse() (response *BatchRegisterResponse) {
+    response = &BatchRegisterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchRegister
+// This API is used to register multiple users (up to 1,000) at a time. If a user ID already exists, the existing one will be overwritten.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BatchRegister(request *BatchRegisterRequest) (response *BatchRegisterResponse, err error) {
+    return c.BatchRegisterWithContext(context.Background(), request)
+}
+
+// BatchRegister
+// This API is used to register multiple users (up to 1,000) at a time. If a user ID already exists, the existing one will be overwritten.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) BatchRegisterWithContext(ctx context.Context, request *BatchRegisterRequest) (response *BatchRegisterResponse, err error) {
+    if request == nil {
+        request = NewBatchRegisterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchRegister require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchRegisterResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindDocumentToRoomRequest() (request *BindDocumentToRoomRequest) {
     request = &BindDocumentToRoomRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -149,6 +701,168 @@ func (c *Client) CreateDocumentWithContext(ctx context.Context, request *CreateD
     request.SetContext(ctx)
     
     response = NewCreateDocumentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateGroupWithMembersRequest() (request *CreateGroupWithMembersRequest) {
+    request = &CreateGroupWithMembersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "CreateGroupWithMembers")
+    
+    
+    return
+}
+
+func NewCreateGroupWithMembersResponse() (response *CreateGroupWithMembersResponse) {
+    response = &CreateGroupWithMembersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateGroupWithMembers
+// This API is used to create a group and specify its members.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateGroupWithMembers(request *CreateGroupWithMembersRequest) (response *CreateGroupWithMembersResponse, err error) {
+    return c.CreateGroupWithMembersWithContext(context.Background(), request)
+}
+
+// CreateGroupWithMembers
+// This API is used to create a group and specify its members.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateGroupWithMembersWithContext(ctx context.Context, request *CreateGroupWithMembersRequest) (response *CreateGroupWithMembersResponse, err error) {
+    if request == nil {
+        request = NewCreateGroupWithMembersRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateGroupWithMembers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateGroupWithMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateGroupWithSubGroupRequest() (request *CreateGroupWithSubGroupRequest) {
+    request = &CreateGroupWithSubGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "CreateGroupWithSubGroup")
+    
+    
+    return
+}
+
+func NewCreateGroupWithSubGroupResponse() (response *CreateGroupWithSubGroupResponse) {
+    response = &CreateGroupWithSubGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateGroupWithSubGroup
+// This API is used to merge groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateGroupWithSubGroup(request *CreateGroupWithSubGroupRequest) (response *CreateGroupWithSubGroupResponse, err error) {
+    return c.CreateGroupWithSubGroupWithContext(context.Background(), request)
+}
+
+// CreateGroupWithSubGroup
+// This API is used to merge groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateGroupWithSubGroupWithContext(ctx context.Context, request *CreateGroupWithSubGroupRequest) (response *CreateGroupWithSubGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateGroupWithSubGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateGroupWithSubGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateGroupWithSubGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -271,6 +985,262 @@ func (c *Client) CreateSupervisorWithContext(ctx context.Context, request *Creat
     return
 }
 
+func NewDeleteDocumentRequest() (request *DeleteDocumentRequest) {
+    request = &DeleteDocumentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DeleteDocument")
+    
+    
+    return
+}
+
+func NewDeleteDocumentResponse() (response *DeleteDocumentResponse) {
+    response = &DeleteDocumentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteDocument
+// This API is used to delete a document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+func (c *Client) DeleteDocument(request *DeleteDocumentRequest) (response *DeleteDocumentResponse, err error) {
+    return c.DeleteDocumentWithContext(context.Background(), request)
+}
+
+// DeleteDocument
+// This API is used to delete a document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+func (c *Client) DeleteDocumentWithContext(ctx context.Context, request *DeleteDocumentRequest) (response *DeleteDocumentResponse, err error) {
+    if request == nil {
+        request = NewDeleteDocumentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDocument require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDocumentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteGroupRequest() (request *DeleteGroupRequest) {
+    request = &DeleteGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DeleteGroup")
+    
+    
+    return
+}
+
+func NewDeleteGroupResponse() (response *DeleteGroupResponse) {
+    response = &DeleteGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteGroup
+// This API is used to delete one or multiple groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteGroup(request *DeleteGroupRequest) (response *DeleteGroupResponse, err error) {
+    return c.DeleteGroupWithContext(context.Background(), request)
+}
+
+// DeleteGroup
+// This API is used to delete one or multiple groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteGroupWithContext(ctx context.Context, request *DeleteGroupRequest) (response *DeleteGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteGroupMemberRequest() (request *DeleteGroupMemberRequest) {
+    request = &DeleteGroupMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DeleteGroupMember")
+    
+    
+    return
+}
+
+func NewDeleteGroupMemberResponse() (response *DeleteGroupMemberResponse) {
+    response = &DeleteGroupMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteGroupMember
+// This API is used to remove users from a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteGroupMember(request *DeleteGroupMemberRequest) (response *DeleteGroupMemberResponse, err error) {
+    return c.DeleteGroupMemberWithContext(context.Background(), request)
+}
+
+// DeleteGroupMember
+// This API is used to remove users from a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTEACHERSNOTEXIST = "InvalidParameter.GroupTeachersNotExist"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteGroupMemberWithContext(ctx context.Context, request *DeleteGroupMemberRequest) (response *DeleteGroupMemberResponse, err error) {
+    if request == nil {
+        request = NewDeleteGroupMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteGroupMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteGroupMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRecordRequest() (request *DeleteRecordRequest) {
+    request = &DeleteRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DeleteRecord")
+    
+    
+    return
+}
+
+func NewDeleteRecordResponse() (response *DeleteRecordResponse) {
+    response = &DeleteRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRecord
+// This example shows you how to delete the recording files of a specific room.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRecord(request *DeleteRecordRequest) (response *DeleteRecordResponse, err error) {
+    return c.DeleteRecordWithContext(context.Background(), request)
+}
+
+// DeleteRecord
+// This example shows you how to delete the recording files of a specific room.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteRecordWithContext(ctx context.Context, request *DeleteRecordRequest) (response *DeleteRecordResponse, err error) {
+    if request == nil {
+        request = NewDeleteRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRoomRequest() (request *DeleteRoomRequest) {
     request = &DeleteRoomRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -319,6 +1289,444 @@ func (c *Client) DeleteRoomWithContext(ctx context.Context, request *DeleteRoomR
     request.SetContext(ctx)
     
     response = NewDeleteRoomResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCurrentMemberListRequest() (request *DescribeCurrentMemberListRequest) {
+    request = &DescribeCurrentMemberListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeCurrentMemberList")
+    
+    
+    return
+}
+
+func NewDescribeCurrentMemberListResponse() (response *DescribeCurrentMemberListResponse) {
+    response = &DescribeCurrentMemberListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCurrentMemberList
+// This API is used to get the user list of a room. This API will not work if a room has ended or expired.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+func (c *Client) DescribeCurrentMemberList(request *DescribeCurrentMemberListRequest) (response *DescribeCurrentMemberListResponse, err error) {
+    return c.DescribeCurrentMemberListWithContext(context.Background(), request)
+}
+
+// DescribeCurrentMemberList
+// This API is used to get the user list of a room. This API will not work if a room has ended or expired.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+func (c *Client) DescribeCurrentMemberListWithContext(ctx context.Context, request *DescribeCurrentMemberListRequest) (response *DescribeCurrentMemberListResponse, err error) {
+    if request == nil {
+        request = NewDescribeCurrentMemberListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCurrentMemberList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCurrentMemberListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDocumentRequest() (request *DescribeDocumentRequest) {
+    request = &DescribeDocumentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeDocument")
+    
+    
+    return
+}
+
+func NewDescribeDocumentResponse() (response *DescribeDocumentResponse) {
+    response = &DescribeDocumentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDocument
+// This API is used to get the information of a specific document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+func (c *Client) DescribeDocument(request *DescribeDocumentRequest) (response *DescribeDocumentResponse, err error) {
+    return c.DescribeDocumentWithContext(context.Background(), request)
+}
+
+// DescribeDocument
+// This API is used to get the information of a specific document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+func (c *Client) DescribeDocumentWithContext(ctx context.Context, request *DescribeDocumentRequest) (response *DescribeDocumentResponse, err error) {
+    if request == nil {
+        request = NewDescribeDocumentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDocument require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDocumentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDocumentsByRoomRequest() (request *DescribeDocumentsByRoomRequest) {
+    request = &DescribeDocumentsByRoomRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeDocumentsByRoom")
+    
+    
+    return
+}
+
+func NewDescribeDocumentsByRoomResponse() (response *DescribeDocumentsByRoomResponse) {
+    response = &DescribeDocumentsByRoomResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDocumentsByRoom
+// This API is used to get the document list of a specific room.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDocumentsByRoom(request *DescribeDocumentsByRoomRequest) (response *DescribeDocumentsByRoomResponse, err error) {
+    return c.DescribeDocumentsByRoomWithContext(context.Background(), request)
+}
+
+// DescribeDocumentsByRoom
+// This API is used to get the document list of a specific room.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDocumentsByRoomWithContext(ctx context.Context, request *DescribeDocumentsByRoomRequest) (response *DescribeDocumentsByRoomResponse, err error) {
+    if request == nil {
+        request = NewDescribeDocumentsByRoomRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDocumentsByRoom require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDocumentsByRoomResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGroupRequest() (request *DescribeGroupRequest) {
+    request = &DescribeGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeGroup")
+    
+    
+    return
+}
+
+func NewDescribeGroupResponse() (response *DescribeGroupResponse) {
+    response = &DescribeGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeGroup
+// This API is used to get the details of a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroup(request *DescribeGroupRequest) (response *DescribeGroupResponse, err error) {
+    return c.DescribeGroupWithContext(context.Background(), request)
+}
+
+// DescribeGroup
+// This API is used to get the details of a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroupWithContext(ctx context.Context, request *DescribeGroupRequest) (response *DescribeGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGroupListRequest() (request *DescribeGroupListRequest) {
+    request = &DescribeGroupListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeGroupList")
+    
+    
+    return
+}
+
+func NewDescribeGroupListResponse() (response *DescribeGroupListResponse) {
+    response = &DescribeGroupListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeGroupList
+// This API is used to query groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroupList(request *DescribeGroupListRequest) (response *DescribeGroupListResponse, err error) {
+    return c.DescribeGroupListWithContext(context.Background(), request)
+}
+
+// DescribeGroupList
+// This API is used to query groups.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroupListWithContext(ctx context.Context, request *DescribeGroupListRequest) (response *DescribeGroupListResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGroupList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeGroupMemberListRequest() (request *DescribeGroupMemberListRequest) {
+    request = &DescribeGroupMemberListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeGroupMemberList")
+    
+    
+    return
+}
+
+func NewDescribeGroupMemberListResponse() (response *DescribeGroupMemberListResponse) {
+    response = &DescribeGroupMemberListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeGroupMemberList
+// This API is used to get the members of a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroupMemberList(request *DescribeGroupMemberListRequest) (response *DescribeGroupMemberListResponse, err error) {
+    return c.DescribeGroupMemberListWithContext(context.Background(), request)
+}
+
+// DescribeGroupMemberList
+// This API is used to get the members of a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeGroupMemberListWithContext(ctx context.Context, request *DescribeGroupMemberListRequest) (response *DescribeGroupMemberListResponse, err error) {
+    if request == nil {
+        request = NewDescribeGroupMemberListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGroupMemberList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGroupMemberListResponse()
     err = c.Send(request, response)
     return
 }
@@ -427,6 +1835,118 @@ func (c *Client) DescribeRoomStatisticsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeSdkAppIdUsersRequest() (request *DescribeSdkAppIdUsersRequest) {
+    request = &DescribeSdkAppIdUsersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeSdkAppIdUsers")
+    
+    
+    return
+}
+
+func NewDescribeSdkAppIdUsersResponse() (response *DescribeSdkAppIdUsersResponse) {
+    response = &DescribeSdkAppIdUsersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSdkAppIdUsers
+// This API is used to get the user list of a specific application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSdkAppIdUsers(request *DescribeSdkAppIdUsersRequest) (response *DescribeSdkAppIdUsersResponse, err error) {
+    return c.DescribeSdkAppIdUsersWithContext(context.Background(), request)
+}
+
+// DescribeSdkAppIdUsers
+// This API is used to get the user list of a specific application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSdkAppIdUsersWithContext(ctx context.Context, request *DescribeSdkAppIdUsersRequest) (response *DescribeSdkAppIdUsersResponse, err error) {
+    if request == nil {
+        request = NewDescribeSdkAppIdUsersRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSdkAppIdUsers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSdkAppIdUsersResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserRequest() (request *DescribeUserRequest) {
     request = &DescribeUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -473,6 +1993,64 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     request.SetContext(ctx)
     
     response = NewDescribeUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetWatermarkRequest() (request *GetWatermarkRequest) {
+    request = &GetWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "GetWatermark")
+    
+    
+    return
+}
+
+func NewGetWatermarkResponse() (response *GetWatermarkResponse) {
+    response = &GetWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetWatermark
+// This API is used to get watermark settings.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetWatermark(request *GetWatermarkRequest) (response *GetWatermarkResponse, err error) {
+    return c.GetWatermarkWithContext(context.Background(), request)
+}
+
+// GetWatermark
+// This API is used to get watermark settings.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) GetWatermarkWithContext(ctx context.Context, request *GetWatermarkRequest) (response *GetWatermarkResponse, err error) {
+    if request == nil {
+        request = NewGetWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetWatermarkResponse()
     err = c.Send(request, response)
     return
 }
@@ -629,6 +2207,286 @@ func (c *Client) ModifyAppWithContext(ctx context.Context, request *ModifyAppReq
     return
 }
 
+func NewModifyGroupRequest() (request *ModifyGroupRequest) {
+    request = &ModifyGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "ModifyGroup")
+    
+    
+    return
+}
+
+func NewModifyGroupResponse() (response *ModifyGroupResponse) {
+    response = &ModifyGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyGroup
+// This API is used to modify a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyGroup(request *ModifyGroupRequest) (response *ModifyGroupResponse, err error) {
+    return c.ModifyGroupWithContext(context.Background(), request)
+}
+
+// ModifyGroup
+// This API is used to modify a group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_GROUPPARAMINVALID = "InvalidParameter.GroupParamInvalid"
+//  INVALIDPARAMETER_GROUPTEACHERNOTMEMBER = "InvalidParameter.GroupTeacherNotMember"
+//  INVALIDPARAMETER_GROUPTYPEINVALID = "InvalidParameter.GroupTypeInvalid"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
+//  RESOURCENOTFOUND_GROUPPARTUSERSNOTEXIST = "ResourceNotFound.GroupPartUsersNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyGroupWithContext(ctx context.Context, request *ModifyGroupRequest) (response *ModifyGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRoomRequest() (request *ModifyRoomRequest) {
+    request = &ModifyRoomRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "ModifyRoom")
+    
+    
+    return
+}
+
+func NewModifyRoomResponse() (response *ModifyRoomResponse) {
+    response = &ModifyRoomResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRoom
+// This API is used to modify a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyRoom(request *ModifyRoomRequest) (response *ModifyRoomResponse, err error) {
+    return c.ModifyRoomWithContext(context.Background(), request)
+}
+
+// ModifyRoom
+// This API is used to modify a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyRoomWithContext(ctx context.Context, request *ModifyRoomRequest) (response *ModifyRoomResponse, err error) {
+    if request == nil {
+        request = NewModifyRoomRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRoom require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRoomResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyUserProfileRequest() (request *ModifyUserProfileRequest) {
+    request = &ModifyUserProfileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "ModifyUserProfile")
+    
+    
+    return
+}
+
+func NewModifyUserProfileResponse() (response *ModifyUserProfileResponse) {
+    response = &ModifyUserProfileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyUserProfile
+// This API is used to modify a user profile such as the nickname and profile photo.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyUserProfile(request *ModifyUserProfileRequest) (response *ModifyUserProfileResponse, err error) {
+    return c.ModifyUserProfileWithContext(context.Background(), request)
+}
+
+// ModifyUserProfile
+// This API is used to modify a user profile such as the nickname and profile photo.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_IMAGEARGINVALID = "FailedOperation.ImageArgInvalid"
+//  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+//  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
+//  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyUserProfileWithContext(ctx context.Context, request *ModifyUserProfileRequest) (response *ModifyUserProfileResponse, err error) {
+    if request == nil {
+        request = NewModifyUserProfileRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyUserProfile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyUserProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRegisterUserRequest() (request *RegisterUserRequest) {
     request = &RegisterUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -729,6 +2587,64 @@ func (c *Client) SetAppCustomContentWithContext(ctx context.Context, request *Se
     request.SetContext(ctx)
     
     response = NewSetAppCustomContentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetWatermarkRequest() (request *SetWatermarkRequest) {
+    request = &SetWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "SetWatermark")
+    
+    
+    return
+}
+
+func NewSetWatermarkResponse() (response *SetWatermarkResponse) {
+    response = &SetWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetWatermark
+// This API is used to configure watermarks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetWatermark(request *SetWatermarkRequest) (response *SetWatermarkResponse, err error) {
+    return c.SetWatermarkWithContext(context.Background(), request)
+}
+
+// SetWatermark
+// This API is used to configure watermarks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SetWatermarkWithContext(ctx context.Context, request *SetWatermarkRequest) (response *SetWatermarkResponse, err error) {
+    if request == nil {
+        request = NewSetWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetWatermarkResponse()
     err = c.Send(request, response)
     return
 }
