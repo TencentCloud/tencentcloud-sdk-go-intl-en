@@ -341,6 +341,9 @@ const (
 	// The sync task has been deleted.
 	RESOURCENOTFOUND_SYNCTASKDELETED = "ResourceNotFound.SyncTaskDeleted"
 
+	// Unable to initialize the instance due to incorrect status.
+	RESOURCEUNAVAILABLE_BADINSTANCESTATUS = "ResourceUnavailable.BadInstanceStatus"
+
 	// An error occurred while calling COS APIs.
 	RESOURCEUNAVAILABLE_COSAPIFAILED = "ResourceUnavailable.CosApiFailed"
 

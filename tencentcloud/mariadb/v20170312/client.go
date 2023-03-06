@@ -2419,6 +2419,72 @@ func (c *Client) ModifyAccountPrivilegesWithContext(ctx context.Context, request
     return
 }
 
+func NewModifyDBEncryptAttributesRequest() (request *ModifyDBEncryptAttributesRequest) {
+    request = &ModifyDBEncryptAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "ModifyDBEncryptAttributes")
+    
+    
+    return
+}
+
+func NewModifyDBEncryptAttributesResponse() (response *ModifyDBEncryptAttributesResponse) {
+    response = &ModifyDBEncryptAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBEncryptAttributes
+// This API is used to modify the instance data encryption.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_BADINSTANCESTATUS = "ResourceUnavailable.BadInstanceStatus"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) ModifyDBEncryptAttributes(request *ModifyDBEncryptAttributesRequest) (response *ModifyDBEncryptAttributesResponse, err error) {
+    return c.ModifyDBEncryptAttributesWithContext(context.Background(), request)
+}
+
+// ModifyDBEncryptAttributes
+// This API is used to modify the instance data encryption.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_BADINSTANCESTATUS = "ResourceUnavailable.BadInstanceStatus"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) ModifyDBEncryptAttributesWithContext(ctx context.Context, request *ModifyDBEncryptAttributesRequest) (response *ModifyDBEncryptAttributesResponse, err error) {
+    if request == nil {
+        request = NewModifyDBEncryptAttributesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBEncryptAttributes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBEncryptAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstancesProjectRequest() (request *ModifyDBInstancesProjectRequest) {
     request = &ModifyDBInstancesProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},

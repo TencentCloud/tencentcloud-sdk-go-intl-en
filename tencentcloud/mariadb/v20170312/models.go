@@ -3548,6 +3548,67 @@ func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDBEncryptAttributesRequestParams struct {
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default）
+	EncryptEnabled *int64 `json:"EncryptEnabled,omitempty" name:"EncryptEnabled"`
+}
+
+type ModifyDBEncryptAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default）
+	EncryptEnabled *int64 `json:"EncryptEnabled,omitempty" name:"EncryptEnabled"`
+}
+
+func (r *ModifyDBEncryptAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBEncryptAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EncryptEnabled")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBEncryptAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBEncryptAttributesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyDBEncryptAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBEncryptAttributesResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBEncryptAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBEncryptAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstancesProjectRequestParams struct {
 	// List of IDs of instances to be modified. The ID is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
