@@ -211,6 +211,106 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     return
 }
 
+func NewDescribeCustomerBillDetailRequest() (request *DescribeCustomerBillDetailRequest) {
+    request = &DescribeCustomerBillDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerBillDetail")
+    
+    
+    return
+}
+
+func NewDescribeCustomerBillDetailResponse() (response *DescribeCustomerBillDetailResponse) {
+    response = &DescribeCustomerBillDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCustomerBillDetail
+// This API is used to query the customer bill details.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailRequest) (response *DescribeCustomerBillDetailResponse, err error) {
+    return c.DescribeCustomerBillDetailWithContext(context.Background(), request)
+}
+
+// DescribeCustomerBillDetail
+// This API is used to query the customer bill details.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillDetailWithContext(ctx context.Context, request *DescribeCustomerBillDetailRequest) (response *DescribeCustomerBillDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerBillDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerBillDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerBillDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomerBillSummaryRequest() (request *DescribeCustomerBillSummaryRequest) {
+    request = &DescribeCustomerBillSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerBillSummary")
+    
+    
+    return
+}
+
+func NewDescribeCustomerBillSummaryResponse() (response *DescribeCustomerBillSummaryResponse) {
+    response = &DescribeCustomerBillSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCustomerBillSummary
+// This API is used to query the total amount of customer bills.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillSummary(request *DescribeCustomerBillSummaryRequest) (response *DescribeCustomerBillSummaryResponse, err error) {
+    return c.DescribeCustomerBillSummaryWithContext(context.Background(), request)
+}
+
+// DescribeCustomerBillSummary
+// This API is used to query the total amount of customer bills.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillSummaryWithContext(ctx context.Context, request *DescribeCustomerBillSummaryRequest) (response *DescribeCustomerBillSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerBillSummaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerBillSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerBillSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
     request = &GetCountryCodesRequest{
         BaseRequest: &tchttp.BaseRequest{},

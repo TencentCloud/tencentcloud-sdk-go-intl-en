@@ -3273,6 +3273,68 @@ func (c *Client) ModifyMaintainPeriodConfigWithContext(ctx context.Context, requ
     return
 }
 
+func NewModifyVipVportRequest() (request *ModifyVipVportRequest) {
+    request = &ModifyVipVportRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "ModifyVipVport")
+    
+    
+    return
+}
+
+func NewModifyVipVportResponse() (response *ModifyVipVportResponse) {
+    response = &ModifyVipVportResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyVipVport
+// This API is used to modify the IP and port of an instance group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyVipVport(request *ModifyVipVportRequest) (response *ModifyVipVportResponse, err error) {
+    return c.ModifyVipVportWithContext(context.Background(), request)
+}
+
+// ModifyVipVport
+// This API is used to modify the IP and port of an instance group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyVipVportWithContext(ctx context.Context, request *ModifyVipVportRequest) (response *ModifyVipVportResponse, err error) {
+    if request == nil {
+        request = NewModifyVipVportRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyVipVport require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyVipVportResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOfflineClusterRequest() (request *OfflineClusterRequest) {
     request = &OfflineClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3427,6 +3489,7 @@ func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
 // This API is used to enable the audit service for a TDSQL-C for MySQL instance.
 //
 // error code that may be returned:
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
     return c.OpenAuditServiceWithContext(context.Background(), request)
@@ -3436,6 +3499,7 @@ func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *O
 // This API is used to enable the audit service for a TDSQL-C for MySQL instance.
 //
 // error code that may be returned:
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 func (c *Client) OpenAuditServiceWithContext(ctx context.Context, request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
     if request == nil {

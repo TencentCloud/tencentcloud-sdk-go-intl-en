@@ -5271,6 +5271,100 @@ type ModifyParamItem struct {
 	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
 }
 
+// Predefined struct for user
+type ModifyVipVportRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance group ID
+	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+
+	// Target IP to be modified
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Target port to be modified
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Database type. Valid values: 
+	// <li> MYSQL </li>
+	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Valid hours of old IPs. If it is set to `0` hours, the IPs will be released immediately.
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+}
+
+type ModifyVipVportRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance group ID
+	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+
+	// Target IP to be modified
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Target port to be modified
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Database type. Valid values: 
+	// <li> MYSQL </li>
+	DbType *string `json:"DbType,omitempty" name:"DbType"`
+
+	// Valid hours of old IPs. If it is set to `0` hours, the IPs will be released immediately.
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+}
+
+func (r *ModifyVipVportRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVipVportRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceGrpId")
+	delete(f, "Vip")
+	delete(f, "Vport")
+	delete(f, "DbType")
+	delete(f, "OldIpReserveHours")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVipVportRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyVipVportResponseParams struct {
+	// Async task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyVipVportResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyVipVportResponseParams `json:"Response"`
+}
+
+func (r *ModifyVipVportResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVipVportResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Module struct {
 	// Whether it is supported. Valid values: `yes`, `no`.
 	IsDisable *string `json:"IsDisable,omitempty" name:"IsDisable"`
