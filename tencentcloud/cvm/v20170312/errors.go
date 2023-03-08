@@ -461,6 +461,9 @@ const (
 	// The subnet is not in the CDC cluster.
 	INVALIDPARAMETERVALUE_NOTCDCSUBNET = "InvalidParameterValue.NotCdcSubnet"
 
+	// 
+	INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
+
 	// Unsupported operation.
 	INVALIDPARAMETERVALUE_NOTSUPPORTED = "InvalidParameterValue.NotSupported"
 
@@ -490,6 +493,9 @@ const (
 
 	// Invalid parameter value: parameter value is too long.
 	INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+
+	// Invalid UUID.
+	INVALIDPARAMETERVALUE_UUIDMALFORMED = "InvalidParameterValue.UuidMalformed"
 
 	// The VPC ID `xxx` is invalid. Please provide a VPC ID in the format of vpc-xxxxxxxx, where “x” can be a lowercase letter or number.
 	INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
@@ -713,6 +719,9 @@ const (
 	// The specified instance or network cannot use the bandwidth package.
 	UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 
+	// Only one snapshot can be created in 24 hours. 
+	UNSUPPORTEDOPERATION_DISKSNAPCREATETIMETOOOLD = "UnsupportedOperation.DiskSnapCreateTimeTooOld"
+
 	// An ENI is bound to the CVM. Please unbind the ENI from the CVM before switching to VPC.
 	UNSUPPORTEDOPERATION_ELASTICNETWORKINTERFACE = "UnsupportedOperation.ElasticNetworkInterface"
 
@@ -721,6 +730,9 @@ const (
 
 	// You cannot change the model of a heterogeneous instance.
 	UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
+
+	// 
+	UNSUPPORTEDOPERATION_HIBERNATIONFORNORMALINSTANCE = "UnsupportedOperation.HibernationForNormalInstance"
 
 	// IPv6 instances cannot be migrated from Classiclink to VPC.
 	UNSUPPORTEDOPERATION_IPV6NOTSUPPORTVPCMIGRATE = "UnsupportedOperation.IPv6NotSupportVpcMigrate"
@@ -812,6 +824,9 @@ const (
 	// This operation is not supported for the instance with a termination schedule. Please cancel the scheduled termination time in the instance details page and try again.
 	UNSUPPORTEDOPERATION_INVALIDINSTANCENOTSUPPORTEDPROTECTEDINSTANCE = "UnsupportedOperation.InvalidInstanceNotSupportedProtectedInstance"
 
+	// Instances with swap disks are not supported.
+	UNSUPPORTEDOPERATION_INVALIDINSTANCEWITHSWAPDISK = "UnsupportedOperation.InvalidInstanceWithSwapDisk"
+
 	// The current operation is only supported for Tencent Cloud International users.
 	UNSUPPORTEDOPERATION_INVALIDPERMISSIONNONINTERNATIONALACCOUNT = "UnsupportedOperation.InvalidPermissionNonInternationalAccount"
 
@@ -830,11 +845,14 @@ const (
 	// The custom images created with the market images cannot be exported.
 	UNSUPPORTEDOPERATION_MARKETIMAGEEXPORTUNSUPPORTED = "UnsupportedOperation.MarketImageExportUnsupported"
 
-	// Encryption attributes of system disk cannot be modified. For example, you cannot reinstall the encrypted instance with a non-encrypted image.
+	// Encryption attributes of the system disk cannot be modified. 
 	UNSUPPORTEDOPERATION_MODIFYENCRYPTIONNOTSUPPORTED = "UnsupportedOperation.ModifyEncryptionNotSupported"
 
 	// An instance bound with CLB does not support modifying its VPC attributes.
 	UNSUPPORTEDOPERATION_MODIFYVPCWITHCLB = "UnsupportedOperation.ModifyVPCWithCLB"
+
+	// This instance is configured with ClassLink. Please cancel the association and continue. 
+	UNSUPPORTEDOPERATION_MODIFYVPCWITHCLASSLINK = "UnsupportedOperation.ModifyVPCWithClassLink"
 
 	// This instance type does not support spot instances.
 	UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
@@ -859,6 +877,9 @@ const (
 
 	// This image does not support instance reinstallation.
 	UNSUPPORTEDOPERATION_RAWLOCALDISKINSREINSTALLTOQCOW2 = "UnsupportedOperation.RawLocalDiskInsReinstalltoQcow2"
+
+	// The RedHat image cannot be exported.
+	UNSUPPORTEDOPERATION_REDHATIMAGEEXPORTUNSUPPORTED = "UnsupportedOperation.RedHatImageExportUnsupported"
 
 	// An instance with an enterprise operating system installed cannot be returned.
 	UNSUPPORTEDOPERATION_REDHATINSTANCETERMINATEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceTerminateUnsupported"
@@ -889,6 +910,9 @@ const (
 
 	// Configuration adjustment of the same type is not supported for instances with no charges when shut down.
 	UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGINGSAMEFAMILY = "UnsupportedOperation.StoppedModeStopChargingSameFamily"
+
+	// For an underwriting instance, `RenewFlag` can only be set to `NOTIFY_AND_AUTO_RENEW`.
+	UNSUPPORTEDOPERATION_UNDERWRITINGINSTANCETYPEONLYSUPPORTAUTORENEW = "UnsupportedOperation.UnderwritingInstanceTypeOnlySupportAutoRenew"
 
 	// The specified model does not support cross-model configuration adjustment.
 	UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceFamily"

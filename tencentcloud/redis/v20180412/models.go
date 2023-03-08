@@ -252,6 +252,14 @@ type BackupDownloadInfo struct {
 	InnerDownloadUrl *string `json:"InnerDownloadUrl,omitempty" name:"InnerDownloadUrl"`
 }
 
+type BackupLimitVpcItem struct {
+	// Region of the VPC of the custom backup file download address.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// VPC list of the custom backup file download address.
+	VpcList []*string `json:"VpcList,omitempty" name:"VpcList"`
+}
+
 type BigKeyInfo struct {
 	// Database
 	DB *int64 `json:"DB,omitempty" name:"DB"`
@@ -1300,8 +1308,30 @@ type DescribeBackupUrlRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup ID, which can be queried through the `DescribeInstanceBackups` API
+	// Backup ID, which can be obtained through the `RedisBackupSet` parameter returned by the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
 	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Type of the network restriction for downloading backup files. If this parameter is not configured, the user-defined configuration will be used.
+	// 
+	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
+	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
+	// - `Customize`: Backup files can be downloaded only in the customized VPC.
+	LimitType *string `json:"LimitType,omitempty" name:"LimitType"`
+
+	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitempty" name:"VpcComparisonSymbol"`
+
+	// Whether backups can be downloaded at the custom `LimitIp` address.
+	// 
+	// - `In` (default value): Download is allowed for the custom IP.
+	// - `NotIn`: Download is not allowed for the custom IP.
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitempty" name:"IpComparisonSymbol"`
+
+	// VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitempty" name:"LimitVpc"`
+
+	// VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
+	LimitIp []*string `json:"LimitIp,omitempty" name:"LimitIp"`
 }
 
 type DescribeBackupUrlRequest struct {
@@ -1310,8 +1340,30 @@ type DescribeBackupUrlRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup ID, which can be queried through the `DescribeInstanceBackups` API
+	// Backup ID, which can be obtained through the `RedisBackupSet` parameter returned by the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
 	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Type of the network restriction for downloading backup files. If this parameter is not configured, the user-defined configuration will be used.
+	// 
+	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
+	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
+	// - `Customize`: Backup files can be downloaded only in the customized VPC.
+	LimitType *string `json:"LimitType,omitempty" name:"LimitType"`
+
+	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitempty" name:"VpcComparisonSymbol"`
+
+	// Whether backups can be downloaded at the custom `LimitIp` address.
+	// 
+	// - `In` (default value): Download is allowed for the custom IP.
+	// - `NotIn`: Download is not allowed for the custom IP.
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitempty" name:"IpComparisonSymbol"`
+
+	// VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitempty" name:"LimitVpc"`
+
+	// VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
+	LimitIp []*string `json:"LimitIp,omitempty" name:"LimitIp"`
 }
 
 func (r *DescribeBackupUrlRequest) ToJsonString() string {
@@ -1328,6 +1380,11 @@ func (r *DescribeBackupUrlRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "BackupId")
+	delete(f, "LimitType")
+	delete(f, "VpcComparisonSymbol")
+	delete(f, "IpComparisonSymbol")
+	delete(f, "LimitVpc")
+	delete(f, "LimitIp")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupUrlRequest has unknown keys!", "")
 	}
@@ -1346,7 +1403,7 @@ type DescribeBackupUrlResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Filenames []*string `json:"Filenames,omitempty" name:"Filenames"`
 
-	// List of backup file information
+	// List of backup file information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BackupInfos []*BackupDownloadInfo `json:"BackupInfos,omitempty" name:"BackupInfos"`
 
@@ -1662,14 +1719,14 @@ func (r *DescribeInstanceAccountResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceBackupsRequestParams struct {
-	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Instance list size. Default value: 20
+	// Number of backups returned per page. Default value: `20`. Maximum value: `100`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`.
+	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 16:46:34. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
@@ -1677,21 +1734,30 @@ type DescribeInstanceBackupsRequestParams struct {
 	// End time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 19:09:26. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// 1: backup in process; 2: backing up normally; 3: converting from backup to RDB file; 4: RDB conversion completed; -1: backup expired; -2: backup deleted.
+	// Backup task status:
+	// `1`: The backup is in the process.
+	// `2`: The backup is normal.
+	// `3`: The backup is being converted to an RDB file.
+	// `4`: Conversion to RDB has been completed.
+	// `-1`: The backup expired.
+	// `-2`: The backup has been deleted.
 	Status []*int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance name, which can be fuzzily searched.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 }
 
 type DescribeInstanceBackupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Instance list size. Default value: 20
+	// Number of backups returned per page. Default value: `20`. Maximum value: `100`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`.
+	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 16:46:34. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
@@ -1699,8 +1765,17 @@ type DescribeInstanceBackupsRequest struct {
 	// End time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 19:09:26. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// 1: backup in process; 2: backing up normally; 3: converting from backup to RDB file; 4: RDB conversion completed; -1: backup expired; -2: backup deleted.
+	// Backup task status:
+	// `1`: The backup is in the process.
+	// `2`: The backup is normal.
+	// `3`: The backup is being converted to an RDB file.
+	// `4`: Conversion to RDB has been completed.
+	// `-1`: The backup expired.
+	// `-2`: The backup has been deleted.
 	Status []*int64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance name, which can be fuzzily searched.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 }
 
 func (r *DescribeInstanceBackupsRequest) ToJsonString() string {
@@ -1715,12 +1790,13 @@ func (r *DescribeInstanceBackupsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "InstanceId")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "InstanceId")
 	delete(f, "BeginTime")
 	delete(f, "EndTime")
 	delete(f, "Status")
+	delete(f, "InstanceName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceBackupsRequest has unknown keys!", "")
 	}
@@ -1729,10 +1805,10 @@ func (r *DescribeInstanceBackupsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceBackupsResponseParams struct {
-	// Total number of backups
+	// Total number of backups.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Array of instance backups
+	// Array of instance backups.
 	BackupSet []*RedisBackupSet `json:"BackupSet,omitempty" name:"BackupSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2869,10 +2945,10 @@ func (r *DescribeInstanceZoneInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
-	// Number of instances. Default value: 20. Maximum value: 1000.
+	// Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`.
+	// Pagination offset, which is an integral multiple of `Limit`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Instance ID, such as crs-6ubhgouj.
@@ -2954,10 +3030,10 @@ type DescribeInstancesRequestParams struct {
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number of instances. Default value: 20. Maximum value: 1000.
+	// Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`.
+	// Pagination offset, which is an integral multiple of `Limit`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Instance ID, such as crs-6ubhgouj.
@@ -3346,7 +3422,7 @@ func (r *DescribeProductInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProductInfoResponseParams struct {
-	// Sale information of a region
+	// Sale information of a region.
 	RegionSet []*RegionConf `json:"RegionSet,omitempty" name:"RegionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3618,32 +3694,32 @@ func (r *DescribeProxySlowLogResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeReplicationGroupRequestParams struct {
-	// Instance list size. Default value: 20
+	// Number of instances returned per page. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`
+	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Replication group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Instance ID/name. Fuzzy query is supported.
+	// Keyword for fuzzy search, which can be an instance name or instance ID.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
 type DescribeReplicationGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance list size. Default value: 20
+	// Number of instances returned per page. Default value: `20`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit`
+	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Replication group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Instance ID/name. Fuzzy query is supported.
+	// Keyword for fuzzy search, which can be an instance name or instance ID.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -3671,10 +3747,10 @@ func (r *DescribeReplicationGroupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeReplicationGroupResponseParams struct {
-	// Number of replication group
+	// Number of replication groups
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
-	// Replication group info
+	// Replication group information
 	Groups []*Groups `json:"Groups,omitempty" name:"Groups"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3708,7 +3784,7 @@ type DescribeSlowLogRequestParams struct {
 	// The end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The average execution time threshold of slow query in microseconds
+	// The average execution time threshold of slow query in ms.
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
 	// Number of slow queries displayed per page. Default value: `20`.
@@ -3733,7 +3809,7 @@ type DescribeSlowLogRequest struct {
 	// The end time
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The average execution time threshold of slow query in microseconds
+	// The average execution time threshold of slow query in ms.
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
 	// Number of slow queries displayed per page. Default value: `20`.
@@ -4873,7 +4949,7 @@ type InstanceParamHistory struct {
 }
 
 type InstanceProxySlowlogDetail struct {
-	// Slow query duration
+	// Duration of the slow query in ms.
 	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
 
 	// Client address
@@ -4904,22 +4980,22 @@ type InstanceSet struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// User's Appid
+	// User AppID
 	Appid *int64 `json:"Appid,omitempty" name:"Appid"`
 
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan.
+	// Region ID. <ul><li>`1`: Guangzhou. </li><li>`4`: Shanghai. </li><li>`5`: Hong Kong (China). </li><li>`6`: Toronto. </li> <li>`7`: Shanghai Finance. </li> <li>`8`: Beijing. </li> <li>`9`: Singapore. </li> <li>`11`: Shenzhen Finance. </li> <li>`15`: West US (Silicon Valley). </li><li>`16`: Chengdu. </li><li>`17`: Frankfurt. </li><li>`18`: Seoul. </li><li>`19`: Chongqing. </li><li>`21`: Mumbai. </li><li>`22`: East US (Virginia). </li><li>`23`: Bangkok. </li><li>`24`: Moscow. </li><li>`25`: Tokyo. </li></ul>
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Region ID
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// VPC ID, such as 75101.
+	// VPC ID, such as `75101`.
 	VpcId *int64 `json:"VpcId,omitempty" name:"VpcId"`
 
-	// VPC subnet ID, such as 46315.
+	// Subnet ID, such as `46315`.
 	SubnetId *int64 `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// Current instance status. <ul><li>`0`: To be initialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
@@ -4937,7 +5013,7 @@ type InstanceSet struct {
 	// Instance capacity in MB
 	Size *float64 `json:"Size,omitempty" name:"Size"`
 
-	// This field has been disused
+	// This field has been disused. You can use the [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
 	SizeUsed *float64 `json:"SizeUsed,omitempty" name:"SizeUsed"`
 
 	// Instance type. <ul><li>`1`: Redis 2.8 memory edition in cluster architecture. </li><li>`2`: Redis 2.8 memory edition in standard architecture. </li><li>`3`: CKV 3.2 memory edition in standard architecture. </li><li>`4`: CKV 3.2 memory edition in cluster architecture. </li><li>`5`: Redis 2.8 memory edition in standalone architecture. </li></li><li>`6`: Redis 4.0 memory edition in standard architecture. </li></li><li>`7`: Redis 4.0 memory edition in cluster architecture. </li></li><li>`8`: Redis 5.0 memory edition in standard architecture. </li></li><li>`9`: Redis 5.0 memory edition in cluster architecture. </li></ul>
@@ -5041,8 +5117,8 @@ type InstanceSet struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Monitoring granularity type. <ul><li>`1m`: Monitoring at 1-minute granularity). </li><li>`5s`: Monitoring at 5-second granularity. </li></ul>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Monitoring granularity type. <ul><li>`1m`: Monitoring at 1-minute granularity. </li><li>`5s`: Monitoring at 5-second granularity. </li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MonitorVersion *string `json:"MonitorVersion,omitempty" name:"MonitorVersion"`
 
 	// The minimum number of max client connections
@@ -5141,7 +5217,7 @@ type InstanceTextParam struct {
 }
 
 type Instances struct {
-	// User App ID
+	// User AppID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
 	// Instance ID
@@ -5150,7 +5226,7 @@ type Instances struct {
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley)
+	// Region ID. <ul><li>`1`: Guangzhou. </li><li>`4`: Shanghai. </li><li>`5`: Hong Kong (China). </li> <li>`6`: Toronto. </li> <li>`7`: Shanghai Finance. </li> <li>`8`: Beijing. </li> <li>`9`: Singapore. </li> <li>`11`: Shenzhen Finance. </li> <li>`15`: West US (Silicon Valley). </li> </ul>
 	RegionId *uint64 `json:"RegionId,omitempty" name:"RegionId"`
 
 	// Region ID
@@ -5162,45 +5238,45 @@ type Instances struct {
 	// Number of shards
 	RedisShardNum *int64 `json:"RedisShardNum,omitempty" name:"RedisShardNum"`
 
-	// Shard size
+	// Shard memory size.
 	RedisShardSize *int64 `json:"RedisShardSize,omitempty" name:"RedisShardSize"`
 
 	// Instance disk size
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
-	// Engine: Redis community edition, Tencent Cloud CKV
+	// Engine: Redis Community Edition, Tencent Cloud CKV.
 	Engine *string `json:"Engine,omitempty" name:"Engine"`
 
-	// Instance role. Valid values: `rw` (read-write), `r`( read-only)
+	// Read-write permission of the instance. <ul><li>`rw`: Read/Write. </li><li>`r`: Read-only. </li></ul>
 	Role *string `json:"Role,omitempty" name:"Role"`
 
 	// Instance VIP
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
 	// Internal parameter, which can be ignored.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
 
-	// VPC ID, such as 75101
+	// VPC ID, such as `75101`.
 	VpcID *int64 `json:"VpcID,omitempty" name:"VpcID"`
 
-	// Instance Port
+	// Instance port
 	VPort *int64 `json:"VPort,omitempty" name:"VPort"`
 
-	// Instance status. 0: to be initialized; 1: in process; 2: running; -2: isolated; -3: to be deleted
+	// Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Repository ID
 	GrocerySysId *int64 `json:"GrocerySysId,omitempty" name:"GrocerySysId"`
 
-	// Instance type. Valid values: `1` (Redis 2.8 memory edition in cluster architecture), `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `5` (Redis 2.8 memory edition in standalone architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture)
+	// Instance type. <ul><li>`1`: Redis 2.8 Memory Edition (Cluster Architecture). </li><li>`2`: Redis 2.8 Memory Edition (Standard Architecture). </li><li>`3`: CKV 3.2 Memory Edition (Standard Architecture). </li><li>`4`: CKV 3.2 Memory Edition (Cluster Architecture). </li><li>`5`: Redis 2.8 Standalone Edition. </li><li>`6`: Redis 4.0 Memory Edition (Standard Architecture). </li><li>`7`: Redis 4.0 Memory Edition (Cluster Architecture). </li><li>`8`: Redis 5.0 Memory Edition (Standard Architecture). </li><li>`9`: Redis 5.0 Memory Edition (Cluster Architecture). </li></ul>
 	ProductType *int64 `json:"ProductType,omitempty" name:"ProductType"`
 
-	// Creation time
+	// The time when the instance was added to the replication group.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Update time
+	// The time when instances in the replication group were updated.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
@@ -5434,13 +5510,13 @@ type ModifyAutoBackupConfigRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter cannot be modified for now.
+	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
 	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
-	// Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
+	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
-	// Automatic backup type: 1 (scheduled rollback)
+	// Automatic backup type. `1`: Scheduled rollback.
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 }
 
@@ -5450,13 +5526,13 @@ type ModifyAutoBackupConfigRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Date. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter cannot be modified for now.
+	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
 	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
-	// Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
+	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
-	// Automatic backup type: 1 (scheduled rollback)
+	// Automatic backup type. `1`: Scheduled rollback.
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 }
 
@@ -5487,10 +5563,10 @@ type ModifyAutoBackupConfigResponseParams struct {
 	// Automatic backup type: 1 (scheduled rollback)
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 
-	// Date. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
 	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
-	// Time period. Value range: 00:00-01:00, 01:00-02:00...... 23:00-00:00
+	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
 	// Retention time of full backup files in days
@@ -5993,20 +6069,31 @@ type ModifyNetworkConfigRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Operation type. changeVip: modify the VIP of an instance; changeVpc: modify the subnet of an instance; changeBaseToVpc: change from classic network to VPC
+	// Network change type. Valid values:
+	// - `changeVip`: VPC change, including the private IPv4 address and port.
+	// - `changeVpc`: Subnet change.
+	// - `changeBaseToVpc`: Change from classic network to VPC.
+	// - `changeVPort`: Port change.
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
-	// VIP address, which is required for the `changeVip` operation. If this parameter is left blank, a random one will be assigned by default.
+	// Private IPv4 address of the instance, which is required if `Operation` is `changeVip`.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
-	// VPC ID, which is required for `changeVpc` and `changeBaseToVpc` operations.
+	// VPC ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID, which is required for `changeVpc` and `changeBaseToVpc` operations
+	// Subnet ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Retention time of the original VIP in days. Note that this parameter works only in the latest SDK. In earlier SDKs, the original VIP is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
+	// Retention period of the original private IPv4 address
+	// - Unit: Days.
+	// - Valid values: `0`, `1`, `2`, `3`, `7`, `15`.
+	// 
+	// **Note**: You can set the retention period of the original address only in the latest SDK. In earlier SDKs, the original address is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
 	Recycle *int64 `json:"Recycle,omitempty" name:"Recycle"`
+
+	// Network port after the change, which is required if `Operation` is `changeVPort` or `changeVip`. Value range: [1024,65535].
+	VPort *int64 `json:"VPort,omitempty" name:"VPort"`
 }
 
 type ModifyNetworkConfigRequest struct {
@@ -6015,20 +6102,31 @@ type ModifyNetworkConfigRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Operation type. changeVip: modify the VIP of an instance; changeVpc: modify the subnet of an instance; changeBaseToVpc: change from classic network to VPC
+	// Network change type. Valid values:
+	// - `changeVip`: VPC change, including the private IPv4 address and port.
+	// - `changeVpc`: Subnet change.
+	// - `changeBaseToVpc`: Change from classic network to VPC.
+	// - `changeVPort`: Port change.
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
-	// VIP address, which is required for the `changeVip` operation. If this parameter is left blank, a random one will be assigned by default.
+	// Private IPv4 address of the instance, which is required if `Operation` is `changeVip`.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
-	// VPC ID, which is required for `changeVpc` and `changeBaseToVpc` operations.
+	// VPC ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID, which is required for `changeVpc` and `changeBaseToVpc` operations
+	// Subnet ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Retention time of the original VIP in days. Note that this parameter works only in the latest SDK. In earlier SDKs, the original VIP is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
+	// Retention period of the original private IPv4 address
+	// - Unit: Days.
+	// - Valid values: `0`, `1`, `2`, `3`, `7`, `15`.
+	// 
+	// **Note**: You can set the retention period of the original address only in the latest SDK. In earlier SDKs, the original address is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
 	Recycle *int64 `json:"Recycle,omitempty" name:"Recycle"`
+
+	// Network port after the change, which is required if `Operation` is `changeVPort` or `changeVip`. Value range: [1024,65535].
+	VPort *int64 `json:"VPort,omitempty" name:"VPort"`
 }
 
 func (r *ModifyNetworkConfigRequest) ToJsonString() string {
@@ -6049,6 +6147,7 @@ func (r *ModifyNetworkConfigRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "SubnetId")
 	delete(f, "Recycle")
+	delete(f, "VPort")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkConfigRequest has unknown keys!", "")
 	}
@@ -6057,17 +6156,20 @@ func (r *ModifyNetworkConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyNetworkConfigResponseParams struct {
-	// Execution status: true or false
+	// Execution status. Ignore this parameter.
 	Status *bool `json:"Status,omitempty" name:"Status"`
 
-	// Subnet ID
+	// New subnet ID of the instance
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// VPC ID
+	// New VPC ID of the instance
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// VIP address
+	// New private IPv4 address of the instance
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -6351,16 +6453,28 @@ type RedisBackupSet struct {
 	// Backup ID
 	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
 
-	// Backup type. 1: manual backup initiated by the user; 0: automatic backup in the early morning initiated by the system
+	// Backup type
+	// 
+	// - `1`: Manual backup initiated by the user.
+	// - `0`: Automatic backup in the early morning initiated by the system.
 	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
 
-	// Backup status. 1: backup is locked by another process; 2: backup is normal and not locked by any process; -1: backup has expired; 3: backup is being exported; 4: backup is exported successfully
+	// Backup status 
+	// 
+	// - `1`: The backup is locked by another process.
+	// - `2`: The backup is normal and not locked by any process.
+	// - `-1`: The backup expired.
+	// - `3`: The backup is being exported.
+	// - `4`: The backup was exported successfully.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Backup remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Whether a backup is locked. 0: no; 1: yes.
+	// Whether the backup is locked
+	// 
+	// - `0`: Not locked.
+	// - `1`: Locked.
 	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
 
 	// Internal field, which can be ignored.
@@ -6374,6 +6488,24 @@ type RedisBackupSet struct {
 	// Internal field, which can be ignored.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// The region where the local backup resides.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Backup end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Backup file type
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// Backup file expiration time
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
 type RedisCommonInstanceList struct {
@@ -6438,16 +6570,16 @@ type RedisNode struct {
 }
 
 type RedisNodeInfo struct {
-	// Node type. 0: master node; 1: replica node
+	// Node type. <ul><li>`0`: Master node.</li><li>`1`: Replica node.</li></ul>
 	NodeType *int64 `json:"NodeType,omitempty" name:"NodeType"`
 
-	// ID of the master or replica node, which is not required during instance creation
+	// Master or replica node ID. <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance. </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul>
 	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
 
-	// AZ ID of the master or replica node
+	// ID of the AZ of the master or replica node
 	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// AZ name of the master or replica node
+	// Name of the AZ of the master or replica node
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 }
 
@@ -7168,7 +7300,7 @@ type UpgradeInstanceRequestParams struct {
 	// The ID of instance to be modified.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
+	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
 	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
 
 	// New number of instance shards. <ul><li>This parameter is not required for standard architecture instances, but for cluster architecture instances. </li><li>For cluster architecture, you can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
@@ -7187,7 +7319,7 @@ type UpgradeInstanceRequest struct {
 	// The ID of instance to be modified.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
+	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
 	MemSize *uint64 `json:"MemSize,omitempty" name:"MemSize"`
 
 	// New number of instance shards. <ul><li>This parameter is not required for standard architecture instances, but for cluster architecture instances. </li><li>For cluster architecture, you can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>

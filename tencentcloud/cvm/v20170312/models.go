@@ -107,7 +107,7 @@ func (r *AllocateHostsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AllocateHostsResponseParams struct {
-	// The ID list of the CVM instances newly created on the CDH.
+	// IDs of created instances
 	HostIdSet []*string `json:"HostIdSet,omitempty" name:"HostIdSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -630,7 +630,7 @@ type CreateImageRequestParams struct {
 	// Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
 	Sysprep *string `json:"Sysprep,omitempty" name:"Sysprep"`
 
-	// Specified data disk ID included in the full image created from the instance.
+	// IDs of data disks included in the image. 
 	DataDiskIds []*string `json:"DataDiskIds,omitempty" name:"DataDiskIds"`
 
 	// Specified snapshot ID used to create an image. A system disk snapshot must be included. It cannot be passed together with `InstanceId`.
@@ -664,7 +664,7 @@ type CreateImageRequest struct {
 	// Click [here](https://intl.cloud.tencent.com/document/product/213/43498?from_cn_redirect=1) to learn more about Sysprep.
 	Sysprep *string `json:"Sysprep,omitempty" name:"Sysprep"`
 
-	// Specified data disk ID included in the full image created from the instance.
+	// IDs of data disks included in the image. 
 	DataDiskIds []*string `json:"DataDiskIds,omitempty" name:"DataDiskIds"`
 
 	// Specified snapshot ID used to create an image. A system disk snapshot must be included. It cannot be passed together with `InstanceId`.
@@ -3351,6 +3351,9 @@ type ExportImagesResponseParams struct {
 	// ID of the image export task
 	TaskId *uint64 `json:"TaskId,omitempty" name:"TaskId"`
 
+	// List of COS filenames of the exported images
+	CosPaths []*string `json:"CosPaths,omitempty" name:"CosPaths"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -3537,11 +3540,11 @@ type Image struct {
 
 type ImageOsList struct {
 	// Supported Windows OS
-	// Note: This field may return null, indicating that no valid value is found.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Windows []*string `json:"Windows,omitempty" name:"Windows"`
 
 	// Supported Linux OS
-	// Note: This field may return null, indicating that no valid value is found.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Linux []*string `json:"Linux,omitempty" name:"Linux"`
 }
 
@@ -4441,6 +4444,16 @@ type Instance struct {
 
 	// Whether the termination protection is enabled. Values: <br><li>`TRUE`: Enable instance protection, which means that this instance can not be deleted by an API action.<br><li>`FALSE`: Do not enable the instance protection.<br><br>Default value: `FALSE`.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitempty" name:"DisableApiTermination"`
+
+	// Default login user
+	DefaultLoginUser *string `json:"DefaultLoginUser,omitempty" name:"DefaultLoginUser"`
+
+	// Default login port
+	DefaultLoginPort *int64 `json:"DefaultLoginPort,omitempty" name:"DefaultLoginPort"`
+
+	// Latest operation errors of the instance.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LatestOperationErrorMsg *string `json:"LatestOperationErrorMsg,omitempty" name:"LatestOperationErrorMsg"`
 }
 
 type InstanceChargePrepaid struct {
@@ -4537,6 +4550,12 @@ type InstanceTypeQuotaItem struct {
 
 	// Descriptive information of the instance.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+
+	GpuCount *float64 `json:"GpuCount,omitempty" name:"GpuCount"`
+
+	// CPU clock rate of the instance
+	Frequency *string `json:"Frequency,omitempty" name:"Frequency"`
 }
 
 type InternetAccessible struct {
@@ -5629,7 +5648,7 @@ type Placement struct {
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
 	HostIds []*string `json:"HostIds,omitempty" name:"HostIds"`
 
-	// Master host IP used to create the CVM
+	// IPs of the hosts to create CVMs
 	HostIps []*string `json:"HostIps,omitempty" name:"HostIps"`
 
 	// The ID of the CDH to which the instance belongs, only used as an output parameter.
@@ -5975,8 +5994,8 @@ type ReservedInstancePriceItem struct {
 	// Unit: second
 	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
 
-	// The operating system of the reserved instance, such as `linux`.
-	// Valid value: linux.
+	// The operating system of the reserved instance, such as `Linux`.
+	// Valid value: `Linux`.
 	ProductDescription *string `json:"ProductDescription,omitempty" name:"ProductDescription"`
 }
 
@@ -6916,10 +6935,10 @@ type StorageBlock struct {
 }
 
 type SyncImage struct {
-
+	// Image ID
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 
-
+	// Region
 	Region *string `json:"Region,omitempty" name:"Region"`
 }
 
@@ -6936,6 +6955,9 @@ type SyncImagesRequestParams struct {
 
 	// Destination image name.
 	ImageName *string `json:"ImageName,omitempty" name:"ImageName"`
+
+	// Whether to return the ID of image created in the destination region
+	ImageSetRequired *bool `json:"ImageSetRequired,omitempty" name:"ImageSetRequired"`
 }
 
 type SyncImagesRequest struct {
@@ -6952,6 +6974,9 @@ type SyncImagesRequest struct {
 
 	// Destination image name.
 	ImageName *string `json:"ImageName,omitempty" name:"ImageName"`
+
+	// Whether to return the ID of image created in the destination region
+	ImageSetRequired *bool `json:"ImageSetRequired,omitempty" name:"ImageSetRequired"`
 }
 
 func (r *SyncImagesRequest) ToJsonString() string {
@@ -6970,6 +6995,7 @@ func (r *SyncImagesRequest) FromJsonString(s string) error {
 	delete(f, "DestinationRegions")
 	delete(f, "DryRun")
 	delete(f, "ImageName")
+	delete(f, "ImageSetRequired")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncImagesRequest has unknown keys!", "")
 	}
@@ -6978,7 +7004,7 @@ func (r *SyncImagesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SyncImagesResponseParams struct {
-
+	// ID of the image created in the destination region
 	ImageSet []*SyncImage `json:"ImageSet,omitempty" name:"ImageSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
