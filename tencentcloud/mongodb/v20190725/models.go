@@ -125,14 +125,6 @@ type BackupDownloadTaskStatus struct {
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
-type BackupFile struct {
-	// ID of the replica set/shard to which a backup file belongs
-	ReplicateSetId *string `json:"ReplicateSetId,omitempty" name:"ReplicateSetId"`
-
-	// Path to a backup file
-	File *string `json:"File,omitempty" name:"File"`
-}
-
 type BackupInfo struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -578,7 +570,7 @@ type CreateDBInstanceRequestParams struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the `DescribeSubnets` API to query the subnet list.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
+	// Instance password. If it is left empty, the password is in the default format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001". The custom password must contain 8-32 characters in at least two of the following types: letters, digits, and symbols (!@#%^*()_).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Instance tag information.
@@ -616,6 +608,15 @@ type CreateDBInstanceRequestParams struct {
 
 	// The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
 	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
+
+	// Number of read-only nodes. Value range: 2-7.
+	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitempty" name:"ReadonlyNodeNum"`
+
+	// The AZ where the read-only node is deployed
+	ReadonlyNodeAvailabilityZoneList []*string `json:"ReadonlyNodeAvailabilityZoneList,omitempty" name:"ReadonlyNodeAvailabilityZoneList"`
+
+	// The AZ where the hidden node resides. It is required for cross-AZ instances.
+	HiddenZone *string `json:"HiddenZone,omitempty" name:"HiddenZone"`
 }
 
 type CreateDBInstanceRequest struct {
@@ -660,7 +661,7 @@ type CreateDBInstanceRequest struct {
 	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the `DescribeSubnets` API to query the subnet list.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance password, which must contain 8 to 16 characters and comprise at least two of the following types: letters, digits, and symbols (!@#%^*()). If it is left empty, the password is in the format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001".
+	// Instance password. If it is left empty, the password is in the default format of "instance ID+@+root account UIN". For example, if the instance ID is "cmgo-higv73ed" and the root account UIN "100000001", the instance password will be "cmgo-higv73ed@100000001". The custom password must contain 8-32 characters in at least two of the following types: letters, digits, and symbols (!@#%^*()_).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
 	// Instance tag information.
@@ -698,6 +699,15 @@ type CreateDBInstanceRequest struct {
 
 	// The number of mongos routers, which is required for a sharded cluster instance of MongoDB 4.2 WiredTiger. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. Note: please purchase 3-32 mongos routers for high availability.
 	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
+
+	// Number of read-only nodes. Value range: 2-7.
+	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitempty" name:"ReadonlyNodeNum"`
+
+	// The AZ where the read-only node is deployed
+	ReadonlyNodeAvailabilityZoneList []*string `json:"ReadonlyNodeAvailabilityZoneList,omitempty" name:"ReadonlyNodeAvailabilityZoneList"`
+
+	// The AZ where the hidden node resides. It is required for cross-AZ instances.
+	HiddenZone *string `json:"HiddenZone,omitempty" name:"HiddenZone"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -738,6 +748,9 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MongosCpu")
 	delete(f, "MongosMemory")
 	delete(f, "MongosNodeNum")
+	delete(f, "ReadonlyNodeNum")
+	delete(f, "ReadonlyNodeAvailabilityZoneList")
+	delete(f, "HiddenZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceRequest has unknown keys!", "")
 	}
@@ -846,76 +859,6 @@ func (r *DescribeAsyncRequestInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeBackupAccessRequestParams struct {
-	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Name of the backup file for which to get the download permission
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
-}
-
-type DescribeBackupAccessRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID in the format of cmgo-p8vnipr5. It is the same as the instance ID displayed on the TencentDB Console page
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
-
-	// Name of the backup file for which to get the download permission
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
-}
-
-func (r *DescribeBackupAccessRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBackupAccessRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "BackupName")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupAccessRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeBackupAccessResponseParams struct {
-	// Instance region
-	Region *string `json:"Region,omitempty" name:"Region"`
-
-	// The bucket where a backup file is located
-	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
-
-	// Storage information of a backup file
-	Files []*BackupFile `json:"Files,omitempty" name:"Files"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeBackupAccessResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeBackupAccessResponseParams `json:"Response"`
-}
-
-func (r *DescribeBackupAccessResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeBackupAccessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1853,16 +1796,16 @@ type InquirePriceCreateDBInstancesRequestParams struct {
 	// Instance region name in the format of ap-guangzhou-2.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
+	// Number of primary and secondary nodes per shard. <br>Value range: It can be queried by the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, and the `MinNodeNum` and `MaxNodeNum` parameters are the minimal and maximum value respectively.</li></ul>
 	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Instance disk size in GB.
+	//  Instance disk size. <ul><li>Unit: GB</li><li>Value range: It can be queried by the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, and `MinStorage` and `MaxStorage` parameters are the minimal and maximum value of the disk size respectively.</br>
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
 
-	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
+	// Instance version information. <ul><li>For specific supported versions, query through the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, the returned parameter `MongoVersionCode` in data structure `SpecItems` is the supported version information. </li><li>The correspondences between parameters and versions are as follows <ul><li>MONGO_3_WT: MongoDB 3.2 WiredTiger storage engine version. </li><li>MONGO_3_ROCKS: MongoDB 3.2 RocksDB storage engine version. </li><li>MONGO_36_WT: MongoDB 3.6 WiredTiger storage engine version. </li><li>MONGO_40_WT: MongoDB 4.0 WiredTiger storage engine version. </li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger storage engine version. </li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger storage engine version. </li></ul>
 	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
 
 	// Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
@@ -1871,14 +1814,35 @@ type InquirePriceCreateDBInstancesRequestParams struct {
 	// Number of instances. Minimum value: 1. Maximum value: 10.
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
-	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
-	Period *int64 `json:"Period,omitempty" name:"Period"`
-
 	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
 	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
 	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
 	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+
+	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+
+	MongosCpu *uint64 `json:"MongosCpu,omitempty" name:"MongosCpu"`
+
+
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+
+	MongosNum *uint64 `json:"MongosNum,omitempty" name:"MongosNum"`
+
+
+	ConfigServerCpu *uint64 `json:"ConfigServerCpu,omitempty" name:"ConfigServerCpu"`
+
+
+	ConfigServerMemory *uint64 `json:"ConfigServerMemory,omitempty" name:"ConfigServerMemory"`
+
+
+	ConfigServerVolume *uint64 `json:"ConfigServerVolume,omitempty" name:"ConfigServerVolume"`
 }
 
 type InquirePriceCreateDBInstancesRequest struct {
@@ -1887,16 +1851,16 @@ type InquirePriceCreateDBInstancesRequest struct {
 	// Instance region name in the format of ap-guangzhou-2.
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// The number of nodes in each replica set. The value range is subject to the response parameter of the `DescribeSpecInfo` API.
+	// Number of primary and secondary nodes per shard. <br>Value range: It can be queried by the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, and the `MinNodeNum` and `MaxNodeNum` parameters are the minimal and maximum value respectively.</li></ul>
 	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
 
 	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
 
-	// Instance disk size in GB.
+	//  Instance disk size. <ul><li>Unit: GB</li><li>Value range: It can be queried by the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, and `MinStorage` and `MaxStorage` parameters are the minimal and maximum value of the disk size respectively.</br>
 	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
 
-	// Version number. For the specific purchasable versions supported, please see the return result of the `DescribeSpecInfo` API. The correspondences between parameters and versions are as follows: MONGO_3_WT: MongoDB 3.2 WiredTiger Edition; MONGO_3_ROCKS: MongoDB 3.2 RocksDB Edition; MONGO_36_WT: MongoDB 3.6 WiredTiger Edition; MONGO_40_WT: MongoDB 4.0 WiredTiger Edition.
+	// Instance version information. <ul><li>For specific supported versions, query through the <a href="https://intl.cloud.tencent.com/document/product/240/38567?from_cn_redirect=1">DescribeSpecInfo</a> API, the returned parameter `MongoVersionCode` in data structure `SpecItems` is the supported version information. </li><li>The correspondences between parameters and versions are as follows <ul><li>MONGO_3_WT: MongoDB 3.2 WiredTiger storage engine version. </li><li>MONGO_3_ROCKS: MongoDB 3.2 RocksDB storage engine version. </li><li>MONGO_36_WT: MongoDB 3.6 WiredTiger storage engine version. </li><li>MONGO_40_WT: MongoDB 4.0 WiredTiger storage engine version. </li><li>MONGO_42_WT: MongoDB 4.2 WiredTiger storage engine version. </li><li>MONGO_44_WT: MongoDB 4.4 WiredTiger storage engine version. </li></ul>
 	MongoVersion *string `json:"MongoVersion,omitempty" name:"MongoVersion"`
 
 	// Server type. Valid values: `HIO` (high IO), `HIO10G` (ten-gigabit high IO)
@@ -1905,14 +1869,28 @@ type InquirePriceCreateDBInstancesRequest struct {
 	// Number of instances. Minimum value: 1. Maximum value: 10.
 	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
 
-	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
-	Period *int64 `json:"Period,omitempty" name:"Period"`
-
 	// Instance type. Valid values: REPLSET (replica set), SHARD (sharded cluster), STANDALONE (single-node).
 	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
 	// Number of replica sets. To create a replica set instance, set this parameter to 1; to create a shard instance, see the parameters returned by the `DescribeSpecInfo` API; to create a single-node instance, set this parameter to 0.
 	ReplicateSetNum *int64 `json:"ReplicateSetNum,omitempty" name:"ReplicateSetNum"`
+
+	// Instance validity period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	MongosCpu *uint64 `json:"MongosCpu,omitempty" name:"MongosCpu"`
+
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+	MongosNum *uint64 `json:"MongosNum,omitempty" name:"MongosNum"`
+
+	ConfigServerCpu *uint64 `json:"ConfigServerCpu,omitempty" name:"ConfigServerCpu"`
+
+	ConfigServerMemory *uint64 `json:"ConfigServerMemory,omitempty" name:"ConfigServerMemory"`
+
+	ConfigServerVolume *uint64 `json:"ConfigServerVolume,omitempty" name:"ConfigServerVolume"`
 }
 
 func (r *InquirePriceCreateDBInstancesRequest) ToJsonString() string {
@@ -1934,9 +1912,16 @@ func (r *InquirePriceCreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "MongoVersion")
 	delete(f, "MachineCode")
 	delete(f, "GoodsNum")
-	delete(f, "Period")
 	delete(f, "ClusterType")
 	delete(f, "ReplicateSetNum")
+	delete(f, "Period")
+	delete(f, "InstanceChargeType")
+	delete(f, "MongosCpu")
+	delete(f, "MongosMemory")
+	delete(f, "MongosNum")
+	delete(f, "ConfigServerCpu")
+	delete(f, "ConfigServerMemory")
+	delete(f, "ConfigServerVolume")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -2145,7 +2130,7 @@ type InstanceDetail struct {
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Cluster type. Valid values: 0 (replica set instance), 1 (sharding instance),
+	// Cluster type. Valid values: `0` (replica set instance), `1` (sharded instance).
 	ClusterType *uint64 `json:"ClusterType,omitempty" name:"ClusterType"`
 
 	// Region information
@@ -2163,7 +2148,7 @@ type InstanceDetail struct {
 	// Subnet ID of VPC
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Instance status. Valid values: 0 (to be initialized), 1 (in process), 2 (running), -2 (expired)
+	// Instance status. Valid values: `0` (to be initialized), `1` (in process), `2` (running), `-2` (expired).
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Instance IP
@@ -2199,16 +2184,16 @@ type InstanceDetail struct {
 	// Number of instance shards
 	ReplicationSetNum *uint64 `json:"ReplicationSetNum,omitempty" name:"ReplicationSetNum"`
 
-	// Instance auto-renewal flag. Valid values: 0 (manual renewal), 1 (auto-renewal), 2 (no renewal upon expiration)
+	// Instance auto-renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal), `2` (no renewal upon expiration)
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
 	// Used capacity in MB
 	UsedVolume *uint64 `json:"UsedVolume,omitempty" name:"UsedVolume"`
 
-	// Start time of the maintenance time window
+	// Start time of the maintenance time
 	MaintenanceStart *string `json:"MaintenanceStart,omitempty" name:"MaintenanceStart"`
 
-	// End time of the maintenance time window
+	// End time of the maintenance time
 	MaintenanceEnd *string `json:"MaintenanceEnd,omitempty" name:"MaintenanceEnd"`
 
 	// Shard information
@@ -2223,19 +2208,19 @@ type InstanceDetail struct {
 	// Information of temp instances
 	CloneInstances []*DBInstanceInfo `json:"CloneInstances,omitempty" name:"CloneInstances"`
 
-	// Information of associated instances. For a promoted instance, this field represents information of its temp instance; for a temp instance, this field represents information of its promoted instance; and for a read-only/disaster recovery instance, this field represents information of its primary instance
+	// Information of associated instances. For a regular instance, this field represents the information of its temp instance; for a temp instance, this field represents the information of its regular instance; and for a read-only instance or a disaster recovery instance, this field represents the information of its primary instance.
 	RelatedInstance *DBInstanceInfo `json:"RelatedInstance,omitempty" name:"RelatedInstance"`
 
 	// Instance tag information set
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Instance version tag
+	// Instance version
 	InstanceVer *uint64 `json:"InstanceVer,omitempty" name:"InstanceVer"`
 
-	// Instance version tag
+	// Instance version
 	ClusterVer *uint64 `json:"ClusterVer,omitempty" name:"ClusterVer"`
 
-	// Protocol information. Valid values: 1 (mongodb), 2 (dynamodb)
+	// Protocol information. Valid values: `1` (mongodb), `2` (dynamodb).
 	Protocol *uint64 `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Instance type. Valid values: 1 (promoted instance), 2 (temp instance), 3 (read-only instance), 4 (disaster recovery instance)
@@ -2246,6 +2231,38 @@ type InstanceDetail struct {
 
 	// Physical instance ID. For an instance that has been rolled back and replaced, its InstanceId and RealInstanceId are different. The physical instance ID is needed in such scenarios as getting monitoring data from Barad
 	RealInstanceId *string `json:"RealInstanceId,omitempty" name:"RealInstanceId"`
+
+	// Number of mongos nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MongosNodeNum *uint64 `json:"MongosNodeNum,omitempty" name:"MongosNodeNum"`
+
+	// mongos node memory
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MongosMemory *uint64 `json:"MongosMemory,omitempty" name:"MongosMemory"`
+
+	// Number of mongos nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MongosCpuNum *uint64 `json:"MongosCpuNum,omitempty" name:"MongosCpuNum"`
+
+	// Number of ConfigServer nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigServerNodeNum *uint64 `json:"ConfigServerNodeNum,omitempty" name:"ConfigServerNodeNum"`
+
+	// Memory of ConfigServer node
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigServerMemory *uint64 `json:"ConfigServerMemory,omitempty" name:"ConfigServerMemory"`
+
+	// Disk size of ConfigServer node
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigServerVolume *uint64 `json:"ConfigServerVolume,omitempty" name:"ConfigServerVolume"`
+
+	// CPU number of ConfigServer node
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConfigServerCpuNum *uint64 `json:"ConfigServerCpuNum,omitempty" name:"ConfigServerCpuNum"`
+
+	// Number of read-only nodes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReadonlyNodeNum *uint64 `json:"ReadonlyNodeNum,omitempty" name:"ReadonlyNodeNum"`
 }
 
 type InstanceEnumParam struct {
