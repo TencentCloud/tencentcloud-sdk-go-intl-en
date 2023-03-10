@@ -65,6 +65,14 @@ type CheckStepInfo struct {
 }
 
 type CompareAbstractInfo struct {
+	// Configuration parameters of the check task
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Options *CompareOptions `json:"Options,omitempty" name:"Options"`
+
+	// Consistency check objects
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Objects *CompareObject `json:"Objects,omitempty" name:"Objects"`
+
 	// Comparison conclusion. Valid values: `same`, `different`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Conclusion *string `json:"Conclusion,omitempty" name:"Conclusion"`
@@ -89,9 +97,29 @@ type CompareAbstractInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SkippedTables *uint64 `json:"SkippedTables,omitempty" name:"SkippedTables"`
 
+	// The estimated number of tables
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NearlyTableCount *uint64 `json:"NearlyTableCount,omitempty" name:"NearlyTableCount"`
+
 	// Number of inconsistent data rows
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DifferentRows *uint64 `json:"DifferentRows,omitempty" name:"DifferentRows"`
+
+	// Source database row count, which takes effect only when the comparison type is **Row count comparison**.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SrcSampleRows *uint64 `json:"SrcSampleRows,omitempty" name:"SrcSampleRows"`
+
+	// Target database row count, which takes effect only when the comparison type is **Row count comparison**.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DstSampleRows *uint64 `json:"DstSampleRows,omitempty" name:"DstSampleRows"`
+
+	// Start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartedAt *string `json:"StartedAt,omitempty" name:"StartedAt"`
+
+	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FinishedAt *string `json:"FinishedAt,omitempty" name:"FinishedAt"`
 }
 
 type CompareDetailInfo struct {
@@ -105,17 +133,21 @@ type CompareDetailInfo struct {
 }
 
 type CompareObject struct {
-	// Object migration mode. Valid values: `all`, `partial`.
+	// Data comparison object mode (`all`: Entire instance; `partial`: Some objects)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectMode *string `json:"ObjectMode,omitempty" name:"ObjectMode"`
 
-	// Migration database/table configuration
+	// Object list
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectItems []*CompareObjectItem `json:"ObjectItems,omitempty" name:"ObjectItems"`
+
+	// Advanced object type (`account`: Account; `index`: Index; `shardkey`: Shard key, which may be adjusted later; `schema`: Database/table structure)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdvancedObjects []*string `json:"AdvancedObjects,omitempty" name:"AdvancedObjects"`
 }
 
 type CompareObjectItem struct {
-	// The database to be migrated
+	// Database name
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DbName *string `json:"DbName,omitempty" name:"DbName"`
 
@@ -123,7 +155,7 @@ type CompareObjectItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
 
-	// The schema to be migrated
+	// Schema name
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SchemaName *string `json:"SchemaName,omitempty" name:"SchemaName"`
 
@@ -144,6 +176,20 @@ type CompareObjectItem struct {
 	Views []*CompareViewItem `json:"Views,omitempty" name:"Views"`
 }
 
+type CompareOptions struct {
+	// Comparison type: (`dataCheck`: Full data comparison; `sampleDataCheck`: Sampling data comparison; `rowsCount`: Row count comparison)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Sampling rate. Value range: 0-100%.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SampleRate *int64 `json:"SampleRate,omitempty" name:"SampleRate"`
+
+	// The number of threads, which defaults to 1. Value range: 1-5.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ThreadCount *int64 `json:"ThreadCount,omitempty" name:"ThreadCount"`
+}
+
 type CompareTableItem struct {
 	// Table name
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -161,7 +207,7 @@ type CompareTaskInfo struct {
 }
 
 type CompareTaskItem struct {
-	// Migration task ID
+	// Task ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
@@ -204,6 +250,18 @@ type CompareTaskItem struct {
 	// Comparison end time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FinishedAt *string `json:"FinishedAt,omitempty" name:"FinishedAt"`
+
+	// Comparison type: (`dataCheck`: Full data comparison; `sampleDataCheck`: Sampling data comparison; `rowsCount`: Row count comparison)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Configuration information of the comparison task
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Options *CompareOptions `json:"Options,omitempty" name:"Options"`
+
+	// Consistency check prompt message
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
 type CompareViewItem struct {
@@ -278,14 +336,11 @@ type ConfigureSyncJobRequestParams struct {
 	// Sync task instance ID in the format of `sync-werwfs23`, which is used to identify a sync task.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
-	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
+	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet). Note that the valid values are subject to the current link.
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
-	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
+	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `ckafka` (CKafka instance). Note that the valid values are subject to the current link.
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
-
-	// Sync task options
-	Options *Options `json:"Options,omitempty" name:"Options"`
 
 	// Information of synced database/table objects
 	Objects *Objects `json:"Objects,omitempty" name:"Objects"`
@@ -302,11 +357,14 @@ type ConfigureSyncJobRequestParams struct {
 	// Expected start time in the format of "2006-01-02 15:04:05", which is required if `RunMode` is `Timed`.
 	ExpectRunTime *string `json:"ExpectRunTime,omitempty" name:"ExpectRunTime"`
 
-	// Source database information. This parameter is used by single-node databases.
+	// Source database information. This parameter only applies to single-node databases, and `SrcNodeType` must be `single`.
 	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
 	// Target database information. This parameter is used by single-node databases.
 	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Sync task options
+	Options *Options `json:"Options,omitempty" name:"Options"`
 
 	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
@@ -318,14 +376,11 @@ type ConfigureSyncJobRequest struct {
 	// Sync task instance ID in the format of `sync-werwfs23`, which is used to identify a sync task.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
-	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
+	// Source database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet). Note that the valid values are subject to the current link.
 	SrcAccessType *string `json:"SrcAccessType,omitempty" name:"SrcAccessType"`
 
-	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `noProxy`. Note that the valid values are subject to the current link.
+	// Target database access type. Valid values: `cdb` (database); `cvm` (self-build on CVM); `vpc` (VPC); `extranet` (public network); `vpncloud` (VPN access); `dcg` (Direct Connect); `ccn` (CCN); `intranet` (intranet); `ckafka` (CKafka instance). Note that the valid values are subject to the current link.
 	DstAccessType *string `json:"DstAccessType,omitempty" name:"DstAccessType"`
-
-	// Sync task options
-	Options *Options `json:"Options,omitempty" name:"Options"`
 
 	// Information of synced database/table objects
 	Objects *Objects `json:"Objects,omitempty" name:"Objects"`
@@ -342,11 +397,14 @@ type ConfigureSyncJobRequest struct {
 	// Expected start time in the format of "2006-01-02 15:04:05", which is required if `RunMode` is `Timed`.
 	ExpectRunTime *string `json:"ExpectRunTime,omitempty" name:"ExpectRunTime"`
 
-	// Source database information. This parameter is used by single-node databases.
+	// Source database information. This parameter only applies to single-node databases, and `SrcNodeType` must be `single`.
 	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
 	// Target database information. This parameter is used by single-node databases.
 	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Sync task options
+	Options *Options `json:"Options,omitempty" name:"Options"`
 
 	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
@@ -367,7 +425,6 @@ func (r *ConfigureSyncJobRequest) FromJsonString(s string) error {
 	delete(f, "JobId")
 	delete(f, "SrcAccessType")
 	delete(f, "DstAccessType")
-	delete(f, "Options")
 	delete(f, "Objects")
 	delete(f, "JobName")
 	delete(f, "JobMode")
@@ -375,6 +432,7 @@ func (r *ConfigureSyncJobRequest) FromJsonString(s string) error {
 	delete(f, "ExpectRunTime")
 	delete(f, "SrcInfo")
 	delete(f, "DstInfo")
+	delete(f, "Options")
 	delete(f, "AutoRetryTimeRangeMinutes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureSyncJobRequest has unknown keys!", "")
@@ -422,6 +480,114 @@ type ConsistencyOption struct {
 	// Data consistency check type. Valid values: `full`, `noCheck`, `notConfigured`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
+// Predefined struct for user
+type ContinueMigrateJobRequestParams struct {
+	// Data migration task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type ContinueMigrateJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data migration task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *ContinueMigrateJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ContinueMigrateJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ContinueMigrateJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ContinueMigrateJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ContinueMigrateJobResponse struct {
+	*tchttp.BaseResponse
+	Response *ContinueMigrateJobResponseParams `json:"Response"`
+}
+
+func (r *ContinueMigrateJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ContinueMigrateJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ContinueSyncJobRequestParams struct {
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type ContinueSyncJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *ContinueSyncJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ContinueSyncJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ContinueSyncJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ContinueSyncJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ContinueSyncJobResponse struct {
+	*tchttp.BaseResponse
+	Response *ContinueSyncJobResponseParams `json:"Response"`
+}
+
+func (r *ContinueSyncJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ContinueSyncJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -480,7 +646,7 @@ func (r *CreateCheckSyncJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCompareTaskRequestParams struct {
-	// Migration task ID
+	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// Data consistency check task name. If this parameter is left empty, the value of `CompareTaskId` will be assigned to it.
@@ -491,12 +657,15 @@ type CreateCompareTaskRequestParams struct {
 
 	// Configuration of the data consistency check object
 	Objects *CompareObject `json:"Objects,omitempty" name:"Objects"`
+
+	// Consistency check options
+	Options *CompareOptions `json:"Options,omitempty" name:"Options"`
 }
 
 type CreateCompareTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Migration task ID
+	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// Data consistency check task name. If this parameter is left empty, the value of `CompareTaskId` will be assigned to it.
@@ -507,6 +676,9 @@ type CreateCompareTaskRequest struct {
 
 	// Configuration of the data consistency check object
 	Objects *CompareObject `json:"Objects,omitempty" name:"Objects"`
+
+	// Consistency check options
+	Options *CompareOptions `json:"Options,omitempty" name:"Options"`
 }
 
 func (r *CreateCompareTaskRequest) ToJsonString() string {
@@ -525,6 +697,7 @@ func (r *CreateCompareTaskRequest) FromJsonString(s string) error {
 	delete(f, "TaskName")
 	delete(f, "ObjectMode")
 	delete(f, "Objects")
+	delete(f, "Options")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCompareTaskRequest has unknown keys!", "")
 	}
@@ -1411,6 +1584,12 @@ type DescribeCompareTasksRequestParams struct {
 
 	// Pagination offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Check task ID
+	CompareTaskId *string `json:"CompareTaskId,omitempty" name:"CompareTaskId"`
+
+	// Data consistency check task status. Valid values: `created`, `readyRun`, `running`, `success`, `stopping`, `failed`, `canceled`.
+	Status []*string `json:"Status,omitempty" name:"Status"`
 }
 
 type DescribeCompareTasksRequest struct {
@@ -1424,6 +1603,12 @@ type DescribeCompareTasksRequest struct {
 
 	// Pagination offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Check task ID
+	CompareTaskId *string `json:"CompareTaskId,omitempty" name:"CompareTaskId"`
+
+	// Data consistency check task status. Valid values: `created`, `readyRun`, `running`, `success`, `stopping`, `failed`, `canceled`.
+	Status []*string `json:"Status,omitempty" name:"Status"`
 }
 
 func (r *DescribeCompareTasksRequest) ToJsonString() string {
@@ -1441,6 +1626,8 @@ func (r *DescribeCompareTasksRequest) FromJsonString(s string) error {
 	delete(f, "JobId")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "CompareTaskId")
+	delete(f, "Status")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCompareTasksRequest has unknown keys!", "")
 	}
@@ -2398,6 +2585,10 @@ type Endpoint struct {
 	// Whether to enable encrypted transfer (`UnEncrypted`: No; `Encrypted`: Yes). Default value: `UnEncrypted`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EncryptConn *string `json:"EncryptConn,omitempty" name:"EncryptConn"`
+
+	// Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitempty" name:"DatabaseNetEnv"`
 }
 
 type ErrorInfoItem struct {
@@ -2763,7 +2954,7 @@ func (r *ModifyCompareTaskNameResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCompareTaskRequestParams struct {
-	// Migration task ID
+	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// Data consistency check task ID in the format of `dts-8yv4w2i1-cmp-37skmii9`
@@ -2772,17 +2963,20 @@ type ModifyCompareTaskRequestParams struct {
 	// Task name
 	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
 
-	// Data comparison object mode. Valid values: `sameAsMigrate` (all migration objects); `custom` (custom mode). Default value: `sameAsMigrate`.
+	// Data comparison object mode. Valid values: `sameAsMigrate` (All migration objects), `custom` (Custom mode. The custom comparison objects must be a subset of the migration objects). Default value: `sameAsMigrate`.
 	ObjectMode *string `json:"ObjectMode,omitempty" name:"ObjectMode"`
 
 	// Compared object, which is required if `CompareObjectMode` is `custom`.
 	Objects *CompareObject `json:"Objects,omitempty" name:"Objects"`
+
+	// Consistency check options
+	Options *CompareOptions `json:"Options,omitempty" name:"Options"`
 }
 
 type ModifyCompareTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Migration task ID
+	// Task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
 	// Data consistency check task ID in the format of `dts-8yv4w2i1-cmp-37skmii9`
@@ -2791,11 +2985,14 @@ type ModifyCompareTaskRequest struct {
 	// Task name
 	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
 
-	// Data comparison object mode. Valid values: `sameAsMigrate` (all migration objects); `custom` (custom mode). Default value: `sameAsMigrate`.
+	// Data comparison object mode. Valid values: `sameAsMigrate` (All migration objects), `custom` (Custom mode. The custom comparison objects must be a subset of the migration objects). Default value: `sameAsMigrate`.
 	ObjectMode *string `json:"ObjectMode,omitempty" name:"ObjectMode"`
 
 	// Compared object, which is required if `CompareObjectMode` is `custom`.
 	Objects *CompareObject `json:"Objects,omitempty" name:"Objects"`
+
+	// Consistency check options
+	Options *CompareOptions `json:"Options,omitempty" name:"Options"`
 }
 
 func (r *ModifyCompareTaskRequest) ToJsonString() string {
@@ -2815,6 +3012,7 @@ func (r *ModifyCompareTaskRequest) FromJsonString(s string) error {
 	delete(f, "TaskName")
 	delete(f, "ObjectMode")
 	delete(f, "Objects")
+	delete(f, "Options")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCompareTaskRequest has unknown keys!", "")
 	}
@@ -3088,12 +3286,15 @@ type Objects struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedObjects []*string `json:"AdvancedObjects,omitempty" name:"AdvancedObjects"`
 
-
+	// A redundant field that specifies the online DDL type
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OnlineDDL *OnlineDDL `json:"OnlineDDL,omitempty" name:"OnlineDDL"`
 }
 
 type OnlineDDL struct {
-
+	// Status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type Options struct {
@@ -3124,6 +3325,114 @@ type Options struct {
 	// DDL statements to be synced
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DdlOptions []*DdlOption `json:"DdlOptions,omitempty" name:"DdlOptions"`
+}
+
+// Predefined struct for user
+type PauseMigrateJobRequestParams struct {
+	// Data migration task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type PauseMigrateJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data migration task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *PauseMigrateJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseMigrateJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PauseMigrateJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PauseMigrateJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type PauseMigrateJobResponse struct {
+	*tchttp.BaseResponse
+	Response *PauseMigrateJobResponseParams `json:"Response"`
+}
+
+func (r *PauseMigrateJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseMigrateJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PauseSyncJobRequestParams struct {
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type PauseSyncJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *PauseSyncJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseSyncJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PauseSyncJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PauseSyncJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type PauseSyncJobResponse struct {
+	*tchttp.BaseResponse
+	Response *PauseSyncJobResponseParams `json:"Response"`
+}
+
+func (r *PauseSyncJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PauseSyncJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ProcessProgress struct {
@@ -3340,7 +3649,7 @@ type ResumeMigrateJobRequestParams struct {
 	// Data migration task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
-	// Task resumption mode. Valid values: `clearData` (clear the target instance data); `overwrite` (execute the task in overwrite mode); `normal` (follow the normal process without performing additional operations).
+	// Task resumption mode. Valid values: `clearData` (Clearing the target instance data); `overwrite` (Executing the task in overwrite mode); `normal` (Following the normal process without additional operations). `clearData` and `overwrite` are only valid for Redis links and `normal` for non-Redis links.
 	ResumeOption *string `json:"ResumeOption,omitempty" name:"ResumeOption"`
 }
 
@@ -3350,7 +3659,7 @@ type ResumeMigrateJobRequest struct {
 	// Data migration task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 
-	// Task resumption mode. Valid values: `clearData` (clear the target instance data); `overwrite` (execute the task in overwrite mode); `normal` (follow the normal process without performing additional operations).
+	// Task resumption mode. Valid values: `clearData` (Clearing the target instance data); `overwrite` (Executing the task in overwrite mode); `normal` (Following the normal process without additional operations). `clearData` and `overwrite` are only valid for Redis links and `normal` for non-Redis links.
 	ResumeOption *string `json:"ResumeOption,omitempty" name:"ResumeOption"`
 }
 
@@ -3468,7 +3777,7 @@ type SkipCheckItemRequestParams struct {
 	// ID of the check step to be skipped, which is obtained in the `StepInfo[i].StepId` field returned by the `DescribeMigrationCheckJob` API, such as "OptimizeCheck".
 	StepIds []*string `json:"StepIds,omitempty" name:"StepIds"`
 
-
+	// When the check fails due to foreign key dependency, you can use this field to specify whether to migrate the foreign key dependency. The foreign key dependency won’t be migrated when `StepIds` contains `ConstraintCheck` and the value of this field is `shield`, and will be migrated when `StepIds` contains `ConstraintCheck` and the value of this field is `migrate`.
 	ForeignKeyFlag *string `json:"ForeignKeyFlag,omitempty" name:"ForeignKeyFlag"`
 }
 
@@ -3481,6 +3790,7 @@ type SkipCheckItemRequest struct {
 	// ID of the check step to be skipped, which is obtained in the `StepInfo[i].StepId` field returned by the `DescribeMigrationCheckJob` API, such as "OptimizeCheck".
 	StepIds []*string `json:"StepIds,omitempty" name:"StepIds"`
 
+	// When the check fails due to foreign key dependency, you can use this field to specify whether to migrate the foreign key dependency. The foreign key dependency won’t be migrated when `StepIds` contains `ConstraintCheck` and the value of this field is `shield`, and will be migrated when `StepIds` contains `ConstraintCheck` and the value of this field is `migrate`.
 	ForeignKeyFlag *string `json:"ForeignKeyFlag,omitempty" name:"ForeignKeyFlag"`
 }
 
@@ -3507,7 +3817,8 @@ func (r *SkipCheckItemRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SkipCheckItemResponseParams struct {
-
+	// Message prompted for skipping the check item
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4079,6 +4390,10 @@ type SyncDetailInfo struct {
 	// Step details
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StepInfos []*StepInfo `json:"StepInfos,omitempty" name:"StepInfos"`
+
+	// Cause of the failure of initiating data consistency check
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CauseOfCompareDisable *string `json:"CauseOfCompareDisable,omitempty" name:"CauseOfCompareDisable"`
 }
 
 type SyncJobInfo struct {
@@ -4215,6 +4530,14 @@ type Table struct {
 	// Filter condition
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FilterCondition *string `json:"FilterCondition,omitempty" name:"FilterCondition"`
+
+	// The temp tables to be synced. This parameter is mutually exclusive with `NewTableName`. It is valid only when the configured sync objects are table-level ones and `TableEditMode` is `pt`. To sync temp tables generated when pt-osc or other tools are used during the sync process, you must configure this parameter first. For example, if you want to perform the pt-osc operation on a table named "t1", configure this parameter as ["\_t1\_new","\_t1\_old"]; to perform the gh-ost operation on t1, configure it as ["\_t1\_ghc","\_t1\_gho","\_t1\_del"]. Temp tables generated by pt-osc and gh-ost operations can be configured at the same time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TmpTables []*string `json:"TmpTables,omitempty" name:"TmpTables"`
+
+	// Table editing type. Valid values: `rename` (table mapping); `pt` (additional table sync).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TableEditMode *string `json:"TableEditMode,omitempty" name:"TableEditMode"`
 }
 
 type TableItem struct {
@@ -4222,11 +4545,11 @@ type TableItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TableName *string `json:"TableName,omitempty" name:"TableName"`
 
-	// Name of the table after migration, which is required if `TableEditMode` is `rename`.
+	// New name of the migrated table. This parameter is required when `TableEditMode` is `rename`. It is mutually exclusive with `TmpTables`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NewTableName *string `json:"NewTableName,omitempty" name:"NewTableName"`
 
-	// Temp table to be migrated, which is required if `TableEditMode` is `pt`. To sync temp tables that may be generated during migration by tools such as pt-online-schema-change, you can use this parameter to configure the temp table names.
+	// The temp tables to be migrated. This parameter is mutually exclusive with `NewTableName`. It is valid only when the configured migration objects are table-level ones and `TableEditMode` is `pt`. To migrate temp tables generated when pt-osc or other tools are used during the migration process, you must configure this parameter first. For example, if you want to perform the pt-osc operation on a table named "t1", configure this parameter as ["_t1_new","_t1_old"]; to perform the gh-ost operation on t1, configure it as ["_t1_ghc","_t1_gho","_t1_del"]. Temp tables generated by pt-osc and gh-ost operations can be configured at the same time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TmpTables []*string `json:"TmpTables,omitempty" name:"TmpTables"`
 

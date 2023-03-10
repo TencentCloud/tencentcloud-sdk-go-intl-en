@@ -1260,6 +1260,29 @@ func (r *CreateUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DatahubTopicDTO struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// The number of partitions
+	PartitionNum *uint64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+
+	// Expiration time
+	RetentionMs *uint64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Remarks
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Status (`1`: In use; `2`: Deleting)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
 // Predefined struct for user
 type DeleteAclRequestParams struct {
 	// Instance ID information
@@ -2059,6 +2082,178 @@ func (r *DescribeConsumerGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeDatahubTopicRequestParams struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type DescribeDatahubTopicRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DescribeDatahubTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatahubTopicRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatahubTopicRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDatahubTopicResp struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// The number of partitions
+	PartitionNum *uint64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+
+	// Expiration time
+	RetentionMs *uint64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Username
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Password
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Status (`1`: In use; `2`: Deleting)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Service routing address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
+}
+
+// Predefined struct for user
+type DescribeDatahubTopicResponseParams struct {
+	// Returned result object
+	Result *DescribeDatahubTopicResp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDatahubTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDatahubTopicResponseParams `json:"Response"`
+}
+
+func (r *DescribeDatahubTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatahubTopicResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDatahubTopicsRequestParams struct {
+	// Keyword for query
+	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
+
+	// Query offset, which defaults to `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of results to be returned in this request. Default value: `50`. Maximum value: `50`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeDatahubTopicsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Keyword for query
+	SearchWord *string `json:"SearchWord,omitempty" name:"SearchWord"`
+
+	// Query offset, which defaults to `0`.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of results to be returned in this request. Default value: `50`. Maximum value: `50`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeDatahubTopicsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatahubTopicsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SearchWord")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDatahubTopicsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeDatahubTopicsResp struct {
+	// Total count
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Topic list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicList []*DatahubTopicDTO `json:"TopicList,omitempty" name:"TopicList"`
+}
+
+// Predefined struct for user
+type DescribeDatahubTopicsResponseParams struct {
+	// Topic list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Result *DescribeDatahubTopicsResp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDatahubTopicsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDatahubTopicsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDatahubTopicsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDatahubTopicsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DescribeGroup struct {
 	// groupId
 	Group *string `json:"Group,omitempty" name:"Group"`
@@ -2387,6 +2582,9 @@ type DescribeInstancesDetailRequestParams struct {
 
 	// Filter by instance ID.
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+
+	// Filter instances by a set of tags
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
 }
 
 type DescribeInstancesDetailRequest struct {
@@ -2418,6 +2616,9 @@ type DescribeInstancesDetailRequest struct {
 
 	// Filter by instance ID.
 	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+
+	// Filter instances by a set of tags
+	TagList []*Tag `json:"TagList,omitempty" name:"TagList"`
 }
 
 func (r *DescribeInstancesDetailRequest) ToJsonString() string {
@@ -2441,6 +2642,7 @@ func (r *DescribeInstancesDetailRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "InstanceIds")
 	delete(f, "InstanceIdList")
+	delete(f, "TagList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesDetailRequest has unknown keys!", "")
 	}
