@@ -597,6 +597,114 @@ func (c *Client) CreateSampleSnapshotTemplateWithContext(ctx context.Context, re
     return
 }
 
+func NewCreateScheduleRequest() (request *CreateScheduleRequest) {
+    request = &CreateScheduleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateSchedule")
+    
+    
+    return
+}
+
+func NewCreateScheduleResponse() (response *CreateScheduleResponse) {
+    response = &CreateScheduleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSchedule
+// This API is used to create a scheme for media files uploaded to a specified COS bucket. A scheme may include the following tasks:
+//
+// 1. Video transcoding (with watermark)
+//
+// 2. Animated screenshot generating
+//
+// 3. Time point screencapturing
+//
+// 4. Sampled screencapturing
+//
+// 5. Image sprite generating
+//
+// 6. Adaptive bitrate streaming
+//
+// 7. Intelligent content moderation (detection of pornographic and sensitive content)
+//
+// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, labeling by frame)
+//
+// 9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
+//
+// 
+//
+// Note: A scheme is disabled upon creation. You need to manually enable it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+func (c *Client) CreateSchedule(request *CreateScheduleRequest) (response *CreateScheduleResponse, err error) {
+    return c.CreateScheduleWithContext(context.Background(), request)
+}
+
+// CreateSchedule
+// This API is used to create a scheme for media files uploaded to a specified COS bucket. A scheme may include the following tasks:
+//
+// 1. Video transcoding (with watermark)
+//
+// 2. Animated screenshot generating
+//
+// 3. Time point screencapturing
+//
+// 4. Sampled screencapturing
+//
+// 5. Image sprite generating
+//
+// 6. Adaptive bitrate streaming
+//
+// 7. Intelligent content moderation (detection of pornographic and sensitive content)
+//
+// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, labeling by frame)
+//
+// 9. Intelligent content recognition (face, full text, text keyword, full speech, and speech keyword)
+//
+// 
+//
+// Note: A scheme is disabled upon creation. You need to manually enable it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+func (c *Client) CreateScheduleWithContext(ctx context.Context, request *CreateScheduleRequest) (response *CreateScheduleResponse, err error) {
+    if request == nil {
+        request = NewCreateScheduleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSchedule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSnapshotByTimeOffsetTemplateRequest() (request *CreateSnapshotByTimeOffsetTemplateRequest) {
     request = &CreateSnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1425,6 +1533,60 @@ func (c *Client) DeleteSampleSnapshotTemplateWithContext(ctx context.Context, re
     return
 }
 
+func NewDeleteScheduleRequest() (request *DeleteScheduleRequest) {
+    request = &DeleteScheduleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteSchedule")
+    
+    
+    return
+}
+
+func NewDeleteScheduleResponse() (response *DeleteScheduleResponse) {
+    response = &DeleteScheduleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteSchedule
+// This API is used to delete a scheme.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteSchedule(request *DeleteScheduleRequest) (response *DeleteScheduleResponse, err error) {
+    return c.DeleteScheduleWithContext(context.Background(), request)
+}
+
+// DeleteSchedule
+// This API is used to delete a scheme.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteScheduleWithContext(ctx context.Context, request *DeleteScheduleRequest) (response *DeleteScheduleResponse, err error) {
+    if request == nil {
+        request = NewDeleteScheduleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSchedule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteSnapshotByTimeOffsetTemplateRequest() (request *DeleteSnapshotByTimeOffsetTemplateRequest) {
     request = &DeleteSnapshotByTimeOffsetTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2193,6 +2355,62 @@ func (c *Client) DescribeSampleSnapshotTemplatesWithContext(ctx context.Context,
     return
 }
 
+func NewDescribeSchedulesRequest() (request *DescribeSchedulesRequest) {
+    request = &DescribeSchedulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeSchedules")
+    
+    
+    return
+}
+
+func NewDescribeSchedulesResponse() (response *DescribeSchedulesResponse) {
+    response = &DescribeSchedulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSchedules
+// This API is used to query a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeSchedules(request *DescribeSchedulesRequest) (response *DescribeSchedulesResponse, err error) {
+    return c.DescribeSchedulesWithContext(context.Background(), request)
+}
+
+// DescribeSchedules
+// This API is used to query a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeSchedulesWithContext(ctx context.Context, request *DescribeSchedulesRequest) (response *DescribeSchedulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeSchedulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSchedules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSchedulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSnapshotByTimeOffsetTemplatesRequest() (request *DescribeSnapshotByTimeOffsetTemplatesRequest) {
     request = &DescribeSnapshotByTimeOffsetTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2593,6 +2811,76 @@ func (c *Client) DescribeWorkflowsWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDisableScheduleRequest() (request *DisableScheduleRequest) {
+    request = &DisableScheduleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DisableSchedule")
+    
+    
+    return
+}
+
+func NewDisableScheduleResponse() (response *DisableScheduleResponse) {
+    response = &DisableScheduleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DisableSchedule
+// This API is used to disable a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  FAILEDOPERATION_SETSOURCENOTIFY = "FailedOperation.SetSourceNotify"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DisableSchedule(request *DisableScheduleRequest) (response *DisableScheduleResponse, err error) {
+    return c.DisableScheduleWithContext(context.Background(), request)
+}
+
+// DisableSchedule
+// This API is used to disable a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  FAILEDOPERATION_SETSOURCENOTIFY = "FailedOperation.SetSourceNotify"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DisableScheduleWithContext(ctx context.Context, request *DisableScheduleRequest) (response *DisableScheduleResponse, err error) {
+    if request == nil {
+        request = NewDisableScheduleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableSchedule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisableWorkflowRequest() (request *DisableWorkflowRequest) {
     request = &DisableWorkflowRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2717,6 +3005,76 @@ func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaReq
     request.SetContext(ctx)
     
     response = NewEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnableScheduleRequest() (request *EnableScheduleRequest) {
+    request = &EnableScheduleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "EnableSchedule")
+    
+    
+    return
+}
+
+func NewEnableScheduleResponse() (response *EnableScheduleResponse) {
+    response = &EnableScheduleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EnableSchedule
+// This API is used to enable a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  FAILEDOPERATION_SETSOURCENOTIFY = "FailedOperation.SetSourceNotify"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) EnableSchedule(request *EnableScheduleRequest) (response *EnableScheduleResponse, err error) {
+    return c.EnableScheduleWithContext(context.Background(), request)
+}
+
+// EnableSchedule
+// This API is used to enable a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
+//  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  FAILEDOPERATION_SETSOURCENOTIFY = "FailedOperation.SetSourceNotify"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_COSBUCKETNAMEINVALID = "ResourceNotFound.CosBucketNameInvalid"
+//  RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) EnableScheduleWithContext(ctx context.Context, request *EnableScheduleRequest) (response *EnableScheduleResponse, err error) {
+    if request == nil {
+        request = NewEnableScheduleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableSchedule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableScheduleResponse()
     err = c.Send(request, response)
     return
 }
@@ -3471,6 +3829,64 @@ func (c *Client) ModifySampleSnapshotTemplateWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewModifySampleSnapshotTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyScheduleRequest() (request *ModifyScheduleRequest) {
+    request = &ModifyScheduleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifySchedule")
+    
+    
+    return
+}
+
+func NewModifyScheduleResponse() (response *ModifyScheduleResponse) {
+    response = &ModifyScheduleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifySchedule
+// This API is used to modify a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifySchedule(request *ModifyScheduleRequest) (response *ModifyScheduleResponse, err error) {
+    return c.ModifyScheduleWithContext(context.Background(), request)
+}
+
+// ModifySchedule
+// This API is used to modify a scheme.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyScheduleWithContext(ctx context.Context, request *ModifyScheduleRequest) (response *ModifyScheduleResponse, err error) {
+    if request == nil {
+        request = NewModifyScheduleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySchedule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyScheduleResponse()
     err = c.Send(request, response)
     return
 }

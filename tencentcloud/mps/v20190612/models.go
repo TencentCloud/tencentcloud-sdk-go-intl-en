@@ -98,6 +98,57 @@ type AIRecognitionTemplateItem struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type Activity struct {
+	// The subtask type.
+	// <li>`input`: The start.</li>
+	// <li>`output`: The end.</li>
+	// <li>`action-trans`: Transcoding.</li>
+	// <li>`action-samplesnapshot`: Sampled screencapturing.</li>
+	// <li>`action-AIAnalysis`: Content analysis.</li>
+	// <li>`action-AIRecognition`: Content recognition.</li>
+	// <li>`action-aiReview`: Content moderation.</li>
+	// <li>`action-animated-graphics`: Animated screenshot generation.</li>
+	// <li>`action-image-sprite`: Image sprite generation.</li>
+	// <li>`action-snapshotByTimeOffset`: Time point screencapturing.</li>
+	// <li>`action-adaptive-substream`: Adaptive bitrate streaming.</li>
+	ActivityType *string `json:"ActivityType,omitempty" name:"ActivityType"`
+
+	// The indexes of the subsequent actions.
+	ReardriveIndex []*int64 `json:"ReardriveIndex,omitempty" name:"ReardriveIndex"`
+
+	// The parameters of a subtask.
+	ActivityPara *ActivityPara `json:"ActivityPara,omitempty" name:"ActivityPara"`
+}
+
+type ActivityPara struct {
+	// A transcoding task.
+	TranscodeTask *TranscodeTaskInput `json:"TranscodeTask,omitempty" name:"TranscodeTask"`
+
+	// An animated screenshot generation task.
+	AnimatedGraphicTask *AnimatedGraphicTaskInput `json:"AnimatedGraphicTask,omitempty" name:"AnimatedGraphicTask"`
+
+	// A time point screencapturing task.
+	SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTask,omitempty" name:"SnapshotByTimeOffsetTask"`
+
+	// A sampled screencapturing task.
+	SampleSnapshotTask *SampleSnapshotTaskInput `json:"SampleSnapshotTask,omitempty" name:"SampleSnapshotTask"`
+
+	// An image sprite generation task.
+	ImageSpriteTask *ImageSpriteTaskInput `json:"ImageSpriteTask,omitempty" name:"ImageSpriteTask"`
+
+	// An adaptive bitrate streaming task.
+	AdaptiveDynamicStreamingTask *AdaptiveDynamicStreamingTaskInput `json:"AdaptiveDynamicStreamingTask,omitempty" name:"AdaptiveDynamicStreamingTask"`
+
+	// A content moderation task.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
+
+	// A content analysis task.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
+
+	// A content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
+}
+
 type ActivityResItem struct {
 	// The result of a transcoding task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -1614,6 +1665,47 @@ type AudioTemplateInfoForUpdate struct {
 	StreamSelects []*int64 `json:"StreamSelects,omitempty" name:"StreamSelects"`
 }
 
+type AwsS3FileUploadTrigger struct {
+	// The AWS S3 bucket bound to the scheme.
+	S3Bucket *string `json:"S3Bucket,omitempty" name:"S3Bucket"`
+
+	// The region of the AWS S3 bucket.
+	S3Region *string `json:"S3Region,omitempty" name:"S3Region"`
+
+	// The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	
+	Dir *string `json:"Dir,omitempty" name:"Dir"`
+
+	// The file formats that will trigger the scheme, such as ["mp4", "flv", "mov"]. If you do not specify this, the upload of files in any format will trigger the scheme.	
+	Formats []*string `json:"Formats,omitempty" name:"Formats"`
+
+	// The key ID of the AWS S3 bucket.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	S3SecretId *string `json:"S3SecretId,omitempty" name:"S3SecretId"`
+
+	// The key of the AWS S3 bucket.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	S3SecretKey *string `json:"S3SecretKey,omitempty" name:"S3SecretKey"`
+
+	// The SQS queue of the AWS S3 bucket.
+	// Note: The queue must be in the same region as the bucket.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AwsSQS *AwsSQS `json:"AwsSQS,omitempty" name:"AwsSQS"`
+}
+
+type AwsSQS struct {
+	// The region of the SQS queue.
+	SQSRegion *string `json:"SQSRegion,omitempty" name:"SQSRegion"`
+
+	// The name of the SQS queue.
+	SQSQueueName *string `json:"SQSQueueName,omitempty" name:"SQSQueueName"`
+
+	// The key ID required to read from/write to the SQS queue.
+	S3SecretId *string `json:"S3SecretId,omitempty" name:"S3SecretId"`
+
+	// The key required to read from/write to the SQS queue.
+	S3SecretKey *string `json:"S3SecretKey,omitempty" name:"S3SecretKey"`
+}
+
 type ClassificationConfigureInfo struct {
 	// Switch of intelligent categorization task. Valid values:
 	// <li>ON: enables intelligent categorization task;</li>
@@ -2659,6 +2751,98 @@ func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateScheduleRequestParams struct {
+	// The scheme name (max 128 characters). This name should be unique across your account.
+	ScheduleName *string `json:"ScheduleName,omitempty" name:"ScheduleName"`
+
+	// The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// The subtasks of the scheme.
+	Activities []*Activity `json:"Activities,omitempty" name:"Activities"`
+
+	// The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the output file, such as `/movie/201907/`. If you do not specify this parameter, the directory of the source file will be used.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The notification configuration. If you do not specify this parameter, notifications will not be sent.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+}
+
+type CreateScheduleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The scheme name (max 128 characters). This name should be unique across your account.
+	ScheduleName *string `json:"ScheduleName,omitempty" name:"ScheduleName"`
+
+	// The trigger of the scheme. If a file is uploaded to the specified bucket, the scheme will be triggered.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// The subtasks of the scheme.
+	Activities []*Activity `json:"Activities,omitempty" name:"Activities"`
+
+	// The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the output file, such as `/movie/201907/`. If you do not specify this parameter, the directory of the source file will be used.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The notification configuration. If you do not specify this parameter, notifications will not be sent.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+}
+
+func (r *CreateScheduleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateScheduleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ScheduleName")
+	delete(f, "Trigger")
+	delete(f, "Activities")
+	delete(f, "OutputStorage")
+	delete(f, "OutputDir")
+	delete(f, "TaskNotifyConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateScheduleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateScheduleResponseParams struct {
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateScheduleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateScheduleResponseParams `json:"Response"`
+}
+
+func (r *CreateScheduleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateScheduleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
 	// Name of a time point screencapturing template. Length limit: 64 characters.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -3668,6 +3852,60 @@ func (r *DeleteSampleSnapshotTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSampleSnapshotTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteScheduleRequestParams struct {
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+}
+
+type DeleteScheduleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+}
+
+func (r *DeleteScheduleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteScheduleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ScheduleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteScheduleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteScheduleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteScheduleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteScheduleResponseParams `json:"Response"`
+}
+
+func (r *DeleteScheduleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteScheduleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4699,6 +4937,93 @@ func (r *DescribeSampleSnapshotTemplatesResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type DescribeSchedulesRequestParams struct {
+	// The IDs of the schemes to query. Array length limit: 100.
+	ScheduleIds []*int64 `json:"ScheduleIds,omitempty" name:"ScheduleIds"`
+
+	// The scheme status. Valid values:
+	// <li>`Enabled`</li>
+	// <li>`Disabled`</li>
+	// If you do not specify this parameter, schemes in both statuses will be returned.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of records to return. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeSchedulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The IDs of the schemes to query. Array length limit: 100.
+	ScheduleIds []*int64 `json:"ScheduleIds,omitempty" name:"ScheduleIds"`
+
+	// The scheme status. Valid values:
+	// <li>`Enabled`</li>
+	// <li>`Disabled`</li>
+	// If you do not specify this parameter, schemes in both statuses will be returned.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The pagination offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of records to return. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSchedulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSchedulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ScheduleIds")
+	delete(f, "Status")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSchedulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSchedulesResponseParams struct {
+	// The total number of records that meet the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The information of the schemes.
+	ScheduleInfoSet []*SchedulesInfo `json:"ScheduleInfoSet,omitempty" name:"ScheduleInfoSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSchedulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSchedulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeSchedulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSchedulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitempty" name:"Definitions"`
@@ -5372,6 +5697,60 @@ func (r *DescribeWorkflowsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DisableScheduleRequestParams struct {
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+}
+
+type DisableScheduleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+}
+
+func (r *DisableScheduleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableScheduleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ScheduleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableScheduleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableScheduleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DisableScheduleResponse struct {
+	*tchttp.BaseResponse
+	Response *DisableScheduleResponseParams `json:"Response"`
+}
+
+func (r *DisableScheduleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableScheduleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DisableWorkflowRequestParams struct {
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitempty" name:"WorkflowId"`
@@ -5585,6 +5964,60 @@ type EditMediaTaskOutput struct {
 
 	// Path of edited video file.
 	Path *string `json:"Path,omitempty" name:"Path"`
+}
+
+// Predefined struct for user
+type EnableScheduleRequestParams struct {
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+}
+
+type EnableScheduleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+}
+
+func (r *EnableScheduleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableScheduleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ScheduleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableScheduleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnableScheduleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EnableScheduleResponse struct {
+	*tchttp.BaseResponse
+	Response *EnableScheduleResponseParams `json:"Response"`
+}
+
+func (r *EnableScheduleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnableScheduleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -6669,7 +7102,10 @@ type MediaImageSpriteItem struct {
 }
 
 type MediaInputInfo struct {
-	// The input type, which can be `COS` or `URL`.
+	// The input type. Valid values:
+	// <li>`COS`: A COS bucket address.</li>
+	// <li> `URL`: A URL.</li>
+	// <li> `AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
@@ -6678,6 +7114,10 @@ type MediaInputInfo struct {
 	// The URL of the object to process. This parameter is valid and required when `Type` is `URL`.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	UrlInputInfo *UrlInputInfo `json:"UrlInputInfo,omitempty" name:"UrlInputInfo"`
+
+	// The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	S3InputInfo *S3InputInfo `json:"S3InputInfo,omitempty" name:"S3InputInfo"`
 }
 
 type MediaMetaData struct {
@@ -7982,6 +8422,106 @@ func (r *ModifySampleSnapshotTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifySampleSnapshotTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyScheduleRequestParams struct {
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+
+	// The scheme name.
+	ScheduleName *string `json:"ScheduleName,omitempty" name:"ScheduleName"`
+
+	// The trigger of the scheme.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// The subtasks of the scheme.
+	// Note: You need to pass in the full list of subtasks even if you want to change only some of the subtasks.
+	Activities []*Activity `json:"Activities,omitempty" name:"Activities"`
+
+	// The bucket to save the output file.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the output file.
+	// Note: If this parameter is left empty, the current `OutputDir` value will be invalidated.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The notification configuration.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+}
+
+type ModifyScheduleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+
+	// The scheme name.
+	ScheduleName *string `json:"ScheduleName,omitempty" name:"ScheduleName"`
+
+	// The trigger of the scheme.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// The subtasks of the scheme.
+	// Note: You need to pass in the full list of subtasks even if you want to change only some of the subtasks.
+	Activities []*Activity `json:"Activities,omitempty" name:"Activities"`
+
+	// The bucket to save the output file.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the output file.
+	// Note: If this parameter is left empty, the current `OutputDir` value will be invalidated.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The notification configuration.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+}
+
+func (r *ModifyScheduleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyScheduleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ScheduleId")
+	delete(f, "ScheduleName")
+	delete(f, "Trigger")
+	delete(f, "Activities")
+	delete(f, "OutputStorage")
+	delete(f, "OutputDir")
+	delete(f, "TaskNotifyConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyScheduleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyScheduleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyScheduleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyScheduleResponseParams `json:"Response"`
+}
+
+func (r *ModifyScheduleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyScheduleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9488,6 +10028,37 @@ func (r *ResetWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type S3InputInfo struct {
+	// The AWS S3 bucket.
+	S3Bucket *string `json:"S3Bucket,omitempty" name:"S3Bucket"`
+
+	// The region of the AWS S3 bucket.
+	S3Region *string `json:"S3Region,omitempty" name:"S3Region"`
+
+	// The path of the AWS S3 object.
+	S3Object *string `json:"S3Object,omitempty" name:"S3Object"`
+
+	// The key ID required to access the AWS S3 object.
+	S3SecretId *string `json:"S3SecretId,omitempty" name:"S3SecretId"`
+
+	// The key required to access the AWS S3 object.
+	S3SecretKey *string `json:"S3SecretKey,omitempty" name:"S3SecretKey"`
+}
+
+type S3OutputStorage struct {
+	// The AWS S3 bucket.
+	S3Bucket *string `json:"S3Bucket,omitempty" name:"S3Bucket"`
+
+	// The region of the AWS S3 bucket.
+	S3Region *string `json:"S3Region,omitempty" name:"S3Region"`
+
+	// The key ID required to upload files to the AWS S3 object.
+	S3SecretId *string `json:"S3SecretId,omitempty" name:"S3SecretId"`
+
+	// The key required to upload files to the AWS S3 object.
+	S3SecretKey *string `json:"S3SecretKey,omitempty" name:"S3SecretKey"`
+}
+
 type SampleSnapshotTaskInput struct {
 	// Sampled screencapturing template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
@@ -9652,6 +10223,49 @@ type ScheduleTask struct {
 	// The output of the scheme.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ActivityResultSet []*ActivityResult `json:"ActivityResultSet,omitempty" name:"ActivityResultSet"`
+}
+
+type SchedulesInfo struct {
+	// The scheme ID.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
+
+	// The scheme name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScheduleName *string `json:"ScheduleName,omitempty" name:"ScheduleName"`
+
+	// The scheme status. Valid values:
+	// `Enabled`
+	// `Disabled`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status []*string `json:"Status,omitempty" name:"Status"`
+
+	// The trigger of the scheme.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Trigger *WorkflowTrigger `json:"Trigger,omitempty" name:"Trigger"`
+
+	// The subtasks of the scheme.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Activities []*Activity `json:"Activities,omitempty" name:"Activities"`
+
+	// The bucket to save the output file.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+
+	// The directory to save the output file.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The notification configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
+
+	// The creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The last updated time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 type ScratchRepairConfig struct {
@@ -9916,20 +10530,32 @@ type TaskNotifyConfig struct {
 	// <li>`TDMQ-CMQ`: Message queue</li>
 	// <li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
 	// <li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
+	// <li>`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.</li>
 	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
 	NotifyType *string `json:"NotifyType,omitempty" name:"NotifyType"`
 
 	// HTTP callback URL, required if `NotifyType` is set to `URL`
 	NotifyUrl *string `json:"NotifyUrl,omitempty" name:"NotifyUrl"`
+
+	// The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AwsSQS *AwsSQS `json:"AwsSQS,omitempty" name:"AwsSQS"`
 }
 
 type TaskOutputStorage struct {
-	// The type of storage location for the media processing output object. Only COS is supported currently.
+	// The storage type for a media processing output file. Valid values:
+	// <li>`COS`: Tencent Cloud COS</li>
+	// <li>`>AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// The location to save the output object in COS. This parameter is valid and required when `Type` is COS.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	CosOutputStorage *CosOutputStorage `json:"CosOutputStorage,omitempty" name:"CosOutputStorage"`
+
+	// The AWS S3 bucket to save the output file. This parameter is required if `Type` is `AWS-S3`.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	S3OutputStorage *S3OutputStorage `json:"S3OutputStorage,omitempty" name:"S3OutputStorage"`
 }
 
 type TaskSimpleInfo struct {
@@ -10669,10 +11295,19 @@ type WorkflowTask struct {
 }
 
 type WorkflowTrigger struct {
-	// Trigger type. Only `CosFileUpload` is supported currently.
+	// The trigger type. Valid values:
+	// <li>`CosFileUpload`: Tencent Cloud COS trigger.</li>
+	// <li>`AwsS3FileUpload`: AWS S3 trigger. Currently, this type is only supported for transcoding tasks and schemes (not supported for workflows).</li>
+	// 
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// This parameter is required and valid when `Type` is `CosFileUpload`, indicating the COS trigger rule.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CosFileUploadTrigger *CosFileUploadTrigger `json:"CosFileUploadTrigger,omitempty" name:"CosFileUploadTrigger"`
+
+	// The AWS S3 trigger. This parameter is valid and required if `Type` is `AwsS3FileUpload`.
+	// 
+	// Note: Currently, the key for the AWS S3 bucket, the trigger SQS queue, and the callback SQS queue must be the same.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AwsS3FileUploadTrigger *AwsS3FileUploadTrigger `json:"AwsS3FileUploadTrigger,omitempty" name:"AwsS3FileUploadTrigger"`
 }
