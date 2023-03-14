@@ -505,10 +505,10 @@ type CertInfo struct {
 	// Name of the uploaded certificate. It's required if `CertId` is not specified.
 	CertName *string `json:"CertName,omitempty" name:"CertName"`
 
-	// Public key of the uploaded certificate. It's required if `CertId` is not specified.
+	// Public key of the uploaded certificate. This is required if `CertId` is not specified.
 	CertContent *string `json:"CertContent,omitempty" name:"CertContent"`
 
-	// Private key of the uploaded server certificate. It's required if `CertId` is not specified.
+	// Private key of the uploaded server certificate. This is required if `CertId` is not specified.
 	CertKey *string `json:"CertKey,omitempty" name:"CertKey"`
 }
 
@@ -548,6 +548,10 @@ type CertificateOutput struct {
 	// Client certificate ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CertCaId *string `json:"CertCaId,omitempty" name:"CertCaId"`
+
+	// IDs of extra server certificates
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExtCertIds []*string `json:"ExtCertIds,omitempty" name:"ExtCertIds"`
 }
 
 type ClassicalHealth struct {
@@ -1007,10 +1011,10 @@ type CreateListenerRequestParams struct {
 	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 
-
+	// Maximum number of concurrent listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
 
-
+	// Maximum number of new listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
@@ -1063,8 +1067,10 @@ type CreateListenerRequest struct {
 	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 
+	// Maximum number of concurrent listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
 
+	// Maximum number of new listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
@@ -2152,6 +2158,95 @@ func (r *DeleteTargetGroupsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteTargetGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeregisterFunctionTargetsRequestParams struct {
+	// CLB instance ID.
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB listener ID.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// List of functions to be unbound
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
+
+	// The ID of target forwarding rule. To unbind a function from an L7 forwarding rule, either `LocationId` or `Domain+Url` is required. 
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Domain name of the target forwarding rule. It is ignored if `LocationId` is specified. 
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// URL of the target forwarding rule. It is ignored if `LocationId` is specified. 
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+type DeregisterFunctionTargetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// CLB instance ID.
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB listener ID.
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// List of functions to be unbound
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
+
+	// The ID of target forwarding rule. To unbind a function from an L7 forwarding rule, either `LocationId` or `Domain+Url` is required. 
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Domain name of the target forwarding rule. It is ignored if `LocationId` is specified. 
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// URL of the target forwarding rule. It is ignored if `LocationId` is specified. 
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+func (r *DeregisterFunctionTargetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeregisterFunctionTargetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	delete(f, "ListenerId")
+	delete(f, "FunctionTargets")
+	delete(f, "LocationId")
+	delete(f, "Domain")
+	delete(f, "Url")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeregisterFunctionTargetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeregisterFunctionTargetsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeregisterFunctionTargetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeregisterFunctionTargetsResponseParams `json:"Response"`
+}
+
+func (r *DeregisterFunctionTargetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeregisterFunctionTargetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4513,6 +4608,30 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
+type FunctionInfo struct {
+	// Function namespace
+	FunctionNamespace *string `json:"FunctionNamespace,omitempty" name:"FunctionNamespace"`
+
+	// Function name
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Function version name or alias
+	FunctionQualifier *string `json:"FunctionQualifier,omitempty" name:"FunctionQualifier"`
+
+	// Function qualifier type. Values: `VERSION`, `ALIAS`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FunctionQualifierType *string `json:"FunctionQualifierType,omitempty" name:"FunctionQualifierType"`
+}
+
+type FunctionTarget struct {
+	// SCF related information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Function *FunctionInfo `json:"Function,omitempty" name:"Function"`
+
+	// Weight
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
+}
+
 type HealthCheck struct {
 	// Whether to enable health check. 1: enable; 0: disable.
 	HealthSwitch *int64 `json:"HealthSwitch,omitempty" name:"HealthSwitch"`
@@ -4744,6 +4863,18 @@ type Listener struct {
 	// Attribute of listener
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AttrFlags []*string `json:"AttrFlags,omitempty" name:"AttrFlags"`
+
+	// List of bound target groups
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TargetGroupList []*BasicTargetGroupInfo `json:"TargetGroupList,omitempty" name:"TargetGroupList"`
+
+	// Maximum number of concurrent listener connections. If it’s set to `-1`, the listener speed is not limited. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
+
+	// Maximum number of new listener connections. If it’s set to `-1`, the listener speed is not limited. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
 type ListenerBackend struct {
@@ -5156,6 +5287,21 @@ type LoadBalancerDetail struct {
 	// List o domain names associated with the forwarding rule
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Domains *string `json:"Domains,omitempty" name:"Domains"`
+
+	// The secondary zone of multi-AZ CLB instance
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SlaveZone []*string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+
+	// The AZ of private CLB instance. This is only available for beta users.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Zones []*string `json:"Zones,omitempty" name:"Zones"`
+
+	// Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SniSwitch *int64 `json:"SniSwitch,omitempty" name:"SniSwitch"`
+
+
+	LoadBalancerDomain *string `json:"LoadBalancerDomain,omitempty" name:"LoadBalancerDomain"`
 }
 
 type LoadBalancerHealth struct {
@@ -5662,10 +5808,10 @@ type ModifyListenerRequestParams struct {
 	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 
-
+	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
 
-
+	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
@@ -5712,8 +5858,10 @@ type ModifyListenerRequest struct {
 	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 
+	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
 
+	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
@@ -6455,6 +6603,89 @@ type Quota struct {
 }
 
 // Predefined struct for user
+type RegisterFunctionTargetsRequestParams struct {
+
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
+
+
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+type RegisterFunctionTargetsRequest struct {
+	*tchttp.BaseRequest
+	
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
+
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+func (r *RegisterFunctionTargetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RegisterFunctionTargetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	delete(f, "ListenerId")
+	delete(f, "FunctionTargets")
+	delete(f, "LocationId")
+	delete(f, "Domain")
+	delete(f, "Url")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RegisterFunctionTargetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RegisterFunctionTargetsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RegisterFunctionTargetsResponse struct {
+	*tchttp.BaseResponse
+	Response *RegisterFunctionTargetsResponseParams `json:"Response"`
+}
+
+func (r *RegisterFunctionTargetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RegisterFunctionTargetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RegisterTargetGroupInstancesRequestParams struct {
 	// Target group ID
 	TargetGroupId *string `json:"TargetGroupId,omitempty" name:"TargetGroupId"`
@@ -6732,6 +6963,18 @@ type Resource struct {
 
 	// ISP information, such as `CMCC`, `CUCC`, `CTCC`, `BGP`, and `INTERNAL`.
 	Isp *string `json:"Isp,omitempty" name:"Isp"`
+
+	// Available resources
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AvailabilitySet []*ResourceAvailability `json:"AvailabilitySet,omitempty" name:"AvailabilitySet"`
+}
+
+type ResourceAvailability struct {
+	// Specific ISP resource information. Values: `CMCC`, `CUCC`, `CTCC`, `BGP`.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Whether the resource is available. Values: `Available`, `Unavailable`
+	Availability *string `json:"Availability,omitempty" name:"Availability"`
 }
 
 type RewriteLocationMap struct {
@@ -6937,6 +7180,10 @@ type RuleOutput struct {
 	// List of domain names associated with the forwarding rule
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// List of bound target groups
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TargetGroupList []*BasicTargetGroupInfo `json:"TargetGroupList,omitempty" name:"TargetGroupList"`
 }
 
 type RuleTargets struct {
@@ -7460,6 +7707,10 @@ type ZoneInfo struct {
 	// Whether the AZ is the `LocalZone`, e.g., false.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
+
+	// Whether the AZ is an edge zone. Values: `true`, `false`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EdgeZone *bool `json:"EdgeZone,omitempty" name:"EdgeZone"`
 }
 
 type ZoneResource struct {
@@ -7482,4 +7733,10 @@ type ZoneResource struct {
 
 	// Whether the AZ is a `LocalZone`. Values: `true`, `false`.
 	LocalZone *bool `json:"LocalZone,omitempty" name:"LocalZone"`
+
+	// Type of resources in the zone. Values: `SHARED`, `EXCLUSIVE`
+	ZoneResourceType *string `json:"ZoneResourceType,omitempty" name:"ZoneResourceType"`
+
+	// Whether the AZ is an edge zone. Values: `true`, `false`.
+	EdgeZone *bool `json:"EdgeZone,omitempty" name:"EdgeZone"`
 }

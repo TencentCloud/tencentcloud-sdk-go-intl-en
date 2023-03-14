@@ -413,6 +413,9 @@ type BGPInstance struct {
 
 	// Whether to enable elastic bandwidth
 	ElasticServiceBandwidth *uint64 `json:"ElasticServiceBandwidth,omitempty" name:"ElasticServiceBandwidth"`
+
+	// Bandwidth quota given away by Tencent Cloud
+	GiftServiceBandWidth *int64 `json:"GiftServiceBandWidth,omitempty" name:"GiftServiceBandWidth"`
 }
 
 type BGPInstanceSpecification struct {
@@ -6032,6 +6035,9 @@ type L7RuleHealth struct {
 
 	// Status code that signals that the passive detection considers the status normal. Values: `1` (1xx), `2` (2xx), `4` (3xx), `8` (4xx), and `16` (5xx).
 	PassiveStatusCode *uint64 `json:"PassiveStatusCode,omitempty" name:"PassiveStatusCode"`
+
+	// Configuration status of the passive health check. Values: `0` (Normal), `1` (configuration in progress) and `2` (configuration failed).
+	PassiveStatus *uint64 `json:"PassiveStatus,omitempty" name:"PassiveStatus"`
 }
 
 type Layer4Rule struct {
@@ -6072,6 +6078,12 @@ type Layer7Rule struct {
 
 	// Information of the Anti-DDoS instance configured
 	InstanceDetailRule []*RuleInstanceRelation `json:"InstanceDetailRule,omitempty" name:"InstanceDetailRule"`
+
+	// Protocol
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port number
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
 }
 
 type ListenerCcThreholdConfig struct {
@@ -6992,6 +7004,9 @@ type SourceServer struct {
 
 	// Forward weight of the real server. Value range: 1–100.
 	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
+
+	// Port number. Value range: 0-65535.
+	Port *int64 `json:"Port,omitempty" name:"Port"`
 }
 
 type SpeedValue struct {
