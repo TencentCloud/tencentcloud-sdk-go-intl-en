@@ -63,7 +63,7 @@ type AudioParams struct {
 
 type CloudStorage struct {
 	// The cloud storage provider.
-	// 0: Tencent Cloud COS. The storage services of other providers are not supported currently.
+	// `0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
 	Vendor *uint64 `json:"Vendor,omitempty" name:"Vendor"`
 
 	// The region of cloud storage.
@@ -517,10 +517,10 @@ type McuFeedBackRoomParams struct {
 	// The ID type of the room to which streams are relayed. `0` indicates integer, and `1` indicates string.
 	RoomIdType *uint64 `json:"RoomIdType,omitempty" name:"RoomIdType"`
 
-	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
+	// The [user ID](https://www.tencentcloud.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The signature (similar to login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://intl.cloud.tencent.com/document/product/647/38104).
+	// The signature (similar to login password) required for the relaying robot to enter the room. For information on how to calculate the signature, see [What is UserSig?](https://www.tencentcloud.com/document/product/647/38104).
 	UserSig *string `json:"UserSig,omitempty" name:"UserSig"`
 }
 
@@ -583,6 +583,14 @@ type McuLayoutVolume struct {
 
 	// The payload type of the SEI message. The default is 100. Value range: 100-254 (244 is used internally by Tencent Cloud for timestamps).
 	PayloadType *uint64 `json:"PayloadType,omitempty" name:"PayloadType"`
+
+	// The SEI sending interval (milliseconds). The default value is 1000.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Valid values: `1`: SEI is guaranteed when keyframes are sent; `0` (default): SEI is not guaranteed when keyframes are sent.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FollowIdr *uint64 `json:"FollowIdr,omitempty" name:"FollowIdr"`
 }
 
 type McuPassThrough struct {
@@ -594,6 +602,14 @@ type McuPassThrough struct {
 
 	// This parameter is required only if `PayloadType` is 5. It must be a 32-character hexadecimal string. If `PayloadType` is not 5, this parameter will be ignored.
 	PayloadUuid *string `json:"PayloadUuid,omitempty" name:"PayloadUuid"`
+
+	// The SEI sending interval (milliseconds). The default value is 1000.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// Valid values: `1`: SEI is guaranteed when keyframes are sent; `0` (default): SEI is not guaranteed when keyframes are sent.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FollowIdr *uint64 `json:"FollowIdr,omitempty" name:"FollowIdr"`
 }
 
 type McuPublishCdnParam struct {
@@ -705,7 +721,7 @@ type MixLayout struct {
 	// The image layer. 0 is the default value and means the bottommost layer.
 	ImageLayer *uint64 `json:"ImageLayer,omitempty" name:"ImageLayer"`
 
-	// The download URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
+	// The URL of the background image for a window. The image must be in JPG or PNG format and cannot be larger than 5 MB. If the image’s aspect ratio is different from that of the window, the image will be rendered according to the value of `RenderMode`.
 	SubBackgroundImage *string `json:"SubBackgroundImage,omitempty" name:"SubBackgroundImage"`
 }
 
@@ -740,7 +756,7 @@ type MixLayoutParams struct {
 	// This parameter specifies the type of the stream displayed in the big window. If it appears in `MixLayoutList`, it indicates the type of the stream of a specified user.
 	MediaId *uint64 `json:"MediaId,omitempty" name:"MediaId"`
 
-	// The download URL of the background image for the canvas, which must be in JPG or PNG format and cannot be larger than 5 MB.
+	// The URL of the background image, which cannot contain Chinese characters. The image must be in JPG or PNG format and cannot be larger than 5 MB.
 	BackgroundImageUrl *string `json:"BackgroundImageUrl,omitempty" name:"BackgroundImageUrl"`
 
 	// `1` means to use placeholders, and `0` (default) means to not use placeholders. If this parameter is set to `1`, when a user is not publishing video, a placeholder image will be displayed in the window reserved for the user.

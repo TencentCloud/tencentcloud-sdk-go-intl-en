@@ -26,10 +26,13 @@ const (
 	// An exception occurred while creating the member.
 	FAILEDOPERATION_CREATEACCOUNT = "FailedOperation.CreateAccount"
 
+	// Failed to create the billing permission
+	FAILEDOPERATION_CREATEBILLINGPERMISSIONERR = "FailedOperation.CreateBillingPermissionErr"
+
 	// The number of times of account identity verification exceeds the upper limit.
 	FAILEDOPERATION_CREATEMEMBERAUTHOVERLIMIT = "FailedOperation.CreateMemberAuthOverLimit"
 
-	// Failed to create the policy.
+	// Failed to create the policy
 	FAILEDOPERATION_CREATEPOLICY = "FailedOperation.CreatePolicy"
 
 	// Created successfully.
@@ -41,7 +44,7 @@ const (
 	// An exception occurred while creating the role.
 	FAILEDOPERATION_CREATEROLE = "FailedOperation.CreateRole"
 
-	// You cannot leave an organization created by yourself.
+	// You cannot quit an organization created by yourself.
 	FAILEDOPERATION_DISABLEQUITSELFCREATEDORGANIZATION = "FailedOperation.DisableQuitSelfCreatedOrganization"
 
 	// An error occurred while querying the identity information.
@@ -164,6 +167,12 @@ const (
 	// Created members cannot be deleted.
 	UNSUPPORTEDOPERATION_CREATEMEMBERNOTALLOWDELETE = "UnsupportedOperation.CreateMemberNotAllowDelete"
 
+	// Payment-on-behalf is not supported for this member or payer as it is a reseller.
+	UNSUPPORTEDOPERATION_EXISTEDAGENT = "UnsupportedOperation.ExistedAgent"
+
+	// Payment-on-behalf is not supported for this member or payer as it is a reseller’s account.
+	UNSUPPORTEDOPERATION_EXISTEDCLIENT = "UnsupportedOperation.ExistedClient"
+
 	// The user type mismatches.
 	UNSUPPORTEDOPERATION_INCONSISTENTUSERTYPES = "UnsupportedOperation.InconsistentUserTypes"
 
@@ -187,6 +196,9 @@ const (
 
 	// The member is an agent or customer.
 	UNSUPPORTEDOPERATION_MEMBERISAGENT = "UnsupportedOperation.MemberIsAgent"
+
+	// No credit card is bound to the member.
+	UNSUPPORTEDOPERATION_MEMBERNOPAYMENT = "UnsupportedOperation.MemberNoPayment"
 
 	// There is an ongoing order.
 	UNSUPPORTEDOPERATION_ORDERINPROGRESSEXISTED = "UnsupportedOperation.OrderInProgressExisted"

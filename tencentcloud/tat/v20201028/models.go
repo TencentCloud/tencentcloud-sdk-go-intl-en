@@ -39,6 +39,9 @@ type AutomationAgentInfo struct {
 	// <li> `Linux`: Linux instance
 	// <li> `Windows`: Windows instance
 	Environment *string `json:"Environment,omitempty" name:"Environment"`
+
+	// Features supported by the TAT agent.
+	SupportFeatures []*string `json:"SupportFeatures,omitempty" name:"SupportFeatures"`
 }
 
 // Predefined struct for user
@@ -174,6 +177,12 @@ type CommandDocument struct {
 
 	// The user who executes the command.
 	Username *string `json:"Username,omitempty" name:"Username"`
+
+	// URL of the COS bucket to store the output
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitempty" name:"OutputCOSBucketUrl"`
+
+	// Prefix of the output file name 
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 // Predefined struct for user

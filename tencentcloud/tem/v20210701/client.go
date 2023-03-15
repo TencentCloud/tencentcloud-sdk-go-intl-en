@@ -68,6 +68,7 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATESERVICEERROR = "FailedOperation.CreateServiceError"
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
@@ -91,6 +92,7 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATESERVICEERROR = "FailedOperation.CreateServiceError"
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
@@ -232,8 +234,10 @@ func NewCreateApplicationServiceResponse() (response *CreateApplicationServiceRe
 //  INVALIDPARAMETERVALUE_CANNOTOVERWRITEOTHERAPPLICATIONSERVICE = "InvalidParameterValue.CannotOverWriteOtherApplicationService"
 //  INVALIDPARAMETERVALUE_CANNOTUPDATESERVICEBYBOTHMETHODS = "InvalidParameterValue.CannotUpdateServiceByBothMethods"
 //  INVALIDPARAMETERVALUE_INVALIDEKSSERVICETYPE = "InvalidParameterValue.InvalidEksServiceType"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_PORTDUPLICATEERROR = "InvalidParameterValue.PortDuplicateError"
 //  INVALIDPARAMETERVALUE_PORTISRESERVED = "InvalidParameterValue.PortIsReserved"
+//  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -259,8 +263,10 @@ func (c *Client) CreateApplicationService(request *CreateApplicationServiceReque
 //  INVALIDPARAMETERVALUE_CANNOTOVERWRITEOTHERAPPLICATIONSERVICE = "InvalidParameterValue.CannotOverWriteOtherApplicationService"
 //  INVALIDPARAMETERVALUE_CANNOTUPDATESERVICEBYBOTHMETHODS = "InvalidParameterValue.CannotUpdateServiceByBothMethods"
 //  INVALIDPARAMETERVALUE_INVALIDEKSSERVICETYPE = "InvalidParameterValue.InvalidEksServiceType"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_PORTDUPLICATEERROR = "InvalidParameterValue.PortDuplicateError"
 //  INVALIDPARAMETERVALUE_PORTISRESERVED = "InvalidParameterValue.PortIsReserved"
+//  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -307,6 +313,7 @@ func NewCreateConfigDataResponse() (response *CreateConfigDataResponse) {
 //  INVALIDPARAMETERVALUE_CONFIGDATAALREADYEXIST = "InvalidParameterValue.ConfigDataAlreadyExist"
 //  INVALIDPARAMETERVALUE_CONFIGDATAINVALID = "InvalidParameterValue.ConfigDataInvalid"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) CreateConfigData(request *CreateConfigDataRequest) (response *CreateConfigDataResponse, err error) {
     return c.CreateConfigDataWithContext(context.Background(), request)
@@ -320,6 +327,7 @@ func (c *Client) CreateConfigData(request *CreateConfigDataRequest) (response *C
 //  INVALIDPARAMETERVALUE_CONFIGDATAALREADYEXIST = "InvalidParameterValue.ConfigDataAlreadyExist"
 //  INVALIDPARAMETERVALUE_CONFIGDATAINVALID = "InvalidParameterValue.ConfigDataInvalid"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) CreateConfigDataWithContext(ctx context.Context, request *CreateConfigDataRequest) (response *CreateConfigDataResponse, err error) {
     if request == nil {
@@ -413,8 +421,11 @@ func NewCreateEnvironmentResponse() (response *CreateEnvironmentResponse) {
 // This API is used to create an environment.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
 //  INTERNALERROR_CREATEEKSCLUSTERERROR = "InternalError.CreateEksClusterError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETER_UNAUTHORIZEDORMISSINGROLE = "InvalidParameter.UnauthorizedOrMissingRole"
+//  INVALIDPARAMETER_VPCOVERQUOTA = "InvalidParameter.VpcOverQuota"
 //  INVALIDPARAMETERVALUE_DAILYCREATENAMESPACEREACHMAXIMUM = "InvalidParameterValue.DailyCreateNamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
@@ -429,8 +440,11 @@ func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response 
 // This API is used to create an environment.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
 //  INTERNALERROR_CREATEEKSCLUSTERERROR = "InternalError.CreateEksClusterError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETER_UNAUTHORIZEDORMISSINGROLE = "InvalidParameter.UnauthorizedOrMissingRole"
+//  INVALIDPARAMETER_VPCOVERQUOTA = "InvalidParameter.VpcOverQuota"
 //  INVALIDPARAMETERVALUE_DAILYCREATENAMESPACEREACHMAXIMUM = "InvalidParameterValue.DailyCreateNamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
@@ -613,7 +627,9 @@ func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
 //   - Delete the application
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
 //  FAILEDOPERATION_DELETESERVICEERROR = "FailedOperation.DeleteServiceError"
+//  FAILEDOPERATION_DESCRIBEINGRESSLISTERROR = "FailedOperation.DescribeIngressListError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
@@ -644,7 +660,9 @@ func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response 
 //   - Delete the application
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
 //  FAILEDOPERATION_DELETESERVICEERROR = "FailedOperation.DeleteServiceError"
+//  FAILEDOPERATION_DESCRIBEINGRESSLISTERROR = "FailedOperation.DescribeIngressListError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DELETESERVICEERROR = "InternalError.DeleteServiceError"
@@ -871,6 +889,10 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 // This API is used to deploy an application.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACTIONREADTIMEOUT = "FailedOperation.ActionReadTimeout"
+//  FAILEDOPERATION_CREATESERVICEERROR = "FailedOperation.CreateServiceError"
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
+//  FAILEDOPERATION_DESCRIBESERVICELISTERROR = "FailedOperation.DescribeServiceListError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
@@ -888,6 +910,7 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  INVALIDPARAMETERVALUE_MUSTPROVIDEPORTMAPPINGRULES = "InvalidParameterValue.MustProvidePortMappingRules"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_OSNOTSUPPORT = "InvalidParameterValue.OsNotSupport"
+//  INVALIDPARAMETERVALUE_POSTSTARTNOTVALID = "InvalidParameterValue.PostStartNotValid"
 //  INVALIDPARAMETERVALUE_REGISTRYNOTBIND = "InvalidParameterValue.RegistryNotBind"
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 //  INVALIDPARAMETERVALUE_SERVICENOTBELONGTOAPPID = "InvalidParameterValue.ServiceNotBelongToAppid"
@@ -899,6 +922,7 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  MISSINGPARAMETER_DEPLOYMODENULL = "MissingParameter.DeployModeNull"
 //  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
+//  MISSINGPARAMETER_IMGREPONULL = "MissingParameter.ImgRepoNull"
 //  MISSINGPARAMETER_LOGSETORTOPICNULL = "MissingParameter.LogsetOrTopicNull"
 //  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 //  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
@@ -919,6 +943,10 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 // This API is used to deploy an application.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACTIONREADTIMEOUT = "FailedOperation.ActionReadTimeout"
+//  FAILEDOPERATION_CREATESERVICEERROR = "FailedOperation.CreateServiceError"
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
+//  FAILEDOPERATION_DESCRIBESERVICELISTERROR = "FailedOperation.DescribeServiceListError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_CREATEAPMRESOURCEERROR = "InternalError.CreateApmResourceError"
 //  INTERNALERROR_CREATESERVICEERROR = "InternalError.CreateServiceError"
@@ -936,6 +964,7 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 //  INVALIDPARAMETERVALUE_MUSTPROVIDEPORTMAPPINGRULES = "InvalidParameterValue.MustProvidePortMappingRules"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_OSNOTSUPPORT = "InvalidParameterValue.OsNotSupport"
+//  INVALIDPARAMETERVALUE_POSTSTARTNOTVALID = "InvalidParameterValue.PostStartNotValid"
 //  INVALIDPARAMETERVALUE_REGISTRYNOTBIND = "InvalidParameterValue.RegistryNotBind"
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 //  INVALIDPARAMETERVALUE_SERVICENOTBELONGTOAPPID = "InvalidParameterValue.ServiceNotBelongToAppid"
@@ -947,6 +976,7 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  MISSINGPARAMETER_DEPLOYMODENULL = "MissingParameter.DeployModeNull"
 //  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
+//  MISSINGPARAMETER_IMGREPONULL = "MissingParameter.ImgRepoNull"
 //  MISSINGPARAMETER_LOGSETORTOPICNULL = "MissingParameter.LogsetOrTopicNull"
 //  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
 //  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
@@ -1053,6 +1083,10 @@ func NewDescribeApplicationInfoResponse() (response *DescribeApplicationInfoResp
 // This API is used to check the basic information of an application.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACTIONREADTIMEOUT = "FailedOperation.ActionReadTimeout"
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
+//  FAILEDOPERATION_DESCRIBERUNPODLISTERROR = "FailedOperation.DescribeRunPodListError"
+//  FAILEDOPERATION_DESCRIBESERVICEERROR = "FailedOperation.DescribeServiceError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
@@ -1074,6 +1108,10 @@ func (c *Client) DescribeApplicationInfo(request *DescribeApplicationInfoRequest
 // This API is used to check the basic information of an application.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ACTIONREADTIMEOUT = "FailedOperation.ActionReadTimeout"
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
+//  FAILEDOPERATION_DESCRIBERUNPODLISTERROR = "FailedOperation.DescribeRunPodListError"
+//  FAILEDOPERATION_DESCRIBESERVICEERROR = "FailedOperation.DescribeServiceError"
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
@@ -1125,6 +1163,8 @@ func NewDescribeApplicationPodsResponse() (response *DescribeApplicationPodsResp
 // This API is used to get the list of application pods.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
+//  FAILEDOPERATION_DESCRIBERUNPODLISTERROR = "FailedOperation.DescribeRunPodListError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
@@ -1141,6 +1181,8 @@ func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest
 // This API is used to get the list of application pods.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DEFAULTINTERNALERROR = "FailedOperation.DefaultInternalError"
+//  FAILEDOPERATION_DESCRIBERUNPODLISTERROR = "FailedOperation.DescribeRunPodListError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
@@ -1250,6 +1292,7 @@ func NewDescribeApplicationsResponse() (response *DescribeApplicationsResponse) 
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeApplications(request *DescribeApplicationsRequest) (response *DescribeApplicationsResponse, err error) {
     return c.DescribeApplicationsWithContext(context.Background(), request)
 }
@@ -1261,6 +1304,7 @@ func (c *Client) DescribeApplications(request *DescribeApplicationsRequest) (res
 //  INTERNALERROR_ACTIONREADTIMEOUT = "InternalError.ActionReadTimeout"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 func (c *Client) DescribeApplicationsWithContext(ctx context.Context, request *DescribeApplicationsRequest) (response *DescribeApplicationsResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationsRequest()
@@ -1300,6 +1344,7 @@ func NewDescribeApplicationsStatusResponse() (response *DescribeApplicationsStat
 //
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -1313,6 +1358,7 @@ func (c *Client) DescribeApplicationsStatus(request *DescribeApplicationsStatusR
 //
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -1357,6 +1403,7 @@ func NewDescribeConfigDataResponse() (response *DescribeConfigDataResponse) {
 // error code that may be returned:
 //  INTERNALERROR_DESCRIBECONFIGDATAERROR = "InternalError.DescribeConfigDataError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
+//  RESOURCENOTFOUND_CONFIGDATANOTFOUND = "ResourceNotFound.ConfigDataNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DescribeConfigData(request *DescribeConfigDataRequest) (response *DescribeConfigDataResponse, err error) {
     return c.DescribeConfigDataWithContext(context.Background(), request)
@@ -1368,6 +1415,7 @@ func (c *Client) DescribeConfigData(request *DescribeConfigDataRequest) (respons
 // error code that may be returned:
 //  INTERNALERROR_DESCRIBECONFIGDATAERROR = "InternalError.DescribeConfigDataError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
+//  RESOURCENOTFOUND_CONFIGDATANOTFOUND = "ResourceNotFound.ConfigDataNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DescribeConfigDataWithContext(ctx context.Context, request *DescribeConfigDataRequest) (response *DescribeConfigDataResponse, err error) {
     if request == nil {
@@ -1689,6 +1737,7 @@ func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
 // This API is used to query the list of ingress rules.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBESERVICELISTERROR = "FailedOperation.DescribeServiceListError"
 //  INTERNALERROR_DESCRIBESERVICELISTERROR = "InternalError.DescribeServiceListError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
@@ -1702,6 +1751,7 @@ func (c *Client) DescribeIngresses(request *DescribeIngressesRequest) (response 
 // This API is used to query the list of ingress rules.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBESERVICELISTERROR = "FailedOperation.DescribeServiceListError"
 //  INTERNALERROR_DESCRIBESERVICELISTERROR = "InternalError.DescribeServiceListError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
@@ -1748,6 +1798,7 @@ func NewDescribeLogConfigResponse() (response *DescribeLogConfigResponse) {
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBELOGCONFIGERROR = "InternalError.DescribeLogConfigError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
+//  RESOURCENOTFOUND_LOGCONFIGNOTFOUND = "ResourceNotFound.LogConfigNotFound"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DescribeLogConfig(request *DescribeLogConfigRequest) (response *DescribeLogConfigResponse, err error) {
@@ -1761,6 +1812,7 @@ func (c *Client) DescribeLogConfig(request *DescribeLogConfigRequest) (response 
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBELOGCONFIGERROR = "InternalError.DescribeLogConfigError"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
+//  RESOURCENOTFOUND_LOGCONFIGNOTFOUND = "ResourceNotFound.LogConfigNotFound"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DescribeLogConfigWithContext(ctx context.Context, request *DescribeLogConfigRequest) (response *DescribeLogConfigResponse, err error) {
@@ -2358,6 +2410,7 @@ func NewModifyApplicationServiceResponse() (response *ModifyApplicationServiceRe
 //  INVALIDPARAMETER_SERVICENAMENOTVALID = "InvalidParameter.ServiceNameNotValid"
 //  INVALIDPARAMETER_SERVICEUSERESERVESUFFIX = "InvalidParameter.ServiceUseReserveSuffix"
 //  INVALIDPARAMETER_TOOMANYPORTMAPPINGRULES = "InvalidParameter.TooManyPortMappingRules"
+//  INVALIDPARAMETERVALUE_APPLICATIONSERVICENOTFOUND = "InvalidParameterValue.ApplicationServiceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDEKSSERVICETYPE = "InvalidParameterValue.InvalidEksServiceType"
 //  INVALIDPARAMETERVALUE_PORTISRESERVED = "InvalidParameterValue.PortIsReserved"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
@@ -2378,6 +2431,7 @@ func (c *Client) ModifyApplicationService(request *ModifyApplicationServiceReque
 //  INVALIDPARAMETER_SERVICENAMENOTVALID = "InvalidParameter.ServiceNameNotValid"
 //  INVALIDPARAMETER_SERVICEUSERESERVESUFFIX = "InvalidParameter.ServiceUseReserveSuffix"
 //  INVALIDPARAMETER_TOOMANYPORTMAPPINGRULES = "InvalidParameter.TooManyPortMappingRules"
+//  INVALIDPARAMETERVALUE_APPLICATIONSERVICENOTFOUND = "InvalidParameterValue.ApplicationServiceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDEKSSERVICETYPE = "InvalidParameterValue.InvalidEksServiceType"
 //  INVALIDPARAMETERVALUE_PORTISRESERVED = "InvalidParameterValue.PortIsReserved"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
@@ -2478,6 +2532,7 @@ func NewModifyEnvironmentResponse() (response *ModifyEnvironmentResponse) {
 //  INVALIDPARAMETERVALUE_ENVIRONMENTNAMEIMMUTABLE = "InvalidParameterValue.EnvironmentNameImmutable"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  OPERATIONDENIED_RESOURCEISOLATED = "OperationDenied.ResourceIsolated"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response *ModifyEnvironmentResponse, err error) {
     return c.ModifyEnvironmentWithContext(context.Background(), request)
@@ -2492,6 +2547,7 @@ func (c *Client) ModifyEnvironment(request *ModifyEnvironmentRequest) (response 
 //  INVALIDPARAMETERVALUE_ENVIRONMENTNAMEIMMUTABLE = "InvalidParameterValue.EnvironmentNameImmutable"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  OPERATIONDENIED_RESOURCEISOLATED = "OperationDenied.ResourceIsolated"
+//  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) ModifyEnvironmentWithContext(ctx context.Context, request *ModifyEnvironmentRequest) (response *ModifyEnvironmentResponse, err error) {
     if request == nil {
@@ -2531,6 +2587,7 @@ func NewModifyIngressResponse() (response *ModifyIngressResponse) {
 // This API is used to create or update an ingress rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UPDATEINGRESSERROR = "FailedOperation.UpdateIngressError"
 //  INTERNALERROR_UPDATEINGRESSERROR = "InternalError.UpdateIngressError"
 //  INVALIDPARAMETERVALUE_INGRESSREWRITEREQUIREDHTTPSENABLE = "InvalidParameterValue.IngressRewriteRequiredHttpsEnable"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
@@ -2543,6 +2600,7 @@ func (c *Client) ModifyIngress(request *ModifyIngressRequest) (response *ModifyI
 // This API is used to create or update an ingress rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UPDATEINGRESSERROR = "FailedOperation.UpdateIngressError"
 //  INTERNALERROR_UPDATEINGRESSERROR = "InternalError.UpdateIngressError"
 //  INVALIDPARAMETERVALUE_INGRESSREWRITEREQUIREDHTTPSENABLE = "InvalidParameterValue.IngressRewriteRequiredHttpsEnable"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"

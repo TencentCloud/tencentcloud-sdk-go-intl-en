@@ -4615,6 +4615,66 @@ func (r *DescribeRocketMQTopicsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRocketMQVipInstanceDetailRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribeRocketMQVipInstanceDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeRocketMQVipInstanceDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRocketMQVipInstanceDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQVipInstanceDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRocketMQVipInstanceDetailResponseParams struct {
+	// Cluster information
+	ClusterInfo *RocketMQClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo"`
+
+	// Cluster configuration
+	InstanceConfig *RocketMQInstanceConfig `json:"InstanceConfig,omitempty" name:"InstanceConfig"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRocketMQVipInstanceDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRocketMQVipInstanceDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeRocketMQVipInstanceDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRocketMQVipInstanceDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRocketMQVipInstancesRequestParams struct {
 	// Query condition filter
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
@@ -5082,6 +5142,17 @@ type FilterSubscription struct {
 
 	// Filter by subscription name for exact query.
 	SubscriptionNames []*string `json:"SubscriptionNames,omitempty" name:"SubscriptionNames"`
+}
+
+type InstanceNodeDistribution struct {
+	// AZ
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// AZ ID
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Number of nodes
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
 }
 
 // Predefined struct for user
@@ -6924,6 +6995,44 @@ type RocketMQGroup struct {
 	RetryMaxTimes *uint64 `json:"RetryMaxTimes,omitempty" name:"RetryMaxTimes"`
 }
 
+type RocketMQInstanceConfig struct {
+	// Maximum TPS per namespace
+	MaxTpsPerNamespace *uint64 `json:"MaxTpsPerNamespace,omitempty" name:"MaxTpsPerNamespace"`
+
+	// Maximum number of namespaces
+	MaxNamespaceNum *uint64 `json:"MaxNamespaceNum,omitempty" name:"MaxNamespaceNum"`
+
+	// Number of used namespaces
+	UsedNamespaceNum *uint64 `json:"UsedNamespaceNum,omitempty" name:"UsedNamespaceNum"`
+
+	// Maximum number of topics
+	MaxTopicNum *uint64 `json:"MaxTopicNum,omitempty" name:"MaxTopicNum"`
+
+	// Number of used topics
+	UsedTopicNum *uint64 `json:"UsedTopicNum,omitempty" name:"UsedTopicNum"`
+
+	// Maximum number of groups
+	MaxGroupNum *uint64 `json:"MaxGroupNum,omitempty" name:"MaxGroupNum"`
+
+	// Number of used groups
+	UsedGroupNum *uint64 `json:"UsedGroupNum,omitempty" name:"UsedGroupNum"`
+
+	// Cluster type
+	ConfigDisplay *string `json:"ConfigDisplay,omitempty" name:"ConfigDisplay"`
+
+	// Number of nodes in the cluster
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Node distribution
+	NodeDistribution []*InstanceNodeDistribution `json:"NodeDistribution,omitempty" name:"NodeDistribution"`
+
+	// Topic distribution
+	TopicDistribution []*RocketMQTopicDistribution `json:"TopicDistribution,omitempty" name:"TopicDistribution"`
+
+
+	MaxQueuesPerTopic *uint64 `json:"MaxQueuesPerTopic,omitempty" name:"MaxQueuesPerTopic"`
+}
+
 type RocketMQNamespace struct {
 	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
@@ -6969,6 +7078,14 @@ type RocketMQTopic struct {
 
 	// Creation time in milliseconds.
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type RocketMQTopicDistribution struct {
+	// Topic type
+	TopicType *string `json:"TopicType,omitempty" name:"TopicType"`
+
+	// Number of topics
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
 }
 
 type RocketMQVipInstance struct {

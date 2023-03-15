@@ -286,6 +286,7 @@ type Blueprint struct {
 	DisplayVersion *string `json:"DisplayVersion,omitempty" name:"DisplayVersion"`
 
 	// Image description information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// OS name.
@@ -336,6 +337,10 @@ type Blueprint struct {
 	// Array of IDs of scenes associated with an image
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SceneIdSet []*string `json:"SceneIdSet,omitempty" name:"SceneIdSet"`
+
+	// Docker version.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DockerVersion *string `json:"DockerVersion,omitempty" name:"DockerVersion"`
 }
 
 type BlueprintInstance struct {
@@ -1255,12 +1260,12 @@ type DescribeBlueprintsRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter list
+	// Filter list.
 	// <li>blueprint-id</li>Filter by the **image ID**.
 	// Type: String
 	// Required: no
 	// <li>blueprint-type</li>Filter by the **image type**.
-	// Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
+	// Valid values: `APP_OS` (application image), `PURE_OS` (system image), `DOCKER` (Docker container image), `PRIVATE` (custom image), `SHARED` (shared image)
 	// Type: String
 	// Required: no
 	// <li>platform-type</li>Filter by the **image operating system**.
@@ -1277,7 +1282,7 @@ type DescribeBlueprintsRequestParams struct {
 	// Type: String
 	// Required: no
 	// 
-	// Each request can contain up to 10 `Filters`, each of which can contain up to 00 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+	// Each request can contain up to 10 `Filters`, each of which can contain up to 100 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -1293,12 +1298,12 @@ type DescribeBlueprintsRequest struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter list
+	// Filter list.
 	// <li>blueprint-id</li>Filter by the **image ID**.
 	// Type: String
 	// Required: no
 	// <li>blueprint-type</li>Filter by the **image type**.
-	// Valid values: `APP_OS` (application image); `PURE_OS` (system image); `PRIVATE` (custom image) and `SHARED` (shared image)
+	// Valid values: `APP_OS` (application image), `PURE_OS` (system image), `DOCKER` (Docker container image), `PRIVATE` (custom image), `SHARED` (shared image)
 	// Type: String
 	// Required: no
 	// <li>platform-type</li>Filter by the **image operating system**.
@@ -1315,7 +1320,7 @@ type DescribeBlueprintsRequest struct {
 	// Type: String
 	// Required: no
 	// 
-	// Each request can contain up to 10 `Filters`, each of which can contain up to 00 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
+	// Each request can contain up to 10 `Filters`, each of which can contain up to 100 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3695,6 +3700,7 @@ type Disk struct {
 
 	// Creation time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
 	// Expiration time according to ISO 8601 standard. UTC time is used. 
@@ -4095,11 +4101,11 @@ type InquirePriceCreateInstancesRequestParams struct {
 	// Instance package ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
+	// Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
 	// Number of instances to be created. Default value: 1.
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
-
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
 	// Application image ID, which is required if a paid application image is used and can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
@@ -4111,11 +4117,11 @@ type InquirePriceCreateInstancesRequest struct {
 	// Instance package ID.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
+	// Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
+
 	// Number of instances to be created. Default value: 1.
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
-
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
 	// Application image ID, which is required if a paid application image is used and can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
@@ -4134,8 +4140,8 @@ func (r *InquirePriceCreateInstancesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "BundleId")
-	delete(f, "InstanceCount")
 	delete(f, "InstanceChargePrepaid")
+	delete(f, "InstanceCount")
 	delete(f, "BlueprintId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateInstancesRequest has unknown keys!", "")
@@ -4237,7 +4243,7 @@ type InquirePriceRenewInstancesRequestParams struct {
 	// IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	// Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew the data disk. Default: `false`.
@@ -4253,7 +4259,7 @@ type InquirePriceRenewInstancesRequest struct {
 	// IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	// Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew the data disk. Default: `false`.
@@ -5506,6 +5512,7 @@ type Snapshot struct {
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitempty" name:"LatestOperationRequestId"`
 
 	// Snapshot creation time.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 }
 

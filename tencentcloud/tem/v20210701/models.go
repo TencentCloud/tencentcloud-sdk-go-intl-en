@@ -592,14 +592,14 @@ type CreateEnvironmentRequestParams struct {
 	// Environment name
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
+	// Environment description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
 	// VPC name
 	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
 
 	// List of subnets
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
-
-	// Environment description
-	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Kubernetes version
 	K8sVersion *string `json:"K8sVersion,omitempty" name:"K8sVersion"`
@@ -618,6 +618,18 @@ type CreateEnvironmentRequestParams struct {
 
 	// The region to create the environment
 	CreateRegion *string `json:"CreateRegion,omitempty" name:"CreateRegion"`
+
+	// Whether to create a VPC
+	SetupVpc *bool `json:"SetupVpc,omitempty" name:"SetupVpc"`
+
+	// Whether to create a TMP instance
+	SetupPrometheus *bool `json:"SetupPrometheus,omitempty" name:"SetupPrometheus"`
+
+	// TMP instance ID
+	PrometheusId *string `json:"PrometheusId,omitempty" name:"PrometheusId"`
+
+	// APM ID
+	ApmId *string `json:"ApmId,omitempty" name:"ApmId"`
 }
 
 type CreateEnvironmentRequest struct {
@@ -626,14 +638,14 @@ type CreateEnvironmentRequest struct {
 	// Environment name
 	EnvironmentName *string `json:"EnvironmentName,omitempty" name:"EnvironmentName"`
 
+	// Environment description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
 	// VPC name
 	Vpc *string `json:"Vpc,omitempty" name:"Vpc"`
 
 	// List of subnets
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
-
-	// Environment description
-	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// Kubernetes version
 	K8sVersion *string `json:"K8sVersion,omitempty" name:"K8sVersion"`
@@ -652,6 +664,18 @@ type CreateEnvironmentRequest struct {
 
 	// The region to create the environment
 	CreateRegion *string `json:"CreateRegion,omitempty" name:"CreateRegion"`
+
+	// Whether to create a VPC
+	SetupVpc *bool `json:"SetupVpc,omitempty" name:"SetupVpc"`
+
+	// Whether to create a TMP instance
+	SetupPrometheus *bool `json:"SetupPrometheus,omitempty" name:"SetupPrometheus"`
+
+	// TMP instance ID
+	PrometheusId *string `json:"PrometheusId,omitempty" name:"PrometheusId"`
+
+	// APM ID
+	ApmId *string `json:"ApmId,omitempty" name:"ApmId"`
 }
 
 func (r *CreateEnvironmentRequest) ToJsonString() string {
@@ -667,15 +691,19 @@ func (r *CreateEnvironmentRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "EnvironmentName")
+	delete(f, "Description")
 	delete(f, "Vpc")
 	delete(f, "SubnetIds")
-	delete(f, "Description")
 	delete(f, "K8sVersion")
 	delete(f, "SourceChannel")
 	delete(f, "EnableTswTraceService")
 	delete(f, "Tags")
 	delete(f, "EnvType")
 	delete(f, "CreateRegion")
+	delete(f, "SetupVpc")
+	delete(f, "SetupPrometheus")
+	delete(f, "PrometheusId")
+	delete(f, "ApmId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEnvironmentRequest has unknown keys!", "")
 	}
@@ -3752,6 +3780,14 @@ type LogConfigExtractRule struct {
 	// Key of log failed to be parsed
 	// Note: This field may return `null`, indicating that no valid value was found.
 	UnMatchedKey *string `json:"UnMatchedKey,omitempty" name:"UnMatchedKey"`
+
+	// tracking
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Backtracking *string `json:"Backtracking,omitempty" name:"Backtracking"`
+
+	// Separator
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Delimiter *string `json:"Delimiter,omitempty" name:"Delimiter"`
 }
 
 type LogConfigListPage struct {
@@ -5014,6 +5050,10 @@ type ServiceVersionBrief struct {
 	// Creation time
 	// Note: This field may return `null`, indicating that no valid value was found.
 	CreateDate *string `json:"CreateDate,omitempty" name:"CreateDate"`
+
+	// Region ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 }
 
 type SortType struct {
@@ -5133,6 +5173,10 @@ type TemEnvironmentStartingStatus struct {
 	// Number of started applictions
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	StartedApplicationNum *int64 `json:"StartedApplicationNum,omitempty" name:"StartedApplicationNum"`
+
+	// Number of applications failed to be started
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StartFailedApplicationNum *int64 `json:"StartFailedApplicationNum,omitempty" name:"StartFailedApplicationNum"`
 }
 
 type TemEnvironmentStoppingStatus struct {
@@ -5143,6 +5187,10 @@ type TemEnvironmentStoppingStatus struct {
 	// Number of stopped applications
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	StoppedApplicationNum *int64 `json:"StoppedApplicationNum,omitempty" name:"StoppedApplicationNum"`
+
+	// Number of applications failed to be stopped
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	StopFailedApplicationNum *int64 `json:"StopFailedApplicationNum,omitempty" name:"StopFailedApplicationNum"`
 }
 
 type TemNamespaceInfo struct {
@@ -5631,6 +5679,14 @@ type TemServiceVersionInfo struct {
 	// Tag
 	// Note: This field may return `null`, indicating that no valid value was found.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to encode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PreStopEncoded *string `json:"PreStopEncoded,omitempty" name:"PreStopEncoded"`
+
+	// Whether to encode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PostStartEncoded *string `json:"PostStartEncoded,omitempty" name:"PostStartEncoded"`
 }
 
 type UseDefaultRepoParameters struct {
