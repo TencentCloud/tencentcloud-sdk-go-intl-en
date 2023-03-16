@@ -1922,7 +1922,7 @@ func NewDescribeSafeAuthFlagCollResponse() (response *DescribeSafeAuthFlagCollRe
 }
 
 // DescribeSafeAuthFlagColl
-// This API is used to query security settings.
+// This API is used to get a sub-account’s security settings.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1933,7 +1933,7 @@ func (c *Client) DescribeSafeAuthFlagColl(request *DescribeSafeAuthFlagCollReque
 }
 
 // DescribeSafeAuthFlagColl
-// This API is used to query security settings.
+// This API is used to get a sub-account’s security settings.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

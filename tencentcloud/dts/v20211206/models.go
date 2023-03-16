@@ -1054,6 +1054,10 @@ type DBEndpointInfo struct {
 	// 'AuthFlag': "1",	'AuthMechanism':"SCRAM-SHA-1"]
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitempty" name:"ExtraAttr"`
+
+	// Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitempty" name:"DatabaseNetEnv"`
 }
 
 type DBInfo struct {
@@ -1229,7 +1233,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NewDbName *string `json:"NewDbName,omitempty" name:"NewDbName"`
 
-	// Database selection mode, which is required if `Mode` is `Partial`. Valid values: `All`, `Partial`. Note that the sync of advanced objects does not depend on this parameter.
+	// Database selection mode, which is required if `Mode` is `Partial`. Valid values: `All`, `Partial`. Note that the sync of advanced objects does not depend on this parameter. To sync an entire database, set this parameter to `All`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
 
@@ -1241,7 +1245,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NewSchemaName *string `json:"NewSchemaName,omitempty" name:"NewSchemaName"`
 
-	// Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`.
+	// Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TableMode *string `json:"TableMode,omitempty" name:"TableMode"`
 
@@ -1249,7 +1253,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tables []*Table `json:"Tables,omitempty" name:"Tables"`
 
-	// View selection mode. Valid values: `All`, `Partial`.
+	// View selection mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ViewMode *string `json:"ViewMode,omitempty" name:"ViewMode"`
 
@@ -1257,7 +1261,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Views []*View `json:"Views,omitempty" name:"Views"`
 
-	// Sync mode. Valid values: `Partial`, `All`.
+	// Sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FunctionMode *string `json:"FunctionMode,omitempty" name:"FunctionMode"`
 
@@ -1265,7 +1269,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Functions []*string `json:"Functions,omitempty" name:"Functions"`
 
-	// Sync mode. Valid values: `Partial`, `All`.
+	// Sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcedureMode *string `json:"ProcedureMode,omitempty" name:"ProcedureMode"`
 
@@ -1273,7 +1277,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Procedures []*string `json:"Procedures,omitempty" name:"Procedures"`
 
-	// Trigger migration mode (`all`: All objects; `partial`: Some objects)
+	// Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “trigger” is not supported for data sync.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TriggerMode *string `json:"TriggerMode,omitempty" name:"TriggerMode"`
 
@@ -1281,7 +1285,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Triggers []*string `json:"Triggers,omitempty" name:"Triggers"`
 
-	// Event migration mode (`all`: All objects; `partial`: Some objects)
+	// Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “event” is not supported for data sync.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EventMode *string `json:"EventMode,omitempty" name:"EventMode"`
 
@@ -1377,14 +1381,14 @@ func (r *DeleteCompareTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCheckSyncJobResultRequestParams struct {
-	// Sync task ID
+	// Sync task instance ID in the format of `sync-werwfs23`, which is used to identify a sync task. This parameter is required.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 }
 
 type DescribeCheckSyncJobResultRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sync task ID
+	// Sync task instance ID in the format of `sync-werwfs23`, which is used to identify a sync task. This parameter is required.
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
 }
 
@@ -1409,7 +1413,7 @@ func (r *DescribeCheckSyncJobResultRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCheckSyncJobResultResponseParams struct {
-	// Check result
+	// Execution status of the check task. Valid values: `notStarted`, `running`, `failed`, `success`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -1421,7 +1425,7 @@ type DescribeCheckSyncJobResultResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StepCur *uint64 `json:"StepCur,omitempty" name:"StepCur"`
 
-	// Overall progress
+	// Overall progress. Value range: 0-100.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Progress *uint64 `json:"Progress,omitempty" name:"Progress"`
 
@@ -3274,7 +3278,7 @@ func (r *ModifyMigrationJobResponse) FromJsonString(s string) error {
 }
 
 type Objects struct {
-	// Migration object type, such as `Partial`.
+	// Sync object type. Valid value: `Partial` (default).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
 
@@ -4146,11 +4150,11 @@ type StepInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StepId *string `json:"StepId,omitempty" name:"StepId"`
 
-	// Current status
+	// Status of the current step. Valid values: `notStarted`, `running`, `failed`, `finished, `skipped`, `paused`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Step start time
+	// Step start time, which may be null.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
@@ -4162,7 +4166,7 @@ type StepInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Warnings []*StepTip `json:"Warnings,omitempty" name:"Warnings"`
 
-	// Progress of the current step
+	// Progress of the current step. Value range: 0-100.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }

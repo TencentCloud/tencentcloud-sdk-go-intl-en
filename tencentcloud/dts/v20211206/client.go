@@ -848,7 +848,7 @@ func NewDescribeCheckSyncJobResultResponse() (response *DescribeCheckSyncJobResu
 }
 
 // DescribeCheckSyncJobResult
-// This API is used to query the result of a sync check task.
+// This API is used to query the result of the sync check task and check the required parameters and peripheral configurations.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -859,7 +859,7 @@ func (c *Client) DescribeCheckSyncJobResult(request *DescribeCheckSyncJobResultR
 }
 
 // DescribeCheckSyncJobResult
-// This API is used to query the result of a sync check task.
+// This API is used to query the result of the sync check task and check the required parameters and peripheral configurations.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"

@@ -557,6 +557,10 @@ type CheckInstancesUpgradeAbleResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 
+	// Reason why the upgrade is not available
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UnavailableVersionReason []*UnavailableReason `json:"UnavailableVersionReason,omitempty" name:"UnavailableVersionReason"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -7446,6 +7450,22 @@ type Instance struct {
 }
 
 type InstanceAdvancedSettings struct {
+	// When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DesiredPodNumber *int64 `json:"DesiredPodNumber,omitempty" name:"DesiredPodNumber"`
+
+	// GPU driver parameters
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	GPUArgs *GPUArgs `json:"GPUArgs,omitempty" name:"GPUArgs"`
+
+	// Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	PreStartUserScript *string `json:"PreStartUserScript,omitempty" name:"PreStartUserScript"`
+
+	// Node taint
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
+
 	// Data disk mount point. By default, no data disk is mounted. Data disks in ext3, ext4, or XFS file system formats will be mounted directly, while data disks in other file systems and unformatted data disks will automatically be formatted as ext4 (xfs for tlinux system) and then mounted. Please back up your data in advance. This setting is only applicable to CVMs with a single data disk.
 	// Note: in multi-disk scenarios, use the DataDisks data structure below to set the corresponding information, such as cloud disk type, cloud disk size, mount path, and whether to perform formatting.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -7473,22 +7493,6 @@ type InstanceAdvancedSettings struct {
 	// Information about node custom parameters
 	// Note: This field may return null, indicating that no valid value was found.
 	ExtraArgs *InstanceExtraArgs `json:"ExtraArgs,omitempty" name:"ExtraArgs"`
-
-	// When the custom PodCIDR mode is enabled for the cluster, you can specify the maximum number of pods per node.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DesiredPodNumber *int64 `json:"DesiredPodNumber,omitempty" name:"DesiredPodNumber"`
-
-	// GPU driver parameters
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	GPUArgs *GPUArgs `json:"GPUArgs,omitempty" name:"GPUArgs"`
-
-	// Specifies the base64-encoded custom script to be executed before initialization of the node. It’s only valid for adding existing nodes for now.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PreStartUserScript *string `json:"PreStartUserScript,omitempty" name:"PreStartUserScript"`
-
-	// Node taint
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Taints []*Taint `json:"Taints,omitempty" name:"Taints"`
 }
 
 type InstanceDataDiskMountSetting struct {
@@ -8986,6 +8990,16 @@ type TaskStepInfo struct {
 	FailedMsg *string `json:"FailedMsg,omitempty" name:"FailedMsg"`
 }
 
+type UnavailableReason struct {
+	// Instance ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Reason
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Reason *string `json:"Reason,omitempty" name:"Reason"`
+}
+
 // Predefined struct for user
 type UninstallEdgeLogAgentRequestParams struct {
 	// Cluster ID
@@ -9207,6 +9221,12 @@ type UpgradeAbleInstancesItem struct {
 	// The latest minor version of the current version
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	LatestVersion *string `json:"LatestVersion,omitempty" name:"LatestVersion"`
+
+	// RuntimeVersion
+	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
+
+	// RuntimeLatestVersion
+	RuntimeLatestVersion *string `json:"RuntimeLatestVersion,omitempty" name:"RuntimeLatestVersion"`
 }
 
 // Predefined struct for user

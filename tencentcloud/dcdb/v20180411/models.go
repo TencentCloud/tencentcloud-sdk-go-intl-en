@@ -669,11 +669,7 @@ type CreateDCDBInstanceRequestParams struct {
 	// VPC subnet ID, which is required when `VpcId` is specified.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Database engine version. Valid values: 8.0.18, 10.1.9, 5.7.17.
-	// 8.0.18 - MySQL 8.0.18；
-	// 10.1.9: MariaDB 10.1.9;
-	// 5.7.17: Percona 5.7.17.
-	// If this parameter is left empty, `5.7.17` will be used.
+	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
 	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
 
 	// Whether to automatically use vouchers. This option is disabled by default.
@@ -747,11 +743,7 @@ type CreateDCDBInstanceRequest struct {
 	// VPC subnet ID, which is required when `VpcId` is specified.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// Database engine version. Valid values: 8.0.18, 10.1.9, 5.7.17.
-	// 8.0.18 - MySQL 8.0.18；
-	// 10.1.9: MariaDB 10.1.9;
-	// 5.7.17: Percona 5.7.17.
-	// If this parameter is left empty, `5.7.17` will be used.
+	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
 	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
 
 	// Whether to automatically use vouchers. This option is disabled by default.
@@ -891,11 +883,7 @@ type CreateHourDCDBInstanceRequestParams struct {
 	//   
 	ShardCpu *int64 `json:"ShardCpu,omitempty" name:"ShardCpu"`
 
-	// Database engine version. Valid values:
-	// 10.0.10: MariaDB 10.0.10;
-	// 10.1.9: MariaDB 10.1.9;
-	// 5.7.17: Percona 5.7.17.
-	// If this parameter is left empty, `10.1.9` will be used.
+	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
 	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
 
 	// AZs to deploy shard nodes. You can specify up to two AZs.
@@ -966,11 +954,7 @@ type CreateHourDCDBInstanceRequest struct {
 	//   
 	ShardCpu *int64 `json:"ShardCpu,omitempty" name:"ShardCpu"`
 
-	// Database engine version. Valid values:
-	// 10.0.10: MariaDB 10.0.10;
-	// 10.1.9: MariaDB 10.1.9;
-	// 5.7.17: Percona 5.7.17.
-	// If this parameter is left empty, `10.1.9` will be used.
+	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
 	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
 
 	// AZs to deploy shard nodes. You can specify up to two AZs.
@@ -3901,6 +3885,67 @@ func (r *ModifyAccountPrivilegesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBEncryptAttributesRequestParams struct {
+	// Instance ID in the format of `tdsqlshard-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default).
+	EncryptEnabled *int64 `json:"EncryptEnabled,omitempty" name:"EncryptEnabled"`
+}
+
+type ModifyDBEncryptAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsqlshard-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default).
+	EncryptEnabled *int64 `json:"EncryptEnabled,omitempty" name:"EncryptEnabled"`
+}
+
+func (r *ModifyDBEncryptAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBEncryptAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EncryptEnabled")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBEncryptAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBEncryptAttributesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyDBEncryptAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBEncryptAttributesResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBEncryptAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBEncryptAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

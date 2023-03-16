@@ -3442,6 +3442,14 @@ type GetUserResponseParams struct {
 	// Email
 	Email *string `json:"Email,omitempty" name:"Email"`
 
+	// Last login IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecentlyLoginIP *string `json:"RecentlyLoginIP,omitempty" name:"RecentlyLoginIP"`
+
+	// Last login time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecentlyLoginTime *string `json:"RecentlyLoginTime,omitempty" name:"RecentlyLoginTime"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }

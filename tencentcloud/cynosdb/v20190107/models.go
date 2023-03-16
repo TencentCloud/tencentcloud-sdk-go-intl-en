@@ -1637,6 +1637,17 @@ type CynosdbInstance struct {
 	// The resource tag
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Source AZ
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// Replica AZ
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+
+
+	InstanceNetInfo []*InstanceNetInfo `json:"InstanceNetInfo,omitempty" name:"InstanceNetInfo"`
 }
 
 type CynosdbInstanceDetail struct {
@@ -4347,6 +4358,41 @@ type InstanceInitInfo struct {
 
 	// Number of the instances. Value range: 1-15.
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+}
+
+type InstanceNetInfo struct {
+
+	InstanceGroupType *string `json:"InstanceGroupType,omitempty" name:"InstanceGroupType"`
+
+
+	InstanceGroupId *string `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
+
+
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+
+	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
+
+
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+
+	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+
+
+	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
+
+
+	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+
+
+	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
 }
 
 type InstanceSpec struct {
