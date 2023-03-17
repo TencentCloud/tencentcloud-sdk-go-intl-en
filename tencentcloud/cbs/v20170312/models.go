@@ -20,6 +20,24 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AdvancedRetentionPolicy struct {
+	// Retains one latest snapshot each day within `Days` days. Value range: [0, 100].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Days *uint64 `json:"Days,omitempty" name:"Days"`
+
+	// Retains one latest snapshot each week within `Weeks` weeks. Value range: [0, 100].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weeks *uint64 `json:"Weeks,omitempty" name:"Weeks"`
+
+	// Retains one latest snapshot each month within `Months` months. Value range: [0, 100].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Months *uint64 `json:"Months,omitempty" name:"Months"`
+
+	// Retains one latest snapshot each year within `Years` years. Value range: [0, 100].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Years *uint64 `json:"Years,omitempty" name:"Years"`
+}
+
 // Predefined struct for user
 type ApplyDiskBackupRequestParams struct {
 	// ID of the cloud disk backup point, which can be queried through the `DescribeDiskBackups` API.
@@ -295,6 +313,24 @@ type AutoSnapshotPolicy struct {
 	// List of IDs of the instances associated with the scheduled snapshot policy.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+
+	// The number of months for which the snapshots created by this scheduled snapshot policy can be retained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RetentionMonths *uint64 `json:"RetentionMonths,omitempty" name:"RetentionMonths"`
+
+	// The maximum number of snapshots created by this scheduled snapshot policy that can be retained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RetentionAmount *uint64 `json:"RetentionAmount,omitempty" name:"RetentionAmount"`
+
+	// Retention policy for scheduled snapshots.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdvancedRetentionPolicy *AdvancedRetentionPolicy `json:"AdvancedRetentionPolicy,omitempty" name:"AdvancedRetentionPolicy"`
+
+
+	CopyFromAccountUin *string `json:"CopyFromAccountUin,omitempty" name:"CopyFromAccountUin"`
+
+
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 // Predefined struct for user
@@ -3045,6 +3081,12 @@ type Policy struct {
 
 	// Specifies the days of the week, from Monday to Sunday, on which a scheduled snapshot will be triggered. Value range: [0, 6]. 0 indicates triggering on Sunday, 1-6 indicate triggering on Monday-Saturday.
 	DayOfWeek []*uint64 `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
+	// Specifies the dates of the month on which a scheduled snapshot will be triggered. Value range: [1, 31]. `1` to `31` indicate the specific dates of the month; for example, `5` indicates the 5th day of the month. Note: If you set a date that does not exist in some months such as 29, 30, and 31, these months will be skipped for scheduled snapshot creation.
+	DayOfMonth []*uint64 `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
+
+	// Specifies the interval for creating scheduled snapshots in days. Value range: [1, 365]. For example, if it is set to `5`, scheduled snapshots will be created every 5 days. Note: If you choose to back up by day, the time for the first backup is theoretically the day when the backup policy is created. If the backup policy creation time on the current day is later than the set backup time, the first backup will be performed in the second backup cycle.
+	IntervalDays *uint64 `json:"IntervalDays,omitempty" name:"IntervalDays"`
 }
 
 type PrepayPrice struct {

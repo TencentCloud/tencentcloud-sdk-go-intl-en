@@ -335,6 +335,286 @@ func (c *Client) DescribeCloudRecordingWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeMixTranscodingUsageRequest() (request *DescribeMixTranscodingUsageRequest) {
+    request = &DescribeMixTranscodingUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeMixTranscodingUsage")
+    
+    
+    return
+}
+
+func NewDescribeMixTranscodingUsageResponse() (response *DescribeMixTranscodingUsageResponse) {
+    response = &DescribeMixTranscodingUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeMixTranscodingUsage
+// This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeMixTranscodingUsage(request *DescribeMixTranscodingUsageRequest) (response *DescribeMixTranscodingUsageResponse, err error) {
+    return c.DescribeMixTranscodingUsageWithContext(context.Background(), request)
+}
+
+// DescribeMixTranscodingUsage
+// This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeMixTranscodingUsageWithContext(ctx context.Context, request *DescribeMixTranscodingUsageRequest) (response *DescribeMixTranscodingUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeMixTranscodingUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMixTranscodingUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMixTranscodingUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRecordingUsageRequest() (request *DescribeRecordingUsageRequest) {
+    request = &DescribeRecordingUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRecordingUsage")
+    
+    
+    return
+}
+
+func NewDescribeRecordingUsageResponse() (response *DescribeRecordingUsageResponse) {
+    response = &DescribeRecordingUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRecordingUsage
+// This API is used to query your TRTC recording usage.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeRecordingUsage(request *DescribeRecordingUsageRequest) (response *DescribeRecordingUsageResponse, err error) {
+    return c.DescribeRecordingUsageWithContext(context.Background(), request)
+}
+
+// DescribeRecordingUsage
+// This API is used to query your TRTC recording usage.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeRecordingUsageWithContext(ctx context.Context, request *DescribeRecordingUsageRequest) (response *DescribeRecordingUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordingUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordingUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordingUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRelayUsageRequest() (request *DescribeRelayUsageRequest) {
+    request = &DescribeRelayUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRelayUsage")
+    
+    
+    return
+}
+
+func NewDescribeRelayUsageResponse() (response *DescribeRelayUsageResponse) {
+    response = &DescribeRelayUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRelayUsage
+// This API is used to query your usage of TRTC’s relay to CDN service.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeRelayUsage(request *DescribeRelayUsageRequest) (response *DescribeRelayUsageResponse, err error) {
+    return c.DescribeRelayUsageWithContext(context.Background(), request)
+}
+
+// DescribeRelayUsage
+// This API is used to query your usage of TRTC’s relay to CDN service.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeRelayUsageWithContext(ctx context.Context, request *DescribeRelayUsageRequest) (response *DescribeRelayUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeRelayUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRelayUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRelayUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTrtcUsageRequest() (request *DescribeTrtcUsageRequest) {
+    request = &DescribeTrtcUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTrtcUsage")
+    
+    
+    return
+}
+
+func NewDescribeTrtcUsageResponse() (response *DescribeTrtcUsageResponse) {
+    response = &DescribeTrtcUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTrtcUsage
+// This API is used to query your TRTC audio/video duration.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeTrtcUsage(request *DescribeTrtcUsageRequest) (response *DescribeTrtcUsageResponse, err error) {
+    return c.DescribeTrtcUsageWithContext(context.Background(), request)
+}
+
+// DescribeTrtcUsage
+// This API is used to query your TRTC audio/video duration.
+//
+// - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
+//
+// - The period queried per request cannot be longer than 31 days.
+//
+// - If you query the statistics of the current day, the statistics returned may be inaccurate due to the delay in data collection.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is five calls per second.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeTrtcUsageWithContext(ctx context.Context, request *DescribeTrtcUsageRequest) (response *DescribeTrtcUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeTrtcUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTrtcUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTrtcUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDismissRoomRequest() (request *DismissRoomRequest) {
     request = &DismissRoomRequest{
         BaseRequest: &tchttp.BaseRequest{},

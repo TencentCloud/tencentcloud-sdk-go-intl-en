@@ -68,7 +68,7 @@ const (
 	// Too many attempts. Please try again later.
 	INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 
-	// 
+	// The query string has too many values.
 	INVALIDPARAMETER_CACHEKEYQUERYSTRINGTOOMANYVALUE = "InvalidParameter.CacheKeyQueryStringTooManyValue"
 
 	// HTTPS certificate chain error.
@@ -113,11 +113,14 @@ const (
 	// Certificate error.
 	INVALIDPARAMETER_CERTUNSUPPORTEDTYPE = "InvalidParameter.CertUnsupportedType"
 
-	// 
+	// Unable to apply for a wildcard certificate under CNAME mode.
 	INVALIDPARAMETER_CNAMEWILDHOSTNOTALLOWAPPLYCERTIFICATE = "InvalidParameter.CnameWildHostNotAllowApplyCertificate"
 
 	// The domain name does not exist or is not belong to this account.
 	INVALIDPARAMETER_DOMAINNOTFOUND = "InvalidParameter.DomainNotFound"
+
+	// Traffic scheduling is already enabled for the current domain name.
+	INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
 
 	// The current conditions do not support the requested operation.
 	INVALIDPARAMETER_ERRACTIONUNSUPPORTTARGET = "InvalidParameter.ErrActionUnsupportTarget"
@@ -128,7 +131,7 @@ const (
 	// Invalid operation: Invalid parameter.
 	INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
 
-	// 
+	// Invalid parameter "action".
 	INVALIDPARAMETER_ERRINVALIDACTIONPARAMACTION = "InvalidParameter.ErrInvalidActionParamAction"
 
 	// Invalid value type for the parameter "action".
@@ -158,7 +161,7 @@ const (
 	// Invalid condition: Invalid regular expression for the parameter value.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADREGULAR = "InvalidParameter.ErrInvalidConditionValueBadRegular"
 
-	// 
+	// Invalid parameter value "url".
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADURL = "InvalidParameter.ErrInvalidConditionValueBadUrl"
 
 	// Invalid condition: The parameter value is invalid.
@@ -170,7 +173,7 @@ const (
 	// Invalid condition: The parameter value exceeds the limit.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOLONGVALUE = "InvalidParameter.ErrInvalidConditionValueTooLongValue"
 
-	// 
+	// The condition has too many regular expressions.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYREGULAR = "InvalidParameter.ErrInvalidConditionValueTooManyRegular"
 
 	// Invalid condition: Too many wildcards in the parameter.
@@ -188,6 +191,9 @@ const (
 	// CNAME is not switched or the origin is not routed to the EdgeOne server.
 	INVALIDPARAMETER_HOSTSTATUSNOTALLOWAPPLYCERTIFICATE = "InvalidParameter.HostStatusNotAllowApplyCertificate"
 
+	// Parameter error.
+	INVALIDPARAMETER_INVALIDACCELERATETYPE = "InvalidParameter.InvalidAccelerateType"
+
 	// Invalid token authentication.
 	INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
 
@@ -197,10 +203,10 @@ const (
 	// Invalid token authentication parameter.
 	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 
-	// 
+	// Invalid secondary origin domain.
 	INVALIDPARAMETER_INVALIDBACKUPSERVERNAME = "InvalidParameter.InvalidBackupServerName"
 
-	// 
+	// Invalid node cache.
 	INVALIDPARAMETER_INVALIDCACHECONFIGCACHE = "InvalidParameter.InvalidCacheConfigCache"
 
 	// Invalid node cache. The origin behavior is followed.
@@ -233,6 +239,9 @@ const (
 	// Invalid custom error page.
 	INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
 
+	// 
+	INVALIDPARAMETER_INVALIDHTTPS = "InvalidParameter.InvalidHttps"
+
 	// Invalid HTTPS HSTS.
 	INVALIDPARAMETER_INVALIDHTTPSHSTSMAXAGE = "InvalidParameter.InvalidHttpsHstsMaxAge"
 
@@ -254,11 +263,17 @@ const (
 	// Invalid POST request size.
 	INVALIDPARAMETER_INVALIDPOSTSIZEVALUE = "InvalidParameter.InvalidPostSizeValue"
 
+	// 
+	INVALIDPARAMETER_INVALIDQUICBILLING = "InvalidParameter.InvalidQuicBilling"
+
 	// Invalid request header.
 	INVALIDPARAMETER_INVALIDREQUESTHEADERNAME = "InvalidParameter.InvalidRequestHeaderName"
 
-	// 
+	// Invalid request header x-forwarded-for.
 	INVALIDPARAMETER_INVALIDREQUESTHEADERNAMEXFF = "InvalidParameter.InvalidRequestHeaderNameXff"
+
+	// 
+	INVALIDPARAMETER_INVALIDREQUESTHEADERVALUE = "InvalidParameter.InvalidRequestHeaderValue"
 
 	// You have not purchased a plan yet.
 	INVALIDPARAMETER_INVALIDRESOURCEIDBILLING = "InvalidParameter.InvalidResourceIdBilling"
@@ -266,7 +281,7 @@ const (
 	// Invalid response header.
 	INVALIDPARAMETER_INVALIDRESPONSEHEADERNAME = "InvalidParameter.InvalidResponseHeaderName"
 
-	// 
+	// Invalid response header.
 	INVALIDPARAMETER_INVALIDRESPONSEHEADERVALUE = "InvalidParameter.InvalidResponseHeaderValue"
 
 	// Invalid rule engine settings.
@@ -305,7 +320,10 @@ const (
 	// Maximum parameter length exceeded.
 	INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
 
-	// 
+	// The origin address cannot be a private IP address.
+	INVALIDPARAMETER_ORIGINISINNERIP = "InvalidParameter.OriginIsInnerIp"
+
+	// The origin group ID is required.
 	INVALIDPARAMETER_ORIGINORIGINGROUPIDISREQUIRED = "InvalidParameter.OriginOriginGroupIdIsRequired"
 
 	// Parameter error.
@@ -344,10 +362,25 @@ const (
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// DNS records conflict with DNSSEC.
+	INVALIDPARAMETERVALUE_CONFLICTWITHDNSSEC = "InvalidParameterValue.ConflictWithDNSSEC"
+
+	// The host record cannot be the same as the record value.
+	INVALIDPARAMETERVALUE_CONTENTSAMEASNAME = "InvalidParameterValue.ContentSameAsName"
+
+	// The specified domain name does not match the site. 
+	INVALIDPARAMETERVALUE_DOMAINNOTMATCHZONE = "InvalidParameterValue.DomainNotMatchZone"
+
+	// Incorrect DNS record
+	INVALIDPARAMETERVALUE_INVALIDDNSCONTENT = "InvalidParameterValue.InvalidDNSContent"
+
+	// Incorrect DNS record name.
+	INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
+
 	// Invalid domain name. Please check the status.
 	INVALIDPARAMETERVALUE_INVALIDDOMAINSTATUS = "InvalidParameterValue.InvalidDomainStatus"
 
-	// 
+	// The site alias already exists. 
 	INVALIDPARAMETERVALUE_ZONESAMEASNAME = "InvalidParameterValue.ZoneSameAsName"
 
 	// The quota limit has been reached.
@@ -359,7 +392,7 @@ const (
 	// Reached the daily upper limit of resource number
 	LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
 
-	// 
+	// Query time limit exceeded.
 	LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
 
 	// Reached the API rate limit.
@@ -403,6 +436,9 @@ const (
 
 	// DNS resources occupied.
 	RESOURCEINUSE_DNS = "ResourceInUse.Dns"
+
+	// The domain name is being resolved. If you need to enable acceleration, please go to DNS Records.
+	RESOURCEINUSE_DNSRECORD = "ResourceInUse.DnsRecord"
 
 	// Duplicate alias domain names.
 	RESOURCEINUSE_DUPLICATENAME = "ResourceInUse.DuplicateName"
@@ -449,6 +485,12 @@ const (
 	// The certificate does not exist or is not authorized.
 	RESOURCEUNAVAILABLE_CERTNOTFOUND = "ResourceUnavailable.CertNotFound"
 
+	// The domain name is already connected to EdgeOne by another account. Please retrieve it first in order to add it.
+	RESOURCEUNAVAILABLE_DOMAINALREADYEXISTS = "ResourceUnavailable.DomainAlreadyExists"
+
+	// The requested accelerated domain name doesn’t exist. 
+	RESOURCEUNAVAILABLE_DOMAINNOTFOUND = "ResourceUnavailable.DomainNotFound"
+
 	// The domain name does not exist or not use a proxy.
 	RESOURCEUNAVAILABLE_HOSTNOTFOUND = "ResourceUnavailable.HostNotFound"
 
@@ -457,6 +499,9 @@ const (
 
 	// The site does not exist or is not belong to this account.
 	RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+
+	// 
+	RESOURCESSOLDOUT_L7LACKOFRESOURCES = "ResourcesSoldOut.L7LackOfResources"
 
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"

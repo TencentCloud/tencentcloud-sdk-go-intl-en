@@ -722,7 +722,7 @@ type CloneLoadBalancerRequestParams struct {
 	// ID of the public network CLB dedicated cluster
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
-	// Guaranteed performance specification.
+	// Specification of the LCU-supported instance.
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// Tag of the STGW dedicated cluster
@@ -786,7 +786,7 @@ type CloneLoadBalancerRequest struct {
 	// ID of the public network CLB dedicated cluster
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
-	// Guaranteed performance specification.
+	// Specification of the LCU-supported instance.
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// Tag of the STGW dedicated cluster
@@ -971,7 +971,7 @@ type CreateListenerRequestParams struct {
 	// Specifies for which ports to create listeners. Each port corresponds to a new listener.
 	Ports []*int64 `json:"Ports,omitempty" name:"Ports"`
 
-	// Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application).
+	// Listener protocol. Values: TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// List of names of the listeners to be created. The array of names and array of ports are in one-to-one correspondence. If you do not want to name them now, you do not need to provide this parameter.
@@ -1027,7 +1027,7 @@ type CreateListenerRequest struct {
 	// Specifies for which ports to create listeners. Each port corresponds to a new listener.
 	Ports []*int64 `json:"Ports,omitempty" name:"Ports"`
 
-	// Listener protocol: TCP, UDP, HTTP, HTTPS, or TCP_SSL (which is currently in beta test. If you want to use it, please submit a ticket for application).
+	// Listener protocol. Values: TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// List of names of the listeners to be created. The array of names and array of ports are in one-to-one correspondence. If you do not want to name them now, you do not need to provide this parameter.
@@ -1178,21 +1178,20 @@ type CreateLoadBalancerRequestParams struct {
 	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Specifies a VIP for the CLB instance.
-	// <ul><li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.</li>
-	// <li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.
-	// </li></ul>
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	// Note: If the specified VIP is occupied or is not within the IP range of the specified VPC subnet, you cannot use the VIP to create a CLB instance in a private network or an IPv6 BGP CLB instance in a public network.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
 	// Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
-	// Exclusive cluster information. This parameter is required for creating exclusive clusters of CLB instances.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
-	// Creates an LCU-supported CLB instance
-	// <ul><li>To create an LCU-supported CLB, this field is required and the value is `SLA`. LCU-supports CLBs adopt the pay-as-you-go model and their performance is guaranteed.</li>
-	// <li>It’s not required for a shared CLB instance.</li></ul>
+	// Creates an LCU-supported instance.
+	// <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
+	// <ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
+	// <li>If you enable ultra-large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul></li><li>This parameter is not required when you create a shared instance.</li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -1263,21 +1262,20 @@ type CreateLoadBalancerRequest struct {
 	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Specifies a VIP for the CLB instance.
-	// <ul><li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.</li>
-	// <li>`VpcId` is optional for creating shared clusters of public network CLB instances. For IPv6 CLB instance type, `SubnetId` is required; for IPv4 and IPv6 NAT64 types, it can be left empty.
-	// </li></ul>
+	// Specifies the VIP for the application of a CLB instance. This parameter is optional. If you do not specify this parameter, the system automatically assigns a value for the parameter. IPv4 and IPv6 CLB instances support this parameter, but IPv6 NAT64 CLB instances do not.
+	// Note: If the specified VIP is occupied or is not within the IP range of the specified VPC subnet, you cannot use the VIP to create a CLB instance in a private network or an IPv6 BGP CLB instance in a public network.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
 	// Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitempty" name:"BandwidthPackageId"`
 
-	// Exclusive cluster information. This parameter is required for creating exclusive clusters of CLB instances.
+	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
-	// Creates an LCU-supported CLB instance
-	// <ul><li>To create an LCU-supported CLB, this field is required and the value is `SLA`. LCU-supports CLBs adopt the pay-as-you-go model and their performance is guaranteed.</li>
-	// <li>It’s not required for a shared CLB instance.</li></ul>
+	// Creates an LCU-supported instance.
+	// <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
+	// <ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
+	// <li>If you enable ultra-large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul></li><li>This parameter is not required when you create a shared instance.</li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -4386,6 +4384,11 @@ type DescribeTargetsRequestParams struct {
 
 	// Listener port
 	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Query the list of backend services associated with a load balancer
+	// <li> `location-id` - String - Optional - Rule ID, such as "loc-12345678".</li>
+	// <li> `private-ip-address` - String - Optional - Backend service private IP, such as `172.16.1.1`</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 type DescribeTargetsRequest struct {
@@ -4402,6 +4405,11 @@ type DescribeTargetsRequest struct {
 
 	// Listener port
 	Port *int64 `json:"Port,omitempty" name:"Port"`
+
+	// Query the list of backend services associated with a load balancer
+	// <li> `location-id` - String - Optional - Rule ID, such as "loc-12345678".</li>
+	// <li> `private-ip-address` - String - Optional - Backend service private IP, such as `172.16.1.1`</li>
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTargetsRequest) ToJsonString() string {
@@ -4420,6 +4428,7 @@ func (r *DescribeTargetsRequest) FromJsonString(s string) error {
 	delete(f, "ListenerIds")
 	delete(f, "Protocol")
 	delete(f, "Port")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTargetsRequest has unknown keys!", "")
 	}
@@ -4956,7 +4965,7 @@ type LoadBalancer struct {
 	// CLB type identifier. Value range: 1 (CLB); 0 (classic CLB).
 	Forward *uint64 `json:"Forward,omitempty" name:"Forward"`
 
-	// CLB instance domain name. This field is provided only to public network classic CLB instance.
+	// Domain name of the CLB instance. It is only available for public classic CLBs. This parameter will be discontinued soon. Please use `LoadBalancerDomain` instead.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
@@ -5104,8 +5113,8 @@ type LoadBalancer struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	SnatIps []*SnatIp `json:"SnatIps,omitempty" name:"SnatIps"`
 
-	// Performance guarantee specification
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Specification of the LCU-supported instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// Whether VIP is blocked
@@ -5143,12 +5152,17 @@ type LoadBalancer struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	HealthLogTopicId *string `json:"HealthLogTopicId,omitempty" name:"HealthLogTopicId"`
 
-
+	// Cluster ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
 	// CLB attribute
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AttributeFlags []*string `json:"AttributeFlags,omitempty" name:"AttributeFlags"`
+
+	// Domain name of the CLB instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LoadBalancerDomain *string `json:"LoadBalancerDomain,omitempty" name:"LoadBalancerDomain"`
 }
 
 type LoadBalancerDetail struct {
@@ -5220,8 +5234,8 @@ type LoadBalancerDetail struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExtraInfo *ExtraInfo `json:"ExtraInfo,omitempty" name:"ExtraInfo"`
 
-	// Custom configuration ID at the CLB instance level.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Custom configuration IDs of CLB instances. Multiple IDs must be separated by commas (,).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConfigId *string `json:"ConfigId,omitempty" name:"ConfigId"`
 
 	// CLB instance tag information.
@@ -5300,7 +5314,8 @@ type LoadBalancerDetail struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SniSwitch *int64 `json:"SniSwitch,omitempty" name:"SniSwitch"`
 
-
+	// Domain name of the CLB instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LoadBalancerDomain *string `json:"LoadBalancerDomain,omitempty" name:"LoadBalancerDomain"`
 }
 
@@ -5332,6 +5347,10 @@ type LoadBalancerTraffic struct {
 
 	// Maximum outbound bandwidth in Mbps
 	OutBandwidth *float64 `json:"OutBandwidth,omitempty" name:"OutBandwidth"`
+
+	// CLB domain name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 // Predefined struct for user
@@ -5767,6 +5786,95 @@ func (r *ModifyDomainResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyFunctionTargetsRequestParams struct {
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// The backend cloud functions to modify
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
+
+	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or `Domain`+`Url`.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Target rule domain name. This parameter does not take effect if `LocationId` is specified.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Target rule URL. This parameter does not take effect if `LocationId` is specified.
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+type ModifyFunctionTargetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
+
+	// CLB listener ID
+	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
+
+	// The backend cloud functions to modify
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
+
+	// Forwarding rule ID. When binding a real server to a layer-7 forwarding rule, you must provide either this parameter or `Domain`+`Url`.
+	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
+
+	// Target rule domain name. This parameter does not take effect if `LocationId` is specified.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Target rule URL. This parameter does not take effect if `LocationId` is specified.
+	Url *string `json:"Url,omitempty" name:"Url"`
+}
+
+func (r *ModifyFunctionTargetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFunctionTargetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	delete(f, "ListenerId")
+	delete(f, "FunctionTargets")
+	delete(f, "LocationId")
+	delete(f, "Domain")
+	delete(f, "Url")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFunctionTargetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyFunctionTargetsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyFunctionTargetsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyFunctionTargetsResponseParams `json:"Response"`
+}
+
+func (r *ModifyFunctionTargetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFunctionTargetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyListenerRequestParams struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
@@ -5808,10 +5916,10 @@ type ModifyListenerRequestParams struct {
 	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 
-	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
+	// The maximum number of concurrent connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum concurrency of the instance. -1 indicates that no limit is set on concurrent connections.
 	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
 
-	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
+	// The maximum number of new connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum number of new connections of the instance. -1 indicates that no limit is set on concurrent connections.
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
@@ -5858,10 +5966,10 @@ type ModifyListenerRequest struct {
 	// Certificate information. You can specify multiple server-side certificates with different algorithm types. This parameter is only applicable to HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
 	MultiCertInfo *MultiCertInfo `json:"MultiCertInfo,omitempty" name:"MultiCertInfo"`
 
-	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
+	// The maximum number of concurrent connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum concurrency of the instance. -1 indicates that no limit is set on concurrent connections.
 	MaxConn *int64 `json:"MaxConn,omitempty" name:"MaxConn"`
 
-	// Maximum number of listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
+	// The maximum number of new connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum number of new connections of the instance. -1 indicates that no limit is set on concurrent connections.
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
 }
 
@@ -5928,7 +6036,7 @@ type ModifyLoadBalancerAttributesRequestParams struct {
 	// CLB instance name
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Region information of the real server bound to a CLB.
+	// The backend service information of cross-region binding 1.0
 	TargetRegionInfo *TargetRegionInfo `json:"TargetRegionInfo,omitempty" name:"TargetRegionInfo"`
 
 	// Network billing parameter
@@ -5937,7 +6045,7 @@ type ModifyLoadBalancerAttributesRequestParams struct {
 	// Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
 
-	// Whether to enable SnatPro
+	// Whether to enable cross-region binding 2.0
 	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
 
 	// Specifies whether to enable deletion protection.
@@ -5953,7 +6061,7 @@ type ModifyLoadBalancerAttributesRequest struct {
 	// CLB instance name
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Region information of the real server bound to a CLB.
+	// The backend service information of cross-region binding 1.0
 	TargetRegionInfo *TargetRegionInfo `json:"TargetRegionInfo,omitempty" name:"TargetRegionInfo"`
 
 	// Network billing parameter
@@ -5962,7 +6070,7 @@ type ModifyLoadBalancerAttributesRequest struct {
 	// Whether the target opens traffic from CLB to the internet. If yes (true), only security groups on CLB will be verified; if no (false), security groups on both CLB and backend instance need to be verified.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
 
-	// Whether to enable SnatPro
+	// Whether to enable cross-region binding 2.0
 	SnatPro *bool `json:"SnatPro,omitempty" name:"SnatPro"`
 
 	// Specifies whether to enable deletion protection.
@@ -6022,14 +6130,14 @@ func (r *ModifyLoadBalancerAttributesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyLoadBalancerSlaRequestParams struct {
-	// CLB instance information
+	// CLB instance information.
 	LoadBalancerSla []*SlaUpdateParam `json:"LoadBalancerSla,omitempty" name:"LoadBalancerSla"`
 }
 
 type ModifyLoadBalancerSlaRequest struct {
 	*tchttp.BaseRequest
 	
-	// CLB instance information
+	// CLB instance information.
 	LoadBalancerSla []*SlaUpdateParam `json:"LoadBalancerSla,omitempty" name:"LoadBalancerSla"`
 }
 
@@ -6604,38 +6712,44 @@ type Quota struct {
 
 // Predefined struct for user
 type RegisterFunctionTargetsRequestParams struct {
-
+	// CLB instance ID.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-
+	// CLB listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
-
+	// SCF functions to be bound.
 	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
 
-
+	// ID of the target forwarding rule. To bind an SCF function to a L7 forwarding rule, this parameter or `Domain+Url` is required.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
-
+	// Domain name of the target forwarding rule. It is ignored if `LocationId` is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-
+	// URL of the target forwarding rule. It is ignored if `LocationId` is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
 type RegisterFunctionTargetsRequest struct {
 	*tchttp.BaseRequest
 	
+	// CLB instance ID.
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
+	// CLB listener ID.
 	ListenerId *string `json:"ListenerId,omitempty" name:"ListenerId"`
 
+	// SCF functions to be bound.
 	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
 
+	// ID of the target forwarding rule. To bind an SCF function to a L7 forwarding rule, this parameter or `Domain+Url` is required.
 	LocationId *string `json:"LocationId,omitempty" name:"LocationId"`
 
+	// Domain name of the target forwarding rule. It is ignored if `LocationId` is specified.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
+	// URL of the target forwarding rule. It is ignored if `LocationId` is specified.
 	Url *string `json:"Url,omitempty" name:"Url"`
 }
 
@@ -7199,6 +7313,10 @@ type RuleTargets struct {
 	// Real server information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Targets []*Backend `json:"Targets,omitempty" name:"Targets"`
+
+	// Information about backend SCF functions.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FunctionTargets []*FunctionTarget `json:"FunctionTargets,omitempty" name:"FunctionTargets"`
 }
 
 type RulesItems struct {
@@ -7524,7 +7642,9 @@ type SlaUpdateParam struct {
 	// ID of the CLB instance
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// To upgrade to LCU-supported CLB instances. It must be `SLA`.
+	// This parameter is set to a fixed value of `SLA`, which specifies to upgrade to an LCU-supported instance of default specification.
+	// <ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
+	// <li>If you enable ultra-large LCU-supported instances, SLA corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 }
 
@@ -7675,7 +7795,10 @@ type TargetHealth struct {
 	// Instance ID of the target, such as ins-12345678
 	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
 
-	// Detailed information of the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+	// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
+	HealthStatusDetail *string `json:"HealthStatusDetail,omitempty" name:"HealthStatusDetail"`
+
+	// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status. This parameter will be discarded soon. We recommend that you use the HealthStatusDetail parameter.
 	HealthStatusDetial *string `json:"HealthStatusDetial,omitempty" name:"HealthStatusDetial"`
 }
 

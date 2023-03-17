@@ -357,6 +357,317 @@ func (r *DescribeCloudRecordingResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeMixTranscodingUsageRequestParams struct {
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+type DescribeMixTranscodingUsageRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeMixTranscodingUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMixTranscodingUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMixTranscodingUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMixTranscodingUsageResponseParams struct {
+	// The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+	UsageKey []*string `json:"UsageKey,omitempty" name:"UsageKey"`
+
+	// The usage data in each time unit.
+	UsageList []*TrtcUsage `json:"UsageList,omitempty" name:"UsageList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeMixTranscodingUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMixTranscodingUsageResponseParams `json:"Response"`
+}
+
+func (r *DescribeMixTranscodingUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMixTranscodingUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingUsageRequestParams struct {
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Whether to query single-stream or mixed-stream recording. Valid values: `single`, `multi`.
+	MixType *string `json:"MixType,omitempty" name:"MixType"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+type DescribeRecordingUsageRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Whether to query single-stream or mixed-stream recording. Valid values: `single`, `multi`.
+	MixType *string `json:"MixType,omitempty" name:"MixType"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeRecordingUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MixType")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordingUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingUsageResponseParams struct {
+	// The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+	UsageKey []*string `json:"UsageKey,omitempty" name:"UsageKey"`
+
+	// The usage data in each time unit.
+	UsageList []*TrtcUsage `json:"UsageList,omitempty" name:"UsageList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordingUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordingUsageResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordingUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRelayUsageRequestParams struct {
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+type DescribeRelayUsageRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeRelayUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRelayUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRelayUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRelayUsageResponseParams struct {
+	// The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+	UsageKey []*string `json:"UsageKey,omitempty" name:"UsageKey"`
+
+	// The usage data in each time unit.
+	UsageList []*TrtcUsage `json:"UsageList,omitempty" name:"UsageList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRelayUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRelayUsageResponseParams `json:"Response"`
+}
+
+func (r *DescribeRelayUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRelayUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTrtcUsageRequestParams struct {
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+type DescribeTrtcUsageRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start date in the format of YYYY-MM-DD.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end date in the format of YYYY-MM-DD.
+	// The period queried per request cannot be longer than 31 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The `SDKAppID` of the TRTC application to which the target room belongs. If you do not specify this parameter, the usage statistics of all TRTC applications under the current account will be returned.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeTrtcUsageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrtcUsageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTrtcUsageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTrtcUsageResponseParams struct {
+	// The usage type. Each element of this parameter corresponds to an element of `UsageValue` in the order they are listed.
+	UsageKey []*string `json:"UsageKey,omitempty" name:"UsageKey"`
+
+	// The usage data in each time unit.
+	UsageList []*TrtcUsage `json:"UsageList,omitempty" name:"UsageList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTrtcUsageResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTrtcUsageResponseParams `json:"Response"`
+}
+
+func (r *DescribeTrtcUsageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTrtcUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DismissRoomByStrRoomIdRequestParams struct {
 	// `SDKAppId` of TRTC
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
@@ -678,11 +989,44 @@ type McuWaterMarkImage struct {
 }
 
 type McuWaterMarkParams struct {
-	// The watermark type. The default is 0, which indicates an image watermark.
+	// The watermark type. Valid values: `0` (default): Image; `1`: Text.
 	WaterMarkType *uint64 `json:"WaterMarkType,omitempty" name:"WaterMarkType"`
 
 	// The watermark image information. This parameter is required if `WaterMarkType` is 0.
 	WaterMarkImage *McuWaterMarkImage `json:"WaterMarkImage,omitempty" name:"WaterMarkImage"`
+
+	// The text watermark configuration. This parameter is required if `WaterMarkType` is `1`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WaterMarkText *McuWaterMarkText `json:"WaterMarkText,omitempty" name:"WaterMarkText"`
+}
+
+type McuWaterMarkText struct {
+	// The text.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The watermark width (pixels).
+	WaterMarkWidth *uint64 `json:"WaterMarkWidth,omitempty" name:"WaterMarkWidth"`
+
+	// The watermark height (pixels).
+	WaterMarkHeight *uint64 `json:"WaterMarkHeight,omitempty" name:"WaterMarkHeight"`
+
+	// The horizontal offset (pixels) of the watermark.
+	LocationX *uint64 `json:"LocationX,omitempty" name:"LocationX"`
+
+	// The vertical offset (pixels) of the watermark.
+	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
+
+	// The font size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FontSize *uint64 `json:"FontSize,omitempty" name:"FontSize"`
+
+	// The text color. The default color is white. Values for some commonly used colors: Red: 0xcc0033; yellow: 0xcc9900; green: 0xcccc33; blue: 0x99CCFF; black: 0x000000; white: 0xFFFFFF; gray: 0x999999.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
+
+	// The text fill color. If you do not specify this parameter, the fill color will be transparent. Values for some commonly used colors: Red: 0xcc0033; yellow: 0xcc9900; green: 0xcccc33; blue: 0x99CCFF; black: 0x000000; white: 0xFFFFFF; gray: 0x999999.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackGroundColor *string `json:"BackGroundColor,omitempty" name:"BackGroundColor"`
 }
 
 type MixLayout struct {
@@ -1459,6 +1803,14 @@ type TencentVod struct {
 
 	// The custom prefix of recording files. This parameter is valid only if recording files are uploaded to VOD. It can contain letters, numbers, underscores, and hyphens and cannot exceed 64 bytes. This prefix and the automatically generated filename are connected with `__UserId_u_`.
 	UserDefineRecordId *string `json:"UserDefineRecordId,omitempty" name:"UserDefineRecordId"`
+}
+
+type TrtcUsage struct {
+	// The time point in the format of `YYYY-MM-DD HH:mm:ss`. If more than one day is queried, `HH:mm:ss` is `00:00:00`.
+	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
+
+	// The usage (minutes). Each element of this parameter corresponds to an element of `UsageKey` in the order they are listed.
+	UsageValue []*float64 `json:"UsageValue,omitempty" name:"UsageValue"`
 }
 
 // Predefined struct for user

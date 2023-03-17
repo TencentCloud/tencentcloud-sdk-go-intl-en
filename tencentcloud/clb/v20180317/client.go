@@ -3851,6 +3851,70 @@ func (c *Client) ModifyDomainAttributesWithContext(ctx context.Context, request 
     return
 }
 
+func NewModifyFunctionTargetsRequest() (request *ModifyFunctionTargetsRequest) {
+    request = &ModifyFunctionTargetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "ModifyFunctionTargets")
+    
+    
+    return
+}
+
+func NewModifyFunctionTargetsResponse() (response *ModifyFunctionTargetsResponse) {
+    response = &ModifyFunctionTargetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyFunctionTargets
+// This API is used to modify the cloud functions associated with a load balancing forwarding rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyFunctionTargets(request *ModifyFunctionTargetsRequest) (response *ModifyFunctionTargetsResponse, err error) {
+    return c.ModifyFunctionTargetsWithContext(context.Background(), request)
+}
+
+// ModifyFunctionTargets
+// This API is used to modify the cloud functions associated with a load balancing forwarding rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyFunctionTargetsWithContext(ctx context.Context, request *ModifyFunctionTargetsRequest) (response *ModifyFunctionTargetsResponse, err error) {
+    if request == nil {
+        request = NewModifyFunctionTargetsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFunctionTargets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFunctionTargetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyListenerRequest() (request *ModifyListenerRequest) {
     request = &ModifyListenerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4012,7 +4076,17 @@ func NewModifyLoadBalancerSlaResponse() (response *ModifyLoadBalancerSlaResponse
 }
 
 // ModifyLoadBalancerSla
-// This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
+// This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance.<br/>
+//
+// Limits
+//
+// - This API can be used to upgrade only a pay-as-you-go shared instance. A monthly subscription shared instance must be upgraded in the console.
+//
+// - An LCU-supported instance cannot be rolled back to a shared instance.
+//
+// - LCU-supported instances are in beta testing. To upgrade to an LCU-supported instance, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.
+//
+// - Classic CLB instances cannot be upgraded to LCU-supported instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4028,7 +4102,17 @@ func (c *Client) ModifyLoadBalancerSla(request *ModifyLoadBalancerSlaRequest) (r
 }
 
 // ModifyLoadBalancerSla
-// This API is used to upgrade shared CLB instances to LCU-supported CLB instances.
+// This API is used to upgrade a pay-as-you-go shared CLB instance to an LCU-supported CLB instance.<br/>
+//
+// Limits
+//
+// - This API can be used to upgrade only a pay-as-you-go shared instance. A monthly subscription shared instance must be upgraded in the console.
+//
+// - An LCU-supported instance cannot be rolled back to a shared instance.
+//
+// - LCU-supported instances are in beta testing. To upgrade to an LCU-supported instance, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.
+//
+// - Classic CLB instances cannot be upgraded to LCU-supported instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

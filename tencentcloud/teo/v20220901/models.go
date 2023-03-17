@@ -27,6 +27,38 @@ type AccelerateType struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type AccelerationDomain struct {
+	// Details of the origin.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginDetail *OriginDetail `json:"OriginDetail,omitempty" name:"OriginDetail"`
+
+	// Creation time of the accelerated domain name.
+	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+
+	// Accelerated domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Modification time of the accelerated domain name.
+	ModifiedOn *string `json:"ModifiedOn,omitempty" name:"ModifiedOn"`
+
+	// ID of the site.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Status of the accelerated domain name. Values:
+	// <li>`online`: Activated</li>
+	// <li>`process`: Being deployed</li>
+	// <li>`offline`: Disabled</li>
+	// <li>`forbidden`: Blocked</li>
+	// <li>`init`: Pending activation</li>
+	DomainStatus *string `json:"DomainStatus,omitempty" name:"DomainStatus"`
+
+	// The CNAME address.
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+
+
+	IdentificationStatus *string `json:"IdentificationStatus,omitempty" name:"IdentificationStatus"`
+}
+
 type AclCondition struct {
 	// The field to match. Values:
 	// <li>`host`: Request domain name</li>
@@ -77,6 +109,10 @@ type AclConfig struct {
 
 	// The custom rule.
 	AclUserRules []*AclUserRule `json:"AclUserRules,omitempty" name:"AclUserRules"`
+
+	// Custom managed rules
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Customizes []*AclUserRule `json:"Customizes,omitempty" name:"Customizes"`
 }
 
 type AclUserRule struct {
@@ -141,7 +177,7 @@ type AclUserRule struct {
 }
 
 type Action struct {
-	// Common feature operation. Features of this type include:
+	// Common feature operation. Values:
 	// <li>`AccessUrlRedirect`: Access URL rewrite</li>
 	// <li>`UpstreamUrlRedirect`: Origin-pull URL rewrite</li>
 	// <li>`QUIC`: QUIC</li>
@@ -165,7 +201,8 @@ type Action struct {
 	// <li>`TlsVersion`</li>
 	// <li>`OcspStapling`</li>
 	// <li>`Http2`: HTTP/2 access</li>
-	// <li>`UpstreamFollowRedirect: Follow origin redirect</li>
+	// <li>`UpstreamFollowRedirect`: Follow origin redirect</li>
+	// <li>`Origin`: Origin</li>
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	NormalAction *NormalAction `json:"NormalAction,omitempty" name:"NormalAction"`
 
@@ -757,6 +794,74 @@ type Compression struct {
 	// <li>`gzip`: Gzip algorithm</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Algorithms []*string `json:"Algorithms,omitempty" name:"Algorithms"`
+}
+
+// Predefined struct for user
+type CreateAccelerationDomainRequestParams struct {
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Accelerated domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Details of the origin.
+	OriginInfo *OriginInfo `json:"OriginInfo,omitempty" name:"OriginInfo"`
+}
+
+type CreateAccelerationDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Accelerated domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Details of the origin.
+	OriginInfo *OriginInfo `json:"OriginInfo,omitempty" name:"OriginInfo"`
+}
+
+func (r *CreateAccelerationDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccelerationDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DomainName")
+	delete(f, "OriginInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccelerationDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAccelerationDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAccelerationDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAccelerationDomainResponseParams `json:"Response"`
+}
+
+func (r *CreateAccelerationDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAccelerationDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1937,6 +2042,78 @@ type DefaultServerCertInfo struct {
 }
 
 // Predefined struct for user
+type DeleteAccelerationDomainsRequestParams struct {
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of accelerated domain names to be deleted.
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
+
+	// Whether to forcibly delete a domain name if it is associated with resources (such as alias domain names and traffic scheduling policies). 
+	// <li>`true`: Delete the domain name and all associated resources.</li>
+	// <li>`false`: Do not delete the domain name and all associated resources.</li>If it’s not specified, the default value `false` is used.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+type DeleteAccelerationDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of accelerated domain names to be deleted.
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
+
+	// Whether to forcibly delete a domain name if it is associated with resources (such as alias domain names and traffic scheduling policies). 
+	// <li>`true`: Delete the domain name and all associated resources.</li>
+	// <li>`false`: Do not delete the domain name and all associated resources.</li>If it’s not specified, the default value `false` is used.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+func (r *DeleteAccelerationDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccelerationDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DomainNames")
+	delete(f, "Force")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAccelerationDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAccelerationDomainsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAccelerationDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAccelerationDomainsResponseParams `json:"Response"`
+}
+
+func (r *DeleteAccelerationDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAccelerationDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteAliasDomainRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -2303,6 +2480,130 @@ func (r *DeleteZoneResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAccelerationDomainsRequestParams struct {
+	// Site ID of the accelerated domain name. If it’s not specified, all accelerated domain names under the site are returned.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Filter criteria. Each filter criteria can have up to 20 entries. Values:
+	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No
+	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No
+	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No
+	// <li>`backup-origin`<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No
+	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// The sorting order. Values:
+	// <li>`asc`: Ascending order.</li>
+	// <li>`desc`: Descending order.</li>Default value: `asc`.
+	Direction *string `json:"Direction,omitempty" name:"Direction"`
+
+	// The match mode. Values:
+	// <li>`all`: Return all matches.</li>
+	// <li>`any`: Return any match.</li>Default value: `all`.
+	Match *string `json:"Match,omitempty" name:"Match"`
+
+	// Limit on paginated queries. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset for paginated queries. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The sorting criteria. Values:
+	// <li>`created_on`: Creation time of the accelerated domain name.</li>
+	// <li>`domain-name`: Acceleration domain name.</li>
+	// </li>Default value: `domain-name`.
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+type DescribeAccelerationDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site ID of the accelerated domain name. If it’s not specified, all accelerated domain names under the site are returned.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Filter criteria. Each filter criteria can have up to 20 entries. Values:
+	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No
+	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No
+	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No
+	// <li>`backup-origin`<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No
+	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// The sorting order. Values:
+	// <li>`asc`: Ascending order.</li>
+	// <li>`desc`: Descending order.</li>Default value: `asc`.
+	Direction *string `json:"Direction,omitempty" name:"Direction"`
+
+	// The match mode. Values:
+	// <li>`all`: Return all matches.</li>
+	// <li>`any`: Return any match.</li>Default value: `all`.
+	Match *string `json:"Match,omitempty" name:"Match"`
+
+	// Limit on paginated queries. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Offset for paginated queries. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The sorting criteria. Values:
+	// <li>`created_on`: Creation time of the accelerated domain name.</li>
+	// <li>`domain-name`: Acceleration domain name.</li>
+	// </li>Default value: `domain-name`.
+	Order *string `json:"Order,omitempty" name:"Order"`
+}
+
+func (r *DescribeAccelerationDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccelerationDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Filters")
+	delete(f, "Direction")
+	delete(f, "Match")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccelerationDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAccelerationDomainsResponseParams struct {
+	// Total number of matched accelerated domain names.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of accelerated domain names.
+	AccelerationDomains []*AccelerationDomain `json:"AccelerationDomains,omitempty" name:"AccelerationDomains"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAccelerationDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAccelerationDomainsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAccelerationDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAccelerationDomainsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAddableEntityListRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -2315,6 +2616,11 @@ type DescribeAddableEntityListRequestParams struct {
 	// <li>`web-rule`: Custom rule logs;</li>
 	// <li>`web-bot`: Bot management logs.</li>
 	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
+
+	// The service region. Values:
+	// <li>`mainland`: Chinese mainland.</li>
+	// <li>`overseas`: Regions outside the Chinese mainland.</li>For an account registered on the Chinese site, it defaults to `mainland`. For an account registered on the international site, it defaults to `overseas`.
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type DescribeAddableEntityListRequest struct {
@@ -2331,6 +2637,11 @@ type DescribeAddableEntityListRequest struct {
 	// <li>`web-rule`: Custom rule logs;</li>
 	// <li>`web-bot`: Bot management logs.</li>
 	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
+
+	// The service region. Values:
+	// <li>`mainland`: Chinese mainland.</li>
+	// <li>`overseas`: Regions outside the Chinese mainland.</li>For an account registered on the Chinese site, it defaults to `mainland`. For an account registered on the international site, it defaults to `overseas`.
+	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 func (r *DescribeAddableEntityListRequest) ToJsonString() string {
@@ -2347,6 +2658,7 @@ func (r *DescribeAddableEntityListRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "EntityType")
+	delete(f, "Area")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddableEntityListRequest has unknown keys!", "")
 	}
@@ -4624,22 +4936,23 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 	// Filters
-	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-	// <li>`province`<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`. </li>
-	// <li>`isp`<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-	// <li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-	// <li>`url`<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-	// <li>`referer`<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+	// <li>`province`:<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`. </li>
+	// <li>`isp`:<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others.</li>
+	// <li>`domain`:<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+	// <li>`url`:<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`referer`:<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
 	// <li>`resourceType`<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-	// <li>`statusCode`<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-	// <li>`browserType`<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-	// <li>`deviceType`<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-	// <li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-	// <li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-	// <li>`ipVersion`<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
-	// <li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-	// <li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+	// <li>`socket`:<br>   Filter by the specified <strong>HTTP protocol type</strong><br>   Values:<br>   `HTTP`: HTTP protocol;<br>   `HTTPS`: HTTPS protocol;<br>   `QUIC`: QUIC protocol.</li>
+	// <li>`statusCode`:<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`:<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`:<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`:<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`<br>   Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4676,22 +4989,23 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 	// Filters
-	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-	// <li>`province`<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`. </li>
-	// <li>`isp`<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-	// <li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-	// <li>`url`<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-	// <li>`referer`<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+	// <li>`province`:<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`. </li>
+	// <li>`isp`:<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others.</li>
+	// <li>`domain`:<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+	// <li>`url`:<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`referer`:<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
 	// <li>`resourceType`<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
-	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-	// <li>`statusCode`<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-	// <li>`browserType`<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-	// <li>`deviceType`<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-	// <li>`operatingSystemType`<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-	// <li>`tlsVersion`<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-	// <li>`ipVersion`<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4；<br>   `6`: IPv6.</li>
-	// <li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-	// <li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+	// <li>`socket`:<br>   Filter by the specified <strong>HTTP protocol type</strong><br>   Values:<br>   `HTTP`: HTTP protocol;<br>   `HTTPS`: HTTPS protocol;<br>   `QUIC`: QUIC protocol.</li>
+	// <li>`statusCode`:<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`:<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`:<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`:<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`<br>   Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4893,6 +5207,141 @@ func (r *DescribeTimingL7CacheDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTimingL7SourceDataRequestParams struct {
+	// Start time of the query period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query period.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of metrics. Values:
+	// <li>`l7Flow_outFlux_hy`: EdgeOne request traffic</li>
+	// <li>`l7Flow_outBandwidth_hy`: EdgeOne request bandwidth</li>
+	// <li>`l7Flow_inFlux_hy`: Origin response traffic</li>
+	// <li>`l7Flow_inBandwidth_hy`: Origin response bandwidth</li>
+	// <li>`l7Flow_request_hy`: Origin-pull requests</li>
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// List of sites to be queried. All sites will be selected if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The query granularity. Values:
+	// <li>`min`: 1 minute</li>
+	// <li>`5min`: 5 minutes</li>
+	// <li>`hour`: 1 hour</li>
+	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. **Query period < 1 hour**: 1-minute granularity; **1 hour < query period < 2 days**: 5-minute granularity; **2 days < query period < 7 days**: 1 hour granularity; **Query period > 7 days**: 1 day granularity.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Filter conditions. See below for details: 
+	// <li>`domain`:<br>   Filter by <strong>the origin domain</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`origin`:<br>   Filter by <strong>the origin</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`originGroup`:<br>   Filter by <strong>the origin group</strong>, such as origin-xxxxx.<br>   Type: String<br>   Required: No</li>
+	// <li>`flowType`:<br>   Filter by <strong>the origin response type</strong>. This parameter takes precedence over `MetricNames.N`.<br>   Type: String<br>   Required: No<br>   Values:<br>   `inFlow`: Origin response data, corresponding to `l7Flow_inFlux_hy`, `l7Flow_inBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.<br>   `outFlow`: EdgeOne request data, corresponding to `l7Flow_outFlux_hy`, `l7Flow_outBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.</li>
+	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+type DescribeTimingL7SourceDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time of the query period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query period.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of metrics. Values:
+	// <li>`l7Flow_outFlux_hy`: EdgeOne request traffic</li>
+	// <li>`l7Flow_outBandwidth_hy`: EdgeOne request bandwidth</li>
+	// <li>`l7Flow_inFlux_hy`: Origin response traffic</li>
+	// <li>`l7Flow_inBandwidth_hy`: Origin response bandwidth</li>
+	// <li>`l7Flow_request_hy`: Origin-pull requests</li>
+	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
+
+	// List of sites to be queried. All sites will be selected if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The query granularity. Values:
+	// <li>`min`: 1 minute</li>
+	// <li>`5min`: 5 minutes</li>
+	// <li>`hour`: 1 hour</li>
+	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. **Query period < 1 hour**: 1-minute granularity; **1 hour < query period < 2 days**: 5-minute granularity; **2 days < query period < 7 days**: 1 hour granularity; **Query period > 7 days**: 1 day granularity.
+	Interval *string `json:"Interval,omitempty" name:"Interval"`
+
+	// Filter conditions. See below for details: 
+	// <li>`domain`:<br>   Filter by <strong>the origin domain</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`origin`:<br>   Filter by <strong>the origin</strong><br>   Type: String<br>   Required: No</li>
+	// <li>`originGroup`:<br>   Filter by <strong>the origin group</strong>, such as origin-xxxxx.<br>   Type: String<br>   Required: No</li>
+	// <li>`flowType`:<br>   Filter by <strong>the origin response type</strong>. This parameter takes precedence over `MetricNames.N`.<br>   Type: String<br>   Required: No<br>   Values:<br>   `inFlow`: Origin response data, corresponding to `l7Flow_inFlux_hy`, `l7Flow_inBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.<br>   `outFlow`: EdgeOne request data, corresponding to `l7Flow_outFlux_hy`, `l7Flow_outBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.</li>
+	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
+
+	// Geolocation scope. Values:
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+}
+
+func (r *DescribeTimingL7SourceDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTimingL7SourceDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricNames")
+	delete(f, "ZoneIds")
+	delete(f, "Interval")
+	delete(f, "Filters")
+	delete(f, "Area")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTimingL7SourceDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTimingL7SourceDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of time series traffic data.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	TimingDataRecords []*TimingDataRecord `json:"TimingDataRecords,omitempty" name:"TimingDataRecords"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTimingL7SourceDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTimingL7SourceDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTimingL7SourceDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTimingL7SourceDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTopL7AnalysisDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -4919,23 +5368,24 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter conditions. See below for details: 
-	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
-	// <li>`province`:<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
-	// <li>`isp`:<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-	// <li>`domain`:<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
-	// <li>`url`:<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
-	// <li>`referer`:<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
-	// <li>`resourceType`:<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
-	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-	// <li>`statusCode`:<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-	// <li>`browserType`:<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-	// <li>`deviceType`:<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-	// <li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-	// <li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-	// <li>`ipVersion`:<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
-	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`tagValue`:<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
+	// Filters
+	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+	// <li>`province`:<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`.</li>
+	// <li>`isp`:<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+	// <li>`domain`:<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+	// <li>`url`:<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`referer`:<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`resourceType`:<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+	// <li>`socket`<br>   Filter by the specified <strong>HTTP protocol type</strong><br>   Values:<br>   `HTTP`: HTTP protocol;<br>   `HTTPS`: HTTPS protocol;<br>   `QUIC`: QUIC protocol.</li>
+	// <li>`statusCode`:<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>  In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`:<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`:<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`:<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`:<br>   Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -4980,23 +5430,24 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter conditions. See below for details: 
-	// <li>`country`:<br>   Filter by the <strong>country/region code</strong>. <a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.<br>   Type: String<br>   Required: No</li>
-	// <li>`province`:<br>   Filter by the <strong>province name</strong>. It’s only available when `Area` is `mainland`. <br>   Type: String<br>   Required: No</li>
-	// <li>`isp`:<br>   Filter by the <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Type: String<br>   Required: No<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
-	// <li>`domain`:<br>   Filter by the <strong>sub-domain name</strong>, such as `test.example.com`<br>   Type: String<br>   Required: No</li>
-	// <li>`url`:<br>   Filter by the <strong>URL</strong>, such as `/content`. Separate multiple URLs with semicolons. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No</li>
-	// <li>`referer`:<br>   Filter by the <strong>Referer header</strong>, such as `example.com`. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No</li>
-	// <li>`resourceType`:<br>   Filter by the <strong>resource file type</strong>, such as `jpg`, `png`. The query period cannot exceed 30 days.<br>  Type: String<br>   Required: No</li>
-	// <li>`protocol`:<br>   Filter by the <strong>HTTP protocol</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-	// <li>`statusCode`:<br>   Filter by the <strong> status code</strong>. The query period  cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
-	// <li>`browserType`:<br>   Filter by the <strong>browser type</strong>. The query period cannot exceed 30 days. <br>   Type:  String<br>   Required:  No<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
-	// <li>`deviceType`:<br>   Filter by the <strong>device type</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
-	// <li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. The query period cannot exceed 30 days. <br>   Type: String<br>   Required: No<br>   Values: <br>   `Linux`：Linux OS;<br>   `MacOS`: OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
-	// <li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. The query period cannot exceed 30 days.<br>   Type: String<br>   Required: No<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
-	// <li>`ipVersion`:<br>   Filter by the <strong>IP version</strong>.<br>   Type: String<br>   Required: No<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
-	// <li>`tagKey`:<br>   Filter by the <strong>tag key</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`tagValue`:<br>  Filter by the <strong>tag value</strong><br>   Type: String<br>   Required: No</li>
+	// Filters
+	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+	// <li>`province`:<br>   Filter by the specified <strong>province name</strong>. It’s only available when `Area` is `mainland`.</li>
+	// <li>`isp`:<br>   Filter by the specified <strong>ISP</strong>. It’s only available when `Area` is `mainland`.<br>   Values: <br>   `2`: CTCC; <br>   `26`: CUCC;<br>   `1046`: CMCC;<br>   `3947`: CTT; <br>   `38`: CERNET; <br>   `43`: GWBN;<br>   `0`: Others</li>
+	// <li>`domain`:<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+	// <li>`url`:<br>   Filter by the specified <strong>URL Path</strong> (such as `/content` or `content/test.jpg`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`referer`:<br>   Filter by the specified <strong>Referer header</strong>, such as `example.com`.<br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`resourceType`:<br>   Filter by the specified <strong>resource file type</strong>, such as `jpg`, `css`. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.</li>
+	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+	// <li>`socket`<br>   Filter by the specified <strong>HTTP protocol type</strong><br>   Values:<br>   `HTTP`: HTTP protocol;<br>   `HTTPS`: HTTPS protocol;<br>   `QUIC`: QUIC protocol.</li>
+	// <li>`statusCode`:<br>   Filter by the specified <strong> status code</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>  In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `1XX`: All 1xx status codes;<br>   `100`: 100 status code;<br>   `101`: 101 status code;<br>   `102`: 102 status code;<br>   `2XX`: All 2xx status codes;<br>   `200`: 200 status code;<br>   `201`: 201 status code;<br>   `202`: 202 status code;<br>   `203`: 203 status code;<br>   `204`: 204 status code;<br>   `205`: 205 status code;<br>   `206`: 206 status code;<br>   `207`: 207 status code;<br>  `3XX`: All 3xx status codes;<br>   `300`: 300 status code;<br>   `301`: 301 status code;<br>   `302`: 302 status code;<br>   `303`: 303 status code;<br>   `304`: 304 status code;<br>   `305`: 305 status code;<br>   `307`: 307 status code;<br>   `4XX`: All 4xx status codes;<br>   `400`: 400 status code;<br>   `401`: 401 status code;<br>   `402`: 402 status code;<br>   `403`: 403 status code;<br>   `404`: 404 status code;<br>   `405`: 405 status code;<br>   `406`: 406 status code;<br>   `407`: 407 status code;<br>   `408`: 408 status code;<br>   `409`: 409 status code;<br>   `410`: 410 status code;<br>   `411`: 411 status code;<br>   `412`: 412 status code;<br>   `412`: 413 status code;<br>   `414`: 414 status code;<br>   `415`: 415 status code;<br>   `416`: 416 status code;<br>   `417`: 417 status code;<br>  `422`: 422 status code;<br>   `423`: 423 status code;<br>   `424`: 424 status code;<br>   `426`: 426 status code;<br>   `451`: 451 status code;<br>   `5XX`: All 5xx status codes;<br>   `500`: 500 status code;<br>   `501`: 501 status code;<br>   `502`: 502 status code;<br>   `503`: 503 status code;<br>   `504`: 504 status code;<br>   `505`: 505 status code;<br>   `506`: 506 status code;<br>   `507`: 507 status code;<br>   `510`: 510 status code;<br>   `514`: 514 status code;<br>   `544`: 544 status code.</li>
+	// <li>`browserType`:<br>   Filter by the specified <strong>browser type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>  `Firefox`: Firefox browser;<br>   `Chrome`: Chrome browser;<br>   `Safari`: Safari browser;<br>   `MicrosoftEdge`: Microsoft Edge browser;<br>   `IE`: IE browser;<br>   `Opera`: Opera browser;<br>   `QQBrowser`: QQ browser;<br>   `LBBrowser`: LB browser;<br>   `MaxthonBrowser`: Maxthon browser;<br>   `SouGouBrowser`: Sogou browser;<br>  `BIDUBrowser`: Baidu browser;<br>   `TaoBrowser`: Tao browser;<br>   `UBrowser`: UC browser;<br>   `Other`: Other browsers; <br>   `Empty`: The browser type is not specified; <br>   `Bot`: Web crawler.</li>
+	// <li>`deviceType`:<br>   Filter by the <strong>device type</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `TV`: TV; <br>   `Tablet`: Tablet;<br>   `Mobile`: Mobile phone;<br>   `Desktop`: Desktop device; <br>   `Other`: Other device;<br>   `Empty`: Device type not specified.</li>
+	// <li>`operatingSystemType`:<br>   Filter by the <strong>operating system</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values: <br>   `Linux`: Linux OS;<br>   `MacOS`: Mac OS;<br>   `Android`: Android OS;<br>   `IOS`: iOS OS;<br>   `Windows`: Windows OS;<br>   `NetBSD`: NetBSD OS;<br>   `ChromiumOS`: Chromium OS;<br>   `Bot`: Web crawler: <br>   `Other`: Other OS;<br>   `Empty`: The OS is not specified.</li>
+	// <li>`tlsVersion`:<br>   Filter by the <strong>TLS version</strong>. <br>   When this parameter is specified, the query period must be within the last 30 days. <br>   In this case, the supported <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> stated when `Zonelds` is specified become invalid.<br>   Values:<br>   `TLS1.0`: TLS 1.0; <br>   `TLS1.1`: TLS 1.1;<br>   `TLS1.2`: TLS 1.2;<br>   `TLS1.3`: TLS 1.3.</li>
+	// <li>`ipVersion`:<br>   Filter by the specified <strong>IP version</strong>.<br>   Values:<br>   `4`: IPv4;<br>   `6`: IPv6.</li>
+	// <li>`tagKey`:<br>   Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`:<br>   Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query time granularity. Values:
@@ -5491,18 +5942,19 @@ type DescribeWebManagedRulesLogRequestParams struct {
 	// The page offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`attackType`: Attack type;</li>
-	// <li>`riskLevel`: Risk level;</li>
-	// <li>`action`: Action;</li>
-	// <li>`ruleId`: Rule ID;</li>
-	// <li>`sipCountryCode`: Country code of the attacker IP;</li>
-	// <li>`attackIp`: Attacker IP;</li>
-	// <li>`oriDomain`: Attacked subdomain name;</li>
-	// <li>`eventId`: Event ID;</li>
-	// <li>`ua`: User agent;</li>
-	// <li>`requestMethod`: Request method;</li>
-	// <li>`uri`: Uniform resource identifier.</li>
+	// Filters for the query. Values:
+	// <li>`attackType`: Attack type</li>
+	// <li>`riskLevel`: Risk level</li>
+	// <li>`action`: Action</li>
+	// <li>`ruleId`: Rule ID</li>
+	// <li>`sipCountryCode`: Country code of the attacker IP</li>
+	// <li>`attackIp`: Attacker IP</li>
+	// <li>`realClientIp`: Real client IP</li>
+	// <li>`oriDomain`: Attacked subdomain name</li>
+	// <li>`eventId`: Event ID</li>
+	// <li>`ua`: User agent</li>
+	// <li>`requestMethod`: Request method</li>
+	// <li>`uri`: Uniform resource identifier</li>
 	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
 
 	// Data storage region. Values:
@@ -5532,18 +5984,19 @@ type DescribeWebManagedRulesLogRequest struct {
 	// The page offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`attackType`: Attack type;</li>
-	// <li>`riskLevel`: Risk level;</li>
-	// <li>`action`: Action;</li>
-	// <li>`ruleId`: Rule ID;</li>
-	// <li>`sipCountryCode`: Country code of the attacker IP;</li>
-	// <li>`attackIp`: Attacker IP;</li>
-	// <li>`oriDomain`: Attacked subdomain name;</li>
-	// <li>`eventId`: Event ID;</li>
-	// <li>`ua`: User agent;</li>
-	// <li>`requestMethod`: Request method;</li>
-	// <li>`uri`: Uniform resource identifier.</li>
+	// Filters for the query. Values:
+	// <li>`attackType`: Attack type</li>
+	// <li>`riskLevel`: Risk level</li>
+	// <li>`action`: Action</li>
+	// <li>`ruleId`: Rule ID</li>
+	// <li>`sipCountryCode`: Country code of the attacker IP</li>
+	// <li>`attackIp`: Attacker IP</li>
+	// <li>`realClientIp`: Real client IP</li>
+	// <li>`oriDomain`: Attacked subdomain name</li>
+	// <li>`eventId`: Event ID</li>
+	// <li>`ua`: User agent</li>
+	// <li>`requestMethod`: Request method</li>
+	// <li>`uri`: Uniform resource identifier</li>
 	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
 
 	// Data storage region. Values:
@@ -6786,6 +7239,18 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
+type FirstPartConfig struct {
+	// Switch. Values:
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The transfer period threshold of the first 8 KB. If the threshold is reached, it’s considered a slow attack. Default: `5`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	StatTime *uint64 `json:"StatTime,omitempty" name:"StatTime"`
+}
+
 type FollowOrigin struct {
 	// Whether to enable the configuration of following the origin server. Valid values:
 	// <li>`on`: Enable</li>
@@ -7141,6 +7606,157 @@ type MaxAge struct {
 	// Specifies the maximum amount of time (in seconds). The maximum value is 365 days.
 	// Note: The value `0` means not to cache.
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitempty" name:"MaxAgeTime"`
+}
+
+// Predefined struct for user
+type ModifyAccelerationDomainRequestParams struct {
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Accelerated domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Details of the origin.
+	OriginInfo *OriginInfo `json:"OriginInfo,omitempty" name:"OriginInfo"`
+}
+
+type ModifyAccelerationDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Accelerated domain name
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Details of the origin.
+	OriginInfo *OriginInfo `json:"OriginInfo,omitempty" name:"OriginInfo"`
+}
+
+func (r *ModifyAccelerationDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccelerationDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DomainName")
+	delete(f, "OriginInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccelerationDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAccelerationDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAccelerationDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAccelerationDomainResponseParams `json:"Response"`
+}
+
+func (r *ModifyAccelerationDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccelerationDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAccelerationDomainStatusesRequestParams struct {
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of accelerated domain names to be modified.
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
+
+	// Status of the accelerated domain name. Values:
+	// <li>`online`: Enabled</li>
+	// <li>`offline`: Disabled</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Whether to force suspension when the domain name has associated resources (such as alias domain names and traffic scheduling policies). Values:
+	// <li>`true`: Suspend the domain name and all associated resources.</li>
+	// <li>`true`: Do not suspend the domain name and all associated resources.</li>Default value: `false`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+type ModifyAccelerationDomainStatusesRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site related with the accelerated domain name.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of accelerated domain names to be modified.
+	DomainNames []*string `json:"DomainNames,omitempty" name:"DomainNames"`
+
+	// Status of the accelerated domain name. Values:
+	// <li>`online`: Enabled</li>
+	// <li>`offline`: Disabled</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Whether to force suspension when the domain name has associated resources (such as alias domain names and traffic scheduling policies). Values:
+	// <li>`true`: Suspend the domain name and all associated resources.</li>
+	// <li>`true`: Do not suspend the domain name and all associated resources.</li>Default value: `false`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+func (r *ModifyAccelerationDomainStatusesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccelerationDomainStatusesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DomainNames")
+	delete(f, "Status")
+	delete(f, "Force")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccelerationDomainStatusesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAccelerationDomainStatusesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAccelerationDomainStatusesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAccelerationDomainStatusesResponseParams `json:"Response"`
+}
+
+func (r *ModifyAccelerationDomainStatusesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccelerationDomainStatusesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -8747,6 +9363,37 @@ type Origin struct {
 	CosPrivateAccess *string `json:"CosPrivateAccess,omitempty" name:"CosPrivateAccess"`
 }
 
+type OriginDetail struct {
+	// The origin type. Values:
+	// <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
+	// <li>`COS`: COS bucket address</li>
+	// <li>`ORIGIN_GROUP`: Origin group</li>
+	// <li>`AWS_S3`: AWS S3 bucket address</li>
+	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
+
+	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+	Origin *string `json:"Origin,omitempty" name:"Origin"`
+
+	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates that secondary origins are not used.
+	BackupOrigin *string `json:"BackupOrigin,omitempty" name:"BackupOrigin"`
+
+	// Name of the primary origin group (valid when `OriginType=ORIGIN_GROUP`).
+	OriginGroupName *string `json:"OriginGroupName,omitempty" name:"OriginGroupName"`
+
+	// Name of the secondary origin group (valid when `OriginType=ORIGIN_GROUP` and `BackupOrigin` is specified).
+	BackOriginGroupName *string `json:"BackOriginGroupName,omitempty" name:"BackOriginGroupName"`
+
+	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values:
+	// <li>`on`: Enable private authentication.</li>
+	// <li>`off`: Disable private authentication.</li>
+	// If this field is not specified, the default value `off` is used.
+	PrivateAccess *string `json:"PrivateAccess,omitempty" name:"PrivateAccess"`
+
+	// The private authentication parameters. This field is valid when `PrivateAccess=on`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitempty" name:"PrivateParameters"`
+}
+
 type OriginGroup struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -8781,6 +9428,34 @@ type OriginGroup struct {
 	// The origin domain when `OriginType=self`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	HostHeader *string `json:"HostHeader,omitempty" name:"HostHeader"`
+}
+
+type OriginInfo struct {
+	// The origin type. Values:
+	// <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
+	// <li>`COS`: COS bucket address</li>
+	// <li>`ORIGIN_GROUP`: Origin group</li>
+	// <li>`AWS_S3`: AWS S3 bucket address</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
+
+	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Origin *string `json:"Origin,omitempty" name:"Origin"`
+
+	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates that secondary origins are not used.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupOrigin *string `json:"BackupOrigin,omitempty" name:"BackupOrigin"`
+
+	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values:
+	// <li>`on`: Enable private authentication.</li>
+	// <li>`off`: Disable private authentication.</li>If this field is not specified, the default value `off` is used.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateAccess *string `json:"PrivateAccess,omitempty" name:"PrivateAccess"`
+
+	// The private authentication parameters. This field is valid when `PrivateAccess=on`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitempty" name:"PrivateParameters"`
 }
 
 type OriginProtectionInfo struct {
@@ -9016,6 +9691,10 @@ type RateLimitConfig struct {
 	// The client filtering settings. If it is null, the settings that were last configured will be used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RateLimitIntelligence *RateLimitIntelligence `json:"RateLimitIntelligence,omitempty" name:"RateLimitIntelligence"`
+
+	// The custom rate limiting rules. If it is `null`, the previous settings is used.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RateLimitCustomizes []*RateLimitUserRule `json:"RateLimitCustomizes,omitempty" name:"RateLimitCustomizes"`
 }
 
 type RateLimitIntelligence struct {
@@ -9289,9 +9968,10 @@ type Resource struct {
 	// ID of the resource associated with the plan.
 	PlanId *string `json:"PlanId,omitempty" name:"PlanId"`
 
-	// The region. Values:
-	// <li>`mainland`: Chinese mainland.</li>
-	// <li>`overseas`: Outside the Chinese mainland.</li>
+	// Applicable area. Values:
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`global`: Global</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
@@ -9719,6 +10399,10 @@ type SecurityConfig struct {
 	// Security template settings
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	TemplateConfig *TemplateConfig `json:"TemplateConfig,omitempty" name:"TemplateConfig"`
+
+	// Slow attack defense configuration. If it is `null`, the previous setting is used.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SlowPostConfig *SlowPostConfig `json:"SlowPostConfig,omitempty" name:"SlowPostConfig"`
 }
 
 type SecurityType struct {
@@ -9814,6 +10498,46 @@ type SkipCondition struct {
 	// The value that matches the content.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	MatchContent []*string `json:"MatchContent,omitempty" name:"MatchContent"`
+}
+
+type SlowPostConfig struct {
+	// Values:
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Detect slow attacks by the transfer period of the first 8 KB of requests
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	FirstPartConfig *FirstPartConfig `json:"FirstPartConfig,omitempty" name:"FirstPartConfig"`
+
+	// Detect slow attacks by the data rate of the main body (excluding the first 8 KB) of requests
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	SlowRateConfig *SlowRateConfig `json:"SlowRateConfig,omitempty" name:"SlowRateConfig"`
+
+	// The action to taken when a slow attack is detected. Values:
+	// <li>`monitor`: Observe</li>
+	// <li>`drop`: Block the request</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// ID of the rule
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	RuleId *uint64 `json:"RuleId,omitempty" name:"RuleId"`
+}
+
+type SlowRateConfig struct {
+	// Switch. Values:
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// The sampling interval in seconds. In this way, the first 8 KB of the request is ignored. The rest of data is separated in to multiple parts according to this interval for slow attack measurement.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
+
+	// The transfer rate threshold in bps. When the transfer rate of a sample is lower than the threshold, it’s considered a slow attack and handled according to the specified `Action`.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Threshold *uint64 `json:"Threshold,omitempty" name:"Threshold"`
 }
 
 type SmartRouting struct {
@@ -10285,10 +11009,10 @@ type WebLogs struct {
 	// The country code of the attacker IP, which is defined in ISO-3166 alpha-2. For the list of country codes, see [ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json).
 	SipCountryCode *string `json:"SipCountryCode,omitempty" name:"SipCountryCode"`
 
-
+	// The real client IP.
 	RealClientIp *string `json:"RealClientIp,omitempty" name:"RealClientIp"`
 
-
+	// The ISO-3166 alpha-2 country code of the real client IP.
 	RealClientIpCountryCode *string `json:"RealClientIpCountryCode,omitempty" name:"RealClientIpCountryCode"`
 
 	// The attack time recorded in seconds using UNIX timestamp.
@@ -10397,6 +11121,12 @@ type Zone struct {
 	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
+
+	// Whether it’s a fake site. Values:
+	// <li>`0`: Non-fake site</li>
+	// <li>`1`: Fake site</li>
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	IsFake *int64 `json:"IsFake,omitempty" name:"IsFake"`
 }
 
 type ZoneSetting struct {
