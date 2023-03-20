@@ -103,6 +103,114 @@ func (c *Client) CancelTaskWithContext(ctx context.Context, request *CancelTaskR
     return
 }
 
+func NewCreateInternalTableRequest() (request *CreateInternalTableRequest) {
+    request = &CreateInternalTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateInternalTable")
+    
+    
+    return
+}
+
+func NewCreateInternalTableResponse() (response *CreateInternalTableResponse) {
+    response = &CreateInternalTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateInternalTable
+// This API is used to create a managed internal table. It has been disused.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInternalTable(request *CreateInternalTableRequest) (response *CreateInternalTableResponse, err error) {
+    return c.CreateInternalTableWithContext(context.Background(), request)
+}
+
+// CreateInternalTable
+// This API is used to create a managed internal table. It has been disused.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateInternalTableWithContext(ctx context.Context, request *CreateInternalTableRequest) (response *CreateInternalTableResponse, err error) {
+    if request == nil {
+        request = NewCreateInternalTableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInternalTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInternalTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateResultDownloadRequest() (request *CreateResultDownloadRequest) {
+    request = &CreateResultDownloadRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateResultDownload")
+    
+    
+    return
+}
+
+func NewCreateResultDownloadResponse() (response *CreateResultDownloadResponse) {
+    response = &CreateResultDownloadResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateResultDownload
+// This API is used to create a query result download task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOPERMISSION = "FailedOperation.NoPermission"
+func (c *Client) CreateResultDownload(request *CreateResultDownloadRequest) (response *CreateResultDownloadResponse, err error) {
+    return c.CreateResultDownloadWithContext(context.Background(), request)
+}
+
+// CreateResultDownload
+// This API is used to create a query result download task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOPERMISSION = "FailedOperation.NoPermission"
+func (c *Client) CreateResultDownloadWithContext(ctx context.Context, request *CreateResultDownloadRequest) (response *CreateResultDownloadResponse, err error) {
+    if request == nil {
+        request = NewCreateResultDownloadRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateResultDownload require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateResultDownloadResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSparkAppRequest() (request *CreateSparkAppRequest) {
     request = &CreateSparkAppRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -419,6 +527,78 @@ func (c *Client) DeleteSparkAppWithContext(ctx context.Context, request *DeleteS
     return
 }
 
+func NewDescribeResultDownloadRequest() (request *DescribeResultDownloadRequest) {
+    request = &DescribeResultDownloadRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeResultDownload")
+    
+    
+    return
+}
+
+func NewDescribeResultDownloadResponse() (response *DescribeResultDownloadResponse) {
+    response = &DescribeResultDownloadResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeResultDownload
+// This API is used to get a query result download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
+//  INVALIDPARAMETER_INVALIDFAILURETOLERANCE = "InvalidParameter.InvalidFailureTolerance"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  INVALIDPARAMETER_INVALIDSQLNUM = "InvalidParameter.InvalidSQLNum"
+//  INVALIDPARAMETER_INVALIDSTORELOCATION = "InvalidParameter.InvalidStoreLocation"
+//  INVALIDPARAMETER_INVALIDTASKTYPE = "InvalidParameter.InvalidTaskType"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESULTOUTPUTPATHNOTFOUND = "ResourceNotFound.ResultOutputPathNotFound"
+//  RESOURCEUNAVAILABLE_BALANCEINSUFFICIENT = "ResourceUnavailable.BalanceInsufficient"
+//  UNAUTHORIZEDOPERATION_USECOMPUTINGENGINE = "UnauthorizedOperation.UseComputingEngine"
+func (c *Client) DescribeResultDownload(request *DescribeResultDownloadRequest) (response *DescribeResultDownloadResponse, err error) {
+    return c.DescribeResultDownloadWithContext(context.Background(), request)
+}
+
+// DescribeResultDownload
+// This API is used to get a query result download task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
+//  INVALIDPARAMETER_INVALIDFAILURETOLERANCE = "InvalidParameter.InvalidFailureTolerance"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  INVALIDPARAMETER_INVALIDSQLNUM = "InvalidParameter.InvalidSQLNum"
+//  INVALIDPARAMETER_INVALIDSTORELOCATION = "InvalidParameter.InvalidStoreLocation"
+//  INVALIDPARAMETER_INVALIDTASKTYPE = "InvalidParameter.InvalidTaskType"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESULTOUTPUTPATHNOTFOUND = "ResourceNotFound.ResultOutputPathNotFound"
+//  RESOURCEUNAVAILABLE_BALANCEINSUFFICIENT = "ResourceUnavailable.BalanceInsufficient"
+//  UNAUTHORIZEDOPERATION_USECOMPUTINGENGINE = "UnauthorizedOperation.UseComputingEngine"
+func (c *Client) DescribeResultDownloadWithContext(ctx context.Context, request *DescribeResultDownloadRequest) (response *DescribeResultDownloadResponse, err error) {
+    if request == nil {
+        request = NewDescribeResultDownloadRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeResultDownload require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeResultDownloadResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSparkAppJobRequest() (request *DescribeSparkAppJobRequest) {
     request = &DescribeSparkAppJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -675,6 +855,130 @@ func (c *Client) DescribeTasksWithContext(ctx context.Context, request *Describe
     request.SetContext(ctx)
     
     response = NewDescribeTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGenerateCreateMangedTableSqlRequest() (request *GenerateCreateMangedTableSqlRequest) {
+    request = &GenerateCreateMangedTableSqlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "GenerateCreateMangedTableSql")
+    
+    
+    return
+}
+
+func NewGenerateCreateMangedTableSqlResponse() (response *GenerateCreateMangedTableSqlResponse) {
+    response = &GenerateCreateMangedTableSqlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GenerateCreateMangedTableSql
+// This API is used to generate SQL statements for creating a managed table.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GenerateCreateMangedTableSql(request *GenerateCreateMangedTableSqlRequest) (response *GenerateCreateMangedTableSqlResponse, err error) {
+    return c.GenerateCreateMangedTableSqlWithContext(context.Background(), request)
+}
+
+// GenerateCreateMangedTableSql
+// This API is used to generate SQL statements for creating a managed table.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GenerateCreateMangedTableSqlWithContext(ctx context.Context, request *GenerateCreateMangedTableSqlRequest) (response *GenerateCreateMangedTableSqlResponse, err error) {
+    if request == nil {
+        request = NewGenerateCreateMangedTableSqlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GenerateCreateMangedTableSql require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGenerateCreateMangedTableSqlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyGovernEventRuleRequest() (request *ModifyGovernEventRuleRequest) {
+    request = &ModifyGovernEventRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "ModifyGovernEventRule")
+    
+    
+    return
+}
+
+func NewModifyGovernEventRuleResponse() (response *ModifyGovernEventRuleResponse) {
+    response = &ModifyGovernEventRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyGovernEventRule
+// This API is used to change data governance event thresholds.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyGovernEventRule(request *ModifyGovernEventRuleRequest) (response *ModifyGovernEventRuleResponse, err error) {
+    return c.ModifyGovernEventRuleWithContext(context.Background(), request)
+}
+
+// ModifyGovernEventRule
+// This API is used to change data governance event thresholds.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyGovernEventRuleWithContext(ctx context.Context, request *ModifyGovernEventRuleRequest) (response *ModifyGovernEventRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyGovernEventRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyGovernEventRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyGovernEventRuleResponse()
     err = c.Send(request, response)
     return
 }

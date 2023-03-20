@@ -116,6 +116,155 @@ type Column struct {
 }
 
 // Predefined struct for user
+type CreateInternalTableRequestParams struct {
+	// The basic table information.
+	TableBaseInfo *TableBaseInfo `json:"TableBaseInfo,omitempty" name:"TableBaseInfo"`
+
+	// The table fields.
+	Columns []*TColumn `json:"Columns,omitempty" name:"Columns"`
+
+	// The table partitions.
+	Partitions []*TPartition `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The table properties.
+	Properties []*Property `json:"Properties,omitempty" name:"Properties"`
+}
+
+type CreateInternalTableRequest struct {
+	*tchttp.BaseRequest
+	
+	// The basic table information.
+	TableBaseInfo *TableBaseInfo `json:"TableBaseInfo,omitempty" name:"TableBaseInfo"`
+
+	// The table fields.
+	Columns []*TColumn `json:"Columns,omitempty" name:"Columns"`
+
+	// The table partitions.
+	Partitions []*TPartition `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The table properties.
+	Properties []*Property `json:"Properties,omitempty" name:"Properties"`
+}
+
+func (r *CreateInternalTableRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInternalTableRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TableBaseInfo")
+	delete(f, "Columns")
+	delete(f, "Partitions")
+	delete(f, "Properties")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInternalTableRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateInternalTableResponseParams struct {
+	// The SQL statements for creating the managed internal table.
+	Execution *string `json:"Execution,omitempty" name:"Execution"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateInternalTableResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateInternalTableResponseParams `json:"Response"`
+}
+
+func (r *CreateInternalTableResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateInternalTableResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateResultDownloadRequestParams struct {
+	// The result query task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The result format.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Whether to re-generate a file to download. This parameter applies only when the last task is `timeout` or `error`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+type CreateResultDownloadRequest struct {
+	*tchttp.BaseRequest
+	
+	// The result query task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The result format.
+	Format *string `json:"Format,omitempty" name:"Format"`
+
+	// Whether to re-generate a file to download. This parameter applies only when the last task is `timeout` or `error`.
+	Force *bool `json:"Force,omitempty" name:"Force"`
+}
+
+func (r *CreateResultDownloadRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateResultDownloadRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "Format")
+	delete(f, "Force")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateResultDownloadRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateResultDownloadResponseParams struct {
+	// The download task ID.
+	DownloadId *string `json:"DownloadId,omitempty" name:"DownloadId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateResultDownloadResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateResultDownloadResponseParams `json:"Response"`
+}
+
+func (r *CreateResultDownloadResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateResultDownloadResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateSparkAppRequestParams struct {
 	// Spark application name
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
@@ -185,6 +334,15 @@ type CreateSparkAppRequestParams struct {
 
 	// Archives: Dependency resources
 	AppArchives *string `json:"AppArchives,omitempty" name:"AppArchives"`
+
+	// The Spark image version.
+	SparkImage *string `json:"SparkImage,omitempty" name:"SparkImage"`
+
+	// The Spark image version name.
+	SparkImageVersion *string `json:"SparkImageVersion,omitempty" name:"SparkImageVersion"`
+
+	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
+	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
 }
 
 type CreateSparkAppRequest struct {
@@ -258,6 +416,15 @@ type CreateSparkAppRequest struct {
 
 	// Archives: Dependency resources
 	AppArchives *string `json:"AppArchives,omitempty" name:"AppArchives"`
+
+	// The Spark image version.
+	SparkImage *string `json:"SparkImage,omitempty" name:"SparkImage"`
+
+	// The Spark image version name.
+	SparkImageVersion *string `json:"SparkImageVersion,omitempty" name:"SparkImageVersion"`
+
+	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
+	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
 }
 
 func (r *CreateSparkAppRequest) ToJsonString() string {
@@ -295,6 +462,9 @@ func (r *CreateSparkAppRequest) FromJsonString(s string) error {
 	delete(f, "AppPythonFiles")
 	delete(f, "IsLocalArchives")
 	delete(f, "AppArchives")
+	delete(f, "SparkImage")
+	delete(f, "SparkImageVersion")
+	delete(f, "AppExecutorMaxNumbers")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSparkAppRequest has unknown keys!", "")
 	}
@@ -303,6 +473,10 @@ func (r *CreateSparkAppRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSparkAppResponseParams struct {
+	// The unique ID of the application.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SparkAppId *string `json:"SparkAppId,omitempty" name:"SparkAppId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -550,6 +724,10 @@ func (r *CreateTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DataGovernPolicy struct {
+
+}
+
 // Predefined struct for user
 type DeleteSparkAppRequestParams struct {
 	// Spark application name
@@ -601,6 +779,83 @@ func (r *DeleteSparkAppResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSparkAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeResultDownloadRequestParams struct {
+	// The query task ID.
+	DownloadId *string `json:"DownloadId,omitempty" name:"DownloadId"`
+}
+
+type DescribeResultDownloadRequest struct {
+	*tchttp.BaseRequest
+	
+	// The query task ID.
+	DownloadId *string `json:"DownloadId,omitempty" name:"DownloadId"`
+}
+
+func (r *DescribeResultDownloadRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResultDownloadRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DownloadId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResultDownloadRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeResultDownloadResponseParams struct {
+	// The file save path.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// The task status. Valid values: `init`, `queue`, `format`, `compress`, `success`, `timeout`, and `error`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The task exception cause.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Reason *string `json:"Reason,omitempty" name:"Reason"`
+
+	// The temporary secret ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretId *string `json:"SecretId,omitempty" name:"SecretId"`
+
+	// The temporary secret key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// The temporary token.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Token *string `json:"Token,omitempty" name:"Token"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeResultDownloadResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeResultDownloadResponseParams `json:"Response"`
+}
+
+func (r *DescribeResultDownloadResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResultDownloadResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1076,12 +1331,95 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Execution struct {
+	// The automatically generated SQL statements.
+	SQL *string `json:"SQL,omitempty" name:"SQL"`
+}
+
 type Filter struct {
 	// Attribute name. If more than one filter exists, the logical relationship between these filters is `OR`.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
 	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`.
 	Values []*string `json:"Values,omitempty" name:"Values"`
+}
+
+// Predefined struct for user
+type GenerateCreateMangedTableSqlRequestParams struct {
+	// The basic table information.
+	TableBaseInfo *TableBaseInfo `json:"TableBaseInfo,omitempty" name:"TableBaseInfo"`
+
+	// The table fields.
+	Columns []*TColumn `json:"Columns,omitempty" name:"Columns"`
+
+	// The table partitions.
+	Partitions []*TPartition `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The table properties.
+	Properties []*Property `json:"Properties,omitempty" name:"Properties"`
+}
+
+type GenerateCreateMangedTableSqlRequest struct {
+	*tchttp.BaseRequest
+	
+	// The basic table information.
+	TableBaseInfo *TableBaseInfo `json:"TableBaseInfo,omitempty" name:"TableBaseInfo"`
+
+	// The table fields.
+	Columns []*TColumn `json:"Columns,omitempty" name:"Columns"`
+
+	// The table partitions.
+	Partitions []*TPartition `json:"Partitions,omitempty" name:"Partitions"`
+
+	// The table properties.
+	Properties []*Property `json:"Properties,omitempty" name:"Properties"`
+}
+
+func (r *GenerateCreateMangedTableSqlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GenerateCreateMangedTableSqlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TableBaseInfo")
+	delete(f, "Columns")
+	delete(f, "Partitions")
+	delete(f, "Properties")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GenerateCreateMangedTableSqlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GenerateCreateMangedTableSqlResponseParams struct {
+	// The SQL statements for creating the managed internal table.
+	Execution *Execution `json:"Execution,omitempty" name:"Execution"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GenerateCreateMangedTableSqlResponse struct {
+	*tchttp.BaseResponse
+	Response *GenerateCreateMangedTableSqlResponseParams `json:"Response"`
+}
+
+func (r *GenerateCreateMangedTableSqlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GenerateCreateMangedTableSqlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type KVPair struct {
@@ -1092,6 +1430,57 @@ type KVPair struct {
 	// Configured value
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+// Predefined struct for user
+type ModifyGovernEventRuleRequestParams struct {
+
+}
+
+type ModifyGovernEventRuleRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *ModifyGovernEventRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGovernEventRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGovernEventRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGovernEventRuleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyGovernEventRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyGovernEventRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyGovernEventRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGovernEventRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1167,6 +1556,15 @@ type ModifySparkAppRequestParams struct {
 
 	// Archives: Dependency resources
 	AppArchives *string `json:"AppArchives,omitempty" name:"AppArchives"`
+
+	// The Spark image version.
+	SparkImage *string `json:"SparkImage,omitempty" name:"SparkImage"`
+
+	// The Spark image version name.
+	SparkImageVersion *string `json:"SparkImageVersion,omitempty" name:"SparkImageVersion"`
+
+	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
+	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
 }
 
 type ModifySparkAppRequest struct {
@@ -1243,6 +1641,15 @@ type ModifySparkAppRequest struct {
 
 	// Archives: Dependency resources
 	AppArchives *string `json:"AppArchives,omitempty" name:"AppArchives"`
+
+	// The Spark image version.
+	SparkImage *string `json:"SparkImage,omitempty" name:"SparkImage"`
+
+	// The Spark image version name.
+	SparkImageVersion *string `json:"SparkImageVersion,omitempty" name:"SparkImageVersion"`
+
+	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
+	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
 }
 
 func (r *ModifySparkAppRequest) ToJsonString() string {
@@ -1281,6 +1688,9 @@ func (r *ModifySparkAppRequest) FromJsonString(s string) error {
 	delete(f, "DataSource")
 	delete(f, "IsLocalArchives")
 	delete(f, "AppArchives")
+	delete(f, "SparkImage")
+	delete(f, "SparkImageVersion")
+	delete(f, "AppExecutorMaxNumbers")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySparkAppRequest has unknown keys!", "")
 	}
@@ -1307,6 +1717,14 @@ func (r *ModifySparkAppResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifySparkAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Property struct {
+	// The property key name.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// The property value.
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type SQLTask struct {
@@ -1414,6 +1832,10 @@ type SparkJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobArchives *string `json:"JobArchives,omitempty" name:"JobArchives"`
 
+	// The Spark image version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SparkImage *string `json:"SparkImage,omitempty" name:"SparkImage"`
+
 	// PySpark: Python dependency, which can be in .py, .zip, or .egg format. Multiple files should be separated by comma.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobPythonFiles *string `json:"JobPythonFiles,omitempty" name:"JobPythonFiles"`
@@ -1425,6 +1847,10 @@ type SparkJobInfo struct {
 	// Engine status. -100 (default value): unknown; -2–11: normal.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DataEngineStatus *int64 `json:"DataEngineStatus,omitempty" name:"DataEngineStatus"`
+
+	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `JobExecutorNums`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	JobExecutorMaxNumbers *int64 `json:"JobExecutorMaxNumbers,omitempty" name:"JobExecutorMaxNumbers"`
 }
 
 type StreamingStatistics struct {
@@ -1524,6 +1950,85 @@ func (r *SuspendResumeDataEngineResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SuspendResumeDataEngineResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TColumn struct {
+	// The field name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The field type.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The field description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The default field value.
+	Default *string `json:"Default,omitempty" name:"Default"`
+
+	// Whether the field is not null.
+	NotNull *bool `json:"NotNull,omitempty" name:"NotNull"`
+}
+
+type TPartition struct {
+	// The field name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The field type.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The field description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The partition type.
+	PartitionType *string `json:"PartitionType,omitempty" name:"PartitionType"`
+
+	// The partition format.
+	PartitionFormat *string `json:"PartitionFormat,omitempty" name:"PartitionFormat"`
+
+	// The separator count of the partition conversion policy.
+	PartitionDot *int64 `json:"PartitionDot,omitempty" name:"PartitionDot"`
+
+	// The partition conversion policy.
+	Transform *string `json:"Transform,omitempty" name:"Transform"`
+
+	// The policy parameters.
+	TransformArgs []*string `json:"TransformArgs,omitempty" name:"TransformArgs"`
+}
+
+type TableBaseInfo struct {
+	// The database name.
+	DatabaseName *string `json:"DatabaseName,omitempty" name:"DatabaseName"`
+
+	// The table name.
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// The data source name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DatasourceConnectionName *string `json:"DatasourceConnectionName,omitempty" name:"DatasourceConnectionName"`
+
+	// The table remarks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TableComment *string `json:"TableComment,omitempty" name:"TableComment"`
+
+	// The specific type: `table` or `view`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The data format type, such as `hive` and `iceberg`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TableFormat *string `json:"TableFormat,omitempty" name:"TableFormat"`
+
+	// The table creator name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserAlias *string `json:"UserAlias,omitempty" name:"UserAlias"`
+
+	// The table creator ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserSubUin *string `json:"UserSubUin,omitempty" name:"UserSubUin"`
+
+	// The data governance configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GovernPolicy *DataGovernPolicy `json:"GovernPolicy,omitempty" name:"GovernPolicy"`
 }
 
 type Task struct {

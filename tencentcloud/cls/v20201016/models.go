@@ -966,10 +966,15 @@ type CreateIndexRequestParams struct {
 	// Whether to take effect. Default value: true
 	Status *bool `json:"Status,omitempty" name:"Status"`
 
-	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	// Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`). Default value: `false`. Recommended value: `true`.
+	// * `false`: Full-text indexing does not include internal fields.
+	// * `true`: Full-text indexing includes internal fields.
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
 
-	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	// Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`). Default value: `0`. Recommended value: `1`.
+	// * `0`: Full-text indexing includes only the metadata fields with key-value indexing enabled.
+	// * `1`: Full-text indexing includes all metadata fields.
+	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
@@ -985,10 +990,15 @@ type CreateIndexRequest struct {
 	// Whether to take effect. Default value: true
 	Status *bool `json:"Status,omitempty" name:"Status"`
 
-	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	// Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`). Default value: `false`. Recommended value: `true`.
+	// * `false`: Full-text indexing does not include internal fields.
+	// * `true`: Full-text indexing includes internal fields.
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
 
-	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	// Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`). Default value: `0`. Recommended value: `1`.
+	// * `0`: Full-text indexing includes only the metadata fields with key-value indexing enabled.
+	// * `1`: Full-text indexing includes all metadata fields.
+	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
@@ -2731,12 +2741,17 @@ type DescribeIndexResponseParams struct {
 	// Index modification time. The default value is the index creation time.
 	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
 
-	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`)
+	// * `false`: Full-text indexing does not include internal fields.
+	// * `true`: Full-text indexing includes internal fields.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
 
-	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`)
+	// * `0`: Full-text indexing includes only the metadata fields with key-value indexing enabled.
+	// * `1`: Full-text indexing includes all metadata fields.
+	// * `2`: Full-text indexing does not include metadata fields.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3969,7 +3984,13 @@ type KeyRegexInfo struct {
 }
 
 type KeyValueInfo struct {
-	// When a key value or metafield index needs to be configured for a field, the metafield `Key` does not need to be prefixed with `__TAG__.` and is consistent with the one when logs are uploaded. `__TAG__.` will be prefixed automatically for display in the console.
+	// Name of the field for which you want to configure a key-value or metadata field index. The name can contain letters, digits, underscores, and symbols -./@ and cannot start with an underscore.
+	// 
+	// Note:
+	// For a metadata field, set its `Key` to be consistent with the one for log uploading, without prefixing it with `__TAG__.`. `__TAG__.` will be prefixed automatically for display in the console.
+	// 2. The total number of keys in key-value indexes (`KeyValue`) and metadata field indexes (`Tag`) cannot exceed 300.
+	// 3. The number of levels in `Key` cannot exceed 10. Example: a.b.c.d.e.f.g.h.j.k
+	// 4. JSON parent and child fields (such as “a” and “a.b”) cannot be contained at the same time.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
 	// Field index description information
@@ -4623,10 +4644,15 @@ type ModifyIndexRequestParams struct {
 	// Index rule
 	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
 
-	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	// Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`). Default value: `false`. Recommended value: `true`.
+	// * `false`: Full-text indexing does not include internal fields.
+	// * `true`: Full-text indexing includes internal fields.
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
 
-	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	// Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`). Default value: `0`. Recommended value: `1`.
+	// * `0`: Full-text indexing includes only metadata fields with key-value indexing enabled.
+	// * `1`: Full-text indexing includes all metadata fields.
+	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
@@ -4642,10 +4668,15 @@ type ModifyIndexRequest struct {
 	// Index rule
 	Rule *RuleInfo `json:"Rule,omitempty" name:"Rule"`
 
-	// Internal field marker of full-text index. Default value: `false`. Valid value: `false`: excluding internal fields; `true`: including internal fields
+	// Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`). Default value: `false`. Recommended value: `true`.
+	// * `false`: Full-text indexing does not include internal fields.
+	// * `true`: Full-text indexing includes internal fields.
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitempty" name:"IncludeInternalFields"`
 
-	// Metadata flag. Default value: `0`. Valid value: `0`: full-text index (including the metadata field with key-value index enabled); `1`: full-text index (including all metadata fields); `2`: full-text index (excluding metadata fields).
+	// Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`). Default value: `0`. Recommended value: `1`.
+	// * `0`: Full-text indexing includes only metadata fields with key-value indexing enabled.
+	// * `1`: Full-text indexing includes all metadata fields.
+	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitempty" name:"MetadataFlag"`
 }
 
@@ -5293,16 +5324,16 @@ func (r *RetryShipperTaskResponse) FromJsonString(s string) error {
 }
 
 type RuleInfo struct {
-	// Full-Text index configuration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Full-text index configuration. If the configuration is left empty, full-text indexing is not enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FullText *FullTextInfo `json:"FullText,omitempty" name:"FullText"`
 
-	// Key-Value index configuration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Key-value index configuration. If the configuration is left empty, key-value indexing is not enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	KeyValue *RuleKeyValueInfo `json:"KeyValue,omitempty" name:"KeyValue"`
 
-	// Metafield index configuration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Metadata field index configuration. If the configuration is left empty, metadata field indexing is not enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tag *RuleTagInfo `json:"Tag,omitempty" name:"Tag"`
 }
 
@@ -5310,7 +5341,7 @@ type RuleKeyValueInfo struct {
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitempty" name:"CaseSensitive"`
 
-	// Key-Value pair information of the index to be created. Up to 100 key-value pairs can be configured.
+	// Key-value pair information of the index to be created
 	KeyValues []*KeyValueInfo `json:"KeyValues,omitempty" name:"KeyValues"`
 }
 
@@ -5324,18 +5355,19 @@ type RuleTagInfo struct {
 
 // Predefined struct for user
 type SearchLogRequestParams struct {
-	// ID of the log topic to be searched
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
 	// Start time of the log to be searched, which is a Unix timestamp in milliseconds
 	From *int64 `json:"From,omitempty" name:"From"`
 
 	// End time of the log to be searched, which is a Unix timestamp in milliseconds
 	To *int64 `json:"To,omitempty" name:"To"`
 
-	// Statement for search and analysis. Maximum length: 12 KB
-	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search rule]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+	// Search and analysis statement. Maximum length: 12 KB
+	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search criteria]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+	// Queries all logs using * or an empty string
 	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// ID of the log topic to be searched
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
 	// The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
 	// Notes:
@@ -5372,18 +5404,19 @@ type SearchLogRequestParams struct {
 type SearchLogRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the log topic to be searched
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
 	// Start time of the log to be searched, which is a Unix timestamp in milliseconds
 	From *int64 `json:"From,omitempty" name:"From"`
 
 	// End time of the log to be searched, which is a Unix timestamp in milliseconds
 	To *int64 `json:"To,omitempty" name:"To"`
 
-	// Statement for search and analysis. Maximum length: 12 KB
-	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search rule]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+	// Search and analysis statement. Maximum length: 12 KB
+	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search criteria]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
+	// Queries all logs using * or an empty string
 	Query *string `json:"Query,omitempty" name:"Query"`
+
+	// ID of the log topic to be searched
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
 	// The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
 	// Notes:
@@ -5429,10 +5462,10 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "TopicId")
 	delete(f, "From")
 	delete(f, "To")
 	delete(f, "Query")
+	delete(f, "TopicId")
 	delete(f, "Limit")
 	delete(f, "Context")
 	delete(f, "Sort")
@@ -5799,8 +5832,8 @@ type ValueInfo struct {
 	// Whether the analysis feature is enabled for the field
 	SqlFlag *bool `json:"SqlFlag,omitempty" name:"SqlFlag"`
 
-	// Whether Chinese characters are contained
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether Chinese characters are contained. For `long` and `double` fields, set them to `false`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContainZH *bool `json:"ContainZH,omitempty" name:"ContainZH"`
 }
 
