@@ -100,6 +100,10 @@ type BatchRecordInfo struct {
 	// MX weight of the record
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MX *uint64 `json:"MX,omitempty" name:"MX"`
+
+	// The record weight.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
 }
 
 // Predefined struct for user

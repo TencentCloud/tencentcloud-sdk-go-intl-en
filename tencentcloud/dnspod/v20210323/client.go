@@ -373,6 +373,7 @@ func NewCreateRecordResponse() (response *CreateRecordResponse) {
 // This API is used to add a record.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINISLOCKED = "FailedOperation.DomainIsLocked"
 //  FAILEDOPERATION_DOMAINISSPAM = "FailedOperation.DomainIsSpam"
 //  FAILEDOPERATION_LOGINAREANOTALLOWED = "FailedOperation.LoginAreaNotAllowed"
@@ -431,6 +432,7 @@ func (c *Client) CreateRecord(request *CreateRecordRequest) (response *CreateRec
 // This API is used to add a record.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINISLOCKED = "FailedOperation.DomainIsLocked"
 //  FAILEDOPERATION_DOMAINISSPAM = "FailedOperation.DomainIsSpam"
 //  FAILEDOPERATION_LOGINAREANOTALLOWED = "FailedOperation.LoginAreaNotAllowed"
@@ -816,6 +818,7 @@ func NewDeleteDomainBatchResponse() (response *DeleteDomainBatchResponse) {
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
+//  INVALIDPARAMETER_DOMAINSEMPTY = "InvalidParameter.DomainsEmpty"
 //  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
 //  OPERATIONDENIED_DOMAINOWNERALLOWEDONLY = "OperationDenied.DomainOwnerAllowedOnly"
 //  OPERATIONDENIED_NOPERMISSIONTOOPERATEDOMAIN = "OperationDenied.NoPermissionToOperateDomain"
@@ -832,6 +835,7 @@ func (c *Client) DeleteDomainBatch(request *DeleteDomainBatchRequest) (response 
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
+//  INVALIDPARAMETER_DOMAINSEMPTY = "InvalidParameter.DomainsEmpty"
 //  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
 //  OPERATIONDENIED_DOMAINOWNERALLOWEDONLY = "OperationDenied.DomainOwnerAllowedOnly"
 //  OPERATIONDENIED_NOPERMISSIONTOOPERATEDOMAIN = "OperationDenied.NoPermissionToOperateDomain"
@@ -1097,6 +1101,7 @@ func NewDescribeDomainResponse() (response *DescribeDomainResponse) {
 // This API is used to get the information of a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
@@ -1112,6 +1117,7 @@ func (c *Client) DescribeDomain(request *DescribeDomainRequest) (response *Descr
 // This API is used to get the information of a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
@@ -1571,6 +1577,7 @@ func NewDescribeRecordResponse() (response *DescribeRecordResponse) {
 // This API is used to get the information of a record.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOGINAREANOTALLOWED = "FailedOperation.LoginAreaNotAllowed"
 //  FAILEDOPERATION_LOGINFAILED = "FailedOperation.LoginFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
@@ -1601,6 +1608,7 @@ func (c *Client) DescribeRecord(request *DescribeRecordRequest) (response *Descr
 // This API is used to get the information of a record.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOGINAREANOTALLOWED = "FailedOperation.LoginAreaNotAllowed"
 //  FAILEDOPERATION_LOGINFAILED = "FailedOperation.LoginFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
@@ -2311,6 +2319,7 @@ func NewModifyDomainStatusResponse() (response *ModifyDomainStatusResponse) {
 // This API is used to modify the status of a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOMAINISKEYDOMAIN = "FailedOperation.DomainIsKeyDomain"
 //  FAILEDOPERATION_DOMAINISLOCKED = "FailedOperation.DomainIsLocked"
 //  FAILEDOPERATION_DOMAINISSPAM = "FailedOperation.DomainIsSpam"
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"
@@ -2328,6 +2337,7 @@ func (c *Client) ModifyDomainStatus(request *ModifyDomainStatusRequest) (respons
 // This API is used to modify the status of a domain.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOMAINISKEYDOMAIN = "FailedOperation.DomainIsKeyDomain"
 //  FAILEDOPERATION_DOMAINISLOCKED = "FailedOperation.DomainIsLocked"
 //  FAILEDOPERATION_DOMAINISSPAM = "FailedOperation.DomainIsSpam"
 //  INVALIDPARAMETER_DOMAINIDINVALID = "InvalidParameter.DomainIdInvalid"

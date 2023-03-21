@@ -348,13 +348,17 @@ type AlarmPolicy struct {
 }
 
 type AlarmPolicyCondition struct {
-	// Metric trigger condition operator. Valid values: 0 (OR), 1 (AND)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Judgment condition of an alarm trigger condition (`0`: Any; `1`: All; `2`: Composite). When the value is set to `2` (i.e., composite trigger conditions), this parameter should be used together with `ComplexExpression`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsUnionRule *int64 `json:"IsUnionRule,omitempty" name:"IsUnionRule"`
 
 	// Alarm trigger condition list
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Rules []*AlarmPolicyRule `json:"Rules,omitempty" name:"Rules"`
+
+	// The judgment expression of composite alarm trigger conditions, which is valid when the value of `IsUnionRule` is `2`. This parameter is used to determine that an alarm condition is met only when the expression values are `True` for multiple trigger conditions.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComplexExpression *string `json:"ComplexExpression,omitempty" name:"ComplexExpression"`
 }
 
 type AlarmPolicyEventCondition struct {
@@ -1646,7 +1650,7 @@ type CreatePolicyGroupCondition struct {
 	// Number of consecutive periods after which an alarm will be triggered.
 	ContinuePeriod *int64 `json:"ContinuePeriod,omitempty" name:"ContinuePeriod"`
 
-	// If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
+	// If a metric is created based on a template, the `RuleId` of the metric in the template must be passed in.
 	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
 }
 
@@ -1660,7 +1664,7 @@ type CreatePolicyGroupEventCondition struct {
 	// Alarm sending period in seconds. The value <0 indicates that no alarm will be triggered. The value 0 indicates that an alarm is triggered only once. The value >0 indicates that an alarm is triggered at the interval of triggerTime.
 	AlarmNotifyPeriod *int64 `json:"AlarmNotifyPeriod,omitempty" name:"AlarmNotifyPeriod"`
 
-	// If a metric is created based on a template, the RuleId of the metric in the template must be passed in.
+	// If a metric is created based on a template, the `RuleId` of the metric in the template must be passed in.
 	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
 }
 
@@ -1696,7 +1700,7 @@ type CreatePolicyGroupRequestParams struct {
 	// Event alarm rules in the policy group.
 	EventConditions []*CreatePolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions"`
 
-	// Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
+	// Whether it is a backend call. Rules pulled from the policy template will be used to fill in the `Conditions` and `EventConditions` fields only when the value of this parameter is `1`.
 	BackEndCall *int64 `json:"BackEndCall,omitempty" name:"BackEndCall"`
 
 	// The 'AND' and 'OR' rules for alarm metrics. The value 0 indicates 'OR', which means that an alarm will be triggered when any rule is met. The value 1 indicates 'AND', which means that an alarm will be triggered only when all rules are met.
@@ -1736,7 +1740,7 @@ type CreatePolicyGroupRequest struct {
 	// Event alarm rules in the policy group.
 	EventConditions []*CreatePolicyGroupEventCondition `json:"EventConditions,omitempty" name:"EventConditions"`
 
-	// Whether it is a backend call. If the value is 1, rules from the policy template will be used to fill in the `Conditions` and `EventConditions` fields.
+	// Whether it is a backend call. Rules pulled from the policy template will be used to fill in the `Conditions` and `EventConditions` fields only when the value of this parameter is `1`.
 	BackEndCall *int64 `json:"BackEndCall,omitempty" name:"BackEndCall"`
 
 	// The 'AND' and 'OR' rules for alarm metrics. The value 0 indicates 'OR', which means that an alarm will be triggered when any rule is met. The value 1 indicates 'AND', which means that an alarm will be triggered only when all rules are met.
@@ -6438,6 +6442,10 @@ type DescribePolicyConditionListCondition struct {
 	// List of regions that support this policy type.
 	// Note: This field may return null, indicating that no valid value was found.
 	SupportRegions []*string `json:"SupportRegions,omitempty" name:"SupportRegions"`
+
+	// Deprecated information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeprecatingInfo *DescribePolicyConditionListResponseDeprecatingInfo `json:"DeprecatingInfo,omitempty" name:"DeprecatingInfo"`
 }
 
 type DescribePolicyConditionListConfigManual struct {
@@ -6653,6 +6661,20 @@ func (r *DescribePolicyConditionListResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribePolicyConditionListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribePolicyConditionListResponseDeprecatingInfo struct {
+	// Whether to hide
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Hidden *bool `json:"Hidden,omitempty" name:"Hidden"`
+
+	// Names of new views
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NewViewNames []*string `json:"NewViewNames,omitempty" name:"NewViewNames"`
+
+	// Description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type DescribePolicyGroupInfoCallback struct {
@@ -7306,13 +7328,13 @@ type DescribeProductEventListRequestParams struct {
 	// API component name. It is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Filter by product type. For example, 'cvm' indicates Cloud Virtual Machine.
+	// Filter by product type. For example, "cvm" indicates Cloud Virtual Machine.
 	ProductName []*string `json:"ProductName,omitempty" name:"ProductName"`
 
-	// Filter by product name. For example, "guest_reboot" indicates server restart.
+	// Filter by event name. For example, "guest_reboot" indicates instance restart.
 	EventName []*string `json:"EventName,omitempty" name:"EventName"`
 
-	// Affected object, such as "ins-19708ino"
+	// Affected object, such as "ins-19708ino".
 	InstanceId []*string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Filter by dimension, such as by public IP: 10.0.0.1.
@@ -7355,13 +7377,13 @@ type DescribeProductEventListRequest struct {
 	// API component name. It is fixed to monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Filter by product type. For example, 'cvm' indicates Cloud Virtual Machine.
+	// Filter by product type. For example, "cvm" indicates Cloud Virtual Machine.
 	ProductName []*string `json:"ProductName,omitempty" name:"ProductName"`
 
-	// Filter by product name. For example, "guest_reboot" indicates server restart.
+	// Filter by event name. For example, "guest_reboot" indicates instance restart.
 	EventName []*string `json:"EventName,omitempty" name:"EventName"`
 
-	// Affected object, such as "ins-19708ino"
+	// Affected object, such as "ins-19708ino".
 	InstanceId []*string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Filter by dimension, such as by public IP: 10.0.0.1.
@@ -7819,6 +7841,21 @@ func (r *DescribePrometheusConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePrometheusConfigResponseParams struct {
+	// Global configuration
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// ServiceMonitor configuration
+	ServiceMonitors []*PrometheusConfigItem `json:"ServiceMonitors,omitempty" name:"ServiceMonitors"`
+
+	// PodMonitor configuration
+	PodMonitors []*PrometheusConfigItem `json:"PodMonitors,omitempty" name:"PodMonitors"`
+
+	// Raw jobs
+	RawJobs []*PrometheusConfigItem `json:"RawJobs,omitempty" name:"RawJobs"`
+
+
+	Probes []*PrometheusConfigItem `json:"Probes,omitempty" name:"Probes"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
