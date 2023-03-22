@@ -821,6 +821,14 @@ type MLIDPassportOCRResponseParams struct {
 	// The second row of the MRZ at the bottom
 	CodeCrc *string `json:"CodeCrc,omitempty" name:"CodeCrc"`
 
+	// The surname.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Surname *string `json:"Surname,omitempty" name:"Surname"`
+
+	// The given name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GivenName *string `json:"GivenName,omitempty" name:"GivenName"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
