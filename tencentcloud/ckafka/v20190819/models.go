@@ -5176,6 +5176,10 @@ type TopicAttributesResponse struct {
 	// Traffic throttling policy in topic dimension.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	QuotaConfig *InstanceQuotaConfigResp `json:"QuotaConfig,omitempty" name:"QuotaConfig"`
+
+	// Number of replicas
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicaNum *int64 `json:"ReplicaNum,omitempty" name:"ReplicaNum"`
 }
 
 type TopicDetail struct {
@@ -5225,6 +5229,10 @@ type TopicDetail struct {
 	// `0`: normal, `1`: deleted, `2`: deleting
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Tag list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
 type TopicDetailResponse struct {

@@ -7853,7 +7853,7 @@ type DescribePrometheusConfigResponseParams struct {
 	// Raw jobs
 	RawJobs []*PrometheusConfigItem `json:"RawJobs,omitempty" name:"RawJobs"`
 
-
+	// Probes
 	Probes []*PrometheusConfigItem `json:"Probes,omitempty" name:"Probes"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -9284,7 +9284,7 @@ type DescribeStatisticDataRequestParams struct {
 	// Module, whose value is fixed at `monitor`
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Namespace. Valid values: QCE/TKE
+	// Namespace. Valid values: `QCE`, `TKE2`.
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Metric name list
@@ -9317,7 +9317,7 @@ type DescribeStatisticDataRequest struct {
 	// Module, whose value is fixed at `monitor`
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Namespace. Valid values: QCE/TKE
+	// Namespace. Valid values: `QCE`, `TKE2`.
 	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
 
 	// Metric name list
@@ -10175,7 +10175,11 @@ type IntegrationConfiguration struct {
 }
 
 type Label struct {
+	// Label name
+	Name *string `json:"Name,omitempty" name:"Name"`
 
+	// Label value
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type LogAlarmReq struct {
@@ -11812,7 +11816,14 @@ type PrometheusAgent struct {
 }
 
 type PrometheusAgentInfo struct {
+	// Cluster type
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
 
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Remarks
+	Describe *string `json:"Describe,omitempty" name:"Describe"`
 }
 
 type PrometheusAgentOverview struct {
@@ -11846,6 +11857,10 @@ type PrometheusAgentOverview struct {
 	// Recorded information of failed operations, such as association.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FailedReason *string `json:"FailedReason,omitempty" name:"FailedReason"`
+
+	// Agent name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type PrometheusAlertManagerConfig struct {

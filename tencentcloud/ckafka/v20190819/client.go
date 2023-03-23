@@ -177,6 +177,7 @@ func NewBatchModifyTopicAttributesResponse() (response *BatchModifyTopicAttribut
 // This API is used to batch set topic attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
@@ -192,6 +193,7 @@ func (c *Client) BatchModifyTopicAttributes(request *BatchModifyTopicAttributesR
 // This API is used to batch set topic attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"

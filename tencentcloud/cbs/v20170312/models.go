@@ -326,10 +326,12 @@ type AutoSnapshotPolicy struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedRetentionPolicy *AdvancedRetentionPolicy `json:"AdvancedRetentionPolicy,omitempty" name:"AdvancedRetentionPolicy"`
 
-
+	// Source account ID of the copied snapshot policy
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CopyFromAccountUin *string `json:"CopyFromAccountUin,omitempty" name:"CopyFromAccountUin"`
 
-
+	// Tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 
@@ -1922,6 +1924,51 @@ func (r *DetachDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DetailPrice struct {
+	// Name of the billable item.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PriceTitle *string `json:"PriceTitle,omitempty" name:"PriceTitle"`
+
+	// Name of the billable item displayed in the console.
+	PriceName *string `json:"PriceName,omitempty" name:"PriceName"`
+
+	// Original price of a monthly subscribed cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discounted price of a monthly subscribed cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
+
+	// Original unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+
+	// Discount unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Billing unit for pay-as-you-go cloud disks. Valid value: `HOUR` (billed hourly).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
+
+	// Original highly-precise price of a monthly subscribed cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitempty" name:"OriginalPriceHigh"`
+
+	// Discounted highly-precise price of a monthly subscribed cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitempty" name:"DiscountPriceHigh"`
+
+	// Original highly-precise unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
+
+	// Discounted highly-precise unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
+}
+
 type Disk struct {
 	// Whether the cloud disk terminates along with the instance mounted to it. <br><li>true: Cloud disk will also be terminated when instance terminates, so only hourly postpaid cloud disk are supported.<br><li>false: Cloud disk does not terminate when instance terminates.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -2053,10 +2100,12 @@ type Disk struct {
 	// Type of the instance mounted to the cloud disk. Valid values: <br><li>CVM<br><li>EKS
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-
+	// ID of the last instance to which the cloud disk is attached
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastAttachInsId *string `json:"LastAttachInsId,omitempty" name:"LastAttachInsId"`
 
-
+	// Error message for the last operation of the cloud disk
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorPrompt *string `json:"ErrorPrompt,omitempty" name:"ErrorPrompt"`
 }
 
@@ -2137,6 +2186,10 @@ type DiskConfig struct {
 
 	// The maximum configurable cloud disk size (in GB).
 	MaxDiskSize *uint64 `json:"MaxDiskSize,omitempty" name:"MaxDiskSize"`
+
+	// Price of a monthly subscribed or pay-as-you-go cloud disk.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Price *Price `json:"Price,omitempty" name:"Price"`
 }
 
 type DiskOperationLog struct {
@@ -3063,6 +3116,10 @@ type Placement struct {
 	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId field in the returned values of [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1). If this is left empty, default project is used.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
+	// Project name of the instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+
 	// Dedicated cluster name. When it is an input parameter, it is ignored.  When it is an output parameter, it is the name of the dedicated cluster the cloud disk belongs to, and it can be left blank.
 	// Note: This field may return null, indicating that no valid value was found.
 	CdcName *string `json:"CdcName,omitempty" name:"CdcName"`
@@ -3090,14 +3147,30 @@ type Policy struct {
 }
 
 type PrepayPrice struct {
-	// Original payment of a monthly-subscribed cloud disk or a snapshot, in USD.
-	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
-
 	// Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD.
 	DiscountPrice *float64 `json:"DiscountPrice,omitempty" name:"DiscountPrice"`
 
+	// Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
+
+	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
+
 	// Original payment of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
 	OriginalPriceHigh *string `json:"OriginalPriceHigh,omitempty" name:"OriginalPriceHigh"`
+
+	// Original payment of a monthly-subscribed cloud disk or a snapshot, in USD.
+	OriginalPrice *float64 `json:"OriginalPrice,omitempty" name:"OriginalPrice"`
+
+	// Discount unit price of a pay-as-you-go cloud disk, in USD.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+
+	// Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
 
 	// Discounted price of a monthly-subscribed cloud disk or a snapshot, in USD, with six decimal places.
 	DiscountPriceHigh *string `json:"DiscountPriceHigh,omitempty" name:"DiscountPriceHigh"`
@@ -3106,21 +3179,9 @@ type PrepayPrice struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	UnitPrice *float64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
 
-	// Billing unit for pay-as-you-go cloud disks. Valid value: <br><li>HOUR: billed hourly.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
-
-	// Discount unit price of a pay-as-you-go cloud disk, in USD.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
-
-	// Original unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPriceHigh *string `json:"UnitPriceHigh,omitempty" name:"UnitPriceHigh"`
-
-	// Discounted unit price of a pay-as-you-go cloud disk, in USD, with six decimal places.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnitPriceDiscountHigh *string `json:"UnitPriceDiscountHigh,omitempty" name:"UnitPriceDiscountHigh"`
+	// Detailed billing items
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DetailPrices []*DetailPrice `json:"DetailPrices,omitempty" name:"DetailPrices"`
 }
 
 type Price struct {
