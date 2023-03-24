@@ -748,6 +748,12 @@ type CloneItem struct {
 
 	// Task status. Valid values: `initial`, `running`, `wait_complete`, `success`, `failed`.
 	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
+
+	// Clone instance region ID
+	NewRegionId *int64 `json:"NewRegionId,omitempty" name:"NewRegionId"`
+
+	// Source instance region ID
+	SrcRegionId *int64 `json:"SrcRegionId,omitempty" name:"SrcRegionId"`
 }
 
 // Predefined struct for user
