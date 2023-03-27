@@ -4504,7 +4504,7 @@ func NewDescribeEdgeLogSwitchesResponse() (response *DescribeEdgeLogSwitchesResp
 }
 
 // DescribeEdgeLogSwitches
-// This API is used to query the status of events, audits and logs.
+// This API is used to query the status of event storage, cluster auditing and logging.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4519,7 +4519,7 @@ func (c *Client) DescribeEdgeLogSwitches(request *DescribeEdgeLogSwitchesRequest
 }
 
 // DescribeEdgeLogSwitches
-// This API is used to query the status of events, audits and logs.
+// This API is used to query the status of event storage, cluster auditing and logging.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5030,6 +5030,7 @@ func NewDescribeRouteTableConflictsResponse() (response *DescribeRouteTableConfl
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CIDRMASKSIZEOUTOFRANGE = "InternalError.CidrMaskSizeOutOfRange"
 //  INTERNALERROR_INVALIDPRIVATENETWORKCIDR = "InternalError.InvalidPrivateNetworkCidr"
@@ -5046,6 +5047,7 @@ func (c *Client) DescribeRouteTableConflicts(request *DescribeRouteTableConflict
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CIDRMASKSIZEOUTOFRANGE = "InternalError.CidrMaskSizeOutOfRange"
 //  INTERNALERROR_INVALIDPRIVATENETWORKCIDR = "InternalError.InvalidPrivateNetworkCidr"

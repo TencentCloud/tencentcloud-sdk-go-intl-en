@@ -384,20 +384,20 @@ func (r *BatchDeleteGroupMemberResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BatchDeleteRecordRequestParams struct {
-	// The room IDs.	
+	// The room IDs.
 	RoomIds []*int64 `json:"RoomIds,omitempty" name:"RoomIds"`
 
-	// The SDKAppID assigned by LCIC.	
+	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
 type BatchDeleteRecordRequest struct {
 	*tchttp.BaseRequest
 	
-	// The room IDs.	
+	// The room IDs.
 	RoomIds []*int64 `json:"RoomIds,omitempty" name:"RoomIds"`
 
-	// The SDKAppID assigned by LCIC.	
+	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
@@ -423,8 +423,7 @@ func (r *BatchDeleteRecordRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BatchDeleteRecordResponseParams struct {
-	// The IDs of the rooms whose recordings are deleted.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The IDs of the rooms whose recordings are deleted. Note: This field may return null, indicating that no valid values can be obtained.
 	RoomIds []*int64 `json:"RoomIds,omitempty" name:"RoomIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -481,8 +480,7 @@ func (r *BatchRegisterRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BatchRegisterResponseParams struct {
-	// The information of the successfully registered users.	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The information of the successfully registered users. Note: This field may return null, indicating that no valid values can be obtained.
 	Users []*BatchUserInfo `json:"Users,omitempty" name:"Users"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -509,34 +507,24 @@ type BatchUserInfo struct {
 	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The user ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID. Note: This field may return null, indicating that no valid values can be obtained
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The user’s ID in your system. If the same request parameter is not specified, the value of this parameter will be the same as `UserId`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user’s ID in your system. If the same request parameter is not specified, the value of this parameter will be the same as UserId. Note: This field may return null, indicating that no valid values can be obtained.
 	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
 }
 
 type BatchUserRequest struct {
-	// The SDKAppID assigned by LCIC.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The SDKAppID assigned by LCIC.  Note: This field may return null, indicating that no valid values can be obtained.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The username.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The username.  Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The user’s ID in your system, which must be unique across the same application.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user’s ID in your system, which must be unique across the same application.  Note: This field may return null, indicating that no valid values can be obtained.
 	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
 
-	// The user’s profile photo.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user’s profile photo.  Note: This field may return null, indicating that no valid values can be obtained.
 	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
 }
 
@@ -884,25 +872,25 @@ type CreateRoomRequestParams struct {
 	// LCIC SdkAppId
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD
+	// 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
-	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]	
+	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
-	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only. 
+	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs. The user specified will have teacher permissions in the room created.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// Whether to automatically turn the mic on when the user enters a room. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
+	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
 	// The user IDs of the teaching assistants. User IDs are returned by the user registration APIs. The users specified will have teaching assistant permissions in the room created.
@@ -930,25 +918,25 @@ type CreateRoomRequest struct {
 	// LCIC SdkAppId
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD
+	// 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
-	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]	
+	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
-	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only. 
+	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs. The user specified will have teacher permissions in the room created.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// Whether to automatically turn the mic on when the user enters a room. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
+	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
 	// The user IDs of the teaching assistants. User IDs are returned by the user registration APIs. The users specified will have teaching assistant permissions in the room created.
@@ -1254,7 +1242,7 @@ func (r *DeleteGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteRecordRequestParams struct {
-	// The room ID.	
+	// The room ID.
 	RoomId *int64 `json:"RoomId,omitempty" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
@@ -1264,7 +1252,7 @@ type DeleteRecordRequestParams struct {
 type DeleteRecordRequest struct {
 	*tchttp.BaseRequest
 	
-	// The room ID.	
+	// The room ID.
 	RoomId *int64 `json:"RoomId,omitempty" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
@@ -1375,7 +1363,7 @@ type DescribeCurrentMemberListRequestParams struct {
 	// The page to return records from. Pagination starts from 1.
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+	// The maximum number of records per page. The value of this parameter cannot exceed 1000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1388,7 +1376,7 @@ type DescribeCurrentMemberListRequest struct {
 	// The page to return records from. Pagination starts from 1.
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+	// The maximum number of records per page. The value of this parameter cannot exceed 1000.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1502,7 +1490,7 @@ type DescribeDocumentResponseParams struct {
 	// The transcoding progress. Value range: 0-100.
 	TranscodeProgress *uint64 `json:"TranscodeProgress,omitempty" name:"TranscodeProgress"`
 
-	// The transcoding status. `0`: The file is not transcoded. `1`: The file is being transcoded. `2`: Transcoding failed. `3`: Transcoding is successful.
+	// The transcoding status. 0: The file is not transcoded. 1: The file is being transcoded. 2: Transcoding failed. 3: Transcoding is successful.
 	TranscodeState *uint64 `json:"TranscodeState,omitempty" name:"TranscodeState"`
 
 	// The error message for failed transcoding.
@@ -1548,15 +1536,10 @@ type DescribeDocumentsByRoomRequestParams struct {
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
 	Page *int64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records to return per page. The maximum value can be `1000`. The default value is `100`.
+	// The maximum number of records to return per page. The maximum value can be 1000. The default value is 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The document access type.
-	// [0]: The private documents of the owner.
-	// [1]: The public documents of the owner.
-	// [0,1]: The private and public documents of the owner.
-	// [2]: The private and public documents of all users (including the owner).
-	// Default value: [2].
+	// The document access type. [0]: The private documents of the owner. [1]: The public documents of the owner. [0,1]: The private and public documents of the owner. [2]: The private and public documents of all users (including the owner). Default value: [2].
 	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
 
 	// The user ID of the document owner. If you do not specify this, the information of all documents under the application will be returned.
@@ -1575,15 +1558,10 @@ type DescribeDocumentsByRoomRequest struct {
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
 	Page *int64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records to return per page. The maximum value can be `1000`. The default value is `100`.
+	// The maximum number of records to return per page. The maximum value can be 1000. The default value is 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The document access type.
-	// [0]: The private documents of the owner.
-	// [1]: The public documents of the owner.
-	// [0,1]: The private and public documents of the owner.
-	// [2]: The private and public documents of all users (including the owner).
-	// Default value: [2].
+	// The document access type. [0]: The private documents of the owner. [1]: The public documents of the owner. [0,1]: The private and public documents of the owner. [2]: The private and public documents of all users (including the owner). Default value: [2].
 	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
 
 	// The user ID of the document owner. If you do not specify this, the information of all documents under the application will be returned.
@@ -1616,8 +1594,7 @@ func (r *DescribeDocumentsByRoomRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDocumentsByRoomResponseParams struct {
-	// The information of the documents.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The information of the documents. Note: This field may return null, indicating that no valid values can be obtained.
 	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
 
 	// The total number of records that meet the conditions.
@@ -1651,13 +1628,13 @@ type DescribeGroupListRequestParams struct {
 	// The page to return records from. Pagination starts from 1.
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records per page. The value of this parameter cannot exceed `1000` and is `20` by default.
+	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The user ID of the teacher, which is used as the filter. This parameter and `MemberId` are mutually exclusive. If both are specified, only this parameter will take effect.
+	// The user ID of the teacher, which is used as the filter. This parameter and MemberId are mutually exclusive. If both are specified, only this parameter will take effect.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// The user ID of a member, which is used as the filter. This parameter and `TeacherId` are mutually exclusive.
+	// The user ID of a member, which is used as the filter. This parameter and TeacherId are mutually exclusive.
 	MemberId *string `json:"MemberId,omitempty" name:"MemberId"`
 }
 
@@ -1670,13 +1647,13 @@ type DescribeGroupListRequest struct {
 	// The page to return records from. Pagination starts from 1.
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records per page. The value of this parameter cannot exceed `1000` and is `20` by default.
+	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The user ID of the teacher, which is used as the filter. This parameter and `MemberId` are mutually exclusive. If both are specified, only this parameter will take effect.
+	// The user ID of the teacher, which is used as the filter. This parameter and MemberId are mutually exclusive. If both are specified, only this parameter will take effect.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// The user ID of a member, which is used as the filter. This parameter and `TeacherId` are mutually exclusive.
+	// The user ID of a member, which is used as the filter. This parameter and TeacherId are mutually exclusive.
 	MemberId *string `json:"MemberId,omitempty" name:"MemberId"`
 }
 
@@ -1708,8 +1685,7 @@ type DescribeGroupListResponseParams struct {
 	// The total number of groups that meet the conditions.
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-	// The information of the groups.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The information of the groups. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1740,10 +1716,10 @@ type DescribeGroupMemberListRequestParams struct {
 	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The page to return records from. The default value is `1`.
+	// The page to return records from. The default value is 1.
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records per page. The value of this parameter cannot exceed `1000` and is `20` by default.
+	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1756,10 +1732,10 @@ type DescribeGroupMemberListRequest struct {
 	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The page to return records from. The default value is `1`.
+	// The page to return records from. The default value is 1.
 	Page *uint64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records per page. The value of this parameter cannot exceed `1000` and is `20` by default.
+	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1790,8 +1766,7 @@ type DescribeGroupMemberListResponseParams struct {
 	// The total number of records that meet the conditions.
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-	// The user IDs of the members.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user IDs of the members. Note: This field may return null, indicating that no valid values can be obtained.
 	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1861,17 +1836,13 @@ type DescribeGroupResponseParams struct {
 	// The group name.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// The user ID of the group’s teacher.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID of the group’s teacher. Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// The group type.
-	// `0`: Ordinary group.
-	// `1`: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
+	// The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
 	GroupType *uint64 `json:"GroupType,omitempty" name:"GroupType"`
 
-	// The IDs of the sub-groups.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The IDs of the sub-groups. Note: This field may return null, indicating that no valid values can be obtained.
 	SubGroupIds []*string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1943,37 +1914,33 @@ type DescribeRoomResponseParams struct {
 	// LCIC SdkAppId	
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// Resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD	
+	// Resolution. Valid values: 1: SD; 2: HD; 3: FHD
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
-	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]	
+	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
-	// Whether to automatically turn the mic on when the user enters a room. Valid values: `0`: No (default value); `1`: Yes.	
+	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.	
+	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only.
+	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
-	// Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.	
+	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
-	// Assistant ID list	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Assistant ID list Note: This field may return null, indicating that no valid values can be obtained.
 	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
 
-	// Recording URL. This parameter exists only after a room is ended.	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Recording URL. This parameter exists only after a room is ended. Note: This field may return null, indicating that no valid values can be obtained.
 	RecordUrl *string `json:"RecordUrl,omitempty" name:"RecordUrl"`
 
-	// The class status. `0`: The class has not started. `1`: The class has started. `2`: The class ended. `3`: The class expired.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The class status. 0: The class has not started. 1: The class has started. 2: The class ended. 3: The class expired. Note: This field may return null, indicating that no valid values can be obtained.
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
 
-	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
@@ -2057,18 +2024,16 @@ type DescribeRoomStatisticsResponseParams struct {
 	// Member record list
 	MemberRecords []*MemberRecord `json:"MemberRecords,omitempty" name:"MemberRecords"`
 
-	// The actual start time of the room, in Unix timestamp, accurate to seconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The actual start time of the room, in Unix timestamp, accurate to seconds. Note: This field may return null, indicating that no valid values can be obtained.
 	RealStartTime *uint64 `json:"RealStartTime,omitempty" name:"RealStartTime"`
 
-	// The actual end time of the room, in Unix timestamp, accurate to seconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The actual end time of the room, in Unix timestamp, accurate to seconds. Note: This field may return null, indicating that no valid values can be obtained.
 	RealEndTime *uint64 `json:"RealEndTime,omitempty" name:"RealEndTime"`
 
-	// The total number of room messages.
+	// The total message count of the room.
 	MessageCount *uint64 `json:"MessageCount,omitempty" name:"MessageCount"`
 
-	// The total number of mics in the room.
+	// The total number of mic-on students in the room.
 	MicCount *uint64 `json:"MicCount,omitempty" name:"MicCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2096,10 +2061,10 @@ type DescribeSdkAppIdUsersRequestParams struct {
 	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The page to return records from. The default value is `1`.
+	// The page to return records from. The default value is 1.
 	Page *int64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records to return per page. The default value is `20`.
+	// The maximum number of records to return per page. The default value is 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -2109,10 +2074,10 @@ type DescribeSdkAppIdUsersRequest struct {
 	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The page to return records from. The default value is `1`.
+	// The page to return records from. The default value is 1.
 	Page *int64 `json:"Page,omitempty" name:"Page"`
 
-	// The maximum number of records to return per page. The default value is `20`.
+	// The maximum number of records to return per page. The default value is 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -2142,8 +2107,7 @@ type DescribeSdkAppIdUsersResponseParams struct {
 	// The total number of users.
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-	// The information of the users.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The information of the users. Note: This field may return null, indicating that no valid values can be obtained.
 	Users []*UserInfo `json:"Users,omitempty" name:"Users"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2233,73 +2197,137 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
 }
 
 type DocumentInfo struct {
-	// The document ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The document ID. Note: This field may return null, indicating that no valid values can be obtained.
 	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
 
-	// The document’s original URL.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The document’s original URL. Note: This field may return null, indicating that no valid values can be obtained.
 	DocumentUrl *string `json:"DocumentUrl,omitempty" name:"DocumentUrl"`
 
-	// The document title.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The document title. Note: This field may return null, indicating that no valid values can be obtained.
 	DocumentName *string `json:"DocumentName,omitempty" name:"DocumentName"`
 
-	// The user ID of the document’s owner.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID of the document’s owner. Note: This field may return null, indicating that no valid values can be obtained.
 	Owner *string `json:"Owner,omitempty" name:"Owner"`
 
-	// The application ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The application ID. Note: This field may return null, indicating that no valid values can be obtained.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The document access type. `0`: Private; `1`: Public.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The document access type. 0: Private; 1: Public. Note: This field may return null, indicating that no valid values can be obtained.
 	Permission *uint64 `json:"Permission,omitempty" name:"Permission"`
 
-	// The transcoding result. If the file is not transcoded, this parameter will be empty. If it is successfully transcoded, this parameter will be the URL of the transcoded file. If transcoding fails, this parameter will indicate the error code.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The transcoding result. If the file is not transcoded, this parameter will be empty. If it is successfully transcoded, this parameter will be the URL of the transcoded file. If transcoding fails, this parameter will indicate the error code. Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeResult *string `json:"TranscodeResult,omitempty" name:"TranscodeResult"`
 
-	// The transcoding type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The transcoding type. Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeType *uint64 `json:"TranscodeType,omitempty" name:"TranscodeType"`
 
-	// The transcoding progress. Value range: 0-100.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The transcoding progress. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeProgress *uint64 `json:"TranscodeProgress,omitempty" name:"TranscodeProgress"`
 
-	// The transcoding status. `0`: The file is not transcoded. `1`: The file is being transcoded. `2`: Transcoding failed. `3`: Transcoding is successful.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The transcoding status. 0: The file is not transcoded. 1: The file is being transcoded. 2: Transcoding failed. 3: Transcoding is successful. Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeState *uint64 `json:"TranscodeState,omitempty" name:"TranscodeState"`
 
-	// The error message for failed transcoding.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The error message for failed transcoding. Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeInfo *string `json:"TranscodeInfo,omitempty" name:"TranscodeInfo"`
 
-	// The document type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The document type. Note: This field may return null, indicating that no valid values can be obtained.
 	DocumentType *string `json:"DocumentType,omitempty" name:"DocumentType"`
 
-	// The document size (bytes).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The document size (bytes). Note: This field may return null, indicating that no valid values can be obtained.
 	DocumentSize *uint64 `json:"DocumentSize,omitempty" name:"DocumentSize"`
 
-	// The time (Unix timestamp) when the document was last updated.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The time (Unix timestamp) when the document was last updated. Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
 // Predefined struct for user
+type GetRoomMessageRequestParams struct {
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The starting message sequence. Messages before this sequence will be returned (not including the message whose sequence is `seq`).
+	Seq *int64 `json:"Seq,omitempty" name:"Seq"`
+
+	// The maximum number of messages to return. The value of this parameter cannot exceed the maximum message count allowed by your package.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type GetRoomMessageRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The starting message sequence. Messages before this sequence will be returned (not including the message whose sequence is `seq`).
+	Seq *int64 `json:"Seq,omitempty" name:"Seq"`
+
+	// The maximum number of messages to return. The value of this parameter cannot exceed the maximum message count allowed by your package.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *GetRoomMessageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRoomMessageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "Seq")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetRoomMessageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetRoomMessageResponseParams struct {
+	// The message list.
+	Messages []*MessageList `json:"Messages,omitempty" name:"Messages"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetRoomMessageResponse struct {
+	*tchttp.BaseResponse
+	Response *GetRoomMessageResponseParams `json:"Response"`
+}
+
+func (r *GetRoomMessageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRoomMessageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetWatermarkRequestParams struct {
-	// The SDKAppID assigned by LCIC.	
+	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
 type GetWatermarkRequest struct {
 	*tchttp.BaseRequest
 	
-	// The SDKAppID assigned by LCIC.	
+	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 }
 
@@ -2324,20 +2352,16 @@ func (r *GetWatermarkRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetWatermarkResponseParams struct {
-	// The watermark settings for the teacher’s video.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark settings for the teacher’s video. Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherLogo *WatermarkConfig `json:"TeacherLogo,omitempty" name:"TeacherLogo"`
 
-	// The watermark settings for the whiteboard.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark settings for the whiteboard. Note: This field may return null, indicating that no valid values can be obtained.
 	BoardLogo *WatermarkConfig `json:"BoardLogo,omitempty" name:"BoardLogo"`
 
-	// The background image.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The background image. Note: This field may return null, indicating that no valid values can be obtained.
 	BackgroundPicture *BackgroundPictureConfig `json:"BackgroundPicture,omitempty" name:"BackgroundPicture"`
 
-	// The watermark text.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark text. Note: This field may return null, indicating that no valid values can be obtained.
 	Text *TextMarkConfig `json:"Text,omitempty" name:"Text"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2361,36 +2385,27 @@ func (r *GetWatermarkResponse) FromJsonString(s string) error {
 }
 
 type GroupBaseInfo struct {
-	// The group names.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The group names. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// The user ID of the teacher.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID of the teacher. Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 }
 
 type GroupInfo struct {
-	// Group ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Group ID Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// The group name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The group name. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// The user ID of the teacher.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID of the teacher. Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// The group type. 
-	// `0`: Ordinary group. 
-	// `1`: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupType *uint64 `json:"GroupType,omitempty" name:"GroupType"`
 
-	// The IDs of the sub-groups.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The IDs of the sub-groups. Note: This field may return null, indicating that no valid values can be obtained.
 	SubGroupIds *string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
 }
 
@@ -2561,14 +2576,46 @@ type MemberRecord struct {
 	// The user’s location.
 	Location *string `json:"Location,omitempty" name:"Location"`
 
-	// The user’s device type. `0`: Unknown; `1`: Windows; `2`: macOS; `3`: Android; `4`: iOS; `5`: Web; `6`: Mobile webpage; `7`: Weixin Mini Program.
+	// The user’s device type. 0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
 	Device *int64 `json:"Device,omitempty" name:"Device"`
 
-	// The number of times each member mics.
+	// The number of times a user turned their mic on.
 	PerMemberMicCount *int64 `json:"PerMemberMicCount,omitempty" name:"PerMemberMicCount"`
 
-	// The number of messages sent by each member.
+	// The number of messages sent by a user.
 	PerMemberMessageCount *int64 `json:"PerMemberMessageCount,omitempty" name:"PerMemberMessageCount"`
+}
+
+type MessageItem struct {
+	// The message type. `0`: Text; `1`: Image.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MessageType *int64 `json:"MessageType,omitempty" name:"MessageType"`
+
+	// The text. This parameter is valid if `MessageType` is `0`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TextMessage *string `json:"TextMessage,omitempty" name:"TextMessage"`
+
+	// The image URL. This parameter is valid if `MessageType` is `1`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageMessage *string `json:"ImageMessage,omitempty" name:"ImageMessage"`
+}
+
+type MessageList struct {
+	// The message timestamp.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// The sender.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FromAccount *string `json:"FromAccount,omitempty" name:"FromAccount"`
+
+	// The message sequence, which is unique across a class. The earlier a message is sent, the lower the sequence.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Seq *int64 `json:"Seq,omitempty" name:"Seq"`
+
+	// The message content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MessageBody []*MessageItem `json:"MessageBody,omitempty" name:"MessageBody"`
 }
 
 // Predefined struct for user
@@ -2734,22 +2781,22 @@ type ModifyRoomRequestParams struct {
 	// The room name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
+	// The resolution. Valid values: 1: SD; 2: HD; 3: FHD.
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
 	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
-	// Whether to automatically turn the mic on when a user enters the room. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only; `coteaching`: Dual-teacher.
+	// The room subtype. Valid values: videodoc: Document + Video; video: Video only; coteaching: Dual-teacher.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
-	// Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
+	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
 	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
@@ -2780,22 +2827,22 @@ type ModifyRoomRequest struct {
 	// The room name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
+	// The resolution. Valid values: 1: SD; 2: HD; 3: FHD.
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
 	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
-	// Whether to automatically turn the mic on when a user enters the room. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
+	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only; `coteaching`: Dual-teacher.
+	// The room subtype. Valid values: videodoc: Document + Video; video: Video only; coteaching: Dual-teacher.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
-	// Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
+	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
 	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
@@ -3009,68 +3056,53 @@ func (r *RegisterUserResponse) FromJsonString(s string) error {
 }
 
 type RoomInfo struct {
-	// The room name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The room name. Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The room start time (Unix timestamp).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The room start time (Unix timestamp). Note: This field may return null, indicating that no valid values can be obtained.
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The room end time (Unix timestamp).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The room end time (Unix timestamp). Note: This field may return null, indicating that no valid values can be obtained.
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The resolution. Valid values: 1: SD; 2: HD; 3: FHD. Note: This field may return null, indicating that no valid values can be obtained.
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
-	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16. Note: This field may return null, indicating that no valid values can be obtained.
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only; `coteaching`: Dual-teacher.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
-	// The user ID of the teacher. User IDs are returned by the user registration APIs.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID of the teacher. User IDs are returned by the user registration APIs. Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// Whether to automatically turn the mic on when a user enters the room. Valid values: `0`: No (default value); `1`: Yes.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes. Note: This field may return null, indicating that no valid values can be obtained.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0`: Yes (default value); `1`: No.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: 0: Yes (default value); 1: No. Note: This field may return null, indicating that no valid values can be obtained.
 	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: `0`: No (default value); `1`: Yes.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes. Note: This field may return null, indicating that no valid values can be obtained.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// Whether to disable auto recording. Valid values: `0`: No (default); `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends. Note: This field may return null, indicating that no valid values can be obtained.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
-	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs. Note: This field may return null, indicating that no valid values can be obtained.
 	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
 
-	// The number of RTC users.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The number of RTC users. Note: This field may return null, indicating that no valid values can be obtained.
 	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
 
-	// The audience type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The audience type. Note: This field may return null, indicating that no valid values can be obtained.
 	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
 
-	// The recording layout.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The recording layout. Note: This field may return null, indicating that no valid values can be obtained.
 	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
 
-	// The ID of the group to bind.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The ID of the group to bind. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
@@ -3137,7 +3169,7 @@ func (r *SetAppCustomContentResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SetWatermarkRequestParams struct {
-	// The SDKAppID assigned by LCIC.	
+	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
 	// The URL of the watermark for the teacher’s video. If you pass in an empty string, the teacher’s video will not have a watermark.
@@ -3149,28 +3181,28 @@ type SetWatermarkRequestParams struct {
 	// The image displayed when there is no video. If you pass in an empty string, no images will be displayed.
 	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
 
-	// The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is `0`.
+	// The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
 	BoardW *float64 `json:"BoardW,omitempty" name:"BoardW"`
 
-	// The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is `0`.
+	// The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
 	BoardH *float64 `json:"BoardH,omitempty" name:"BoardH"`
 
-	// The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
+	// The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
 	BoardX *float64 `json:"BoardX,omitempty" name:"BoardX"`
 
-	// The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.
+	// The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
 	BoardY *float64 `json:"BoardY,omitempty" name:"BoardY"`
 
-	// The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is `0`.
+	// The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
 	TeacherW *float64 `json:"TeacherW,omitempty" name:"TeacherW"`
 
-	// The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is `0`.
+	// The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
 	TeacherH *float64 `json:"TeacherH,omitempty" name:"TeacherH"`
 
-	// The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
+	// The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
 	TeacherX *float64 `json:"TeacherX,omitempty" name:"TeacherX"`
 
-	// The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.
+	// The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
 	TeacherY *float64 `json:"TeacherY,omitempty" name:"TeacherY"`
 
 	// The watermark text. If you pass in an empty string, there will be no text.
@@ -3183,7 +3215,7 @@ type SetWatermarkRequestParams struct {
 type SetWatermarkRequest struct {
 	*tchttp.BaseRequest
 	
-	// The SDKAppID assigned by LCIC.	
+	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
 	// The URL of the watermark for the teacher’s video. If you pass in an empty string, the teacher’s video will not have a watermark.
@@ -3195,28 +3227,28 @@ type SetWatermarkRequest struct {
 	// The image displayed when there is no video. If you pass in an empty string, no images will be displayed.
 	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
 
-	// The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is `0`.
+	// The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
 	BoardW *float64 `json:"BoardW,omitempty" name:"BoardW"`
 
-	// The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is `0`.
+	// The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
 	BoardH *float64 `json:"BoardH,omitempty" name:"BoardH"`
 
-	// The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
+	// The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
 	BoardX *float64 `json:"BoardX,omitempty" name:"BoardX"`
 
-	// The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.
+	// The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
 	BoardY *float64 `json:"BoardY,omitempty" name:"BoardY"`
 
-	// The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is `0`.
+	// The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
 	TeacherW *float64 `json:"TeacherW,omitempty" name:"TeacherW"`
 
-	// The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is `0`.
+	// The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
 	TeacherH *float64 `json:"TeacherH,omitempty" name:"TeacherH"`
 
-	// The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
+	// The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
 	TeacherX *float64 `json:"TeacherX,omitempty" name:"TeacherX"`
 
-	// The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.
+	// The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
 	TeacherY *float64 `json:"TeacherY,omitempty" name:"TeacherY"`
 
 	// The watermark text. If you pass in an empty string, there will be no text.
@@ -3281,12 +3313,10 @@ func (r *SetWatermarkResponse) FromJsonString(s string) error {
 }
 
 type TextMarkConfig struct {
-	// The watermark text.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark text. Note: This field may return null, indicating that no valid values can be obtained.
 	Text *string `json:"Text,omitempty" name:"Text"`
 
-	// The watermark text color.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark text color. Note: This field may return null, indicating that no valid values can be obtained.
 	Color *string `json:"Color,omitempty" name:"Color"`
 }
 
@@ -3352,41 +3382,32 @@ func (r *UnbindDocumentFromRoomResponse) FromJsonString(s string) error {
 }
 
 type UserInfo struct {
-	// The application ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The application ID. Note: This field may return null, indicating that no valid values can be obtained.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The user ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID. Note: This field may return null, indicating that no valid values can be obtained.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The username.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The username. Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The URL of profile photo.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The URL of profile photo. Note: This field may return null, indicating that no valid values can be obtained.
 	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
 }
 
 type WatermarkConfig struct {
-	// The URL of the watermark image.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The URL of the watermark image. Note: This field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitempty" name:"Url"`
 
-	// The watermark width, which is expressed as a percentage of the video width.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark width, which is expressed as a percentage of the video width. Note: This field may return null, indicating that no valid values can be obtained.
 	Width *float64 `json:"Width,omitempty" name:"Width"`
 
-	// The watermark height, which is expressed as a percentage of the video height.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The watermark height, which is expressed as a percentage of the video height. Note: This field may return null, indicating that no valid values can be obtained.
 	Height *float64 `json:"Height,omitempty" name:"Height"`
 
-	// The horizontal offset of the watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle horizontally. Value range: 0-100.	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The horizontal offset of the watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
 	LocationX *float64 `json:"LocationX,omitempty" name:"LocationX"`
 
-	// The vertical offset of the watermark, which is expressed as a percentage of the video width. For example, `50` indicates that the watermark will appear in the middle vertically. Value range: 0-100.	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The vertical offset of the watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
 	LocationY *float64 `json:"LocationY,omitempty" name:"LocationY"`
 }

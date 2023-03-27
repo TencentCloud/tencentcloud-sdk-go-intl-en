@@ -66,6 +66,8 @@ func NewAddGroupMemberResponse() (response *AddGroupMemberResponse) {
 // AddGroupMember
 // This API is used to add users to a group.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -90,6 +92,8 @@ func (c *Client) AddGroupMember(request *AddGroupMemberRequest) (response *AddGr
 
 // AddGroupMember
 // This API is used to add users to a group.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -146,6 +150,8 @@ func NewBatchAddGroupMemberResponse() (response *BatchAddGroupMemberResponse) {
 // BatchAddGroupMember
 // This API is used to add users to multiple groups at a time.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -168,6 +174,8 @@ func (c *Client) BatchAddGroupMember(request *BatchAddGroupMemberRequest) (respo
 
 // BatchAddGroupMember
 // This API is used to add users to multiple groups at a time.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -222,6 +230,8 @@ func NewBatchCreateGroupWithMembersResponse() (response *BatchCreateGroupWithMem
 // BatchCreateGroupWithMembers
 // This API is used to create multiple groups at a time.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -249,6 +259,8 @@ func (c *Client) BatchCreateGroupWithMembers(request *BatchCreateGroupWithMember
 
 // BatchCreateGroupWithMembers
 // This API is used to create multiple groups at a time.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -308,6 +320,8 @@ func NewBatchCreateRoomResponse() (response *BatchCreateRoomResponse) {
 // BatchCreateRoom
 // This API is used to create multiple rooms at a time.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -348,6 +362,8 @@ func (c *Client) BatchCreateRoom(request *BatchCreateRoomRequest) (response *Bat
 
 // BatchCreateRoom
 // This API is used to create multiple rooms at a time.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -420,6 +436,8 @@ func NewBatchDeleteGroupMemberResponse() (response *BatchDeleteGroupMemberRespon
 // BatchDeleteGroupMember
 // This API is used to remove users from multiple groups at a time.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -443,6 +461,8 @@ func (c *Client) BatchDeleteGroupMember(request *BatchDeleteGroupMemberRequest) 
 
 // BatchDeleteGroupMember
 // This API is used to remove users from multiple groups at a time.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -498,6 +518,8 @@ func NewBatchDeleteRecordResponse() (response *BatchDeleteRecordResponse) {
 // BatchDeleteRecord
 // This API is used to delete the recordings of multiple rooms.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -513,6 +535,8 @@ func (c *Client) BatchDeleteRecord(request *BatchDeleteRecordRequest) (response 
 
 // BatchDeleteRecord
 // This API is used to delete the recordings of multiple rooms.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -560,6 +584,8 @@ func NewBatchRegisterResponse() (response *BatchRegisterResponse) {
 // BatchRegister
 // This API is used to register multiple users (up to 1,000) at a time. If a user ID already exists, the existing one will be overwritten.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -573,6 +599,8 @@ func (c *Client) BatchRegister(request *BatchRegisterRequest) (response *BatchRe
 
 // BatchRegister
 // This API is used to register multiple users (up to 1,000) at a time. If a user ID already exists, the existing one will be overwritten.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -724,7 +752,9 @@ func NewCreateGroupWithMembersResponse() (response *CreateGroupWithMembersRespon
 }
 
 // CreateGroupWithMembers
-// This API is used to create a group and specify its members.
+// his API is used to create a group and specify its members.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -748,7 +778,9 @@ func (c *Client) CreateGroupWithMembers(request *CreateGroupWithMembersRequest) 
 }
 
 // CreateGroupWithMembers
-// This API is used to create a group and specify its members.
+// his API is used to create a group and specify its members.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -804,6 +836,8 @@ func NewCreateGroupWithSubGroupResponse() (response *CreateGroupWithSubGroupResp
 // CreateGroupWithSubGroup
 // This API is used to merge groups.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -830,6 +864,8 @@ func (c *Client) CreateGroupWithSubGroup(request *CreateGroupWithSubGroupRequest
 
 // CreateGroupWithSubGroup
 // This API is used to merge groups.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -888,10 +924,13 @@ func NewCreateRoomResponse() (response *CreateRoomResponse) {
 // CreateRoom
 // This API is used to create a room.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
@@ -906,10 +945,13 @@ func (c *Client) CreateRoom(request *CreateRoomRequest) (response *CreateRoomRes
 // CreateRoom
 // This API is used to create a room.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
@@ -1006,6 +1048,8 @@ func NewDeleteDocumentResponse() (response *DeleteDocumentResponse) {
 // DeleteDocument
 // This API is used to delete a document.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
@@ -1015,6 +1059,8 @@ func (c *Client) DeleteDocument(request *DeleteDocumentRequest) (response *Delet
 
 // DeleteDocument
 // This API is used to delete a document.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1056,6 +1102,8 @@ func NewDeleteGroupResponse() (response *DeleteGroupResponse) {
 // DeleteGroup
 // This API is used to delete one or multiple groups.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -1074,6 +1122,8 @@ func (c *Client) DeleteGroup(request *DeleteGroupRequest) (response *DeleteGroup
 
 // DeleteGroup
 // This API is used to delete one or multiple groups.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1124,6 +1174,8 @@ func NewDeleteGroupMemberResponse() (response *DeleteGroupMemberResponse) {
 // DeleteGroupMember
 // This API is used to remove users from a group.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -1147,6 +1199,8 @@ func (c *Client) DeleteGroupMember(request *DeleteGroupMemberRequest) (response 
 
 // DeleteGroupMember
 // This API is used to remove users from a group.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1202,6 +1256,8 @@ func NewDeleteRecordResponse() (response *DeleteRecordResponse) {
 // DeleteRecord
 // This example shows you how to delete the recording files of a specific room.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1216,6 +1272,8 @@ func (c *Client) DeleteRecord(request *DeleteRecordRequest) (response *DeleteRec
 
 // DeleteRecord
 // This example shows you how to delete the recording files of a specific room.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1314,6 +1372,8 @@ func NewDescribeCurrentMemberListResponse() (response *DescribeCurrentMemberList
 // DescribeCurrentMemberList
 // This API is used to get the user list of a room. This API will not work if a room has ended or expired.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
@@ -1325,6 +1385,8 @@ func (c *Client) DescribeCurrentMemberList(request *DescribeCurrentMemberListReq
 
 // DescribeCurrentMemberList
 // This API is used to get the user list of a room. This API will not work if a room has ended or expired.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
@@ -1368,6 +1430,8 @@ func NewDescribeDocumentResponse() (response *DescribeDocumentResponse) {
 // DescribeDocument
 // This API is used to get the information of a specific document.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_DOCUMENT = "ResourceNotFound.Document"
@@ -1377,6 +1441,8 @@ func (c *Client) DescribeDocument(request *DescribeDocumentRequest) (response *D
 
 // DescribeDocument
 // This API is used to get the information of a specific document.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1418,6 +1484,8 @@ func NewDescribeDocumentsByRoomResponse() (response *DescribeDocumentsByRoomResp
 // DescribeDocumentsByRoom
 // This API is used to get the document list of a specific room.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -1458,6 +1526,8 @@ func (c *Client) DescribeDocumentsByRoom(request *DescribeDocumentsByRoomRequest
 
 // DescribeDocumentsByRoom
 // This API is used to get the document list of a specific room.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1530,6 +1600,8 @@ func NewDescribeGroupResponse() (response *DescribeGroupResponse) {
 // DescribeGroup
 // This API is used to get the details of a group.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -1550,6 +1622,8 @@ func (c *Client) DescribeGroup(request *DescribeGroupRequest) (response *Describ
 
 // DescribeGroup
 // This API is used to get the details of a group.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1602,6 +1676,8 @@ func NewDescribeGroupListResponse() (response *DescribeGroupListResponse) {
 // DescribeGroupList
 // This API is used to query groups.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -1622,6 +1698,8 @@ func (c *Client) DescribeGroupList(request *DescribeGroupListRequest) (response 
 
 // DescribeGroupList
 // This API is used to query groups.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1674,6 +1752,8 @@ func NewDescribeGroupMemberListResponse() (response *DescribeGroupMemberListResp
 // DescribeGroupMemberList
 // This API is used to get the members of a group.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
@@ -1697,6 +1777,8 @@ func (c *Client) DescribeGroupMemberList(request *DescribeGroupMemberListRequest
 
 // DescribeGroupMemberList
 // This API is used to get the members of a group.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1752,6 +1834,8 @@ func NewDescribeRoomResponse() (response *DescribeRoomResponse) {
 // DescribeRoom
 // This API is used to get room information.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
@@ -1761,6 +1845,8 @@ func (c *Client) DescribeRoom(request *DescribeRoomRequest) (response *DescribeR
 
 // DescribeRoom
 // This API is used to get room information.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1802,6 +1888,8 @@ func NewDescribeRoomStatisticsResponse() (response *DescribeRoomStatisticsRespon
 // DescribeRoomStatistics
 // This API is used to obtain the statistics of a room. It can be called only after the room is ended.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
 //  INTERNALERROR = "InternalError"
@@ -1813,6 +1901,8 @@ func (c *Client) DescribeRoomStatistics(request *DescribeRoomStatisticsRequest) 
 
 // DescribeRoomStatistics
 // This API is used to obtain the statistics of a room. It can be called only after the room is ended.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
@@ -1856,6 +1946,8 @@ func NewDescribeSdkAppIdUsersResponse() (response *DescribeSdkAppIdUsersResponse
 // DescribeSdkAppIdUsers
 // This API is used to get the user list of a specific application.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -1896,6 +1988,8 @@ func (c *Client) DescribeSdkAppIdUsers(request *DescribeSdkAppIdUsersRequest) (r
 
 // DescribeSdkAppIdUsers
 // This API is used to get the user list of a specific application.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1997,6 +2091,80 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     return
 }
 
+func NewGetRoomMessageRequest() (request *GetRoomMessageRequest) {
+    request = &GetRoomMessageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "GetRoomMessage")
+    
+    
+    return
+}
+
+func NewGetRoomMessageResponse() (response *GetRoomMessageResponse) {
+    response = &GetRoomMessageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetRoomMessage
+// This API is used to get the message history of a room (room messages are retained for seven days).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetRoomMessage(request *GetRoomMessageRequest) (response *GetRoomMessageResponse, err error) {
+    return c.GetRoomMessageWithContext(context.Background(), request)
+}
+
+// GetRoomMessage
+// This API is used to get the message history of a room (room messages are retained for seven days).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  RESOURCEUNAVAILABLE_ROOMSTATISTICS = "ResourceUnavailable.RoomStatistics"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetRoomMessageWithContext(ctx context.Context, request *GetRoomMessageRequest) (response *GetRoomMessageResponse, err error) {
+    if request == nil {
+        request = NewGetRoomMessageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetRoomMessage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetRoomMessageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetWatermarkRequest() (request *GetWatermarkRequest) {
     request = &GetWatermarkRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2018,6 +2186,8 @@ func NewGetWatermarkResponse() (response *GetWatermarkResponse) {
 // GetWatermark
 // This API is used to get watermark settings.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2031,6 +2201,8 @@ func (c *Client) GetWatermark(request *GetWatermarkRequest) (response *GetWaterm
 
 // GetWatermark
 // This API is used to get watermark settings.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2178,6 +2350,8 @@ func NewModifyAppResponse() (response *ModifyAppResponse) {
 // ModifyApp
 // This API is used to modify an application.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
@@ -2187,6 +2361,8 @@ func (c *Client) ModifyApp(request *ModifyAppRequest) (response *ModifyAppRespon
 
 // ModifyApp
 // This API is used to modify an application.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2228,6 +2404,8 @@ func NewModifyGroupResponse() (response *ModifyGroupResponse) {
 // ModifyGroup
 // This API is used to modify a group.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -2259,6 +2437,8 @@ func (c *Client) ModifyGroup(request *ModifyGroupRequest) (response *ModifyGroup
 
 // ModifyGroup
 // This API is used to modify a group.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2322,6 +2502,8 @@ func NewModifyRoomResponse() (response *ModifyRoomResponse) {
 // ModifyRoom
 // This API is used to modify a room.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
@@ -2343,6 +2525,8 @@ func (c *Client) ModifyRoom(request *ModifyRoomRequest) (response *ModifyRoomRes
 
 // ModifyRoom
 // This API is used to modify a room.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
@@ -2396,6 +2580,8 @@ func NewModifyUserProfileResponse() (response *ModifyUserProfileResponse) {
 // ModifyUserProfile
 // This API is used to modify a user profile such as the nickname and profile photo.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -2436,6 +2622,8 @@ func (c *Client) ModifyUserProfile(request *ModifyUserProfileRequest) (response 
 
 // ModifyUserProfile
 // This API is used to modify a user profile such as the nickname and profile photo.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2612,6 +2800,8 @@ func NewSetWatermarkResponse() (response *SetWatermarkResponse) {
 // SetWatermark
 // This API is used to configure watermarks.
 //
+// A maximum of 20 requests can be initiated per second for this API.
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2625,6 +2815,8 @@ func (c *Client) SetWatermark(request *SetWatermarkRequest) (response *SetWaterm
 
 // SetWatermark
 // This API is used to configure watermarks.
+//
+// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

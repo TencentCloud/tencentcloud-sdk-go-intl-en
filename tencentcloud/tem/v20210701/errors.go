@@ -329,7 +329,7 @@ const (
 	// The environment name is required.
 	MISSINGPARAMETER_ENVIRONMENTNAMENULL = "MissingParameter.EnvironmentNameNull"
 
-	// 
+	// The image repository is required.
 	MISSINGPARAMETER_IMGREPONULL = "MissingParameter.ImgRepoNull"
 
 	// The `logset` and `topic` are required.

@@ -127,7 +127,9 @@ type AdaptiveDynamicStreamingInfoItem struct {
 	// Adaptive bitrate streaming specification.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 
-	// Container format. Valid values: hls, dash.
+	// The packaging format. Valid values:
+	// <li>`HLS`</li>
+	// <li>`DASH`</li>
 	Package *string `json:"Package,omitempty" name:"Package"`
 
 	// Encryption type.
@@ -146,6 +148,9 @@ type AdaptiveDynamicStreamingInfoItem struct {
 	// <li>Trace: Digital watermark</li>
 	// <li>None: Regular watermark</li>
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitempty" name:"DigitalWatermarkType"`
+
+	// The information of the streams.
+	SubStreamSet []*MediaSubStreamInfoItem `json:"SubStreamSet,omitempty" name:"SubStreamSet"`
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
@@ -9569,6 +9574,7 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>`DescribeFileAttributesTask`: Getting file attributes</li>
 	// <li>`RebuildMedia`; Remastering audio/video</li>
 	// <li> `ReviewAudioVideo`: Moderation</li>
+	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -11709,9 +11715,9 @@ type MediaBasicInfo struct {
 	// <li>Image: image file</li>
 	Category *string `json:"Category,omitempty" name:"Category"`
 
-	// File status. Valid values: Normal, Forbidden.
+	// The file status. Valid values: `Normal`, `Forbidden`.
 	// 
-	// *Note: this field is not supported yet.
+	// *Note: This field is not supported yet.	
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Storage class of a media file:
@@ -12447,6 +12453,23 @@ type MediaSourceData struct {
 	// The TRTC recording information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrtcRecordInfo *TrtcRecordInfo `json:"TrtcRecordInfo,omitempty" name:"TrtcRecordInfo"`
+}
+
+type MediaSubStreamInfoItem struct {
+	// The stream type. Valid values:
+	// <li>`audio`: Audio only</li>
+	// <li>`video`: Video (may include audio)</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The video width (px) if `Type` is `video`.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// The video height (px) if `Type` is `video`.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// The file size (bytes).
+	// <font color=red>Note:</font>For adaptive bitrate streaming files generated before 2023-02-09T16:00:00Z, the value of this parameter is `0`.
+	Size *uint64 `json:"Size,omitempty" name:"Size"`
 }
 
 type MediaSubtitleInfo struct {

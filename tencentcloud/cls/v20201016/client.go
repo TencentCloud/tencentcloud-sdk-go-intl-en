@@ -503,6 +503,74 @@ func (c *Client) CreateConsumerWithContext(ctx context.Context, request *CreateC
     return
 }
 
+func NewCreateCosRechargeRequest() (request *CreateCosRechargeRequest) {
+    request = &CreateCosRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateCosRecharge")
+    
+    
+    return
+}
+
+func NewCreateCosRechargeResponse() (response *CreateCosRechargeResponse) {
+    response = &CreateCosRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCosRecharge
+// This API is used to create a COS import task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateCosRecharge(request *CreateCosRechargeRequest) (response *CreateCosRechargeResponse, err error) {
+    return c.CreateCosRechargeWithContext(context.Background(), request)
+}
+
+// CreateCosRecharge
+// This API is used to create a COS import task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateCosRechargeWithContext(ctx context.Context, request *CreateCosRechargeRequest) (response *CreateCosRechargeResponse, err error) {
+    if request == nil {
+        request = NewCreateCosRechargeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCosRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCosRechargeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateExportRequest() (request *CreateExportRequest) {
     request = &CreateExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -814,7 +882,7 @@ func NewCreateShipperResponse() (response *CreateShipperResponse) {
 }
 
 // CreateShipper
-// This API is used to create a shipping rule. Note: To use this API, you need to check whether you have configured the role and permission for COS shipping tasks. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+// This API is used to create a task to ship to COS. Note: To use this API, you need to check whether you have configured the role and permission for shipping to COS. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -836,7 +904,7 @@ func (c *Client) CreateShipper(request *CreateShipperRequest) (response *CreateS
 }
 
 // CreateShipper
-// This API is used to create a shipping rule. Note: To use this API, you need to check whether you have configured the role and permission for COS shipping tasks. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
+// This API is used to create a task to ship to COS. Note: To use this API, you need to check whether you have configured the role and permission for shipping to COS. If not, see **Viewing and Configuring Shipping Authorization** at https://intl.cloud.tencent.com/document/product/614/71623.?from_cn_redirect=1
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2055,6 +2123,76 @@ func (c *Client) DescribeConsumerWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeCosRechargesRequest() (request *DescribeCosRechargesRequest) {
+    request = &DescribeCosRechargesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeCosRecharges")
+    
+    
+    return
+}
+
+func NewDescribeCosRechargesResponse() (response *DescribeCosRechargesResponse) {
+    response = &DescribeCosRechargesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCosRecharges
+// This API is used to get COS import configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeCosRecharges(request *DescribeCosRechargesRequest) (response *DescribeCosRechargesResponse, err error) {
+    return c.DescribeCosRechargesWithContext(context.Background(), request)
+}
+
+// DescribeCosRecharges
+// This API is used to get COS import configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeCosRechargesWithContext(ctx context.Context, request *DescribeCosRechargesRequest) (response *DescribeCosRechargesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCosRechargesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCosRecharges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCosRechargesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeExportsRequest() (request *DescribeExportsRequest) {
     request = &DescribeExportsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2782,7 +2920,7 @@ func NewDescribeShippersResponse() (response *DescribeShippersResponse) {
 }
 
 // DescribeShippers
-// This API is used to get the list of shipping rules.
+// This API is used to get the configuration of the task of shipping to COS.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2803,7 +2941,7 @@ func (c *Client) DescribeShippers(request *DescribeShippersRequest) (response *D
 }
 
 // DescribeShippers
-// This API is used to get the list of shipping rules.
+// This API is used to get the configuration of the task of shipping to COS.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2854,7 +2992,7 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 }
 
 // DescribeTopics
-//  This API is used to get the list of log topics and supports pagination.
+// This API is used to get the list of log topics and supports pagination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2876,7 +3014,7 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
 }
 
 // DescribeTopics
-//  This API is used to get the list of log topics and supports pagination.
+// This API is used to get the list of log topics and supports pagination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3337,6 +3475,74 @@ func (c *Client) ModifyConsumerWithContext(ctx context.Context, request *ModifyC
     request.SetContext(ctx)
     
     response = NewModifyConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCosRechargeRequest() (request *ModifyCosRechargeRequest) {
+    request = &ModifyCosRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyCosRecharge")
+    
+    
+    return
+}
+
+func NewModifyCosRechargeResponse() (response *ModifyCosRechargeResponse) {
+    response = &ModifyCosRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCosRecharge
+// This API is used to modify a COS import task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyCosRecharge(request *ModifyCosRechargeRequest) (response *ModifyCosRechargeResponse, err error) {
+    return c.ModifyCosRechargeWithContext(context.Background(), request)
+}
+
+// ModifyCosRecharge
+// This API is used to modify a COS import task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyCosRechargeWithContext(ctx context.Context, request *ModifyCosRechargeRequest) (response *ModifyCosRechargeResponse, err error) {
+    if request == nil {
+        request = NewModifyCosRechargeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCosRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCosRechargeResponse()
     err = c.Send(request, response)
     return
 }

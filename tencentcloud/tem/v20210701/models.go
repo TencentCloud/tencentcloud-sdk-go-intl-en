@@ -3356,6 +3356,10 @@ type EksService struct {
 	// Whether all the application IPs are ready
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AllIpDone *bool `json:"AllIpDone,omitempty" name:"AllIpDone"`
+
+	// CLB domain name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExternalDomain *string `json:"ExternalDomain,omitempty" name:"ExternalDomain"`
 }
 
 // Predefined struct for user
@@ -3647,6 +3651,10 @@ type IngressInfo struct {
 	// - `NONE` (no redirection)
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	RewriteType *string `json:"RewriteType,omitempty" name:"RewriteType"`
+
+	// CLB domain name
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 type IngressRule struct {
@@ -4959,6 +4967,10 @@ type ServicePortMapping struct {
 	// Port mapping array 
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PortMappingItemList []*ServicePortMappingItem `json:"PortMappingItemList,omitempty" name:"PortMappingItemList"`
+
+	// CLB domain name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ExternalDomain *string `json:"ExternalDomain,omitempty" name:"ExternalDomain"`
 }
 
 type ServicePortMappingItem struct {

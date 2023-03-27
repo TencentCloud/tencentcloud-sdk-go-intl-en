@@ -464,6 +464,69 @@ type ContentInfo struct {
 	Parquet *ParquetInfo `json:"Parquet,omitempty" name:"Parquet"`
 }
 
+type CosRechargeInfo struct {
+	// COS import configuration ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// ID of the log topic.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// ID of the logset.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// COS import task name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// COS bucket.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// COS bucket region.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
+
+	// The prefix of the folder where COS files are located.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
+
+	// The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
+	// Default value: `minimalist_log`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Update time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Progress in percentage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Progress *uint64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Valid values: "" (default), "gzip", "lzop", "snappy"
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Compress *string `json:"Compress,omitempty" name:"Compress"`
+
+	// See the description of the `ExtractRuleInfo` structure.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitempty" name:"ExtractRuleInfo"`
+}
+
 // Predefined struct for user
 type CreateAlarmNoticeRequestParams struct {
 	// Notification group name
@@ -853,6 +916,118 @@ func (r *CreateConsumerResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCosRechargeRequestParams struct {
+	// ID of the log topic.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// ID of the logset.
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Shipping task name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// COS bucket.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Region where the COS bucket is located.
+	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
+
+	// The prefix of the folder where COS files are located.
+	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
+
+	// The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
+	// Default value: `minimalist_log`
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// Valid values: "" (default), "gzip", "lzop", "snappy"
+	Compress *string `json:"Compress,omitempty" name:"Compress"`
+
+	// Extraction rule. If `ExtractRule` is set, `LogType` must be set.
+	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitempty" name:"ExtractRuleInfo"`
+}
+
+type CreateCosRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the log topic.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// ID of the logset.
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Shipping task name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// COS bucket.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Region where the COS bucket is located.
+	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
+
+	// The prefix of the folder where COS files are located.
+	Prefix *string `json:"Prefix,omitempty" name:"Prefix"`
+
+	// The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
+	// Default value: `minimalist_log`
+	LogType *string `json:"LogType,omitempty" name:"LogType"`
+
+	// Valid values: "" (default), "gzip", "lzop", "snappy"
+	Compress *string `json:"Compress,omitempty" name:"Compress"`
+
+	// Extraction rule. If `ExtractRule` is set, `LogType` must be set.
+	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitempty" name:"ExtractRuleInfo"`
+}
+
+func (r *CreateCosRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCosRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "LogsetId")
+	delete(f, "Name")
+	delete(f, "Bucket")
+	delete(f, "BucketRegion")
+	delete(f, "Prefix")
+	delete(f, "LogType")
+	delete(f, "Compress")
+	delete(f, "ExtractRuleInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCosRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCosRechargeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateCosRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCosRechargeResponseParams `json:"Response"`
+}
+
+func (r *CreateCosRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCosRechargeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1314,7 +1489,7 @@ func (r *CreateShipperRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateShipperResponseParams struct {
-	// Shipping rule ID
+	// Shipping task ID.
 	ShipperId *string `json:"ShipperId,omitempty" name:"ShipperId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2617,6 +2792,78 @@ func (r *DescribeConsumerResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConsumerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCosRechargesRequestParams struct {
+	// ID of the log topic.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+type DescribeCosRechargesRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the log topic.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+func (r *DescribeCosRechargesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCosRechargesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Status")
+	delete(f, "Enable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCosRechargesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCosRechargesResponseParams struct {
+	// See the description of the `CosRechargeInfo` structure.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data []*CosRechargeInfo `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCosRechargesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCosRechargesResponseParams `json:"Response"`
+}
+
+func (r *DescribeCosRechargesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCosRechargesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4634,6 +4881,81 @@ func (r *ModifyConsumerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyCosRechargeRequestParams struct {
+	// COS import configuration ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// ID of the log topic.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// COS import task name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+type ModifyCosRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// COS import configuration ID.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// ID of the log topic.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// COS import task name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+func (r *ModifyCosRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCosRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "Enable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCosRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCosRechargeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyCosRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCosRechargeResponseParams `json:"Response"`
+}
+
+func (r *ModifyCosRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCosRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyIndexRequestParams struct {
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
@@ -5689,10 +6011,12 @@ func (r *SplitPartitionResponse) FromJsonString(s string) error {
 }
 
 type Tag struct {
-	// Tag key
+	// The tag key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// Tag value
+	// The tag value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
@@ -5749,6 +6073,11 @@ type TopicInfo struct {
 	// Log topic description
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Describes *string `json:"Describes,omitempty" name:"Describes"`
+
+	// The lifecycle of hot storage when log transitioning is enabled. The value of `hotPeriod` is smaller than that of `Period`.
+	// The hot storage period is the value of `hotPeriod`, and the cold storage period is the value of `Period` minus the value of `hotPeriod`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HotPeriod *uint64 `json:"HotPeriod,omitempty" name:"HotPeriod"`
 }
 
 // Predefined struct for user

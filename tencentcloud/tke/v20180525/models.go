@@ -296,6 +296,9 @@ type AddVpcCniSubnetsRequestParams struct {
 
 	// ID of the VPC where the cluster resides
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Whether to skip adding the VPC IP range to `NonMasqueradeCIDRs` field of `ip-masq-agent-config`. Default value: `false`
+	SkipAddingNonMasqueradeCIDRs *bool `json:"SkipAddingNonMasqueradeCIDRs,omitempty" name:"SkipAddingNonMasqueradeCIDRs"`
 }
 
 type AddVpcCniSubnetsRequest struct {
@@ -309,6 +312,9 @@ type AddVpcCniSubnetsRequest struct {
 
 	// ID of the VPC where the cluster resides
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Whether to skip adding the VPC IP range to `NonMasqueradeCIDRs` field of `ip-masq-agent-config`. Default value: `false`
+	SkipAddingNonMasqueradeCIDRs *bool `json:"SkipAddingNonMasqueradeCIDRs,omitempty" name:"SkipAddingNonMasqueradeCIDRs"`
 }
 
 func (r *AddVpcCniSubnetsRequest) ToJsonString() string {
@@ -326,6 +332,7 @@ func (r *AddVpcCniSubnetsRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "SubnetIds")
 	delete(f, "VpcId")
+	delete(f, "SkipAddingNonMasqueradeCIDRs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddVpcCniSubnetsRequest has unknown keys!", "")
 	}
@@ -6751,6 +6758,14 @@ type EdgeCluster struct {
 	// TKE edge cluster level
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Level *string `json:"Level,omitempty" name:"Level"`
+
+	// Whether to support auto upgrade of cluster spec level
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AutoUpgradeClusterLevel *bool `json:"AutoUpgradeClusterLevel,omitempty" name:"AutoUpgradeClusterLevel"`
+
+	// Cluster billing mode. Valid values: `POSTPAID_BY_HOUR`, `PREPAID`
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
 }
 
 type EdgeClusterAdvancedSettings struct {

@@ -356,6 +356,8 @@ func NewDescribeMixTranscodingUsageResponse() (response *DescribeMixTranscodingU
 // DescribeMixTranscodingUsage
 // This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
 //
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
+//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -375,6 +377,8 @@ func (c *Client) DescribeMixTranscodingUsage(request *DescribeMixTranscodingUsag
 
 // DescribeMixTranscodingUsage
 // This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
+//
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -426,6 +430,8 @@ func NewDescribeRecordingUsageResponse() (response *DescribeRecordingUsageRespon
 // DescribeRecordingUsage
 // This API is used to query your TRTC recording usage.
 //
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
+//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -445,6 +451,8 @@ func (c *Client) DescribeRecordingUsage(request *DescribeRecordingUsageRequest) 
 
 // DescribeRecordingUsage
 // This API is used to query your TRTC recording usage.
+//
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -496,6 +504,8 @@ func NewDescribeRelayUsageResponse() (response *DescribeRelayUsageResponse) {
 // DescribeRelayUsage
 // This API is used to query your usage of TRTC’s relay to CDN service.
 //
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
+//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -515,6 +525,8 @@ func (c *Client) DescribeRelayUsage(request *DescribeRelayUsageRequest) (respons
 
 // DescribeRelayUsage
 // This API is used to query your usage of TRTC’s relay to CDN service.
+//
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -566,6 +578,8 @@ func NewDescribeTrtcUsageResponse() (response *DescribeTrtcUsageResponse) {
 // DescribeTrtcUsage
 // This API is used to query your TRTC audio/video duration.
 //
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
+//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -585,6 +599,8 @@ func (c *Client) DescribeTrtcUsage(request *DescribeTrtcUsageRequest) (response 
 
 // DescribeTrtcUsage
 // This API is used to query your TRTC audio/video duration.
+//
+// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -1171,6 +1187,7 @@ func NewStartPublishCdnStreamResponse() (response *StartPublishCdnStreamResponse
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (response *StartPublishCdnStreamResponse, err error) {
     return c.StartPublishCdnStreamWithContext(context.Background(), request)
@@ -1232,6 +1249,7 @@ func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (r
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) StartPublishCdnStreamWithContext(ctx context.Context, request *StartPublishCdnStreamRequest) (response *StartPublishCdnStreamResponse, err error) {
     if request == nil {

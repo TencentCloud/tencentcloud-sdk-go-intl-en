@@ -2397,6 +2397,10 @@ type GetServiceStatusResponseParams struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ExclusiveHSMEnabled *bool `json:"ExclusiveHSMEnabled,omitempty" name:"ExclusiveHSMEnabled"`
 
+	// KMS subscription information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubscriptionInfo *string `json:"SubscriptionInfo,omitempty" name:"SubscriptionInfo"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }

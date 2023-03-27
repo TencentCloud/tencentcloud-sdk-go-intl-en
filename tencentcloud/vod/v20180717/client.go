@@ -1913,6 +1913,7 @@ func NewDeleteAIAnalysisTemplateResponse() (response *DeleteAIAnalysisTemplateRe
 // Note: templates with an ID below 10000 are preset and cannot be deleted.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1930,6 +1931,7 @@ func (c *Client) DeleteAIAnalysisTemplate(request *DeleteAIAnalysisTemplateReque
 // Note: templates with an ID below 10000 are preset and cannot be deleted.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -8125,6 +8127,7 @@ func NewRebuildMediaResponse() (response *RebuildMediaResponse) {
 // This API is used to remaster audio/video.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 func (c *Client) RebuildMedia(request *RebuildMediaRequest) (response *RebuildMediaResponse, err error) {
     return c.RebuildMediaWithContext(context.Background(), request)
@@ -8134,6 +8137,7 @@ func (c *Client) RebuildMedia(request *RebuildMediaRequest) (response *RebuildMe
 // This API is used to remaster audio/video.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 func (c *Client) RebuildMediaWithContext(ctx context.Context, request *RebuildMediaRequest) (response *RebuildMediaResponse, err error) {
     if request == nil {
@@ -8526,6 +8530,7 @@ func NewReviewImageResponse() (response *ReviewImageResponse) {
 //  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ReviewImage(request *ReviewImageRequest) (response *ReviewImageResponse, err error) {
@@ -8541,6 +8546,7 @@ func (c *Client) ReviewImage(request *ReviewImageRequest) (response *ReviewImage
 //  FAILEDOPERATION_MEDIATYPE = "FailedOperation.MediaType"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ReviewImageWithContext(ctx context.Context, request *ReviewImageRequest) (response *ReviewImageResponse, err error) {

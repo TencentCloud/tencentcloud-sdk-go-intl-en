@@ -58,7 +58,7 @@ type ImageModerationRequestParams struct {
 	// This field indicates the Base64 encoding of the image to be detected. The image **size cannot exceed 5 MB**. **A resolution of 256x256 or higher is recommended**; otherwise, the recognition effect may be affected.<br>Note: **you must enter a value for either this field or `FileUrl`**.
 	FileContent *string `json:"FileContent,omitempty" name:"FileContent"`
 
-	// This field indicates the access URL of the image to be detected in PNG, JPG, JPEG, BMP, GIF, or WEBP format and of **up to 5 MB in size**. **A resolution of 256x256 or higher** is recommended. The image download time should be limited to 3 seconds; otherwise, a download timeout will be returned.<br>Note: **you must enter a value for either this field or `FileContent`**.
+	// URL of the image to moderate. It supports PNG, JPG, JPEG, BMP, GIF AND WEBP files. The file **cannot exceed 5 MB** and the resolution should not below **256*246**. The default timeout period is 3 seconds. Note that **redirection URLs may be blocked by security policies**. In this case, an error message will return. For example, if an HTTP request gets the 302 code, the error `ResourceUnavailable.ImageDownloadError` is returned. <br>**Either `FileUrl` or `FileContent` must be specified. 
 	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
 
 	// **For GIF/long image detection only**. This field indicates the GIF frame capturing frequency (the image interval for capturing a frame for detection). For long images, you should round the width:height ratio as the total number of images to be split. The default value is 0, where only the first frame of the GIF image will be detected, and the long image will not be split.<br>Note: the `Interval` and `MaxFrames` parameters need to be used in combination; for example, if `Interval` is `3` and `MaxFrames` is `400`, the GIF/long image will be detected once every two frames for up to 400 frames.
@@ -86,7 +86,7 @@ type ImageModerationRequest struct {
 	// This field indicates the Base64 encoding of the image to be detected. The image **size cannot exceed 5 MB**. **A resolution of 256x256 or higher is recommended**; otherwise, the recognition effect may be affected.<br>Note: **you must enter a value for either this field or `FileUrl`**.
 	FileContent *string `json:"FileContent,omitempty" name:"FileContent"`
 
-	// This field indicates the access URL of the image to be detected in PNG, JPG, JPEG, BMP, GIF, or WEBP format and of **up to 5 MB in size**. **A resolution of 256x256 or higher** is recommended. The image download time should be limited to 3 seconds; otherwise, a download timeout will be returned.<br>Note: **you must enter a value for either this field or `FileContent`**.
+	// URL of the image to moderate. It supports PNG, JPG, JPEG, BMP, GIF AND WEBP files. The file **cannot exceed 5 MB** and the resolution should not below **256*246**. The default timeout period is 3 seconds. Note that **redirection URLs may be blocked by security policies**. In this case, an error message will return. For example, if an HTTP request gets the 302 code, the error `ResourceUnavailable.ImageDownloadError` is returned. <br>**Either `FileUrl` or `FileContent` must be specified. 
 	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
 
 	// **For GIF/long image detection only**. This field indicates the GIF frame capturing frequency (the image interval for capturing a frame for detection). For long images, you should round the width:height ratio as the total number of images to be split. The default value is 0, where only the first frame of the GIF image will be detected, and the long image will not be split.<br>Note: the `Interval` and `MaxFrames` parameters need to be used in combination; for example, if `Interval` is `3` and `MaxFrames` is `400`, the GIF/long image will be detected once every two frames for up to 400 frames.
@@ -139,7 +139,7 @@ type ImageModerationResponseParams struct {
 	// This field is used to return the subtag name under the maliciousness tag with the highest priority hit by the detection result, such as *Porn-SexBehavior*. If no subtag is hit, an empty string will be returned.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
 
-	// This field is used to return the confidence under the current tag (Label). Value range: 0 (**the lowest confidence**)–100 (**the highest confidence**), where a higher value indicates that the text is more likely to fall into the category of the current returned tag; for example, *Porn 99* indicates that the text is highly likely to be pornographic, while *Porn 0* indicates that the text is not pornographic.
+	// Confidence score of the under the current label. Value range: 0 (**the lowest confidence**) to 100 (**the highest confidence**). For example, *Porn 99* indicates that the image is highly likely to be pornographic, while *Porn 0* indicates that the image is not pornographic.
 	Score *int64 `json:"Score,omitempty" name:"Score"`
 
 	// This field is used to return the detailed recognition result for the maliciousness tag hit by the categorization model, such as porn, advertising, or any other offensive, unsafe, or inappropriate type of content.
@@ -170,6 +170,10 @@ type ImageModerationResponseParams struct {
 
 	// This field is used to return the MD5 checksum of the detected object for easier verification of the file integrity.
 	FileMD5 *string `json:"FileMD5,omitempty" name:"FileMD5"`
+
+	// Image recognition result, including the hit tags, confidence and location.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RecognitionResults []*RecognitionResult `json:"RecognitionResults,omitempty" name:"RecognitionResults"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -218,7 +222,7 @@ type LabelResult struct {
 	// This field is used to return the detection result for a subtag under the maliciousness tag, such as *Porn-SexBehavior*.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
 
-	// This field is used to return the confidence under the current tag (Label). Value range: 0 (**the lowest confidence**)–100 (**the highest confidence**), where a higher value indicates that the text is more likely to fall into the category of the current returned tag; for example, *Porn 99* indicates that the text is highly likely to be pornographic, while *Porn 0* indicates that the text is not pornographic.
+	// Confidence score of the under the current label. Value range: 0 (**the lowest confidence**) to 100 (**the highest confidence**). For example, *Porn 99* indicates that the image is highly likely to be pornographic, while *Porn 0* indicates that the image is not pornographic.
 	Score *uint64 `json:"Score,omitempty" name:"Score"`
 
 	// This field is used to return the details of the subtag hit by the categorization model, such as number, hit tag name, and score.
@@ -387,6 +391,30 @@ type OcrTextDetail struct {
 
 	// This field is used to return the maliciousness subtag that corresponds to the detection result.
 	SubLabel *string `json:"SubLabel,omitempty" name:"SubLabel"`
+}
+
+type RecognitionResult struct {
+	// Value: `Scene`
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Label *string `json:"Label,omitempty" name:"Label"`
+
+	// Hit tags under the `Label`
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Tags []*RecognitionTag `json:"Tags,omitempty" name:"Tags"`
+}
+
+type RecognitionTag struct {
+	// Tag name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Confidence score. Value: 1 to 100. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Score *int64 `json:"Score,omitempty" name:"Score"`
+
+	// Location information. It returns 0 if there is not location information.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Location *Location `json:"Location,omitempty" name:"Location"`
 }
 
 type User struct {
