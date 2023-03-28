@@ -360,8 +360,20 @@ type ConfigureSyncJobRequestParams struct {
 	// Source database information. This parameter only applies to single-node databases, and `SrcNodeType` must be `single`.
 	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
+	// Source database information. This parameter is valid for multi-node databases, and the value of `SrcNodeType` must be `cluster`.
+	SrcInfos *SyncDBEndpointInfos `json:"SrcInfos,omitempty" name:"SrcInfos"`
+
+	// Enumerated values: `single` (for single-node source database), `cluster` (for multi-node source database).
+	SrcNodeType *string `json:"SrcNodeType,omitempty" name:"SrcNodeType"`
+
 	// Target database information. This parameter is used by single-node databases.
 	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Target database information. This parameter is valid for multi-node databases, and the value of `DstNodeType` must be `cluster`.
+	DstInfos *SyncDBEndpointInfos `json:"DstInfos,omitempty" name:"DstInfos"`
+
+	// Enumerated values: `single` (for single-node target database), `cluster` (for multi-node target database).
+	DstNodeType *string `json:"DstNodeType,omitempty" name:"DstNodeType"`
 
 	// Sync task options
 	Options *Options `json:"Options,omitempty" name:"Options"`
@@ -400,8 +412,20 @@ type ConfigureSyncJobRequest struct {
 	// Source database information. This parameter only applies to single-node databases, and `SrcNodeType` must be `single`.
 	SrcInfo *Endpoint `json:"SrcInfo,omitempty" name:"SrcInfo"`
 
+	// Source database information. This parameter is valid for multi-node databases, and the value of `SrcNodeType` must be `cluster`.
+	SrcInfos *SyncDBEndpointInfos `json:"SrcInfos,omitempty" name:"SrcInfos"`
+
+	// Enumerated values: `single` (for single-node source database), `cluster` (for multi-node source database).
+	SrcNodeType *string `json:"SrcNodeType,omitempty" name:"SrcNodeType"`
+
 	// Target database information. This parameter is used by single-node databases.
 	DstInfo *Endpoint `json:"DstInfo,omitempty" name:"DstInfo"`
+
+	// Target database information. This parameter is valid for multi-node databases, and the value of `DstNodeType` must be `cluster`.
+	DstInfos *SyncDBEndpointInfos `json:"DstInfos,omitempty" name:"DstInfos"`
+
+	// Enumerated values: `single` (for single-node target database), `cluster` (for multi-node target database).
+	DstNodeType *string `json:"DstNodeType,omitempty" name:"DstNodeType"`
 
 	// Sync task options
 	Options *Options `json:"Options,omitempty" name:"Options"`
@@ -431,7 +455,11 @@ func (r *ConfigureSyncJobRequest) FromJsonString(s string) error {
 	delete(f, "RunMode")
 	delete(f, "ExpectRunTime")
 	delete(f, "SrcInfo")
+	delete(f, "SrcInfos")
+	delete(f, "SrcNodeType")
 	delete(f, "DstInfo")
+	delete(f, "DstInfos")
+	delete(f, "DstNodeType")
 	delete(f, "Options")
 	delete(f, "AutoRetryTimeRangeMinutes")
 	if len(f) > 0 {
@@ -902,7 +930,7 @@ type CreateSyncJobRequestParams struct {
 	// Source database region, such as `ap-guangzhou`.
 	SrcRegion *string `json:"SrcRegion,omitempty" name:"SrcRegion"`
 
-	// Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
+	// Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, `tdsqlmysql`, and `kafka`.
 	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
 
 	// Target database region, such as `ap-guangzhou`.
@@ -942,7 +970,7 @@ type CreateSyncJobRequest struct {
 	// Source database region, such as `ap-guangzhou`.
 	SrcRegion *string `json:"SrcRegion,omitempty" name:"SrcRegion"`
 
-	// Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
+	// Target database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, `tdsqlmysql`, and `kafka`.
 	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
 
 	// Target database region, such as `ap-guangzhou`.
@@ -2795,6 +2823,20 @@ type JobItem struct {
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitempty" name:"AutoRetryTimeRangeMinutes"`
 }
 
+type KafkaOption struct {
+	// Type of data that is delivered to Kafka, such as `Avro` and `Json`.
+	DataType *string `json:"DataType,omitempty" name:"DataType"`
+
+	// Topic sync policy, such as `Single` (deliver all data to a single topic), `Multi` (deliver data to multiple custom topics).
+	TopicType *string `json:"TopicType,omitempty" name:"TopicType"`
+
+	// Topic for DDL storage
+	DDLTopicName *string `json:"DDLTopicName,omitempty" name:"DDLTopicName"`
+
+	// Topic description
+	TopicRules []*TopicRule `json:"TopicRules,omitempty" name:"TopicRules"`
+}
+
 type KeyValuePairOption struct {
 	// Option key
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -3329,6 +3371,10 @@ type Options struct {
 	// DDL statements to be synced
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DdlOptions []*DdlOption `json:"DdlOptions,omitempty" name:"DdlOptions"`
+
+	// Kafka sync options
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KafkaOption *KafkaOption `json:"KafkaOption,omitempty" name:"KafkaOption"`
 }
 
 // Predefined struct for user
@@ -4362,6 +4408,24 @@ func (r *StopSyncJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SyncDBEndpointInfos struct {
+	// Region of the database
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Instance network access type. Valid values: `extranet` (public network); `ipv6` (public IPv6); `cvm` (self-build on CVM); `dcg` (Direct Connect); `vpncloud` (VPN access); `cdb` (database); `ccn` (CCN); `intranet` (intranet); `vpc` (VPC). Note that the valid values are subject to the current link.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessType *string `json:"AccessType,omitempty" name:"AccessType"`
+
+	// Database type, such as `mysql`, `redis`, `mongodb`, `postgresql`, `mariadb`, and `percona`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DatabaseType *string `json:"DatabaseType,omitempty" name:"DatabaseType"`
+
+	// Database information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Info []*Endpoint `json:"Info,omitempty" name:"Info"`
+}
+
 type SyncDetailInfo struct {
 	// Total number of steps
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4578,6 +4642,26 @@ type TagItem struct {
 	// Tag value
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TopicRule struct {
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Topic partitioning policy. If the topic sync policy is delivering data to multiple custom topics (`TopicType` = `Multi`), the value of this parameter is `Random` (deliver to a random partition). If the topic sync policy is delivering all data to a single topic (`TopicType` = `Single`), this parameter has three valid values: `AllInPartitionZero` (deliver all data to partition0), `PartitionByTable` (partition by table name), `PartitionByTableAndKey` (partition by table name and primary key).
+	PartitionType *string `json:"PartitionType,omitempty" name:"PartitionType"`
+
+	// Database name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
+	DbMatchMode *string `json:"DbMatchMode,omitempty" name:"DbMatchMode"`
+
+	// Database name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
+	DbName *string `json:"DbName,omitempty" name:"DbName"`
+
+	// Table name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
+	TableMatchMode *string `json:"TableMatchMode,omitempty" name:"TableMatchMode"`
+
+	// Table name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
 }
 
 type TradeInfo struct {

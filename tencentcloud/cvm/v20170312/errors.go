@@ -365,6 +365,9 @@ const (
 	// Invalid AppID
 	INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 
+	// Unsupported boot mode.
+	INVALIDPARAMETERVALUE_INVALIDBOOTMODE = "InvalidParameterValue.InvalidBootMode"
+
 	// You don’t have the write permission to the bucket.
 	INVALIDPARAMETERVALUE_INVALIDBUCKETPERMISSIONFOREXPORT = "InvalidParameterValue.InvalidBucketPermissionForExport"
 
@@ -461,11 +464,17 @@ const (
 	// The subnet is not in the CDC cluster.
 	INVALIDPARAMETERVALUE_NOTCDCSUBNET = "InvalidParameterValue.NotCdcSubnet"
 
-	// 
+	// The parameter value is required.
 	INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 
 	// Unsupported operation.
 	INVALIDPARAMETERVALUE_NOTSUPPORTED = "InvalidParameterValue.NotSupported"
+
+	// Preheating is not supported on this model.
+	INVALIDPARAMETERVALUE_PREHEATNOTSUPPORTEDINSTANCETYPE = "InvalidParameterValue.PreheatNotSupportedInstanceType"
+
+	// Preheating is not supported in this availability zone.
+	INVALIDPARAMETERVALUE_PREHEATNOTSUPPORTEDZONE = "InvalidParameterValue.PreheatNotSupportedZone"
 
 	//  Invalid parameter value: invalid parameter value range.
 	INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
@@ -586,6 +595,9 @@ const (
 
 	// The number of instance launch template versions exceeds the limit.
 	LIMITEXCEEDED_LAUNCHTEMPLATEVERSIONQUOTA = "LimitExceeded.LaunchTemplateVersionQuota"
+
+	// Reached the upper limit for preheating in this availability zone. Remove some snapshots first.
+	LIMITEXCEEDED_PREHEATIMAGESNAPSHOTOUTOFQUOTA = "LimitExceeded.PreheatImageSnapshotOutOfQuota"
 
 	// Your quota for monthly-subscribed instances is used up. Increase your quota and try again.
 	LIMITEXCEEDED_PREPAYQUOTA = "LimitExceeded.PrepayQuota"
@@ -731,7 +743,7 @@ const (
 	// You cannot change the model of a heterogeneous instance.
 	UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
 
-	// 
+	// Instances with hibernation disabled are not supported.
 	UNSUPPORTEDOPERATION_HIBERNATIONFORNORMALINSTANCE = "UnsupportedOperation.HibernationForNormalInstance"
 
 	// IPv6 instances cannot be migrated from Classiclink to VPC.
@@ -871,6 +883,9 @@ const (
 
 	// The original instance type is invalid.
 	UNSUPPORTEDOPERATION_ORIGINALINSTANCETYPEINVALID = "UnsupportedOperation.OriginalInstanceTypeInvalid"
+
+	// Image preheating is not supported under your account.
+	UNSUPPORTEDOPERATION_PREHEATIMAGE = "UnsupportedOperation.PreheatImage"
 
 	// Public images and market images cannot be exported.
 	UNSUPPORTEDOPERATION_PUBLICIMAGEEXPORTUNSUPPORTED = "UnsupportedOperation.PublicImageExportUnsupported"

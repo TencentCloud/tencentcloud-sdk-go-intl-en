@@ -405,6 +405,9 @@ type CreateInstanceRequestParams struct {
 
 	// Whether to sync TCR cloud tags to the COS bucket
 	SyncTag *bool `json:"SyncTag,omitempty" name:"SyncTag"`
+
+	// Whether to enable the COS Multi-AZ feature
+	EnableCosMAZ *bool `json:"EnableCosMAZ,omitempty" name:"EnableCosMAZ"`
 }
 
 type CreateInstanceRequest struct {
@@ -427,6 +430,9 @@ type CreateInstanceRequest struct {
 
 	// Whether to sync TCR cloud tags to the COS bucket
 	SyncTag *bool `json:"SyncTag,omitempty" name:"SyncTag"`
+
+	// Whether to enable the COS Multi-AZ feature
+	EnableCosMAZ *bool `json:"EnableCosMAZ,omitempty" name:"EnableCosMAZ"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -447,6 +453,7 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "RegistryChargeType")
 	delete(f, "RegistryChargePrepaid")
 	delete(f, "SyncTag")
+	delete(f, "EnableCosMAZ")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstanceRequest has unknown keys!", "")
 	}
@@ -2899,97 +2906,6 @@ func (r *DescribeInstanceAllNamespacesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstanceAllNamespacesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeInstanceAllRequestParams struct {
-	// List of instance IDs (if it is empty,
-	// it indicates to get all instances under the current account)
-	Registryids []*string `json:"Registryids,omitempty" name:"Registryids"`
-
-	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number of output entries. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filters
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// Whether to get the instances in all regions. Default value: False.
-	AllRegion *bool `json:"AllRegion,omitempty" name:"AllRegion"`
-}
-
-type DescribeInstanceAllRequest struct {
-	*tchttp.BaseRequest
-	
-	// List of instance IDs (if it is empty,
-	// it indicates to get all instances under the current account)
-	Registryids []*string `json:"Registryids,omitempty" name:"Registryids"`
-
-	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Maximum number of output entries. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Filters
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// Whether to get the instances in all regions. Default value: False.
-	AllRegion *bool `json:"AllRegion,omitempty" name:"AllRegion"`
-}
-
-func (r *DescribeInstanceAllRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeInstanceAllRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Registryids")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
-	delete(f, "AllRegion")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceAllRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeInstanceAllResponseParams struct {
-	// Total number of instances
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// List of instances
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Registries []*Registry `json:"Registries,omitempty" name:"Registries"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeInstanceAllResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeInstanceAllResponseParams `json:"Response"`
-}
-
-func (r *DescribeInstanceAllResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeInstanceAllResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

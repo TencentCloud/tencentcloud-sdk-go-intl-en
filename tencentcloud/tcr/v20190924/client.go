@@ -993,6 +993,7 @@ func NewCreateSignaturePolicyResponse() (response *CreateSignaturePolicyResponse
 // This API is used to create an image signature policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateSignaturePolicy(request *CreateSignaturePolicyRequest) (response *CreateSignaturePolicyResponse, err error) {
@@ -1003,6 +1004,7 @@ func (c *Client) CreateSignaturePolicy(request *CreateSignaturePolicyRequest) (r
 // This API is used to create an image signature policy.
 //
 // error code that may be returned:
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateSignaturePolicyWithContext(ctx context.Context, request *CreateSignaturePolicyRequest) (response *CreateSignaturePolicyResponse, err error) {
@@ -2661,70 +2663,6 @@ func (c *Client) DescribeImmutableTagRulesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeImmutableTagRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeInstanceAllRequest() (request *DescribeInstanceAllRequest) {
-    request = &DescribeInstanceAllRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcr", APIVersion, "DescribeInstanceAll")
-    
-    
-    return
-}
-
-func NewDescribeInstanceAllResponse() (response *DescribeInstanceAllResponse) {
-    response = &DescribeInstanceAllResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeInstanceAll
-// This API is used to query the information of all instances.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeInstanceAll(request *DescribeInstanceAllRequest) (response *DescribeInstanceAllResponse, err error) {
-    return c.DescribeInstanceAllWithContext(context.Background(), request)
-}
-
-// DescribeInstanceAll
-// This API is used to query the information of all instances.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DbError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINSUFFICIENT_ERRORINSTANCENOTRUNNING = "ResourceInsufficient.ErrorInstanceNotRunning"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeInstanceAllWithContext(ctx context.Context, request *DescribeInstanceAllRequest) (response *DescribeInstanceAllResponse, err error) {
-    if request == nil {
-        request = NewDescribeInstanceAllRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeInstanceAll require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeInstanceAllResponse()
     err = c.Send(request, response)
     return
 }

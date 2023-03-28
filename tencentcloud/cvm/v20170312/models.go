@@ -21,14 +21,14 @@ import (
 )
 
 type ActionTimer struct {
-	// Additional data
-	Externals *Externals `json:"Externals,omitempty" name:"Externals"`
-
 	// Timer name. Currently `TerminateInstances` is the only supported value.
 	TimerAction *string `json:"TimerAction,omitempty" name:"TimerAction"`
 
-	// Execution time, which must be at least 5 minutes later than the current time. For example, 2018-5-29 11:26:40.
+	// Execution time, which follows the ISO8601 standard and uses UTC time. It must be at least 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
 	ActionTime *string `json:"ActionTime,omitempty" name:"ActionTime"`
+
+	// Additional data
+	Externals *Externals `json:"Externals,omitempty" name:"Externals"`
 }
 
 // Predefined struct for user
@@ -3582,6 +3582,9 @@ type ImportImageRequestParams struct {
 	// `TencentCloud`: Tencent Cloud official license
 	// `BYOL`: Bring Your Own License
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
+
+	// Boot mode
+	BootMode *string `json:"BootMode,omitempty" name:"BootMode"`
 }
 
 type ImportImageRequest struct {
@@ -3619,6 +3622,9 @@ type ImportImageRequest struct {
 	// `TencentCloud`: Tencent Cloud official license
 	// `BYOL`: Bring Your Own License
 	LicenseType *string `json:"LicenseType,omitempty" name:"LicenseType"`
+
+	// Boot mode
+	BootMode *string `json:"BootMode,omitempty" name:"BootMode"`
 }
 
 func (r *ImportImageRequest) ToJsonString() string {
@@ -3643,6 +3649,7 @@ func (r *ImportImageRequest) FromJsonString(s string) error {
 	delete(f, "Force")
 	delete(f, "TagSpecification")
 	delete(f, "LicenseType")
+	delete(f, "BootMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImportImageRequest has unknown keys!", "")
 	}
@@ -7062,6 +7069,9 @@ type TagSpecification struct {
 type TerminateInstancesRequestParams struct {
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Release the monthly subscribed data disks attached to the instance
+	ReleasePrepaidDataDisks *bool `json:"ReleasePrepaidDataDisks,omitempty" name:"ReleasePrepaidDataDisks"`
 }
 
 type TerminateInstancesRequest struct {
@@ -7069,6 +7079,9 @@ type TerminateInstancesRequest struct {
 	
 	// Instance ID(s). To obtain the instance IDs, you can call [`DescribeInstances`](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and look for `InstanceId` in the response. The maximum number of instances in each request is 100.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Release the monthly subscribed data disks attached to the instance
+	ReleasePrepaidDataDisks *bool `json:"ReleasePrepaidDataDisks,omitempty" name:"ReleasePrepaidDataDisks"`
 }
 
 func (r *TerminateInstancesRequest) ToJsonString() string {
@@ -7084,6 +7097,7 @@ func (r *TerminateInstancesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceIds")
+	delete(f, "ReleasePrepaidDataDisks")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateInstancesRequest has unknown keys!", "")
 	}
