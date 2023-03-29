@@ -245,6 +245,10 @@ type CertificateExtra struct {
 	// Certificate ID of the new order
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	RenewOrder *string `json:"RenewOrder,omitempty" name:"RenewOrder"`
+
+	// Whether the certificate is a Chinese SM certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SMCert *int64 `json:"SMCert,omitempty" name:"SMCert"`
 }
 
 type Certificates struct {
@@ -260,8 +264,10 @@ type Certificates struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	From *string `json:"From,omitempty" name:"From"`
 
-	// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The certificate plan type. Valid values:
+	// null: Certificates uploaded by users (no plan type)
+	// `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 	// Certificate type. `CA`: client certificate; `SVR`: server certificate
@@ -1907,6 +1913,9 @@ type UploadCertificateRequestParams struct {
 
 
 	CertificateUse *string `json:"CertificateUse,omitempty" name:"CertificateUse"`
+
+	// Whether a certificate can be repeatedly uploaded.
+	Repeatable *bool `json:"Repeatable,omitempty" name:"Repeatable"`
 }
 
 type UploadCertificateRequest struct {
@@ -1928,6 +1937,9 @@ type UploadCertificateRequest struct {
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	CertificateUse *string `json:"CertificateUse,omitempty" name:"CertificateUse"`
+
+	// Whether a certificate can be repeatedly uploaded.
+	Repeatable *bool `json:"Repeatable,omitempty" name:"Repeatable"`
 }
 
 func (r *UploadCertificateRequest) ToJsonString() string {
@@ -1948,6 +1960,7 @@ func (r *UploadCertificateRequest) FromJsonString(s string) error {
 	delete(f, "Alias")
 	delete(f, "ProjectId")
 	delete(f, "CertificateUse")
+	delete(f, "Repeatable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadCertificateRequest has unknown keys!", "")
 	}
@@ -1958,6 +1971,10 @@ func (r *UploadCertificateRequest) FromJsonString(s string) error {
 type UploadCertificateResponseParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// The ID of the repeatedly uploaded certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RepeatCertId *string `json:"RepeatCertId,omitempty" name:"RepeatCertId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

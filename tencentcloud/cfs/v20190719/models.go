@@ -33,7 +33,7 @@ type AutoSnapshotPolicyInfo struct {
 	// Number of bound file systems
 	FileSystemNums *uint64 `json:"FileSystemNums,omitempty" name:"FileSystemNums"`
 
-	// The day of the week on which to regularly back up the snapshot
+	// The specific day of the week on which to create a snapshot. This parameter is mutually exclusive with `DayOfMonth` and `IntervalDays`.
 	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
 
 	// The hour of a day at which to regularly back up the snapshot
@@ -59,6 +59,14 @@ type AutoSnapshotPolicyInfo struct {
 
 	// File system information
 	FileSystems []*FileSystemByPolicy `json:"FileSystems,omitempty" name:"FileSystems"`
+
+	// The specific day of the month on which to create a snapshot. This parameter is mutually exclusive with `DayOfWeek` and `IntervalDays`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
+
+	// The snapshot interval (1 to 365 days). This parameter is mutually exclusive with `DayOfWeek` and `DayOfMonth`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IntervalDays *uint64 `json:"IntervalDays,omitempty" name:"IntervalDays"`
 }
 
 type AvailableProtoStatus struct {
@@ -180,33 +188,45 @@ func (r *BindAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAutoSnapshotPolicyRequestParams struct {
-	// The day of the week on which to repeat the snapshot operation
-	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
-
 	// The time point when to repeat the snapshot operation
 	Hour *string `json:"Hour,omitempty" name:"Hour"`
 
 	// Policy name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
+	// The day of the week on which to repeat the snapshot operation
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
 	// Snapshot retention period
 	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+
+	// The specific day (day 1 to day 31) of the month on which to create a snapshot.
+	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
+
+	// The snapshot interval, in days.
+	IntervalDays *uint64 `json:"IntervalDays,omitempty" name:"IntervalDays"`
 }
 
 type CreateAutoSnapshotPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The day of the week on which to repeat the snapshot operation
-	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
-
 	// The time point when to repeat the snapshot operation
 	Hour *string `json:"Hour,omitempty" name:"Hour"`
 
 	// Policy name
 	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
 
+	// The day of the week on which to repeat the snapshot operation
+	DayOfWeek *string `json:"DayOfWeek,omitempty" name:"DayOfWeek"`
+
 	// Snapshot retention period
 	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
+
+	// The specific day (day 1 to day 31) of the month on which to create a snapshot.
+	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
+
+	// The snapshot interval, in days.
+	IntervalDays *uint64 `json:"IntervalDays,omitempty" name:"IntervalDays"`
 }
 
 func (r *CreateAutoSnapshotPolicyRequest) ToJsonString() string {
@@ -221,10 +241,12 @@ func (r *CreateAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "DayOfWeek")
 	delete(f, "Hour")
 	delete(f, "PolicyName")
+	delete(f, "DayOfWeek")
 	delete(f, "AliveDays")
+	delete(f, "DayOfMonth")
+	delete(f, "IntervalDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoSnapshotPolicyRequest has unknown keys!", "")
 	}
@@ -1876,6 +1898,13 @@ type FileSystemInfo struct {
 
 	// File system tag list
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// The lifecycle management status of a file system.
+	TieringState *string `json:"TieringState,omitempty" name:"TieringState"`
+
+	// The details about tiered storage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TieringDetail *TieringDetailInfo `json:"TieringDetail,omitempty" name:"TieringDetail"`
 }
 
 type Filter struct {
@@ -2097,6 +2126,10 @@ type TagInfo struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
+type TieringDetailInfo struct {
+
+}
+
 // Predefined struct for user
 type UnbindAutoSnapshotPolicyRequestParams struct {
 	// List of IDs of the file systems to be unbound, separated by comma
@@ -2180,6 +2213,12 @@ type UpdateAutoSnapshotPolicyRequestParams struct {
 
 	// Whether to activate the scheduled snapshot feature
 	IsActivated *uint64 `json:"IsActivated,omitempty" name:"IsActivated"`
+
+	// The specific day of the month on which to create a snapshot. This parameter is mutually exclusive with `DayOfWeek`.
+	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
+
+	// The snapshot interval. This parameter is mutually exclusive with `DayOfWeek` and `DayOfMonth`.
+	IntervalDays *uint64 `json:"IntervalDays,omitempty" name:"IntervalDays"`
 }
 
 type UpdateAutoSnapshotPolicyRequest struct {
@@ -2202,6 +2241,12 @@ type UpdateAutoSnapshotPolicyRequest struct {
 
 	// Whether to activate the scheduled snapshot feature
 	IsActivated *uint64 `json:"IsActivated,omitempty" name:"IsActivated"`
+
+	// The specific day of the month on which to create a snapshot. This parameter is mutually exclusive with `DayOfWeek`.
+	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
+
+	// The snapshot interval. This parameter is mutually exclusive with `DayOfWeek` and `DayOfMonth`.
+	IntervalDays *uint64 `json:"IntervalDays,omitempty" name:"IntervalDays"`
 }
 
 func (r *UpdateAutoSnapshotPolicyRequest) ToJsonString() string {
@@ -2222,6 +2267,8 @@ func (r *UpdateAutoSnapshotPolicyRequest) FromJsonString(s string) error {
 	delete(f, "Hour")
 	delete(f, "AliveDays")
 	delete(f, "IsActivated")
+	delete(f, "DayOfMonth")
+	delete(f, "IntervalDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAutoSnapshotPolicyRequest has unknown keys!", "")
 	}

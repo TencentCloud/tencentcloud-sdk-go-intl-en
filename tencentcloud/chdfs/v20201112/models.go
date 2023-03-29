@@ -237,6 +237,10 @@ func (r *CreateAccessRulesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAccessRulesResponseParams struct {
+	// List of permission rules
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessRules []*AccessRule `json:"AccessRules,omitempty" name:"AccessRules"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -1072,6 +1076,14 @@ type DescribeFileSystemResponseParams struct {
 	// Used STANDARD_IA capacity of COS, in bytes
 	// Note: this field may return `null`, indicating that no valid value was found.
 	DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitempty" name:"DegradeCapacityUsed"`
+
+	// COS DEEP ARCHIVE storage usage, in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeepArchiveCapacityUsed *uint64 `json:"DeepArchiveCapacityUsed,omitempty" name:"DeepArchiveCapacityUsed"`
+
+	// COS INTELLIGENT TIERING storage usage, in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IntelligentCapacityUsed *uint64 `json:"IntelligentCapacityUsed,omitempty" name:"IntelligentCapacityUsed"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2034,6 +2046,6 @@ type Transition struct {
 	// Trigger time (in days)
 	Days *uint64 `json:"Days,omitempty" name:"Days"`
 
-	// Transition type (`1`: transition to ARCHIVE; `2`: delete; `3`: transition to STANDARD_IA)
+	// Transition type (`1`: ARCHIVE; `2`: Delete; `3`: STANDARD_IA; `4`: DEEP ARCHIVE; `5`: INTELLIGENT TIERING)
 	Type *uint64 `json:"Type,omitempty" name:"Type"`
 }

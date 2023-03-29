@@ -136,6 +136,8 @@ func NewCreateAccessGroupResponse() (response *CreateAccessGroupResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTINSUFFICIENTBALANCE = "FailedOperation.AccountInsufficientBalance"
+//  FAILEDOPERATION_ACCOUNTUNAUTHENTICATED = "FailedOperation.AccountUnauthenticated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -157,6 +159,8 @@ func (c *Client) CreateAccessGroup(request *CreateAccessGroupRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTINSUFFICIENTBALANCE = "FailedOperation.AccountInsufficientBalance"
+//  FAILEDOPERATION_ACCOUNTUNAUTHENTICATED = "FailedOperation.AccountUnauthenticated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -278,6 +282,8 @@ func NewCreateFileSystemResponse() (response *CreateFileSystemResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTINSUFFICIENTBALANCE = "FailedOperation.AccountInsufficientBalance"
+//  FAILEDOPERATION_ACCOUNTUNAUTHENTICATED = "FailedOperation.AccountUnauthenticated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -298,6 +304,8 @@ func (c *Client) CreateFileSystem(request *CreateFileSystemRequest) (response *C
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTINSUFFICIENTBALANCE = "FailedOperation.AccountInsufficientBalance"
+//  FAILEDOPERATION_ACCOUNTUNAUTHENTICATED = "FailedOperation.AccountUnauthenticated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -354,7 +362,6 @@ func NewCreateLifeCycleRulesResponse() (response *CreateLifeCycleRulesResponse) 
 //  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_FILESYSTEMNOTEXISTS = "ResourceNotFound.FileSystemNotExists"
@@ -375,7 +382,6 @@ func (c *Client) CreateLifeCycleRules(request *CreateLifeCycleRulesRequest) (res
 //  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_FILESYSTEMNOTEXISTS = "ResourceNotFound.FileSystemNotExists"
@@ -1185,7 +1191,6 @@ func NewDescribeLifeCycleRulesResponse() (response *DescribeLifeCycleRulesRespon
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_FILESYSTEMNOTEXISTS = "ResourceNotFound.FileSystemNotExists"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -1203,7 +1208,6 @@ func (c *Client) DescribeLifeCycleRules(request *DescribeLifeCycleRulesRequest) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_FILESYSTEMNOTEXISTS = "ResourceNotFound.FileSystemNotExists"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
