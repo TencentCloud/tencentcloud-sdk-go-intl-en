@@ -198,13 +198,13 @@ type AddInstancesRequestParams struct {
 	// Number of added read-only instances. Value range: (0,16].
 	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitempty" name:"ReadOnlyCount"`
 
-	// Instance group ID, which is used when you add an instance to an existing RO group. If this parameter is left empty, an RO group will be created. We recommend you not pass in this value on the current version.
+	// Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
 	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
 
-	// VPC ID. This parameter has been disused.
+	// VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID. If `VpcId` is set, `SubnetId` is required. This parameter has been disused.
+	// Subnet ID. If `VpcId` is set, `SubnetId` is required.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// The port used when adding an RO group. Value range: [0,65535).
@@ -231,6 +231,9 @@ type AddInstancesRequestParams struct {
 
 	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
 	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitempty" name:"InstanceParams"`
+
+	// Security group ID. You can specify an security group when creating a read-only instance.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 type AddInstancesRequest struct {
@@ -248,13 +251,13 @@ type AddInstancesRequest struct {
 	// Number of added read-only instances. Value range: (0,16].
 	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitempty" name:"ReadOnlyCount"`
 
-	// Instance group ID, which is used when you add an instance to an existing RO group. If this parameter is left empty, an RO group will be created. We recommend you not pass in this value on the current version.
+	// Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
 	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
 
-	// VPC ID. This parameter has been disused.
+	// VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID. If `VpcId` is set, `SubnetId` is required. This parameter has been disused.
+	// Subnet ID. If `VpcId` is set, `SubnetId` is required.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
 	// The port used when adding an RO group. Value range: [0,65535).
@@ -281,6 +284,9 @@ type AddInstancesRequest struct {
 
 	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
 	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitempty" name:"InstanceParams"`
+
+	// Security group ID. You can specify an security group when creating a read-only instance.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 }
 
 func (r *AddInstancesRequest) ToJsonString() string {
@@ -310,6 +316,7 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DealMode")
 	delete(f, "ParamTemplateId")
 	delete(f, "InstanceParams")
+	delete(f, "SecurityGroupIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddInstancesRequest has unknown keys!", "")
 	}
@@ -1646,7 +1653,8 @@ type CynosdbInstance struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
 
-
+	// Instance network information
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	InstanceNetInfo []*InstanceNetInfo `json:"InstanceNetInfo,omitempty" name:"InstanceNetInfo"`
 }
 
@@ -4361,37 +4369,47 @@ type InstanceInitInfo struct {
 }
 
 type InstanceNetInfo struct {
-
+	// Network type
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceGroupType *string `json:"InstanceGroupType,omitempty" name:"InstanceGroupType"`
 
-
+	// Instance group ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceGroupId *string `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
 
-
+	// VPC ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-
+	// Subnet ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-
+	// Network type
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
 
-
+	// VPC IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
 
-
+	// VPC port
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
 
-
+	// Public network domain name
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
 
 
 	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
 
-
+	// Public network port
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
 
-
+	// Public network status
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
 }
 

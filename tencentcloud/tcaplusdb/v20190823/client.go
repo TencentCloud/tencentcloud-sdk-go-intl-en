@@ -1063,6 +1063,7 @@ func NewDescribeMachineResponse() (response *DescribeMachineResponse) {
 //  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeMachine(request *DescribeMachineRequest) (response *DescribeMachineResponse, err error) {
     return c.DescribeMachineWithContext(context.Background(), request)
 }
@@ -1075,6 +1076,7 @@ func (c *Client) DescribeMachine(request *DescribeMachineRequest) (response *Des
 //  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeMachineWithContext(ctx context.Context, request *DescribeMachineRequest) (response *DescribeMachineResponse, err error) {
     if request == nil {
         request = NewDescribeMachineRequest()

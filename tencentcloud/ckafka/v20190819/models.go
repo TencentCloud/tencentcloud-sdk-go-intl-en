@@ -745,6 +745,91 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDatahubTopicRequestParams struct {
+	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Number of partitions, which should be greater than 0.
+	PartitionNum *int64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+
+	// Message retention period in milliseconds. The current minimum value is 60,000 ms.
+	RetentionMs *int64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Topic remarks, which are a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Tag list
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+type CreateDatahubTopicRequest struct {
+	*tchttp.BaseRequest
+	
+	// Topic name, which is a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Number of partitions, which should be greater than 0.
+	PartitionNum *int64 `json:"PartitionNum,omitempty" name:"PartitionNum"`
+
+	// Message retention period in milliseconds. The current minimum value is 60,000 ms.
+	RetentionMs *int64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Topic remarks, which are a string of up to 128 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Tag list
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *CreateDatahubTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatahubTopicRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "PartitionNum")
+	delete(f, "RetentionMs")
+	delete(f, "Note")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDatahubTopicRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDatahubTopicResponseParams struct {
+	// Returned creation result
+	Result *DatahubTopicResp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDatahubTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDatahubTopicResponseParams `json:"Response"`
+}
+
+func (r *CreateDatahubTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatahubTopicResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateInstancePostRequestParams struct {
 	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
@@ -1281,6 +1366,11 @@ type DatahubTopicDTO struct {
 
 	// Status (`1`: In use; `2`: Deleting)
 	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+type DatahubTopicResp struct {
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
 }
 
 // Predefined struct for user

@@ -169,12 +169,12 @@ type ClusterInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ApiAccessIpv6 *string `json:"ApiAccessIpv6,omitempty" name:"ApiAccessIpv6"`
 
-	// Cluster type
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Cluster type. Valid values: `0` and `1` (shared cluster), `2` (dedicated cluster).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterType *int64 `json:"ClusterType,omitempty" name:"ClusterType"`
 
-	// Cluster status
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Cluster status. Valid values: `0` (Running), `1` (Isolated. This status is caused by overdue payments), `2` (To be repossessed. This status is caused when the cluster is actively deleted.),·`3` (To be released. The resources occupied by the table can be released in this status.), `4` (Modifying).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterStatus *int64 `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
 
 	// Read CU
@@ -223,6 +223,10 @@ type ClusterInfo struct {
 	// Whether the expiration policy of cluster Ulog backup file is read-only. `0`: Yes; `1`: No.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	IsReadOnlyUlogBackupExpireDay *uint64 `json:"IsReadOnlyUlogBackupExpireDay,omitempty" name:"IsReadOnlyUlogBackupExpireDay"`
+
+	// restproxy Status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RestProxyStatus *int64 `json:"RestProxyStatus,omitempty" name:"RestProxyStatus"`
 }
 
 // Predefined struct for user
@@ -3615,6 +3619,10 @@ type ProxyDetailInfo struct {
 
 	// The speed of processing delayed request packets
 	SlowProcessSpeed *int64 `json:"SlowProcessSpeed,omitempty" name:"SlowProcessSpeed"`
+
+	// Version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitempty" name:"Version"`
 }
 
 type ProxyMachineInfo struct {
@@ -3878,6 +3886,10 @@ type ServerDetailInfo struct {
 
 	// The number of writes
 	WriteNum *int64 `json:"WriteNum,omitempty" name:"WriteNum"`
+
+	// Version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Version *string `json:"Version,omitempty" name:"Version"`
 }
 
 type ServerMachineInfo struct {
@@ -4153,6 +4165,21 @@ type TableGroupInfo struct {
 
 	// Total table storage capacity in MB in table group
 	TotalSize *uint64 `json:"TotalSize,omitempty" name:"TotalSize"`
+
+	// The number of days before the backup files of the Txh tables expire and are deleted.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TxhBackupExpireDay *uint64 `json:"TxhBackupExpireDay,omitempty" name:"TxhBackupExpireDay"`
+
+	// Whether MySQL load rebalancing is enabled. Valid values: `0` (Disabled), `1` (Enabling), `2` (Enabled).
+	EnableMysql *uint64 `json:"EnableMysql,omitempty" name:"EnableMysql"`
+
+	// MySQL load rebalancing vip
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MysqlConnIp *string `json:"MysqlConnIp,omitempty" name:"MysqlConnIp"`
+
+	// MySQL load rebalancing vport
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MysqlConnPort *uint64 `json:"MysqlConnPort,omitempty" name:"MysqlConnPort"`
 }
 
 type TableInfoNew struct {
