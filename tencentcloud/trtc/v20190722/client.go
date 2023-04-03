@@ -356,8 +356,6 @@ func NewDescribeMixTranscodingUsageResponse() (response *DescribeMixTranscodingU
 // DescribeMixTranscodingUsage
 // This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
 //
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
-//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -377,8 +375,6 @@ func (c *Client) DescribeMixTranscodingUsage(request *DescribeMixTranscodingUsag
 
 // DescribeMixTranscodingUsage
 // This API is used to query your usage of TRTC’s On-Cloud MixTranscoding service.
-//
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -430,8 +426,6 @@ func NewDescribeRecordingUsageResponse() (response *DescribeRecordingUsageRespon
 // DescribeRecordingUsage
 // This API is used to query your TRTC recording usage.
 //
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
-//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -451,8 +445,6 @@ func (c *Client) DescribeRecordingUsage(request *DescribeRecordingUsageRequest) 
 
 // DescribeRecordingUsage
 // This API is used to query your TRTC recording usage.
-//
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -504,8 +496,6 @@ func NewDescribeRelayUsageResponse() (response *DescribeRelayUsageResponse) {
 // DescribeRelayUsage
 // This API is used to query your usage of TRTC’s relay to CDN service.
 //
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
-//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -525,8 +515,6 @@ func (c *Client) DescribeRelayUsage(request *DescribeRelayUsageRequest) (respons
 
 // DescribeRelayUsage
 // This API is used to query your usage of TRTC’s relay to CDN service.
-//
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -557,6 +545,70 @@ func (c *Client) DescribeRelayUsageWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeTrtcRoomUsageRequest() (request *DescribeTrtcRoomUsageRequest) {
+    request = &DescribeTrtcRoomUsageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTrtcRoomUsage")
+    
+    
+    return
+}
+
+func NewDescribeTrtcRoomUsageResponse() (response *DescribeTrtcRoomUsageResponse) {
+    response = &DescribeTrtcRoomUsageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeTrtcRoomUsage
+// This API is used to query usage data grouped by room.
+//
+// - The queried period cannot exceed 24 hours. If the period spans two different days, the data returned may not be accurate due to a delay in data collection. You can make multiple calls to query the usage on different days.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is one call every 15 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTrtcRoomUsage(request *DescribeTrtcRoomUsageRequest) (response *DescribeTrtcRoomUsageResponse, err error) {
+    return c.DescribeTrtcRoomUsageWithContext(context.Background(), request)
+}
+
+// DescribeTrtcRoomUsage
+// This API is used to query usage data grouped by room.
+//
+// - The queried period cannot exceed 24 hours. If the period spans two different days, the data returned may not be accurate due to a delay in data collection. You can make multiple calls to query the usage on different days.
+//
+// - You can use this API to query your historical usage or to reconcile data, but we do not recommend you use it for crucial business logic.
+//
+// - The rate limit of this API is one call every 15 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTrtcRoomUsageWithContext(ctx context.Context, request *DescribeTrtcRoomUsageRequest) (response *DescribeTrtcRoomUsageResponse, err error) {
+    if request == nil {
+        request = NewDescribeTrtcRoomUsageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTrtcRoomUsage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTrtcRoomUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTrtcUsageRequest() (request *DescribeTrtcUsageRequest) {
     request = &DescribeTrtcUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -578,8 +630,6 @@ func NewDescribeTrtcUsageResponse() (response *DescribeTrtcUsageResponse) {
 // DescribeTrtcUsage
 // This API is used to query your TRTC audio/video duration.
 //
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
-//
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
 // - The period queried per request cannot be longer than 31 days.
@@ -599,8 +649,6 @@ func (c *Client) DescribeTrtcUsage(request *DescribeTrtcUsageRequest) (response 
 
 // DescribeTrtcUsage
 // This API is used to query your TRTC audio/video duration.
-//
-// Note: This API is not available for applications whose SDKAppID starts with `14`.
 //
 // - If the period queried is one day or shorter, the statistics returned are on a five-minute basis. If the period queried is longer than one day, the statistics returned are on a daily basis.
 //
@@ -1182,13 +1230,13 @@ func NewStartPublishCdnStreamResponse() (response *StartPublishCdnStreamResponse
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CRUNSUPPORTMETHOD = "FailedOperation.CRUnsupportMethod"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (response *StartPublishCdnStreamResponse, err error) {
     return c.StartPublishCdnStreamWithContext(context.Background(), request)
 }
@@ -1244,13 +1292,13 @@ func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (r
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CRUNSUPPORTMETHOD = "FailedOperation.CRUnsupportMethod"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) StartPublishCdnStreamWithContext(ctx context.Context, request *StartPublishCdnStreamRequest) (response *StartPublishCdnStreamResponse, err error) {
     if request == nil {
         request = NewStartPublishCdnStreamRequest()
@@ -1360,12 +1408,11 @@ func NewUpdatePublishCdnStreamResponse() (response *UpdatePublishCdnStreamRespon
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CRUNSUPPORTMETHOD = "FailedOperation.CRUnsupportMethod"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpdatePublishCdnStream(request *UpdatePublishCdnStreamRequest) (response *UpdatePublishCdnStreamResponse, err error) {
     return c.UpdatePublishCdnStreamWithContext(context.Background(), request)
 }
@@ -1381,12 +1428,11 @@ func (c *Client) UpdatePublishCdnStream(request *UpdatePublishCdnStreamRequest) 
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CRUNSUPPORTMETHOD = "FailedOperation.CRUnsupportMethod"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_CRINTERNALERROR = "InternalError.CRInternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) UpdatePublishCdnStreamWithContext(ctx context.Context, request *UpdatePublishCdnStreamRequest) (response *UpdatePublishCdnStreamResponse, err error) {
     if request == nil {
         request = NewUpdatePublishCdnStreamRequest()

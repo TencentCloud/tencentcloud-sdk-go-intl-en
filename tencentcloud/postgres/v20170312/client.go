@@ -433,6 +433,64 @@ func (c *Client) CloseServerlessDBExtranetAccessWithContext(ctx context.Context,
     return
 }
 
+func NewCreateBaseBackupRequest() (request *CreateBaseBackupRequest) {
+    request = &CreateBaseBackupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "CreateBaseBackup")
+    
+    
+    return
+}
+
+func NewCreateBaseBackupResponse() (response *CreateBaseBackupResponse) {
+    response = &CreateBaseBackupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateBaseBackup
+// This API is used to create a full backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CreateBaseBackup(request *CreateBaseBackupRequest) (response *CreateBaseBackupResponse, err error) {
+    return c.CreateBaseBackupWithContext(context.Background(), request)
+}
+
+// CreateBaseBackup
+// This API is used to create a full backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) CreateBaseBackupWithContext(ctx context.Context, request *CreateBaseBackupRequest) (response *CreateBaseBackupResponse, err error) {
+    if request == nil {
+        request = NewCreateBaseBackupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBaseBackup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateBaseBackupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBInstanceNetworkAccessRequest() (request *CreateDBInstanceNetworkAccessRequest) {
     request = &CreateDBInstanceNetworkAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -931,6 +989,7 @@ func NewCreateParameterTemplateResponse() (response *CreateParameterTemplateResp
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) CreateParameterTemplate(request *CreateParameterTemplateRequest) (response *CreateParameterTemplateResponse, err error) {
     return c.CreateParameterTemplateWithContext(context.Background(), request)
 }
@@ -943,6 +1002,7 @@ func (c *Client) CreateParameterTemplate(request *CreateParameterTemplateRequest
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) CreateParameterTemplateWithContext(ctx context.Context, request *CreateParameterTemplateRequest) (response *CreateParameterTemplateResponse, err error) {
     if request == nil {
         request = NewCreateParameterTemplateRequest()
@@ -989,6 +1049,7 @@ func NewCreateReadOnlyDBInstanceResponse() (response *CreateReadOnlyDBInstanceRe
 //  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
 //  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
@@ -1070,6 +1131,7 @@ func (c *Client) CreateReadOnlyDBInstance(request *CreateReadOnlyDBInstanceReque
 //  FAILEDOPERATION_CREATEBASICNETWORKDENIEDERROR = "FailedOperation.CreateBasicNetworkDeniedError"
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_GETSUBNETERROR = "FailedOperation.GetSubnetError"
 //  FAILEDOPERATION_GETVPCINFOERROR = "FailedOperation.GetVpcInfoError"
@@ -1453,6 +1515,60 @@ func (c *Client) CreateServerlessDBInstanceWithContext(ctx context.Context, requ
     return
 }
 
+func NewDeleteBaseBackupRequest() (request *DeleteBaseBackupRequest) {
+    request = &DeleteBaseBackupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteBaseBackup")
+    
+    
+    return
+}
+
+func NewDeleteBaseBackupResponse() (response *DeleteBaseBackupResponse) {
+    response = &DeleteBaseBackupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteBaseBackup
+// This API is used to delete the specified full backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteBaseBackup(request *DeleteBaseBackupRequest) (response *DeleteBaseBackupResponse, err error) {
+    return c.DeleteBaseBackupWithContext(context.Background(), request)
+}
+
+// DeleteBaseBackup
+// This API is used to delete the specified full backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteBaseBackupWithContext(ctx context.Context, request *DeleteBaseBackupRequest) (response *DeleteBaseBackupResponse, err error) {
+    if request == nil {
+        request = NewDeleteBaseBackupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBaseBackup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBaseBackupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDBInstanceNetworkAccessRequest() (request *DeleteDBInstanceNetworkAccessRequest) {
     request = &DeleteDBInstanceNetworkAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1531,6 +1647,60 @@ func (c *Client) DeleteDBInstanceNetworkAccessWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDeleteDBInstanceNetworkAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLogBackupRequest() (request *DeleteLogBackupRequest) {
+    request = &DeleteLogBackupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DeleteLogBackup")
+    
+    
+    return
+}
+
+func NewDeleteLogBackupResponse() (response *DeleteLogBackupResponse) {
+    response = &DeleteLogBackupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteLogBackup
+// This API is used to delete the specified log backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteLogBackup(request *DeleteLogBackupRequest) (response *DeleteLogBackupResponse, err error) {
+    return c.DeleteLogBackupWithContext(context.Background(), request)
+}
+
+// DeleteLogBackup
+// This API is used to delete the specified log backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DeleteLogBackupWithContext(ctx context.Context, request *DeleteLogBackupRequest) (response *DeleteLogBackupResponse, err error) {
+    if request == nil {
+        request = NewDeleteLogBackupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLogBackup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLogBackupResponse()
     err = c.Send(request, response)
     return
 }
@@ -1959,6 +2129,118 @@ func (c *Client) DescribeAvailableRecoveryTimeWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeBackupDownloadURLRequest() (request *DescribeBackupDownloadURLRequest) {
+    request = &DescribeBackupDownloadURLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeBackupDownloadURL")
+    
+    
+    return
+}
+
+func NewDescribeBackupDownloadURLResponse() (response *DescribeBackupDownloadURLResponse) {
+    response = &DescribeBackupDownloadURLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupDownloadURL
+// This API is used to get the download URL of a backup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeBackupDownloadURL(request *DescribeBackupDownloadURLRequest) (response *DescribeBackupDownloadURLResponse, err error) {
+    return c.DescribeBackupDownloadURLWithContext(context.Background(), request)
+}
+
+// DescribeBackupDownloadURL
+// This API is used to get the download URL of a backup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeBackupDownloadURLWithContext(ctx context.Context, request *DescribeBackupDownloadURLRequest) (response *DescribeBackupDownloadURLResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupDownloadURLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupDownloadURL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupDownloadURLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest) {
+    request = &DescribeBackupOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeBackupOverview")
+    
+    
+    return
+}
+
+func NewDescribeBackupOverviewResponse() (response *DescribeBackupOverviewResponse) {
+    response = &DescribeBackupOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupOverview
+// This API is used to query the backup overview. It will return the current number and size of backups, free backup space size, and paid backup space size (all size values are in bytes).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
+    return c.DescribeBackupOverviewWithContext(context.Background(), request)
+}
+
+// DescribeBackupOverview
+// This API is used to query the backup overview. It will return the current number and size of backups, free backup space size, and paid backup space size (all size values are in bytes).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeBackupOverviewWithContext(ctx context.Context, request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupOverviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBackupPlansRequest() (request *DescribeBackupPlansRequest) {
     request = &DescribeBackupPlansRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2021,6 +2303,172 @@ func (c *Client) DescribeBackupPlansWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeBackupPlansResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupSummariesRequest() (request *DescribeBackupSummariesRequest) {
+    request = &DescribeBackupSummariesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeBackupSummaries")
+    
+    
+    return
+}
+
+func NewDescribeBackupSummariesResponse() (response *DescribeBackupSummariesResponse) {
+    response = &DescribeBackupSummariesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupSummaries
+// This API is used to query the backup statistics of an instance. It will return the number and size (bytes) of backups of the instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeBackupSummaries(request *DescribeBackupSummariesRequest) (response *DescribeBackupSummariesResponse, err error) {
+    return c.DescribeBackupSummariesWithContext(context.Background(), request)
+}
+
+// DescribeBackupSummaries
+// This API is used to query the backup statistics of an instance. It will return the number and size (bytes) of backups of the instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeBackupSummariesWithContext(ctx context.Context, request *DescribeBackupSummariesRequest) (response *DescribeBackupSummariesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupSummariesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupSummaries require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupSummariesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaseBackupsRequest() (request *DescribeBaseBackupsRequest) {
+    request = &DescribeBaseBackupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeBaseBackups")
+    
+    
+    return
+}
+
+func NewDescribeBaseBackupsResponse() (response *DescribeBaseBackupsResponse) {
+    response = &DescribeBaseBackupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBaseBackups
+// This API is used to query the list of full backups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeBaseBackups(request *DescribeBaseBackupsRequest) (response *DescribeBaseBackupsResponse, err error) {
+    return c.DescribeBaseBackupsWithContext(context.Background(), request)
+}
+
+// DescribeBaseBackups
+// This API is used to query the list of full backups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeBaseBackupsWithContext(ctx context.Context, request *DescribeBaseBackupsRequest) (response *DescribeBaseBackupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaseBackupsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaseBackups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaseBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClassesRequest() (request *DescribeClassesRequest) {
+    request = &DescribeClassesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeClasses")
+    
+    
+    return
+}
+
+func NewDescribeClassesResponse() (response *DescribeClassesResponse) {
+    response = &DescribeClassesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClasses
+// This API is used to query purchasable instance specifications.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_WHITELISTCONNECTERROR = "FailedOperation.WhitelistConnectError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeClasses(request *DescribeClassesRequest) (response *DescribeClassesResponse, err error) {
+    return c.DescribeClassesWithContext(context.Background(), request)
+}
+
+// DescribeClasses
+// This API is used to query purchasable instance specifications.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_WHITELISTCONNECTERROR = "FailedOperation.WhitelistConnectError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeClassesWithContext(ctx context.Context, request *DescribeClassesRequest) (response *DescribeClassesResponse, err error) {
+    if request == nil {
+        request = NewDescribeClassesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClasses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClassesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2512,6 +2960,7 @@ func NewDescribeDBInstancesResponse() (response *DescribeDBInstancesResponse) {
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -2546,6 +2995,7 @@ func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (respo
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
 //  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
 //  INVALIDPARAMETERVALUE_PARAMETERHANDLEERROR = "InvalidParameterValue.ParameterHandleError"
 //  INVALIDPARAMETERVALUE_REGIONNOTSUPPORTED = "InvalidParameterValue.RegionNotSupported"
 //  INVALIDPARAMETERVALUE_STRUCTPARSEFAILED = "InvalidParameterValue.StructParseFailed"
@@ -2643,6 +3093,60 @@ func (c *Client) DescribeDBSlowlogsWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeDBSlowlogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBVersionsRequest() (request *DescribeDBVersionsRequest) {
+    request = &DescribeDBVersionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDBVersions")
+    
+    
+    return
+}
+
+func NewDescribeDBVersionsResponse() (response *DescribeDBVersionsResponse) {
+    response = &DescribeDBVersionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBVersions
+// This API is used to query the list of supported database versions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeDBVersions(request *DescribeDBVersionsRequest) (response *DescribeDBVersionsResponse, err error) {
+    return c.DescribeDBVersionsWithContext(context.Background(), request)
+}
+
+// DescribeDBVersions
+// This API is used to query the list of supported database versions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeDBVersionsWithContext(ctx context.Context, request *DescribeDBVersionsRequest) (response *DescribeDBVersionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBVersionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBVersions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBVersionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2929,6 +3433,60 @@ func (c *Client) DescribeEncryptionKeysWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeEncryptionKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogBackupsRequest() (request *DescribeLogBackupsRequest) {
+    request = &DescribeLogBackupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeLogBackups")
+    
+    
+    return
+}
+
+func NewDescribeLogBackupsResponse() (response *DescribeLogBackupsResponse) {
+    response = &DescribeLogBackupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLogBackups
+// This API is used to query the list of log backups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeLogBackups(request *DescribeLogBackupsRequest) (response *DescribeLogBackupsResponse, err error) {
+    return c.DescribeLogBackupsWithContext(context.Background(), request)
+}
+
+// DescribeLogBackups
+// This API is used to query the list of log backups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+func (c *Client) DescribeLogBackupsWithContext(ctx context.Context, request *DescribeLogBackupsRequest) (response *DescribeLogBackupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogBackupsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogBackups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogBackupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3579,6 +4137,7 @@ func NewDescribeSlowQueryListResponse() (response *DescribeSlowQueryListResponse
 // This API is used to get the slow queries during the specified period of time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -3593,6 +4152,7 @@ func (c *Client) DescribeSlowQueryList(request *DescribeSlowQueryListRequest) (r
 // This API is used to get the slow queries during the specified period of time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -4325,6 +4885,7 @@ func NewIsolateDBInstancesResponse() (response *IsolateDBInstancesResponse) {
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
 //  FAILEDOPERATION_GETINSTANCEBYRESOURCEIDERROR = "FailedOperation.GetInstanceByResourceIdError"
 //  FAILEDOPERATION_INVALIDACCOUNTSTATUS = "FailedOperation.InvalidAccountStatus"
 //  FAILEDOPERATION_OPERATEFREQUENCYLIMITEDERROR = "FailedOperation.OperateFrequencyLimitedError"
@@ -4368,6 +4929,7 @@ func (c *Client) IsolateDBInstances(request *IsolateDBInstancesRequest) (respons
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
 //  FAILEDOPERATION_GETINSTANCEBYRESOURCEIDERROR = "FailedOperation.GetInstanceByResourceIdError"
 //  FAILEDOPERATION_INVALIDACCOUNTSTATUS = "FailedOperation.InvalidAccountStatus"
 //  FAILEDOPERATION_OPERATEFREQUENCYLIMITEDERROR = "FailedOperation.OperateFrequencyLimitedError"
@@ -4551,6 +5113,58 @@ func (c *Client) ModifyBackupPlanWithContext(ctx context.Context, request *Modif
     return
 }
 
+func NewModifyBaseBackupExpireTimeRequest() (request *ModifyBaseBackupExpireTimeRequest) {
+    request = &ModifyBaseBackupExpireTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyBaseBackupExpireTime")
+    
+    
+    return
+}
+
+func NewModifyBaseBackupExpireTimeResponse() (response *ModifyBaseBackupExpireTimeResponse) {
+    response = &ModifyBaseBackupExpireTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyBaseBackupExpireTime
+// This API is used to modify the expiration time of the specified full backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyBaseBackupExpireTime(request *ModifyBaseBackupExpireTimeRequest) (response *ModifyBaseBackupExpireTimeResponse, err error) {
+    return c.ModifyBaseBackupExpireTimeWithContext(context.Background(), request)
+}
+
+// ModifyBaseBackupExpireTime
+// This API is used to modify the expiration time of the specified full backup of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyBaseBackupExpireTimeWithContext(ctx context.Context, request *ModifyBaseBackupExpireTimeRequest) (response *ModifyBaseBackupExpireTimeResponse, err error) {
+    if request == nil {
+        request = NewModifyBaseBackupExpireTimeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBaseBackupExpireTime require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBaseBackupExpireTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceDeploymentRequest() (request *ModifyDBInstanceDeploymentRequest) {
     request = &ModifyDBInstanceDeploymentRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4723,6 +5337,7 @@ func NewModifyDBInstanceParametersResponse() (response *ModifyDBInstanceParamete
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
@@ -4739,6 +5354,7 @@ func (c *Client) ModifyDBInstanceParameters(request *ModifyDBInstanceParametersR
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
@@ -5087,6 +5703,7 @@ func NewModifyParameterTemplateResponse() (response *ModifyParameterTemplateResp
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) ModifyParameterTemplate(request *ModifyParameterTemplateRequest) (response *ModifyParameterTemplateResponse, err error) {
     return c.ModifyParameterTemplateWithContext(context.Background(), request)
 }
@@ -5097,6 +5714,7 @@ func (c *Client) ModifyParameterTemplate(request *ModifyParameterTemplateRequest
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) ModifyParameterTemplateWithContext(ctx context.Context, request *ModifyParameterTemplateRequest) (response *ModifyParameterTemplateResponse, err error) {
     if request == nil {
         request = NewModifyParameterTemplateRequest()
@@ -6103,6 +6721,68 @@ func (c *Client) UpgradeDBInstanceWithContext(ctx context.Context, request *Upgr
     request.SetContext(ctx)
     
     response = NewUpgradeDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeDBInstanceKernelVersionRequest() (request *UpgradeDBInstanceKernelVersionRequest) {
+    request = &UpgradeDBInstanceKernelVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "UpgradeDBInstanceKernelVersion")
+    
+    
+    return
+}
+
+func NewUpgradeDBInstanceKernelVersionResponse() (response *UpgradeDBInstanceKernelVersionResponse) {
+    response = &UpgradeDBInstanceKernelVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeDBInstanceKernelVersion
+// This API is used to upgrade the kernel version of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+func (c *Client) UpgradeDBInstanceKernelVersion(request *UpgradeDBInstanceKernelVersionRequest) (response *UpgradeDBInstanceKernelVersionResponse, err error) {
+    return c.UpgradeDBInstanceKernelVersionWithContext(context.Background(), request)
+}
+
+// UpgradeDBInstanceKernelVersion
+// This API is used to upgrade the kernel version of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+func (c *Client) UpgradeDBInstanceKernelVersionWithContext(ctx context.Context, request *UpgradeDBInstanceKernelVersionRequest) (response *UpgradeDBInstanceKernelVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDBInstanceKernelVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeDBInstanceKernelVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeDBInstanceKernelVersionResponse()
     err = c.Send(request, response)
     return
 }
