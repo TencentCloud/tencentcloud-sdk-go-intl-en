@@ -320,8 +320,6 @@ func NewBatchCreateRoomResponse() (response *BatchCreateRoomResponse) {
 // BatchCreateRoom
 // This API is used to create multiple rooms at a time.
 //
-// A maximum of 20 requests can be initiated per second for this API.
-//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
@@ -362,8 +360,6 @@ func (c *Client) BatchCreateRoom(request *BatchCreateRoomRequest) (response *Bat
 
 // BatchCreateRoom
 // This API is used to create multiple rooms at a time.
-//
-// A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1027,6 +1023,58 @@ func (c *Client) CreateSupervisorWithContext(ctx context.Context, request *Creat
     return
 }
 
+func NewDeleteAppCustomContentRequest() (request *DeleteAppCustomContentRequest) {
+    request = &DeleteAppCustomContentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DeleteAppCustomContent")
+    
+    
+    return
+}
+
+func NewDeleteAppCustomContentResponse() (response *DeleteAppCustomContentResponse) {
+    response = &DeleteAppCustomContentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteAppCustomContent
+// This API is used to delete the custom elements. The `Scenes` parameter specifies the custom elements to delete. If `Scenes` is empty, all custom elements will be deleted.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DeleteAppCustomContent(request *DeleteAppCustomContentRequest) (response *DeleteAppCustomContentResponse, err error) {
+    return c.DeleteAppCustomContentWithContext(context.Background(), request)
+}
+
+// DeleteAppCustomContent
+// This API is used to delete the custom elements. The `Scenes` parameter specifies the custom elements to delete. If `Scenes` is empty, all custom elements will be deleted.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DeleteAppCustomContentWithContext(ctx context.Context, request *DeleteAppCustomContentRequest) (response *DeleteAppCustomContentResponse, err error) {
+    if request == nil {
+        request = NewDeleteAppCustomContentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAppCustomContent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAppCustomContentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDocumentRequest() (request *DeleteDocumentRequest) {
     request = &DeleteDocumentRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1264,6 +1312,7 @@ func NewDeleteRecordResponse() (response *DeleteRecordResponse) {
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteRecord(request *DeleteRecordRequest) (response *DeleteRecordResponse, err error) {
@@ -1281,6 +1330,7 @@ func (c *Client) DeleteRecord(request *DeleteRecordRequest) (response *DeleteRec
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteRecordWithContext(ctx context.Context, request *DeleteRecordRequest) (response *DeleteRecordResponse, err error) {
@@ -1405,6 +1455,66 @@ func (c *Client) DescribeCurrentMemberListWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeCurrentMemberListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDeveloperRequest() (request *DescribeDeveloperRequest) {
+    request = &DescribeDeveloperRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeDeveloper")
+    
+    
+    return
+}
+
+func NewDescribeDeveloperResponse() (response *DescribeDeveloperResponse) {
+    response = &DescribeDeveloperResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDeveloper
+// This API is used to get the developer information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDeveloper(request *DescribeDeveloperRequest) (response *DescribeDeveloperResponse, err error) {
+    return c.DescribeDeveloperWithContext(context.Background(), request)
+}
+
+// DescribeDeveloper
+// This API is used to get the developer information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDeveloperWithContext(ctx context.Context, request *DescribeDeveloperRequest) (response *DescribeDeveloperResponse, err error) {
+    if request == nil {
+        request = NewDescribeDeveloperRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDeveloper require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDeveloperResponse()
     err = c.Send(request, response)
     return
 }
@@ -2087,6 +2197,56 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     request.SetContext(ctx)
     
     response = NewDescribeUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetRoomEventRequest() (request *GetRoomEventRequest) {
+    request = &GetRoomEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "GetRoomEvent")
+    
+    
+    return
+}
+
+func NewGetRoomEventResponse() (response *GetRoomEventResponse) {
+    response = &GetRoomEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetRoomEvent
+// This API is used to get the events of a room. It only works within one hour after a class ends.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+func (c *Client) GetRoomEvent(request *GetRoomEventRequest) (response *GetRoomEventResponse, err error) {
+    return c.GetRoomEventWithContext(context.Background(), request)
+}
+
+// GetRoomEvent
+// This API is used to get the events of a room. It only works within one hour after a class ends.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+func (c *Client) GetRoomEventWithContext(ctx context.Context, request *GetRoomEventRequest) (response *GetRoomEventResponse, err error) {
+    if request == nil {
+        request = NewGetRoomEventRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetRoomEvent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetRoomEventResponse()
     err = c.Send(request, response)
     return
 }

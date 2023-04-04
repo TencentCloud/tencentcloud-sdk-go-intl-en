@@ -507,10 +507,12 @@ type BatchUserInfo struct {
 	// The SDKAppID assigned by LCIC.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The user ID. Note: This field may return null, indicating that no valid values can be obtained
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The user’s ID in your system. If the same request parameter is not specified, the value of this parameter will be the same as UserId. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
 }
 
@@ -1008,12 +1010,21 @@ func (r *CreateRoomResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSupervisorRequestParams struct {
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
+	// The user IDs.
+	Users []*string `json:"Users,omitempty" name:"Users"`
 }
 
 type CreateSupervisorRequest struct {
 	*tchttp.BaseRequest
 	
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The user IDs.
+	Users []*string `json:"Users,omitempty" name:"Users"`
 }
 
 func (r *CreateSupervisorRequest) ToJsonString() string {
@@ -1028,7 +1039,8 @@ func (r *CreateSupervisorRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "SdkAppId")
+	delete(f, "Users")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSupervisorRequest has unknown keys!", "")
 	}
@@ -1054,6 +1066,67 @@ func (r *CreateSupervisorResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSupervisorResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAppCustomContentRequestParams struct {
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
+	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
+}
+
+type DeleteAppCustomContentRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
+	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
+}
+
+func (r *DeleteAppCustomContentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAppCustomContentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Scenes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAppCustomContentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAppCustomContentResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteAppCustomContentResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAppCustomContentResponseParams `json:"Response"`
+}
+
+func (r *DeleteAppCustomContentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAppCustomContentResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1430,6 +1503,60 @@ func (r *DescribeCurrentMemberListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDeveloperRequestParams struct {
+
+}
+
+type DescribeDeveloperRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeDeveloperRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDeveloperRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDeveloperRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDeveloperResponseParams struct {
+
+	DeveloperId *string `json:"DeveloperId,omitempty" name:"DeveloperId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDeveloperResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDeveloperResponseParams `json:"Response"`
+}
+
+func (r *DescribeDeveloperResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDeveloperResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDocumentRequestParams struct {
 	// The (unique) document ID.
 	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
@@ -1594,7 +1721,8 @@ func (r *DescribeDocumentsByRoomRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDocumentsByRoomResponseParams struct {
-	// The information of the documents. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
 
 	// The total number of records that meet the conditions.
@@ -1685,7 +1813,8 @@ type DescribeGroupListResponseParams struct {
 	// The total number of groups that meet the conditions.
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-	// The information of the groups. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1766,7 +1895,8 @@ type DescribeGroupMemberListResponseParams struct {
 	// The total number of records that meet the conditions.
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
-	// The user IDs of the members. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1836,13 +1966,15 @@ type DescribeGroupResponseParams struct {
 	// The group name.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// The user ID of the group’s teacher. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
 	// The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
 	GroupType *uint64 `json:"GroupType,omitempty" name:"GroupType"`
 
-	// The IDs of the sub-groups. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubGroupIds []*string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2240,6 +2372,128 @@ type DocumentInfo struct {
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
+type EventDataInfo struct {
+	// The room ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The ID of the user to whom the event occurred.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+}
+
+type EventInfo struct {
+	// The Unix timestamp (seconds) when the event occurred.
+	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// The event type. Valid values:
+	// `RoomStart`: The class started. `RoomEnd`: The class ended. `MemberJoin`: A user joined. `MemberQuit`: A user left. `RecordFinish`: Recording is finished.
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// The details of the event, including the room ID and the user to whom the event occurred.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EventData *EventDataInfo `json:"EventData,omitempty" name:"EventData"`
+}
+
+// Predefined struct for user
+type GetRoomEventRequestParams struct {
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The starting page. Pagination starts from 1. This parameter is valid only if `keyword` is empty.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// The maximum number of records (up to 200) per page. This parameter is valid only if `keyword` is empty.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The type of events to query. Valid values:
+	// `RoomStart`: The class started.
+	// `RoomEnd`: The class ended.
+	// `MemberJoin`: A user joined.
+	// `MemberQuit`: A user left.
+	// `RecordFinish`: Recording is finished.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
+type GetRoomEventRequest struct {
+	*tchttp.BaseRequest
+	
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The starting page. Pagination starts from 1. This parameter is valid only if `keyword` is empty.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// The maximum number of records (up to 200) per page. This parameter is valid only if `keyword` is empty.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The type of events to query. Valid values:
+	// `RoomStart`: The class started.
+	// `RoomEnd`: The class ended.
+	// `MemberJoin`: A user joined.
+	// `MemberQuit`: A user left.
+	// `RecordFinish`: Recording is finished.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+}
+
+func (r *GetRoomEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRoomEventRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoomId")
+	delete(f, "SdkAppId")
+	delete(f, "Page")
+	delete(f, "Limit")
+	delete(f, "Keyword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetRoomEventRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetRoomEventResponseParams struct {
+	// The total number of events for the room. The value of this parameter is not affected by `keyword`.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The event details, including the type and time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Events []*EventInfo `json:"Events,omitempty" name:"Events"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetRoomEventResponse struct {
+	*tchttp.BaseResponse
+	Response *GetRoomEventResponseParams `json:"Response"`
+}
+
+func (r *GetRoomEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRoomEventResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type GetRoomMessageRequestParams struct {
 	// The SDKAppID assigned by LCIC.
@@ -2393,19 +2647,24 @@ type GroupBaseInfo struct {
 }
 
 type GroupInfo struct {
-	// Group ID Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// The group name. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// The user ID of the teacher. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupType *uint64 `json:"GroupType,omitempty" name:"GroupType"`
 
-	// The IDs of the sub-groups. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubGroupIds *string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
 }
 
@@ -3056,50 +3315,49 @@ func (r *RegisterUserResponse) FromJsonString(s string) error {
 }
 
 type RoomInfo struct {
-	// The room name. Note: This field may return null, indicating that no valid values can be obtained.
+	// The room name.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The room start time (Unix timestamp). Note: This field may return null, indicating that no valid values can be obtained.
+	// The room start time (Unix timestamp).
 	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The room end time (Unix timestamp). Note: This field may return null, indicating that no valid values can be obtained.
+	// The room end time (Unix timestamp).
 	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The resolution. Valid values: 1: SD; 2: HD; 3: FHD. Note: This field may return null, indicating that no valid values can be obtained.
+	// The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
 	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
 
-	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16. Note: This field may return null, indicating that no valid values can be obtained.
+	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only; `coteaching`: Dual-teacher.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubType *string `json:"SubType,omitempty" name:"SubType"`
 
-	// The user ID of the teacher. User IDs are returned by the user registration APIs. Note: This field may return null, indicating that no valid values can be obtained.
+	// The user ID of the teacher. User IDs are returned by the user registration APIs.
 	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
 
-	// Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to automatically turn the mic on when a user enters the room. Valid values: `0` (default): No; `1`: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
-	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: 0: Yes (default value); 1: No. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
 	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
 
-	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable the high audio quality mode. Valid values: `0` (default): No; `1`: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
-	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to disable auto recording. Valid values: `0` (default): No; `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
 	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
 
-	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs. Note: This field may return null, indicating that no valid values can be obtained.
+	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
 	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
 
-	// The number of RTC users. Note: This field may return null, indicating that no valid values can be obtained.
+	// The number of RTC users.
 	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
 
-	// The audience type. Note: This field may return null, indicating that no valid values can be obtained.
+	// The audience type.
 	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
 
-	// The recording layout. Note: This field may return null, indicating that no valid values can be obtained.
+	// The recording layout.
 	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
 
 	// The ID of the group to bind. Note: This field may return null, indicating that no valid values can be obtained.
@@ -3382,16 +3640,20 @@ func (r *UnbindDocumentFromRoomResponse) FromJsonString(s string) error {
 }
 
 type UserInfo struct {
-	// The application ID. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
-	// The user ID. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
 
-	// The username. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The URL of profile photo. Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
 }
 

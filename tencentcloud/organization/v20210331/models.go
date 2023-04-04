@@ -620,10 +620,10 @@ func (r *DescribeOrganizationMemberAuthAccountsResponse) FromJsonString(s string
 
 // Predefined struct for user
 type DescribeOrganizationMemberAuthIdentitiesRequestParams struct {
-	// Offset.
+	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of returned results. Maximum value: `50`.
+	// Limit, which defaults to `10`. Value range: 1-50.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Organization member UIN.
@@ -633,10 +633,10 @@ type DescribeOrganizationMemberAuthIdentitiesRequestParams struct {
 type DescribeOrganizationMemberAuthIdentitiesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset.
+	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of returned results. Maximum value: `50`.
+	// Limit, which defaults to `10`. Value range: 1-50.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Organization member UIN.
@@ -666,7 +666,7 @@ func (r *DescribeOrganizationMemberAuthIdentitiesRequest) FromJsonString(s strin
 
 // Predefined struct for user
 type DescribeOrganizationMemberAuthIdentitiesResponseParams struct {
-	// List.
+	// List of authorizable identities
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Items []*OrgMemberAuthIdentity `json:"Items,omitempty" name:"Items"`
 
@@ -779,10 +779,10 @@ func (r *DescribeOrganizationMemberPoliciesResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeOrganizationMembersRequestParams struct {
-	// Offset.
+	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of returned results. Maximum value: `50`.
+	// Limit, which defaults to `10`. Value range: 1-50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
@@ -801,10 +801,10 @@ type DescribeOrganizationMembersRequestParams struct {
 type DescribeOrganizationMembersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset.
+	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of returned results. Maximum value: `50`.
+	// Limit, which defaults to `10`. Value range: 1-50.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
@@ -1367,11 +1367,11 @@ type OrgMemberAuthIdentity struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
 
-	// Identity role name.
+	// Role name of an identity
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IdentityRoleName *string `json:"IdentityRoleName,omitempty" name:"IdentityRoleName"`
 
-	// Identity role alias.
+	// Role alias of an identity
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitempty" name:"IdentityRoleAliasName"`
 
@@ -1386,6 +1386,10 @@ type OrgMemberAuthIdentity struct {
 	// Update time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Identity type (`1`: Preset; `2`: Custom)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
 }
 
 type OrgMemberPolicy struct {

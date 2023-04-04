@@ -17019,7 +17019,7 @@ type RebuildMediaTargetVideoStream struct {
 	// Default value: `open`.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitempty" name:"ResolutionAdaptive"`
 
-	// The maximum video width (or long side), in pixels. Value range: 0 and 128-8192.
+	// The maximum video width (or long side) in pixels. Value range: 0 and 128-4096.
 	// <li>If both `Width` and `Height` are `0`, the original resolution will be used.</li>
 	// <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
 	// <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
@@ -17028,7 +17028,7 @@ type RebuildMediaTargetVideoStream struct {
 	// Default value: `0`.
 	Width *int64 `json:"Width,omitempty" name:"Width"`
 
-	// The maximum video height (or short side), in pixels. Value range: 0 and 128-8192.
+	// The maximum video width (or short side) in pixels. Value range: 0 and [128, 4096].
 	// <li>If both `Width` and `Height` are `0`, the original resolution will be used.</li>
 	// <li>If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.</li>
 	// <li>If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.</li>
@@ -18395,6 +18395,16 @@ type SearchMediaRequestParams struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClasses []*string `json:"StorageClasses,omitempty" name:"StorageClasses"`
 
+	// The file formats.
+	// <li>Array length limit: 10</li>
+	MediaTypes []*string `json:"MediaTypes,omitempty" name:"MediaTypes"`
+
+
+	Status []*string `json:"Status,omitempty" name:"Status"`
+
+
+	ReviewResults []*string `json:"ReviewResults,omitempty" name:"ReviewResults"`
+
 	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
 	// <li>Array length limit: 10</li>
 	TrtcSdkAppIds []*uint64 `json:"TrtcSdkAppIds,omitempty" name:"TrtcSdkAppIds"`
@@ -18532,6 +18542,14 @@ type SearchMediaRequest struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClasses []*string `json:"StorageClasses,omitempty" name:"StorageClasses"`
 
+	// The file formats.
+	// <li>Array length limit: 10</li>
+	MediaTypes []*string `json:"MediaTypes,omitempty" name:"MediaTypes"`
+
+	Status []*string `json:"Status,omitempty" name:"Status"`
+
+	ReviewResults []*string `json:"ReviewResults,omitempty" name:"ReviewResults"`
+
 	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
 	// <li>Array length limit: 10</li>
 	TrtcSdkAppIds []*uint64 `json:"TrtcSdkAppIds,omitempty" name:"TrtcSdkAppIds"`
@@ -18604,6 +18622,9 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "StorageRegions")
 	delete(f, "StorageClasses")
+	delete(f, "MediaTypes")
+	delete(f, "Status")
+	delete(f, "ReviewResults")
 	delete(f, "TrtcSdkAppIds")
 	delete(f, "TrtcRoomIds")
 	delete(f, "Text")
@@ -19999,7 +20020,7 @@ type VideoFrameInterpolationInfo struct {
 	// <li>`OFF`</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// The frame rate. Value range: (0, 60]. This parameter is valid only if `Switch` is `ON`. By default, the original frame rate will be used.
+	// The frame rate. Value range: (0, 100]. This parameter is valid only if `Switch` is `ON`. By default, the original frame rate will be used.
 	Fps *int64 `json:"Fps,omitempty" name:"Fps"`
 }
 

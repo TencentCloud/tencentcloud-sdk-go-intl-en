@@ -44,6 +44,9 @@ const (
 	// The user origin ID already exists.
 	FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
 
+	// 
+	FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+
 	// The class has not ended.
 	FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
 

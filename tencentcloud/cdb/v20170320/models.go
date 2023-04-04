@@ -183,6 +183,107 @@ type Address struct {
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 }
 
+type AggregationCondition struct {
+	// Aggregation field. Valid values: `host` (source IP), `user` （username), `dbName` (database name), `sqlType` (SQL type).
+	AggregationField *string `json:"AggregationField,omitempty" name:"AggregationField"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of buckets returned under this field. Maximum value: `100`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+// Predefined struct for user
+type AnalyzeAuditLogsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Sorting conditions for aggregation dimension
+	AggregationConditions []*AggregationCondition `json:"AggregationConditions,omitempty" name:"AggregationConditions"`
+
+	// The result set of the audit log filtered by this condition is set as the analysis Log.
+	AuditLogFilter *AuditLogFilter `json:"AuditLogFilter,omitempty" name:"AuditLogFilter"`
+}
+
+type AnalyzeAuditLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Start time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Sorting conditions for aggregation dimension
+	AggregationConditions []*AggregationCondition `json:"AggregationConditions,omitempty" name:"AggregationConditions"`
+
+	// The result set of the audit log filtered by this condition is set as the analysis Log.
+	AuditLogFilter *AuditLogFilter `json:"AuditLogFilter,omitempty" name:"AuditLogFilter"`
+}
+
+func (r *AnalyzeAuditLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AnalyzeAuditLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "AggregationConditions")
+	delete(f, "AuditLogFilter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AnalyzeAuditLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AnalyzeAuditLogsResponseParams struct {
+	// Information set of the aggregation bucket returned
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*AuditLogAggregationResult `json:"Items,omitempty" name:"Items"`
+
+	// Number of scanned logs
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AnalyzeAuditLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *AnalyzeAuditLogsResponseParams `json:"Response"`
+}
+
+func (r *AnalyzeAuditLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AnalyzeAuditLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
 	// Security group ID.
@@ -267,6 +368,69 @@ type AuditFilter struct {
 
 	// Filter match value
 	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type AuditLogAggregationResult struct {
+	// Aggregation dimension
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AggregationField *string `json:"AggregationField,omitempty" name:"AggregationField"`
+
+	// Result set of an aggregation bucket
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Buckets []*Bucket `json:"Buckets,omitempty" name:"Buckets"`
+}
+
+type AuditLogFilter struct {
+	// Client address
+	Host []*string `json:"Host,omitempty" name:"Host"`
+
+	// Username
+	User []*string `json:"User,omitempty" name:"User"`
+
+
+	DBName []*string `json:"DBName,omitempty" name:"DBName"`
+
+	// Table name
+	TableName []*string `json:"TableName,omitempty" name:"TableName"`
+
+	// Audit policy name
+	PolicyName []*string `json:"PolicyName,omitempty" name:"PolicyName"`
+
+
+	Sql *string `json:"Sql,omitempty" name:"Sql"`
+
+
+	SqlType *string `json:"SqlType,omitempty" name:"SqlType"`
+
+	// Execution time in ms, which is used to filter the audit log with execution time greater than this value.
+	ExecTime *int64 `json:"ExecTime,omitempty" name:"ExecTime"`
+
+	// Number of affected rows, which is used to filter the audit log with affected rows greater than this value.
+	AffectRows *int64 `json:"AffectRows,omitempty" name:"AffectRows"`
+
+	// SQL type (Multiple types can be queried at same time). Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `ALTER`, `SET`, `REPLACE`, `EXECUTE`.
+	SqlTypes []*string `json:"SqlTypes,omitempty" name:"SqlTypes"`
+
+	// SQL statement. Multiple SQL statements can be passed in.
+	Sqls []*string `json:"Sqls,omitempty" name:"Sqls"`
+
+	// Number of rows affected in the format of M-N, such as 10-200.
+	AffectRowsSection *string `json:"AffectRowsSection,omitempty" name:"AffectRowsSection"`
+
+	// Number of rows returned in the format of M-N, such as 10-200.
+	SentRowsSection *string `json:"SentRowsSection,omitempty" name:"SentRowsSection"`
+
+	// Execution time in the format of M-N, such as 10-200.
+	ExecTimeSection *string `json:"ExecTimeSection,omitempty" name:"ExecTimeSection"`
+
+	// Lock wait time in the format of M-N, such as 10-200.
+	LockWaitTimeSection *string `json:"LockWaitTimeSection,omitempty" name:"LockWaitTimeSection"`
+
+	// IO wait time in the format of M-N, such as 10-200.
+	IoWaitTimeSection *string `json:"IoWaitTimeSection,omitempty" name:"IoWaitTimeSection"`
+
+	// Transaction duration in the format of M-N, such as 10-200.
+	TransactionLivingTimeSection *string `json:"TransactionLivingTimeSection,omitempty" name:"TransactionLivingTimeSection"`
 }
 
 type AuditPolicy struct {
@@ -582,6 +746,15 @@ type BinlogInfo struct {
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type Bucket struct {
+	// None
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Number of keys in the statistic report
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
 }
 
 type CdbRegionSellConf struct {
@@ -4429,6 +4602,9 @@ type DescribeDBInstancesRequestParams struct {
 
 	// Database proxy ID
 	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+
+	// Database engine type
+	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
 }
 
 type DescribeDBInstancesRequest struct {
@@ -4535,6 +4711,9 @@ type DescribeDBInstancesRequest struct {
 
 	// Database proxy ID
 	ProxyIds []*string `json:"ProxyIds,omitempty" name:"ProxyIds"`
+
+	// Database engine type
+	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -4583,6 +4762,7 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "ProxyVips")
 	delete(f, "ProxyIds")
+	delete(f, "EngineTypes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesRequest has unknown keys!", "")
 	}
@@ -5078,21 +5258,27 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDefaultParamsRequestParams struct {
-	// MySQL version. Currently, the supported versions are ["5.1", "5.5", "5.6", "5.7"].
+	// Engine version. Currently, the supported versions are `5.1`, `5.5`, `5.6`, `5.7`, and `8.0`.
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
 	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+
+	// Parameter template engine. Default value: `InnoDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
 }
 
 type DescribeDefaultParamsRequest struct {
 	*tchttp.BaseRequest
 	
-	// MySQL version. Currently, the supported versions are ["5.1", "5.5", "5.6", "5.7"].
+	// Engine version. Currently, the supported versions are `5.1`, `5.5`, `5.6`, `5.7`, and `8.0`.
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
 	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+
+	// Parameter template engine. Default value: `InnoDB`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
 }
 
 func (r *DescribeDefaultParamsRequest) ToJsonString() string {
@@ -5109,6 +5295,7 @@ func (r *DescribeDefaultParamsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EngineVersion")
 	delete(f, "TemplateType")
+	delete(f, "EngineType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDefaultParamsRequest has unknown keys!", "")
 	}
@@ -7406,6 +7593,9 @@ type InstanceInfo struct {
 	// Maximum delay threshold
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitempty" name:"MaxDelayTime"`
+
+	// Instance disk type, which is returned only for the instances of cloud disk edition. Valid values: `CLOUD_SSD` (SSD), `CLOUD_HSSD` (Enhanced SSD).
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
 }
 
 type InstanceRebootTime struct {

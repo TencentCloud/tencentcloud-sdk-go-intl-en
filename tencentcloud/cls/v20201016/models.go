@@ -485,7 +485,7 @@ type CosRechargeInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 
-	// COS bucket region.
+	// Region where the COS bucket is located.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
 
@@ -4072,7 +4072,7 @@ type FullTextInfo struct {
 
 	// Separator of the full-text index. Each character represents a separator.
 	// Only symbols, \n\t\r, and escape character \ are supported.
-	// Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
+	// Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping. When debugging with API Explorer, use the JSON parameter input method to avoid repeated escaping of \n\t\r.
 	Tokenizer *string `json:"Tokenizer,omitempty" name:"Tokenizer"`
 
 	// Whether Chinese characters are contained
@@ -4266,6 +4266,14 @@ type LogContextInfo struct {
 	// Source host name of logs
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// Raw log (this parameter has a value only when an exception occurred while creating indexes for logs).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RawLog *string `json:"RawLog,omitempty" name:"RawLog"`
+
+	// The cause of index creation exception (this parameter has a value only when an exception occurred while creating indexes for logs).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IndexStatus *string `json:"IndexStatus,omitempty" name:"IndexStatus"`
 }
 
 type LogInfo struct {
@@ -4297,6 +4305,14 @@ type LogInfo struct {
 	// Source host name of logs
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HostName *string `json:"HostName,omitempty" name:"HostName"`
+
+	// Raw log (this parameter has a value only when an exception occurred while creating indexes for logs).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RawLog *string `json:"RawLog,omitempty" name:"RawLog"`
+
+	// The cause of index creation exception (this parameter has a value only when an exception occurred while creating indexes for logs).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IndexStatus *string `json:"IndexStatus,omitempty" name:"IndexStatus"`
 }
 
 type LogItem struct {
@@ -5721,6 +5737,11 @@ type SearchLogRequestParams struct {
 	// `1`: Precise analysis without sampling.
 	// Default value: `1`
 	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
+
+	// Search syntax.
+	// `0` (default): Lucene; `1`: CQL.
+	// For more information, visit https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules.
+	SyntaxRule *uint64 `json:"SyntaxRule,omitempty" name:"SyntaxRule"`
 }
 
 type SearchLogRequest struct {
@@ -5770,6 +5791,11 @@ type SearchLogRequest struct {
 	// `1`: Precise analysis without sampling.
 	// Default value: `1`
 	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
+
+	// Search syntax.
+	// `0` (default): Lucene; `1`: CQL.
+	// For more information, visit https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules.
+	SyntaxRule *uint64 `json:"SyntaxRule,omitempty" name:"SyntaxRule"`
 }
 
 func (r *SearchLogRequest) ToJsonString() string {
@@ -5793,6 +5819,7 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 	delete(f, "Sort")
 	delete(f, "UseNewAnalysis")
 	delete(f, "SamplingRate")
+	delete(f, "SyntaxRule")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchLogRequest has unknown keys!", "")
 	}
@@ -6155,7 +6182,7 @@ type ValueInfo struct {
 	// Separator of fields. Each character represents a separator.
 	// Only symbols, \n\t\r, and escape character \ are supported.
 	// `long` and `double` fields need to be null.
-	// Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping.
+	// Note: \n\t\r can be directly enclosed in double quotes as the input parameter without escaping. When debugging with API Explorer, use the JSON parameter input method to avoid repeated escaping of \n\t\r.
 	Tokenizer *string `json:"Tokenizer,omitempty" name:"Tokenizer"`
 
 	// Whether the analysis feature is enabled for the field

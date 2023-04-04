@@ -5616,6 +5616,9 @@ type ModifyDomainAttributesRequestParams struct {
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
 	DefaultServer *bool `json:"DefaultServer,omitempty" name:"DefaultServer"`
 
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic *bool `json:"Quic,omitempty" name:"Quic"`
+
 	// Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
 	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 
@@ -5650,6 +5653,9 @@ type ModifyDomainAttributesRequest struct {
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
 	DefaultServer *bool `json:"DefaultServer,omitempty" name:"DefaultServer"`
 
+	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names.
+	Quic *bool `json:"Quic,omitempty" name:"Quic"`
+
 	// Specifies a new default domain name for the listener. This field is used when the original default domain name is disabled. If there are multiple domain names, specify one of them.
 	NewDefaultServerDomain *string `json:"NewDefaultServerDomain,omitempty" name:"NewDefaultServerDomain"`
 
@@ -5679,6 +5685,7 @@ func (r *ModifyDomainAttributesRequest) FromJsonString(s string) error {
 	delete(f, "Certificate")
 	delete(f, "Http2")
 	delete(f, "DefaultServer")
+	delete(f, "Quic")
 	delete(f, "NewDefaultServerDomain")
 	delete(f, "NewDomains")
 	delete(f, "MultiCertInfo")
