@@ -434,6 +434,9 @@ type CreateIntlDomainBatchRequestParams struct {
 
 	// Whether to enable the update prohibition lock.
 	UpdateProhibition *bool `json:"UpdateProhibition,omitempty" name:"UpdateProhibition"`
+
+	// The custom DNS servers
+	CustomDns []*string `json:"CustomDns,omitempty" name:"CustomDns"`
 }
 
 type CreateIntlDomainBatchRequest struct {
@@ -459,6 +462,9 @@ type CreateIntlDomainBatchRequest struct {
 
 	// Whether to enable the update prohibition lock.
 	UpdateProhibition *bool `json:"UpdateProhibition,omitempty" name:"UpdateProhibition"`
+
+	// The custom DNS servers
+	CustomDns []*string `json:"CustomDns,omitempty" name:"CustomDns"`
 }
 
 func (r *CreateIntlDomainBatchRequest) ToJsonString() string {
@@ -480,6 +486,7 @@ func (r *CreateIntlDomainBatchRequest) FromJsonString(s string) error {
 	delete(f, "AutoRenewFlag")
 	delete(f, "TransferProhibition")
 	delete(f, "UpdateProhibition")
+	delete(f, "CustomDns")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateIntlDomainBatchRequest has unknown keys!", "")
 	}

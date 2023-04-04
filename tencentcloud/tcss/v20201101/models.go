@@ -5696,6 +5696,12 @@ type CreateVirusScanTaskRequestParams struct {
 
 	// Specified path to be excluded or scanned
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 }
 
 type CreateVirusScanTaskRequest struct {
@@ -5721,6 +5727,12 @@ type CreateVirusScanTaskRequest struct {
 
 	// Specified path to be excluded or scanned
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 }
 
 func (r *CreateVirusScanTaskRequest) ToJsonString() string {
@@ -5742,6 +5754,7 @@ func (r *CreateVirusScanTaskRequest) FromJsonString(s string) error {
 	delete(f, "ScanPathType")
 	delete(f, "ScanIds")
 	delete(f, "ScanPath")
+	delete(f, "ScanPathMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVirusScanTaskRequest has unknown keys!", "")
 	}
@@ -21196,6 +21209,14 @@ type DescribeVirusDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CheckPlatform []*string `json:"CheckPlatform,omitempty" name:"CheckPlatform"`
 
+	// File accessed time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileAccessTime *string `json:"FileAccessTime,omitempty" name:"FileAccessTime"`
+
+	// File modified time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileModifyTime *string `json:"FileModifyTime,omitempty" name:"FileModifyTime"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -21509,6 +21530,12 @@ type DescribeVirusMonitorSettingResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
 
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -21650,6 +21677,12 @@ type DescribeVirusScanSettingResponseParams struct {
 	// Timeout settings of quick check
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClickTimeout *uint64 `json:"ClickTimeout,omitempty" name:"ClickTimeout"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -27261,6 +27294,12 @@ type ModifyVirusMonitorSettingRequestParams struct {
 
 	// Specified path to be excluded or scanned
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 }
 
 type ModifyVirusMonitorSettingRequest struct {
@@ -27277,6 +27316,12 @@ type ModifyVirusMonitorSettingRequest struct {
 
 	// Specified path to be excluded or scanned
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 }
 
 func (r *ModifyVirusMonitorSettingRequest) ToJsonString() string {
@@ -27295,6 +27340,7 @@ func (r *ModifyVirusMonitorSettingRequest) FromJsonString(s string) error {
 	delete(f, "ScanPathAll")
 	delete(f, "ScanPathType")
 	delete(f, "ScanPath")
+	delete(f, "ScanPathMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVirusMonitorSettingRequest has unknown keys!", "")
 	}
@@ -27354,6 +27400,12 @@ type ModifyVirusScanSettingRequestParams struct {
 
 	// Scanned path
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 }
 
 type ModifyVirusScanSettingRequest struct {
@@ -27388,6 +27440,12 @@ type ModifyVirusScanSettingRequest struct {
 
 	// Scanned path
 	ScanPath []*string `json:"ScanPath,omitempty" name:"ScanPath"`
+
+	// Path scanning mode: 
+	// `SCAN_PATH_ALL`: Scan all paths
+	// `SCAN_PATH_DEFAULT`: Scan the default path
+	// `SCAN_PATH_USER_DEFINE`: Scan the custom path
+	ScanPathMode *string `json:"ScanPathMode,omitempty" name:"ScanPathMode"`
 }
 
 func (r *ModifyVirusScanSettingRequest) ToJsonString() string {
@@ -27412,6 +27470,7 @@ func (r *ModifyVirusScanSettingRequest) FromJsonString(s string) error {
 	delete(f, "ScanRangeAll")
 	delete(f, "ScanIds")
 	delete(f, "ScanPath")
+	delete(f, "ScanPathMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVirusScanSettingRequest has unknown keys!", "")
 	}
