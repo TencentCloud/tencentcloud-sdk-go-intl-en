@@ -1128,7 +1128,7 @@ func NewInquirePriceModifyDBInstanceSpecResponse() (response *InquirePriceModify
 }
 
 // InquirePriceModifyDBInstanceSpec
-// This API is used to query price of instance specification adjustment.
+// This API is used to query the price of instance specification adjustment.
 //
 // error code that may be returned:
 //  INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
@@ -1139,7 +1139,7 @@ func (c *Client) InquirePriceModifyDBInstanceSpec(request *InquirePriceModifyDBI
 }
 
 // InquirePriceModifyDBInstanceSpec
-// This API is used to query price of instance specification adjustment.
+// This API is used to query the price of instance specification adjustment.
 //
 // error code that may be returned:
 //  INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
@@ -1362,6 +1362,7 @@ func NewModifyDBInstanceSecurityGroupResponse() (response *ModifyDBInstanceSecur
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
 //  INVALIDPARAMETERVALUE_SECURITYGROUPID = "InvalidParameterValue.SecurityGroupId"
 //  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
@@ -1376,6 +1377,7 @@ func (c *Client) ModifyDBInstanceSecurityGroup(request *ModifyDBInstanceSecurity
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
 //  INVALIDPARAMETERVALUE_SECURITYGROUPID = "InvalidParameterValue.SecurityGroupId"
 //  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
