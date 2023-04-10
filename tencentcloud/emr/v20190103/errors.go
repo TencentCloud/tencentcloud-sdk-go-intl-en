@@ -302,6 +302,9 @@ const (
 	// The TKE cluster ID is invalid, or the TKE cluster is not eligible.
 	INVALIDPARAMETERVALUE_INVALIDTKEINSTANCE = "InvalidParameterValue.InvalidTkeInstance"
 
+	// The number of security groups exceeds the limit.
+	LIMITEXCEEDED_SECURITYGROUPNUMLIMITEXCEEDED = "LimitExceeded.SecurityGroupNumLimitExceeded"
+
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
 
@@ -346,6 +349,9 @@ const (
 
 	// CVM instances have been sold out.
 	RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+
+	// Unauthorized operation.
+	UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
 
 	// Unknown parameter.
 	UNKNOWNPARAMETER = "UnknownParameter"

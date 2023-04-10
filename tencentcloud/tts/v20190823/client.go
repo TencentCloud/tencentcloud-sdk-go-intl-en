@@ -66,11 +66,13 @@ func NewTextToVoiceResponse() (response *TextToVoiceResponse) {
 // TextToVoice
 // This API is used to convert any text to speech, allowing your devices and applications to talk to users.
 //
-// ​Tencent Cloud Text To Speech (TTS) can synthesize speech from text in real time for many use cases, such as audiobook and news apps, voice reminders on smart devices, quick synthesis of a celebrity's voice based on existing programs or certain voice records available on the Internet, and personalized vehicle navigation systems.
+// u200bTencent Cloud Text To Speech (TTS) can synthesize speech from text in real time for many use cases, such as audiobook and news apps, voice reminders on smart devices, quick synthesis of a celebrity's voice based on existing programs or certain voice records available on the internet, and personalized vehicle navigation systems.
 //
 // It is free for use in beta.
 //
 // It supports SSML. For syntax details, see [SSML](https://intl.cloud.tencent.com/document/product/1073/49575?from_cn_redirect=1).
+//
+// Default API request rate limit: 20 requests/sec.
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
@@ -116,11 +118,13 @@ func (c *Client) TextToVoice(request *TextToVoiceRequest) (response *TextToVoice
 // TextToVoice
 // This API is used to convert any text to speech, allowing your devices and applications to talk to users.
 //
-// ​Tencent Cloud Text To Speech (TTS) can synthesize speech from text in real time for many use cases, such as audiobook and news apps, voice reminders on smart devices, quick synthesis of a celebrity's voice based on existing programs or certain voice records available on the Internet, and personalized vehicle navigation systems.
+// u200bTencent Cloud Text To Speech (TTS) can synthesize speech from text in real time for many use cases, such as audiobook and news apps, voice reminders on smart devices, quick synthesis of a celebrity's voice based on existing programs or certain voice records available on the internet, and personalized vehicle navigation systems.
 //
 // It is free for use in beta.
 //
 // It supports SSML. For syntax details, see [SSML](https://intl.cloud.tencent.com/document/product/1073/49575?from_cn_redirect=1).
+//
+// Default API request rate limit: 20 requests/sec.
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"

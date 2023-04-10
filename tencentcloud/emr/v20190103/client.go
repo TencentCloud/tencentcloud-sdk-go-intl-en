@@ -271,6 +271,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 //  INVALIDPARAMETER_UNGRANTEDROLE = "InvalidParameter.UngrantedRole"
 //  INVALIDPARAMETER_ZONERESOURCENOTMATCH = "InvalidParameter.ZoneResourceNotMatch"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_SECURITYGROUPNUMLIMITEXCEEDED = "LimitExceeded.SecurityGroupNumLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT_DISKINSUFFICIENT = "ResourceInsufficient.DiskInsufficient"
 //  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
@@ -353,6 +354,7 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
 //  INVALIDPARAMETER_UNGRANTEDROLE = "InvalidParameter.UngrantedRole"
 //  INVALIDPARAMETER_ZONERESOURCENOTMATCH = "InvalidParameter.ZoneResourceNotMatch"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_SECURITYGROUPNUMLIMITEXCEEDED = "LimitExceeded.SecurityGroupNumLimitExceeded"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT_DISKINSUFFICIENT = "ResourceInsufficient.DiskInsufficient"
 //  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
@@ -574,6 +576,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_HARDWAREINFONOTFOUND = "ResourceNotFound.HardwareInfoNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
 func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
     return c.DescribeInstancesWithContext(context.Background(), request)
 }
@@ -609,6 +612,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_HARDWAREINFONOTFOUND = "ResourceNotFound.HardwareInfoNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
 func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeInstancesRequest()
@@ -671,6 +675,7 @@ func NewDescribeInstancesListResponse() (response *DescribeInstancesListResponse
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
 //  INVALIDPARAMETER_ORDERFIELDNOTMATCH = "InvalidParameter.OrderFieldNotMatch"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
 func (c *Client) DescribeInstancesList(request *DescribeInstancesListRequest) (response *DescribeInstancesListResponse, err error) {
     return c.DescribeInstancesListWithContext(context.Background(), request)
 }
@@ -703,6 +708,7 @@ func (c *Client) DescribeInstancesList(request *DescribeInstancesListRequest) (r
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
 //  INVALIDPARAMETER_ORDERFIELDNOTMATCH = "InvalidParameter.OrderFieldNotMatch"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
 func (c *Client) DescribeInstancesListWithContext(ctx context.Context, request *DescribeInstancesListRequest) (response *DescribeInstancesListResponse, err error) {
     if request == nil {
         request = NewDescribeInstancesListRequest()
@@ -1490,6 +1496,7 @@ func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
 //  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
 //  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
 //  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDSERCURITYGRPUPID = "InvalidParameter.InvalidSercurityGrpupId"
 //  INVALIDPARAMETER_INVALIDSERVICENODEINFO = "InvalidParameter.InvalidServiceNodeInfo"
 //  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
 //  INVALIDPARAMETER_INVALIDTASKCOUNT = "InvalidParameter.InvalidTaskCount"
@@ -1498,6 +1505,7 @@ func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
 //  INVALIDPARAMETER_INVALIDTKEINSTANCE = "InvalidParameter.InvalidTkeInstance"
 //  INVALIDPARAMETERVALUE_INVALIDTKEINSTANCE = "InvalidParameterValue.InvalidTkeInstance"
 //  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCEINSUFFICIENT_DISKINSUFFICIENT = "ResourceInsufficient.DiskInsufficient"
 //  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
@@ -1552,6 +1560,7 @@ func (c *Client) ScaleOutInstance(request *ScaleOutInstanceRequest) (response *S
 //  INVALIDPARAMETER_INVALIDINSTANCENAME = "InvalidParameter.InvalidInstanceName"
 //  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
 //  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
+//  INVALIDPARAMETER_INVALIDSERCURITYGRPUPID = "InvalidParameter.InvalidSercurityGrpupId"
 //  INVALIDPARAMETER_INVALIDSERVICENODEINFO = "InvalidParameter.InvalidServiceNodeInfo"
 //  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
 //  INVALIDPARAMETER_INVALIDTASKCOUNT = "InvalidParameter.InvalidTaskCount"
@@ -1560,6 +1569,7 @@ func (c *Client) ScaleOutInstance(request *ScaleOutInstanceRequest) (response *S
 //  INVALIDPARAMETER_INVALIDTKEINSTANCE = "InvalidParameter.InvalidTkeInstance"
 //  INVALIDPARAMETERVALUE_INVALIDTKEINSTANCE = "InvalidParameterValue.InvalidTkeInstance"
 //  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCEINSUFFICIENT_DISKINSUFFICIENT = "ResourceInsufficient.DiskInsufficient"
 //  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
@@ -1607,6 +1617,7 @@ func NewTerminateInstanceResponse() (response *TerminateInstanceResponse) {
 // This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REFUNDCVMFAILED = "FailedOperation.RefundCvmFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -1627,6 +1638,7 @@ func (c *Client) TerminateInstance(request *TerminateInstanceRequest) (response 
 // This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REFUNDCVMFAILED = "FailedOperation.RefundCvmFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"

@@ -1852,6 +1852,10 @@ type EmrListInstance struct {
 	// Client component information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutSideSoftInfo []*SoftDependInfo `json:"OutSideSoftInfo,omitempty" name:"OutSideSoftInfo"`
+
+	// Whether the current cluster supports external clients.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSupportOutsideCluster *bool `json:"IsSupportOutsideCluster,omitempty" name:"IsSupportOutsideCluster"`
 }
 
 type EmrPrice struct {
