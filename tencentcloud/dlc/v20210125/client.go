@@ -103,6 +103,134 @@ func (c *Client) CancelTaskWithContext(ctx context.Context, request *CancelTaskR
     return
 }
 
+func NewCreateDataEngineRequest() (request *CreateDataEngineRequest) {
+    request = &CreateDataEngineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateDataEngine")
+    
+    
+    return
+}
+
+func NewCreateDataEngineResponse() (response *CreateDataEngineResponse) {
+    response = &CreateDataEngineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateDataEngine
+// This API is used to create a data engine.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ABNORMALORDERSTATUS = "FailedOperation.AbnormalOrderStatus"
+//  FAILEDOPERATION_ANOTHERCREATEPROCESSRUNNING = "FailedOperation.AnotherCreateProcessRunning"
+//  FAILEDOPERATION_ANOTHERPROCESSRUNNING = "FailedOperation.AnotherProcessRunning"
+//  FAILEDOPERATION_ANOTHERREQUESTPROCESSING = "FailedOperation.AnotherRequestProcessing"
+//  FAILEDOPERATION_BALANCENOTENOUGH = "FailedOperation.BalanceNotEnough"
+//  FAILEDOPERATION_BILLINGSYSTEMERROR = "FailedOperation.BillingSystemError"
+//  FAILEDOPERATION_BINDTOOMANYTAGS = "FailedOperation.BindTooManyTags"
+//  FAILEDOPERATION_CREATEDATAENGINEFAILED = "FailedOperation.CreateDataEngineFailed"
+//  FAILEDOPERATION_DELIVERGOODSFAILED = "FailedOperation.DeliverGoodsFailed"
+//  FAILEDOPERATION_DUPLICATETAGKEY = "FailedOperation.DuplicateTagKey"
+//  FAILEDOPERATION_FEEDEDUCTIONFAILED = "FailedOperation.FeeDeductionFailed"
+//  FAILEDOPERATION_GETPRODUCTINFORMATIONFAILED = "FailedOperation.GetProductInformationFailed"
+//  FAILEDOPERATION_ILLEGALRESOURCE = "FailedOperation.IllegalResource"
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
+//  FAILEDOPERATION_ILLEGALTAGVALUE = "FailedOperation.IllegalTagValue"
+//  FAILEDOPERATION_INQUIREPRICEFAILED = "FailedOperation.InquirePriceFailed"
+//  FAILEDOPERATION_MODIFYINSTANCEFAILED = "FailedOperation.ModifyInstanceFailed"
+//  FAILEDOPERATION_NOPERMISSION = "FailedOperation.NoPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTHENTICATION = "FailedOperation.NoRealNameAuthentication"
+//  FAILEDOPERATION_NUMBEREXCEEDLIMIT = "FailedOperation.NumberExceedLimit"
+//  FAILEDOPERATION_PARAMETERVALIDATIONFAILED = "FailedOperation.ParameterValidationFailed"
+//  FAILEDOPERATION_REFUNDDEPOSITFAILED = "FailedOperation.RefundDepositFailed"
+//  FAILEDOPERATION_TAGALREADYATTACHED = "FailedOperation.TagAlreadyAttached"
+//  FAILEDOPERATION_TAGKEYTOOLONG = "FailedOperation.TagKeyTooLong"
+//  FAILEDOPERATION_TAGNOTEXIST = "FailedOperation.TagNotExist"
+//  FAILEDOPERATION_TAGVALUETOOLONG = "FailedOperation.TagValueTooLong"
+//  FAILEDOPERATION_TOOMANYRESOURCES = "FailedOperation.TooManyResources"
+//  FAILEDOPERATION_TOOMANYTAGS = "FailedOperation.TooManyTags"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_DUPLICATEDATAENGINENAME = "InvalidParameter.DuplicateDataEngineName"
+//  INVALIDPARAMETER_INVALIDDATAENGINEMODE = "InvalidParameter.InvalidDataEngineMode"
+//  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
+//  INVALIDPARAMETER_INVALIDDATAENGINESPECS = "InvalidParameter.InvalidDataEngineSpecs"
+//  INVALIDPARAMETER_INVALIDENGINETYPE = "InvalidParameter.InvalidEngineType"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPayMode"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_VPCCIDRFORMATERROR = "InvalidParameter.VpcCidrFormatError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOPAYMENTAUTHORITY = "UnauthorizedOperation.NoPaymentAuthority"
+func (c *Client) CreateDataEngine(request *CreateDataEngineRequest) (response *CreateDataEngineResponse, err error) {
+    return c.CreateDataEngineWithContext(context.Background(), request)
+}
+
+// CreateDataEngine
+// This API is used to create a data engine.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ABNORMALORDERSTATUS = "FailedOperation.AbnormalOrderStatus"
+//  FAILEDOPERATION_ANOTHERCREATEPROCESSRUNNING = "FailedOperation.AnotherCreateProcessRunning"
+//  FAILEDOPERATION_ANOTHERPROCESSRUNNING = "FailedOperation.AnotherProcessRunning"
+//  FAILEDOPERATION_ANOTHERREQUESTPROCESSING = "FailedOperation.AnotherRequestProcessing"
+//  FAILEDOPERATION_BALANCENOTENOUGH = "FailedOperation.BalanceNotEnough"
+//  FAILEDOPERATION_BILLINGSYSTEMERROR = "FailedOperation.BillingSystemError"
+//  FAILEDOPERATION_BINDTOOMANYTAGS = "FailedOperation.BindTooManyTags"
+//  FAILEDOPERATION_CREATEDATAENGINEFAILED = "FailedOperation.CreateDataEngineFailed"
+//  FAILEDOPERATION_DELIVERGOODSFAILED = "FailedOperation.DeliverGoodsFailed"
+//  FAILEDOPERATION_DUPLICATETAGKEY = "FailedOperation.DuplicateTagKey"
+//  FAILEDOPERATION_FEEDEDUCTIONFAILED = "FailedOperation.FeeDeductionFailed"
+//  FAILEDOPERATION_GETPRODUCTINFORMATIONFAILED = "FailedOperation.GetProductInformationFailed"
+//  FAILEDOPERATION_ILLEGALRESOURCE = "FailedOperation.IllegalResource"
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
+//  FAILEDOPERATION_ILLEGALTAGVALUE = "FailedOperation.IllegalTagValue"
+//  FAILEDOPERATION_INQUIREPRICEFAILED = "FailedOperation.InquirePriceFailed"
+//  FAILEDOPERATION_MODIFYINSTANCEFAILED = "FailedOperation.ModifyInstanceFailed"
+//  FAILEDOPERATION_NOPERMISSION = "FailedOperation.NoPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTHENTICATION = "FailedOperation.NoRealNameAuthentication"
+//  FAILEDOPERATION_NUMBEREXCEEDLIMIT = "FailedOperation.NumberExceedLimit"
+//  FAILEDOPERATION_PARAMETERVALIDATIONFAILED = "FailedOperation.ParameterValidationFailed"
+//  FAILEDOPERATION_REFUNDDEPOSITFAILED = "FailedOperation.RefundDepositFailed"
+//  FAILEDOPERATION_TAGALREADYATTACHED = "FailedOperation.TagAlreadyAttached"
+//  FAILEDOPERATION_TAGKEYTOOLONG = "FailedOperation.TagKeyTooLong"
+//  FAILEDOPERATION_TAGNOTEXIST = "FailedOperation.TagNotExist"
+//  FAILEDOPERATION_TAGVALUETOOLONG = "FailedOperation.TagValueTooLong"
+//  FAILEDOPERATION_TOOMANYRESOURCES = "FailedOperation.TooManyResources"
+//  FAILEDOPERATION_TOOMANYTAGS = "FailedOperation.TooManyTags"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_DUPLICATEDATAENGINENAME = "InvalidParameter.DuplicateDataEngineName"
+//  INVALIDPARAMETER_INVALIDDATAENGINEMODE = "InvalidParameter.InvalidDataEngineMode"
+//  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
+//  INVALIDPARAMETER_INVALIDDATAENGINESPECS = "InvalidParameter.InvalidDataEngineSpecs"
+//  INVALIDPARAMETER_INVALIDENGINETYPE = "InvalidParameter.InvalidEngineType"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPayMode"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_VPCCIDRFORMATERROR = "InvalidParameter.VpcCidrFormatError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_NOPAYMENTAUTHORITY = "UnauthorizedOperation.NoPaymentAuthority"
+func (c *Client) CreateDataEngineWithContext(ctx context.Context, request *CreateDataEngineRequest) (response *CreateDataEngineResponse, err error) {
+    if request == nil {
+        request = NewCreateDataEngineRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDataEngine require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDataEngineResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateInternalTableRequest() (request *CreateInternalTableRequest) {
     request = &CreateInternalTableRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -527,6 +655,240 @@ func (c *Client) DeleteSparkAppWithContext(ctx context.Context, request *DeleteS
     return
 }
 
+func NewDescribeEngineUsageInfoRequest() (request *DescribeEngineUsageInfoRequest) {
+    request = &DescribeEngineUsageInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeEngineUsageInfo")
+    
+    
+    return
+}
+
+func NewDescribeEngineUsageInfoResponse() (response *DescribeEngineUsageInfoResponse) {
+    response = &DescribeEngineUsageInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeEngineUsageInfo
+// This API is used to query the resource usage of a data engine based on its ID.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeEngineUsageInfo(request *DescribeEngineUsageInfoRequest) (response *DescribeEngineUsageInfoResponse, err error) {
+    return c.DescribeEngineUsageInfoWithContext(context.Background(), request)
+}
+
+// DescribeEngineUsageInfo
+// This API is used to query the resource usage of a data engine based on its ID.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeEngineUsageInfoWithContext(ctx context.Context, request *DescribeEngineUsageInfoRequest) (response *DescribeEngineUsageInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeEngineUsageInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEngineUsageInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEngineUsageInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeForbiddenTableProRequest() (request *DescribeForbiddenTableProRequest) {
+    request = &DescribeForbiddenTableProRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeForbiddenTablePro")
+    
+    
+    return
+}
+
+func NewDescribeForbiddenTableProResponse() (response *DescribeForbiddenTableProResponse) {
+    response = &DescribeForbiddenTableProResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeForbiddenTablePro
+// This API is used to get the list of disabled table attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeForbiddenTablePro(request *DescribeForbiddenTableProRequest) (response *DescribeForbiddenTableProResponse, err error) {
+    return c.DescribeForbiddenTableProWithContext(context.Background(), request)
+}
+
+// DescribeForbiddenTablePro
+// This API is used to get the list of disabled table attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeForbiddenTableProWithContext(ctx context.Context, request *DescribeForbiddenTableProRequest) (response *DescribeForbiddenTableProResponse, err error) {
+    if request == nil {
+        request = NewDescribeForbiddenTableProRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeForbiddenTablePro require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeForbiddenTableProResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLakeFsDirSummaryRequest() (request *DescribeLakeFsDirSummaryRequest) {
+    request = &DescribeLakeFsDirSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeLakeFsDirSummary")
+    
+    
+    return
+}
+
+func NewDescribeLakeFsDirSummaryResponse() (response *DescribeLakeFsDirSummaryResponse) {
+    response = &DescribeLakeFsDirSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLakeFsDirSummary
+// This API is used to query the summary of a specified directory in a managed storage.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeLakeFsDirSummary(request *DescribeLakeFsDirSummaryRequest) (response *DescribeLakeFsDirSummaryResponse, err error) {
+    return c.DescribeLakeFsDirSummaryWithContext(context.Background(), request)
+}
+
+// DescribeLakeFsDirSummary
+// This API is used to query the summary of a specified directory in a managed storage.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeLakeFsDirSummaryWithContext(ctx context.Context, request *DescribeLakeFsDirSummaryRequest) (response *DescribeLakeFsDirSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeLakeFsDirSummaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLakeFsDirSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLakeFsDirSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLakeFsInfoRequest() (request *DescribeLakeFsInfoRequest) {
+    request = &DescribeLakeFsInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeLakeFsInfo")
+    
+    
+    return
+}
+
+func NewDescribeLakeFsInfoResponse() (response *DescribeLakeFsInfoResponse) {
+    response = &DescribeLakeFsInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLakeFsInfo
+// This API is used to query managed storage information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeLakeFsInfo(request *DescribeLakeFsInfoRequest) (response *DescribeLakeFsInfoResponse, err error) {
+    return c.DescribeLakeFsInfoWithContext(context.Background(), request)
+}
+
+// DescribeLakeFsInfo
+// This API is used to query managed storage information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeLakeFsInfoWithContext(ctx context.Context, request *DescribeLakeFsInfoRequest) (response *DescribeLakeFsInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeLakeFsInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLakeFsInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLakeFsInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResultDownloadRequest() (request *DescribeResultDownloadRequest) {
     request = &DescribeResultDownloadRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -549,19 +911,15 @@ func NewDescribeResultDownloadResponse() (response *DescribeResultDownloadRespon
 // This API is used to get a query result download task.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
-//  INVALIDPARAMETER_INVALIDFAILURETOLERANCE = "InvalidParameter.InvalidFailureTolerance"
-//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
-//  INVALIDPARAMETER_INVALIDSQLNUM = "InvalidParameter.InvalidSQLNum"
-//  INVALIDPARAMETER_INVALIDSTORELOCATION = "InvalidParameter.InvalidStoreLocation"
-//  INVALIDPARAMETER_INVALIDTASKTYPE = "InvalidParameter.InvalidTaskType"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_RESULTOUTPUTPATHNOTFOUND = "ResourceNotFound.ResultOutputPathNotFound"
-//  RESOURCEUNAVAILABLE_BALANCEINSUFFICIENT = "ResourceUnavailable.BalanceInsufficient"
-//  UNAUTHORIZEDOPERATION_USECOMPUTINGENGINE = "UnauthorizedOperation.UseComputingEngine"
 func (c *Client) DescribeResultDownload(request *DescribeResultDownloadRequest) (response *DescribeResultDownloadResponse, err error) {
     return c.DescribeResultDownloadWithContext(context.Background(), request)
 }
@@ -570,19 +928,15 @@ func (c *Client) DescribeResultDownload(request *DescribeResultDownloadRequest) 
 // This API is used to get a query result download task.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDDATAENGINENAME = "InvalidParameter.InvalidDataEngineName"
-//  INVALIDPARAMETER_INVALIDFAILURETOLERANCE = "InvalidParameter.InvalidFailureTolerance"
-//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
-//  INVALIDPARAMETER_INVALIDSQLNUM = "InvalidParameter.InvalidSQLNum"
-//  INVALIDPARAMETER_INVALIDSTORELOCATION = "InvalidParameter.InvalidStoreLocation"
-//  INVALIDPARAMETER_INVALIDTASKTYPE = "InvalidParameter.InvalidTaskType"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_RESULTOUTPUTPATHNOTFOUND = "ResourceNotFound.ResultOutputPathNotFound"
-//  RESOURCEUNAVAILABLE_BALANCEINSUFFICIENT = "ResourceUnavailable.BalanceInsufficient"
-//  UNAUTHORIZEDOPERATION_USECOMPUTINGENGINE = "UnauthorizedOperation.UseComputingEngine"
 func (c *Client) DescribeResultDownloadWithContext(ctx context.Context, request *DescribeResultDownloadRequest) (response *DescribeResultDownloadResponse, err error) {
     if request == nil {
         request = NewDescribeResultDownloadRequest()
@@ -1083,6 +1437,114 @@ func (c *Client) SuspendResumeDataEngineWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewSuspendResumeDataEngineResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSwitchDataEngineRequest() (request *SwitchDataEngineRequest) {
+    request = &SwitchDataEngineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "SwitchDataEngine")
+    
+    
+    return
+}
+
+func NewSwitchDataEngineResponse() (response *SwitchDataEngineResponse) {
+    response = &SwitchDataEngineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SwitchDataEngine
+// This API is used to switch between the primary and standby clusters.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  UNAUTHORIZEDOPERATION_OPERATECOMPUTINGENGINE = "UnauthorizedOperation.OperateComputingEngine"
+func (c *Client) SwitchDataEngine(request *SwitchDataEngineRequest) (response *SwitchDataEngineResponse, err error) {
+    return c.SwitchDataEngineWithContext(context.Background(), request)
+}
+
+// SwitchDataEngine
+// This API is used to switch between the primary and standby clusters.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  UNAUTHORIZEDOPERATION_OPERATECOMPUTINGENGINE = "UnauthorizedOperation.OperateComputingEngine"
+func (c *Client) SwitchDataEngineWithContext(ctx context.Context, request *SwitchDataEngineRequest) (response *SwitchDataEngineResponse, err error) {
+    if request == nil {
+        request = NewSwitchDataEngineRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SwitchDataEngine require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSwitchDataEngineResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateRowFilterRequest() (request *UpdateRowFilterRequest) {
+    request = &UpdateRowFilterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "UpdateRowFilter")
+    
+    
+    return
+}
+
+func NewUpdateRowFilterResponse() (response *UpdateRowFilterResponse) {
+    response = &UpdateRowFilterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateRowFilter
+// This API is used to update row filters. Please note that it updates filters only but not catalogs, databases, or tables.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  UNAUTHORIZEDOPERATION_OPERATECOMPUTINGENGINE = "UnauthorizedOperation.OperateComputingEngine"
+func (c *Client) UpdateRowFilter(request *UpdateRowFilterRequest) (response *UpdateRowFilterResponse, err error) {
+    return c.UpdateRowFilterWithContext(context.Background(), request)
+}
+
+// UpdateRowFilter
+// This API is used to update row filters. Please note that it updates filters only but not catalogs, databases, or tables.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  UNAUTHORIZEDOPERATION_OPERATECOMPUTINGENGINE = "UnauthorizedOperation.OperateComputingEngine"
+func (c *Client) UpdateRowFilterWithContext(ctx context.Context, request *UpdateRowFilterRequest) (response *UpdateRowFilterResponse, err error) {
+    if request == nil {
+        request = NewUpdateRowFilterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateRowFilter require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateRowFilterResponse()
     err = c.Send(request, response)
     return
 }

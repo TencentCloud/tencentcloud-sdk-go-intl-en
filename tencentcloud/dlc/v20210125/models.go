@@ -116,6 +116,257 @@ type Column struct {
 }
 
 // Predefined struct for user
+type CreateDataEngineRequestParams struct {
+	// The engine type. Valid values: `spark` and `presto`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
+	// The name of the virtual cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The cluster type. Valid values: `spark_private`, `presto_private`, `presto_cu`, and `spark_cu`.
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// The billing mode. Valid values: `0` (shared engine), `1` (pay-as-you-go), and `2` (monthly subscription).
+	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+
+	// Whether to automatically start the clusters.
+	AutoResume *bool `json:"AutoResume,omitempty" name:"AutoResume"`
+
+	// The minimum number of clusters.
+	MinClusters *int64 `json:"MinClusters,omitempty" name:"MinClusters"`
+
+	// The maximum number of clusters.
+	MaxClusters *int64 `json:"MaxClusters,omitempty" name:"MaxClusters"`
+
+	// Whether the cluster is the default one.
+	DefaultDataEngine *bool `json:"DefaultDataEngine,omitempty" name:"DefaultDataEngine"`
+
+	// The VPC CIDR block.
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// The description.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The cluster size.
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// The pay mode. Valid value: `0` (postpaid, default) and `1` (prepaid) (currently not available).
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// The resource period. For the postpaid mode, the value is 3600 (default); for the prepaid mode, the value must be in the range of 1–120, representing purchasing the resource for 1–120 months.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// The auto-renewal status of the resource. For the postpaid mode, no renewal is required, and the value is fixed to `0`. For the prepaid mode, valid values are `0` (manual), `1` (auto), and `2` (no renewal). If this parameter is set to `0` for a key account in the prepaid mode, auto-renewal applies. It defaults to `0`.
+	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// The tags to be set for the resource being created.
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to automatically suspend clusters. Valid values: `false` (default, no) and `true` (yes).
+	AutoSuspend *bool `json:"AutoSuspend,omitempty" name:"AutoSuspend"`
+
+	// Whether to enable scheduled start and suspension of clusters. Valid values: `0` (disable) and `1` (enable). Note: This policy and the auto-suspension policy are mutually exclusive.
+	CrontabResumeSuspend *int64 `json:"CrontabResumeSuspend,omitempty" name:"CrontabResumeSuspend"`
+
+	// The complex policy for scheduled start and suspension, including the start/suspension time and suspension policy.
+	CrontabResumeSuspendStrategy *CrontabResumeSuspendStrategy `json:"CrontabResumeSuspendStrategy,omitempty" name:"CrontabResumeSuspendStrategy"`
+
+	// The type of tasks to be executed by the engine, which defaults to SQL.
+	EngineExecType *string `json:"EngineExecType,omitempty" name:"EngineExecType"`
+
+	// The max task concurrency of a cluster, which defaults to 5.
+	MaxConcurrency *int64 `json:"MaxConcurrency,omitempty" name:"MaxConcurrency"`
+
+	// The task queue time limit, which defaults to 0. When the actual queue time exceeds the value set here, scale-out may be triggered. Setting this parameter to 0 represents that scale-out may be triggered immediately after a task queues up.
+	TolerableQueueTime *int64 `json:"TolerableQueueTime,omitempty" name:"TolerableQueueTime"`
+
+	// The cluster auto-suspension time, which defaults to 10 min.
+	AutoSuspendTime *int64 `json:"AutoSuspendTime,omitempty" name:"AutoSuspendTime"`
+
+	// The resource type. Valid values: `Standard_CU` (standard) and `Memory_CU` (memory).
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// The advanced configurations of clusters.
+	DataEngineConfigPairs []*DataEngineConfigPair `json:"DataEngineConfigPairs,omitempty" name:"DataEngineConfigPairs"`
+
+	// The version name of cluster image, such as SuperSQL-P 1.1 and SuperSQL-S 3.2. If no value is passed in, a cluster is created using the latest image version.
+	ImageVersionName *string `json:"ImageVersionName,omitempty" name:"ImageVersionName"`
+
+	// The name of the primary cluster.
+	MainClusterName *string `json:"MainClusterName,omitempty" name:"MainClusterName"`
+
+
+	ElasticSwitch *bool `json:"ElasticSwitch,omitempty" name:"ElasticSwitch"`
+
+
+	ElasticLimit *int64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
+}
+
+type CreateDataEngineRequest struct {
+	*tchttp.BaseRequest
+	
+	// The engine type. Valid values: `spark` and `presto`.
+	EngineType *string `json:"EngineType,omitempty" name:"EngineType"`
+
+	// The name of the virtual cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The cluster type. Valid values: `spark_private`, `presto_private`, `presto_cu`, and `spark_cu`.
+	ClusterType *string `json:"ClusterType,omitempty" name:"ClusterType"`
+
+	// The billing mode. Valid values: `0` (shared engine), `1` (pay-as-you-go), and `2` (monthly subscription).
+	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+
+	// Whether to automatically start the clusters.
+	AutoResume *bool `json:"AutoResume,omitempty" name:"AutoResume"`
+
+	// The minimum number of clusters.
+	MinClusters *int64 `json:"MinClusters,omitempty" name:"MinClusters"`
+
+	// The maximum number of clusters.
+	MaxClusters *int64 `json:"MaxClusters,omitempty" name:"MaxClusters"`
+
+	// Whether the cluster is the default one.
+	DefaultDataEngine *bool `json:"DefaultDataEngine,omitempty" name:"DefaultDataEngine"`
+
+	// The VPC CIDR block.
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
+
+	// The description.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The cluster size.
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// The pay mode. Valid value: `0` (postpaid, default) and `1` (prepaid) (currently not available).
+	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// The resource period. For the postpaid mode, the value is 3600 (default); for the prepaid mode, the value must be in the range of 1–120, representing purchasing the resource for 1–120 months.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+
+	// The unit of the resource period. Valid values: `s` (default) for the postpaid mode and `m` for the prepaid mode.
+	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+
+	// The auto-renewal status of the resource. For the postpaid mode, no renewal is required, and the value is fixed to `0`. For the prepaid mode, valid values are `0` (manual), `1` (auto), and `2` (no renewal). If this parameter is set to `0` for a key account in the prepaid mode, auto-renewal applies. It defaults to `0`.
+	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// The tags to be set for the resource being created.
+	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// Whether to automatically suspend clusters. Valid values: `false` (default, no) and `true` (yes).
+	AutoSuspend *bool `json:"AutoSuspend,omitempty" name:"AutoSuspend"`
+
+	// Whether to enable scheduled start and suspension of clusters. Valid values: `0` (disable) and `1` (enable). Note: This policy and the auto-suspension policy are mutually exclusive.
+	CrontabResumeSuspend *int64 `json:"CrontabResumeSuspend,omitempty" name:"CrontabResumeSuspend"`
+
+	// The complex policy for scheduled start and suspension, including the start/suspension time and suspension policy.
+	CrontabResumeSuspendStrategy *CrontabResumeSuspendStrategy `json:"CrontabResumeSuspendStrategy,omitempty" name:"CrontabResumeSuspendStrategy"`
+
+	// The type of tasks to be executed by the engine, which defaults to SQL.
+	EngineExecType *string `json:"EngineExecType,omitempty" name:"EngineExecType"`
+
+	// The max task concurrency of a cluster, which defaults to 5.
+	MaxConcurrency *int64 `json:"MaxConcurrency,omitempty" name:"MaxConcurrency"`
+
+	// The task queue time limit, which defaults to 0. When the actual queue time exceeds the value set here, scale-out may be triggered. Setting this parameter to 0 represents that scale-out may be triggered immediately after a task queues up.
+	TolerableQueueTime *int64 `json:"TolerableQueueTime,omitempty" name:"TolerableQueueTime"`
+
+	// The cluster auto-suspension time, which defaults to 10 min.
+	AutoSuspendTime *int64 `json:"AutoSuspendTime,omitempty" name:"AutoSuspendTime"`
+
+	// The resource type. Valid values: `Standard_CU` (standard) and `Memory_CU` (memory).
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// The advanced configurations of clusters.
+	DataEngineConfigPairs []*DataEngineConfigPair `json:"DataEngineConfigPairs,omitempty" name:"DataEngineConfigPairs"`
+
+	// The version name of cluster image, such as SuperSQL-P 1.1 and SuperSQL-S 3.2. If no value is passed in, a cluster is created using the latest image version.
+	ImageVersionName *string `json:"ImageVersionName,omitempty" name:"ImageVersionName"`
+
+	// The name of the primary cluster.
+	MainClusterName *string `json:"MainClusterName,omitempty" name:"MainClusterName"`
+
+	ElasticSwitch *bool `json:"ElasticSwitch,omitempty" name:"ElasticSwitch"`
+
+	ElasticLimit *int64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
+}
+
+func (r *CreateDataEngineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDataEngineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EngineType")
+	delete(f, "DataEngineName")
+	delete(f, "ClusterType")
+	delete(f, "Mode")
+	delete(f, "AutoResume")
+	delete(f, "MinClusters")
+	delete(f, "MaxClusters")
+	delete(f, "DefaultDataEngine")
+	delete(f, "CidrBlock")
+	delete(f, "Message")
+	delete(f, "Size")
+	delete(f, "PayMode")
+	delete(f, "TimeSpan")
+	delete(f, "TimeUnit")
+	delete(f, "AutoRenew")
+	delete(f, "Tags")
+	delete(f, "AutoSuspend")
+	delete(f, "CrontabResumeSuspend")
+	delete(f, "CrontabResumeSuspendStrategy")
+	delete(f, "EngineExecType")
+	delete(f, "MaxConcurrency")
+	delete(f, "TolerableQueueTime")
+	delete(f, "AutoSuspendTime")
+	delete(f, "ResourceType")
+	delete(f, "DataEngineConfigPairs")
+	delete(f, "ImageVersionName")
+	delete(f, "MainClusterName")
+	delete(f, "ElasticSwitch")
+	delete(f, "ElasticLimit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDataEngineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDataEngineResponseParams struct {
+	// The ID of the virtual engine.
+	DataEngineId *string `json:"DataEngineId,omitempty" name:"DataEngineId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDataEngineResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDataEngineResponseParams `json:"Response"`
+}
+
+func (r *CreateDataEngineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDataEngineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateInternalTableRequestParams struct {
 	// The basic table information.
 	TableBaseInfo *TableBaseInfo `json:"TableBaseInfo,omitempty" name:"TableBaseInfo"`
@@ -724,6 +975,24 @@ func (r *CreateTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CrontabResumeSuspendStrategy struct {
+	// The scheduled start time, such as 8:00 AM every Monday.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResumeTime *string `json:"ResumeTime,omitempty" name:"ResumeTime"`
+
+	// The scheduled suspension time, such as 8:00 PM every Monday.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SuspendTime *string `json:"SuspendTime,omitempty" name:"SuspendTime"`
+
+	// The suspension setting. Valid values: `0` (suspension after task end, default) and `1` (force suspension).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SuspendStrategy *int64 `json:"SuspendStrategy,omitempty" name:"SuspendStrategy"`
+}
+
+type DataEngineConfigPair struct {
+
+}
+
 type DataGovernPolicy struct {
 
 }
@@ -779,6 +1048,222 @@ func (r *DeleteSparkAppResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSparkAppResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEngineUsageInfoRequestParams struct {
+	// The house ID.
+	DataEngineId *string `json:"DataEngineId,omitempty" name:"DataEngineId"`
+}
+
+type DescribeEngineUsageInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The house ID.
+	DataEngineId *string `json:"DataEngineId,omitempty" name:"DataEngineId"`
+}
+
+func (r *DescribeEngineUsageInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEngineUsageInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DataEngineId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEngineUsageInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEngineUsageInfoResponseParams struct {
+	// The total cluster spec.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The used cluster spec.
+	Used *int64 `json:"Used,omitempty" name:"Used"`
+
+	// The available cluster spec.
+	Available *int64 `json:"Available,omitempty" name:"Available"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeEngineUsageInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEngineUsageInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeEngineUsageInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEngineUsageInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeForbiddenTableProRequestParams struct {
+
+}
+
+type DescribeForbiddenTableProRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeForbiddenTableProRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeForbiddenTableProRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeForbiddenTableProRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeForbiddenTableProResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeForbiddenTableProResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeForbiddenTableProResponseParams `json:"Response"`
+}
+
+func (r *DescribeForbiddenTableProResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeForbiddenTableProResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLakeFsDirSummaryRequestParams struct {
+
+}
+
+type DescribeLakeFsDirSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeLakeFsDirSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLakeFsDirSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLakeFsDirSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLakeFsDirSummaryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLakeFsDirSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLakeFsDirSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeLakeFsDirSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLakeFsDirSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLakeFsInfoRequestParams struct {
+
+}
+
+type DescribeLakeFsInfoRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeLakeFsInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLakeFsInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLakeFsInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLakeFsInfoResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeLakeFsInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLakeFsInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeLakeFsInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLakeFsInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1719,6 +2204,71 @@ func (r *ModifySparkAppResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Policy struct {
+	// The name of the target database. `*` represents all databases in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any database.
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// The name of the target data source. To grant admin permission, it must be `*` (all resources at this level); to grant data source and database permissions, it must be `COSDataCatalog` or `*`; to grant table permissions, it can be a custom data source; if it is left empty, `DataLakeCatalog` is used. Note: To grant permissions on a custom data source, the permissions that can be managed in the Data Lake Compute console are subsets of the account permissions granted when you connect the data source to the console.
+	Catalog *string `json:"Catalog,omitempty" name:"Catalog"`
+
+	// The name of the target table. `*` represents all tables in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any table.
+	Table *string `json:"Table,omitempty" name:"Table"`
+
+	// The target permissions, which vary by permission level. Admin: `ALL` (default); data connection: `CREATE`; database: `ALL`, `CREATE`, `ALTER`, and `DROP`; table: `ALL`, `SELECT`, `INSERT`, `ALTER`, `DELETE`, `DROP`, and `UPDATE`. Note: For table permissions, if a data source other than `COSDataCatalog` is specified, only the `SELECT` permission can be granted here.
+	Operation *string `json:"Operation,omitempty" name:"Operation"`
+
+	// The permission type. Valid values: `ADMIN`, `DATASOURCE`, `DATABASE`, `TABLE`, `VIEW`, `FUNCTION`, `COLUMN`, and `ENGINE`. Note: If it is left empty, `ADMIN` is used.
+	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
+
+	// The name of the target function. `*` represents all functions in the current catalog. To grant admin permissions, it must be `*`; to grant data connection permissions, it must be null; to grant other permissions, it can be any function.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Function *string `json:"Function,omitempty" name:"Function"`
+
+	// The name of the target view. `*` represents all views in the current database. To grant admin permissions, it must be `*`; to grant data connection and database permissions, it must be null; to grant other permissions, it can be any view.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	View *string `json:"View,omitempty" name:"View"`
+
+	// The name of the target column. `*` represents all columns. To grant admin permissions, it must be `*`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Column *string `json:"Column,omitempty" name:"Column"`
+
+	// The name of the target data engine. `*` represents all engines. To grant admin permissions, it must be `*`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataEngine *string `json:"DataEngine,omitempty" name:"DataEngine"`
+
+	// Whether the grantee is allowed to further grant the permissions. Valid values: `false` (default) and `true` (the grantee can grant permissions gained here to other sub-users).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReAuth *bool `json:"ReAuth,omitempty" name:"ReAuth"`
+
+	// The permission source, which is not required when input parameters are passed in. Valid values: `USER` (from the user) and `WORKGROUP` (from one or more associated work groups).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// The grant mode, which is not required as an input parameter. Valid values: `COMMON` and `SENIOR`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+
+	// The operator, which is not required as an input parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// The permission policy creation time, which is not required as an input parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The ID of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SourceId *int64 `json:"SourceId,omitempty" name:"SourceId"`
+
+	// The name of the work group, which applies only when the value of the `Source` field is `WORKGROUP`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SourceName *string `json:"SourceName,omitempty" name:"SourceName"`
+
+	// The policy ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+}
+
 type Property struct {
 	// The property key name.
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -1952,6 +2502,67 @@ func (r *SuspendResumeDataEngineResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SwitchDataEngineRequestParams struct {
+	// The name of the primary cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// Whether to start the standby cluster.
+	StartStandbyCluster *bool `json:"StartStandbyCluster,omitempty" name:"StartStandbyCluster"`
+}
+
+type SwitchDataEngineRequest struct {
+	*tchttp.BaseRequest
+	
+	// The name of the primary cluster.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// Whether to start the standby cluster.
+	StartStandbyCluster *bool `json:"StartStandbyCluster,omitempty" name:"StartStandbyCluster"`
+}
+
+func (r *SwitchDataEngineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchDataEngineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DataEngineName")
+	delete(f, "StartStandbyCluster")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchDataEngineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SwitchDataEngineResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SwitchDataEngineResponse struct {
+	*tchttp.BaseResponse
+	Response *SwitchDataEngineResponseParams `json:"Response"`
+}
+
+func (r *SwitchDataEngineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchDataEngineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type TColumn struct {
 	// The field name.
 	Name *string `json:"Name,omitempty" name:"Name"`
@@ -2029,6 +2640,16 @@ type TableBaseInfo struct {
 	// The data governance configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	GovernPolicy *DataGovernPolicy `json:"GovernPolicy,omitempty" name:"GovernPolicy"`
+}
+
+type TagInfo struct {
+	// The tag key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+
+	// The tag value.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
 type Task struct {
@@ -2246,4 +2867,65 @@ type TasksOverview struct {
 
 	// The total number of tasks in this time range.
 	TotalTaskCount *int64 `json:"TotalTaskCount,omitempty" name:"TotalTaskCount"`
+}
+
+// Predefined struct for user
+type UpdateRowFilterRequestParams struct {
+	// The ID of the row filter policy, which can be obtained using the `DescribeUserInfo` or `DescribeWorkGroupInfo` API.
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The new filter policy.
+	Policy *Policy `json:"Policy,omitempty" name:"Policy"`
+}
+
+type UpdateRowFilterRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the row filter policy, which can be obtained using the `DescribeUserInfo` or `DescribeWorkGroupInfo` API.
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The new filter policy.
+	Policy *Policy `json:"Policy,omitempty" name:"Policy"`
+}
+
+func (r *UpdateRowFilterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateRowFilterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PolicyId")
+	delete(f, "Policy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateRowFilterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateRowFilterResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateRowFilterResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateRowFilterResponseParams `json:"Response"`
+}
+
+func (r *UpdateRowFilterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateRowFilterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
