@@ -2401,6 +2401,10 @@ type SparkJobInfo struct {
 	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `JobExecutorNums`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobExecutorMaxNumbers *int64 `json:"JobExecutorMaxNumbers,omitempty" name:"JobExecutorMaxNumbers"`
+
+	// The image version.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SparkImageVersion *string `json:"SparkImageVersion,omitempty" name:"SparkImageVersion"`
 }
 
 type StreamingStatistics struct {
