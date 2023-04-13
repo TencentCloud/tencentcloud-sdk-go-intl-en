@@ -3074,6 +3074,10 @@ type InstanceConfs struct {
 
 	// Whether to enable instance overview. Valid values: Yes, No.
 	OverviewDisplay *string `json:"OverviewDisplay,omitempty" name:"OverviewDisplay"`
+
+	// Custom big key analysis separator for Redis only
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KeyDelimiters []*string `json:"KeyDelimiters,omitempty" name:"KeyDelimiters"`
 }
 
 type InstanceInfo struct {
@@ -3160,6 +3164,17 @@ type InstanceInfo struct {
 
 	// Running status of instance audit log. Valid values: normal (running), paused (suspension due to overdue payment).
 	AuditRunningStatus *string `json:"AuditRunningStatus,omitempty" name:"AuditRunningStatus"`
+
+	// Private VIP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InternalVip *string `json:"InternalVip,omitempty" name:"InternalVip"`
+
+	// Private network port
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InternalVport *int64 `json:"InternalVport,omitempty" name:"InternalVport"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 }
 
 type IssueTypeInfo struct {
