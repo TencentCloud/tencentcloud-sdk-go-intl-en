@@ -21,13 +21,16 @@ import (
 )
 
 type ActionTimer struct {
-	// Timer name. Currently `TerminateInstances` is the only supported value.
+	// Timer action. Valid value: `TerminateInstances`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TimerAction *string `json:"TimerAction,omitempty" name:"TimerAction"`
 
-	// Execution time, which follows the ISO8601 standard and uses UTC time. It must be at least 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
+	// Action time, which follows the ISO8601 standard and uses UTC time. It must be 5 minutes later than the current time. Format: YYYY-MM-DDThh:mm:ssZ. For example: 2018-05-29T11:26:40Z.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ActionTime *string `json:"ActionTime,omitempty" name:"ActionTime"`
 
-	// Additional data
+	// Extended data
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Externals *Externals `json:"Externals,omitempty" name:"Externals"`
 }
 
@@ -4464,10 +4467,12 @@ type Instance struct {
 }
 
 type InstanceChargePrepaid struct {
-	// Subscription period; unit: month; valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+	// Subscription period (in month). Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48’, `60`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
 
-	// Auto renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+	// Auto-renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: Notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: Notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify upon expiration nor renew automatically <br><br>Default value: `NOTIFY_AND_MANUAL_RENEW`. When `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis if the account has sufficient balance.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	RenewFlag *string `json:"RenewFlag,omitempty" name:"RenewFlag"`
 }
 
@@ -4480,10 +4485,12 @@ type InstanceFamilyConfig struct {
 }
 
 type InstanceMarketOptionsRequest struct {
-	// Options related to bidding
+	// Spot-related options
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SpotOptions *SpotMarketOptions `json:"SpotOptions,omitempty" name:"SpotOptions"`
 
-	// Market option type. Currently `spot` is the only supported value.
+	// Market type. Valid value: `spot`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	MarketType *string `json:"MarketType,omitempty" name:"MarketType"`
 }
 
@@ -4834,6 +4841,15 @@ type LaunchTemplateVersionData struct {
 	// List of tag description. By specifying this parameter, the tag can be bound to the corresponding CVM and CBS instances at the same time.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
+
+	// Whether to enable termination protection. Valid values:
+	// 
+	// TRUE: Termination protection is enabled.
+	// FALSE: Termination protection is disabled.
+	// 
+	// Default value: `FALSE`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DisableApiTermination *bool `json:"DisableApiTermination,omitempty" name:"DisableApiTermination"`
 }
 
 type LaunchTemplateVersionInfo struct {
@@ -7058,10 +7074,12 @@ type Tag struct {
 }
 
 type TagSpecification struct {
-	// The type of resource that the tag is bound to. Valid values: `instance` (for CVM), `host` (for CDH), `image` (for image), and `keypair` (for key).
+	// Resource type. Valid values: `instance` (CVM), `host` (CDH), `image` (for image), and `keypair` (for key).
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
 
-	// List of tags
+	// Tag pairs
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }
 

@@ -179,6 +179,9 @@ const (
 	// The regions specified for CLB is invalid.
 	INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
 
+	// The format of the placement group ID is incorrect.
+	INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
+
 	// Invalid filter condition.
 	INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 
@@ -272,6 +275,9 @@ const (
 	// The backend port of the CLB layer-4 listener already exists.
 	INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 
+	// Executing a target tracking policy is not supported.
+	INVALIDPARAMETERVALUE_TARGETTRACKINGSCALINGPOLICY = "InvalidParameterValue.TargetTrackingScalingPolicy"
+
 	// The specified threshold must be within the valid range.
 	INVALIDPARAMETERVALUE_THRESHOLDOUTOFRANGE = "InvalidParameterValue.ThresholdOutOfRange"
 
@@ -329,6 +335,9 @@ const (
 	// The number of scheduled tasks exceeds the limit.
 	LIMITEXCEEDED_SCHEDULEDACTIONLIMITEXCEEDED = "LimitExceeded.ScheduledActionLimitExceeded"
 
+	// Only one target tracking policy can be created for a scaling group.
+	LIMITEXCEEDED_TARGETTRACKINGSCALINGPOLICY = "LimitExceeded.TargetTrackingScalingPolicy"
+
 	// Parameter missing.
 	MISSINGPARAMETER = "MissingParameter"
 
@@ -377,6 +386,9 @@ const (
 	// The command does not exist.
 	RESOURCENOTFOUND_COMMANDNOTFOUND = "ResourceNotFound.CommandNotFound"
 
+	// The specified placement group ID does not exist.
+	RESOURCENOTFOUND_DISASTERRECOVERGROUPNOTFOUND = "ResourceNotFound.DisasterRecoverGroupNotFound"
+
 	// The specified instance does not exist.
 	RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
 
@@ -391,6 +403,9 @@ const (
 
 	// The specified lifecycle hook was not found.
 	RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
+
+	// The specified lifecycle hook token does not exist.
+	RESOURCENOTFOUND_LIFECYCLEHOOKTOKENNOTFOUND = "ResourceNotFound.LifecycleHookTokenNotFound"
 
 	// The specified listener does not exist.
 	RESOURCENOTFOUND_LISTENERNOTFOUND = "ResourceNotFound.ListenerNotFound"
@@ -430,6 +445,9 @@ const (
 
 	// The instance and the auto scaling group are in different VPCs.
 	RESOURCEUNAVAILABLE_CVMVPCINCONSISTENT = "ResourceUnavailable.CvmVpcInconsistent"
+
+	// You cannot modify the VPC of a scaling group bound with a load balancer.
+	RESOURCEUNAVAILABLE_FORBIDDENMODIFYVPC = "ResourceUnavailable.ForbiddenModifyVpc"
 
 	// Unable to add the instance to the scaling group.
 	RESOURCEUNAVAILABLE_INSTANCECANNOTATTACH = "ResourceUnavailable.InstanceCannotAttach"

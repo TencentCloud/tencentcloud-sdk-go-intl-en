@@ -108,7 +108,7 @@ type AddExistedInstancesRequestParams struct {
 	// The array length of `InstanceAdvancedSettingsOverride` should be the same as the array length of `InstanceIds`. If its array length is greater than the `InstanceIds` array length, an error will be reported. If its array length is less than the `InstanceIds` array length, the instance without corresponding configuration will use the default configuration.
 	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides"`
 
-	// Node image (it is required when creating a node)
+	// Node image
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 }
 
@@ -147,7 +147,7 @@ type AddExistedInstancesRequest struct {
 	// The array length of `InstanceAdvancedSettingsOverride` should be the same as the array length of `InstanceIds`. If its array length is greater than the `InstanceIds` array length, an error will be reported. If its array length is less than the `InstanceIds` array length, the instance without corresponding configuration will use the default configuration.
 	InstanceAdvancedSettingsOverrides []*InstanceAdvancedSettings `json:"InstanceAdvancedSettingsOverrides,omitempty" name:"InstanceAdvancedSettingsOverrides"`
 
-	// Node image (it is required when creating a node)
+	// Node image
 	ImageId *string `json:"ImageId,omitempty" name:"ImageId"`
 }
 
@@ -619,7 +619,7 @@ type Cluster struct {
 	// Tag description list.
 	TagSpecification []*TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 
-	// Cluster status (`Running`, `Creating`, `Idling` or `Abnormal`)
+	// Cluster status. Values: `Trading` (Preparing), `Creating`, `Running`, `Deleting`, `Idling` (Idle), `Recovering`, `Scaling`, `Upgrading` (Upgrading the cluster), `WaittingForConnect` (Pending registration), `Pause` (Cluster upgrade paused), `NodeUpgrading` (Upgrading the node), `RuntimeUpgrading` (Upgrading the node runtime), `MasterScaling` (Scaling Master), `ClusterLevelUpgrading` (Adjusting cluster specification level), `ResourceIsolate` (Isolating), `ResourceIsolated` (Isolated), `ResourceReverse` (Overdue payment made. Recovering the cluster), and `Abnormal`.
 	ClusterStatus *string `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
 
 	// Cluster attributes (including a map of different cluster attributes, with attribute fields including NodeNameType (lan-ip mode and hostname mode, with lan-ip mode as default))
@@ -667,6 +667,10 @@ type Cluster struct {
 	// Runtime version
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	RuntimeVersion *string `json:"RuntimeVersion,omitempty" name:"RuntimeVersion"`
+
+	// Number of current etcd in the cluster
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ClusterEtcdNodeNum *uint64 `json:"ClusterEtcdNodeNum,omitempty" name:"ClusterEtcdNodeNum"`
 }
 
 type ClusterAdvancedSettings struct {
@@ -1033,6 +1037,11 @@ type ClusterNetworkSettings struct {
 	// It is used to automatically assign the IP ranges for the service.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Ipv6ServiceCIDR *string `json:"Ipv6ServiceCIDR,omitempty" name:"Ipv6ServiceCIDR"`
+
+	// Cluster Cilium Mode configuration
+	// - clusterIP
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	CiliumMode *string `json:"CiliumMode,omitempty" name:"CiliumMode"`
 }
 
 type ClusterStatus struct {
@@ -8858,6 +8867,10 @@ type RunSecurityServiceEnabled struct {
 }
 
 type ServiceAccountAuthenticationOptions struct {
+	// Use TKE default issuer and jwksuri
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UseTKEDefault *bool `json:"UseTKEDefault,omitempty" name:"UseTKEDefault"`
+
 	// service-account-issuer
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`

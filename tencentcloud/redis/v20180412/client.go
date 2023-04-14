@@ -547,6 +547,116 @@ func (c *Client) ClearInstanceWithContext(ctx context.Context, request *ClearIns
     return
 }
 
+func NewCloneInstancesRequest() (request *CloneInstancesRequest) {
+    request = &CloneInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "CloneInstances")
+    
+    
+    return
+}
+
+func NewCloneInstancesResponse() (response *CloneInstancesResponse) {
+    response = &CloneInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CloneInstances
+// This API is used to clone a complete instance based on the current instance backup file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
+//  INVALIDPARAMETER_ONLYVPCONSPECZONEID = "InvalidParameter.OnlyVPCOnSpecZoneId"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_BASENETWORKACCESSDENY = "InvalidParameterValue.BaseNetWorkAccessDeny"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPEID = "InvalidParameterValue.InvalidInstanceTypeId"
+//  INVALIDPARAMETERVALUE_INVALIDSUBNETID = "InvalidParameterValue.InvalidSubnetId"
+//  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
+//  INVALIDPARAMETERVALUE_PASSWORDFREEDENIED = "InvalidParameterValue.PasswordFreeDenied"
+//  INVALIDPARAMETERVALUE_PASSWORDRULEERROR = "InvalidParameterValue.PasswordRuleError"
+//  INVALIDPARAMETERVALUE_SECURITYGROUPIDSNOTEXISTS = "InvalidParameterValue.SecurityGroupIdsNotExists"
+//  INVALIDPARAMETERVALUE_UNVPCIDNOTEXISTS = "InvalidParameterValue.UnVpcIdNotExists"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_INVALIDMEMSIZE = "LimitExceeded.InvalidMemSize"
+//  LIMITEXCEEDED_INVALIDPARAMETERGOODSNUMNOTINRANGE = "LimitExceeded.InvalidParameterGoodsNumNotInRange"
+//  LIMITEXCEEDED_PERIODLESSTHANMINLIMIT = "LimitExceeded.PeriodLessThanMinLimit"
+//  LIMITEXCEEDED_REACHTHEAMOUNTLIMIT = "LimitExceeded.ReachTheAmountLimit"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND_ACCOUNTDOESNOTEXISTS = "ResourceNotFound.AccountDoesNotExists"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCEDELETED = "ResourceUnavailable.InstanceDeleted"
+//  RESOURCEUNAVAILABLE_NOENOUGHVIPINVPC = "ResourceUnavailable.NoEnoughVipInVPC"
+//  RESOURCEUNAVAILABLE_NOREDISSERVICE = "ResourceUnavailable.NoRedisService"
+//  RESOURCEUNAVAILABLE_NOSERVICEAVAILABLEFORTHISZONEID = "ResourceUnavailable.NoServiceAvailableForThisZoneId"
+//  RESOURCEUNAVAILABLE_SALEOUT = "ResourceUnavailable.SaleOut"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CloneInstances(request *CloneInstancesRequest) (response *CloneInstancesResponse, err error) {
+    return c.CloneInstancesWithContext(context.Background(), request)
+}
+
+// CloneInstances
+// This API is used to clone a complete instance based on the current instance backup file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
+//  INVALIDPARAMETER_ONLYVPCONSPECZONEID = "InvalidParameter.OnlyVPCOnSpecZoneId"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_BASENETWORKACCESSDENY = "InvalidParameterValue.BaseNetWorkAccessDeny"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPEID = "InvalidParameterValue.InvalidInstanceTypeId"
+//  INVALIDPARAMETERVALUE_INVALIDSUBNETID = "InvalidParameterValue.InvalidSubnetId"
+//  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
+//  INVALIDPARAMETERVALUE_PASSWORDFREEDENIED = "InvalidParameterValue.PasswordFreeDenied"
+//  INVALIDPARAMETERVALUE_PASSWORDRULEERROR = "InvalidParameterValue.PasswordRuleError"
+//  INVALIDPARAMETERVALUE_SECURITYGROUPIDSNOTEXISTS = "InvalidParameterValue.SecurityGroupIdsNotExists"
+//  INVALIDPARAMETERVALUE_UNVPCIDNOTEXISTS = "InvalidParameterValue.UnVpcIdNotExists"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_INVALIDMEMSIZE = "LimitExceeded.InvalidMemSize"
+//  LIMITEXCEEDED_INVALIDPARAMETERGOODSNUMNOTINRANGE = "LimitExceeded.InvalidParameterGoodsNumNotInRange"
+//  LIMITEXCEEDED_PERIODLESSTHANMINLIMIT = "LimitExceeded.PeriodLessThanMinLimit"
+//  LIMITEXCEEDED_REACHTHEAMOUNTLIMIT = "LimitExceeded.ReachTheAmountLimit"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND_ACCOUNTDOESNOTEXISTS = "ResourceNotFound.AccountDoesNotExists"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCEDELETED = "ResourceUnavailable.InstanceDeleted"
+//  RESOURCEUNAVAILABLE_NOENOUGHVIPINVPC = "ResourceUnavailable.NoEnoughVipInVPC"
+//  RESOURCEUNAVAILABLE_NOREDISSERVICE = "ResourceUnavailable.NoRedisService"
+//  RESOURCEUNAVAILABLE_NOSERVICEAVAILABLEFORTHISZONEID = "ResourceUnavailable.NoServiceAvailableForThisZoneId"
+//  RESOURCEUNAVAILABLE_SALEOUT = "ResourceUnavailable.SaleOut"
+//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CloneInstancesWithContext(ctx context.Context, request *CloneInstancesRequest) (response *CloneInstancesResponse, err error) {
+    if request == nil {
+        request = NewCloneInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloneInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloneInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseSSLRequest() (request *CloseSSLRequest) {
     request = &CloseSSLRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -572,6 +682,7 @@ func NewCloseSSLResponse() (response *CloseSSLResponse) {
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -588,6 +699,7 @@ func (c *Client) CloseSSL(request *CloseSSLRequest) (response *CloseSSLResponse,
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -2784,13 +2896,14 @@ func NewDescribeSSLStatusResponse() (response *DescribeSSLStatusResponse) {
 }
 
 // DescribeSSLStatus
-// This API is used to query SSL status.
+// This API is used to query the SSL authentication information of an instance, such as enablement status, configuration status, and certificate address.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -2799,13 +2912,14 @@ func (c *Client) DescribeSSLStatus(request *DescribeSSLStatusRequest) (response 
 }
 
 // DescribeSSLStatus
-// This API is used to query SSL status.
+// This API is used to query the SSL authentication information of an instance, such as enablement status, configuration status, and certificate address.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -3646,7 +3760,7 @@ func NewModfiyInstancePasswordResponse() (response *ModfiyInstancePasswordRespon
 }
 
 // ModfiyInstancePassword
-// This API is used to change the Redis password.
+// This API is used to modify the access password for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3664,7 +3778,7 @@ func (c *Client) ModfiyInstancePassword(request *ModfiyInstancePasswordRequest) 
 }
 
 // ModfiyInstancePassword
-// This API is used to change the Redis password.
+// This API is used to modify the access password for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -4349,6 +4463,7 @@ func NewOpenSSLResponse() (response *OpenSSLResponse) {
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -4366,6 +4481,7 @@ func (c *Client) OpenSSL(request *OpenSSLRequest) (response *OpenSSLResponse, er
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
@@ -4978,6 +5094,7 @@ func NewUpgradeProxyVersionResponse() (response *UpgradeProxyVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) UpgradeProxyVersion(request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
     return c.UpgradeProxyVersionWithContext(context.Background(), request)
 }
@@ -4987,6 +5104,7 @@ func (c *Client) UpgradeProxyVersion(request *UpgradeProxyVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) UpgradeProxyVersionWithContext(ctx context.Context, request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeProxyVersionRequest()
@@ -5026,6 +5144,7 @@ func NewUpgradeSmallVersionResponse() (response *UpgradeSmallVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
     return c.UpgradeSmallVersionWithContext(context.Background(), request)
 }
@@ -5035,6 +5154,7 @@ func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 func (c *Client) UpgradeSmallVersionWithContext(ctx context.Context, request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeSmallVersionRequest()

@@ -300,11 +300,11 @@ func NewCompleteLifecycleActionResponse() (response *CompleteLifecycleActionResp
 }
 
 // CompleteLifecycleAction
-// This API (CompleteLifecycleAction) is used to complete a lifecycle action.
+// This API is used to complete a lifecycle action by setting the status of lifecycle hook to `CONTINUE` or `ABANDON`.
 //
 // 
 //
-// * The result ("CONTINUE" or "ABANDON") of a specific lifecycle hook can be specified by calling this API. If this API is not called at all, the lifecycle hook will be processed based on the "DefaultResult" after timeout.
+// * If this API is not called, the lifecycle hook goes to the status specified in `DefaultResult` after the timeout period.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -317,17 +317,18 @@ func NewCompleteLifecycleActionResponse() (response *CompleteLifecycleActionResp
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEHOOKID = "InvalidParameterValue.InvalidLifecycleHookId"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKINSTANCENOTFOUND = "ResourceNotFound.LifecycleHookInstanceNotFound"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
+//  RESOURCENOTFOUND_LIFECYCLEHOOKTOKENNOTFOUND = "ResourceNotFound.LifecycleHookTokenNotFound"
 //  RESOURCEUNAVAILABLE_LIFECYCLEACTIONRESULTHASSET = "ResourceUnavailable.LifecycleActionResultHasSet"
 func (c *Client) CompleteLifecycleAction(request *CompleteLifecycleActionRequest) (response *CompleteLifecycleActionResponse, err error) {
     return c.CompleteLifecycleActionWithContext(context.Background(), request)
 }
 
 // CompleteLifecycleAction
-// This API (CompleteLifecycleAction) is used to complete a lifecycle action.
+// This API is used to complete a lifecycle action by setting the status of lifecycle hook to `CONTINUE` or `ABANDON`.
 //
 // 
 //
-// * The result ("CONTINUE" or "ABANDON") of a specific lifecycle hook can be specified by calling this API. If this API is not called at all, the lifecycle hook will be processed based on the "DefaultResult" after timeout.
+// * If this API is not called, the lifecycle hook goes to the status specified in `DefaultResult` after the timeout period.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -340,6 +341,7 @@ func (c *Client) CompleteLifecycleAction(request *CompleteLifecycleActionRequest
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEHOOKID = "InvalidParameterValue.InvalidLifecycleHookId"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKINSTANCENOTFOUND = "ResourceNotFound.LifecycleHookInstanceNotFound"
 //  RESOURCENOTFOUND_LIFECYCLEHOOKNOTFOUND = "ResourceNotFound.LifecycleHookNotFound"
+//  RESOURCENOTFOUND_LIFECYCLEHOOKTOKENNOTFOUND = "ResourceNotFound.LifecycleHookTokenNotFound"
 //  RESOURCEUNAVAILABLE_LIFECYCLEACTIONRESULTHASSET = "ResourceUnavailable.LifecycleActionResultHasSet"
 func (c *Client) CompleteLifecycleActionWithContext(ctx context.Context, request *CompleteLifecycleActionRequest) (response *CompleteLifecycleActionResponse, err error) {
     if request == nil {
@@ -616,11 +618,11 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //
 // 
 //
-// * To modify a launch configuration, you can use `ModifyLaunchConfigurationAttributes`.
+// * To modify a launch configuration, please use `ModifyLaunchConfigurationAttributes`.
 //
 // 
 //
-// * You can create up to 20 launch configurations for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+// * Up to 20 launch configurations can be created for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
@@ -637,6 +639,7 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  INVALIDPARAMETERVALUE_IPV6INTERNETCHARGETYPE = "InvalidParameterValue.IPv6InternetChargeType"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
+//  INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDHPCCLUSTERID = "InvalidParameterValue.InvalidHpcClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
@@ -657,6 +660,7 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_INSTANCEMARKETOPTIONS = "MissingParameter.InstanceMarketOptions"
 //  RESOURCENOTFOUND_BANDWIDTHPACKAGEIDNOTFOUND = "ResourceNotFound.BandwidthPackageIdNotFound"
+//  RESOURCENOTFOUND_DISASTERRECOVERGROUPNOTFOUND = "ResourceNotFound.DisasterRecoverGroupNotFound"
 func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationRequest) (response *CreateLaunchConfigurationResponse, err error) {
     return c.CreateLaunchConfigurationWithContext(context.Background(), request)
 }
@@ -666,11 +670,11 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 //
 // 
 //
-// * To modify a launch configuration, you can use `ModifyLaunchConfigurationAttributes`.
+// * To modify a launch configuration, please use `ModifyLaunchConfigurationAttributes`.
 //
 // 
 //
-// * You can create up to 20 launch configurations for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+// * Up to 20 launch configurations can be created for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
@@ -687,6 +691,7 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 //  INVALIDPARAMETERVALUE_IPV6INTERNETCHARGETYPE = "InvalidParameterValue.IPv6InternetChargeType"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
+//  INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDHPCCLUSTERID = "InvalidParameterValue.InvalidHpcClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
@@ -707,6 +712,7 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_INSTANCEMARKETOPTIONS = "MissingParameter.InstanceMarketOptions"
 //  RESOURCENOTFOUND_BANDWIDTHPACKAGEIDNOTFOUND = "ResourceNotFound.BandwidthPackageIdNotFound"
+//  RESOURCENOTFOUND_DISASTERRECOVERGROUPNOTFOUND = "ResourceNotFound.DisasterRecoverGroupNotFound"
 func (c *Client) CreateLaunchConfigurationWithContext(ctx context.Context, request *CreateLaunchConfigurationRequest) (response *CreateLaunchConfigurationResponse, err error) {
     if request == nil {
         request = NewCreateLaunchConfigurationRequest()
@@ -1110,6 +1116,7 @@ func NewCreateScalingPolicyResponse() (response *CreateScalingPolicyResponse) {
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_USERGROUPIDNOTFOUND = "InvalidParameterValue.UserGroupIdNotFound"
 //  LIMITEXCEEDED_QUOTANOTENOUGH = "LimitExceeded.QuotaNotEnough"
+//  LIMITEXCEEDED_TARGETTRACKINGSCALINGPOLICY = "LimitExceeded.TargetTrackingScalingPolicy"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 func (c *Client) CreateScalingPolicy(request *CreateScalingPolicyRequest) (response *CreateScalingPolicyResponse, err error) {
     return c.CreateScalingPolicyWithContext(context.Background(), request)
@@ -1132,6 +1139,7 @@ func (c *Client) CreateScalingPolicy(request *CreateScalingPolicyRequest) (respo
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_USERGROUPIDNOTFOUND = "InvalidParameterValue.UserGroupIdNotFound"
 //  LIMITEXCEEDED_QUOTANOTENOUGH = "LimitExceeded.QuotaNotEnough"
+//  LIMITEXCEEDED_TARGETTRACKINGSCALINGPOLICY = "LimitExceeded.TargetTrackingScalingPolicy"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 func (c *Client) CreateScalingPolicyWithContext(ctx context.Context, request *CreateScalingPolicyRequest) (response *CreateScalingPolicyResponse, err error) {
     if request == nil {
@@ -1833,6 +1841,7 @@ func NewDescribeAutoScalingGroupsResponse() (response *DescribeAutoScalingGroups
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
+//  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAutoScalingGroups(request *DescribeAutoScalingGroupsRequest) (response *DescribeAutoScalingGroupsResponse, err error) {
     return c.DescribeAutoScalingGroupsWithContext(context.Background(), request)
@@ -1858,6 +1867,7 @@ func (c *Client) DescribeAutoScalingGroups(request *DescribeAutoScalingGroupsReq
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
+//  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAutoScalingGroupsWithContext(ctx context.Context, request *DescribeAutoScalingGroupsRequest) (response *DescribeAutoScalingGroupsResponse, err error) {
     if request == nil {
@@ -1910,6 +1920,7 @@ func NewDescribeAutoScalingInstancesResponse() (response *DescribeAutoScalingIns
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
 func (c *Client) DescribeAutoScalingInstances(request *DescribeAutoScalingInstancesRequest) (response *DescribeAutoScalingInstancesResponse, err error) {
     return c.DescribeAutoScalingInstancesWithContext(context.Background(), request)
@@ -1932,6 +1943,7 @@ func (c *Client) DescribeAutoScalingInstances(request *DescribeAutoScalingInstan
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
 func (c *Client) DescribeAutoScalingInstancesWithContext(ctx context.Context, request *DescribeAutoScalingInstancesRequest) (response *DescribeAutoScalingInstancesResponse, err error) {
     if request == nil {
@@ -1985,6 +1997,7 @@ func NewDescribeLaunchConfigurationsResponse() (response *DescribeLaunchConfigur
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
+//  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLaunchConfigurations(request *DescribeLaunchConfigurationsRequest) (response *DescribeLaunchConfigurationsResponse, err error) {
     return c.DescribeLaunchConfigurationsWithContext(context.Background(), request)
@@ -2008,6 +2021,7 @@ func (c *Client) DescribeLaunchConfigurations(request *DescribeLaunchConfigurati
 //  INVALIDPARAMETERVALUE_INVALIDLAUNCHCONFIGURATIONID = "InvalidParameterValue.InvalidLaunchConfigurationId"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPERMISSION = "InvalidPermission"
+//  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeLaunchConfigurationsWithContext(ctx context.Context, request *DescribeLaunchConfigurationsRequest) (response *DescribeLaunchConfigurationsResponse, err error) {
     if request == nil {
@@ -2658,19 +2672,22 @@ func NewExecuteScalingPolicyResponse() (response *ExecuteScalingPolicyResponse) 
 }
 
 // ExecuteScalingPolicy
-// This API (ExecuteScalingPolicy) is used to execute a scaling policy.
+// This API is used to execute a scaling policy.
 //
 // 
 //
 // * The scaling policy can be executed based on the scaling policy ID.
 //
-// * When the auto scaling group to which the scaling policy belongs is performing a scaling activity, the scaling policy will be rejected.
+// * The policy cannot be executed if there are ongoing scaling actions on the scaling group.
+//
+// * Executing a target tracking policy is not supported.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGPOLICYID = "InvalidParameterValue.InvalidAutoScalingPolicyId"
+//  INVALIDPARAMETERVALUE_TARGETTRACKINGSCALINGPOLICY = "InvalidParameterValue.TargetTrackingScalingPolicy"
 //  RESOURCEINUSE_AUTOSCALINGGROUPNOTACTIVE = "ResourceInUse.AutoScalingGroupNotActive"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_SCALINGPOLICYNOTFOUND = "ResourceNotFound.ScalingPolicyNotFound"
@@ -2681,19 +2698,22 @@ func (c *Client) ExecuteScalingPolicy(request *ExecuteScalingPolicyRequest) (res
 }
 
 // ExecuteScalingPolicy
-// This API (ExecuteScalingPolicy) is used to execute a scaling policy.
+// This API is used to execute a scaling policy.
 //
 // 
 //
 // * The scaling policy can be executed based on the scaling policy ID.
 //
-// * When the auto scaling group to which the scaling policy belongs is performing a scaling activity, the scaling policy will be rejected.
+// * The policy cannot be executed if there are ongoing scaling actions on the scaling group.
+//
+// * Executing a target tracking policy is not supported.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGPOLICYID = "InvalidParameterValue.InvalidAutoScalingPolicyId"
+//  INVALIDPARAMETERVALUE_TARGETTRACKINGSCALINGPOLICY = "InvalidParameterValue.TargetTrackingScalingPolicy"
 //  RESOURCEINUSE_AUTOSCALINGGROUPNOTACTIVE = "ResourceInUse.AutoScalingGroupNotActive"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_SCALINGPOLICYNOTFOUND = "ResourceNotFound.ScalingPolicyNotFound"
@@ -2764,6 +2784,7 @@ func NewModifyAutoScalingGroupResponse() (response *ModifyAutoScalingGroupRespon
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCEUNAVAILABLE_FORBIDDENMODIFYVPC = "ResourceUnavailable.ForbiddenModifyVpc"
 //  RESOURCEUNAVAILABLE_LAUNCHCONFIGURATIONSTATUSABNORMAL = "ResourceUnavailable.LaunchConfigurationStatusAbnormal"
 //  RESOURCEUNAVAILABLE_PROJECTINCONSISTENT = "ResourceUnavailable.ProjectInconsistent"
 func (c *Client) ModifyAutoScalingGroup(request *ModifyAutoScalingGroupRequest) (response *ModifyAutoScalingGroupResponse, err error) {
@@ -2801,6 +2822,7 @@ func (c *Client) ModifyAutoScalingGroup(request *ModifyAutoScalingGroupRequest) 
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCEUNAVAILABLE_FORBIDDENMODIFYVPC = "ResourceUnavailable.ForbiddenModifyVpc"
 //  RESOURCEUNAVAILABLE_LAUNCHCONFIGURATIONSTATUSABNORMAL = "ResourceUnavailable.LaunchConfigurationStatusAbnormal"
 //  RESOURCEUNAVAILABLE_PROJECTINCONSISTENT = "ResourceUnavailable.ProjectInconsistent"
 func (c *Client) ModifyAutoScalingGroupWithContext(ctx context.Context, request *ModifyAutoScalingGroupRequest) (response *ModifyAutoScalingGroupResponse, err error) {
@@ -2913,6 +2935,7 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 // * This API supports modifying certain simple types of attributes.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_HOSTNAMEUNAVAILABLE = "InvalidParameter.HostNameUnavailable"
@@ -2928,6 +2951,7 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 //  INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
+//  INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDHPCCLUSTERID = "InvalidParameterValue.InvalidHpcClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
@@ -2944,6 +2968,7 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
 //  RESOURCENOTFOUND_BANDWIDTHPACKAGEIDNOTFOUND = "ResourceNotFound.BandwidthPackageIdNotFound"
+//  RESOURCENOTFOUND_DISASTERRECOVERGROUPNOTFOUND = "ResourceNotFound.DisasterRecoverGroupNotFound"
 //  RESOURCENOTFOUND_LAUNCHCONFIGURATIONIDNOTFOUND = "ResourceNotFound.LaunchConfigurationIdNotFound"
 func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfigurationAttributesRequest) (response *ModifyLaunchConfigurationAttributesResponse, err error) {
     return c.ModifyLaunchConfigurationAttributesWithContext(context.Background(), request)
@@ -2959,6 +2984,7 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 // * This API supports modifying certain simple types of attributes.
 //
 // error code that may be returned:
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_HOSTNAMEUNAVAILABLE = "InvalidParameter.HostNameUnavailable"
@@ -2974,6 +3000,7 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 //  INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
+//  INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDHPCCLUSTERID = "InvalidParameterValue.InvalidHpcClusterId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDINSTANCETYPE = "InvalidParameterValue.InvalidInstanceType"
@@ -2990,6 +3017,7 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
 //  RESOURCENOTFOUND_BANDWIDTHPACKAGEIDNOTFOUND = "ResourceNotFound.BandwidthPackageIdNotFound"
+//  RESOURCENOTFOUND_DISASTERRECOVERGROUPNOTFOUND = "ResourceNotFound.DisasterRecoverGroupNotFound"
 //  RESOURCENOTFOUND_LAUNCHCONFIGURATIONIDNOTFOUND = "ResourceNotFound.LaunchConfigurationIdNotFound"
 func (c *Client) ModifyLaunchConfigurationAttributesWithContext(ctx context.Context, request *ModifyLaunchConfigurationAttributesRequest) (response *ModifyLaunchConfigurationAttributesResponse, err error) {
     if request == nil {

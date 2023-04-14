@@ -2898,6 +2898,7 @@ func NewDescribeClusterAuthenticationOptionsResponse() (response *DescribeCluste
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
@@ -2910,6 +2911,7 @@ func (c *Client) DescribeClusterAuthenticationOptions(request *DescribeClusterAu
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
@@ -6677,6 +6679,7 @@ func NewRemoveNodeFromNodePoolResponse() (response *RemoveNodeFromNodePoolRespon
 // This API is used to remove a node from a node pool but retain it in the cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) RemoveNodeFromNodePool(request *RemoveNodeFromNodePoolRequest) (response *RemoveNodeFromNodePoolResponse, err error) {
@@ -6687,6 +6690,7 @@ func (c *Client) RemoveNodeFromNodePool(request *RemoveNodeFromNodePoolRequest) 
 // This API is used to remove a node from a node pool but retain it in the cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) RemoveNodeFromNodePoolWithContext(ctx context.Context, request *RemoveNodeFromNodePoolRequest) (response *RemoveNodeFromNodePoolResponse, err error) {

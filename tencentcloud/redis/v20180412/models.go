@@ -612,6 +612,192 @@ func (r *ClearInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CloneInstancesRequestParams struct {
+	// ID of the current instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of instance to be cloned each time. You can purchase up to 100 monthly subscribed instances or up to 30 pay-as-you-go instances at a time. You can purchase up to 100 instances in each region.
+	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// ID of the AZ where the clone instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Billing mode. Valid values: <ul><li>`0` (Pay-as-you-go) </li><li>`1` (Monthly subscription) </li></ul>
+	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
+
+	// Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitempty" name:"SecurityGroupIdList"`
+
+	// Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
+	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Whether the clone instance supports password-free access. Valid values: <ul><li>`true` (Yes)</li><li>`false` (No. When SSL or public network is enabled). Default value: `false`.</li></ul>
+	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
+
+	// VPC ID. If this parameter is not passed in, the classic network will be selected by default.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID, which is not required for the classic network.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Name of the clone instance. <br>Enter up to 60 letters, digits, hyphens, and underscores.</br>
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// The access password of the clone instance. <ul><li>When the input parameter <b>NoAuth</b> is <b>true</b>, this parameter is not required. </li><li>When the instance is Redis 2.8, 4.0, or 5.0, the password must contain 8–30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and special characters `()`~!@#$%^&*-+=_|{}[]:;<>,.?/` and cannot start with `/`.</li><li>When the instance is CKV 3.2, the password must and can only contain 8–30 letters and digits.</li></ul>
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default) </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user)</ul>
+	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// Customized port. Valid range: 1024-65535. Default value: `6379`.
+	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
+
+	// Node information of an instance. <ul><li>Currently supported type and AZ information of a node to be configured (master node or replica node) For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo).</li><li>This parameter is not required for single-AZ deployment.</li></ul>
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet"`
+
+	// Project ID, which can be obtained in <b>Account Center</b> > <b>Project Management</b> in the upper-right corner in the console.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Tag to be bound for the clone instance
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// The ID of a parameter template to be applied to the clone instance, which can be obtained on <b>Parameter Template</b> page in the console. If this parameter is not configured, the default parameter template will be applied.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Alarm policy ID of the specified clone instance, which can be obtained on <b>Cloud Monitor</b> > <b>Alarm Configuration</b> > <b>Alarm Policy</b> in the console.
+	AlarmPolicyList []*string `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
+}
+
+type CloneInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the current instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Number of instance to be cloned each time. You can purchase up to 100 monthly subscribed instances or up to 30 pay-as-you-go instances at a time. You can purchase up to 100 instances in each region.
+	GoodsNum *uint64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// ID of the AZ where the clone instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Billing mode. Valid values: <ul><li>`0` (Pay-as-you-go) </li><li>`1` (Monthly subscription) </li></ul>
+	BillingMode *int64 `json:"BillingMode,omitempty" name:"BillingMode"`
+
+	// Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
+	Period *uint64 `json:"Period,omitempty" name:"Period"`
+
+	// Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitempty" name:"SecurityGroupIdList"`
+
+	// Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
+	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
+
+	// Whether the clone instance supports password-free access. Valid values: <ul><li>`true` (Yes)</li><li>`false` (No. When SSL or public network is enabled). Default value: `false`.</li></ul>
+	NoAuth *bool `json:"NoAuth,omitempty" name:"NoAuth"`
+
+	// VPC ID. If this parameter is not passed in, the classic network will be selected by default.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID, which is not required for the classic network.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Name of the clone instance. <br>Enter up to 60 letters, digits, hyphens, and underscores.</br>
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// The access password of the clone instance. <ul><li>When the input parameter <b>NoAuth</b> is <b>true</b>, this parameter is not required. </li><li>When the instance is Redis 2.8, 4.0, or 5.0, the password must contain 8–30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and special characters `()`~!@#$%^&*-+=_|{}[]:;<>,.?/` and cannot start with `/`.</li><li>When the instance is CKV 3.2, the password must and can only contain 8–30 letters and digits.</li></ul>
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default) </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user)</ul>
+	AutoRenew *uint64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+
+	// Customized port. Valid range: 1024-65535. Default value: `6379`.
+	VPort *uint64 `json:"VPort,omitempty" name:"VPort"`
+
+	// Node information of an instance. <ul><li>Currently supported type and AZ information of a node to be configured (master node or replica node) For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo).</li><li>This parameter is not required for single-AZ deployment.</li></ul>
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitempty" name:"NodeSet"`
+
+	// Project ID, which can be obtained in <b>Account Center</b> > <b>Project Management</b> in the upper-right corner in the console.
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Tag to be bound for the clone instance
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// The ID of a parameter template to be applied to the clone instance, which can be obtained on <b>Parameter Template</b> page in the console. If this parameter is not configured, the default parameter template will be applied.
+	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Alarm policy ID of the specified clone instance, which can be obtained on <b>Cloud Monitor</b> > <b>Alarm Configuration</b> > <b>Alarm Policy</b> in the console.
+	AlarmPolicyList []*string `json:"AlarmPolicyList,omitempty" name:"AlarmPolicyList"`
+}
+
+func (r *CloneInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "GoodsNum")
+	delete(f, "ZoneId")
+	delete(f, "BillingMode")
+	delete(f, "Period")
+	delete(f, "SecurityGroupIdList")
+	delete(f, "BackupId")
+	delete(f, "NoAuth")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "InstanceName")
+	delete(f, "Password")
+	delete(f, "AutoRenew")
+	delete(f, "VPort")
+	delete(f, "NodeSet")
+	delete(f, "ProjectId")
+	delete(f, "ResourceTags")
+	delete(f, "TemplateId")
+	delete(f, "AlarmPolicyList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloneInstancesResponseParams struct {
+	// Request task ID
+	DealId *string `json:"DealId,omitempty" name:"DealId"`
+
+	// Clone instance ID
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CloneInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CloneInstancesResponseParams `json:"Response"`
+}
+
+func (r *CloneInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CloseSSLRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3776,7 +3962,7 @@ type DescribeReplicationGroupRequestParams struct {
 	// Replication group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Keyword for fuzzy search, which can be an instance name or instance ID.
+	// Key words for fuzzy query, which can be set as the ID or name of a replication group.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -3792,7 +3978,7 @@ type DescribeReplicationGroupRequest struct {
 	// Replication group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Keyword for fuzzy search, which can be an instance name or instance ID.
+	// Key words for fuzzy query, which can be set as the ID or name of a replication group.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -3880,19 +4066,25 @@ func (r *DescribeSSLStatusRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSSLStatusResponseParams struct {
-	// Certificate download address
+	// Download address for SSL certificate
 	CertDownloadUrl *string `json:"CertDownloadUrl,omitempty" name:"CertDownloadUrl"`
 
 	// Expiration time of the certificate download address
 	UrlExpiredTime *string `json:"UrlExpiredTime,omitempty" name:"UrlExpiredTime"`
 
-	// SSL configuration status of an instance. Valid values: `true` (enable), `false` (disable).
+	// Whether the SSL is enabled for the identified instance.
+	// - `true`: Enabled
+	// - `false`: Disabled
 	SSLConfig *bool `json:"SSLConfig,omitempty" name:"SSLConfig"`
 
-	// Whether the instance supports SSL. Valid values: `true` (Yes. When minor version is upgraded.), `false` (No).
+	// Whether SSL is supported for the identified instance.
+	// -`true`: Supported
+	// -`false`: Not supported
 	FeatureSupport *bool `json:"FeatureSupport,omitempty" name:"FeatureSupport"`
 
-	// SSL configuration status. Valid values: `1`(Configuring), `2` (Configured).
+	// Status of SSL configuration
+	// - `1`: Configuring
+	// - `2`: Configured successfully
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4631,28 +4823,51 @@ type Groups struct {
 	// User App ID
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
-	// Region ID. 1: Guangzhou; 4: Shanghai; 5: Hong Kong (China); 6: Toronto; 7: Shanghai Finance; 8: Beijing; 9: Singapore; 11: Shenzhen Finance; 15: West US (Silicon Valley); 16: Chengdu; 17: Germany; 18: South Korea; 19: Chongqing; 21: India; 22: East US (Virginia); 23: Thailand; 24: Russia; 25: Japan
+	// Region ID
+	// - `1`: Guangzhou 
+	// - `4`: Shanghai 
+	// - `5`: Hong Kong (China) 
+	// - `6`: Toronto 
+	// - `7`: Shanghai Finance 
+	// - `8`: Beijing 
+	// - `9`: Singapore
+	// - `11`: Shenzhen Finance
+	// - `15`: Silicon Valley (West US)
+	// - `16`: Chengdu 
+	// - `17`: Germany 
+	// - `18`: South Korea 
+	// - `19`: Chongqing 
+	// - `21`: India 
+	// - `22`: Virginia (East US)
+	// - `23`: Thailand 
+	// - `24`: Russia 
+	// - `25`: Japan
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
-	// Replication group info
+	// Replication group ID
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
 	// Replication group name
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
 
-	// Replication group status. Valid values: 37 (Associating replication group), 38 (Reconnecting to replication group), 51 (Disassociating the replication group), 52 (Switching primary instance in the replication group), 53 (Modifying roles)
+	// Status of replication group
+	// - `37`: Associating replication group
+	// - `38`: Reconnecting to replication group
+	// - `51`: Disassociating replication group
+	// - `52`: Switching with master instance in replication group
+	// - `53`: Modifying the roles
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Number of replication groups
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
 
-	// Instances in replication group
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Instance information in replication groups
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Instances []*Instances `json:"Instances,omitempty" name:"Instances"`
 
 	// Remarks
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 }
 
@@ -5584,7 +5799,10 @@ type ModfiyInstancePasswordRequestParams struct {
 	// Old password of an instance
 	OldPassword *string `json:"OldPassword,omitempty" name:"OldPassword"`
 
-	// New password of an instance
+	// New instance password, which has the following requirements:
+	// - It must contain 8-30 characters, preferably 12 or more.
+	// - It cannot start with a slash (/)
+	// - It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
 	Password *string `json:"Password,omitempty" name:"Password"`
 }
 
@@ -5597,7 +5815,10 @@ type ModfiyInstancePasswordRequest struct {
 	// Old password of an instance
 	OldPassword *string `json:"OldPassword,omitempty" name:"OldPassword"`
 
-	// New password of an instance
+	// New instance password, which has the following requirements:
+	// - It must contain 8-30 characters, preferably 12 or more.
+	// - It cannot start with a slash (/)
+	// - It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
 	Password *string `json:"Password,omitempty" name:"Password"`
 }
 
