@@ -26,6 +26,12 @@ const (
 	// Duplicate order. Please check the EMR console.
 	FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
 
+	// Failed to query the CAM role.
+	FAILEDOPERATION_GETCAMROLEFAILED = "FailedOperation.GetCamRoleFailed"
+
+	// Failed to call the CAM service.
+	FAILEDOPERATION_GETCAMSERVERFAILED = "FailedOperation.GetCamServerFailed"
+
 	// Operation failed. The pods are not supported.
 	FAILEDOPERATION_NOTSUPPORTPOD = "FailedOperation.NotSupportPod"
 
@@ -167,6 +173,9 @@ const (
 	// Invalid model.
 	INVALIDPARAMETER_INVALIDINSTANCETYPE = "InvalidParameter.InvalidInstanceType"
 
+	// Invalid process task.
+	INVALIDPARAMETER_INVALIDJOBFLOW = "InvalidParameter.InvalidJobFlow"
+
 	// Invalid login settings.
 	INVALIDPARAMETER_INVALIDLOGINSETTING = "InvalidParameter.InvalidLoginSetting"
 
@@ -181,6 +190,9 @@ const (
 
 	// Invalid target specification.
 	INVALIDPARAMETER_INVALIDMODIFYSPEC = "InvalidParameter.InvalidModifySpec"
+
+	// Incorrect node type.
+	INVALIDPARAMETER_INVALIDNODEFLAG = "InvalidParameter.InvalidNodeFlag"
 
 	// Invalid `NodeType`.
 	INVALIDPARAMETER_INVALIDNODETYPE = "InvalidParameter.InvalidNodeType"

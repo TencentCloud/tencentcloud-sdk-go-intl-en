@@ -437,6 +437,16 @@ type ClusterInstancesInfo struct {
 	IsCvmReplace *bool `json:"IsCvmReplace,omitempty" name:"IsCvmReplace"`
 }
 
+type ComponentBasicRestartInfo struct {
+	// The process name (required), such as NameNode.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentName *string `json:"ComponentName,omitempty" name:"ComponentName"`
+
+	// The target IP list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IpList []*string `json:"IpList,omitempty" name:"IpList"`
+}
+
 // Predefined struct for user
 type CreateClusterRequestParams struct {
 	// The EMR version, such as `EMR-V2.3.0` that indicates the version 2.3.0 of EMR. You can query the EMR version [here](https://intl.cloud.tencent.com/document/product/589/66338?from_cn_redirect=1).
@@ -3061,6 +3071,12 @@ type NodeResourceSpec struct {
 	LocalDataDisk []*DiskSpecInfo `json:"LocalDataDisk,omitempty" name:"LocalDataDisk"`
 }
 
+type OpScope struct {
+	// The information of the services to operate on.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceInfoList []*ServiceBasicRestartInfo `json:"ServiceInfoList,omitempty" name:"ServiceInfoList"`
+}
+
 type OutterResource struct {
 	// Specification
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -4178,6 +4194,14 @@ type SearchItem struct {
 	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
 }
 
+type ServiceBasicRestartInfo struct {
+	// The service name (required), such as HDFS.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// If it is left empty, all processes will be operated on.
+	ComponentInfoList []*ComponentBasicRestartInfo `json:"ComponentInfoList,omitempty" name:"ComponentInfoList"`
+}
+
 type ShortNodeInfo struct {
 	// Node type: Master/Core/Task/Router/Common
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
@@ -4196,6 +4220,82 @@ type SoftDependInfo struct {
 	Required *bool `json:"Required,omitempty" name:"Required"`
 }
 
+// Predefined struct for user
+type StartStopServiceOrMonitorRequestParams struct {
+	// The cluster ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The operation type. Valid values:
+	// <li>`StartService`: Start services.</li>
+	// <li>`StopService`: Stop services.</li>
+	// <li>`StartMonitor`: Start the monitor.</li>
+	// <li>`StopMonitor`: Stop the monitor.</li>
+	OpType *string `json:"OpType,omitempty" name:"OpType"`
+
+	// The operation scope.
+	OpScope *OpScope `json:"OpScope,omitempty" name:"OpScope"`
+}
+
+type StartStopServiceOrMonitorRequest struct {
+	*tchttp.BaseRequest
+	
+	// The cluster ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The operation type. Valid values:
+	// <li>`StartService`: Start services.</li>
+	// <li>`StopService`: Stop services.</li>
+	// <li>`StartMonitor`: Start the monitor.</li>
+	// <li>`StopMonitor`: Stop the monitor.</li>
+	OpType *string `json:"OpType,omitempty" name:"OpType"`
+
+	// The operation scope.
+	OpScope *OpScope `json:"OpScope,omitempty" name:"OpScope"`
+}
+
+func (r *StartStopServiceOrMonitorRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartStopServiceOrMonitorRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "OpType")
+	delete(f, "OpScope")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStopServiceOrMonitorRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartStopServiceOrMonitorResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartStopServiceOrMonitorResponse struct {
+	*tchttp.BaseResponse
+	Response *StartStopServiceOrMonitorResponseParams `json:"Response"`
+}
+
+func (r *StartStopServiceOrMonitorResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartStopServiceOrMonitorResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SubnetInfo struct {
 	// Subnet information (name)
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
@@ -4212,6 +4312,103 @@ type Tag struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+// Predefined struct for user
+type TerminateClusterNodesRequestParams struct {
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The list of resources to be terminated.
+	CvmInstanceIds []*string `json:"CvmInstanceIds,omitempty" name:"CvmInstanceIds"`
+
+	// Valid values of node type:
+	//   <li>MASTER</li>
+	//   <li>TASK</li>
+	//   <li>CORE</li>
+	//   <li>ROUTER</li>
+	NodeFlag *string `json:"NodeFlag,omitempty" name:"NodeFlag"`
+
+	// The graceful scale-in feature. Valid values:
+	//   <li>`true`: Enabled.</li>
+	//   <li>`false`: Disabled.</li>
+	GraceDownFlag *bool `json:"GraceDownFlag,omitempty" name:"GraceDownFlag"`
+
+	// The graceful scale-in wait time in seconds. Value range: 60–1800.
+	GraceDownTime *int64 `json:"GraceDownTime,omitempty" name:"GraceDownTime"`
+}
+
+type TerminateClusterNodesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The list of resources to be terminated.
+	CvmInstanceIds []*string `json:"CvmInstanceIds,omitempty" name:"CvmInstanceIds"`
+
+	// Valid values of node type:
+	//   <li>MASTER</li>
+	//   <li>TASK</li>
+	//   <li>CORE</li>
+	//   <li>ROUTER</li>
+	NodeFlag *string `json:"NodeFlag,omitempty" name:"NodeFlag"`
+
+	// The graceful scale-in feature. Valid values:
+	//   <li>`true`: Enabled.</li>
+	//   <li>`false`: Disabled.</li>
+	GraceDownFlag *bool `json:"GraceDownFlag,omitempty" name:"GraceDownFlag"`
+
+	// The graceful scale-in wait time in seconds. Value range: 60–1800.
+	GraceDownTime *int64 `json:"GraceDownTime,omitempty" name:"GraceDownTime"`
+}
+
+func (r *TerminateClusterNodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateClusterNodesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "CvmInstanceIds")
+	delete(f, "NodeFlag")
+	delete(f, "GraceDownFlag")
+	delete(f, "GraceDownTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateClusterNodesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TerminateClusterNodesResponseParams struct {
+	// The scale-in process ID.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type TerminateClusterNodesResponse struct {
+	*tchttp.BaseResponse
+	Response *TerminateClusterNodesResponseParams `json:"Response"`
+}
+
+func (r *TerminateClusterNodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TerminateClusterNodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

@@ -423,6 +423,114 @@ func (c *Client) GenerateReflectSequenceWithContext(ctx context.Context, request
     return
 }
 
+func NewGetFaceIdResultIntlRequest() (request *GetFaceIdResultIntlRequest) {
+    request = &GetFaceIdResultIntlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetFaceIdResultIntl")
+    
+    
+    return
+}
+
+func NewGetFaceIdResultIntlResponse() (response *GetFaceIdResultIntlResponse) {
+    response = &GetFaceIdResultIntlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetFaceIdResultIntl
+// This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for two hours (2*3,600s) after generation and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetFaceIdResultIntl(request *GetFaceIdResultIntlRequest) (response *GetFaceIdResultIntlResponse, err error) {
+    return c.GetFaceIdResultIntlWithContext(context.Background(), request)
+}
+
+// GetFaceIdResultIntl
+// This API is used to get the verification result with the corresponding SDK token after the identity verification process is completed. The SDK token is valid for two hours (2*3,600s) after generation and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetFaceIdResultIntlWithContext(ctx context.Context, request *GetFaceIdResultIntlRequest) (response *GetFaceIdResultIntlResponse, err error) {
+    if request == nil {
+        request = NewGetFaceIdResultIntlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetFaceIdResultIntl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetFaceIdResultIntlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetFaceIdTokenIntlRequest() (request *GetFaceIdTokenIntlRequest) {
+    request = &GetFaceIdTokenIntlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetFaceIdTokenIntl")
+    
+    
+    return
+}
+
+func NewGetFaceIdTokenIntlResponse() (response *GetFaceIdTokenIntlResponse) {
+    response = &GetFaceIdTokenIntlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetFaceIdTokenIntl
+// This API is used to apply for an SDK token before calling the liveness detection and face comparison SDK each time. The SDK token is used throughout the identity verification process and to get the verification result after the verification is completed. A token is valid for one identity verification process only.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetFaceIdTokenIntl(request *GetFaceIdTokenIntlRequest) (response *GetFaceIdTokenIntlResponse, err error) {
+    return c.GetFaceIdTokenIntlWithContext(context.Background(), request)
+}
+
+// GetFaceIdTokenIntl
+// This API is used to apply for an SDK token before calling the liveness detection and face comparison SDK each time. The SDK token is used throughout the identity verification process and to get the verification result after the verification is completed. A token is valid for one identity verification process only.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetFaceIdTokenIntlWithContext(ctx context.Context, request *GetFaceIdTokenIntlRequest) (response *GetFaceIdTokenIntlResponse, err error) {
+    if request == nil {
+        request = NewGetFaceIdTokenIntlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetFaceIdTokenIntl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetFaceIdTokenIntlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetLivenessResultRequest() (request *GetLivenessResultRequest) {
     request = &GetLivenessResultRequest{
         BaseRequest: &tchttp.BaseRequest{},

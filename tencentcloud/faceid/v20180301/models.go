@@ -92,7 +92,7 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
 	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitempty" name:"NeedVerifyIdCard"`
 
-	// The card type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `PhilippinesVoteID` (Philippine voters ID card), `PhilippinesDrivingLicense` (Philippine driver's license), and `IndonesiaIDCard` (Indonesian identity card).
+	// The card type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `PhilippinesVoteID` (Philippine voters ID card), `IndonesiaIDCard` (Indonesian identity card), `SingaporeIDCard` (Singapore identity card), and `PhilippinesDrivingLicense` (Philippine driver's license).
 	IdCardType *string `json:"IdCardType,omitempty" name:"IdCardType"`
 
 	// Disable the modification of the OCR result by the user. Default value: `false` (modification allowed).
@@ -111,7 +111,7 @@ type ApplySdkVerificationTokenRequest struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
 	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitempty" name:"NeedVerifyIdCard"`
 
-	// The card type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `PhilippinesVoteID` (Philippine voters ID card), `PhilippinesDrivingLicense` (Philippine driver's license), and `IndonesiaIDCard` (Indonesian identity card).
+	// The card type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `PhilippinesVoteID` (Philippine voters ID card), `IndonesiaIDCard` (Indonesian identity card), `SingaporeIDCard` (Singapore identity card), and `PhilippinesDrivingLicense` (Philippine driver's license).
 	IdCardType *string `json:"IdCardType,omitempty" name:"IdCardType"`
 
 	// Disable the modification of the OCR result by the user. Default value: `false` (modification allowed).
@@ -639,6 +639,184 @@ func (r *GenerateReflectSequenceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GenerateReflectSequenceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetFaceIdResultIntlRequestParams struct {
+	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
+	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+}
+
+type GetFaceIdResultIntlRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
+	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+}
+
+func (r *GetFaceIdResultIntlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetFaceIdResultIntlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFaceIdResultIntlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetFaceIdResultIntlResponseParams struct {
+	// The return code of the verification result.
+	// 0: Succeeded.
+	// 1001: System error.
+	// 1004: Liveness detection and face comparison failed.
+	// 2004: The image passed in is too large or too small.
+	// 2012: Several faces were detected.
+	// 2013: No face was detected, or the face detected was incomplete.
+	// 2014: The image resolution is too low or the quality does not meet the requirements.
+	// 2015: Face comparison failed.
+	// 2016: The similarity did not reach the standard passing threshold.
+	// -999: The verification process wasn't finished.
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The description of the verification result.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// The best frame screenshot (in Base64) obtained during the verification.
+	BestFrame *string `json:"BestFrame,omitempty" name:"BestFrame"`
+
+	// The video file (Base64) for verification.
+	Video *string `json:"Video,omitempty" name:"Video"`
+
+	// The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Similarity *float64 `json:"Similarity,omitempty" name:"Similarity"`
+
+	// The pass-through parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Extra *string `json:"Extra,omitempty" name:"Extra"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetFaceIdResultIntlResponse struct {
+	*tchttp.BaseResponse
+	Response *GetFaceIdResultIntlResponseParams `json:"Response"`
+}
+
+func (r *GetFaceIdResultIntlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetFaceIdResultIntlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetFaceIdTokenIntlRequestParams struct {
+	// The detection mode. Valid values:
+	// `liveness`: Liveness detection only.
+	// `compare`: Liveness detection and face comparison.
+	// Default value: `liveness`.
+	CheckMode *string `json:"CheckMode,omitempty" name:"CheckMode"`
+
+	// The verification security level. Valid values:
+	// `1`: Video-based liveness detection.
+	// `2`: Motion-based liveness detection.
+	// `3`: Reflection-based liveness detection.
+	// `4`: Motion- and reflection-based liveness detection.
+	// Default value: `4`.
+	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+
+	// The image for comparison in the `compare` (liveness detection and face comparison) mode. This parameter is required when the value of `CheckMode` is `compare`.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// The pass-through parameter.
+	Extra *string `json:"Extra,omitempty" name:"Extra"`
+}
+
+type GetFaceIdTokenIntlRequest struct {
+	*tchttp.BaseRequest
+	
+	// The detection mode. Valid values:
+	// `liveness`: Liveness detection only.
+	// `compare`: Liveness detection and face comparison.
+	// Default value: `liveness`.
+	CheckMode *string `json:"CheckMode,omitempty" name:"CheckMode"`
+
+	// The verification security level. Valid values:
+	// `1`: Video-based liveness detection.
+	// `2`: Motion-based liveness detection.
+	// `3`: Reflection-based liveness detection.
+	// `4`: Motion- and reflection-based liveness detection.
+	// Default value: `4`.
+	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+
+	// The image for comparison in the `compare` (liveness detection and face comparison) mode. This parameter is required when the value of `CheckMode` is `compare`.
+	Image *string `json:"Image,omitempty" name:"Image"`
+
+	// The pass-through parameter.
+	Extra *string `json:"Extra,omitempty" name:"Extra"`
+}
+
+func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CheckMode")
+	delete(f, "SecureLevel")
+	delete(f, "Image")
+	delete(f, "Extra")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFaceIdTokenIntlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetFaceIdTokenIntlResponseParams struct {
+	// The SDK token, which is used throughout the verification process and to get the verification result.
+	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetFaceIdTokenIntlResponse struct {
+	*tchttp.BaseResponse
+	Response *GetFaceIdTokenIntlResponseParams `json:"Response"`
+}
+
+func (r *GetFaceIdTokenIntlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetFaceIdTokenIntlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
