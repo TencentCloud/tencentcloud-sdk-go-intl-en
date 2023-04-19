@@ -625,6 +625,58 @@ func (c *Client) CreateEnvironmentRoleWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateRabbitMQVipInstanceRequest() (request *CreateRabbitMQVipInstanceRequest) {
+    request = &CreateRabbitMQVipInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "CreateRabbitMQVipInstance")
+    
+    
+    return
+}
+
+func NewCreateRabbitMQVipInstanceResponse() (response *CreateRabbitMQVipInstanceResponse) {
+    response = &CreateRabbitMQVipInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRabbitMQVipInstance
+// This API is used to create a TDMQ for RabbitMQ exclusive instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRabbitMQVipInstance(request *CreateRabbitMQVipInstanceRequest) (response *CreateRabbitMQVipInstanceResponse, err error) {
+    return c.CreateRabbitMQVipInstanceWithContext(context.Background(), request)
+}
+
+// CreateRabbitMQVipInstance
+// This API is used to create a TDMQ for RabbitMQ exclusive instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRabbitMQVipInstanceWithContext(ctx context.Context, request *CreateRabbitMQVipInstanceRequest) (response *CreateRabbitMQVipInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateRabbitMQVipInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRabbitMQVipInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRabbitMQVipInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRocketMQClusterRequest() (request *CreateRocketMQClusterRequest) {
     request = &CreateRocketMQClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -996,6 +1048,7 @@ func NewCreateSubscriptionResponse() (response *CreateSubscriptionResponse) {
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateSubscription(request *CreateSubscriptionRequest) (response *CreateSubscriptionResponse, err error) {
     return c.CreateSubscriptionWithContext(context.Background(), request)
 }
@@ -1017,6 +1070,7 @@ func (c *Client) CreateSubscription(request *CreateSubscriptionRequest) (respons
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateSubscriptionWithContext(ctx context.Context, request *CreateSubscriptionRequest) (response *CreateSubscriptionResponse, err error) {
     if request == nil {
         request = NewCreateSubscriptionRequest()
@@ -1068,6 +1122,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
     return c.CreateTopicWithContext(context.Background(), request)
 }
@@ -1089,6 +1144,7 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENT = "ResourceNotFound.Environment"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
     if request == nil {
         request = NewCreateTopicRequest()
@@ -2228,6 +2284,7 @@ func NewDescribeCmqQueuesResponse() (response *DescribeCmqQueuesResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeCmqQueues(request *DescribeCmqQueuesRequest) (response *DescribeCmqQueuesResponse, err error) {
     return c.DescribeCmqQueuesWithContext(context.Background(), request)
 }
@@ -2237,6 +2294,7 @@ func (c *Client) DescribeCmqQueues(request *DescribeCmqQueuesRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeCmqQueuesWithContext(ctx context.Context, request *DescribeCmqQueuesRequest) (response *DescribeCmqQueuesResponse, err error) {
     if request == nil {
         request = NewDescribeCmqQueuesRequest()
@@ -2276,6 +2334,7 @@ func NewDescribeCmqSubscriptionDetailResponse() (response *DescribeCmqSubscripti
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) DescribeCmqSubscriptionDetail(request *DescribeCmqSubscriptionDetailRequest) (response *DescribeCmqSubscriptionDetailResponse, err error) {
     return c.DescribeCmqSubscriptionDetailWithContext(context.Background(), request)
 }
@@ -2285,6 +2344,7 @@ func (c *Client) DescribeCmqSubscriptionDetail(request *DescribeCmqSubscriptionD
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CMQBACKENDERROR = "FailedOperation.CmqBackendError"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) DescribeCmqSubscriptionDetailWithContext(ctx context.Context, request *DescribeCmqSubscriptionDetailRequest) (response *DescribeCmqSubscriptionDetailResponse, err error) {
     if request == nil {
         request = NewDescribeCmqSubscriptionDetailRequest()
@@ -3038,6 +3098,8 @@ func NewDescribeRocketMQTopicsResponse() (response *DescribeRocketMQTopicsRespon
 //  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQTopics(request *DescribeRocketMQTopicsRequest) (response *DescribeRocketMQTopicsResponse, err error) {
     return c.DescribeRocketMQTopicsWithContext(context.Background(), request)
@@ -3052,6 +3114,8 @@ func (c *Client) DescribeRocketMQTopics(request *DescribeRocketMQTopicsRequest) 
 //  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQTopicsWithContext(ctx context.Context, request *DescribeRocketMQTopicsRequest) (response *DescribeRocketMQTopicsResponse, err error) {
     if request == nil {
@@ -3096,6 +3160,7 @@ func NewDescribeRocketMQVipInstanceDetailResponse() (response *DescribeRocketMQV
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
 func (c *Client) DescribeRocketMQVipInstanceDetail(request *DescribeRocketMQVipInstanceDetailRequest) (response *DescribeRocketMQVipInstanceDetailResponse, err error) {
     return c.DescribeRocketMQVipInstanceDetailWithContext(context.Background(), request)
 }
@@ -3109,6 +3174,7 @@ func (c *Client) DescribeRocketMQVipInstanceDetail(request *DescribeRocketMQVipI
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
 func (c *Client) DescribeRocketMQVipInstanceDetailWithContext(ctx context.Context, request *DescribeRocketMQVipInstanceDetailRequest) (response *DescribeRocketMQVipInstanceDetailResponse, err error) {
     if request == nil {
         request = NewDescribeRocketMQVipInstanceDetailRequest()
@@ -3152,6 +3218,7 @@ func NewDescribeRocketMQVipInstancesResponse() (response *DescribeRocketMQVipIns
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
 func (c *Client) DescribeRocketMQVipInstances(request *DescribeRocketMQVipInstancesRequest) (response *DescribeRocketMQVipInstancesResponse, err error) {
     return c.DescribeRocketMQVipInstancesWithContext(context.Background(), request)
 }
@@ -3165,6 +3232,7 @@ func (c *Client) DescribeRocketMQVipInstances(request *DescribeRocketMQVipInstan
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
 func (c *Client) DescribeRocketMQVipInstancesWithContext(ctx context.Context, request *DescribeRocketMQVipInstancesRequest) (response *DescribeRocketMQVipInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeRocketMQVipInstancesRequest()
@@ -3329,6 +3397,7 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDADMINURL = "InvalidParameter.InvalidAdminUrl"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
@@ -3344,6 +3413,7 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDADMINURL = "InvalidParameter.InvalidAdminUrl"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
@@ -3682,6 +3752,7 @@ func NewModifyEnvironmentRoleResponse() (response *ModifyEnvironmentRoleResponse
 //  FAILEDOPERATION_UPDATEENVIRONMENTROLE = "FailedOperation.UpdateEnvironmentRole"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENTROLE = "ResourceNotFound.EnvironmentRole"
 func (c *Client) ModifyEnvironmentRole(request *ModifyEnvironmentRoleRequest) (response *ModifyEnvironmentRoleResponse, err error) {
     return c.ModifyEnvironmentRoleWithContext(context.Background(), request)
@@ -3696,6 +3767,7 @@ func (c *Client) ModifyEnvironmentRole(request *ModifyEnvironmentRoleRequest) (r
 //  FAILEDOPERATION_UPDATEENVIRONMENTROLE = "FailedOperation.UpdateEnvironmentRole"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENTROLE = "ResourceNotFound.EnvironmentRole"
 func (c *Client) ModifyEnvironmentRoleWithContext(ctx context.Context, request *ModifyEnvironmentRoleRequest) (response *ModifyEnvironmentRoleResponse, err error) {
     if request == nil {
@@ -3984,6 +4056,7 @@ func NewModifyRoleResponse() (response *ModifyRoleResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ModifyRole(request *ModifyRoleRequest) (response *ModifyRoleResponse, err error) {
@@ -3999,6 +4072,7 @@ func (c *Client) ModifyRole(request *ModifyRoleRequest) (response *ModifyRoleRes
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_BROKERCLUSTER = "ResourceNotFound.BrokerCluster"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ROLE = "ResourceNotFound.Role"
 //  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ModifyRoleWithContext(ctx context.Context, request *ModifyRoleRequest) (response *ModifyRoleResponse, err error) {
@@ -4046,6 +4120,7 @@ func NewModifyTopicResponse() (response *ModifyTopicResponse) {
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
     return c.ModifyTopicWithContext(context.Background(), request)
@@ -4062,6 +4137,7 @@ func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopic
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMS = "InvalidParameterValue.InvalidParams"
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
 func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
     if request == nil {

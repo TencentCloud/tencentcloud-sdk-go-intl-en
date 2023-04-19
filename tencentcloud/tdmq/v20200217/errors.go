@@ -164,6 +164,9 @@ const (
 	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
+	// Invalid management API address
+	INVALIDPARAMETER_INVALIDADMINURL = "InvalidParameter.InvalidAdminUrl"
+
 	// Incorrect partition count.
 	INVALIDPARAMETER_PARTITION = "InvalidParameter.Partition"
 
@@ -268,6 +271,9 @@ const (
 
 	// The environment role does not exist.
 	RESOURCENOTFOUND_ENVIRONMENTROLE = "ResourceNotFound.EnvironmentRole"
+
+	// The instance doesn’t exist.
+	RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
 
 	// The namespace does not exist.
 	RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"

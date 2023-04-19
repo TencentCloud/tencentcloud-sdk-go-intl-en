@@ -837,6 +837,56 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeBackupFilesRequest() (request *DescribeBackupFilesRequest) {
+    request = &DescribeBackupFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "DescribeBackupFiles")
+    
+    
+    return
+}
+
+func NewDescribeBackupFilesResponse() (response *DescribeBackupFilesResponse) {
+    response = &DescribeBackupFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupFiles
+// This API is used to query the list of backup files.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupFiles(request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
+    return c.DescribeBackupFilesWithContext(context.Background(), request)
+}
+
+// DescribeBackupFiles
+// This API is used to query the list of backup files.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupFilesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupFiles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBEncryptAttributesRequest() (request *DescribeDBEncryptAttributesRequest) {
     request = &DescribeDBEncryptAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -895,6 +945,64 @@ func (c *Client) DescribeDBEncryptAttributesWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeDBEncryptAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstanceDetailRequest() (request *DescribeDBInstanceDetailRequest) {
+    request = &DescribeDBInstanceDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mariadb", APIVersion, "DescribeDBInstanceDetail")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceDetailResponse() (response *DescribeDBInstanceDetailResponse) {
+    response = &DescribeDBInstanceDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBInstanceDetail
+// This API is used to query the details of a specified instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDBInstanceDetail(request *DescribeDBInstanceDetailRequest) (response *DescribeDBInstanceDetailResponse, err error) {
+    return c.DescribeDBInstanceDetailWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceDetail
+// This API is used to query the details of a specified instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDBInstanceDetailWithContext(ctx context.Context, request *DescribeDBInstanceDetailRequest) (response *DescribeDBInstanceDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceDetailResponse()
     err = c.Send(request, response)
     return
 }

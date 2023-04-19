@@ -332,10 +332,11 @@ func NewCreateAlarmPolicyResponse() (response *CreateAlarmPolicyResponse) {
 }
 
 // CreateAlarmPolicy
-// This API is used to create a Cloud Monitor alarm policy.
+// This API is used to create an alarm policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -347,10 +348,11 @@ func (c *Client) CreateAlarmPolicy(request *CreateAlarmPolicyRequest) (response 
 }
 
 // CreateAlarmPolicy
-// This API is used to create a Cloud Monitor alarm policy.
+// This API is used to create an alarm policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -892,7 +894,7 @@ func NewCreatePrometheusClusterAgentResponse() (response *CreatePrometheusCluste
 }
 
 // CreatePrometheusClusterAgent
-// This API is used to associate a Cloud Monitor (CM)-integrated Tencent Managed Service for Prometheus (TMP) 2.0 instance with a cluster.
+// This API is used to associate a cluster with a Cloud Monitor (CM)-integrated Tencent Managed Service for Prometheus (TMP) 2.0 instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
@@ -909,7 +911,7 @@ func (c *Client) CreatePrometheusClusterAgent(request *CreatePrometheusClusterAg
 }
 
 // CreatePrometheusClusterAgent
-// This API is used to associate a Cloud Monitor (CM)-integrated Tencent Managed Service for Prometheus (TMP) 2.0 instance with a cluster.
+// This API is used to associate a cluster with a Cloud Monitor (CM)-integrated Tencent Managed Service for Prometheus (TMP) 2.0 instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
@@ -1552,7 +1554,7 @@ func NewDeleteAlarmNoticesResponse() (response *DeleteAlarmNoticesResponse) {
 }
 
 // DeleteAlarmNotices
-// This API is used to delete alarm notification templates.
+// This API is used to delete an alarm notification template.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1566,7 +1568,7 @@ func (c *Client) DeleteAlarmNotices(request *DeleteAlarmNoticesRequest) (respons
 }
 
 // DeleteAlarmNotices
-// This API is used to delete alarm notification templates.
+// This API is used to delete an alarm notification template.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2273,8 +2275,11 @@ func NewDeletePrometheusRecordRuleYamlResponse() (response *DeletePrometheusReco
 // This API is used to delete a recording instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DeletePrometheusRecordRuleYaml(request *DeletePrometheusRecordRuleYamlRequest) (response *DeletePrometheusRecordRuleYamlResponse, err error) {
@@ -2285,8 +2290,11 @@ func (c *Client) DeletePrometheusRecordRuleYaml(request *DeletePrometheusRecordR
 // This API is used to delete a recording instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DeletePrometheusRecordRuleYamlWithContext(ctx context.Context, request *DeletePrometheusRecordRuleYamlRequest) (response *DeletePrometheusRecordRuleYamlResponse, err error) {
@@ -2456,6 +2464,7 @@ func NewDeletePrometheusTempSyncResponse() (response *DeletePrometheusTempSyncRe
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -2474,6 +2483,7 @@ func (c *Client) DeletePrometheusTempSync(request *DeletePrometheusTempSyncReque
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -2770,6 +2780,7 @@ func NewDescribeAlarmHistoriesResponse() (response *DescribeAlarmHistoriesRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2789,6 +2800,7 @@ func (c *Client) DescribeAlarmHistories(request *DescribeAlarmHistoriesRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2944,7 +2956,7 @@ func NewDescribeAlarmNoticeCallbacksResponse() (response *DescribeAlarmNoticeCal
 }
 
 // DescribeAlarmNoticeCallbacks
-// This API is used to get all the callback URLs of an alarm notification template.
+// This API is used to obtain all the callback URLs of an alarm notification template.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2959,7 +2971,7 @@ func (c *Client) DescribeAlarmNoticeCallbacks(request *DescribeAlarmNoticeCallba
 }
 
 // DescribeAlarmNoticeCallbacks
-// This API is used to get all the callback URLs of an alarm notification template.
+// This API is used to obtain all the callback URLs of an alarm notification template.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3432,6 +3444,7 @@ func NewDescribeBindingPolicyObjectListResponse() (response *DescribeBindingPoli
 //  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
 //  FAILEDOPERATION_DIMQUERYREQUESTFAILED = "FailedOperation.DimQueryRequestFailed"
 //  FAILEDOPERATION_DIVISIONBYZERO = "FailedOperation.DivisionByZero"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 //  FAILEDOPERATION_DRUIDTABLENOTFOUND = "FailedOperation.DruidTableNotFound"
 //  FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
@@ -3478,6 +3491,7 @@ func (c *Client) DescribeBindingPolicyObjectList(request *DescribeBindingPolicyO
 //  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
 //  FAILEDOPERATION_DIMQUERYREQUESTFAILED = "FailedOperation.DimQueryRequestFailed"
 //  FAILEDOPERATION_DIVISIONBYZERO = "FailedOperation.DivisionByZero"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 //  FAILEDOPERATION_DRUIDTABLENOTFOUND = "FailedOperation.DruidTableNotFound"
 //  FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
@@ -3553,6 +3567,7 @@ func NewDescribeConditionsTemplateListResponse() (response *DescribeConditionsTe
 //  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
 //  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
 //  FAILEDOPERATION_DIMQUERYREQUESTFAILED = "FailedOperation.DimQueryRequestFailed"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 //  FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
 //  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
@@ -3597,6 +3612,7 @@ func (c *Client) DescribeConditionsTemplateList(request *DescribeConditionsTempl
 //  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
 //  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
 //  FAILEDOPERATION_DIMQUERYREQUESTFAILED = "FailedOperation.DimQueryRequestFailed"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 //  FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
 //  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
@@ -4164,18 +4180,20 @@ func NewDescribeMonitorTypesResponse() (response *DescribeMonitorTypesResponse) 
 }
 
 // DescribeMonitorTypes
-// This API is used to list all the monitor types supported by CM.
+// This API is used to list all the monitoring types supported by CM.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeMonitorTypes(request *DescribeMonitorTypesRequest) (response *DescribeMonitorTypesResponse, err error) {
     return c.DescribeMonitorTypesWithContext(context.Background(), request)
 }
 
 // DescribeMonitorTypes
-// This API is used to list all the monitor types supported by CM.
+// This API is used to list all the monitoring types supported by CM.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeMonitorTypesWithContext(ctx context.Context, request *DescribeMonitorTypesRequest) (response *DescribeMonitorTypesResponse, err error) {
     if request == nil {
@@ -4764,6 +4782,7 @@ func NewDescribePrometheusAlertPolicyResponse() (response *DescribePrometheusAle
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusAlertPolicy(request *DescribePrometheusAlertPolicyRequest) (response *DescribePrometheusAlertPolicyResponse, err error) {
     return c.DescribePrometheusAlertPolicyWithContext(context.Background(), request)
@@ -4784,6 +4803,7 @@ func (c *Client) DescribePrometheusAlertPolicy(request *DescribePrometheusAlertP
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusAlertPolicyWithContext(ctx context.Context, request *DescribePrometheusAlertPolicyRequest) (response *DescribePrometheusAlertPolicyResponse, err error) {
     if request == nil {
@@ -4824,11 +4844,20 @@ func NewDescribePrometheusClusterAgentsResponse() (response *DescribePrometheusC
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 func (c *Client) DescribePrometheusClusterAgents(request *DescribePrometheusClusterAgentsRequest) (response *DescribePrometheusClusterAgentsResponse, err error) {
     return c.DescribePrometheusClusterAgentsWithContext(context.Background(), request)
 }
@@ -4838,11 +4867,20 @@ func (c *Client) DescribePrometheusClusterAgents(request *DescribePrometheusClus
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 func (c *Client) DescribePrometheusClusterAgentsWithContext(ctx context.Context, request *DescribePrometheusClusterAgentsRequest) (response *DescribePrometheusClusterAgentsResponse, err error) {
     if request == nil {
         request = NewDescribePrometheusClusterAgentsRequest()
@@ -5487,6 +5525,7 @@ func NewDescribePrometheusRecordRulesResponse() (response *DescribePrometheusRec
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusRecordRules(request *DescribePrometheusRecordRulesRequest) (response *DescribePrometheusRecordRulesResponse, err error) {
     return c.DescribePrometheusRecordRulesWithContext(context.Background(), request)
@@ -5506,6 +5545,7 @@ func (c *Client) DescribePrometheusRecordRules(request *DescribePrometheusRecord
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusRecordRulesWithContext(ctx context.Context, request *DescribePrometheusRecordRulesRequest) (response *DescribePrometheusRecordRulesResponse, err error) {
     if request == nil {
@@ -6620,6 +6660,7 @@ func NewModifyAlarmPolicyConditionResponse() (response *ModifyAlarmPolicyConditi
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6634,6 +6675,7 @@ func (c *Client) ModifyAlarmPolicyCondition(request *ModifyAlarmPolicyConditionR
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6794,6 +6836,7 @@ func NewModifyAlarmPolicyStatusResponse() (response *ModifyAlarmPolicyStatusResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6808,6 +6851,7 @@ func (c *Client) ModifyAlarmPolicyStatus(request *ModifyAlarmPolicyStatusRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6848,7 +6892,7 @@ func NewModifyAlarmPolicyTasksResponse() (response *ModifyAlarmPolicyTasksRespon
 }
 
 // ModifyAlarmPolicyTasks
-// This API is used to modify the task triggered by an alarm policy. The `TriggerTasks` field contains the list of triggered tasks. If an empty array is passed in for `TriggerTasks`, it indicates to unbind all the triggered tasks from this policy.
+// This API is used to modify the tasks triggered by alarm policy, which are listed by the value of the `TriggerTasks` field. If an empty array is passed in for `TriggerTasks`, it means unbinding all the trigger tasks from the policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6861,7 +6905,7 @@ func (c *Client) ModifyAlarmPolicyTasks(request *ModifyAlarmPolicyTasksRequest) 
 }
 
 // ModifyAlarmPolicyTasks
-// This API is used to modify the task triggered by an alarm policy. The `TriggerTasks` field contains the list of triggered tasks. If an empty array is passed in for `TriggerTasks`, it indicates to unbind all the triggered tasks from this policy.
+// This API is used to modify the tasks triggered by alarm policy, which are listed by the value of the `TriggerTasks` field. If an empty array is passed in for `TriggerTasks`, it means unbinding all the trigger tasks from the policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7524,6 +7568,10 @@ func NewPutMonitorDataResponse() (response *PutMonitorDataResponse) {
 }
 
 // PutMonitorData
+// 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
+//
+// 
+//
 // The default API request rate limit is 50 requests/sec.
 //
 // The default upper limit on metrics of a single tenant is 100.
@@ -7561,6 +7609,10 @@ func (c *Client) PutMonitorData(request *PutMonitorDataRequest) (response *PutMo
 }
 
 // PutMonitorData
+// 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
+//
+// 
+//
 // The default API request rate limit is 50 requests/sec.
 //
 // The default upper limit on metrics of a single tenant is 100.
@@ -7891,6 +7943,7 @@ func NewSyncPrometheusTempResponse() (response *SyncPrometheusTempResponse) {
 // This API is used to sync a template to an instance or cluster. It takes effect for v2 instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
@@ -7910,6 +7963,7 @@ func (c *Client) SyncPrometheusTemp(request *SyncPrometheusTempRequest) (respons
 // This API is used to sync a template to an instance or cluster. It takes effect for v2 instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"

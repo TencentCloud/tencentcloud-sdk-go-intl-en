@@ -1264,6 +1264,131 @@ func (r *CreateEnvironmentRoleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateRabbitMQVipInstanceRequestParams struct {
+	// AZ
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Node specification (`rabbit-vip-basic-1`: Basic; `rabbit-vip-basic-2`: Standard; `rabbit-vip-basic-3`: Advanced I; `rabbit-vip-basic-4`: Advanced II). If this parameter is left empty, the default value is `rabbit-vip-basic-1`.
+	NodeSpec *string `json:"NodeSpec,omitempty" name:"NodeSpec"`
+
+	// Number of nodes, which is at least three for multi-AZ deployment. If this parameter is left empty, the value will be set to 1 for single-AZ deployment and 3 for multi-AZ deployment by default.
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Storage capacity of a single node, which is 200 GB by default.
+	StorageSize *int64 `json:"StorageSize,omitempty" name:"StorageSize"`
+
+	// Whether to enable mirrored queue. Default value: `false`.
+	EnableCreateDefaultHaMirrorQueue *bool `json:"EnableCreateDefaultHaMirrorQueue,omitempty" name:"EnableCreateDefaultHaMirrorQueue"`
+
+	// Whether to enable auto-renewal. Default value: `true`.
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Validity period, which is one month by default.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+}
+
+type CreateRabbitMQVipInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// AZ
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Node specification (`rabbit-vip-basic-1`: Basic; `rabbit-vip-basic-2`: Standard; `rabbit-vip-basic-3`: Advanced I; `rabbit-vip-basic-4`: Advanced II). If this parameter is left empty, the default value is `rabbit-vip-basic-1`.
+	NodeSpec *string `json:"NodeSpec,omitempty" name:"NodeSpec"`
+
+	// Number of nodes, which is at least three for multi-AZ deployment. If this parameter is left empty, the value will be set to 1 for single-AZ deployment and 3 for multi-AZ deployment by default.
+	NodeNum *int64 `json:"NodeNum,omitempty" name:"NodeNum"`
+
+	// Storage capacity of a single node, which is 200 GB by default.
+	StorageSize *int64 `json:"StorageSize,omitempty" name:"StorageSize"`
+
+	// Whether to enable mirrored queue. Default value: `false`.
+	EnableCreateDefaultHaMirrorQueue *bool `json:"EnableCreateDefaultHaMirrorQueue,omitempty" name:"EnableCreateDefaultHaMirrorQueue"`
+
+	// Whether to enable auto-renewal. Default value: `true`.
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Validity period, which is one month by default.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+}
+
+func (r *CreateRabbitMQVipInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRabbitMQVipInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneIds")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "ClusterName")
+	delete(f, "NodeSpec")
+	delete(f, "NodeNum")
+	delete(f, "StorageSize")
+	delete(f, "EnableCreateDefaultHaMirrorQueue")
+	delete(f, "AutoRenewFlag")
+	delete(f, "TimeSpan")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRabbitMQVipInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRabbitMQVipInstanceResponseParams struct {
+	// Order ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranId *string `json:"TranId,omitempty" name:"TranId"`
+
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateRabbitMQVipInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRabbitMQVipInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateRabbitMQVipInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRabbitMQVipInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateRocketMQClusterRequestParams struct {
 	// Cluster name, which can contain 3–64 letters, digits, hyphens, and underscores
 	Name *string `json:"Name,omitempty" name:"Name"`

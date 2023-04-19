@@ -2251,6 +2251,9 @@ type CreatePrometheusRecordRuleYamlRequestParams struct {
 
 	// YAML content
 	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 type CreatePrometheusRecordRuleYamlRequest struct {
@@ -2261,6 +2264,9 @@ type CreatePrometheusRecordRuleYamlRequest struct {
 
 	// YAML content
 	Content *string `json:"Content,omitempty" name:"Content"`
+
+	// Rule name
+	Name *string `json:"Name,omitempty" name:"Name"`
 }
 
 func (r *CreatePrometheusRecordRuleYamlRequest) ToJsonString() string {
@@ -2277,6 +2283,7 @@ func (r *CreatePrometheusRecordRuleYamlRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "Content")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePrometheusRecordRuleYamlRequest has unknown keys!", "")
 	}
@@ -10685,6 +10692,9 @@ type ModifyAlarmPolicyNoticeRequestParams struct {
 
 	// Alarm policy ID array, which can be used to associate notification templates with multiple alarm policies. Max value: 30.
 	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
+
+	// Notification rules for different alarm levels
+	HierarchicalNotices []*AlarmHierarchicalNotice `json:"HierarchicalNotices,omitempty" name:"HierarchicalNotices"`
 }
 
 type ModifyAlarmPolicyNoticeRequest struct {
@@ -10701,6 +10711,9 @@ type ModifyAlarmPolicyNoticeRequest struct {
 
 	// Alarm policy ID array, which can be used to associate notification templates with multiple alarm policies. Max value: 30.
 	PolicyIds []*string `json:"PolicyIds,omitempty" name:"PolicyIds"`
+
+	// Notification rules for different alarm levels
+	HierarchicalNotices []*AlarmHierarchicalNotice `json:"HierarchicalNotices,omitempty" name:"HierarchicalNotices"`
 }
 
 func (r *ModifyAlarmPolicyNoticeRequest) ToJsonString() string {
@@ -10719,6 +10732,7 @@ func (r *ModifyAlarmPolicyNoticeRequest) FromJsonString(s string) error {
 	delete(f, "PolicyId")
 	delete(f, "NoticeIds")
 	delete(f, "PolicyIds")
+	delete(f, "HierarchicalNotices")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmPolicyNoticeRequest has unknown keys!", "")
 	}
@@ -11957,6 +11971,9 @@ type PrometheusClusterAgentBasic struct {
 
 	// Whether to collect metrics (`true`: Drop all metrics; `false`: Collect default metrics)
 	NotScrape *bool `json:"NotScrape,omitempty" name:"NotScrape"`
+
+	// Whether to enable the default recording rule
+	OpenDefaultRecord *bool `json:"OpenDefaultRecord,omitempty" name:"OpenDefaultRecord"`
 }
 
 type PrometheusClusterAgentPodConfig struct {
@@ -12808,7 +12825,7 @@ type SendCustomAlarmMsgRequestParams struct {
 	// API component name. The value for the current API is monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Message policy ID, which is configured on the custom message page of Cloud Monitor.
+	// Message policy ID, which is configured on the custom message page.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Custom message content that a user wants to send.
@@ -12821,7 +12838,7 @@ type SendCustomAlarmMsgRequest struct {
 	// API component name. The value for the current API is monitor.
 	Module *string `json:"Module,omitempty" name:"Module"`
 
-	// Message policy ID, which is configured on the custom message page of Cloud Monitor.
+	// Message policy ID, which is configured on the custom message page.
 	PolicyId *string `json:"PolicyId,omitempty" name:"PolicyId"`
 
 	// Custom message content that a user wants to send.
