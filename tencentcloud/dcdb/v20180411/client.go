@@ -654,6 +654,7 @@ func NewCreateHourDCDBInstanceResponse() (response *CreateHourDCDBInstanceRespon
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_SUBNETNOTFOUND = "InvalidParameter.SubnetNotFound"
 //  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
@@ -678,6 +679,7 @@ func (c *Client) CreateHourDCDBInstance(request *CreateHourDCDBInstanceRequest) 
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CHECKPARAMNOTPASS = "InvalidParameter.CheckParamNotPass"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETER_SUBNETNOTFOUND = "InvalidParameter.SubnetNotFound"
 //  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
@@ -883,6 +885,54 @@ func (c *Client) DescribeAccountsWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupFilesRequest() (request *DescribeBackupFilesRequest) {
+    request = &DescribeBackupFilesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeBackupFiles")
+    
+    
+    return
+}
+
+func NewDescribeBackupFilesResponse() (response *DescribeBackupFilesResponse) {
+    response = &DescribeBackupFilesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupFiles
+// This API is used to query the list of backup files.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupFiles(request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
+    return c.DescribeBackupFilesWithContext(context.Background(), request)
+}
+
+// DescribeBackupFiles
+// This API is used to query the list of backup files.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *DescribeBackupFilesRequest) (response *DescribeBackupFilesResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupFilesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupFiles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupFilesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1227,6 +1277,64 @@ func (c *Client) DescribeDBSyncModeWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeDBSyncModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDCDBInstanceDetailRequest() (request *DescribeDCDBInstanceDetailRequest) {
+    request = &DescribeDCDBInstanceDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeDCDBInstanceDetail")
+    
+    
+    return
+}
+
+func NewDescribeDCDBInstanceDetailResponse() (response *DescribeDCDBInstanceDetailResponse) {
+    response = &DescribeDCDBInstanceDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDCDBInstanceDetail
+// This API is used to get the details of a TDSQL instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDCDBInstanceDetail(request *DescribeDCDBInstanceDetailRequest) (response *DescribeDCDBInstanceDetailResponse, err error) {
+    return c.DescribeDCDBInstanceDetailWithContext(context.Background(), request)
+}
+
+// DescribeDCDBInstanceDetail
+// This API is used to get the details of a TDSQL instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDCDBInstanceDetailWithContext(ctx context.Context, request *DescribeDCDBInstanceDetailRequest) (response *DescribeDCDBInstanceDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDCDBInstanceDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDCDBInstanceDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDCDBInstanceDetailResponse()
     err = c.Send(request, response)
     return
 }
@@ -2949,6 +3057,7 @@ func NewModifyDBSyncModeResponse() (response *ModifyDBSyncModeResponse) {
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_BADSYNCMODE = "InvalidParameterValue.BadSyncMode"
+//  INVALIDPARAMETERVALUE_SYNCMODENOTALLOWED = "InvalidParameterValue.SyncModeNotAllowed"
 //  RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
@@ -2968,6 +3077,7 @@ func (c *Client) ModifyDBSyncMode(request *ModifyDBSyncModeRequest) (response *M
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_BADSYNCMODE = "InvalidParameterValue.BadSyncMode"
+//  INVALIDPARAMETERVALUE_SYNCMODENOTALLOWED = "InvalidParameterValue.SyncModeNotAllowed"
 //  RESOURCENOTFOUND_NOINSTANCEFOUND = "ResourceNotFound.NoInstanceFound"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"

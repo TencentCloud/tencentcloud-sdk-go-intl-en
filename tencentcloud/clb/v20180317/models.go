@@ -1016,6 +1016,9 @@ type CreateListenerRequestParams struct {
 
 	// Maximum number of new listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
+
+	// Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds), please submit a [submit](https://console.cloud.tencent.com/workorder/category). 
+	IdleConnectTimeout *int64 `json:"IdleConnectTimeout,omitempty" name:"IdleConnectTimeout"`
 }
 
 type CreateListenerRequest struct {
@@ -1072,6 +1075,9 @@ type CreateListenerRequest struct {
 
 	// Maximum number of new listener connections. It’s available for TCP/UDP/TCP_SSL/QUIC listeners. If it’s set to `-1` or not specified, the listener speed is not limited. 
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
+
+	// Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds), please submit a [submit](https://console.cloud.tencent.com/workorder/category). 
+	IdleConnectTimeout *int64 `json:"IdleConnectTimeout,omitempty" name:"IdleConnectTimeout"`
 }
 
 func (r *CreateListenerRequest) ToJsonString() string {
@@ -1103,6 +1109,7 @@ func (r *CreateListenerRequest) FromJsonString(s string) error {
 	delete(f, "MultiCertInfo")
 	delete(f, "MaxConn")
 	delete(f, "MaxCps")
+	delete(f, "IdleConnectTimeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateListenerRequest has unknown keys!", "")
 	}
@@ -4733,6 +4740,10 @@ type IdleLoadBalancer struct {
 
 	// CLB type. Value range: `1` (CLB); `0` (classic CLB).
 	Forward *uint64 `json:"Forward,omitempty" name:"Forward"`
+
+	// The load balancing hostname.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 type InternetAccessible struct {
@@ -4884,6 +4895,10 @@ type Listener struct {
 	// Maximum number of new listener connections. If it’s set to `-1`, the listener speed is not limited. 
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
+
+	// Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	IdleConnectTimeout *int64 `json:"IdleConnectTimeout,omitempty" name:"IdleConnectTimeout"`
 }
 
 type ListenerBackend struct {
@@ -5928,6 +5943,9 @@ type ModifyListenerRequestParams struct {
 
 	// The maximum number of new connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum number of new connections of the instance. -1 indicates that no limit is set on concurrent connections.
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
+
+	// Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds), please submit a [submit](https://console.cloud.tencent.com/workorder/category). 
+	IdleConnectTimeout *int64 `json:"IdleConnectTimeout,omitempty" name:"IdleConnectTimeout"`
 }
 
 type ModifyListenerRequest struct {
@@ -5978,6 +5996,9 @@ type ModifyListenerRequest struct {
 
 	// The maximum number of new connections at the listener level. This parameter takes effect only on LCU-supported instances and TCP/UDP/TCP_SSL/QUIC listeners. Value range: 1 to the maximum number of new connections of the instance. -1 indicates that no limit is set on concurrent connections.
 	MaxCps *int64 `json:"MaxCps,omitempty" name:"MaxCps"`
+
+	// Connection idle timeout period (in seconds). It’s only available to TCP listeners. Value range: 300-900 for shared and dedicated instances; 300-2000 for LCU-supported CLB instances. It defaults to 900. To set a period longer than 2000 seconds (up to 3600 seconds), please submit a [submit](https://console.cloud.tencent.com/workorder/category). 
+	IdleConnectTimeout *int64 `json:"IdleConnectTimeout,omitempty" name:"IdleConnectTimeout"`
 }
 
 func (r *ModifyListenerRequest) ToJsonString() string {
@@ -6007,6 +6028,7 @@ func (r *ModifyListenerRequest) FromJsonString(s string) error {
 	delete(f, "MultiCertInfo")
 	delete(f, "MaxConn")
 	delete(f, "MaxCps")
+	delete(f, "IdleConnectTimeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyListenerRequest has unknown keys!", "")
 	}

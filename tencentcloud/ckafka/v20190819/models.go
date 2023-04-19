@@ -119,6 +119,15 @@ type AclRuleInfo struct {
 	Principal *string `json:"Principal,omitempty" name:"Principal"`
 }
 
+type AclRuleResp struct {
+	// Total number of data entries
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// ACL rule list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AclRuleList []*AclRule `json:"AclRuleList,omitempty" name:"AclRuleList"`
+}
+
 type AppIdResponse struct {
 	// Number of eligible `AppId`
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
@@ -663,6 +672,112 @@ func (r *CreateAclResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAclResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAclRuleRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL resource type. Currently, the only valid value is `Topic`.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Matching type. Valid values: `PREFIXED`(match by prefix), `PRESET` (match by preset policy).
+	PatternType *string `json:"PatternType,omitempty" name:"PatternType"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// ACL rule list
+	RuleList []*AclRuleInfo `json:"RuleList,omitempty" name:"RuleList"`
+
+	// Prefix value for prefix match
+	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
+
+	// A parameter used to specify whether the preset ACL rule is applied to new topics
+	IsApplied *int64 `json:"IsApplied,omitempty" name:"IsApplied"`
+
+	// Remarks for ACL rules
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+type CreateAclRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL resource type. Currently, the only valid value is `Topic`.
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Matching type. Valid values: `PREFIXED`(match by prefix), `PRESET` (match by preset policy).
+	PatternType *string `json:"PatternType,omitempty" name:"PatternType"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// ACL rule list
+	RuleList []*AclRuleInfo `json:"RuleList,omitempty" name:"RuleList"`
+
+	// Prefix value for prefix match
+	Pattern *string `json:"Pattern,omitempty" name:"Pattern"`
+
+	// A parameter used to specify whether the preset ACL rule is applied to new topics
+	IsApplied *int64 `json:"IsApplied,omitempty" name:"IsApplied"`
+
+	// Remarks for ACL rules
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
+func (r *CreateAclRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAclRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ResourceType")
+	delete(f, "PatternType")
+	delete(f, "RuleName")
+	delete(f, "RuleList")
+	delete(f, "Pattern")
+	delete(f, "IsApplied")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAclRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAclRuleResponseParams struct {
+	// Unique key of a rule
+	Result *int64 `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateAclRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAclRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateAclRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAclRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1949,6 +2064,84 @@ func (r *DescribeACLResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeACLResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAclRuleRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// ACL rule matching type
+	PatternType *string `json:"PatternType,omitempty" name:"PatternType"`
+
+	// Whether to read simplified ACL rules
+	IsSimplified *bool `json:"IsSimplified,omitempty" name:"IsSimplified"`
+}
+
+type DescribeAclRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL rule name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// ACL rule matching type
+	PatternType *string `json:"PatternType,omitempty" name:"PatternType"`
+
+	// Whether to read simplified ACL rules
+	IsSimplified *bool `json:"IsSimplified,omitempty" name:"IsSimplified"`
+}
+
+func (r *DescribeAclRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAclRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RuleName")
+	delete(f, "PatternType")
+	delete(f, "IsSimplified")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAclRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAclRuleResponseParams struct {
+	// The set of returned ACL rules
+	Result *AclRuleResp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAclRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAclRuleResponseParams `json:"Response"`
+}
+
+func (r *DescribeAclRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAclRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4442,6 +4635,155 @@ type JgwOperateResponse struct {
 	// Data returned by an operation, which may contain `flowId`, etc.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Data *OperateResponseData `json:"Data,omitempty" name:"Data"`
+}
+
+// Predefined struct for user
+type ModifyAclRuleRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL policy name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Whether to be applied to new topics
+	IsApplied *int64 `json:"IsApplied,omitempty" name:"IsApplied"`
+}
+
+type ModifyAclRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// ACL policy name
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Whether to be applied to new topics
+	IsApplied *int64 `json:"IsApplied,omitempty" name:"IsApplied"`
+}
+
+func (r *ModifyAclRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAclRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RuleName")
+	delete(f, "IsApplied")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAclRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAclRuleResponseParams struct {
+	// Unique key of a rule
+	Result *int64 `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAclRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAclRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyAclRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAclRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDatahubTopicRequestParams struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Message retention period in ms. The current minimum value is 60,000 ms.
+	RetentionMs *int64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Topic remarks, which are a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Tag list
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+type ModifyDatahubTopicRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Message retention period in ms. The current minimum value is 60,000 ms.
+	RetentionMs *int64 `json:"RetentionMs,omitempty" name:"RetentionMs"`
+
+	// Topic remarks, which are a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
+	Note *string `json:"Note,omitempty" name:"Note"`
+
+	// Tag list
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *ModifyDatahubTopicRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatahubTopicRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "RetentionMs")
+	delete(f, "Note")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatahubTopicRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDatahubTopicResponseParams struct {
+	// Returned result set
+	Result *JgwOperateResponse `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyDatahubTopicResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDatahubTopicResponseParams `json:"Response"`
+}
+
+func (r *ModifyDatahubTopicResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDatahubTopicResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

@@ -1692,6 +1692,122 @@ func (r *DescribeAccountsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBackupFilesRequestParams struct {
+	// Query by instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Query by shard ID
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// Backup type. Valid values: `Data` (data backup), `Binlog` (Binlog backup), `Errlog` (error log), `Slowlog` (slow log).
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Query by start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query by end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination parameter
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination parameter
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting dimension. Valid values: `Time`, `Size`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `DESC`, `ASC`.
+	OrderType *string `json:"OrderType,omitempty" name:"OrderType"`
+}
+
+type DescribeBackupFilesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query by instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Query by shard ID
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// Backup type. Valid values: `Data` (data backup), `Binlog` (Binlog backup), `Errlog` (error log), `Slowlog` (slow log).
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Query by start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Query by end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Pagination parameter
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination parameter
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting dimension. Valid values: `Time`, `Size`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `DESC`, `ASC`.
+	OrderType *string `json:"OrderType,omitempty" name:"OrderType"`
+}
+
+func (r *DescribeBackupFilesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupFilesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ShardId")
+	delete(f, "BackupType")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupFilesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupFilesResponseParams struct {
+	// List of backup files
+	Files []*InstanceBackupFileItem `json:"Files,omitempty" name:"Files"`
+
+	// Total number
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupFilesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupFilesResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupFilesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupFilesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBLogFilesRequestParams struct {
 	// Instance ID in the format of dcdbt-ow7t8lmc.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2104,6 +2220,227 @@ func (r *DescribeDBSyncModeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBSyncModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDCDBInstanceDetailRequestParams struct {
+	// Instance ID, such as dcdbt-7oaxtcb7.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeDCDBInstanceDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, such as dcdbt-7oaxtcb7.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDCDBInstanceDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDCDBInstanceDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDCDBInstanceDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDCDBInstanceDetailResponseParams struct {
+	// Instance ID, such as dcdbt-7oaxtcb7.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Current status of the instance
+	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+
+	// Instance private IP address
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Private port of instance
+	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+
+	// Number of instance nodes. Valid values: `2` (1-source-1-replica), `3` (1-source-2-replica).
+	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Instance region, such as ap-guangzhou.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Instance VPC ID, such as vpc-r9jr0de3.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// VPC subnet ID of an instance, such as subnet-6rqs61o2.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Public network status. Valid values: `0` (not enabled), `1` (enabled), `2` (disabled), `3`: (enabling), `4` (disabling).
+	WanStatus *int64 `json:"WanStatus,omitempty" name:"WanStatus"`
+
+	// Domain name for public network access, which can be resolved by the public network.
+	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+
+	// Public IP address, which can be accessed over the public network.
+	WanVip *string `json:"WanVip,omitempty" name:"WanVip"`
+
+	// Public network access port
+	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+
+	// Project ID of the instance
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Automatic renewal flag for an instance. Valid values: `0` (normal renewal), `1` (auto-renewal), `3` (no renewal upon expiration).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Dedicated cluster ID
+	ExclusterId *string `json:"ExclusterId,omitempty" name:"ExclusterId"`
+
+	// Billing mode. Valid values: `prepaid` (monthly subscription), `postpaid` (pay-as-you-go).
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Creation time of the instance in the format of 2006-01-02 15:04:05
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Expiration time of the instance in the format of 2006-01-02 15:04:05
+	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
+
+	// Database version information
+	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+
+	// Whether the instance supports audit. Valid values: `1` (yes), `0` (no).
+	IsAuditSupported *int64 `json:"IsAuditSupported,omitempty" name:"IsAuditSupported"`
+
+	// Whether data encryption is supported for an instance. Valid values: `1` (yes), `0` (no).
+	IsEncryptSupported *int64 `json:"IsEncryptSupported,omitempty" name:"IsEncryptSupported"`
+
+	// Instance machine model
+	Machine *string `json:"Machine,omitempty" name:"Machine"`
+
+	// Instance memory size in GB, which is the sum of the memory of all shards.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk storage size in GB, which is the sum of the disk size of all shards.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Instance storage space utilization. It is calculated by dividing the sum of the used disk size of all shards by the total disk size of all shards.
+	StorageUsage *float64 `json:"StorageUsage,omitempty" name:"StorageUsage"`
+
+	// Size of log storage space in GB
+	LogStorage *int64 `json:"LogStorage,omitempty" name:"LogStorage"`
+
+	// Product type ID
+	Pid *int64 `json:"Pid,omitempty" name:"Pid"`
+
+	// Source AZ
+	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+
+	// Replica AZ
+	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+
+	// Shard information
+	Shards []*ShardBriefInfo `json:"Shards,omitempty" name:"Shards"`
+
+	// Private network IPv6 address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vip6 *string `json:"Vip6,omitempty" name:"Vip6"`
+
+	// Number of CPU cores of an instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Instance QPS
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Qps *int64 `json:"Qps,omitempty" name:"Qps"`
+
+	// Database engine
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbEngine *string `json:"DbEngine,omitempty" name:"DbEngine"`
+
+	// Whether IPv6 is supported.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
+
+	// Public IPv6 address, which can be accessed over the public network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanVipv6 *string `json:"WanVipv6,omitempty" name:"WanVipv6"`
+
+	// Public network status. Valid values: `0` (not enabled), `1` (enabled), `2` (disabled), `3`: (enabling), `4` (disabling).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanStatusIpv6 *int64 `json:"WanStatusIpv6,omitempty" name:"WanStatusIpv6"`
+
+	// Public network IPv6 port
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WanPortIpv6 *int64 `json:"WanPortIpv6,omitempty" name:"WanPortIpv6"`
+
+	// Tag information
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// DCN type. Valid values: `0` (N/A), `1` (source instance), `2` (disaster recovery read-only instance)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DcnFlag *int64 `json:"DcnFlag,omitempty" name:"DcnFlag"`
+
+	// DCN status. Valid values: `0` (N/A), `1` (creating), `2` (syncing), `3` (disconnected).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DcnStatus *int64 `json:"DcnStatus,omitempty" name:"DcnStatus"`
+
+	// The number of DCN disaster recovery instances
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DcnDstNum *int64 `json:"DcnDstNum,omitempty" name:"DcnDstNum"`
+
+	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery read-only instance), `4` (dedicated disaster recovery read-only instance)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// Whether the instance supports setting the connection limit, which is not supported for kernel version 10.1.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsMaxUserConnectionsSupported *bool `json:"IsMaxUserConnectionsSupported,omitempty" name:"IsMaxUserConnectionsSupported"`
+
+	// The displayed database version
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbVersionId *string `json:"DbVersionId,omitempty" name:"DbVersionId"`
+
+	// Encryption status. Valid values: `0` (disabled), `1` (enabled).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptStatus *int64 `json:"EncryptStatus,omitempty" name:"EncryptStatus"`
+
+	// Type of dedicated cluster. Valid values: `0` (public cloud), `1` (finance cage), `2` (CDC cluster).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExclusterType *int64 `json:"ExclusterType,omitempty" name:"ExclusterType"`
+
+	// Nearby VPC access
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RsAccessStrategy *int64 `json:"RsAccessStrategy,omitempty" name:"RsAccessStrategy"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDCDBInstanceDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDCDBInstanceDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeDCDBInstanceDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDCDBInstanceDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3498,6 +3835,41 @@ func (r *InitDCDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type InstanceBackupFileItem struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance status
+	InstanceStatus *int64 `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+
+	// Shard ID
+	ShardId *string `json:"ShardId,omitempty" name:"ShardId"`
+
+	// File path
+	FilePath *string `json:"FilePath,omitempty" name:"FilePath"`
+
+	// File name
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// File size
+	FileSize *int64 `json:"FileSize,omitempty" name:"FileSize"`
+
+	// Backup type. Valid values: `Data` (data backup), `Binlog` (Binlog backup), `Errlog` (error log), `Slowlog` (slow log).
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// Manual backup. Valid values: `0` (no), `1` (yes).
+	ManualBackup *int64 `json:"ManualBackup,omitempty" name:"ManualBackup"`
+
+	// Backup start time
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Backup end time
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+}
+
 // Predefined struct for user
 type IsolateDedicatedDBInstanceRequestParams struct {
 	// Instance ID in the format of `dcdbt-ow728lmc`
@@ -4504,6 +4876,14 @@ func (r *ModifyInstanceVportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type NodeInfo struct {
+	// Node ID
+	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
+
+	// Node role. Valid values: `master`, `slave`.
+	Role *string `json:"Role,omitempty" name:"Role"`
+}
+
 type ParamConstraint struct {
 	// Constraint type, such as `enum` and `section`
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -4670,6 +5050,54 @@ type SecurityGroupBound struct {
 
 	// Network protocol. UDP and TCP are supported.
 	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+}
+
+type ShardBriefInfo struct {
+	// Shard serial ID
+	ShardSerialId *string `json:"ShardSerialId,omitempty" name:"ShardSerialId"`
+
+	// Shard ID, such as shard-7vg1o339.
+	ShardInstanceId *string `json:"ShardInstanceId,omitempty" name:"ShardInstanceId"`
+
+	// Shard running status
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Description of shard running status
+	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+
+	// Shard creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Shard memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Shard disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Log disk space size of a shard in GB
+	LogDisk *int64 `json:"LogDisk,omitempty" name:"LogDisk"`
+
+	// Number of shard nodes
+	NodeCount *int64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Disk space utilization of a shard
+	StorageUsage *float64 `json:"StorageUsage,omitempty" name:"StorageUsage"`
+
+	// Version information of the shard proxy
+	ProxyVersion *string `json:"ProxyVersion,omitempty" name:"ProxyVersion"`
+
+	// Source AZ of a shard
+	ShardMasterZone *string `json:"ShardMasterZone,omitempty" name:"ShardMasterZone"`
+
+	// Replica AZ of a shard
+	ShardSlaveZones []*string `json:"ShardSlaveZones,omitempty" name:"ShardSlaveZones"`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Node information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodesInfo []*NodeInfo `json:"NodesInfo,omitempty" name:"NodesInfo"`
 }
 
 type ShardInfo struct {
