@@ -1401,6 +1401,68 @@ func (c *Client) DeleteRoomWithContext(ctx context.Context, request *DeleteRoomR
     return
 }
 
+func NewDescribeAnswerListRequest() (request *DescribeAnswerListRequest) {
+    request = &DescribeAnswerListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeAnswerList")
+    
+    
+    return
+}
+
+func NewDescribeAnswerListResponse() (response *DescribeAnswerListResponse) {
+    response = &DescribeAnswerListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAnswerList
+// This API is used to get the answers to a quiz question in a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAnswerList(request *DescribeAnswerListRequest) (response *DescribeAnswerListResponse, err error) {
+    return c.DescribeAnswerListWithContext(context.Background(), request)
+}
+
+// DescribeAnswerList
+// This API is used to get the answers to a quiz question in a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAnswerListWithContext(ctx context.Context, request *DescribeAnswerListRequest) (response *DescribeAnswerListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAnswerListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAnswerList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAnswerListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCurrentMemberListRequest() (request *DescribeCurrentMemberListRequest) {
     request = &DescribeCurrentMemberListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1923,6 +1985,68 @@ func (c *Client) DescribeGroupMemberListWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeQuestionListRequest() (request *DescribeQuestionListRequest) {
+    request = &DescribeQuestionListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeQuestionList")
+    
+    
+    return
+}
+
+func NewDescribeQuestionListResponse() (response *DescribeQuestionListResponse) {
+    response = &DescribeQuestionListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeQuestionList
+// This API is used to get the quiz details of a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeQuestionList(request *DescribeQuestionListRequest) (response *DescribeQuestionListResponse, err error) {
+    return c.DescribeQuestionListWithContext(context.Background(), request)
+}
+
+// DescribeQuestionList
+// This API is used to get the quiz details of a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeQuestionListWithContext(ctx context.Context, request *DescribeQuestionListRequest) (response *DescribeQuestionListResponse, err error) {
+    if request == nil {
+        request = NewDescribeQuestionListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeQuestionList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeQuestionListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRoomRequest() (request *DescribeRoomRequest) {
     request = &DescribeRoomRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2151,6 +2275,70 @@ func (c *Client) DescribeSdkAppIdUsersWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeSupervisorsRequest() (request *DescribeSupervisorsRequest) {
+    request = &DescribeSupervisorsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeSupervisors")
+    
+    
+    return
+}
+
+func NewDescribeSupervisorsResponse() (response *DescribeSupervisorsResponse) {
+    response = &DescribeSupervisorsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSupervisors
+// This API is used to get the spectators of a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSupervisors(request *DescribeSupervisorsRequest) (response *DescribeSupervisorsResponse, err error) {
+    return c.DescribeSupervisorsWithContext(context.Background(), request)
+}
+
+// DescribeSupervisors
+// This API is used to get the spectators of a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSupervisorsWithContext(ctx context.Context, request *DescribeSupervisorsRequest) (response *DescribeSupervisorsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSupervisorsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSupervisors require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSupervisorsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserRequest() (request *DescribeUserRequest) {
     request = &DescribeUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2321,6 +2509,74 @@ func (c *Client) GetRoomMessageWithContext(ctx context.Context, request *GetRoom
     request.SetContext(ctx)
     
     response = NewGetRoomMessageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetRoomsRequest() (request *GetRoomsRequest) {
+    request = &GetRoomsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "GetRooms")
+    
+    
+    return
+}
+
+func NewGetRoomsResponse() (response *GetRoomsResponse) {
+    response = &GetRoomsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetRooms
+// This API is used to get the room list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetRooms(request *GetRoomsRequest) (response *GetRoomsResponse, err error) {
+    return c.GetRoomsWithContext(context.Background(), request)
+}
+
+// GetRooms
+// This API is used to get the room list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) GetRoomsWithContext(ctx context.Context, request *GetRoomsRequest) (response *GetRoomsResponse, err error) {
+    if request == nil {
+        request = NewGetRoomsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetRooms require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetRoomsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2909,6 +3165,7 @@ func NewSetAppCustomContentResponse() (response *SetAppCustomContentResponse) {
 // This API is used to set or update the custom content of an application, including the application icon and custom code. After you update JS and CSS content, you also need to call this API for the updates to take effect.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
@@ -2920,6 +3177,7 @@ func (c *Client) SetAppCustomContent(request *SetAppCustomContentRequest) (respo
 // This API is used to set or update the custom content of an application, including the application icon and custom code. After you update JS and CSS content, you also need to call this API for the updates to take effect.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"

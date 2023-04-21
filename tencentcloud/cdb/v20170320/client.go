@@ -1002,6 +1002,7 @@ func NewCreateDBInstanceHourResponse() (response *CreateDBInstanceHourResponse) 
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
 //  OPERATIONDENIED_OTHERODERINPROCESS = "OperationDenied.OtherOderInProcess"
@@ -1040,6 +1041,7 @@ func (c *Client) CreateDBInstanceHour(request *CreateDBInstanceHourRequest) (res
 //  INTERNALERROR_UNDEFINEDERROR = "InternalError.UndefinedError"
 //  INTERNALERROR_VPCERROR = "InternalError.VpcError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
 //  OPERATIONDENIED_OTHERODERINPROCESS = "OperationDenied.OtherOderInProcess"
@@ -1500,6 +1502,7 @@ func NewDescribeAccountPrivilegesResponse() (response *DescribeAccountPrivileges
 //  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
 //  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
 //  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -1540,6 +1543,7 @@ func (c *Client) DescribeAccountPrivileges(request *DescribeAccountPrivilegesReq
 //  FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
 //  FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
 //  FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INTERNALERROR_INTERNALASSERTERROR = "InternalError.InternalAssertError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -2187,6 +2191,7 @@ func NewDescribeBackupsResponse() (response *DescribeBackupsResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -2211,6 +2216,7 @@ func (c *Client) DescribeBackups(request *DescribeBackupsRequest) (response *Des
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
@@ -2384,6 +2390,10 @@ func NewDescribeCDBProxyResponse() (response *DescribeCDBProxyResponse) {
 }
 
 // DescribeCDBProxy
+// 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
+//
+// 
+//
 // This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
 //
 // error code that may be returned:
@@ -2396,6 +2406,10 @@ func (c *Client) DescribeCDBProxy(request *DescribeCDBProxyRequest) (response *D
 }
 
 // DescribeCDBProxy
+// 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
+//
+// 
+//
 // This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
 //
 // error code that may be returned:
@@ -2719,6 +2733,7 @@ func NewDescribeDBInstanceConfigResponse() (response *DescribeDBInstanceConfigRe
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_JSONERROR = "InternalError.JSONError"
 //  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -2736,6 +2751,7 @@ func (c *Client) DescribeDBInstanceConfig(request *DescribeDBInstanceConfigReque
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_JSONERROR = "InternalError.JSONError"
 //  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -3279,6 +3295,8 @@ func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_EXESQLERROR = "InternalError.ExeSqlError"
 //  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
 //  INTERNALERROR_JSONERROR = "InternalError.JSONError"
@@ -3298,6 +3316,8 @@ func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response 
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 //  INTERNALERROR_EXESQLERROR = "InternalError.ExeSqlError"
 //  INTERNALERROR_INTERNALSERVICEERRORERR = "InternalError.InternalServiceErrorErr"
 //  INTERNALERROR_JSONERROR = "InternalError.JSONError"
@@ -3894,6 +3914,10 @@ func NewDescribeProxyConnectionPoolConfResponse() (response *DescribeProxyConnec
 }
 
 // DescribeProxyConnectionPoolConf
+// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
+//
+// 
+//
 // This API is used to query the connection pool configuration of database proxy.
 //
 // error code that may be returned:
@@ -3904,6 +3928,10 @@ func (c *Client) DescribeProxyConnectionPoolConf(request *DescribeProxyConnectio
 }
 
 // DescribeProxyConnectionPoolConf
+// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
+//
+// 
+//
 // This API is used to query the connection pool configuration of database proxy.
 //
 // error code that may be returned:
@@ -4650,6 +4678,7 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
 //
 // error code that may be returned:
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
 //  INTERNALERROR_FTPERROR = "InternalError.FtpError"
@@ -4668,6 +4697,7 @@ func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *Describ
 //
 // error code that may be returned:
 //  CDBERROR = "CdbError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
 //  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
 //  INTERNALERROR_DESERROR = "InternalError.DesError"
 //  INTERNALERROR_FTPERROR = "InternalError.FtpError"
@@ -5674,6 +5704,10 @@ func NewModifyCDBProxyConnectionPoolResponse() (response *ModifyCDBProxyConnecti
 }
 
 // ModifyCDBProxyConnectionPool
+// 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
+//
+// 
+//
 // This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
 //
 // error code that may be returned:
@@ -5684,6 +5718,10 @@ func (c *Client) ModifyCDBProxyConnectionPool(request *ModifyCDBProxyConnectionP
 }
 
 // ModifyCDBProxyConnectionPool
+// 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
+//
+// 
+//
 // This API is used to configure the connection pool of database proxy. You can use the `DescribeProxyConnectionPoolConf` API to query the supported connection pool configurations.
 //
 // error code that may be returned:
@@ -5724,6 +5762,10 @@ func NewModifyCDBProxyDescResponse() (response *ModifyCDBProxyDescResponse) {
 }
 
 // ModifyCDBProxyDesc
+// 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
+//
+// 
+//
 // This API is used to modify the description of database proxy.
 //
 // error code that may be returned:
@@ -5733,6 +5775,10 @@ func (c *Client) ModifyCDBProxyDesc(request *ModifyCDBProxyDescRequest) (respons
 }
 
 // ModifyCDBProxyDesc
+// 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
+//
+// 
+//
 // This API is used to modify the description of database proxy.
 //
 // error code that may be returned:
@@ -5772,6 +5818,10 @@ func NewModifyCDBProxyVipVPortResponse() (response *ModifyCDBProxyVipVPortRespon
 }
 
 // ModifyCDBProxyVipVPort
+// 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
+//
+// 
+//
 // This API is used to modify the VIP or port of database proxy.
 //
 // error code that may be returned:
@@ -5783,6 +5833,10 @@ func (c *Client) ModifyCDBProxyVipVPort(request *ModifyCDBProxyVipVPortRequest) 
 }
 
 // ModifyCDBProxyVipVPort
+// 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
+//
+// 
+//
 // This API is used to modify the VIP or port of database proxy.
 //
 // error code that may be returned:
@@ -7004,6 +7058,10 @@ func NewQueryCDBProxyResponse() (response *QueryCDBProxyResponse) {
 }
 
 // QueryCDBProxy
+// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
+//
+// 
+//
 // This API is used to query the proxy details.
 //
 // error code that may be returned:
@@ -7016,6 +7074,10 @@ func (c *Client) QueryCDBProxy(request *QueryCDBProxyRequest) (response *QueryCD
 }
 
 // QueryCDBProxy
+// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
+//
+// 
+//
 // This API is used to query the proxy details.
 //
 // error code that may be returned:

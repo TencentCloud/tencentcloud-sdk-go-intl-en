@@ -753,7 +753,7 @@ type Bucket struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Key *string `json:"Key,omitempty" name:"Key"`
 
-	// Number of keys in the statistic report
+	// Number of occurrences of the key value
 	Count *uint64 `json:"Count,omitempty" name:"Count"`
 }
 
@@ -11905,10 +11905,10 @@ type UpgradeDBInstanceRequestParams struct {
 	// The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
 
-	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
+	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, it will be subject to the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes), `2` (QuickChange preferred). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// QuickChange options. Valid values: `0` (common upgrade), `1` (QuickChange), `2` (QuickChange first). After QuickChange is enabled, the required resources will be checked. QuickChange will be performed only when the required resources support the feature; otherwise, an error message will be returned.
 	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
 
 	// Delay threshold. Value range: 1-10. Default value: `10`.
@@ -11919,6 +11919,9 @@ type UpgradeDBInstanceRequestParams struct {
 
 	// New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Processing logic of the intra-AZ read-only instance for cross-cluster migration. Valid values: `together` (intra-AZ read-only instances will be migrated to the target AZ with the source instance by default.), `severally` (intra-AZ read-only instances will maintain the original deployment mode and will not be migrated to the target AZ.).
+	RoTransType *string `json:"RoTransType,omitempty" name:"RoTransType"`
 }
 
 type UpgradeDBInstanceRequest struct {
@@ -11957,10 +11960,10 @@ type UpgradeDBInstanceRequest struct {
 	// The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
 	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
 
-	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the number of CPU cores will be automatically filled in according to the `Memory` value.
+	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, it will be subject to the `Memory` value.
 	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
 
-	// Whether to enable QuickChange. Valid values: `0` (no), `1` (yes), `2` (QuickChange preferred). After QuickChange is enabled, the required resources will be checked. QuickChange is performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// QuickChange options. Valid values: `0` (common upgrade), `1` (QuickChange), `2` (QuickChange first). After QuickChange is enabled, the required resources will be checked. QuickChange will be performed only when the required resources support the feature; otherwise, an error message will be returned.
 	FastUpgrade *int64 `json:"FastUpgrade,omitempty" name:"FastUpgrade"`
 
 	// Delay threshold. Value range: 1-10. Default value: `10`.
@@ -11971,6 +11974,9 @@ type UpgradeDBInstanceRequest struct {
 
 	// New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Processing logic of the intra-AZ read-only instance for cross-cluster migration. Valid values: `together` (intra-AZ read-only instances will be migrated to the target AZ with the source instance by default.), `severally` (intra-AZ read-only instances will maintain the original deployment mode and will not be migrated to the target AZ.).
+	RoTransType *string `json:"RoTransType,omitempty" name:"RoTransType"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -12001,6 +12007,7 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "MaxDelayTime")
 	delete(f, "CrossCluster")
 	delete(f, "ZoneId")
+	delete(f, "RoTransType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}

@@ -88,6 +88,31 @@ func (r *AddGroupMemberResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AnswerInfo struct {
+	// The username.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The answer. Bits are used to indicate the options chosen. For example, `0x1` indicates that option A is chosen; `0x11` indicates that A and B are chosen, and so on.
+	Answer *uint64 `json:"Answer,omitempty" name:"Answer"`
+
+	// The time used.
+	CostTime *uint64 `json:"CostTime,omitempty" name:"CostTime"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Whether the answer is correct. `1`: Correct; `0`: Incorrect.
+	IsCorrect *uint64 `json:"IsCorrect,omitempty" name:"IsCorrect"`
+}
+
+type AnswerStat struct {
+	// The answer. Bits are used to indicate the options chosen. For example, `0x1` indicates that option A is chosen; `0x11` indicates that A and B are chosen, and so on.
+	Answer *int64 `json:"Answer,omitempty" name:"Answer"`
+
+	// The number of users that submitted the answer.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
 type AppCustomContent struct {
 	// Multiple scenarios can be set for an application.
 	Scene *string `json:"Scene,omitempty" name:"Scene"`
@@ -889,6 +914,9 @@ type CreateRoomRequestParams struct {
 	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
+	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
+	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
+
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
@@ -897,6 +925,12 @@ type CreateRoomRequestParams struct {
 
 	// The user IDs of the teaching assistants. User IDs are returned by the user registration APIs. The users specified will have teaching assistant permissions in the room created.
 	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+
+	// The number of RTC users.
+	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
+
+	// The audience type.
+	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
 
 	// Recording layout
 	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
@@ -935,6 +969,9 @@ type CreateRoomRequest struct {
 	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
 	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
 
+	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
+	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
+
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
 	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
 
@@ -943,6 +980,12 @@ type CreateRoomRequest struct {
 
 	// The user IDs of the teaching assistants. User IDs are returned by the user registration APIs. The users specified will have teaching assistant permissions in the room created.
 	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+
+	// The number of RTC users.
+	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
+
+	// The audience type.
+	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
 
 	// Recording layout
 	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
@@ -972,9 +1015,12 @@ func (r *CreateRoomRequest) FromJsonString(s string) error {
 	delete(f, "SubType")
 	delete(f, "TeacherId")
 	delete(f, "AutoMic")
+	delete(f, "TurnOffMic")
 	delete(f, "AudioQuality")
 	delete(f, "DisableRecord")
 	delete(f, "Assistants")
+	delete(f, "RTCAudienceNumber")
+	delete(f, "AudienceType")
 	delete(f, "RecordLayout")
 	delete(f, "GroupId")
 	if len(f) > 0 {
@@ -1429,6 +1475,81 @@ func (r *DeleteRoomResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAnswerListRequestParams struct {
+	// The question ID.
+	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
+
+	// 1
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeAnswerListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The question ID.
+	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
+
+	// 1
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeAnswerListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAnswerListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "QuestionId")
+	delete(f, "Page")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAnswerListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAnswerListResponseParams struct {
+	// The total number of answers.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// A list of the answers.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnswerInfo []*AnswerInfo `json:"AnswerInfo,omitempty" name:"AnswerInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAnswerListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAnswerListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAnswerListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAnswerListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCurrentMemberListRequestParams struct {
 	// The room ID.
 	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
@@ -1533,7 +1654,7 @@ func (r *DescribeDeveloperRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDeveloperResponseParams struct {
-
+	// The developer ID.
 	DeveloperId *string `json:"DeveloperId,omitempty" name:"DeveloperId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1998,6 +2119,81 @@ func (r *DescribeGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeQuestionListRequestParams struct {
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeQuestionListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeQuestionListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQuestionListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoomId")
+	delete(f, "Page")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeQuestionListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeQuestionListResponseParams struct {
+	// The total number of quiz questions.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// A list of the questions.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QuestionInfo []*QuestionInfo `json:"QuestionInfo,omitempty" name:"QuestionInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeQuestionListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeQuestionListResponseParams `json:"Response"`
+}
+
+func (r *DescribeQuestionListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQuestionListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRoomRequestParams struct {
 	// Room ID	
 	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
@@ -2259,6 +2455,86 @@ func (r *DescribeSdkAppIdUsersResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSdkAppIdUsersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSupervisorsRequestParams struct {
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The maximum number of records per page. The maximum value allowed is 100, and the default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+}
+
+type DescribeSupervisorsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The maximum number of records per page. The maximum value allowed is 100, and the default value is 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+}
+
+func (r *DescribeSupervisorsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSupervisorsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Limit")
+	delete(f, "Page")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSupervisorsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSupervisorsResponseParams struct {
+	// The total number of spectators.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The current page number.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// The number of records on the current page.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// A list of the spectators.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSupervisorsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSupervisorsResponseParams `json:"Response"`
+}
+
+func (r *DescribeSupervisorsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSupervisorsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2569,6 +2845,94 @@ func (r *GetRoomMessageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetRoomMessageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetRoomsRequestParams struct {
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time. The default start time is 30 minutes before the current time.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. The default end time is 30 minutes after the current time.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The page to return records from. Pagination starts from 1.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// The number of records per page. The default is 10.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type GetRoomsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time. The default start time is 30 minutes before the current time.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time. The default end time is 30 minutes after the current time.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The page to return records from. Pagination starts from 1.
+	Page *uint64 `json:"Page,omitempty" name:"Page"`
+
+	// The number of records per page. The default is 10.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *GetRoomsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRoomsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Page")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetRoomsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetRoomsResponseParams struct {
+	// The total number of rooms.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The room list.
+	Rooms []*RoomItem `json:"Rooms,omitempty" name:"Rooms"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetRoomsResponse struct {
+	*tchttp.BaseResponse
+	Response *GetRoomsResponseParams `json:"Response"`
+}
+
+func (r *GetRoomsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetRoomsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3233,6 +3597,24 @@ func (r *ModifyUserProfileResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type QuestionInfo struct {
+	// The question ID.
+	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
+
+	// The question.
+	QuestionContent *string `json:"QuestionContent,omitempty" name:"QuestionContent"`
+
+	// The time limit for the question. If you set this parameter to `0`, there will not be a time limit.
+	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+
+	// The correct answer. Bits are used to indicate the options that should be chosen. For example, `0x1` indicates option A; `0x11` indicates A and B, and so on.
+	CorrectAnswer *int64 `json:"CorrectAnswer,omitempty" name:"CorrectAnswer"`
+
+	// The statistics for each type of answer.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnswerStats []*AnswerStat `json:"AnswerStats,omitempty" name:"AnswerStats"`
+}
+
 // Predefined struct for user
 type RegisterUserRequestParams struct {
 	// LCIC SdkAppId	
@@ -3362,6 +3744,54 @@ type RoomInfo struct {
 
 	// The ID of the group to bind. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+}
+
+type RoomItem struct {
+	// The name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The room ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The room status. `0`: Not started; `1`: Started; `2`: Ended.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The scheduled start time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The scheduled end time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The actual start time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RealStartTime *uint64 `json:"RealStartTime,omitempty" name:"RealStartTime"`
+
+	// The actual end time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RealEndTime *uint64 `json:"RealEndTime,omitempty" name:"RealEndTime"`
+
+	// The resolution. `1`: SD.
+	// `2`: HD
+	// `3`: FHD
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+
+	// The maximum number of mic-on users allowed.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxRTCMember *uint64 `json:"MaxRTCMember,omitempty" name:"MaxRTCMember"`
+
+	// The URL of the room's recording. This parameter has been deprecated. Please use `RecordUrl` instead.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplayUrl *string `json:"ReplayUrl,omitempty" name:"ReplayUrl"`
+
+	// The recording URL (HTTPS), which is generated only after a room ends.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecordUrl *string `json:"RecordUrl,omitempty" name:"RecordUrl"`
 }
 
 // Predefined struct for user
