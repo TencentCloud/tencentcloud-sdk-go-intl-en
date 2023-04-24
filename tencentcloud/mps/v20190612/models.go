@@ -111,12 +111,15 @@ type Activity struct {
 	// <li>`action-image-sprite`: Image sprite generation.</li>
 	// <li>`action-snapshotByTimeOffset`: Time point screencapturing.</li>
 	// <li>`action-adaptive-substream`: Adaptive bitrate streaming.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ActivityType *string `json:"ActivityType,omitempty" name:"ActivityType"`
 
 	// The indexes of the subsequent actions.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReardriveIndex []*int64 `json:"ReardriveIndex,omitempty" name:"ReardriveIndex"`
 
 	// The parameters of a subtask.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ActivityPara *ActivityPara `json:"ActivityPara,omitempty" name:"ActivityPara"`
 }
 
@@ -317,6 +320,10 @@ type AiAnalysisResult struct {
 
 	// Query result of intelligent frame-specific tagging task in video content analysis, which is valid if task type is `FrameTag`.
 	FrameTagTask *AiAnalysisTaskFrameTagResult `json:"FrameTagTask,omitempty" name:"FrameTagTask"`
+
+	// The result of a highlight generation task. This parameter is valid if `Type` is `Highlight`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HighlightTask *AiAnalysisTaskHighlightResult `json:"HighlightTask,omitempty" name:"HighlightTask"`
 }
 
 type AiAnalysisTaskClassificationInput struct {
@@ -410,6 +417,37 @@ type AiAnalysisTaskFrameTagResult struct {
 
 	// Output of intelligent frame-specific tagging task.
 	Output *AiAnalysisTaskFrameTagOutput `json:"Output,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskHighlightInput struct {
+	// The ID of the intelligent highlight generation template.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskHighlightOutput struct {
+	// A list of the highlight segments generated.
+	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitempty" name:"HighlightSet"`
+
+	// The storage location of the highlight segments.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
+}
+
+type AiAnalysisTaskHighlightResult struct {
+	// The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Error code. `0`: The task succeeded; other values: The task failed.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of the intelligent highlight generation task.
+	Input *AiAnalysisTaskHighlightInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of the intelligent highlight generation task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskHighlightOutput `json:"Output,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskInput struct {
@@ -514,6 +552,16 @@ type AiContentReviewResult struct {
 type AiContentReviewTaskInput struct {
 	// Video content audit template ID.
 	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type AiQualityControlTaskInput struct {
+	// The ID of the quality control template.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Definition *uint64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The channel extension parameter, which is a serialized JSON string.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChannelExtPara *string `json:"ChannelExtPara,omitempty" name:"ChannelExtPara"`
 }
 
 type AiRecognitionResult struct {
@@ -2764,7 +2812,8 @@ type CreateScheduleRequestParams struct {
 	// The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the output file, such as `/movie/201907/`. If you do not specify this parameter, the directory of the source file will be used.
+	// The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+	// If you do not specify this, the file will be saved to the trigger directory.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
 	// The notification configuration. If you do not specify this parameter, notifications will not be sent.
@@ -2786,7 +2835,8 @@ type CreateScheduleRequest struct {
 	// The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the output file, such as `/movie/201907/`. If you do not specify this parameter, the directory of the source file will be used.
+	// The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+	// If you do not specify this, the file will be saved to the trigger directory.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
 	// The notification configuration. If you do not specify this parameter, notifications will not be sent.
@@ -3314,7 +3364,8 @@ type CreateWorkflowRequestParams struct {
 	// The location to save the output file of media processing. If this parameter is left empty, the storage location in `Trigger` will be inherited.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the output file will be saved to the same directory where the source file is located.
+	// The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+	// If you do not specify this, the file will be saved to the trigger directory.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
 	// The media processing parameters to use.
@@ -3348,7 +3399,8 @@ type CreateWorkflowRequest struct {
 	// The location to save the output file of media processing. If this parameter is left empty, the storage location in `Trigger` will be inherited.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the output file will be saved to the same directory where the source file is located.
+	// The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+	// If you do not specify this, the file will be saved to the trigger directory.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
 	// The media processing parameters to use.
@@ -4941,10 +4993,16 @@ type DescribeSchedulesRequestParams struct {
 	// The IDs of the schemes to query. Array length limit: 100.
 	ScheduleIds []*int64 `json:"ScheduleIds,omitempty" name:"ScheduleIds"`
 
+	// The trigger type. Valid values:
+	// <li>`CosFileUpload`: The scheme is triggered when a file is uploaded to Tencent Cloud Object Storage (COS).</li>
+	// <li>`AwsS3FileUpload`: The scheme is triggered when a file is uploaded to AWS S3.</li>
+	// If you do not specify this parameter or leave it empty, all schemes will be returned regardless of the trigger type.
+	TriggerType *string `json:"TriggerType,omitempty" name:"TriggerType"`
+
 	// The scheme status. Valid values:
 	// <li>`Enabled`</li>
 	// <li>`Disabled`</li>
-	// If you do not specify this parameter, schemes in both statuses will be returned.
+	// If you do not specify this parameter, all schemes will be returned regardless of the status.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// The pagination offset. Default value: 0.
@@ -4960,10 +5018,16 @@ type DescribeSchedulesRequest struct {
 	// The IDs of the schemes to query. Array length limit: 100.
 	ScheduleIds []*int64 `json:"ScheduleIds,omitempty" name:"ScheduleIds"`
 
+	// The trigger type. Valid values:
+	// <li>`CosFileUpload`: The scheme is triggered when a file is uploaded to Tencent Cloud Object Storage (COS).</li>
+	// <li>`AwsS3FileUpload`: The scheme is triggered when a file is uploaded to AWS S3.</li>
+	// If you do not specify this parameter or leave it empty, all schemes will be returned regardless of the trigger type.
+	TriggerType *string `json:"TriggerType,omitempty" name:"TriggerType"`
+
 	// The scheme status. Valid values:
 	// <li>`Enabled`</li>
 	// <li>`Disabled`</li>
-	// If you do not specify this parameter, schemes in both statuses will be returned.
+	// If you do not specify this parameter, all schemes will be returned regardless of the status.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// The pagination offset. Default value: 0.
@@ -4986,6 +5050,7 @@ func (r *DescribeSchedulesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ScheduleIds")
+	delete(f, "TriggerType")
 	delete(f, "Status")
 	delete(f, "Offset")
 	delete(f, "Limit")
@@ -6263,6 +6328,17 @@ type HeadTailParameter struct {
 	TailSet []*MediaInputInfo `json:"TailSet,omitempty" name:"TailSet"`
 }
 
+type HighlightSegmentItem struct {
+	// The confidence score.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The start time offset of the segment.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// The end time offset of the segment.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+}
+
 type ImageQualityEnhanceConfig struct {
 	// Whether to enable the feature. Valid values:
 	// <li>ON</li>
@@ -6566,11 +6642,11 @@ type LiveStreamAiReviewResultInfo struct {
 }
 
 type LiveStreamAiReviewResultItem struct {
-	// The type of the moderation result. Valid values:
+	// The type of moderation result. Valid values:
 	// <li>ImagePorn</li>
 	// <li>ImageTerrorism</li>
 	// <li>ImagePolitical</li>
-	// <li>PornVoice (pornographic content in speech)</li>
+	// <li>VoicePorn</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Result of porn information detection in image, which is valid when `Type` is `ImagePorn`.
@@ -6582,7 +6658,7 @@ type LiveStreamAiReviewResultItem struct {
 	// The result of detecting sensitive information in images, which is valid if `Type` is `ImagePolitical`.
 	ImagePoliticalResultSet []*LiveStreamAiReviewImagePoliticalResult `json:"ImagePoliticalResultSet,omitempty" name:"ImagePoliticalResultSet"`
 
-	// Result of porn information detection in speech, which is valid when `Type` is `PornVoice`.
+	// The result for moderation of pornographic content in audio. This parameter is valid if `Type` is `VoicePorn`.
 	VoicePornResultSet []*LiveStreamAiReviewVoicePornResult `json:"VoicePornResultSet,omitempty" name:"VoicePornResultSet"`
 }
 
@@ -6882,6 +6958,23 @@ type MediaAiAnalysisFrameTagSegmentItem struct {
 
 	// List of tags in time period.
 	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitempty" name:"TagSet"`
+}
+
+type MediaAiAnalysisHighlightItem struct {
+	// The URL of the highlight segments.
+	HighlightPath *string `json:"HighlightPath,omitempty" name:"HighlightPath"`
+
+	// The URL of the thumbnail.
+	CovImgPath *string `json:"CovImgPath,omitempty" name:"CovImgPath"`
+
+	// The confidence score. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The duration of the highlights.
+	Duration *float64 `json:"Duration,omitempty" name:"Duration"`
+
+	// A list of the highlight segments.
+	SegmentSet []*HighlightSegmentItem `json:"SegmentSet,omitempty" name:"SegmentSet"`
 }
 
 type MediaAiAnalysisTagItem struct {
@@ -8443,7 +8536,7 @@ type ModifyScheduleRequestParams struct {
 	// The bucket to save the output file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the output file.
+	// The directory to save the media processing output file, which must start and end with `/`.
 	// Note: If this parameter is left empty, the current `OutputDir` value will be invalidated.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
@@ -8470,7 +8563,7 @@ type ModifyScheduleRequest struct {
 	// The bucket to save the output file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the output file.
+	// The directory to save the media processing output file, which must start and end with `/`.
 	// Note: If this parameter is left empty, the current `OutputDir` value will be invalidated.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
 
@@ -9100,6 +9193,10 @@ type OverrideTranscodeParameter struct {
 
 	// The subtitle settings.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitempty" name:"SubtitleTemplate"`
+
+	// The information of the external audio track to add.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AddonAudioStream []*MediaInputInfo `json:"AddonAudioStream,omitempty" name:"AddonAudioStream"`
 }
 
 // Predefined struct for user
@@ -9612,8 +9709,18 @@ type ProcessMediaRequestParams struct {
 	// The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be saved to the directory in `InputInfo`.
+	// The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+	// If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The scheme ID.
+	// Note 1: About `OutputStorage` and `OutputDir`
+	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
+	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
+	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+	// 
+	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 
 	// The media processing parameters to use.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
@@ -9627,6 +9734,9 @@ type ProcessMediaRequestParams struct {
 	// Type parameter of a video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
+	// The parameters of a quality control task.
+	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitempty" name:"AiQualityControlTask"`
+
 	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
 
@@ -9638,15 +9748,6 @@ type ProcessMediaRequestParams struct {
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
-
-	// The scheme ID.
-	// Note 1: About `OutputStorage` and `OutputDir`
-	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
-	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
-	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
-	// 
-	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
-	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 
 	// The task type.
 	// <li> `Online` (default): A task that is executed immediately.</li>
@@ -9663,8 +9764,18 @@ type ProcessMediaRequest struct {
 	// The storage location of the media processing output file. If this parameter is left empty, the storage location in `InputInfo` will be inherited.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitempty" name:"OutputStorage"`
 
-	// The directory to save the media processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be saved to the directory in `InputInfo`.
+	// The directory to save the media processing output file, which must start and end with `/`, such as `/movie/201907/`.
+	// If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
 	OutputDir *string `json:"OutputDir,omitempty" name:"OutputDir"`
+
+	// The scheme ID.
+	// Note 1: About `OutputStorage` and `OutputDir`
+	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
+	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
+	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+	// 
+	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 
 	// The media processing parameters to use.
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
@@ -9678,6 +9789,9 @@ type ProcessMediaRequest struct {
 	// Type parameter of a video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
 
+	// The parameters of a quality control task.
+	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitempty" name:"AiQualityControlTask"`
+
 	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitempty" name:"TaskNotifyConfig"`
 
@@ -9689,15 +9803,6 @@ type ProcessMediaRequest struct {
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
-
-	// The scheme ID.
-	// Note 1: About `OutputStorage` and `OutputDir`
-	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
-	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
-	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
-	// 
-	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
-	ScheduleId *int64 `json:"ScheduleId,omitempty" name:"ScheduleId"`
 
 	// The task type.
 	// <li> `Online` (default): A task that is executed immediately.</li>
@@ -9720,15 +9825,16 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "InputInfo")
 	delete(f, "OutputStorage")
 	delete(f, "OutputDir")
+	delete(f, "ScheduleId")
 	delete(f, "MediaProcessTask")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiAnalysisTask")
 	delete(f, "AiRecognitionTask")
+	delete(f, "AiQualityControlTask")
 	delete(f, "TaskNotifyConfig")
 	delete(f, "TasksPriority")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
-	delete(f, "ScheduleId")
 	delete(f, "TaskType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
@@ -9827,6 +9933,64 @@ type ProhibitedOcrReviewTemplateInfoForUpdate struct {
 
 	// Threshold score for human audit. If this score is reached or exceeded during intelligent audit, human audit will be considered necessary. If this parameter is left empty, 75 will be used by default. Value range: 0–100.
 	ReviewConfidence *int64 `json:"ReviewConfidence,omitempty" name:"ReviewConfidence"`
+}
+
+type QualityControlData struct {
+	// Whether there is an audio track. `true` indicates that there isn't.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoAudio *bool `json:"NoAudio,omitempty" name:"NoAudio"`
+
+	// Whether there is a video track. `true` indicates that there isn't.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoVideo *bool `json:"NoVideo,omitempty" name:"NoVideo"`
+
+	// The no-reference video quality score. Value range: 0-100.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityEvaluationScore *int64 `json:"QualityEvaluationScore,omitempty" name:"QualityEvaluationScore"`
+
+	// The issues detected by quality control.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityControlResultSet []*QualityControlResult `json:"QualityControlResultSet,omitempty" name:"QualityControlResultSet"`
+}
+
+type QualityControlItem struct {
+	// The confidence score. Value range: 0-100.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The start timestamp (second) of the segment.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// The end timestamp (second) of the segment.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// The coordinates (px) of the top left and bottom right corner.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitempty" name:"AreaCoordSet"`
+}
+
+type QualityControlResult struct {
+	// The issue type. Valid values:
+	// `Jitter`
+	// `Blur`
+	// `LowLighting`
+	// `HighLighting` (overexposure)
+	// `CrashScreen` (video corruption)
+	// `BlackWhiteEdge`
+	// `SolidColorScreen` (blank screen)
+	// `Noise`
+	// `Mosaic` (pixelation)
+	// `QRCode`
+	// `AppletCode` (Weixin Mini Program code)
+	// `BarCode`
+	// `LowVoice`
+	// `HighVoice`
+	// `NoVoice`
+	// `LowEvaluation` (low no-reference video quality score)
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The information of a checked segment in quality control.
+	QualityControlItems []*QualityControlItem `json:"QualityControlItems,omitempty" name:"QualityControlItems"`
 }
 
 type RawImageWatermarkInput struct {
@@ -10161,6 +10325,27 @@ type ScheduleAnalysisTaskResult struct {
 	Output []*AiAnalysisResult `json:"Output,omitempty" name:"Output"`
 }
 
+type ScheduleQualityControlTaskResult struct {
+	// The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://www.tencentcloud.com/document/product/1041/40249).
+	ErrCodeExt *string `json:"ErrCodeExt,omitempty" name:"ErrCodeExt"`
+
+	// The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// The error message.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The input of the quality control task.
+	Input *AiQualityControlTaskInput `json:"Input,omitempty" name:"Input"`
+
+	// The output of the quality control task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *QualityControlData `json:"Output,omitempty" name:"Output"`
+}
+
 type ScheduleRecognitionTaskResult struct {
 	// The task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -10211,6 +10396,12 @@ type ScheduleTask struct {
 	// <li>PROCESSING</li>
 	// <li>FINISH</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// If the value returned is not 0, there was a source error. If 0 is returned, refer to the error codes of the corresponding task type.
+	ErrCode *int64 `json:"ErrCode,omitempty" name:"ErrCode"`
+
+	// If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
+	Message *string `json:"Message,omitempty" name:"Message"`
 
 	// The information of the file processed.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -11292,6 +11483,10 @@ type WorkflowTask struct {
 
 	// Execution status and result of a video content recognition task.
 	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitempty" name:"AiRecognitionResultSet"`
+
+	// The execution status and result of a quality control task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AiQualityControlTaskResult *ScheduleQualityControlTaskResult `json:"AiQualityControlTaskResult,omitempty" name:"AiQualityControlTaskResult"`
 }
 
 type WorkflowTrigger struct {

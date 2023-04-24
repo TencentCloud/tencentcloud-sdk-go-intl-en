@@ -2655,7 +2655,7 @@ type ConfirmEventsRequestParams struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -2669,7 +2669,7 @@ type ConfirmEventsRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 }
 
@@ -3592,7 +3592,7 @@ func (r *CreateContentReviewTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateImageProcessingTemplateRequestParams struct {
 	// An array of image processing operations. The operations will be performed in the specified order.
-	// <li>Length limit: 3.</li>
+	// <li>Length limit: 10.</li>
 	Operations []*ImageOperation `json:"Operations,omitempty" name:"Operations"`
 
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
@@ -3609,7 +3609,7 @@ type CreateImageProcessingTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// An array of image processing operations. The operations will be performed in the specified order.
-	// <li>Length limit: 3.</li>
+	// <li>Length limit: 10.</li>
 	Operations []*ImageOperation `json:"Operations,omitempty" name:"Operations"`
 
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
@@ -4095,6 +4095,138 @@ func (r *CreateProcedureTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateProcedureTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRebuildMediaTemplateRequestParams struct {
+	// The output container format. Valid values: `mp4`, `flv`, `hls`.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The remaster template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The video remaster parameters.
+	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitempty" name:"RebuildVideoInfo"`
+
+	// The audio remaster parameters.
+	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitempty" name:"RebuildAudioInfo"`
+
+	// The output video parameters.
+	TargetVideoInfo *RebuildMediaTargetVideoStream `json:"TargetVideoInfo,omitempty" name:"TargetVideoInfo"`
+
+	// The output audio parameters.
+	TargetAudioInfo *RebuildMediaTargetAudioStream `json:"TargetAudioInfo,omitempty" name:"TargetAudioInfo"`
+
+	// Whether to remove video data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	// Default value: 0.
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	// Default value: 0.
+	RemoveAudio *string `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+}
+
+type CreateRebuildMediaTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The output container format. Valid values: `mp4`, `flv`, `hls`.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The remaster template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The video remaster parameters.
+	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitempty" name:"RebuildVideoInfo"`
+
+	// The audio remaster parameters.
+	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitempty" name:"RebuildAudioInfo"`
+
+	// The output video parameters.
+	TargetVideoInfo *RebuildMediaTargetVideoStream `json:"TargetVideoInfo,omitempty" name:"TargetVideoInfo"`
+
+	// The output audio parameters.
+	TargetAudioInfo *RebuildMediaTargetAudioStream `json:"TargetAudioInfo,omitempty" name:"TargetAudioInfo"`
+
+	// Whether to remove video data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	// Default value: 0.
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	// Default value: 0.
+	RemoveAudio *string `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+}
+
+func (r *CreateRebuildMediaTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRebuildMediaTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Container")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "RebuildVideoInfo")
+	delete(f, "RebuildAudioInfo")
+	delete(f, "TargetVideoInfo")
+	delete(f, "TargetAudioInfo")
+	delete(f, "RemoveVideo")
+	delete(f, "RemoveAudio")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRebuildMediaTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRebuildMediaTemplateResponseParams struct {
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateRebuildMediaTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRebuildMediaTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateRebuildMediaTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRebuildMediaTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5995,6 +6127,67 @@ func (r *DeleteProcedureTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteProcedureTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRebuildMediaTemplateRequestParams struct {
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *int64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type DeleteRebuildMediaTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *int64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DeleteRebuildMediaTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRebuildMediaTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRebuildMediaTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRebuildMediaTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteRebuildMediaTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRebuildMediaTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteRebuildMediaTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRebuildMediaTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8356,17 +8549,18 @@ type DescribeMediaProcessUsageDataRequestParams struct {
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// The type of media processing task. Valid values:
-	// <li>Transcoding: General transcoding</li>
-	// <li>Transcoding-TESHD: Top Speed Codec transcoding</li>
-	// <li>Editing: Video editing</li>
-	// <li>Editing-TESHD: Top Speed Codec editing</li>
-	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
-	// <li>ContentAudit: Content moderation</li>
-	// <li> ContentRecognition: Content recognition</li>
-	// <li>RemoveWatermark: Watermark removal</li>
-	// <li> ExtractTraceWatermark: Digital watermark extraction</li>
-	// <li> AddTraceWatermark: Digital watermarking</li>
-	// <li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+	// <li>`Transcoding`: General transcoding</li>
+	// <li>`Transcoding-TESHD`: Top Speed Codec transcoding</li>
+	// <li>`Editing`: Video editing</li>
+	// <li>`Editing-TESHD`: Top Speed Codec editing</li>
+	// <li>`AdaptiveBitrateStreaming`: Adaptive bitrate streaming</li>
+	// <li>`ContentAudit`: Content moderation</li>
+	// <li>`ContentRecognition`: Content recognition</li>
+	// <li>`RemoveWatermark`: Watermark removal</li>
+	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+	// <li>`AddTraceWatermark`: Digital watermarking</li>
+	// <li>`RebuildMedia`: Remaster</li>
+	// <li>`Transcode` Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -8383,17 +8577,18 @@ type DescribeMediaProcessUsageDataRequest struct {
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
 	// The type of media processing task. Valid values:
-	// <li>Transcoding: General transcoding</li>
-	// <li>Transcoding-TESHD: Top Speed Codec transcoding</li>
-	// <li>Editing: Video editing</li>
-	// <li>Editing-TESHD: Top Speed Codec editing</li>
-	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
-	// <li>ContentAudit: Content moderation</li>
-	// <li> ContentRecognition: Content recognition</li>
-	// <li>RemoveWatermark: Watermark removal</li>
-	// <li> ExtractTraceWatermark: Digital watermark extraction</li>
-	// <li> AddTraceWatermark: Digital watermarking</li>
-	// <li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+	// <li>`Transcoding`: General transcoding</li>
+	// <li>`Transcoding-TESHD`: Top Speed Codec transcoding</li>
+	// <li>`Editing`: Video editing</li>
+	// <li>`Editing-TESHD`: Top Speed Codec editing</li>
+	// <li>`AdaptiveBitrateStreaming`: Adaptive bitrate streaming</li>
+	// <li>`ContentAudit`: Content moderation</li>
+	// <li>`ContentRecognition`: Content recognition</li>
+	// <li>`RemoveWatermark`: Watermark removal</li>
+	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+	// <li>`AddTraceWatermark`: Digital watermarking</li>
+	// <li>`RebuildMedia`: Remaster</li>
+	// <li>`Transcode` Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
@@ -8645,6 +8840,98 @@ func (r *DescribeProcedureTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeProcedureTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRebuildMediaTemplatesRequestParams struct {
+	// The remaster template IDs.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *int64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The template type. Valid values:
+	// <li>`Preset`</li>
+	// <li>`Custom`</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of records to return. Default value: 10. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeRebuildMediaTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The remaster template IDs.
+	Definitions []*int64 `json:"Definitions,omitempty" name:"Definitions"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *int64 `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The template type. Valid values:
+	// <li>`Preset`</li>
+	// <li>`Custom`</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of records to return. Default value: 10. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRebuildMediaTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRebuildMediaTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definitions")
+	delete(f, "SubAppId")
+	delete(f, "Type")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRebuildMediaTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRebuildMediaTemplatesResponseParams struct {
+	// The total number of records that meet the conditions.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The details of the remaster templates.
+	RebuildMediaTemplateSet []*RebuildMediaTemplate `json:"RebuildMediaTemplateSet,omitempty" name:"RebuildMediaTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRebuildMediaTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRebuildMediaTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRebuildMediaTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRebuildMediaTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11015,6 +11302,18 @@ type HighlightsConfigureInfoForUpdate struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type ImageBlur struct {
+	// The blur type. Valid values:
+	// <li>`Gaussian`</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The radius of the blur. Value range: 1-50. This parameter is valid if `Type` is `Gaussian`.
+	Radius *int64 `json:"Radius,omitempty" name:"Radius"`
+
+	// The standard deviation of the Gaussian distribution, which must be greater than 0. This parameter is valid if `Type` is `Gaussian`.
+	Sigma *int64 `json:"Sigma,omitempty" name:"Sigma"`
+}
+
 type ImageCenterCut struct {
 	// The cropping type. Valid values:
 	// <li>Circle: Cropping to circle. `Radius` specifies the radius of the output image.</li>
@@ -11042,6 +11341,9 @@ type ImageOperation struct {
 
 	// The cropping details. This parameter is valid only if `Type` is `CenterCut`.
 	CenterCut *ImageCenterCut `json:"CenterCut,omitempty" name:"CenterCut"`
+
+	// Image blurring. This parameter is valid only if `Type` is `Blur`.
+	Blur *ImageBlur `json:"Blur,omitempty" name:"Blur"`
 }
 
 type ImageProcessingTemplate struct {
@@ -13984,6 +14286,138 @@ func (r *ModifyPersonSampleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyRebuildMediaTemplateRequestParams struct {
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *string `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The remaster template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The video remaster parameters.
+	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitempty" name:"RebuildVideoInfo"`
+
+	// The audio remaster parameters.
+	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitempty" name:"RebuildAudioInfo"`
+
+	// The output video parameters.
+	TargetVideoInfo *RebuildMediaTargetVideoStream `json:"TargetVideoInfo,omitempty" name:"TargetVideoInfo"`
+
+	// The output audio parameters.
+	TargetAudioInfo *RebuildMediaTargetAudioStream `json:"TargetAudioInfo,omitempty" name:"TargetAudioInfo"`
+
+	// The output container format. Valid values: `mp4`, `flv`, `hls`.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// Whether to remove video data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+}
+
+type ModifyRebuildMediaTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *string `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The remaster template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The video remaster parameters.
+	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitempty" name:"RebuildVideoInfo"`
+
+	// The audio remaster parameters.
+	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitempty" name:"RebuildAudioInfo"`
+
+	// The output video parameters.
+	TargetVideoInfo *RebuildMediaTargetVideoStream `json:"TargetVideoInfo,omitempty" name:"TargetVideoInfo"`
+
+	// The output audio parameters.
+	TargetAudioInfo *RebuildMediaTargetAudioStream `json:"TargetAudioInfo,omitempty" name:"TargetAudioInfo"`
+
+	// The output container format. Valid values: `mp4`, `flv`, `hls`.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// Whether to remove video data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+}
+
+func (r *ModifyRebuildMediaTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRebuildMediaTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "RebuildVideoInfo")
+	delete(f, "RebuildAudioInfo")
+	delete(f, "TargetVideoInfo")
+	delete(f, "TargetAudioInfo")
+	delete(f, "Container")
+	delete(f, "RemoveVideo")
+	delete(f, "RemoveAudio")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRebuildMediaTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRebuildMediaTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRebuildMediaTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRebuildMediaTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyRebuildMediaTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRebuildMediaTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyReviewTemplateRequestParams struct {
 
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
@@ -16480,6 +16914,10 @@ type PullUploadRequestParams struct {
 	// For more information about supported extensions, see [Media types](https://intl.cloud.tencent.com/document/product/266/9760#media-types). Please make sure the URL is accessible.
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
 
+	// The file format (extension). For information about supported extensions, see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+	// If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
+	MediaType *string `json:"MediaType,omitempty" name:"MediaType"`
+
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
 
@@ -16522,6 +16960,10 @@ type PullUploadRequest struct {
 	// The URL of the media to pull, which can be in HLS format, but not DASH format.
 	// For more information about supported extensions, see [Media types](https://intl.cloud.tencent.com/document/product/266/9760#media-types). Please make sure the URL is accessible.
 	MediaUrl *string `json:"MediaUrl,omitempty" name:"MediaUrl"`
+
+	// The file format (extension). For information about supported extensions, see [Media Types](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
+	// If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
+	MediaType *string `json:"MediaType,omitempty" name:"MediaType"`
 
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
 	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
@@ -16572,6 +17014,7 @@ func (r *PullUploadRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "MediaUrl")
+	delete(f, "MediaType")
 	delete(f, "SubAppId")
 	delete(f, "MediaName")
 	delete(f, "CoverUrl")
@@ -16720,6 +17163,144 @@ func (r *PushUrlCacheResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *PushUrlCacheResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RebuildAudioInfo struct {
+	// The noise removal parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AudioDenoiseInfo *AudioDenoiseInfo `json:"AudioDenoiseInfo,omitempty" name:"AudioDenoiseInfo"`
+}
+
+// Predefined struct for user
+type RebuildMediaByTemplateRequestParams struct {
+	// The file ID.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *string `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// The parameters for the output file of remastering.
+	OutputConfig *RebuildMediaOutputConfig `json:"OutputConfig,omitempty" name:"OutputConfig"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+type RebuildMediaByTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The file ID.
+	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *string `json:"SubAppId,omitempty" name:"SubAppId"`
+
+	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitempty" name:"StartTimeOffset"`
+
+	// The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
+
+	// The parameters for the output file of remastering.
+	OutputConfig *RebuildMediaOutputConfig `json:"OutputConfig,omitempty" name:"OutputConfig"`
+
+	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The source context, which is used to pass through user request information. The `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
+
+	// The task priority, which can be a value from -10 to 10. The higher the value, the higher the priority. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
+
+	// A reserved parameter.
+	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
+}
+
+func (r *RebuildMediaByTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RebuildMediaByTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	delete(f, "StartTimeOffset")
+	delete(f, "EndTimeOffset")
+	delete(f, "OutputConfig")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RebuildMediaByTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RebuildMediaByTemplateResponseParams struct {
+	// The ID of the remaster task. You need to provide this ID to query the task status.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RebuildMediaByTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *RebuildMediaByTemplateResponseParams `json:"Response"`
+}
+
+func (r *RebuildMediaByTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RebuildMediaByTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RebuildMediaOutputConfig struct {
+	// The filename. This parameter can contain up to 64 characters, and will be generated by the system if it is left empty.
+	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
+
+	// The ID of the file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the "Other" category.</li>
+	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+
+	// The expiration time of the output file, in [ISO date format](https://www.tencentcloud.com/document/product/266/11732?lang=en&pg=). The file will be deleted after the specified expiration time. By default, the file will never expire.
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
 // Predefined struct for user
@@ -17102,6 +17683,9 @@ type RebuildMediaTaskInput struct {
 	// The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 
+	// The ID of the remaster template.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
 	// The video quality remastering parameters.
 	RepairInfo *RepairInfo `json:"RepairInfo,omitempty" name:"RepairInfo"`
 
@@ -17161,6 +17745,105 @@ type RebuildMediaTaskOutput struct {
 
 	// The expiration time of the output file, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=). The file will be deleted after the specified expiration time. By default, the file will never expire.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+}
+
+type RebuildMediaTemplate struct {
+	// The remaster template ID.
+	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+
+	// The template type. Valid values:
+	// <li>`Preset`</li>
+	// <li>`Custom`</li>
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The remaster template name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The template description.
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+
+	// The video remaster parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitempty" name:"RebuildVideoInfo"`
+
+	// The audio remaster parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitempty" name:"RebuildAudioInfo"`
+
+	// The output video parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TargetVideoInfo *RebuildMediaTargetVideoStream `json:"TargetVideoInfo,omitempty" name:"TargetVideoInfo"`
+
+	// The output audio parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TargetAudioInfo *RebuildMediaTargetAudioStream `json:"TargetAudioInfo,omitempty" name:"TargetAudioInfo"`
+
+	// The output file format. Valid values: `mp4` (default), `hls`.
+	Container *string `json:"Container,omitempty" name:"Container"`
+
+	// Whether to remove video data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	// Default value: 0.
+	RemoveVideo *int64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>`0`: No</li>
+	// <li>`1`: Yes</li>
+	// Default value: 0.
+	RemoveAudio *int64 `json:"RemoveAudio,omitempty" name:"RemoveAudio"`
+
+	// The template creation time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The last updated time of the template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type RebuildVideoInfo struct {
+	// The image restoration parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RepairInfo *RepairInfo `json:"RepairInfo,omitempty" name:"RepairInfo"`
+
+	// The smart frame interpolation parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoFrameInterpolationInfo *VideoFrameInterpolationInfo `json:"VideoFrameInterpolationInfo,omitempty" name:"VideoFrameInterpolationInfo"`
+
+	// The super resolution parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SuperResolutionInfo *SuperResolutionInfo `json:"SuperResolutionInfo,omitempty" name:"SuperResolutionInfo"`
+
+	// The high dynamic range (HDR) configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HDRInfo *HDRInfo `json:"HDRInfo,omitempty" name:"HDRInfo"`
+
+	// The image noise removal parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoDenoiseInfo *VideoDenoiseInfo `json:"VideoDenoiseInfo,omitempty" name:"VideoDenoiseInfo"`
+
+	// The color enhancement parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ColorInfo *ColorEnhanceInfo `json:"ColorInfo,omitempty" name:"ColorInfo"`
+
+	// The detail enhancement parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SharpInfo *SharpEnhanceInfo `json:"SharpInfo,omitempty" name:"SharpInfo"`
+
+	// The face enhancement parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FaceInfo *FaceEnhanceInfo `json:"FaceInfo,omitempty" name:"FaceInfo"`
+
+	// The low-light enhancement parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LowLightInfo *LowLightEnhanceInfo `json:"LowLightInfo,omitempty" name:"LowLightInfo"`
+
+	// The banding removal parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScratchRepairInfo *ScratchRepairInfo `json:"ScratchRepairInfo,omitempty" name:"ScratchRepairInfo"`
+
+	// The artifact removal parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ArtifactRepairInfo *ArtifactRepairInfo `json:"ArtifactRepairInfo,omitempty" name:"ArtifactRepairInfo"`
 }
 
 type ReduceMediaBitrateAdaptiveDynamicStreamingResult struct {
@@ -18399,10 +19082,17 @@ type SearchMediaRequestParams struct {
 	// <li>Array length limit: 10</li>
 	MediaTypes []*string `json:"MediaTypes,omitempty" name:"MediaTypes"`
 
-
+	// The file statuses.
+	// <li>`Normal`</li>
+	// <li>`SystemForbidden` (blocked by VOD)</li>
+	// <li>`Forbidden` (blocked by you)</li>
 	Status []*string `json:"Status,omitempty" name:"Status"`
 
-
+	// The types of moderation result.
+	// <li>`pass`</li>
+	// <li>`review` (the content may be non-compliant and needs to be reviewed)</li>
+	// <li>`block` (the content is non-compliant and should be blocked)</li>
+	// <li>`notModerated` (the file hasn't been moderated yet)</li>
 	ReviewResults []*string `json:"ReviewResults,omitempty" name:"ReviewResults"`
 
 	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
@@ -18546,8 +19236,17 @@ type SearchMediaRequest struct {
 	// <li>Array length limit: 10</li>
 	MediaTypes []*string `json:"MediaTypes,omitempty" name:"MediaTypes"`
 
+	// The file statuses.
+	// <li>`Normal`</li>
+	// <li>`SystemForbidden` (blocked by VOD)</li>
+	// <li>`Forbidden` (blocked by you)</li>
 	Status []*string `json:"Status,omitempty" name:"Status"`
 
+	// The types of moderation result.
+	// <li>`pass`</li>
+	// <li>`review` (the content may be non-compliant and needs to be reviewed)</li>
+	// <li>`block` (the content is non-compliant and should be blocked)</li>
+	// <li>`notModerated` (the file hasn't been moderated yet)</li>
 	ReviewResults []*string `json:"ReviewResults,omitempty" name:"ReviewResults"`
 
 	// The TRTC application IDs. Any file that matches one of the application IDs will be returned.
@@ -19391,74 +20090,76 @@ type TaskSimpleInfo struct {
 
 type TaskStatData struct {
 	// The task type.
-	// <li>Transcoding: General transcoding</li>
-	// <li>Transcoding-TESHD: Top Speed Codec transcoding</li>
-	// <li>Editing: Video editing</li>
-	// <li>Editing-TESHD: Top Speed Codec editing</li>
-	// <li>AdaptiveBitrateStreaming: Adaptive bitrate streaming</li>
+	// <li>`Transcoding`: General transcoding</li>
+	// <li>`Transcoding-TESHD`: Top Speed Codec transcoding</li>
+	// <li>`Editing`: Video editing</li>
+	// <li>`Editing-TESHD`: Top Speed Codec editing</li>
+	// <li>`AdaptiveBitrateStreaming`: Adaptive bitrate streaming</li>
 	// <li>ContentAudit: Content moderation</li>
-	// <li> ContentRecognition: Content recognition</li>
+	// <li>`ContentRecognition`: Content recognition</li>
 	// <li>RemoveWatermark: Watermark removal</li>
-	// <li> ExtractTraceWatermark: Digital watermark extraction</li>
-	// <li> AddTraceWatermark: Digital watermarking</li>
-	// <li>Transcode: Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
+	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+	// <li>`AddTraceWatermark`: Digital watermarking</li>
+	// <li>`RebuildMedia`: Remaster</li>
+	// <li>`Transcode` Transcoding, including general transcoding, Top Speed Codec transcoding, and video editing. This value is not recommended.</li>
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Task statistics overview (usage unit: second).
 	Summary []*TaskStatDataItem `json:"Summary,omitempty" name:"Summary"`
 
-	// The detailed statistics of different tasks.
+	// The usage statistics for different task types.
 	// Transcoding:
-	// <li>Remuxing</li>
-	// <li>Audio</li>
-	// <li>Standard.H264.SD</li>
-	// <li>Standard.H264.HD</li>
-	// <li>Standard.H264.FHD</li>
-	// <li>Standard.H264.2K</li>
-	// <li>Standard.H264.4K</li>
-	// <li>Standard.H265.SD</li>
-	// <li>Standard.H265.HD</li>
-	// <li>Standard.H265.FHD</li>
-	// <li>Standard.H265.2K</li>
-	// <li>Standard.H265.4K</li>
-	// <li>TESHD-10.H264.SD</li>
-	// <li>TESHD-10.H264.HD</li>
-	// <li>TESHD-10.H264.FHD</li>
-	// <li>TESHD-10.H264.2K</li>
-	// <li>TESHD-10.H264.4K</li>
-	// <li>TESHD-10.H265.SD</li>
-	// <li>TESHD-10.H265.HD</li>
-	// <li>TESHD-10.H265.FHD</li>
-	// <li>TESHD-10.H265.2K</li>
-	// <li>TESHD-10.H265.4K</li>
-	// <li>Edit.Audio</li>
-	// <li>Edit.H264.SD</li>
-	// <li>Edit.H264.HD</li>
-	// <li>Edit.H264.FHD</li>
-	// <li>Edit.H264.2K</li>
-	// <li>Edit.H264.4K</li>
-	// <li>Edit.H265.SD</li>
-	// <li>Edit.H265.HD</li>
-	// <li>Edit.H265.FHD</li>
-	// <li>Edit.H265.2K</li>
-	// <li>Edit.H265.4K</li>
-	// <li>Edit.TESHD-10.H264.SD</li>
-	// <li>Edit.TESHD-10.H264.HD</li>
-	// <li>Edit.TESHD-10.H264.FHD</li>
-	// <li>Edit.TESHD-10.H264.2K</li>
-	// <li>Edit.TESHD-10.H264.4K</li>
-	// <li>Edit.TESHD-10.H265.SD</li>
-	// <li>Edit.TESHD-10.H265.HD</li>
-	// <li>Edit.TESHD-10.H265.FHD</li>
-	// <li>Edit.TESHD-10.H265.2K</li>
-	// <li>Edit.TESHD-10.H265.4K</li>
-	// Watermark removal:
-	// <li>480P: 640 x 480 and below</li>
-	// <li>720P: 1280 x 720 and below</li>
-	// <li>1080P: 1920 x 1080 and below</li>
-	// <li>2K: 2560 x 1440 and below</li>
-	// <li>4K: 3840 x 2160 and below</li>
-	// <li>8K: 7680 x 4320 and below</li>
+	// <li>`Remuxing`</li>
+	// <li>`Audio` (audio transcoding)</li>
+	// <li>`Standard.H264.SD`</li>
+	// <li>`Standard.H264.HD`</li>
+	// <li>`Standard.H264.FHD`</li>
+	// <li>`Standard.H264.2K`</li>
+	// <li>`Standard.H264.4K`</li>
+	// <li>`Standard.H265.SD`</li>
+	// <li>`Standard.H265.HD`</li>
+	// <li>`Standard.H265.FHD`</li>
+	// <li>`Standard.H265.2K`</li>
+	// <li>`Standard.H265.4K`</li>
+	// <li>`TESHD-10.H264.SD` (H.264 SD Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H264.HD` (H.264 HD Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H264.FHD` (H.264 FHD Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H264.2K` (H.264 2K Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H264.4K` (H.264 4K Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H265.SD` (H.265 SD Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H265.HD` (H.265 HD Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H265.FHD` (H.265 FHD Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H265.2K` (H.265 2K Top Speed Codec transcoding)</li>
+	// <li>`TESHD-10.H265.4K` (H.265 4K Top Speed Codec transcoding)</li>
+	// <li>`Edit.Audio`</li>
+	// <li>`Edit.H264.SD` (H.264 SD video editing)</li>
+	// <li>`Edit.H264.HD` (H.264 HD video editing)</li>
+	// <li>`Edit.H264.FHD` (H.264 FHD video editing)</li>
+	// <li>`Edit.H264.2K` (H.264 2K video editing)</li>
+	// <li>`Edit.H264.4K` (H.264 4K video editing)</li>
+	// <li>`Edit.H265.SD` (H.265 SD video editing)</li>
+	// <li>`Edit.H265.HD` (H.265 HD video editing)</li>
+	// <li>`Edit.H265.FHD` (H.265 FHD video editing)</li>
+	// <li>`Edit.H265.2K` (H.265 2K video editing)</li>
+	// <li>`Edit.H265.4K` (H.265 4K video editing)</li>
+	// <li>`Edit.TESHD-10.H264.SD` (H.264 SD Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H264.HD` (H.264 HD Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H264.FHD` (H.264 FHD Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H264.2K` (H.264 2K Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H264.4K` (H.264 4K Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H265.SD` (H.265 SD Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H265.HD` (H.265 HD Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H265.FHD` (H.265 FHD Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H265.2K` (H.265 2K Top Speed Codec video editing)</li>
+	// <li>`Edit.TESHD-10.H265.4K` (H.265 4K Top Speed Codec video editing)</li>
+	// The watermark removal/remaster specifications. Valid values:
+	// <li>`480P` (short side ≤ 480 px)</li>
+	// <li>`720P` (short side ≤ 720 px)</li>
+	// <li>`1080P` (short side ≤ 1080 px)</li>
+	// <li>`2K` (short side ≤ 1440 px)</li>
+	// <li>`4K` (short side ≤ 2160 px)</li>
+	// <li>`8K` (short side ≤ 4320 px)</li>
+	// <li>`audio`</li>
 	Details []*SpecificationDataItem `json:"Details,omitempty" name:"Details"`
 }
 

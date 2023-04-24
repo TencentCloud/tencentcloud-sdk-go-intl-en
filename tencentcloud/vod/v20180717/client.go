@@ -880,7 +880,7 @@ func NewCreateImageProcessingTemplateResponse() (response *CreateImageProcessing
 }
 
 // CreateImageProcessingTemplate
-// This API is used to create a custom image processing template. You can create up to 16 templates, and each template can contain up to three operations, for example, cropping, scaling, and cropping again.
+// This API is used to create a custom image processing template. A template can include at most 10 operations, for example, crop-scale-crop-blur-scale-crop-scale-crop-blur-scale. You can have up to 16 image processing templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -899,7 +899,7 @@ func (c *Client) CreateImageProcessingTemplate(request *CreateImageProcessingTem
 }
 
 // CreateImageProcessingTemplate
-// This API is used to create a custom image processing template. You can create up to 16 templates, and each template can contain up to three operations, for example, cropping, scaling, and cropping again.
+// This API is used to create a custom image processing template. A template can include at most 10 operations, for example, crop-scale-crop-blur-scale-crop-scale-crop-blur-scale. You can have up to 16 image processing templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1115,6 +1115,56 @@ func (c *Client) CreateProcedureTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateProcedureTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRebuildMediaTemplateRequest() (request *CreateRebuildMediaTemplateRequest) {
+    request = &CreateRebuildMediaTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateRebuildMediaTemplate")
+    
+    
+    return
+}
+
+func NewCreateRebuildMediaTemplateResponse() (response *CreateRebuildMediaTemplateResponse) {
+    response = &CreateRebuildMediaTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRebuildMediaTemplate
+// This API is used to create a remaster template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+func (c *Client) CreateRebuildMediaTemplate(request *CreateRebuildMediaTemplateRequest) (response *CreateRebuildMediaTemplateResponse, err error) {
+    return c.CreateRebuildMediaTemplateWithContext(context.Background(), request)
+}
+
+// CreateRebuildMediaTemplate
+// This API is used to create a remaster template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+func (c *Client) CreateRebuildMediaTemplateWithContext(ctx context.Context, request *CreateRebuildMediaTemplateRequest) (response *CreateRebuildMediaTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateRebuildMediaTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRebuildMediaTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRebuildMediaTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2523,6 +2573,64 @@ func (c *Client) DeleteProcedureTemplateWithContext(ctx context.Context, request
     return
 }
 
+func NewDeleteRebuildMediaTemplateRequest() (request *DeleteRebuildMediaTemplateRequest) {
+    request = &DeleteRebuildMediaTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteRebuildMediaTemplate")
+    
+    
+    return
+}
+
+func NewDeleteRebuildMediaTemplateResponse() (response *DeleteRebuildMediaTemplateResponse) {
+    response = &DeleteRebuildMediaTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRebuildMediaTemplate
+// This API is used to delete a remaster template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteRebuildMediaTemplate(request *DeleteRebuildMediaTemplateRequest) (response *DeleteRebuildMediaTemplateResponse, err error) {
+    return c.DeleteRebuildMediaTemplateWithContext(context.Background(), request)
+}
+
+// DeleteRebuildMediaTemplate
+// This API is used to delete a remaster template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteRebuildMediaTemplateWithContext(ctx context.Context, request *DeleteRebuildMediaTemplateRequest) (response *DeleteRebuildMediaTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteRebuildMediaTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRebuildMediaTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRebuildMediaTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteReviewTemplateRequest() (request *DeleteReviewTemplateRequest) {
     request = &DeleteReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3049,6 +3157,7 @@ func NewDescribeAIAnalysisTemplatesResponse() (response *DescribeAIAnalysisTempl
 // This API is used to get the list of video content analysis templates based on unique template ID. The returned result includes all eligible custom and [preset video content analysis templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
@@ -3063,6 +3172,7 @@ func (c *Client) DescribeAIAnalysisTemplates(request *DescribeAIAnalysisTemplate
 // This API is used to get the list of video content analysis templates based on unique template ID. The returned result includes all eligible custom and [preset video content analysis templates](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF).
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
@@ -4507,6 +4617,66 @@ func (c *Client) DescribeProcedureTemplatesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeProcedureTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRebuildMediaTemplatesRequest() (request *DescribeRebuildMediaTemplatesRequest) {
+    request = &DescribeRebuildMediaTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeRebuildMediaTemplates")
+    
+    
+    return
+}
+
+func NewDescribeRebuildMediaTemplatesResponse() (response *DescribeRebuildMediaTemplatesResponse) {
+    response = &DescribeRebuildMediaTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRebuildMediaTemplates
+// This API is used to query remaster templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_NAMES = "InvalidParameterValue.Names"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRebuildMediaTemplates(request *DescribeRebuildMediaTemplatesRequest) (response *DescribeRebuildMediaTemplatesResponse, err error) {
+    return c.DescribeRebuildMediaTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeRebuildMediaTemplates
+// This API is used to query remaster templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_NAMES = "InvalidParameterValue.Names"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeRebuildMediaTemplatesWithContext(ctx context.Context, request *DescribeRebuildMediaTemplatesRequest) (response *DescribeRebuildMediaTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRebuildMediaTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRebuildMediaTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRebuildMediaTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -6757,6 +6927,66 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifyRebuildMediaTemplateRequest() (request *ModifyRebuildMediaTemplateRequest) {
+    request = &ModifyRebuildMediaTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyRebuildMediaTemplate")
+    
+    
+    return
+}
+
+func NewModifyRebuildMediaTemplateResponse() (response *ModifyRebuildMediaTemplateResponse) {
+    response = &ModifyRebuildMediaTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRebuildMediaTemplate
+// This API is used to modify a remaster template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
+//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
+//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyRebuildMediaTemplate(request *ModifyRebuildMediaTemplateRequest) (response *ModifyRebuildMediaTemplateResponse, err error) {
+    return c.ModifyRebuildMediaTemplateWithContext(context.Background(), request)
+}
+
+// ModifyRebuildMediaTemplate
+// This API is used to modify a remaster template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
+//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
+//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyRebuildMediaTemplateWithContext(ctx context.Context, request *ModifyRebuildMediaTemplateRequest) (response *ModifyRebuildMediaTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyRebuildMediaTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRebuildMediaTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRebuildMediaTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyReviewTemplateRequest() (request *ModifyReviewTemplateRequest) {
     request = &ModifyReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8155,6 +8385,56 @@ func (c *Client) RebuildMediaWithContext(ctx context.Context, request *RebuildMe
     return
 }
 
+func NewRebuildMediaByTemplateRequest() (request *RebuildMediaByTemplateRequest) {
+    request = &RebuildMediaByTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "RebuildMediaByTemplate")
+    
+    
+    return
+}
+
+func NewRebuildMediaByTemplateResponse() (response *RebuildMediaByTemplateResponse) {
+    response = &RebuildMediaByTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RebuildMediaByTemplate
+// This API is used to start a remaster task using a template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+func (c *Client) RebuildMediaByTemplate(request *RebuildMediaByTemplateRequest) (response *RebuildMediaByTemplateResponse, err error) {
+    return c.RebuildMediaByTemplateWithContext(context.Background(), request)
+}
+
+// RebuildMediaByTemplate
+// This API is used to start a remaster task using a template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+func (c *Client) RebuildMediaByTemplateWithContext(ctx context.Context, request *RebuildMediaByTemplateRequest) (response *RebuildMediaByTemplateResponse, err error) {
+    if request == nil {
+        request = NewRebuildMediaByTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RebuildMediaByTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRebuildMediaByTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRefreshUrlCacheRequest() (request *RefreshUrlCacheRequest) {
     request = &RefreshUrlCacheRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8602,6 +8882,10 @@ func NewSearchMediaResponse() (response *SearchMediaResponse) {
 //
 // - Specify the file formats (`MediaTypes`), such as MP4, AVI, and MP3. All files in the specified formats will be returned. For example, if you set `MediaTypes` to MP4 and MP3, all files in these two formats will be returned.
 //
+// - Specify the file statuses (`Status`). Files in the specified statuses will be returned. Valid values: `Normal`, `SystemForbidden` (blocked by VOD), `Forbidden` (blocked by you). If you set `Status` to `Normal` and `Forbidden`, files in either status will be returned.
+//
+// - Specify the types of moderation results (`ReviewResults`). Files that have the specified types of moderation results will be returned. Valid values include `pass`, `block`, and more. If you set `ReviewResults` to `pass` and `block`, files whose moderation result is "pass" or "block" will be returned.
+//
 // - Specify the stream IDs (`StreamIds`) of live recording files.
 //
 // - Specify a time range for search by file creation time.
@@ -8701,6 +8985,10 @@ func (c *Client) SearchMedia(request *SearchMediaRequest) (response *SearchMedia
 // - Specify the source types (`SourceTypes`). Any file that matches one of the source types specified will be returned. For example, if you set `SourceTypes` to `Record` (live recording) and `Upload` (upload), all recording files and uploaded files will be returned.
 //
 // - Specify the file formats (`MediaTypes`), such as MP4, AVI, and MP3. All files in the specified formats will be returned. For example, if you set `MediaTypes` to MP4 and MP3, all files in these two formats will be returned.
+//
+// - Specify the file statuses (`Status`). Files in the specified statuses will be returned. Valid values: `Normal`, `SystemForbidden` (blocked by VOD), `Forbidden` (blocked by you). If you set `Status` to `Normal` and `Forbidden`, files in either status will be returned.
+//
+// - Specify the types of moderation results (`ReviewResults`). Files that have the specified types of moderation results will be returned. Valid values include `pass`, `block`, and more. If you set `ReviewResults` to `pass` and `block`, files whose moderation result is "pass" or "block" will be returned.
 //
 // - Specify the stream IDs (`StreamIds`) of live recording files.
 //
