@@ -7780,6 +7780,9 @@ type DescribePrometheusClusterAgentsResponseParams struct {
 	// The total number of the associated clusters
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
 
+	// Whether the TMP instance is associated with the cluster for the first time. If so, you need to configure recording rules for it. This also applies if it has no default recording rule.
+	IsFirstBind *bool `json:"IsFirstBind,omitempty" name:"IsFirstBind"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -9728,6 +9731,12 @@ type Filter struct {
 
 	// Filter value. For the `in` filter method, separate multiple values by comma.
 	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Filter name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Filter value range
+	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
 // Predefined struct for user
@@ -12246,6 +12255,14 @@ type PrometheusInstancesOverview struct {
 
 	// Total number of bound clusters in the normal status
 	BoundNormal *int64 `json:"BoundNormal,omitempty" name:"BoundNormal"`
+
+	// Resource pack status (`0`: Unavailable; `1`: Available)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourcePackageStatus *int64 `json:"ResourcePackageStatus,omitempty" name:"ResourcePackageStatus"`
+
+	// Resource pack specification name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourcePackageSpecName *string `json:"ResourcePackageSpecName,omitempty" name:"ResourcePackageSpecName"`
 }
 
 type PrometheusJobTargets struct {

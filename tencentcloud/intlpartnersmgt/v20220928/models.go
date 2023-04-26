@@ -20,6 +20,28 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type ActionSummaryOverviewItem struct {
+	// Transaction type code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+
+	// Transaction type name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ActionTypeName *string `json:"ActionTypeName,omitempty" name:"ActionTypeName"`
+
+	// The actual total consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// The deducted voucher amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Total consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
 // Predefined struct for user
 type AllocateCustomerCreditRequestParams struct {
 	// Specific value of the credit allocated to the customer
@@ -216,6 +238,28 @@ type BillDetailData struct {
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
+type BusinessSummaryOverviewItem struct {
+	// Product code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+	// Product name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
+
+	// List price accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// The deducted voucher amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
 type CountryCodeItem struct {
 	// Country/region name in English
 	EnName *string `json:"EnName,omitempty" name:"EnName"`
@@ -344,6 +388,201 @@ func (r *CreateAccountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAccountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryByPayModeRequestParams struct {
+	// Bill month in the format of "yyyy-MM"
+	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// Customer UIN
+	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+type DescribeBillSummaryByPayModeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month in the format of "yyyy-MM"
+	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// Customer UIN
+	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+func (r *DescribeBillSummaryByPayModeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryByPayModeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BillMonth")
+	delete(f, "CustomerUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryByPayModeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryByPayModeResponseParams struct {
+	// Payment mode details in the customer bill data totaled by payment mode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBillSummaryByPayModeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillSummaryByPayModeResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillSummaryByPayModeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryByPayModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryByProductRequestParams struct {
+	// Bill month in the format of "yyyy-MM"
+	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// Customer UIN
+	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+type DescribeBillSummaryByProductRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month in the format of "yyyy-MM"
+	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// Customer UIN
+	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+func (r *DescribeBillSummaryByProductRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryByProductRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BillMonth")
+	delete(f, "CustomerUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryByProductRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryByProductResponseParams struct {
+	// Bill details from the product dimension
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBillSummaryByProductResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillSummaryByProductResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillSummaryByProductResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryByProductResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryByRegionRequestParams struct {
+	// Bill month in the format of "yyyy-MM"
+	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// Customer UIN
+	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+type DescribeBillSummaryByRegionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month in the format of "yyyy-MM"
+	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+
+	// Customer UIN
+	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+func (r *DescribeBillSummaryByRegionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryByRegionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BillMonth")
+	delete(f, "CustomerUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryByRegionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryByRegionResponseParams struct {
+	// Region details in the customer bill data totaled by region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBillSummaryByRegionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillSummaryByRegionResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillSummaryByRegionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryByRegionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -707,6 +946,32 @@ func (r *GetCountryCodesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetCountryCodesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type PayModeSummaryOverviewItem struct {
+	// Billing mode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Billing mode name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayModeName *string `json:"PayModeName,omitempty" name:"PayModeName"`
+
+	// The actual total consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// Bill details in each payment mode
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Detail []*ActionSummaryOverviewItem `json:"Detail,omitempty" name:"Detail"`
+
+	// The deducted voucher amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Total consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }
 
 type QueryCreditAllocationHistoryData struct {
@@ -1332,4 +1597,26 @@ func (r *QueryVoucherPoolResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *QueryVoucherPoolResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RegionSummaryOverviewItem struct {
+	// Region ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+
+	// Region name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+
+	// The actual total consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// The deducted voucher amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Total consumption amount accurate down to eight decimal places
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 }

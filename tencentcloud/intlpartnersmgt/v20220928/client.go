@@ -211,6 +211,156 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     return
 }
 
+func NewDescribeBillSummaryByPayModeRequest() (request *DescribeBillSummaryByPayModeRequest) {
+    request = &DescribeBillSummaryByPayModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeBillSummaryByPayMode")
+    
+    
+    return
+}
+
+func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByPayModeResponse) {
+    response = &DescribeBillSummaryByPayModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillSummaryByPayMode
+// This API is used to obtain the total amount of customer bills by payment mode.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
+    return c.DescribeBillSummaryByPayModeWithContext(context.Background(), request)
+}
+
+// DescribeBillSummaryByPayMode
+// This API is used to obtain the total amount of customer bills by payment mode.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByPayModeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByPayMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryByPayModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillSummaryByProductRequest() (request *DescribeBillSummaryByProductRequest) {
+    request = &DescribeBillSummaryByProductRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeBillSummaryByProduct")
+    
+    
+    return
+}
+
+func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByProductResponse) {
+    response = &DescribeBillSummaryByProductResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillSummaryByProduct
+// This API is used to obtain the total amount of customer bills by product.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
+    return c.DescribeBillSummaryByProductWithContext(context.Background(), request)
+}
+
+// DescribeBillSummaryByProduct
+// This API is used to obtain the total amount of customer bills by product.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByProductRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByProduct require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryByProductResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillSummaryByRegionRequest() (request *DescribeBillSummaryByRegionRequest) {
+    request = &DescribeBillSummaryByRegionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeBillSummaryByRegion")
+    
+    
+    return
+}
+
+func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRegionResponse) {
+    response = &DescribeBillSummaryByRegionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillSummaryByRegion
+// This API is used to obtain the total amount of customer bills by region.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
+    return c.DescribeBillSummaryByRegionWithContext(context.Background(), request)
+}
+
+// DescribeBillSummaryByRegion
+// This API is used to obtain the total amount of customer bills by region.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryByRegionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryByRegion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryByRegionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerBillDetailRequest() (request *DescribeCustomerBillDetailRequest) {
     request = &DescribeCustomerBillDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -233,7 +383,9 @@ func NewDescribeCustomerBillDetailResponse() (response *DescribeCustomerBillDeta
 // This API is used to query the customer bill details.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailRequest) (response *DescribeCustomerBillDetailResponse, err error) {
     return c.DescribeCustomerBillDetailWithContext(context.Background(), request)
@@ -243,7 +395,9 @@ func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailR
 // This API is used to query the customer bill details.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeCustomerBillDetailWithContext(ctx context.Context, request *DescribeCustomerBillDetailRequest) (response *DescribeCustomerBillDetailResponse, err error) {
     if request == nil {
@@ -283,6 +437,7 @@ func NewDescribeCustomerBillSummaryResponse() (response *DescribeCustomerBillSum
 // This API is used to query the total amount of customer bills.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeCustomerBillSummary(request *DescribeCustomerBillSummaryRequest) (response *DescribeCustomerBillSummaryResponse, err error) {
@@ -293,6 +448,7 @@ func (c *Client) DescribeCustomerBillSummary(request *DescribeCustomerBillSummar
 // This API is used to query the total amount of customer bills.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeCustomerBillSummaryWithContext(ctx context.Context, request *DescribeCustomerBillSummaryRequest) (response *DescribeCustomerBillSummaryResponse, err error) {

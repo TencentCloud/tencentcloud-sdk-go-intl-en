@@ -1151,6 +1151,7 @@ func NewCreatePrometheusRecordRuleYamlResponse() (response *CreatePrometheusReco
 // This API is used to create a recording rule in the YAML way.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -1169,6 +1170,7 @@ func (c *Client) CreatePrometheusRecordRuleYaml(request *CreatePrometheusRecordR
 // This API is used to create a recording rule in the YAML way.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -4847,6 +4849,7 @@ func NewDescribePrometheusClusterAgentsResponse() (response *DescribePrometheusC
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -4870,6 +4873,7 @@ func (c *Client) DescribePrometheusClusterAgents(request *DescribePrometheusClus
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -5384,7 +5388,7 @@ func NewDescribePrometheusInstancesOverviewResponse() (response *DescribePrometh
 }
 
 // DescribePrometheusInstancesOverview
-// This API is used to get the list of CM-integrated instances.
+// This API is used to obtain the list of Tencent Managed Service for Prometheus (TMP) instances and the clusters associated with them.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
@@ -5398,7 +5402,7 @@ func (c *Client) DescribePrometheusInstancesOverview(request *DescribePrometheus
 }
 
 // DescribePrometheusInstancesOverview
-// This API is used to get the list of CM-integrated instances.
+// This API is used to obtain the list of Tencent Managed Service for Prometheus (TMP) instances and the clusters associated with them.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
@@ -5718,6 +5722,7 @@ func NewDescribePrometheusTempResponse() (response *DescribePrometheusTempRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -5731,6 +5736,7 @@ func (c *Client) DescribePrometheusTemp(request *DescribePrometheusTempRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -7572,6 +7578,10 @@ func NewPutMonitorDataResponse() (response *PutMonitorDataResponse) {
 //
 // 
 //
+// This API is not deprecated, but its related console features and backend services were deactivated two years ago.
+//
+// 
+//
 // The default API request rate limit is 50 requests/sec.
 //
 // The default upper limit on metrics of a single tenant is 100.
@@ -7610,6 +7620,10 @@ func (c *Client) PutMonitorData(request *PutMonitorDataRequest) (response *PutMo
 
 // PutMonitorData
 // 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
+//
+// 
+//
+// This API is not deprecated, but its related console features and backend services were deactivated two years ago.
 //
 // 
 //

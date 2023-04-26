@@ -68,6 +68,7 @@ func NewAllocateWanAddressResponse() (response *AllocateWanAddressResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_ISNOTVPCINSTANCE = "InvalidParameter.IsNotVpcInstance"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -81,6 +82,7 @@ func (c *Client) AllocateWanAddress(request *AllocateWanAddressRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_ISNOTVPCINSTANCE = "InvalidParameter.IsNotVpcInstance"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -566,7 +568,7 @@ func NewCloneInstancesResponse() (response *CloneInstancesResponse) {
 }
 
 // CloneInstances
-// This API is used to clone a complete instance based on the current instance backup file.
+// This API is used to clone a complete new instance based on the current instance backup file.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
@@ -606,7 +608,7 @@ func (c *Client) CloneInstances(request *CloneInstancesRequest) (response *Clone
 }
 
 // CloneInstances
-// This API is used to clone a complete instance based on the current instance backup file.
+// This API is used to clone a complete new instance based on the current instance backup file.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
@@ -798,7 +800,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 }
 
 // CreateInstances
-// This API is used to create a Redis instance.
+// This API is used to create an TencentDB or Redis instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
@@ -837,7 +839,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 }
 
 // CreateInstances
-// This API is used to create a Redis instance.
+// This API is used to create an TencentDB or Redis instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
@@ -1237,6 +1239,70 @@ func (c *Client) DescribeBackupUrlWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeBackupUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBandwidthRangeRequest() (request *DescribeBandwidthRangeRequest) {
+    request = &DescribeBandwidthRangeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "DescribeBandwidthRange")
+    
+    
+    return
+}
+
+func NewDescribeBandwidthRangeResponse() (response *DescribeBandwidthRangeResponse) {
+    response = &DescribeBandwidthRangeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBandwidthRange
+// This API is used to query the information of instance bandwidth.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) DescribeBandwidthRange(request *DescribeBandwidthRangeRequest) (response *DescribeBandwidthRangeResponse, err error) {
+    return c.DescribeBandwidthRangeWithContext(context.Background(), request)
+}
+
+// DescribeBandwidthRange
+// This API is used to query the information of instance bandwidth.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ILLEGALPARAMETERERROR = "InvalidParameter.IllegalParameterError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) DescribeBandwidthRangeWithContext(ctx context.Context, request *DescribeBandwidthRangeRequest) (response *DescribeBandwidthRangeResponse, err error) {
+    if request == nil {
+        request = NewDescribeBandwidthRangeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBandwidthRange require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBandwidthRangeResponse()
     err = c.Send(request, response)
     return
 }
@@ -2060,6 +2126,7 @@ func NewDescribeInstanceParamRecordsResponse() (response *DescribeInstanceParamR
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 //  UNSUPPORTEDOPERATION_CLUSTERINSTANCEACCESSEDDENY = "UnsupportedOperation.ClusterInstanceAccessedDeny"
@@ -2076,6 +2143,7 @@ func (c *Client) DescribeInstanceParamRecords(request *DescribeInstanceParamReco
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
 //  UNAUTHORIZEDOPERATION_USERNOTINWHITELIST = "UnauthorizedOperation.UserNotInWhiteList"
 //  UNSUPPORTEDOPERATION_CLUSTERINSTANCEACCESSEDDENY = "UnsupportedOperation.ClusterInstanceAccessedDeny"
@@ -2482,7 +2550,7 @@ func NewDescribeParamTemplateInfoResponse() (response *DescribeParamTemplateInfo
 }
 
 // DescribeParamTemplateInfo
-// This API is used to query the parameter template details.
+// This API is used to query the details of a parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2497,7 +2565,7 @@ func (c *Client) DescribeParamTemplateInfo(request *DescribeParamTemplateInfoReq
 }
 
 // DescribeParamTemplateInfo
-// This API is used to query the parameter template details.
+// This API is used to query the details of a parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -4555,6 +4623,70 @@ func (c *Client) ReleaseWanAddressWithContext(ctx context.Context, request *Rele
     return
 }
 
+func NewRemoveReplicationInstanceRequest() (request *RemoveReplicationInstanceRequest) {
+    request = &RemoveReplicationInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "RemoveReplicationInstance")
+    
+    
+    return
+}
+
+func NewRemoveReplicationInstanceResponse() (response *RemoveReplicationInstanceResponse) {
+    response = &RemoveReplicationInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RemoveReplicationInstance
+// This API is used to remove a member from a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+func (c *Client) RemoveReplicationInstance(request *RemoveReplicationInstanceRequest) (response *RemoveReplicationInstanceResponse, err error) {
+    return c.RemoveReplicationInstanceWithContext(context.Background(), request)
+}
+
+// RemoveReplicationInstance
+// This API is used to remove a member from a replication group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
+//  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
+//  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSPECTION = "UnsupportedOperation.Inspection"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+func (c *Client) RemoveReplicationInstanceWithContext(ctx context.Context, request *RemoveReplicationInstanceRequest) (response *RemoveReplicationInstanceResponse, err error) {
+    if request == nil {
+        request = NewRemoveReplicationInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveReplicationInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRemoveReplicationInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRenewInstanceRequest() (request *RenewInstanceRequest) {
     request = &RenewInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4577,6 +4709,7 @@ func NewRenewInstanceResponse() (response *RenewInstanceResponse) {
 // This API is used to renew an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -4594,6 +4727,7 @@ func (c *Client) RenewInstance(request *RenewInstanceRequest) (response *RenewIn
 // This API is used to renew an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -4779,6 +4913,7 @@ func NewStartupInstanceResponse() (response *StartupInstanceResponse) {
 // This API is used to deisolate an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
@@ -4795,6 +4930,7 @@ func (c *Client) StartupInstance(request *StartupInstanceRequest) (response *Sta
 // This API is used to deisolate an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_PAYFAILED = "FailedOperation.PayFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
@@ -5144,7 +5280,9 @@ func NewUpgradeSmallVersionResponse() (response *UpgradeSmallVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
 func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
     return c.UpgradeSmallVersionWithContext(context.Background(), request)
 }
@@ -5154,7 +5292,9 @@ func (c *Client) UpgradeSmallVersion(request *UpgradeSmallVersionRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
 func (c *Client) UpgradeSmallVersionWithContext(ctx context.Context, request *UpgradeSmallVersionRequest) (response *UpgradeSmallVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeSmallVersionRequest()

@@ -128,6 +128,9 @@ const (
 	// Backend service timed out.
 	FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 
+	// DoTRPCTransferFailed
+	FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
+
 	// Failed to query analysis data.
 	FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 

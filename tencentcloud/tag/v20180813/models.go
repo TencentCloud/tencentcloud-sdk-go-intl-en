@@ -473,6 +473,80 @@ func (r *DeleteTagsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeProjectsRequestParams struct {
+	// If this parameter is 1, all projects (including hidden ones) will be queried. If it is 0, only non-hidden projects will be queried.
+	AllList *uint64 `json:"AllList,omitempty" name:"AllList"`
+
+	// Number of entries per page. Fixed value: 1,000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribeProjectsRequest struct {
+	*tchttp.BaseRequest
+	
+	// If this parameter is 1, all projects (including hidden ones) will be queried. If it is 0, only non-hidden projects will be queried.
+	AllList *uint64 `json:"AllList,omitempty" name:"AllList"`
+
+	// Number of entries per page. Fixed value: 1,000.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribeProjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AllList")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProjectsResponseParams struct {
+	// Total number of data entries.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Project list.
+	Projects []*Project `json:"Projects,omitempty" name:"Projects"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeProjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProjectsResponseParams `json:"Response"`
+}
+
+func (r *DescribeProjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeResourceTagsByResourceIdsRequestParams struct {
 	// Service type.
 	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
@@ -2188,6 +2262,23 @@ func (r *ModifyResourcesTagValueResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Project struct {
+	// Project ID.
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Project name.
+	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+
+	// Creator UIN.
+	CreatorUin *uint64 `json:"CreatorUin,omitempty" name:"CreatorUin"`
+
+	// Project description.
+	ProjectInfo *string `json:"ProjectInfo,omitempty" name:"ProjectInfo"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
 type ResourceIdTag struct {
 	// Unique resource ID
 	// Note: this field may return null, indicating that no valid values can be obtained
@@ -2274,7 +2365,7 @@ type TagResource struct {
 // Predefined struct for user
 type TagResourcesRequestParams struct {
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
 	// Value range of N: 0–9
 	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
 
@@ -2290,7 +2381,7 @@ type TagResourcesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
 	// Value range of N: 0–9
 	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
 
@@ -2363,7 +2454,7 @@ type TagWithDelete struct {
 // Predefined struct for user
 type UnTagResourcesRequestParams struct {
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
 	// Value range of N: 0–9
 	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
 
@@ -2376,7 +2467,7 @@ type UnTagResourcesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-	// For example, ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}.
+	// For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
 	// Value range of N: 0–9
 	ResourceList []*string `json:"ResourceList,omitempty" name:"ResourceList"`
 
