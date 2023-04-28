@@ -128,6 +128,353 @@ func (r *AddCLSTopicDomainsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddCdnDomainRequestParams struct {
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Acceleration domain name service type
+	// `web`: Webpage file downloads
+	// `download`: Large file downloads
+	// `media`: Audio and video on demand acceleration
+	// `hybrid`: Dynamic and static content acceleration
+	// `dynamic`: Dynamic content acceleration
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Origin server configuration
+	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
+
+	// Project ID. Default value: 0, indicating `Default Project`
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// IP blocklist/allowlist
+	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
+
+	// IP rate limiting
+	IpFreqLimit *IpFreqLimit `json:"IpFreqLimit,omitempty" name:"IpFreqLimit"`
+
+	// Status code cache
+	StatusCodeCache *StatusCodeCache `json:"StatusCodeCache,omitempty" name:"StatusCodeCache"`
+
+	// Smart compression
+	Compression *Compression `json:"Compression,omitempty" name:"Compression"`
+
+	// Bandwidth cap configuration
+	BandwidthAlert *BandwidthAlert `json:"BandwidthAlert,omitempty" name:"BandwidthAlert"`
+
+	// Range GETs configuration
+	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
+
+	// 301/302 origin-pull follow-redirect configuration
+	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
+
+	// Error code redirection (in beta)
+	ErrorPage *ErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
+
+	// Request header configuration
+	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
+
+	// Response header configuration
+	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
+
+	// Download speed configuration
+	DownstreamCapping *DownstreamCapping `json:"DownstreamCapping,omitempty" name:"DownstreamCapping"`
+
+	// Node cache key configuration
+	CacheKey *CacheKey `json:"CacheKey,omitempty" name:"CacheKey"`
+
+	// Header cache configuration
+	ResponseHeaderCache *ResponseHeaderCache `json:"ResponseHeaderCache,omitempty" name:"ResponseHeaderCache"`
+
+	// Video dragging configuration
+	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+
+	// Cache validity configuration
+	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
+
+	// Cross-MLC-border origin-pull optimization
+	OriginPullOptimization *OriginPullOptimization `json:"OriginPullOptimization,omitempty" name:"OriginPullOptimization"`
+
+	// HTTPS acceleration
+	Https *Https `json:"Https,omitempty" name:"Https"`
+
+	// Timestamp hotlink protection
+	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
+
+	// SEO optimization
+	Seo *Seo `json:"Seo,omitempty" name:"Seo"`
+
+	// Force redirect by access protocol
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+	// Referer hotlink protection
+	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
+
+	// Browser caching (in beta)
+	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
+
+	// IPv6 configuration (This feature is in beta and not generally available yet.)
+	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
+
+	// Specific region configuration
+	// Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
+	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
+
+	// Domain name acceleration region
+	// mainland: acceleration inside mainland China
+	// overseas: acceleration outside mainland China
+	// global: global acceleration
+	// Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Origin-pull timeout configuration
+	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
+
+	// Tag configuration
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
+
+	// Ipv6 access configuration
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+	// Offline cache
+	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
+
+	// QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+	// Access authentication for S3 origin
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// Access authentication for OSS origin
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
+
+	// Origin-pull authentication for Huawei Cloud OBS origin
+	HwPrivateAccess *HwPrivateAccess `json:"HwPrivateAccess,omitempty" name:"HwPrivateAccess"`
+
+	// Origin-pull authentication for Qiniu Cloud Kodo origin
+	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
+
+	// Origin-pull authentication for other origins
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
+
+	// HTTPS (enabled by default), which is a paid service. You can check the product document and Billing Overview for more information.
+	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
+}
+
+type AddCdnDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// Domain name
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Acceleration domain name service type
+	// `web`: Webpage file downloads
+	// `download`: Large file downloads
+	// `media`: Audio and video on demand acceleration
+	// `hybrid`: Dynamic and static content acceleration
+	// `dynamic`: Dynamic content acceleration
+	ServiceType *string `json:"ServiceType,omitempty" name:"ServiceType"`
+
+	// Origin server configuration
+	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
+
+	// Project ID. Default value: 0, indicating `Default Project`
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// IP blocklist/allowlist
+	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
+
+	// IP rate limiting
+	IpFreqLimit *IpFreqLimit `json:"IpFreqLimit,omitempty" name:"IpFreqLimit"`
+
+	// Status code cache
+	StatusCodeCache *StatusCodeCache `json:"StatusCodeCache,omitempty" name:"StatusCodeCache"`
+
+	// Smart compression
+	Compression *Compression `json:"Compression,omitempty" name:"Compression"`
+
+	// Bandwidth cap configuration
+	BandwidthAlert *BandwidthAlert `json:"BandwidthAlert,omitempty" name:"BandwidthAlert"`
+
+	// Range GETs configuration
+	RangeOriginPull *RangeOriginPull `json:"RangeOriginPull,omitempty" name:"RangeOriginPull"`
+
+	// 301/302 origin-pull follow-redirect configuration
+	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
+
+	// Error code redirection (in beta)
+	ErrorPage *ErrorPage `json:"ErrorPage,omitempty" name:"ErrorPage"`
+
+	// Request header configuration
+	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
+
+	// Response header configuration
+	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
+
+	// Download speed configuration
+	DownstreamCapping *DownstreamCapping `json:"DownstreamCapping,omitempty" name:"DownstreamCapping"`
+
+	// Node cache key configuration
+	CacheKey *CacheKey `json:"CacheKey,omitempty" name:"CacheKey"`
+
+	// Header cache configuration
+	ResponseHeaderCache *ResponseHeaderCache `json:"ResponseHeaderCache,omitempty" name:"ResponseHeaderCache"`
+
+	// Video dragging configuration
+	VideoSeek *VideoSeek `json:"VideoSeek,omitempty" name:"VideoSeek"`
+
+	// Cache validity configuration
+	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
+
+	// Cross-MLC-border origin-pull optimization
+	OriginPullOptimization *OriginPullOptimization `json:"OriginPullOptimization,omitempty" name:"OriginPullOptimization"`
+
+	// HTTPS acceleration
+	Https *Https `json:"Https,omitempty" name:"Https"`
+
+	// Timestamp hotlink protection
+	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
+
+	// SEO optimization
+	Seo *Seo `json:"Seo,omitempty" name:"Seo"`
+
+	// Force redirect by access protocol
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+	// Referer hotlink protection
+	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
+
+	// Browser caching (in beta)
+	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
+
+	// IPv6 configuration (This feature is in beta and not generally available yet.)
+	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
+
+	// Specific region configuration
+	// Applicable to cases where the acceleration domain name configuration differs for regions in and outside mainland China.
+	SpecificConfig *SpecificConfig `json:"SpecificConfig,omitempty" name:"SpecificConfig"`
+
+	// Domain name acceleration region
+	// mainland: acceleration inside mainland China
+	// overseas: acceleration outside mainland China
+	// global: global acceleration
+	// Overseas acceleration service must be enabled to use overseas acceleration and global acceleration.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Origin-pull timeout configuration
+	OriginPullTimeout *OriginPullTimeout `json:"OriginPullTimeout,omitempty" name:"OriginPullTimeout"`
+
+	// Tag configuration
+	Tag []*Tag `json:"Tag,omitempty" name:"Tag"`
+
+	// Ipv6 access configuration
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+	// Offline cache
+	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
+
+	// QUIC access, which is a paid service. You can check the product document and Billing Overview for more information.
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+	// Access authentication for S3 origin
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+	// Access authentication for OSS origin
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
+
+	// Origin-pull authentication for Huawei Cloud OBS origin
+	HwPrivateAccess *HwPrivateAccess `json:"HwPrivateAccess,omitempty" name:"HwPrivateAccess"`
+
+	// Origin-pull authentication for Qiniu Cloud Kodo origin
+	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
+
+	// Origin-pull authentication for other origins
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
+
+	// HTTPS (enabled by default), which is a paid service. You can check the product document and Billing Overview for more information.
+	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
+}
+
+func (r *AddCdnDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddCdnDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "ServiceType")
+	delete(f, "Origin")
+	delete(f, "ProjectId")
+	delete(f, "IpFilter")
+	delete(f, "IpFreqLimit")
+	delete(f, "StatusCodeCache")
+	delete(f, "Compression")
+	delete(f, "BandwidthAlert")
+	delete(f, "RangeOriginPull")
+	delete(f, "FollowRedirect")
+	delete(f, "ErrorPage")
+	delete(f, "RequestHeader")
+	delete(f, "ResponseHeader")
+	delete(f, "DownstreamCapping")
+	delete(f, "CacheKey")
+	delete(f, "ResponseHeaderCache")
+	delete(f, "VideoSeek")
+	delete(f, "Cache")
+	delete(f, "OriginPullOptimization")
+	delete(f, "Https")
+	delete(f, "Authentication")
+	delete(f, "Seo")
+	delete(f, "ForceRedirect")
+	delete(f, "Referer")
+	delete(f, "MaxAge")
+	delete(f, "Ipv6")
+	delete(f, "SpecificConfig")
+	delete(f, "Area")
+	delete(f, "OriginPullTimeout")
+	delete(f, "Tag")
+	delete(f, "Ipv6Access")
+	delete(f, "OfflineCache")
+	delete(f, "Quic")
+	delete(f, "AwsPrivateAccess")
+	delete(f, "OssPrivateAccess")
+	delete(f, "HwPrivateAccess")
+	delete(f, "QnPrivateAccess")
+	delete(f, "OthersPrivateAccess")
+	delete(f, "HttpsBilling")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddCdnDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddCdnDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AddCdnDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *AddCdnDomainResponseParams `json:"Response"`
+}
+
+func (r *AddCdnDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddCdnDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AdvanceCacheRule struct {
 	// Rule types:
 	// `all`: Apply to all files.
@@ -969,7 +1316,8 @@ type BriefDomain struct {
 	// Acceleration service status
 	// `rejected`: The domain name is rejected due to expiration/deregistration of its ICP filing
 	// `processing`: Deploying
-	// `online`: Activated
+	// `closing`: Disabling
+	// `online`: Enabled
 	// `offline`: Disabled
 	Status *string `json:"Status,omitempty" name:"Status"`
 
@@ -3647,6 +3995,7 @@ type DetailDomain struct {
 	// Acceleration service status
 	// `rejected`: The domain name is rejected due to expiration/deregistration of its ICP filing
 	// `processing`: Deploying
+	// `closing`: Disabling
 	// `online`: Enabled
 	// `offline`: Disabled
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -3904,9 +4253,13 @@ type DetailDomain struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
 
-	// HTTPS service
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// HTTPS (enabled by default)
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
+
+	// Origin-pull authentication for other origins
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
 }
 
 // Predefined struct for user
@@ -4569,7 +4922,7 @@ type Https struct {
 }
 
 type HttpsBilling struct {
-	// HTTPS Service
+	// HTTPS (enabled by default), which will incur charges.
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -4630,8 +4983,8 @@ type IpFilter struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules"`
 
-	// [Unavailable soon] The code returned when the IP blocklist/allowlist verification fails.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// (Disused) Expected HTTP code to return when the IP allowlist/blocklist verification fails. <br><font color=red>The 514 code is used instead.</font>
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
 }
 
@@ -5543,6 +5896,27 @@ type OssPrivateAccess struct {
 
 	// BucketName
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+}
+
+type OthersPrivateAccess struct {
+	// Whether to enable access authentication. Valid values: `on`, `off`.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Access ID.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+	// Key.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+	// Region.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Bucket name
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 }
 
@@ -7308,7 +7682,10 @@ type UpdateDomainConfigRequestParams struct {
 	// Access authentication for QiNiu Cloud Kodo origin
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
 
-	// HTTPS service
+	// Origin-pull authentication for other origins
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
+
+	// HTTPS, which is a paid service. You can check the product document and Billing Overview for more information.
 	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
 }
 
@@ -7464,7 +7841,10 @@ type UpdateDomainConfigRequest struct {
 	// Access authentication for QiNiu Cloud Kodo origin
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitempty" name:"QnPrivateAccess"`
 
-	// HTTPS service
+	// Origin-pull authentication for other origins
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
+
+	// HTTPS, which is a paid service. You can check the product document and Billing Overview for more information.
 	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitempty" name:"HttpsBilling"`
 }
 
@@ -7527,6 +7907,7 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "ShareCname")
 	delete(f, "HwPrivateAccess")
 	delete(f, "QnPrivateAccess")
+	delete(f, "OthersPrivateAccess")
 	delete(f, "HttpsBilling")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDomainConfigRequest has unknown keys!", "")

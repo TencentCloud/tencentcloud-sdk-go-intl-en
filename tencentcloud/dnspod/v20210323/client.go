@@ -76,6 +76,7 @@ func NewCreateDomainResponse() (response *CreateDomainResponse) {
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
 //  INVALIDPARAMETER_DOMAINNOTREGED = "InvalidParameter.DomainNotReged"
 //  INVALIDPARAMETER_EMAILNOTVERIFIED = "InvalidParameter.EmailNotVerified"
+//  INVALIDPARAMETER_QUHUITXTNOTMATCH = "InvalidParameter.QuhuiTxtNotMatch"
 //  INVALIDPARAMETER_QUHUITXTRECORDWAIT = "InvalidParameter.QuhuiTxtRecordWait"
 //  INVALIDPARAMETER_TOOLSDOMAININVALID = "InvalidParameter.ToolsDomainInvalid"
 //  INVALIDPARAMETER_UNREALNAMEUSER = "InvalidParameter.UnrealNameUser"
@@ -96,6 +97,7 @@ func (c *Client) CreateDomain(request *CreateDomainRequest) (response *CreateDom
 //  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
 //  INVALIDPARAMETER_DOMAINNOTREGED = "InvalidParameter.DomainNotReged"
 //  INVALIDPARAMETER_EMAILNOTVERIFIED = "InvalidParameter.EmailNotVerified"
+//  INVALIDPARAMETER_QUHUITXTNOTMATCH = "InvalidParameter.QuhuiTxtNotMatch"
 //  INVALIDPARAMETER_QUHUITXTRECORDWAIT = "InvalidParameter.QuhuiTxtRecordWait"
 //  INVALIDPARAMETER_TOOLSDOMAININVALID = "InvalidParameter.ToolsDomainInvalid"
 //  INVALIDPARAMETER_UNREALNAMEUSER = "InvalidParameter.UnrealNameUser"
@@ -1729,6 +1731,7 @@ func NewDescribeRecordLineListResponse() (response *DescribeRecordLineListRespon
 // This API is used to get the split zones allowed by the domain level.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOGINAREANOTALLOWED = "FailedOperation.LoginAreaNotAllowed"
 //  FAILEDOPERATION_LOGINFAILED = "FailedOperation.LoginFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
@@ -1757,6 +1760,7 @@ func (c *Client) DescribeRecordLineList(request *DescribeRecordLineListRequest) 
 // This API is used to get the split zones allowed by the domain level.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOGINAREANOTALLOWED = "FailedOperation.LoginAreaNotAllowed"
 //  FAILEDOPERATION_LOGINFAILED = "FailedOperation.LoginFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
@@ -1994,6 +1998,7 @@ func NewDescribeSubdomainAnalyticsResponse() (response *DescribeSubdomainAnalyti
 //  FAILEDOPERATION_TEMPORARYERROR = "FailedOperation.TemporaryError"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
+//  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
 //  INVALIDPARAMETERVALUE_DOMAINGRADEINVALID = "InvalidParameterValue.DomainGradeInvalid"
 //  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
 //  OPERATIONDENIED_DOMAINOWNERALLOWEDONLY = "OperationDenied.DomainOwnerAllowedOnly"
@@ -2010,6 +2015,7 @@ func (c *Client) DescribeSubdomainAnalytics(request *DescribeSubdomainAnalyticsR
 //  FAILEDOPERATION_TEMPORARYERROR = "FailedOperation.TemporaryError"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
 //  INVALIDPARAMETER_DOMAININVALID = "InvalidParameter.DomainInvalid"
+//  INVALIDPARAMETER_DOMAINISALIASER = "InvalidParameter.DomainIsAliaser"
 //  INVALIDPARAMETERVALUE_DOMAINGRADEINVALID = "InvalidParameterValue.DomainGradeInvalid"
 //  INVALIDPARAMETERVALUE_DOMAINNOTEXISTS = "InvalidParameterValue.DomainNotExists"
 //  OPERATIONDENIED_DOMAINOWNERALLOWEDONLY = "OperationDenied.DomainOwnerAllowedOnly"
@@ -2629,6 +2635,7 @@ func NewModifyRecordBatchResponse() (response *ModifyRecordBatchResponse) {
 // This API is used to bulk modify records.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINISLOCKED = "FailedOperation.DomainIsLocked"
 //  FAILEDOPERATION_DOMAINISSPAM = "FailedOperation.DomainIsSpam"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"
@@ -2661,6 +2668,7 @@ func (c *Client) ModifyRecordBatch(request *ModifyRecordBatchRequest) (response 
 // This API is used to bulk modify records.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DOMAINISLOCKED = "FailedOperation.DomainIsLocked"
 //  FAILEDOPERATION_DOMAINISSPAM = "FailedOperation.DomainIsSpam"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnknowError"

@@ -676,6 +676,7 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndexResponse, err error) {
     return c.CreateIndexWithContext(context.Background(), request)
 }
@@ -699,6 +700,7 @@ func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndex
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateIndexWithContext(ctx context.Context, request *CreateIndexRequest) (response *CreateIndexResponse, err error) {
     if request == nil {
         request = NewCreateIndexRequest()
@@ -961,6 +963,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
+//  FAILEDOPERATION_TOPICCREATING = "FailedOperation.TopicCreating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
@@ -983,6 +986,7 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDPERIOD = "FailedOperation.InvalidPeriod"
+//  FAILEDOPERATION_TOPICCREATING = "FailedOperation.TopicCreating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
@@ -1915,6 +1919,68 @@ func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeAlarmsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAlertRecordHistoryRequest() (request *DescribeAlertRecordHistoryRequest) {
+    request = &DescribeAlertRecordHistoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeAlertRecordHistory")
+    
+    
+    return
+}
+
+func NewDescribeAlertRecordHistoryResponse() (response *DescribeAlertRecordHistoryResponse) {
+    response = &DescribeAlertRecordHistoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAlertRecordHistory
+// This API is used to get alarm records, such as today's uncleared alarms.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeAlertRecordHistory(request *DescribeAlertRecordHistoryRequest) (response *DescribeAlertRecordHistoryResponse, err error) {
+    return c.DescribeAlertRecordHistoryWithContext(context.Background(), request)
+}
+
+// DescribeAlertRecordHistory
+// This API is used to get alarm records, such as today's uncleared alarms.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeAlertRecordHistoryWithContext(ctx context.Context, request *DescribeAlertRecordHistoryRequest) (response *DescribeAlertRecordHistoryResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlertRecordHistoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlertRecordHistory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAlertRecordHistoryResponse()
     err = c.Send(request, response)
     return
 }
@@ -3586,6 +3652,7 @@ func NewModifyIndexResponse() (response *ModifyIndexResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyIndex(request *ModifyIndexRequest) (response *ModifyIndexResponse, err error) {
     return c.ModifyIndexWithContext(context.Background(), request)
 }
@@ -3609,6 +3676,7 @@ func (c *Client) ModifyIndex(request *ModifyIndexRequest) (response *ModifyIndex
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyIndexWithContext(ctx context.Context, request *ModifyIndexRequest) (response *ModifyIndexResponse, err error) {
     if request == nil {
         request = NewModifyIndexRequest()

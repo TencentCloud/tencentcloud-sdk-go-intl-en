@@ -133,6 +133,10 @@ type BillDetail struct {
 
 	// Project ID: ID of the project to which the resource belongs
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Price attribute
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PriceInfo []*string `json:"PriceInfo,omitempty" name:"PriceInfo"`
 }
 
 type BillDetailComponent struct {
@@ -418,7 +422,7 @@ type CosDetailSets struct {
 	// The end time of the usage
 	DosageEndTime *string `json:"DosageEndTime,omitempty" name:"DosageEndTime"`
 
-	// Sub-product name
+	// Subproduct name
 	SubProductCodeName *string `json:"SubProductCodeName,omitempty" name:"SubProductCodeName"`
 
 	// Billable item name
@@ -1222,7 +1226,7 @@ type DescribeBillSummaryByTagRequestParams struct {
 	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Cost allocation tag key
+	// Cost allocation tag key, which can be customized.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Payer UIN
@@ -1241,7 +1245,7 @@ type DescribeBillSummaryByTagRequest struct {
 	// The value must be of the same month as `BeginTime`. Query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Cost allocation tag key
+	// Cost allocation tag key, which can be customized.
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
 
 	// Payer UIN
@@ -1309,10 +1313,10 @@ func (r *DescribeBillSummaryByTagResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDosageCosDetailByDateRequestParams struct {
-	// The start date of the usage query
+	// The start date of the usage query, such as `2020-09-01`.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// The end date of the usage query (end date must be in the same month as the start date)
+	// The end date of the usage query (end date must be in the same month as the start date), such as `2020-09-30`.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
 	// Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
@@ -1322,10 +1326,10 @@ type DescribeDosageCosDetailByDateRequestParams struct {
 type DescribeDosageCosDetailByDateRequest struct {
 	*tchttp.BaseRequest
 	
-	// The start date of the usage query
+	// The start date of the usage query, such as `2020-09-01`.
 	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
 
-	// The end date of the usage query (end date must be in the same month as the start date)
+	// The end date of the usage query (end date must be in the same month as the start date), such as `2020-09-30`.
 	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
 
 	// Bucket name. You can use `Get Service` to query the list of all buckets under a requester account. For details, see [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291).
@@ -1404,10 +1408,10 @@ type DescribeVoucherInfoRequestParams struct {
 	// The voucher name.
 	VoucherName *string `json:"VoucherName,omitempty" name:"VoucherName"`
 
-	// The start time of the promotional campaign.
+	// The start date of the voucher issuance, such as `2021-01-01`.
 	TimeFrom *string `json:"TimeFrom,omitempty" name:"TimeFrom"`
 
-	// The end time of the promotional campaign.
+	// The end date of the voucher issuance, such as `2021-01-01`.
 	TimeTo *string `json:"TimeTo,omitempty" name:"TimeTo"`
 
 	// The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.
@@ -1453,10 +1457,10 @@ type DescribeVoucherInfoRequest struct {
 	// The voucher name.
 	VoucherName *string `json:"VoucherName,omitempty" name:"VoucherName"`
 
-	// The start time of the promotional campaign.
+	// The start date of the voucher issuance, such as `2021-01-01`.
 	TimeFrom *string `json:"TimeFrom,omitempty" name:"TimeFrom"`
 
-	// The end time of the promotional campaign.
+	// The end date of the voucher issuance, such as `2021-01-01`.
 	TimeTo *string `json:"TimeTo,omitempty" name:"TimeTo"`
 
 	// The field used to sort the records. Valid values: BeginTime, EndTime, CreateTime.

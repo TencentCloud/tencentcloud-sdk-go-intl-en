@@ -1486,6 +1486,10 @@ type DatahubTopicDTO struct {
 type DatahubTopicResp struct {
 	// Topic name
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// TopicId
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 }
 
 // Predefined struct for user

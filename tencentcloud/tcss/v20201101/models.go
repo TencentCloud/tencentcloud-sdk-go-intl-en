@@ -9581,7 +9581,7 @@ func (r *DescribeAssetHostDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetHostDetailResponseParams struct {
-	// CWPP UUID
+	// TCSS UUID
 	UUID *string `json:"UUID,omitempty" name:"UUID"`
 
 	// Update time
@@ -13149,6 +13149,9 @@ type DescribeClusterDetailResponseParams struct {
 	// Number of Ingresses
 	IngressCount *uint64 `json:"IngressCount,omitempty" name:"IngressCount"`
 
+	// IPs of the primary nodes
+	MasterIps *string `json:"MasterIps,omitempty" name:"MasterIps"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -13229,6 +13232,9 @@ type DescribeClusterSummaryResponseParams struct {
 
 	// Number of clusters that failed the check
 	FailedClusterCount *uint64 `json:"FailedClusterCount,omitempty" name:"FailedClusterCount"`
+
+	// Number of clusters not imported
+	NotImportedClusterCount *uint64 `json:"NotImportedClusterCount,omitempty" name:"NotImportedClusterCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -23492,6 +23498,21 @@ type DescribeVulSummaryResponseParams struct {
 
 	// Number of images on the latest version affected by critical or high-risk vulnerabilities
 	SeriousVulNewestImageCount *int64 `json:"SeriousVulNewestImageCount,omitempty" name:"SeriousVulNewestImageCount"`
+
+	// Number of high-priority system vulnerabilities
+	SystemVulnerabilityFocusCount *int64 `json:"SystemVulnerabilityFocusCount,omitempty" name:"SystemVulnerabilityFocusCount"`
+
+	// Number of high-priority web vulnerabilities
+	WebVulnerabilityFocusCount *int64 `json:"WebVulnerabilityFocusCount,omitempty" name:"WebVulnerabilityFocusCount"`
+
+	// Number of affected local images
+	SeriousVulnerabilityLocalImageCount *int64 `json:"SeriousVulnerabilityLocalImageCount,omitempty" name:"SeriousVulnerabilityLocalImageCount"`
+
+	// Number of affected repository images
+	SeriousVulnerabilityRegistryImageCount *int64 `json:"SeriousVulnerabilityRegistryImageCount,omitempty" name:"SeriousVulnerabilityRegistryImageCount"`
+
+	// Number of emergency vulnerabilities
+	EmergencyVulnerabilityCount *int64 `json:"EmergencyVulnerabilityCount,omitempty" name:"EmergencyVulnerabilityCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

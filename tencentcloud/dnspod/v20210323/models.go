@@ -36,8 +36,7 @@ type AddRecordBatch struct {
 	// Split zone ID of the DNS record. If both `RecordLine` and `RecordLineId` are specified, `RecordLineId` will be used.
 	RecordLineId *string `json:"RecordLineId,omitempty" name:"RecordLineId"`
 
-	// Record weight (not supported).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The record weight (not supported).
 	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
 
 	// MX record value. It is `0` by default for non-MX records and required for MX records.
@@ -510,6 +509,10 @@ type CreateRecordBatchRecord struct {
 	// MX weight of the record
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MX *uint64 `json:"MX,omitempty" name:"MX"`
+
+	// The record weight.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weight *uint64 `json:"Weight,omitempty" name:"Weight"`
 }
 
 // Predefined struct for user
@@ -1308,7 +1311,7 @@ func (r *DescribeDomainGroupListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDomainListRequestParams struct {
-	// Domain group type. Valid values: `ALL`, `MINE`, `SHARE`, `ISMARK`, `PAUSE`, `VIP`, `RECENT`, `SHARE_OUT`. Default value: `ALL`.
+	// The domain group type. Valid values: `ALL` (default), `MINE`, `SHARE`, `ISMARK`, `PAUSE`, `VIP`, `RECENT`, `SHARE_OUT`, and `FREE`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Record offset starting from `0`. Default value: `0`.
@@ -1327,7 +1330,7 @@ type DescribeDomainListRequestParams struct {
 type DescribeDomainListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain group type. Valid values: `ALL`, `MINE`, `SHARE`, `ISMARK`, `PAUSE`, `VIP`, `RECENT`, `SHARE_OUT`. Default value: `ALL`.
+	// The domain group type. Valid values: `ALL` (default), `MINE`, `SHARE`, `ISMARK`, `PAUSE`, `VIP`, `RECENT`, `SHARE_OUT`, and `FREE`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Record offset starting from `0`. Default value: `0`.

@@ -74,6 +74,9 @@ const (
 	// The log topic has been disabled.
 	FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
 
+	// The topic is being created.
+	FAILEDOPERATION_TOPICCREATING = "FailedOperation.TopicCreating"
+
 	// The log topic has been isolated.
 	FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 

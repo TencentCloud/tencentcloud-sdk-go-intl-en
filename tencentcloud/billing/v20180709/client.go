@@ -180,7 +180,7 @@ func NewDescribeBillResourceSummaryResponse() (response *DescribeBillResourceSum
 }
 
 // DescribeBillResourceSummary
-// This API is used to query bill resources summary. 
+// This API is used to query bill resources summary.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
@@ -190,7 +190,7 @@ func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummar
 }
 
 // DescribeBillResourceSummary
-// This API is used to query bill resources summary. 
+// This API is used to query bill resources summary.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"

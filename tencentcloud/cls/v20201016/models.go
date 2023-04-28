@@ -215,17 +215,83 @@ type AlarmTargetInfo struct {
 	EndTimeOffset *int64 `json:"EndTimeOffset,omitempty" name:"EndTimeOffset"`
 }
 
-type AnalysisDimensional struct {
-	// Analysis name
+type AlertHistoryNotice struct {
+	// Notification group name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Type of data being analyzed. Valid values: `query`; `field`; `original`
+	// Notification group ID
+	AlarmNoticeId *string `json:"AlarmNoticeId,omitempty" name:"AlarmNoticeId"`
+}
+
+type AlertHistoryRecord struct {
+	// Alarm record ID
+	RecordId *string `json:"RecordId,omitempty" name:"RecordId"`
+
+	// Alarm policy ID
+	AlarmId *string `json:"AlarmId,omitempty" name:"AlarmId"`
+
+	// Alarm policy name
+	AlarmName *string `json:"AlarmName,omitempty" name:"AlarmName"`
+
+	// ID of the monitored object
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Name of the monitored object
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Region of the monitored object
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Trigger condition
+	Trigger *string `json:"Trigger,omitempty" name:"Trigger"`
+
+	// Number of cycles for which the alarm lasts. An alarm will be triggered only after the trigger condition is met for the number of cycles specified by `TriggerCount`.
+	TriggerCount *int64 `json:"TriggerCount,omitempty" name:"TriggerCount"`
+
+	// Alarm notification frequency (minutes)
+	AlarmPeriod *int64 `json:"AlarmPeriod,omitempty" name:"AlarmPeriod"`
+
+	// Notification group
+	Notices []*AlertHistoryNotice `json:"Notices,omitempty" name:"Notices"`
+
+	// Alarm duration (minutes)
+	Duration *int64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Alarm status. Valid values: `0` (uncleared), `1` (cleared), `2` (expired)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Alarm generation time, which is a Unix timestamp in ms
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Group information corresponding to triggering by group
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GroupTriggerCondition []*GroupTriggerConditionInfo `json:"GroupTriggerCondition,omitempty" name:"GroupTriggerCondition"`
+
+	// Alarm severity. Valid values: `0` (Warn), `1` (Info), `2` (Critical)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AlarmLevel *uint64 `json:"AlarmLevel,omitempty" name:"AlarmLevel"`
+
+	// Type of the monitored object
+	// `0`: The same object is specified for all statements. `1`: An object is separately specified for each statement. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MonitorObjectType *uint64 `json:"MonitorObjectType,omitempty" name:"MonitorObjectType"`
+}
+
+type AnalysisDimensional struct {
+	// Analysis name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Type of data being analyzed. Valid values: `query`, `field`, `original`
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Analysis content
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Content *string `json:"Content,omitempty" name:"Content"`
 
 	// Configuration
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConfigInfo []*AlarmAnalysisConfig `json:"ConfigInfo,omitempty" name:"ConfigInfo"`
 }
 
@@ -1537,6 +1603,16 @@ type CreateTopicRequestParams struct {
 
 	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Log topic description
+	Describes *string `json:"Describes,omitempty" name:"Describes"`
+
+	// `0`: Disable log transitioning.
+	// A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+	HotPeriod *uint64 `json:"HotPeriod,omitempty" name:"HotPeriod"`
+
+	// Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+	IsWebTracking *bool `json:"IsWebTracking,omitempty" name:"IsWebTracking"`
 }
 
 type CreateTopicRequest struct {
@@ -1565,6 +1641,16 @@ type CreateTopicRequest struct {
 
 	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Log topic description
+	Describes *string `json:"Describes,omitempty" name:"Describes"`
+
+	// `0`: Disable log transitioning.
+	// A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+	HotPeriod *uint64 `json:"HotPeriod,omitempty" name:"HotPeriod"`
+
+	// Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+	IsWebTracking *bool `json:"IsWebTracking,omitempty" name:"IsWebTracking"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -1587,6 +1673,9 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "MaxSplitPartitions")
 	delete(f, "StorageType")
 	delete(f, "Period")
+	delete(f, "Describes")
+	delete(f, "HotPeriod")
+	delete(f, "IsWebTracking")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -2544,6 +2633,104 @@ func (r *DescribeAlarmsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAlarmsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAlertRecordHistoryRequestParams struct {
+	// Start time of the query range, which is a Unix timestamp in ms
+	From *uint64 `json:"From,omitempty" name:"From"`
+
+	// End time of the query range, which is a Unix timestamp in ms
+	To *uint64 `json:"To,omitempty" name:"To"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// - alertId: Filter by alarm policy ID. Type: String; optional
+	// - topicId: Filter by ID of monitored object. Type: String; optional
+	// - status: Filter by alarm status. Type: String, optional. Valid values: `0` (uncleared), `1` (cleared), `2` (expired)
+	// - alarmLevel: Filter by alarm severity. Type: String, optional. Valid values: `0` (Warn), `1` (Info), `2` (Critical)
+	// 
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeAlertRecordHistoryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time of the query range, which is a Unix timestamp in ms
+	From *uint64 `json:"From,omitempty" name:"From"`
+
+	// End time of the query range, which is a Unix timestamp in ms
+	To *uint64 `json:"To,omitempty" name:"To"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Maximum value: 100
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// - alertId: Filter by alarm policy ID. Type: String; optional
+	// - topicId: Filter by ID of monitored object. Type: String; optional
+	// - status: Filter by alarm status. Type: String, optional. Valid values: `0` (uncleared), `1` (cleared), `2` (expired)
+	// - alarmLevel: Filter by alarm severity. Type: String, optional. Valid values: `0` (Warn), `1` (Info), `2` (Critical)
+	// 
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeAlertRecordHistoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAlertRecordHistoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "From")
+	delete(f, "To")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlertRecordHistoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAlertRecordHistoryResponseParams struct {
+	// Total alarm records
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Alarm record details
+	Records []*AlertHistoryRecord `json:"Records,omitempty" name:"Records"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeAlertRecordHistoryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAlertRecordHistoryResponseParams `json:"Response"`
+}
+
+func (r *DescribeAlertRecordHistoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAlertRecordHistoryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3931,6 +4118,12 @@ func (r *DescribeTopicsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DynamicIndex struct {
+	// Dynamic index configuration status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *bool `json:"Status,omitempty" name:"Status"`
+}
+
 type ExcludePathInfo struct {
 	// Type. Valid values: `File`, `Path`
 	Type *string `json:"Type,omitempty" name:"Type"`
@@ -4203,6 +4396,14 @@ func (r *GetAlarmLogResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetAlarmLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type GroupTriggerConditionInfo struct {
+	// Name of the field for triggering by group
+	Key *string `json:"Key,omitempty" name:"Key"`
+
+	// Value of the field for triggering by group
+	Value *string `json:"Value,omitempty" name:"Value"`
 }
 
 type HistogramInfo struct {
@@ -5387,6 +5588,16 @@ type ModifyTopicRequestParams struct {
 
 	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Log topic description
+	Describes *string `json:"Describes,omitempty" name:"Describes"`
+
+	// `0`: Disable log transitioning.
+	// A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+	HotPeriod *uint64 `json:"HotPeriod,omitempty" name:"HotPeriod"`
+
+	// Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+	IsWebTracking *bool `json:"IsWebTracking,omitempty" name:"IsWebTracking"`
 }
 
 type ModifyTopicRequest struct {
@@ -5412,6 +5623,16 @@ type ModifyTopicRequest struct {
 
 	// Lifecycle in days. Value range: 1–3600 (STANDARD storage); 7–3600 (IA storage). `3640` indicates permanent retention.
 	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Log topic description
+	Describes *string `json:"Describes,omitempty" name:"Describes"`
+
+	// `0`: Disable log transitioning.
+	// A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+	HotPeriod *uint64 `json:"HotPeriod,omitempty" name:"HotPeriod"`
+
+	// Whether to enable web tracking. Valid values: `false` (disable); `true` (enable)
+	IsWebTracking *bool `json:"IsWebTracking,omitempty" name:"IsWebTracking"`
 }
 
 func (r *ModifyTopicRequest) ToJsonString() string {
@@ -5433,6 +5654,9 @@ func (r *ModifyTopicRequest) FromJsonString(s string) error {
 	delete(f, "AutoSplit")
 	delete(f, "MaxSplitPartitions")
 	delete(f, "Period")
+	delete(f, "Describes")
+	delete(f, "HotPeriod")
+	delete(f, "IsWebTracking")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicRequest has unknown keys!", "")
 	}
@@ -5673,6 +5897,10 @@ type RuleInfo struct {
 	// Metadata field index configuration. If the configuration is left empty, metadata field indexing is not enabled.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tag *RuleTagInfo `json:"Tag,omitempty" name:"Tag"`
+
+	// Dynamic index configuration. If the configuration is empty, dynamic indexing is not enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DynamicIndex *DynamicIndex `json:"DynamicIndex,omitempty" name:"DynamicIndex"`
 }
 
 type RuleKeyValueInfo struct {
@@ -5738,9 +5966,9 @@ type SearchLogRequestParams struct {
 	// Default value: `1`
 	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
 
-	// Search syntax.
+	// Search syntax
 	// `0` (default): Lucene; `1`: CQL.
-	// For more information, visit https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules.
+	// For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Syntax Rules</a>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitempty" name:"SyntaxRule"`
 }
 
@@ -5792,9 +6020,9 @@ type SearchLogRequest struct {
 	// Default value: `1`
 	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
 
-	// Search syntax.
+	// Search syntax
 	// `0` (default): Lucene; `1`: CQL.
-	// For more information, visit https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules.
+	// For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Syntax Rules</a>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitempty" name:"SyntaxRule"`
 }
 
@@ -5861,6 +6089,10 @@ type SearchLogResponseParams struct {
 	// This parameter is valid only when `UseNewAnalysis` is `true`.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	Columns []*Column `json:"Columns,omitempty" name:"Columns"`
+
+	// Sample rate used in this statistical analysis
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SamplingRate *float64 `json:"SamplingRate,omitempty" name:"SamplingRate"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`

@@ -7942,6 +7942,10 @@ type DescribePrometheusGlobalConfigResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RawJobs []*PrometheusConfigItem `json:"RawJobs,omitempty" name:"RawJobs"`
 
+	// List of probes and the corresponding targets information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Probes []*PrometheusConfigItem `json:"Probes,omitempty" name:"Probes"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -12006,6 +12010,10 @@ type PrometheusConfigItem struct {
 	// If the configuration comes from a template, this parameter is the template ID, which is used as an output parameter.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// Number of targets
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Targets *Targets `json:"Targets,omitempty" name:"Targets"`
 }
 
 type PrometheusInstanceGrantInfo struct {
@@ -12347,6 +12355,18 @@ type PrometheusRecordRuleYamlItem struct {
 	// If the recording rule comes from the user cluster CRD resource definition, `ClusterId` is the cluster ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Number of rules
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Count *int64 `json:"Count,omitempty" name:"Count"`
 }
 
 type PrometheusRuleKV struct {
@@ -13089,6 +13109,24 @@ type TagInstance struct {
 	// Tag status. 2: existent; 1: nonexistent
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TagStatus *int64 `json:"TagStatus,omitempty" name:"TagStatus"`
+}
+
+type Targets struct {
+	// The total count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Number of online targets
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Up *uint64 `json:"Up,omitempty" name:"Up"`
+
+	// Number of offline targets
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Down *uint64 `json:"Down,omitempty" name:"Down"`
+
+	// Number of unknown status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Unknown *uint64 `json:"Unknown,omitempty" name:"Unknown"`
 }
 
 type TaskStepInfo struct {

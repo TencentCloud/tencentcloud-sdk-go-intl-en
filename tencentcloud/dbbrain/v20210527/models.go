@@ -710,6 +710,79 @@ func (r *CreateSecurityAuditLogExportTaskResponse) FromJsonString(s string) erro
 }
 
 // Predefined struct for user
+type DeleteDBDiagReportTasksRequestParams struct {
+	// List of IDs of tasks to be deleted
+	AsyncRequestIds []*int64 `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL).
+	// Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+type DeleteDBDiagReportTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of IDs of tasks to be deleted
+	AsyncRequestIds []*int64 `json:"AsyncRequestIds,omitempty" name:"AsyncRequestIds"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL).
+	// Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+}
+
+func (r *DeleteDBDiagReportTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDBDiagReportTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AsyncRequestIds")
+	delete(f, "InstanceId")
+	delete(f, "Product")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDBDiagReportTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDBDiagReportTasksResponseParams struct {
+	// Task deletion status (`0`: Successful)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteDBDiagReportTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDBDiagReportTasksResponseParams `json:"Response"`
+}
+
+func (r *DeleteDBDiagReportTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDBDiagReportTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteSecurityAuditLogExportTasksRequestParams struct {
 	// Security audit group ID.
 	SecAuditGroupId *string `json:"SecAuditGroupId,omitempty" name:"SecAuditGroupId"`
@@ -2479,6 +2552,143 @@ func (r *DescribeSlowLogUserHostStatsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSlowLogsRequestParams struct {
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// MD5 value of a SQL template
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
+
+	// Start time in the format of "2019-09-10 12:13:14".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of "2019-09-11 10:13:14". The interval between the end time and the start time can be up to 7 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of queried items. Default value: `20`. Max value: `100`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Database list
+	DB []*string `json:"DB,omitempty" name:"DB"`
+
+	// Keyword
+	Key []*string `json:"Key,omitempty" name:"Key"`
+
+	// User
+	User []*string `json:"User,omitempty" name:"User"`
+
+	// ip
+	Ip []*string `json:"Ip,omitempty" name:"Ip"`
+
+	// Duration range. The left and right borders of the range are the zeroth and first element of the array, respectively.
+	Time []*int64 `json:"Time,omitempty" name:"Time"`
+}
+
+type DescribeSlowLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
+	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// MD5 value of a SQL template
+	Md5 *string `json:"Md5,omitempty" name:"Md5"`
+
+	// Start time in the format of "2019-09-10 12:13:14".
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time in the format of "2019-09-11 10:13:14". The interval between the end time and the start time can be up to 7 days.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of queried items. Default value: `20`. Max value: `100`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Database list
+	DB []*string `json:"DB,omitempty" name:"DB"`
+
+	// Keyword
+	Key []*string `json:"Key,omitempty" name:"Key"`
+
+	// User
+	User []*string `json:"User,omitempty" name:"User"`
+
+	// ip
+	Ip []*string `json:"Ip,omitempty" name:"Ip"`
+
+	// Duration range. The left and right borders of the range are the zeroth and first element of the array, respectively.
+	Time []*int64 `json:"Time,omitempty" name:"Time"`
+}
+
+func (r *DescribeSlowLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSlowLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "InstanceId")
+	delete(f, "Md5")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "DB")
+	delete(f, "Key")
+	delete(f, "User")
+	delete(f, "Ip")
+	delete(f, "Time")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlowLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSlowLogsResponseParams struct {
+	// Number of eligible entries.
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Slow log details
+	Rows []*SlowLogInfoItem `json:"Rows,omitempty" name:"Rows"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSlowLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSlowLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeSlowLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSlowLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTopSpaceSchemaTimeSeriesRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3604,6 +3814,40 @@ type SlowLogHost struct {
 
 	// Number of slow logs from this source address.
 	Count *int64 `json:"Count,omitempty" name:"Count"`
+}
+
+type SlowLogInfoItem struct {
+	// Slow log start time
+	Timestamp *string `json:"Timestamp,omitempty" name:"Timestamp"`
+
+	// SQL statement
+	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+
+	// Database
+	Database *string `json:"Database,omitempty" name:"Database"`
+
+	// User source
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// IP source
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserHost *string `json:"UserHost,omitempty" name:"UserHost"`
+
+	// Execution time in seconds
+	QueryTime *int64 `json:"QueryTime,omitempty" name:"QueryTime"`
+
+	// Lock time in seconds
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LockTime *int64 `json:"LockTime,omitempty" name:"LockTime"`
+
+	// Number of scanned rows
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RowsExamined *int64 `json:"RowsExamined,omitempty" name:"RowsExamined"`
+
+	// Number of returned rows
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RowsSent *int64 `json:"RowsSent,omitempty" name:"RowsSent"`
 }
 
 type SlowLogTopSqlItem struct {
