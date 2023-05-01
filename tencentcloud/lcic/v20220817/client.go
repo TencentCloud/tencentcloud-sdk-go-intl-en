@@ -559,6 +559,54 @@ func (c *Client) BatchDeleteRecordWithContext(ctx context.Context, request *Batc
     return
 }
 
+func NewBatchDescribeDocumentRequest() (request *BatchDescribeDocumentRequest) {
+    request = &BatchDescribeDocumentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "BatchDescribeDocument")
+    
+    
+    return
+}
+
+func NewBatchDescribeDocumentResponse() (response *BatchDescribeDocumentResponse) {
+    response = &BatchDescribeDocumentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchDescribeDocument
+// This API is used to get courseware information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) BatchDescribeDocument(request *BatchDescribeDocumentRequest) (response *BatchDescribeDocumentResponse, err error) {
+    return c.BatchDescribeDocumentWithContext(context.Background(), request)
+}
+
+// BatchDescribeDocument
+// This API is used to get courseware information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) BatchDescribeDocumentWithContext(ctx context.Context, request *BatchDescribeDocumentRequest) (response *BatchDescribeDocumentResponse, err error) {
+    if request == nil {
+        request = NewBatchDescribeDocumentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchDescribeDocument require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchDescribeDocumentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBatchRegisterRequest() (request *BatchRegisterRequest) {
     request = &BatchRegisterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -699,6 +747,7 @@ func NewCreateDocumentResponse() (response *CreateDocumentResponse) {
 // This API is used to create a document to be used in a room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
@@ -710,6 +759,7 @@ func (c *Client) CreateDocument(request *CreateDocumentRequest) (response *Creat
 // This API is used to create a document to be used in a room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
@@ -1401,6 +1451,58 @@ func (c *Client) DeleteRoomWithContext(ctx context.Context, request *DeleteRoomR
     return
 }
 
+func NewDeleteSupervisorRequest() (request *DeleteSupervisorRequest) {
+    request = &DeleteSupervisorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DeleteSupervisor")
+    
+    
+    return
+}
+
+func NewDeleteSupervisorResponse() (response *DeleteSupervisorResponse) {
+    response = &DeleteSupervisorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteSupervisor
+// This API is used to delete spectators.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+func (c *Client) DeleteSupervisor(request *DeleteSupervisorRequest) (response *DeleteSupervisorResponse, err error) {
+    return c.DeleteSupervisorWithContext(context.Background(), request)
+}
+
+// DeleteSupervisor
+// This API is used to delete spectators.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
+func (c *Client) DeleteSupervisorWithContext(ctx context.Context, request *DeleteSupervisorRequest) (response *DeleteSupervisorResponse, err error) {
+    if request == nil {
+        request = NewDeleteSupervisorRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSupervisor require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSupervisorResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAnswerListRequest() (request *DescribeAnswerListRequest) {
     request = &DescribeAnswerListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1631,6 +1733,70 @@ func (c *Client) DescribeDocumentWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeDocumentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDocumentsRequest() (request *DescribeDocumentsRequest) {
+    request = &DescribeDocumentsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "DescribeDocuments")
+    
+    
+    return
+}
+
+func NewDescribeDocumentsResponse() (response *DescribeDocumentsResponse) {
+    response = &DescribeDocumentsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDocuments
+// 有新接口替换
+//
+// 
+//
+// A new API is offered for this action now.
+//
+// 
+//
+// This API is used to query courseware. It has been deprecated. Please use `BatchDescribeDocument` instead.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeDocuments(request *DescribeDocumentsRequest) (response *DescribeDocumentsResponse, err error) {
+    return c.DescribeDocumentsWithContext(context.Background(), request)
+}
+
+// DescribeDocuments
+// 有新接口替换
+//
+// 
+//
+// A new API is offered for this action now.
+//
+// 
+//
+// This API is used to query courseware. It has been deprecated. Please use `BatchDescribeDocument` instead.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+func (c *Client) DescribeDocumentsWithContext(ctx context.Context, request *DescribeDocumentsRequest) (response *DescribeDocumentsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDocumentsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDocuments require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDocumentsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2385,6 +2551,80 @@ func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeU
     request.SetContext(ctx)
     
     response = NewDescribeUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEndRoomRequest() (request *EndRoomRequest) {
+    request = &EndRoomRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "EndRoom")
+    
+    
+    return
+}
+
+func NewEndRoomResponse() (response *EndRoomResponse) {
+    response = &EndRoomResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EndRoom
+// This API is used to end a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) EndRoom(request *EndRoomRequest) (response *EndRoomResponse, err error) {
+    return c.EndRoomWithContext(context.Background(), request)
+}
+
+// EndRoom
+// This API is used to end a room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) EndRoomWithContext(ctx context.Context, request *EndRoomRequest) (response *EndRoomResponse, err error) {
+    if request == nil {
+        request = NewEndRoomRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EndRoom require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEndRoomResponse()
     err = c.Send(request, response)
     return
 }
@@ -3255,6 +3495,80 @@ func (c *Client) SetWatermarkWithContext(ctx context.Context, request *SetWaterm
     request.SetContext(ctx)
     
     response = NewSetWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartRoomRequest() (request *StartRoomRequest) {
+    request = &StartRoomRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "StartRoom")
+    
+    
+    return
+}
+
+func NewStartRoomResponse() (response *StartRoomResponse) {
+    response = &StartRoomResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StartRoom
+// This API is used to start a room. Before you call this API, make sure a user has entered the room so that the class is initialized.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) StartRoom(request *StartRoomRequest) (response *StartRoomResponse, err error) {
+    return c.StartRoomWithContext(context.Background(), request)
+}
+
+// StartRoom
+// This API is used to start a room. Before you call this API, make sure a user has entered the room so that the class is initialized.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
+//  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
+//  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
+//  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) StartRoomWithContext(ctx context.Context, request *StartRoomRequest) (response *StartRoomResponse, err error) {
+    if request == nil {
+        request = NewStartRoomRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartRoom require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartRoomResponse()
     err = c.Send(request, response)
     return
 }

@@ -10519,12 +10519,23 @@ type DomainDetailInfo struct {
 	// The time when the domain name was added in the VOD system
 	// <li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The QUIC configuration for the domain.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitempty" name:"QUICConfig"`
 }
 
 type DomainHTTPSConfig struct {
 	// Time when the certificate expires
 	// <li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
 	CertExpireTime *string `json:"CertExpireTime,omitempty" name:"CertExpireTime"`
+}
+
+type DomainQUICConfig struct {
+	// The QUIC status. Valid values:
+	// <li>`Enabled`</li>
+	// <li>`Disabled`</li>
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type DrmStreamingsInfo struct {
@@ -15418,6 +15429,9 @@ type ModifyVodDomainConfigRequestParams struct {
 
 	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/14047?from_cn_redirect=1) policy
 	UrlSignatureAuthPolicy *UrlSignatureAuthPolicy `json:"UrlSignatureAuthPolicy,omitempty" name:"UrlSignatureAuthPolicy"`
+
+	// The QUIC configuration.
+	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitempty" name:"QUICConfig"`
 }
 
 type ModifyVodDomainConfigRequest struct {
@@ -15434,6 +15448,9 @@ type ModifyVodDomainConfigRequest struct {
 
 	// [Key hotlink protection](https://intl.cloud.tencent.com/document/product/266/14047?from_cn_redirect=1) policy
 	UrlSignatureAuthPolicy *UrlSignatureAuthPolicy `json:"UrlSignatureAuthPolicy,omitempty" name:"UrlSignatureAuthPolicy"`
+
+	// The QUIC configuration.
+	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitempty" name:"QUICConfig"`
 }
 
 func (r *ModifyVodDomainConfigRequest) ToJsonString() string {
@@ -15452,6 +15469,7 @@ func (r *ModifyVodDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "SubAppId")
 	delete(f, "RefererAuthPolicy")
 	delete(f, "UrlSignatureAuthPolicy")
+	delete(f, "QUICConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVodDomainConfigRequest has unknown keys!", "")
 	}
@@ -18034,8 +18052,17 @@ type RemoveWaterMarkTaskInput struct {
 }
 
 type RemoveWaterMarkTaskOutput struct {
-	// The file ID of the video.
+	// The file ID.
 	FileId *string `json:"FileId,omitempty" name:"FileId"`
+
+	// The file type, such as MP4 or MP3.
+	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// The playback URL of the output file.
+	FileUrl *string `json:"FileUrl,omitempty" name:"FileUrl"`
+
+	// The filename, which can be up to 64 characters long.
+	MediaName *string `json:"MediaName,omitempty" name:"MediaName"`
 
 	// The metadata of the video, including size, duration, video stream information, and audio stream information.
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`

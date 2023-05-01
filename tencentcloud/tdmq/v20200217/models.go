@@ -4087,6 +4087,145 @@ func (r *DescribePublishersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribePulsarProInstanceDetailRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+type DescribePulsarProInstanceDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribePulsarProInstanceDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePulsarProInstanceDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePulsarProInstanceDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePulsarProInstanceDetailResponseParams struct {
+	// Cluster information
+	ClusterInfo *PulsarProClusterInfo `json:"ClusterInfo,omitempty" name:"ClusterInfo"`
+
+	// Cluster network access point information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetworkAccessPointInfos []*PulsarNetworkAccessPointInfo `json:"NetworkAccessPointInfos,omitempty" name:"NetworkAccessPointInfos"`
+
+	// Cluster specification information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterSpecInfo *PulsarProClusterSpecInfo `json:"ClusterSpecInfo,omitempty" name:"ClusterSpecInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePulsarProInstanceDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePulsarProInstanceDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribePulsarProInstanceDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePulsarProInstanceDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePulsarProInstancesRequestParams struct {
+	// Query condition filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of queried items, which defaults to `20`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+type DescribePulsarProInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query condition filter
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The maximum number of queried items, which defaults to `20`.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Start offset for query
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+}
+
+func (r *DescribePulsarProInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePulsarProInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePulsarProInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribePulsarProInstancesResponseParams struct {
+	// The total number of unpaginated items
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Instance information list
+	Instances []*PulsarProInstance `json:"Instances,omitempty" name:"Instances"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribePulsarProInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribePulsarProInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribePulsarProInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribePulsarProInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRabbitMQNodeListRequestParams struct {
 	// TDMQ for RabbitMQ cluster ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -6510,6 +6649,130 @@ type Publisher struct {
 	// Serial number of the topic partition connected to the producer.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+}
+
+type PulsarNetworkAccessPointInfo struct {
+	// VPC ID. This field is left empty for supporting network and public network access points.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID. This field is left empty for supporting network and public network access points.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Access address
+	Endpoint *string `json:"Endpoint,omitempty" name:"Endpoint"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Access point type: 
+	// `0`: Supporting network access point 
+	// `1`: VPC access point 
+	// `2`: Public network access point
+	RouteType *uint64 `json:"RouteType,omitempty" name:"RouteType"`
+}
+
+type PulsarProClusterInfo struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+
+	// Description
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Cluster status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Cluster version
+	Version *string `json:"Version,omitempty" name:"Version"`
+
+	// Node distribution
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NodeDistribution []*InstanceNodeDistribution `json:"NodeDistribution,omitempty" name:"NodeDistribution"`
+
+	// Max storage capacity in MB
+	MaxStorage *uint64 `json:"MaxStorage,omitempty" name:"MaxStorage"`
+}
+
+type PulsarProClusterSpecInfo struct {
+	// Cluster specification name
+	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
+
+	// Peak TPS
+	MaxTps *uint64 `json:"MaxTps,omitempty" name:"MaxTps"`
+
+	// Peak bandwidth in Mbps
+	MaxBandWidth *uint64 `json:"MaxBandWidth,omitempty" name:"MaxBandWidth"`
+
+	// Maximum number of namespaces
+	MaxNamespaces *uint64 `json:"MaxNamespaces,omitempty" name:"MaxNamespaces"`
+
+	// Maximum number of topic partitions
+	MaxTopics *uint64 `json:"MaxTopics,omitempty" name:"MaxTopics"`
+
+	// Elastic TPS beyond the specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScalableTps *uint64 `json:"ScalableTps,omitempty" name:"ScalableTps"`
+}
+
+type PulsarProInstance struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Instance version
+	InstanceVersion *string `json:"InstanceVersion,omitempty" name:"InstanceVersion"`
+
+	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed), `6` (Adjusting configuration), `7` (Configuration adjustment failed).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Instance specification name
+	ConfigDisplay *string `json:"ConfigDisplay,omitempty" name:"ConfigDisplay"`
+
+	// Peak TPS
+	MaxTps *uint64 `json:"MaxTps,omitempty" name:"MaxTps"`
+
+	// Storage capacity in GB
+	MaxStorage *uint64 `json:"MaxStorage,omitempty" name:"MaxStorage"`
+
+	// Instance expiration time in milliseconds
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Payment mode. Valid values: `0` (Pay-as-you-go), `1` (Monthly subscription).
+	PayMode *uint64 `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Instance specification ID
+	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
+
+	// Elastic TPS beyond the specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScalableTps *uint64 `json:"ScalableTps,omitempty" name:"ScalableTps"`
+
+	// VPC ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Peak bandwidth in Mbps
+	MaxBandWidth *uint64 `json:"MaxBandWidth,omitempty" name:"MaxBandWidth"`
 }
 
 type RabbitMQPrivateNode struct {

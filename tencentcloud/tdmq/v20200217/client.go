@@ -2743,6 +2743,118 @@ func (c *Client) DescribePublishersWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribePulsarProInstanceDetailRequest() (request *DescribePulsarProInstanceDetailRequest) {
+    request = &DescribePulsarProInstanceDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribePulsarProInstanceDetail")
+    
+    
+    return
+}
+
+func NewDescribePulsarProInstanceDetailResponse() (response *DescribePulsarProInstanceDetailResponse) {
+    response = &DescribePulsarProInstanceDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePulsarProInstanceDetail
+// This API is used to obtain the information of a TDMQ for Pulsar pro cluster instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribePulsarProInstanceDetail(request *DescribePulsarProInstanceDetailRequest) (response *DescribePulsarProInstanceDetailResponse, err error) {
+    return c.DescribePulsarProInstanceDetailWithContext(context.Background(), request)
+}
+
+// DescribePulsarProInstanceDetail
+// This API is used to obtain the information of a TDMQ for Pulsar pro cluster instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribePulsarProInstanceDetailWithContext(ctx context.Context, request *DescribePulsarProInstanceDetailRequest) (response *DescribePulsarProInstanceDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribePulsarProInstanceDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePulsarProInstanceDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePulsarProInstanceDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePulsarProInstancesRequest() (request *DescribePulsarProInstancesRequest) {
+    request = &DescribePulsarProInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribePulsarProInstances")
+    
+    
+    return
+}
+
+func NewDescribePulsarProInstancesResponse() (response *DescribePulsarProInstancesResponse) {
+    response = &DescribePulsarProInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribePulsarProInstances
+// This API is used to query the list of the purchased TDMQ for Pulsar pro instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribePulsarProInstances(request *DescribePulsarProInstancesRequest) (response *DescribePulsarProInstancesResponse, err error) {
+    return c.DescribePulsarProInstancesWithContext(context.Background(), request)
+}
+
+// DescribePulsarProInstances
+// This API is used to query the list of the purchased TDMQ for Pulsar pro instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribePulsarProInstancesWithContext(ctx context.Context, request *DescribePulsarProInstancesRequest) (response *DescribePulsarProInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribePulsarProInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePulsarProInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePulsarProInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRabbitMQNodeListRequest() (request *DescribeRabbitMQNodeListRequest) {
     request = &DescribeRabbitMQNodeListRequest{
         BaseRequest: &tchttp.BaseRequest{},

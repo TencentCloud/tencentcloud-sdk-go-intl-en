@@ -472,6 +472,109 @@ func (r *BatchDeleteRecordResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type BatchDescribeDocumentRequestParams struct {
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The page to return records from. Pagination starts from 1.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
+	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+
+	// The user ID of the courseware owner. If you do not specify this, the information of all courseware under the application will be returned.
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
+
+	// The filename keyword.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The courseware IDs. Non-existent IDs will be ignored.
+	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+}
+
+type BatchDescribeDocumentRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The page to return records from. Pagination starts from 1.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
+	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+
+	// The user ID of the courseware owner. If you do not specify this, the information of all courseware under the application will be returned.
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
+
+	// The filename keyword.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The courseware IDs. Non-existent IDs will be ignored.
+	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+}
+
+func (r *BatchDescribeDocumentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchDescribeDocumentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Page")
+	delete(f, "Limit")
+	delete(f, "Permission")
+	delete(f, "Owner")
+	delete(f, "Keyword")
+	delete(f, "DocumentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchDescribeDocumentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BatchDescribeDocumentResponseParams struct {
+	// The total number of records that meet the conditions.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The information of the courseware.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type BatchDescribeDocumentResponse struct {
+	*tchttp.BaseResponse
+	Response *BatchDescribeDocumentResponseParams `json:"Response"`
+}
+
+func (r *BatchDescribeDocumentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchDescribeDocumentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type BatchRegisterRequestParams struct {
 	// The information of the users to register.
 	Users []*BatchUserRequest `json:"Users,omitempty" name:"Users"`
@@ -1475,6 +1578,67 @@ func (r *DeleteRoomResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteSupervisorRequestParams struct {
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The user IDs.
+	Users []*string `json:"Users,omitempty" name:"Users"`
+}
+
+type DeleteSupervisorRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The user IDs.
+	Users []*string `json:"Users,omitempty" name:"Users"`
+}
+
+func (r *DeleteSupervisorRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSupervisorRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "Users")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSupervisorRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSupervisorResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteSupervisorResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSupervisorResponseParams `json:"Response"`
+}
+
+func (r *DeleteSupervisorResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSupervisorResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAnswerListRequestParams struct {
 	// The question ID.
 	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
@@ -1866,6 +2030,109 @@ func (r *DescribeDocumentsByRoomResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDocumentsByRoomResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDocumentsRequestParams struct {
+	// The school ID.
+	SchoolId *uint64 `json:"SchoolId,omitempty" name:"SchoolId"`
+
+	// The page to return records from. Pagination starts from 1.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
+	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+
+	// The user ID of the courseware owner. If you do not specify this parameter, all courseware under the school ID will be returned.
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
+
+	// The filename keyword.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The courseware IDs. Non-existent IDs will be ignored.
+	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+}
+
+type DescribeDocumentsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The school ID.
+	SchoolId *uint64 `json:"SchoolId,omitempty" name:"SchoolId"`
+
+	// The page to return records from. Pagination starts from 1.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
+	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+
+	// The user ID of the courseware owner. If you do not specify this parameter, all courseware under the school ID will be returned.
+	Owner *string `json:"Owner,omitempty" name:"Owner"`
+
+	// The filename keyword.
+	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+
+	// The courseware IDs. Non-existent IDs will be ignored.
+	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+}
+
+func (r *DescribeDocumentsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDocumentsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SchoolId")
+	delete(f, "Page")
+	delete(f, "Limit")
+	delete(f, "Permission")
+	delete(f, "Owner")
+	delete(f, "Keyword")
+	delete(f, "DocumentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDocumentsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDocumentsResponseParams struct {
+	// The total number of records that meet the conditions.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The information of the courseware.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDocumentsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDocumentsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDocumentsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDocumentsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2646,6 +2913,76 @@ type DocumentInfo struct {
 
 	// The time (Unix timestamp) when the document was last updated. Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Pages *uint64 `json:"Pages,omitempty" name:"Pages"`
+
+	// The width. This parameter is valid only if static document transcoding is used.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// The height. This parameter is valid only if static document transcoding is used.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// The thumbnail. Only transcoded courseware has thumbnails.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cover *string `json:"Cover,omitempty" name:"Cover"`
+}
+
+// Predefined struct for user
+type EndRoomRequestParams struct {
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+type EndRoomRequest struct {
+	*tchttp.BaseRequest
+	
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+func (r *EndRoomRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EndRoomRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoomId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EndRoomRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EndRoomResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type EndRoomResponse struct {
+	*tchttp.BaseResponse
+	Response *EndRoomResponseParams `json:"Response"`
+}
+
+func (r *EndRoomResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EndRoomResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type EventDataInfo struct {
@@ -3207,6 +3544,20 @@ type MemberRecord struct {
 
 	// The number of messages sent by a user.
 	PerMemberMessageCount *int64 `json:"PerMemberMessageCount,omitempty" name:"PerMemberMessageCount"`
+
+	// The user role. `0`: Student; `1`: Teacher; `2`: Teaching Assistant; `3`: Spectator.
+	Role *uint64 `json:"Role,omitempty" name:"Role"`
+
+	// The class number.
+	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// The sub-class number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubGroupId []*string `json:"SubGroupId,omitempty" name:"SubGroupId"`
+
+	// Whether the user is on the stage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Stage *int64 `json:"Stage,omitempty" name:"Stage"`
 }
 
 type MessageItem struct {
@@ -3997,6 +4348,60 @@ func (r *SetWatermarkResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SetWatermarkResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartRoomRequestParams struct {
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+type StartRoomRequest struct {
+	*tchttp.BaseRequest
+	
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+func (r *StartRoomRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartRoomRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoomId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartRoomRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartRoomResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartRoomResponse struct {
+	*tchttp.BaseResponse
+	Response *StartRoomResponseParams `json:"Response"`
+}
+
+func (r *StartRoomResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartRoomResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

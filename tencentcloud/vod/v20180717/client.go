@@ -4408,6 +4408,7 @@ func NewDescribeMediaPlayStatDetailsResponse() (response *DescribeMediaPlayStatD
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
 //  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
 //  INVALIDPARAMETERVALUE_INTERVAL = "InvalidParameterValue.Interval"
@@ -4427,6 +4428,7 @@ func (c *Client) DescribeMediaPlayStatDetails(request *DescribeMediaPlayStatDeta
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  INVALIDPARAMETERVALUE_ENDTIME = "InvalidParameterValue.EndTime"
 //  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
 //  INVALIDPARAMETERVALUE_INTERVAL = "InvalidParameterValue.Interval"

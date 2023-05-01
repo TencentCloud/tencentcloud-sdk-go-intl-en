@@ -1027,6 +1027,10 @@ func NewDescribeSparkAppJobsResponse() (response *DescribeSparkAppJobsResponse) 
 // This API is used to get the list of Spark applications.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSparkAppJobs(request *DescribeSparkAppJobsRequest) (response *DescribeSparkAppJobsResponse, err error) {
     return c.DescribeSparkAppJobsWithContext(context.Background(), request)
@@ -1036,6 +1040,10 @@ func (c *Client) DescribeSparkAppJobs(request *DescribeSparkAppJobsRequest) (res
 // This API is used to get the list of Spark applications.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeSparkAppJobsWithContext(ctx context.Context, request *DescribeSparkAppJobsRequest) (response *DescribeSparkAppJobsResponse, err error) {
     if request == nil {

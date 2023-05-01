@@ -484,6 +484,10 @@ type CallBackTemplateInfo struct {
 	// The push error callback URL.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitempty" name:"PushExceptionNotifyUrl"`
+
+	// The audio/video moderation callback URL.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AudioAuditNotifyUrl *string `json:"AudioAuditNotifyUrl,omitempty" name:"AudioAuditNotifyUrl"`
 }
 
 // Predefined struct for user
@@ -2189,7 +2193,7 @@ type CreateLiveTranscodeRuleRequestParams struct {
 	// Playback domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you only bind a domain name, leave this parameter empty.
+	// The push path, which is the same as `AppName` in the push and playback addresses and is `live` by default. If you only want to bind the template to a domain, pass in an empty string.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Stream name. If only the domain name or path is bound, leave this parameter blank.
@@ -2205,7 +2209,7 @@ type CreateLiveTranscodeRuleRequest struct {
 	// Playback domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
 
-	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you only bind a domain name, leave this parameter empty.
+	// The push path, which is the same as `AppName` in the push and playback addresses and is `live` by default. If you only want to bind the template to a domain, pass in an empty string.
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
 
 	// Stream name. If only the domain name or path is bound, leave this parameter blank.
@@ -2701,6 +2705,116 @@ func (r *CreateRecordTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateRecordTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateScreenshotTaskRequestParams struct {
+	// The stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The push domain.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The task end time, which must be a Unix timestamp and later than `StartTime` and the current time. The end time and start time cannot be more than 24 hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The ID of the screencapturing template, which is returned by `CreateLiveSnapshotTemplate`. If an incorrect template ID is passed in, the screencapturing task will fail.
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// The task start time, which must be a Unix timestamp and cannot be later than six days from the current time. If you do not specify this parameter, the task will start immediately.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The publishing type. Valid values:
+	// `0` (default): Live stream
+	// `1`: Mixed stream
+	StreamType *uint64 `json:"StreamType,omitempty" name:"StreamType"`
+
+	// An extension field, which is not defined currently and is empty by default.
+	Extension *string `json:"Extension,omitempty" name:"Extension"`
+}
+
+type CreateScreenshotTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The push domain.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// The push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// The task end time, which must be a Unix timestamp and later than `StartTime` and the current time. The end time and start time cannot be more than 24 hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The ID of the screencapturing template, which is returned by `CreateLiveSnapshotTemplate`. If an incorrect template ID is passed in, the screencapturing task will fail.
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// The task start time, which must be a Unix timestamp and cannot be later than six days from the current time. If you do not specify this parameter, the task will start immediately.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The publishing type. Valid values:
+	// `0` (default): Live stream
+	// `1`: Mixed stream
+	StreamType *uint64 `json:"StreamType,omitempty" name:"StreamType"`
+
+	// An extension field, which is not defined currently and is empty by default.
+	Extension *string `json:"Extension,omitempty" name:"Extension"`
+}
+
+func (r *CreateScreenshotTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateScreenshotTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StreamName")
+	delete(f, "DomainName")
+	delete(f, "AppName")
+	delete(f, "EndTime")
+	delete(f, "TemplateId")
+	delete(f, "StartTime")
+	delete(f, "StreamType")
+	delete(f, "Extension")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateScreenshotTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateScreenshotTaskResponseParams struct {
+	// A unique task ID. If this parameter is returned, the screencapturing task is created successfully.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateScreenshotTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateScreenshotTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateScreenshotTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateScreenshotTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11017,7 +11131,8 @@ type StreamEventInfo struct {
 	// Push duration in seconds.
 	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
 
-	// Host IP.
+	// The IP address of the host.
+	// If the stream is published from a private network, this parameter will be `-`.
 	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
 
 	// Resolution.

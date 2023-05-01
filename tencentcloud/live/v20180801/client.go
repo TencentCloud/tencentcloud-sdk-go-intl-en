@@ -1518,9 +1518,9 @@ func NewCreateLiveTranscodeRuleResponse() (response *CreateLiveTranscodeRuleResp
 }
 
 // CreateLiveTranscodeRule
-// To create a transcoding rule, you need to first call the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API to create a transcoding template and bind the returned template ID to the stream.
+// This API is used to create a transcoding rule that binds a template ID to a stream. Up to 50 transcoding rules can be created in total. Before you call this API, you need to first call [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) to get the template ID.
 //
-// <br>Transcoding-related document: [LVB Remuxing and Transcoding](https://intl.cloud.tencent.com/document/product/267/32736?from_cn_redirect=1).
+// <br>Related document: [Live Remuxing and Transcoding](https://intl.cloud.tencent.com/document/product/267/32736?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RULEALREADYEXIST = "FailedOperation.RuleAlreadyExist"
@@ -1548,9 +1548,9 @@ func (c *Client) CreateLiveTranscodeRule(request *CreateLiveTranscodeRuleRequest
 }
 
 // CreateLiveTranscodeRule
-// To create a transcoding rule, you need to first call the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API to create a transcoding template and bind the returned template ID to the stream.
+// This API is used to create a transcoding rule that binds a template ID to a stream. Up to 50 transcoding rules can be created in total. Before you call this API, you need to first call [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) to get the template ID.
 //
-// <br>Transcoding-related document: [LVB Remuxing and Transcoding](https://intl.cloud.tencent.com/document/product/267/32736?from_cn_redirect=1).
+// <br>Related document: [Live Remuxing and Transcoding](https://intl.cloud.tencent.com/document/product/267/32736?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RULEALREADYEXIST = "FailedOperation.RuleAlreadyExist"
@@ -1869,6 +1869,96 @@ func (c *Client) CreateRecordTaskWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateScreenshotTaskRequest() (request *CreateScreenshotTaskRequest) {
+    request = &CreateScreenshotTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "CreateScreenshotTask")
+    
+    
+    return
+}
+
+func NewCreateScreenshotTaskResponse() (response *CreateScreenshotTaskResponse) {
+    response = &CreateScreenshotTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateScreenshotTask
+// This API is used to create a screencapturing task that has a specific start and end time and takes screenshots according to the template configured.
+//
+// - Note
+//
+// 1. If the stream is interrupted, screencapturing will stop. However, the task will still be valid before the specified end time, and screencapturing will be performed as required after the stream is resumed.
+//
+// 2. Avoid creating screencapturing tasks with overlapping time periods. The system will execute at most three screencapturing tasks on the same stream at a time.
+//
+// 3. Task records are only kept for three months.
+//
+// 4. The new screencapturing APIs (CreateScreenshotTask/StopScreenshotTask/DeleteScreenshotTask) are not compatible with the legacy ones (CreateLiveInstantSnapshot/StopLiveInstantSnapshot). Do not mix them when you call APIs to manage screencapturing tasks.
+//
+// 5. If you create a screencapturing task and publish the stream at the same time, the task may fail to be executed at the specified time. After creating a screencapturing task, we recommend you wait at least three seconds before publishing the stream.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_MAXIMUMRUNNINGTASK = "LimitExceeded.MaximumRunningTask"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateScreenshotTask(request *CreateScreenshotTaskRequest) (response *CreateScreenshotTaskResponse, err error) {
+    return c.CreateScreenshotTaskWithContext(context.Background(), request)
+}
+
+// CreateScreenshotTask
+// This API is used to create a screencapturing task that has a specific start and end time and takes screenshots according to the template configured.
+//
+// - Note
+//
+// 1. If the stream is interrupted, screencapturing will stop. However, the task will still be valid before the specified end time, and screencapturing will be performed as required after the stream is resumed.
+//
+// 2. Avoid creating screencapturing tasks with overlapping time periods. The system will execute at most three screencapturing tasks on the same stream at a time.
+//
+// 3. Task records are only kept for three months.
+//
+// 4. The new screencapturing APIs (CreateScreenshotTask/StopScreenshotTask/DeleteScreenshotTask) are not compatible with the legacy ones (CreateLiveInstantSnapshot/StopLiveInstantSnapshot). Do not mix them when you call APIs to manage screencapturing tasks.
+//
+// 5. If you create a screencapturing task and publish the stream at the same time, the task may fail to be executed at the specified time. After creating a screencapturing task, we recommend you wait at least three seconds before publishing the stream.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_MAXIMUMRUNNINGTASK = "LimitExceeded.MaximumRunningTask"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateScreenshotTaskWithContext(ctx context.Context, request *CreateScreenshotTaskRequest) (response *CreateScreenshotTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateScreenshotTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateScreenshotTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateScreenshotTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -3531,13 +3621,11 @@ func NewDescribeLiveCallbackTemplateResponse() (response *DescribeLiveCallbackTe
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
 //  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
 //  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
-//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
 //  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
 //  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
 //  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
 //  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
 //  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
-//  INTERNALERROR_RULEOUTLIMIT = "InternalError.RuleOutLimit"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
 //  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
@@ -3561,13 +3649,11 @@ func (c *Client) DescribeLiveCallbackTemplate(request *DescribeLiveCallbackTempl
 //  INTERNALERROR_ARGSNOTMATCH = "InternalError.ArgsNotMatch"
 //  INTERNALERROR_CONFINUSED = "InternalError.ConfInUsed"
 //  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
-//  INTERNALERROR_CONFOUTLIMIT = "InternalError.ConfOutLimit"
 //  INTERNALERROR_INVALIDINPUT = "InternalError.InvalidInput"
 //  INTERNALERROR_NOTFOUND = "InternalError.NotFound"
 //  INTERNALERROR_RULEALREADYEXIST = "InternalError.RuleAlreadyExist"
 //  INTERNALERROR_RULEINUSING = "InternalError.RuleInUsing"
 //  INTERNALERROR_RULENOTFOUND = "InternalError.RuleNotFound"
-//  INTERNALERROR_RULEOUTLIMIT = "InternalError.RuleOutLimit"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_COSCUSTOMFILENAMEERROR = "InvalidParameter.COSCustomFileNameError"
 //  INVALIDPARAMETER_INVALIDVODFILENAME = "InvalidParameter.InvalidVodFileName"
@@ -7294,7 +7380,15 @@ func NewForbidLiveStreamResponse() (response *ForbidLiveStreamResponse) {
 }
 
 // ForbidLiveStream
-// This API is used to forbid the push of a specific stream. You can preset a time point to resume the stream.
+// This API is used to disable a stream. You can set a time to resume the stream.
+//
+// Note:
+//
+// 1. As long as the correct stream name is passed in, the stream will be disabled successfully.
+//
+// 2. If you want a stream to be disabled only if the push domain, push path, and stream name match, please submit a ticket.
+//
+// 3. If you have configured domain groups, you must pass in the correct push domain in order to disable a stream.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -7321,7 +7415,15 @@ func (c *Client) ForbidLiveStream(request *ForbidLiveStreamRequest) (response *F
 }
 
 // ForbidLiveStream
-// This API is used to forbid the push of a specific stream. You can preset a time point to resume the stream.
+// This API is used to disable a stream. You can set a time to resume the stream.
+//
+// Note:
+//
+// 1. As long as the correct stream name is passed in, the stream will be disabled successfully.
+//
+// 2. If you want a stream to be disabled only if the push domain, push path, and stream name match, please submit a ticket.
+//
+// 3. If you have configured domain groups, you must pass in the correct push domain in order to disable a stream.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8148,7 +8250,7 @@ func NewModifyLiveTimeShiftTemplateResponse() (response *ModifyLiveTimeShiftTemp
 }
 
 // ModifyLiveTimeShiftTemplate
-// This API is used to modify a standby stream template.
+// This API is used to modify a time shifting template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
@@ -8172,7 +8274,7 @@ func (c *Client) ModifyLiveTimeShiftTemplate(request *ModifyLiveTimeShiftTemplat
 }
 
 // ModifyLiveTimeShiftTemplate
-// This API is used to modify a standby stream template.
+// This API is used to modify a time shifting template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"

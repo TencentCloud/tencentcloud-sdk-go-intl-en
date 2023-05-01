@@ -198,10 +198,10 @@ type CreateDataEngineRequestParams struct {
 	// The name of the primary cluster.
 	MainClusterName *string `json:"MainClusterName,omitempty" name:"MainClusterName"`
 
-
+	// Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
 	ElasticSwitch *bool `json:"ElasticSwitch,omitempty" name:"ElasticSwitch"`
 
-
+	// The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
 	ElasticLimit *int64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
 }
 
@@ -289,8 +289,10 @@ type CreateDataEngineRequest struct {
 	// The name of the primary cluster.
 	MainClusterName *string `json:"MainClusterName,omitempty" name:"MainClusterName"`
 
+	// Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
 	ElasticSwitch *bool `json:"ElasticSwitch,omitempty" name:"ElasticSwitch"`
 
+	// The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
 	ElasticLimit *int64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
 }
 
@@ -594,6 +596,9 @@ type CreateSparkAppRequestParams struct {
 
 	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
 	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
+
+	// The ID of the associated Data Lake Compute query script.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 }
 
 type CreateSparkAppRequest struct {
@@ -676,6 +681,9 @@ type CreateSparkAppRequest struct {
 
 	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
 	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
+
+	// The ID of the associated Data Lake Compute query script.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 }
 
 func (r *CreateSparkAppRequest) ToJsonString() string {
@@ -716,6 +724,7 @@ func (r *CreateSparkAppRequest) FromJsonString(s string) error {
 	delete(f, "SparkImage")
 	delete(f, "SparkImageVersion")
 	delete(f, "AppExecutorMaxNumbers")
+	delete(f, "SessionId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSparkAppRequest has unknown keys!", "")
 	}
@@ -1423,16 +1432,16 @@ type DescribeSparkAppJobsRequestParams struct {
 	// Filter by this parameter, which can be `spark-job-name`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Update start time
+	// The update start time in the format of yyyy-mm-dd HH:MM:SS.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Update end time
+	// The update end time in the format of yyyy-mm-dd HH:MM:SS.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Query list offset
+	// The query list offset, which defaults to 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Query list limit
+	// The maximum number of queries allowed in the list, which defaults to 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -1448,16 +1457,16 @@ type DescribeSparkAppJobsRequest struct {
 	// Filter by this parameter, which can be `spark-job-name`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// Update start time
+	// The update start time in the format of yyyy-mm-dd HH:MM:SS.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Update end time
+	// The update end time in the format of yyyy-mm-dd HH:MM:SS.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Query list offset
+	// The query list offset, which defaults to 0.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Query list limit
+	// The maximum number of queries allowed in the list, which defaults to 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 }
 
@@ -2050,6 +2059,9 @@ type ModifySparkAppRequestParams struct {
 
 	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
 	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
+
+	// The associated Data Lake Compute query script.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 }
 
 type ModifySparkAppRequest struct {
@@ -2135,6 +2147,9 @@ type ModifySparkAppRequest struct {
 
 	// The specified executor count (max), which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the executor count is equal to `AppExecutorNums`.
 	AppExecutorMaxNumbers *int64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
+
+	// The associated Data Lake Compute query script.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 }
 
 func (r *ModifySparkAppRequest) ToJsonString() string {
@@ -2176,6 +2191,7 @@ func (r *ModifySparkAppRequest) FromJsonString(s string) error {
 	delete(f, "SparkImage")
 	delete(f, "SparkImageVersion")
 	delete(f, "AppExecutorMaxNumbers")
+	delete(f, "SessionId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySparkAppRequest has unknown keys!", "")
 	}
@@ -2405,6 +2421,16 @@ type SparkJobInfo struct {
 	// The image version.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SparkImageVersion *string `json:"SparkImageVersion,omitempty" name:"SparkImageVersion"`
+
+	// The ID of the associated Data Lake Compute query script.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+
+	DataEngineClusterType *string `json:"DataEngineClusterType,omitempty" name:"DataEngineClusterType"`
+
+
+	DataEngineImageVersion *string `json:"DataEngineImageVersion,omitempty" name:"DataEngineImageVersion"`
 }
 
 type StreamingStatistics struct {
