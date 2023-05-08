@@ -377,6 +377,70 @@ func (r *AddEnterpriseSecurityGroupRulesResponse) FromJsonString(s string) error
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddNatAcRuleRequestParams struct {
+	// NAT access control rules to be added.
+	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+
+	// Source of the rules to be added. Generally, this parameter is not used. The value insert_rule indicates that rules in the specified location are inserted, and the value batch_import indicates that rules are imported in batches. If the parameter is left empty, rules defined in the API request are added.
+	From *string `json:"From,omitempty" name:"From"`
+}
+
+type AddNatAcRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// NAT access control rules to be added.
+	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+
+	// Source of the rules to be added. Generally, this parameter is not used. The value insert_rule indicates that rules in the specified location are inserted, and the value batch_import indicates that rules are imported in batches. If the parameter is left empty, rules defined in the API request are added.
+	From *string `json:"From,omitempty" name:"From"`
+}
+
+func (r *AddNatAcRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddNatAcRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Rules")
+	delete(f, "From")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddNatAcRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddNatAcRuleResponseParams struct {
+	// ID list of new rules.
+	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type AddNatAcRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *AddNatAcRuleResponseParams `json:"Response"`
+}
+
+func (r *AddNatAcRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddNatAcRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AssetZone struct {
 	// Region
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
@@ -419,6 +483,85 @@ type AssociatedInstanceInfo struct {
 	SecurityGroupCount *uint64 `json:"SecurityGroupCount,omitempty" name:"SecurityGroupCount"`
 }
 
+type BetaInfoByACL struct {
+	// Task ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Task name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Last execution time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastTime *string `json:"LastTime,omitempty" name:"LastTime"`
+}
+
+type BlockIgnoreRule struct {
+	// Domain name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Rule IP.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ioc *string `json:"Ioc,omitempty" name:"Ioc"`
+
+	// Threat level.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Level *string `json:"Level,omitempty" name:"Level"`
+
+	// Source event name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EventName *string `json:"EventName,omitempty" name:"EventName"`
+
+	// Direction. Valid values: 0: outbound; 1: inbound.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Direction *int64 `json:"Direction,omitempty" name:"Direction"`
+
+	// Protocol.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// Rule type. Valid values: 1: block; 2: allow.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Action *int64 `json:"Action,omitempty" name:"Action"`
+
+	// Time when a rule starts to take effect.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Time when a rule expires.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Reason for ignoring.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IgnoreReason *string `json:"IgnoreReason,omitempty" name:"IgnoreReason"`
+
+	// Security event source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Source *string `json:"Source,omitempty" name:"Source"`
+
+	// Rule ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UniqueId *string `json:"UniqueId,omitempty" name:"UniqueId"`
+
+	// Number of rule matching times.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MatchTimes *int64 `json:"MatchTimes,omitempty" name:"MatchTimes"`
+
+	// Country.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Country *string `json:"Country,omitempty" name:"Country"`
+
+
+	Comment *string `json:"Comment,omitempty" name:"Comment"`
+}
+
 type CfwNatDnatRule struct {
 	// Network protocol. Valid values: TCP or UDP.
 	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
@@ -437,6 +580,45 @@ type CfwNatDnatRule struct {
 
 	// The description of NAT firewall forwarding rules.
 	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type CommonFilter struct {
+	// Search key.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Search values.
+	Values []*string `json:"Values,omitempty" name:"Values"`
+
+	// Enum of integers that represent relations between Name and Values.
+	// enum FilterOperatorType {
+	//     // Invalid
+	//     FILTER_OPERATOR_TYPE_INVALID = 0;
+	//     // Equal to
+	//     FILTER_OPERATOR_TYPE_EQUAL = 1;
+	//     // Greater than
+	//     FILTER_OPERATOR_TYPE_GREATER = 2;
+	//     // Less than
+	//     FILTER_OPERATOR_TYPE_LESS = 3;
+	//     // Greater than or equal to
+	//     FILTER_OPERATOR_TYPE_GREATER_EQ = 4;
+	//     // Less than or equal to
+	//     FILTER_OPERATOR_TYPE_LESS_EQ = 5;
+	//     // Not equal to
+	//     FILTER_OPERATOR_TYPE_NO_EQ = 6;
+	//     // In (contained in the array)
+	//     FILTER_OPERATOR_TYPE_IN = 7;
+	//     // Not in
+	//     FILTER_OPERATOR_TYPE_NOT_IN = 8;
+	//     // Fuzzily matched
+	//     FILTER_OPERATOR_TYPE_FUZZINESS = 9;
+	//     // Existing
+	//     FILTER_OPERATOR_TYPE_EXIST = 10;
+	//     // Not existing
+	//     FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
+	//     // Regular
+	//     FILTER_OPERATOR_TYPE_REGULAR = 12;
+	// }
+	OperatorType *int64 `json:"OperatorType,omitempty" name:"OperatorType"`
 }
 
 // Predefined struct for user
@@ -574,6 +756,9 @@ type CreateNatFwInstanceRequestParams struct {
 
 	// Remote disaster recovery. 1: enable; 0: disable; empty: disable by default
 	CrossAZone *int64 `json:"CrossAZone,omitempty" name:"CrossAZone"`
+
+	// IP range of the firewall
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
 }
 
 type CreateNatFwInstanceRequest struct {
@@ -602,6 +787,9 @@ type CreateNatFwInstanceRequest struct {
 
 	// Remote disaster recovery. 1: enable; 0: disable; empty: disable by default
 	CrossAZone *int64 `json:"CrossAZone,omitempty" name:"CrossAZone"`
+
+	// IP range of the firewall
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
 }
 
 func (r *CreateNatFwInstanceRequest) ToJsonString() string {
@@ -624,6 +812,7 @@ func (r *CreateNatFwInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Zone")
 	delete(f, "ZoneBak")
 	delete(f, "CrossAZone")
+	delete(f, "FwCidrInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatFwInstanceRequest has unknown keys!", "")
 	}
@@ -686,6 +875,9 @@ type CreateNatFwInstanceWithDomainRequestParams struct {
 
 	// Required for creating a domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// IP range of the firewall
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
 }
 
 type CreateNatFwInstanceWithDomainRequest struct {
@@ -720,6 +912,9 @@ type CreateNatFwInstanceWithDomainRequest struct {
 
 	// Required for creating a domain name
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// IP range of the firewall
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
 }
 
 func (r *CreateNatFwInstanceWithDomainRequest) ToJsonString() string {
@@ -744,6 +939,7 @@ func (r *CreateNatFwInstanceWithDomainRequest) FromJsonString(s string) error {
 	delete(f, "CrossAZone")
 	delete(f, "IsCreateDomain")
 	delete(f, "Domain")
+	delete(f, "FwCidrInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNatFwInstanceWithDomainRequest has unknown keys!", "")
 	}
@@ -774,6 +970,44 @@ func (r *CreateNatFwInstanceWithDomainResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateNatFwInstanceWithDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateNatRuleItem struct {
+	// Access source. Example: `net: IP/CIDR(192.168.0.2)`
+	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+
+	// Access source type. Values for inbound rules: `ip`, `net`, `template`, and `location`. Values for outbound rules: `ip`, `net`, `template`, `instance`, `group`, and `tag`.
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
+	// Access target. Example: `net: IP/CIDR(192.168.0.2); domain: domain name rule, e.g., *.qq.com
+	TargetContent *string `json:"TargetContent,omitempty" name:"TargetContent"`
+
+	// Access target type. Values for inbound rules: `ip`, `net`, `template`, `instance`, `group`, and `tag`. Values for outbound rules: `ip`, `net`, `domain`, `template`, and `location`.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
+	// Protocol. Values: `TCP`, `UDP`, `ICMP`, `ANY`, `HTTP`, `HTTPS`, `HTTP/HTTPS`, `SMTP`, `SMTPS`, `SMTP/SMTPS`, `FTP`, and `DNS`.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Specify how the CFW instance deals with the traffic hit the access control rule. Values: `accept` (allow), `drop` (reject), and `log` (observe).
+	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+
+	// The port of the access control rule. Values: `-1/-1` (all ports) and `80` (Port 80)
+	Port *string `json:"Port,omitempty" name:"Port"`
+
+	// Rule direction. Values: `1` (Inbound) and `0` (Outbound)
+	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+
+	// Rule sequence number
+	OrderIndex *int64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+
+	// Rule status. `true` (Enabled); `false` (Disabled)
+	Enable *string `json:"Enable,omitempty" name:"Enable"`
+
+	// The unique ID of the rule, which is not required when you create a rule.
+	Uuid *int64 `json:"Uuid,omitempty" name:"Uuid"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 // Predefined struct for user
@@ -984,7 +1218,7 @@ func (r *DeleteAllAccessControlRuleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAllAccessControlRuleResponseParams struct {
-	// Status value. 0: modified successfully; !0: modification failed
+	// Status of the task. `0`: Modified successfully; Others: Modification failed
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Number of access control rules deleted.
@@ -1196,6 +1430,106 @@ func (r *DeleteVpcInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DeleteVpcInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescAcItem struct {
+	// Access source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+
+	// Access destination.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TargetContent *string `json:"TargetContent,omitempty" name:"TargetContent"`
+
+	// Protocol.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Port.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Port *string `json:"Port,omitempty" name:"Port"`
+
+	// Action that Cloud Firewall performs on the traffic. Valid values: accept (allow), drop (reject), and log (monitor).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+
+	// Description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Number of rule matching times.
+	Count *uint64 `json:"Count,omitempty" name:"Count"`
+
+	// Rule sequence number.
+	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+
+	// Access source type. Valid values for an inbound rule: ip, net, template, and location; valid values for an outbound rule: ip, net, template, instance, group, and tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+
+	// Access destination type. Valid values for an inbound rule: ip, net, template, instance, group, and tag; valid values for an outbound rule: ip, net, domain, template, and location.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+
+	// Unique ID of the rule.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Uuid *uint64 `json:"Uuid,omitempty" name:"Uuid"`
+
+	// Rule validity.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Invalid *uint64 `json:"Invalid,omitempty" name:"Invalid"`
+
+	// Valid values: 0: common rules; 1: regional rules.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsRegion *uint64 `json:"IsRegion,omitempty" name:"IsRegion"`
+
+	// Country ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CountryCode *uint64 `json:"CountryCode,omitempty" name:"CountryCode"`
+
+	// City ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CityCode *uint64 `json:"CityCode,omitempty" name:"CityCode"`
+
+	// Country name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CountryName *string `json:"CountryName,omitempty" name:"CountryName"`
+
+	// City name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CityName *string `json:"CityName,omitempty" name:"CityName"`
+
+	// Cloud provider code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CloudCode *string `json:"CloudCode,omitempty" name:"CloudCode"`
+
+	// Valid values: 0: common rules; 1: cloud provider rules.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsCloud *uint64 `json:"IsCloud,omitempty" name:"IsCloud"`
+
+	// Rule status. Valid values: true: enabled; false: disabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Enable *string `json:"Enable,omitempty" name:"Enable"`
+
+	// Rule direction. Valid values: 1: inbound; 0: outbound.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+
+	// Instance name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// UUID for internal use. Generally, this field is not required.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InternalUuid *int64 `json:"InternalUuid,omitempty" name:"InternalUuid"`
+
+	// Rule status. This field is valid when you query rule matching details. Valid values: 0: new; 1: deleted; 2: edited and deleted.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Details of associated tasks
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	BetaList []*BetaInfoByACL `json:"BetaList,omitempty" name:"BetaList"`
 }
 
 // Predefined struct for user
@@ -1542,6 +1876,114 @@ func (r *DescribeBlockByIpTimesListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBlockByIpTimesListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBlockIgnoreListRequestParams struct {
+	// Number of entries per page.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Direction. Valid values: 1: inbound public access; 0: outbound public access; 3: private network access; empty string: all access.
+	Direction *string `json:"Direction,omitempty" name:"Direction"`
+
+	// Rule type. Valid values: 1: block; 2: allow.
+	RuleType *uint64 `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Column by which rules are sorted. Valid values: EndTime: end time; StartTime: start time; MatchTimes: number of matching times.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sort order. Valid values: desc: descending; asc: ascending.
+	By *string `json:"By,omitempty" name:"By"`
+
+	// Search keys, in a JSON string. Valid values: {}: empty; domain: domain name; level: threat level; ignore_reason: reason for allowing access; rule_source: source of a security event; address: geographical location; common: fuzzy search.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+}
+
+type DescribeBlockIgnoreListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of entries per page.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Direction. Valid values: 1: inbound public access; 0: outbound public access; 3: private network access; empty string: all access.
+	Direction *string `json:"Direction,omitempty" name:"Direction"`
+
+	// Rule type. Valid values: 1: block; 2: allow.
+	RuleType *uint64 `json:"RuleType,omitempty" name:"RuleType"`
+
+	// Column by which rules are sorted. Valid values: EndTime: end time; StartTime: start time; MatchTimes: number of matching times.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Sort order. Valid values: desc: descending; asc: ascending.
+	By *string `json:"By,omitempty" name:"By"`
+
+	// Search keys, in a JSON string. Valid values: {}: empty; domain: domain name; level: threat level; ignore_reason: reason for allowing access; rule_source: source of a security event; address: geographical location; common: fuzzy search.
+	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+}
+
+func (r *DescribeBlockIgnoreListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBlockIgnoreListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Direction")
+	delete(f, "RuleType")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "SearchValue")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBlockIgnoreListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBlockIgnoreListResponseParams struct {
+	// List data.
+	Data []*BlockIgnoreRule `json:"Data,omitempty" name:"Data"`
+
+	// Total number of results, which is used for pagination.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// Status code. Valid values: 0: successful; others: failed.
+	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+
+	// Status message. Valid values: success: successful query; fail: failed query.
+	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBlockIgnoreListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBlockIgnoreListResponseParams `json:"Response"`
+}
+
+func (r *DescribeBlockIgnoreListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBlockIgnoreListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1991,6 +2433,119 @@ func (r *DescribeIPStatusListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIPStatusListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatAcRuleRequestParams struct {
+	// Number of entries per page.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Index to be queried. This parameter is optional, and is used only in specific cases.
+	Index *string `json:"Index,omitempty" name:"Index"`
+
+	// Filter condition combination.
+	Filters []*CommonFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Start time for search. This parameter is optional.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for search. This parameter is optional.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Valid values: desc: descending; asc: ascending. The returned results are sorted by the value of By. If this parameter is specified, By is also required.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Field by which the returned results are sorted.
+	By *string `json:"By,omitempty" name:"By"`
+}
+
+type DescribeNatAcRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of entries per page.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Index to be queried. This parameter is optional, and is used only in specific cases.
+	Index *string `json:"Index,omitempty" name:"Index"`
+
+	// Filter condition combination.
+	Filters []*CommonFilter `json:"Filters,omitempty" name:"Filters"`
+
+	// Start time for search. This parameter is optional.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time for search. This parameter is optional.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Valid values: desc: descending; asc: ascending. The returned results are sorted by the value of By. If this parameter is specified, By is also required.
+	Order *string `json:"Order,omitempty" name:"Order"`
+
+	// Field by which the returned results are sorted.
+	By *string `json:"By,omitempty" name:"By"`
+}
+
+func (r *DescribeNatAcRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatAcRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Index")
+	delete(f, "Filters")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNatAcRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNatAcRuleResponseParams struct {
+	// Total number of entries.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// NAT access control list data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data []*DescAcItem `json:"Data,omitempty" name:"Data"`
+
+	// Total number of entries returned without filtering.
+	AllTotal *uint64 `json:"AllTotal,omitempty" name:"AllTotal"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeNatAcRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNatAcRuleResponseParams `json:"Response"`
+}
+
+func (r *DescribeNatAcRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNatAcRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2869,7 +3424,12 @@ func (r *DescribeTLogInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTLogInfoResponseParams struct {
-	// None
+	// `NetworkNum`: Number of detected network scans
+	//  `HandleNum`: Number of pending processing events
+	// "BanNum": 
+	//   `VulNum`: Number of vulnerability exploits
+	//   "OutNum`: Number of compromised servers
+	// "BruteForceNum": 0
 	Data *TLogInfo `json:"Data,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3208,6 +3768,25 @@ func (r *ExpandCfwVerticalResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ExpandCfwVerticalResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type FwCidrInfo struct {
+	// The IP range type of the firewall. Values: `VpcSelf` (VPC IP range preferred); `Assis` (Secondary IP range preferred); `Custom` (Custom IP range)
+	FwCidrType *string `json:"FwCidrType,omitempty" name:"FwCidrType"`
+
+	// The IP segment assigned for each VPC.
+	FwCidrLst []*FwVpcCidr `json:"FwCidrLst,omitempty" name:"FwCidrLst"`
+
+	// The IP segment used by other firewalls. Specify this if you want to assign a dedicated segment for the firewall.
+	ComFwCidr *string `json:"ComFwCidr,omitempty" name:"ComFwCidr"`
+}
+
+type FwVpcCidr struct {
+	// VPC ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// IP range of the firewall. The mask must be at least /24.
+	FwCidr *string `json:"FwCidr,omitempty" name:"FwCidr"`
 }
 
 type IPDefendStatus struct {
@@ -3676,7 +4255,7 @@ func (r *ModifyAssetScanResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyBlockIgnoreListRequestParams struct {
-	// 1: blocklist; 2: ignore list
+	// Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
 	RuleType *int64 `json:"RuleType,omitempty" name:"RuleType"`
 
 	// Either IP or Domain is required
@@ -3688,14 +4267,14 @@ type ModifyBlockIgnoreListRequestParams struct {
 	// Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
+	// End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type ModifyBlockIgnoreListRequest struct {
 	*tchttp.BaseRequest
 	
-	// 1: blocklist; 2: ignore list
+	// Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
 	RuleType *int64 `json:"RuleType,omitempty" name:"RuleType"`
 
 	// Either IP or Domain is required
@@ -3707,7 +4286,7 @@ type ModifyBlockIgnoreListRequest struct {
 	// Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
+	// End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -3824,6 +4403,202 @@ func (r *ModifyBlockTopResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyEnterpriseSecurityDispatchStatusRequestParams struct {
+	// Status. Values: `0` (Publish now), `1` (Stop publishing)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+type ModifyEnterpriseSecurityDispatchStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Status. Values: `0` (Publish now), `1` (Stop publishing)
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *ModifyEnterpriseSecurityDispatchStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEnterpriseSecurityDispatchStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEnterpriseSecurityDispatchStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyEnterpriseSecurityDispatchStatusResponseParams struct {
+	// `0`: Modified successfully; Others: Modification failed
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyEnterpriseSecurityDispatchStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyEnterpriseSecurityDispatchStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyEnterpriseSecurityDispatchStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEnterpriseSecurityDispatchStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyEnterpriseSecurityGroupRuleRequestParams struct {
+	// UUID of the rule, which can be obtained by querying the rule list
+	RuleUuid *uint64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// Modification type. Values: `0` (Modify rule content), `1` (Toggle on/off a rule) and `2` (Toggle on/off all rules)
+	ModifyType *uint64 `json:"ModifyType,omitempty" name:"ModifyType"`
+
+	// The new rule content you want. It’s only required when you want to modify the rule content (`ModifyType=0`)
+	Data *SecurityGroupRule `json:"Data,omitempty" name:"Data"`
+
+	// `0`: Do not enable; `1`: Enable
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+type ModifyEnterpriseSecurityGroupRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// UUID of the rule, which can be obtained by querying the rule list
+	RuleUuid *uint64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// Modification type. Values: `0` (Modify rule content), `1` (Toggle on/off a rule) and `2` (Toggle on/off all rules)
+	ModifyType *uint64 `json:"ModifyType,omitempty" name:"ModifyType"`
+
+	// The new rule content you want. It’s only required when you want to modify the rule content (`ModifyType=0`)
+	Data *SecurityGroupRule `json:"Data,omitempty" name:"Data"`
+
+	// `0`: Do not enable; `1`: Enable
+	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+}
+
+func (r *ModifyEnterpriseSecurityGroupRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEnterpriseSecurityGroupRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleUuid")
+	delete(f, "ModifyType")
+	delete(f, "Data")
+	delete(f, "Enable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEnterpriseSecurityGroupRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyEnterpriseSecurityGroupRuleResponseParams struct {
+	// Status value. `0`: Edited successfully; Others: Failed to edit
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// ID of new rule generated after the modification
+	NewRuleUuid *uint64 `json:"NewRuleUuid,omitempty" name:"NewRuleUuid"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyEnterpriseSecurityGroupRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyEnterpriseSecurityGroupRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyEnterpriseSecurityGroupRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEnterpriseSecurityGroupRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatAcRuleRequestParams struct {
+	// Array of rules to be modified.
+	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+}
+
+type ModifyNatAcRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of rules to be modified.
+	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+}
+
+func (r *ModifyNatAcRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatAcRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Rules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatAcRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatAcRuleResponseParams struct {
+	// ID list of new rules that have been successfully modified.
+	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNatAcRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNatAcRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyNatAcRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatAcRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyNatFwReSelectRequestParams struct {
 	// Mode. 1: use existing; 0: create new
 	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
@@ -3836,6 +4611,9 @@ type ModifyNatFwReSelectRequestParams struct {
 
 	// List of VPCs reconnected for the Create New mode. Only one of NatGwList and VpcList can be passed.
 	VpcList []*string `json:"VpcList,omitempty" name:"VpcList"`
+
+	// IP range of the firewall
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
 }
 
 type ModifyNatFwReSelectRequest struct {
@@ -3852,6 +4630,9 @@ type ModifyNatFwReSelectRequest struct {
 
 	// List of VPCs reconnected for the Create New mode. Only one of NatGwList and VpcList can be passed.
 	VpcList []*string `json:"VpcList,omitempty" name:"VpcList"`
+
+	// IP range of the firewall
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
 }
 
 func (r *ModifyNatFwReSelectRequest) ToJsonString() string {
@@ -3870,6 +4651,7 @@ func (r *ModifyNatFwReSelectRequest) FromJsonString(s string) error {
 	delete(f, "CfwInstance")
 	delete(f, "NatGwList")
 	delete(f, "VpcList")
+	delete(f, "FwCidrInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatFwReSelectRequest has unknown keys!", "")
 	}
@@ -4035,6 +4817,67 @@ func (r *ModifyNatFwVpcDnsSwitchResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyNatFwVpcDnsSwitchResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatSequenceRulesRequestParams struct {
+	// Rule sequence number. Values: `OrderIndex` (Original sequence number), `NewOrderIndex` (New sequence number)
+	RuleChangeItems []*RuleChangeItem `json:"RuleChangeItems,omitempty" name:"RuleChangeItems"`
+
+	// Rule direction. Values: `1` (Inbound) and `0` (Outbound)
+	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+}
+
+type ModifyNatSequenceRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Rule sequence number. Values: `OrderIndex` (Original sequence number), `NewOrderIndex` (New sequence number)
+	RuleChangeItems []*RuleChangeItem `json:"RuleChangeItems,omitempty" name:"RuleChangeItems"`
+
+	// Rule direction. Values: `1` (Inbound) and `0` (Outbound)
+	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+}
+
+func (r *ModifyNatSequenceRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatSequenceRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleChangeItems")
+	delete(f, "Direction")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNatSequenceRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNatSequenceRulesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyNatSequenceRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNatSequenceRulesResponseParams `json:"Response"`
+}
+
+func (r *ModifyNatSequenceRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNatSequenceRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4446,6 +5289,57 @@ func (r *ModifySequenceRulesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyStorageSettingRequestParams struct {
+
+}
+
+type ModifyStorageSettingRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *ModifyStorageSettingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStorageSettingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStorageSettingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStorageSettingResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyStorageSettingResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyStorageSettingResponseParams `json:"Response"`
+}
+
+func (r *ModifyStorageSettingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStorageSettingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyTableStatusRequestParams struct {
 	// Edge ID between two VPCs
 	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
@@ -4608,6 +5502,14 @@ type NatInstanceInfo struct {
 	// Availability zone of the instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ZoneZhBak *string `json:"ZoneZhBak,omitempty" name:"ZoneZhBak"`
+
+	// Number of used rules.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleUsed *uint64 `json:"RuleUsed,omitempty" name:"RuleUsed"`
+
+	// The maximum number of rules allowed in the instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleMax *uint64 `json:"RuleMax,omitempty" name:"RuleMax"`
 }
 
 type NewModeItems struct {
@@ -4752,6 +5654,78 @@ func (r *RemoveEnterpriseSecurityGroupRuleResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RemoveEnterpriseSecurityGroupRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveNatAcRuleRequestParams struct {
+	// UUIDs of the rules to delete, which can be obtained by querying the rule list. Note: If [-1] is passed in, all rules are deleted.
+	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// Rule direction. Valid values: 1: inbound; 0: outbound.
+	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+}
+
+type RemoveNatAcRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// UUIDs of the rules to delete, which can be obtained by querying the rule list. Note: If [-1] is passed in, all rules are deleted.
+	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// Rule direction. Valid values: 1: inbound; 0: outbound.
+	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+}
+
+func (r *RemoveNatAcRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveNatAcRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleUuid")
+	delete(f, "Direction")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RemoveNatAcRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RemoveNatAcRuleResponseParams struct {
+	// UUID list of the deleted rules.
+	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RemoveNatAcRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *RemoveNatAcRuleResponseParams `json:"Response"`
+}
+
+func (r *RemoveNatAcRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RemoveNatAcRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RuleChangeItem struct {
+	// Original sequence number
+	OrderIndex *int64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+
+	// New sequence number
+	NewOrderIndex *int64 `json:"NewOrderIndex,omitempty" name:"NewOrderIndex"`
 }
 
 type RuleInfoData struct {

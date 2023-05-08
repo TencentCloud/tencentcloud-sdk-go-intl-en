@@ -54,6 +54,55 @@ type ApplyStatus struct {
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
 }
 
+type BackupExpireRuleInfo struct {
+	// The ID of the table group where the table resides
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// file tag, which is described above.
+	FileTag *uint64 `json:"FileTag,omitempty" name:"FileTag"`
+
+	// Retention days, which is described above.
+	ExpireDay *uint64 `json:"ExpireDay,omitempty" name:"ExpireDay"`
+
+	// Operation type, which is described above.
+	OperType *uint64 `json:"OperType,omitempty" name:"OperType"`
+}
+
+type BackupRecords struct {
+	// Table group ID
+	ZoneId *uint64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Table name
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+
+	// Backup source
+	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+
+	// File tag: TCAPLUS_FULL or OSDATA
+	FileTag *string `json:"FileTag,omitempty" name:"FileTag"`
+
+	// Number of shards
+	ShardCount *uint64 `json:"ShardCount,omitempty" name:"ShardCount"`
+
+	// Backup batch date
+	BackupBatchTime *string `json:"BackupBatchTime,omitempty" name:"BackupBatchTime"`
+
+	// Total size of backup files
+	BackupFileSize *uint64 `json:"BackupFileSize,omitempty" name:"BackupFileSize"`
+
+	// Backup success rate
+	BackupSuccRate *string `json:"BackupSuccRate,omitempty" name:"BackupSuccRate"`
+
+	// Backup file expiration time
+	BackupExpireTime *string `json:"BackupExpireTime,omitempty" name:"BackupExpireTime"`
+
+	// Business ID
+	AppId *uint64 `json:"AppId,omitempty" name:"AppId"`
+}
+
 // Predefined struct for user
 type ClearTablesRequestParams struct {
 	// ID of the cluster instance where a table resides
@@ -769,6 +818,71 @@ func (r *CreateTablesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteBackupRecordsRequestParams struct {
+	// Cluster ID of the backup records to be deleted
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Details of the backup records to be deleted
+	BackupRecords []*BackupRecords `json:"BackupRecords,omitempty" name:"BackupRecords"`
+}
+
+type DeleteBackupRecordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID of the backup records to be deleted
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Details of the backup records to be deleted
+	BackupRecords []*BackupRecords `json:"BackupRecords,omitempty" name:"BackupRecords"`
+}
+
+func (r *DeleteBackupRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "BackupRecords")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBackupRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBackupRecordsResponseParams struct {
+	// `TaskId` is in the format of `AppInstanceId-taskId`, which is used to identify tasks of different clusters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteBackupRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBackupRecordsResponseParams `json:"Response"`
+}
+
+func (r *DeleteBackupRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteClusterRequestParams struct {
 	// ID of cluster to be deleted
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -1221,6 +1335,94 @@ func (r *DeleteTablesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteTablesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupRecordsRequestParams struct {
+	// Cluster ID, which is used to query a specified cluster
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of results per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Table group ID used as a filter condition
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name used as a filter condition
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+}
+
+type DescribeBackupRecordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID, which is used to query a specified cluster
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of results per page
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Page offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Table group ID used as a filter condition
+	TableGroupId *string `json:"TableGroupId,omitempty" name:"TableGroupId"`
+
+	// Table name used as a filter condition
+	TableName *string `json:"TableName,omitempty" name:"TableName"`
+}
+
+func (r *DescribeBackupRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "TableGroupId")
+	delete(f, "TableName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupRecordsResponseParams struct {
+	// Backup record details
+	BackupRecords []*BackupRecords `json:"BackupRecords,omitempty" name:"BackupRecords"`
+
+	// Number of returned entries
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupRecordsResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupRecordsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3898,6 +4100,71 @@ type ServerMachineInfo struct {
 
 	// Machine type
 	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+}
+
+// Predefined struct for user
+type SetBackupExpireRuleRequestParams struct {
+	// The ID of the cluster where the tables reside
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Array of retention policies
+	BackupExpireRules []*BackupExpireRuleInfo `json:"BackupExpireRules,omitempty" name:"BackupExpireRules"`
+}
+
+type SetBackupExpireRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the cluster where the tables reside
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Array of retention policies
+	BackupExpireRules []*BackupExpireRuleInfo `json:"BackupExpireRules,omitempty" name:"BackupExpireRules"`
+}
+
+func (r *SetBackupExpireRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetBackupExpireRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "BackupExpireRules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetBackupExpireRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetBackupExpireRuleResponseParams struct {
+	// `TaskId` is in the format of `AppInstanceId-taskId`, which is used to identify tasks of different clusters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SetBackupExpireRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *SetBackupExpireRuleResponseParams `json:"Response"`
+}
+
+func (r *SetBackupExpireRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetBackupExpireRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

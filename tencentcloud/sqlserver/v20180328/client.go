@@ -1819,6 +1819,60 @@ func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeDBInstancesAttributeRequest() (request *DescribeDBInstancesAttributeRequest) {
+    request = &DescribeDBInstancesAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeDBInstancesAttribute")
+    
+    
+    return
+}
+
+func NewDescribeDBInstancesAttributeResponse() (response *DescribeDBInstancesAttributeResponse) {
+    response = &DescribeDBInstancesAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBInstancesAttribute
+// This API is used to query the attributes of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeDBInstancesAttribute(request *DescribeDBInstancesAttributeRequest) (response *DescribeDBInstancesAttributeResponse, err error) {
+    return c.DescribeDBInstancesAttributeWithContext(context.Background(), request)
+}
+
+// DescribeDBInstancesAttribute
+// This API is used to query the attributes of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+func (c *Client) DescribeDBInstancesAttributeWithContext(ctx context.Context, request *DescribeDBInstancesAttributeRequest) (response *DescribeDBInstancesAttributeResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstancesAttributeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstancesAttribute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstancesAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBsRequest() (request *DescribeDBsRequest) {
     request = &DescribeDBsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2671,6 +2725,68 @@ func (c *Client) DescribeUploadBackupInfoWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeUploadBackupInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeXEventsRequest() (request *DescribeXEventsRequest) {
+    request = &DescribeXEventsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeXEvents")
+    
+    
+    return
+}
+
+func NewDescribeXEventsResponse() (response *DescribeXEventsResponse) {
+    response = &DescribeXEventsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeXEvents
+// This API is used to query the list of extended events.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSERROR = "FailedOperation.CosError"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeXEvents(request *DescribeXEventsRequest) (response *DescribeXEventsResponse, err error) {
+    return c.DescribeXEventsWithContext(context.Background(), request)
+}
+
+// DescribeXEvents
+// This API is used to query the list of extended events.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSERROR = "FailedOperation.CosError"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeXEventsWithContext(ctx context.Context, request *DescribeXEventsRequest) (response *DescribeXEventsResponse, err error) {
+    if request == nil {
+        request = NewDescribeXEventsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeXEvents require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeXEventsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4150,9 +4266,10 @@ func NewRestoreInstanceResponse() (response *RestoreInstanceResponse) {
 }
 
 // RestoreInstance
-// This API is used to restore an instance from a backup file.
+// This API is used to roll back the database by backup set.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -4169,9 +4286,10 @@ func (c *Client) RestoreInstance(request *RestoreInstanceRequest) (response *Res
 }
 
 // RestoreInstance
-// This API is used to restore an instance from a backup file.
+// This API is used to roll back the database by backup set.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -4218,7 +4336,7 @@ func NewRollbackInstanceResponse() (response *RollbackInstanceResponse) {
 }
 
 // RollbackInstance
-// This API is used to roll back an instance.
+// This API is used to roll back the instance by time point.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -4226,6 +4344,7 @@ func NewRollbackInstanceResponse() (response *RollbackInstanceResponse) {
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
 //  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_DBCHARILLEGAL = "InvalidParameterValue.DBCharIllegal"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
@@ -4235,7 +4354,7 @@ func (c *Client) RollbackInstance(request *RollbackInstanceRequest) (response *R
 }
 
 // RollbackInstance
-// This API is used to roll back an instance.
+// This API is used to roll back the instance by time point.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -4243,6 +4362,7 @@ func (c *Client) RollbackInstance(request *RollbackInstanceRequest) (response *R
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
 //  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_DBCHARILLEGAL = "InvalidParameterValue.DBCharIllegal"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
@@ -4461,6 +4581,62 @@ func (c *Client) StartIncrementalMigrationWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewStartIncrementalMigrationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartInstanceXEventRequest() (request *StartInstanceXEventRequest) {
+    request = &StartInstanceXEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "StartInstanceXEvent")
+    
+    
+    return
+}
+
+func NewStartInstanceXEventResponse() (response *StartInstanceXEventResponse) {
+    response = &StartInstanceXEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StartInstanceXEvent
+// This API is used to start and stop an extended event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
+func (c *Client) StartInstanceXEvent(request *StartInstanceXEventRequest) (response *StartInstanceXEventResponse, err error) {
+    return c.StartInstanceXEventWithContext(context.Background(), request)
+}
+
+// StartInstanceXEvent
+// This API is used to start and stop an extended event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
+func (c *Client) StartInstanceXEventWithContext(ctx context.Context, request *StartInstanceXEventRequest) (response *StartInstanceXEventResponse, err error) {
+    if request == nil {
+        request = NewStartInstanceXEventRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartInstanceXEvent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartInstanceXEventResponse()
     err = c.Send(request, response)
     return
 }

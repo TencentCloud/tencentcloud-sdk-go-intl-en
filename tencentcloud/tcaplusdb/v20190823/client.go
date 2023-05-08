@@ -467,6 +467,64 @@ func (c *Client) CreateTablesWithContext(ctx context.Context, request *CreateTab
     return
 }
 
+func NewDeleteBackupRecordsRequest() (request *DeleteBackupRecordsRequest) {
+    request = &DeleteBackupRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DeleteBackupRecords")
+    
+    
+    return
+}
+
+func NewDeleteBackupRecordsResponse() (response *DeleteBackupRecordsResponse) {
+    response = &DeleteBackupRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteBackupRecords
+// This API is used to delete a manual backup.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteBackupRecords(request *DeleteBackupRecordsRequest) (response *DeleteBackupRecordsResponse, err error) {
+    return c.DeleteBackupRecordsWithContext(context.Background(), request)
+}
+
+// DeleteBackupRecords
+// This API is used to delete a manual backup.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteBackupRecordsWithContext(ctx context.Context, request *DeleteBackupRecordsRequest) (response *DeleteBackupRecordsResponse, err error) {
+    if request == nil {
+        request = NewDeleteBackupRecordsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBackupRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBackupRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteClusterRequest() (request *DeleteClusterRequest) {
     request = &DeleteClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -869,6 +927,80 @@ func (c *Client) DeleteTablesWithContext(ctx context.Context, request *DeleteTab
     request.SetContext(ctx)
     
     response = NewDeleteTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupRecordsRequest() (request *DescribeBackupRecordsRequest) {
+    request = &DescribeBackupRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "DescribeBackupRecords")
+    
+    
+    return
+}
+
+func NewDescribeBackupRecordsResponse() (response *DescribeBackupRecordsResponse) {
+    response = &DescribeBackupRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupRecords
+// This API is used to query backup records.
+//
+// 
+//
+// When querying the cluster level, set `TableGroupId` to `-1` and `TableName` to `-1`.
+//
+// When querying the cluster and table group levels, set `TableName` to `-1`.
+//
+// When querying the cluster, table group, and table levels, both `TableGroupId` and `TableName` cannot be set to `-1`.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBackupRecords(request *DescribeBackupRecordsRequest) (response *DescribeBackupRecordsResponse, err error) {
+    return c.DescribeBackupRecordsWithContext(context.Background(), request)
+}
+
+// DescribeBackupRecords
+// This API is used to query backup records.
+//
+// 
+//
+// When querying the cluster level, set `TableGroupId` to `-1` and `TableName` to `-1`.
+//
+// When querying the cluster and table group levels, set `TableName` to `-1`.
+//
+// When querying the cluster, table group, and table levels, both `TableGroupId` and `TableName` cannot be set to `-1`.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_REGIONMISMATCH = "FailedOperation.RegionMismatch"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBackupRecordsWithContext(ctx context.Context, request *DescribeBackupRecordsRequest) (response *DescribeBackupRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupRecordsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupRecordsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2681,6 +2813,68 @@ func (c *Client) RollbackTablesWithContext(ctx context.Context, request *Rollbac
     request.SetContext(ctx)
     
     response = NewRollbackTablesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetBackupExpireRuleRequest() (request *SetBackupExpireRuleRequest) {
+    request = &SetBackupExpireRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcaplusdb", APIVersion, "SetBackupExpireRule")
+    
+    
+    return
+}
+
+func NewSetBackupExpireRuleResponse() (response *SetBackupExpireRuleResponse) {
+    response = &SetBackupExpireRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SetBackupExpireRule
+// This API is used to add/delete/modify backup expiration policy. `ClusterId` must be a specific cluster ID (appid).
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SetBackupExpireRule(request *SetBackupExpireRuleRequest) (response *SetBackupExpireRuleResponse, err error) {
+    return c.SetBackupExpireRuleWithContext(context.Background(), request)
+}
+
+// SetBackupExpireRule
+// This API is used to add/delete/modify backup expiration policy. `ClusterId` must be a specific cluster ID (appid).
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) SetBackupExpireRuleWithContext(ctx context.Context, request *SetBackupExpireRuleRequest) (response *SetBackupExpireRuleResponse, err error) {
+    if request == nil {
+        request = NewSetBackupExpireRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetBackupExpireRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetBackupExpireRuleResponse()
     err = c.Send(request, response)
     return
 }

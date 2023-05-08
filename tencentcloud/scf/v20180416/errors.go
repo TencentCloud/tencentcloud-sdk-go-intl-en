@@ -143,6 +143,12 @@ const (
 	// You cannot update code in the current function state. Please try again when the state is normal.
 	FAILEDOPERATION_UPDATEFUNCTIONCODE = "FailedOperation.UpdateFunctionCode"
 
+	// Failed to update the status
+	FAILEDOPERATION_UPDATESTATUS = "FailedOperation.UpdateStatus"
+
+	// The new status is the same as the previous one.
+	FAILEDOPERATION_UPDATETRIGGERSTATUS = "FailedOperation.UpdateTriggerStatus"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
@@ -167,6 +173,9 @@ const (
 	// Internal system error.
 	INTERNALERROR_SYSTEM = "InternalError.System"
 
+	// Log parameter error
+	INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
+
 	// The value of `FunctionName` does not conform to the specification. Please fix it and try again. For more information, please visit https://tencentcs.com/5jXKFnBW.
 	INVALIDPARAMETER_FUNCTIONNAME = "InvalidParameter.FunctionName"
 
@@ -176,7 +185,7 @@ const (
 	// Invalid request parameter.
 	INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 
-	// 
+	// Request size 
 	INVALIDPARAMETER_REQUESTTOOLARGE = "InvalidParameter.RequestTooLarge"
 
 	// RoleCheck parameter error
@@ -187,6 +196,9 @@ const (
 
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// Invalid `Action` value. For more information, go to https://tencentcs.com/5jXKFnBW.
+	INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 
 	// Incorrect `AdditionalVersionWeights` parameter.
 	INVALIDPARAMETERVALUE_ADDITIONALVERSIONWEIGHTS = "InvalidParameterValue.AdditionalVersionWeights"
@@ -241,6 +253,9 @@ const (
 
 	// The value of CosBucketRegion is invalid. Please modify and try again. See: https://tencentcs.com/5jXKFnBW
 	INVALIDPARAMETERVALUE_COSBUCKETREGION = "InvalidParameterValue.CosBucketRegion"
+
+	// COS notification rule conflict
+	INVALIDPARAMETERVALUE_COSNOTIFYRULECONFLICT = "InvalidParameterValue.CosNotifyRuleConflict"
 
 	// Invalid CosObjectName.
 	INVALIDPARAMETERVALUE_COSOBJECTNAME = "InvalidParameterValue.CosObjectName"
@@ -437,6 +452,12 @@ const (
 	// The Cdn usage exceeds the upper limit.
 	LIMITEXCEEDED_CDN = "LimitExceeded.Cdn"
 
+	// Reached the upper limit of function versions enabling image acceleration
+	LIMITEXCEEDED_CONTAINERIMAGEACCELERATE = "LimitExceeded.ContainerImageAccelerate"
+
+	// Reached the upper limit of function versions enabling image acceleration
+	LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
+
 	// If the number of functions exceeds the upper limit, you can apply for an increase by [submitting a ticket](https://intl.cloud.tencent.com/act/event/Online_service?from=scf%7Cindex?from_cn_redirect=1).
 	LIMITEXCEEDED_FUNCTION = "LimitExceeded.Function"
 
@@ -503,6 +524,9 @@ const (
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
 
+	// This account has been isolated.
+	OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+
 	// The resource is in use.
 	RESOURCEINUSE = "ResourceInUse"
 
@@ -544,6 +568,9 @@ const (
 
 	// The specified `AsyncEvent` was not found. Please create it and try again.
 	RESOURCENOTFOUND_ASYNCEVENT = "ResourceNotFound.AsyncEvent"
+
+	// The tag key does not exist.
+	RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 
 	// Cdn does not exist.
 	RESOURCENOTFOUND_CDN = "ResourceNotFound.Cdn"
@@ -623,11 +650,17 @@ const (
 	// Region error.
 	UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
 
+	// Not authorized to access your COS resources.
+	UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
+
 	// The `Appid` of TempCos is not consistent with the APPID of the request account.
 	UNAUTHORIZEDOPERATION_TEMPCOSAPPID = "UnauthorizedOperation.TempCosAppid"
 
 	// Operation failed.
 	UNAUTHORIZEDOPERATION_UPDATEFUNCTIONCODE = "UnauthorizedOperation.UpdateFunctionCode"
+
+	// You are not authorized for the operation.
+	UNAUTHORIZEDOPERATION_UPDATETRIGGERSTATUS = "UnauthorizedOperation.UpdateTriggerStatus"
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -643,6 +676,9 @@ const (
 
 	// The specified EipFixed does not exist.
 	UNSUPPORTEDOPERATION_EIPFIXED = "UnsupportedOperation.EipFixed"
+
+	// Unsupported region.
+	UNSUPPORTEDOPERATION_NOTSUPPORTREGION = "UnsupportedOperation.NotSupportRegion"
 
 	// This region is not supported.
 	UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"

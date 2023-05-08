@@ -187,6 +187,88 @@ func (c *Client) AddEnterpriseSecurityGroupRulesWithContext(ctx context.Context,
     return
 }
 
+func NewAddNatAcRuleRequest() (request *AddNatAcRuleRequest) {
+    request = &AddNatAcRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "AddNatAcRule")
+    
+    
+    return
+}
+
+func NewAddNatAcRuleResponse() (response *AddNatAcRuleResponse) {
+    response = &AddNatAcRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// AddNatAcRule
+// This API is used to add NAT access control rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddNatAcRule(request *AddNatAcRuleRequest) (response *AddNatAcRuleResponse, err error) {
+    return c.AddNatAcRuleWithContext(context.Background(), request)
+}
+
+// AddNatAcRule
+// This API is used to add NAT access control rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddNatAcRuleWithContext(ctx context.Context, request *AddNatAcRuleRequest) (response *AddNatAcRuleResponse, err error) {
+    if request == nil {
+        request = NewAddNatAcRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddNatAcRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddNatAcRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAcRulesRequest() (request *CreateAcRulesRequest) {
     request = &CreateAcRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -206,7 +288,7 @@ func NewCreateAcRulesResponse() (response *CreateAcRulesResponse) {
 }
 
 // CreateAcRules
-// This API is used to create rules.
+// This API is used to create access control rules.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -217,7 +299,7 @@ func (c *Client) CreateAcRules(request *CreateAcRulesRequest) (response *CreateA
 }
 
 // CreateAcRules
-// This API is used to create rules.
+// This API is used to create access control rules.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -945,6 +1027,58 @@ func (c *Client) DescribeBlockByIpTimesListWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeBlockIgnoreListRequest() (request *DescribeBlockIgnoreListRequest) {
+    request = &DescribeBlockIgnoreListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "DescribeBlockIgnoreList")
+    
+    
+    return
+}
+
+func NewDescribeBlockIgnoreListResponse() (response *DescribeBlockIgnoreListResponse) {
+    response = &DescribeBlockIgnoreListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBlockIgnoreList
+// This API is used to get allowlists or blocklists for intrusion prevention.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBlockIgnoreList(request *DescribeBlockIgnoreListRequest) (response *DescribeBlockIgnoreListResponse, err error) {
+    return c.DescribeBlockIgnoreListWithContext(context.Background(), request)
+}
+
+// DescribeBlockIgnoreList
+// This API is used to get allowlists or blocklists for intrusion prevention.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBlockIgnoreListWithContext(ctx context.Context, request *DescribeBlockIgnoreListRequest) (response *DescribeBlockIgnoreListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBlockIgnoreListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBlockIgnoreList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBlockIgnoreListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBlockStaticListRequest() (request *DescribeBlockStaticListRequest) {
     request = &DescribeBlockStaticListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1293,6 +1427,60 @@ func (c *Client) DescribeIPStatusListWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeIPStatusListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNatAcRuleRequest() (request *DescribeNatAcRuleRequest) {
+    request = &DescribeNatAcRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "DescribeNatAcRule")
+    
+    
+    return
+}
+
+func NewDescribeNatAcRuleResponse() (response *DescribeNatAcRuleResponse) {
+    response = &DescribeNatAcRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeNatAcRule
+// This API is used to get the NAT access control list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeNatAcRule(request *DescribeNatAcRuleRequest) (response *DescribeNatAcRuleResponse, err error) {
+    return c.DescribeNatAcRuleWithContext(context.Background(), request)
+}
+
+// DescribeNatAcRule
+// This API is used to get the NAT access control list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeNatAcRuleWithContext(ctx context.Context, request *DescribeNatAcRuleRequest) (response *DescribeNatAcRuleResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatAcRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNatAcRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNatAcRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -2662,13 +2850,13 @@ func NewModifyBlockIgnoreListResponse() (response *ModifyBlockIgnoreListResponse
 }
 
 // ModifyBlockIgnoreList
-// This API is used to:
+// This API is used to manage blocked/allowed IPs and domains.
 //
-// add IPs/domains in the blocklist or ignored list
+// Add IPs/domains to the blocked/allowed list
 //
-// delete IPs/domains in the blocklist or ignored list
+// Remove IPs/domains from the blocked/allowed list
 //
-// modify IPs/domains in the blocklist or ignored list
+// Modify events related with the IPs/domains in the blocked/allowed list
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2680,13 +2868,13 @@ func (c *Client) ModifyBlockIgnoreList(request *ModifyBlockIgnoreListRequest) (r
 }
 
 // ModifyBlockIgnoreList
-// This API is used to:
+// This API is used to manage blocked/allowed IPs and domains.
 //
-// add IPs/domains in the blocklist or ignored list
+// Add IPs/domains to the blocked/allowed list
 //
-// delete IPs/domains in the blocklist or ignored list
+// Remove IPs/domains from the blocked/allowed list
 //
-// modify IPs/domains in the blocklist or ignored list
+// Modify events related with the IPs/domains in the blocked/allowed list
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2787,6 +2975,174 @@ func (c *Client) ModifyBlockTopWithContext(ctx context.Context, request *ModifyB
     request.SetContext(ctx)
     
     response = NewModifyBlockTopResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyEnterpriseSecurityDispatchStatusRequest() (request *ModifyEnterpriseSecurityDispatchStatusRequest) {
+    request = &ModifyEnterpriseSecurityDispatchStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "ModifyEnterpriseSecurityDispatchStatus")
+    
+    
+    return
+}
+
+func NewModifyEnterpriseSecurityDispatchStatusResponse() (response *ModifyEnterpriseSecurityDispatchStatusResponse) {
+    response = &ModifyEnterpriseSecurityDispatchStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyEnterpriseSecurityDispatchStatus
+// This API is used to modify the publishing status of an enterprise security group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyEnterpriseSecurityDispatchStatus(request *ModifyEnterpriseSecurityDispatchStatusRequest) (response *ModifyEnterpriseSecurityDispatchStatusResponse, err error) {
+    return c.ModifyEnterpriseSecurityDispatchStatusWithContext(context.Background(), request)
+}
+
+// ModifyEnterpriseSecurityDispatchStatus
+// This API is used to modify the publishing status of an enterprise security group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyEnterpriseSecurityDispatchStatusWithContext(ctx context.Context, request *ModifyEnterpriseSecurityDispatchStatusRequest) (response *ModifyEnterpriseSecurityDispatchStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyEnterpriseSecurityDispatchStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEnterpriseSecurityDispatchStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyEnterpriseSecurityDispatchStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyEnterpriseSecurityGroupRuleRequest() (request *ModifyEnterpriseSecurityGroupRuleRequest) {
+    request = &ModifyEnterpriseSecurityGroupRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "ModifyEnterpriseSecurityGroupRule")
+    
+    
+    return
+}
+
+func NewModifyEnterpriseSecurityGroupRuleResponse() (response *ModifyEnterpriseSecurityGroupRuleResponse) {
+    response = &ModifyEnterpriseSecurityGroupRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyEnterpriseSecurityGroupRule
+// This API is used to modify a new enterprise security group rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyEnterpriseSecurityGroupRule(request *ModifyEnterpriseSecurityGroupRuleRequest) (response *ModifyEnterpriseSecurityGroupRuleResponse, err error) {
+    return c.ModifyEnterpriseSecurityGroupRuleWithContext(context.Background(), request)
+}
+
+// ModifyEnterpriseSecurityGroupRule
+// This API is used to modify a new enterprise security group rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyEnterpriseSecurityGroupRuleWithContext(ctx context.Context, request *ModifyEnterpriseSecurityGroupRuleRequest) (response *ModifyEnterpriseSecurityGroupRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyEnterpriseSecurityGroupRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEnterpriseSecurityGroupRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyEnterpriseSecurityGroupRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNatAcRuleRequest() (request *ModifyNatAcRuleRequest) {
+    request = &ModifyNatAcRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "ModifyNatAcRule")
+    
+    
+    return
+}
+
+func NewModifyNatAcRuleResponse() (response *ModifyNatAcRuleResponse) {
+    response = &ModifyNatAcRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNatAcRule
+// This API is used to modify NAT access control rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatAcRule(request *ModifyNatAcRuleRequest) (response *ModifyNatAcRuleResponse, err error) {
+    return c.ModifyNatAcRuleWithContext(context.Background(), request)
+}
+
+// ModifyNatAcRule
+// This API is used to modify NAT access control rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatAcRuleWithContext(ctx context.Context, request *ModifyNatAcRuleRequest) (response *ModifyNatAcRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyNatAcRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNatAcRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNatAcRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -3023,6 +3379,88 @@ func (c *Client) ModifyNatFwVpcDnsSwitchWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyNatFwVpcDnsSwitchResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNatSequenceRulesRequest() (request *ModifyNatSequenceRulesRequest) {
+    request = &ModifyNatSequenceRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "ModifyNatSequenceRules")
+    
+    
+    return
+}
+
+func NewModifyNatSequenceRulesResponse() (response *ModifyNatSequenceRulesResponse) {
+    response = &ModifyNatSequenceRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyNatSequenceRules
+// This API is used to change the sequence number of NAT firewall rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatSequenceRules(request *ModifyNatSequenceRulesRequest) (response *ModifyNatSequenceRulesResponse, err error) {
+    return c.ModifyNatSequenceRulesWithContext(context.Background(), request)
+}
+
+// ModifyNatSequenceRules
+// This API is used to change the sequence number of NAT firewall rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNatSequenceRulesWithContext(ctx context.Context, request *ModifyNatSequenceRulesRequest) (response *ModifyNatSequenceRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyNatSequenceRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNatSequenceRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNatSequenceRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3379,6 +3817,88 @@ func (c *Client) ModifySequenceRulesWithContext(ctx context.Context, request *Mo
     return
 }
 
+func NewModifyStorageSettingRequest() (request *ModifyStorageSettingRequest) {
+    request = &ModifyStorageSettingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "ModifyStorageSetting")
+    
+    
+    return
+}
+
+func NewModifyStorageSettingResponse() (response *ModifyStorageSettingResponse) {
+    response = &ModifyStorageSettingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyStorageSetting
+// This API is used to modify the log retention period or to clear logs.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyStorageSetting(request *ModifyStorageSettingRequest) (response *ModifyStorageSettingResponse, err error) {
+    return c.ModifyStorageSettingWithContext(context.Background(), request)
+}
+
+// ModifyStorageSetting
+// This API is used to modify the log retention period or to clear logs.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyStorageSettingWithContext(ctx context.Context, request *ModifyStorageSettingRequest) (response *ModifyStorageSettingResponse, err error) {
+    if request == nil {
+        request = NewModifyStorageSettingRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStorageSetting require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStorageSettingResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTableStatusRequest() (request *ModifyTableStatusRequest) {
     request = &ModifyTableStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3593,6 +4113,88 @@ func (c *Client) RemoveEnterpriseSecurityGroupRuleWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewRemoveEnterpriseSecurityGroupRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveNatAcRuleRequest() (request *RemoveNatAcRuleRequest) {
+    request = &RemoveNatAcRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "RemoveNatAcRule")
+    
+    
+    return
+}
+
+func NewRemoveNatAcRuleResponse() (response *RemoveNatAcRuleResponse) {
+    response = &RemoveNatAcRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RemoveNatAcRule
+// This API is used to delete NAT access control rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RemoveNatAcRule(request *RemoveNatAcRuleRequest) (response *RemoveNatAcRuleResponse, err error) {
+    return c.RemoveNatAcRuleWithContext(context.Background(), request)
+}
+
+// RemoveNatAcRule
+// This API is used to delete NAT access control rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RemoveNatAcRuleWithContext(ctx context.Context, request *RemoveNatAcRuleRequest) (response *RemoveNatAcRuleResponse, err error) {
+    if request == nil {
+        request = NewRemoveNatAcRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveNatAcRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRemoveNatAcRuleResponse()
     err = c.Send(request, response)
     return
 }

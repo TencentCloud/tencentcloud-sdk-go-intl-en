@@ -1498,6 +1498,14 @@ type DBInstance struct {
 	// Replica AZ information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SlaveZones *SlaveZones `json:"SlaveZones,omitempty" name:"SlaveZones"`
+
+	// Architecture type. Valid values: `SINGLE` (single-node), `DOUBLE` (two-node), `TRIPLE` (three-node).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Architecture *string `json:"Architecture,omitempty" name:"Architecture"`
+
+	// Instance type. Valid values: `EXCLUSIVE` (dedicated), `SHARED` (shared)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Style *string `json:"Style,omitempty" name:"Style"`
 }
 
 type DBPrivilege struct {
@@ -2872,6 +2880,84 @@ func (r *DescribeDBInstanceInterResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBInstancesAttributeRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeDBInstancesAttributeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBInstancesAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstancesAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstancesAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstancesAttributeResponseParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Archive backup status. Valid values: `enable` (enabled), `disable` (disabled)
+	RegularBackupEnable *string `json:"RegularBackupEnable,omitempty" name:"RegularBackupEnable"`
+
+	// Archive backup retention period: [90-3650] days
+	RegularBackupSaveDays *uint64 `json:"RegularBackupSaveDays,omitempty" name:"RegularBackupSaveDays"`
+
+	// Archive backup policy. Valid values: `years` (yearly); `quarters (quarterly); `months` (monthly).
+	RegularBackupStrategy *string `json:"RegularBackupStrategy,omitempty" name:"RegularBackupStrategy"`
+
+	// The number of retained archive backups
+	RegularBackupCounts *uint64 `json:"RegularBackupCounts,omitempty" name:"RegularBackupCounts"`
+
+	// Archive backup start date in YYYY-MM-DD format, which is the current time by default.
+	RegularBackupStartTime *string `json:"RegularBackupStartTime,omitempty" name:"RegularBackupStartTime"`
+
+	// Block process threshold in milliseconds
+	BlockedThreshold *int64 `json:"BlockedThreshold,omitempty" name:"BlockedThreshold"`
+
+	// Retention period for the files of slow SQL, blocking, deadlock, and extended events.
+	EventSaveDays *int64 `json:"EventSaveDays,omitempty" name:"EventSaveDays"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDBInstancesAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstancesAttributeResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstancesAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstancesAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBInstancesRequestParams struct {
 	// Project ID
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
@@ -4128,6 +4214,101 @@ func (r *DescribeUploadBackupInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeXEventsRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  deadlock` (deadlock event).
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// Generation start time of an extended file
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Generation end time of an extended file
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Page number. Default value: `0`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries to be returned per page. Value range: 1-100. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeXEventsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  deadlock` (deadlock event).
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// Generation start time of an extended file
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Generation end time of an extended file
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Page number. Default value: `0`
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Number of entries to be returned per page. Value range: 1-100. Default value: `20`
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeXEventsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeXEventsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EventType")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeXEventsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeXEventsResponseParams struct {
+	// List of extended events
+	Events []*Events `json:"Events,omitempty" name:"Events"`
+
+	// Total number of extended events
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeXEventsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeXEventsResponseParams `json:"Response"`
+}
+
+func (r *DescribeXEventsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeXEventsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeZonesRequestParams struct {
 
 }
@@ -4182,6 +4363,43 @@ func (r *DescribeZonesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type EventConfig struct {
+	// Event type. Valid values: `slow` (set threshold for slow SQL ), `blocked` (set threshold for the blocking and deadlock).
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// Threshold in milliseconds. Valid values: `0`(disable), `non-zero` (enable)
+	Threshold *int64 `json:"Threshold,omitempty" name:"Threshold"`
+}
+
+type Events struct {
+	// ID
+	Id *int64 `json:"Id,omitempty" name:"Id"`
+
+	// File name of an extended event
+	FileName *string `json:"FileName,omitempty" name:"FileName"`
+
+	// File size of an extended event
+	Size *int64 `json:"Size,omitempty" name:"Size"`
+
+	// Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  `deadlock` (deadlock event).
+	EventType *string `json:"EventType,omitempty" name:"EventType"`
+
+	// Event record status. Valid values: `1` (succeeded), `2` (failed).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Generation start time of an extended file
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Generation end time of an extended file
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Download address on the private network
+	InternalAddr *string `json:"InternalAddr,omitempty" name:"InternalAddr"`
+
+	// Download address on the public network
+	ExternalAddr *string `json:"ExternalAddr,omitempty" name:"ExternalAddr"`
 }
 
 type FileAction struct {
@@ -6145,7 +6363,13 @@ type RestoreInstanceRequestParams struct {
 	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
 	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
 
-	// Group ID of unarchived backup files grouped by backup task. This parameter is returned by the [DescribeBackups](https://intl.cloud.tencent.com/document/product/238/19943?from_cn_redirect=1) API.
+	// Rollback type. Valid values: `0` (overwriting), `1` (renaming).
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// Database to be overwritten, which is required when overwriting a rollback database.
+	DBList []*string `json:"DBList,omitempty" name:"DBList"`
+
+	// Group ID of unarchived backup files grouped by backup task
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
@@ -6164,7 +6388,13 @@ type RestoreInstanceRequest struct {
 	// Restore the databases listed in `ReNameRestoreDatabase` and rename them after restoration. If this parameter is left empty, all databases will be restored and renamed in the default format.
 	RenameRestore []*RenameRestoreDatabase `json:"RenameRestore,omitempty" name:"RenameRestore"`
 
-	// Group ID of unarchived backup files grouped by backup task. This parameter is returned by the [DescribeBackups](https://intl.cloud.tencent.com/document/product/238/19943?from_cn_redirect=1) API.
+	// Rollback type. Valid values: `0` (overwriting), `1` (renaming).
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// Database to be overwritten, which is required when overwriting a rollback database.
+	DBList []*string `json:"DBList,omitempty" name:"DBList"`
+
+	// Group ID of unarchived backup files grouped by backup task
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 }
 
@@ -6184,6 +6414,8 @@ func (r *RestoreInstanceRequest) FromJsonString(s string) error {
 	delete(f, "BackupId")
 	delete(f, "TargetInstanceId")
 	delete(f, "RenameRestore")
+	delete(f, "Type")
+	delete(f, "DBList")
 	delete(f, "GroupId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestoreInstanceRequest has unknown keys!", "")
@@ -6583,6 +6815,67 @@ func (r *StartIncrementalMigrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartIncrementalMigrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartInstanceXEventRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to start or stop an extended event
+	EventConfig []*EventConfig `json:"EventConfig,omitempty" name:"EventConfig"`
+}
+
+type StartInstanceXEventRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to start or stop an extended event
+	EventConfig []*EventConfig `json:"EventConfig,omitempty" name:"EventConfig"`
+}
+
+func (r *StartInstanceXEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartInstanceXEventRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "EventConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartInstanceXEventRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartInstanceXEventResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartInstanceXEventResponse struct {
+	*tchttp.BaseResponse
+	Response *StartInstanceXEventResponseParams `json:"Response"`
+}
+
+func (r *StartInstanceXEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartInstanceXEventResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

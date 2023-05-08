@@ -264,6 +264,7 @@ func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
 //  FAILEDOPERATION_CREATENAMESPACE = "FailedOperation.CreateNamespace"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_DEFAULTNAMESPACE = "InvalidParameterValue.DefaultNamespace"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
@@ -273,6 +274,7 @@ func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINUSE_NAMESPACE = "ResourceInUse.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
     return c.CreateNamespaceWithContext(context.Background(), request)
@@ -285,6 +287,7 @@ func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *Cre
 //  FAILEDOPERATION_CREATENAMESPACE = "FailedOperation.CreateNamespace"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_DEFAULTNAMESPACE = "InvalidParameterValue.DefaultNamespace"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
@@ -294,6 +297,7 @@ func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *Cre
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINUSE_NAMESPACE = "ResourceInUse.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNAUTHORIZEDOPERATION_ROLE = "UnauthorizedOperation.Role"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateNamespaceWithContext(ctx context.Context, request *CreateNamespaceRequest) (response *CreateNamespaceResponse, err error) {
     if request == nil {
@@ -348,6 +352,7 @@ func NewCreateTriggerResponse() (response *CreateTriggerResponse) {
 //  INVALIDPARAMETERVALUE_CDN = "InvalidParameterValue.Cdn"
 //  INVALIDPARAMETERVALUE_CKAFKA = "InvalidParameterValue.Ckafka"
 //  INVALIDPARAMETERVALUE_COS = "InvalidParameterValue.Cos"
+//  INVALIDPARAMETERVALUE_COSNOTIFYRULECONFLICT = "InvalidParameterValue.CosNotifyRuleConflict"
 //  INVALIDPARAMETERVALUE_CUSTOMARGUMENT = "InvalidParameterValue.CustomArgument"
 //  INVALIDPARAMETERVALUE_ENABLE = "InvalidParameterValue.Enable"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
@@ -408,6 +413,7 @@ func (c *Client) CreateTrigger(request *CreateTriggerRequest) (response *CreateT
 //  INVALIDPARAMETERVALUE_CDN = "InvalidParameterValue.Cdn"
 //  INVALIDPARAMETERVALUE_CKAFKA = "InvalidParameterValue.Ckafka"
 //  INVALIDPARAMETERVALUE_COS = "InvalidParameterValue.Cos"
+//  INVALIDPARAMETERVALUE_COSNOTIFYRULECONFLICT = "InvalidParameterValue.CosNotifyRuleConflict"
 //  INVALIDPARAMETERVALUE_CUSTOMARGUMENT = "InvalidParameterValue.CustomArgument"
 //  INVALIDPARAMETERVALUE_ENABLE = "InvalidParameterValue.Enable"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
@@ -556,6 +562,7 @@ func NewDeleteFunctionResponse() (response *DeleteFunctionResponse) {
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
@@ -585,6 +592,7 @@ func (c *Client) DeleteFunction(request *DeleteFunctionRequest) (response *Delet
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_ATTACHEDTAGKEYNOTFOUND = "ResourceNotFound.AttachedTagKeyNotFound"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
@@ -694,6 +702,7 @@ func NewDeleteNamespaceResponse() (response *DeleteNamespaceResponse) {
 //  FAILEDOPERATION_DELETENAMESPACE = "FailedOperation.DeleteNamespace"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_NAMESPACEINVALID = "InvalidParameterValue.NamespaceInvalid"
 //  RESOURCEINUSE_NAMESPACE = "ResourceInUse.Namespace"
@@ -711,6 +720,7 @@ func (c *Client) DeleteNamespace(request *DeleteNamespaceRequest) (response *Del
 //  FAILEDOPERATION_DELETENAMESPACE = "FailedOperation.DeleteNamespace"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_NAMESPACEINVALID = "InvalidParameterValue.NamespaceInvalid"
 //  RESOURCEINUSE_NAMESPACE = "ResourceInUse.Namespace"
@@ -755,6 +765,7 @@ func NewDeleteProvisionedConcurrencyConfigResponse() (response *DeleteProvisione
 // This API is used to delete the provisioned concurrency configuration of a function version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
@@ -772,6 +783,7 @@ func (c *Client) DeleteProvisionedConcurrencyConfig(request *DeleteProvisionedCo
 // This API is used to delete the provisioned concurrency configuration of a function version.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_PROVISIONEDINPROGRESS = "FailedOperation.ProvisionedInProgress"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
@@ -1155,6 +1167,7 @@ func NewGetFunctionAddressResponse() (response *GetFunctionAddressResponse) {
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
@@ -1179,6 +1192,7 @@ func (c *Client) GetFunctionAddress(request *GetFunctionAddressRequest) (respons
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_QUALIFIER = "InvalidParameterValue.Qualifier"
@@ -1312,6 +1326,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  INTERNALERROR_ES = "InternalError.ES"
 //  INTERNALERROR_EXCEPTION = "InternalError.Exception"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETER_ROLECHECK = "InvalidParameter.RoleCheck"
@@ -1329,6 +1344,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTREGION = "UnsupportedOperation.NotSupportRegion"
 func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
     return c.GetFunctionLogsWithContext(context.Background(), request)
 }
@@ -1344,6 +1360,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 //  INTERNALERROR_ES = "InternalError.ES"
 //  INTERNALERROR_EXCEPTION = "InternalError.Exception"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 //  INVALIDPARAMETER_PAYLOAD = "InvalidParameter.Payload"
 //  INVALIDPARAMETER_ROLECHECK = "InvalidParameter.RoleCheck"
@@ -1361,6 +1378,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTREGION = "UnsupportedOperation.NotSupportRegion"
 func (c *Client) GetFunctionLogsWithContext(ctx context.Context, request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
     if request == nil {
         request = NewGetFunctionLogsRequest()
@@ -1525,6 +1543,7 @@ func NewGetRequestStatusResponse() (response *GetRequestStatusResponse) {
 //  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
 //  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
@@ -1533,6 +1552,7 @@ func NewGetRequestStatusResponse() (response *GetRequestStatusResponse) {
 //  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *GetRequestStatusResponse, err error) {
@@ -1547,6 +1567,7 @@ func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *G
 //  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
+//  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
 //  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
@@ -1555,6 +1576,7 @@ func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *G
 //  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
 //  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
 //  INVALIDPARAMETERVALUE_STARTTIMEORENDTIME = "InvalidParameterValue.StartTimeOrEndTime"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 func (c *Client) GetRequestStatusWithContext(ctx context.Context, request *GetRequestStatusRequest) (response *GetRequestStatusResponse, err error) {
@@ -2004,6 +2026,7 @@ func NewListLayerVersionsResponse() (response *ListLayerVersionsResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) ListLayerVersions(request *ListLayerVersionsRequest) (response *ListLayerVersionsResponse, err error) {
@@ -2017,6 +2040,7 @@ func (c *Client) ListLayerVersions(request *ListLayerVersionsRequest) (response 
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_RUNTIME = "InvalidParameterValue.Runtime"
 //  RESOURCENOTFOUND_LAYER = "ResourceNotFound.Layer"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 func (c *Client) ListLayerVersionsWithContext(ctx context.Context, request *ListLayerVersionsRequest) (response *ListLayerVersionsResponse, err error) {
@@ -2384,6 +2408,8 @@ func NewPublishVersionResponse() (response *PublishVersionResponse) {
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATE = "LimitExceeded.ContainerImageAccelerate"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -2405,6 +2431,8 @@ func (c *Client) PublishVersion(request *PublishVersionRequest) (response *Publi
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATE = "LimitExceeded.ContainerImageAccelerate"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -2567,6 +2595,7 @@ func NewPutReservedConcurrencyConfigResponse() (response *PutReservedConcurrency
 // This API is used to configure the reserved quota of a function.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
 //  FAILEDOPERATION_FUNCTIONVERSIONSTATUSNOTACTIVE = "FailedOperation.FunctionVersionStatusNotActive"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
@@ -2575,6 +2604,8 @@ func NewPutReservedConcurrencyConfigResponse() (response *PutReservedConcurrency
 //  FAILEDOPERATION_SERVICECLOSED = "FailedOperation.ServiceClosed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  LIMITEXCEEDED_FUNCTIONRESERVEDCONCURRENCYMEMORY = "LimitExceeded.FunctionReservedConcurrencyMemory"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -2589,6 +2620,7 @@ func (c *Client) PutReservedConcurrencyConfig(request *PutReservedConcurrencyCon
 // This API is used to configure the reserved quota of a function.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DEBUGMODESTATUS = "FailedOperation.DebugModeStatus"
 //  FAILEDOPERATION_FUNCTIONVERSIONSTATUSNOTACTIVE = "FailedOperation.FunctionVersionStatusNotActive"
 //  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
@@ -2597,6 +2629,8 @@ func (c *Client) PutReservedConcurrencyConfig(request *PutReservedConcurrencyCon
 //  FAILEDOPERATION_SERVICECLOSED = "FailedOperation.ServiceClosed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  LIMITEXCEEDED_FUNCTIONRESERVEDCONCURRENCYMEMORY = "LimitExceeded.FunctionReservedConcurrencyMemory"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -2772,7 +2806,9 @@ func NewUpdateAliasResponse() (response *UpdateAliasResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ADDITIONALVERSIONWEIGHTS = "InvalidParameterValue.AdditionalVersionWeights"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ROUTINGCONFIG = "InvalidParameterValue.RoutingConfig"
 //  RESOURCENOTFOUND_ALIAS = "ResourceNotFound.Alias"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -2795,7 +2831,9 @@ func (c *Client) UpdateAlias(request *UpdateAliasRequest) (response *UpdateAlias
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ADDITIONALVERSIONWEIGHTS = "InvalidParameterValue.AdditionalVersionWeights"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ROUTINGCONFIG = "InvalidParameterValue.RoutingConfig"
 //  RESOURCENOTFOUND_ALIAS = "ResourceNotFound.Alias"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
@@ -2876,6 +2914,7 @@ func NewUpdateFunctionCodeResponse() (response *UpdateFunctionCodeResponse) {
 //  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
@@ -2927,6 +2966,7 @@ func (c *Client) UpdateFunctionCode(request *UpdateFunctionCodeRequest) (respons
 //  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_IMAGECONFIG = "ResourceNotFound.ImageConfig"
@@ -3083,6 +3123,94 @@ func (c *Client) UpdateNamespaceWithContext(ctx context.Context, request *Update
     request.SetContext(ctx)
     
     response = NewUpdateNamespaceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateTriggerStatusRequest() (request *UpdateTriggerStatusRequest) {
+    request = &UpdateTriggerStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("scf", APIVersion, "UpdateTriggerStatus")
+    
+    
+    return
+}
+
+func NewUpdateTriggerStatusResponse() (response *UpdateTriggerStatusResponse) {
+    response = &UpdateTriggerStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateTriggerStatus
+// This API is used to update the trigger status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COS = "FailedOperation.Cos"
+//  FAILEDOPERATION_CREATETRIGGER = "FailedOperation.CreateTrigger"
+//  FAILEDOPERATION_UPDATESTATUS = "FailedOperation.UpdateStatus"
+//  FAILEDOPERATION_UPDATETRIGGERSTATUS = "FailedOperation.UpdateTriggerStatus"
+//  INTERNALERROR_CMQ = "InternalError.Cmq"
+//  INTERNALERROR_COS = "InternalError.Cos"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COSNOTIFYRULECONFLICT = "InvalidParameterValue.CosNotifyRuleConflict"
+//  INVALIDPARAMETERVALUE_ENABLE = "InvalidParameterValue.Enable"
+//  INVALIDPARAMETERVALUE_TRIGGERDESC = "InvalidParameterValue.TriggerDesc"
+//  INVALIDPARAMETERVALUE_TRIGGERNAME = "InvalidParameterValue.TriggerName"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
+//  RESOURCENOTFOUND_TRIGGER = "ResourceNotFound.Trigger"
+//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNAUTHORIZEDOPERATION_UPDATETRIGGERSTATUS = "UnauthorizedOperation.UpdateTriggerStatus"
+func (c *Client) UpdateTriggerStatus(request *UpdateTriggerStatusRequest) (response *UpdateTriggerStatusResponse, err error) {
+    return c.UpdateTriggerStatusWithContext(context.Background(), request)
+}
+
+// UpdateTriggerStatus
+// This API is used to update the trigger status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COS = "FailedOperation.Cos"
+//  FAILEDOPERATION_CREATETRIGGER = "FailedOperation.CreateTrigger"
+//  FAILEDOPERATION_UPDATESTATUS = "FailedOperation.UpdateStatus"
+//  FAILEDOPERATION_UPDATETRIGGERSTATUS = "FailedOperation.UpdateTriggerStatus"
+//  INTERNALERROR_CMQ = "InternalError.Cmq"
+//  INTERNALERROR_COS = "InternalError.Cos"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COSNOTIFYRULECONFLICT = "InvalidParameterValue.CosNotifyRuleConflict"
+//  INVALIDPARAMETERVALUE_ENABLE = "InvalidParameterValue.Enable"
+//  INVALIDPARAMETERVALUE_TRIGGERDESC = "InvalidParameterValue.TriggerDesc"
+//  INVALIDPARAMETERVALUE_TRIGGERNAME = "InvalidParameterValue.TriggerName"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
+//  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
+//  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
+//  RESOURCENOTFOUND_QUALIFIER = "ResourceNotFound.Qualifier"
+//  RESOURCENOTFOUND_TRIGGER = "ResourceNotFound.Trigger"
+//  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNAUTHORIZEDOPERATION_UPDATETRIGGERSTATUS = "UnauthorizedOperation.UpdateTriggerStatus"
+func (c *Client) UpdateTriggerStatusWithContext(ctx context.Context, request *UpdateTriggerStatusRequest) (response *UpdateTriggerStatusResponse, err error) {
+    if request == nil {
+        request = NewUpdateTriggerStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateTriggerStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateTriggerStatusResponse()
     err = c.Send(request, response)
     return
 }

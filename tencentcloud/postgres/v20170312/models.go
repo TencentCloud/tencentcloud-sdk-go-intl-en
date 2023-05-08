@@ -145,6 +145,23 @@ type AnalysisItems struct {
 	LastTime *string `json:"LastTime,omitempty" name:"LastTime"`
 }
 
+type BackupDownloadRestriction struct {
+	// Type of the network restrictions for downloading backup files. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	RestrictionType *string `json:"RestrictionType,omitempty" name:"RestrictionType"`
+
+	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	VpcRestrictionEffect *string `json:"VpcRestrictionEffect,omitempty" name:"VpcRestrictionEffect"`
+
+	// Whether it is allowed to download the VPC ID list of the backup files.
+	VpcIdSet []*string `json:"VpcIdSet,omitempty" name:"VpcIdSet"`
+
+	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	IpRestrictionEffect *string `json:"IpRestrictionEffect,omitempty" name:"IpRestrictionEffect"`
+
+	// Whether it is allowed to download IP list of the backup files.
+	IpSet []*string `json:"IpSet,omitempty" name:"IpSet"`
+}
+
 type BackupPlan struct {
 	// Backup cycle
 	BackupPeriod *string `json:"BackupPeriod,omitempty" name:"BackupPeriod"`
@@ -2588,6 +2605,9 @@ type DescribeBackupDownloadURLRequestParams struct {
 
 	// Validity period of a URL, which is 12 hours by default.
 	URLExpireTime *uint64 `json:"URLExpireTime,omitempty" name:"URLExpireTime"`
+
+	// Backup download restriction
+	BackupDownloadRestriction *BackupDownloadRestriction `json:"BackupDownloadRestriction,omitempty" name:"BackupDownloadRestriction"`
 }
 
 type DescribeBackupDownloadURLRequest struct {
@@ -2604,6 +2624,9 @@ type DescribeBackupDownloadURLRequest struct {
 
 	// Validity period of a URL, which is 12 hours by default.
 	URLExpireTime *uint64 `json:"URLExpireTime,omitempty" name:"URLExpireTime"`
+
+	// Backup download restriction
+	BackupDownloadRestriction *BackupDownloadRestriction `json:"BackupDownloadRestriction,omitempty" name:"BackupDownloadRestriction"`
 }
 
 func (r *DescribeBackupDownloadURLRequest) ToJsonString() string {
@@ -2622,6 +2645,7 @@ func (r *DescribeBackupDownloadURLRequest) FromJsonString(s string) error {
 	delete(f, "BackupType")
 	delete(f, "BackupId")
 	delete(f, "URLExpireTime")
+	delete(f, "BackupDownloadRestriction")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupDownloadURLRequest has unknown keys!", "")
 	}

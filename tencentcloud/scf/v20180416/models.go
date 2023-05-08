@@ -896,7 +896,7 @@ type DeleteTriggerRequestParams struct {
 	// This field is required if a COS trigger is to be deleted. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
 	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
 
-	// Function version information
+	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
@@ -918,7 +918,7 @@ type DeleteTriggerRequest struct {
 	// This field is required if a COS trigger is to be deleted. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
 	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
 
-	// Function version information
+	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
 }
 
@@ -1650,11 +1650,7 @@ type GetLayerVersionResponseParams struct {
 	// Layer name
 	LayerName *string `json:"LayerName,omitempty" name:"LayerName"`
 
-	// Current status of specific layer version. Valid values:
-	// Active: normal
-	// Publishing: publishing
-	// PublishFailed: publishing failed
-	// Deleted: deleted
+	// Current status of specific layer version. For the status values, [see here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1928,6 +1924,17 @@ type ImageConfig struct {
 	// The parameters to start up the container. Separate parameters with spaces, such as `u app.py`. If it’s not specified, `CMD in Dockerfile is used.
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Args *string `json:"Args,omitempty" name:"Args"`
+
+	// Whether to enable image acceleration. It defaults to `False`.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ContainerImageAccelerate *bool `json:"ContainerImageAccelerate,omitempty" name:"ContainerImageAccelerate"`
+
+	// Image function port settings
+	// `-1`: No port-specific image functions
+	// `0`: Default port (Port 9000)
+	// Others: Special ports
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImagePort *int64 `json:"ImagePort,omitempty" name:"ImagePort"`
 }
 
 // Predefined struct for user
@@ -2145,6 +2152,10 @@ type LayerVersionInfo struct {
 
 	// Current status of specific layer version. For valid values, please see [here](https://intl.cloud.tencent.com/document/product/583/47175?from_cn_redirect=1#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Stamp
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Stamp *string `json:"Stamp,omitempty" name:"Stamp"`
 }
 
 type LimitsInfo struct {
@@ -3505,7 +3516,7 @@ type Result struct {
 	// ID of the executed function
 	FunctionRequestId *string `json:"FunctionRequestId,omitempty" name:"FunctionRequestId"`
 
-	// `0` indicates successful execution. Null is returned for asynchronous invocations.
+	// The [status code](https://intl.cloud.tencent.com/document/product/583/42611?from_cn_redirect=1) of the request. It’s not available for `Invoke` API. 
 	InvokeResult *int64 `json:"InvokeResult,omitempty" name:"InvokeResult"`
 }
 
@@ -3718,6 +3729,10 @@ type TriggerCount struct {
 
 	// Number of VOD triggers
 	Vod *int64 `json:"Vod,omitempty" name:"Vod"`
+
+	// Number of EventBridge triggers
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Eb *int64 `json:"Eb,omitempty" name:"Eb"`
 }
 
 type TriggerInfo struct {
@@ -4105,6 +4120,102 @@ func (r *UpdateNamespaceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateNamespaceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateTriggerStatusRequestParams struct {
+	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled)
+	Enable *string `json:"Enable,omitempty" name:"Enable"`
+
+	// Function name.
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Trigger name
+	TriggerName *string `json:"TriggerName,omitempty" name:"TriggerName"`
+
+	// Trigger Type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// To update a COS trigger, this field is required. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
+}
+
+type UpdateTriggerStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Initial status of the trigger. Values: `OPEN` (enabled); `CLOSE` disabled)
+	Enable *string `json:"Enable,omitempty" name:"Enable"`
+
+	// Function name.
+	FunctionName *string `json:"FunctionName,omitempty" name:"FunctionName"`
+
+	// Trigger name
+	TriggerName *string `json:"TriggerName,omitempty" name:"TriggerName"`
+
+	// Trigger Type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
+	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Function namespace
+	Namespace *string `json:"Namespace,omitempty" name:"Namespace"`
+
+	// To update a COS trigger, this field is required. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	TriggerDesc *string `json:"TriggerDesc,omitempty" name:"TriggerDesc"`
+}
+
+func (r *UpdateTriggerStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateTriggerStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Enable")
+	delete(f, "FunctionName")
+	delete(f, "TriggerName")
+	delete(f, "Type")
+	delete(f, "Qualifier")
+	delete(f, "Namespace")
+	delete(f, "TriggerDesc")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateTriggerStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateTriggerStatusResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateTriggerStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateTriggerStatusResponseParams `json:"Response"`
+}
+
+func (r *UpdateTriggerStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateTriggerStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
