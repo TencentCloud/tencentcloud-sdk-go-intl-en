@@ -20,6 +20,32 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AbnormalEvent struct {
+	// The error event ID. For details, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+	AbnormalEventId *uint64 `json:"AbnormalEventId,omitempty" name:"AbnormalEventId"`
+
+	// The remote user ID. If this parameter is empty, it indicates that the error event is not associated with a remote user.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeerId *string `json:"PeerId,omitempty" name:"PeerId"`
+}
+
+type AbnormalExperience struct {
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The abnormal experience ID.
+	ExperienceId *uint64 `json:"ExperienceId,omitempty" name:"ExperienceId"`
+
+	// The room ID (string).
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The possible error events.
+	AbnormalEventList []*AbnormalEvent `json:"AbnormalEventList,omitempty" name:"AbnormalEventList"`
+
+	// The report time.
+	EventTime *uint64 `json:"EventTime,omitempty" name:"EventTime"`
+}
+
 type AgentParams struct {
 	// The [user ID](https://intl.cloud.tencent.com/document/product/647/37714) of the relaying robot in the TRTC room, which cannot be the same as a user ID already in use. We recommend you include the room ID in this user ID.
 	UserId *string `json:"UserId,omitempty" name:"UserId"`
@@ -104,7 +130,7 @@ type CreateCloudRecordingRequestParams struct {
 	// The on-cloud recording parameters.
 	RecordParams *RecordParams `json:"RecordParams,omitempty" name:"RecordParams"`
 
-	// The cloud storage information of the recording file. Currently, you can only save recording files to Tencent Cloud VOD.
+	// The storage information of the recording file. Currently, you can save recording files to Tencent Cloud VOD or COS.
 	StorageParams *StorageParams `json:"StorageParams,omitempty" name:"StorageParams"`
 
 	// The type of the TRTC room ID, which must be the same as the ID type of the room whose streams are recorded.
@@ -143,7 +169,7 @@ type CreateCloudRecordingRequest struct {
 	// The on-cloud recording parameters.
 	RecordParams *RecordParams `json:"RecordParams,omitempty" name:"RecordParams"`
 
-	// The cloud storage information of the recording file. Currently, you can only save recording files to Tencent Cloud VOD.
+	// The storage information of the recording file. Currently, you can save recording files to Tencent Cloud VOD or COS.
 	StorageParams *StorageParams `json:"StorageParams,omitempty" name:"StorageParams"`
 
 	// The type of the TRTC room ID, which must be the same as the ID type of the room whose streams are recorded.
@@ -279,6 +305,158 @@ func (r *DeleteCloudRecordingResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCloudRecordingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCallDetailInfoRequestParams struct {
+	// The unique ID of a call, whose format is `SdkAppId_CreateTime`, such as `1400xxxxxx_218695_1590065777`. `createTime` is the UNIX timestamp (seconds) when the room was created. Its value can be obtained using the [DescribeRoomInfo](https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1) API.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: If `DataType` is not null, the end time and start time cannot be more than one hour apart; if `DataType` is null, the end time and start time cannot be more than four hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The users to query. If you do not specify this, the data of six users will be returned.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+
+	// The metrics to query. If you do not specify this, only the user list will be returned. If you pass in `all`, all metrics will be returned.
+	// `appCpu`: The CPU utilization of the application.
+	// `sysCpu`: The CPU utilization of the system.
+	// `aBit`: The upstream/downstream audio bitrate (bps).
+	// `aBlock`: The audio stutter duration (ms).
+	// `bigvBit`: The upstream/downstream video bitrate (bps).
+	// `bigvCapFps`: The frame rate for capturing videos.
+	// `bigvEncFps`: The frame rate for sending videos.
+	// `bigvDecFps`: The rendering frame rate.
+	// `bigvBlock`: The video stutter duration (ms).
+	// `aLoss`: The upstream/downstream audio packet loss.
+	// `bigvLoss`: The upstream/downstream video packet loss.
+	// `bigvWidth`: The upstream/downstream resolution (width).
+	// `bigvHeight`: The upstream/downstream resolution (height).
+	DataType []*string `json:"DataType,omitempty" name:"DataType"`
+
+	// The page number. The default is 0.
+	// Note: If `PageNumber` or `PageSize` is not specified, six records will be returned.
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of records per page. The default is `6`.
+	// Value range: 1-100.
+	// Note: If `DataType` is not null, the length of the array `UserIds` and the value of `PageSize` cannot exceed `6`.
+	// If `DataType` is null, the length of the array `UserIds` and the value of `PageSize` cannot exceed `100`.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+type DescribeCallDetailInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of a call, whose format is `SdkAppId_CreateTime`, such as `1400xxxxxx_218695_1590065777`. `createTime` is the UNIX timestamp (seconds) when the room was created. Its value can be obtained using the [DescribeRoomInfo](https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1) API.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: If `DataType` is not null, the end time and start time cannot be more than one hour apart; if `DataType` is null, the end time and start time cannot be more than four hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The users to query. If you do not specify this, the data of six users will be returned.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+
+	// The metrics to query. If you do not specify this, only the user list will be returned. If you pass in `all`, all metrics will be returned.
+	// `appCpu`: The CPU utilization of the application.
+	// `sysCpu`: The CPU utilization of the system.
+	// `aBit`: The upstream/downstream audio bitrate (bps).
+	// `aBlock`: The audio stutter duration (ms).
+	// `bigvBit`: The upstream/downstream video bitrate (bps).
+	// `bigvCapFps`: The frame rate for capturing videos.
+	// `bigvEncFps`: The frame rate for sending videos.
+	// `bigvDecFps`: The rendering frame rate.
+	// `bigvBlock`: The video stutter duration (ms).
+	// `aLoss`: The upstream/downstream audio packet loss.
+	// `bigvLoss`: The upstream/downstream video packet loss.
+	// `bigvWidth`: The upstream/downstream resolution (width).
+	// `bigvHeight`: The upstream/downstream resolution (height).
+	DataType []*string `json:"DataType,omitempty" name:"DataType"`
+
+	// The page number. The default is 0.
+	// Note: If `PageNumber` or `PageSize` is not specified, six records will be returned.
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of records per page. The default is `6`.
+	// Value range: 1-100.
+	// Note: If `DataType` is not null, the length of the array `UserIds` and the value of `PageSize` cannot exceed `6`.
+	// If `DataType` is null, the length of the array `UserIds` and the value of `PageSize` cannot exceed `100`.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeCallDetailInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCallDetailInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CommId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	delete(f, "UserIds")
+	delete(f, "DataType")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCallDetailInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCallDetailInfoResponseParams struct {
+	// The number of records returned.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The user information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserList []*UserInformation `json:"UserList,omitempty" name:"UserList"`
+
+	// The call quality data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data []*QualityData `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCallDetailInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCallDetailInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeCallDetailInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCallDetailInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -592,24 +770,209 @@ func (r *DescribeRelayUsageResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeTrtcRoomUsageRequestParams struct {
+type DescribeRoomInfoRequestParams struct {
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
 
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: The end and start time cannot be more than 24 hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The room ID, such as `223`.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The page number. The default is 0.
+	// Note: If `PageNumber` or `PageSize` is not specified, 10 records will be returned.
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of records per page. The default is `10`.
+	// Value range: 1-100.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+type DescribeRoomInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: The end and start time cannot be more than 24 hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The room ID, such as `223`.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The page number. The default is 0.
+	// Note: If `PageNumber` or `PageSize` is not specified, 10 records will be returned.
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of records per page. The default is `10`.
+	// Value range: 1-100.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeRoomInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRoomInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "RoomId")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRoomInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRoomInfoResponseParams struct {
+	// The number of records returned.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The room information.
+	RoomList []*RoomState `json:"RoomList,omitempty" name:"RoomList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRoomInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRoomInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeRoomInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRoomInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScaleInfoRequestParams struct {
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time should preferably be more than 24 hours apart.
+	// Note: Data is collected on a daily basis. To query the data of a day, make sure the end time is later than 00:00 on that day. Otherwise, no data will be returned. For example, to query the data on the 20th, the end time must be later than 00:00 on the 20th.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+type DescribeScaleInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time should preferably be more than 24 hours apart.
+	// Note: Data is collected on a daily basis. To query the data of a day, make sure the end time is later than 00:00 on that day. Otherwise, no data will be returned. For example, to query the data on the 20th, the end time must be later than 00:00 on the 20th.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeScaleInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScaleInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeScaleInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeScaleInfoResponseParams struct {
+	// The number of records returned.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The returned data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScaleList []*ScaleInfomation `json:"ScaleList,omitempty" name:"ScaleList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeScaleInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeScaleInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeScaleInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeScaleInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTrtcRoomUsageRequestParams struct {
+	// The `SDKAppID` of the room.
 	SdkAppid *uint64 `json:"SdkAppid,omitempty" name:"SdkAppid"`
 
-
+	// The start time in the format of `YYYY-MM-DD HH:MM` (accurate to the minute).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-
+	// The end time in the format of `YYYY-MM-DD HH:MM`. The start and end time cannot be more than 24 hours apart.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type DescribeTrtcRoomUsageRequest struct {
 	*tchttp.BaseRequest
 	
+	// The `SDKAppID` of the room.
 	SdkAppid *uint64 `json:"SdkAppid,omitempty" name:"SdkAppid"`
 
+	// The start time in the format of `YYYY-MM-DD HH:MM` (accurate to the minute).
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
+	// The end time in the format of `YYYY-MM-DD HH:MM`. The start and end time cannot be more than 24 hours apart.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -636,6 +999,9 @@ func (r *DescribeTrtcRoomUsageRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTrtcRoomUsageResponseParams struct {
+	// The usage data grouped by room, in CSV format.
+	Data *string `json:"Data,omitempty" name:"Data"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -729,6 +1095,299 @@ func (r *DescribeTrtcUsageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTrtcUsageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUnusualEventRequestParams struct {
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time cannot be more than one hour apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The room ID. Up to 20 random abnormal user experiences of the specified room will be returned.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+type DescribeUnusualEventRequest struct {
+	*tchttp.BaseRequest
+	
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`. The end time and start time cannot be more than one hour apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The room ID. Up to 20 random abnormal user experiences of the specified room will be returned.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+}
+
+func (r *DescribeUnusualEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUnusualEventRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "RoomId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUnusualEventRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUnusualEventResponseParams struct {
+	// The number of records returned.
+	// Value range: 0-20.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The information of the abnormal user experiences.
+	AbnormalExperienceList []*AbnormalExperience `json:"AbnormalExperienceList,omitempty" name:"AbnormalExperienceList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeUnusualEventResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUnusualEventResponseParams `json:"Response"`
+}
+
+func (r *DescribeUnusualEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUnusualEventResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserEventRequestParams struct {
+	// The unique ID of a call, whose format is `SdkAppId_CreateTime`, such as `1400xxxxxx_218695_1590065777`. `createTime` is the UNIX timestamp (seconds) when the room was created. Its value can be obtained using the [DescribeRoomInfo](https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1) API.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: If you pass in an end time later than the room end time, the room end time will be used.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The room ID, such as `223`.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+type DescribeUserEventRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of a call, whose format is `SdkAppId_CreateTime`, such as `1400xxxxxx_218695_1590065777`. `createTime` is the UNIX timestamp (seconds) when the room was created. Its value can be obtained using the [DescribeRoomInfo](https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1) API.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: If you pass in an end time later than the room end time, the room end time will be used.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The room ID, such as `223`.
+	RoomId *string `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+}
+
+func (r *DescribeUserEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserEventRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CommId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "UserId")
+	delete(f, "RoomId")
+	delete(f, "SdkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserEventRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserEventResponseParams struct {
+	// The event list. An empty array will be returned if no data is obtained.
+	Data []*EventList `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeUserEventResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserEventResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserEventResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserInfoRequestParams struct {
+	// The unique ID of a call, whose format is `SdkAppId_CreateTime`, such as `1400xxxxxx_218695_1590065777`. `createTime` is the UNIX timestamp (seconds) when the room was created. Its value can be obtained using the [DescribeRoomInfo](https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1) API.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: The end and start time cannot be more than four hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The users to query. If you do not specify this, the information of six users will be returned.
+	// Array length: 1-100.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+
+	// The page number. The default is 0.
+	// Note: If `PageNumber` or `PageSize` is not specified, six records will be returned.
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of records per page. The default is `6`.
+	// Array length: 1-100.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+type DescribeUserInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of a call, whose format is `SdkAppId_CreateTime`, such as `1400xxxxxx_218695_1590065777`. `createTime` is the UNIX timestamp (seconds) when the room was created. Its value can be obtained using the [DescribeRoomInfo](https://intl.cloud.tencent.com/document/product/647/44050?from_cn_redirect=1) API.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The start time, which is a Unix timestamp (seconds) in local time, such as `1590065777`.
+	// Note: Only data in the last 14 days can be queried.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time, which is a Unix timestamp (seconds) in local time, such as `1590065877`.
+	// Note: The end and start time cannot be more than four hours apart.
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The application ID, such as `1400xxxxxx`.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The users to query. If you do not specify this, the information of six users will be returned.
+	// Array length: 1-100.
+	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+
+	// The page number. The default is 0.
+	// Note: If `PageNumber` or `PageSize` is not specified, six records will be returned.
+	PageNumber *uint64 `json:"PageNumber,omitempty" name:"PageNumber"`
+
+	// The number of records per page. The default is `6`.
+	// Array length: 1-100.
+	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeUserInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CommId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SdkAppId")
+	delete(f, "UserIds")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserInfoResponseParams struct {
+	// The number of records returned.
+	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// The user information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserList []*UserInformation `json:"UserList,omitempty" name:"UserList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeUserInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -854,6 +1513,35 @@ func (r *DismissRoomResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type EventList struct {
+	// The event information.
+	Content []*EventMessage `json:"Content,omitempty" name:"Content"`
+
+	// The user ID of the sender.
+	PeerId *string `json:"PeerId,omitempty" name:"PeerId"`
+}
+
+type EventMessage struct {
+	// The video stream type. Valid values:
+	// `0`: A non-video event
+	// `2`: The big video
+	// `3`: The small video
+	// `7`: A relayed video
+	Type *uint64 `json:"Type,omitempty" name:"Type"`
+
+	// The event reporting time in the format of UNIX timestamp (milliseconds), such as `1589891188801`.
+	Time *uint64 `json:"Time,omitempty" name:"Time"`
+
+	// The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+	EventId *uint64 `json:"EventId,omitempty" name:"EventId"`
+
+	// The first event parameter, such as the video width.
+	ParamOne *int64 `json:"ParamOne,omitempty" name:"ParamOne"`
+
+	// The second event parameter, such as the video height.
+	ParamTwo *int64 `json:"ParamTwo,omitempty" name:"ParamTwo"`
+}
+
 type MaxVideoUser struct {
 	// The stream information.
 	UserMediaStream *UserMediaStream `json:"UserMediaStream,omitempty" name:"UserMediaStream"`
@@ -922,14 +1610,14 @@ type McuLayout struct {
 	// The rendering mode of the video. 0 (the video is scaled and the excess parts are cropped), 1 (the video is scaled), 2 (the video is scaled and the blank spaces are filled with black bars). If you do not pass this parameter, 0 will be used.
 	RenderMode *uint64 `json:"RenderMode,omitempty" name:"RenderMode"`
 
-	// The background color of the video. Below are the values for some common colors:
-	// Red: 0xcc0033
-	// Yellow: 0xcc9900
-	// Green: 0xcccc33
-	// Blue: 0x99CCFF
-	// Black: 0x000000
-	// White: 0xFFFFFF
-	// Grey: 0x999999
+	// (Not supported yet) The background color of a video. Below are the values for some commonly used colors:
+	// Red: `0xcc0033`
+	// Yellow: `0xcc9900`
+	// Green: `0xcccc33`
+	// Blue: `0x99CCFF`
+	// Black: `0x000000`
+	// White: `0xFFFFFF`
+	// Grey: `0x999999`
 	BackGroundColor *string `json:"BackGroundColor,omitempty" name:"BackGroundColor"`
 
 	// The URL of the background image for the video. This parameter allows you to specify an image to display when the user’s camera is turned off or before the user enters the room. If the dimensions of the image specified are different from those of the video window, the image will be stretched to fit the space. This parameter has a higher priority than `BackGroundColor`.
@@ -951,6 +1639,9 @@ type McuLayoutParams struct {
 
 	// The information of the large video in screen sharing or floating layout mode.
 	MaxVideoUser *MaxVideoUser `json:"MaxVideoUser,omitempty" name:"MaxVideoUser"`
+
+	// The image fill mode. This parameter is valid if the layout mode is screen sharing, floating, or grid. `0`: The image will be cropped. `1`: The image will be scaled. `2`: The image will be scaled and there may be black bars.
+	RenderMode *uint64 `json:"RenderMode,omitempty" name:"RenderMode"`
 }
 
 type McuLayoutVolume struct {
@@ -961,11 +1652,9 @@ type McuLayoutVolume struct {
 	PayloadType *uint64 `json:"PayloadType,omitempty" name:"PayloadType"`
 
 	// The SEI sending interval (milliseconds). The default value is 1000.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
 
 	// Valid values: `1`: SEI is guaranteed when keyframes are sent; `0` (default): SEI is not guaranteed when keyframes are sent.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FollowIdr *uint64 `json:"FollowIdr,omitempty" name:"FollowIdr"`
 }
 
@@ -980,11 +1669,9 @@ type McuPassThrough struct {
 	PayloadUuid *string `json:"PayloadUuid,omitempty" name:"PayloadUuid"`
 
 	// The SEI sending interval (milliseconds). The default value is 1000.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
 
 	// Valid values: `1`: SEI is guaranteed when keyframes are sent; `0` (default): SEI is not guaranteed when keyframes are sent.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FollowIdr *uint64 `json:"FollowIdr,omitempty" name:"FollowIdr"`
 }
 
@@ -1061,7 +1748,6 @@ type McuWaterMarkParams struct {
 	WaterMarkImage *McuWaterMarkImage `json:"WaterMarkImage,omitempty" name:"WaterMarkImage"`
 
 	// The text watermark configuration. This parameter is required if `WaterMarkType` is `1`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	WaterMarkText *McuWaterMarkText `json:"WaterMarkText,omitempty" name:"WaterMarkText"`
 }
 
@@ -1082,15 +1768,12 @@ type McuWaterMarkText struct {
 	LocationY *uint64 `json:"LocationY,omitempty" name:"LocationY"`
 
 	// The font size.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontSize *uint64 `json:"FontSize,omitempty" name:"FontSize"`
 
-	// The text color. The default color is white. Values for some commonly used colors: Red: 0xcc0033; yellow: 0xcc9900; green: 0xcccc33; blue: 0x99CCFF; black: 0x000000; white: 0xFFFFFF; gray: 0x999999.	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The text color. The default color is white. Values for some commonly used colors: Red: `0xcc0033`; yellow: `0xcc9900`; green: `0xcccc33`; blue: `0x99CCFF`; black: `0x000000`; white: `0xFFFFFF`; gray: `0x999999`.	
 	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
 
-	// The text fill color. If you do not specify this parameter, the fill color will be transparent. Values for some commonly used colors: Red: 0xcc0033; yellow: 0xcc9900; green: 0xcccc33; blue: 0x99CCFF; black: 0x000000; white: 0xFFFFFF; gray: 0x999999.	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The text fill color. If you do not specify this parameter, the fill color will be transparent. Values for some commonly used colors: Red: `0xcc0033`; yellow: `0xcc9900`; green: `0xcccc33`; blue: `0x99CCFF`; black: `0x000000`; white: `0xFFFFFF`; gray: `0x999999`.	
 	BackGroundColor *string `json:"BackGroundColor,omitempty" name:"BackGroundColor"`
 }
 
@@ -1284,6 +1967,21 @@ func (r *ModifyCloudRecordingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type QualityData struct {
+	// The quality data.
+	Content []*TimeValue `json:"Content,omitempty" name:"Content"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The remote user ID. An empty string indicates that the data is upstream data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeerId *string `json:"PeerId,omitempty" name:"PeerId"`
+
+	// The data type.
+	DataType *string `json:"DataType,omitempty" name:"DataType"`
+}
+
 type RecordParams struct {
 	// The recording mode.
 	// 1: Single-stream recording. Records the audio and video of each subscribed user (`UserId`) in a room and saves the recording files to the cloud.
@@ -1312,8 +2010,7 @@ type RecordParams struct {
 	// This parameter is invalid if the output format is HLS.
 	MaxMediaFileDuration *uint64 `json:"MaxMediaFileDuration,omitempty" name:"MaxMediaFileDuration"`
 
-	// The type of stream to record. `0`: The primary stream and substream; `1`: The primary stream; `2`: The substream.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The type of stream to record. `0` (default): The primary stream and substream; `1`: The primary stream; `2`: The substream.
 	MediaId *uint64 `json:"MediaId,omitempty" name:"MediaId"`
 }
 
@@ -1451,6 +2148,43 @@ func (r *RemoveUserResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RemoveUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RoomState struct {
+	// The call ID, which uniquely identifies a call.
+	CommId *string `json:"CommId,omitempty" name:"CommId"`
+
+	// The room ID.
+	RoomString *string `json:"RoomString,omitempty" name:"RoomString"`
+
+	// The room creation time.
+	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// The room termination time.
+	DestroyTime *uint64 `json:"DestroyTime,omitempty" name:"DestroyTime"`
+
+	// Whether the room is terminated.
+	IsFinished *bool `json:"IsFinished,omitempty" name:"IsFinished"`
+
+	// The user ID of the room creator.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+}
+
+type ScaleInfomation struct {
+	// Start time for each day
+	Time *uint64 `json:"Time,omitempty" name:"Time"`
+
+	// The number of users. If a user enters a room multiple times, it will be counted as one user.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserNumber *uint64 `json:"UserNumber,omitempty" name:"UserNumber"`
+
+	// The number of room entries. Every time a user enters a room, it will be counted as one room entry.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserCount *uint64 `json:"UserCount,omitempty" name:"UserCount"`
+
+	// The total number of rooms of the application on a day.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoomNumbers *uint64 `json:"RoomNumbers,omitempty" name:"RoomNumbers"`
 }
 
 // Predefined struct for user
@@ -1622,10 +2356,10 @@ type StartPublishCdnStreamRequestParams struct {
 	// The information of the relaying robot in the room.
 	AgentParams *AgentParams `json:"AgentParams,omitempty" name:"AgentParams"`
 
-	// Whether to transcode the streams. 0: No; 1: Yes.
+	// Whether to transcode the streams. `0`: No. `1`: Yes. This parameter determines whether transcoding fees are charged. If it is `0`, streams will only be relayed, and no transcoding fees will be incurred. If it is `1`, streams will be transcoded before being relayed, and transcoding fees will be incurred.
 	WithTranscoding *uint64 `json:"WithTranscoding,omitempty" name:"WithTranscoding"`
 
-	// The audio encoding parameters for relaying.
+	// The audio encoding parameters. Because audio is always transcoded (no fees are incurred), this parameter is required when you start a relay task.
 	AudioParams *McuAudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
 
 	// The video encoding parameters for relaying. If you do not pass this parameter, only audio will be relayed.
@@ -1634,13 +2368,13 @@ type StartPublishCdnStreamRequestParams struct {
 	// The information of a single stream relayed. When you relay a single stream, set `WithTranscoding` to 0.
 	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitempty" name:"SingleSubscribeParams"`
 
-	// The CDN information.
+	// The information of the CDNs to relay to. You need to specify at least one between this parameter and `FeedBackRoomParams.N`.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
 
 	// The stream mixing SEI parameters.
 	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
 
-	// The information of the room to which streams are relayed.
+	// The information of the room to which streams are relayed. Between this parameter and `PublishCdnParams`, you must specify at least one. Please note that relaying to a TRTC room is only supported in some SDK versions. For details, please contact technical support.
 	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitempty" name:"FeedBackRoomParams"`
 }
 
@@ -1659,10 +2393,10 @@ type StartPublishCdnStreamRequest struct {
 	// The information of the relaying robot in the room.
 	AgentParams *AgentParams `json:"AgentParams,omitempty" name:"AgentParams"`
 
-	// Whether to transcode the streams. 0: No; 1: Yes.
+	// Whether to transcode the streams. `0`: No. `1`: Yes. This parameter determines whether transcoding fees are charged. If it is `0`, streams will only be relayed, and no transcoding fees will be incurred. If it is `1`, streams will be transcoded before being relayed, and transcoding fees will be incurred.
 	WithTranscoding *uint64 `json:"WithTranscoding,omitempty" name:"WithTranscoding"`
 
-	// The audio encoding parameters for relaying.
+	// The audio encoding parameters. Because audio is always transcoded (no fees are incurred), this parameter is required when you start a relay task.
 	AudioParams *McuAudioParams `json:"AudioParams,omitempty" name:"AudioParams"`
 
 	// The video encoding parameters for relaying. If you do not pass this parameter, only audio will be relayed.
@@ -1671,13 +2405,13 @@ type StartPublishCdnStreamRequest struct {
 	// The information of a single stream relayed. When you relay a single stream, set `WithTranscoding` to 0.
 	SingleSubscribeParams *SingleSubscribeParams `json:"SingleSubscribeParams,omitempty" name:"SingleSubscribeParams"`
 
-	// The CDN information.
+	// The information of the CDNs to relay to. You need to specify at least one between this parameter and `FeedBackRoomParams.N`.
 	PublishCdnParams []*McuPublishCdnParam `json:"PublishCdnParams,omitempty" name:"PublishCdnParams"`
 
 	// The stream mixing SEI parameters.
 	SeiParams *McuSeiParams `json:"SeiParams,omitempty" name:"SeiParams"`
 
-	// The information of the room to which streams are relayed.
+	// The information of the room to which streams are relayed. Between this parameter and `PublishCdnParams`, you must specify at least one. Please note that relaying to a TRTC room is only supported in some SDK versions. For details, please contact technical support.
 	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitempty" name:"FeedBackRoomParams"`
 }
 
@@ -1819,10 +2553,10 @@ type StorageFile struct {
 }
 
 type StorageParams struct {
-	// The account information for third-party cloud storage. This parameter is not available currently. Please use `CloudVod` instead to save files to Tencent Cloud VOD.
+	// The account information for third-party storage. Please note that if you save files to COS, a recording-to-COS fee will be incurred. For details, see the document "Billing of On-Cloud Recording". If you save files to VOD, there won't be such a fee.
 	CloudStorage *CloudStorage `json:"CloudStorage,omitempty" name:"CloudStorage"`
 
-	// The account information for saving files to Tencent Cloud VOD. This parameter is required. Currently, you can only save files to Tencent Cloud VOD.
+	// The account information for VOD storage.
 	CloudVod *CloudVod `json:"CloudVod,omitempty" name:"CloudVod"`
 }
 
@@ -1868,6 +2602,14 @@ type TencentVod struct {
 
 	// The custom prefix of recording files. This parameter is valid only if recording files are uploaded to VOD. It can contain letters, numbers, underscores, and hyphens and cannot exceed 64 bytes. This prefix and the automatically generated filename are connected with `__UserId_u_`.
 	UserDefineRecordId *string `json:"UserDefineRecordId,omitempty" name:"UserDefineRecordId"`
+}
+
+type TimeValue struct {
+	// The UNIX timestamp (seconds), such as `1590065877`.
+	Time *uint64 `json:"Time,omitempty" name:"Time"`
+
+	// The metric value. For example, if the video capturing frame rate (`bigvCapFps`) at the time `1590065877` is `0`, the value of this parameter will be `0`.
+	Value *float64 `json:"Value,omitempty" name:"Value"`
 }
 
 type TrtcUsage struct {
@@ -1998,6 +2740,32 @@ func (r *UpdatePublishCdnStreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type UserInformation struct {
+	// The room ID.
+	RoomStr *string `json:"RoomStr,omitempty" name:"RoomStr"`
+
+	// The user ID.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The time when the user entered the room.
+	JoinTs *uint64 `json:"JoinTs,omitempty" name:"JoinTs"`
+
+	// The time when the user left the room. If the user is still in the room, the current time will be returned.
+	LeaveTs *uint64 `json:"LeaveTs,omitempty" name:"LeaveTs"`
+
+	// The device type.
+	DeviceType *string `json:"DeviceType,omitempty" name:"DeviceType"`
+
+	// The SDK version number.
+	SdkVersion *string `json:"SdkVersion,omitempty" name:"SdkVersion"`
+
+	// The client IP address.
+	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
+
+	// Whether a user has left the room.
+	Finished *bool `json:"Finished,omitempty" name:"Finished"`
+}
+
 type UserMediaStream struct {
 	// The user information.
 	UserInfo *MixUserInfo `json:"UserInfo,omitempty" name:"UserInfo"`
@@ -2046,6 +2814,38 @@ type WaterMark struct {
 
 	// The information of watermark images. This parameter is required if the watermark type is image.
 	WaterMarkImage *WaterMarkImage `json:"WaterMarkImage,omitempty" name:"WaterMarkImage"`
+
+	// The information of the text watermark. This parameter is required if `WaterMarkType` is `1`.
+	WaterMarkChar *WaterMarkChar `json:"WaterMarkChar,omitempty" name:"WaterMarkChar"`
+
+	// The information of the timestamp watermark. This parameter is required if `WaterMarkType` is `2`.
+	WaterMarkTimestamp *WaterMarkTimestamp `json:"WaterMarkTimestamp,omitempty" name:"WaterMarkTimestamp"`
+}
+
+type WaterMarkChar struct {
+	// The Y coordinate of the text watermark from the top left.
+	Top *uint64 `json:"Top,omitempty" name:"Top"`
+
+	// The X coordinate of the text watermark from the top left.
+	Left *uint64 `json:"Left,omitempty" name:"Left"`
+
+	// The watermark width (pixels).
+	Width *uint64 `json:"Width,omitempty" name:"Width"`
+
+	// The watermark height (pixels).
+	Height *uint64 `json:"Height,omitempty" name:"Height"`
+
+	// The text.
+	Chars *string `json:"Chars,omitempty" name:"Chars"`
+
+	// The font size (pixels). The default value is `14`.
+	FontSize *uint64 `json:"FontSize,omitempty" name:"FontSize"`
+
+	// The text color. The default color is white.
+	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
+
+	// The background color. If this parameter is empty, the background will be transparent (default).
+	BackGroundColor *string `json:"BackGroundColor,omitempty" name:"BackGroundColor"`
 }
 
 type WaterMarkImage struct {
@@ -2063,4 +2863,12 @@ type WaterMarkImage struct {
 
 	// The relative height of the image. Value range: [0, 2560]. The sum of the values of this parameter and `Top` cannot exceed the canvas height.
 	Height *uint64 `json:"Height,omitempty" name:"Height"`
+}
+
+type WaterMarkTimestamp struct {
+	// The position of the timestamp watermark. Valid values: `0` (top left), `1` (top right), `2` (bottom left), `3` (bottom right), `4` (top center), `5` (bottom center), `6` (center).
+	Pos *uint64 `json:"Pos,omitempty" name:"Pos"`
+
+	// The time zone. The default is UTC+8.
+	TimeZone *uint64 `json:"TimeZone,omitempty" name:"TimeZone"`
 }

@@ -388,6 +388,38 @@ type AutoscalingAdded struct {
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 }
 
+type BackupStorageLocation struct {
+	// Backup repository name	
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Repository region, such as `ap-guangzhou`	
+	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
+
+	// The provider of storage service. It defaults to Tencent Cloud. 	
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	Provider *string `json:"Provider,omitempty" name:"Provider"`
+
+	// COS bucket name. For COS storage type, it must start with the prefix `tke-backup`. 	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// COS bucket path 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitempty" name:"Path"`
+
+	// Storage repository status 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	State *string `json:"State,omitempty" name:"State"`
+
+	// Status information 	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// Last checked time 	
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	LastValidationTime *string `json:"LastValidationTime,omitempty" name:"LastValidationTime"`
+}
+
 type CUDNN struct {
 	// cuDNN version
 	Version *string `json:"Version,omitempty" name:"Version"`
@@ -1100,6 +1132,88 @@ type CommonName struct {
 }
 
 // Predefined struct for user
+type CreateBackupStorageLocationRequestParams struct {
+	// Repository region, such as `ap-guangzhou`
+	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
+
+	// COS bucket name. For COS storage type, it must start with the prefix `tke-backup`.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Backup repository name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The provider of storage service. It defaults to Tencent Cloud.
+	Provider *string `json:"Provider,omitempty" name:"Provider"`
+
+	// COS bucket path
+	Path *string `json:"Path,omitempty" name:"Path"`
+}
+
+type CreateBackupStorageLocationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Repository region, such as `ap-guangzhou`
+	StorageRegion *string `json:"StorageRegion,omitempty" name:"StorageRegion"`
+
+	// COS bucket name. For COS storage type, it must start with the prefix `tke-backup`.
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+
+	// Backup repository name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The provider of storage service. It defaults to Tencent Cloud.
+	Provider *string `json:"Provider,omitempty" name:"Provider"`
+
+	// COS bucket path
+	Path *string `json:"Path,omitempty" name:"Path"`
+}
+
+func (r *CreateBackupStorageLocationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupStorageLocationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StorageRegion")
+	delete(f, "Bucket")
+	delete(f, "Name")
+	delete(f, "Provider")
+	delete(f, "Path")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupStorageLocationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBackupStorageLocationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateBackupStorageLocationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBackupStorageLocationResponseParams `json:"Response"`
+}
+
+func (r *CreateBackupStorageLocationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBackupStorageLocationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateClusterEndpointRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -1116,7 +1230,12 @@ type CreateClusterEndpointRequestParams struct {
 	// The security group in use, which must be passed in when public access is enabled.
 	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
-	// The LB parameter. Required only for public network access.
+	// Parameters used to create a CLB in JSON format. It’s only required for public network access. Example: `{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}`. 
+	// Parameters: 
+	// `InternetAccessible.InternetChargeType`: `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR`, `InternetAccessible.BANDWIDTH_PACKAGE` (Bill by the bandwidth package) 
+	// `InternetMaxBandwidthOut`: Outbound bandwidth cap in Mbps. Range: 0 - 2048. It defaults to 10. 
+	// `VipIsp`: The VIP provider. Values: `CMCC` (China Mobile), `CTCC` (China Telecom), `CUCC` (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode. 
+	// `BandwidthPackageId`: Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	ExtensiveParameters *string `json:"ExtensiveParameters,omitempty" name:"ExtensiveParameters"`
 }
 
@@ -1138,7 +1257,12 @@ type CreateClusterEndpointRequest struct {
 	// The security group in use, which must be passed in when public access is enabled.
 	SecurityGroup *string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
-	// The LB parameter. Required only for public network access.
+	// Parameters used to create a CLB in JSON format. It’s only required for public network access. Example: `{"InternetAccessible":{"InternetChargeType":"TRAFFIC_POSTPAID_BY_HOUR","InternetMaxBandwidthOut":"200"},"VipIsp":"","BandwidthPackageId":""}`. 
+	// Parameters: 
+	// `InternetAccessible.InternetChargeType`: `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR`, `InternetAccessible.BANDWIDTH_PACKAGE` (Bill by the bandwidth package) 
+	// `InternetMaxBandwidthOut`: Outbound bandwidth cap in Mbps. Range: 0 - 2048. It defaults to 10. 
+	// `VipIsp`: The VIP provider. Values: `CMCC` (China Mobile), `CTCC` (China Telecom), `CUCC` (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode. 
+	// `BandwidthPackageId`: Bandwidth package ID. If this parameter is specified, the network billing mode (`InternetAccessible.InternetChargeType`) will only support bill-by-bandwidth package (`BANDWIDTH_PACKAGE`).
 	ExtensiveParameters *string `json:"ExtensiveParameters,omitempty" name:"ExtensiveParameters"`
 }
 
@@ -2413,6 +2537,60 @@ type DataDisk struct {
 }
 
 // Predefined struct for user
+type DeleteBackupStorageLocationRequestParams struct {
+	// Backup repository name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type DeleteBackupStorageLocationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Backup repository name
+	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+func (r *DeleteBackupStorageLocationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupStorageLocationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBackupStorageLocationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBackupStorageLocationResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteBackupStorageLocationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBackupStorageLocationResponseParams `json:"Response"`
+}
+
+func (r *DeleteBackupStorageLocationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupStorageLocationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteClusterAsGroupsRequestParams struct {
 	// The cluster ID, obtained through the [DescribeClusters](https://intl.cloud.tencent.com/document/api/457/31862?from_cn_redirect=1) API.
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -3502,6 +3680,64 @@ func (r *DescribeAvailableTKEEdgeVersionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAvailableTKEEdgeVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupStorageLocationsRequestParams struct {
+	// Names of repositories. If it’s not specified, all storage repository names in the current region are returned.
+	Names []*string `json:"Names,omitempty" name:"Names"`
+}
+
+type DescribeBackupStorageLocationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Names of repositories. If it’s not specified, all storage repository names in the current region are returned.
+	Names []*string `json:"Names,omitempty" name:"Names"`
+}
+
+func (r *DescribeBackupStorageLocationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupStorageLocationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Names")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupStorageLocationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupStorageLocationsResponseParams struct {
+	// Detailed information of the backup repository 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	BackupStorageLocationSet []*BackupStorageLocation `json:"BackupStorageLocationSet,omitempty" name:"BackupStorageLocationSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupStorageLocationsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupStorageLocationsResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupStorageLocationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupStorageLocationsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6775,6 +7011,13 @@ type EdgeCluster struct {
 	// Cluster billing mode. Valid values: `POSTPAID_BY_HOUR`, `PREPAID`
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ChargeType *string `json:"ChargeType,omitempty" name:"ChargeType"`
+
+	// Edge cluster component version 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EdgeVersion *string `json:"EdgeVersion,omitempty" name:"EdgeVersion"`
+
+
+	TagSpecification *TagSpecification `json:"TagSpecification,omitempty" name:"TagSpecification"`
 }
 
 type EdgeClusterAdvancedSettings struct {
@@ -6895,6 +7138,9 @@ type EnableVpcCniNetworkTypeRequestParams struct {
 
 	// Specifies when to release the IP after the Pod termination in static IP mode. It must be longer than 300 seconds. If this parameter is left empty, the IP address will never be released.
 	ExpiredSeconds *uint64 `json:"ExpiredSeconds,omitempty" name:"ExpiredSeconds"`
+
+	// Whether to skip adding the VPC IP range to `NonMasqueradeCIDRs` field of `ip-masq-agent-config`. Default value: `false`
+	SkipAddingNonMasqueradeCIDRs *bool `json:"SkipAddingNonMasqueradeCIDRs,omitempty" name:"SkipAddingNonMasqueradeCIDRs"`
 }
 
 type EnableVpcCniNetworkTypeRequest struct {
@@ -6914,6 +7160,9 @@ type EnableVpcCniNetworkTypeRequest struct {
 
 	// Specifies when to release the IP after the Pod termination in static IP mode. It must be longer than 300 seconds. If this parameter is left empty, the IP address will never be released.
 	ExpiredSeconds *uint64 `json:"ExpiredSeconds,omitempty" name:"ExpiredSeconds"`
+
+	// Whether to skip adding the VPC IP range to `NonMasqueradeCIDRs` field of `ip-masq-agent-config`. Default value: `false`
+	SkipAddingNonMasqueradeCIDRs *bool `json:"SkipAddingNonMasqueradeCIDRs,omitempty" name:"SkipAddingNonMasqueradeCIDRs"`
 }
 
 func (r *EnableVpcCniNetworkTypeRequest) ToJsonString() string {
@@ -6933,6 +7182,7 @@ func (r *EnableVpcCniNetworkTypeRequest) FromJsonString(s string) error {
 	delete(f, "EnableStaticIp")
 	delete(f, "Subnets")
 	delete(f, "ExpiredSeconds")
+	delete(f, "SkipAddingNonMasqueradeCIDRs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableVpcCniNetworkTypeRequest has unknown keys!", "")
 	}
@@ -9083,6 +9333,71 @@ func (r *UninstallEdgeLogAgentResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type UpdateClusterKubeconfigRequestParams struct {
+	// The cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of sub-account UINs. If it’s not specified, the SubUin used to invoke this API is used.
+	SubAccounts []*string `json:"SubAccounts,omitempty" name:"SubAccounts"`
+}
+
+type UpdateClusterKubeconfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// The cluster ID.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// List of sub-account UINs. If it’s not specified, the SubUin used to invoke this API is used.
+	SubAccounts []*string `json:"SubAccounts,omitempty" name:"SubAccounts"`
+}
+
+func (r *UpdateClusterKubeconfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateClusterKubeconfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SubAccounts")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateClusterKubeconfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateClusterKubeconfigResponseParams struct {
+	// List of updated sub-account UINs 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	UpdatedSubAccounts []*string `json:"UpdatedSubAccounts,omitempty" name:"UpdatedSubAccounts"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpdateClusterKubeconfigResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateClusterKubeconfigResponseParams `json:"Response"`
+}
+
+func (r *UpdateClusterKubeconfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateClusterKubeconfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UpdateClusterVersionRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -9444,4 +9759,7 @@ type VirtualNodeSpec struct {
 
 	// Subnet ID
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Tencent Cloud tags
+	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 }

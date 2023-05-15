@@ -74,7 +74,7 @@ func NewCreateCloudRecordingResponse() (response *CreateCloudRecordingResponse) 
 //
 // * Specify the anchors whose streams you want or do not want to record by using the `RecordParams` parameter
 //
-// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can only save recording files to VOD (`CloudVod`).
+// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can save recording files to Tencent Cloud VOD or COS.
 //
 // * Specify transcoding settings for mixed-stream recording, including video resolution, video bitrate, frame rate, and audio quality, by using `MixTranscodeParams`
 //
@@ -84,9 +84,9 @@ func NewCreateCloudRecordingResponse() (response *CreateCloudRecordingResponse) 
 //
 // Key concepts:
 //
-// * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to VOD.
+// * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to the storage you specify.
 //
-// * Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD. After a recording task ends, you can go to the VOD console (https://console.cloud.tencent.com/vod/media) to view the recording files.
+// Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to the storage you specify. After a recording task ends, you can go to the VOD console (https://console.tencentcloud.com/vod/media) or [COS console](https://console.cloud.tencent.com/cos/bucket) to view the recording files.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -130,7 +130,7 @@ func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (res
 //
 // * Specify the anchors whose streams you want or do not want to record by using the `RecordParams` parameter
 //
-// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can only save recording files to VOD (`CloudVod`).
+// * Specify the storage service you want to save recording files to by using the `StorageParams` parameter. Currently, you can save recording files to Tencent Cloud VOD or COS.
 //
 // * Specify transcoding settings for mixed-stream recording, including video resolution, video bitrate, frame rate, and audio quality, by using `MixTranscodeParams`
 //
@@ -140,9 +140,9 @@ func (c *Client) CreateCloudRecording(request *CreateCloudRecordingRequest) (res
 //
 // Key concepts:
 //
-// * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to VOD.
+// * Single-stream recording: Record the audio and video of each subscribed user (`UserId`) in a room and save the recording files to the storage you specify.
 //
-// * Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to VOD. After a recording task ends, you can go to the VOD console (https://console.cloud.tencent.com/vod/media) to view the recording files.
+// Mixed-stream recording: Mix the audios and videos of subscribed users (`UserId`) in a room, record the mixed stream, and save the recording files to the storage you specify. After a recording task ends, you can go to the VOD console (https://console.tencentcloud.com/vod/media) or [COS console](https://console.cloud.tencent.com/cos/bucket) to view the recording files.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -253,6 +253,112 @@ func (c *Client) DeleteCloudRecordingWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteCloudRecordingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCallDetailInfoRequest() (request *DescribeCallDetailInfoRequest) {
+    request = &DescribeCallDetailInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeCallDetailInfo")
+    
+    
+    return
+}
+
+func NewDescribeCallDetailInfoResponse() (response *DescribeCallDetailInfoResponse) {
+    response = &DescribeCallDetailInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCallDetailInfo
+// This API (the old `DescribeCallDetail`) is used to query the user list and call quality data of a specified time range in the last 14 days. If `DataType` is not null, the data of up to six users during a period of up to one hour can be queried (the period can start and end on different days). If `DataType` is null, the data of up to 100 users can be returned per page (the value of `PageSize` cannot exceed 100). Six users are queried by default. The period queried cannot exceed four hours. This API is used to query call quality and is not recommended for billing purposes.
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEOVERSIZE = "InvalidParameter.StartTimeOversize"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeCallDetailInfo(request *DescribeCallDetailInfoRequest) (response *DescribeCallDetailInfoResponse, err error) {
+    return c.DescribeCallDetailInfoWithContext(context.Background(), request)
+}
+
+// DescribeCallDetailInfo
+// This API (the old `DescribeCallDetail`) is used to query the user list and call quality data of a specified time range in the last 14 days. If `DataType` is not null, the data of up to six users during a period of up to one hour can be queried (the period can start and end on different days). If `DataType` is null, the data of up to 100 users can be returned per page (the value of `PageSize` cannot exceed 100). Six users are queried by default. The period queried cannot exceed four hours. This API is used to query call quality and is not recommended for billing purposes.
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEOVERSIZE = "InvalidParameter.StartTimeOversize"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeCallDetailInfoWithContext(ctx context.Context, request *DescribeCallDetailInfoRequest) (response *DescribeCallDetailInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeCallDetailInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCallDetailInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCallDetailInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -545,6 +651,184 @@ func (c *Client) DescribeRelayUsageWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeRoomInfoRequest() (request *DescribeRoomInfoRequest) {
+    request = &DescribeRoomInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeRoomInfo")
+    
+    
+    return
+}
+
+func NewDescribeRoomInfoResponse() (response *DescribeRoomInfoResponse) {
+    response = &DescribeRoomInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRoomInfo
+// This API (the old `DescribeRoomInformation`) is used to query the rooms of an application (`SDKAppID`) in the last 14 days. Up to 100 records can be returned per call (10 are returned by default).
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEOVERSIZE = "InvalidParameter.StartTimeOversize"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_ROOMNUM = "MissingParameter.RoomNum"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeRoomInfo(request *DescribeRoomInfoRequest) (response *DescribeRoomInfoResponse, err error) {
+    return c.DescribeRoomInfoWithContext(context.Background(), request)
+}
+
+// DescribeRoomInfo
+// This API (the old `DescribeRoomInformation`) is used to query the rooms of an application (`SDKAppID`) in the last 14 days. Up to 100 records can be returned per call (10 are returned by default).
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEOVERSIZE = "InvalidParameter.StartTimeOversize"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_ROOMNUM = "MissingParameter.RoomNum"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeRoomInfoWithContext(ctx context.Context, request *DescribeRoomInfoRequest) (response *DescribeRoomInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoomInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRoomInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRoomInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeScaleInfoRequest() (request *DescribeScaleInfoRequest) {
+    request = &DescribeScaleInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeScaleInfo")
+    
+    
+    return
+}
+
+func NewDescribeScaleInfoResponse() (response *DescribeScaleInfoResponse) {
+    response = &DescribeScaleInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeScaleInfo
+// This API (the old `DescribeHistoryScale`) is used to query the daily number of rooms and users of an application (`SDKAppID`) in the last 14 days. Data for the current day cannot be queried.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeScaleInfo(request *DescribeScaleInfoRequest) (response *DescribeScaleInfoResponse, err error) {
+    return c.DescribeScaleInfoWithContext(context.Background(), request)
+}
+
+// DescribeScaleInfo
+// This API (the old `DescribeHistoryScale`) is used to query the daily number of rooms and users of an application (`SDKAppID`) in the last 14 days. Data for the current day cannot be queried.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeScaleInfoWithContext(ctx context.Context, request *DescribeScaleInfoRequest) (response *DescribeScaleInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeScaleInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeScaleInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeScaleInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTrtcRoomUsageRequest() (request *DescribeTrtcRoomUsageRequest) {
     request = &DescribeTrtcRoomUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -675,6 +959,304 @@ func (c *Client) DescribeTrtcUsageWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeTrtcUsageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUnusualEventRequest() (request *DescribeUnusualEventRequest) {
+    request = &DescribeUnusualEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeUnusualEvent")
+    
+    
+    return
+}
+
+func NewDescribeUnusualEventResponse() (response *DescribeUnusualEventResponse) {
+    response = &DescribeUnusualEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUnusualEvent
+// This API (the old `DescribeAbnormalEvent`) is used to query up to 20 random abnormal user experiences of an application (`SDKAppID`) in the last 14 days. The start and end time can be on two different days, but they cannot be more than one hour apart.
+//
+// For details about the error events, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeUnusualEvent(request *DescribeUnusualEventRequest) (response *DescribeUnusualEventResponse, err error) {
+    return c.DescribeUnusualEventWithContext(context.Background(), request)
+}
+
+// DescribeUnusualEvent
+// This API (the old `DescribeAbnormalEvent`) is used to query up to 20 random abnormal user experiences of an application (`SDKAppID`) in the last 14 days. The start and end time can be on two different days, but they cannot be more than one hour apart.
+//
+// For details about the error events, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEEXPIRE = "InvalidParameter.StartTimeExpire"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeUnusualEventWithContext(ctx context.Context, request *DescribeUnusualEventRequest) (response *DescribeUnusualEventResponse, err error) {
+    if request == nil {
+        request = NewDescribeUnusualEventRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUnusualEvent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUnusualEventResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserEventRequest() (request *DescribeUserEventRequest) {
+    request = &DescribeUserEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeUserEvent")
+    
+    
+    return
+}
+
+func NewDescribeUserEventResponse() (response *DescribeUserEventResponse) {
+    response = &DescribeUserEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUserEvent
+// This API (the old `DescribeDetailEvent`) is used to query the events of a call in the last 14 days, including user entry and exit, turning the camera on/off, etc.
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_APPID = "MissingParameter.AppId"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+func (c *Client) DescribeUserEvent(request *DescribeUserEventRequest) (response *DescribeUserEventResponse, err error) {
+    return c.DescribeUserEventWithContext(context.Background(), request)
+}
+
+// DescribeUserEvent
+// This API (the old `DescribeDetailEvent`) is used to query the events of a call in the last 14 days, including user entry and exit, turning the camera on/off, etc.
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ESQUERYERROR = "InternalError.EsQueryError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENDTS = "InvalidParameter.EndTs"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  INVALIDPARAMETER_URLPARAMSERROR = "InvalidParameter.UrlParamsError"
+//  INVALIDPARAMETER_USERID = "InvalidParameter.UserId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_APPID = "MissingParameter.AppId"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+func (c *Client) DescribeUserEventWithContext(ctx context.Context, request *DescribeUserEventRequest) (response *DescribeUserEventResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserEventRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserEvent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserEventResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserInfoRequest() (request *DescribeUserInfoRequest) {
+    request = &DescribeUserInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeUserInfo")
+    
+    
+    return
+}
+
+func NewDescribeUserInfoResponse() (response *DescribeUserInfoResponse) {
+    response = &DescribeUserInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUserInfo
+// This API (the old `DescribeUserInformation`) is used to query the user list of a specified time range (up to four hours) in the last 14 days. The data of up to 100 users can be returned per page (six are returned by default).
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEOVERSIZE = "InvalidParameter.StartTimeOversize"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeUserInfo(request *DescribeUserInfoRequest) (response *DescribeUserInfoResponse, err error) {
+    return c.DescribeUserInfoWithContext(context.Background(), request)
+}
+
+// DescribeUserInfo
+// This API (the old `DescribeUserInformation`) is used to query the user list of a specified time range (up to four hours) in the last 14 days. The data of up to 100 users can be returned per page (six are returned by default).
+//
+// **Note**:
+//
+// 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
+//
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_HTTPPARASEFALIED = "InternalError.HttpParaseFalied"
+//  INTERNALERROR_INTERFACEERR = "InternalError.InterfaceErr"
+//  INTERNALERROR_METHODERR = "InternalError.MethodErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ENCODEPARAMS = "InvalidParameter.EncodeParams"
+//  INVALIDPARAMETER_PAGENUMBER = "InvalidParameter.PageNumber"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_PAGESIZEOVERSIZE = "InvalidParameter.PageSizeOversize"
+//  INVALIDPARAMETER_QUERYSCALEOVERSIZE = "InvalidParameter.QueryScaleOversize"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STARTTIMEOVERSIZE = "InvalidParameter.StartTimeOversize"
+//  INVALIDPARAMETER_STARTTS = "InvalidParameter.StartTs"
+//  INVALIDPARAMETER_STARTTSOVERSIZE = "InvalidParameter.StartTsOversize"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_COMMID = "MissingParameter.CommId"
+//  MISSINGPARAMETER_COMMIDORSDKAPPID = "MissingParameter.CommIdOrSdkAppId"
+//  MISSINGPARAMETER_ENDTS = "MissingParameter.EndTs"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_STARTTS = "MissingParameter.StartTs"
+func (c *Client) DescribeUserInfoWithContext(ctx context.Context, request *DescribeUserInfoRequest) (response *DescribeUserInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -1053,6 +1635,7 @@ func NewSetUserBlockedResponse() (response *SetUserBlockedResponse) {
 //  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
 //  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) SetUserBlocked(request *SetUserBlockedRequest) (response *SetUserBlockedResponse, err error) {
     return c.SetUserBlockedWithContext(context.Background(), request)
 }
@@ -1073,6 +1656,7 @@ func (c *Client) SetUserBlocked(request *SetUserBlockedRequest) (response *SetUs
 //  INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"
 //  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
 func (c *Client) SetUserBlockedWithContext(ctx context.Context, request *SetUserBlockedRequest) (response *SetUserBlockedResponse, err error) {
     if request == nil {
         request = NewSetUserBlockedRequest()
@@ -1182,7 +1766,7 @@ func NewStartPublishCdnStreamResponse() (response *StartPublishCdnStreamResponse
 // StartPublishCdnStream
 // This API is used to mix streams and relay the mixed stream to CDNs. You can use this API to do the following:
 //
-// 1. Publish (also known as “relay”) the audio/video stream of one anchor to CDNs. For details, see example 2 (starting a task to relay the audio and video of a stream) and example 3 (starting a task to relay only the audio of a stream).
+// 1. Publish (also known as "relay") the audio/video stream of one anchor to CDNs. For details, see example 2 (starting a task to relay the audio and video of a stream) and example 3 (starting a task to relay only the audio of a stream).
 //
 // 2. Mix the streams of multiple anchors in a room or in different rooms and publish the mixed stream to CDNs. You can use `AudioParams.SubscribeAudioList` to specify the users whose audios are mixed, and use `VideoParams.LayoutParams` to specify the layout of the anchors’ videos. For details, see example 1 (mixing streams and publishing the mixed stream to a CDN).
 //
@@ -1216,7 +1800,7 @@ func NewStartPublishCdnStreamResponse() (response *StartPublishCdnStreamResponse
 //
 // 2. To ensure the stability of relaying, you cannot switch between relaying audio only, relaying audio and video, and relaying video only for the same task.
 //
-// 3. To ensure the stability of relaying, you cannot change the video codec, audio codec, audio sample rate, audio bitrate, or sound channels using the `UpdatePublishCdnStream` API. We recommend you pass in all the other parameters.
+// 3. To ensure the stability of relaying, you cannot change the video codec, audio codec, audio sample rate, audio bitrate, or sound channels using the `UpdatePublishCdnStream` API. We recommend you pass in all the other parameters when calling `UpdatePublishCdnStream`. If you only want to enable/disable transcoding, make sure you pass in all the other parameters.
 //
 // 4. When you relay a single stream, specify both `AudioParams` and `VideoParams` to publish both audio and video, and specify only `AudioParams` to publish audio only. You cannot switch between the two modes during the relaying process. For `VideoParams`, set `Width`, `Height`, `Fps`, `Bitrate`, and `Gop` according to the actual settings used for publishing.
 //
@@ -1244,7 +1828,7 @@ func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (r
 // StartPublishCdnStream
 // This API is used to mix streams and relay the mixed stream to CDNs. You can use this API to do the following:
 //
-// 1. Publish (also known as “relay”) the audio/video stream of one anchor to CDNs. For details, see example 2 (starting a task to relay the audio and video of a stream) and example 3 (starting a task to relay only the audio of a stream).
+// 1. Publish (also known as "relay") the audio/video stream of one anchor to CDNs. For details, see example 2 (starting a task to relay the audio and video of a stream) and example 3 (starting a task to relay only the audio of a stream).
 //
 // 2. Mix the streams of multiple anchors in a room or in different rooms and publish the mixed stream to CDNs. You can use `AudioParams.SubscribeAudioList` to specify the users whose audios are mixed, and use `VideoParams.LayoutParams` to specify the layout of the anchors’ videos. For details, see example 1 (mixing streams and publishing the mixed stream to a CDN).
 //
@@ -1278,7 +1862,7 @@ func (c *Client) StartPublishCdnStream(request *StartPublishCdnStreamRequest) (r
 //
 // 2. To ensure the stability of relaying, you cannot switch between relaying audio only, relaying audio and video, and relaying video only for the same task.
 //
-// 3. To ensure the stability of relaying, you cannot change the video codec, audio codec, audio sample rate, audio bitrate, or sound channels using the `UpdatePublishCdnStream` API. We recommend you pass in all the other parameters.
+// 3. To ensure the stability of relaying, you cannot change the video codec, audio codec, audio sample rate, audio bitrate, or sound channels using the `UpdatePublishCdnStream` API. We recommend you pass in all the other parameters when calling `UpdatePublishCdnStream`. If you only want to enable/disable transcoding, make sure you pass in all the other parameters.
 //
 // 4. When you relay a single stream, specify both `AudioParams` and `VideoParams` to publish both audio and video, and specify only `AudioParams` to publish audio only. You cannot switch between the two modes during the relaying process. For `VideoParams`, set `Width`, `Height`, `Fps`, `Bitrate`, and `Gop` according to the actual settings used for publishing.
 //

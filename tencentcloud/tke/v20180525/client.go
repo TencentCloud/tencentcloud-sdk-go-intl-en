@@ -495,6 +495,62 @@ func (c *Client) CheckInstancesUpgradeAbleWithContext(ctx context.Context, reque
     return
 }
 
+func NewCreateBackupStorageLocationRequest() (request *CreateBackupStorageLocationRequest) {
+    request = &CreateBackupStorageLocationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateBackupStorageLocation")
+    
+    
+    return
+}
+
+func NewCreateBackupStorageLocationResponse() (response *CreateBackupStorageLocationResponse) {
+    response = &CreateBackupStorageLocationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateBackupStorageLocation
+// This API is used to create a backup repository. You can specify the storage type (such as COS), the bucket region and the name. Up to 100 repositories can be created. Note that the settings of this API apply globally. You only need to create one backup repository, and back up TKE clusters in different regions in it.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateBackupStorageLocation(request *CreateBackupStorageLocationRequest) (response *CreateBackupStorageLocationResponse, err error) {
+    return c.CreateBackupStorageLocationWithContext(context.Background(), request)
+}
+
+// CreateBackupStorageLocation
+// This API is used to create a backup repository. You can specify the storage type (such as COS), the bucket region and the name. Up to 100 repositories can be created. Note that the settings of this API apply globally. You only need to create one backup repository, and back up TKE clusters in different regions in it.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateBackupStorageLocationWithContext(ctx context.Context, request *CreateBackupStorageLocationRequest) (response *CreateBackupStorageLocationResponse, err error) {
+    if request == nil {
+        request = NewCreateBackupStorageLocationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateBackupStorageLocation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateBackupStorageLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateClusterRequest() (request *CreateClusterRequest) {
     request = &CreateClusterRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1551,6 +1607,60 @@ func (c *Client) CreateTKEEdgeClusterWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateTKEEdgeClusterResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteBackupStorageLocationRequest() (request *DeleteBackupStorageLocationRequest) {
+    request = &DeleteBackupStorageLocationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DeleteBackupStorageLocation")
+    
+    
+    return
+}
+
+func NewDeleteBackupStorageLocationResponse() (response *DeleteBackupStorageLocationResponse) {
+    response = &DeleteBackupStorageLocationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteBackupStorageLocation
+// This API is used to delete a backup repository.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteBackupStorageLocation(request *DeleteBackupStorageLocationRequest) (response *DeleteBackupStorageLocationResponse, err error) {
+    return c.DeleteBackupStorageLocationWithContext(context.Background(), request)
+}
+
+// DeleteBackupStorageLocation
+// This API is used to delete a backup repository.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteBackupStorageLocationWithContext(ctx context.Context, request *DeleteBackupStorageLocationRequest) (response *DeleteBackupStorageLocationResponse, err error) {
+    if request == nil {
+        request = NewDeleteBackupStorageLocationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBackupStorageLocation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBackupStorageLocationResponse()
     err = c.Send(request, response)
     return
 }
@@ -2721,6 +2831,60 @@ func (c *Client) DescribeAvailableTKEEdgeVersionWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewDescribeAvailableTKEEdgeVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBackupStorageLocationsRequest() (request *DescribeBackupStorageLocationsRequest) {
+    request = &DescribeBackupStorageLocationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeBackupStorageLocations")
+    
+    
+    return
+}
+
+func NewDescribeBackupStorageLocationsResponse() (response *DescribeBackupStorageLocationsResponse) {
+    response = &DescribeBackupStorageLocationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBackupStorageLocations
+// This API is used to query backup repositories.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBackupStorageLocations(request *DescribeBackupStorageLocationsRequest) (response *DescribeBackupStorageLocationsResponse, err error) {
+    return c.DescribeBackupStorageLocationsWithContext(context.Background(), request)
+}
+
+// DescribeBackupStorageLocations
+// This API is used to query backup repositories.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBackupStorageLocationsWithContext(ctx context.Context, request *DescribeBackupStorageLocationsRequest) (response *DescribeBackupStorageLocationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupStorageLocationsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupStorageLocations require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupStorageLocationsResponse()
     err = c.Send(request, response)
     return
 }
@@ -6823,6 +6987,64 @@ func (c *Client) UninstallEdgeLogAgentWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewUninstallEdgeLogAgentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateClusterKubeconfigRequest() (request *UpdateClusterKubeconfigRequest) {
+    request = &UpdateClusterKubeconfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "UpdateClusterKubeconfig")
+    
+    
+    return
+}
+
+func NewUpdateClusterKubeconfigResponse() (response *UpdateClusterKubeconfigResponse) {
+    response = &UpdateClusterKubeconfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpdateClusterKubeconfig
+// This API is used to update the Kubeconfig information of a cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_KUBERNETESPATCHOPERATIONERROR = "InternalError.KubernetesPatchOperationError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateClusterKubeconfig(request *UpdateClusterKubeconfigRequest) (response *UpdateClusterKubeconfigResponse, err error) {
+    return c.UpdateClusterKubeconfigWithContext(context.Background(), request)
+}
+
+// UpdateClusterKubeconfig
+// This API is used to update the Kubeconfig information of a cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_KUBERNETESPATCHOPERATIONERROR = "InternalError.KubernetesPatchOperationError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) UpdateClusterKubeconfigWithContext(ctx context.Context, request *UpdateClusterKubeconfigRequest) (response *UpdateClusterKubeconfigResponse, err error) {
+    if request == nil {
+        request = NewUpdateClusterKubeconfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateClusterKubeconfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateClusterKubeconfigResponse()
     err = c.Send(request, response)
     return
 }
