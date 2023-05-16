@@ -3279,6 +3279,66 @@ func (c *Client) DescribeAllStreamPlayInfoListWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeBillBandwidthAndFluxListRequest() (request *DescribeBillBandwidthAndFluxListRequest) {
+    request = &DescribeBillBandwidthAndFluxListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeBillBandwidthAndFluxList")
+    
+    
+    return
+}
+
+func NewDescribeBillBandwidthAndFluxListResponse() (response *DescribeBillBandwidthAndFluxListResponse) {
+    response = &DescribeBillBandwidthAndFluxListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillBandwidthAndFluxList
+// This API is used to query the data of billable LVB bandwidth and traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeBillBandwidthAndFluxList(request *DescribeBillBandwidthAndFluxListRequest) (response *DescribeBillBandwidthAndFluxListResponse, err error) {
+    return c.DescribeBillBandwidthAndFluxListWithContext(context.Background(), request)
+}
+
+// DescribeBillBandwidthAndFluxList
+// This API is used to query the data of billable LVB bandwidth and traffic.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) DescribeBillBandwidthAndFluxListWithContext(ctx context.Context, request *DescribeBillBandwidthAndFluxListRequest) (response *DescribeBillBandwidthAndFluxListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillBandwidthAndFluxListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillBandwidthAndFluxList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillBandwidthAndFluxListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConcurrentRecordStreamNumRequest() (request *DescribeConcurrentRecordStreamNumRequest) {
     request = &DescribeConcurrentRecordStreamNumRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -431,6 +431,20 @@ type BatchDomainOperateErrors struct {
 	Message *string `json:"Message,omitempty" name:"Message"`
 }
 
+type BillDataInfo struct {
+	// Time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Bandwidth in Mbps.
+	Bandwidth *float64 `json:"Bandwidth,omitempty" name:"Bandwidth"`
+
+	// Traffic in MB.
+	Flux *float64 `json:"Flux,omitempty" name:"Flux"`
+
+	// Time point of peak value in the format of `yyyy-mm-dd HH:MM:SS`. As raw data is at a 5-minute granularity, if data at a 1-hour or 1-day granularity is queried, the time point of peak bandwidth value at the corresponding granularity will be returned.
+	PeakTime *string `json:"PeakTime,omitempty" name:"PeakTime"`
+}
+
 type CallBackRuleInfo struct {
 	// The rule creation time.
 	// Note: Beijing time (UTC+8) is used.
@@ -3926,6 +3940,154 @@ func (r *DescribeAllStreamPlayInfoListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAllStreamPlayInfoListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillBandwidthAndFluxListRequestParams struct {
+	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// LVB playback domain name. If this parameter is left empty, full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
+
+	// Valid values:
+	// Mainland: query data for Mainland China,
+	// Oversea: query data for regions outside Mainland China,
+	// Default: query data for all regions.
+	// Note: LEB only supports querying data for all regions.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+
+	// Data granularity. Valid values:
+	// 5: 5-minute granularity (the query time span should be within 1 day),
+	// 60: 1-hour granularity (the query time span should be within one month),
+	// 1440: 1-day granularity (the query time span should be within one month).
+	// Default value: 5.
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+
+	// Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Region. Valid values:
+	// China Mainland
+	// Asia Pacific I
+	// Asia Pacific II
+	// Asia Pacific III
+	// Europe
+	// North America
+	// South America
+	// Middle East
+	// Africa
+	RegionNames []*string `json:"RegionNames,omitempty" name:"RegionNames"`
+}
+
+type DescribeBillBandwidthAndFluxListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// LVB playback domain name. If this parameter is left empty, full data will be queried.
+	PlayDomains []*string `json:"PlayDomains,omitempty" name:"PlayDomains"`
+
+	// Valid values:
+	// Mainland: query data for Mainland China,
+	// Oversea: query data for regions outside Mainland China,
+	// Default: query data for all regions.
+	// Note: LEB only supports querying data for all regions.
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitempty" name:"MainlandOrOversea"`
+
+	// Data granularity. Valid values:
+	// 5: 5-minute granularity (the query time span should be within 1 day),
+	// 60: 1-hour granularity (the query time span should be within one month),
+	// 1440: 1-day granularity (the query time span should be within one month).
+	// Default value: 5.
+	Granularity *uint64 `json:"Granularity,omitempty" name:"Granularity"`
+
+	// Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Region. Valid values:
+	// China Mainland
+	// Asia Pacific I
+	// Asia Pacific II
+	// Asia Pacific III
+	// Europe
+	// North America
+	// South America
+	// Middle East
+	// Africa
+	RegionNames []*string `json:"RegionNames,omitempty" name:"RegionNames"`
+}
+
+func (r *DescribeBillBandwidthAndFluxListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillBandwidthAndFluxListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PlayDomains")
+	delete(f, "MainlandOrOversea")
+	delete(f, "Granularity")
+	delete(f, "ServiceName")
+	delete(f, "RegionNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillBandwidthAndFluxListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillBandwidthAndFluxListResponseParams struct {
+	// Time point of peak bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
+	PeakBandwidthTime *string `json:"PeakBandwidthTime,omitempty" name:"PeakBandwidthTime"`
+
+	// Peak bandwidth in Mbps.
+	PeakBandwidth *float64 `json:"PeakBandwidth,omitempty" name:"PeakBandwidth"`
+
+	// Time point of 95th percentile bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
+	P95PeakBandwidthTime *string `json:"P95PeakBandwidthTime,omitempty" name:"P95PeakBandwidthTime"`
+
+	// 95th percentile bandwidth in Mbps.
+	P95PeakBandwidth *float64 `json:"P95PeakBandwidth,omitempty" name:"P95PeakBandwidth"`
+
+	// Total traffic in MB.
+	SumFlux *float64 `json:"SumFlux,omitempty" name:"SumFlux"`
+
+	// Detailed data information.
+	DataInfoList []*BillDataInfo `json:"DataInfoList,omitempty" name:"DataInfoList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBillBandwidthAndFluxListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillBandwidthAndFluxListResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillBandwidthAndFluxListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillBandwidthAndFluxListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
