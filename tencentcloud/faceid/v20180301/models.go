@@ -742,10 +742,10 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// Default value: `4`.
 	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
 
-	// The image for comparison in the `compare` (liveness detection and face comparison) mode. This parameter is required when the value of `CheckMode` is `compare`.
+	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
 	Image *string `json:"Image,omitempty" name:"Image"`
 
-	// The pass-through parameter.
+	// The pass-through parameter, which can be omitted if there are no special requirements.
 	Extra *string `json:"Extra,omitempty" name:"Extra"`
 }
 
@@ -766,10 +766,10 @@ type GetFaceIdTokenIntlRequest struct {
 	// Default value: `4`.
 	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
 
-	// The image for comparison in the `compare` (liveness detection and face comparison) mode. This parameter is required when the value of `CheckMode` is `compare`.
+	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
 	Image *string `json:"Image,omitempty" name:"Image"`
 
-	// The pass-through parameter.
+	// The pass-through parameter, which can be omitted if there are no special requirements.
 	Extra *string `json:"Extra,omitempty" name:"Extra"`
 }
 
