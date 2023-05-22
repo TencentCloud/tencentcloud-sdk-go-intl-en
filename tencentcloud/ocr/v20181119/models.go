@@ -458,6 +458,11 @@ func (r *GeneralBasicOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GroupInfo struct {
+	// The elements in each line.
+	Groups []*LineInfo `json:"Groups,omitempty" name:"Groups"`
+}
+
 // Predefined struct for user
 type HKIDCardOCRRequestParams struct {
 	// Whether to check for authenticity.
@@ -607,6 +612,26 @@ type ItemCoord struct {
 
 	// Height
 	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
+type ItemInfo struct {
+	// The key information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *Key `json:"Key,omitempty" name:"Key"`
+
+	// The value information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *Value `json:"Value,omitempty" name:"Value"`
+}
+
+type Key struct {
+	// The name of the recognized field.
+	AutoName *string `json:"AutoName,omitempty" name:"AutoName"`
+}
+
+type LineInfo struct {
+	// The elements in a line
+	Lines []*ItemInfo `json:"Lines,omitempty" name:"Lines"`
 }
 
 // Predefined struct for user
@@ -847,6 +872,20 @@ func (r *MLIDPassportOCRResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *MLIDPassportOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Polygon struct {
+	// The coordinates of the upper-left vertex.
+	LeftTop *Coord `json:"LeftTop,omitempty" name:"LeftTop"`
+
+	// The coordinates of the upper-right vertex.
+	RightTop *Coord `json:"RightTop,omitempty" name:"RightTop"`
+
+	// The coordinates of the lower-left vertex.
+	RightBottom *Coord `json:"RightBottom,omitempty" name:"RightBottom"`
+
+	// The coordinates of the lower-right vertex.
+	LeftBottom *Coord `json:"LeftBottom,omitempty" name:"LeftBottom"`
 }
 
 // Predefined struct for user
@@ -1420,6 +1459,122 @@ func (r *RecognizePhilippinesVoteIDOCRResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type SmartStructuralOCRV2RequestParams struct {
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
+	IsPdf *bool `json:"IsPdf,omitempty" name:"IsPdf"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `IsPdf` is `true`. Default value: `1`.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+
+	// The names of the fields you want to return for the structured information recognition.
+	// For example, if you want to return only the recognition result of the "Name" and "Gender" fields, set this parameter as follows:
+	// ItemNames=["Name","Gender"]
+	ItemNames []*string `json:"ItemNames,omitempty" name:"ItemNames"`
+
+	// Whether to enable recognition of all fields.
+	ReturnFullText *bool `json:"ReturnFullText,omitempty" name:"ReturnFullText"`
+}
+
+type SmartStructuralOCRV2Request struct {
+	*tchttp.BaseRequest
+	
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// Whether to enable PDF recognition. Default value: `false`. If you enable this feature, both images and PDF files can be recognized.
+	IsPdf *bool `json:"IsPdf,omitempty" name:"IsPdf"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `IsPdf` is `true`. Default value: `1`.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+
+	// The names of the fields you want to return for the structured information recognition.
+	// For example, if you want to return only the recognition result of the "Name" and "Gender" fields, set this parameter as follows:
+	// ItemNames=["Name","Gender"]
+	ItemNames []*string `json:"ItemNames,omitempty" name:"ItemNames"`
+
+	// Whether to enable recognition of all fields.
+	ReturnFullText *bool `json:"ReturnFullText,omitempty" name:"ReturnFullText"`
+}
+
+func (r *SmartStructuralOCRV2Request) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SmartStructuralOCRV2Request) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageUrl")
+	delete(f, "ImageBase64")
+	delete(f, "IsPdf")
+	delete(f, "PdfPageNumber")
+	delete(f, "ItemNames")
+	delete(f, "ReturnFullText")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SmartStructuralOCRV2Request has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SmartStructuralOCRV2ResponseParams struct {
+	// The rotation angle (degrees) of the text on the image. 0: The text is horizontal. Positive value: The text is rotated clockwise. Negative value: The text is rotated counterclockwise.
+	Angle *float64 `json:"Angle,omitempty" name:"Angle"`
+
+	// The structural information (key-value).
+	StructuralList []*GroupInfo `json:"StructuralList,omitempty" name:"StructuralList"`
+
+	// The recognized text information.
+	WordList []*WordItem `json:"WordList,omitempty" name:"WordList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SmartStructuralOCRV2Response struct {
+	*tchttp.BaseResponse
+	Response *SmartStructuralOCRV2ResponseParams `json:"Response"`
+}
+
+func (r *SmartStructuralOCRV2Response) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SmartStructuralOCRV2Response) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type TableOCRRequestParams struct {
 	// Base64-encoded value of image.
 	// Supported image formats: PNG, JPG, JPEG. GIF is not supported at present.
@@ -1560,4 +1715,21 @@ type TextTable struct {
 
 	// Extended field
 	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
+}
+
+type Value struct {
+	// The value of the recognized field.
+	AutoContent *string `json:"AutoContent,omitempty" name:"AutoContent"`
+
+	// The coordinates of the four vertices.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Coord *Polygon `json:"Coord,omitempty" name:"Coord"`
+}
+
+type WordItem struct {
+	// The text content.
+	DetectedText *string `json:"DetectedText,omitempty" name:"DetectedText"`
+
+	// The coordinates of the four vertices.
+	Coord *Polygon `json:"Coord,omitempty" name:"Coord"`
 }

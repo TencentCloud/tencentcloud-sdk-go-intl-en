@@ -759,6 +759,9 @@ type AssignPrivateIpAddressesRequestParams struct {
 
 	// The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota. For more information, see<a href="/document/product/576/18527">ENI Use Limits</a>.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
+
+	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 }
 
 type AssignPrivateIpAddressesRequest struct {
@@ -772,6 +775,9 @@ type AssignPrivateIpAddressesRequest struct {
 
 	// The number of newly-applied private IP addresses. You should provide either this parameter or PrivateIpAddresses, or both. The total number of private IP addresses cannot exceed the quota. For more information, see<a href="/document/product/576/18527">ENI Use Limits</a>.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
+
+	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 }
 
 func (r *AssignPrivateIpAddressesRequest) ToJsonString() string {
@@ -789,6 +795,7 @@ func (r *AssignPrivateIpAddressesRequest) FromJsonString(s string) error {
 	delete(f, "NetworkInterfaceId")
 	delete(f, "PrivateIpAddresses")
 	delete(f, "SecondaryPrivateIpAddressCount")
+	delete(f, "QosLevel")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssignPrivateIpAddressesRequest has unknown keys!", "")
 	}
@@ -2273,6 +2280,9 @@ type CreateAndAttachNetworkInterfaceRequestParams struct {
 	// The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
+	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
+
 	// The security group to be bound with, such as ['sg-1dd51d'].
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
@@ -2307,6 +2317,9 @@ type CreateAndAttachNetworkInterfaceRequest struct {
 	// The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
+	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
+
 	// The security group to be bound with, such as ['sg-1dd51d'].
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
@@ -2338,6 +2351,7 @@ func (r *CreateAndAttachNetworkInterfaceRequest) FromJsonString(s string) error 
 	delete(f, "InstanceId")
 	delete(f, "PrivateIpAddresses")
 	delete(f, "SecondaryPrivateIpAddressCount")
+	delete(f, "QosLevel")
 	delete(f, "SecurityGroupIds")
 	delete(f, "NetworkInterfaceDescription")
 	delete(f, "Tags")
@@ -3761,6 +3775,9 @@ type CreateNetworkInterfaceRequestParams struct {
 	// The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
+	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
+
 	// Specifies the security group to be bound with, such as ['sg-1dd51d'].
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
@@ -3792,6 +3809,9 @@ type CreateNetworkInterfaceRequest struct {
 	// The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
+	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
+
 	// Specifies the security group to be bound with, such as ['sg-1dd51d'].
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
@@ -3822,6 +3842,7 @@ func (r *CreateNetworkInterfaceRequest) FromJsonString(s string) error {
 	delete(f, "SubnetId")
 	delete(f, "NetworkInterfaceDescription")
 	delete(f, "SecondaryPrivateIpAddressCount")
+	delete(f, "QosLevel")
 	delete(f, "SecurityGroupIds")
 	delete(f, "PrivateIpAddresses")
 	delete(f, "Tags")
@@ -4923,7 +4944,7 @@ type CreateVpnConnectionRequestParams struct {
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
-	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the [DescribeCustomerGateways](https://intl.cloud.tencent.com/document/product/215/17516?from_cn_redirect=1) API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 
 	// Gateway can be named freely, but the maximum length is 60 characters.
@@ -4948,13 +4969,13 @@ type CreateVpnConnectionRequestParams struct {
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// Whether the tunnel health check is supported.
+	// Whether the tunnel health check is supported. The default value is `False`.
 	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
 
-	// Local IP address for the health check
+	// Local IP of health check. It defaults to a random IP within 169.254.128.0/17.
 	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
 
-	// Peer IP address for the health check
+	// Peer IP of health check. It defaults to a random IP within 169.254.128.0/17.
 	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
 
 	// Tunnel type. Valid values: `STATIC`, `StaticRoute`, and `Policy`.
@@ -4979,7 +5000,7 @@ type CreateVpnConnectionRequest struct {
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
-	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the [DescribeCustomerGateways](https://intl.cloud.tencent.com/document/product/215/17516?from_cn_redirect=1) API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 
 	// Gateway can be named freely, but the maximum length is 60 characters.
@@ -5004,13 +5025,13 @@ type CreateVpnConnectionRequest struct {
 	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
-	// Whether the tunnel health check is supported.
+	// Whether the tunnel health check is supported. The default value is `False`.
 	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
 
-	// Local IP address for the health check
+	// Local IP of health check. It defaults to a random IP within 169.254.128.0/17.
 	HealthCheckLocalIp *string `json:"HealthCheckLocalIp,omitempty" name:"HealthCheckLocalIp"`
 
-	// Peer IP address for the health check
+	// Peer IP of health check. It defaults to a random IP within 169.254.128.0/17.
 	HealthCheckRemoteIp *string `json:"HealthCheckRemoteIp,omitempty" name:"HealthCheckRemoteIp"`
 
 	// Tunnel type. Valid values: `STATIC`, `StaticRoute`, and `Policy`.
@@ -5691,14 +5712,14 @@ func (r *DeleteCcnResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteCustomerGatewayRequestParams struct {
-	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the [DescribeCustomerGateways](https://intl.cloud.tencent.com/document/api/215/17516?from_cn_redirect=1) API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 }
 
 type DeleteCustomerGatewayRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the [DescribeCustomerGateways](https://intl.cloud.tencent.com/document/api/215/17516?from_cn_redirect=1) API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 }
 
@@ -8991,7 +9012,7 @@ func (r *DescribeDirectConnectGatewaysResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeFlowLogRequestParams struct {
-	// ID of the VPC instance
+	// ID of the VPC instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -9001,7 +9022,7 @@ type DescribeFlowLogRequestParams struct {
 type DescribeFlowLogRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the VPC instance
+	// ID of the VPC instance.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The unique ID of the flow log.
@@ -11503,6 +11524,63 @@ func (r *DescribeSnapshotPoliciesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSubnetResourceDashboardRequestParams struct {
+	// Subnet instance ID, such as `subnet-f1xjkw1b`.
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+}
+
+type DescribeSubnetResourceDashboardRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subnet instance ID, such as `subnet-f1xjkw1b`.
+	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
+}
+
+func (r *DescribeSubnetResourceDashboardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubnetResourceDashboardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubnetIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubnetResourceDashboardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubnetResourceDashboardResponseParams struct {
+	// Information of resources returned
+	ResourceStatisticsSet []*ResourceStatistics `json:"ResourceStatisticsSet,omitempty" name:"ResourceStatisticsSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSubnetResourceDashboardResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSubnetResourceDashboardResponseParams `json:"Response"`
+}
+
+func (r *DescribeSubnetResourceDashboardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubnetResourceDashboardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSubnetsRequestParams struct {
 	// Queries the ID of the subnet instance, such as `subnet-pxir56ns`. Each request can have a maximum of 100 instances. `SubnetIds` and `Filters` cannot be specified at the same time.
 	SubnetIds []*string `json:"SubnetIds,omitempty" name:"SubnetIds"`
@@ -11756,6 +11834,96 @@ func (r *DescribeTrafficPackagesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTrafficPackagesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsedIpAddressRequestParams struct {
+	// VPC instance ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet instance ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// IPs to query
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of requested objects.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeUsedIpAddressRequest struct {
+	*tchttp.BaseRequest
+	
+	// VPC instance ID.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet instance ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// IPs to query
+	IpAddresses []*string `json:"IpAddresses,omitempty" name:"IpAddresses"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The number of requested objects.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeUsedIpAddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsedIpAddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "IpAddresses")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsedIpAddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsedIpAddressResponseParams struct {
+	// Information of resources bound with the queried IPs 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	IpAddressStates []*IpAddressStates `json:"IpAddressStates,omitempty" name:"IpAddressStates"`
+
+	// Number of taken IPs 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeUsedIpAddressResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUsedIpAddressResponseParams `json:"Response"`
+}
+
+func (r *DescribeUsedIpAddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsedIpAddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -14240,7 +14408,7 @@ type Filter struct {
 	// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// The attribute value. If there are multiple Values for one Filter, the logical relation between these Values under the same Filter is `OR`.
+	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
@@ -14851,6 +15019,23 @@ type InstanceStatistic struct {
 
 	// Number of instances
 	InstanceCount *uint64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+}
+
+type IpAddressStates struct {
+	// VPC instance ID
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet instance ID
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// IP address
+	IpAddress *string `json:"IpAddress,omitempty" name:"IpAddress"`
+
+	// Resource type
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 }
 
 type IpField struct {
@@ -15824,7 +16009,7 @@ func (r *ModifyCcnRegionBandwidthLimitsTypeResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type ModifyCustomerGatewayAttributeRequestParams struct {
-	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the [DescribeCustomerGateways](https://intl.cloud.tencent.com/document/api/215/17516?from_cn_redirect=1) API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 
 	// Customer gateway can be named freely, but the maximum length is 60 characters.
@@ -15834,7 +16019,7 @@ type ModifyCustomerGatewayAttributeRequestParams struct {
 type ModifyCustomerGatewayAttributeRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the `DescribeCustomerGateways` API.
+	// The ID of the customer gateway, such as `cgw-2wqq41m9`. You can query the customer gateway by using the [DescribeCustomerGateways](https://intl.cloud.tencent.com/document/api/215/17516?from_cn_redirect=1) API.
 	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 
 	// Customer gateway can be named freely, but the maximum length is 60 characters.
@@ -15966,7 +16151,7 @@ type ModifyFlowLogAttributeRequestParams struct {
 	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the attributes of a CCN flow log is modified.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The name of the flow log.
+	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
 	// The description of the flow log.
@@ -15982,7 +16167,7 @@ type ModifyFlowLogAttributeRequest struct {
 	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the attributes of a CCN flow log is modified.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The name of the flow log.
+	// The name of the flow log instance.
 	FlowLogName *string `json:"FlowLogName,omitempty" name:"FlowLogName"`
 
 	// The description of the flow log.
@@ -17734,7 +17919,7 @@ type ModifyVpnConnectionAttributeRequestParams struct {
 	// The pre-shared key.
 	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
 
-	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
+	// SPD policy group. Taking {"10.0.0.5/24":["172.123.10.5/16"]} as an example, 10.0.0.5/24 is the VPC private IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
 	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
 
 	// IKE (Internet Key Exchange) configuration. IKE comes with a self-protection mechanism. The network security protocol is configured by the user.
@@ -17743,7 +17928,7 @@ type ModifyVpnConnectionAttributeRequestParams struct {
 	// IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
 	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
 
-	// Whether to enable the tunnel health check.
+	// Whether to enable the tunnel health check. The default value is `False`.
 	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
 
 	// Local IP address for the tunnel health check
@@ -17763,6 +17948,9 @@ type ModifyVpnConnectionAttributeRequestParams struct {
 
 	// The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
 	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
+
+	// Peer gateway ID. You can update tunnels of V4.0 and later gateways.
+	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 }
 
 type ModifyVpnConnectionAttributeRequest struct {
@@ -17777,7 +17965,7 @@ type ModifyVpnConnectionAttributeRequest struct {
 	// The pre-shared key.
 	PreShareKey *string `json:"PreShareKey,omitempty" name:"PreShareKey"`
 
-	// The SPD policy group, for example: {"10.0.0.5/24":["172.123.10.5/16"]}. 10.0.0.5/24 is the VPC internal IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
+	// SPD policy group. Taking {"10.0.0.5/24":["172.123.10.5/16"]} as an example, 10.0.0.5/24 is the VPC private IP range, and 172.123.10.5/16 is the IDC IP range. The user specifies the IP range in the VPC that can communicate with the IP range in the IDC.
 	SecurityPolicyDatabases []*SecurityPolicyDatabase `json:"SecurityPolicyDatabases,omitempty" name:"SecurityPolicyDatabases"`
 
 	// IKE (Internet Key Exchange) configuration. IKE comes with a self-protection mechanism. The network security protocol is configured by the user.
@@ -17786,7 +17974,7 @@ type ModifyVpnConnectionAttributeRequest struct {
 	// IPSec configuration. The IPSec secure session configuration is provided by Tencent Cloud.
 	IPSECOptionsSpecification *IPSECOptionsSpecification `json:"IPSECOptionsSpecification,omitempty" name:"IPSECOptionsSpecification"`
 
-	// Whether to enable the tunnel health check.
+	// Whether to enable the tunnel health check. The default value is `False`.
 	EnableHealthCheck *bool `json:"EnableHealthCheck,omitempty" name:"EnableHealthCheck"`
 
 	// Local IP address for the tunnel health check
@@ -17806,6 +17994,9 @@ type ModifyVpnConnectionAttributeRequest struct {
 
 	// The action after DPD timeout. Valid values: `clear` (disconnect) and `restart` (try again). It’s valid when `DpdEnable` is `1`. 
 	DpdAction *string `json:"DpdAction,omitempty" name:"DpdAction"`
+
+	// Peer gateway ID. You can update tunnels of V4.0 and later gateways.
+	CustomerGatewayId *string `json:"CustomerGatewayId,omitempty" name:"CustomerGatewayId"`
 }
 
 func (r *ModifyVpnConnectionAttributeRequest) ToJsonString() string {
@@ -17833,6 +18024,7 @@ func (r *ModifyVpnConnectionAttributeRequest) FromJsonString(s string) error {
 	delete(f, "DpdEnable")
 	delete(f, "DpdTimeout")
 	delete(f, "DpdAction")
+	delete(f, "CustomerGatewayId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVpnConnectionAttributeRequest has unknown keys!", "")
 	}
@@ -18529,7 +18721,7 @@ type Price struct {
 	// Instance price.
 	InstancePrice *ItemPrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
 
-	// Network price.
+	// Bandwidth price
 	BandwidthPrice *ItemPrice `json:"BandwidthPrice,omitempty" name:"BandwidthPrice"`
 }
 
@@ -18558,6 +18750,9 @@ type PrivateIpAddressSpecification struct {
 	// DELETING: Deleting
 	// AVAILABLE: Available
 	State *string `json:"State,omitempty" name:"State"`
+
+	// IP service level. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
+	QosLevel *string `json:"QosLevel,omitempty" name:"QosLevel"`
 }
 
 type Quota struct {
@@ -19417,7 +19612,7 @@ type ResetVpnGatewayInternetMaxBandwidthRequestParams struct {
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
-	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps.
+	// The new bandwidth cap in Mbps. Values: `5`, `10`, `20`, `50`, `100`, `200`, `500` and `1000`. The adjustment of the VPN gateway bandwidth is limited to [5,100] Mbps and [200,1000] Mbps.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 }
 
@@ -19427,7 +19622,7 @@ type ResetVpnGatewayInternetMaxBandwidthRequest struct {
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
-	// The public network bandwidth configuration. Available bandwidth specifications: 5, 10, 20, 50, and 100. Unit: Mbps.
+	// The new bandwidth cap in Mbps. Values: `5`, `10`, `20`, `50`, `100`, `200`, `500` and `1000`. The adjustment of the VPN gateway bandwidth is limited to [5,100] Mbps and [200,1000] Mbps.
 	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 }
 
@@ -19612,6 +19807,31 @@ type ResourceDashboard struct {
 	RouteTable *uint64 `json:"RouteTable,omitempty" name:"RouteTable"`
 }
 
+type ResourceStatistics struct {
+	// VPC instance ID, such as vpc-f1xjkw1b.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet instance ID, such as `subnet-bthucmmy`.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// The total number of used IP addresses.
+	Ip *uint64 `json:"Ip,omitempty" name:"Ip"`
+
+	// Information of associated resources
+	ResourceStatisticsItemSet []*ResourceStatisticsItem `json:"ResourceStatisticsItemSet,omitempty" name:"ResourceStatisticsItemSet"`
+}
+
+type ResourceStatisticsItem struct {
+	// Resource type, such as CVM, ENI
+	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+
+	// Resource name.
+	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+
+	// Number of resources
+	ResourceCount *uint64 `json:"ResourceCount,omitempty" name:"ResourceCount"`
+}
+
 // Predefined struct for user
 type ResumeSnapshotInstanceRequestParams struct {
 	// Snapshot policy IDs
@@ -19750,7 +19970,8 @@ type Route struct {
 	// `LOCAL_GATEWAY`: local gateway.
 	GatewayType *string `json:"GatewayType,omitempty" name:"GatewayType"`
 
-	// Next hop address. You simply need to specify the gateway ID of a different next hop type, and the system will automatically match the next hop address.
+	// Next hop address. You simply need to specify the gateway ID of a different next hop type, and the system will automatically match the next hop address. 
+	// Note: If `GatewayType` is set to `NORMAL_CVM`, `GatewayId` should be the private IP of the instance.
 	GatewayId *string `json:"GatewayId,omitempty" name:"GatewayId"`
 
 	// Routing policy ID. The IPv4 routing policy will have a meaningful value, while the IPv6 routing policy is always 0. We recommend using the unique ID `RouteItemId` for the routing policy.
@@ -19892,7 +20113,7 @@ type SecurityGroupPolicy struct {
 	// Protocol port ID or protocol port group ID. ServiceTemplate and Protocol+Port are mutually exclusive.
 	ServiceTemplate *ServiceTemplateSpecification `json:"ServiceTemplate,omitempty" name:"ServiceTemplate"`
 
-	// IP range or IP (mutually exclusive).
+	// Either `CidrBlock` or `Ipv6CidrBlock can be specified. Note that if `0.0.0.0/n` is entered, it is mapped to 0.0.0.0/0.
 	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 
 	// The CIDR block or IPv6 (mutually exclusive).
@@ -19915,13 +20136,16 @@ type SecurityGroupPolicy struct {
 }
 
 type SecurityGroupPolicySet struct {
-	// The version of the security group policy. The version number is automatically increased by one each time users update the security policy, to prevent the expiration of updated routing policies. Conflict is ignored if it is left empty.
+	// The version number of the security group policy, which will automatically increase by one each time you update the security group policy, so as to prevent expiration of the updated routing policies. If it is left empty, any conflicts will be ignored. 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
 	Version *string `json:"Version,omitempty" name:"Version"`
 
-	// Outbound policy.
+	// Outbound rule. 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
 	Egress []*SecurityGroupPolicy `json:"Egress,omitempty" name:"Egress"`
 
-	// Inbound policy.
+	// Inbound rule. 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
 	Ingress []*SecurityGroupPolicy `json:"Ingress,omitempty" name:"Ingress"`
 }
 

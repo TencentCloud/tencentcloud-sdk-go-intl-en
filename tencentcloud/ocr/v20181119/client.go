@@ -867,6 +867,76 @@ func (c *Client) RecognizePhilippinesVoteIDOCRWithContext(ctx context.Context, r
     return
 }
 
+func NewSmartStructuralOCRV2Request() (request *SmartStructuralOCRV2Request) {
+    request = &SmartStructuralOCRV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "SmartStructuralOCRV2")
+    
+    
+    return
+}
+
+func NewSmartStructuralOCRV2Response() (response *SmartStructuralOCRV2Response) {
+    response = &SmartStructuralOCRV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SmartStructuralOCRV2
+// This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
+//
+// 
+//
+// A maximum of 10 requests can be initiated per second for this API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) SmartStructuralOCRV2(request *SmartStructuralOCRV2Request) (response *SmartStructuralOCRV2Response, err error) {
+    return c.SmartStructuralOCRV2WithContext(context.Background(), request)
+}
+
+// SmartStructuralOCRV2
+// This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
+//
+// 
+//
+// A maximum of 10 requests can be initiated per second for this API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) SmartStructuralOCRV2WithContext(ctx context.Context, request *SmartStructuralOCRV2Request) (response *SmartStructuralOCRV2Response, err error) {
+    if request == nil {
+        request = NewSmartStructuralOCRV2Request()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SmartStructuralOCRV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSmartStructuralOCRV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewTableOCRRequest() (request *TableOCRRequest) {
     request = &TableOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

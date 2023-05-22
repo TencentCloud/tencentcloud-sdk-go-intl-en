@@ -3616,9 +3616,9 @@ func NewCreateRoutesResponse() (response *CreateRoutesResponse) {
 }
 
 // CreateRoutes
-// This API (CreateRoutes) is used to create a routing policy.
+// This API is used to create routes. 
 //
-// * You can create routing policies in batch for a specified route table.
+// * You can batch add routes to a specified route table.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3642,9 +3642,9 @@ func (c *Client) CreateRoutes(request *CreateRoutesRequest) (response *CreateRou
 }
 
 // CreateRoutes
-// This API (CreateRoutes) is used to create a routing policy.
+// This API is used to create routes. 
 //
-// * You can create routing policies in batch for a specified route table.
+// * You can batch add routes to a specified route table.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6934,7 +6934,7 @@ func NewDeleteVpnConnectionResponse() (response *DeleteVpnConnectionResponse) {
 }
 
 // DeleteVpnConnection
-// This API (DeleteVpnConnection) is used to delete VPN tunnels.
+// This API is used to delete a VPN tunnel.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -6947,7 +6947,7 @@ func (c *Client) DeleteVpnConnection(request *DeleteVpnConnectionRequest) (respo
 }
 
 // DeleteVpnConnection
-// This API (DeleteVpnConnection) is used to delete VPN tunnels.
+// This API is used to delete a VPN tunnel.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -9877,6 +9877,58 @@ func (c *Client) DescribeSnapshotPoliciesWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeSubnetResourceDashboardRequest() (request *DescribeSubnetResourceDashboardRequest) {
+    request = &DescribeSubnetResourceDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeSubnetResourceDashboard")
+    
+    
+    return
+}
+
+func NewDescribeSubnetResourceDashboardResponse() (response *DescribeSubnetResourceDashboardResponse) {
+    response = &DescribeSubnetResourceDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSubnetResourceDashboard
+// This API is used to query the subnet resource.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeSubnetResourceDashboard(request *DescribeSubnetResourceDashboardRequest) (response *DescribeSubnetResourceDashboardResponse, err error) {
+    return c.DescribeSubnetResourceDashboardWithContext(context.Background(), request)
+}
+
+// DescribeSubnetResourceDashboard
+// This API is used to query the subnet resource.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeSubnetResourceDashboardWithContext(ctx context.Context, request *DescribeSubnetResourceDashboardRequest) (response *DescribeSubnetResourceDashboardResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubnetResourceDashboardRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubnetResourceDashboard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSubnetResourceDashboardResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSubnetsRequest() (request *DescribeSubnetsRequest) {
     request = &DescribeSubnetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10047,6 +10099,58 @@ func (c *Client) DescribeTrafficPackagesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeTrafficPackagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUsedIpAddressRequest() (request *DescribeUsedIpAddressRequest) {
+    request = &DescribeUsedIpAddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeUsedIpAddress")
+    
+    
+    return
+}
+
+func NewDescribeUsedIpAddressResponse() (response *DescribeUsedIpAddressResponse) {
+    response = &DescribeUsedIpAddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUsedIpAddress
+// This API is used to query IP usage of a subnet or VPC. 
+//
+// If the IP is taken, the associated resource type and ID are returned. Otherwise it returns null.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
+func (c *Client) DescribeUsedIpAddress(request *DescribeUsedIpAddressRequest) (response *DescribeUsedIpAddressResponse, err error) {
+    return c.DescribeUsedIpAddressWithContext(context.Background(), request)
+}
+
+// DescribeUsedIpAddress
+// This API is used to query IP usage of a subnet or VPC. 
+//
+// If the IP is taken, the associated resource type and ID are returned. Otherwise it returns null.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
+func (c *Client) DescribeUsedIpAddressWithContext(ctx context.Context, request *DescribeUsedIpAddressRequest) (response *DescribeUsedIpAddressResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsedIpAddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUsedIpAddress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsedIpAddressResponse()
     err = c.Send(request, response)
     return
 }
@@ -10596,7 +10700,7 @@ func NewDescribeVpnConnectionsResponse() (response *DescribeVpnConnectionsRespon
 }
 
 // DescribeVpnConnections
-//  This API (DescribeVpnConnections) is used to query the VPN tunnel list.
+// This API is used to used to query the list of VPN tunnels.
 //
 // error code that may be returned:
 //  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
@@ -10611,7 +10715,7 @@ func (c *Client) DescribeVpnConnections(request *DescribeVpnConnectionsRequest) 
 }
 
 // DescribeVpnConnections
-//  This API (DescribeVpnConnections) is used to query the VPN tunnel list.
+// This API is used to used to query the list of VPN tunnels.
 //
 // error code that may be returned:
 //  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
@@ -12378,11 +12482,11 @@ func NewMigratePrivateIpAddressResponse() (response *MigratePrivateIpAddressResp
 }
 
 // MigratePrivateIpAddress
-//  This API is used to migrate the private IPs between ENIs.
+// This API is used to migrate the private IPs between ENIs. 
 //
-// * This API is used to migrate a private IP from one ENI to another. Primary IPs cannot be migrated.
+// * Note that primary IPs cannot be migrated. 
 //
-// * The source and destination ENIs must be in the same subnet.  
+// * The source and destination ENI must be within the same subnet.  
 //
 // 
 //
@@ -12402,11 +12506,11 @@ func (c *Client) MigratePrivateIpAddress(request *MigratePrivateIpAddressRequest
 }
 
 // MigratePrivateIpAddress
-//  This API is used to migrate the private IPs between ENIs.
+// This API is used to migrate the private IPs between ENIs. 
 //
-// * This API is used to migrate a private IP from one ENI to another. Primary IPs cannot be migrated.
+// * Note that primary IPs cannot be migrated. 
 //
-// * The source and destination ENIs must be in the same subnet.  
+// * The source and destination ENI must be within the same subnet.  
 //
 // 
 //
@@ -15786,7 +15890,7 @@ func NewResetVpnConnectionResponse() (response *ResetVpnConnectionResponse) {
 }
 
 // ResetVpnConnection
-// The API (ResetVpnConnection) is used to reset VPN tunnels.
+// The API is used to reset a VPN tunnel.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -15797,7 +15901,7 @@ func (c *Client) ResetVpnConnection(request *ResetVpnConnectionRequest) (respons
 }
 
 // ResetVpnConnection
-// The API (ResetVpnConnection) is used to reset VPN tunnels.
+// The API is used to reset a VPN tunnel.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -15838,7 +15942,7 @@ func NewResetVpnGatewayInternetMaxBandwidthResponse() (response *ResetVpnGateway
 }
 
 // ResetVpnGatewayInternetMaxBandwidth
-// This API (ResetVpnGatewayInternetMaxBandwidth) is used to adjust the bandwidth cap of VPN gateways. Currently, only configuration upgrade is supported. VPN gateways with monthly subscription must be within the validity period.
+// This API is used to adjust the bandwidth cap of a VPN gateway. The adjustment of the VPN gateway bandwidth is limited to [5,100] Mbps and [200,1000] Mbps. 
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -15850,7 +15954,7 @@ func (c *Client) ResetVpnGatewayInternetMaxBandwidth(request *ResetVpnGatewayInt
 }
 
 // ResetVpnGatewayInternetMaxBandwidth
-// This API (ResetVpnGatewayInternetMaxBandwidth) is used to adjust the bandwidth cap of VPN gateways. Currently, only configuration upgrade is supported. VPN gateways with monthly subscription must be within the validity period.
+// This API is used to adjust the bandwidth cap of a VPN gateway. The adjustment of the VPN gateway bandwidth is limited to [5,100] Mbps and [200,1000] Mbps. 
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
