@@ -20,6 +20,9 @@ const (
 	// Error with CAM signature/authentication.
 	AUTHFAILURE = "AuthFailure"
 
+	// 
+	AUTHFAILURE_INVALIDREGION = "AuthFailure.InvalidRegion"
+
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
@@ -50,6 +53,12 @@ const (
 	// Failed to query traffic packages.
 	FAILEDOPERATION_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "FailedOperation.DescribeInstancesTrafficPackagesFailed"
 
+	// 
+	FAILEDOPERATION_DESCRIBERESOURCESRETURNABLEERROR = "FailedOperation.DescribeResourcesReturnableError"
+
+	// Unable to terminate the resource. Please retry later.
+	FAILEDOPERATION_DESTROYRESOURCESFAILED = "FailedOperation.DestroyResourcesFailed"
+
 	// Failed to manipulate the firewall rule.
 	FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
 
@@ -59,11 +68,26 @@ const (
 	// Failed to manipulate the instance.
 	FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 
+	// 
+	FAILEDOPERATION_INVALIDCOMMANDNOTFOUND = "FailedOperation.InvalidCommandNotFound"
+
+	// Failed to return the resource.
+	FAILEDOPERATION_ISOLATERESOURCESFAILED = "FailedOperation.IsolateResourcesFailed"
+
+	// Failed to change the instance bundle.
+	FAILEDOPERATION_MODIFYINSTANCESBUNDLEFAILED = "FailedOperation.ModifyInstancesBundleFailed"
+
+	// 
+	FAILEDOPERATION_MODIFYRESOURCESATTRIBUTEFAILED = "FailedOperation.ModifyResourcesAttributeFailed"
+
 	// A request error occurred.
 	FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 
 	// Failed to manipulate the snapshot.
 	FAILEDOPERATION_SNAPSHOTOPERATIONFAILED = "FailedOperation.SnapshotOperationFailed"
+
+	// 
+	FAILEDOPERATION_TRADECALLBILLINGGATEWAYFAILED = "FailedOperation.TradeCallBillingGatewayFailed"
 
 	// Failed to query the price.
 	FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
@@ -95,6 +119,9 @@ const (
 	// An error occurred while querying the instance traffic package.
 	INTERNALERROR_DESCRIBEINSTANCESTRAFFICPACKAGESFAILED = "InternalError.DescribeInstancesTrafficPackagesFailed"
 
+	// Error querying the resource
+	INTERNALERROR_DESCRIBERESOURCESRETURNABLEERROR = "InternalError.DescribeResourcesReturnableError"
+
 	// Failed to get the snapshot quota lock.
 	INTERNALERROR_GETSNAPSHOTALLOCQUOTALOCKERROR = "InternalError.GetSnapshotAllocQuotaLockError"
 
@@ -125,6 +152,9 @@ const (
 	// Undefined service package ID.
 	INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
 
+	// 
+	INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
+
 	// Invalid parameter: the number of `Values` in the `Filter` parameter exceeds the allowed maximum number.
 	INVALIDPARAMETER_FILTERVALUELIMITEXCEEDED = "InvalidParameter.FilterValueLimitExceeded"
 
@@ -152,6 +182,9 @@ const (
 	// Invalid parameter: there are unsupported `Name` values in the `Filter` parameter.
 	INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
 
+	// 
+	INVALIDPARAMETER_MUSTSPECIFYONEATTRIBUTETOMODIFY = "InvalidParameter.MustSpecifyOneAttributeToModify"
+
 	// Invalid parameter: only one attribute can be modified at a time.
 	INVALIDPARAMETER_ONLYALLOWMODIFYONEATTRIBUTE = "InvalidParameter.OnlyAllowModifyOneAttribute"
 
@@ -175,6 +208,9 @@ const (
 
 	// The ID format of the CCN instance is invalid.
 	INVALIDPARAMETERVALUE_CCNIDMALFORMED = "InvalidParameterValue.CcnIdMalformed"
+
+	// 
+	INVALIDPARAMETERVALUE_CLIENTTOKENTOOLONG = "InvalidParameterValue.ClientTokenTooLong"
 
 	// The disk name is too long.
 	INVALIDPARAMETERVALUE_DISKNAMETOOLONG = "InvalidParameterValue.DiskNameTooLong"
@@ -299,11 +335,17 @@ const (
 	// Reached the upper limit of attached data disks of the instance
 	LIMITEXCEEDED_ATTACHDATADISKQUOTALIMITEXCEEDED = "LimitExceeded.AttachDataDiskQuotaLimitExceeded"
 
+	// 
+	LIMITEXCEEDED_BLUEPRINTQUOTALIMITEXCEEDED = "LimitExceeded.BlueprintQuotaLimitExceeded"
+
 	// The firewall rule quota is exceeded.
 	LIMITEXCEEDED_FIREWALLRULESLIMITEXCEEDED = "LimitExceeded.FirewallRulesLimitExceeded"
 
 	// Run out of the instance quota.
 	LIMITEXCEEDED_INSTANCEQUOTALIMITEXCEEDED = "LimitExceeded.InstanceQuotaLimitExceeded"
+
+	// Reached the upper limit of resources can be returned
+	LIMITEXCEEDED_ISOLATERESOURCESLIMITEXCEEDED = "LimitExceeded.IsolateResourcesLimitExceeded"
 
 	// The key pair quota is exceeded.
 	LIMITEXCEEDED_KEYPAIRLIMITEXCEEDED = "LimitExceeded.KeyPairLimitExceeded"
@@ -331,6 +373,9 @@ const (
 
 	// It is not allowed to manipulate this instance, as the last operation is still in progress.
 	OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+
+	// 
+	OPERATIONDENIED_OPERATIONDENIEDCREATESNAPSHOT = "OperationDenied.OperationDeniedCreateSnapshot"
 
 	// Instances using storage packages do not support snapshot creation.
 	OPERATIONDENIED_OPERATIONDENIEDCREATESNAPSHOTFORSTORAGEBUNDLE = "OperationDenied.OperationDeniedCreateSnapshotForStorageBundle"
@@ -487,6 +532,9 @@ const (
 
 	// Failed to reapply to associate a CCN instance. Please check the CCN status and try again later.
 	UNSUPPORTEDOPERATION_RESETATTACHCCNFAILED = "UnsupportedOperation.ResetAttachCcnFailed"
+
+	// The resource cannot be returned.
+	UNSUPPORTEDOPERATION_RESOURCENOTRETURNABLE = "UnsupportedOperation.ResourceNotReturnable"
 
 	// The snapshot is busy.
 	UNSUPPORTEDOPERATION_SNAPSHOTBUSY = "UnsupportedOperation.SnapshotBusy"

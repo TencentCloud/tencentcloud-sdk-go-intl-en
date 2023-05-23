@@ -1217,6 +1217,7 @@ func NewListRulesResponse() (response *ListRulesResponse) {
 //  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
+//  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 func (c *Client) ListRules(request *ListRulesRequest) (response *ListRulesResponse, err error) {
     return c.ListRulesWithContext(context.Background(), request)
@@ -1230,6 +1231,7 @@ func (c *Client) ListRules(request *ListRulesRequest) (response *ListRulesRespon
 //  INVALIDPARAMETERVALUE_FILTERS = "InvalidParameterValue.Filters"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
 //  INVALIDPARAMETERVALUE_ORDER = "InvalidParameterValue.Order"
+//  INVALIDPARAMETERVALUE_ORDERBY = "InvalidParameterValue.OrderBy"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
 func (c *Client) ListRulesWithContext(ctx context.Context, request *ListRulesRequest) (response *ListRulesResponse, err error) {
     if request == nil {
@@ -1461,6 +1463,7 @@ func NewUpdateRuleResponse() (response *UpdateRuleResponse) {
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 func (c *Client) UpdateRule(request *UpdateRuleRequest) (response *UpdateRuleResponse, err error) {
     return c.UpdateRuleWithContext(context.Background(), request)
 }
@@ -1479,6 +1482,7 @@ func (c *Client) UpdateRule(request *UpdateRuleRequest) (response *UpdateRuleRes
 //  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
 //  RESOURCENOTFOUND_EVENTBUS = "ResourceNotFound.EventBus"
+//  RESOURCENOTFOUND_RULE = "ResourceNotFound.Rule"
 func (c *Client) UpdateRuleWithContext(ctx context.Context, request *UpdateRuleRequest) (response *UpdateRuleResponse, err error) {
     if request == nil {
         request = NewUpdateRuleRequest()
@@ -1520,11 +1524,13 @@ func NewUpdateTargetResponse() (response *UpdateTargetResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_BATCHTIMEOUT = "InvalidParameterValue.BatchTimeout"
+//  INVALIDPARAMETERVALUE_CALLBACKTYPE = "InvalidParameterValue.CallbackType"
 //  INVALIDPARAMETERVALUE_CALLBACKWECOMURL = "InvalidParameterValue.CallbackWeComURL"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERCHANNEL = "InvalidParameterValue.NoticeReceiverChannel"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERTIMEWINDOW = "InvalidParameterValue.NoticeReceiverTimeWindow"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERUSERIDS = "InvalidParameterValue.NoticeReceiverUserIds"
+//  INVALIDPARAMETERVALUE_NOTICERECEIVERUSERTYPE = "InvalidParameterValue.NoticeReceiverUserType"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"
@@ -1542,11 +1548,13 @@ func (c *Client) UpdateTarget(request *UpdateTargetRequest) (response *UpdateTar
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_BATCHTIMEOUT = "InvalidParameterValue.BatchTimeout"
+//  INVALIDPARAMETERVALUE_CALLBACKTYPE = "InvalidParameterValue.CallbackType"
 //  INVALIDPARAMETERVALUE_CALLBACKWECOMURL = "InvalidParameterValue.CallbackWeComURL"
 //  INVALIDPARAMETERVALUE_EVENTBUSID = "InvalidParameterValue.EventBusId"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERCHANNEL = "InvalidParameterValue.NoticeReceiverChannel"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERTIMEWINDOW = "InvalidParameterValue.NoticeReceiverTimeWindow"
 //  INVALIDPARAMETERVALUE_NOTICERECEIVERUSERIDS = "InvalidParameterValue.NoticeReceiverUserIds"
+//  INVALIDPARAMETERVALUE_NOTICERECEIVERUSERTYPE = "InvalidParameterValue.NoticeReceiverUserType"
 //  INVALIDPARAMETERVALUE_RULEID = "InvalidParameterValue.RuleId"
 //  INVALIDPARAMETERVALUE_TARGETID = "InvalidParameterValue.TargetId"
 //  OPERATIONDENIED_RESOURCEIMMUTABLE = "OperationDenied.ResourceImmutable"

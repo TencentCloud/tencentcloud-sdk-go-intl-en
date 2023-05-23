@@ -199,6 +199,16 @@ type Connection struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type ConnectionBrief struct {
+	// Connector type
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Connector status
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
 type ConnectionDescription struct {
 	// Six-Segment QCS resource description. For more information, see [Resource Description Method](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
 	ResourceDescription *string `json:"ResourceDescription,omitempty" name:"ResourceDescription"`
@@ -210,6 +220,10 @@ type ConnectionDescription struct {
 	// CKafka parameters
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CkafkaParams *CkafkaParams `json:"CkafkaParams,omitempty" name:"CkafkaParams"`
+
+	// Data Transfer Service (DTS) connector information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	DTSParams *DTSParams `json:"DTSParams,omitempty" name:"DTSParams"`
 }
 
 // Predefined struct for user
@@ -311,6 +325,12 @@ type CreateEventBusRequestParams struct {
 
 	// Event bus description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Log retention period
+	SaveDays *int64 `json:"SaveDays,omitempty" name:"SaveDays"`
+
+	// Whether to enable log storage
+	EnableStore *bool `json:"EnableStore,omitempty" name:"EnableStore"`
 }
 
 type CreateEventBusRequest struct {
@@ -321,6 +341,12 @@ type CreateEventBusRequest struct {
 
 	// Event bus description, which can contain up to 200 characters of any type.
 	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Log retention period
+	SaveDays *int64 `json:"SaveDays,omitempty" name:"SaveDays"`
+
+	// Whether to enable log storage
+	EnableStore *bool `json:"EnableStore,omitempty" name:"EnableStore"`
 }
 
 func (r *CreateEventBusRequest) ToJsonString() string {
@@ -337,6 +363,8 @@ func (r *CreateEventBusRequest) FromJsonString(s string) error {
 	}
 	delete(f, "EventBusName")
 	delete(f, "Description")
+	delete(f, "SaveDays")
+	delete(f, "EnableStore")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEventBusRequest has unknown keys!", "")
 	}
@@ -600,6 +628,10 @@ func (r *CreateTransformationResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateTransformationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DTSParams struct {
+
 }
 
 type DeadLetterConfig struct {
@@ -966,6 +998,18 @@ type EventBus struct {
 
 	// Event bus type
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Billing Mode
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Connector basic information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ConnectionBriefs []*ConnectionBrief `json:"ConnectionBriefs,omitempty" name:"ConnectionBriefs"`
+
+	// Target information
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TargetBriefs []*TargetBrief `json:"TargetBriefs,omitempty" name:"TargetBriefs"`
 }
 
 type Extraction struct {
@@ -1045,6 +1089,25 @@ type GetEventBusResponseParams struct {
 
 	// (Disused) Event bus type
 	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Billing mode
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// EventBridge log storage period
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SaveDays *int64 `json:"SaveDays,omitempty" name:"SaveDays"`
+
+	// EventBridge log topic ID
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LogTopicId *string `json:"LogTopicId,omitempty" name:"LogTopicId"`
+
+	// Whether to enable log storage
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	EnableStore *bool `json:"EnableStore,omitempty" name:"EnableStore"`
+
+	// Whether to sort the message
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	LinkMode *string `json:"LinkMode,omitempty" name:"LinkMode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1820,6 +1883,15 @@ type UpdateEventBusRequestParams struct {
 
 	// Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
 	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+
+	// Log retention period
+	SaveDays *int64 `json:"SaveDays,omitempty" name:"SaveDays"`
+
+	// EventBridge log topic ID
+	LogTopicId *string `json:"LogTopicId,omitempty" name:"LogTopicId"`
+
+	// Whether to enable log retention
+	EnableStore *bool `json:"EnableStore,omitempty" name:"EnableStore"`
 }
 
 type UpdateEventBusRequest struct {
@@ -1833,6 +1905,15 @@ type UpdateEventBusRequest struct {
 
 	// Event bus name: it can contain 2-60 letters, digits, underscores, and hyphens and must start with a letter and end with a digit or letter.
 	EventBusName *string `json:"EventBusName,omitempty" name:"EventBusName"`
+
+	// Log retention period
+	SaveDays *int64 `json:"SaveDays,omitempty" name:"SaveDays"`
+
+	// EventBridge log topic ID
+	LogTopicId *string `json:"LogTopicId,omitempty" name:"LogTopicId"`
+
+	// Whether to enable log retention
+	EnableStore *bool `json:"EnableStore,omitempty" name:"EnableStore"`
 }
 
 func (r *UpdateEventBusRequest) ToJsonString() string {
@@ -1850,6 +1931,9 @@ func (r *UpdateEventBusRequest) FromJsonString(s string) error {
 	delete(f, "EventBusId")
 	delete(f, "Description")
 	delete(f, "EventBusName")
+	delete(f, "SaveDays")
+	delete(f, "LogTopicId")
+	delete(f, "EnableStore")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateEventBusRequest has unknown keys!", "")
 	}

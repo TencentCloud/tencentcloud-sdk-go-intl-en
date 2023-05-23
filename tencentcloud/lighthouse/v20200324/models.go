@@ -407,10 +407,21 @@ type Bundle struct {
 	// Package sale status. Valid values: AVAILABLE, SOLD_OUT
 	BundleSalesState *string `json:"BundleSalesState,omitempty" name:"BundleSalesState"`
 
-	// Package type.
-	// Valid values:
-	// <li> GENERAL_BUNDLE: general</li><li> STORAGE_BUNDLE: Storage</li>
+	// Bundle type. 
+	// Valid values: 
+	// <li>STARTER_BUNDLE: Starter bundle</li>
+	// <li>GENERAL_BUNDLE: General bundle</li>
+	// <li>ENTERPRISE_BUNDLE: Enterprise bundle</li>
+	// <li>STORAGE_BUNDLE: Storage-optimized bundle</li>
+	// <li>EXCLUSIVE_BUNDLE: Dedicated bundle</li>
+	// <li>HK_EXCLUSIVE_BUNDLE: Hong Kong-dedicated bundle </li>
+	// <li>CAREFREE_BUNDLE: Lighthouse Care bundle</li>
+	// <li>BEFAST_BUNDLE: BeFast bundle </li>
 	BundleType *string `json:"BundleType,omitempty" name:"BundleType"`
+
+	// Bundle type description 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	BundleTypeDescription *string `json:"BundleTypeDescription,omitempty" name:"BundleTypeDescription"`
 
 	// Package tag.
 	// Valid values:
@@ -466,6 +477,14 @@ type CreateBlueprintRequestParams struct {
 
 	// ID of the instance for which to make an image.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to forcibly shut down the instance before creating the image 
+	// Valid values: 
+	// `True`: Shut down and instance first 
+	// `False`: Create the image when the instance is running 
+	// Default: `True` 
+	// Note that if you create an image when the instance is running, there might be data loss.
+	ForcePowerOff *bool `json:"ForcePowerOff,omitempty" name:"ForcePowerOff"`
 }
 
 type CreateBlueprintRequest struct {
@@ -479,6 +498,14 @@ type CreateBlueprintRequest struct {
 
 	// ID of the instance for which to make an image.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to forcibly shut down the instance before creating the image 
+	// Valid values: 
+	// `True`: Shut down and instance first 
+	// `False`: Create the image when the instance is running 
+	// Default: `True` 
+	// Note that if you create an image when the instance is running, there might be data loss.
+	ForcePowerOff *bool `json:"ForcePowerOff,omitempty" name:"ForcePowerOff"`
 }
 
 func (r *CreateBlueprintRequest) ToJsonString() string {
@@ -496,6 +523,7 @@ func (r *CreateBlueprintRequest) FromJsonString(s string) error {
 	delete(f, "BlueprintName")
 	delete(f, "Description")
 	delete(f, "InstanceId")
+	delete(f, "ForcePowerOff")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBlueprintRequest has unknown keys!", "")
 	}
@@ -661,10 +689,10 @@ func (r *CreateInstanceSnapshotResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
-	// Bundle ID.
+	// Bundle ID. You can get it via the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1) API.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
-	// Image ID
+	// Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
 
 	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
@@ -702,10 +730,10 @@ type CreateInstancesRequestParams struct {
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Bundle ID.
+	// Bundle ID. You can get it via the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1) API.
 	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
 
-	// Image ID
+	// Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitempty" name:"BlueprintId"`
 
 	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
@@ -2475,22 +2503,31 @@ type DescribeInstancesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Filter list.
-	// <li>instance-name</li>Filter by **instance name**.
-	// Type: String
-	// Required: no
-	// <li>private-ip-address</li>Filter by **private IP of instance primary ENI**.
-	// Type: String
-	// Required: no
-	// <li>public-ip-address</li>Filter by **public IP of instance primary ENI**.
-	// Type: String
-	// Required: no
-	// <li>zone</li>Filter by the availability zone
-	// Type: String
-	// Required: no
-	// <li>instance-state</li>Filter by **instance status**.
-	// Type: String
-	// Required: no
+	// Filter list. 
+	// <li>instance-name</li>Filter by the **instance name**. 
+	// Type: String 
+	// Required: No 
+	// <li>private-ip-address</li>Filter by the **private IP of instance primary ENI**. 
+	// Type: String 
+	// Required: No 
+	// <li>public-ip-address</li>Filter by the **public IP of instance primary ENI**. 
+	// Type: String 
+	// Required: No 
+	// <li>zone</li>Filter by the availability zone. 
+	// Type: String 
+	// Required: No 
+	// <li>instance-state</li>Filter by the **instance status**. 
+	// Type: String 
+	// Required: No 
+	// <li>tag-key</li>Filter by the **tag key**. 
+	// Type: String 
+	// Required: No 
+	// <li>tag-value</li>Filter by the **tag value**. 
+	// Type: String 
+	// Required: No 
+	// <li> tag:tag-key</li>Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key. 
+	// Type: String 
+	// Required: No 
 	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
@@ -2507,22 +2544,31 @@ type DescribeInstancesRequest struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 
-	// Filter list.
-	// <li>instance-name</li>Filter by **instance name**.
-	// Type: String
-	// Required: no
-	// <li>private-ip-address</li>Filter by **private IP of instance primary ENI**.
-	// Type: String
-	// Required: no
-	// <li>public-ip-address</li>Filter by **public IP of instance primary ENI**.
-	// Type: String
-	// Required: no
-	// <li>zone</li>Filter by the availability zone
-	// Type: String
-	// Required: no
-	// <li>instance-state</li>Filter by **instance status**.
-	// Type: String
-	// Required: no
+	// Filter list. 
+	// <li>instance-name</li>Filter by the **instance name**. 
+	// Type: String 
+	// Required: No 
+	// <li>private-ip-address</li>Filter by the **private IP of instance primary ENI**. 
+	// Type: String 
+	// Required: No 
+	// <li>public-ip-address</li>Filter by the **public IP of instance primary ENI**. 
+	// Type: String 
+	// Required: No 
+	// <li>zone</li>Filter by the availability zone. 
+	// Type: String 
+	// Required: No 
+	// <li>instance-state</li>Filter by the **instance status**. 
+	// Type: String 
+	// Required: No 
+	// <li>tag-key</li>Filter by the **tag key**. 
+	// Type: String 
+	// Required: No 
+	// <li>tag-value</li>Filter by the **tag value**. 
+	// Type: String 
+	// Required: No 
+	// <li> tag:tag-key</li>Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key. 
+	// Type: String 
+	// Required: No 
 	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
@@ -4512,6 +4558,73 @@ type InternetAccessible struct {
 	PublicIpAssigned *bool `json:"PublicIpAssigned,omitempty" name:"PublicIpAssigned"`
 }
 
+// Predefined struct for user
+type IsolateInstancesRequestParams struct {
+	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 20 instances can be specified at the same time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Whether to return data disks mounted on the instance together with the instance. Valid values: 
+	// `TRUE`: Return the mounted data disks at the same time 
+	// `FALSE`: Do not return the mounted data disks at the same time 
+	// Default value: `TRUE`.
+	IsolateDataDisk *bool `json:"IsolateDataDisk,omitempty" name:"IsolateDataDisk"`
+}
+
+type IsolateInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 20 instances can be specified at the same time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// Whether to return data disks mounted on the instance together with the instance. Valid values: 
+	// `TRUE`: Return the mounted data disks at the same time 
+	// `FALSE`: Do not return the mounted data disks at the same time 
+	// Default value: `TRUE`.
+	IsolateDataDisk *bool `json:"IsolateDataDisk,omitempty" name:"IsolateDataDisk"`
+}
+
+func (r *IsolateInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "IsolateDataDisk")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type IsolateInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateInstancesResponseParams `json:"Response"`
+}
+
+func (r *IsolateInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type KeyPair struct {
 	// Key pair ID, which is the unique identifier of a key pair.
 	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
@@ -4956,6 +5069,80 @@ func (r *ModifyInstancesAttributeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyInstancesAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstancesBundleRequestParams struct {
+	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
+	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
+
+	// Whether to use existing vouchers under the current account automatically. Valid values: 
+	// `true`: Deduct from existing vouchers automatically 
+	// `false`: Do not deduct from existing vouchers automatically 
+	// Default value: `false`.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+}
+
+type ModifyInstancesBundleRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+
+	// ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
+	BundleId *string `json:"BundleId,omitempty" name:"BundleId"`
+
+	// Whether to use existing vouchers under the current account automatically. Valid values: 
+	// `true`: Deduct from existing vouchers automatically 
+	// `false`: Do not deduct from existing vouchers automatically 
+	// Default value: `false`.
+	AutoVoucher *bool `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+}
+
+func (r *ModifyInstancesBundleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstancesBundleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "BundleId")
+	delete(f, "AutoVoucher")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstancesBundleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstancesBundleResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyInstancesBundleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyInstancesBundleResponseParams `json:"Response"`
+}
+
+func (r *ModifyInstancesBundleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstancesBundleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
