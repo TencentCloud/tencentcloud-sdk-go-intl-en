@@ -457,6 +457,10 @@ type BGPInstanceSpecification struct {
 	// Elastic bandwidth threshold of the Anti-DDoS Pro Enterprise edition.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ElasticLimit *uint64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
+
+	// Protection bandwidth after the plan downgrade, in Gbps. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DownGradeProtect *uint64 `json:"DownGradeProtect,omitempty" name:"DownGradeProtect"`
 }
 
 type BGPInstanceUsages struct {
