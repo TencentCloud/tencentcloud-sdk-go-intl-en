@@ -20,6 +20,11 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AccelerateMainland struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type AccelerateType struct {
 	// Acceleration switch. Values:
 	// <li>`on`: Enable</li>
@@ -55,7 +60,8 @@ type AccelerationDomain struct {
 	// The CNAME address.
 	Cname *string `json:"Cname,omitempty" name:"Cname"`
 
-
+	// Ownership verification status. Values: <li>`pending`: Pending verification</li> <li>`finished`: Verified</li>	
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IdentificationStatus *string `json:"IdentificationStatus,omitempty" name:"IdentificationStatus"`
 }
 
@@ -73,6 +79,11 @@ type AclCondition struct {
 	// <li>`header`: Request header</li>
 	// <li>`app_proto`: Application layer protocol</li>
 	// <li>`sip_proto`: Network layer protocol</li>
+	// <li>`uabot`: UA rules (only available in custom bot rules)</li>
+	// <li>`idcid`: IDC rules (only available in custom bot rules)</li>
+	// <li>`sipbot`: Search engine rules (only available in custom bot rules)</li>
+	// <li>`portrait`: Client reputation (only available in custom bot rules)</li>
+	// <li>`header_seq`: Header sequence (only available in custom bot rules)</li>
 	MatchFrom *string `json:"MatchFrom,omitempty" name:"MatchFrom"`
 
 	// The parameter of the field. When `MatchFrom = header`, the key contained in the header can be passed.
@@ -177,7 +188,7 @@ type AclUserRule struct {
 }
 
 type Action struct {
-	// Common feature operation. Values:
+	// Common operation. Values:
 	// <li>`AccessUrlRedirect`: Access URL rewrite</li>
 	// <li>`UpstreamUrlRedirect`: Origin-pull URL rewrite</li>
 	// <li>`QUIC`: QUIC</li>
@@ -198,7 +209,7 @@ type Action struct {
 	// <li>`Compression`: Smart compression</li>
 	// <li>`Hsts`</li>
 	// <li>`ClientIpHeader`</li>
-	// <li>`TlsVersion`</li>
+	// <li>`SslTlsSecureConf`</li>
 	// <li>`OcspStapling`</li>
 	// <li>`Http2`: HTTP/2 access</li>
 	// <li>`UpstreamFollowRedirect`: Follow origin redirect</li>
@@ -236,6 +247,102 @@ type AiRule struct {
 	// <li>`smart_status_open`: Block</li>
 	// <li>`smart_status_observe`: Observe</li>
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
+type AlgDetectJS struct {
+	// Method to validate client behavior.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Proof-of-work strength. Values:
+	// <li>`low` (default): Low</li>
+	// <li>`middle`: Medium</li>
+	// <li>`high`: High</li>
+	WorkLevel *string `json:"WorkLevel,omitempty" name:"WorkLevel"`
+
+	// Implement a delay before executing JS in milliseconds. Value range: 0-1000. Default value: 500.
+	ExecuteMode *int64 `json:"ExecuteMode,omitempty" name:"ExecuteMode"`
+
+	// The period threshold for validating the result "Client JS disabled" in seconds. Value range: 5-3600. Default value: 10.
+	InvalidStatTime *int64 `json:"InvalidStatTime,omitempty" name:"InvalidStatTime"`
+
+	// The number of times for the result "Client JS disabled" occurred in the specified period. Value range: 1-100000000. Default value: 30.
+	InvalidThreshold *int64 `json:"InvalidThreshold,omitempty" name:"InvalidThreshold"`
+
+	// Client behavior validation results.
+	AlgDetectResults []*AlgDetectResult `json:"AlgDetectResults,omitempty" name:"AlgDetectResults"`
+}
+
+type AlgDetectResult struct {
+	// The validation result. Values:
+	// <li>`invalid`: Invalid Cookie</li>
+	// <li>`cookie_empty`: No Cookie/Cookie expired</li>
+	// <li>`js_empty`: Client JS disabled</li>
+	// <li>`low`: Low-risk session</li>
+	// <li>`middle`: Medium-risk session</li>
+	// <li>`high`: High-risk session</li>
+	// <li>`timeout`: JS validation timed out</li>
+	// <li>`not_browser`: Invalid browser</li>
+	// <li>`is_bot`: Bot client</li>
+	Result *string `json:"Result,omitempty" name:"Result"`
+
+	// The action. Values:
+	// <li>`drop`: Block</li>
+	// <li>`monitor`: Observe</li>
+	// <li>`silence`: Drop w/o response</li>
+	// <li>`shortdelay`: Add short latency</li>
+	// <li>`longdelay`: Add long latency</li>
+	Action *string `json:"Action,omitempty" name:"Action"`
+}
+
+type AlgDetectRule struct {
+	// ID of the rule.
+	RuleID *int64 `json:"RuleID,omitempty" name:"RuleID"`
+
+	// Name of the rule.
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// Whether to enable the rule.
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+	// Condition specified for the rule.
+	AlgConditions []*AclCondition `json:"AlgConditions,omitempty" name:"AlgConditions"`
+
+	// Validate Cookie when the condition is satisfied.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	AlgDetectSession *AlgDetectSession `json:"AlgDetectSession,omitempty" name:"AlgDetectSession"`
+
+	// Validate client behavior when the condition is satisfied.
+	AlgDetectJS []*AlgDetectJS `json:"AlgDetectJS,omitempty" name:"AlgDetectJS"`
+
+	// The update time, which is only used as an output parameter.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type AlgDetectSession struct {
+	// Method to validate Cookie.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// The validation mode. Values:
+	// <li>`detect`: Validate only</li>
+	// <li>`update_detect` (default): Update Cookie and validate</li>
+	DetectMode *string `json:"DetectMode,omitempty" name:"DetectMode"`
+
+	// Whether to enable Cookie-based session check. The default value is `off`. Values:
+	// <li>`off`: Disable</li>
+	// <li>`on`: Enable</li>
+	SessionAnalyzeSwitch *string `json:"SessionAnalyzeSwitch,omitempty" name:"SessionAnalyzeSwitch"`
+
+	// The period threshold for validating the result "No Cookie/Cookie expired" in seconds. Value range: 5-3600. Default value: 10.
+	InvalidStatTime *int64 `json:"InvalidStatTime,omitempty" name:"InvalidStatTime"`
+
+	// The number of times for the result "No Cookie/Cookie expired" occurred in the specified period. Value range: 1-100000000. Default value: 300.
+	InvalidThreshold *int64 `json:"InvalidThreshold,omitempty" name:"InvalidThreshold"`
+
+	// Cookie validation results.
+	AlgDetectResults []*AlgDetectResult `json:"AlgDetectResults,omitempty" name:"AlgDetectResults"`
+
+	// Cookie-based session check results.
+	SessionBehaviors []*AlgDetectResult `json:"SessionBehaviors,omitempty" name:"SessionBehaviors"`
 }
 
 type AliasDomain struct {
@@ -481,6 +588,33 @@ type BotConfig struct {
 	// The bot intelligence settings. If it is null, the settings that were last configured will be used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IntelligenceRule *IntelligenceRule `json:"IntelligenceRule,omitempty" name:"IntelligenceRule"`
+
+	// Settings of the custom bot rule. If it is null, the settings that were last configured will be used.
+	BotUserRules []*BotUserRule `json:"BotUserRules,omitempty" name:"BotUserRules"`
+
+	// Active bot detection rule.
+	AlgDetectRule []*AlgDetectRule `json:"AlgDetectRule,omitempty" name:"AlgDetectRule"`
+
+	// Settings of the bot managed rule. It is only used for output.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Customizes []*BotUserRule `json:"Customizes,omitempty" name:"Customizes"`
+}
+
+type BotExtendAction struct {
+	// The action. Values:
+	// <li>`monitor`: Observe</li>
+	// <li>`trans`: Allow</li>
+	// <li>`alg`: JavaScript challenge</li>
+	// <li>`captcha`: Managed challenge</li>
+	// <li>`random`: Weighted random. Actions are executed based on the percentage specified in `ExtendActions`.</li>
+	// <li>`silence`: Drop w/o response</li>
+	// <li>`shortdelay`: Add short latency</li>
+	// <li>`longdelay`: Add long latency</li>
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// The probability for triggering the action. Value range: 0-100.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Percent *uint64 `json:"Percent,omitempty" name:"Percent"`
 }
 
 type BotManagedRule struct {
@@ -539,6 +673,55 @@ type BotPortraitRule struct {
 	// The ID of the rule that applies the "Block" action.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DropManagedIds []*int64 `json:"DropManagedIds,omitempty" name:"DropManagedIds"`
+}
+
+type BotUserRule struct {
+
+	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
+
+	// The action. Values:
+	// <li>`drop`: Block</li>
+	// <li>`monitor`: Observe</li>
+	// <li>`trans`: Allow</li>
+	// <li>`alg`: JavaScript challenge</li>
+	// <li>`captcha`: Managed challenge</li>
+	// <li>`silence`: Drop w/o response</li>
+	// <li>`shortdelay`: Add short latency</li>
+	// <li>`longdelay`: Add long latency</li>
+	Action *string `json:"Action,omitempty" name:"Action"`
+
+	// The rule status. Values:
+	// <li>`on`: Enabled</li>
+	// <li>`off`: Disabled</li>Default value: `on`
+	RuleStatus *string `json:"RuleStatus,omitempty" name:"RuleStatus"`
+
+	// Details of the rule.
+	AclConditions []*AclCondition `json:"AclConditions,omitempty" name:"AclConditions"`
+
+	// The rule weight. Value range: 0-100.
+	RulePriority *int64 `json:"RulePriority,omitempty" name:"RulePriority"`
+
+	// The rule ID, which is only used as an output parameter.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	RuleID *int64 `json:"RuleID,omitempty" name:"RuleID"`
+
+	// [Currently unavailable] Specify the random action and percentage.
+	ExtendActions []*BotExtendAction `json:"ExtendActions,omitempty" name:"ExtendActions"`
+
+	// The filter. Values:
+	// <li>`sip`: Client IP</li>
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FreqFields []*string `json:"FreqFields,omitempty" name:"FreqFields"`
+
+	// Updated time
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// The statistical dimension. Values:
+	// <li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
+	// <li>`client_to_eo`: Requests from the client to EdgeOne</li>
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FreqScope []*string `json:"FreqScope,omitempty" name:"FreqScope"`
 }
 
 type CC struct {
@@ -1404,7 +1587,7 @@ type CreatePlanForZoneRequestParams struct {
 	// <li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
 	// <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
 	// <li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
-	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
+	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://intl.cloud.tencent.com/document/product/1552/80606?from_cn_redirect=1">DescribeAvailablePlans</a>.
 	PlanType *string `json:"PlanType,omitempty" name:"PlanType"`
 }
 
@@ -1426,7 +1609,7 @@ type CreatePlanForZoneRequest struct {
 	// <li>`ent_cm`: Enterprise plan that supports content delivery network inside the Chinese mainland.</li>
 	// <li>`ent_cm_with_bot`: Enterprise plan that supports content delivery network inside the Chinese mainland and bot management.</li>
 	// <li>`ent_global`: Enterprise plan that supports content delivery network over the globe.</li>
-	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://tcloud4api.woa.com/document/product/1657/80124?!preview&!document=1">DescribeAvailablePlans</a>.
+	// <li>`ent_global_with_bot`: Enterprise plan that supports content delivery network over the globe and bot management.</li>To get the available plan options for your account, view the output from <a href="https://intl.cloud.tencent.com/document/product/1552/80606?from_cn_redirect=1">DescribeAvailablePlans</a>.
 	PlanType *string `json:"PlanType,omitempty" name:"PlanType"`
 }
 
@@ -1993,6 +2176,58 @@ type DDoS struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
+type DDoSAttackEvent struct {
+	// The event ID.
+	EventId *string `json:"EventId,omitempty" name:"EventId"`
+
+	// The attack type.
+	AttackType *string `json:"AttackType,omitempty" name:"AttackType"`
+
+	// The attack status.
+	AttackStatus *int64 `json:"AttackStatus,omitempty" name:"AttackStatus"`
+
+	// The maximum attack bandwidth.
+	AttackMaxBandWidth *int64 `json:"AttackMaxBandWidth,omitempty" name:"AttackMaxBandWidth"`
+
+	// The peak attack packet rate.
+	AttackPacketMaxRate *int64 `json:"AttackPacketMaxRate,omitempty" name:"AttackPacketMaxRate"`
+
+	// The attack start time recorded in seconds.
+	AttackStartTime *int64 `json:"AttackStartTime,omitempty" name:"AttackStartTime"`
+
+	// The attack end time recorded in seconds.
+	AttackEndTime *int64 `json:"AttackEndTime,omitempty" name:"AttackEndTime"`
+
+	// The DDoS policy ID. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+
+	// The site ID. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Geolocation scope. Values: 
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// The blocking time of a DDoS attack. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	DDoSBlockData []*DDoSBlockData `json:"DDoSBlockData,omitempty" name:"DDoSBlockData"`
+}
+
+type DDoSBlockData struct {
+	// The start time recorded in UNIX timestamp.
+	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time recorded in UNIX timestamp. `0` indicates the blocking is ongoing.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// The regions blocked.
+	BlockArea *string `json:"BlockArea,omitempty" name:"BlockArea"`
+}
+
 type DefaultServerCertInfo struct {
 	// ID of the server certificate.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2484,11 +2719,13 @@ type DescribeAccelerationDomainsRequestParams struct {
 	// Site ID of the accelerated domain name. If it’s not specified, all accelerated domain names under the site are returned.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. Values:
-	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No
-	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No
-	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No
-	// <li>`backup-origin`<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No
+	// Filters. Each filter can have up to 20 entries. See below for details: 
+	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No 
+	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No 
+	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No 
+	// <li>`backup-origin`:<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No 
+	// <li>`domain-cname`:<br>   <strong>Accelerated CNAME</strong><br>   Type: String<br>   Required: No 
+	// <li>`share-cname`:<br>   <strong> Shared CNAME</strong><br>   Type: String<br>   Required: No
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 
 	// The sorting order. Values:
@@ -2520,11 +2757,13 @@ type DescribeAccelerationDomainsRequest struct {
 	// Site ID of the accelerated domain name. If it’s not specified, all accelerated domain names under the site are returned.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. Values:
-	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No
-	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No
-	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No
-	// <li>`backup-origin`<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No
+	// Filters. Each filter can have up to 20 entries. See below for details: 
+	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No 
+	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No 
+	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No 
+	// <li>`backup-origin`:<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No 
+	// <li>`domain-cname`:<br>   <strong>Accelerated CNAME</strong><br>   Type: String<br>   Required: No 
+	// <li>`share-cname`:<br>   <strong> Shared CNAME</strong><br>   Type: String<br>   Required: No
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 
 	// The sorting order. Values:
@@ -3212,6 +3451,144 @@ func (r *DescribeDDoSAttackDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDDoSAttackEventRequestParams struct {
+	// Start time of the query period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query period.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of DDoS policy IDs. All policies are selected if this field is not specified.
+	PolicyIds []*int64 `json:"PolicyIds,omitempty" name:"PolicyIds"`
+
+	// (Required) List of sites. No query results are returned if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Whether to display the details.
+	ShowDetail *bool `json:"ShowDetail,omitempty" name:"ShowDetail"`
+
+	// Geolocation scope. Values: 
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// The sorting field. Values: 
+	// <li>`MaxBandWidth`: Peak bandwidth</li>
+	// <li>`AttackStartTime` Start time of the attack</li>If this field is not specified, the default value `AttackStartTime` is used.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// The sorting method. Values: 
+	// <Li>`asc`: Ascending</li>
+	// <li>`desc`: Descending</li>If this field is not specified, the default value `desc` is used.
+	OrderType *string `json:"OrderType,omitempty" name:"OrderType"`
+}
+
+type DescribeDDoSAttackEventRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time of the query period.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// End time of the query period.
+	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+
+	// List of DDoS policy IDs. All policies are selected if this field is not specified.
+	PolicyIds []*int64 `json:"PolicyIds,omitempty" name:"PolicyIds"`
+
+	// (Required) List of sites. No query results are returned if this field is not specified.
+	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The page offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Whether to display the details.
+	ShowDetail *bool `json:"ShowDetail,omitempty" name:"ShowDetail"`
+
+	// Geolocation scope. Values: 
+	// <li>`overseas`: Regions outside the Chinese mainland</li>
+	// <li>`mainland`: Chinese mainland</li>
+	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// The sorting field. Values: 
+	// <li>`MaxBandWidth`: Peak bandwidth</li>
+	// <li>`AttackStartTime` Start time of the attack</li>If this field is not specified, the default value `AttackStartTime` is used.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// The sorting method. Values: 
+	// <Li>`asc`: Ascending</li>
+	// <li>`desc`: Descending</li>If this field is not specified, the default value `desc` is used.
+	OrderType *string `json:"OrderType,omitempty" name:"OrderType"`
+}
+
+func (r *DescribeDDoSAttackEventRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDDoSAttackEventRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "PolicyIds")
+	delete(f, "ZoneIds")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "ShowDetail")
+	delete(f, "Area")
+	delete(f, "OrderBy")
+	delete(f, "OrderType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDDoSAttackEventRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDDoSAttackEventResponseParams struct {
+	// List of DDoS attack data. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	Data []*DDoSAttackEvent `json:"Data,omitempty" name:"Data"`
+
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDDoSAttackEventResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDDoSAttackEventResponseParams `json:"Response"`
+}
+
+func (r *DescribeDDoSAttackEventResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDDoSAttackEventResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDDoSAttackTopDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -3852,8 +4229,8 @@ type DescribeOriginGroupRequestParams struct {
 	// Limit on paginated queries. Value range: 1-1000. Default value: 10.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`<br>   Filter by <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`origin-group-id`:<br>   Filter by <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`origin-group-name`:<br>   Filter by <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)
+	// Filters. Each filter can have up to 20 entries. See below for details:
+	// <li>`zone-id`<br>   Filter by the specified <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-id`:<br>   Filter by the specified <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-name`:<br>   Filter by the specified <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3866,8 +4243,8 @@ type DescribeOriginGroupRequest struct {
 	// Limit on paginated queries. Value range: 1-1000. Default value: 10.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`<br>   Filter by <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`origin-group-id`:<br>   Filter by <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<li>`origin-group-name`:<br>   Filter by <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)
+	// Filters. Each filter can have up to 20 entries. See below for details:
+	// <li>`zone-id`<br>   Filter by the specified <strong>site ID</strong>, such as zone-20hzkd4rdmy0<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-id`:<br>   Filter by the specified <strong>origin group ID</strong>, such as origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`origin-group-name`:<br>   Filter by the specified <strong>origin group name</strong><br>   Type: String<br>   Required: No<br>   Fuzzy query: Supported (only one origin group name allowed in a query)</li>
 	Filters []*AdvancedFilter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -4011,11 +4388,15 @@ type DescribeOverviewL7DataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The query metric. Values:
-	// <li>`l7Flow_outFlux`: Access traffic;</li>
-	// <li>`l7Flow_request`: Access requests;</li>
-	// <li>`l7Flow_outBandwidth`: Access bandwidth.</li>
-	// <li>`l7Flow_hit_outFlux`: Cache hit traffic.</li>
+	// The metric to query. Values:
+	// <li>`l7Flow_outFlux`: Traffic used for EdegOne responses</li>
+	// <li>`l7Flow_inFlux`: Traffic used for EdegOne requests</li>
+	// <li>`l7Flow_outBandwidth`: Bandwidth used for EdegOne responses</li>
+	// <li>`l7Flow_inBandwidth`: Bandwidth used for EdegOne requests</li>
+	// <li>`l7Flow_hit_outFlux`: Traffic used for cache hit</li>
+	// <li>`l7Flow_request`: Access requests</li>
+	// <li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
+	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// List of sites
@@ -4040,8 +4421,9 @@ type DescribeOverviewL7DataRequestParams struct {
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 	// Filters
-	// <li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-	// <li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
+	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4060,11 +4442,15 @@ type DescribeOverviewL7DataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The query metric. Values:
-	// <li>`l7Flow_outFlux`: Access traffic;</li>
-	// <li>`l7Flow_request`: Access requests;</li>
-	// <li>`l7Flow_outBandwidth`: Access bandwidth.</li>
-	// <li>`l7Flow_hit_outFlux`: Cache hit traffic.</li>
+	// The metric to query. Values:
+	// <li>`l7Flow_outFlux`: Traffic used for EdegOne responses</li>
+	// <li>`l7Flow_inFlux`: Traffic used for EdegOne requests</li>
+	// <li>`l7Flow_outBandwidth`: Bandwidth used for EdegOne responses</li>
+	// <li>`l7Flow_inBandwidth`: Bandwidth used for EdegOne requests</li>
+	// <li>`l7Flow_hit_outFlux`: Traffic used for cache hit</li>
+	// <li>`l7Flow_request`: Access requests</li>
+	// <li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
+	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// List of sites
@@ -4089,8 +4475,9 @@ type DescribeOverviewL7DataRequest struct {
 	Interval *string `json:"Interval,omitempty" name:"Interval"`
 
 	// Filters
-	// <li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-	// <li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
+	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4482,11 +4869,12 @@ type DescribeSingleL7AnalysisDataRequestParams struct {
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// Filters
-	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-	// <li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-	// <li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-	// <li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+	// <li>`domain`:<br>u2003u2003 Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>u2003u2003 `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
+	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`:<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query granularity. Values:
@@ -4522,11 +4910,12 @@ type DescribeSingleL7AnalysisDataRequest struct {
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// Filters
-	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-	// <li>`domain`<br>   Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol</strong><br>   Values:<br>   `HTTP/1.0`: HTTP 1.0<br>   `HTTP/1.1`: HTTP 1.1<br>   `HTTP/2.0`: HTTP 2.0<br>   `HTTP/3.0`: HTTP 3.0<br>   `WebSocket`: WebSocket</li>
-	// <li>tagKey<br>   Filter by the specified <strong>tag key</strong></li>
-	// <li>tagValue<br>   Filter by the specified <strong>tag value</strong></li>
+	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
+	// <li>`domain`:<br>u2003u2003 Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
+	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>u2003u2003 `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
+	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
+	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
+	// <li>`tagValue`:<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
 	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
 
 	// The query granularity. Values:
@@ -4918,10 +5307,14 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The list of metrics. Values:
-	// <li>`l7Flow_outFlux`: Access traffic;</li>
-	// <li>`l7Flow_request`: Access requests;</li>
-	// <li>`l7Flow_outBandwidth`: Access bandwidth.</li>
+	// The metric to query. Values:
+	// <li>`l7Flow_outFlux`: Traffic used for EdgeOne responses</li>
+	// <li>`l7Flow_inFlux`: Traffic used for EdgeOne requests</li>
+	// <li>`l7Flow_outBandwidth`: Bandwidth used for EdgeOne responses</li>
+	// <li>`l7Flow_inBandwidth`: Bandwidth used for EdgeOne requests</li>
+	// <li>`l7Flow_request`: Access requests</li>
+	// <li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
+	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// List of sites
@@ -4971,10 +5364,14 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The list of metrics. Values:
-	// <li>`l7Flow_outFlux`: Access traffic;</li>
-	// <li>`l7Flow_request`: Access requests;</li>
-	// <li>`l7Flow_outBandwidth`: Access bandwidth.</li>
+	// The metric to query. Values:
+	// <li>`l7Flow_outFlux`: Traffic used for EdgeOne responses</li>
+	// <li>`l7Flow_inFlux`: Traffic used for EdgeOne requests</li>
+	// <li>`l7Flow_outBandwidth`: Bandwidth used for EdgeOne responses</li>
+	// <li>`l7Flow_inBandwidth`: Bandwidth used for EdgeOne requests</li>
+	// <li>`l7Flow_request`: Access requests</li>
+	// <li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
+	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
 	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
 
 	// List of sites
@@ -5349,20 +5746,30 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The query metric. Values:
-	// <li>`l7Flow_outFlux_country`: Country the request came from;</li>
-	// <li>`l7Flow_outFlux_statusCode`: Status code of the request;</li>
-	// <li>`l7Flow_outFlux_domain`: Domain name of the request;</li>
-	// <li>`l7Flow_outFlux_url`: URL of the request;</li>
-	// <li>`l7Flow_outFlux_resourceType`: Resource type;</li>
-	// <li>`l7Flow_outFlux_sip`: Client IP;</li>
-	// <li>`l7Flow_outFlux_referers`: Refer header;</li>
-	// <li>`l7Flow_outFlux_ua_device`: Device type;</li>
-	// <li>`l7Flow_outFlux_ua_browser`: Browser type;</li>
-	// <li>`l7Flow_outFlux_us_os`: OS type;</li>
+	// The metric to query. Values: 
+	// <li>`l7Flow_outFlux_country`: Traffic by country/region</li>
+	// <li>`l7Flow_outFlux_statusCode`: Traffic by status code</li>
+	// <li>`l7Flow_outFlux_domain`: Traffic by domain name</li>
+	// <li>`l7Flow_outFlux_url`: Traffic by URL</li>
+	// <li>`l7Flow_outFlux_resourceType`: Traffic by resource type</li>
+	// <li>`l7Flow_outFlux_sip`: Traffic by client IP</li>
+	// <li>`l7Flow_outFlux_referers`: Traffic by referer</li>
+	// <li>`l7Flow_outFlux_ua_device`: Traffic by device</li>
+	// <li>`l7Flow_outFlux_ua_browser`: Traffic by browser</li>
+	// <li>`l7Flow_outFlux_us_os`: Traffic by operating system</li>
+	// <li>`l7Flow_request_country`: Requests by country/region</li>
+	// <li>`l7Flow_request_statusCode`: Requests by status code</li>
+	// <li>`l7Flow_request_domain`: Requests by domain name</li>
+	// <li>`l7Flow_request_url`: Requests by URL</li>
+	// <li>`l7Flow_request_resourceType`: Requests by resource type</li>
+	// <li>`l7Flow_request_sip`: Requests by client IP</li>
+	// <li>`l7Flow_request_referer`: Requests by referer</li>
+	// <li>`l7Flow_request_ua_device`: Requests by device</li>
+	// <li>`l7Flow_request_ua_browser`: Requests by browser</li>
+	// <li>`l7Flow_request_us_os`: Requests by operating system</li>
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// (Required) List of sites. No query results are returned if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
@@ -5411,20 +5818,30 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The query metric. Values:
-	// <li>`l7Flow_outFlux_country`: Country the request came from;</li>
-	// <li>`l7Flow_outFlux_statusCode`: Status code of the request;</li>
-	// <li>`l7Flow_outFlux_domain`: Domain name of the request;</li>
-	// <li>`l7Flow_outFlux_url`: URL of the request;</li>
-	// <li>`l7Flow_outFlux_resourceType`: Resource type;</li>
-	// <li>`l7Flow_outFlux_sip`: Client IP;</li>
-	// <li>`l7Flow_outFlux_referers`: Refer header;</li>
-	// <li>`l7Flow_outFlux_ua_device`: Device type;</li>
-	// <li>`l7Flow_outFlux_ua_browser`: Browser type;</li>
-	// <li>`l7Flow_outFlux_us_os`: OS type;</li>
+	// The metric to query. Values: 
+	// <li>`l7Flow_outFlux_country`: Traffic by country/region</li>
+	// <li>`l7Flow_outFlux_statusCode`: Traffic by status code</li>
+	// <li>`l7Flow_outFlux_domain`: Traffic by domain name</li>
+	// <li>`l7Flow_outFlux_url`: Traffic by URL</li>
+	// <li>`l7Flow_outFlux_resourceType`: Traffic by resource type</li>
+	// <li>`l7Flow_outFlux_sip`: Traffic by client IP</li>
+	// <li>`l7Flow_outFlux_referers`: Traffic by referer</li>
+	// <li>`l7Flow_outFlux_ua_device`: Traffic by device</li>
+	// <li>`l7Flow_outFlux_ua_browser`: Traffic by browser</li>
+	// <li>`l7Flow_outFlux_us_os`: Traffic by operating system</li>
+	// <li>`l7Flow_request_country`: Requests by country/region</li>
+	// <li>`l7Flow_request_statusCode`: Requests by status code</li>
+	// <li>`l7Flow_request_domain`: Requests by domain name</li>
+	// <li>`l7Flow_request_url`: Requests by URL</li>
+	// <li>`l7Flow_request_resourceType`: Requests by resource type</li>
+	// <li>`l7Flow_request_sip`: Requests by client IP</li>
+	// <li>`l7Flow_request_referer`: Requests by referer</li>
+	// <li>`l7Flow_request_ua_device`: Requests by device</li>
+	// <li>`l7Flow_request_ua_browser`: Requests by browser</li>
+	// <li>`l7Flow_request_us_os`: Requests by operating system</li>
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// (Required) List of sites. No query results are returned if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
@@ -5537,7 +5954,7 @@ type DescribeTopL7CacheDataRequestParams struct {
 	// Specifies sites by ID. All sites will be selected if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
-	// Queries the top rows of data. Top 10 rows of data will be queried if this field is not specified.
+	// Top rows of data to query. Maximum value: 1000. Top 10 rows of data are queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter conditions. See below for details: 
@@ -5583,7 +6000,7 @@ type DescribeTopL7CacheDataRequest struct {
 	// Specifies sites by ID. All sites will be selected if this field is not specified.
 	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
 
-	// Queries the top rows of data. Top 10 rows of data will be queried if this field is not specified.
+	// Top rows of data to query. Maximum value: 1000. Top 10 rows of data are queried if this field is not specified.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Filter conditions. See below for details: 
@@ -7200,10 +7617,12 @@ type ExceptUserRuleScope struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// The module to be activated. Values:
-	// <li>`waf`: Managed rules</li>
-	// <li>`cc`: Rate limiting rules</li>
-	// <li>`bot`: bot protection</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// <li>`waf`: Tencent Cloud-managed rules</li>
+	// <li>`rate`: Rate limiting rules</li>
+	// <li>`acl`: Custom rule</li>
+	// <li>`cc`: CC attack defense</li>
+	// <li>`bot`: Bot protection</li>
+	// Note: this field may return `null`, indicating that no valid value is obtained.
 	Modules []*string `json:"Modules,omitempty" name:"Modules"`
 
 	// Module settings of the exception rule. If it is null, the settings that were last configured will be used.
@@ -7355,6 +7774,13 @@ type Https struct {
 	// <li>`none`: Not managed by EdgeOne.</li>If it is left empty, the default value `none` is used.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ApplyType *string `json:"ApplyType,omitempty" name:"ApplyType"`
+
+	// Cipher suite. Values:
+	// <li>`loose-v2023`: Offer the highest compatibility but relatively lower security. It supports TLS 1.0-1.3.</li>
+	// <li>`general-v2023`: Keep a balance between the compatibility and security. It supports TLS 1.2-1.3.</li>
+	// <li>`strict-v2023`: Provides high security, disabling all insecure cipher suites. It supports TLS 1.2-1.3.
+	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	CipherSuite *string `json:"CipherSuite,omitempty" name:"CipherSuite"`
 }
 
 type IPWhitelist struct {
@@ -7368,6 +7794,10 @@ type IPWhitelist struct {
 type Identification struct {
 	// The site name.
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// The subdomain name to be verified. To verify the ownership of a site, leave it blank.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// The verification status. Values:
 	// <li>`pending`: The verification is ongoing.</li>
@@ -7389,6 +7819,9 @@ type Identification struct {
 type IdentifyZoneRequestParams struct {
 	// The site name.
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// A subdomain name under the site. Specify this field if you want to verify the ownership of a subdomain name. Otherwise you can leave it blank.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 type IdentifyZoneRequest struct {
@@ -7396,6 +7829,9 @@ type IdentifyZoneRequest struct {
 	
 	// The site name.
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
+
+	// A subdomain name under the site. Specify this field if you want to verify the ownership of a subdomain name. Otherwise you can leave it blank.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
 }
 
 func (r *IdentifyZoneRequest) ToJsonString() string {
@@ -7411,6 +7847,7 @@ func (r *IdentifyZoneRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ZoneName")
+	delete(f, "Domain")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IdentifyZoneRequest has unknown keys!", "")
 	}
@@ -7443,6 +7880,13 @@ func (r *IdentifyZoneResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *IdentifyZoneResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ImageOptimize struct {
+	// Whether to enable configuration. Values: 
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable</li>
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type IntelligenceRule struct {
@@ -9431,30 +9875,25 @@ type OriginGroup struct {
 }
 
 type OriginInfo struct {
-	// The origin type. Values:
+	// The origin type. Values: 
 	// <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
 	// <li>`COS`: COS bucket address</li>
 	// <li>`ORIGIN_GROUP`: Origin group</li>
 	// <li>`AWS_S3`: AWS S3 bucket address</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
 	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Origin *string `json:"Origin,omitempty" name:"Origin"`
 
 	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates that secondary origins are not used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	BackupOrigin *string `json:"BackupOrigin,omitempty" name:"BackupOrigin"`
 
-	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values:
+	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: 
 	// <li>`on`: Enable private authentication.</li>
 	// <li>`off`: Disable private authentication.</li>If this field is not specified, the default value `off` is used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	PrivateAccess *string `json:"PrivateAccess,omitempty" name:"PrivateAccess"`
 
 	// The private authentication parameters. This field is valid when `PrivateAccess=on`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitempty" name:"PrivateParameters"`
 }
 
@@ -10986,10 +11425,10 @@ type WafRule struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// IDs of the managed rules in the Block mode. You can obtain more details from [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1).
+	// IDs of the rules to be disabled.
 	BlockRuleIDs []*int64 `json:"BlockRuleIDs,omitempty" name:"BlockRuleIDs"`
 
-	// IDs of the managed rules in the Observe mode. You can obtain more details from [DescribeSecurityGroupManagedRules](https://tcloud4api.woa.com/document/product/1657/80807?!preview&!document=1).
+	// IDs of the rules to be executed in Observe mode.
 	ObserveRuleIDs []*int64 `json:"ObserveRuleIDs,omitempty" name:"ObserveRuleIDs"`
 }
 
@@ -11209,4 +11648,11 @@ type ZoneSetting struct {
 	// Configuration of gRPC support
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Grpc *Grpc `json:"Grpc,omitempty" name:"Grpc"`
+
+	// Image optimization configuration. 
+	// Note: This field may return `null`, indicating that no valid value was found.
+	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitempty" name:"ImageOptimize"`
+
+
+	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 }
