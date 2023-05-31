@@ -1526,7 +1526,7 @@ type ReportConversionStatus struct {
 // Predefined struct for user
 type SendSmsRequestParams struct {
 	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers).
-	// For example, +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+	// For example, +60198890000, which has a + sign followed by 60 (country/region code) and then by 198890000 (mobile number).
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
@@ -1557,7 +1557,7 @@ type SendSmsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers).
-	// For example, +8613711112222, which has a + sign followed by 86 (country/region code) and then by 13711112222 (mobile number).
+	// For example, +60198890000, which has a + sign followed by 60 (country/region code) and then by 198890000 (mobile number).
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
