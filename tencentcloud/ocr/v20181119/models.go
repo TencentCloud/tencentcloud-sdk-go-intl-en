@@ -1572,6 +1572,112 @@ func (r *RecognizePhilippinesTinIDOCRResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RecognizePhilippinesUMIDOCRRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return the identity photo.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitempty" name:"ReturnHeadImage"`
+}
+
+type RecognizePhilippinesUMIDOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return the identity photo.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitempty" name:"ReturnHeadImage"`
+}
+
+func (r *RecognizePhilippinesUMIDOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizePhilippinesUMIDOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "ReturnHeadImage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizePhilippinesUMIDOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizePhilippinesUMIDOCRResponseParams struct {
+	// The surname.
+	Surname *TextDetectionResult `json:"Surname,omitempty" name:"Surname"`
+
+	// The middle name.
+	MiddleName *TextDetectionResult `json:"MiddleName,omitempty" name:"MiddleName"`
+
+	// The given name.
+	GivenName *TextDetectionResult `json:"GivenName,omitempty" name:"GivenName"`
+
+	// The address.
+	Address *TextDetectionResult `json:"Address,omitempty" name:"Address"`
+
+	// The date of birth.
+	Birthday *TextDetectionResult `json:"Birthday,omitempty" name:"Birthday"`
+
+	// The common reference number (CRN).
+	CRN *TextDetectionResult `json:"CRN,omitempty" name:"CRN"`
+
+	// The gender.
+	Sex *TextDetectionResult `json:"Sex,omitempty" name:"Sex"`
+
+	// The Base64-encoded identity photo.
+	HeadPortrait *TextDetectionResult `json:"HeadPortrait,omitempty" name:"HeadPortrait"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RecognizePhilippinesUMIDOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizePhilippinesUMIDOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizePhilippinesUMIDOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizePhilippinesUMIDOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RecognizePhilippinesVoteIDOCRRequestParams struct {
 	// Whether to return the identity photo.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitempty" name:"ReturnHeadImage"`

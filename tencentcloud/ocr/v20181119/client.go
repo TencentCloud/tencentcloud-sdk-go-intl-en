@@ -923,6 +923,70 @@ func (c *Client) RecognizePhilippinesTinIDOCRWithContext(ctx context.Context, re
     return
 }
 
+func NewRecognizePhilippinesUMIDOCRRequest() (request *RecognizePhilippinesUMIDOCRRequest) {
+    request = &RecognizePhilippinesUMIDOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizePhilippinesUMIDOCR")
+    
+    
+    return
+}
+
+func NewRecognizePhilippinesUMIDOCRResponse() (response *RecognizePhilippinesUMIDOCRResponse) {
+    response = &RecognizePhilippinesUMIDOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RecognizePhilippinesUMIDOCR
+// This API is used to recognize a Philippine Unified Multi-Purpose ID (UMID) card.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) RecognizePhilippinesUMIDOCR(request *RecognizePhilippinesUMIDOCRRequest) (response *RecognizePhilippinesUMIDOCRResponse, err error) {
+    return c.RecognizePhilippinesUMIDOCRWithContext(context.Background(), request)
+}
+
+// RecognizePhilippinesUMIDOCR
+// This API is used to recognize a Philippine Unified Multi-Purpose ID (UMID) card.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) RecognizePhilippinesUMIDOCRWithContext(ctx context.Context, request *RecognizePhilippinesUMIDOCRRequest) (response *RecognizePhilippinesUMIDOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizePhilippinesUMIDOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizePhilippinesUMIDOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizePhilippinesUMIDOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizePhilippinesVoteIDOCRRequest() (request *RecognizePhilippinesVoteIDOCRRequest) {
     request = &RecognizePhilippinesVoteIDOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
