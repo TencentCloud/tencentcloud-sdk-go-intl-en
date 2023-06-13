@@ -62,7 +62,7 @@ type BatchSendEmailRequestParams struct {
 	// Parameter required for a scheduled sending task
 	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
 
-	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
+	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
 	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
 
 	// Whether to add an ad tag. `0`: Add no tag; `1`: Add before the subject; `2`: Add after the subject.
@@ -104,7 +104,7 @@ type BatchSendEmailRequest struct {
 	// Parameter required for a scheduled sending task
 	TimedParam *TimedEmailParam `json:"TimedParam,omitempty" name:"TimedParam"`
 
-	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
+	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
 	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
 
 	// Whether to add an ad tag. `0`: Add no tag; `1`: Add before the subject; `2`: Add after the subject.
@@ -1591,6 +1591,12 @@ type SendEmailRequestParams struct {
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
+
+	Cc []*string `json:"Cc,omitempty" name:"Cc"`
+
+
+	Bcc []*string `json:"Bcc,omitempty" name:"Bcc"`
+
 	// Template parameters for template-based sending. As `Simple` has been disused, `Template` is required.
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
@@ -1600,7 +1606,7 @@ type SendEmailRequestParams struct {
 	// Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
 	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
 
-	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
+	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
 	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
 
 	// Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
@@ -1624,6 +1630,10 @@ type SendEmailRequest struct {
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
 	ReplyToAddresses *string `json:"ReplyToAddresses,omitempty" name:"ReplyToAddresses"`
 
+	Cc []*string `json:"Cc,omitempty" name:"Cc"`
+
+	Bcc []*string `json:"Bcc,omitempty" name:"Bcc"`
+
 	// Template parameters for template-based sending. As `Simple` has been disused, `Template` is required.
 	Template *Template `json:"Template,omitempty" name:"Template"`
 
@@ -1633,7 +1643,7 @@ type SendEmailRequest struct {
 	// Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
 	Attachments []*Attachment `json:"Attachments,omitempty" name:"Attachments"`
 
-	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic
+	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
 	Unsubscribe *string `json:"Unsubscribe,omitempty" name:"Unsubscribe"`
 
 	// Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
@@ -1656,6 +1666,8 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 	delete(f, "Destination")
 	delete(f, "Subject")
 	delete(f, "ReplyToAddresses")
+	delete(f, "Cc")
+	delete(f, "Bcc")
 	delete(f, "Template")
 	delete(f, "Simple")
 	delete(f, "Attachments")
