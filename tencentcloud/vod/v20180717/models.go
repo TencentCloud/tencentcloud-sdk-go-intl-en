@@ -2242,6 +2242,310 @@ type AudioVolumeParam struct {
 	Gain *float64 `json:"Gain,omitempty" name:"Gain"`
 }
 
+type Authentication struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	TypeA *AuthenticationTypeA `json:"TypeA,omitempty" name:"TypeA"`
+
+
+	TypeB *AuthenticationTypeB `json:"TypeB,omitempty" name:"TypeB"`
+
+
+	TypeC *AuthenticationTypeC `json:"TypeC,omitempty" name:"TypeC"`
+
+
+	TypeD *AuthenticationTypeD `json:"TypeD,omitempty" name:"TypeD"`
+}
+
+type AuthenticationTypeA struct {
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
+
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
+}
+
+type AuthenticationTypeB struct {
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
+
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
+}
+
+type AuthenticationTypeC struct {
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
+
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
+}
+
+type AuthenticationTypeD struct {
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+
+
+	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
+
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
+
+
+	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
+
+
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+
+	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
+}
+
+type AwsPrivateAccess struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+}
+
+type CDNCertInfo struct {
+
+	CertId *string `json:"CertId,omitempty" name:"CertId"`
+
+
+	Certificate *string `json:"Certificate,omitempty" name:"Certificate"`
+
+
+	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+}
+
+type CDNDomainConfig struct {
+
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+
+	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
+
+
+	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
+
+
+	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
+
+
+	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
+
+
+	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
+
+
+	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
+
+
+	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
+
+
+	Https *Https `json:"Https,omitempty" name:"Https"`
+
+
+	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
+
+
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+
+	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
+
+
+	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
+
+
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
+
+
+	HwPrivateAccess *HwPrivateAccess `json:"HwPrivateAccess,omitempty" name:"HwPrivateAccess"`
+
+
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
+}
+
+type CDNDomainConfigForUpdate struct {
+
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+
+	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
+
+
+	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
+
+
+	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
+
+
+	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
+
+
+	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
+
+
+	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
+
+
+	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
+
+
+	Https *Https `json:"Https,omitempty" name:"Https"`
+
+
+	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
+
+
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
+
+
+	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
+
+
+	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
+
+
+	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
+
+
+	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
+
+
+	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
+
+
+	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
+
+
+	HwPrivateAccess *HwPrivateAccess `json:"HwPrivateAccess,omitempty" name:"HwPrivateAccess"`
+
+
+	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
+}
+
+type CDNDomainInfo struct {
+
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+
+	DeployStatus *string `json:"DeployStatus,omitempty" name:"DeployStatus"`
+
+
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+
+
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+
+	Config *CDNDomainConfig `json:"Config,omitempty" name:"Config"`
+}
+
+type Cache struct {
+
+	RuleCache []*RuleCache `json:"RuleCache,omitempty" name:"RuleCache"`
+}
+
+type CacheConfigCache struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	CacheTime *uint64 `json:"CacheTime,omitempty" name:"CacheTime"`
+
+
+	CompareMaxAge *string `json:"CompareMaxAge,omitempty" name:"CompareMaxAge"`
+
+
+	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
+
+
+	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
+}
+
+type CacheConfigFollowOrigin struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	HeuristicCache *HeuristicCache `json:"HeuristicCache,omitempty" name:"HeuristicCache"`
+}
+
+type CacheConfigNoCache struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	Revalidate *string `json:"Revalidate,omitempty" name:"Revalidate"`
+}
+
 type Canvas struct {
 	// Background color. Valid values:
 	// <li>Black: black background</li>
@@ -2323,6 +2627,74 @@ type ClipTask2017 struct {
 
 	// Information of file output by video clipping.
 	FileInfo *ClipFileInfo2017 `json:"FileInfo,omitempty" name:"FileInfo"`
+}
+
+// Predefined struct for user
+type CloneCDNDomainRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The cloned domain name.
+	ReferenceDomain *string `json:"ReferenceDomain,omitempty" name:"ReferenceDomain"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type CloneCDNDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// The cloned domain name.
+	ReferenceDomain *string `json:"ReferenceDomain,omitempty" name:"ReferenceDomain"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *CloneCDNDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneCDNDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "ReferenceDomain")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneCDNDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloneCDNDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CloneCDNDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *CloneCDNDomainResponseParams `json:"Response"`
+}
+
+func (r *CloneCDNDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneCDNDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ColorEnhanceInfo struct {
@@ -3387,6 +3759,74 @@ func (r *CreateAnimatedGraphicsTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCDNDomainRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain configuration.
+	Config *CDNDomainConfig `json:"Config,omitempty" name:"Config"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type CreateCDNDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain configuration.
+	Config *CDNDomainConfig `json:"Config,omitempty" name:"Config"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *CreateCDNDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCDNDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "Config")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCDNDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCDNDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateCDNDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCDNDomainResponseParams `json:"Response"`
+}
+
+func (r *CreateCDNDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCDNDomainResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5697,6 +6137,67 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DeleteCDNDomainRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type DeleteCDNDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DeleteCDNDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCDNDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCDNDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCDNDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteCDNDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCDNDomainResponseParams `json:"Response"`
+}
+
+func (r *DeleteCDNDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCDNDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteClassRequestParams struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
@@ -7141,6 +7642,87 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCDNDomainsRequestParams struct {
+	// List of domain names. If this field is left blank, all domain name information will be listed by default.
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// The maximum number of returned results for pagination fetching. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The starting offset for page fetching. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type DescribeCDNDomainsRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of domain names. If this field is left blank, all domain name information will be listed by default.
+	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+
+	// The maximum number of returned results for pagination fetching. Default value: 20.
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+
+	// The starting offset for page fetching. Default value: 0.
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *DescribeCDNDomainsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCDNDomainsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domains")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCDNDomainsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCDNDomainsResponseParams struct {
+	// List of domain name information.
+	DomainSet []*CDNDomainInfo `json:"DomainSet,omitempty" name:"DomainSet"`
+
+	// The total number of CDN domain names under the current application.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCDNDomainsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCDNDomainsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCDNDomainsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCDNDomainsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11162,6 +11744,11 @@ type FileUploadTask struct {
 	MetaData *MediaMetaData `json:"MetaData,omitempty" name:"MetaData"`
 }
 
+type FollowRedirect struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 // Predefined struct for user
 type ForbidMediaDistributionRequestParams struct {
 	// List of media files. Up to 20 ones can be submitted at a time.
@@ -11233,6 +11820,20 @@ func (r *ForbidMediaDistributionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ForceRedirect struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	RedirectType *string `json:"RedirectType,omitempty" name:"RedirectType"`
+
+
+	RedirectStatusCode *uint64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
+
+
+	CarryHeaders *string `json:"CarryHeaders,omitempty" name:"CarryHeaders"`
+}
+
 type FrameTagConfigureInfo struct {
 	// Switch of intelligent frame-specific tagging task. Valid values:
 	// <li>ON: enables intelligent frame-specific tagging task;</li>
@@ -11288,6 +11889,22 @@ type HeadTailTaskInput struct {
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
 }
 
+type HeuristicCache struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	CacheConfig *HeuristicCacheConfig `json:"CacheConfig,omitempty" name:"CacheConfig"`
+}
+
+type HeuristicCacheConfig struct {
+
+	HeuristicCacheTimeSwitch *string `json:"HeuristicCacheTimeSwitch,omitempty" name:"HeuristicCacheTimeSwitch"`
+
+
+	HeuristicCacheTime *uint64 `json:"HeuristicCacheTime,omitempty" name:"HeuristicCacheTime"`
+}
+
 type HighlightSegmentItem struct {
 	// Confidence.
 	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
@@ -11311,6 +11928,48 @@ type HighlightsConfigureInfoForUpdate struct {
 	// <li>ON: enable an intelligent highlight generating task;</li>
 	// <li>OFF: disable an intelligent highlight generating task.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
+type HttpHeaderPathRule struct {
+
+	HeaderMode *string `json:"HeaderMode,omitempty" name:"HeaderMode"`
+
+
+	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
+
+
+	HeaderValue *string `json:"HeaderValue,omitempty" name:"HeaderValue"`
+
+
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
+}
+
+type Https struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	Http2 *string `json:"Http2,omitempty" name:"Http2"`
+
+
+	CertInfo *CDNCertInfo `json:"CertInfo,omitempty" name:"CertInfo"`
+}
+
+type HwPrivateAccess struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 }
 
 type ImageBlur struct {
@@ -11560,6 +12219,39 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitempty" name:"RepeatType"`
+}
+
+type IpFilter struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
+
+
+	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules"`
+}
+
+type IpFilterPathRule struct {
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	Filters []*string `json:"Filters,omitempty" name:"Filters"`
+
+
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
+}
+
+type Ipv6Access struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
 type LicenseUsageDataItem struct {
@@ -11829,6 +12521,25 @@ func (r *ManageTaskResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ManageTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type MaxAge struct {
+
+	MaxAgeRules []*MaxAgeRule `json:"MaxAgeRules,omitempty" name:"MaxAgeRules"`
+}
+
+type MaxAgeRule struct {
+
+	MaxAgeType *string `json:"MaxAgeType,omitempty" name:"MaxAgeType"`
+
+
+	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents"`
+
+
+	MaxAgeTime *uint64 `json:"MaxAgeTime,omitempty" name:"MaxAgeTime"`
+
+
+	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
 type MediaAdaptiveDynamicStreamingInfo struct {
@@ -13490,6 +14201,74 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCDNDomainConfigRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain configuration.
+	Config *CDNDomainConfigForUpdate `json:"Config,omitempty" name:"Config"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type ModifyCDNDomainConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain configuration.
+	Config *CDNDomainConfigForUpdate `json:"Config,omitempty" name:"Config"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *ModifyCDNDomainConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDNDomainConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "Config")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCDNDomainConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCDNDomainConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyCDNDomainConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCDNDomainConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyCDNDomainConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCDNDomainConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -15832,6 +16611,66 @@ type OcrWordsConfigureInfoForUpdate struct {
 	LabelSet []*string `json:"LabelSet,omitempty" name:"LabelSet"`
 }
 
+type Origin struct {
+
+	Origins []*string `json:"Origins,omitempty" name:"Origins"`
+
+
+	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
+
+
+	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
+
+
+	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
+
+
+	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins"`
+
+
+	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
+
+
+	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
+
+
+	OriginCompany *string `json:"OriginCompany,omitempty" name:"OriginCompany"`
+}
+
+type OssPrivateAccess struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+}
+
+type OthersPrivateAccess struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
+
+
+	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
+
+
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+
+	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
+}
+
 type OutputAudioStream struct {
 	// Audio stream encoder. Valid values:
 	// <li>libfdk_aac: suitable for mp4 files.</li>
@@ -17183,6 +18022,11 @@ func (r *PushUrlCacheResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Quic struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+}
+
 type RebuildAudioInfo struct {
 	// The noise removal parameters.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -17963,6 +18807,14 @@ type ReduceMediaBitrateTranscodeResult struct {
 	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
 }
 
+type Referer struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	RefererRules []*RefererRule `json:"RefererRules,omitempty" name:"RefererRules"`
+}
+
 type RefererAuthPolicy struct {
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/33985) status. Valid values:
 	// <li>Enabled</li>
@@ -17983,6 +18835,23 @@ type RefererAuthPolicy struct {
 	// <li>`No`</li>
 	// When `Status` is set to `Enabled`, `BlankRefererAllowed` must be specified.
 	BlankRefererAllowed *string `json:"BlankRefererAllowed,omitempty" name:"BlankRefererAllowed"`
+}
+
+type RefererRule struct {
+
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
+
+
+	RefererType *string `json:"RefererType,omitempty" name:"RefererType"`
+
+
+	Referers []*string `json:"Referers,omitempty" name:"Referers"`
+
+
+	AllowEmpty *bool `json:"AllowEmpty,omitempty" name:"AllowEmpty"`
 }
 
 // Predefined struct for user
@@ -18210,6 +19079,14 @@ type RepairInfo struct {
 	Type *string `json:"Type,omitempty" name:"Type"`
 }
 
+type RequestHeader struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
+}
+
 // Predefined struct for user
 type ResetProcedureTemplateRequestParams struct {
 	// Task flow name
@@ -18329,6 +19206,14 @@ type ResourceTag struct {
 
 	// Tag value.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type ResponseHeader struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
 }
 
 // Predefined struct for user
@@ -18909,6 +19794,28 @@ type RoundPlayListItemInfo struct {
 
 	// The transcoding template used to generate the transcoding output played. This parameter is required if `AudioVideoType` is `Transcode`.
 	Definition *int64 `json:"Definition,omitempty" name:"Definition"`
+}
+
+type RuleCache struct {
+
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
+
+
+	CacheConfig *RuleCacheConfig `json:"CacheConfig,omitempty" name:"CacheConfig"`
+}
+
+type RuleCacheConfig struct {
+
+	Cache *CacheConfigCache `json:"Cache,omitempty" name:"Cache"`
+
+
+	NoCache *CacheConfigNoCache `json:"NoCache,omitempty" name:"NoCache"`
+
+
+	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
 type SDMCDrmKeyProviderInfo struct {
@@ -19817,6 +20724,74 @@ type SplitMediaTaskSegmentInfo struct {
 	ReviewAudioVideoTaskId *string `json:"ReviewAudioVideoTaskId,omitempty" name:"ReviewAudioVideoTaskId"`
 }
 
+// Predefined struct for user
+type StartCDNDomainRequestParams struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+	Operation *string `json:"Operation,omitempty" name:"Operation"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+type StartCDNDomainRequest struct {
+	*tchttp.BaseRequest
+	
+	// Domain name.
+	Domain *string `json:"Domain,omitempty" name:"Domain"`
+
+	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+	Operation *string `json:"Operation,omitempty" name:"Operation"`
+
+	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
+}
+
+func (r *StartCDNDomainRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartCDNDomainRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "Operation")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartCDNDomainRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartCDNDomainResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartCDNDomainResponse struct {
+	*tchttp.BaseResponse
+	Response *StartCDNDomainResponseParams `json:"Response"`
+}
+
+func (r *StartCDNDomainResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartCDNDomainResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type StatDataItem struct {
 	// Start time of data time range in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). For example, if the time granularity is 1-day, `2018-12-01T00:00:00+08:00` represents the time range between December 1, 2018 (inclusive) and December 2, 2018 (not inclusive).
 	// <li>For data at hourly level, `2019-08-22T00:00:00+08:00` indicates the statistics between 00:00 and 01:00 AM on August 22, 2019.</li>
@@ -20600,6 +21575,28 @@ type UrlSignatureAuthPolicy struct {
 	// The key for generating the signature of [key hotlink protection](https://intl.cloud.tencent.com/document/product/266/33986).
 	// `EncryptedKey` can contain 8-40 bytes, and cannot contain non-printable characters.
 	EncryptedKey *string `json:"EncryptedKey,omitempty" name:"EncryptedKey"`
+}
+
+type UserAgentFilter struct {
+
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
+
+
+	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitempty" name:"FilterRules"`
+}
+
+type UserAgentFilterRule struct {
+
+	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+
+
+	UserAgents []*string `json:"UserAgents,omitempty" name:"UserAgents"`
+
+
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
+
+
+	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type UserDefineAsrTextReviewTemplateInfo struct {

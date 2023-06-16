@@ -167,6 +167,62 @@ func (c *Client) AttachMediaSubtitlesWithContext(ctx context.Context, request *A
     return
 }
 
+func NewCloneCDNDomainRequest() (request *CloneCDNDomainRequest) {
+    request = &CloneCDNDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CloneCDNDomain")
+    
+    
+    return
+}
+
+func NewCloneCDNDomainResponse() (response *CloneCDNDomainResponse) {
+    response = &CloneCDNDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CloneCDNDomain
+// CloneCDNDomain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CloneCDNDomain(request *CloneCDNDomainRequest) (response *CloneCDNDomainResponse, err error) {
+    return c.CloneCDNDomainWithContext(context.Background(), request)
+}
+
+// CloneCDNDomain
+// CloneCDNDomain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CloneCDNDomainWithContext(ctx context.Context, request *CloneCDNDomainRequest) (response *CloneCDNDomainResponse, err error) {
+    if request == nil {
+        request = NewCloneCDNDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloneCDNDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloneCDNDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCommitUploadRequest() (request *CommitUploadRequest) {
     request = &CommitUploadRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -701,6 +757,64 @@ func (c *Client) CreateAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewCreateAnimatedGraphicsTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCDNDomainRequest() (request *CreateCDNDomainRequest) {
+    request = &CreateCDNDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateCDNDomain")
+    
+    
+    return
+}
+
+func NewCreateCDNDomainResponse() (response *CreateCDNDomainResponse) {
+    response = &CreateCDNDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCDNDomain
+// This interface is used to add domain names to VOD, and a user can add at most 20 domains. 1. After the domain name is successfully added, VOD will deploy the domain name. It takes about 2 minutes for the domain name to change from the deployed state to the online state.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DOMAINNAMEINBLACKLIST = "InvalidParameterValue.DomainNameInBlackList"
+func (c *Client) CreateCDNDomain(request *CreateCDNDomainRequest) (response *CreateCDNDomainResponse, err error) {
+    return c.CreateCDNDomainWithContext(context.Background(), request)
+}
+
+// CreateCDNDomain
+// This interface is used to add domain names to VOD, and a user can add at most 20 domains. 1. After the domain name is successfully added, VOD will deploy the domain name. It takes about 2 minutes for the domain name to change from the deployed state to the online state.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DOMAINNAMEINBLACKLIST = "InvalidParameterValue.DomainNameInBlackList"
+func (c *Client) CreateCDNDomainWithContext(ctx context.Context, request *CreateCDNDomainRequest) (response *CreateCDNDomainResponse, err error) {
+    if request == nil {
+        request = NewCreateCDNDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCDNDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCDNDomainResponse()
     err = c.Send(request, response)
     return
 }
@@ -2167,6 +2281,58 @@ func (c *Client) DeleteAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     return
 }
 
+func NewDeleteCDNDomainRequest() (request *DeleteCDNDomainRequest) {
+    request = &DeleteCDNDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteCDNDomain")
+    
+    
+    return
+}
+
+func NewDeleteCDNDomainResponse() (response *DeleteCDNDomainResponse) {
+    response = &DeleteCDNDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCDNDomain
+// DeleteCDNDomain.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteCDNDomain(request *DeleteCDNDomainRequest) (response *DeleteCDNDomainResponse, err error) {
+    return c.DeleteCDNDomainWithContext(context.Background(), request)
+}
+
+// DeleteCDNDomain
+// DeleteCDNDomain.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteCDNDomainWithContext(ctx context.Context, request *DeleteCDNDomainRequest) (response *DeleteCDNDomainResponse, err error) {
+    if request == nil {
+        request = NewDeleteCDNDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCDNDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCDNDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteClassRequest() (request *DeleteClassRequest) {
     request = &DeleteClassRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3427,6 +3593,60 @@ func (c *Client) DescribeAnimatedGraphicsTemplatesWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDescribeAnimatedGraphicsTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCDNDomainsRequest() (request *DescribeCDNDomainsRequest) {
+    request = &DescribeCDNDomainsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeCDNDomains")
+    
+    
+    return
+}
+
+func NewDescribeCDNDomainsResponse() (response *DescribeCDNDomainsResponse) {
+    response = &DescribeCDNDomainsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCDNDomains
+// DescribeCDNDomains.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeCDNDomains(request *DescribeCDNDomainsRequest) (response *DescribeCDNDomainsResponse, err error) {
+    return c.DescribeCDNDomainsWithContext(context.Background(), request)
+}
+
+// DescribeCDNDomains
+// DescribeCDNDomains.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeCDNDomainsWithContext(ctx context.Context, request *DescribeCDNDomainsRequest) (response *DescribeCDNDomainsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCDNDomainsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCDNDomains require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCDNDomainsResponse()
     err = c.Send(request, response)
     return
 }
@@ -6389,6 +6609,60 @@ func (c *Client) ModifyAnimatedGraphicsTemplateWithContext(ctx context.Context, 
     return
 }
 
+func NewModifyCDNDomainConfigRequest() (request *ModifyCDNDomainConfigRequest) {
+    request = &ModifyCDNDomainConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyCDNDomainConfig")
+    
+    
+    return
+}
+
+func NewModifyCDNDomainConfigResponse() (response *ModifyCDNDomainConfigResponse) {
+    response = &ModifyCDNDomainConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCDNDomainConfig
+// ModifyCDNDomainConfig.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyCDNDomainConfig(request *ModifyCDNDomainConfigRequest) (response *ModifyCDNDomainConfigResponse, err error) {
+    return c.ModifyCDNDomainConfigWithContext(context.Background(), request)
+}
+
+// ModifyCDNDomainConfig
+// ModifyCDNDomainConfig.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOMAINDEPLOYING = "FailedOperation.DomainDeploying"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyCDNDomainConfigWithContext(ctx context.Context, request *ModifyCDNDomainConfigRequest) (response *ModifyCDNDomainConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyCDNDomainConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCDNDomainConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCDNDomainConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClassRequest() (request *ModifyClassRequest) {
     request = &ModifyClassRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9291,6 +9565,56 @@ func (c *Client) SimpleHlsClipWithContext(ctx context.Context, request *SimpleHl
     request.SetContext(ctx)
     
     response = NewSimpleHlsClipResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartCDNDomainRequest() (request *StartCDNDomainRequest) {
+    request = &StartCDNDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "StartCDNDomain")
+    
+    
+    return
+}
+
+func NewStartCDNDomainResponse() (response *StartCDNDomainResponse) {
+    response = &StartCDNDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StartCDNDomain
+// This interface is used to enable/disable CDN accelerated domain names.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) StartCDNDomain(request *StartCDNDomainRequest) (response *StartCDNDomainResponse, err error) {
+    return c.StartCDNDomainWithContext(context.Background(), request)
+}
+
+// StartCDNDomain
+// This interface is used to enable/disable CDN accelerated domain names.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) StartCDNDomainWithContext(ctx context.Context, request *StartCDNDomainRequest) (response *StartCDNDomainResponse, err error) {
+    if request == nil {
+        request = NewStartCDNDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartCDNDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartCDNDomainResponse()
     err = c.Send(request, response)
     return
 }
