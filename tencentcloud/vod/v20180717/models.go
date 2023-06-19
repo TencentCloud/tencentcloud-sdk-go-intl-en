@@ -2243,306 +2243,306 @@ type AudioVolumeParam struct {
 }
 
 type Authentication struct {
-
+	// Hotlink protection configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Timestamp hotlink protection mode A configuration
 	TypeA *AuthenticationTypeA `json:"TypeA,omitempty" name:"TypeA"`
 
-
+	// Timestamp hotlink protection mode B configuration
 	TypeB *AuthenticationTypeB `json:"TypeB,omitempty" name:"TypeB"`
 
-
+	// Timestamp hotlink protection mode C configuration
 	TypeC *AuthenticationTypeC `json:"TypeC,omitempty" name:"TypeC"`
 
-
+	// Timestamp hotlink protection mode D configuration
 	TypeD *AuthenticationTypeD `json:"TypeD,omitempty" name:"TypeD"`
 }
 
 type AuthenticationTypeA struct {
-
+	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
 
-
+	// Signature expiration time;Unit: second. The maximum value is 630720000.
 	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-
+	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
-
+	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
 	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeB struct {
-
+	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-
+	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
-
+	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
 	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeC struct {
-
+	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Signature expiration time;Unit: second. The maximum value is 630720000.
 	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-
+	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
-
+	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// Timestamp settings:<li>dec: Decimal</li> <li>hex: Hexadecimal</li>
 	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
 
-
+	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
 	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeD struct {
-
+	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Signature expiration time;Unit: second. The maximum value is 630720000.
 	ExpireTime *uint64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
 
-
+	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
 	FileExtensions []*string `json:"FileExtensions,omitempty" name:"FileExtensions"`
 
-
+	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	SignParam *string `json:"SignParam,omitempty" name:"SignParam"`
 
-
+	// Timestamp parameter name;Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
 	TimeParam *string `json:"TimeParam,omitempty" name:"TimeParam"`
 
-
+	// Timestamp settings: <li>dec: Decimal</li> <li>hex: Hexadecimal</li>
 	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
 
-
+	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
 	BackupSecretKey *string `json:"BackupSecretKey,omitempty" name:"BackupSecretKey"`
 }
 
 type AwsPrivateAccess struct {
-
+	//  Aws S3 back-to-origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Access ID.
 	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
 
-
+	// Key.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Region.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
-
+	// BucketName.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 }
 
 type CDNCertInfo struct {
-
+	// Server certificate ID, which is auto-generated when the certificate is being managed by the SSL Certificate Service
 	CertId *string `json:"CertId,omitempty" name:"CertId"`
 
-
+	// Server certificate information.
 	Certificate *string `json:"Certificate,omitempty" name:"Certificate"`
 
-
+	// Server key information.
 	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
 
-
+	// Time when the certificate expires;Can be left blank when used as an input parameter.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
 type CDNDomainConfig struct {
-
+	// Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-
+	// Origin Server Configuration
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-
+	// IP blocklist/allowlist configuration. This is disabled by default.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
-
+	// UserAgent:blacklist/whitelist configuration.
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 
-
+	// Back to the source 301/302 status code automatically follows the configuration, the default is off
 	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
 
-
+	// Custom request header configuration. This is disabled by default.
 	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
 
-
+	// Custom response header configuration. This is disabled by default.
 	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
 
-
+	// Node cache expiration time configuration.
 	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
 
-
+	// Domain name HTTPS acceleration configuration. This is disabled by default.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
-
+	// Timestamp hotlink protection configuration.
 	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
 
-
+	// Access protocol forced redirect configuration. This is disabled by default.
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
 
-
+	// Referer blacklist/whitelist configuration. This is disabled by default.
 	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
 
-
+	// Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
 	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
 
-
+	// IPv6 access configuration.
 	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
 
-
+	// QUIC configuration item.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 
-
+	// Origin access authentication for S3 bucket.
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 
-
+	// Access authentication configuration for OSS origin.
 	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
 
-
+	// Access authentication for Huawei Cloud OBS origin
 	HwPrivateAccess *HwPrivateAccess `json:"HwPrivateAccess,omitempty" name:"HwPrivateAccess"`
 
-
+	// Origin-pull authentication for other origins.
 	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
 }
 
 type CDNDomainConfigForUpdate struct {
-
+	// Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
 
-
+	// Origin Server Configuration.
 	Origin *Origin `json:"Origin,omitempty" name:"Origin"`
 
-
+	// IP blocklist/allowlist configuration. This is disabled by default.
 	IpFilter *IpFilter `json:"IpFilter,omitempty" name:"IpFilter"`
 
-
+	// UserAgent:blacklist/whitelist configuration.
 	UserAgentFilter *UserAgentFilter `json:"UserAgentFilter,omitempty" name:"UserAgentFilter"`
 
-
+	// Back to the source 301/302 status code automatically follows the configuration, the default is off
 	FollowRedirect *FollowRedirect `json:"FollowRedirect,omitempty" name:"FollowRedirect"`
 
-
+	// Custom request header configuration. This is disabled by default.
 	RequestHeader *RequestHeader `json:"RequestHeader,omitempty" name:"RequestHeader"`
 
-
+	// Custom response header configuration. This is disabled by default.
 	ResponseHeader *ResponseHeader `json:"ResponseHeader,omitempty" name:"ResponseHeader"`
 
-
+	// Node cache expiration time configuration.
 	Cache *Cache `json:"Cache,omitempty" name:"Cache"`
 
-
+	// Domain name HTTPS acceleration configuration. This is disabled by default.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
-
+	// Timestamp hotlink protection configuration.
 	Authentication *Authentication `json:"Authentication,omitempty" name:"Authentication"`
 
-
+	// Access protocol forced redirect configuration. This is disabled by default.
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
 
-
+	// Referer blacklist/whitelist configuration. This is disabled by default.
 	Referer *Referer `json:"Referer,omitempty" name:"Referer"`
 
-
+	// Browser cache rule configuration, which is used to set the default value of MaxAge and is disabled by default.
 	MaxAge *MaxAge `json:"MaxAge,omitempty" name:"MaxAge"`
 
-
+	// IPv6 access configuration.
 	Ipv6Access *Ipv6Access `json:"Ipv6Access,omitempty" name:"Ipv6Access"`
 
-
+	// QUIC configuration item.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 
-
+	// Origin access authentication for S3 bucket.
 	AwsPrivateAccess *AwsPrivateAccess `json:"AwsPrivateAccess,omitempty" name:"AwsPrivateAccess"`
 
-
+	// Access authentication configuration for OSS origin.
 	OssPrivateAccess *OssPrivateAccess `json:"OssPrivateAccess,omitempty" name:"OssPrivateAccess"`
 
-
+	// Access authentication for Huawei Cloud OBS origin
 	HwPrivateAccess *HwPrivateAccess `json:"HwPrivateAccess,omitempty" name:"HwPrivateAccess"`
 
-
+	// Origin-pull authentication for other origins.
 	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitempty" name:"OthersPrivateAccess"`
 }
 
 type CDNDomainInfo struct {
-
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-
+	// Deployment status.
 	DeployStatus *string `json:"DeployStatus,omitempty" name:"DeployStatus"`
 
-
+	// CNAME record.
 	Cname *string `json:"Cname,omitempty" name:"Cname"`
 
-
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-
+	// CDN domain configuration information.
 	Config *CDNDomainConfig `json:"Config,omitempty" name:"Config"`
 }
 
 type Cache struct {
-
+	// Advanced path cache configuration.
 	RuleCache []*RuleCache `json:"RuleCache,omitempty" name:"RuleCache"`
 }
 
 type CacheConfigCache struct {
-
+	// Cache configuration switch: <li>on:enable；</li> <li>off: disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Cache expiration time settings<li>Unit: second. The maximum value is 365 days.</li>
 	CacheTime *uint64 `json:"CacheTime,omitempty" name:"CacheTime"`
 
-
+	// Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node: <li>on: Enable;</li> <li>off: Disable.</li>
 	CompareMaxAge *string `json:"CompareMaxAge,omitempty" name:"CompareMaxAge"`
 
-
+	// Force cache: <li>on: Enable;</li> <li>off: Disable.</li>
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
 
-
+	// Whether to ignore the header and body on cache nodes if the origin server returns the header Set-Cookie. <li>on: Ignore; do not cache the header and body.</li> <li>off: Do not ignore; follow the custom cache rules of cache nodes.</li>
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitempty" name:"IgnoreSetCookie"`
 }
 
 type CacheConfigFollowOrigin struct {
-
+	// Follow origin server switch configuration: <li>on: Enable.</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Heuristic cache configuration
 	HeuristicCache *HeuristicCache `json:"HeuristicCache,omitempty" name:"HeuristicCache"`
 }
 
 type CacheConfigNoCache struct {
-
+	// No-cache configuration switch: <li>on: Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Always forwards to the origin server for verification:<li>on: Enable;</li> <li>off: Disable.</li>
 	Revalidate *string `json:"Revalidate,omitempty" name:"Revalidate"`
 }
 
@@ -2631,10 +2631,10 @@ type ClipTask2017 struct {
 
 // Predefined struct for user
 type CloneCDNDomainRequestParams struct {
-	// Domain name.
+	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// The cloned domain name.
+	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitempty" name:"ReferenceDomain"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -2644,10 +2644,10 @@ type CloneCDNDomainRequestParams struct {
 type CloneCDNDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain name.
+	// Domain
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// The cloned domain name.
+	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitempty" name:"ReferenceDomain"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -3764,7 +3764,7 @@ func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type CreateCDNDomainRequestParams struct {
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Domain configuration.
@@ -3777,7 +3777,7 @@ type CreateCDNDomainRequestParams struct {
 type CreateCDNDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Domain configuration.
@@ -6138,7 +6138,7 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DeleteCDNDomainRequestParams struct {
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -6148,7 +6148,7 @@ type DeleteCDNDomainRequestParams struct {
 type DeleteCDNDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -7647,7 +7647,7 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeCDNDomainsRequestParams struct {
-	// List of domain names. If this field is left blank, all domain name information will be listed by default.
+	// List of domain. If this field is left blank, all domain information will be listed by default.
 	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// The maximum number of returned results for pagination fetching. Default value: 20.
@@ -7663,7 +7663,7 @@ type DescribeCDNDomainsRequestParams struct {
 type DescribeCDNDomainsRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of domain names. If this field is left blank, all domain name information will be listed by default.
+	// List of domain. If this field is left blank, all domain information will be listed by default.
 	Domains []*string `json:"Domains,omitempty" name:"Domains"`
 
 	// The maximum number of returned results for pagination fetching. Default value: 20.
@@ -7700,10 +7700,10 @@ func (r *DescribeCDNDomainsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCDNDomainsResponseParams struct {
-	// List of domain name information.
+	// List of domain information.
 	DomainSet []*CDNDomainInfo `json:"DomainSet,omitempty" name:"DomainSet"`
 
-	// The total number of CDN domain names under the current application.
+	// The total number of CDN domain under the current application.
 	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -11745,7 +11745,7 @@ type FileUploadTask struct {
 }
 
 type FollowRedirect struct {
-
+	// Access forced redirect configuration switch <li>on：Enable;</li> <li>off：Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -11821,16 +11821,16 @@ func (r *ForbidMediaDistributionResponse) FromJsonString(s string) error {
 }
 
 type ForceRedirect struct {
-
+	// Access forced redirect configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Access forced redirect types: <li>http:forced HTTP redirect</li> <li>https: forced HTTPS redirect</li>
 	RedirectType *string `json:"RedirectType,omitempty" name:"RedirectType"`
 
-
+	// Status code returned for forced redirect Supports 301, 302.
 	RedirectStatusCode *uint64 `json:"RedirectStatusCode,omitempty" name:"RedirectStatusCode"`
 
-
+	// Whether to return the newly added header during force redirection.
 	CarryHeaders *string `json:"CarryHeaders,omitempty" name:"CarryHeaders"`
 }
 
@@ -11898,10 +11898,10 @@ type HeuristicCache struct {
 }
 
 type HeuristicCacheConfig struct {
-
+	// Heuristic cache configuration switch:<li>on:Enable.</li> <li>off: Disable.</li>
 	HeuristicCacheTimeSwitch *string `json:"HeuristicCacheTimeSwitch,omitempty" name:"HeuristicCacheTimeSwitch"`
 
-
+	// Unit: seconds.
 	HeuristicCacheTime *uint64 `json:"HeuristicCacheTime,omitempty" name:"HeuristicCacheTime"`
 }
 
@@ -11931,44 +11931,44 @@ type HighlightsConfigureInfoForUpdate struct {
 }
 
 type HttpHeaderPathRule struct {
-
+	// HTTP header setting methods: <li>set: sets a value for an existing header parameter, a new header parameter, or multiple header parameters. Multiple header parameters will be merged into one.</li> <li>del: deletes a header parameter.</li> <li>add: adds a header parameter. By default, you can repeat the same action to add the same header parameter, which may affect browser response. Please consider the set operation first.</li>
 	HeaderMode *string `json:"HeaderMode,omitempty" name:"HeaderMode"`
 
-
+	// HTTP header name. Up to 100 characters can be set.
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
 
-
+	// HTTP header value. Up to 1000 characters can be set.<li>Not required when Mode is del.</li> <li>Required when Mode is add/set.</li>
 	HeaderValue *string `json:"HeaderValue,omitempty" name:"HeaderValue"`
 
-
+	// Rule types:<li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-
+	// Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type Https struct {
-
+	// HTTPS configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Whether to enable HTTP2: <li>on:Enable;</li> <li>off:Disable.</li>
 	Http2 *string `json:"Http2,omitempty" name:"Http2"`
 
-
+	// Server certificate configuration information
 	CertInfo *CDNCertInfo `json:"CertInfo,omitempty" name:"CertInfo"`
 }
 
 type HwPrivateAccess struct {
-
+	// Huawei Cloud OBS origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Access ID
 	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
 
-
+	// Key
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// BucketName
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 }
 
@@ -12222,35 +12222,35 @@ type ImageWatermarkTemplate struct {
 }
 
 type IpFilter struct {
-
+	// IP blocklist/allowlist configuration switch :<li>on：Enable;</li> <li>off：Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// IP blocklist/allowlist type <li>whitelist: IP allowlist;</li> <li>blacklist:IP blocklist.</li>
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// IP blocklist/allowlist Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format. Up to 50 whitelists or blacklists can be entered
 	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 
-
+	// IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
 	FilterRules []*IpFilterPathRule `json:"FilterRules,omitempty" name:"FilterRules"`
 }
 
 type IpFilterPathRule struct {
-
+	// IP blocklist/allowlist type: <li>whitelist: allowlist IPs;</li> <li>blacklist: blocklist IPs.</li>
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// IP blocklist/allowlist list Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
 	Filters []*string `json:"Filters,omitempty" name:"Filters"`
 
-
+	// Rule types: <li>all: Effective for all files;</li> <li>file: Effective for specified file suffixes;</li> <li>directory: Effective for specified paths;</li> <li>path: Effective for specified absolute paths.</li>
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-
+	// Content for each RuleType: <li>For all, enter an asterisk (*).</li> <li>For file, enter the suffix, such as jpg, txt.</li> <li>For directory, enter the path, such as /xxx/test/.</li> <li>For path, enter the corresponding absolute path, such as /xxx/test.html.</li>
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 
 type Ipv6Access struct {
-
+	// Enable the ipv6 access configuration switch for the domain name, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -12524,21 +12524,21 @@ func (r *ManageTaskResponse) FromJsonString(s string) error {
 }
 
 type MaxAge struct {
-
+	// MaxAge rule.
 	MaxAgeRules []*MaxAgeRule `json:"MaxAgeRules,omitempty" name:"MaxAgeRules"`
 }
 
 type MaxAgeRule struct {
-
+	// Rule types: <li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
 	MaxAgeType *string `json:"MaxAgeType,omitempty" name:"MaxAgeType"`
 
-
+	// Content for each MaxAgeType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li> <b>Note: the all rule cannot be deleted, and it follows the origin site by default, which can be modified.</b>
 	MaxAgeContents []*string `json:"MaxAgeContents,omitempty" name:"MaxAgeContents"`
 
-
+	// Note: The value 0 means not to cache. <b>Note: The value 0 means not to cache.</b>
 	MaxAgeTime *uint64 `json:"MaxAgeTime,omitempty" name:"MaxAgeTime"`
 
-
+	// Whether to follow the origin server. Valid values: on and off. If it's on, MaxAgeTime is ignored.
 	FollowOrigin *string `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
@@ -14206,7 +14206,7 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type ModifyCDNDomainConfigRequestParams struct {
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Domain configuration.
@@ -14219,7 +14219,7 @@ type ModifyCDNDomainConfigRequestParams struct {
 type ModifyCDNDomainConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// Domain configuration.
@@ -16612,62 +16612,62 @@ type OcrWordsConfigureInfoForUpdate struct {
 }
 
 type Origin struct {
-
+	// Primary origin server list When modifying the origin server, you need to enter the corresponding OriginType. Note: This field may return null, indicating that no valid value was found.
 	Origins []*string `json:"Origins,omitempty" name:"Origins"`
 
-
+	// Primary origin server type The following types are supported for input parameters: <li> domain:domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
-
+	// Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.When the origin server type is object storage, the ServerName field is required.
 	ServerName *string `json:"ServerName,omitempty" name:"ServerName"`
 
-
+	// Origin-pull protocol configuration http: forced HTTP origin-pull follow: protocol follow origin-pull https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull. Note: This field may return null, indicating that no valid value can be obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
 
-
+	// Backup origin server list When modifying the backup origin server, you need to enter the corresponding BackupOriginType. Note: This field may return null, indicating that no valid value can be obtained.
 	BackupOrigins []*string `json:"BackupOrigins,omitempty" name:"BackupOrigins"`
 
-
+	//  Backup origin server type, which supports the following types: <li>domain：Domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
 	BackupOriginType *string `json:"BackupOriginType,omitempty" name:"BackupOriginType"`
 
-
+	// Host header used when accessing the backup origin server. If it is left empty, the ServerName of primary origin server will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitempty" name:"BackupServerName"`
 
-
+	// The object storage returns to the source vendor. It is required when the source site type is a third-party storage source site (third_party). The optional values include the following:<li>aws_s3：AWS S3;</li> <li>ali_oss：Alibaba Cloud OSS;</li> <li>hw_obs：Huawei OBS;</li> <li>others：Object storage from other vendors only supports object storage compatible with the AWS signature algorithm, such as Tencent Cloud COS.</li>
 	OriginCompany *string `json:"OriginCompany,omitempty" name:"OriginCompany"`
 }
 
 type OssPrivateAccess struct {
-
+	// Alibaba Cloud OSS back-to-origin authentication configuration switch, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Access ID.
 	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
 
-
+	// Key.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Region.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
-
+	// BucketName.
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 }
 
 type OthersPrivateAccess struct {
-
+	// Other vendor object storage back-to-source authentication configuration switches, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Access ID.
 	AccessKey *string `json:"AccessKey,omitempty" name:"AccessKey"`
 
-
+	// Key.
 	SecretKey *string `json:"SecretKey,omitempty" name:"SecretKey"`
 
-
+	// Region.
 	Region *string `json:"Region,omitempty" name:"Region"`
 
-
+	// Bucket name
 	Bucket *string `json:"Bucket,omitempty" name:"Bucket"`
 }
 
@@ -17501,135 +17501,6 @@ func (r *ProcessMediaByUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-// Predefined struct for user
-type ProcessMediaRequestParams struct {
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
-	FileId *string `json:"FileId,omitempty" name:"FileId"`
-
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
-
-	// Parameter of video processing task.
-	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
-
-	// The information of the audio/video moderation task\*.
-	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
-
-	// Video content analysis task parameter.
-	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
-
-	// Type parameter of video content recognition task.
-	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
-
-	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
-
-	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-	TasksNotifyMode *string `json:"TasksNotifyMode,omitempty" name:"TasksNotifyMode"`
-
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
-
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
-
-	// Reserved field for special purposes.
-	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-}
-
-type ProcessMediaRequest struct {
-	*tchttp.BaseRequest
-	
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
-	FileId *string `json:"FileId,omitempty" name:"FileId"`
-
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-	SubAppId *uint64 `json:"SubAppId,omitempty" name:"SubAppId"`
-
-	// Parameter of video processing task.
-	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitempty" name:"MediaProcessTask"`
-
-	// The information of the audio/video moderation task\*.
-	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitempty" name:"AiContentReviewTask"`
-
-	// Video content analysis task parameter.
-	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitempty" name:"AiAnalysisTask"`
-
-	// Type parameter of video content recognition task.
-	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitempty" name:"AiRecognitionTask"`
-
-	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-	TasksPriority *int64 `json:"TasksPriority,omitempty" name:"TasksPriority"`
-
-	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-	TasksNotifyMode *string `json:"TasksNotifyMode,omitempty" name:"TasksNotifyMode"`
-
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
-
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
-
-	// Reserved field for special purposes.
-	ExtInfo *string `json:"ExtInfo,omitempty" name:"ExtInfo"`
-}
-
-func (r *ProcessMediaRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ProcessMediaRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FileId")
-	delete(f, "SubAppId")
-	delete(f, "MediaProcessTask")
-	delete(f, "AiContentReviewTask")
-	delete(f, "AiAnalysisTask")
-	delete(f, "AiRecognitionTask")
-	delete(f, "TasksPriority")
-	delete(f, "TasksNotifyMode")
-	delete(f, "SessionContext")
-	delete(f, "SessionId")
-	delete(f, "ExtInfo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ProcessMediaResponseParams struct {
-	// Task ID
-	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ProcessMediaResponse struct {
-	*tchttp.BaseResponse
-	Response *ProcessMediaResponseParams `json:"Response"`
-}
-
-func (r *ProcessMediaResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ProcessMediaResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type ProhibitedAsrReviewTemplateInfo struct {
 	// Switch of prohibited information detection in speech task. Valid values:
 	// <li>ON: enables prohibited information detection in speech task;</li>
@@ -18023,7 +17894,7 @@ func (r *PushUrlCacheResponse) FromJsonString(s string) error {
 }
 
 type Quic struct {
-
+	// Quic function configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -18808,10 +18679,10 @@ type ReduceMediaBitrateTranscodeResult struct {
 }
 
 type Referer struct {
-
+	// Referer blacklist/whitelist configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Referer blacklist/whitelist configuration rule
 	RefererRules []*RefererRule `json:"RefererRules,omitempty" name:"RefererRules"`
 }
 
@@ -18838,19 +18709,19 @@ type RefererAuthPolicy struct {
 }
 
 type RefererRule struct {
-
+	// Rule types: <li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-
+	// Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
-
+	// Referer configuration types:<li>whitelist：Allowlist;</li> <li>blacklist:Blocklist.</li>
 	RefererType *string `json:"RefererType,omitempty" name:"RefererType"`
 
-
+	// Referer content list
 	Referers []*string `json:"Referers,omitempty" name:"Referers"`
 
-
+	// Whether to allow empty referer：true: Allow empty referer when RefererType = whitelist; false: Reject empty refer when RefererType = blacklist.
 	AllowEmpty *bool `json:"AllowEmpty,omitempty" name:"AllowEmpty"`
 }
 
@@ -19080,10 +18951,10 @@ type RepairInfo struct {
 }
 
 type RequestHeader struct {
-
+	// Custom request header configuration switch: <li>on：Enable;</li> <li>off：Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Custom request header configuration rules
 	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
 }
 
@@ -19209,10 +19080,10 @@ type ResourceTag struct {
 }
 
 type ResponseHeader struct {
-
+	// Custom response header switch: <li>on：Enable;</li> <li>off：Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// Custom response header rules
 	HeaderRules []*HttpHeaderPathRule `json:"HeaderRules,omitempty" name:"HeaderRules"`
 }
 
@@ -19797,24 +19668,24 @@ type RoundPlayListItemInfo struct {
 }
 
 type RuleCache struct {
-
+	// Rule types:<li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-
+	// Content for each CacheType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li>
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 
-
+	// Cache configuration
 	CacheConfig *RuleCacheConfig `json:"CacheConfig,omitempty" name:"CacheConfig"`
 }
 
 type RuleCacheConfig struct {
-
+	// Cache configuration
 	Cache *CacheConfigCache `json:"Cache,omitempty" name:"Cache"`
 
-
+	// No cache configuration
 	NoCache *CacheConfigNoCache `json:"NoCache,omitempty" name:"NoCache"`
 
-
+	// Follows the origin server configuration
 	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitempty" name:"FollowOrigin"`
 }
 
@@ -20726,10 +20597,10 @@ type SplitMediaTaskSegmentInfo struct {
 
 // Predefined struct for user
 type StartCDNDomainRequestParams struct {
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+	// Domain operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -20739,10 +20610,10 @@ type StartCDNDomainRequestParams struct {
 type StartCDNDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain name.
+	// Domain.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
-	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+	// Domain operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitempty" name:"Operation"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -21578,24 +21449,24 @@ type UrlSignatureAuthPolicy struct {
 }
 
 type UserAgentFilter struct {
-
+	// UserAgent blacklist and whitelist configuration switches, the values are: <li>on:Enable; </li> <li>off: Disable. </li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// UA blacklist/whitelist effect rule list
 	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitempty" name:"FilterRules"`
 }
 
 type UserAgentFilterRule struct {
-
+	// UserAgent blacklist/whitelist type: <li>whitelist:whitelist;</li> <li>blacklist:blacklist.</li>
 	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
 
-
+	// UserAgent list.
 	UserAgents []*string `json:"UserAgents,omitempty" name:"UserAgents"`
 
-
+	// Rule type: <li>all: All files take effect;</li> <li>file: The specified file suffix takes effect;</li> <li>directory: The specified path takes effect;</li> <li>path: The specified absolute path takes effect.</li>
 	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
-
+	// Matching content under the corresponding type of RuleType:<li>For `all`, enter an asterisk (*).</li> <li>For `file`, enter the suffix, such as jpg, txt.</li> <li>For `directory`, enter the path, such as /xxx/test/.</li> <li>For `path`, enter the corresponding absolute path, such as /xxx/test.html.</li>
 	RulePaths []*string `json:"RulePaths,omitempty" name:"RulePaths"`
 }
 

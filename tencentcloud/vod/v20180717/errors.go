@@ -35,7 +35,7 @@ const (
 	// Operation failed: unsupported cover type.
 	FAILEDOPERATION_COVERTYPE = "FailedOperation.CoverType"
 
-	// 
+	// Operation failed: The database operation failed.
 	FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 
 	// You cannot modify the settings of the domain name as it is being deployed.
@@ -55,9 +55,6 @@ const (
 
 	// Network error.
 	FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetWorkError"
-
-	// No need to reduce the bitrate.
-	FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
 
 	// Operation failed: the parent category ID does not exist.
 	FAILEDOPERATION_PARENTIDNOFOUND = "FailedOperation.ParentIdNoFound"
