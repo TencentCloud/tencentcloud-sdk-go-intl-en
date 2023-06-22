@@ -1040,6 +1040,11 @@ type CreateRoomRequestParams struct {
 
 	// The ID of the group to bind. If you specify this parameter, only members of the group can enter this room.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether the teacher/teaching assistant can control students' cameras/microphones without the students' consent. Valid values: 
+	// `0` (default): No (consent required)
+	// `1`: Yes (no consent required)
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
 }
 
 type CreateRoomRequest struct {
@@ -1095,6 +1100,11 @@ type CreateRoomRequest struct {
 
 	// The ID of the group to bind. If you specify this parameter, only members of the group can enter this room.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether the teacher/teaching assistant can control students' cameras/microphones without the students' consent. Valid values: 
+	// `0` (default): No (consent required)
+	// `1`: Yes (no consent required)
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
 }
 
 func (r *CreateRoomRequest) ToJsonString() string {
@@ -1126,6 +1136,7 @@ func (r *CreateRoomRequest) FromJsonString(s string) error {
 	delete(f, "AudienceType")
 	delete(f, "RecordLayout")
 	delete(f, "GroupId")
+	delete(f, "EnableDirectControl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRoomRequest has unknown keys!", "")
 	}
@@ -2539,6 +2550,9 @@ type DescribeRoomResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
+	// Whether the students' consent is required to control their cameras/microphones.
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2999,8 +3013,16 @@ type EventInfo struct {
 	// The Unix timestamp (seconds) when the event occurred.
 	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
 
-	// The event type. Valid values:
+	// The event type. Valid values: 
 	// `RoomStart`: The class started. `RoomEnd`: The class ended. `MemberJoin`: A user joined. `MemberQuit`: A user left. `RecordFinish`: Recording is finished.
+	// ·Camera0n·: The camera is turned on.
+	// `Camera0ff`: The camera is turned off.
+	// `MicOn`: The mic is turned on.
+	// `MicOff`: The mic is turned off.
+	// `ScreenOn`: Screen sharing is enabled.
+	// `ScreenOff`: Screen sharing is disabled.
+	// `VisibleOn`: The page is visible.
+	// `VisibleOff`: The page is invisible.
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// The details of the event, including the room ID and the user to whom the event occurred.
@@ -3367,6 +3389,92 @@ type GroupInfo struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubGroupIds *string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
+}
+
+// Predefined struct for user
+type KickUserFromRoomRequestParams struct {
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The ID of the user to be removed.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The removal type: 
+	// `1`: Keep the user out temporarily. The `Duration` parameter specifies the ban duration, during which the user is banned from entering the room. 
+	// `2`: Remove the user permanently.
+	KickType *uint64 `json:"KickType,omitempty" name:"KickType"`
+
+	// The ban duration (seconds). This parameter is valid if `KickType` is `1`. The default value is `0`.
+	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+}
+
+type KickUserFromRoomRequest struct {
+	*tchttp.BaseRequest
+	
+	// The room ID.
+	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+
+	// The SDKAppID assigned by LCIC.
+	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+
+	// The ID of the user to be removed.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// The removal type: 
+	// `1`: Keep the user out temporarily. The `Duration` parameter specifies the ban duration, during which the user is banned from entering the room. 
+	// `2`: Remove the user permanently.
+	KickType *uint64 `json:"KickType,omitempty" name:"KickType"`
+
+	// The ban duration (seconds). This parameter is valid if `KickType` is `1`. The default value is `0`.
+	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+}
+
+func (r *KickUserFromRoomRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KickUserFromRoomRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RoomId")
+	delete(f, "SdkAppId")
+	delete(f, "UserId")
+	delete(f, "KickType")
+	delete(f, "Duration")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KickUserFromRoomRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type KickUserFromRoomResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type KickUserFromRoomResponse struct {
+	*tchttp.BaseResponse
+	Response *KickUserFromRoomResponseParams `json:"Response"`
+}
+
+func (r *KickUserFromRoomResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *KickUserFromRoomResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -3778,6 +3886,9 @@ type ModifyRoomRequestParams struct {
 
 	// The ID of the group to bind.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether the students' consent is required to control their cameras/microphones.
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
 }
 
 type ModifyRoomRequest struct {
@@ -3824,6 +3935,9 @@ type ModifyRoomRequest struct {
 
 	// The ID of the group to bind.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether the students' consent is required to control their cameras/microphones.
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
 }
 
 func (r *ModifyRoomRequest) ToJsonString() string {
@@ -3852,6 +3966,7 @@ func (r *ModifyRoomRequest) FromJsonString(s string) error {
 	delete(f, "DisableRecord")
 	delete(f, "Assistants")
 	delete(f, "GroupId")
+	delete(f, "EnableDirectControl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoomRequest has unknown keys!", "")
 	}
@@ -4095,6 +4210,9 @@ type RoomInfo struct {
 
 	// The ID of the group to bind. Note: This field may return null, indicating that no valid values can be obtained.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Whether the students' consent is required to control their cameras/microphones.
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
 }
 
 type RoomItem struct {
@@ -4143,6 +4261,14 @@ type RoomItem struct {
 	// The recording URL (HTTPS), which is generated only after a room ends.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RecordUrl *string `json:"RecordUrl,omitempty" name:"RecordUrl"`
+
+	// The maximum number of users allowed (including teachers) in the room. The default value is `0`, which indicates that no limit is set. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+
+	// Whether the students' consent is required to control their cameras/microphones.
+	// Note: This field may return null, indicating that no valid value was found.
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
 }
 
 // Predefined struct for user

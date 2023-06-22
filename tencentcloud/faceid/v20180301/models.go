@@ -92,13 +92,41 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
 	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitempty" name:"NeedVerifyIdCard"`
 
-	// The identity document type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `IndonesiaIDCard` (Indonesian identity card), `PhilippinesVoteID` (Philippine voters ID card), `PhilippinesDrivingLicense` (Philippine driver's license), `PhilippinesTinID` (Philippine TIN ID card), `PhilippinesSSSID` (Philippine SSS ID card), and `MLIDPassport` (passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions).
+	// The verification mode. Valid values:
+	// 1: OCR + liveness detection + face comparison
+	// 2: Liveness detection + face comparison
+	// 3: Liveness detection
+	// Default value: 1
+	CheckMode *int64 `json:"CheckMode,omitempty" name:"CheckMode"`
+
+	// The security level of the verification. Valid values:
+	// 1: Video-based liveness detection
+	// 2: Motion-based liveness detection
+	// 3: Reflection-based liveness detection
+	// 4: Motion- and reflection-based liveness detection
+	// Default value: 4
+	SecurityLevel *int64 `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
+
+	// The identity document type. Valid values: 
+	// 1. `HK` (default): Identity card of Hong Kong (China)
+	// 2. `ML`: Malaysian identity card
+	// 3. `IndonesiaIDCard`: Indonesian identity card
+	// 4. `PhilippinesVoteID`: Philippine voters ID card
+	// 5. `PhilippinesDrivingLicense`: Philippine driver's license
+	// 6. `PhilippinesTinID`: Philippine TIN ID card
+	// 7. `PhilippinesSSSID`: Philippine SSS ID card
+	// 8. `PhilippinesUMID`: Philippine UMID card
+	// 9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
 	IdCardType *string `json:"IdCardType,omitempty" name:"IdCardType"`
 
-	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed).
+	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
+	CompareImage *string `json:"CompareImage,omitempty" name:"CompareImage"`
+
+	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
 	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitempty" name:"DisableChangeOcrResult"`
 
-	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning. If `NeedVerifyIdCard` is set to `true`, this parameter must also be set to `true`.
+	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
+	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitempty" name:"DisableCheckOcrWarnings"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
@@ -111,13 +139,41 @@ type ApplySdkVerificationTokenRequest struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
 	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitempty" name:"NeedVerifyIdCard"`
 
-	// The identity document type. Valid values: `HK` (identity card of Hong Kong (China)) (default), `ML` (Malaysian identity card), `IndonesiaIDCard` (Indonesian identity card), `PhilippinesVoteID` (Philippine voters ID card), `PhilippinesDrivingLicense` (Philippine driver's license), `PhilippinesTinID` (Philippine TIN ID card), `PhilippinesSSSID` (Philippine SSS ID card), and `MLIDPassport` (passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions).
+	// The verification mode. Valid values:
+	// 1: OCR + liveness detection + face comparison
+	// 2: Liveness detection + face comparison
+	// 3: Liveness detection
+	// Default value: 1
+	CheckMode *int64 `json:"CheckMode,omitempty" name:"CheckMode"`
+
+	// The security level of the verification. Valid values:
+	// 1: Video-based liveness detection
+	// 2: Motion-based liveness detection
+	// 3: Reflection-based liveness detection
+	// 4: Motion- and reflection-based liveness detection
+	// Default value: 4
+	SecurityLevel *int64 `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
+
+	// The identity document type. Valid values: 
+	// 1. `HK` (default): Identity card of Hong Kong (China)
+	// 2. `ML`: Malaysian identity card
+	// 3. `IndonesiaIDCard`: Indonesian identity card
+	// 4. `PhilippinesVoteID`: Philippine voters ID card
+	// 5. `PhilippinesDrivingLicense`: Philippine driver's license
+	// 6. `PhilippinesTinID`: Philippine TIN ID card
+	// 7. `PhilippinesSSSID`: Philippine SSS ID card
+	// 8. `PhilippinesUMID`: Philippine UMID card
+	// 9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
 	IdCardType *string `json:"IdCardType,omitempty" name:"IdCardType"`
 
-	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed).
+	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
+	CompareImage *string `json:"CompareImage,omitempty" name:"CompareImage"`
+
+	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
 	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitempty" name:"DisableChangeOcrResult"`
 
-	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning. If `NeedVerifyIdCard` is set to `true`, this parameter must also be set to `true`.
+	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
+	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitempty" name:"DisableCheckOcrWarnings"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
@@ -137,7 +193,10 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "NeedVerifyIdCard")
+	delete(f, "CheckMode")
+	delete(f, "SecurityLevel")
 	delete(f, "IdCardType")
+	delete(f, "CompareImage")
 	delete(f, "DisableChangeOcrResult")
 	delete(f, "DisableCheckOcrWarnings")
 	delete(f, "Extra")
@@ -321,6 +380,15 @@ type CardVerifyResult struct {
 	// - FullName (string): Full name.
 	// - Birthday (string): Date of birth.
 	// 
+	// When the value of `IdCardType` is `PhilippinesUMID`:
+	// - Surname (string): Surname.
+	// - MiddleName (string):Middle name.
+	// - GivenName (string): Given name.
+	// - Sex (string): Gender.
+	// - Birthday (string): Date of birth.
+	// - Address (string): Address.
+	// - CRN (string): Common reference number (CRN).
+	// 
 	// (4) Indonesian identity card
 	// When the value of `IdCardType` is `IndonesiaIDCard`:
 	// - NIK (string): Single Identity Number.
@@ -349,7 +417,7 @@ type CardVerifyResult struct {
 	// - DateOfExpiration (string): Expiration date.
 	// - IssuingCountry (string): Issuing country.
 	// - NationalityCode (string): Country/region code.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardInfoOcrJson *FileInfo `json:"CardInfoOcrJson,omitempty" name:"CardInfoOcrJson"`
 
 	// The request ID of a single process.
@@ -372,7 +440,7 @@ type CompareResult struct {
 	// The description of the final verification result.
 	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
 
-
+	// The liveness algorithm package generated during this SDK-based liveness detection.
 	LiveData *FileInfo `json:"LiveData,omitempty" name:"LiveData"`
 
 	// The download URL of the video used for verification, which is valid for 10 minutes.
@@ -410,32 +478,13 @@ type CompareResult struct {
 	CompareErrorMsg *string `json:"CompareErrorMsg,omitempty" name:"CompareErrorMsg"`
 
 	// The similarity score of face comparison.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Sim *float64 `json:"Sim,omitempty" name:"Sim"`
 
-	// This field is disused.
+	// This parameter is disused.
 	IsNeedCharge *bool `json:"IsNeedCharge,omitempty" name:"IsNeedCharge"`
 
-	// The identity document photo info edited by the user in JSON. If the value of `DisableChangeOcrResult` is `true`, the editing feature is disabled and this field does not exist. The URL is valid for 10 minutes.
-	// When the value of `IdCardType` is `HK`:
-	// - CnName string: Chinese name
-	// - EnName string: English name
-	// - TelexCode string: The code corresponding to the Chinese name
-	// - Sex string: Gender. Valid values: `M` (male) and `F` (female).
-	// - Birthday string: Date of birth.
-	// - Permanent int: Whether it is a permanent residence identity card. Valid values: `0` (non-permanent), `1` (permanent), and `-1` (unknown).
-	// - IdNum string: ID number.
-	// - Symbol string: The ID symbol below the date of birth, such as "***AZ".
-	// - FirstIssueDate string: The date of first issuance.
-	// - CurrentIssueDate string: The date of latest issuance.
-	// 
-	// When the value of `IdCardType` is `ML`:
-	// - Sex string: `LELAKI` (male) and `PEREMPUAN` (female).
-	// - Birthday string
-	// - ID string
-	// - Name string
-	// - Address string
-	// - Type string: Identity document type.
+	// The identity document photo info edited by the user. Currently, this parameter is not applied.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardInfoInputJson *FileInfo `json:"CardInfoInputJson,omitempty" name:"CardInfoInputJson"`
 
@@ -965,22 +1014,22 @@ func (r *GetSdkVerificationResultRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetSdkVerificationResultResponseParams struct {
-	// The result of the entire verification process.
+	// The result code of the verification result.
 	Result *string `json:"Result,omitempty" name:"Result"`
 
-	// The result description.
+	// The verification result description.
 	Description *string `json:"Description,omitempty" name:"Description"`
 
 	// The charge count.
 	ChargeCount *int64 `json:"ChargeCount,omitempty" name:"ChargeCount"`
 
-	// The results of multiple OCR processes (in order). The result of the final process is taken as the valid result.
+	// The results of multiple OCR processes (in order). The result of the final process is used as the valid result.
 	CardVerifyResults []*CardVerifyResult `json:"CardVerifyResults,omitempty" name:"CardVerifyResults"`
 
-	// The results of multiple liveness detection processes (in order). The result of the final process is taken as the valid result.
+	// The results of multiple liveness detection processes (in order). The result of the final process is used as the valid result.
 	CompareResults []*CompareResult `json:"CompareResults,omitempty" name:"CompareResults"`
 
-	// Info passed in the process of getting the token.
+	// Data passed through in the process of getting the token.
 	Extra *string `json:"Extra,omitempty" name:"Extra"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

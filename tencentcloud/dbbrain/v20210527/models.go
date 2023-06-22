@@ -717,8 +717,7 @@ type DeleteDBDiagReportTasksRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL).
-	// Default value: `mysql`.
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -731,8 +730,7 @@ type DeleteDBDiagReportTasksRequest struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL).
-	// Default value: `mysql`.
+	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
 }
 
@@ -2531,6 +2529,12 @@ type DescribeSlowLogUserHostStatsResponseParams struct {
 	// Detailed list of the proportion of slow logs from each source address.
 	Items []*SlowLogHost `json:"Items,omitempty" name:"Items"`
 
+	// Detailed list of the percentages of slow logs from different source usernames
+	UserNameItems []*SlowLogUser `json:"UserNameItems,omitempty" name:"UserNameItems"`
+
+	// The number of source users
+	UserTotalCount *int64 `json:"UserTotalCount,omitempty" name:"UserTotalCount"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -2583,7 +2587,7 @@ type DescribeSlowLogsRequestParams struct {
 	// User
 	User []*string `json:"User,omitempty" name:"User"`
 
-	// ip
+	// IP
 	Ip []*string `json:"Ip,omitempty" name:"Ip"`
 
 	// Duration range. The left and right borders of the range are the zeroth and first element of the array, respectively.
@@ -2623,7 +2627,7 @@ type DescribeSlowLogsRequest struct {
 	// User
 	User []*string `json:"User,omitempty" name:"User"`
 
-	// ip
+	// IP
 	Ip []*string `json:"Ip,omitempty" name:"Ip"`
 
 	// Duration range. The left and right borders of the range are the zeroth and first element of the array, respectively.
@@ -3375,16 +3379,24 @@ type InstanceInfo struct {
 	// Running status of instance audit log. Valid values: normal (running), paused (suspension due to overdue payment).
 	AuditRunningStatus *string `json:"AuditRunningStatus,omitempty" name:"AuditRunningStatus"`
 
-	// Private VIP
+	// Private VIP 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InternalVip *string `json:"InternalVip,omitempty" name:"InternalVip"`
 
-	// Private network port
+	// Private network port 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InternalVport *int64 `json:"InternalVport,omitempty" name:"InternalVport"`
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Cluster ID. This field is only required for cluster database products like TDSQL-C. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Cluster name. This field is only required for cluster database products like TDSQL-C. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
 }
 
 type IssueTypeInfo struct {
@@ -3414,6 +3426,9 @@ type KillMySqlThreadsRequestParams struct {
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Whether to record the thread killing history. The default value is `true`, indicating “yes”. You can set it to `false` (“no”) to speed up the killing process.
+	RecordHistory *bool `json:"RecordHistory,omitempty" name:"RecordHistory"`
 }
 
 type KillMySqlThreadsRequest struct {
@@ -3433,6 +3448,9 @@ type KillMySqlThreadsRequest struct {
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
 	Product *string `json:"Product,omitempty" name:"Product"`
+
+	// Whether to record the thread killing history. The default value is `true`, indicating “yes”. You can set it to `false` (“no”) to speed up the killing process.
+	RecordHistory *bool `json:"RecordHistory,omitempty" name:"RecordHistory"`
 }
 
 func (r *KillMySqlThreadsRequest) ToJsonString() string {
@@ -3452,6 +3470,7 @@ func (r *KillMySqlThreadsRequest) FromJsonString(s string) error {
 	delete(f, "Threads")
 	delete(f, "SqlExecId")
 	delete(f, "Product")
+	delete(f, "RecordHistory")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "KillMySqlThreadsRequest has unknown keys!", "")
 	}
@@ -3925,6 +3944,17 @@ type SlowLogTopSqlItem struct {
 
 	// MD5 value of the SQL template
 	Md5 *string `json:"Md5,omitempty" name:"Md5"`
+}
+
+type SlowLogUser struct {
+	// Source username
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Percentage of the number of slow logs from this source username to the total number of slow logs
+	Ratio *float64 `json:"Ratio,omitempty" name:"Ratio"`
+
+	// Number of slow logs from this source username
+	Count *int64 `json:"Count,omitempty" name:"Count"`
 }
 
 type TableSpaceData struct {

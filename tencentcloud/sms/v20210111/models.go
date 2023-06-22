@@ -768,7 +768,7 @@ type DescribeTemplateListStatus struct {
 	// Whether it is Global SMS. 0: Mainland China SMS; 1: Global SMS.
 	International *uint64 `json:"International,omitempty" name:"International"`
 
-	// Template application status. Valid values: 0: approved; 1: under review; -1: application rejected or failed.
+	// Template application status. Valid values: 0: approved and effective; 1: under review; 2: approved but to be effective; -1: application rejected or failed.
 	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
 
 	// Review reply, i.e., response given by the reviewer, which is usually the reason for rejection.
@@ -1525,11 +1525,10 @@ type ReportConversionStatus struct {
 
 // Predefined struct for user
 type SendSmsRequestParams struct {
-	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers).
-	// For example, +60198890000, which has a + sign followed by 60 (country/region code) and then by 198890000 (mobile number).
+	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers). For example, +60198890000, which has a + sign followed by 60 (country/region code) and then by 198890000 (mobile number).
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
-	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 2400006666.
 	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
 
 	// Template ID, which can be viewed on the **Body Templates** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template). You must enter the ID of an approved template.
@@ -1545,7 +1544,7 @@ type SendSmsRequestParams struct {
 	// SMS code number extension, which is not activated by default. If you need to activate it, you can contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
 
-	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
+	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server. Note that the length must be less than 512 bytes.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.
@@ -1556,11 +1555,10 @@ type SendSmsRequestParams struct {
 type SendSmsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers).
-	// For example, +60198890000, which has a + sign followed by 60 (country/region code) and then by 198890000 (mobile number).
+	// Target mobile number in the E.164 standard in the format of +[country/region code][mobile number]. Up to 200 mobile numbers are supported in one request (which should be all Chinese mainland mobile numbers or all global mobile numbers). For example, +60198890000, which has a + sign followed by 60 (country/region code) and then by 198890000 (mobile number).
 	PhoneNumberSet []*string `json:"PhoneNumberSet,omitempty" name:"PhoneNumberSet"`
 
-	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
+	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 2400006666.
 	SmsSdkAppId *string `json:"SmsSdkAppId,omitempty" name:"SmsSdkAppId"`
 
 	// Template ID, which can be viewed on the **Body Templates** page in [Global SMS](https://console.cloud.tencent.com/smsv2/isms-template). You must enter the ID of an approved template.
@@ -1576,7 +1574,7 @@ type SendSmsRequest struct {
 	// SMS code number extension, which is not activated by default. If you need to activate it, you can contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81).
 	ExtendCode *string `json:"ExtendCode,omitempty" name:"ExtendCode"`
 
-	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server.
+	// User session content, which can carry context information such as user-side ID and will be returned as-is by the server. Note that the length must be less than 512 bytes.
 	SessionContext *string `json:"SessionContext,omitempty" name:"SessionContext"`
 
 	// For Global SMS, if you have applied for a separate `SenderId`, this parameter is required. By default, the public `SenderId` is used, in which case you don't need to enter this parameter.

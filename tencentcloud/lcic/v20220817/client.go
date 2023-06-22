@@ -691,6 +691,7 @@ func NewBindDocumentToRoomResponse() (response *BindDocumentToRoomResponse) {
 // This API is used to bind a document to a room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
@@ -704,6 +705,7 @@ func (c *Client) BindDocumentToRoom(request *BindDocumentToRoomRequest) (respons
 // This API is used to bind a document to a room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
@@ -973,7 +975,9 @@ func NewCreateRoomResponse() (response *CreateRoomResponse) {
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
@@ -983,6 +987,7 @@ func NewCreateRoomResponse() (response *CreateRoomResponse) {
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
 //  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
 func (c *Client) CreateRoom(request *CreateRoomRequest) (response *CreateRoomResponse, err error) {
     return c.CreateRoomWithContext(context.Background(), request)
@@ -994,7 +999,9 @@ func (c *Client) CreateRoom(request *CreateRoomRequest) (response *CreateRoomRes
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSTOOLONG = "FailedOperation.ClassTooLong"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
@@ -1004,6 +1011,7 @@ func (c *Client) CreateRoom(request *CreateRoomRequest) (response *CreateRoomRes
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEINSUFFICIENT_RECORD = "ResourceInsufficient.Record"
 //  RESOURCEINSUFFICIENT_ROOM = "ResourceInsufficient.Room"
+//  RESOURCENOTFOUND_GROUPNOTEXIST = "ResourceNotFound.GroupNotExist"
 //  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
 func (c *Client) CreateRoomWithContext(ctx context.Context, request *CreateRoomRequest) (response *CreateRoomResponse, err error) {
     if request == nil {
@@ -1642,7 +1650,7 @@ func NewDescribeDeveloperResponse() (response *DescribeDeveloperResponse) {
 }
 
 // DescribeDeveloper
-// This API is used to get the developer information.
+// This API is used to get developer information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
@@ -1657,7 +1665,7 @@ func (c *Client) DescribeDeveloper(request *DescribeDeveloperRequest) (response 
 }
 
 // DescribeDeveloper
-// This API is used to get the developer information.
+// This API is used to get developer information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
@@ -2652,6 +2660,7 @@ func NewGetRoomEventResponse() (response *GetRoomEventResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
 func (c *Client) GetRoomEvent(request *GetRoomEventRequest) (response *GetRoomEventResponse, err error) {
     return c.GetRoomEventWithContext(context.Background(), request)
@@ -2662,6 +2671,7 @@ func (c *Client) GetRoomEvent(request *GetRoomEventRequest) (response *GetRoomEv
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
 func (c *Client) GetRoomEventWithContext(ctx context.Context, request *GetRoomEventRequest) (response *GetRoomEventResponse, err error) {
     if request == nil {
@@ -2775,6 +2785,7 @@ func NewGetRoomsResponse() (response *GetRoomsResponse) {
 // This API is used to get the room list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
 //  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
@@ -2794,6 +2805,7 @@ func (c *Client) GetRooms(request *GetRoomsRequest) (response *GetRoomsResponse,
 // This API is used to get the room list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
 //  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
@@ -2879,6 +2891,56 @@ func (c *Client) GetWatermarkWithContext(ctx context.Context, request *GetWaterm
     request.SetContext(ctx)
     
     response = NewGetWatermarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewKickUserFromRoomRequest() (request *KickUserFromRoomRequest) {
+    request = &KickUserFromRoomRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lcic", APIVersion, "KickUserFromRoom")
+    
+    
+    return
+}
+
+func NewKickUserFromRoomResponse() (response *KickUserFromRoomResponse) {
+    response = &KickUserFromRoomResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// KickUserFromRoom
+// This API is used to remove a user from the room.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+func (c *Client) KickUserFromRoom(request *KickUserFromRoomRequest) (response *KickUserFromRoomResponse, err error) {
+    return c.KickUserFromRoomWithContext(context.Background(), request)
+}
+
+// KickUserFromRoom
+// This API is used to remove a user from the room.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
+func (c *Client) KickUserFromRoomWithContext(ctx context.Context, request *KickUserFromRoomRequest) (response *KickUserFromRoomResponse, err error) {
+    if request == nil {
+        request = NewKickUserFromRoomRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("KickUserFromRoom require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewKickUserFromRoomResponse()
     err = c.Send(request, response)
     return
 }
@@ -3353,6 +3415,7 @@ func NewRegisterUserResponse() (response *RegisterUserResponse) {
 // This API is used to register a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
@@ -3364,6 +3427,7 @@ func (c *Client) RegisterUser(request *RegisterUserRequest) (response *RegisterU
 // This API is used to register a user.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ORIGINIDEXISTS = "FailedOperation.OriginIdExists"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
@@ -3408,6 +3472,7 @@ func NewSetAppCustomContentResponse() (response *SetAppCustomContentResponse) {
 //  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CSSORJS = "InvalidParameter.CssOrJs"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 func (c *Client) SetAppCustomContent(request *SetAppCustomContentRequest) (response *SetAppCustomContentResponse, err error) {
     return c.SetAppCustomContentWithContext(context.Background(), request)
@@ -3420,6 +3485,7 @@ func (c *Client) SetAppCustomContent(request *SetAppCustomContentRequest) (respo
 //  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CSSORJS = "InvalidParameter.CssOrJs"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 func (c *Client) SetAppCustomContentWithContext(ctx context.Context, request *SetAppCustomContentRequest) (response *SetAppCustomContentResponse, err error) {
     if request == nil {

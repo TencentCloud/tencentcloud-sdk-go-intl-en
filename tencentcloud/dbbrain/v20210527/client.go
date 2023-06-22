@@ -2152,7 +2152,7 @@ func NewDescribeSlowLogsResponse() (response *DescribeSlowLogsResponse) {
 }
 
 // DescribeSlowLogs
-// This API is used to obtain the slow query log details of a SQL template in a specified time period.
+// This API is used to obtain the slow log details of a SQL template in a specified time period.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2173,7 +2173,7 @@ func (c *Client) DescribeSlowLogs(request *DescribeSlowLogsRequest) (response *D
 }
 
 // DescribeSlowLogs
-// This API is used to obtain the slow query log details of a SQL template in a specified time period.
+// This API is used to obtain the slow log details of a SQL template in a specified time period.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

@@ -675,6 +675,9 @@ type CreateDisksRequestParams struct {
 
 	// Specifies the cloud disk backup point quota.
 	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
+
+	// Specifies whether to enable disk bursting.
+	BurstPerformance *bool `json:"BurstPerformance,omitempty" name:"BurstPerformance"`
 }
 
 type CreateDisksRequest struct {
@@ -727,6 +730,9 @@ type CreateDisksRequest struct {
 
 	// Specifies the cloud disk backup point quota.
 	DiskBackupQuota *uint64 `json:"DiskBackupQuota,omitempty" name:"DiskBackupQuota"`
+
+	// Specifies whether to enable disk bursting.
+	BurstPerformance *bool `json:"BurstPerformance,omitempty" name:"BurstPerformance"`
 }
 
 func (r *CreateDisksRequest) ToJsonString() string {
@@ -757,6 +763,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "DeleteSnapshot")
 	delete(f, "AutoMountConfiguration")
 	delete(f, "DiskBackupQuota")
+	delete(f, "BurstPerformance")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDisksRequest has unknown keys!", "")
 	}
@@ -765,7 +772,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDisksResponseParams struct {
-	// List of IDs of the created cloud disks.
+	// ID list of the created cloud disks. Note: This field may return null, indicating that no valid values can be obtained.
 	DiskIdSet []*string `json:"DiskIdSet,omitempty" name:"DiskIdSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -796,7 +803,7 @@ type CreateSnapshotRequestParams struct {
 	// Snapshot name. If it is not specified, "Unnamed" will be used by default.
 	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
 
-	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, such as 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
+	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
 	Deadline *string `json:"Deadline,omitempty" name:"Deadline"`
 
 	// ID of the cloud disk backup point. When this parameter is specified, the snapshot will be created from the backup point.
@@ -815,7 +822,7 @@ type CreateSnapshotRequest struct {
 	// Snapshot name. If it is not specified, "Unnamed" will be used by default.
 	SnapshotName *string `json:"SnapshotName,omitempty" name:"SnapshotName"`
 
-	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, such as 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
+	// Expiration time of the snapshot. It must be in UTC ISO-8601 format, eg. 2022-01-08T09:47:55+00:00. The snapshot will be automatically deleted when it expires.
 	Deadline *string `json:"Deadline,omitempty" name:"Deadline"`
 
 	// ID of the cloud disk backup point. When this parameter is specified, the snapshot will be created from the backup point.
@@ -850,7 +857,7 @@ func (r *CreateSnapshotRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSnapshotResponseParams struct {
-	// ID of the new snapshot.
+	// ID of the created snapshot <br/>Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotId *string `json:"SnapshotId,omitempty" name:"SnapshotId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2107,6 +2114,9 @@ type Disk struct {
 	// Error message for the last operation of the cloud disk
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorPrompt *string `json:"ErrorPrompt,omitempty" name:"ErrorPrompt"`
+
+	// Whether the cloud disk has enabled disk bursting. Note: This field may return null, indicating that no valid values can be obtained.
+	BurstPerformance *bool `json:"BurstPerformance,omitempty" name:"BurstPerformance"`
 }
 
 type DiskBackup struct {
@@ -2756,20 +2766,23 @@ type ModifyDiskAttributesRequestParams struct {
 	// IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
-	// The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
-	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
-
 	// Name of new cloud disk.
 	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
 
 	// Whether it is an elastic cloud disk. FALSE: non-elastic cloud disk; TRUE: elastic cloud disk. You can only modify non-elastic cloud disks to elastic cloud disks.
 	Portable *bool `json:"Portable,omitempty" name:"Portable"`
 
+	// The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
 	// Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
 
 	// When changing the type of a cloud disk, this parameter can be passed to indicate the desired cloud disk type. Value range: <br><li>CLOUD_PREMIUM: Premium cloud storage.  <br><li>CLOUD_SSD: SSD cloud disk. <br>Currently, batch operations are not supported for changing type. That is, when `DiskType` is passed, only one cloud disk can be passed through `DiskIds`. <br>When the cloud disk type is changed, the changing of other attributes is not supported concurrently.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Enable/disable disk bursting.
+	BurstPerformanceOperation *string `json:"BurstPerformanceOperation,omitempty" name:"BurstPerformanceOperation"`
 }
 
 type ModifyDiskAttributesRequest struct {
@@ -2778,20 +2791,23 @@ type ModifyDiskAttributesRequest struct {
 	// IDs of one or more cloud disks to be operated. If multiple cloud disk IDs are selected, it only supports modifying all cloud disks with the same attributes.
 	DiskIds []*string `json:"DiskIds,omitempty" name:"DiskIds"`
 
-	// The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
-	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
-
 	// Name of new cloud disk.
 	DiskName *string `json:"DiskName,omitempty" name:"DiskName"`
 
 	// Whether it is an elastic cloud disk. FALSE: non-elastic cloud disk; TRUE: elastic cloud disk. You can only modify non-elastic cloud disks to elastic cloud disks.
 	Portable *bool `json:"Portable,omitempty" name:"Portable"`
 
+	// The new project ID of the cloud disk. Only the project ID of elastic cloud disk can be modified. The available projects and their IDs can be queried via the API [DescribeProject](https://intl.cloud.tencent.com/document/api/378/4400?from_cn_redirect=1).
+	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
 	// Whether the cloud disk is terminated with the CVM after it has been successfully mounted. `TRUE` indicates that it is terminated with the CVM. `FALSE` indicates that it is not terminated with the CVM. This is only supported for cloud disks and data disks that are pay-as-you-go.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitempty" name:"DeleteWithInstance"`
 
 	// When changing the type of a cloud disk, this parameter can be passed to indicate the desired cloud disk type. Value range: <br><li>CLOUD_PREMIUM: Premium cloud storage.  <br><li>CLOUD_SSD: SSD cloud disk. <br>Currently, batch operations are not supported for changing type. That is, when `DiskType` is passed, only one cloud disk can be passed through `DiskIds`. <br>When the cloud disk type is changed, the changing of other attributes is not supported concurrently.
 	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Enable/disable disk bursting.
+	BurstPerformanceOperation *string `json:"BurstPerformanceOperation,omitempty" name:"BurstPerformanceOperation"`
 }
 
 func (r *ModifyDiskAttributesRequest) ToJsonString() string {
@@ -2807,11 +2823,12 @@ func (r *ModifyDiskAttributesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "DiskIds")
-	delete(f, "ProjectId")
 	delete(f, "DiskName")
 	delete(f, "Portable")
+	delete(f, "ProjectId")
 	delete(f, "DeleteWithInstance")
 	delete(f, "DiskType")
+	delete(f, "BurstPerformanceOperation")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDiskAttributesRequest has unknown keys!", "")
 	}

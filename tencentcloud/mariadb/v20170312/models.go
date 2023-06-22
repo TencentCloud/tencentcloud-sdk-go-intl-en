@@ -599,7 +599,7 @@ type CreateDBInstanceRequestParams struct {
 	// Auto-renewal flag. Valid values: `1` (auto-renewal), `2` (no renewal upon expiration).
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// Whether IPv6 is supported.
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
@@ -666,7 +666,7 @@ type CreateDBInstanceRequest struct {
 	// Auto-renewal flag. Valid values: `1` (auto-renewal), `2` (no renewal upon expiration).
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
-	// Whether IPv6 is supported.
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
@@ -785,7 +785,7 @@ type CreateHourDBInstanceRequestParams struct {
 	// Security group ID. If this parameter is not passed in, no security groups will be associated when the instance is created.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// Whether IPv6 is supported.
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs.
@@ -802,7 +802,7 @@ type CreateHourDBInstanceRequestParams struct {
 	// `innodb_page_size` (innoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
 	InitParams []*DBParamValue `json:"InitParams,omitempty" name:"InitParams"`
 
-	// ID of the instance whose backup data will be rolled back to the new instance you create.
+	// ID of the instance to be rolled back, such as “2021-11-22 00:00:00”.
 	RollbackInstanceId *string `json:"RollbackInstanceId,omitempty" name:"RollbackInstanceId"`
 
 	// Rollback time.
@@ -845,7 +845,7 @@ type CreateHourDBInstanceRequest struct {
 	// Security group ID. If this parameter is not passed in, no security groups will be associated when the instance is created.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
 
-	// Whether IPv6 is supported.
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs.
@@ -862,7 +862,7 @@ type CreateHourDBInstanceRequest struct {
 	// `innodb_page_size` (innoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
 	InitParams []*DBParamValue `json:"InitParams,omitempty" name:"InitParams"`
 
-	// ID of the instance whose backup data will be rolled back to the new instance you create.
+	// ID of the instance to be rolled back, such as “2021-11-22 00:00:00”.
 	RollbackInstanceId *string `json:"RollbackInstanceId,omitempty" name:"RollbackInstanceId"`
 
 	// Rollback time.
@@ -964,6 +964,9 @@ type DBAccount struct {
 
 	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
 	SlaveConst *int64 `json:"SlaveConst,omitempty" name:"SlaveConst"`
+
+	// Maximum number of connections. `0` indicates no limit.
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 type DBInstance struct {
@@ -1921,6 +1924,12 @@ type DescribeDBInstanceDetailResponseParams struct {
 	// Nearby VPC access
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RsAccessStrategy *int64 `json:"RsAccessStrategy,omitempty" name:"RsAccessStrategy"`
+
+	// Unclaimed network resource
+	ReservedNetResources []*ReservedNetResource `json:"ReservedNetResources,omitempty" name:"ReservedNetResources"`
+
+
+	IsPhysicalReplicationSupported *bool `json:"IsPhysicalReplicationSupported,omitempty" name:"IsPhysicalReplicationSupported"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -4540,6 +4549,23 @@ type ProcedurePrivilege struct {
 	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 }
 
+type ReservedNetResource struct {
+	// VPC
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Reserved private network IP under `VpcId` and `SubnetId`
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Port under `Vip`
+	Vports []*int64 `json:"Vports,omitempty" name:"Vports"`
+
+	// Valid hours of VIP
+	RecycleTime *string `json:"RecycleTime,omitempty" name:"RecycleTime"`
+}
+
 // Predefined struct for user
 type ResetAccountPasswordRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
@@ -4793,6 +4819,98 @@ func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeDedicatedDBInstanceRequestParams struct {
+	// ID of the instance to be upgraded.  It is in the form of  `tdsql-ow728lmc`, which can be obtained by querying the instance details through the `DescribeDBInstances` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Memory size in GB,  which can be obtained through the `DescribeFenceDBInstanceSpecs` API.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Storage space size in GB.  You can obtain the disk space limits by querying instance specification through the `DescribeDBInstanceSpecs` API.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to retry again when missing the switch time window. Valid values: `0` (no), `1` (yes).
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitempty" name:"SwitchAutoRetry"`
+
+	// Switch start time
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// Switch end time
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
+type UpgradeDedicatedDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the instance to be upgraded.  It is in the form of  `tdsql-ow728lmc`, which can be obtained by querying the instance details through the `DescribeDBInstances` API.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Memory size in GB,  which can be obtained through the `DescribeFenceDBInstanceSpecs` API.
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Storage space size in GB.  You can obtain the disk space limits by querying instance specification through the `DescribeDBInstanceSpecs` API.
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Whether to retry again when missing the switch time window. Valid values: `0` (no), `1` (yes).
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitempty" name:"SwitchAutoRetry"`
+
+	// Switch start time
+	SwitchStartTime *string `json:"SwitchStartTime,omitempty" name:"SwitchStartTime"`
+
+	// Switch end time
+	SwitchEndTime *string `json:"SwitchEndTime,omitempty" name:"SwitchEndTime"`
+}
+
+func (r *UpgradeDedicatedDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeDedicatedDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "SwitchAutoRetry")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDedicatedDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeDedicatedDBInstanceResponseParams struct {
+	// Async task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpgradeDedicatedDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeDedicatedDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *UpgradeDedicatedDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeDedicatedDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

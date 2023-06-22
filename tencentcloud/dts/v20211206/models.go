@@ -814,10 +814,10 @@ func (r *CreateMigrateCheckJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateMigrationServiceRequestParams struct {
-	// Source database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`.
+	// Source database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`, and `cynosdbmysql`.
 	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
 
-	// Target database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`.
+	// Target database type. Valid values: `mysql`, `redis`, `percona`, `mongodb` ,`postgresql`, `sqlserver`, `mariadb`, and `cynosdbmysql`.
 	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
 
 	// Source instance region, such as `ap-guangzhou`.
@@ -842,10 +842,10 @@ type CreateMigrationServiceRequestParams struct {
 type CreateMigrationServiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Source database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`.
+	// Source database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`, and `cynosdbmysql`.
 	SrcDatabaseType *string `json:"SrcDatabaseType,omitempty" name:"SrcDatabaseType"`
 
-	// Target database type. Valid values: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`.
+	// Target database type. Valid values: `mysql`, `redis`, `percona`, `mongodb` ,`postgresql`, `sqlserver`, `mariadb`, and `cynosdbmysql`.
 	DstDatabaseType *string `json:"DstDatabaseType,omitempty" name:"DstDatabaseType"`
 
 	// Source instance region, such as `ap-guangzhou`.
@@ -916,6 +916,60 @@ func (r *CreateMigrationServiceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateMigrationServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateModifyCheckSyncJobRequestParams struct {
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type CreateModifyCheckSyncJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *CreateModifyCheckSyncJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateModifyCheckSyncJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateModifyCheckSyncJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateModifyCheckSyncJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateModifyCheckSyncJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateModifyCheckSyncJobResponseParams `json:"Response"`
+}
+
+func (r *CreateModifyCheckSyncJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateModifyCheckSyncJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1952,8 +2006,7 @@ type DescribeMigrationDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BriefMsg *string `json:"BriefMsg,omitempty" name:"BriefMsg"`
 
-	// Task status. Valid values: `created`, `checking`, `checkPass`, `checkNotPass`, `readyRun`, `running`, `readyComplete`, `success`, `failed`, `stopping`, `completing`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task status. Valid values: `created`(Created), `checking` (Checking), `checkPass` (Check passed), `checkNotPass` (Check not passed), `readyRun` (Ready for running), `running` (Running), `readyComplete` (Preparation completed), `success` (Successful), `failed` (Failed), `stopping` (Stopping), `completing` (Completing), `pausing` (Pausing), `manualPaused` (Paused). Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Task operation information
@@ -2188,6 +2241,75 @@ func (r *DescribeMigrationJobsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMigrationJobsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeModifyCheckSyncJobResultRequestParams struct {
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type DescribeModifyCheckSyncJobResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *DescribeModifyCheckSyncJobResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeModifyCheckSyncJobResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeModifyCheckSyncJobResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeModifyCheckSyncJobResultResponseParams struct {
+	// Execution status of the check task Valid values: `notStarted` (Not started), `running` (Running), `failed` (Failed), `success` (Successful).
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Number of check steps Note: This field may return null, indicating that no valid values can be obtained.
+	StepCount *uint64 `json:"StepCount,omitempty" name:"StepCount"`
+
+	// Current step Note: This field may return null, indicating that no valid values can be obtained.
+	StepCur *uint64 `json:"StepCur,omitempty" name:"StepCur"`
+
+	// Overall progress. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
+	Progress *uint64 `json:"Progress,omitempty" name:"Progress"`
+
+	// Step details Note: This field may return null, indicating that no valid values can be obtained.
+	StepInfos []*StepInfo `json:"StepInfos,omitempty" name:"StepInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeModifyCheckSyncJobResultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeModifyCheckSyncJobResultResponseParams `json:"Response"`
+}
+
+func (r *DescribeModifyCheckSyncJobResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeModifyCheckSyncJobResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2517,6 +2639,20 @@ type DifferenceItem struct {
 	FinishedAt *string `json:"FinishedAt,omitempty" name:"FinishedAt"`
 }
 
+type DynamicOptions struct {
+	// DML and DDL options to be synced. Valid values: `Insert` (INSERT), `Update` (UPDATE), `Delete` (DELETE), `DDL` (structure sync), `PartialDDL` (custom option, which is used together with `DdlOptions`). This parameter is required, and its value will overwrite the previous value. Note: This field may return null, indicating that no valid values can be obtained.
+	OpTypes []*string `json:"OpTypes,omitempty" name:"OpTypes"`
+
+	// DDL options to be synced. This parameter is required when `OpTypes` is `PartialDDL`, and its value will overwrite the previous value. Note: This field may return null, indicating that no valid values can be obtained.
+	DdlOptions []*DdlOption `json:"DdlOptions,omitempty" name:"DdlOptions"`
+
+	// Conflict resolution method. Valid values: `ReportError` (Report error), `Ignore` (Ignore), `Cover` (Overwrite), `ConditionCover` (Conditionally overwrite). Currently, this parameter cannot be modified if the target of the link is Kafka. Note: This field may return null, indicating that no valid values can be obtained.
+	ConflictHandleType *string `json:"ConflictHandleType,omitempty" name:"ConflictHandleType"`
+
+	// Detailed options of the conflict resolution method, such as the conditionally overwritten rows and condition operations for the “conditionally overwrite” method. The internal field of this parameter cannot be modified separately. If this parameter needs to be updated, update it fully. Note: This field may return null, indicating that no valid values can be obtained.
+	ConflictHandleOption *ConflictHandleOption `json:"ConflictHandleOption,omitempty" name:"ConflictHandleOption"`
+}
+
 type Endpoint struct {
 	// Region name, such as `ap-guangzhou`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2778,8 +2914,7 @@ type JobItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BriefMsg *string `json:"BriefMsg,omitempty" name:"BriefMsg"`
 
-	// Task status. Valid values: `creating`, `created`, `checking`, `checkPass`, `checkNotPass`, `readyRun`, `running`, `readyComplete`, `success`, `failed`, `stopping`, `completing`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task status. Valid values: `creating` (Creating), `created`(Created), `checking` (Checking), `checkPass` (Check passed), `checkNotPass` (Check not passed), `readyRun` (Ready for running), `running` (Running), `readyComplete` (Preparation completed), `success` (Successful), `failed` (Failed), `stopping` (Stopping), `completing` (Completing), `pausing` (Pausing), `manualPaused` (Paused). Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Task running mode. Valid values: `immediate`, `timed`.
@@ -3319,17 +3454,83 @@ func (r *ModifyMigrationJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySyncJobConfigRequestParams struct {
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// The modified sync objects
+	DynamicObjects *Objects `json:"DynamicObjects,omitempty" name:"DynamicObjects"`
+
+	// The modified sync task options
+	DynamicOptions *DynamicOptions `json:"DynamicOptions,omitempty" name:"DynamicOptions"`
+}
+
+type ModifySyncJobConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+
+	// The modified sync objects
+	DynamicObjects *Objects `json:"DynamicObjects,omitempty" name:"DynamicObjects"`
+
+	// The modified sync task options
+	DynamicOptions *DynamicOptions `json:"DynamicOptions,omitempty" name:"DynamicOptions"`
+}
+
+func (r *ModifySyncJobConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySyncJobConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "DynamicObjects")
+	delete(f, "DynamicOptions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySyncJobConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySyncJobConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifySyncJobConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySyncJobConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifySyncJobConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySyncJobConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Objects struct {
-	// Sync object type. Valid value: `Partial` (default).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Sync object type. Valid value: `Partial` (Partial objects). Note: This field may return null, indicating that no valid values can be obtained.
 	Mode *string `json:"Mode,omitempty" name:"Mode"`
 
 	// Sync object, which is required if `Mode` is `Partial`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Databases []*Database `json:"Databases,omitempty" name:"Databases"`
 
-	// Advanced object type, such as function and procedure. If you need to sync advanced objects, the initialization type must include structure initialization; that is, `Options.InitType` must be `Structure` or `Full`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Advanced object type, such as functions and procedures. If you need to sync advanced objects, the initialization type must include structure initialization, that is, `Options.InitType` must be `Structure` or `Full`. Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedObjects []*string `json:"AdvancedObjects,omitempty" name:"AdvancedObjects"`
 
 	// A redundant field that specifies the online DDL type
@@ -4092,6 +4293,60 @@ func (r *StartMigrateJobResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type StartModifySyncJobRequestParams struct {
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+type StartModifySyncJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Sync task ID
+	JobId *string `json:"JobId,omitempty" name:"JobId"`
+}
+
+func (r *StartModifySyncJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartModifySyncJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartModifySyncJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartModifySyncJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartModifySyncJobResponse struct {
+	*tchttp.BaseResponse
+	Response *StartModifySyncJobResponseParams `json:"Response"`
+}
+
+func (r *StartModifySyncJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartModifySyncJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type StartSyncJobRequestParams struct {
 	// Sync task ID
 	JobId *string `json:"JobId,omitempty" name:"JobId"`
@@ -4212,8 +4467,7 @@ type StepInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Warnings []*StepTip `json:"Warnings,omitempty" name:"Warnings"`
 
-	// Progress of the current step. Value range: 0-100.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Current step progress. Value range: 0-100. The value `-1` indicates that the progress of the current step is unavailable. Note: This field may return null, indicating that no valid values can be obtained.
 	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
 }
 
@@ -4715,8 +4969,7 @@ type View struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ViewName *string `json:"ViewName,omitempty" name:"ViewName"`
 
-	// New view name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Reserved field. Currently, a view cannot be renamed. Note: This field may return null, indicating that no valid values can be obtained.
 	NewViewName *string `json:"NewViewName,omitempty" name:"NewViewName"`
 }
 
