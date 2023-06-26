@@ -20,6 +20,80 @@ import (
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
 )
 
+type AirTransport struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// E-ticket No.
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Check code
+	CheckCode *string `json:"CheckCode,omitempty" name:"CheckCode"`
+
+	// Serial number
+	SerialNumber *string `json:"SerialNumber,omitempty" name:"SerialNumber"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Agent code
+	AgentCode *string `json:"AgentCode,omitempty" name:"AgentCode"`
+
+	// First line of the agent code
+	AgentCodeFirst *string `json:"AgentCodeFirst,omitempty" name:"AgentCodeFirst"`
+
+	// Second line of the agent code
+	AgentCodeSecond *string `json:"AgentCodeSecond,omitempty" name:"AgentCodeSecond"`
+
+	// Name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// ID card number
+	UserID *string `json:"UserID,omitempty" name:"UserID"`
+
+	// Issuer
+	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`
+
+	// Fare
+	Fare *string `json:"Fare,omitempty" name:"Fare"`
+
+	// Tax
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Fuel surcharge
+	FuelSurcharge *string `json:"FuelSurcharge,omitempty" name:"FuelSurcharge"`
+
+	// Aviation Development Fund
+	AirDevelopmentFund *string `json:"AirDevelopmentFund,omitempty" name:"AirDevelopmentFund"`
+
+	// Insurance
+	Insurance *string `json:"Insurance,omitempty" name:"Insurance"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Domestic or international tag
+	DomesticInternationalTag *string `json:"DomesticInternationalTag,omitempty" name:"DomesticInternationalTag"`
+
+	// Not-valid-before date
+	DateStart *string `json:"DateStart,omitempty" name:"DateStart"`
+
+	// Not-valid-after date
+	DateEnd *string `json:"DateEnd,omitempty" name:"DateEnd"`
+
+	// Endorsements/Restrictions
+	Endorsement *string `json:"Endorsement,omitempty" name:"Endorsement"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Items
+	FlightItems []*FlightItem `json:"FlightItems,omitempty" name:"FlightItems"`
+}
+
 // Predefined struct for user
 type BankCardOCRRequestParams struct {
 	// Base64-encoded value of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
@@ -170,6 +244,71 @@ func (r *BankCardOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BusInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Departure time
+	TimeGetOn *string `json:"TimeGetOn,omitempty" name:"TimeGetOn"`
+
+	// Departure date
+	DateGetOn *string `json:"DateGetOn,omitempty" name:"DateGetOn"`
+
+	// Departure station
+	StationGetOn *string `json:"StationGetOn,omitempty" name:"StationGetOn"`
+
+	// Destination
+	StationGetOff *string `json:"StationGetOff,omitempty" name:"StationGetOff"`
+
+	// Fare
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Consumption type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// ID card number
+	UserID *string `json:"UserID,omitempty" name:"UserID"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Departure place
+	PlaceGetOn *string `json:"PlaceGetOn,omitempty" name:"PlaceGetOn"`
+
+	// Check-in gate
+	GateNumber *string `json:"GateNumber,omitempty" name:"GateNumber"`
+
+	// Fare category
+	TicketType *string `json:"TicketType,omitempty" name:"TicketType"`
+
+	// Vehicle type
+	VehicleType *string `json:"VehicleType,omitempty" name:"VehicleType"`
+
+	// Seat No.
+	SeatNumber *string `json:"SeatNumber,omitempty" name:"SeatNumber"`
+
+	// Fleet number
+	TrainNumber *string `json:"TrainNumber,omitempty" name:"TrainNumber"`
+}
+
 type Coord struct {
 	// Horizontal coordinate
 	X *int64 `json:"X,omitempty" name:"X"`
@@ -189,6 +328,41 @@ type DetectedWords struct {
 
 	// A possible character
 	Character *string `json:"Character,omitempty" name:"Character"`
+}
+
+type FlightItem struct {
+	// Departure terminal
+	TerminalGetOn *string `json:"TerminalGetOn,omitempty" name:"TerminalGetOn"`
+
+	// Arrival terminal
+	TerminalGetOff *string `json:"TerminalGetOff,omitempty" name:"TerminalGetOff"`
+
+	// Carrier
+	Carrier *string `json:"Carrier,omitempty" name:"Carrier"`
+
+	// Flight number
+	FlightNumber *string `json:"FlightNumber,omitempty" name:"FlightNumber"`
+
+	// Class
+	Seat *string `json:"Seat,omitempty" name:"Seat"`
+
+	// Departure date
+	DateGetOn *string `json:"DateGetOn,omitempty" name:"DateGetOn"`
+
+	// Departure time
+	TimeGetOn *string `json:"TimeGetOn,omitempty" name:"TimeGetOn"`
+
+	// Departure city
+	StationGetOn *string `json:"StationGetOn,omitempty" name:"StationGetOn"`
+
+	// Arrival city
+	StationGetOff *string `json:"StationGetOff,omitempty" name:"StationGetOff"`
+
+	// Baggage allowance
+	Allow *string `json:"Allow,omitempty" name:"Allow"`
+
+	// Fare category
+	FareBasis *string `json:"FareBasis,omitempty" name:"FareBasis"`
 }
 
 // Predefined struct for user
@@ -458,6 +632,32 @@ func (r *GeneralBasicOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type GeneralMachineItem struct {
+	// Item name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Specification
+	Specification *string `json:"Specification,omitempty" name:"Specification"`
+
+	// Unit
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Quantity
+	Quantity *string `json:"Quantity,omitempty" name:"Quantity"`
+
+	// Unit price
+	Price *string `json:"Price,omitempty" name:"Price"`
+
+	// Amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Tax rate
+	TaxRate *string `json:"TaxRate,omitempty" name:"TaxRate"`
+
+	// Tax amount
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+}
+
 type GroupInfo struct {
 	// The elements in each line.
 	Groups []*LineInfo `json:"Groups,omitempty" name:"Groups"`
@@ -600,6 +800,330 @@ func (r *HKIDCardOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type HmtResidentPermitOCRRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// `FRONT`: The side with the profile photo.
+	// `BACK`: The side with the national emblem.
+	// If this parameter is not specified, the system will automatically determine the ID card side.
+	CardSide *string `json:"CardSide,omitempty" name:"CardSide"`
+}
+
+type HmtResidentPermitOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// `FRONT`: The side with the profile photo.
+	// `BACK`: The side with the national emblem.
+	// If this parameter is not specified, the system will automatically determine the ID card side.
+	CardSide *string `json:"CardSide,omitempty" name:"CardSide"`
+}
+
+func (r *HmtResidentPermitOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *HmtResidentPermitOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "CardSide")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "HmtResidentPermitOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type HmtResidentPermitOCRResponseParams struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Gender
+	Sex *string `json:"Sex,omitempty" name:"Sex"`
+
+	// Date of birth
+	Birth *string `json:"Birth,omitempty" name:"Birth"`
+
+	// Address
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// ID card number
+	IdCardNo *string `json:"IdCardNo,omitempty" name:"IdCardNo"`
+
+	// 0: Front side.
+	// 1: Back side.
+	CardType *int64 `json:"CardType,omitempty" name:"CardType"`
+
+	// Validity period
+	ValidDate *string `json:"ValidDate,omitempty" name:"ValidDate"`
+
+	// Issuing authority
+	Authority *string `json:"Authority,omitempty" name:"Authority"`
+
+	// Number of issues
+	VisaNum *string `json:"VisaNum,omitempty" name:"VisaNum"`
+
+	// Permit number
+	PassNo *string `json:"PassNo,omitempty" name:"PassNo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type HmtResidentPermitOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *HmtResidentPermitOCRResponseParams `json:"Response"`
+}
+
+func (r *HmtResidentPermitOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *HmtResidentPermitOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IDCardOCRRequestParams struct {
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// `FRONT`: The side with the profile photo.
+	// `BACK`: The side with the national emblem.
+	// If this parameter is not specified, the system will automatically determine the ID card side.
+	CardSide *string `json:"CardSide,omitempty" name:"CardSide"`
+
+	// The following parameters are all of `bool` type and default to `false`:
+	// `CropIdCard`: Crops the ID card photo (by removing extra edges outside the ID card and automatically correcting the shooting angle).
+	// `CropPortrait`: Crops the profile photo (by automatically cutting out the face area in the ID card).
+	// `CopyWarn`: Warns about photocopied images.
+	// `BorderCheckWarn`: Warns about border and frame occlusions.
+	// `ReshootWarn`: Warns about spoofed images.
+	// `DetectPsWarn`: Warns about photoshopped images.
+	// `TempIdWarn`: Warns about temporary ID cards.
+	// `InvalidDateWarn`: Warns about invalid ID card validity periods.
+	// `Quality`: Gets the image quality score (by evaluating the blurriness of the image).
+	// `MultiCardDetect`: Enables multi-card detection.
+	// `ReflectWarn`: Enables glare detection.
+	// 
+	// Parameter setting method via SDK:
+	// Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
+	// Parameter setting method via API 3.0 Explorer:
+	// Config = {"CropIdCard":true,"CropPortrait":true}
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+type IDCardOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// `FRONT`: The side with the profile photo.
+	// `BACK`: The side with the national emblem.
+	// If this parameter is not specified, the system will automatically determine the ID card side.
+	CardSide *string `json:"CardSide,omitempty" name:"CardSide"`
+
+	// The following parameters are all of `bool` type and default to `false`:
+	// `CropIdCard`: Crops the ID card photo (by removing extra edges outside the ID card and automatically correcting the shooting angle).
+	// `CropPortrait`: Crops the profile photo (by automatically cutting out the face area in the ID card).
+	// `CopyWarn`: Warns about photocopied images.
+	// `BorderCheckWarn`: Warns about border and frame occlusions.
+	// `ReshootWarn`: Warns about spoofed images.
+	// `DetectPsWarn`: Warns about photoshopped images.
+	// `TempIdWarn`: Warns about temporary ID cards.
+	// `InvalidDateWarn`: Warns about invalid ID card validity periods.
+	// `Quality`: Gets the image quality score (by evaluating the blurriness of the image).
+	// `MultiCardDetect`: Enables multi-card detection.
+	// `ReflectWarn`: Enables glare detection.
+	// 
+	// Parameter setting method via SDK:
+	// Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
+	// Parameter setting method via API 3.0 Explorer:
+	// Config = {"CropIdCard":true,"CropPortrait":true}
+	Config *string `json:"Config,omitempty" name:"Config"`
+}
+
+func (r *IDCardOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IDCardOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "CardSide")
+	delete(f, "Config")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IDCardOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IDCardOCRResponseParams struct {
+	// Name (profile photo side)
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Gender (profile photo side)
+	Sex *string `json:"Sex,omitempty" name:"Sex"`
+
+	// Ethnicity (profile photo side)
+	Nation *string `json:"Nation,omitempty" name:"Nation"`
+
+	// Date of birth (profile photo side)
+	Birth *string `json:"Birth,omitempty" name:"Birth"`
+
+	// Address (profile photo side)
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// ID number (profile photo side)
+	IdNum *string `json:"IdNum,omitempty" name:"IdNum"`
+
+	// Issuing authority (national emblem side)
+	Authority *string `json:"Authority,omitempty" name:"Authority"`
+
+	// Validity period (national emblem side)
+	ValidDate *string `json:"ValidDate,omitempty" name:"ValidDate"`
+
+	// Extended information, which will be returned only when requested. For the input parameters, please see example 3 and example 4.
+	// `IdCard`: Base64-encoded content of the cropped ID card photo, which will be returned if `Config.CropIdCard` is set to `true`.
+	// `Portrait`: Base64-encoded content of the ID photo on the card, which will be returned if `Config.CropPortrait` is set to `true`.
+	// 
+	// `Quality`: Image quality score, which will be returned if `Config.Quality` is set to `true`. Value range: 0–100. The lower the score, the blurrier the image. The recommended threshold is ≥ 50.
+	// `BorderCodeValue`: Warning threshold score for incomplete ID card borders, which will be returned if `Config.BorderCheckWarn` is set to `true`. Value range: 0–100. The lower the score, the lower the probability of border occlusion. The recommended threshold value is ≤ 50.
+	// 
+	// `WarnInfos`: Warning information. Warning codes and descriptions are as follows:
+	// -9100: The ID card validity period is invalid.
+	// -9101: The ID card borders are incomplete.
+	// -9102: The ID card image is photocopied.
+	// -9103: The ID card image is spoofed. 
+	// -9104: The ID card is a temporary one. 
+	// -9105: The ID card frame is occluded.
+	// -9106: The ID card image is photoshopped.
+	// -9107: The ID card image has glares.
+	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type IDCardOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *IDCardOCRResponseParams `json:"Response"`
+}
+
+func (r *IDCardOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IDCardOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type InvoiceItem struct {
+	// The recognition result.
+	// `OK`: Recognition is successful.
+	// `FailedOperation.UnsupportedInvoice`: Recognition is not supported.
+	// `FailedOperation.UnKnowError`: Recognition failed.
+	// For the information about other error codes, see the OCR API description for each invoice/ticket.
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// The type of invoice/ticket to which the recognized image belongs.
+	// -1: Unknown
+	// 0: Taxi receipt
+	// 1: Quota invoice
+	// 2: Train ticket
+	// 3: VAT invoice
+	// 5: Itinerary/Receipt of e-ticket for air transportation
+	// 8: General machine-printed invoice
+	// 9: Bus ticket
+	// 10: Ship ticket
+	// 11: VAT invoice (roll)
+	// 12: Car sales invoice
+	// 13: Toll receipt
+	// 15: Non-tax revenue invoice
+	// 16: Fully digitalized electronic invoice
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// The coordinates of the four vertices of the rotated image.
+	Polygon *Polygon `json:"Polygon,omitempty" name:"Polygon"`
+
+	// The rotation angle of the recognized image in the image with multiple types of invoices/tickets.
+	Angle *float64 `json:"Angle,omitempty" name:"Angle"`
+
+	// The recognized content.
+	SingleInvoiceInfos *SingleInvoiceItem `json:"SingleInvoiceInfos,omitempty" name:"SingleInvoiceInfos"`
+
+	// The number of the page on which the recognized invoice is in the image or PDF file, starting from 1 by default.
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// The detailed invoice type. See the description of `SubType`.
+	SubType *string `json:"SubType,omitempty" name:"SubType"`
+
+	// The invoice description. See the description of `TypeDescription`.
+	TypeDescription *string `json:"TypeDescription,omitempty" name:"TypeDescription"`
+
+	// The image file after cropping, encoded in Base64. This is returned if `EnableCutImage` is set to `true`.
+	CutImage *string `json:"CutImage,omitempty" name:"CutImage"`
+
+	// The description of the detailed invoice type. See the description of `SubType`.
+	SubTypeDescription *string `json:"SubTypeDescription,omitempty" name:"SubTypeDescription"`
+}
+
 type ItemCoord struct {
 	// X-coordinate of top-left point.
 	X *int64 `json:"X,omitempty" name:"X"`
@@ -631,6 +1155,110 @@ type Key struct {
 	// The name of a defined field (the key passed in).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConfigName *string `json:"ConfigName,omitempty" name:"ConfigName"`
+}
+
+type LicensePlateInfo struct {
+	// The recognized license plate number.
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// The confidence score (0–100).
+	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The bounding box coordinates of the text line in the original image.
+	Rect *Rect `json:"Rect,omitempty" name:"Rect"`
+
+	// The recognized license plate color, which currently includes "white", "black", "blue", "green", "yellow", "yellow-green", and "temporary plate".
+	Color *string `json:"Color,omitempty" name:"Color"`
+}
+
+// Predefined struct for user
+type LicensePlateOCRRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+type LicensePlateOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *LicensePlateOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *LicensePlateOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "LicensePlateOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type LicensePlateOCRResponseParams struct {
+	// The recognized license plate number.
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// The confidence score (0–100).
+	Confidence *int64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// The bounding box coordinates of the text line in the original image.
+	Rect *Rect `json:"Rect,omitempty" name:"Rect"`
+
+	// The recognized license plate color, which currently includes "white", "black", "blue", "green", "yellow", "yellow-green", and "temporary plate".
+	Color *string `json:"Color,omitempty" name:"Color"`
+
+	// The vehicle license plate information.
+	LicensePlateInfos []*LicensePlateInfo `json:"LicensePlateInfos,omitempty" name:"LicensePlateInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type LicensePlateOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *LicensePlateOCRResponseParams `json:"Response"`
+}
+
+func (r *LicensePlateOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *LicensePlateOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type LineInfo struct {
@@ -878,6 +1506,611 @@ func (r *MLIDPassportOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MachinePrintedInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Time
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Check code
+	CheckCode *string `json:"CheckCode,omitempty" name:"CheckCode"`
+
+	// Ciphertext
+	Ciphertext *string `json:"Ciphertext,omitempty" name:"Ciphertext"`
+
+	// Category
+	Category *string `json:"Category,omitempty" name:"Category"`
+
+	// Amount before tax
+	PretaxAmount *string `json:"PretaxAmount,omitempty" name:"PretaxAmount"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Tax
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Industry
+	IndustryClass *string `json:"IndustryClass,omitempty" name:"IndustryClass"`
+
+	// Seller's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Seller's taxpayer identification number
+	SellerTaxID *string `json:"SellerTaxID,omitempty" name:"SellerTaxID"`
+
+	// Seller's address and phone number
+	SellerAddrTel *string `json:"SellerAddrTel,omitempty" name:"SellerAddrTel"`
+
+	// Seller's bank account number
+	SellerBankAccount *string `json:"SellerBankAccount,omitempty" name:"SellerBankAccount"`
+
+	// Buyer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Buyer's taxpayer identification number
+	BuyerTaxID *string `json:"BuyerTaxID,omitempty" name:"BuyerTaxID"`
+
+	// Buyer's address and phone number
+	BuyerAddrTel *string `json:"BuyerAddrTel,omitempty" name:"BuyerAddrTel"`
+
+	// Buyer's bank account number
+	BuyerBankAccount *string `json:"BuyerBankAccount,omitempty" name:"BuyerBankAccount"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+
+	// Whether it is a general machine-printed invoice issued by Zhejiang or Guangdong province (0: No, 1: Yes)
+	ElectronicMark *int64 `json:"ElectronicMark,omitempty" name:"ElectronicMark"`
+
+	// Issuer
+	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`
+
+	// Payee
+	Receiptor *string `json:"Receiptor,omitempty" name:"Receiptor"`
+
+	// Reviewer
+	Reviewer *string `json:"Reviewer,omitempty" name:"Reviewer"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Operator's payment information
+	PaymentInfo *string `json:"PaymentInfo,omitempty" name:"PaymentInfo"`
+
+	// Operator-assigned invoice pickup user
+	TicketPickupUser *string `json:"TicketPickupUser,omitempty" name:"TicketPickupUser"`
+
+	// Operator's merchant number
+	MerchantNumber *string `json:"MerchantNumber,omitempty" name:"MerchantNumber"`
+
+	// Operator's order number
+	OrderNumber *string `json:"OrderNumber,omitempty" name:"OrderNumber"`
+
+	// Items
+	GeneralMachineItems []*GeneralMachineItem `json:"GeneralMachineItems,omitempty" name:"GeneralMachineItems"`
+}
+
+// Predefined struct for user
+type MainlandPermitOCRRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return the ID photo. By default, the ID photo is not returned.
+	RetProfile *bool `json:"RetProfile,omitempty" name:"RetProfile"`
+}
+
+type MainlandPermitOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to return the ID photo. By default, the ID photo is not returned.
+	RetProfile *bool `json:"RetProfile,omitempty" name:"RetProfile"`
+}
+
+func (r *MainlandPermitOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MainlandPermitOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "RetProfile")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MainlandPermitOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type MainlandPermitOCRResponseParams struct {
+	// Name in Chinese
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Name in English
+	EnglishName *string `json:"EnglishName,omitempty" name:"EnglishName"`
+
+	// Gender
+	Sex *string `json:"Sex,omitempty" name:"Sex"`
+
+	// Date of birth
+	Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
+
+	// Issuing authority
+	IssueAuthority *string `json:"IssueAuthority,omitempty" name:"IssueAuthority"`
+
+	// Validity period
+	ValidDate *string `json:"ValidDate,omitempty" name:"ValidDate"`
+
+	// ID number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Place of issue
+	IssueAddress *string `json:"IssueAddress,omitempty" name:"IssueAddress"`
+
+	// Number of issues
+	IssueNumber *string `json:"IssueNumber,omitempty" name:"IssueNumber"`
+
+	// Document type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Base64-encoded profile photo, which is returned only when `RetProfile` is set to `True`
+	Profile *string `json:"Profile,omitempty" name:"Profile"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type MainlandPermitOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *MainlandPermitOCRResponseParams `json:"Response"`
+}
+
+func (r *MainlandPermitOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *MainlandPermitOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type MedicalInvoice struct {
+
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+
+	CheckCode *string `json:"CheckCode,omitempty" name:"CheckCode"`
+
+
+	Place *string `json:"Place,omitempty" name:"Place"`
+
+
+	Reviewer *string `json:"Reviewer,omitempty" name:"Reviewer"`
+}
+
+type MotorVehicleSaleInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Amount before tax
+	PretaxAmount *string `json:"PretaxAmount,omitempty" name:"PretaxAmount"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Seller's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Seller's company code
+	SellerTaxID *string `json:"SellerTaxID,omitempty" name:"SellerTaxID"`
+
+	// Seller's phone number
+	SellerTel *string `json:"SellerTel,omitempty" name:"SellerTel"`
+
+	// Seller's address
+	SellerAddress *string `json:"SellerAddress,omitempty" name:"SellerAddress"`
+
+	// Seller's account opening bank
+	SellerBank *string `json:"SellerBank,omitempty" name:"SellerBank"`
+
+	// Seller's bank account number
+	SellerBankAccount *string `json:"SellerBankAccount,omitempty" name:"SellerBankAccount"`
+
+	// Buyer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Buyer's taxpayer identification number
+	BuyerTaxID *string `json:"BuyerTaxID,omitempty" name:"BuyerTaxID"`
+
+	// Buyer's ID number/organization code
+	BuyerID *string `json:"BuyerID,omitempty" name:"BuyerID"`
+
+	// Tax authority
+	TaxAuthorities *string `json:"TaxAuthorities,omitempty" name:"TaxAuthorities"`
+
+	// Code of the tax authority
+	TaxAuthoritiesCode *string `json:"TaxAuthoritiesCode,omitempty" name:"TaxAuthoritiesCode"`
+
+	// VIN
+	VIN *string `json:"VIN,omitempty" name:"VIN"`
+
+	// Vehicle model
+	VehicleModel *string `json:"VehicleModel,omitempty" name:"VehicleModel"`
+
+	// Engine No.
+	VehicleEngineCode *string `json:"VehicleEngineCode,omitempty" name:"VehicleEngineCode"`
+
+	// No. of the certificate of conformity
+	CertificateNumber *string `json:"CertificateNumber,omitempty" name:"CertificateNumber"`
+
+	// Inspection No.
+	InspectionNumber *string `json:"InspectionNumber,omitempty" name:"InspectionNumber"`
+
+	// Machine No.
+	MachineID *string `json:"MachineID,omitempty" name:"MachineID"`
+
+	// Vehicle type
+	VehicleType *string `json:"VehicleType,omitempty" name:"VehicleType"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Tax
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Tax rate
+	TaxRate *string `json:"TaxRate,omitempty" name:"TaxRate"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+
+	// Tonnage
+	Tonnage *string `json:"Tonnage,omitempty" name:"Tonnage"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Form type
+	FormType *string `json:"FormType,omitempty" name:"FormType"`
+
+	// Form name
+	FormName *string `json:"FormName,omitempty" name:"FormName"`
+
+	// Issuer
+	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`
+
+	// Tax payment voucher number
+	TaxNum *string `json:"TaxNum,omitempty" name:"TaxNum"`
+
+	// Passenger capacity
+	MaxPeopleNum *string `json:"MaxPeopleNum,omitempty" name:"MaxPeopleNum"`
+
+	// Origin
+	Origin *string `json:"Origin,omitempty" name:"Origin"`
+
+	// Machine-printed invoice code
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Machine-printed invoice number
+	MachineNumber *string `json:"MachineNumber,omitempty" name:"MachineNumber"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+}
+
+type NonTaxIncomeBill struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Check code
+	CheckCode *string `json:"CheckCode,omitempty" name:"CheckCode"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Payer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Payer's taxpayer identification number
+	BuyerTaxID *string `json:"BuyerTaxID,omitempty" name:"BuyerTaxID"`
+
+	// Payee's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Payee's company name
+	SellerCompany *string `json:"SellerCompany,omitempty" name:"SellerCompany"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Currency
+	CurrencyCode *string `json:"CurrencyCode,omitempty" name:"CurrencyCode"`
+
+	// Reviewer
+	Reviewer *string `json:"Reviewer,omitempty" name:"Reviewer"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Other information
+	OtherInfo *string `json:"OtherInfo,omitempty" name:"OtherInfo"`
+
+	// Payment code
+	PaymentCode *string `json:"PaymentCode,omitempty" name:"PaymentCode"`
+
+	// Collecting organization's code
+	ReceiveUnitCode *string `json:"ReceiveUnitCode,omitempty" name:"ReceiveUnitCode"`
+
+	// Collecting organization's name
+	Receiver *string `json:"Receiver,omitempty" name:"Receiver"`
+
+	// Operator
+	Operator *string `json:"Operator,omitempty" name:"Operator"`
+
+	// Payer's account
+	PayerAccount *string `json:"PayerAccount,omitempty" name:"PayerAccount"`
+
+	// Payer's account opening bank
+	PayerBank *string `json:"PayerBank,omitempty" name:"PayerBank"`
+
+	// Payee's account
+	ReceiverAccount *string `json:"ReceiverAccount,omitempty" name:"ReceiverAccount"`
+
+	// Payee's account opening bank
+	ReceiverBank *string `json:"ReceiverBank,omitempty" name:"ReceiverBank"`
+
+	// Items
+	NonTaxItems []*NonTaxItem `json:"NonTaxItems,omitempty" name:"NonTaxItems"`
+}
+
+type NonTaxItem struct {
+	// Item code
+	ItemID *string `json:"ItemID,omitempty" name:"ItemID"`
+
+	// Item name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Unit
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Quantity
+	Quantity *string `json:"Quantity,omitempty" name:"Quantity"`
+
+	// Standard
+	Standard *string `json:"Standard,omitempty" name:"Standard"`
+
+	// Amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+}
+
+type OtherInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// List
+	OtherInvoiceListItems []*OtherInvoiceItem `json:"OtherInvoiceListItems,omitempty" name:"OtherInvoiceListItems"`
+
+	// Table
+	OtherInvoiceTableItems []*OtherInvoiceList `json:"OtherInvoiceTableItems,omitempty" name:"OtherInvoiceTableItems"`
+}
+
+type OtherInvoiceItem struct {
+	// Field name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Field value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
+type OtherInvoiceList struct {
+	// List
+	OtherInvoiceItemList []*OtherInvoiceItem `json:"OtherInvoiceItemList,omitempty" name:"OtherInvoiceItemList"`
+}
+
+// Predefined struct for user
+type PermitOCRRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+type PermitOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *PermitOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PermitOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PermitOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PermitOCRResponseParams struct {
+	// Name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Name in English
+	EnglishName *string `json:"EnglishName,omitempty" name:"EnglishName"`
+
+	// ID number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Gender
+	Sex *string `json:"Sex,omitempty" name:"Sex"`
+
+	// Validity period
+	ValidDate *string `json:"ValidDate,omitempty" name:"ValidDate"`
+
+	// Issuing authority
+	IssueAuthority *string `json:"IssueAuthority,omitempty" name:"IssueAuthority"`
+
+	// Place of issue
+	IssueAddress *string `json:"IssueAddress,omitempty" name:"IssueAddress"`
+
+	// Date of birth
+	Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type PermitOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *PermitOCRResponseParams `json:"Response"`
+}
+
+func (r *PermitOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PermitOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Polygon struct {
 	// The coordinates of the upper-left vertex.
 	LeftTop *Coord `json:"LeftTop,omitempty" name:"LeftTop"`
@@ -890,6 +2123,201 @@ type Polygon struct {
 
 	// The coordinates of the lower-right vertex.
 	LeftBottom *Coord `json:"LeftBottom,omitempty" name:"LeftBottom"`
+}
+
+type QuotaInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+}
+
+// Predefined struct for user
+type RecognizeGeneralInvoiceRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, JPEG, and PDF. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image pixels: 20 to 10,000
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, JPEG, and PDF. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image pixels: 20 to 10,000
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The list of the types of invoices to be recognized. If this parameter is left empty, all types of invoices are recognized.
+	// 0: Taxi receipt
+	// 1: Quota invoice
+	// 2: Train ticket
+	// 3: VAT invoice
+	// 5: Itinerary/Receipt of e-ticket for air transport
+	// 8: General machine-printed invoice
+	// 9: Bus ticket
+	// 10: Ship ticket
+	// 11: VAT invoice (roll)
+	// 12: Car sales inovice
+	// 13: Toll receipt
+	// 15: Non-tax revenue invoice
+	// 16: Fully digitalized electronic invoice
+	// -1: Other
+	// 
+	// By default, this parameter is left empty, which means to recognize all types of invoices.
+	// When a single type is passed in, the image is recognized based on this type.
+	// You can only specify a singe type or all types, but not some types.
+	Types []*int64 `json:"Types,omitempty" name:"Types"`
+
+	// Whether to enable recognition of other invoices. If you enable this feature, other invoices can be recognized. Default value: `true`.	
+	EnableOther *bool `json:"EnableOther,omitempty" name:"EnableOther"`
+
+	// Whether to enable PDF recognition. If you enable this feature, both images and PDF files can be recognized. Default value: `true`.
+	EnablePdf *bool `json:"EnablePdf,omitempty" name:"EnablePdf"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `EnablePdf` is `true`. Default value: 1.
+	PdfPageNumber *int64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+
+	// Whether to enable multi-page PDF recognition. If you enable this feature, multiple pages of a PDF file can be recognized, and the recognition results of a maximum of the first 30 pages can be returned. After you enable this feature, input parameters `EnablePdf` and `PdfPageNumber` are invalid. Default value: `false`.
+	EnableMultiplePage *bool `json:"EnableMultiplePage,omitempty" name:"EnableMultiplePage"`
+
+	// Whether to return the Base64-encoded value of the cropped image. Default value: `false`.
+	EnableCutImage *bool `json:"EnableCutImage,omitempty" name:"EnableCutImage"`
+}
+
+type RecognizeGeneralInvoiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, JPEG, and PDF. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image pixels: 20 to 10,000
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, JPEG, and PDF. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image pixels: 20 to 10,000
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The list of the types of invoices to be recognized. If this parameter is left empty, all types of invoices are recognized.
+	// 0: Taxi receipt
+	// 1: Quota invoice
+	// 2: Train ticket
+	// 3: VAT invoice
+	// 5: Itinerary/Receipt of e-ticket for air transport
+	// 8: General machine-printed invoice
+	// 9: Bus ticket
+	// 10: Ship ticket
+	// 11: VAT invoice (roll)
+	// 12: Car sales inovice
+	// 13: Toll receipt
+	// 15: Non-tax revenue invoice
+	// 16: Fully digitalized electronic invoice
+	// -1: Other
+	// 
+	// By default, this parameter is left empty, which means to recognize all types of invoices.
+	// When a single type is passed in, the image is recognized based on this type.
+	// You can only specify a singe type or all types, but not some types.
+	Types []*int64 `json:"Types,omitempty" name:"Types"`
+
+	// Whether to enable recognition of other invoices. If you enable this feature, other invoices can be recognized. Default value: `true`.	
+	EnableOther *bool `json:"EnableOther,omitempty" name:"EnableOther"`
+
+	// Whether to enable PDF recognition. If you enable this feature, both images and PDF files can be recognized. Default value: `true`.
+	EnablePdf *bool `json:"EnablePdf,omitempty" name:"EnablePdf"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `EnablePdf` is `true`. Default value: 1.
+	PdfPageNumber *int64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+
+	// Whether to enable multi-page PDF recognition. If you enable this feature, multiple pages of a PDF file can be recognized, and the recognition results of a maximum of the first 30 pages can be returned. After you enable this feature, input parameters `EnablePdf` and `PdfPageNumber` are invalid. Default value: `false`.
+	EnableMultiplePage *bool `json:"EnableMultiplePage,omitempty" name:"EnableMultiplePage"`
+
+	// Whether to return the Base64-encoded value of the cropped image. Default value: `false`.
+	EnableCutImage *bool `json:"EnableCutImage,omitempty" name:"EnableCutImage"`
+}
+
+func (r *RecognizeGeneralInvoiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeGeneralInvoiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "Types")
+	delete(f, "EnableOther")
+	delete(f, "EnablePdf")
+	delete(f, "PdfPageNumber")
+	delete(f, "EnableMultiplePage")
+	delete(f, "EnableCutImage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeGeneralInvoiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeGeneralInvoiceResponseParams struct {
+	// Mixed invoice/ticket recognition result. Please click the link on the left for details.
+	MixedInvoiceItems []*InvoiceItem `json:"MixedInvoiceItems,omitempty" name:"MixedInvoiceItems"`
+
+	// Total number of pages in the PDF file.
+	TotalPDFCount *int64 `json:"TotalPDFCount,omitempty" name:"TotalPDFCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RecognizeGeneralInvoiceResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeGeneralInvoiceResponseParams `json:"Response"`
+}
+
+func (r *RecognizeGeneralInvoiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeGeneralInvoiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1787,6 +3215,462 @@ func (r *RecognizePhilippinesVoteIDOCRResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RecognizeTableAccurateOCRRequestParams struct {
+	// The Base64-encoded value of an image.
+	// The image cannot exceed 7 MB after being Base64-encoded. A resolution above 600 x 800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// Supported image pixels: 20 to 10,000
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image or PDF file.
+	// The image or PDF file cannot exceed 7 MB after being Base64-encoded. A resolution above 600 x 800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// Supported image pixels: 20 to 10,000
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `IsPdf` is `true`. Default value: `1`.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+}
+
+type RecognizeTableAccurateOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of an image.
+	// The image cannot exceed 7 MB after being Base64-encoded. A resolution above 600 x 800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// Supported image pixels: 20 to 10,000
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image or PDF file.
+	// The image or PDF file cannot exceed 7 MB after being Base64-encoded. A resolution above 600 x 800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported.
+	// Supported image pixels: 20 to 10,000
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF and the value of `IsPdf` is `true`. Default value: `1`.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitempty" name:"PdfPageNumber"`
+}
+
+func (r *RecognizeTableAccurateOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeTableAccurateOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "PdfPageNumber")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeTableAccurateOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeTableAccurateOCRResponseParams struct {
+	// The recognized text information. Please click the link on the left for details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TableDetections []*TableInfo `json:"TableDetections,omitempty" name:"TableDetections"`
+
+	// Base64-encoded Excel data.
+	Data *string `json:"Data,omitempty" name:"Data"`
+
+	// The total number of pages in the PDF file.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PdfPageSize *int64 `json:"PdfPageSize,omitempty" name:"PdfPageSize"`
+
+	// Image rotation angle in degrees. 0°: The horizontal direction of the text on the image; a negative value: rotate counterclockwise. Value range: -360° to 0°.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Angle *float64 `json:"Angle,omitempty" name:"Angle"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RecognizeTableAccurateOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeTableAccurateOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeTableAccurateOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeTableAccurateOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeThaiIDCardOCRRequestParams struct {
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+	// When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+	CropPortrait *bool `json:"CropPortrait,omitempty" name:"CropPortrait"`
+}
+
+type RecognizeThaiIDCardOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+
+	// Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+	// When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+	CropPortrait *bool `json:"CropPortrait,omitempty" name:"CropPortrait"`
+}
+
+func (r *RecognizeThaiIDCardOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeThaiIDCardOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "CropPortrait")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeThaiIDCardOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeThaiIDCardOCRResponseParams struct {
+	// ID card number
+	ID *string `json:"ID,omitempty" name:"ID"`
+
+	// Name in Thai
+	ThaiName *string `json:"ThaiName,omitempty" name:"ThaiName"`
+
+	// Name in English
+	EnFirstName *string `json:"EnFirstName,omitempty" name:"EnFirstName"`
+
+	// Address
+	Address *string `json:"Address,omitempty" name:"Address"`
+
+	// Date of birth
+	Birthday *string `json:"Birthday,omitempty" name:"Birthday"`
+
+	// Date of issue
+	IssueDate *string `json:"IssueDate,omitempty" name:"IssueDate"`
+
+	// Expiration date
+	ExpirationDate *string `json:"ExpirationDate,omitempty" name:"ExpirationDate"`
+
+	// Name in English
+	EnLastName *string `json:"EnLastName,omitempty" name:"EnLastName"`
+
+	// Identity photo
+	PortraitImage *string `json:"PortraitImage,omitempty" name:"PortraitImage"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type RecognizeThaiIDCardOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeThaiIDCardOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeThaiIDCardOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeThaiIDCardOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type Rect struct {
+	// X-coordinate of top-left point
+	X *int64 `json:"X,omitempty" name:"X"`
+
+	// Y-coordinate of top-left point
+	Y *int64 `json:"Y,omitempty" name:"Y"`
+
+	// Width
+	Width *int64 `json:"Width,omitempty" name:"Width"`
+
+	// Height
+	Height *int64 `json:"Height,omitempty" name:"Height"`
+}
+
+type SealInfo struct {
+	// Seal body information
+	SealBody *string `json:"SealBody,omitempty" name:"SealBody"`
+
+	// Seal coordinates
+	Location *Rect `json:"Location,omitempty" name:"Location"`
+
+	// Other text content
+	OtherTexts []*string `json:"OtherTexts,omitempty" name:"OtherTexts"`
+
+	// Seal shape. Valid values:
+	// 0: Round
+	// 1: Oval
+	// 2: Rectangle
+	// 3: Diamond
+	// 4: Triangle
+	SealShape *string `json:"SealShape,omitempty" name:"SealShape"`
+}
+
+// Predefined struct for user
+type SealOCRRequestParams struct {
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+type SealOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *SealOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SealOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SealOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SealOCRResponseParams struct {
+	// Seal content
+	SealBody *string `json:"SealBody,omitempty" name:"SealBody"`
+
+	// Seal coordinates
+	Location *Rect `json:"Location,omitempty" name:"Location"`
+
+	// Other text content
+	OtherTexts []*string `json:"OtherTexts,omitempty" name:"OtherTexts"`
+
+	// All seal information
+	SealInfos []*SealInfo `json:"SealInfos,omitempty" name:"SealInfos"`
+
+	// Seal shape. Valid values:
+	// 0: Round
+	// 1: Oval
+	// 2: Rectangle
+	// 3: Diamond
+	// 4: Triangle
+	SealShape *string `json:"SealShape,omitempty" name:"SealShape"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SealOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *SealOCRResponseParams `json:"Response"`
+}
+
+func (r *SealOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SealOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ShippingInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Date
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Time
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Departure station
+	StationGetOn *string `json:"StationGetOn,omitempty" name:"StationGetOn"`
+
+	// Destination
+	StationGetOff *string `json:"StationGetOff,omitempty" name:"StationGetOff"`
+
+	// Fare
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Currency
+	CurrencyCode *string `json:"CurrencyCode,omitempty" name:"CurrencyCode"`
+}
+
+type SingleInvoiceItem struct {
+	// Special VAT invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatSpecialInvoice *VatInvoiceInfo `json:"VatSpecialInvoice,omitempty" name:"VatSpecialInvoice"`
+
+	// General VAT invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatCommonInvoice *VatInvoiceInfo `json:"VatCommonInvoice,omitempty" name:"VatCommonInvoice"`
+
+	// Electronic general VAT invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatElectronicCommonInvoice *VatInvoiceInfo `json:"VatElectronicCommonInvoice,omitempty" name:"VatElectronicCommonInvoice"`
+
+	// Electronic special VAT invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatElectronicSpecialInvoice *VatInvoiceInfo `json:"VatElectronicSpecialInvoice,omitempty" name:"VatElectronicSpecialInvoice"`
+
+	// Blockchain electronic invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatElectronicInvoiceBlockchain *VatInvoiceInfo `json:"VatElectronicInvoiceBlockchain,omitempty" name:"VatElectronicInvoiceBlockchain"`
+
+	// Electronic general VAT invoice (toll)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatElectronicInvoiceToll *VatInvoiceInfo `json:"VatElectronicInvoiceToll,omitempty" name:"VatElectronicInvoiceToll"`
+
+	// Electronic invoice (special)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatElectronicSpecialInvoiceFull *VatElectronicInfo `json:"VatElectronicSpecialInvoiceFull,omitempty" name:"VatElectronicSpecialInvoiceFull"`
+
+	// Electronic invoice (general)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatElectronicInvoiceFull *VatElectronicInfo `json:"VatElectronicInvoiceFull,omitempty" name:"VatElectronicInvoiceFull"`
+
+	// General machine-printed invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MachinePrintedInvoice *MachinePrintedInvoice `json:"MachinePrintedInvoice,omitempty" name:"MachinePrintedInvoice"`
+
+	// Bus ticket
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BusInvoice *BusInvoice `json:"BusInvoice,omitempty" name:"BusInvoice"`
+
+	// Ship ticket
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShippingInvoice *ShippingInvoice `json:"ShippingInvoice,omitempty" name:"ShippingInvoice"`
+
+	// Toll receipt
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TollInvoice *TollInvoice `json:"TollInvoice,omitempty" name:"TollInvoice"`
+
+	// Other invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OtherInvoice *OtherInvoice `json:"OtherInvoice,omitempty" name:"OtherInvoice"`
+
+	// Motor vehicle sales invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MotorVehicleSaleInvoice *MotorVehicleSaleInvoice `json:"MotorVehicleSaleInvoice,omitempty" name:"MotorVehicleSaleInvoice"`
+
+	// Used car invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UsedCarPurchaseInvoice *UsedCarPurchaseInvoice `json:"UsedCarPurchaseInvoice,omitempty" name:"UsedCarPurchaseInvoice"`
+
+	// General VAT invoice (roll)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VatInvoiceRoll *VatInvoiceRoll `json:"VatInvoiceRoll,omitempty" name:"VatInvoiceRoll"`
+
+	// Taxi receipt
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaxiTicket *TaxiTicket `json:"TaxiTicket,omitempty" name:"TaxiTicket"`
+
+	// Quota invoice
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QuotaInvoice *QuotaInvoice `json:"QuotaInvoice,omitempty" name:"QuotaInvoice"`
+
+	// Itinerary/Receipt of e-ticket for air transportation
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AirTransport *AirTransport `json:"AirTransport,omitempty" name:"AirTransport"`
+
+	// Non-tax revenue general receipt
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NonTaxIncomeGeneralBill *NonTaxIncomeBill `json:"NonTaxIncomeGeneralBill,omitempty" name:"NonTaxIncomeGeneralBill"`
+
+	// Non-tax revenue unified payment voucher
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NonTaxIncomeElectronicBill *NonTaxIncomeBill `json:"NonTaxIncomeElectronicBill,omitempty" name:"NonTaxIncomeElectronicBill"`
+
+	// Train ticket
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TrainTicket *TrainTicket `json:"TrainTicket,omitempty" name:"TrainTicket"`
+
+
+	MedicalOutpatientInvoice *MedicalInvoice `json:"MedicalOutpatientInvoice,omitempty" name:"MedicalOutpatientInvoice"`
+
+
+	MedicalHospitalizedInvoice *MedicalInvoice `json:"MedicalHospitalizedInvoice,omitempty" name:"MedicalHospitalizedInvoice"`
+}
+
+// Predefined struct for user
 type SmartStructuralOCRV2RequestParams struct {
 	// The URL of the image.
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
@@ -1902,6 +3786,49 @@ func (r *SmartStructuralOCRV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type TableCellInfo struct {
+	// Column index of the upper-left corner of the cell
+	ColTl *int64 `json:"ColTl,omitempty" name:"ColTl"`
+
+	// Row index of the upper-left corner of the cell
+	RowTl *int64 `json:"RowTl,omitempty" name:"RowTl"`
+
+	// Column index of the lower-right corner of the cell
+	ColBr *int64 `json:"ColBr,omitempty" name:"ColBr"`
+
+	// Row index of the lower-right corner of the cell
+	RowBr *int64 `json:"RowBr,omitempty" name:"RowBr"`
+
+	// Recognized string text within the cell. If there are multiple lines, they are separated by "\n".
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// Cell type
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Cell confidence
+	Confidence *float64 `json:"Confidence,omitempty" name:"Confidence"`
+
+	// Four-point coordinates of the cell in the image
+	Polygon []*Coord `json:"Polygon,omitempty" name:"Polygon"`
+}
+
+type TableInfo struct {
+	// Cell content
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	Cells []*TableCellInfo `json:"Cells,omitempty" name:"Cells"`
+
+	// Type of text in the image. Valid values:
+	// 0: Non-table text
+	// 1: Text in a bordered table
+	// 2: Text in a borderless table
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// The coordinates of the four vertices (upper-left, upper-right, lower-right, and lower-left) of the table body.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TableCoordPoint []*Coord `json:"TableCoordPoint,omitempty" name:"TableCoordPoint"`
+}
+
 // Predefined struct for user
 type TableOCRRequestParams struct {
 	// Base64-encoded value of image.
@@ -1983,6 +3910,62 @@ func (r *TableOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type TaxiTicket struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Start time
+	TimeGetOn *string `json:"TimeGetOn,omitempty" name:"TimeGetOn"`
+
+	// End time
+	TimeGetOff *string `json:"TimeGetOff,omitempty" name:"TimeGetOff"`
+
+	// Unit price
+	Price *string `json:"Price,omitempty" name:"Price"`
+
+	// Distance
+	Mileage *string `json:"Mileage,omitempty" name:"Mileage"`
+
+	// Total amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Invoice place
+	Place *string `json:"Place,omitempty" name:"Place"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// License plate number
+	LicensePlate *string `json:"LicensePlate,omitempty" name:"LicensePlate"`
+
+	// Fuel surcharge
+	FuelFee *string `json:"FuelFee,omitempty" name:"FuelFee"`
+
+	// Booking fee
+	BookingCallFee *string `json:"BookingCallFee,omitempty" name:"BookingCallFee"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+}
+
 type TextDetection struct {
 	// Recognized text line content.
 	DetectedText *string `json:"DetectedText,omitempty" name:"DetectedText"`
@@ -2045,6 +4028,216 @@ type TextTable struct {
 	AdvancedInfo *string `json:"AdvancedInfo,omitempty" name:"AdvancedInfo"`
 }
 
+type TollInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Date
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Time
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Entrance
+	Entrance *string `json:"Entrance,omitempty" name:"Entrance"`
+
+	// Exit
+	Exit *string `json:"Exit,omitempty" name:"Exit"`
+
+	// Highway mark (0: No, 1: Yes)
+	HighwayMark *int64 `json:"HighwayMark,omitempty" name:"HighwayMark"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+}
+
+type TrainTicket struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Departure date
+	DateGetOn *string `json:"DateGetOn,omitempty" name:"DateGetOn"`
+
+	// Departure time
+	TimeGetOn *string `json:"TimeGetOn,omitempty" name:"TimeGetOn"`
+
+	// Passenger's name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Departure station
+	StationGetOn *string `json:"StationGetOn,omitempty" name:"StationGetOn"`
+
+	// Destination
+	StationGetOff *string `json:"StationGetOff,omitempty" name:"StationGetOff"`
+
+	// Seat class
+	Seat *string `json:"Seat,omitempty" name:"Seat"`
+
+	// Total amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Serial number
+	SerialNumber *string `json:"SerialNumber,omitempty" name:"SerialNumber"`
+
+	// ID card number
+	UserID *string `json:"UserID,omitempty" name:"UserID"`
+
+	// Check-in gate
+	GateNumber *string `json:"GateNumber,omitempty" name:"GateNumber"`
+
+	// Fleet number
+	TrainNumber *string `json:"TrainNumber,omitempty" name:"TrainNumber"`
+
+	// Handling fee
+	HandlingFee *string `json:"HandlingFee,omitempty" name:"HandlingFee"`
+
+	// Original ticket price
+	OriginalFare *string `json:"OriginalFare,omitempty" name:"OriginalFare"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Seat No.
+	SeatNumber *string `json:"SeatNumber,omitempty" name:"SeatNumber"`
+
+	// Ticket pickup address
+	PickUpAddress *string `json:"PickUpAddress,omitempty" name:"PickUpAddress"`
+
+	// Ticket change information
+	TicketChange *string `json:"TicketChange,omitempty" name:"TicketChange"`
+
+	// Additional fare
+	AdditionalFare *string `json:"AdditionalFare,omitempty" name:"AdditionalFare"`
+
+	// Receipt No.
+	ReceiptNumber *string `json:"ReceiptNumber,omitempty" name:"ReceiptNumber"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Whether it is for reimbursement only (0: No, 1: Yes)
+	ReimburseOnlyMark *int64 `json:"ReimburseOnlyMark,omitempty" name:"ReimburseOnlyMark"`
+}
+
+type UsedCarPurchaseInvoice struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Seller's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Seller's phone number
+	SellerTel *string `json:"SellerTel,omitempty" name:"SellerTel"`
+
+	// Seller's company code/personal ID card number
+	SellerTaxID *string `json:"SellerTaxID,omitempty" name:"SellerTaxID"`
+
+	// Seller's address
+	SellerAddress *string `json:"SellerAddress,omitempty" name:"SellerAddress"`
+
+	// Buyer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Buyer's company code/personal ID card number
+	BuyerID *string `json:"BuyerID,omitempty" name:"BuyerID"`
+
+	// Buyer's address
+	BuyerAddress *string `json:"BuyerAddress,omitempty" name:"BuyerAddress"`
+
+	// Buyer's phone number
+	BuyerTel *string `json:"BuyerTel,omitempty" name:"BuyerTel"`
+
+	// Company (used car market) name
+	CompanyName *string `json:"CompanyName,omitempty" name:"CompanyName"`
+
+	// Company's taxpayer identification number
+	CompanyTaxID *string `json:"CompanyTaxID,omitempty" name:"CompanyTaxID"`
+
+	// Company's account opening bank and account number
+	CompanyBankAccount *string `json:"CompanyBankAccount,omitempty" name:"CompanyBankAccount"`
+
+	// Company's phone number
+	CompanyTel *string `json:"CompanyTel,omitempty" name:"CompanyTel"`
+
+	// Company's address
+	CompanyAddress *string `json:"CompanyAddress,omitempty" name:"CompanyAddress"`
+
+	// Name of the transfer-to department of motor vehicles
+	TransferAdministrationName *string `json:"TransferAdministrationName,omitempty" name:"TransferAdministrationName"`
+
+	// License plate number
+	LicensePlate *string `json:"LicensePlate,omitempty" name:"LicensePlate"`
+
+	// Registration certificate No.
+	RegistrationNumber *string `json:"RegistrationNumber,omitempty" name:"RegistrationNumber"`
+
+	// VIN
+	VIN *string `json:"VIN,omitempty" name:"VIN"`
+
+	// Vehicle model
+	VehicleModel *string `json:"VehicleModel,omitempty" name:"VehicleModel"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Vehicle type
+	VehicleType *string `json:"VehicleType,omitempty" name:"VehicleType"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Form type
+	FormType *string `json:"FormType,omitempty" name:"FormType"`
+
+	// Form name
+	FormName *string `json:"FormName,omitempty" name:"FormName"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+}
+
 type Value struct {
 	// The value of the recognized field.
 	AutoContent *string `json:"AutoContent,omitempty" name:"AutoContent"`
@@ -2052,6 +4245,435 @@ type Value struct {
 	// The coordinates of the four vertices.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Coord *Polygon `json:"Coord,omitempty" name:"Coord"`
+}
+
+type VatElectronicInfo struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Amount before tax
+	PretaxAmount *string `json:"PretaxAmount,omitempty" name:"PretaxAmount"`
+
+	// Tax
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Seller's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Seller's taxpayer identification number
+	SellerTaxID *string `json:"SellerTaxID,omitempty" name:"SellerTaxID"`
+
+	// Buyer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Buyer's taxpayer identification number
+	BuyerTaxID *string `json:"BuyerTaxID,omitempty" name:"BuyerTaxID"`
+
+	// Issuer
+	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Subtotal amount
+	SubTotal *string `json:"SubTotal,omitempty" name:"SubTotal"`
+
+	// Subtotal tax
+	SubTax *string `json:"SubTax,omitempty" name:"SubTax"`
+
+	// Detailed items of an electronic invoice
+	VatElectronicItems []*VatElectronicItemInfo `json:"VatElectronicItems,omitempty" name:"VatElectronicItems"`
+}
+
+type VatElectronicItemInfo struct {
+	// Item name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Quantity
+	Quantity *string `json:"Quantity,omitempty" name:"Quantity"`
+
+	// Specification
+	Specification *string `json:"Specification,omitempty" name:"Specification"`
+
+	// Unit price
+	Price *string `json:"Price,omitempty" name:"Price"`
+
+	// Amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Tax rate
+	TaxRate *string `json:"TaxRate,omitempty" name:"TaxRate"`
+
+	// Tax amount
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Unit
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Vehicle type
+	VehicleType *string `json:"VehicleType,omitempty" name:"VehicleType"`
+
+	// Vehicle No.
+	VehicleBrand *string `json:"VehicleBrand,omitempty" name:"VehicleBrand"`
+
+	// Departure place
+	DeparturePlace *string `json:"DeparturePlace,omitempty" name:"DeparturePlace"`
+
+	// Destination
+	ArrivalPlace *string `json:"ArrivalPlace,omitempty" name:"ArrivalPlace"`
+
+	// Name of the transported goods. It is returned only for a goods transport service invoice.
+	TransportItemsName *string `json:"TransportItemsName,omitempty" name:"TransportItemsName"`
+
+	// Location of the construction service. It is returned only for a construction invoice.
+	PlaceOfBuildingService *string `json:"PlaceOfBuildingService,omitempty" name:"PlaceOfBuildingService"`
+
+	// Name of the construction project. It is returned only for a construction invoice.
+	BuildingName *string `json:"BuildingName,omitempty" name:"BuildingName"`
+
+	// Property or real estate ownership certificate No. It is returned only for a real estate operation and leasing service invoice.
+	EstateNumber *string `json:"EstateNumber,omitempty" name:"EstateNumber"`
+
+	// Unit of area. It is returned only for a real estate operation and leasing service invoice.
+	AreaUnit *string `json:"AreaUnit,omitempty" name:"AreaUnit"`
+}
+
+type VatInvoiceInfo struct {
+	// Check code
+	CheckCode *string `json:"CheckCode,omitempty" name:"CheckCode"`
+
+	// Form type
+	FormType *string `json:"FormType,omitempty" name:"FormType"`
+
+	// Vehicle and vessel tax
+	TravelTax *string `json:"TravelTax,omitempty" name:"TravelTax"`
+
+	// Buyer's address and phone number
+	BuyerAddrTel *string `json:"BuyerAddrTel,omitempty" name:"BuyerAddrTel"`
+
+	// Buyer's bank account number
+	BuyerBankAccount *string `json:"BuyerBankAccount,omitempty" name:"BuyerBankAccount"`
+
+	// Company seal content
+	CompanySealContent *string `json:"CompanySealContent,omitempty" name:"CompanySealContent"`
+
+	// Tax authority seal content
+	TaxSealContent *string `json:"TaxSealContent,omitempty" name:"TaxSealContent"`
+
+	// Service type
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Whether there is an agent (0: No, 1: Yes)
+	AgentMark *int64 `json:"AgentMark,omitempty" name:"AgentMark"`
+
+	// Whether there is a toll (0: No, 1: Yes)
+	TransitMark *int64 `json:"TransitMark,omitempty" name:"TransitMark"`
+
+	// Whether there is refined oil (0: No, 1: Yes)
+	OilMark *int64 `json:"OilMark,omitempty" name:"OilMark"`
+
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Machine-printed invoice number
+	NumberConfirm *string `json:"NumberConfirm,omitempty" name:"NumberConfirm"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Amount before tax
+	PretaxAmount *string `json:"PretaxAmount,omitempty" name:"PretaxAmount"`
+
+	// Tax
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Machine No.
+	MachineCode *string `json:"MachineCode,omitempty" name:"MachineCode"`
+
+	// Ciphertext
+	Ciphertext *string `json:"Ciphertext,omitempty" name:"Ciphertext"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Seller's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Seller's taxpayer identification number
+	SellerTaxID *string `json:"SellerTaxID,omitempty" name:"SellerTaxID"`
+
+	// Seller's address and phone number
+	SellerAddrTel *string `json:"SellerAddrTel,omitempty" name:"SellerAddrTel"`
+
+	// Seller's bank account number
+	SellerBankAccount *string `json:"SellerBankAccount,omitempty" name:"SellerBankAccount"`
+
+	// Buyer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Buyer's taxpayer identification number
+	BuyerTaxID *string `json:"BuyerTaxID,omitempty" name:"BuyerTaxID"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+
+	// Issuer
+	Issuer *string `json:"Issuer,omitempty" name:"Issuer"`
+
+	// Reviewer
+	Reviewer *string `json:"Reviewer,omitempty" name:"Reviewer"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// Information about VAT invoice items
+	VatInvoiceItemInfos []*VatInvoiceItemInfo `json:"VatInvoiceItemInfos,omitempty" name:"VatInvoiceItemInfos"`
+
+	// Machine-printed invoice code
+	CodeConfirm *string `json:"CodeConfirm,omitempty" name:"CodeConfirm"`
+
+	// Payee
+	Receiptor *string `json:"Receiptor,omitempty" name:"Receiptor"`
+
+
+	ElectronicFullMark *int64 `json:"ElectronicFullMark,omitempty" name:"ElectronicFullMark"`
+
+
+	ElectronicFullNumber *string `json:"ElectronicFullNumber,omitempty" name:"ElectronicFullNumber"`
+
+
+	FormName *string `json:"FormName,omitempty" name:"FormName"`
+}
+
+type VatInvoiceItemInfo struct {
+	// Item name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Specification
+	Specification *string `json:"Specification,omitempty" name:"Specification"`
+
+	// Unit
+	Unit *string `json:"Unit,omitempty" name:"Unit"`
+
+	// Quantity
+	Quantity *string `json:"Quantity,omitempty" name:"Quantity"`
+
+	// Unit price
+	Price *string `json:"Price,omitempty" name:"Price"`
+
+	// Amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Tax rate
+	TaxRate *string `json:"TaxRate,omitempty" name:"TaxRate"`
+
+	// Tax amount
+	Tax *string `json:"Tax,omitempty" name:"Tax"`
+
+	// Start date
+	DateStart *string `json:"DateStart,omitempty" name:"DateStart"`
+
+	// End date
+	DateEnd *string `json:"DateEnd,omitempty" name:"DateEnd"`
+
+	// License plate number
+	LicensePlate *string `json:"LicensePlate,omitempty" name:"LicensePlate"`
+
+	// Vehicle type
+	VehicleType *string `json:"VehicleType,omitempty" name:"VehicleType"`
+}
+
+type VatInvoiceRoll struct {
+	// Invoice title
+	Title *string `json:"Title,omitempty" name:"Title"`
+
+	// Invoice code
+	Code *string `json:"Code,omitempty" name:"Code"`
+
+	// Invoice number
+	Number *string `json:"Number,omitempty" name:"Number"`
+
+	// Machine-printed invoice number
+	NumberConfirm *string `json:"NumberConfirm,omitempty" name:"NumberConfirm"`
+
+	// Date of issue
+	Date *string `json:"Date,omitempty" name:"Date"`
+
+	// Check code
+	CheckCode *string `json:"CheckCode,omitempty" name:"CheckCode"`
+
+	// Seller's name
+	Seller *string `json:"Seller,omitempty" name:"Seller"`
+
+	// Seller's taxpayer identification number
+	SellerTaxID *string `json:"SellerTaxID,omitempty" name:"SellerTaxID"`
+
+	// Buyer's name
+	Buyer *string `json:"Buyer,omitempty" name:"Buyer"`
+
+	// Buyer's taxpayer identification number
+	BuyerTaxID *string `json:"BuyerTaxID,omitempty" name:"BuyerTaxID"`
+
+	// Category
+	Category *string `json:"Category,omitempty" name:"Category"`
+
+	// Total amount (in figures)
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// Total amount (in words)
+	TotalCn *string `json:"TotalCn,omitempty" name:"TotalCn"`
+
+	// Invoice type
+	Kind *string `json:"Kind,omitempty" name:"Kind"`
+
+	// Province
+	Province *string `json:"Province,omitempty" name:"Province"`
+
+	// City
+	City *string `json:"City,omitempty" name:"City"`
+
+	// Whether there is a company seal (0: No, 1: Yes)
+	CompanySealMark *int64 `json:"CompanySealMark,omitempty" name:"CompanySealMark"`
+
+	// Whether there is a QR code (0: No, 1: Yes)
+	QRCodeMark *int64 `json:"QRCodeMark,omitempty" name:"QRCodeMark"`
+
+	// Service type
+	ServiceName *string `json:"ServiceName,omitempty" name:"ServiceName"`
+
+	// Company seal content
+	CompanySealContent *string `json:"CompanySealContent,omitempty" name:"CompanySealContent"`
+
+	// Tax authority seal content
+	TaxSealContent *string `json:"TaxSealContent,omitempty" name:"TaxSealContent"`
+
+	// Items
+	VatRollItems []*VatRollItem `json:"VatRollItems,omitempty" name:"VatRollItems"`
+}
+
+type VatRollItem struct {
+	// Item name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Quantity
+	Quantity *string `json:"Quantity,omitempty" name:"Quantity"`
+
+	// Unit price
+	Price *string `json:"Price,omitempty" name:"Price"`
+
+	// Amount
+	Total *string `json:"Total,omitempty" name:"Total"`
+}
+
+// Predefined struct for user
+type VinOCRRequestParams struct {
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+type VinOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+}
+
+func (r *VinOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VinOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VinOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type VinOCRResponseParams struct {
+	// The detected VIN.
+	Vin *string `json:"Vin,omitempty" name:"Vin"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type VinOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *VinOCRResponseParams `json:"Response"`
+}
+
+func (r *VinOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VinOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type WordItem struct {
