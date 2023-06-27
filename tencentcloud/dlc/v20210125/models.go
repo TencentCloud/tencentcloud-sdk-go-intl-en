@@ -21,6 +21,60 @@ import (
 )
 
 // Predefined struct for user
+type CancelSparkSessionBatchSQLRequestParams struct {
+	// The unique identifier of a batch task.
+	BatchId *string `json:"BatchId,omitempty" name:"BatchId"`
+}
+
+type CancelSparkSessionBatchSQLRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique identifier of a batch task.
+	BatchId *string `json:"BatchId,omitempty" name:"BatchId"`
+}
+
+func (r *CancelSparkSessionBatchSQLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelSparkSessionBatchSQLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BatchId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelSparkSessionBatchSQLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CancelSparkSessionBatchSQLResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CancelSparkSessionBatchSQLResponse struct {
+	*tchttp.BaseResponse
+	Response *CancelSparkSessionBatchSQLResponseParams `json:"Response"`
+}
+
+func (r *CancelSparkSessionBatchSQLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelSparkSessionBatchSQLResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CancelTaskRequestParams struct {
 	// Globally unique task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -115,6 +169,41 @@ type Column struct {
 	IsPartition *bool `json:"IsPartition,omitempty" name:"IsPartition"`
 }
 
+type CommonMetrics struct {
+
+	CreateTaskTime *float64 `json:"CreateTaskTime,omitempty" name:"CreateTaskTime"`
+
+
+	ProcessTime *float64 `json:"ProcessTime,omitempty" name:"ProcessTime"`
+
+
+	QueueTime *float64 `json:"QueueTime,omitempty" name:"QueueTime"`
+
+
+	ExecutionTime *float64 `json:"ExecutionTime,omitempty" name:"ExecutionTime"`
+
+
+	IsResultCacheHit *bool `json:"IsResultCacheHit,omitempty" name:"IsResultCacheHit"`
+
+
+	MatchedMVBytes *int64 `json:"MatchedMVBytes,omitempty" name:"MatchedMVBytes"`
+
+
+	MatchedMVs *string `json:"MatchedMVs,omitempty" name:"MatchedMVs"`
+
+
+	AffectedBytes *string `json:"AffectedBytes,omitempty" name:"AffectedBytes"`
+
+
+	AffectedRows *int64 `json:"AffectedRows,omitempty" name:"AffectedRows"`
+
+
+	ProcessedBytes *int64 `json:"ProcessedBytes,omitempty" name:"ProcessedBytes"`
+
+
+	ProcessedRows *int64 `json:"ProcessedRows,omitempty" name:"ProcessedRows"`
+}
+
 // Predefined struct for user
 type CreateDataEngineRequestParams struct {
 	// The engine type. Valid values: `spark` and `presto`.
@@ -203,6 +292,9 @@ type CreateDataEngineRequestParams struct {
 
 	// The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
 	ElasticLimit *int64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
+
+	// The session resource configuration template for a Spark job cluster.
+	SessionResourceTemplate *SessionResourceTemplate `json:"SessionResourceTemplate,omitempty" name:"SessionResourceTemplate"`
 }
 
 type CreateDataEngineRequest struct {
@@ -294,6 +386,9 @@ type CreateDataEngineRequest struct {
 
 	// The upper limit (in CUs) for scaling of the monthly subscribed Spark job cluster.
 	ElasticLimit *int64 `json:"ElasticLimit,omitempty" name:"ElasticLimit"`
+
+	// The session resource configuration template for a Spark job cluster.
+	SessionResourceTemplate *SessionResourceTemplate `json:"SessionResourceTemplate,omitempty" name:"SessionResourceTemplate"`
 }
 
 func (r *CreateDataEngineRequest) ToJsonString() string {
@@ -337,6 +432,7 @@ func (r *CreateDataEngineRequest) FromJsonString(s string) error {
 	delete(f, "MainClusterName")
 	delete(f, "ElasticSwitch")
 	delete(f, "ElasticLimit")
+	delete(f, "SessionResourceTemplate")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDataEngineRequest has unknown keys!", "")
 	}
@@ -599,6 +695,9 @@ type CreateSparkAppRequestParams struct {
 
 	// The ID of the associated Data Lake Compute query script.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
 }
 
 type CreateSparkAppRequest struct {
@@ -684,6 +783,9 @@ type CreateSparkAppRequest struct {
 
 	// The ID of the associated Data Lake Compute query script.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
 }
 
 func (r *CreateSparkAppRequest) ToJsonString() string {
@@ -725,6 +827,7 @@ func (r *CreateSparkAppRequest) FromJsonString(s string) error {
 	delete(f, "SparkImageVersion")
 	delete(f, "AppExecutorMaxNumbers")
 	delete(f, "SessionId")
+	delete(f, "IsInherit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSparkAppRequest has unknown keys!", "")
 	}
@@ -821,6 +924,126 @@ func (r *CreateSparkAppTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSparkAppTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSparkSessionBatchSQLRequestParams struct {
+	// The name of the engine for executing the Spark job.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The SQL statement to execute.
+	ExecuteSQL *string `json:"ExecuteSQL,omitempty" name:"ExecuteSQL"`
+
+	// The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+	DriverSize *string `json:"DriverSize,omitempty" name:"DriverSize"`
+
+	// The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+	ExecutorSize *string `json:"ExecutorSize,omitempty" name:"ExecutorSize"`
+
+	// The executor count, which defaults to 1.
+	ExecutorNumbers *uint64 `json:"ExecutorNumbers,omitempty" name:"ExecutorNumbers"`
+
+	// The maximum executor count, which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the value of this parameter is the same as that of `ExecutorNumbers`.
+	ExecutorMaxNumbers *uint64 `json:"ExecutorMaxNumbers,omitempty" name:"ExecutorMaxNumbers"`
+
+	// The session timeout period in seconds. Default value: 3600
+	TimeoutInSecond *int64 `json:"TimeoutInSecond,omitempty" name:"TimeoutInSecond"`
+
+	// The unique ID of a session. If this parameter is specified, the task will be run using the specified session.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The name of the session to create.
+	SessionName *string `json:"SessionName,omitempty" name:"SessionName"`
+
+	// Session configurations. `dlc.eni`, `dlc.role.arn`, `dlc.sql.set.config`, and user-defined configurations are supported.
+	Arguments []*KVPair `json:"Arguments,omitempty" name:"Arguments"`
+}
+
+type CreateSparkSessionBatchSQLRequest struct {
+	*tchttp.BaseRequest
+	
+	// The name of the engine for executing the Spark job.
+	DataEngineName *string `json:"DataEngineName,omitempty" name:"DataEngineName"`
+
+	// The SQL statement to execute.
+	ExecuteSQL *string `json:"ExecuteSQL,omitempty" name:"ExecuteSQL"`
+
+	// The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+	DriverSize *string `json:"DriverSize,omitempty" name:"DriverSize"`
+
+	// The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
+	ExecutorSize *string `json:"ExecutorSize,omitempty" name:"ExecutorSize"`
+
+	// The executor count, which defaults to 1.
+	ExecutorNumbers *uint64 `json:"ExecutorNumbers,omitempty" name:"ExecutorNumbers"`
+
+	// The maximum executor count, which defaults to 1. This parameter applies if the "Dynamic" mode is selected. If the "Dynamic" mode is not selected, the value of this parameter is the same as that of `ExecutorNumbers`.
+	ExecutorMaxNumbers *uint64 `json:"ExecutorMaxNumbers,omitempty" name:"ExecutorMaxNumbers"`
+
+	// The session timeout period in seconds. Default value: 3600
+	TimeoutInSecond *int64 `json:"TimeoutInSecond,omitempty" name:"TimeoutInSecond"`
+
+	// The unique ID of a session. If this parameter is specified, the task will be run using the specified session.
+	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// The name of the session to create.
+	SessionName *string `json:"SessionName,omitempty" name:"SessionName"`
+
+	// Session configurations. `dlc.eni`, `dlc.role.arn`, `dlc.sql.set.config`, and user-defined configurations are supported.
+	Arguments []*KVPair `json:"Arguments,omitempty" name:"Arguments"`
+}
+
+func (r *CreateSparkSessionBatchSQLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSparkSessionBatchSQLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DataEngineName")
+	delete(f, "ExecuteSQL")
+	delete(f, "DriverSize")
+	delete(f, "ExecutorSize")
+	delete(f, "ExecutorNumbers")
+	delete(f, "ExecutorMaxNumbers")
+	delete(f, "TimeoutInSecond")
+	delete(f, "SessionId")
+	delete(f, "SessionName")
+	delete(f, "Arguments")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSparkSessionBatchSQLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSparkSessionBatchSQLResponseParams struct {
+	// The unique identifier of a batch task.
+	BatchId *string `json:"BatchId,omitempty" name:"BatchId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateSparkSessionBatchSQLResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSparkSessionBatchSQLResponseParams `json:"Response"`
+}
+
+func (r *CreateSparkSessionBatchSQLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSparkSessionBatchSQLResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1003,7 +1226,13 @@ type DataEngineConfigPair struct {
 }
 
 type DataGovernPolicy struct {
+	// Governance rule type. Valid values: `Customize` (custom) and `Intelligence` (intelligent).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
 
+	// The governance engine.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GovernEngine *string `json:"GovernEngine,omitempty" name:"GovernEngine"`
 }
 
 // Predefined struct for user
@@ -1631,6 +1860,67 @@ func (r *DescribeSparkAppTasksResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSparkSessionBatchSqlLogRequestParams struct {
+	// The unique ID of a Spark SQL job.
+	BatchId *string `json:"BatchId,omitempty" name:"BatchId"`
+}
+
+type DescribeSparkSessionBatchSqlLogRequest struct {
+	*tchttp.BaseRequest
+	
+	// The unique ID of a Spark SQL job.
+	BatchId *string `json:"BatchId,omitempty" name:"BatchId"`
+}
+
+func (r *DescribeSparkSessionBatchSqlLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSparkSessionBatchSqlLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BatchId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSparkSessionBatchSqlLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSparkSessionBatchSqlLogResponseParams struct {
+	// The status. Valid values: `0` (initializing), `1` (successful), `2` (failed), `3` (canceled), and `4` (exception).
+	State *uint64 `json:"State,omitempty" name:"State"`
+
+	// The log information list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogSet []*SparkSessionBatchLog `json:"LogSet,omitempty" name:"LogSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSparkSessionBatchSqlLogResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSparkSessionBatchSqlLogResponseParams `json:"Response"`
+}
+
+func (r *DescribeSparkSessionBatchSqlLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSparkSessionBatchSqlLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTaskResultRequestParams struct {
 	// Unique task ID
 	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
@@ -1851,6 +2141,9 @@ type GenerateCreateMangedTableSqlRequestParams struct {
 
 	// The table properties.
 	Properties []*Property `json:"Properties,omitempty" name:"Properties"`
+
+	// The Upsert key for a v2 table (in Upsert mode).
+	UpsertKeys []*string `json:"UpsertKeys,omitempty" name:"UpsertKeys"`
 }
 
 type GenerateCreateMangedTableSqlRequest struct {
@@ -1867,6 +2160,9 @@ type GenerateCreateMangedTableSqlRequest struct {
 
 	// The table properties.
 	Properties []*Property `json:"Properties,omitempty" name:"Properties"`
+
+	// The Upsert key for a v2 table (in Upsert mode).
+	UpsertKeys []*string `json:"UpsertKeys,omitempty" name:"UpsertKeys"`
 }
 
 func (r *GenerateCreateMangedTableSqlRequest) ToJsonString() string {
@@ -1885,6 +2181,7 @@ func (r *GenerateCreateMangedTableSqlRequest) FromJsonString(s string) error {
 	delete(f, "Columns")
 	delete(f, "Partitions")
 	delete(f, "Properties")
+	delete(f, "UpsertKeys")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GenerateCreateMangedTableSqlRequest has unknown keys!", "")
 	}
@@ -1978,6 +2275,110 @@ func (r *ModifyGovernEventRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySparkAppBatchRequestParams struct {
+	// The list of the IDs of the Spark job tasks to be modified in batches.
+	SparkAppId []*string `json:"SparkAppId,omitempty" name:"SparkAppId"`
+
+	// The engine ID.
+	DataEngine *string `json:"DataEngine,omitempty" name:"DataEngine"`
+
+	// The driver size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	AppDriverSize *string `json:"AppDriverSize,omitempty" name:"AppDriverSize"`
+
+	// The executor size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	AppExecutorSize *string `json:"AppExecutorSize,omitempty" name:"AppExecutorSize"`
+
+	// The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+	AppExecutorNums *uint64 `json:"AppExecutorNums,omitempty" name:"AppExecutorNums"`
+
+	// The maximum executor count (in dynamic configuration scenarios). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+	AppExecutorMaxNumbers *uint64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
+
+	// Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
+}
+
+type ModifySparkAppBatchRequest struct {
+	*tchttp.BaseRequest
+	
+	// The list of the IDs of the Spark job tasks to be modified in batches.
+	SparkAppId []*string `json:"SparkAppId,omitempty" name:"SparkAppId"`
+
+	// The engine ID.
+	DataEngine *string `json:"DataEngine,omitempty" name:"DataEngine"`
+
+	// The driver size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	AppDriverSize *string `json:"AppDriverSize,omitempty" name:"AppDriverSize"`
+
+	// The executor size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	AppExecutorSize *string `json:"AppExecutorSize,omitempty" name:"AppExecutorSize"`
+
+	// The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+	AppExecutorNums *uint64 `json:"AppExecutorNums,omitempty" name:"AppExecutorNums"`
+
+	// The maximum executor count (in dynamic configuration scenarios). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+	AppExecutorMaxNumbers *uint64 `json:"AppExecutorMaxNumbers,omitempty" name:"AppExecutorMaxNumbers"`
+
+	// Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
+}
+
+func (r *ModifySparkAppBatchRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySparkAppBatchRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SparkAppId")
+	delete(f, "DataEngine")
+	delete(f, "AppDriverSize")
+	delete(f, "AppExecutorSize")
+	delete(f, "AppExecutorNums")
+	delete(f, "AppExecutorMaxNumbers")
+	delete(f, "IsInherit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySparkAppBatchRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySparkAppBatchResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifySparkAppBatchResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySparkAppBatchResponseParams `json:"Response"`
+}
+
+func (r *ModifySparkAppBatchResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySparkAppBatchResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifySparkAppRequestParams struct {
 	// Spark application name
 	AppName *string `json:"AppName,omitempty" name:"AppName"`
@@ -2062,6 +2463,9 @@ type ModifySparkAppRequestParams struct {
 
 	// The associated Data Lake Compute query script.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Whether to inherit the task resource configuration from the cluster configuration template. Valid values: `0` (default): No; `1`: Yes.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
 }
 
 type ModifySparkAppRequest struct {
@@ -2150,6 +2554,9 @@ type ModifySparkAppRequest struct {
 
 	// The associated Data Lake Compute query script.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+
+	// Whether to inherit the task resource configuration from the cluster configuration template. Valid values: `0` (default): No; `1`: Yes.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
 }
 
 func (r *ModifySparkAppRequest) ToJsonString() string {
@@ -2192,6 +2599,7 @@ func (r *ModifySparkAppRequest) FromJsonString(s string) error {
 	delete(f, "SparkImageVersion")
 	delete(f, "AppExecutorMaxNumbers")
 	delete(f, "SessionId")
+	delete(f, "IsInherit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySparkAppRequest has unknown keys!", "")
 	}
@@ -2285,6 +2693,14 @@ type Policy struct {
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 }
 
+type PrestoMonitorMetrics struct {
+
+	LocalCacheHitRate *float64 `json:"LocalCacheHitRate,omitempty" name:"LocalCacheHitRate"`
+
+
+	FragmentCacheHitRate *float64 `json:"FragmentCacheHitRate,omitempty" name:"FragmentCacheHitRate"`
+}
+
 type Property struct {
 	// The property key name.
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -2299,6 +2715,28 @@ type SQLTask struct {
 
 	// Task configuration information
 	Config []*KVPair `json:"Config,omitempty" name:"Config"`
+}
+
+type SessionResourceTemplate struct {
+	// The driver size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DriverSize *string `json:"DriverSize,omitempty" name:"DriverSize"`
+
+	// The executor size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorSize *string `json:"ExecutorSize,omitempty" name:"ExecutorSize"`
+
+	// The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorNums *uint64 `json:"ExecutorNums,omitempty" name:"ExecutorNums"`
+
+	// The maximum executor count (in dynamic mode). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorMaxNumbers *uint64 `json:"ExecutorMaxNumbers,omitempty" name:"ExecutorMaxNumbers"`
 }
 
 type SparkJobInfo struct {
@@ -2426,11 +2864,57 @@ type SparkJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
 
-
+	// `spark_emr_livy` indicates to create an EMR cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DataEngineClusterType *string `json:"DataEngineClusterType,omitempty" name:"DataEngineClusterType"`
 
-
+	// `Spark 3.2-EMR` indicates to use the Spark 3.2 image.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DataEngineImageVersion *string `json:"DataEngineImageVersion,omitempty" name:"DataEngineImageVersion"`
+
+	// Whether the task resource configuration is inherited from the cluster template. Valid values: `0` (default): No; `1`: Yes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsInherit *uint64 `json:"IsInherit,omitempty" name:"IsInherit"`
+}
+
+type SparkMonitorMetrics struct {
+
+	ShuffleWriteBytesCos *int64 `json:"ShuffleWriteBytesCos,omitempty" name:"ShuffleWriteBytesCos"`
+
+
+	ShuffleWriteBytesTotal *int64 `json:"ShuffleWriteBytesTotal,omitempty" name:"ShuffleWriteBytesTotal"`
+}
+
+type SparkSessionBatchLog struct {
+	// The log step. Valid values: `BEG`, `CS`, `DS`, `DSS`, `DSF`, `FINF`, `RTO`, `CANCEL`, `CT`, `DT`, `DTS`, `DTF`, `FINT`, and `EXCE`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Step *string `json:"Step,omitempty" name:"Step"`
+
+	// Time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// The log message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitempty" name:"Message"`
+
+	// The operation.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Operate []*SparkSessionBatchLogOperate `json:"Operate,omitempty" name:"Operate"`
+}
+
+type SparkSessionBatchLogOperate struct {
+	// The operation message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Text *string `json:"Text,omitempty" name:"Text"`
+
+	// The operation type. Valid values: `COPY`, `LOG`, `UI`, `RESULT`, `List`, and `TAB`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Operate *string `json:"Operate,omitempty" name:"Operate"`
+
+	// Additional information, such as taskid, sessionid, and sparkui.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Supplement []*KVPair `json:"Supplement,omitempty" name:"Supplement"`
 }
 
 type StreamingStatistics struct {
@@ -2670,6 +3154,10 @@ type TableBaseInfo struct {
 	// The data governance configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	GovernPolicy *DataGovernPolicy `json:"GovernPolicy,omitempty" name:"GovernPolicy"`
+
+	// Whether database data governance is disabled. Valid values: `true` (disabled) and `false` (not disabled).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DbGovernPolicyIsDisable *string `json:"DbGovernPolicyIsDisable,omitempty" name:"DbGovernPolicyIsDisable"`
 }
 
 type TagInfo struct {
@@ -2803,6 +3291,39 @@ type TaskResponseInfo struct {
 	// The program entry parameter for running a task under a Spark job.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CmdArgs *string `json:"CmdArgs,omitempty" name:"CmdArgs"`
+
+	// The image version of the cluster.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageVersion *string `json:"ImageVersion,omitempty" name:"ImageVersion"`
+
+	// The driver size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DriverSize *string `json:"DriverSize,omitempty" name:"DriverSize"`
+
+	// The executor size.
+	// Valid values for the standard resource type: `small`, `medium`, `large`, and `xlarge`.
+	// Valid values for the memory resource type: `m.small`, `m.medium`, `m.large`, and `m.xlarge`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorSize *string `json:"ExecutorSize,omitempty" name:"ExecutorSize"`
+
+	// The executor count. The minimum value is 1 and the maximum value is less than the cluster specification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorNums *uint64 `json:"ExecutorNums,omitempty" name:"ExecutorNums"`
+
+	// The maximum executor count (in dynamic mode). The minimum value is 1 and the maximum value is less than the cluster specification. If you set `ExecutorMaxNumbers` to a value smaller than that of `ExecutorNums`, the value of `ExecutorMaxNumbers` is automatically changed to that of `ExecutorNums`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorMaxNumbers *uint64 `json:"ExecutorMaxNumbers,omitempty" name:"ExecutorMaxNumbers"`
+
+
+	CommonMetrics *CommonMetrics `json:"CommonMetrics,omitempty" name:"CommonMetrics"`
+
+
+	SparkMonitorMetrics *SparkMonitorMetrics `json:"SparkMonitorMetrics,omitempty" name:"SparkMonitorMetrics"`
+
+
+	PrestoMonitorMetrics *PrestoMonitorMetrics `json:"PrestoMonitorMetrics,omitempty" name:"PrestoMonitorMetrics"`
 }
 
 type TaskResultInfo struct {

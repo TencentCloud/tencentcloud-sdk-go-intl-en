@@ -405,6 +405,14 @@ type ColumnPrivilege struct {
 	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
 }
 
+type ConfigValue struct {
+	// Configuration name, which supports `max_user_connections`.
+	Config *string `json:"Config,omitempty" name:"Config"`
+
+	// Configuration value
+	Value *string `json:"Value,omitempty" name:"Value"`
+}
+
 type ConstraintRange struct {
 	// Minimum value when the constraint type is `section`
 	Min *string `json:"Min,omitempty" name:"Min"`
@@ -684,7 +692,7 @@ type CreateDCDBInstanceRequestParams struct {
 	// Custom name of the instance
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Whether IPv6 is supported
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
@@ -699,7 +707,7 @@ type CreateDCDBInstanceRequestParams struct {
 	// DCN source instance ID
 	DcnInstanceId *string `json:"DcnInstanceId,omitempty" name:"DcnInstanceId"`
 
-	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users). If no renewal is required, set it to `0`.
+	// Renewal mode. Valid values: `0` (manual renewal, which is the default mode), `1` (auto-renewal), `2` (manual renewal, which is specified by users).  If no renewal is required, set it to `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
 	// Security group IDs in array. This parameter is compatible with the old parameter `SecurityGroupId`.
@@ -758,7 +766,7 @@ type CreateDCDBInstanceRequest struct {
 	// Custom name of the instance
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Whether IPv6 is supported
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
@@ -773,7 +781,7 @@ type CreateDCDBInstanceRequest struct {
 	// DCN source instance ID
 	DcnInstanceId *string `json:"DcnInstanceId,omitempty" name:"DcnInstanceId"`
 
-	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users). If no renewal is required, set it to `0`.
+	// Renewal mode. Valid values: `0` (manual renewal, which is the default mode), `1` (auto-renewal), `2` (manual renewal, which is specified by users).  If no renewal is required, set it to `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
 
 	// Security group IDs in array. This parameter is compatible with the old parameter `SecurityGroupId`.
@@ -895,7 +903,7 @@ type CreateHourDCDBInstanceRequestParams struct {
 	// Custom name of the instance
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Whether IPv6 is supported
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
@@ -913,7 +921,7 @@ type CreateHourDCDBInstanceRequestParams struct {
 	// ID of the instance to be rolled back
 	RollbackInstanceId *string `json:"RollbackInstanceId,omitempty" name:"RollbackInstanceId"`
 
-	// Rollback time
+	// Rollback time, such as "2021-11-22 00:00:00".
 	RollbackTime *string `json:"RollbackTime,omitempty" name:"RollbackTime"`
 
 	// Array of security group IDs (this parameter is compatible with the old parameter `SecurityGroupId`)
@@ -966,7 +974,7 @@ type CreateHourDCDBInstanceRequest struct {
 	// Custom name of the instance
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Whether IPv6 is supported
+	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
 	Ipv6Flag *int64 `json:"Ipv6Flag,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
@@ -984,7 +992,7 @@ type CreateHourDCDBInstanceRequest struct {
 	// ID of the instance to be rolled back
 	RollbackInstanceId *string `json:"RollbackInstanceId,omitempty" name:"RollbackInstanceId"`
 
-	// Rollback time
+	// Rollback time, such as "2021-11-22 00:00:00".
 	RollbackTime *string `json:"RollbackTime,omitempty" name:"RollbackTime"`
 
 	// Array of security group IDs (this parameter is compatible with the old parameter `SecurityGroupId`)
@@ -1087,6 +1095,9 @@ type DBAccount struct {
 
 	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
 	SlaveConst *int64 `json:"SlaveConst,omitempty" name:"SlaveConst"`
+
+	// Maximum number of connections. `0` indicates no limit.	
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
 }
 
 type DBParamValue struct {
@@ -1808,6 +1819,69 @@ func (r *DescribeBackupFilesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBEncryptAttributesRequestParams struct {
+	// Instance ID in the format of  `tdsqlshard-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DescribeDBEncryptAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of  `tdsqlshard-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeDBEncryptAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBEncryptAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBEncryptAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBEncryptAttributesResponseParams struct {
+	// Whether encryption is enabled. Valid values: `1` (enabled), `2` (disabled).
+	EncryptStatus *int64 `json:"EncryptStatus,omitempty" name:"EncryptStatus"`
+
+	// DEK
+	CipherText *string `json:"CipherText,omitempty" name:"CipherText"`
+
+	// DEK expiration date
+	ExpireDate *string `json:"ExpireDate,omitempty" name:"ExpireDate"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDBEncryptAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBEncryptAttributesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBEncryptAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBEncryptAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDBLogFilesRequestParams struct {
 	// Instance ID in the format of dcdbt-ow7t8lmc.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -2423,6 +2497,12 @@ type DescribeDCDBInstanceDetailResponseParams struct {
 	// Nearby VPC access
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RsAccessStrategy *int64 `json:"RsAccessStrategy,omitempty" name:"RsAccessStrategy"`
+
+	// Unclaimed network resource
+	ReservedNetResources []*ReservedNetResource `json:"ReservedNetResources,omitempty" name:"ReservedNetResources"`
+
+
+	IsPhysicalReplicationSupported *bool `json:"IsPhysicalReplicationSupported,omitempty" name:"IsPhysicalReplicationSupported"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -3871,6 +3951,66 @@ type InstanceBackupFileItem struct {
 }
 
 // Predefined struct for user
+type IsolateDCDBInstanceRequestParams struct {
+	// Instance ID in the format of `tdsqlshard-avw0207d`,  which is the same as the instance ID displayed on the TencentDB console and can be queried through the `DescribeDBInstances` API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+type IsolateDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsqlshard-avw0207d`,  which is the same as the instance ID displayed on the TencentDB console and can be queried through the `DescribeDBInstances` API.
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+}
+
+func (r *IsolateDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDCDBInstanceResponseParams struct {
+	// IDs of isolated instances
+	SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitempty" name:"SuccessInstanceIds"`
+
+	// IDs of instances failed to be isolated
+	FailedInstanceIds []*string `json:"FailedInstanceIds,omitempty" name:"FailedInstanceIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type IsolateDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateDCDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *IsolateDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDCDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type IsolateDedicatedDBInstanceRequestParams struct {
 	// Instance ID in the format of `dcdbt-ow728lmc`
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -3926,14 +4066,14 @@ func (r *IsolateDedicatedDBInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type IsolateHourDCDBInstanceRequestParams struct {
-	// Instance uuid list
+	// ID list of the instances to be upgraded  in the format of  `dcdbt-ow728lmc`, which can be obtained through the `DescribeDCDBInstances` API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 type IsolateHourDCDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance uuid list
+	// ID list of the instances to be upgraded  in the format of  `dcdbt-ow728lmc`, which can be obtained through the `DescribeDCDBInstances` API.
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
@@ -4074,6 +4214,81 @@ type LogFileInfo struct {
 
 	// Filename
 	FileName *string `json:"FileName,omitempty" name:"FileName"`
+}
+
+// Predefined struct for user
+type ModifyAccountConfigRequestParams struct {
+	// Instance ID in the format of  `tdsqlshard-kpkvq5oj`, which is the same as the one displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Account name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Account domain name
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Configuration list. Each element in the list is a pair of `Config` and `Value`.
+	Configs []*ConfigValue `json:"Configs,omitempty" name:"Configs"`
+}
+
+type ModifyAccountConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of  `tdsqlshard-kpkvq5oj`, which is the same as the one displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Account name
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// Account domain name
+	Host *string `json:"Host,omitempty" name:"Host"`
+
+	// Configuration list. Each element in the list is a pair of `Config` and `Value`.
+	Configs []*ConfigValue `json:"Configs,omitempty" name:"Configs"`
+}
+
+func (r *ModifyAccountConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserName")
+	delete(f, "Host")
+	delete(f, "Configs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccountConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAccountConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyAccountConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAccountConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyAccountConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAccountConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -4930,6 +5145,23 @@ type ParamModifyResult struct {
 
 	// Result of parameter modification. 0: success; -1: failure; -2: invalid parameter value
 	Code *int64 `json:"Code,omitempty" name:"Code"`
+}
+
+type ReservedNetResource struct {
+	// VPC
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// Subnet
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Reserved private network IP under `VpcId` and `SubnetId`
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Port under `Vip`
+	Vports []*int64 `json:"Vports,omitempty" name:"Vports"`
+
+	// Valid hours of VIP	
+	RecycleTime *string `json:"RecycleTime,omitempty" name:"RecycleTime"`
 }
 
 // Predefined struct for user

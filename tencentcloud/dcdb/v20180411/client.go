@@ -64,7 +64,7 @@ func NewActiveHourDCDBInstanceResponse() (response *ActiveHourDCDBInstanceRespon
 }
 
 // ActiveHourDCDBInstance
-// This API is used to remove the isolation of a pay-as-you-go TDSQL for MySQL instance.
+// This API is used to remove a pay-as-you-go TDSQL instance from isolation.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -76,7 +76,7 @@ func (c *Client) ActiveHourDCDBInstance(request *ActiveHourDCDBInstanceRequest) 
 }
 
 // ActiveHourDCDBInstance
-// This API is used to remove the isolation of a pay-as-you-go TDSQL for MySQL instance.
+// This API is used to remove a pay-as-you-go TDSQL instance from isolation.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -558,7 +558,7 @@ func NewCreateDCDBInstanceResponse() (response *CreateDCDBInstanceResponse) {
 }
 
 // CreateDCDBInstance
-// This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, and purchased duration.
+// This API is used to create a monthly subscribed TDSQL instance by passing in information such as instance specifications, database version number, and purchased duration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
@@ -579,12 +579,13 @@ func NewCreateDCDBInstanceResponse() (response *CreateDCDBInstanceResponse) {
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_DBVERSIONNOTSUPPORTED = "UnsupportedOperation.DbVersionNotSupported"
 func (c *Client) CreateDCDBInstance(request *CreateDCDBInstanceRequest) (response *CreateDCDBInstanceResponse, err error) {
     return c.CreateDCDBInstanceWithContext(context.Background(), request)
 }
 
 // CreateDCDBInstance
-// This API is used to create a monthly subscribed TencentDB instance by passing in information such as instance specifications, database version number, and purchased duration.
+// This API is used to create a monthly subscribed TDSQL instance by passing in information such as instance specifications, database version number, and purchased duration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
@@ -605,6 +606,7 @@ func (c *Client) CreateDCDBInstance(request *CreateDCDBInstanceRequest) (respons
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_DBVERSIONNOTSUPPORTED = "UnsupportedOperation.DbVersionNotSupported"
 func (c *Client) CreateDCDBInstanceWithContext(ctx context.Context, request *CreateDCDBInstanceRequest) (response *CreateDCDBInstanceResponse, err error) {
     if request == nil {
         request = NewCreateDCDBInstanceRequest()
@@ -640,7 +642,7 @@ func NewCreateHourDCDBInstanceResponse() (response *CreateHourDCDBInstanceRespon
 }
 
 // CreateHourDCDBInstance
-// This API is used to create pay-as-you-go TDSQL for MySQL instances.
+// This API is used to create a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
@@ -660,12 +662,13 @@ func NewCreateHourDCDBInstanceResponse() (response *CreateHourDCDBInstanceRespon
 //  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_DBVERSIONNOTSUPPORTED = "UnsupportedOperation.DbVersionNotSupported"
 func (c *Client) CreateHourDCDBInstance(request *CreateHourDCDBInstanceRequest) (response *CreateHourDCDBInstanceResponse, err error) {
     return c.CreateHourDCDBInstanceWithContext(context.Background(), request)
 }
 
 // CreateHourDCDBInstance
-// This API is used to create pay-as-you-go TDSQL for MySQL instances.
+// This API is used to create a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
@@ -685,6 +688,7 @@ func (c *Client) CreateHourDCDBInstance(request *CreateHourDCDBInstanceRequest) 
 //  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_DBVERSIONNOTSUPPORTED = "UnsupportedOperation.DbVersionNotSupported"
 func (c *Client) CreateHourDCDBInstanceWithContext(ctx context.Context, request *CreateHourDCDBInstanceRequest) (response *CreateHourDCDBInstanceResponse, err error) {
     if request == nil {
         request = NewCreateHourDCDBInstanceRequest()
@@ -933,6 +937,66 @@ func (c *Client) DescribeBackupFilesWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeBackupFilesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBEncryptAttributesRequest() (request *DescribeDBEncryptAttributesRequest) {
+    request = &DescribeDBEncryptAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeDBEncryptAttributes")
+    
+    
+    return
+}
+
+func NewDescribeDBEncryptAttributesResponse() (response *DescribeDBEncryptAttributesResponse) {
+    response = &DescribeDBEncryptAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBEncryptAttributes
+// This API is used to query the encryption status of the instance data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) DescribeDBEncryptAttributes(request *DescribeDBEncryptAttributesRequest) (response *DescribeDBEncryptAttributesResponse, err error) {
+    return c.DescribeDBEncryptAttributesWithContext(context.Background(), request)
+}
+
+// DescribeDBEncryptAttributes
+// This API is used to query the encryption status of the instance data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) DescribeDBEncryptAttributesWithContext(ctx context.Context, request *DescribeDBEncryptAttributesRequest) (response *DescribeDBEncryptAttributesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBEncryptAttributesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBEncryptAttributes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBEncryptAttributesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2068,7 +2132,7 @@ func NewDestroyDCDBInstanceResponse() (response *DestroyDCDBInstanceResponse) {
 }
 
 // DestroyDCDBInstance
-// This API is used to terminate an isolated monthly-subscribed instance.
+// This API is used to terminate an isolated monthly subscribed TDSQL instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2083,7 +2147,7 @@ func (c *Client) DestroyDCDBInstance(request *DestroyDCDBInstanceRequest) (respo
 }
 
 // DestroyDCDBInstance
-// This API is used to terminate an isolated monthly-subscribed instance.
+// This API is used to terminate an isolated monthly subscribed TDSQL instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2128,11 +2192,12 @@ func NewDestroyHourDCDBInstanceResponse() (response *DestroyHourDCDBInstanceResp
 }
 
 // DestroyHourDCDBInstance
-// This API is used to terminate a pay-as-you-go instance.
+// This API is used to terminate a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  FAILEDOPERATION_INSTANCERETURNFAILED = "FailedOperation.InstanceReturnFailed"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -2143,11 +2208,12 @@ func (c *Client) DestroyHourDCDBInstance(request *DestroyHourDCDBInstanceRequest
 }
 
 // DestroyHourDCDBInstance
-// This API is used to terminate a pay-as-you-go instance.
+// This API is used to terminate a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
+//  FAILEDOPERATION_INSTANCERETURNFAILED = "FailedOperation.InstanceReturnFailed"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -2391,6 +2457,70 @@ func (c *Client) InitDCDBInstancesWithContext(ctx context.Context, request *Init
     return
 }
 
+func NewIsolateDCDBInstanceRequest() (request *IsolateDCDBInstanceRequest) {
+    request = &IsolateDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "IsolateDCDBInstance")
+    
+    
+    return
+}
+
+func NewIsolateDCDBInstanceResponse() (response *IsolateDCDBInstanceResponse) {
+    response = &IsolateDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// IsolateDCDBInstance
+// This API is used to isolate a monthly subscribed TDSQL instance, which will no longer be accessible via IP and port.  The isolated instance can be started up in the recycle bin.  If it is isolated due to overdue payments, top up your account as soon as possible.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_INSTANCECANNOTRETURN = "FailedOperation.InstanceCanNotReturn"
+//  FAILEDOPERATION_INSTANCERETURNFAILED = "FailedOperation.InstanceReturnFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) IsolateDCDBInstance(request *IsolateDCDBInstanceRequest) (response *IsolateDCDBInstanceResponse, err error) {
+    return c.IsolateDCDBInstanceWithContext(context.Background(), request)
+}
+
+// IsolateDCDBInstance
+// This API is used to isolate a monthly subscribed TDSQL instance, which will no longer be accessible via IP and port.  The isolated instance can be started up in the recycle bin.  If it is isolated due to overdue payments, top up your account as soon as possible.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  FAILEDOPERATION_INSTANCECANNOTRETURN = "FailedOperation.InstanceCanNotReturn"
+//  FAILEDOPERATION_INSTANCERETURNFAILED = "FailedOperation.InstanceReturnFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+func (c *Client) IsolateDCDBInstanceWithContext(ctx context.Context, request *IsolateDCDBInstanceRequest) (response *IsolateDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewIsolateDCDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateDCDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolateDCDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewIsolateDedicatedDBInstanceRequest() (request *IsolateDedicatedDBInstanceRequest) {
     request = &IsolateDedicatedDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2472,7 +2602,7 @@ func NewIsolateHourDCDBInstanceResponse() (response *IsolateHourDCDBInstanceResp
 }
 
 // IsolateHourDCDBInstance
-// This API is used to isolate pay-as-you-go TDSQL for MySQL instances.
+// This API is used to isolate a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2484,7 +2614,7 @@ func (c *Client) IsolateHourDCDBInstance(request *IsolateHourDCDBInstanceRequest
 }
 
 // IsolateHourDCDBInstance
-// This API is used to isolate pay-as-you-go TDSQL for MySQL instances.
+// This API is used to isolate a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2557,6 +2687,62 @@ func (c *Client) KillSessionWithContext(ctx context.Context, request *KillSessio
     request.SetContext(ctx)
     
     response = NewKillSessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAccountConfigRequest() (request *ModifyAccountConfigRequest) {
+    request = &ModifyAccountConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "ModifyAccountConfig")
+    
+    
+    return
+}
+
+func NewModifyAccountConfigResponse() (response *ModifyAccountConfigResponse) {
+    response = &ModifyAccountConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyAccountConfig
+// This API is used to modify the configurations of an account, such as `max_user_connections`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MODIFYUSERCONFIGFAILED = "FailedOperation.ModifyUserConfigFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyAccountConfig(request *ModifyAccountConfigRequest) (response *ModifyAccountConfigResponse, err error) {
+    return c.ModifyAccountConfigWithContext(context.Background(), request)
+}
+
+// ModifyAccountConfig
+// This API is used to modify the configurations of an account, such as `max_user_connections`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MODIFYUSERCONFIGFAILED = "FailedOperation.ModifyUserConfigFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyAccountConfigWithContext(ctx context.Context, request *ModifyAccountConfigRequest) (response *ModifyAccountConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyAccountConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAccountConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAccountConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -2640,17 +2826,7 @@ func NewModifyAccountPrivilegesResponse() (response *ModifyAccountPrivilegesResp
 }
 
 // ModifyAccountPrivileges
-// This API is used to modify the permissions of a TencentDB instance account.
-//
-// 
-//
-// **Notes**
-//
-// - Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted.
-//
-// - An error will be reported if read-write permissions are granted to a read-only account.
-//
-// - If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+// This API is used to modify the permissions of a TencentDB instance account. \n\n**Note**\n-Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted. An error will be reported if read-write permissions are granted to a read-only account. If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted view permissions, set `Privileges` to an empty array.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2665,17 +2841,7 @@ func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest
 }
 
 // ModifyAccountPrivileges
-// This API is used to modify the permissions of a TencentDB instance account.
-//
-// 
-//
-// **Notes**
-//
-// - Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted.
-//
-// - An error will be reported if read-write permissions are granted to a read-only account.
-//
-// - If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
+// This API is used to modify the permissions of a TencentDB instance account. \n\n**Note**\n-Only the SELECT permission (that is, set the permission parameter to `["SELECT"]`) of the system database `mysql` can be granted. An error will be reported if read-write permissions are granted to a read-only account. If the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted view permissions, set `Privileges` to an empty array.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2787,6 +2953,7 @@ func NewModifyDBInstanceNameResponse() (response *ModifyDBInstanceNameResponse) 
 // This API is used to modify instance name.
 //
 // error code that may be returned:
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -2799,6 +2966,7 @@ func (c *Client) ModifyDBInstanceName(request *ModifyDBInstanceNameRequest) (res
 // This API is used to modify instance name.
 //
 // error code that may be returned:
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -2935,6 +3103,7 @@ func NewModifyDBInstancesProjectResponse() (response *ModifyDBInstancesProjectRe
 // error code that may be returned:
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -2948,6 +3117,7 @@ func (c *Client) ModifyDBInstancesProject(request *ModifyDBInstancesProjectReque
 // error code that may be returned:
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -3054,6 +3224,7 @@ func NewModifyDBSyncModeResponse() (response *ModifyDBSyncModeResponse) {
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_BADSYNCMODE = "InvalidParameterValue.BadSyncMode"
@@ -3074,6 +3245,7 @@ func (c *Client) ModifyDBSyncMode(request *ModifyDBSyncModeRequest) (response *M
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_GETINSTANCEINFOFAILED = "InternalError.GetInstanceInfoFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_BADSYNCMODE = "InvalidParameterValue.BadSyncMode"
@@ -3397,8 +3569,10 @@ func NewSwitchDBInstanceHAResponse() (response *SwitchDBInstanceHAResponse) {
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_ZONEIDILLEGAL = "InvalidParameter.ZoneIdIllegal"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) SwitchDBInstanceHA(request *SwitchDBInstanceHARequest) (response *SwitchDBInstanceHAResponse, err error) {
     return c.SwitchDBInstanceHAWithContext(context.Background(), request)
@@ -3412,8 +3586,10 @@ func (c *Client) SwitchDBInstanceHA(request *SwitchDBInstanceHARequest) (respons
 //  FAILEDOPERATION_CREATEFLOWFAILED = "FailedOperation.CreateFlowFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETINSTANCEDETAILFAILED = "InternalError.GetInstanceDetailFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_ZONEIDILLEGAL = "InvalidParameter.ZoneIdIllegal"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) SwitchDBInstanceHAWithContext(ctx context.Context, request *SwitchDBInstanceHARequest) (response *SwitchDBInstanceHAResponse, err error) {
     if request == nil {
@@ -3508,7 +3684,7 @@ func NewUpgradeHourDCDBInstanceResponse() (response *UpgradeHourDCDBInstanceResp
 }
 
 // UpgradeHourDCDBInstance
-// This API is used to upgrade a pay-as-you-go TDSQL for MySQL instance.
+// This API is used to upgrade a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
@@ -3525,7 +3701,7 @@ func (c *Client) UpgradeHourDCDBInstance(request *UpgradeHourDCDBInstanceRequest
 }
 
 // UpgradeHourDCDBInstance
-// This API is used to upgrade a pay-as-you-go TDSQL for MySQL instance.
+// This API is used to upgrade a pay-as-you-go TDSQL instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"

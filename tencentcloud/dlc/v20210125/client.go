@@ -45,6 +45,62 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCancelSparkSessionBatchSQLRequest() (request *CancelSparkSessionBatchSQLRequest) {
+    request = &CancelSparkSessionBatchSQLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CancelSparkSessionBatchSQL")
+    
+    
+    return
+}
+
+func NewCancelSparkSessionBatchSQLResponse() (response *CancelSparkSessionBatchSQLResponse) {
+    response = &CancelSparkSessionBatchSQLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CancelSparkSessionBatchSQL
+// This API is used to cancel a Spark SQL batch task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CancelSparkSessionBatchSQL(request *CancelSparkSessionBatchSQLRequest) (response *CancelSparkSessionBatchSQLResponse, err error) {
+    return c.CancelSparkSessionBatchSQLWithContext(context.Background(), request)
+}
+
+// CancelSparkSessionBatchSQL
+// This API is used to cancel a Spark SQL batch task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CancelSparkSessionBatchSQLWithContext(ctx context.Context, request *CancelSparkSessionBatchSQLRequest) (response *CancelSparkSessionBatchSQLResponse, err error) {
+    if request == nil {
+        request = NewCancelSparkSessionBatchSQLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelSparkSessionBatchSQL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelSparkSessionBatchSQLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelTaskRequest() (request *CancelTaskRequest) {
     request = &CancelTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -439,6 +495,68 @@ func (c *Client) CreateSparkAppTaskWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateSparkAppTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSparkSessionBatchSQLRequest() (request *CreateSparkSessionBatchSQLRequest) {
+    request = &CreateSparkSessionBatchSQLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateSparkSessionBatchSQL")
+    
+    
+    return
+}
+
+func NewCreateSparkSessionBatchSQLResponse() (response *CreateSparkSessionBatchSQLResponse) {
+    response = &CreateSparkSessionBatchSQLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateSparkSessionBatchSQL
+// This API is used to submit a Spark SQL batch task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDCODE_SESSIONINSUFFICIENTRESOURCES = "ResourceNotFound.ResourceNotFoundCode_SessionInsufficientResources"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+//  RESOURCENOTFOUND_SESSIONSTATEDEAD = "ResourceNotFound.SessionStateDead"
+func (c *Client) CreateSparkSessionBatchSQL(request *CreateSparkSessionBatchSQLRequest) (response *CreateSparkSessionBatchSQLResponse, err error) {
+    return c.CreateSparkSessionBatchSQLWithContext(context.Background(), request)
+}
+
+// CreateSparkSessionBatchSQL
+// This API is used to submit a Spark SQL batch task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDCODE_SESSIONINSUFFICIENTRESOURCES = "ResourceNotFound.ResourceNotFoundCode_SessionInsufficientResources"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+//  RESOURCENOTFOUND_SESSIONSTATEDEAD = "ResourceNotFound.SessionStateDead"
+func (c *Client) CreateSparkSessionBatchSQLWithContext(ctx context.Context, request *CreateSparkSessionBatchSQLRequest) (response *CreateSparkSessionBatchSQLResponse, err error) {
+    if request == nil {
+        request = NewCreateSparkSessionBatchSQLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSparkSessionBatchSQL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSparkSessionBatchSQLResponse()
     err = c.Send(request, response)
     return
 }
@@ -1109,6 +1227,62 @@ func (c *Client) DescribeSparkAppTasksWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeSparkSessionBatchSqlLogRequest() (request *DescribeSparkSessionBatchSqlLogRequest) {
+    request = &DescribeSparkSessionBatchSqlLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeSparkSessionBatchSqlLog")
+    
+    
+    return
+}
+
+func NewDescribeSparkSessionBatchSqlLogResponse() (response *DescribeSparkSessionBatchSqlLogResponse) {
+    response = &DescribeSparkSessionBatchSqlLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSparkSessionBatchSqlLog
+// This API is used to obtain the logs of a Spark SQL batch task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeSparkSessionBatchSqlLog(request *DescribeSparkSessionBatchSqlLogRequest) (response *DescribeSparkSessionBatchSqlLogResponse, err error) {
+    return c.DescribeSparkSessionBatchSqlLogWithContext(context.Background(), request)
+}
+
+// DescribeSparkSessionBatchSqlLog
+// This API is used to obtain the logs of a Spark SQL batch task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeSparkSessionBatchSqlLogWithContext(ctx context.Context, request *DescribeSparkSessionBatchSqlLogRequest) (response *DescribeSparkSessionBatchSqlLogResponse, err error) {
+    if request == nil {
+        request = NewDescribeSparkSessionBatchSqlLogRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSparkSessionBatchSqlLog require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSparkSessionBatchSqlLogResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTaskResultRequest() (request *DescribeTaskResultRequest) {
     request = &DescribeTaskResultRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1391,6 +1565,62 @@ func (c *Client) ModifySparkAppWithContext(ctx context.Context, request *ModifyS
     request.SetContext(ctx)
     
     response = NewModifySparkAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySparkAppBatchRequest() (request *ModifySparkAppBatchRequest) {
+    request = &ModifySparkAppBatchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "ModifySparkAppBatch")
+    
+    
+    return
+}
+
+func NewModifySparkAppBatchResponse() (response *ModifySparkAppBatchResponse) {
+    response = &ModifySparkAppBatchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifySparkAppBatch
+// This API is used to modify Spark job parameters in batches.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifySparkAppBatch(request *ModifySparkAppBatchRequest) (response *ModifySparkAppBatchResponse, err error) {
+    return c.ModifySparkAppBatchWithContext(context.Background(), request)
+}
+
+// ModifySparkAppBatch
+// This API is used to modify Spark job parameters in batches.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDSQL = "InvalidParameter.InvalidSQL"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifySparkAppBatchWithContext(ctx context.Context, request *ModifySparkAppBatchRequest) (response *ModifySparkAppBatchResponse, err error) {
+    if request == nil {
+        request = NewModifySparkAppBatchRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySparkAppBatch require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySparkAppBatchResponse()
     err = c.Send(request, response)
     return
 }

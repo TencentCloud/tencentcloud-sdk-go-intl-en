@@ -601,6 +601,9 @@ func (r *CreateBaseBackupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateBaseBackupResponseParams struct {
+	// Full backup set ID
+	BaseBackupId *string `json:"BaseBackupId,omitempty" name:"BaseBackupId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -1844,7 +1847,7 @@ type DBInstance struct {
 	// Instance name
 	DBInstanceName *string `json:"DBInstanceName,omitempty" name:"DBInstanceName"`
 
-	// Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, upgrading (upgrading kernel version).
+	// Instance status.  Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolating`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, `upgrading` (upgrading kernel version).
 	DBInstanceStatus *string `json:"DBInstanceStatus,omitempty" name:"DBInstanceStatus"`
 
 	// Assigned instance memory size in GB
@@ -2593,6 +2596,76 @@ func (r *DescribeAvailableRecoveryTimeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBackupDownloadRestrictionRequestParams struct {
+
+}
+
+type DescribeBackupDownloadRestrictionRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeBackupDownloadRestrictionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupDownloadRestrictionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupDownloadRestrictionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupDownloadRestrictionResponseParams struct {
+	// Type of the network restrictions for downloading a backup file. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	RestrictionType *string `json:"RestrictionType,omitempty" name:"RestrictionType"`
+
+	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny). 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
+	VpcRestrictionEffect *string `json:"VpcRestrictionEffect,omitempty" name:"VpcRestrictionEffect"`
+
+	// Whether it is allowed to download the VPC ID list of the backup files. 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
+	VpcIdSet []*string `json:"VpcIdSet,omitempty" name:"VpcIdSet"`
+
+	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny). 
+	// Note: Note: This field may return null, indicating that no valid values can be obtained.
+	IpRestrictionEffect *string `json:"IpRestrictionEffect,omitempty" name:"IpRestrictionEffect"`
+
+	// Whether it is allowed to download the IP list of the backup files. 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
+	IpSet []*string `json:"IpSet,omitempty" name:"IpSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupDownloadRestrictionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupDownloadRestrictionResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupDownloadRestrictionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupDownloadRestrictionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeBackupDownloadURLRequestParams struct {
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
@@ -2914,10 +2987,7 @@ type DescribeBaseBackupsRequestParams struct {
 	// Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
 	MaxFinishTime *string `json:"MaxFinishTime,omitempty" name:"MaxFinishTime"`
 
-	// Filter instances using one or more criteria. Valid filter names:
-	// db-instance-id: Filter by instance ID (in string format).
-	// db-instance-name: Filter by instance name (in string format).
-	// db-instance-ip: Filter by instance VPC IP (in string format).
+	// Filter instances by using one or more filters. Valid values:  `db-instance-idFilter` (filter by instance ID in string),  `db-instance-name` (filter by instance name in string),  `db-instance-ip` (filter by instance VPC IP address in string),  `base-backup-id` (filter by backup set ID in string), 
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
@@ -2942,10 +3012,7 @@ type DescribeBaseBackupsRequest struct {
 	// Maximum end time of a backup in the format of `2018-01-01 00:00:00`. It is the current time by default.
 	MaxFinishTime *string `json:"MaxFinishTime,omitempty" name:"MaxFinishTime"`
 
-	// Filter instances using one or more criteria. Valid filter names:
-	// db-instance-id: Filter by instance ID (in string format).
-	// db-instance-name: Filter by instance name (in string format).
-	// db-instance-ip: Filter by instance VPC IP (in string format).
+	// Filter instances by using one or more filters. Valid values:  `db-instance-idFilter` (filter by instance ID in string),  `db-instance-name` (filter by instance name in string),  `db-instance-ip` (filter by instance VPC IP address in string),  `base-backup-id` (filter by backup set ID in string), 
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The maximum number of results returned per page. Value range: 1-100. Default: `10`
@@ -4550,7 +4617,7 @@ func (r *DescribeProductConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeReadOnlyGroupsRequestParams struct {
-	// Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
+	// Filter instances by using one or more filters. Valid values:  `db-master-instance-id` (filter by the primary instance ID in string), `read-only-group-id` (filter by the read-only group ID in string),
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The number of results per page. Default value: 10.
@@ -4569,7 +4636,7 @@ type DescribeReadOnlyGroupsRequestParams struct {
 type DescribeReadOnlyGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filter condition. The primary ID must be specified in the format of `db-master-instance-id` to filter results, or else `null` will be returned.
+	// Filter instances by using one or more filters. Valid values:  `db-master-instance-id` (filter by the primary instance ID in string), `read-only-group-id` (filter by the read-only group ID in string),
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The number of results per page. Default value: 10.
@@ -5813,6 +5880,88 @@ func (r *ModifyAccountRemarkResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyBackupDownloadRestrictionRequestParams struct {
+	// Type of the network restrictions for downloading a backup file. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	RestrictionType *string `json:"RestrictionType,omitempty" name:"RestrictionType"`
+
+	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	VpcRestrictionEffect *string `json:"VpcRestrictionEffect,omitempty" name:"VpcRestrictionEffect"`
+
+	// Whether it is allowed to download the VPC ID list of the backup files.
+	VpcIdSet []*string `json:"VpcIdSet,omitempty" name:"VpcIdSet"`
+
+	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	IpRestrictionEffect *string `json:"IpRestrictionEffect,omitempty" name:"IpRestrictionEffect"`
+
+	// Whether it is allowed to download the IP list of the backup files.
+	IpSet []*string `json:"IpSet,omitempty" name:"IpSet"`
+}
+
+type ModifyBackupDownloadRestrictionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Type of the network restrictions for downloading a backup file. Valid values: `NONE` (backups can be downloaded over both private and public networks), `INTRANET` (backups can only be downloaded over the private network), `CUSTOMIZE` (backups can be downloaded over specified VPCs or at specified IPs).
+	RestrictionType *string `json:"RestrictionType,omitempty" name:"RestrictionType"`
+
+	// Whether VPC is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	VpcRestrictionEffect *string `json:"VpcRestrictionEffect,omitempty" name:"VpcRestrictionEffect"`
+
+	// Whether it is allowed to download the VPC ID list of the backup files.
+	VpcIdSet []*string `json:"VpcIdSet,omitempty" name:"VpcIdSet"`
+
+	// Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
+	IpRestrictionEffect *string `json:"IpRestrictionEffect,omitempty" name:"IpRestrictionEffect"`
+
+	// Whether it is allowed to download the IP list of the backup files.
+	IpSet []*string `json:"IpSet,omitempty" name:"IpSet"`
+}
+
+func (r *ModifyBackupDownloadRestrictionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupDownloadRestrictionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RestrictionType")
+	delete(f, "VpcRestrictionEffect")
+	delete(f, "VpcIdSet")
+	delete(f, "IpRestrictionEffect")
+	delete(f, "IpSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupDownloadRestrictionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBackupDownloadRestrictionResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyBackupDownloadRestrictionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBackupDownloadRestrictionResponseParams `json:"Response"`
+}
+
+func (r *ModifyBackupDownloadRestrictionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBackupDownloadRestrictionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyBackupPlanRequestParams struct {
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
@@ -5959,6 +6108,91 @@ func (r *ModifyBaseBackupExpireTimeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyBaseBackupExpireTimeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceChargeTypeRequestParams struct {
+	// Instance ID in the format of `postgres-6fego161`
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance billing mode.  Valid values:  `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go). Default value:  `PREPAID`.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Validity period  in months. Valid values:  Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Renewal flag. Valid values；  Valid values: `0` (manual renewal), `1` (auto-renewal).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+}
+
+type ModifyDBInstanceChargeTypeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `postgres-6fego161`
+	DBInstanceId *string `json:"DBInstanceId,omitempty" name:"DBInstanceId"`
+
+	// Instance billing mode.  Valid values:  `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go). Default value:  `PREPAID`.
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Validity period  in months. Valid values:  Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Renewal flag. Valid values；  Valid values: `0` (manual renewal), `1` (auto-renewal).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+}
+
+func (r *ModifyDBInstanceChargeTypeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceChargeTypeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "InstanceChargeType")
+	delete(f, "Period")
+	delete(f, "AutoRenewFlag")
+	delete(f, "AutoVoucher")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceChargeTypeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceChargeTypeResponseParams struct {
+	// Order name
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyDBInstanceChargeTypeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceChargeTypeResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceChargeTypeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceChargeTypeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

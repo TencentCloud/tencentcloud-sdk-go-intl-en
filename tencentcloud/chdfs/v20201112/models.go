@@ -1582,6 +1582,12 @@ type LifeCycleRule struct {
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Detailed storage usage of the current lifecycle rule path
+	Summary *Summary `json:"Summary,omitempty" name:"Summary"`
+
+	// Update time of `Summary`
+	LastSummaryTime *string `json:"LastSummaryTime,omitempty" name:"LastSummaryTime"`
 }
 
 // Predefined struct for user
@@ -2032,6 +2038,32 @@ type RestoreTask struct {
 
 	// Creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+}
+
+type Summary struct {
+	// Capacity usage in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CapacityUsed *uint64 `json:"CapacityUsed,omitempty" name:"CapacityUsed"`
+
+	// COS STANDARD storage usage in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StandardCapacityUsed *uint64 `json:"StandardCapacityUsed,omitempty" name:"StandardCapacityUsed"`
+
+	// COS STANDARD_IA storage usage in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitempty" name:"DegradeCapacityUsed"`
+
+	// COS ARCHIVE storage usage in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ArchiveCapacityUsed *uint64 `json:"ArchiveCapacityUsed,omitempty" name:"ArchiveCapacityUsed"`
+
+	// COS DEEP ARCHIVE storage usage in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeepArchiveCapacityUsed *uint64 `json:"DeepArchiveCapacityUsed,omitempty" name:"DeepArchiveCapacityUsed"`
+
+	// COS INTELLIGENT TIERING storage usage in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IntelligentCapacityUsed *uint64 `json:"IntelligentCapacityUsed,omitempty" name:"IntelligentCapacityUsed"`
 }
 
 type Tag struct {

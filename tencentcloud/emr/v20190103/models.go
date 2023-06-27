@@ -4226,14 +4226,18 @@ type StartStopServiceOrMonitorRequestParams struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The operation type. Valid values:
-	// <li>`StartService`: Start services.</li>
-	// <li>`StopService`: Stop services.</li>
-	// <li>`StartMonitor`: Start the monitor.</li>
-	// <li>`StopMonitor`: Stop the monitor.</li>
+	// <li>StartService: Start service</li>
+	// <li>StopService: Stop service</li>
+	// <li>StartMonitor: Start maintenance</li>
+	// <li>StopMonitor: Stop maintenance</li>
+	// <li>RestartService: Restart service. If this type is selected, "StrategyConfig" is required.</li>
 	OpType *string `json:"OpType,omitempty" name:"OpType"`
 
 	// The operation scope.
 	OpScope *OpScope `json:"OpScope,omitempty" name:"OpScope"`
+
+	// The operation policy.
+	StrategyConfig *StrategyConfig `json:"StrategyConfig,omitempty" name:"StrategyConfig"`
 }
 
 type StartStopServiceOrMonitorRequest struct {
@@ -4243,14 +4247,18 @@ type StartStopServiceOrMonitorRequest struct {
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// The operation type. Valid values:
-	// <li>`StartService`: Start services.</li>
-	// <li>`StopService`: Stop services.</li>
-	// <li>`StartMonitor`: Start the monitor.</li>
-	// <li>`StopMonitor`: Stop the monitor.</li>
+	// <li>StartService: Start service</li>
+	// <li>StopService: Stop service</li>
+	// <li>StartMonitor: Start maintenance</li>
+	// <li>StopMonitor: Stop maintenance</li>
+	// <li>RestartService: Restart service. If this type is selected, "StrategyConfig" is required.</li>
 	OpType *string `json:"OpType,omitempty" name:"OpType"`
 
 	// The operation scope.
 	OpScope *OpScope `json:"OpScope,omitempty" name:"OpScope"`
+
+	// The operation policy.
+	StrategyConfig *StrategyConfig `json:"StrategyConfig,omitempty" name:"StrategyConfig"`
 }
 
 func (r *StartStopServiceOrMonitorRequest) ToJsonString() string {
@@ -4268,6 +4276,7 @@ func (r *StartStopServiceOrMonitorRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "OpType")
 	delete(f, "OpScope")
+	delete(f, "StrategyConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStopServiceOrMonitorRequest has unknown keys!", "")
 	}
@@ -4294,6 +4303,25 @@ func (r *StartStopServiceOrMonitorResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StartStopServiceOrMonitorResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type StrategyConfig struct {
+	// `0`: Disable rolling restart
+	// `1`: Enable rolling restart
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RollingRestartSwitch *int64 `json:"RollingRestartSwitch,omitempty" name:"RollingRestartSwitch"`
+
+	// The number of nodes to be restarted per batch in rolling restart, with a maximum value of 99,999.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BatchSize *int64 `json:"BatchSize,omitempty" name:"BatchSize"`
+
+	// The wait time (in seconds) per batch in rolling restart, with a maximum value of 5 minutes.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeWait *int64 `json:"TimeWait,omitempty" name:"TimeWait"`
+
+	// The failure handling policy. Valid values: `0` (blocks the process) and `1` (skips).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DealOnFail *int64 `json:"DealOnFail,omitempty" name:"DealOnFail"`
 }
 
 type SubnetInfo struct {
