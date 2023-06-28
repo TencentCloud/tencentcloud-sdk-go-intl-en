@@ -122,12 +122,15 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
 }
 
 // DescribeBillDetail
-// This API is used to query bill details.
+// This API is used to get bill details. 
+//
+// Notes: 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), bill data query via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -136,12 +139,15 @@ func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (respons
 }
 
 // DescribeBillDetail
-// This API is used to query bill details.
+// This API is used to get bill details. 
+//
+// Notes: 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), bill data query via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -211,6 +217,62 @@ func (c *Client) DescribeBillResourceSummaryWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeBillSummaryRequest() (request *DescribeBillSummaryRequest) {
+    request = &DescribeBillSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeBillSummary")
+    
+    
+    return
+}
+
+func NewDescribeBillSummaryResponse() (response *DescribeBillSummaryResponse) {
+    response = &DescribeBillSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillSummary
+// This API is used to get bill details by product, project, region, billing mode, and tag through passing in parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummary(request *DescribeBillSummaryRequest) (response *DescribeBillSummaryResponse, err error) {
+    return c.DescribeBillSummaryWithContext(context.Background(), request)
+}
+
+// DescribeBillSummary
+// This API is used to get bill details by product, project, region, billing mode, and tag through passing in parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryWithContext(ctx context.Context, request *DescribeBillSummaryRequest) (response *DescribeBillSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillSummaryByPayModeRequest() (request *DescribeBillSummaryByPayModeRequest) {
     request = &DescribeBillSummaryByPayModeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -230,7 +292,7 @@ func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByP
 }
 
 // DescribeBillSummaryByPayMode
-// Gets the bill summarized according to billing mode
+// This API is used to get the bill summarized by billing mode.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -242,7 +304,7 @@ func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayM
 }
 
 // DescribeBillSummaryByPayMode
-// Gets the bill summarized according to billing mode
+// This API is used to get the bill summarized by billing mode.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

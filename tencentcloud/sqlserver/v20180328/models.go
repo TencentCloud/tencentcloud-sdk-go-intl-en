@@ -733,6 +733,12 @@ type CreateBusinessDBInstancesResponseParams struct {
 	// Order name
 	DealName *string `json:"DealName,omitempty" name:"DealName"`
 
+	// Process ID Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// IDs of instances Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIdSet []*string `json:"InstanceIdSet,omitempty" name:"InstanceIdSet"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
@@ -827,6 +833,435 @@ func (r *CreateBusinessIntelligenceFileResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateBusinessIntelligenceFileResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudDBInstancesRequestParams struct {
+	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of CPU cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The host type of the purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Number of instances purchased this time. Default value: `1`.  Maximum value: `10`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Array of voucher IDs (currently, only one voucher can be used per order)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// SQL Server version. Valid values:  `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard).  Default value: `2008R2`.  The available version varies by region, and you can pull the version information through the `DescribeProductConfig` API.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Auto-renewal flag, which takes effect only when purchasing a monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Security group list, which contains security group IDs in the format of `sg-xxx`.
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
+
+	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday).
+	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly"`
+
+	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour
+	Span *int64 `json:"Span,omitempty" name:"Span"`
+
+	// Whether to deploy across AZs. Default value: `false`.
+	MultiZones *bool `json:"MultiZones,omitempty" name:"MultiZones"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Collation of system character sets. Default value:  `Chinese_PRC_CI_AS`.
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+	// System time zone. Default value:  `China Standard Time`.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+}
+
+type CreateCloudDBInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of CPU cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The host type of the purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+
+	// Number of instances purchased this time. Default value: `1`.  Maximum value: `10`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Array of voucher IDs (currently, only one voucher can be used per order)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// SQL Server version. Valid values:  `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard).  Default value: `2008R2`.  The available version varies by region, and you can pull the version information through the `DescribeProductConfig` API.
+	DBVersion *string `json:"DBVersion,omitempty" name:"DBVersion"`
+
+	// Auto-renewal flag, which takes effect only when purchasing a monthly subscribed instance.  Valid values:  `0` (auto-renewal disabled), `1` (auto-renewal enabled). Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+
+	// Security group list, which contains security group IDs in the format of `sg-xxx`.
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
+
+	// Configuration of the maintenance window, which specifies the day of the week when maintenance can be performed. Valid values: `1` (Monday), `2` (Tuesday), `3` (Wednesday), `4` (Thursday), `5` (Friday), `6` (Saturday), `7` (Sunday).
+	Weekly []*int64 `json:"Weekly,omitempty" name:"Weekly"`
+
+	// Configuration of the maintenance window, which specifies the start time of daily maintenance.
+	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+
+	// Configuration of the maintenance window, which specifies the maintenance duration in hours. Hour
+	Span *int64 `json:"Span,omitempty" name:"Span"`
+
+	// Whether to deploy across AZs. Default value: `false`.
+	MultiZones *bool `json:"MultiZones,omitempty" name:"MultiZones"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Collation of system character sets. Default value:  `Chinese_PRC_CI_AS`.
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+	// System time zone. Default value:  `China Standard Time`.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+}
+
+func (r *CreateCloudDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudDBInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "Cpu")
+	delete(f, "MachineType")
+	delete(f, "InstanceChargeType")
+	delete(f, "ProjectId")
+	delete(f, "GoodsNum")
+	delete(f, "SubnetId")
+	delete(f, "VpcId")
+	delete(f, "Period")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "DBVersion")
+	delete(f, "AutoRenewFlag")
+	delete(f, "SecurityGroupList")
+	delete(f, "Weekly")
+	delete(f, "StartTime")
+	delete(f, "Span")
+	delete(f, "MultiZones")
+	delete(f, "ResourceTags")
+	delete(f, "Collation")
+	delete(f, "TimeZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudDBInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudDBInstancesResponseParams struct {
+	// Order name
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateCloudDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudDBInstancesResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudDBInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudReadOnlyDBInstancesRequestParams struct {
+	// Instance ID in the format of  `mssql-3l3fgqn7`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
+	ReadOnlyGroupType *int64 `json:"ReadOnlyGroupType,omitempty" name:"ReadOnlyGroupType"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instance cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The host type of purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Valid values: `0` (not upgrade the primary instance by default), `1` (upgrade the primary instance to complete the RO deployment).  You need to pass in `1` for this parameter and upgrade the primary instance to cluster edition.
+	ReadOnlyGroupForcedUpgrade *int64 `json:"ReadOnlyGroupForcedUpgrade,omitempty" name:"ReadOnlyGroupForcedUpgrade"`
+
+	// Existing read-only group ID, which is required when `ReadOnlyGroupType` is `3`.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// New read-only group ID, which is required when `ReadOnlyGroupType` is `2`.
+	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitempty" name:"ReadOnlyGroupName"`
+
+	// Whether delayed read-only instance removal is enabled in a new read-only group, which is required when `ReadOnlyGroupType` is `2`. Valid values: `1` (enabled), `0` (disabled).  The read-only replica will be automatically removed when the delay between it and the primary instance exceeds the threshold.
+	ReadOnlyGroupIsOfflineDelay *int64 `json:"ReadOnlyGroupIsOfflineDelay,omitempty" name:"ReadOnlyGroupIsOfflineDelay"`
+
+	// The delay threshold for a new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
+	ReadOnlyGroupMaxDelayTime *int64 `json:"ReadOnlyGroupMaxDelayTime,omitempty" name:"ReadOnlyGroupMaxDelayTime"`
+
+	// Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
+	ReadOnlyGroupMinInGroup *int64 `json:"ReadOnlyGroupMinInGroup,omitempty" name:"ReadOnlyGroupMinInGroup"`
+
+	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Number of instances purchased this time. Default value: `1`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Security group list, which contains security group IDs in the format of `sg-xxx`.
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
+
+	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Array of voucher IDs (currently, only one voucher can be used per order)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+	// System time zone. Default value:  `China Standard Time`
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+}
+
+type CreateCloudReadOnlyDBInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of  `mssql-3l3fgqn7`.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance AZ, such as `ap-guangzhou-1` (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the`DescribeZones` API.
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Read-only group types. Valid values: `1` (each read-only replica is placed in one auto-created read-only group), `2` (all read-only replicas are placed in one auto-created read-only group), `3` (all read-only replicas are placed in one existing read-only group).
+	ReadOnlyGroupType *int64 `json:"ReadOnlyGroupType,omitempty" name:"ReadOnlyGroupType"`
+
+	// Instance memory size in GB
+	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+
+	// Instance disk size in GB
+	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+
+	// Number of instance cores
+	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// The host type of purchased instance. Valid values: `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
+	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+
+	// Valid values: `0` (not upgrade the primary instance by default), `1` (upgrade the primary instance to complete the RO deployment).  You need to pass in `1` for this parameter and upgrade the primary instance to cluster edition.
+	ReadOnlyGroupForcedUpgrade *int64 `json:"ReadOnlyGroupForcedUpgrade,omitempty" name:"ReadOnlyGroupForcedUpgrade"`
+
+	// Existing read-only group ID, which is required when `ReadOnlyGroupType` is `3`.
+	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitempty" name:"ReadOnlyGroupId"`
+
+	// New read-only group ID, which is required when `ReadOnlyGroupType` is `2`.
+	ReadOnlyGroupName *string `json:"ReadOnlyGroupName,omitempty" name:"ReadOnlyGroupName"`
+
+	// Whether delayed read-only instance removal is enabled in a new read-only group, which is required when `ReadOnlyGroupType` is `2`. Valid values: `1` (enabled), `0` (disabled).  The read-only replica will be automatically removed when the delay between it and the primary instance exceeds the threshold.
+	ReadOnlyGroupIsOfflineDelay *int64 `json:"ReadOnlyGroupIsOfflineDelay,omitempty" name:"ReadOnlyGroupIsOfflineDelay"`
+
+	// The delay threshold for a new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
+	ReadOnlyGroupMaxDelayTime *int64 `json:"ReadOnlyGroupMaxDelayTime,omitempty" name:"ReadOnlyGroupMaxDelayTime"`
+
+	// Minimum number of reserved read-only replicas when the delayed removal is enabled for the new read-only group, which is required when `ReadOnlyGroupType` is `2` and `ReadOnlyGroupIsOfflineDelay` is `1`.
+	ReadOnlyGroupMinInGroup *int64 `json:"ReadOnlyGroupMinInGroup,omitempty" name:"ReadOnlyGroupMinInGroup"`
+
+	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
+	InstanceChargeType *string `json:"InstanceChargeType,omitempty" name:"InstanceChargeType"`
+
+	// Number of instances purchased this time. Default value: `1`.
+	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+
+	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// VPC ID in the format of `vpc-dsp338hz`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// The purchase period of an instance. Default value: `1` (one month).  Maximum value: `48`.
+	Period *int64 `json:"Period,omitempty" name:"Period"`
+
+	// Security group list, which contains security group IDs in the format of `sg-xxx`.
+	SecurityGroupList []*string `json:"SecurityGroupList,omitempty" name:"SecurityGroupList"`
+
+	// Whether to automatically use voucher. Valid values: `0` (no, default), `1` (yes).
+	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+
+	// Array of voucher IDs (currently, only one voucher can be used per order)
+	VoucherIds []*string `json:"VoucherIds,omitempty" name:"VoucherIds"`
+
+	// Tags associated with the instances to be created
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+
+	// Collation of system character sets. Default value:  Chinese_PRC_CI_AS
+	Collation *string `json:"Collation,omitempty" name:"Collation"`
+
+	// System time zone. Default value:  `China Standard Time`
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+}
+
+func (r *CreateCloudReadOnlyDBInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudReadOnlyDBInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Zone")
+	delete(f, "ReadOnlyGroupType")
+	delete(f, "Memory")
+	delete(f, "Storage")
+	delete(f, "Cpu")
+	delete(f, "MachineType")
+	delete(f, "ReadOnlyGroupForcedUpgrade")
+	delete(f, "ReadOnlyGroupId")
+	delete(f, "ReadOnlyGroupName")
+	delete(f, "ReadOnlyGroupIsOfflineDelay")
+	delete(f, "ReadOnlyGroupMaxDelayTime")
+	delete(f, "ReadOnlyGroupMinInGroup")
+	delete(f, "InstanceChargeType")
+	delete(f, "GoodsNum")
+	delete(f, "SubnetId")
+	delete(f, "VpcId")
+	delete(f, "Period")
+	delete(f, "SecurityGroupList")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "ResourceTags")
+	delete(f, "Collation")
+	delete(f, "TimeZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudReadOnlyDBInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudReadOnlyDBInstancesResponseParams struct {
+	// Order name in array
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateCloudReadOnlyDBInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudReadOnlyDBInstancesResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudReadOnlyDBInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudReadOnlyDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

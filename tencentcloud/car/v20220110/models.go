@@ -110,13 +110,27 @@ type CreateSessionRequestParams struct {
 	// Public IP of user’s application client, which is used for nearby scheduling.
 	UserIp *string `json:"UserIp,omitempty" name:"UserIp"`
 
-	// The client-side session data, which is obtained from the SDK.
+	// The client-side session data, which is obtained from the SDK. If `RunMode` is `RunWithoutClient`, this parameter can be null.
 	ClientSession *string `json:"ClientSession,omitempty" name:"ClientSession"`
 
 	// The on-cloud running mode.
 	// `RunWithoutClient`: Keep the application running on the cloud even when there are no client connections.
 	// Empty string (default): Keep the application running on the cloud only when there are client connections.
 	RunMode *string `json:"RunMode,omitempty" name:"RunMode"`
+
+	// Application startup parameter.
+	// If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
+	// If the user requests a prelaunch-enabled single-application project, this parameter is invalid.
+	ApplicationParameters *string `json:"ApplicationParameters,omitempty" name:"ApplicationParameters"`
+
+	// The user ID of the host in **multi-person interaction** scenarios, which is required.
+	// If the current user is the host, `HostUserId` must be the same as their `UserId`; otherwise, `HostUserId` should be the host's `UserId`.
+	HostUserId *string `json:"HostUserId,omitempty" name:"HostUserId"`
+
+	// The role in **multi-person interaction** scenarios. Valid values:
+	// `Player`: A user who can operate an application by using a keyboard and mouse
+	// `Viewer`: A user who can only watch the video in the room but cannot operate the application
+	Role *string `json:"Role,omitempty" name:"Role"`
 }
 
 type CreateSessionRequest struct {
@@ -128,13 +142,27 @@ type CreateSessionRequest struct {
 	// Public IP of user’s application client, which is used for nearby scheduling.
 	UserIp *string `json:"UserIp,omitempty" name:"UserIp"`
 
-	// The client-side session data, which is obtained from the SDK.
+	// The client-side session data, which is obtained from the SDK. If `RunMode` is `RunWithoutClient`, this parameter can be null.
 	ClientSession *string `json:"ClientSession,omitempty" name:"ClientSession"`
 
 	// The on-cloud running mode.
 	// `RunWithoutClient`: Keep the application running on the cloud even when there are no client connections.
 	// Empty string (default): Keep the application running on the cloud only when there are client connections.
 	RunMode *string `json:"RunMode,omitempty" name:"RunMode"`
+
+	// Application startup parameter.
+	// If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
+	// If the user requests a prelaunch-enabled single-application project, this parameter is invalid.
+	ApplicationParameters *string `json:"ApplicationParameters,omitempty" name:"ApplicationParameters"`
+
+	// The user ID of the host in **multi-person interaction** scenarios, which is required.
+	// If the current user is the host, `HostUserId` must be the same as their `UserId`; otherwise, `HostUserId` should be the host's `UserId`.
+	HostUserId *string `json:"HostUserId,omitempty" name:"HostUserId"`
+
+	// The role in **multi-person interaction** scenarios. Valid values:
+	// `Player`: A user who can operate an application by using a keyboard and mouse
+	// `Viewer`: A user who can only watch the video in the room but cannot operate the application
+	Role *string `json:"Role,omitempty" name:"Role"`
 }
 
 func (r *CreateSessionRequest) ToJsonString() string {
@@ -153,6 +181,9 @@ func (r *CreateSessionRequest) FromJsonString(s string) error {
 	delete(f, "UserIp")
 	delete(f, "ClientSession")
 	delete(f, "RunMode")
+	delete(f, "ApplicationParameters")
+	delete(f, "HostUserId")
+	delete(f, "Role")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSessionRequest has unknown keys!", "")
 	}

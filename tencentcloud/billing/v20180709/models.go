@@ -21,26 +21,29 @@ import (
 )
 
 type ActionSummaryOverviewItem struct {
-	// Transaction type
+	// Transaction type code
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
-	// Transaction type name
+	// Transaction type,  which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitempty" name:"ActionTypeName"`
-
-	// Actual cost
-	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
 	// Cost ratio, to two decimal points
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
-	// Cash amount
+	// Total amount after discount
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Trial credit amount
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Voucher amount
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit. Note:  This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
@@ -58,80 +61,76 @@ type ApplicableProducts struct {
 }
 
 type BillDetail struct {
-	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
+	// Product name:  The name of a Tencent Cloud product purchased by the user, such as  CVM.
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
-	// Sub-product name: sub-categories of Tencent Cloud services, such as CVM-Standard S1
+	// Subproduct name:  The subcategory of a Tencent Cloud product purchased by the user, such as  CVM – Standard S1.
 	ProductCodeName *string `json:"ProductCodeName,omitempty" name:"ProductCodeName"`
 
-	// Billing mode
+	// Billing mode,  which can be monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitempty" name:"PayModeName"`
 
-	// Project: project of a resource
+	// Project name:  The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
 
-	// Region: region of a resource, e.g. South China (Guangzhou)
+	// Region:  The region to which a resource belongs, such as South China (Guangzhou).
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
 
 	// Availability zone: availability zone of a resource, e.g. Guangzhou Zone 3
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 
-	// Instance ID
+	// Instance ID:  The object ID of a billed resource, such as a CVM instance ID. This object ID may vary due to various forms and contents of resources in different products.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// Instance name
+	// Instance name:  The resource name set by the user in the console. If it is not set, it will be empty by default.
 	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 
-	// Transaction type
+	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitempty" name:"ActionTypeName"`
 
-	// Order ID
+	// Order ID:  The order number for a monthly subscription purchase
 	OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
 
-	// Transaction ID
+	// Transaction ID:  The bill number for a deducted payment
 	BillId *string `json:"BillId,omitempty" name:"BillId"`
 
-	// Payment time
+	// Transaction time:  The time at which a payment was deducted
 	PayTime *string `json:"PayTime,omitempty" name:"PayTime"`
 
-	// Service start time
+	// Usage start time:  The time at which product or service usage starts
 	FeeBeginTime *string `json:"FeeBeginTime,omitempty" name:"FeeBeginTime"`
 
-	// Service end time
+	// Usage end time:  The time at which product or service usage ends
 	FeeEndTime *string `json:"FeeEndTime,omitempty" name:"FeeEndTime"`
 
 	// Component list
 	ComponentSet []*BillDetailComponent `json:"ComponentSet,omitempty" name:"ComponentSet"`
 
-	// Payer's UIN
+	// Payer account ID:  The account ID of the payer, which is the unique identifier of a Tencent Cloud user.
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
-	// User's UIN
+	// Owner account ID:  The account ID of the actual resource user
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// Operator's UIN
+	// Operator account ID:  The account or role ID of the operator who purchases or activates a resource
 	OperateUin *string `json:"OperateUin,omitempty" name:"OperateUin"`
 
-	// Tag information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag information. Note:  This field may return null, indicating that no valid values can be obtained.
 	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Product code
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Product code. Note:  This field may return null, indicating that no valid values can be obtained.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
-	// Subproduct code
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Subproduct code. Note:  This field may return null, indicating that no valid values can be obtained.
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
-	// Transaction type
-	// Note: This field may return `null`, indicating that no valid value can be found.
+	// Transaction type code. Note:  This field may return null, indicating that no valid values can be obtained.
 	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
 
-
+	// Region ID. Note:  This field may return null, indicating that no valid values can be obtained.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
-	// Project ID: ID of the project to which the resource belongs
+	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
 	// Price attribute
@@ -140,185 +139,184 @@ type BillDetail struct {
 }
 
 type BillDetailComponent struct {
-	// Component type: type of a resource component, e.g. memory, disk, etc.
+	// Component type:  The component type of a product or service purchased, such as  CVM instance components including  CPU and memory.
 	ComponentCodeName *string `json:"ComponentCodeName,omitempty" name:"ComponentCodeName"`
 
-	// Component name: name of a resource component, e.g. TencentDB for MySQL-memory
+	// Component name:  The specific component of a product or service purchased
 	ItemCodeName *string `json:"ItemCodeName,omitempty" name:"ItemCodeName"`
 
-	// Component published price: original price of a resource component with the original granularity
+	// Component list price:  The listed unit price of a component. If a customer has applied for a fixed preferential price or contract price, this parameter will not be displayed by default.
 	SinglePrice *string `json:"SinglePrice,omitempty" name:"SinglePrice"`
 
-	// Specified price of the component
+	// Specified price of a component. This parameter has been deprecated.
+	//
+	// Deprecated: SpecifiedPrice is deprecated.
 	SpecifiedPrice *string `json:"SpecifiedPrice,omitempty" name:"SpecifiedPrice"`
 
-	// Price unit
+	// Component price measurement unit:  The unit of measurement for a component price, which is composed of  USD, usage unit, and duration unit.
 	PriceUnit *string `json:"PriceUnit,omitempty" name:"PriceUnit"`
 
-	// Component usage
+	// Component usage:  The actually settled usage of a component, which is "Raw usage - Deducted usage (including packages)".
 	UsedAmount *string `json:"UsedAmount,omitempty" name:"UsedAmount"`
 
-	// Component usage unit
+	// Component usage unit:  The unit of measurement for component usage
 	UsedAmountUnit *string `json:"UsedAmountUnit,omitempty" name:"UsedAmountUnit"`
 
-	// Usage period
+	// Usage duration:  The resource usage duration
 	TimeSpan *string `json:"TimeSpan,omitempty" name:"TimeSpan"`
 
-	// Time unit
+	// Duration unit:  The unit of measurement for usage duration
 	TimeUnitName *string `json:"TimeUnitName,omitempty" name:"TimeUnitName"`
 
-	// Original price of the component
+	// Original cost:  The original cost of a resource, which is "List price x Usage x Usage duration". If a customer has applied for a fixed preferential price or contract price or is in a refund scenario, this parameter will not be displayed by default.
 	Cost *string `json:"Cost,omitempty" name:"Cost"`
 
-	// Discount rate
+	// Discount multiplier:  The discount multiplier applied to the cost of the resource. If a customer has applied for a fixed preferential price or contract price or is in a refund scenario, this parameter will not be displayed by default.
 	Discount *string `json:"Discount,omitempty" name:"Discount"`
 
 	// Offer type
 	ReduceType *string `json:"ReduceType,omitempty" name:"ReduceType"`
 
-	// Total discounted price
+	// Total amount after discount:   Total amount after discount = (Original cost - RI deduction (cost) - SP deduction (cost)) x Discount multiplier
 	RealCost *string `json:"RealCost,omitempty" name:"RealCost"`
 
-	// Amount paid in voucher
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
 
-	// Amount paid in cash
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Amount paid in trial credit
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Component type code
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Commission credit:  The amount paid by the user’s commission credit. Note:  This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
+
+	// Component type code. Note:  This field may return null, indicating that no valid values can be obtained.
 	ItemCode *string `json:"ItemCode,omitempty" name:"ItemCode"`
 
-	// Component code
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Component name code. Note:  This field may return null, indicating that no valid values can be obtained.
 	ComponentCode *string `json:"ComponentCode,omitempty" name:"ComponentCode"`
 
-	// Contract price
+	// Component contracted price:  The contracted unit price of a component, which is "List price x Discount". Note:  This field may return null, indicating that no valid values can be obtained.
 	ContractPrice *string `json:"ContractPrice,omitempty" name:"ContractPrice"`
 
-	// The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Instance type:  The instance type of a product or service purchased, which can be resource package, RI, SP, or spot instance. Other instance types are not displayed by default. Note:  This field may return null, indicating that no valid values can be obtained.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-	// The usage duration deducted by a reserved instance. The unit of measurement for deduction is the same as that for usage duration.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// RI deduction (duration):  The usage duration deducted by RI. Note:  This field may return null, indicating that no valid values can be obtained.
 	RiTimeSpan *string `json:"RiTimeSpan,omitempty" name:"RiTimeSpan"`
 
-	// The amount deducted by a reserved instance based on the original component cost.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// RI deduction (cost):  The amount deducted from the original cost by RI. Note:  This field may return null, indicating that no valid values can be obtained.
 	OriginalCostWithRI *string `json:"OriginalCostWithRI,omitempty" name:"OriginalCostWithRI"`
 
-	// The discount multiplier that applies to the component based on the remaining commitment of the savings plan.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Savings plan deduction rate:  The discount multiplier that applies to the component based on the remaining commitment of the savings plan. Note:  This field may return null, indicating that no valid values can be obtained.
 	SPDeductionRate *string `json:"SPDeductionRate,omitempty" name:"SPDeductionRate"`
 
-	// The savings plan deduction amount.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Cost deduction by SP. This parameter has been deprecated. Note:  This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: SPDeduction is deprecated.
 	SPDeduction *string `json:"SPDeduction,omitempty" name:"SPDeduction"`
 
-	// The amount deducted by a savings plan based on the original component cost.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// SP deduction (cost):  SP deduction (cost) = Cost deduction by SP / SP deduction rate. Note:  This field may return null, indicating that no valid values can be obtained.
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitempty" name:"OriginalCostWithSP"`
 
-	// The blended discount multiplier that combines the official website discount, reserved instance discount, and savings plan discount. If no reserved instance and savings plan discounts are available, the blended discount multiplier equals the discount multiplier.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Blended discount multiplier:  The final discount multiplier that is applied after combining multiple discount types, which is "Total amount after discount / Original cost". Note:  This field may return null, indicating that no valid values can be obtained.
 	BlendedDiscount *string `json:"BlendedDiscount,omitempty" name:"BlendedDiscount"`
 }
 
 type BillResourceSummary struct {
-	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
+	// Product name:  The name of a Tencent Cloud product purchased by the user, such as  CVM.
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
-	// Subproduct name, which is the subcategory of a Tencent Cloud product, such as CVM-Standard S1. If no subproduct name can be obtained, `-` is returned.
+	// Subproduct name:  The subcategory of a Tencent Cloud product purchased by the user, such as  CVM – Standard S1.
 	ProductCodeName *string `json:"ProductCodeName,omitempty" name:"ProductCodeName"`
 
-	// Billing mode
+	// Billing mode,  which can be monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitempty" name:"PayModeName"`
 
-	// Project
+	// Project name:  The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
 
-	// Region
+	// Region:  The region to which a resource belongs, such as South China (Guangzhou).
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
 
-	// Availability zone
+	// Availability zone:  The availability zone to which a resource belongs, such as Guangzhou Zone 3.
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 
-	// Instance ID
+	// Instance ID:  The object ID of a billed resource, such as a CVM instance ID. This object ID may vary due to various forms and contents of resources in different products.	
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
-	// Resource instance namDeduction timee
+	// Instance name:  The resource name set by the user in the console. If it is not set, it will be empty by default.
 	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
 
-	// Transaction type
+	// Transaction type,  which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitempty" name:"ActionTypeName"`
 
-	// Order ID
+	// Order ID:  The order number for a monthly subscription purchase
 	OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
 
-	// Payment time
+	// Transaction time:  The time at which a payment was deducted
 	PayTime *string `json:"PayTime,omitempty" name:"PayTime"`
 
-	// Service start time
+	// Usage start time:  The time at which product or service usage starts
 	FeeBeginTime *string `json:"FeeBeginTime,omitempty" name:"FeeBeginTime"`
 
-	// Service end time
+	// Usage end time:  The time at which product or service usage ends
 	FeeEndTime *string `json:"FeeEndTime,omitempty" name:"FeeEndTime"`
 
-	// Configuration description
+	// Configuration description:  The billable item names and usage of a resource, which are displayed on the resource bill only.
 	ConfigDesc *string `json:"ConfigDesc,omitempty" name:"ConfigDesc"`
 
-	// Extension field 1
+	// Extended field 1:  Extended attribute information of a product, which is displayed on the resource bill only.
 	ExtendField1 *string `json:"ExtendField1,omitempty" name:"ExtendField1"`
 
-	// Extension field 2
+	// Extended field 2:  Extended attribute information of a product, which is displayed on the resource bill only.
 	ExtendField2 *string `json:"ExtendField2,omitempty" name:"ExtendField2"`
 
-	// Cost, in USD
+	// Original cost:  The original cost of a resource, which is "List price x Usage x Usage duration". If a customer has applied for a fixed preferential price or contract price or is in a refund scenario, this parameter will not be displayed by default.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 
-	// Discount
-	// If different discounts or contract prices are applied, `-` will be returned for this parameter.
+	// Discount multiplier:  The discount multiplier applied to the cost of the resource. If a customer has applied for a fixed preferential price or contract price or is in a refund scenario, this parameter will not be displayed by default.
 	Discount *string `json:"Discount,omitempty" name:"Discount"`
 
 	// Offer type
 	ReduceType *string `json:"ReduceType,omitempty" name:"ReduceType"`
 
-	// Total cost after discount, in USD
+	// Total amount after discount
 	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
-	// Amount paid in voucher, in USD
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
 
-	// Amount paid in cash, in USD
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Amount paid in trial credit, in USD
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Extension field 3
+	// Commission credit:  The amount paid by the user’s commission credit. Note:  This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
+
+	// Extended field 3:  Extended attribute information of a product, which is displayed on the resource bill only.
 	ExtendField3 *string `json:"ExtendField3,omitempty" name:"ExtendField3"`
 
-	// Extension field 4
+	// Extended field 4:  Extended attribute information of a product, which is displayed on the resource bill only.
 	ExtendField4 *string `json:"ExtendField4,omitempty" name:"ExtendField4"`
 
-	// Extension field 5
+	// Extended field 5:  Extended attribute information of a product, which is displayed on the resource bill only.
 	ExtendField5 *string `json:"ExtendField5,omitempty" name:"ExtendField5"`
 
-	// Tag information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag information. Note:  This field may return null, indicating that no valid values can be obtained.
 	Tags []*BillTagInfo `json:"Tags,omitempty" name:"Tags"`
 
-	// Payer UIN
+	// Payer account ID:  The account ID of the payer, which is the unique identifier of a Tencent Cloud user.
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 
-	// Resource owner UIN; '-' is returned if no value is obtained
+	// Owner account ID:  The account ID of the actual resource user
 	OwnerUin *string `json:"OwnerUin,omitempty" name:"OwnerUin"`
 
-	// Operator UIN; '-' is returned if no value is obtained
+	// Operator account ID:  The account or role ID of the operator who purchases or activates a resource.
 	OperateUin *string `json:"OperateUin,omitempty" name:"OperateUin"`
 
 	// Product code
@@ -327,27 +325,21 @@ type BillResourceSummary struct {
 	// Subproduct code
 	ProductCode *string `json:"ProductCode,omitempty" name:"ProductCode"`
 
-
+	// Region ID
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
-	// The special instance (resource pack, reserved instance, savings plan, or spot instance) that is applied to deduction. Valid values:
-	// 
-	// ri=Standard RI
-	// 
-	// svp=Savings Plan
-	// 
-	// si=Spot Instances
-	// 
-	// rp=Resource Pack
+	// Instance type:  The instance type of a product or service purchased, which can be resource package, RI, SP, or spot instance. Other instance types are not displayed by default.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
 
-	// The amount deducted by a reserved instance based on the original component cost.
+	// RI deduction (cost):  The amount deducted from the original cost by RI	
 	OriginalCostWithRI *string `json:"OriginalCostWithRI,omitempty" name:"OriginalCostWithRI"`
 
-	// The savings plan deduction amount.
+	// Cost deduction by SP. This parameter has been deprecated.
+	//
+	// Deprecated: SPDeduction is deprecated.
 	SPDeduction *string `json:"SPDeduction,omitempty" name:"SPDeduction"`
 
-	// The amount deducted by a savings plan based on the original component cost.
+	// SP deduction (cost):  SP deduction (cost) = Cost deduction by SP / SP deduction rate	
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitempty" name:"OriginalCostWithSP"`
 }
 
@@ -359,57 +351,83 @@ type BillTagInfo struct {
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 }
 
-type BusinessSummaryOverviewItem struct {
+type BusinessSummaryInfo struct {
 	// Product code
-	// Note: This field may return `null`, indicating that no valid value can be found.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
-	// Product name: major categories of Tencent Cloud services, e.g. CVM and TencentDB for MySQL
+	// Product name:  The name of a Tencent Cloud product purchased by the user, such as  CVM.
 	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
-	// Actual cost
+	// Original cost in USD.  This parameter has become valid since Bill 3.0 took effect in May 2021, and before that `-` was returned for this parameter. If a customer has applied for a contract price different from the prices listed on the official website, `-` will also be returned for this parameter. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Total amount after discount
 	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account
+	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
+
+	// Free credit:  The amount paid by the user’s free credit
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
+
+	// Voucher payment:  The voucher deduction amount
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit. Note:  This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
+}
+
+type BusinessSummaryOverviewItem struct {
+	// Product code. Note:  This field may return null, indicating that no valid values can be obtained.
+	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+	// Product name:  The name of a Tencent Cloud product purchased by the user, such as  CVM.
+	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
 
 	// Cost ratio, to two decimal points
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
-	// Cash amount
+	// Total amount after discount
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Trial credit amount
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Voucher amount
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
-
-	// Payment by commission credits
-	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type BusinessSummaryTotal struct {
-	// Total cost
+	// Total amount after discount
 	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
-	// Voucher amount
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
 
-	// Trial credit amount
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Cash amount
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
-
-	// Payment by commission credits
-	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type CosDetailSets struct {
@@ -599,6 +617,12 @@ type DescribeBillDetailRequestParams struct {
 	// Product code
 	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+	// Context information returned by the last request. You can set `Month` to `2023-05` for query by page to accelerate queries. We recommend users whose data volume is over 100 thousand entries use the paginated query feature, which can help greatly speed up your queries.
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 type DescribeBillDetailRequest struct {
@@ -676,6 +700,11 @@ type DescribeBillDetailRequest struct {
 	// Product code
 	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+	// Context information returned by the last request. You can set `Month` to `2023-05` for query by page to accelerate queries. We recommend users whose data volume is over 100 thousand entries use the paginated query feature, which can help greatly speed up your queries.
+	Context *string `json:"Context,omitempty" name:"Context"`
+
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillDetailRequest) ToJsonString() string {
@@ -703,6 +732,8 @@ func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
 	delete(f, "ActionType")
 	delete(f, "ProjectId")
 	delete(f, "BusinessCode")
+	delete(f, "Context")
+	delete(f, "PayerUin")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillDetailRequest has unknown keys!", "")
 	}
@@ -714,9 +745,12 @@ type DescribeBillDetailResponseParams struct {
 	// Details list
 	DetailSet []*BillDetail `json:"DetailSet,omitempty" name:"DetailSet"`
 
-	// Total number of records
-	// Note: This field may return null, indicating that no valid value was found.
+	// 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Total *uint64 `json:"Total,omitempty" name:"Total"`
+
+	// Context information returned by this request, and the value can be passed in as the value of parameters in the next request to accelerate queries. Note:  This field may return null, indicating that no valid values can be obtained.
+	Context *string `json:"Context,omitempty" name:"Context"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -740,13 +774,13 @@ func (r *DescribeBillDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillResourceSummaryRequestParams struct {
-	// Offset
+	// Pagination offset. If `Offset` is `0`, it indicates the first page. If `Limit` is `100`, "`Offset` = `100`" indicates the second page, then "`Offset` = `200`" indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Quantity, maximum is 1000
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Month; format: yyyy-mm. This value cannot be earlier than the month when Bill 2.0 is enabled. Last 24 months data are available.
+	// Bill month in the format of "yyyy-mm".  This value must be no earlier than March 2019, when Bill 2.0 was launched.
 	Month *string `json:"Month,omitempty" name:"Month"`
 
 	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
@@ -787,18 +821,21 @@ type DescribeBillResourceSummaryRequestParams struct {
 	// Product code
 	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 type DescribeBillResourceSummaryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset
+	// Pagination offset. If `Offset` is `0`, it indicates the first page. If `Limit` is `100`, "`Offset` = `100`" indicates the second page, then "`Offset` = `200`" indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Quantity, maximum is 1000
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Month; format: yyyy-mm. This value cannot be earlier than the month when Bill 2.0 is enabled. Last 24 months data are available.
+	// Bill month in the format of "yyyy-mm".  This value must be no earlier than March 2019, when Bill 2.0 was launched.
 	Month *string `json:"Month,omitempty" name:"Month"`
 
 	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
@@ -839,6 +876,8 @@ type DescribeBillResourceSummaryRequest struct {
 	// Product code
 	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+
+	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
 func (r *DescribeBillResourceSummaryRequest) ToJsonString() string {
@@ -862,6 +901,7 @@ func (r *DescribeBillResourceSummaryRequest) FromJsonString(s string) error {
 	delete(f, "ResourceId")
 	delete(f, "PayMode")
 	delete(f, "BusinessCode")
+	delete(f, "PayerUin")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillResourceSummaryRequest has unknown keys!", "")
 	}
@@ -873,8 +913,7 @@ type DescribeBillResourceSummaryResponseParams struct {
 	// Resource summary list
 	ResourceSummarySet []*BillResourceSummary `json:"ResourceSummarySet,omitempty" name:"ResourceSummarySet"`
 
-	// Total number of resource summary lists
-	// Note: This field may return null, indicating that no valid value was found.
+	// Total number of resource summary lists, which will not be returned when `NeedRecordNum` is `0`. This field may return null, indicating that no valid values can be obtained.
 	Total *int64 `json:"Total,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -945,7 +984,7 @@ func (r *DescribeBillSummaryByPayModeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByPayModeResponseParams struct {
-	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed cost distribution for all billing modes
@@ -1037,7 +1076,7 @@ func (r *DescribeBillSummaryByProductRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByProductResponseParams struct {
-	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Total cost details
@@ -1116,7 +1155,7 @@ func (r *DescribeBillSummaryByProjectRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByProjectResponseParams struct {
-	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed cost distribution for all projects
@@ -1191,7 +1230,7 @@ func (r *DescribeBillSummaryByRegionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByRegionResponseParams struct {
-	// Indicates whether or not the data is ready. 0 = not ready, 1 = ready.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed cost distribution for all regions
@@ -1280,7 +1319,7 @@ func (r *DescribeBillSummaryByTagRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByTagResponseParams struct {
-	// Indicates whether or not the data is ready. `0`: not ready; `1`: ready.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Details about cost distribution over different tags
@@ -1308,6 +1347,80 @@ func (r *DescribeBillSummaryByTagResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBillSummaryByTagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryRequestParams struct {
+	// Bill month in the format of "2023-04"
+	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// Bill dimension. Valid values:  `business`, `project`, `region`, `payMode`, and `tag`
+	GroupType *string `json:"GroupType,omitempty" name:"GroupType"`
+
+	// Tag key, which is used when `GroupType` is `tag`.
+	TagKey []*string `json:"TagKey,omitempty" name:"TagKey"`
+}
+
+type DescribeBillSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Bill month in the format of "2023-04"
+	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// Bill dimension. Valid values:  `business`, `project`, `region`, `payMode`, and `tag`
+	GroupType *string `json:"GroupType,omitempty" name:"GroupType"`
+
+	// Tag key, which is used when `GroupType` is `tag`.
+	TagKey []*string `json:"TagKey,omitempty" name:"TagKey"`
+}
+
+func (r *DescribeBillSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	delete(f, "GroupType")
+	delete(f, "TagKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillSummaryResponseParams struct {
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready.  If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
+	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
+
+	// Detailed summary of costs by multiple dimensions
+	SummaryDetail []*SummaryDetail `json:"SummaryDetail,omitempty" name:"SummaryDetail"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBillSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1638,67 +1751,67 @@ type ExcludedProducts struct {
 }
 
 type PayModeSummaryOverviewItem struct {
-	// Billing mode
+	// Billing mode code
 	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
 
-	// Billing mode name
+	// Billing mode,  which can be monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitempty" name:"PayModeName"`
-
-	// Actual cost
-	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
 	// Cost ratio, to two decimal points
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
-	// Detailed summary of purchases by transaction type
-	Detail []*ActionSummaryOverviewItem `json:"Detail,omitempty" name:"Detail"`
+	// Total amount after discount
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
-	// Cash amount
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Trial credit amount
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Voucher amount
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
 
-	// Payment by commission credits
-	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
+	// Detailed summary of costs by transaction type
+	Detail []*ActionSummaryOverviewItem `json:"Detail,omitempty" name:"Detail"`
 }
 
 type ProjectSummaryOverviewItem struct {
 	// Project ID
 	ProjectId *string `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Project name
+	// Project name:  The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
 	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
-
-	// Actual cost
-	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
 	// Cost ratio, to two decimal points
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
-	// Cash amount
+	// Total amount after discount
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Trial credit amount
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Voucher amount
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
-
-	// Payment by commission credits
-	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type RegionSummaryOverviewItem struct {
@@ -1706,37 +1819,65 @@ type RegionSummaryOverviewItem struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
-	// Region name
+	// Region:  The region to which a resource belongs, such as South China (Guangzhou).
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
-
-	// Actual cost
-	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
 	// Cost ratio, to two decimal points
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
-	// Cash amount
+	// Total amount after discount
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account
 	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
 
-	// Trial credit amount
+	// Free credit:  The amount paid by the user’s free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
 
-	// Voucher amount
+	// Voucher payment:  The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 
 	// Billing month, e.g. `2019-08`
 	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
 
-	// Payment by commission credits
+type SummaryDetail struct {
+	// Bill dimension code. Note:  This field may return null, indicating that no valid values can be obtained.
+	GroupKey *string `json:"GroupKey,omitempty" name:"GroupKey"`
+
+	// Bill dimension value. Note:  This field may return null, indicating that no valid values can be obtained.
+	GroupValue *string `json:"GroupValue,omitempty" name:"GroupValue"`
+
+	// Original cost in USD. This parameter has become valid since Bill 3.0 took effect in May 2021, and before that `-` was returned for this parameter. If a customer has applied for a contract price different from the prices listed on the official website, `-` will also be returned for this parameter.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+
+	// Total amount after discount
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account
+	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
+
+	// Free credit:  The amount paid by the user’s free credit
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
+
+	// Voucher payment:  The voucher deduction amount
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit. Note:  This field may return null, indicating that no valid values can be obtained.
 	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
+
+	// Detailed summary of products. Note:  This field may return null, indicating that no valid values can be obtained.
+	Business []*BusinessSummaryInfo `json:"Business,omitempty" name:"Business"`
 }
 
 type SummaryTotal struct {
-	// Total cost
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Total amount after discount. Note:  This field may return null, indicating that no valid values can be obtained.
 	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
@@ -1749,33 +1890,28 @@ type TagSummaryOverviewItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
 
-	// Actual cost
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
-
 	// Cost percentage rounded to two decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RealTotalCostRatio *string `json:"RealTotalCostRatio,omitempty" name:"RealTotalCostRatio"`
 
+	// Total amount after discount. Note:  This field may return null, indicating that no valid values can be obtained.
+	RealTotalCost *string `json:"RealTotalCost,omitempty" name:"RealTotalCost"`
+
+	// Cash credit:  The amount paid from the user’s cash account. Note:  This field may return null, indicating that no valid values can be obtained.
+	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
+
+	// Free credit:  The amount paid by the user’s free credit. Note:  This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
+
+	// Voucher payment:  The voucher deduction amount. Note:  This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+
+	// Commission credit:  The amount paid by the user’s commission credit. Note:  This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
+
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
-
-	// Payment by cash credits
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	CashPayAmount *string `json:"CashPayAmount,omitempty" name:"CashPayAmount"`
-
-	// Payment by free credits
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IncentivePayAmount *string `json:"IncentivePayAmount,omitempty" name:"IncentivePayAmount"`
-
-	// Payment by vouchers
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
-
-	// Payment by commission credits
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransferPayAmount *string `json:"TransferPayAmount,omitempty" name:"TransferPayAmount"`
 }
 
 type UsageDetails struct {

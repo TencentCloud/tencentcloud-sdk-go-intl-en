@@ -44,6 +44,9 @@ const (
 	// Gateway error.
 	INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
 
+	// 
+	INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
