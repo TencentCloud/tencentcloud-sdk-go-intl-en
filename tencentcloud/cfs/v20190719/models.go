@@ -186,6 +186,15 @@ func (r *BindAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BucketInfo struct {
+	// Bucket name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Bucket region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+}
+
 // Predefined struct for user
 type CreateAutoSnapshotPolicyRequestParams struct {
 	// The time point when to repeat the snapshot operation
@@ -200,7 +209,7 @@ type CreateAutoSnapshotPolicyRequestParams struct {
 	// Snapshot retention period
 	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
 
-	// The specific day (day 1 to day 31) of the month on which to create a snapshot.
+	// The specific day (day 1 to day 31) of the month on which to automatically create a snapshot.
 	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
 
 	// The snapshot interval, in days.
@@ -222,7 +231,7 @@ type CreateAutoSnapshotPolicyRequest struct {
 	// Snapshot retention period
 	AliveDays *uint64 `json:"AliveDays,omitempty" name:"AliveDays"`
 
-	// The specific day (day 1 to day 31) of the month on which to create a snapshot.
+	// The specific day (day 1 to day 31) of the month on which to automatically create a snapshot.
 	DayOfMonth *string `json:"DayOfMonth,omitempty" name:"DayOfMonth"`
 
 	// The snapshot interval, in days.
@@ -283,16 +292,16 @@ type CreateCfsFileSystemRequestParams struct {
 	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Network type. Valid values: `VPC` (private network), `BASIC` (classic network), `CCN` (Cloud Connect Network). You must set this parameter to `CCN` if you use the Turbo series. Classic network will be phased out and is not recommended.
+	// Network type. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
 	NetInterface *string `json:"NetInterface,omitempty" name:"NetInterface"`
 
-	// Permission group ID (required for Standard and High-Performance). For the Turbo series, set it to `pgroupbasic`.
+	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
 	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Storage class of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), `TP` (High-Performance Turbo)
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
 	// VPC ID. This field is required if network type is VPC.
@@ -329,16 +338,16 @@ type CreateCfsFileSystemRequest struct {
 	// AZ name, such as "ap-beijing-1". For the list of regions and AZs, please see [Overview](https://intl.cloud.tencent.com/document/product/582/13225?from_cn_redirect=1)
 	Zone *string `json:"Zone,omitempty" name:"Zone"`
 
-	// Network type. Valid values: `VPC` (private network), `BASIC` (classic network), `CCN` (Cloud Connect Network). You must set this parameter to `CCN` if you use the Turbo series. Classic network will be phased out and is not recommended.
+	// Network type. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
 	NetInterface *string `json:"NetInterface,omitempty" name:"NetInterface"`
 
-	// Permission group ID (required for Standard and High-Performance). For the Turbo series, set it to `pgroupbasic`.
+	// Permission group ID
 	PGroupId *string `json:"PGroupId,omitempty" name:"PGroupId"`
 
 	// File system protocol. Valid values: `NFS`, `CIFS`, `TURBO`. If this parameter is left empty, `NFS` is used by default. For the Turbo series, you must set this parameter to `TURBO`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
-	// Storage class of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), `TP` (High-Performance Turbo)
+	// Storage type of the file system. Valid values: `SD` (Standard), `HP` (High-Performance), `TB` (Standard Turbo), and `TP` (High-Performance Turbo). Default value: `SD`.
 	StorageType *string `json:"StorageType,omitempty" name:"StorageType"`
 
 	// VPC ID. This field is required if network type is VPC.
@@ -695,6 +704,161 @@ func (r *CreateCfsSnapshotResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateMigrationTaskRequestParams struct {
+	// Migration task name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Migration type. Valid values: `0` (bucket) and `1` (list). Default value: `0`.
+	MigrationType *uint64 `json:"MigrationType,omitempty" name:"MigrationType"`
+
+	// Migration mode. Default value: `0` (full migration).
+	MigrationMode *uint64 `json:"MigrationMode,omitempty" name:"MigrationMode"`
+
+	// SecretId of the data source account
+	SrcSecretId *string `json:"SrcSecretId,omitempty" name:"SrcSecretId"`
+
+	// SecretKey of the data source account
+	SrcSecretKey *string `json:"SrcSecretKey,omitempty" name:"SrcSecretKey"`
+
+	// File system instance ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// File system path
+	FsPath *string `json:"FsPath,omitempty" name:"FsPath"`
+
+	// Overwrite policy for files with the same name. Valid values: `0` (retain the file with the latest modified time), `1` (overwrite); and `2` (not overwrite). Default value: `0`.
+	CoverType *uint64 `json:"CoverType,omitempty" name:"CoverType"`
+
+	// Data source service provider. Valid values: `COS` (Tencent Cloud COS), `OSS` (Alibaba Cloud OSS), and `OBS` (Huawei Cloud OBS).
+	SrcService *string `json:"SrcService,omitempty" name:"SrcService"`
+
+	// Data source bucket name. Specify at least one of the bucket name or address.
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+
+	// Data source bucket region
+	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
+
+	// Data source bucket address. Specify at least one of the bucket name or address.
+	BucketAddress *string `json:"BucketAddress,omitempty" name:"BucketAddress"`
+
+	// List address. This parameter is required if `MigrationType` is set to `1` (list).
+	ListAddress *string `json:"ListAddress,omitempty" name:"ListAddress"`
+
+	// Target file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// Source bucket path, which defaults to `/`
+	BucketPath *string `json:"BucketPath,omitempty" name:"BucketPath"`
+}
+
+type CreateMigrationTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Migration task name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Migration type. Valid values: `0` (bucket) and `1` (list). Default value: `0`.
+	MigrationType *uint64 `json:"MigrationType,omitempty" name:"MigrationType"`
+
+	// Migration mode. Default value: `0` (full migration).
+	MigrationMode *uint64 `json:"MigrationMode,omitempty" name:"MigrationMode"`
+
+	// SecretId of the data source account
+	SrcSecretId *string `json:"SrcSecretId,omitempty" name:"SrcSecretId"`
+
+	// SecretKey of the data source account
+	SrcSecretKey *string `json:"SrcSecretKey,omitempty" name:"SrcSecretKey"`
+
+	// File system instance ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// File system path
+	FsPath *string `json:"FsPath,omitempty" name:"FsPath"`
+
+	// Overwrite policy for files with the same name. Valid values: `0` (retain the file with the latest modified time), `1` (overwrite); and `2` (not overwrite). Default value: `0`.
+	CoverType *uint64 `json:"CoverType,omitempty" name:"CoverType"`
+
+	// Data source service provider. Valid values: `COS` (Tencent Cloud COS), `OSS` (Alibaba Cloud OSS), and `OBS` (Huawei Cloud OBS).
+	SrcService *string `json:"SrcService,omitempty" name:"SrcService"`
+
+	// Data source bucket name. Specify at least one of the bucket name or address.
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+
+	// Data source bucket region
+	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
+
+	// Data source bucket address. Specify at least one of the bucket name or address.
+	BucketAddress *string `json:"BucketAddress,omitempty" name:"BucketAddress"`
+
+	// List address. This parameter is required if `MigrationType` is set to `1` (list).
+	ListAddress *string `json:"ListAddress,omitempty" name:"ListAddress"`
+
+	// Target file system name
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// Source bucket path, which defaults to `/`
+	BucketPath *string `json:"BucketPath,omitempty" name:"BucketPath"`
+}
+
+func (r *CreateMigrationTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMigrationTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskName")
+	delete(f, "MigrationType")
+	delete(f, "MigrationMode")
+	delete(f, "SrcSecretId")
+	delete(f, "SrcSecretKey")
+	delete(f, "FileSystemId")
+	delete(f, "FsPath")
+	delete(f, "CoverType")
+	delete(f, "SrcService")
+	delete(f, "BucketName")
+	delete(f, "BucketRegion")
+	delete(f, "BucketAddress")
+	delete(f, "ListAddress")
+	delete(f, "FsName")
+	delete(f, "BucketPath")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMigrationTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMigrationTaskResponseParams struct {
+	// Migration task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateMigrationTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateMigrationTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateMigrationTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMigrationTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteAutoSnapshotPolicyRequestParams struct {
 	// Snapshot policy ID
 	AutoSnapshotPolicyId *string `json:"AutoSnapshotPolicyId,omitempty" name:"AutoSnapshotPolicyId"`
@@ -997,6 +1161,60 @@ func (r *DeleteCfsSnapshotResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteMigrationTaskRequestParams struct {
+	// Migration task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type DeleteMigrationTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Migration task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteMigrationTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMigrationTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMigrationTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMigrationTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteMigrationTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteMigrationTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteMigrationTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMigrationTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteMountTargetRequestParams struct {
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
@@ -1203,6 +1421,80 @@ func (r *DescribeAvailableZoneInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAvailableZoneInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBucketListRequestParams struct {
+	// Data source service provider. Valid values: `COS` (Tencent Cloud COS), `OSS` (Alibaba Cloud OSS), and `OBS` (Huawei Cloud OBS).
+	SrcService *string `json:"SrcService,omitempty" name:"SrcService"`
+
+	// SecretId of the data source account
+	SrcSecretId *string `json:"SrcSecretId,omitempty" name:"SrcSecretId"`
+
+	// SecretKey of the data source account
+	SrcSecretKey *string `json:"SrcSecretKey,omitempty" name:"SrcSecretKey"`
+}
+
+type DescribeBucketListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data source service provider. Valid values: `COS` (Tencent Cloud COS), `OSS` (Alibaba Cloud OSS), and `OBS` (Huawei Cloud OBS).
+	SrcService *string `json:"SrcService,omitempty" name:"SrcService"`
+
+	// SecretId of the data source account
+	SrcSecretId *string `json:"SrcSecretId,omitempty" name:"SrcSecretId"`
+
+	// SecretKey of the data source account
+	SrcSecretKey *string `json:"SrcSecretKey,omitempty" name:"SrcSecretKey"`
+}
+
+func (r *DescribeBucketListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBucketListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SrcService")
+	delete(f, "SrcSecretId")
+	delete(f, "SrcSecretKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBucketListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBucketListResponseParams struct {
+	// Number of buckets
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Bucket list
+	BucketList []*BucketInfo `json:"BucketList,omitempty" name:"BucketList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBucketListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBucketListResponseParams `json:"Response"`
+}
+
+func (r *DescribeBucketListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBucketListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1662,6 +1954,108 @@ func (r *DescribeCfsSnapshotsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeMigrationTasksRequestParams struct {
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// <br><li> taskId
+	// 
+	// Filter by **migration task ID**
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// <br><li> taskName
+	// 
+	// Fuzzy filter by **migration task name**
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeMigrationTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// <br><li> taskId
+	// 
+	// Filter by **migration task ID**
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// <br><li> taskName
+	// 
+	// Fuzzy filter by **migration task name**
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeMigrationTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMigrationTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMigrationTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMigrationTasksResponseParams struct {
+	// Number of migration tasks
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Migration task details
+	MigrationTasks []*MigrationTaskInfo `json:"MigrationTasks,omitempty" name:"MigrationTasks"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeMigrationTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMigrationTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeMigrationTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMigrationTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeMountTargetsRequestParams struct {
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
@@ -1848,7 +2242,13 @@ type FileSystemInfo struct {
 	// File system ID
 	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
 
-	// File system status
+	// File system status. Valid values:
+	// - creating
+	// - mounting
+	// - create_failed
+	// - available
+	// - unserviced
+	// - upgrading
 	LifeCycleState *string `json:"LifeCycleState,omitempty" name:"LifeCycleState"`
 
 	// Used file system capacity
@@ -1913,6 +2313,186 @@ type Filter struct {
 
 	// Name
 	Name *string `json:"Name,omitempty" name:"Name"`
+}
+
+type MigrationTaskInfo struct {
+	// Migration task name
+	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+
+	// Migration task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Migration type. Valid values: `0` (bucket) and `1` (list). Default value: `0`.
+	MigrationType *uint64 `json:"MigrationType,omitempty" name:"MigrationType"`
+
+	// Migration mode. Default value: `0` (full migration).
+	MigrationMode *uint64 `json:"MigrationMode,omitempty" name:"MigrationMode"`
+
+	// Data source bucket name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BucketName *string `json:"BucketName,omitempty" name:"BucketName"`
+
+	// Data source bucket region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BucketRegion *string `json:"BucketRegion,omitempty" name:"BucketRegion"`
+
+	// Data source bucket address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BucketAddress *string `json:"BucketAddress,omitempty" name:"BucketAddress"`
+
+	// List address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ListAddress *string `json:"ListAddress,omitempty" name:"ListAddress"`
+
+	// File system instance name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FsName *string `json:"FsName,omitempty" name:"FsName"`
+
+	// File system instance ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// File system path
+	FsPath *string `json:"FsPath,omitempty" name:"FsPath"`
+
+	// Overwrite policy for files with the same name. Valid values: `0` (retain the file with the latest modified time), `1` (overwrite); and `2` (not overwrite). Default value: `0`.
+	CoverType *uint64 `json:"CoverType,omitempty" name:"CoverType"`
+
+	// Creation time
+	CreateTime *int64 `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// End time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Migration status. Valid values: `0` (completed), `1` (in progress), and `2` (stopped).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Number of files
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileTotalCount *uint64 `json:"FileTotalCount,omitempty" name:"FileTotalCount"`
+
+	// Number of migrated files
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileMigratedCount *uint64 `json:"FileMigratedCount,omitempty" name:"FileMigratedCount"`
+
+	// Number of files that failed to be migrated
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileFailedCount *uint64 `json:"FileFailedCount,omitempty" name:"FileFailedCount"`
+
+	// File size, in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileTotalSize *int64 `json:"FileTotalSize,omitempty" name:"FileTotalSize"`
+
+	// Size of migrated files, in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileMigratedSize *int64 `json:"FileMigratedSize,omitempty" name:"FileMigratedSize"`
+
+	// Size of files that failed to be migrated, in bytes
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileFailedSize *int64 `json:"FileFailedSize,omitempty" name:"FileFailedSize"`
+
+	// List of all files
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileTotalList *string `json:"FileTotalList,omitempty" name:"FileTotalList"`
+
+	// List of migrated files
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileCompletedList *string `json:"FileCompletedList,omitempty" name:"FileCompletedList"`
+
+	// List of files that failed to be migrated
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileFailedList *string `json:"FileFailedList,omitempty" name:"FileFailedList"`
+
+	// Source bucket path
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BucketPath *string `json:"BucketPath,omitempty" name:"BucketPath"`
+}
+
+// Predefined struct for user
+type ModifyFileSystemAutoScaleUpRuleRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Threshold for triggering scaling. Value range: 10-90
+	ScaleUpThreshold *uint64 `json:"ScaleUpThreshold,omitempty" name:"ScaleUpThreshold"`
+
+	// Target threshold after scaling. Value range: 10-90. The value of this parameter must be smaller than that of `ScaleUpThreshold`.
+	TargetThreshold *uint64 `json:"TargetThreshold,omitempty" name:"TargetThreshold"`
+
+	// Rule status. Valid values: `0` (disabled) and `1` (enabled).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+type ModifyFileSystemAutoScaleUpRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Threshold for triggering scaling. Value range: 10-90
+	ScaleUpThreshold *uint64 `json:"ScaleUpThreshold,omitempty" name:"ScaleUpThreshold"`
+
+	// Target threshold after scaling. Value range: 10-90. The value of this parameter must be smaller than that of `ScaleUpThreshold`.
+	TargetThreshold *uint64 `json:"TargetThreshold,omitempty" name:"TargetThreshold"`
+
+	// Rule status. Valid values: `0` (disabled) and `1` (enabled).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *ModifyFileSystemAutoScaleUpRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFileSystemAutoScaleUpRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileSystemId")
+	delete(f, "ScaleUpThreshold")
+	delete(f, "TargetThreshold")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFileSystemAutoScaleUpRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyFileSystemAutoScaleUpRuleResponseParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Rule status. Valid values: `0` (disabled) and `1` (enabled).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// Threshold for triggering scaling. Value range: 10-90
+	ScaleUpThreshold *uint64 `json:"ScaleUpThreshold,omitempty" name:"ScaleUpThreshold"`
+
+	// Target threshold after scaling. Value range: 10-90
+	TargetThreshold *uint64 `json:"TargetThreshold,omitempty" name:"TargetThreshold"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyFileSystemAutoScaleUpRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyFileSystemAutoScaleUpRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyFileSystemAutoScaleUpRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFileSystemAutoScaleUpRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type MountInfo struct {
@@ -1993,6 +2573,73 @@ type PGroupRuleInfo struct {
 
 	// Rule priority. Value range: 1-100. 1 represents the highest priority, while 100 the lowest
 	Priority *int64 `json:"Priority,omitempty" name:"Priority"`
+}
+
+// Predefined struct for user
+type ScaleUpFileSystemRequestParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Target capacity after scaling
+	TargetCapacity *uint64 `json:"TargetCapacity,omitempty" name:"TargetCapacity"`
+}
+
+type ScaleUpFileSystemRequest struct {
+	*tchttp.BaseRequest
+	
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Target capacity after scaling
+	TargetCapacity *uint64 `json:"TargetCapacity,omitempty" name:"TargetCapacity"`
+}
+
+func (r *ScaleUpFileSystemRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ScaleUpFileSystemRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileSystemId")
+	delete(f, "TargetCapacity")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleUpFileSystemRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ScaleUpFileSystemResponseParams struct {
+	// File system ID
+	FileSystemId *string `json:"FileSystemId,omitempty" name:"FileSystemId"`
+
+	// Target capacity after scaling
+	TargetCapacity *uint64 `json:"TargetCapacity,omitempty" name:"TargetCapacity"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ScaleUpFileSystemResponse struct {
+	*tchttp.BaseResponse
+	Response *ScaleUpFileSystemResponseParams `json:"Response"`
+}
+
+func (r *ScaleUpFileSystemResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ScaleUpFileSystemResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -2088,6 +2735,10 @@ type SnapshotInfo struct {
 
 	// Snapshot tag
 	Tags []*TagInfo `json:"Tags,omitempty" name:"Tags"`
+
+	// Snapshot type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SnapshotType *string `json:"SnapshotType,omitempty" name:"SnapshotType"`
 }
 
 type SnapshotOperateLog struct {
@@ -2118,6 +2769,66 @@ type SnapshotStatistics struct {
 	SnapshotSize *uint64 `json:"SnapshotSize,omitempty" name:"SnapshotSize"`
 }
 
+// Predefined struct for user
+type StopMigrationTaskRequestParams struct {
+	// Migration task name
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type StopMigrationTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Migration task name
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *StopMigrationTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopMigrationTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopMigrationTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopMigrationTaskResponseParams struct {
+	// Migration task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Migration status. Valid values: `0` (completed), `1` (in progress), and `2` (stopped).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StopMigrationTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *StopMigrationTaskResponseParams `json:"Response"`
+}
+
+func (r *StopMigrationTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopMigrationTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type TagInfo struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -2127,7 +2838,9 @@ type TagInfo struct {
 }
 
 type TieringDetailInfo struct {
-
+	// STANDARD_IA storage usage
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TieringSizeInBytes *int64 `json:"TieringSizeInBytes,omitempty" name:"TieringSizeInBytes"`
 }
 
 // Predefined struct for user

@@ -143,8 +143,17 @@ func NewCreateAutoSnapshotPolicyResponse() (response *CreateAutoSnapshotPolicyRe
 //  INVALIDPARAMETER_MISSINGPOLICYPARAM = "InvalidParameter.MissingPolicyParam"
 //  INVALIDPARAMETER_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameter.SnapshotPolicyNameLimitExceeded"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUTOPOLICYNOTFOUND = "InvalidParameterValue.AutoPolicyNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDALIVEDAYS = "InvalidParameterValue.InvalidAliveDays"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMDAYOFMONTH = "InvalidParameterValue.InvalidParamDayOfMonth"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMDAYOFWEEK = "InvalidParameterValue.InvalidParamDayOfWeek"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMINTERVALDAYS = "InvalidParameterValue.InvalidParamIntervalDays"
+//  INVALIDPARAMETERVALUE_INVALIDSNAPPOLICYSTATUS = "InvalidParameterValue.InvalidSnapPolicyStatus"
+//  INVALIDPARAMETERVALUE_INVALIDSNAPSHOTNAME = "InvalidParameterValue.InvalidSnapshotName"
+//  INVALIDPARAMETERVALUE_INVALIDSNAPSHOTPOLICYNAME = "InvalidParameterValue.InvalidSnapshotPolicyName"
+//  INVALIDPARAMETERVALUE_MISSINGSNAPNAMEORALIVEDAY = "InvalidParameterValue.MissingSnapNameOrAliveDay"
+//  INVALIDPARAMETERVALUE_SNAPSHOTNAMELIMITEXCEEDED = "InvalidParameterValue.SnapshotNameLimitExceeded"
+//  INVALIDPARAMETERVALUE_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameterValue.SnapshotPolicyNameLimitExceeded"
 //  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
 //  UNSUPPORTEDOPERATION_UNAUTHORIZEDCFSQCSROLE = "UnsupportedOperation.UnauthorizedCfsQcsRole"
 //  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
@@ -166,8 +175,17 @@ func (c *Client) CreateAutoSnapshotPolicy(request *CreateAutoSnapshotPolicyReque
 //  INVALIDPARAMETER_MISSINGPOLICYPARAM = "InvalidParameter.MissingPolicyParam"
 //  INVALIDPARAMETER_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameter.SnapshotPolicyNameLimitExceeded"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUTOPOLICYNOTFOUND = "InvalidParameterValue.AutoPolicyNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDALIVEDAYS = "InvalidParameterValue.InvalidAliveDays"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMDAYOFMONTH = "InvalidParameterValue.InvalidParamDayOfMonth"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMDAYOFWEEK = "InvalidParameterValue.InvalidParamDayOfWeek"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMINTERVALDAYS = "InvalidParameterValue.InvalidParamIntervalDays"
+//  INVALIDPARAMETERVALUE_INVALIDSNAPPOLICYSTATUS = "InvalidParameterValue.InvalidSnapPolicyStatus"
+//  INVALIDPARAMETERVALUE_INVALIDSNAPSHOTNAME = "InvalidParameterValue.InvalidSnapshotName"
+//  INVALIDPARAMETERVALUE_INVALIDSNAPSHOTPOLICYNAME = "InvalidParameterValue.InvalidSnapshotPolicyName"
+//  INVALIDPARAMETERVALUE_MISSINGSNAPNAMEORALIVEDAY = "InvalidParameterValue.MissingSnapNameOrAliveDay"
+//  INVALIDPARAMETERVALUE_SNAPSHOTNAMELIMITEXCEEDED = "InvalidParameterValue.SnapshotNameLimitExceeded"
+//  INVALIDPARAMETERVALUE_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameterValue.SnapshotPolicyNameLimitExceeded"
 //  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
 //  UNSUPPORTEDOPERATION_UNAUTHORIZEDCFSQCSROLE = "UnsupportedOperation.UnauthorizedCfsQcsRole"
 //  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
@@ -218,6 +236,7 @@ func NewCreateCfsFileSystemResponse() (response *CreateCfsFileSystemResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_AUTOPOLICYNOTFOUND = "InvalidParameter.AutoPolicyNotFound"
 //  INVALIDPARAMETERVALUE_CLIENTTOKENLIMITEXCEEDED = "InvalidParameterValue.ClientTokenLimitExceeded"
+//  INVALIDPARAMETERVALUE_DUPLICATEDTAGKEY = "InvalidParameterValue.DuplicatedTagKey"
 //  INVALIDPARAMETERVALUE_FSNAMELIMITEXCEEDED = "InvalidParameterValue.FsNameLimitExceeded"
 //  INVALIDPARAMETERVALUE_INVALIDCLIENTTOKEN = "InvalidParameterValue.InvalidClientToken"
 //  INVALIDPARAMETERVALUE_INVALIDENCRYPTED = "InvalidParameterValue.InvalidEncrypted"
@@ -247,7 +266,9 @@ func NewCreateCfsFileSystemResponse() (response *CreateCfsFileSystemResponse) {
 //  INVALIDPARAMETERVALUE_MISSINGVPCIDORUNVPCID = "InvalidParameterValue.MissingVpcidOrUnvpcid"
 //  INVALIDPARAMETERVALUE_MISSINGZONEID = "InvalidParameterValue.MissingZoneId"
 //  INVALIDPARAMETERVALUE_MISSINGZONEORZONEID = "InvalidParameterValue.MissingZoneOrZoneId"
+//  INVALIDPARAMETERVALUE_TAGKEYFILTERLIMITEXCEEDED = "InvalidParameterValue.TagKeyFilterLimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGKEYLIMITEXCEEDED = "InvalidParameterValue.TagKeyLimitExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUEFILTERLIMITEXCEEDED = "InvalidParameterValue.TagValueFilterLimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGVALUELIMITEXCEEDED = "InvalidParameterValue.TagValueLimitExceeded"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEREGION = "InvalidParameterValue.UnavailableRegion"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
@@ -257,6 +278,7 @@ func NewCreateCfsFileSystemResponse() (response *CreateCfsFileSystemResponse) {
 //  RESOURCEINSUFFICIENT_SUBNETIPALLOCCUPIED = "ResourceInsufficient.SubnetIpAllOccupied"
 //  RESOURCEINSUFFICIENT_TAGLIMITEXCEEDED = "ResourceInsufficient.TagLimitExceeded"
 //  RESOURCEINSUFFICIENT_TAGQUOTASEXCEEDED = "ResourceInsufficient.TagQuotasExceeded"
+//  RESOURCEINSUFFICIENT_TURBOSPECIALCAPACITYFILESYSTEMCOUNTLIMIT = "ResourceInsufficient.TurboSpecialCapacityFileSystemCountLimit"
 //  RESOURCENOTFOUND_PGROUPNOTFOUND = "ResourceNotFound.PgroupNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_BASICNETINTERFACENOTSUPPORTED = "UnsupportedOperation.BasicNetInterfaceNotSupported"
@@ -279,6 +301,7 @@ func (c *Client) CreateCfsFileSystem(request *CreateCfsFileSystemRequest) (respo
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_AUTOPOLICYNOTFOUND = "InvalidParameter.AutoPolicyNotFound"
 //  INVALIDPARAMETERVALUE_CLIENTTOKENLIMITEXCEEDED = "InvalidParameterValue.ClientTokenLimitExceeded"
+//  INVALIDPARAMETERVALUE_DUPLICATEDTAGKEY = "InvalidParameterValue.DuplicatedTagKey"
 //  INVALIDPARAMETERVALUE_FSNAMELIMITEXCEEDED = "InvalidParameterValue.FsNameLimitExceeded"
 //  INVALIDPARAMETERVALUE_INVALIDCLIENTTOKEN = "InvalidParameterValue.InvalidClientToken"
 //  INVALIDPARAMETERVALUE_INVALIDENCRYPTED = "InvalidParameterValue.InvalidEncrypted"
@@ -308,7 +331,9 @@ func (c *Client) CreateCfsFileSystem(request *CreateCfsFileSystemRequest) (respo
 //  INVALIDPARAMETERVALUE_MISSINGVPCIDORUNVPCID = "InvalidParameterValue.MissingVpcidOrUnvpcid"
 //  INVALIDPARAMETERVALUE_MISSINGZONEID = "InvalidParameterValue.MissingZoneId"
 //  INVALIDPARAMETERVALUE_MISSINGZONEORZONEID = "InvalidParameterValue.MissingZoneOrZoneId"
+//  INVALIDPARAMETERVALUE_TAGKEYFILTERLIMITEXCEEDED = "InvalidParameterValue.TagKeyFilterLimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGKEYLIMITEXCEEDED = "InvalidParameterValue.TagKeyLimitExceeded"
+//  INVALIDPARAMETERVALUE_TAGVALUEFILTERLIMITEXCEEDED = "InvalidParameterValue.TagValueFilterLimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGVALUELIMITEXCEEDED = "InvalidParameterValue.TagValueLimitExceeded"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEREGION = "InvalidParameterValue.UnavailableRegion"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
@@ -318,6 +343,7 @@ func (c *Client) CreateCfsFileSystem(request *CreateCfsFileSystemRequest) (respo
 //  RESOURCEINSUFFICIENT_SUBNETIPALLOCCUPIED = "ResourceInsufficient.SubnetIpAllOccupied"
 //  RESOURCEINSUFFICIENT_TAGLIMITEXCEEDED = "ResourceInsufficient.TagLimitExceeded"
 //  RESOURCEINSUFFICIENT_TAGQUOTASEXCEEDED = "ResourceInsufficient.TagQuotasExceeded"
+//  RESOURCEINSUFFICIENT_TURBOSPECIALCAPACITYFILESYSTEMCOUNTLIMIT = "ResourceInsufficient.TurboSpecialCapacityFileSystemCountLimit"
 //  RESOURCENOTFOUND_PGROUPNOTFOUND = "ResourceNotFound.PgroupNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_BASICNETINTERFACENOTSUPPORTED = "UnsupportedOperation.BasicNetInterfaceNotSupported"
@@ -571,6 +597,58 @@ func (c *Client) CreateCfsSnapshotWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateCfsSnapshotResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMigrationTaskRequest() (request *CreateMigrationTaskRequest) {
+    request = &CreateMigrationTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "CreateMigrationTask")
+    
+    
+    return
+}
+
+func NewCreateMigrationTaskResponse() (response *CreateMigrationTaskResponse) {
+    response = &CreateMigrationTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateMigrationTask
+// This API is used to create a migration task.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateMigrationTask(request *CreateMigrationTaskRequest) (response *CreateMigrationTaskResponse, err error) {
+    return c.CreateMigrationTaskWithContext(context.Background(), request)
+}
+
+// CreateMigrationTask
+// This API is used to create a migration task.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateMigrationTaskWithContext(ctx context.Context, request *CreateMigrationTaskRequest) (response *CreateMigrationTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateMigrationTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMigrationTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMigrationTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -921,6 +999,72 @@ func (c *Client) DeleteCfsSnapshotWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeleteMigrationTaskRequest() (request *DeleteMigrationTaskRequest) {
+    request = &DeleteMigrationTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "DeleteMigrationTask")
+    
+    
+    return
+}
+
+func NewDeleteMigrationTaskResponse() (response *DeleteMigrationTaskResponse) {
+    response = &DeleteMigrationTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteMigrationTask
+// This API is used to delete a migration task.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteMigrationTask(request *DeleteMigrationTaskRequest) (response *DeleteMigrationTaskResponse, err error) {
+    return c.DeleteMigrationTaskWithContext(context.Background(), request)
+}
+
+// DeleteMigrationTask
+// This API is used to delete a migration task.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteMigrationTaskWithContext(ctx context.Context, request *DeleteMigrationTaskRequest) (response *DeleteMigrationTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteMigrationTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMigrationTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMigrationTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteMountTargetRequest() (request *DeleteMountTargetRequest) {
     request = &DeleteMountTargetRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1105,6 +1249,68 @@ func (c *Client) DescribeAvailableZoneInfoWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeAvailableZoneInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBucketListRequest() (request *DescribeBucketListRequest) {
+    request = &DescribeBucketListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "DescribeBucketList")
+    
+    
+    return
+}
+
+func NewDescribeBucketListResponse() (response *DescribeBucketListResponse) {
+    response = &DescribeBucketListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBucketList
+// This API is used to get the list of data source buckets.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETACCOUNTSTATUSFAILED = "InternalError.GetAccountStatusFailed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) DescribeBucketList(request *DescribeBucketListRequest) (response *DescribeBucketListResponse, err error) {
+    return c.DescribeBucketListWithContext(context.Background(), request)
+}
+
+// DescribeBucketList
+// This API is used to get the list of data source buckets.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETACCOUNTSTATUSFAILED = "InternalError.GetAccountStatusFailed"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) DescribeBucketListWithContext(ctx context.Context, request *DescribeBucketListRequest) (response *DescribeBucketListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBucketListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBucketList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBucketListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1521,6 +1727,70 @@ func (c *Client) DescribeCfsSnapshotsWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeMigrationTasksRequest() (request *DescribeMigrationTasksRequest) {
+    request = &DescribeMigrationTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "DescribeMigrationTasks")
+    
+    
+    return
+}
+
+func NewDescribeMigrationTasksResponse() (response *DescribeMigrationTasksResponse) {
+    response = &DescribeMigrationTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeMigrationTasks
+// This API is used to get the list of migration tasks.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
+//  RESOURCENOTFOUND_SNAPSHOTNOTFOUND = "ResourceNotFound.SnapshotNotFound"
+//  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) DescribeMigrationTasks(request *DescribeMigrationTasksRequest) (response *DescribeMigrationTasksResponse, err error) {
+    return c.DescribeMigrationTasksWithContext(context.Background(), request)
+}
+
+// DescribeMigrationTasks
+// This API is used to get the list of migration tasks.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
+//  RESOURCENOTFOUND_SNAPSHOTNOTFOUND = "ResourceNotFound.SnapshotNotFound"
+//  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) DescribeMigrationTasksWithContext(ctx context.Context, request *DescribeMigrationTasksRequest) (response *DescribeMigrationTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeMigrationTasksRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMigrationTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMigrationTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMountTargetsRequest() (request *DescribeMountTargetsRequest) {
     request = &DescribeMountTargetsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1649,6 +1919,134 @@ func (c *Client) DescribeSnapshotOperationLogsWithContext(ctx context.Context, r
     return
 }
 
+func NewModifyFileSystemAutoScaleUpRuleRequest() (request *ModifyFileSystemAutoScaleUpRuleRequest) {
+    request = &ModifyFileSystemAutoScaleUpRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "ModifyFileSystemAutoScaleUpRule")
+    
+    
+    return
+}
+
+func NewModifyFileSystemAutoScaleUpRuleResponse() (response *ModifyFileSystemAutoScaleUpRuleResponse) {
+    response = &ModifyFileSystemAutoScaleUpRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyFileSystemAutoScaleUpRule
+// This API is used to modify the scaling policy of a file system.
+//
+// error code that may be returned:
+//  AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALEUPPARAMS = "InvalidParameterValue.InvalidAutoScaleUpParams"
+//  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
+//  RESOURCENOTFOUND_FSNOTEXIST = "ResourceNotFound.FsNotExist"
+//  RESOURCENOTFOUND_RESOURCEPACKAGENOTFOUND = "ResourceNotFound.ResourcePackageNotFound"
+func (c *Client) ModifyFileSystemAutoScaleUpRule(request *ModifyFileSystemAutoScaleUpRuleRequest) (response *ModifyFileSystemAutoScaleUpRuleResponse, err error) {
+    return c.ModifyFileSystemAutoScaleUpRuleWithContext(context.Background(), request)
+}
+
+// ModifyFileSystemAutoScaleUpRule
+// This API is used to modify the scaling policy of a file system.
+//
+// error code that may be returned:
+//  AUTHFAILURE_GETROLEFAILED = "AuthFailure.GetRoleFailed"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALEUPPARAMS = "InvalidParameterValue.InvalidAutoScaleUpParams"
+//  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
+//  RESOURCENOTFOUND_FSNOTEXIST = "ResourceNotFound.FsNotExist"
+//  RESOURCENOTFOUND_RESOURCEPACKAGENOTFOUND = "ResourceNotFound.ResourcePackageNotFound"
+func (c *Client) ModifyFileSystemAutoScaleUpRuleWithContext(ctx context.Context, request *ModifyFileSystemAutoScaleUpRuleRequest) (response *ModifyFileSystemAutoScaleUpRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyFileSystemAutoScaleUpRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFileSystemAutoScaleUpRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFileSystemAutoScaleUpRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewScaleUpFileSystemRequest() (request *ScaleUpFileSystemRequest) {
+    request = &ScaleUpFileSystemRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "ScaleUpFileSystem")
+    
+    
+    return
+}
+
+func NewScaleUpFileSystemResponse() (response *ScaleUpFileSystemResponse) {
+    response = &ScaleUpFileSystemResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ScaleUpFileSystem
+// This API is used to scale up a Turbo file system.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
+//  INVALIDPARAMETERVALUE_INVALIDSCALEUPTARGETCAPACITY = "InvalidParameterValue.InvalidScaleupTargetCapacity"
+//  INVALIDPARAMETERVALUE_INVALIDTURBOCAPACITY = "InvalidParameterValue.InvalidTurboCapacity"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FILESYSTEMNOTFOUND = "ResourceNotFound.FileSystemNotFound"
+//  RESOURCENOTFOUND_FSNOTEXIST = "ResourceNotFound.FsNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MISSINGKMSACCESSPERMISSION = "UnsupportedOperation.MissingKmsAccessPermission"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) ScaleUpFileSystem(request *ScaleUpFileSystemRequest) (response *ScaleUpFileSystemResponse, err error) {
+    return c.ScaleUpFileSystemWithContext(context.Background(), request)
+}
+
+// ScaleUpFileSystem
+// This API is used to scale up a Turbo file system.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
+//  INVALIDPARAMETERVALUE_INVALIDSCALEUPTARGETCAPACITY = "InvalidParameterValue.InvalidScaleupTargetCapacity"
+//  INVALIDPARAMETERVALUE_INVALIDTURBOCAPACITY = "InvalidParameterValue.InvalidTurboCapacity"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_FILESYSTEMNOTFOUND = "ResourceNotFound.FileSystemNotFound"
+//  RESOURCENOTFOUND_FSNOTEXIST = "ResourceNotFound.FsNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MISSINGKMSACCESSPERMISSION = "UnsupportedOperation.MissingKmsAccessPermission"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) ScaleUpFileSystemWithContext(ctx context.Context, request *ScaleUpFileSystemRequest) (response *ScaleUpFileSystemResponse, err error) {
+    if request == nil {
+        request = NewScaleUpFileSystemRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ScaleUpFileSystem require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewScaleUpFileSystemResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSignUpCfsServiceRequest() (request *SignUpCfsServiceRequest) {
     request = &SignUpCfsServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1701,6 +2099,66 @@ func (c *Client) SignUpCfsServiceWithContext(ctx context.Context, request *SignU
     request.SetContext(ctx)
     
     response = NewSignUpCfsServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopMigrationTaskRequest() (request *StopMigrationTaskRequest) {
+    request = &StopMigrationTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "StopMigrationTask")
+    
+    
+    return
+}
+
+func NewStopMigrationTaskResponse() (response *StopMigrationTaskResponse) {
+    response = &StopMigrationTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StopMigrationTask
+// This API is used to stop a migration task.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) StopMigrationTask(request *StopMigrationTaskRequest) (response *StopMigrationTaskResponse, err error) {
+    return c.StopMigrationTaskWithContext(context.Background(), request)
+}
+
+// StopMigrationTask
+// This API is used to stop a migration task.
+//
+// To use this API, submit a ticket for us to add you to the allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
+//  UNSUPPORTEDOPERATION_UNVERIFIEDUSER = "UnsupportedOperation.UnverifiedUser"
+func (c *Client) StopMigrationTaskWithContext(ctx context.Context, request *StopMigrationTaskRequest) (response *StopMigrationTaskResponse, err error) {
+    if request == nil {
+        request = NewStopMigrationTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopMigrationTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopMigrationTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -1803,6 +2261,8 @@ func NewUpdateAutoSnapshotPolicyResponse() (response *UpdateAutoSnapshotPolicyRe
 //  INVALIDPARAMETER_MISSINGPOLICYPARAM = "InvalidParameter.MissingPolicyParam"
 //  INVALIDPARAMETER_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameter.SnapshotPolicyNameLimitExceeded"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUTOPOLICYNOTFOUND = "InvalidParameterValue.AutoPolicyNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDDESTINATIONREGIONS = "InvalidParameterValue.InvalidDestinationRegions"
 //  INVALIDPARAMETERVALUE_MISSINGPOLICYPARAM = "InvalidParameterValue.MissingPolicyParam"
 //  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
 //  UNSUPPORTEDOPERATION_UNAUTHORIZEDCFSQCSROLE = "UnsupportedOperation.UnauthorizedCfsQcsRole"
@@ -1825,6 +2285,8 @@ func (c *Client) UpdateAutoSnapshotPolicy(request *UpdateAutoSnapshotPolicyReque
 //  INVALIDPARAMETER_MISSINGPOLICYPARAM = "InvalidParameter.MissingPolicyParam"
 //  INVALIDPARAMETER_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameter.SnapshotPolicyNameLimitExceeded"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUTOPOLICYNOTFOUND = "InvalidParameterValue.AutoPolicyNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDDESTINATIONREGIONS = "InvalidParameterValue.InvalidDestinationRegions"
 //  INVALIDPARAMETERVALUE_MISSINGPOLICYPARAM = "InvalidParameterValue.MissingPolicyParam"
 //  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
 //  UNSUPPORTEDOPERATION_UNAUTHORIZEDCFSQCSROLE = "UnsupportedOperation.UnauthorizedCfsQcsRole"

@@ -95,6 +95,9 @@ const (
 	// The parameter value is incorrect.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// 
+	INVALIDPARAMETERVALUE_AUTOPOLICYNOTFOUND = "InvalidParameterValue.AutoPolicyNotFound"
+
 	// The length of the string used to ensure the idempotency of the request exceeds the upper limit of 64 bytes.
 	INVALIDPARAMETERVALUE_CLIENTTOKENLIMITEXCEEDED = "InvalidParameterValue.ClientTokenLimitExceeded"
 
@@ -104,17 +107,29 @@ const (
 	// The rule IP already exists.
 	INVALIDPARAMETERVALUE_DUPLICATEDRULEAUTHCLIENTIP = "InvalidParameterValue.DuplicatedRuleAuthClientIp"
 
+	// Duplicate tag key.
+	INVALIDPARAMETERVALUE_DUPLICATEDTAGKEY = "InvalidParameterValue.DuplicatedTagKey"
+
 	// The length of the custom file system name exceeds the limit (64 bytes).
 	INVALIDPARAMETERVALUE_FSNAMELIMITEXCEEDED = "InvalidParameterValue.FsNameLimitExceeded"
 
 	// The file system quota exceeds the upper limit.
 	INVALIDPARAMETERVALUE_FSSIZELIMITEXCEEDED = "InvalidParameterValue.FsSizeLimitExceeded"
 
+	// 
+	INVALIDPARAMETERVALUE_INVALIDALIVEDAYS = "InvalidParameterValue.InvalidAliveDays"
+
 	// Incorrect rule IP.
 	INVALIDPARAMETERVALUE_INVALIDAUTHCLIENTIP = "InvalidParameterValue.InvalidAuthClientIp"
 
+	// Invalid scaling policy parameters.
+	INVALIDPARAMETERVALUE_INVALIDAUTOSCALEUPPARAMS = "InvalidParameterValue.InvalidAutoScaleUpParams"
+
 	// The string used to ensure the idempotency of the request is incorrect.
 	INVALIDPARAMETERVALUE_INVALIDCLIENTTOKEN = "InvalidParameterValue.InvalidClientToken"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDDESTINATIONREGIONS = "InvalidParameterValue.InvalidDestinationRegions"
 
 	// Invalid encryption parameter.
 	INVALIDPARAMETERVALUE_INVALIDENCRYPTED = "InvalidParameterValue.InvalidEncrypted"
@@ -139,6 +154,9 @@ const (
 
 	// Invalid value of `DayOfMonth`.
 	INVALIDPARAMETERVALUE_INVALIDPARAMDAYOFMONTH = "InvalidParameterValue.InvalidParamDayOfMonth"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDPARAMDAYOFWEEK = "InvalidParameterValue.InvalidParamDayOfWeek"
 
 	// Invalid value of `IntervalDays`.
 	INVALIDPARAMETERVALUE_INVALIDPARAMINTERVALDAYS = "InvalidParameterValue.InvalidParamIntervalDays"
@@ -166,6 +184,18 @@ const (
 
 	// Incorrect read/write permission settings.
 	INVALIDPARAMETERVALUE_INVALIDRWPERMISSION = "InvalidParameterValue.InvalidRwPermission"
+
+	// Invalid target capacity.
+	INVALIDPARAMETERVALUE_INVALIDSCALEUPTARGETCAPACITY = "InvalidParameterValue.InvalidScaleupTargetCapacity"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDSNAPPOLICYSTATUS = "InvalidParameterValue.InvalidSnapPolicyStatus"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDSNAPSHOTNAME = "InvalidParameterValue.InvalidSnapshotName"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDSNAPSHOTPOLICYNAME = "InvalidParameterValue.InvalidSnapshotPolicyName"
 
 	// The snapshot is invalid.
 	INVALIDPARAMETERVALUE_INVALIDSNAPSHOTSTATUS = "InvalidParameterValue.InvalidSnapshotStatus"
@@ -227,6 +257,9 @@ const (
 	// Snapshot policy parameters missing.
 	INVALIDPARAMETERVALUE_MISSINGPOLICYPARAM = "InvalidParameterValue.MissingPolicyParam"
 
+	// 
+	INVALIDPARAMETERVALUE_MISSINGSNAPNAMEORALIVEDAY = "InvalidParameterValue.MissingSnapNameOrAliveDay"
+
 	// No storage pack is bound to.
 	INVALIDPARAMETERVALUE_MISSINGSTORAGERESOURCEPKG = "InvalidParameterValue.MissingStorageResourcePkg"
 
@@ -254,6 +287,12 @@ const (
 	// The permission group rule and permission group do not match.
 	INVALIDPARAMETERVALUE_RULENOTMATCHPGROUP = "InvalidParameterValue.RuleNotMatchPgroup"
 
+	// 
+	INVALIDPARAMETERVALUE_SNAPSHOTNAMELIMITEXCEEDED = "InvalidParameterValue.SnapshotNameLimitExceeded"
+
+	// 
+	INVALIDPARAMETERVALUE_SNAPSHOTPOLICYNAMELIMITEXCEEDED = "InvalidParameterValue.SnapshotPolicyNameLimitExceeded"
+
 	// Invalid parameter value: the number of tag keys exceeds the upper limit (6).
 	INVALIDPARAMETERVALUE_TAGKEYFILTERLIMITEXCEEDED = "InvalidParameterValue.TagKeyFilterLimitExceeded"
 
@@ -274,6 +313,15 @@ const (
 
 	// `ZoneId` and `Region` do not match.
 	INVALIDPARAMETERVALUE_ZONEIDREGIONNOTMATCH = "InvalidParameterValue.ZoneIdRegionNotMatch"
+
+	// Missing parameter.
+	MISSINGPARAMETER = "MissingParameter"
+
+	// Operation denied.
+	OPERATIONDENIED = "OperationDenied"
+
+	// The resource is in use.
+	RESOURCEINUSE = "ResourceInUse"
 
 	// The number of file systems has reached the upper limit.
 	RESOURCEINSUFFICIENT_FILESYSTEMLIMITEXCEEDED = "ResourceInsufficient.FileSystemLimitExceeded"
@@ -299,11 +347,17 @@ const (
 	// The tag quota is insufficient.
 	RESOURCEINSUFFICIENT_TAGQUOTASEXCEEDED = "ResourceInsufficient.TagQuotasExceeded"
 
+	// The number of Turbo file systems with special capacity has reached the upper limit.
+	RESOURCEINSUFFICIENT_TURBOSPECIALCAPACITYFILESYSTEMCOUNTLIMIT = "ResourceInsufficient.TurboSpecialCapacityFileSystemCountLimit"
+
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
 	// The file system does not exist.
 	RESOURCENOTFOUND_FILESYSTEMNOTFOUND = "ResourceNotFound.FileSystemNotFound"
+
+	// The file system does not exist.
+	RESOURCENOTFOUND_FSNOTEXIST = "ResourceNotFound.FsNotExist"
 
 	// The mount target does not exist.
 	RESOURCENOTFOUND_MOUNTTARGETNOTFOUND = "ResourceNotFound.MountTargetNotFound"
@@ -311,17 +365,26 @@ const (
 	// The permission group does not exist.
 	RESOURCENOTFOUND_PGROUPNOTFOUND = "ResourceNotFound.PgroupNotFound"
 
+	// The resource does not exist: The resource ID cannot be found.
+	RESOURCENOTFOUND_RESOURCEPACKAGENOTFOUND = "ResourceNotFound.ResourcePackageNotFound"
+
 	// The permission rule does not exist.
 	RESOURCENOTFOUND_RULENOTFOUND = "ResourceNotFound.RuleNotFound"
 
 	// The snapshot ID does not exist.
 	RESOURCENOTFOUND_SNAPSHOTNOTFOUND = "ResourceNotFound.SnapshotNotFound"
 
+	// Unauthorized operation.
+	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
 	// This AZ does not support the basic network.
 	UNSUPPORTEDOPERATION_BASICNETINTERFACENOTSUPPORTED = "UnsupportedOperation.BasicNetInterfaceNotSupported"
+
+	// The appid is not on the allowlist of the KMS (the KMS allowlist is currently enabled).
+	UNSUPPORTEDOPERATION_MISSINGKMSACCESSPERMISSION = "UnsupportedOperation.MissingKmsAccessPermission"
 
 	// Your account is in arrears. Please top up and try again.
 	UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
