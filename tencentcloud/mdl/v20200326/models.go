@@ -904,6 +904,20 @@ func (r *DeleteStreamLiveWatermarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeliveryRestrictionsInfo struct {
+	// Corresponds to SCTE-35 web_delivery_allowed_flag parameter.
+	WebDeliveryAllowed *string `json:"WebDeliveryAllowed,omitempty" name:"WebDeliveryAllowed"`
+
+	// Corresponds to SCTE-35 no_regional_blackout_flag parameter.
+	NoRegionalBlackout *string `json:"NoRegionalBlackout,omitempty" name:"NoRegionalBlackout"`
+
+	// Corresponds to SCTE-35 archive_allowed_flag.
+	ArchiveAllowed *string `json:"ArchiveAllowed,omitempty" name:"ArchiveAllowed"`
+
+	// Corresponds to SCTE-35 device_restrictions parameter.
+	DeviceRestrictions *string `json:"DeviceRestrictions,omitempty" name:"DeviceRestrictions"`
+}
+
 type DescribeImageSettings struct {
 	// Origin
 	Location *string `json:"Location,omitempty" name:"Location"`
@@ -2062,6 +2076,15 @@ type EventSettingsReq struct {
 
 	// URL of the COS bucket to save recording files. This parameter is required if `EventType` is `TIMED_RECORD`. It may contain 1 or 2 URLs. The first URL corresponds to pipeline 0 and the second pipeline 1.
 	Destinations []*EventSettingsDestinationReq `json:"Destinations,omitempty" name:"Destinations"`
+
+	// SCTE-35 configuration information.
+	SCTE35SegmentationDescriptor []*SegmentationDescriptorInfo `json:"SCTE35SegmentationDescriptor,omitempty" name:"SCTE35SegmentationDescriptor"`
+
+	// A 32-bit unique segmentation event identifier.Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+	SpliceEventID *uint64 `json:"SpliceEventID,omitempty" name:"SpliceEventID"`
+
+	// The duration of the segment in 90kHz ticks.It used to  give the splicer an indication of when the break will be over and when the network In Point will occur. If not specifyed,the splice_insert will continue when enter a return_to_network to end the splice_insert at the appropriate time.
+	SpliceDuration *uint64 `json:"SpliceDuration,omitempty" name:"SpliceDuration"`
 }
 
 type EventSettingsResp struct {
@@ -2079,6 +2102,15 @@ type EventSettingsResp struct {
 
 	// URL of the COS bucket where recording files are saved. This parameter is not empty if `EventType` is `TIMED_RECORD`. It may contain 1 or 2 URLs. The first URL corresponds to pipeline 0 and the second pipeline 1.
 	Destinations []*EventSettingsDestinationResp `json:"Destinations,omitempty" name:"Destinations"`
+
+	// SCTE-35 configuration information.
+	SCTE35SegmentationDescriptor []*SegmentationDescriptorRespInfo `json:"SCTE35SegmentationDescriptor,omitempty" name:"SCTE35SegmentationDescriptor"`
+
+	// A 32-bit unique segmentation event identifier.Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+	SpliceEventID *uint64 `json:"SpliceEventID,omitempty" name:"SpliceEventID"`
+
+	// The duration of the segment in 90kHz ticks.It used to  give the splicer an indication of when the break will be over and when the network In Point will occur. If not specifyed,the splice_insert will continue when enter a return_to_network to end the splice_insert at the appropriate time.
+	SpliceDuration *string `json:"SpliceDuration,omitempty" name:"SpliceDuration"`
 }
 
 type FailOverSettings struct {
@@ -2781,6 +2813,76 @@ type SDMCSettingsInfo struct {
 type Scte35SettingsInfo struct {
 	// Whether to pass through SCTE-35 information. Valid values: NO_PASSTHROUGH/PASSTHROUGH. Default value: NO_PASSTHROUGH.
 	Behavior *string `json:"Behavior,omitempty" name:"Behavior"`
+}
+
+type SegmentationDescriptorInfo struct {
+	// A 32-bit unique segmentation event identifier. Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+	EventID *uint64 `json:"EventID,omitempty" name:"EventID"`
+
+	// Indicates that a previously sent segmentation event, identified by segmentation_event_id, has been cancelled.
+	EventCancelIndicator *uint64 `json:"EventCancelIndicator,omitempty" name:"EventCancelIndicator"`
+
+	// Distribution configuration.
+	DeliveryRestrictions *DeliveryRestrictionsInfo `json:"DeliveryRestrictions,omitempty" name:"DeliveryRestrictions"`
+
+	// The duration of the segment in 90kHz ticks. indicat when the segment will be over and when the next segmentation message will occur.Shall be 0 for end messages.the time signal will continue until insert a cancellation message when not specify the duration.
+	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+
+	// Corresponds to SCTE-35 segmentation_upid_type parameter.
+	UPIDType *uint64 `json:"UPIDType,omitempty" name:"UPIDType"`
+
+	// Corresponds to SCTE-35 segmentation_upid. 
+	UPID *string `json:"UPID,omitempty" name:"UPID"`
+
+	// Corresponds to SCTE-35 segmentation_type_id.
+	TypeID *uint64 `json:"TypeID,omitempty" name:"TypeID"`
+
+	// Corresponds to SCTE-35 segment_num。This field provides support for numbering segments within a given collection of segments.
+	Num *uint64 `json:"Num,omitempty" name:"Num"`
+
+	// Corresponds to SCTE-35 segment_expected.This field provides a count of the expected number of individual segments within a collection of segments.
+	Expected *uint64 `json:"Expected,omitempty" name:"Expected"`
+
+	// Corresponds to SCTE-35 sub_segment_num.This field provides identification for a specific sub-segment within a collection of sub-segments.
+	SubSegmentNum *uint64 `json:"SubSegmentNum,omitempty" name:"SubSegmentNum"`
+
+	// Corresponds to SCTE-35 sub_segments_expected.This field provides a count of the expected number of individual sub-segments within the collection of sub-segments.
+	SubSegmentsExpected *uint64 `json:"SubSegmentsExpected,omitempty" name:"SubSegmentsExpected"`
+}
+
+type SegmentationDescriptorRespInfo struct {
+	// A 32-bit unique segmentation event identifier. Only one occurrence of a given segmentation_event_id value shall be active at any one time.
+	EventID *uint64 `json:"EventID,omitempty" name:"EventID"`
+
+	// Indicates that a previously sent segmentation event, identified by segmentation_event_id, has been cancelled.
+	EventCancelIndicator *uint64 `json:"EventCancelIndicator,omitempty" name:"EventCancelIndicator"`
+
+	// Distribution configuration.
+	DeliveryRestrictions *DeliveryRestrictionsInfo `json:"DeliveryRestrictions,omitempty" name:"DeliveryRestrictions"`
+
+	// The duration of the segment in 90kHz ticks. indicat when the segment will be over and when the next segmentation message will occur.Shall be 0 for end messages.the time signal will continue until insert a cancellation message when not specify the duration.
+	Duration *string `json:"Duration,omitempty" name:"Duration"`
+
+	// Corresponds to SCTE-35 segmentation_upid_type parameter.
+	UPIDType *uint64 `json:"UPIDType,omitempty" name:"UPIDType"`
+
+	// Corresponds to SCTE-35 segmentation_upid. 
+	UPID *string `json:"UPID,omitempty" name:"UPID"`
+
+	// Corresponds to SCTE-35 segmentation_type_id.
+	TypeID *uint64 `json:"TypeID,omitempty" name:"TypeID"`
+
+	// Corresponds to SCTE-35 segment_num。This field provides support for numbering segments within a given collection of segments.
+	Num *uint64 `json:"Num,omitempty" name:"Num"`
+
+	// Corresponds to SCTE-35 segment_expected.This field provides a count of the expected number of individual segments within a collection of segments.
+	Expected *uint64 `json:"Expected,omitempty" name:"Expected"`
+
+	// Corresponds to SCTE-35 sub_segment_num.This field provides identification for a specific sub-segment within a collection of sub-segments.
+	SubSegmentNum *uint64 `json:"SubSegmentNum,omitempty" name:"SubSegmentNum"`
+
+	// Corresponds to SCTE-35 sub_segments_expected.This field provides a count of the expected number of individual sub-segments within the collection of sub-segments.
+	SubSegmentsExpected *uint64 `json:"SubSegmentsExpected,omitempty" name:"SubSegmentsExpected"`
 }
 
 // Predefined struct for user

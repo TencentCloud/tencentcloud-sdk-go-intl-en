@@ -944,28 +944,76 @@ func (r *CreateDatahubTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CreateInstancePostData struct {
+	// This parameter has a fixed value of 0 returned by `CreateInstancePre`. It is only used for backend data alignment  and cannot be used as the query condition for `CheckTaskStatus`. 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// List of order IDs Note: This field may return null, indicating that no valid values can be obtained.
+	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+
+	// Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+	DealNameInstanceIdMapping []*DealInstanceDTO `json:"DealNameInstanceIdMapping,omitempty" name:"DealNameInstanceIdMapping"`
+}
+
 // Predefined struct for user
 type CreateInstancePostRequestParams struct {
 	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Instance bandwidth
+	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
 	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
 
-	// VPC ID. If this parameter is left empty, the classic network will be used by default.
+	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID, which is required for a VPC but not for the classic network.
+	// ID of the subnet  where the default access point of the created instance resides. 
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// The maximum retention period for instance logs in minutes. Default value: 1,440 minutes (1 day). Max value: 12960 minutes (90 days). This parameter is optional.
+	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitempty" name:"MsgRetentionTime"`
 
-	// AZ
+	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+	KafkaVersion *string `json:"KafkaVersion,omitempty" name:"KafkaVersion"`
+
+	// Instance type. Valid values: `standard` (Standard Edition),  `profession`  (Pro Edition)
+	SpecificationsType *string `json:"SpecificationsType,omitempty" name:"SpecificationsType"`
+
+	// Instance disk type. Valid values:  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Instance disk size, which must meet the requirement of the instance’s specification.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
+
+	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Cluster ID, which can be selected when you create an instance.
-	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+	// Whether the current instance is a multi-AZ instance
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitempty" name:"MultiZoneFlag"`
+
+	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+
+	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`. The value must be an integer multiple of 3.
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitempty" name:"PublicNetworkMonthly"`
 }
 
 type CreateInstancePostRequest struct {
@@ -974,23 +1022,56 @@ type CreateInstancePostRequest struct {
 	// Instance name, which is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Instance bandwidth
+	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
 	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
 
-	// VPC ID. If this parameter is left empty, the classic network will be used by default.
+	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Subnet ID, which is required for a VPC but not for the classic network.
+	// ID of the subnet  where the default access point of the created instance resides. 
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
 
-	// The maximum retention period for instance logs in minutes. Default value: 1,440 minutes (1 day). Max value: 12960 minutes (90 days). This parameter is optional.
+	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
 	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitempty" name:"MsgRetentionTime"`
 
-	// AZ
+	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+	KafkaVersion *string `json:"KafkaVersion,omitempty" name:"KafkaVersion"`
+
+	// Instance type. Valid values: `standard` (Standard Edition),  `profession`  (Pro Edition)
+	SpecificationsType *string `json:"SpecificationsType,omitempty" name:"SpecificationsType"`
+
+	// Instance disk type. Valid values:  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Instance disk size, which must meet the requirement of the instance’s specification.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
+
+	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
 	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Cluster ID, which can be selected when you create an instance.
-	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+	// Whether the current instance is a multi-AZ instance
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitempty" name:"MultiZoneFlag"`
+
+	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+
+	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`. The value must be an integer multiple of 3.
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitempty" name:"PublicNetworkMonthly"`
 }
 
 func (r *CreateInstancePostRequest) ToJsonString() string {
@@ -1009,13 +1090,35 @@ func (r *CreateInstancePostRequest) FromJsonString(s string) error {
 	delete(f, "BandWidth")
 	delete(f, "VpcId")
 	delete(f, "SubnetId")
+	delete(f, "InstanceType")
 	delete(f, "MsgRetentionTime")
-	delete(f, "ZoneId")
 	delete(f, "ClusterId")
+	delete(f, "KafkaVersion")
+	delete(f, "SpecificationsType")
+	delete(f, "DiskType")
+	delete(f, "DiskSize")
+	delete(f, "Partition")
+	delete(f, "TopicNum")
+	delete(f, "ZoneId")
+	delete(f, "MultiZoneFlag")
+	delete(f, "ZoneIds")
+	delete(f, "InstanceNum")
+	delete(f, "PublicNetworkMonthly")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancePostRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateInstancePostResp struct {
+	// Returned code. `0` indicates normal status while other codes indicate errors.
+	ReturnCode *string `json:"ReturnCode,omitempty" name:"ReturnCode"`
+
+	// Message returned by the API. An error message will be returned if the API reports an error. 
+	ReturnMessage *string `json:"ReturnMessage,omitempty" name:"ReturnMessage"`
+
+	// Returned data.  Note: This field may return null, indicating that no valid values can be obtained.
+	Data *CreateInstancePostData `json:"Data,omitempty" name:"Data"`
 }
 
 // Predefined struct for user
@@ -1052,9 +1155,11 @@ type CreateInstancePreData struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
 
-	// Instance ID.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Instance ID. When multiple instances are purchased, the ID of the first one is returned by default . Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Mapping between orders and the purchased instances.  Note: This field may return null, indicating that no valid values can be obtained.
+	DealNameInstanceIdMapping []*DealInstanceDTO `json:"DealNameInstanceIdMapping,omitempty" name:"DealNameInstanceIdMapping"`
 }
 
 type CreateInstancePreResp struct {
@@ -1068,8 +1173,9 @@ type CreateInstancePreResp struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Data *CreateInstancePreData `json:"Data,omitempty" name:"Data"`
 
-	// Deletion time.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Deletion time.  This parameter has been deprecated and will be deleted.  Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: DeleteRouteTimestamp is deprecated.
 	DeleteRouteTimestamp *string `json:"DeleteRouteTimestamp,omitempty" name:"DeleteRouteTimestamp"`
 }
 
@@ -1141,6 +1247,182 @@ func (r *CreatePartitionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreatePartitionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePostPaidInstanceRequestParams struct {
+	// Instance name, which is a string of up to 64 letters, digits, and hyphens (-). It must start with a letter.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of the subnet  where the default access point of the created instance resides.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
+	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitempty" name:"MsgRetentionTime"`
+
+	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+	KafkaVersion *string `json:"KafkaVersion,omitempty" name:"KafkaVersion"`
+
+	// Instance type. `standard` (Standard Edition),  `profession`  (Pro Edition)
+	SpecificationsType *string `json:"SpecificationsType,omitempty" name:"SpecificationsType"`
+
+	// Instance disk type.  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
+	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
+
+	// Instance disk size, which must meet the requirement of the instance’s specification.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
+
+	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Whether the current instance is a multi-AZ instance
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitempty" name:"MultiZoneFlag"`
+
+	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+
+	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitempty" name:"PublicNetworkMonthly"`
+}
+
+type CreatePostPaidInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance name, which is a string of up to 64 letters, digits, and hyphens (-). It must start with a letter.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// ID of the VPC where the default access point of the created instance resides.  This parameter is required as instances cannot be created in the classic network currently.
+	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+
+	// ID of the subnet  where the default access point of the created instance resides.
+	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Instance specification.  This parameter is required for a Standard Edition instance but not for a Pro Edition instance.  Valid values:  `1` (Small),  `2` (Standard),  `3` (Advanced),  `4` (Large),  `5` (Xlarge L1),  `6` (Xlarge L2),  `7` (Xlarge L3),  `8` (Xlarge L4),  
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// The maximum instance log retention period in minutes by default.  If this parameter is left empty, the default retention period is 1,440 minutes (1 day) to 30 days.  If the message retention period of the topic is explicitly set, it will prevail.
+	MsgRetentionTime *int64 `json:"MsgRetentionTime,omitempty" name:"MsgRetentionTime"`
+
+	// Cluster ID, which can be selected when you create an instance.  You don’t need to pass in this parameter if the cluster where the instance resides is not specified.
+	ClusterId *int64 `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Instance version.  Valid values: `0.10.2`, `1.1.1`, `2.4.2`, and `2.8.1`.
+	KafkaVersion *string `json:"KafkaVersion,omitempty" name:"KafkaVersion"`
+
+	// Instance type. `standard` (Standard Edition),  `profession`  (Pro Edition)
+	SpecificationsType *string `json:"SpecificationsType,omitempty" name:"SpecificationsType"`
+
+	// Instance disk type.  `CLOUD_BASIC` (Premium Cloud Storage),  `CLOUD_SSD` (SSD).  If this parameter is left empty, the default value `CLOUD_BASIC` will be used.
+	DiskType *string `json:"DiskType,omitempty" name:"DiskType"`
+
+	// Private network peak bandwidth of an instance  in MB/sec.  If you create a Standard Edition instance, pass in the corresponding peak bandwidth for the current instance specification.  If you create a Pro Edition instance, configure the peak bandwidth, partition count, and other parameters as required by Pro Edition.
+	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
+
+	// Instance disk size, which must meet the requirement of the instance’s specification.
+	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
+
+	// The maximum number of partitions of the instance, which must meet the requirement of the instance’s specification.
+	Partition *int64 `json:"Partition,omitempty" name:"Partition"`
+
+	// The maximum number of topics of the instance, which must meet the requirement of the instance’s specification.
+	TopicNum *int64 `json:"TopicNum,omitempty" name:"TopicNum"`
+
+	// AZ of the instance.  When a multi-AZ instance is created, the value of this parameter is the AZ ID of the subnet where the instance’s default access point resides.
+	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// Whether the current instance is a multi-AZ instance
+	MultiZoneFlag *bool `json:"MultiZoneFlag,omitempty" name:"MultiZoneFlag"`
+
+	// This parameter indicates the list of AZ IDs when the instance is deployed in multiple AZs.  Note that `ZoneId` must be included in the array of this parameter.
+	ZoneIds []*int64 `json:"ZoneIds,omitempty" name:"ZoneIds"`
+
+	// The number of purchased instances.  Default value: `1`. This parameter is optional.  If it is passed in, multiple instances will be created, with their names being `instanceName` plus different suffixes.
+	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+
+	// Public network bandwidth in Mbps.  The 3 Mbps of free bandwidth is not included here by default.  For example, if you need 3 Mbps of public network bandwidth, pass in `0`; if you need 6 Mbps, pass in `3`.  The value must be an integer multiple of 3.
+	PublicNetworkMonthly *int64 `json:"PublicNetworkMonthly,omitempty" name:"PublicNetworkMonthly"`
+}
+
+func (r *CreatePostPaidInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePostPaidInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceName")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "InstanceType")
+	delete(f, "MsgRetentionTime")
+	delete(f, "ClusterId")
+	delete(f, "KafkaVersion")
+	delete(f, "SpecificationsType")
+	delete(f, "DiskType")
+	delete(f, "BandWidth")
+	delete(f, "DiskSize")
+	delete(f, "Partition")
+	delete(f, "TopicNum")
+	delete(f, "ZoneId")
+	delete(f, "MultiZoneFlag")
+	delete(f, "ZoneIds")
+	delete(f, "InstanceNum")
+	delete(f, "PublicNetworkMonthly")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePostPaidInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreatePostPaidInstanceResponseParams struct {
+	// Returned result
+	Result *CreateInstancePostResp `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreatePostPaidInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreatePostPaidInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreatePostPaidInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreatePostPaidInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1490,6 +1772,14 @@ type DatahubTopicResp struct {
 	// TopicId
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
+type DealInstanceDTO struct {
+	// Order list.  Note: This field may return null, indicating that no valid values can be obtained.
+	DealName *string `json:"DealName,omitempty" name:"DealName"`
+
+	// ID list of the purchased CKafka instances corresponding to the order list.  Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
 }
 
 // Predefined struct for user
@@ -3143,6 +3433,9 @@ func (r *DescribeRegionResponse) FromJsonString(s string) error {
 type DescribeRouteRequestParams struct {
 	// Unique instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Route ID
+	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
 }
 
 type DescribeRouteRequest struct {
@@ -3150,6 +3443,9 @@ type DescribeRouteRequest struct {
 	
 	// Unique instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Route ID
+	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
 }
 
 func (r *DescribeRouteRequest) ToJsonString() string {
@@ -3165,6 +3461,7 @@ func (r *DescribeRouteRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "RouteId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRouteRequest has unknown keys!", "")
 	}
@@ -3193,6 +3490,63 @@ func (r *DescribeRouteResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRouteResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTaskStatusRequestParams struct {
+	// Unique task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+}
+
+type DescribeTaskStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique task ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+}
+
+func (r *DescribeTaskStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTaskStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FlowId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTaskStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTaskStatusResponseParams struct {
+	// Returned result
+	Result *TaskStatusResponse `json:"Result,omitempty" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeTaskStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTaskStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeTaskStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTaskStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5356,6 +5710,9 @@ type OperateResponseData struct {
 	// FlowId11
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// RouteIdDto Note: This field may return null, indicating that no valid values can be obtained.
+	RouteDTO *RouteDTO `json:"RouteDTO,omitempty" name:"RouteDTO"`
 }
 
 type Partition struct {
@@ -5448,6 +5805,11 @@ type Route struct {
 	// Timestamp
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DeleteTimestamp *string `json:"DeleteTimestamp,omitempty" name:"DeleteTimestamp"`
+}
+
+type RouteDTO struct {
+	// RouteId11 Note: This field may return null, indicating that no valid values can be obtained.
+	RouteId *int64 `json:"RouteId,omitempty" name:"RouteId"`
 }
 
 type RouteResponse struct {
@@ -5561,6 +5923,14 @@ type Tag struct {
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+}
+
+type TaskStatusResponse struct {
+	// Task status. `0` (Successful), `1` (Failed), `2` ( Running)
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Output information Note: This field may return null, indicating that no valid values can be obtained.
+	Output *string `json:"Output,omitempty" name:"Output"`
 }
 
 type Topic struct {
