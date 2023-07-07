@@ -1076,10 +1076,10 @@ type IdentityPolicy struct {
 
 // Predefined struct for user
 type ListOrganizationIdentityRequestParams struct {
-	// Offset.
+	// Offset.  It must be an integer multiple of the value of `Limit`.  Default value: `0`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of returned results. Maximum value: `50`.
+	// The limit for the number of query results.  Value range:  1-50.  Default value:  `10`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Search by name.
@@ -1087,15 +1087,18 @@ type ListOrganizationIdentityRequestParams struct {
 
 	// Search by identity ID.
 	IdentityId *uint64 `json:"IdentityId,omitempty" name:"IdentityId"`
+
+	// Identity type.  Valid values: `1` (Preset), `2` (Custom).
+	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
 }
 
 type ListOrganizationIdentityRequest struct {
 	*tchttp.BaseRequest
 	
-	// Offset.
+	// Offset.  It must be an integer multiple of the value of `Limit`.  Default value: `0`.
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Maximum number of returned results. Maximum value: `50`.
+	// The limit for the number of query results.  Value range:  1-50.  Default value:  `10`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Search by name.
@@ -1103,6 +1106,9 @@ type ListOrganizationIdentityRequest struct {
 
 	// Search by identity ID.
 	IdentityId *uint64 `json:"IdentityId,omitempty" name:"IdentityId"`
+
+	// Identity type.  Valid values: `1` (Preset), `2` (Custom).
+	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
 }
 
 func (r *ListOrganizationIdentityRequest) ToJsonString() string {
@@ -1121,6 +1127,7 @@ func (r *ListOrganizationIdentityRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "SearchKey")
 	delete(f, "IdentityId")
+	delete(f, "IdentityType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListOrganizationIdentityRequest has unknown keys!", "")
 	}

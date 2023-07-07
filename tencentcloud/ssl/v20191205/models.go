@@ -43,10 +43,10 @@ type ApplyCertificateRequestParams struct {
 	// Validity period. The default value is 12 months, which is the only supported value currently.
 	ValidityPeriod *string `json:"ValidityPeriod,omitempty" name:"ValidityPeriod"`
 
-	// Encryption algorithm. Only RSA is supported.
+	// Encryption algorithm. RSA and ECC are supported.
 	CsrEncryptAlgo *string `json:"CsrEncryptAlgo,omitempty" name:"CsrEncryptAlgo"`
 
-	// Key pair parameter. Only the 2048-bit key pair is supported.
+	// Key pair parameter. RSA supports only the 2048-bit key and ECC supports only prime256v1.
 	CsrKeyParameter *string `json:"CsrKeyParameter,omitempty" name:"CsrKeyParameter"`
 
 	// CSR encryption password
@@ -89,10 +89,10 @@ type ApplyCertificateRequest struct {
 	// Validity period. The default value is 12 months, which is the only supported value currently.
 	ValidityPeriod *string `json:"ValidityPeriod,omitempty" name:"ValidityPeriod"`
 
-	// Encryption algorithm. Only RSA is supported.
+	// Encryption algorithm. RSA and ECC are supported.
 	CsrEncryptAlgo *string `json:"CsrEncryptAlgo,omitempty" name:"CsrEncryptAlgo"`
 
-	// Key pair parameter. Only the 2048-bit key pair is supported.
+	// Key pair parameter. RSA supports only the 2048-bit key and ECC supports only prime256v1.
 	CsrKeyParameter *string `json:"CsrKeyParameter,omitempty" name:"CsrKeyParameter"`
 
 	// CSR encryption password
@@ -411,6 +411,9 @@ type Certificates struct {
 type CommitCertificateInformationRequestParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Domain validation method
+	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 }
 
 type CommitCertificateInformationRequest struct {
@@ -418,6 +421,9 @@ type CommitCertificateInformationRequest struct {
 	
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Domain validation method
+	VerifyType *string `json:"VerifyType,omitempty" name:"VerifyType"`
 }
 
 func (r *CommitCertificateInformationRequest) ToJsonString() string {
@@ -433,6 +439,7 @@ func (r *CommitCertificateInformationRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "CertificateId")
+	delete(f, "VerifyType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CommitCertificateInformationRequest has unknown keys!", "")
 	}
@@ -464,6 +471,80 @@ func (r *CommitCertificateInformationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CommitCertificateInformationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCertificateRequestParams struct {
+	// Certificate product ID. `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod SM2 DV; `34`: DNSPod SM2 DV multi-domain; `35`: DNSPod SM2 DV wildcard; `37`: DNSPod SM2 OV; `38`: DNSPod SM2 OV multi-domain; `39`: DNSPod SM2 OV wildcard: `40`: DNSPod SM2 EV; `41`: DNSPod SM2 EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
+	ProductId *int64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Number of domains associated with the certificate
+	DomainNum *int64 `json:"DomainNum,omitempty" name:"DomainNum"`
+
+	// Certificate validity period. Currently, you can only purchase 1-year certificates.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+}
+
+type CreateCertificateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Certificate product ID. `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod SM2 DV; `34`: DNSPod SM2 DV multi-domain; `35`: DNSPod SM2 DV wildcard; `37`: DNSPod SM2 OV; `38`: DNSPod SM2 OV multi-domain; `39`: DNSPod SM2 OV wildcard: `40`: DNSPod SM2 EV; `41`: DNSPod SM2 EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
+	ProductId *int64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Number of domains associated with the certificate
+	DomainNum *int64 `json:"DomainNum,omitempty" name:"DomainNum"`
+
+	// Certificate validity period. Currently, you can only purchase 1-year certificates.
+	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+}
+
+func (r *CreateCertificateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCertificateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductId")
+	delete(f, "DomainNum")
+	delete(f, "TimeSpan")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCertificateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCertificateResponseParams struct {
+	// List of certificate IDs
+	CertificateIds []*string `json:"CertificateIds,omitempty" name:"CertificateIds"`
+
+	// List of order IDs
+	DealIds []*string `json:"DealIds,omitempty" name:"DealIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateCertificateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCertificateResponseParams `json:"Response"`
+}
+
+func (r *CreateCertificateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -574,8 +655,7 @@ type DescribeCertificateDetailResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
-	// Certificate plan type. `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Certificate plan type. null: User-uploaded certificate (no plan type); `1`: GeoTrust DV SSL CA - G3; `2`: TrustAsia TLS RSA CA; `3`: SecureSite EV Pro; `4`: SecureSite EV; `5`: SecureSite OV Pro; `6`: SecureSite OV; `7`: SecureSite OV wildcard; `8`: GeoTrust EV; `9`: GeoTrust OV; `10`: GeoTrust OV wildcard; `11`: TrustAsia DV multi-domain; `12`: TrustAsia DV wildcard; `13`: TrustAsia OV wildcard D3; `14`: TrustAsia OV D3; `15`: TrustAsia OV multi-domain D3; `16`: TrustAsia EV D3; `17`: TrustAsia EV multi-domain D3; `18`: GlobalSign OV; `19`: GlobalSign OV wildcard; `20`: GlobalSign EV; `21`: TrustAsia OV wildcard multi-domain D3; `22`: GlobalSign OV multi-domain; `23`: GlobalSign OV wildcard multi-domain; `24`: GlobalSign EV multi-domain; `25` WoTrus DV; `26`: WoTrus DV multi-domain; `27`: WoTrus DV wildcard; `28`: WoTrus OV; `29`: WoTrus OV multi-domain; `30`: WoTrus OV wildcard; `31`: WoTrus EV; `32`: WoTrus EV multi-domain; `33`: DNSPod SM2 DV; `34`: DNSPod SM2 DV multi-domain; `35`: DNSPod SM2 DV wildcard; `37`: DNSPod SM2 OV; `38`: DNSPod SM2 OV multi-domain; `39`: DNSPod SM2 OV wildcard: `40`: DNSPod SM2 EV; `41`: DNSPod SM2 EV multi-domain; `42`: TrustAsia DV wildcard multi-domain.
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 	// Issuer
@@ -984,6 +1064,18 @@ type DescribeCertificateResponseParams struct {
 	// List of tags
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tags `json:"Tags,omitempty" name:"Tags"`
+
+	// All encryption algorithms of a CA certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CAEncryptAlgorithms []*string `json:"CAEncryptAlgorithms,omitempty" name:"CAEncryptAlgorithms"`
+
+	// All common names of a CA certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CACommonNames []*string `json:"CACommonNames,omitempty" name:"CACommonNames"`
+
+	// All expiration time of a CA certificate
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CAEndTimes []*string `json:"CAEndTimes,omitempty" name:"CAEndTimes"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -1902,7 +1994,7 @@ type UploadCertificateRequestParams struct {
 	// Private key content. This parameter is required when the certificate type is SVR, and not required when the certificate type is CA.
 	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-	// Certificate type. `CA`: client certificate; `SVR`: server certificate. The default value is SVR.
+	// Certificate type. Valid values: `CA` (CA certificate) and `SVR` (server certificate). Default value: `SVR`
 	CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
 	// Alias
@@ -1927,7 +2019,7 @@ type UploadCertificateRequest struct {
 	// Private key content. This parameter is required when the certificate type is SVR, and not required when the certificate type is CA.
 	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitempty" name:"CertificatePrivateKey"`
 
-	// Certificate type. `CA`: client certificate; `SVR`: server certificate. The default value is SVR.
+	// Certificate type. Valid values: `CA` (CA certificate) and `SVR` (server certificate). Default value: `SVR`
 	CertificateType *string `json:"CertificateType,omitempty" name:"CertificateType"`
 
 	// Alias
@@ -1993,5 +2085,72 @@ func (r *UploadCertificateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UploadCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadConfirmLetterRequestParams struct {
+	// Certificate ID
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Base64-encoded confirmation letter file, which must be a JPG, JPEG, PNG, or PDF file of 1 KB to 1.4 MB
+	ConfirmLetter *string `json:"ConfirmLetter,omitempty" name:"ConfirmLetter"`
+}
+
+type UploadConfirmLetterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Certificate ID
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Base64-encoded confirmation letter file, which must be a JPG, JPEG, PNG, or PDF file of 1 KB to 1.4 MB
+	ConfirmLetter *string `json:"ConfirmLetter,omitempty" name:"ConfirmLetter"`
+}
+
+func (r *UploadConfirmLetterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadConfirmLetterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertificateId")
+	delete(f, "ConfirmLetter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadConfirmLetterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadConfirmLetterResponseParams struct {
+	// Certificate ID
+	CertificateId *string `json:"CertificateId,omitempty" name:"CertificateId"`
+
+	// Whether the operation is successful
+	IsSuccess *bool `json:"IsSuccess,omitempty" name:"IsSuccess"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UploadConfirmLetterResponse struct {
+	*tchttp.BaseResponse
+	Response *UploadConfirmLetterResponseParams `json:"Response"`
+}
+
+func (r *UploadConfirmLetterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadConfirmLetterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }

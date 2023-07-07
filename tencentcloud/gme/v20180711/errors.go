@@ -68,6 +68,9 @@ const (
 	// Parameter missing.
 	MISSINGPARAMETER = "MissingParameter"
 
+	// Operation denied.
+	OPERATIONDENIED = "OperationDenied"
+
 	// The task already exists.
 	RESOURCEINUSE_TASKINUSE = "ResourceInUse.TaskInUse"
 

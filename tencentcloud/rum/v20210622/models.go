@@ -454,6 +454,9 @@ type CreateTawInstanceRequestParams struct {
 
 	// The number of prepaid resource packs (only required for prepaid mode)
 	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitempty" name:"ResourcePackageNum"`
+
+	// Instance type. `1`: Web; `2`: Application
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 type CreateTawInstanceRequest struct {
@@ -491,6 +494,9 @@ type CreateTawInstanceRequest struct {
 
 	// The number of prepaid resource packs (only required for prepaid mode)
 	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitempty" name:"ResourcePackageNum"`
+
+	// Instance type. `1`: Web; `2`: Application
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 }
 
 func (r *CreateTawInstanceRequest) ToJsonString() string {
@@ -516,6 +522,7 @@ func (r *CreateTawInstanceRequest) FromJsonString(s string) error {
 	delete(f, "BuyingChannel")
 	delete(f, "ResourcePackageType")
 	delete(f, "ResourcePackageNum")
+	delete(f, "InstanceType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTawInstanceRequest has unknown keys!", "")
 	}
@@ -6545,6 +6552,10 @@ type RumProject struct {
 	// Project status (`1`: Creating; `2`: Running; `3`: Abnormal; `4`: Restarting; `5`: Stopping; `6`: Stopped; `7`: Terminating; `8`: Terminated)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ProjectStatus *int64 `json:"ProjectStatus,omitempty" name:"ProjectStatus"`
+
+	// Log access point, which can be ignored. 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
+	AccessPoint *string `json:"AccessPoint,omitempty" name:"AccessPoint"`
 }
 
 type RumPvInfo struct {

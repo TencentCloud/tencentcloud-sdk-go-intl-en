@@ -1434,6 +1434,7 @@ func NewDeleteIndexResponse() (response *DeleteIndexResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
@@ -1453,6 +1454,7 @@ func (c *Client) DeleteIndex(request *DeleteIndexRequest) (response *DeleteIndex
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
@@ -1763,6 +1765,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_TOPICHASDATAFORMTASK = "OperationDenied.TopicHasDataFormTask"
 //  OPERATIONDENIED_TOPICHASDELIVERFUNCTION = "OperationDenied.TopicHasDeliverFunction"
+//  OPERATIONDENIED_TOPICHASEXTERNALDATASOURCECONFIG = "OperationDenied.TopicHasExternalDatasourceConfig"
 //  OPERATIONDENIED_TOPICHASSCHEDULESQLTASK = "OperationDenied.TopicHasScheduleSqlTask"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
@@ -1784,6 +1787,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_TOPICHASDATAFORMTASK = "OperationDenied.TopicHasDataFormTask"
 //  OPERATIONDENIED_TOPICHASDELIVERFUNCTION = "OperationDenied.TopicHasDeliverFunction"
+//  OPERATIONDENIED_TOPICHASEXTERNALDATASOURCECONFIG = "OperationDenied.TopicHasExternalDatasourceConfig"
 //  OPERATIONDENIED_TOPICHASSCHEDULESQLTASK = "OperationDenied.TopicHasScheduleSqlTask"
 //  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
@@ -2292,6 +2296,7 @@ func NewDescribeExportsResponse() (response *DescribeExportsResponse) {
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeExports(request *DescribeExportsRequest) (response *DescribeExportsResponse, err error) {
     return c.DescribeExportsWithContext(context.Background(), request)
 }
@@ -2311,6 +2316,7 @@ func (c *Client) DescribeExports(request *DescribeExportsRequest) (response *Des
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeExportsWithContext(ctx context.Context, request *DescribeExportsRequest) (response *DescribeExportsResponse, err error) {
     if request == nil {
         request = NewDescribeExportsRequest()
@@ -3075,6 +3081,7 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_ANALYSISSWITCHCLOSE = "OperationDenied.AnalysisSwitchClose"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
@@ -3097,6 +3104,7 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  OPERATIONDENIED_ANALYSISSWITCHCLOSE = "OperationDenied.AnalysisSwitchClose"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeTopicsWithContext(ctx context.Context, request *DescribeTopicsRequest) (response *DescribeTopicsResponse, err error) {
@@ -4314,11 +4322,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 // UploadLog
 // ## Note
 //
-// To ensure log data reliability and help you use CLS more efficiently, we recommend you use the optimized API to upload logs. For more information about the API, see [Uploading Log via API](https://www.tencentcloud.com/document/product/614/50267).
+// To ensure log data reliability and help you use CLS more efficiently, we recommend you use the optimized API to upload logs. For more information about the API, see [Uploading Log via API](https://intl.cloud.tencent.com/document/product/614/16873?from_cn_redirect=1).
 //
 // 
 //
-// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Uploading Log via SDK](https://intl.cloud.tencent.com/document/product/614/45006).
+// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Uploading Log via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
 //
 // 
 //
@@ -4362,11 +4370,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Parameter | Type | Location | Required | Description |
+// | Parameter       | Type    | Location | Required | Description                                                         |
 //
 // | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
 //
-// | logGroupList | message | pb    | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to five `logGroup` values.                     |
+// | logGroupList | message | pb   | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to five `logGroup` values. |
 //
 // 
 //
@@ -4374,13 +4382,13 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Parameter     | Required | Description                                                         |
+// | Parameter      | Required | Description                                                         |
 //
 // | ----------- | -------- | ------------------------------------------------------------ |
 //
 // | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
 //
-// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{Context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
 //
 // | filename    | No       | Log filename                                                   |
 //
@@ -4394,13 +4402,13 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Parameter | Required | Description |
+// | Parameter   | Required | Description                                                         |
 //
 // | -------- | -------- | ------------------------------------------------------------ |
 //
-// | time | Yes | Unix timestamp of log time in seconds or milliseconds (recommended) |
+// | time     | Yes       | Unix timestamp of log time in seconds or milliseconds (recommended)      |
 //
-// | contents | No | Log content in key-value format. A log can contain multiple key-value pairs. |
+// | contents | No       | Log content in key-value format. A log can contain multiple key-value pairs. |
 //
 // 
 //
@@ -4408,7 +4416,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Parameter | Required | Description |
+// | Parameter | Required | Description                                                         |
 //
 // | ------ | -------- | ------------------------------------------------------------ |
 //
@@ -4422,21 +4430,21 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// | Parameter     | Required | Description                                                         |
+// | Parameter | Required | Description                             |
 //
 // | ------ | -------- | -------------------------------- |
 //
-// | key    | Yes       | Key of a custom tag             |
+// | key    | Yes       | Key of a custom tag                 |
 //
 // | value  | Yes       | Value corresponding to the custom tag key |
 //
 // 
 //
-// ## pb Compilation Sample
+// ## pb Compilation Example
 //
 // 
 //
-// This sample describes how to use the protoc compiler to compile the pb description file into a log upload API in C++.
+// This example shows you how to use the protoc compiler to compile a pb description file into a log upload API in C++.
 //
 // 
 //
@@ -4448,7 +4456,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
+// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the example is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
 //
 // 
 //
@@ -4460,7 +4468,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// Run the following commands to start compilation and installation, and configure the environment variables:
+// Run the following commands to start compilation and installation and configure the environment variables:
 //
 // 
 //
@@ -4584,7 +4592,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
+// This example uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
 //
 // 
 //
@@ -4600,7 +4608,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
+// After the compilation succeeds, the code file in the corresponding programming language will be generated. This example generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
 //
 // 
 //
@@ -4651,11 +4659,11 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 // UploadLog
 // ## Note
 //
-// To ensure log data reliability and help you use CLS more efficiently, we recommend you use the optimized API to upload logs. For more information about the API, see [Uploading Log via API](https://www.tencentcloud.com/document/product/614/50267).
+// To ensure log data reliability and help you use CLS more efficiently, we recommend you use the optimized API to upload logs. For more information about the API, see [Uploading Log via API](https://intl.cloud.tencent.com/document/product/614/16873?from_cn_redirect=1).
 //
 // 
 //
-// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Uploading Log via SDK](https://intl.cloud.tencent.com/document/product/614/45006).
+// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Uploading Log via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
 //
 // 
 //
@@ -4699,11 +4707,11 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// | Parameter | Type | Location | Required | Description |
+// | Parameter       | Type    | Location | Required | Description                                                         |
 //
 // | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
 //
-// | logGroupList | message | pb    | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to five `logGroup` values.                     |
+// | logGroupList | message | pb   | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to five `logGroup` values. |
 //
 // 
 //
@@ -4711,13 +4719,13 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// | Parameter     | Required | Description                                                         |
+// | Parameter      | Required | Description                                                         |
 //
 // | ----------- | -------- | ------------------------------------------------------------ |
 //
 // | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
 //
-// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{Context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
 //
 // | filename    | No       | Log filename                                                   |
 //
@@ -4731,13 +4739,13 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// | Parameter | Required | Description |
+// | Parameter   | Required | Description                                                         |
 //
 // | -------- | -------- | ------------------------------------------------------------ |
 //
-// | time | Yes | Unix timestamp of log time in seconds or milliseconds (recommended) |
+// | time     | Yes       | Unix timestamp of log time in seconds or milliseconds (recommended)      |
 //
-// | contents | No | Log content in key-value format. A log can contain multiple key-value pairs. |
+// | contents | No       | Log content in key-value format. A log can contain multiple key-value pairs. |
 //
 // 
 //
@@ -4745,7 +4753,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// | Parameter | Required | Description |
+// | Parameter | Required | Description                                                         |
 //
 // | ------ | -------- | ------------------------------------------------------------ |
 //
@@ -4759,21 +4767,21 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// | Parameter     | Required | Description                                                         |
+// | Parameter | Required | Description                             |
 //
 // | ------ | -------- | -------------------------------- |
 //
-// | key    | Yes       | Key of a custom tag             |
+// | key    | Yes       | Key of a custom tag                 |
 //
 // | value  | Yes       | Value corresponding to the custom tag key |
 //
 // 
 //
-// ## pb Compilation Sample
+// ## pb Compilation Example
 //
 // 
 //
-// This sample describes how to use the protoc compiler to compile the pb description file into a log upload API in C++.
+// This example shows you how to use the protoc compiler to compile a pb description file into a log upload API in C++.
 //
 // 
 //
@@ -4785,7 +4793,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the sample is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
+// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the example is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
 //
 // 
 //
@@ -4797,7 +4805,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// Run the following commands to start compilation and installation, and configure the environment variables:
+// Run the following commands to start compilation and installation and configure the environment variables:
 //
 // 
 //
@@ -4921,7 +4929,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// This sample uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
+// This example uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
 //
 // 
 //
@@ -4937,7 +4945,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This sample generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
+// After the compilation succeeds, the code file in the corresponding programming language will be generated. This example generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
 //
 // 
 //

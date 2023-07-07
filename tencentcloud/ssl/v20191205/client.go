@@ -265,6 +265,68 @@ func (c *Client) CommitCertificateInformationWithContext(ctx context.Context, re
     return
 }
 
+func NewCreateCertificateRequest() (request *CreateCertificateRequest) {
+    request = &CreateCertificateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CreateCertificate")
+    
+    
+    return
+}
+
+func NewCreateCertificateResponse() (response *CreateCertificateResponse) {
+    response = &CreateCertificateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCertificate
+// This API is used to purchase a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateCertificate(request *CreateCertificateRequest) (response *CreateCertificateResponse, err error) {
+    return c.CreateCertificateWithContext(context.Background(), request)
+}
+
+// CreateCertificate
+// This API is used to purchase a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEERROR = "InternalError.BackendResponseError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateCertificateWithContext(ctx context.Context, request *CreateCertificateRequest) (response *CreateCertificateResponse, err error) {
+    if request == nil {
+        request = NewCreateCertificateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCertificate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCertificateRequest() (request *DeleteCertificateRequest) {
     request = &DeleteCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -596,6 +658,7 @@ func NewDescribeCertificatesResponse() (response *DescribeCertificatesResponse) 
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEEMPTY = "InternalError.BackendResponseEmpty"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
     return c.DescribeCertificatesWithContext(context.Background(), request)
@@ -624,6 +687,7 @@ func (c *Client) DescribeCertificates(request *DescribeCertificatesRequest) (res
 //  FAILEDOPERATION_ORDERREPLACEFAILED = "FailedOperation.OrderReplaceFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_BACKENDRESPONSEEMPTY = "InternalError.BackendResponseEmpty"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *DescribeCertificatesRequest) (response *DescribeCertificatesResponse, err error) {
     if request == nil {
@@ -1069,6 +1133,74 @@ func (c *Client) UploadCertificateWithContext(ctx context.Context, request *Uplo
     request.SetContext(ctx)
     
     response = NewUploadCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUploadConfirmLetterRequest() (request *UploadConfirmLetterRequest) {
+    request = &UploadConfirmLetterRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "UploadConfirmLetter")
+    
+    
+    return
+}
+
+func NewUploadConfirmLetterResponse() (response *UploadConfirmLetterResponse) {
+    response = &UploadConfirmLetterResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UploadConfirmLetter
+// This API is used to upload the confirmation letter for a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CONFIRMLETTERTOOLARGE = "FailedOperation.ConfirmLetterTooLarge"
+//  FAILEDOPERATION_CONFIRMLETTERTOOSMALL = "FailedOperation.ConfirmLetterTooSmall"
+//  FAILEDOPERATION_INVALIDCERTIFICATESOURCE = "FailedOperation.InvalidCertificateSource"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMAT = "FailedOperation.InvalidConfirmLetterFormat"
+//  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMATWOSIGN = "FailedOperation.InvalidConfirmLetterFormatWosign"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  INTERNALERROR = "InternalError"
+func (c *Client) UploadConfirmLetter(request *UploadConfirmLetterRequest) (response *UploadConfirmLetterResponse, err error) {
+    return c.UploadConfirmLetterWithContext(context.Background(), request)
+}
+
+// UploadConfirmLetter
+// This API is used to upload the confirmation letter for a certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CONFIRMLETTERTOOLARGE = "FailedOperation.ConfirmLetterTooLarge"
+//  FAILEDOPERATION_CONFIRMLETTERTOOSMALL = "FailedOperation.ConfirmLetterTooSmall"
+//  FAILEDOPERATION_INVALIDCERTIFICATESOURCE = "FailedOperation.InvalidCertificateSource"
+//  FAILEDOPERATION_INVALIDCERTIFICATESTATUSCODE = "FailedOperation.InvalidCertificateStatusCode"
+//  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMAT = "FailedOperation.InvalidConfirmLetterFormat"
+//  FAILEDOPERATION_INVALIDCONFIRMLETTERFORMATWOSIGN = "FailedOperation.InvalidConfirmLetterFormatWosign"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  INTERNALERROR = "InternalError"
+func (c *Client) UploadConfirmLetterWithContext(ctx context.Context, request *UploadConfirmLetterRequest) (response *UploadConfirmLetterResponse, err error) {
+    if request == nil {
+        request = NewUploadConfirmLetterRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadConfirmLetter require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUploadConfirmLetterResponse()
     err = c.Send(request, response)
     return
 }

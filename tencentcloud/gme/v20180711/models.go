@@ -94,6 +94,11 @@ type ApplicationDataStatistics struct {
 	PcuDataSum []*StatisticsItem `json:"PcuDataSum,omitempty" name:"PcuDataSum"`
 }
 
+type AsrConf struct {
+	// Speech-to-Text status. Valid values: `open`, `close`.
+	Status *string `json:"Status,omitempty" name:"Status"`
+}
+
 type AudioTextStatisticsItem struct {
 	// Statistical value (in seconds)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -108,20 +113,25 @@ type CreateAppRequestParams struct {
 	// Tencent Cloud project ID. Default value: 0, which means that the default project is used.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// List of engines to be supported. All values are selected by default.
+	// List of engines to be supported.
+	// Valid values: `android`, `ios`, `unity`, `cocos`, `unreal`, `windows`. All values are selected by default.
 	EngineList []*string `json:"EngineList,omitempty" name:"EngineList"`
 
-	// Service region list. All values are selected by default.
+	// List of regions.
+	// Valid values: `mainland` (Chinese mainland), `hmt` (Hong Kong, Macao and Taiwan (China)), `sea` (Southeast Asia), `na` (North America), `eu` (Europe), `jpkr` (Japan, Korea and Asia Pacific), `sa` (South America), `oc` (Oceania), `me` (Middle East). All values are selected by default.
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
 	// Configuration information of Voice Chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
 
-	// Configuration information of Voice Message Service
+	// Configuration information of Voice Messaging
 	VoiceMessageConf *VoiceMessageConf `json:"VoiceMessageConf,omitempty" name:"VoiceMessageConf"`
 
 	// Configuration information of Voice Analysis Service
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
+
+	// Configuration information of Speech-to-Text
+	AsrConf *AsrConf `json:"AsrConf,omitempty" name:"AsrConf"`
 
 	// List of tags to be added
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
@@ -136,20 +146,25 @@ type CreateAppRequest struct {
 	// Tencent Cloud project ID. Default value: 0, which means that the default project is used.
 	ProjectId *uint64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// List of engines to be supported. All values are selected by default.
+	// List of engines to be supported.
+	// Valid values: `android`, `ios`, `unity`, `cocos`, `unreal`, `windows`. All values are selected by default.
 	EngineList []*string `json:"EngineList,omitempty" name:"EngineList"`
 
-	// Service region list. All values are selected by default.
+	// List of regions.
+	// Valid values: `mainland` (Chinese mainland), `hmt` (Hong Kong, Macao and Taiwan (China)), `sea` (Southeast Asia), `na` (North America), `eu` (Europe), `jpkr` (Japan, Korea and Asia Pacific), `sa` (South America), `oc` (Oceania), `me` (Middle East). All values are selected by default.
 	RegionList []*string `json:"RegionList,omitempty" name:"RegionList"`
 
 	// Configuration information of Voice Chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
 
-	// Configuration information of Voice Message Service
+	// Configuration information of Voice Messaging
 	VoiceMessageConf *VoiceMessageConf `json:"VoiceMessageConf,omitempty" name:"VoiceMessageConf"`
 
 	// Configuration information of Voice Analysis Service
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
+
+	// Configuration information of Speech-to-Text
+	AsrConf *AsrConf `json:"AsrConf,omitempty" name:"AsrConf"`
 
 	// List of tags to be added
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
@@ -174,6 +189,7 @@ func (r *CreateAppRequest) FromJsonString(s string) error {
 	delete(f, "RealtimeSpeechConf")
 	delete(f, "VoiceMessageConf")
 	delete(f, "VoiceFilterConf")
+	delete(f, "AsrConf")
 	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAppRequest has unknown keys!", "")
@@ -200,11 +216,14 @@ type CreateAppResp struct {
 	// Configuration information of Voice Chat
 	RealtimeSpeechConf *RealtimeSpeechConf `json:"RealtimeSpeechConf,omitempty" name:"RealtimeSpeechConf"`
 
-	// Configuration information of Voice Message Service
+	// Configuration information of Voice Messaging
 	VoiceMessageConf *VoiceMessageConf `json:"VoiceMessageConf,omitempty" name:"VoiceMessageConf"`
 
 	// Configuration information of Voice Analysis Service
 	VoiceFilterConf *VoiceFilterConf `json:"VoiceFilterConf,omitempty" name:"VoiceFilterConf"`
+
+	// Configuration information of Speech-to-Text
+	AsrConf *AsrConf `json:"AsrConf,omitempty" name:"AsrConf"`
 }
 
 // Predefined struct for user
@@ -793,7 +812,7 @@ type RealtimeSpeechConf struct {
 	// Voice Chat status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Voice Chat sound quality. Valid value: `high`.
+	// Voice Chat sound quality type. Valid values: `high` (HD), `ordinary` (SD).
 	Quality *string `json:"Quality,omitempty" name:"Quality"`
 }
 
@@ -815,6 +834,10 @@ type RecordInfo struct {
 
 	// Recording status. Valid values: `2`: recording; `10`: to be transcoded; `11`: transcoding; `12`: uploading; `13`: uploaded; `14`: user notified.
 	RecordStatus *uint64 `json:"RecordStatus,omitempty" name:"RecordStatus"`
+}
+
+type SceneInfo struct {
+
 }
 
 // Predefined struct for user
@@ -993,6 +1016,10 @@ type Tag struct {
 type VoiceFilterConf struct {
 	// Phrase Filtering status. Valid values: `open`, `close`.
 	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Scenario configuration information, such as status and callback URL.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	SceneInfos []*SceneInfo `json:"SceneInfos,omitempty" name:"SceneInfos"`
 }
 
 type VoiceFilterStatisticsItem struct {
