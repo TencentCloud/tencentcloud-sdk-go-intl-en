@@ -328,6 +328,7 @@ func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
 //  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
 //  LIMITEXCEEDED_BANDWIDTHPACKAGEQUOTA = "LimitExceeded.BandwidthPackageQuota"
+//  LIMITEXCEEDED_BANDWIDTHPACKAGERESOURCEQUOTA = "LimitExceeded.BandwidthPackageResourceQuota"
 //  LIMITEXCEEDED_MONTHLYADDRESSRECOVERYQUOTA = "LimitExceeded.MonthlyAddressRecoveryQuota"
 //  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -376,6 +377,7 @@ func (c *Client) AllocateAddresses(request *AllocateAddressesRequest) (response 
 //  INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
 //  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
 //  LIMITEXCEEDED_BANDWIDTHPACKAGEQUOTA = "LimitExceeded.BandwidthPackageQuota"
+//  LIMITEXCEEDED_BANDWIDTHPACKAGERESOURCEQUOTA = "LimitExceeded.BandwidthPackageResourceQuota"
 //  LIMITEXCEEDED_MONTHLYADDRESSRECOVERYQUOTA = "LimitExceeded.MonthlyAddressRecoveryQuota"
 //  LIMITEXCEEDED_TAGQUOTA = "LimitExceeded.TagQuota"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -435,11 +437,13 @@ func NewAssignIpv6AddressesResponse() (response *AssignIpv6AddressesResponse) {
 // * When applying for one or more secondary IPv6 addresses for an ENI, the API will return the specified number of secondary IPv6 addresses in the subnet range where the ENI is located.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
 //  LIMITEXCEEDED_ADDRESS = "LimitExceeded.Address"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -467,11 +471,13 @@ func (c *Client) AssignIpv6Addresses(request *AssignIpv6AddressesRequest) (respo
 // * When applying for one or more secondary IPv6 addresses for an ENI, the API will return the specified number of secondary IPv6 addresses in the subnet range where the ENI is located.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
 //  LIMITEXCEEDED_ADDRESS = "LimitExceeded.Address"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -669,6 +675,7 @@ func NewAssignPrivateIpAddressesResponse() (response *AssignPrivateIpAddressesRe
 //  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
@@ -703,6 +710,7 @@ func (c *Client) AssignPrivateIpAddresses(request *AssignPrivateIpAddressesReque
 //  INVALIDPARAMETERVALUE_RESERVED = "InvalidParameterValue.Reserved"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCEINSUFFICIENT_SUBNET = "ResourceInsufficient.Subnet"
@@ -793,6 +801,7 @@ func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
 //  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
 //  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
+//  UNSUPPORTEDOPERATION_ADDRESSIPNOTSUPPORTINSTANCE = "UnsupportedOperation.AddressIpNotSupportInstance"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
 //  UNSUPPORTEDOPERATION_INCORRECTADDRESSRESOURCETYPE = "UnsupportedOperation.IncorrectAddressResourceType"
 //  UNSUPPORTEDOPERATION_INSTANCESTATENOTSUPPORTED = "UnsupportedOperation.InstanceStateNotSupported"
@@ -851,6 +860,7 @@ func (c *Client) AssociateAddress(request *AssociateAddressRequest) (response *A
 //  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
 //  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
+//  UNSUPPORTEDOPERATION_ADDRESSIPNOTSUPPORTINSTANCE = "UnsupportedOperation.AddressIpNotSupportInstance"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
 //  UNSUPPORTEDOPERATION_INCORRECTADDRESSRESOURCETYPE = "UnsupportedOperation.IncorrectAddressResourceType"
 //  UNSUPPORTEDOPERATION_INSTANCESTATENOTSUPPORTED = "UnsupportedOperation.InstanceStateNotSupported"
@@ -1035,6 +1045,7 @@ func NewAssociateNetworkAclSubnetsResponse() (response *AssociateNetworkAclSubne
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) AssociateNetworkAclSubnets(request *AssociateNetworkAclSubnetsRequest) (response *AssociateNetworkAclSubnetsResponse, err error) {
     return c.AssociateNetworkAclSubnetsWithContext(context.Background(), request)
@@ -1048,6 +1059,7 @@ func (c *Client) AssociateNetworkAclSubnets(request *AssociateNetworkAclSubnetsR
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) AssociateNetworkAclSubnetsWithContext(ctx context.Context, request *AssociateNetworkAclSubnetsRequest) (response *AssociateNetworkAclSubnetsResponse, err error) {
     if request == nil {
@@ -1329,6 +1341,7 @@ func NewAttachNetworkInterfaceResponse() (response *AttachNetworkInterfaceRespon
 // This API is completed asynchronously. If you need to query the execution result of an async task, please use the `RequestId` returned by this API to poll the `DescribeVpcTaskResult` API.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1361,6 +1374,7 @@ func (c *Client) AttachNetworkInterface(request *AttachNetworkInterfaceRequest) 
 // This API is completed asynchronously. If you need to query the execution result of an async task, please use the `RequestId` returned by this API to poll the `DescribeVpcTaskResult` API.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1410,6 +1424,7 @@ func NewAttachSnapshotInstancesResponse() (response *AttachSnapshotInstancesResp
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_DUPLICATEPARA = "InvalidParameterValue.DuplicatePara"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_ATTACHEDSNAPSHOTPOLICYEXCEEDED = "LimitExceeded.AttachedSnapshotPolicyExceeded"
@@ -1425,6 +1440,7 @@ func (c *Client) AttachSnapshotInstances(request *AttachSnapshotInstancesRequest
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_DUPLICATEPARA = "InvalidParameterValue.DuplicatePara"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_ATTACHEDSNAPSHOTPOLICYEXCEEDED = "LimitExceeded.AttachedSnapshotPolicyExceeded"
@@ -1612,6 +1628,7 @@ func NewCheckNetDetectStateResponse() (response *CheckNetDetectStateResponse) {
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
 //  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
@@ -1636,6 +1653,7 @@ func (c *Client) CheckNetDetectState(request *CheckNetDetectStateRequest) (respo
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
 //  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
@@ -2360,23 +2378,23 @@ func NewCreateDefaultVpcResponse() (response *CreateDefaultVpcResponse) {
 }
 
 // CreateDefaultVpc
-// This API is used to create a default VPC.
+// This API is used to create a VPC with default settings.
 //
 // 
 //
-// The default VPC is suitable for getting started with and launching public instances, and it can be used like any other VPCs. To create a standard VPC, for which you need to specify a VPC name, VPC IP range, subnet IP range, and subnet availability zone, use the regular CreateVpc API.
+// To create a VPC with custom settings, such as VPC name, IP range, subnet IP range, and subnet availability zone, use `CreateVpc` instead.
 //
 // 
 //
-// Under normal circumstances, this API may not create a default VPC. It depends on the network attributes (DescribeAccountAttributes) of your account.
+// This API may not create a default VPC. It depends on the network attributes (`DescribeAccountAttributes`) of your account.
 //
-// * If both basic network and VPC are supported, the returned VpcId is 0.
+// * If both basic network and VPC are supported, the returned `VpcId` is 0.
 //
 // * If only VPC is supported, the default VPC information is returned.
 //
 // 
 //
-// You can also use the Force parameter to forcibly return a default VPC.
+// You can also use the `Force` parameter to forcibly return a default VPC.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
@@ -2390,23 +2408,23 @@ func (c *Client) CreateDefaultVpc(request *CreateDefaultVpcRequest) (response *C
 }
 
 // CreateDefaultVpc
-// This API is used to create a default VPC.
+// This API is used to create a VPC with default settings.
 //
 // 
 //
-// The default VPC is suitable for getting started with and launching public instances, and it can be used like any other VPCs. To create a standard VPC, for which you need to specify a VPC name, VPC IP range, subnet IP range, and subnet availability zone, use the regular CreateVpc API.
+// To create a VPC with custom settings, such as VPC name, IP range, subnet IP range, and subnet availability zone, use `CreateVpc` instead.
 //
 // 
 //
-// Under normal circumstances, this API may not create a default VPC. It depends on the network attributes (DescribeAccountAttributes) of your account.
+// This API may not create a default VPC. It depends on the network attributes (`DescribeAccountAttributes`) of your account.
 //
-// * If both basic network and VPC are supported, the returned VpcId is 0.
+// * If both basic network and VPC are supported, the returned `VpcId` is 0.
 //
 // * If only VPC is supported, the default VPC information is returned.
 //
 // 
 //
-// You can also use the Force parameter to forcibly return a default VPC.
+// You can also use the `Force` parameter to forcibly return a default VPC.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
@@ -2595,6 +2613,7 @@ func NewCreateFlowLogResponse() (response *CreateFlowLogResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_DPDKNATFLOWLOGONLYSUPPORTALLTRAFFICTYPE = "UnsupportedOperation.DpdkNatFlowLogOnlySupportAllTrafficType"
+//  UNSUPPORTEDOPERATION_FLOWLOGINSTANCEEXISTED = "UnsupportedOperation.FlowLogInstanceExisted"
 //  UNSUPPORTEDOPERATION_FLOWLOGSNOTSUPPORTKOINSTANCEENI = "UnsupportedOperation.FlowLogsNotSupportKoInstanceEni"
 //  UNSUPPORTEDOPERATION_FLOWLOGSNOTSUPPORTNULLINSTANCEENI = "UnsupportedOperation.FlowLogsNotSupportNullInstanceEni"
 //  UNSUPPORTEDOPERATION_ONLYSUPPORTPROFESSIONKAFKA = "UnsupportedOperation.OnlySupportProfessionKafka"
@@ -2638,6 +2657,7 @@ func (c *Client) CreateFlowLog(request *CreateFlowLogRequest) (response *CreateF
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_DPDKNATFLOWLOGONLYSUPPORTALLTRAFFICTYPE = "UnsupportedOperation.DpdkNatFlowLogOnlySupportAllTrafficType"
+//  UNSUPPORTEDOPERATION_FLOWLOGINSTANCEEXISTED = "UnsupportedOperation.FlowLogInstanceExisted"
 //  UNSUPPORTEDOPERATION_FLOWLOGSNOTSUPPORTKOINSTANCEENI = "UnsupportedOperation.FlowLogsNotSupportKoInstanceEni"
 //  UNSUPPORTEDOPERATION_FLOWLOGSNOTSUPPORTNULLINSTANCEENI = "UnsupportedOperation.FlowLogsNotSupportNullInstanceEni"
 //  UNSUPPORTEDOPERATION_ONLYSUPPORTPROFESSIONKAFKA = "UnsupportedOperation.OnlySupportProfessionKafka"
@@ -2680,7 +2700,7 @@ func NewCreateHaVipResponse() (response *CreateHaVipResponse) {
 }
 
 // CreateHaVip
-// This API (CreateHaVip) is used to create a highly available virtual IP (HAVIP)
+// This API is used to create a highly available virtual IP (HAVIP).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2695,12 +2715,13 @@ func NewCreateHaVipResponse() (response *CreateHaVipResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_SUBNETNOTEXISTS = "UnsupportedOperation.SubnetNotExists"
 func (c *Client) CreateHaVip(request *CreateHaVipRequest) (response *CreateHaVipResponse, err error) {
     return c.CreateHaVipWithContext(context.Background(), request)
 }
 
 // CreateHaVip
-// This API (CreateHaVip) is used to create a highly available virtual IP (HAVIP)
+// This API is used to create a highly available virtual IP (HAVIP).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2715,6 +2736,7 @@ func (c *Client) CreateHaVip(request *CreateHaVipRequest) (response *CreateHaVip
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_SUBNETNOTEXISTS = "UnsupportedOperation.SubnetNotExists"
 func (c *Client) CreateHaVipWithContext(ctx context.Context, request *CreateHaVipRequest) (response *CreateHaVipResponse, err error) {
     if request == nil {
         request = NewCreateHaVipRequest()
@@ -2970,6 +2992,7 @@ func NewCreateNatGatewayDestinationIpPortTranslationNatRuleResponse() (response 
 //  INVALIDPARAMETERVALUE_NATGATEWAYDNATRULEPIPNEEDVM = "InvalidParameterValue.NatGatewayDnatRulePipNeedVm"
 //  INVALIDPARAMETERVALUE_NATGATEWAYDNATRULEREPEATED = "InvalidParameterValue.NatGatewayDnatRuleRepeated"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_NATGATEWAYEIPNOTEXISTS = "UnsupportedOperation.NatGatewayEipNotExists"
 func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
@@ -2985,6 +3008,7 @@ func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRule(request *Cr
 //  INVALIDPARAMETERVALUE_NATGATEWAYDNATRULEPIPNEEDVM = "InvalidParameterValue.NatGatewayDnatRulePipNeedVm"
 //  INVALIDPARAMETERVALUE_NATGATEWAYDNATRULEREPEATED = "InvalidParameterValue.NatGatewayDnatRuleRepeated"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_NATGATEWAYEIPNOTEXISTS = "UnsupportedOperation.NatGatewayEipNotExists"
 func (c *Client) CreateNatGatewayDestinationIpPortTranslationNatRuleWithContext(ctx context.Context, request *CreateNatGatewayDestinationIpPortTranslationNatRuleRequest) (response *CreateNatGatewayDestinationIpPortTranslationNatRuleResponse, err error) {
@@ -3096,7 +3120,7 @@ func NewCreateNetDetectResponse() (response *CreateNetDetectResponse) {
 }
 
 // CreateNetDetect
-// This API is used to create a network detection instance.
+// This API is used to create a network probe.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NETDETECTTIMEOUT = "FailedOperation.NetDetectTimeOut"
@@ -3112,6 +3136,7 @@ func NewCreateNetDetectResponse() (response *CreateNetDetectResponse) {
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
 //  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
@@ -3120,7 +3145,7 @@ func (c *Client) CreateNetDetect(request *CreateNetDetectRequest) (response *Cre
 }
 
 // CreateNetDetect
-// This API is used to create a network detection instance.
+// This API is used to create a network probe.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NETDETECTTIMEOUT = "FailedOperation.NetDetectTimeOut"
@@ -3136,6 +3161,7 @@ func (c *Client) CreateNetDetect(request *CreateNetDetectRequest) (response *Cre
 //  LIMITEXCEEDED = "LimitExceeded"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CONFLICTWITHDOCKERROUTE = "UnsupportedOperation.ConflictWithDockerRoute"
 //  UNSUPPORTEDOPERATION_ECMPWITHUSERROUTE = "UnsupportedOperation.EcmpWithUserRoute"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
@@ -3510,6 +3536,7 @@ func NewCreateRouteTableResponse() (response *CreateRouteTableResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -3552,6 +3579,7 @@ func (c *Client) CreateRouteTable(request *CreateRouteTableRequest) (response *C
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -3708,6 +3736,7 @@ func NewCreateSecurityGroupResponse() (response *CreateSecurityGroupResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -3752,6 +3781,7 @@ func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (respo
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -4775,6 +4805,7 @@ func NewCreateVpcEndPointServiceResponse() (response *CreateVpcEndPointServiceRe
 // This API is used to create an endpoint service.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -4786,6 +4817,7 @@ func NewCreateVpcEndPointServiceResponse() (response *CreateVpcEndPointServiceRe
 //  UNSUPPORTEDOPERATION_INSTANCEMISMATCH = "UnsupportedOperation.InstanceMismatch"
 //  UNSUPPORTEDOPERATION_NOTMATCHTARGETSERVICE = "UnsupportedOperation.NotMatchTargetService"
 //  UNSUPPORTEDOPERATION_RESOURCEISINVALIDSTATE = "UnsupportedOperation.ResourceIsInvalidState"
+//  UNSUPPORTEDOPERATION_ROLENOTFOUND = "UnsupportedOperation.RoleNotFound"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) CreateVpcEndPointService(request *CreateVpcEndPointServiceRequest) (response *CreateVpcEndPointServiceResponse, err error) {
     return c.CreateVpcEndPointServiceWithContext(context.Background(), request)
@@ -4795,6 +4827,7 @@ func (c *Client) CreateVpcEndPointService(request *CreateVpcEndPointServiceReque
 // This API is used to create an endpoint service.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -4806,6 +4839,7 @@ func (c *Client) CreateVpcEndPointService(request *CreateVpcEndPointServiceReque
 //  UNSUPPORTEDOPERATION_INSTANCEMISMATCH = "UnsupportedOperation.InstanceMismatch"
 //  UNSUPPORTEDOPERATION_NOTMATCHTARGETSERVICE = "UnsupportedOperation.NotMatchTargetService"
 //  UNSUPPORTEDOPERATION_RESOURCEISINVALIDSTATE = "UnsupportedOperation.ResourceIsInvalidState"
+//  UNSUPPORTEDOPERATION_ROLENOTFOUND = "UnsupportedOperation.RoleNotFound"
 //  UNSUPPORTEDOPERATION_VPCMISMATCH = "UnsupportedOperation.VpcMismatch"
 func (c *Client) CreateVpcEndPointServiceWithContext(ctx context.Context, request *CreateVpcEndPointServiceRequest) (response *CreateVpcEndPointServiceResponse, err error) {
     if request == nil {
@@ -4906,6 +4940,7 @@ func NewCreateVpnConnectionResponse() (response *CreateVpnConnectionResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
@@ -4952,6 +4987,7 @@ func (c *Client) CreateVpnConnection(request *CreateVpnConnectionRequest) (respo
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TAGDUPLICATEKEY = "InvalidParameterValue.TagDuplicateKey"
@@ -5328,8 +5364,10 @@ func NewDeleteBandwidthPackageResponse() (response *DeleteBandwidthPackageRespon
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEINUSE = "InvalidParameterValue.BandwidthPackageInUse"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_STOPCHARGINGINSTANCEINUSE = "InvalidParameterValue.StopChargingInstanceInUse"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 //  UNSUPPORTEDOPERATION_INVALIDADDRESSSTATE = "UnsupportedOperation.InvalidAddressState"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) DeleteBandwidthPackage(request *DeleteBandwidthPackageRequest) (response *DeleteBandwidthPackageResponse, err error) {
     return c.DeleteBandwidthPackageWithContext(context.Background(), request)
 }
@@ -5343,8 +5381,10 @@ func (c *Client) DeleteBandwidthPackage(request *DeleteBandwidthPackageRequest) 
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEINUSE = "InvalidParameterValue.BandwidthPackageInUse"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_STOPCHARGINGINSTANCEINUSE = "InvalidParameterValue.StopChargingInstanceInUse"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
 //  UNSUPPORTEDOPERATION_INVALIDADDRESSSTATE = "UnsupportedOperation.InvalidAddressState"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) DeleteBandwidthPackageWithContext(ctx context.Context, request *DeleteBandwidthPackageRequest) (response *DeleteBandwidthPackageResponse, err error) {
     if request == nil {
         request = NewDeleteBandwidthPackageRequest()
@@ -5458,6 +5498,7 @@ func NewDeleteCustomerGatewayResponse() (response *DeleteCustomerGatewayResponse
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_RECORDNOTEXISTS = "UnsupportedOperation.RecordNotExists"
 func (c *Client) DeleteCustomerGateway(request *DeleteCustomerGatewayRequest) (response *DeleteCustomerGatewayResponse, err error) {
     return c.DeleteCustomerGatewayWithContext(context.Background(), request)
 }
@@ -5469,6 +5510,7 @@ func (c *Client) DeleteCustomerGateway(request *DeleteCustomerGatewayRequest) (r
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_RECORDNOTEXISTS = "UnsupportedOperation.RecordNotExists"
 func (c *Client) DeleteCustomerGatewayWithContext(ctx context.Context, request *DeleteCustomerGatewayRequest) (response *DeleteCustomerGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteCustomerGatewayRequest()
@@ -5520,6 +5562,7 @@ func NewDeleteDirectConnectGatewayResponse() (response *DeleteDirectConnectGatew
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYNATRULEEXISTS = "UnsupportedOperation.DCGatewayNatRuleExists"
+//  UNSUPPORTEDOPERATION_ROUTETABLEHASSUBNETRULE = "UnsupportedOperation.RouteTableHasSubnetRule"
 func (c *Client) DeleteDirectConnectGateway(request *DeleteDirectConnectGatewayRequest) (response *DeleteDirectConnectGatewayResponse, err error) {
     return c.DeleteDirectConnectGatewayWithContext(context.Background(), request)
 }
@@ -5541,6 +5584,7 @@ func (c *Client) DeleteDirectConnectGateway(request *DeleteDirectConnectGatewayR
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
 //  UNSUPPORTEDOPERATION_DCGATEWAYNATRULEEXISTS = "UnsupportedOperation.DCGatewayNatRuleExists"
+//  UNSUPPORTEDOPERATION_ROUTETABLEHASSUBNETRULE = "UnsupportedOperation.RouteTableHasSubnetRule"
 func (c *Client) DeleteDirectConnectGatewayWithContext(ctx context.Context, request *DeleteDirectConnectGatewayRequest) (response *DeleteDirectConnectGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteDirectConnectGatewayRequest()
@@ -5962,7 +6006,7 @@ func NewDeleteNetDetectResponse() (response *DeleteNetDetectResponse) {
 }
 
 // DeleteNetDetect
-// This API (DeleteNetDetect) is used to delete a network detection instance.
+// This API is used to delete a network probe.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5974,7 +6018,7 @@ func (c *Client) DeleteNetDetect(request *DeleteNetDetectRequest) (response *Del
 }
 
 // DeleteNetDetect
-// This API (DeleteNetDetect) is used to delete a network detection instance.
+// This API is used to delete a network probe.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -6708,6 +6752,7 @@ func NewDeleteVpcResponse() (response *DeleteVpcResponse) {
 //  FAILEDOPERATION_NETDETECTTIMEOUT = "FailedOperation.NetDetectTimeOut"
 //  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
@@ -6728,6 +6773,7 @@ func (c *Client) DeleteVpc(request *DeleteVpcRequest) (response *DeleteVpcRespon
 //  FAILEDOPERATION_NETDETECTTIMEOUT = "FailedOperation.NetDetectTimeOut"
 //  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
@@ -7046,7 +7092,7 @@ func NewDeleteVpnGatewayRoutesResponse() (response *DeleteVpnGatewayRoutesRespon
 }
 
 // DeleteVpnGatewayRoutes
-// This API is used to delete routes of a VPN gateway.
+// This API is used to delete routes of a VPN gateway. 
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -7058,7 +7104,7 @@ func (c *Client) DeleteVpnGatewayRoutes(request *DeleteVpnGatewayRoutesRequest) 
 }
 
 // DeleteVpnGatewayRoutes
-// This API is used to delete routes of a VPN gateway.
+// This API is used to delete routes of a VPN gateway. 
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -7103,10 +7149,7 @@ func NewDescribeAccountAttributesResponse() (response *DescribeAccountAttributes
 // This API (DescribeAccountAttributes) is used to query your account attributes.
 //
 // error code that may be returned:
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 func (c *Client) DescribeAccountAttributes(request *DescribeAccountAttributesRequest) (response *DescribeAccountAttributesResponse, err error) {
     return c.DescribeAccountAttributesWithContext(context.Background(), request)
 }
@@ -7115,10 +7158,7 @@ func (c *Client) DescribeAccountAttributes(request *DescribeAccountAttributesReq
 // This API (DescribeAccountAttributes) is used to query your account attributes.
 //
 // error code that may be returned:
-//  INTERNALSERVERERROR = "InternalServerError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 func (c *Client) DescribeAccountAttributesWithContext(ctx context.Context, request *DescribeAccountAttributesRequest) (response *DescribeAccountAttributesResponse, err error) {
     if request == nil {
         request = NewDescribeAccountAttributesRequest()
@@ -7322,6 +7362,7 @@ func NewDescribeAddressesResponse() (response *DescribeAddressesResponse) {
 //  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NETWORKINTERFACEIDMALFORMED = "InvalidParameterValue.NetworkInterfaceIdMalformed"
+//  INVALIDPARAMETERVALUE_RESOURCEIDMALFORMED = "InvalidParameterValue.ResourceIdMalformed"
 //  LIMITEXCEEDED_NUMBEROFFILTERS = "LimitExceeded.NumberOfFilters"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAddresses(request *DescribeAddressesRequest) (response *DescribeAddressesResponse, err error) {
@@ -7339,6 +7380,7 @@ func (c *Client) DescribeAddresses(request *DescribeAddressesRequest) (response 
 //  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NETWORKINTERFACEIDMALFORMED = "InvalidParameterValue.NetworkInterfaceIdMalformed"
+//  INVALIDPARAMETERVALUE_RESOURCEIDMALFORMED = "InvalidParameterValue.ResourceIdMalformed"
 //  LIMITEXCEEDED_NUMBEROFFILTERS = "LimitExceeded.NumberOfFilters"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeAddressesWithContext(ctx context.Context, request *DescribeAddressesRequest) (response *DescribeAddressesResponse, err error) {
@@ -8043,6 +8085,7 @@ func NewDescribeCustomerGatewaysResponse() (response *DescribeCustomerGatewaysRe
 // This API (DescribeCustomerGateways) is used to query the customer gateway list.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -8054,6 +8097,7 @@ func (c *Client) DescribeCustomerGateways(request *DescribeCustomerGatewaysReque
 // This API (DescribeCustomerGateways) is used to query the customer gateway list.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -8147,6 +8191,7 @@ func NewDescribeDirectConnectGatewaysResponse() (response *DescribeDirectConnect
 // This API is used to query direct connect gateways.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
 //  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
@@ -8163,6 +8208,7 @@ func (c *Client) DescribeDirectConnectGateways(request *DescribeDirectConnectGat
 // This API is used to query direct connect gateways.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETER_FILTERNOTDICT = "InvalidParameter.FilterNotDict"
 //  INVALIDPARAMETER_FILTERVALUESNOTLIST = "InvalidParameter.FilterValuesNotList"
@@ -8319,6 +8365,7 @@ func NewDescribeGatewayFlowMonitorDetailResponse() (response *DescribeGatewayFlo
 // * If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring has been enabled in the corresponding gateway details page in the console.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -8334,6 +8381,7 @@ func (c *Client) DescribeGatewayFlowMonitorDetail(request *DescribeGatewayFlowMo
 // * If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring has been enabled in the corresponding gateway details page in the console.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -8431,6 +8479,7 @@ func NewDescribeHaVipsResponse() (response *DescribeHaVipsResponse) {
 // This API (DescribeHaVips) is used to query the list of highly available virtual IPs (HAVIP).
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -8445,6 +8494,7 @@ func (c *Client) DescribeHaVips(request *DescribeHaVipsRequest) (response *Descr
 // This API (DescribeHaVips) is used to query the list of highly available virtual IPs (HAVIP).
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -8488,6 +8538,8 @@ func NewDescribeIpGeolocationDatabaseUrlResponse() (response *DescribeIpGeolocat
 // DescribeIpGeolocationDatabaseUrl
 // This API is used to obtain the download link of an IP location database.
 //
+// <font color="#FF0000">This API will be discontinued soon and is only available for existing users.</font>
+//
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
@@ -8500,6 +8552,8 @@ func (c *Client) DescribeIpGeolocationDatabaseUrl(request *DescribeIpGeolocation
 
 // DescribeIpGeolocationDatabaseUrl
 // This API is used to obtain the download link of an IP location database.
+//
+// <font color="#FF0000">This API will be discontinued soon and is only available for existing users.</font>
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -8544,7 +8598,7 @@ func NewDescribeIpGeolocationInfosResponse() (response *DescribeIpGeolocationInf
 // DescribeIpGeolocationInfos
 // This API is used to query the location and network information of one or more IP addresses.
 //
-// This API is only available for existing customers. For any questions, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2).
+// <font color="#FF0000">This API will be discontinued soon and is only available for existing users.</font>
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -8560,7 +8614,7 @@ func (c *Client) DescribeIpGeolocationInfos(request *DescribeIpGeolocationInfosR
 // DescribeIpGeolocationInfos
 // This API is used to query the location and network information of one or more IP addresses.
 //
-// This API is only available for existing customers. For any questions, please [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=660&source=0&data_title=%E5%BC%B9%E6%80%A7%E5%85%AC%E7%BD%91%20EIP&level3_id=662&queue=96&scene_code=16400&step=2).
+// <font color="#FF0000">This API will be discontinued soon and is only available for existing users.</font>
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -8673,6 +8727,7 @@ func NewDescribeNatGatewayDestinationIpPortTranslationNatRulesResponse() (respon
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRules(request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
     return c.DescribeNatGatewayDestinationIpPortTranslationNatRulesWithContext(context.Background(), request)
@@ -8690,6 +8745,7 @@ func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRules(request 
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeNatGatewayDestinationIpPortTranslationNatRulesWithContext(ctx context.Context, request *DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest) (response *DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse, err error) {
     if request == nil {
@@ -8793,6 +8849,7 @@ func NewDescribeNatGatewaySourceIpTranslationNatRulesResponse() (response *Descr
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNatGatewaySourceIpTranslationNatRules(request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
     return c.DescribeNatGatewaySourceIpTranslationNatRulesWithContext(context.Background(), request)
@@ -8810,6 +8867,7 @@ func (c *Client) DescribeNatGatewaySourceIpTranslationNatRules(request *Describe
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNatGatewaySourceIpTranslationNatRulesWithContext(ctx context.Context, request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) (response *DescribeNatGatewaySourceIpTranslationNatRulesResponse, err error) {
     if request == nil {
@@ -8857,6 +8915,7 @@ func NewDescribeNatGatewaysResponse() (response *DescribeNatGatewaysResponse) {
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 func (c *Client) DescribeNatGateways(request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
@@ -8875,6 +8934,7 @@ func (c *Client) DescribeNatGateways(request *DescribeNatGatewaysRequest) (respo
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 func (c *Client) DescribeNatGatewaysWithContext(ctx context.Context, request *DescribeNatGatewaysRequest) (response *DescribeNatGatewaysResponse, err error) {
@@ -9103,6 +9163,7 @@ func NewDescribeNetworkAclsResponse() (response *DescribeNetworkAclsResponse) {
 // This API is used to query a list of network ACLs.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -9119,6 +9180,7 @@ func (c *Client) DescribeNetworkAcls(request *DescribeNetworkAclsRequest) (respo
 // This API is used to query a list of network ACLs.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -9469,6 +9531,7 @@ func NewDescribeSecurityGroupReferencesResponse() (response *DescribeSecurityGro
 // This API (DescribeSecurityGroupReferences) is used to query referred security groups.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -9480,6 +9543,7 @@ func (c *Client) DescribeSecurityGroupReferences(request *DescribeSecurityGroupR
 // This API (DescribeSecurityGroupReferences) is used to query referred security groups.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -10127,6 +10191,7 @@ func NewDescribeUsedIpAddressResponse() (response *DescribeUsedIpAddressResponse
 // If the IP is taken, the associated resource type and ID are returned. Otherwise it returns null.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
 func (c *Client) DescribeUsedIpAddress(request *DescribeUsedIpAddressRequest) (response *DescribeUsedIpAddressResponse, err error) {
     return c.DescribeUsedIpAddressWithContext(context.Background(), request)
@@ -10138,6 +10203,7 @@ func (c *Client) DescribeUsedIpAddress(request *DescribeUsedIpAddressRequest) (r
 // If the IP is taken, the associated resource type and ID are returned. Otherwise it returns null.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
 func (c *Client) DescribeUsedIpAddressWithContext(ctx context.Context, request *DescribeUsedIpAddressRequest) (response *DescribeUsedIpAddressResponse, err error) {
     if request == nil {
@@ -10359,6 +10425,7 @@ func NewDescribeVpcInstancesResponse() (response *DescribeVpcInstancesResponse) 
 //  This API (DescribeVpcInstances) is used to query a list of VCM instances on VPC.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -10372,6 +10439,7 @@ func (c *Client) DescribeVpcInstances(request *DescribeVpcInstancesRequest) (res
 //  This API (DescribeVpcInstances) is used to query a list of VCM instances on VPC.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -10473,6 +10541,7 @@ func NewDescribeVpcPrivateIpAddressesResponse() (response *DescribeVpcPrivateIpA
 // This API is used to query only the information of IP addresses that are already in use. When querying IPs that have not yet been used, this API will not report an error, but the IPs will not appear in the returned results.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -10487,6 +10556,7 @@ func (c *Client) DescribeVpcPrivateIpAddresses(request *DescribeVpcPrivateIpAddr
 // This API is used to query only the information of IP addresses that are already in use. When querying IPs that have not yet been used, this API will not report an error, but the IPs will not appear in the returned results.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
@@ -10760,7 +10830,7 @@ func NewDescribeVpnGatewayCcnRoutesResponse() (response *DescribeVpnGatewayCcnRo
 }
 
 // DescribeVpnGatewayCcnRoutes
-// This API (DescribeVpnGatewayCcnRoutes) is used to query VPN gateway-based CCN routes.
+// This API is used to query VPN gateway-based CCN routes.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -10772,7 +10842,7 @@ func (c *Client) DescribeVpnGatewayCcnRoutes(request *DescribeVpnGatewayCcnRoute
 }
 
 // DescribeVpnGatewayCcnRoutes
-// This API (DescribeVpnGatewayCcnRoutes) is used to query VPN gateway-based CCN routes.
+// This API is used to query VPN gateway-based CCN routes.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -10814,7 +10884,7 @@ func NewDescribeVpnGatewayRoutesResponse() (response *DescribeVpnGatewayRoutesRe
 }
 
 // DescribeVpnGatewayRoutes
-// This API is used to query destination routes of a route-based VPN gateway.
+// This API is used to query VPN gateway routes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10831,7 +10901,7 @@ func (c *Client) DescribeVpnGatewayRoutes(request *DescribeVpnGatewayRoutesReque
 }
 
 // DescribeVpnGatewayRoutes
-// This API is used to query destination routes of a route-based VPN gateway.
+// This API is used to query VPN gateway routes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10954,6 +11024,7 @@ func NewDetachCcnInstancesResponse() (response *DetachCcnInstancesResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
@@ -10971,6 +11042,7 @@ func (c *Client) DetachCcnInstances(request *DetachCcnInstancesRequest) (respons
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_PARAMETERMISMATCH = "InvalidParameterValue.ParameterMismatch"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_APPIDMISMATCH = "UnsupportedOperation.AppIdMismatch"
@@ -11075,6 +11147,7 @@ func NewDetachNetworkInterfaceResponse() (response *DetachNetworkInterfaceRespon
 // This API is completed asynchronously. If you need to query the execution result of an async task, please use the `RequestId` returned by this API to poll the `DescribeVpcTaskResult` API.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -11090,6 +11163,7 @@ func (c *Client) DetachNetworkInterface(request *DetachNetworkInterfaceRequest) 
 // This API is completed asynchronously. If you need to query the execution result of an async task, please use the `RequestId` returned by this API to poll the `DescribeVpcTaskResult` API.
 //
 // error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  LIMITEXCEEDED_ACTIONLIMITED = "LimitExceeded.ActionLimited"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -11768,7 +11842,7 @@ func NewDownloadCustomerGatewayConfigurationResponse() (response *DownloadCustom
 }
 
 // DownloadCustomerGatewayConfiguration
-// This API (DownloadCustomerGatewayConfiguration) is used to download a VPN tunnel configuration.
+// This API is used to download VPN tunnel configurations.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
@@ -11779,7 +11853,7 @@ func (c *Client) DownloadCustomerGatewayConfiguration(request *DownloadCustomerG
 }
 
 // DownloadCustomerGatewayConfiguration
-// This API (DownloadCustomerGatewayConfiguration) is used to download a VPN tunnel configuration.
+// This API is used to download VPN tunnel configurations.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
@@ -11825,6 +11899,7 @@ func NewEnableCcnRoutesResponse() (response *EnableCcnRoutesResponse) {
 // This API is used to verify whether there will be conflict with an existing route after a CCN route is enabled. If there is a conflict, the route will not be enabled, and the process will fail. When a conflict occurs, you must disable the conflicting route before you can enable the desired route.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_ECMP = "UnsupportedOperation.Ecmp"
 func (c *Client) EnableCcnRoutes(request *EnableCcnRoutesRequest) (response *EnableCcnRoutesResponse, err error) {
@@ -11837,6 +11912,7 @@ func (c *Client) EnableCcnRoutes(request *EnableCcnRoutesRequest) (response *Ena
 // This API is used to verify whether there will be conflict with an existing route after a CCN route is enabled. If there is a conflict, the route will not be enabled, and the process will fail. When a conflict occurs, you must disable the conflicting route before you can enable the desired route.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_ECMP = "UnsupportedOperation.Ecmp"
 func (c *Client) EnableCcnRoutesWithContext(ctx context.Context, request *EnableCcnRoutesRequest) (response *EnableCcnRoutesResponse, err error) {
@@ -12656,6 +12732,7 @@ func NewModifyAddressInternetChargeTypeResponse() (response *ModifyAddressIntern
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
 //  UNSUPPORTEDOPERATION_NATNOTSUPPORTED = "UnsupportedOperation.NatNotSupported"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
     return c.ModifyAddressInternetChargeTypeWithContext(context.Background(), request)
 }
@@ -12689,6 +12766,7 @@ func (c *Client) ModifyAddressInternetChargeType(request *ModifyAddressInternetC
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
 //  UNSUPPORTEDOPERATION_NATNOTSUPPORTED = "UnsupportedOperation.NatNotSupported"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ModifyAddressInternetChargeTypeWithContext(ctx context.Context, request *ModifyAddressInternetChargeTypeRequest) (response *ModifyAddressInternetChargeTypeResponse, err error) {
     if request == nil {
         request = NewModifyAddressInternetChargeTypeRequest()
@@ -12727,7 +12805,9 @@ func NewModifyAddressTemplateAttributeResponse() (response *ModifyAddressTemplat
 // This API (ModifyAddressTemplateAttribute) is used to modify an IP address template.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -12742,7 +12822,9 @@ func (c *Client) ModifyAddressTemplateAttribute(request *ModifyAddressTemplateAt
 // This API (ModifyAddressTemplateAttribute) is used to modify an IP address template.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_EMPTY = "InvalidParameterValue.Empty"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -12866,6 +12948,7 @@ func NewModifyAddressesBandwidthResponse() (response *ModifyAddressesBandwidthRe
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
 //  UNSUPPORTEDOPERATION_INSTANCESTATENOTSUPPORTED = "UnsupportedOperation.InstanceStateNotSupported"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthRequest) (response *ModifyAddressesBandwidthResponse, err error) {
     return c.ModifyAddressesBandwidthWithContext(context.Background(), request)
 }
@@ -12893,6 +12976,7 @@ func (c *Client) ModifyAddressesBandwidth(request *ModifyAddressesBandwidthReque
 //  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
 //  UNSUPPORTEDOPERATION_INSTANCESTATENOTSUPPORTED = "UnsupportedOperation.InstanceStateNotSupported"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ModifyAddressesBandwidthWithContext(ctx context.Context, request *ModifyAddressesBandwidthRequest) (response *ModifyAddressesBandwidthResponse, err error) {
     if request == nil {
         request = NewModifyAddressesBandwidthRequest()
@@ -13112,6 +13196,7 @@ func NewModifyCcnAttributeResponse() (response *ModifyCcnAttributeResponse) {
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyCcnAttribute(request *ModifyCcnAttributeRequest) (response *ModifyCcnAttributeResponse, err error) {
     return c.ModifyCcnAttributeWithContext(context.Background(), request)
@@ -13122,6 +13207,7 @@ func (c *Client) ModifyCcnAttribute(request *ModifyCcnAttributeRequest) (respons
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyCcnAttributeWithContext(ctx context.Context, request *ModifyCcnAttributeRequest) (response *ModifyCcnAttributeResponse, err error) {
     if request == nil {
@@ -13496,6 +13582,7 @@ func NewModifyIpv6AddressesAttributeResponse() (response *ModifyIpv6AddressesAtt
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
 //  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
@@ -13508,6 +13595,7 @@ func (c *Client) ModifyIpv6AddressesAttribute(request *ModifyIpv6AddressesAttrib
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ATTACHMENTNOTFOUND = "UnsupportedOperation.AttachmentNotFound"
 //  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
@@ -13723,6 +13811,7 @@ func NewModifyNatGatewaySourceIpTranslationNatRuleResponse() (response *ModifyNa
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
 func (c *Client) ModifyNatGatewaySourceIpTranslationNatRule(request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     return c.ModifyNatGatewaySourceIpTranslationNatRuleWithContext(context.Background(), request)
@@ -13738,6 +13827,7 @@ func (c *Client) ModifyNatGatewaySourceIpTranslationNatRule(request *ModifyNatGa
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_NATGATEWAYSNATRULENOTEXISTS = "InvalidParameterValue.NatGatewaySnatRuleNotExists"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_UNBINDEIP = "UnsupportedOperation.UnbindEIP"
 func (c *Client) ModifyNatGatewaySourceIpTranslationNatRuleWithContext(ctx context.Context, request *ModifyNatGatewaySourceIpTranslationNatRuleRequest) (response *ModifyNatGatewaySourceIpTranslationNatRuleResponse, err error) {
     if request == nil {
@@ -14092,6 +14182,7 @@ func NewModifyPrivateIpAddressesAttributeResponse() (response *ModifyPrivateIpAd
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) ModifyPrivateIpAddressesAttribute(request *ModifyPrivateIpAddressesAttributeRequest) (response *ModifyPrivateIpAddressesAttributeResponse, err error) {
@@ -14103,6 +14194,7 @@ func (c *Client) ModifyPrivateIpAddressesAttribute(request *ModifyPrivateIpAddre
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 func (c *Client) ModifyPrivateIpAddressesAttributeWithContext(ctx context.Context, request *ModifyPrivateIpAddressesAttributeRequest) (response *ModifyPrivateIpAddressesAttributeResponse, err error) {
@@ -14551,6 +14643,7 @@ func NewModifySubnetAttributeResponse() (response *ModifySubnetAttributeResponse
 // This API (ModifySubnetAttribute) is used to modify subnet attributes.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -14562,6 +14655,7 @@ func (c *Client) ModifySubnetAttribute(request *ModifySubnetAttributeRequest) (r
 // This API (ModifySubnetAttribute) is used to modify subnet attributes.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -14603,11 +14697,13 @@ func NewModifyVpcAttributeResponse() (response *ModifyVpcAttributeResponse) {
 // This API (ModifyVpcAttribute) is used to modify VPC attributes.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_ENABLEMULTICAST = "UnsupportedOperation.EnableMulticast"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTEDUPDATECCNROUTEPUBLISH = "UnsupportedOperation.NotSupportedUpdateCcnRoutePublish"
 func (c *Client) ModifyVpcAttribute(request *ModifyVpcAttributeRequest) (response *ModifyVpcAttributeResponse, err error) {
     return c.ModifyVpcAttributeWithContext(context.Background(), request)
@@ -14617,11 +14713,13 @@ func (c *Client) ModifyVpcAttribute(request *ModifyVpcAttributeRequest) (respons
 // This API (ModifyVpcAttribute) is used to modify VPC attributes.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_ENABLEMULTICAST = "UnsupportedOperation.EnableMulticast"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTEDUPDATECCNROUTEPUBLISH = "UnsupportedOperation.NotSupportedUpdateCcnRoutePublish"
 func (c *Client) ModifyVpcAttributeWithContext(ctx context.Context, request *ModifyVpcAttributeRequest) (response *ModifyVpcAttributeResponse, err error) {
     if request == nil {
@@ -14849,6 +14947,7 @@ func NewModifyVpnConnectionAttributeResponse() (response *ModifyVpnConnectionAtt
 //  INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
 //  INVALIDPARAMETERVALUE_VPNCONNHEALTHCHECKIPCONFLICT = "InvalidParameterValue.VpnConnHealthCheckIpConflict"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 //  UNSUPPORTEDOPERATION_VPNCONNINVALIDSTATE = "UnsupportedOperation.VpnConnInvalidState"
 func (c *Client) ModifyVpnConnectionAttribute(request *ModifyVpnConnectionAttributeRequest) (response *ModifyVpnConnectionAttributeResponse, err error) {
     return c.ModifyVpnConnectionAttributeWithContext(context.Background(), request)
@@ -14862,6 +14961,7 @@ func (c *Client) ModifyVpnConnectionAttribute(request *ModifyVpnConnectionAttrib
 //  INVALIDPARAMETERVALUE_VPNCONNCIDRCONFLICT = "InvalidParameterValue.VpnConnCidrConflict"
 //  INVALIDPARAMETERVALUE_VPNCONNHEALTHCHECKIPCONFLICT = "InvalidParameterValue.VpnConnHealthCheckIpConflict"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 //  UNSUPPORTEDOPERATION_VPNCONNINVALIDSTATE = "UnsupportedOperation.VpnConnInvalidState"
 func (c *Client) ModifyVpnConnectionAttributeWithContext(ctx context.Context, request *ModifyVpnConnectionAttributeRequest) (response *ModifyVpnConnectionAttributeResponse, err error) {
     if request == nil {
@@ -14952,7 +15052,7 @@ func NewModifyVpnGatewayCcnRoutesResponse() (response *ModifyVpnGatewayCcnRoutes
 }
 
 // ModifyVpnGatewayCcnRoutes
-// This API (ModifyVpnGatewayCcnRoutes) is used to modify VPN gateway-based CCN routes.
+// This API is used to modify VPN gateway-based CCN routes.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -14962,7 +15062,7 @@ func (c *Client) ModifyVpnGatewayCcnRoutes(request *ModifyVpnGatewayCcnRoutesReq
 }
 
 // ModifyVpnGatewayCcnRoutes
-// This API (ModifyVpnGatewayCcnRoutes) is used to modify VPN gateway-based CCN routes.
+// This API is used to modify VPN gateway-based CCN routes.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -15002,7 +15102,7 @@ func NewModifyVpnGatewayRoutesResponse() (response *ModifyVpnGatewayRoutesRespon
 }
 
 // ModifyVpnGatewayRoutes
-// This API is used to modify the route status of a VPN gateway.
+// This API is used to modify VPN gateway routes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -15017,7 +15117,7 @@ func (c *Client) ModifyVpnGatewayRoutes(request *ModifyVpnGatewayRoutesRequest) 
 }
 
 // ModifyVpnGatewayRoutes
-// This API is used to modify the route status of a VPN gateway.
+// This API is used to modify VPN gateway routes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -15071,6 +15171,7 @@ func NewNotifyRoutesResponse() (response *NotifyRoutesResponse) {
 //  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
 //  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
 //  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_ASSOCIATEDVPCOFCCNHADNATROUTE = "UnsupportedOperation.AssociatedVpcOfCcnHadNatRoute"
 //  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
 //  UNSUPPORTEDOPERATION_INVALIDSTATUSNOTIFYCCN = "UnsupportedOperation.InvalidStatusNotifyCcn"
@@ -15090,6 +15191,7 @@ func (c *Client) NotifyRoutes(request *NotifyRoutesRequest) (response *NotifyRou
 //  INVALIDROUTEID_NOTFOUND = "InvalidRouteId.NotFound"
 //  INVALIDROUTETABLEID_MALFORMED = "InvalidRouteTableId.Malformed"
 //  INVALIDROUTETABLEID_NOTFOUND = "InvalidRouteTableId.NotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION_ASSOCIATEDVPCOFCCNHADNATROUTE = "UnsupportedOperation.AssociatedVpcOfCcnHadNatRoute"
 //  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
 //  UNSUPPORTEDOPERATION_INVALIDSTATUSNOTIFYCCN = "UnsupportedOperation.InvalidStatusNotifyCcn"
@@ -15190,6 +15292,7 @@ func NewRejectAttachCcnInstancesResponse() (response *RejectAttachCcnInstancesRe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
@@ -15205,6 +15308,7 @@ func (c *Client) RejectAttachCcnInstances(request *RejectAttachCcnInstancesReque
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_CCNNOTATTACHED = "UnsupportedOperation.CcnNotAttached"
@@ -15257,11 +15361,12 @@ func NewReleaseAddressesResponse() (response *ReleaseAddressesResponse) {
 //  INVALIDADDRESSSTATE = "InvalidAddressState"
 //  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
 //  INVALIDPARAMETERVALUE_ADDRESSINTERNETCHARGETYPECONFLICT = "InvalidParameterValue.AddressInternetChargeTypeConflict"
-//  INVALIDPARAMETERVALUE_ADDRESSNOTEIP = "InvalidParameterValue.AddressNotEIP"
 //  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSTYPECONFLICT = "InvalidParameterValue.AddressTypeConflict"
 //  LIMITEXCEEDED_ACCOUNTRETURNQUOTA = "LimitExceeded.AccountReturnQuota"
 //  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ReleaseAddresses(request *ReleaseAddressesRequest) (response *ReleaseAddressesResponse, err error) {
     return c.ReleaseAddressesWithContext(context.Background(), request)
 }
@@ -15280,11 +15385,12 @@ func (c *Client) ReleaseAddresses(request *ReleaseAddressesRequest) (response *R
 //  INVALIDADDRESSSTATE = "InvalidAddressState"
 //  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
 //  INVALIDPARAMETERVALUE_ADDRESSINTERNETCHARGETYPECONFLICT = "InvalidParameterValue.AddressInternetChargeTypeConflict"
-//  INVALIDPARAMETERVALUE_ADDRESSNOTEIP = "InvalidParameterValue.AddressNotEIP"
 //  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSTYPECONFLICT = "InvalidParameterValue.AddressTypeConflict"
 //  LIMITEXCEEDED_ACCOUNTRETURNQUOTA = "LimitExceeded.AccountReturnQuota"
 //  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
 //  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+//  UNSUPPORTEDOPERATION_UNPAIDORDERALREADYEXISTS = "UnsupportedOperation.UnpaidOrderAlreadyExists"
 func (c *Client) ReleaseAddressesWithContext(ctx context.Context, request *ReleaseAddressesRequest) (response *ReleaseAddressesResponse, err error) {
     if request == nil {
         request = NewReleaseAddressesRequest()
@@ -15599,6 +15705,94 @@ func (c *Client) ReplaceRoutesWithContext(ctx context.Context, request *ReplaceR
     return
 }
 
+func NewReplaceSecurityGroupPoliciesRequest() (request *ReplaceSecurityGroupPoliciesRequest) {
+    request = &ReplaceSecurityGroupPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ReplaceSecurityGroupPolicies")
+    
+    
+    return
+}
+
+func NewReplaceSecurityGroupPoliciesResponse() (response *ReplaceSecurityGroupPoliciesResponse) {
+    response = &ReplaceSecurityGroupPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ReplaceSecurityGroupPolicies
+// This API is used to batch modify security group policies.
+//
+// Policies to modify must be in the same direction. `PolicyIndex` must be specified.
+//
+// error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONIDMISMATCH = "InvalidParameterValue.MemberApprovalApplicationIdMismatch"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONNOTAPPROVED = "InvalidParameterValue.MemberApprovalApplicationNotApproved"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONREJECTED = "InvalidParameterValue.MemberApprovalApplicationRejected"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONSTARTED = "InvalidParameterValue.MemberApprovalApplicationStarted"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_CLBPOLICYEXCEEDLIMIT = "UnsupportedOperation.ClbPolicyExceedLimit"
+//  UNSUPPORTEDOPERATION_CLBPOLICYLIMIT = "UnsupportedOperation.ClbPolicyLimit"
+//  UNSUPPORTEDOPERATION_DUPLICATEPOLICY = "UnsupportedOperation.DuplicatePolicy"
+//  UNSUPPORTEDOPERATION_LOCKEDRESOURCES = "UnsupportedOperation.LockedResources"
+//  UNSUPPORTEDOPERATION_VERSIONMISMATCH = "UnsupportedOperation.VersionMismatch"
+func (c *Client) ReplaceSecurityGroupPolicies(request *ReplaceSecurityGroupPoliciesRequest) (response *ReplaceSecurityGroupPoliciesResponse, err error) {
+    return c.ReplaceSecurityGroupPoliciesWithContext(context.Background(), request)
+}
+
+// ReplaceSecurityGroupPolicies
+// This API is used to batch modify security group policies.
+//
+// Policies to modify must be in the same direction. `PolicyIndex` must be specified.
+//
+// error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONIDMISMATCH = "InvalidParameterValue.MemberApprovalApplicationIdMismatch"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONNOTAPPROVED = "InvalidParameterValue.MemberApprovalApplicationNotApproved"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONREJECTED = "InvalidParameterValue.MemberApprovalApplicationRejected"
+//  INVALIDPARAMETERVALUE_MEMBERAPPROVALAPPLICATIONSTARTED = "InvalidParameterValue.MemberApprovalApplicationStarted"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_CLBPOLICYEXCEEDLIMIT = "UnsupportedOperation.ClbPolicyExceedLimit"
+//  UNSUPPORTEDOPERATION_CLBPOLICYLIMIT = "UnsupportedOperation.ClbPolicyLimit"
+//  UNSUPPORTEDOPERATION_DUPLICATEPOLICY = "UnsupportedOperation.DuplicatePolicy"
+//  UNSUPPORTEDOPERATION_LOCKEDRESOURCES = "UnsupportedOperation.LockedResources"
+//  UNSUPPORTEDOPERATION_VERSIONMISMATCH = "UnsupportedOperation.VersionMismatch"
+func (c *Client) ReplaceSecurityGroupPoliciesWithContext(ctx context.Context, request *ReplaceSecurityGroupPoliciesRequest) (response *ReplaceSecurityGroupPoliciesResponse, err error) {
+    if request == nil {
+        request = NewReplaceSecurityGroupPoliciesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReplaceSecurityGroupPolicies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReplaceSecurityGroupPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewReplaceSecurityGroupPolicyRequest() (request *ReplaceSecurityGroupPolicyRequest) {
     request = &ReplaceSecurityGroupPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -15895,6 +16089,7 @@ func NewResetVpnConnectionResponse() (response *ResetVpnConnectionResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 //  UNSUPPORTEDOPERATION_VPNCONNINVALIDSTATE = "UnsupportedOperation.VpnConnInvalidState"
 func (c *Client) ResetVpnConnection(request *ResetVpnConnectionRequest) (response *ResetVpnConnectionResponse, err error) {
     return c.ResetVpnConnectionWithContext(context.Background(), request)
@@ -15906,6 +16101,7 @@ func (c *Client) ResetVpnConnection(request *ResetVpnConnectionRequest) (respons
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
 //  UNSUPPORTEDOPERATION_VPNCONNINVALIDSTATE = "UnsupportedOperation.VpnConnInvalidState"
 func (c *Client) ResetVpnConnectionWithContext(ctx context.Context, request *ResetVpnConnectionRequest) (response *ResetVpnConnectionResponse, err error) {
     if request == nil {
@@ -16154,7 +16350,7 @@ func NewSetVpnGatewaysRenewFlagResponse() (response *SetVpnGatewaysRenewFlagResp
 }
 
 // SetVpnGatewaysRenewFlag
-// This API is used to specify whether to enable auto-renewal for the VPN gateway.
+// This API is used set the auto-renewal configuration of a VPN gateway.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -16167,7 +16363,7 @@ func (c *Client) SetVpnGatewaysRenewFlag(request *SetVpnGatewaysRenewFlagRequest
 }
 
 // SetVpnGatewaysRenewFlag
-// This API is used to specify whether to enable auto-renewal for the VPN gateway.
+// This API is used set the auto-renewal configuration of a VPN gateway.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -16217,6 +16413,7 @@ func NewTransformAddressResponse() (response *TransformAddressResponse) {
 // error code that may be returned:
 //  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
 //  ADDRESSQUOTALIMITEXCEEDED_DAILYALLOCATE = "AddressQuotaLimitExceeded.DailyAllocate"
+//  FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
 //  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_ALREADYBINDEIP = "InvalidInstanceId.AlreadyBindEip"
@@ -16242,6 +16439,7 @@ func (c *Client) TransformAddress(request *TransformAddressRequest) (response *T
 // error code that may be returned:
 //  ADDRESSQUOTALIMITEXCEEDED = "AddressQuotaLimitExceeded"
 //  ADDRESSQUOTALIMITEXCEEDED_DAILYALLOCATE = "AddressQuotaLimitExceeded.DailyAllocate"
+//  FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
 //  INVALIDADDRESSID_BLOCKED = "InvalidAddressId.Blocked"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_ALREADYBINDEIP = "InvalidInstanceId.AlreadyBindEip"
@@ -16416,6 +16614,7 @@ func NewUnassignIpv6SubnetCidrBlockResponse() (response *UnassignIpv6SubnetCidrB
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) UnassignIpv6SubnetCidrBlock(request *UnassignIpv6SubnetCidrBlockRequest) (response *UnassignIpv6SubnetCidrBlockResponse, err error) {
@@ -16429,6 +16628,7 @@ func (c *Client) UnassignIpv6SubnetCidrBlock(request *UnassignIpv6SubnetCidrBloc
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) UnassignIpv6SubnetCidrBlockWithContext(ctx context.Context, request *UnassignIpv6SubnetCidrBlockRequest) (response *UnassignIpv6SubnetCidrBlockResponse, err error) {

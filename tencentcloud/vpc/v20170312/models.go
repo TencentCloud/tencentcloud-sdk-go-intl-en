@@ -241,6 +241,17 @@ type Address struct {
 	// List of tags associated with the EIP
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
+
+	// The expiration time.
+	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	DeadlineDate *string `json:"DeadlineDate,omitempty" name:"DeadlineDate"`
+
+	// The type of instance bound with the EIP
+	// Note: this field may return `null`, indicating that no valid value was found.
+	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+
+	AntiDDoSPackageId *string `json:"AntiDDoSPackageId,omitempty" name:"AntiDDoSPackageId"`
 }
 
 type AddressChargePrepaid struct {
@@ -295,10 +306,16 @@ type AddressTemplateGroup struct {
 }
 
 type AddressTemplateItem struct {
-	// Start address
+	// ipm-xxxxxxxx
+	AddressTemplateId *string `json:"AddressTemplateId,omitempty" name:"AddressTemplateId"`
+
+	// IP template name
+	AddressTemplateName *string `json:"AddressTemplateName,omitempty" name:"AddressTemplateName"`
+
+	// Disused
 	From *string `json:"From,omitempty" name:"From"`
 
-	// End address
+	// Disused
 	To *string `json:"To,omitempty" name:"To"`
 }
 
@@ -1730,6 +1747,10 @@ type CcnBandwidthInfo struct {
 	// Cloud marketplace instance ID.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	MarketId *string `json:"MarketId,omitempty" name:"MarketId"`
+
+	// The list of tags to be bound.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	TagSet []*Tag `json:"TagSet,omitempty" name:"TagSet"`
 }
 
 type CcnInstance struct {
@@ -2277,7 +2298,7 @@ type CreateAndAttachNetworkInterfaceRequestParams struct {
 	// The information of the specified private IPs. You can specify a maximum of 10 IPs each time.
 	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
-	// The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
+	// The number of private IP addresses you apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
 	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
@@ -2314,7 +2335,7 @@ type CreateAndAttachNetworkInterfaceRequest struct {
 	// The information of the specified private IPs. You can specify a maximum of 10 IPs each time.
 	PrivateIpAddresses []*PrivateIpAddressSpecification `json:"PrivateIpAddresses,omitempty" name:"PrivateIpAddresses"`
 
-	// The number of private IP addresses you can apply for. The total number of private IP addresses cannot exceed the quota.
+	// The number of private IP addresses you apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
 	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
@@ -2978,13 +2999,13 @@ type CreateFlowLogRequestParams struct {
 	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The description of the flow log instance
+	// The description of the flow log.
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
 
 	// The storage ID of the flow log.
 	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
 
-	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Consumer types: `cls` and `ckafka`
@@ -3015,13 +3036,13 @@ type CreateFlowLogRequest struct {
 	// The VPC ID or unique ID of the resource. We recommend using the unique ID. This parameter is required unless the `ResourceType` is set to `CCN`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// The description of the flow log instance
+	// The description of the flow log.
 	FlowLogDescription *string `json:"FlowLogDescription,omitempty" name:"FlowLogDescription"`
 
 	// The storage ID of the flow log.
 	CloudLogId *string `json:"CloudLogId,omitempty" name:"CloudLogId"`
 
-	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}]
+	// Bound tags, such as [{"Key": "city", "Value": "shanghai"}].
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
 
 	// Consumer types: `cls` and `ckafka`
@@ -3101,6 +3122,9 @@ type CreateHaVipRequestParams struct {
 
 	// The specified virtual IP address, which must be within the IP range of the `VPC` and not in use. It will be automatically assigned if not specified.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// The ID of the ENI associated with the HAVIP.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 }
 
 type CreateHaVipRequest struct {
@@ -3117,6 +3141,9 @@ type CreateHaVipRequest struct {
 
 	// The specified virtual IP address, which must be within the IP range of the `VPC` and not in use. It will be automatically assigned if not specified.
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// The ID of the ENI associated with the HAVIP.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitempty" name:"NetworkInterfaceId"`
 }
 
 func (r *CreateHaVipRequest) ToJsonString() string {
@@ -3135,6 +3162,7 @@ func (r *CreateHaVipRequest) FromJsonString(s string) error {
 	delete(f, "SubnetId")
 	delete(f, "HaVipName")
 	delete(f, "Vip")
+	delete(f, "NetworkInterfaceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateHaVipRequest has unknown keys!", "")
 	}
@@ -3498,7 +3526,7 @@ func (r *CreateNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s st
 
 // Predefined struct for user
 type CreateNetDetectRequestParams struct {
-	// The `ID` of a `VPC` instance, such as `vpc-12345678`.
+	// The ID of a VPC instance, such as `vpc-12345678`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The ID of a subnet instance, such as subnet-12345678.
@@ -3512,20 +3540,22 @@ type CreateNetDetectRequestParams struct {
 
 	// Type of the next hop. Valid values:
 	// `VPN`: VPN gateway;
-	// `DIRECTCONNECT`: direct connect gateway;
-	// `PEERCONNECTION`: peering connection;
+	// `DIRECTCONNECT`: Direct connect gateway;
+	// `PEERCONNECTION`: Peering connection;
 	// `NAT`: NAT gateway;
-	// `NORMAL_CVM`: normal CVM;
-	// `CCN`: CCN gateway.
+	// `NORMAL_CVM`: CVM instance;
+	// `CCN`: CCN instance;
+	// `NONEXTHOP`: No next hop.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// Next-hop destination gateway. Its value is determined by `NextHopType`.
-	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	// ID of the next-hop gateway. 
+	// `NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+	// `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+	// `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+	// `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+	// `NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+	// `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+	// `NextHopType` = `NONEXTHOP`: No next hop.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// Network detection description.
@@ -3535,7 +3565,7 @@ type CreateNetDetectRequestParams struct {
 type CreateNetDetectRequest struct {
 	*tchttp.BaseRequest
 	
-	// The `ID` of a `VPC` instance, such as `vpc-12345678`.
+	// The ID of a VPC instance, such as `vpc-12345678`.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// The ID of a subnet instance, such as subnet-12345678.
@@ -3549,20 +3579,22 @@ type CreateNetDetectRequest struct {
 
 	// Type of the next hop. Valid values:
 	// `VPN`: VPN gateway;
-	// `DIRECTCONNECT`: direct connect gateway;
-	// `PEERCONNECTION`: peering connection;
+	// `DIRECTCONNECT`: Direct connect gateway;
+	// `PEERCONNECTION`: Peering connection;
 	// `NAT`: NAT gateway;
-	// `NORMAL_CVM`: normal CVM;
-	// `CCN`: CCN gateway.
+	// `NORMAL_CVM`: CVM instance;
+	// `CCN`: CCN instance;
+	// `NONEXTHOP`: No next hop.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// Next-hop destination gateway. Its value is determined by `NextHopType`.
-	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	// ID of the next-hop gateway. 
+	// `NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+	// `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+	// `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+	// `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+	// `NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+	// `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+	// `NextHopType` = `NONEXTHOP`: No next hop.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// Network detection description.
@@ -3682,7 +3714,7 @@ func (r *CreateNetworkAclQuintupleEntriesResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type CreateNetworkAclRequestParams struct {
-	// VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Network ACL name, which can contain up to 60 bytes.
@@ -3698,7 +3730,7 @@ type CreateNetworkAclRequestParams struct {
 type CreateNetworkAclRequest struct {
 	*tchttp.BaseRequest
 	
-	// VPC instance ID, which can be obtained from the `VpcId` field returned by `DescribeVpcs` API.
+	// VPC instance ID, which can be obtained from the `VpcId` field in the response of the [`DescribeVpcs`](https://intl.cloud.tencent.com/document/product/215/15778?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
 	// Network ACL name, which can contain up to 60 bytes.
@@ -3772,7 +3804,7 @@ type CreateNetworkInterfaceRequestParams struct {
 	// ENI description can be named freely, but the maximum length is 60 characters.
 	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
 
-	// The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
+	// The number of private IP addresses you apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
 	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
@@ -3806,7 +3838,7 @@ type CreateNetworkInterfaceRequest struct {
 	// ENI description can be named freely, but the maximum length is 60 characters.
 	NetworkInterfaceDescription *string `json:"NetworkInterfaceDescription,omitempty" name:"NetworkInterfaceDescription"`
 
-	// The number of private IP addresses that is newly applied for. The total number of private IP addresses cannot exceed the quota.
+	// The number of private IP addresses you apply for. The total number of private IP addresses cannot exceed the quota.
 	SecondaryPrivateIpAddressCount *uint64 `json:"SecondaryPrivateIpAddressCount,omitempty" name:"SecondaryPrivateIpAddressCount"`
 
 	// IP service level. It’s used in combination with `SecondaryPrivateIpAddressCount`. Values: `PT` (Gold), `AU` (Silver), `AG` (Bronze) and `DEFAULT`
@@ -5426,11 +5458,20 @@ type CvmInstance struct {
 }
 
 type DefaultVpcSubnet struct {
-	// Default VpcId
+	// Default VPC ID
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
 
-	// Default SubnetId
+	// Default subnet ID
 	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+
+	// Default VPC name
+	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+
+	// Default subnet name
+	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+
+	// Default subnet IP range
+	CidrBlock *string `json:"CidrBlock,omitempty" name:"CidrBlock"`
 }
 
 // Predefined struct for user
@@ -6240,14 +6281,14 @@ func (r *DeleteNatGatewaySourceIpTranslationNatRuleResponse) FromJsonString(s st
 
 // Predefined struct for user
 type DeleteNetDetectRequestParams struct {
-	// The `ID` of a network detection instance, such as `netd-12345678`.
+	// ID of a network probe, such as `netd-12345678`.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
 }
 
 type DeleteNetDetectRequest struct {
 	*tchttp.BaseRequest
 	
-	// The `ID` of a network detection instance, such as `netd-12345678`.
+	// ID of a network probe, such as `netd-12345678`.
 	NetDetectId *string `json:"NetDetectId,omitempty" name:"NetDetectId"`
 }
 
@@ -8754,7 +8795,7 @@ type DescribeCustomerGatewaysRequestParams struct {
 	// <li>ip-address - String - (Filter condition) The public IP address, such as `58.211.1.12`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
+	// Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -8773,7 +8814,7 @@ type DescribeCustomerGatewaysRequest struct {
 	// <li>ip-address - String - (Filter condition) The public IP address, such as `58.211.1.12`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
-	// The Offset. The default value is 0. For more information about Offset, see the relevant section in the API Introduction.
+	// Offset. Default value: 0. For more information on Offset, see the relevant section in the API [Introduction](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
@@ -9112,9 +9153,9 @@ type DescribeFlowLogsRequestParams struct {
 	// The number of rows per page. Default value: 10.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter condition. `FlowLogIds` and `Filters` cannot be specified at the same time.
-	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
+	// Filter condition. `FlowLogId` and `Filters` cannot be specified at the same time.
+	// <li> `tag-key` - String - Optional - Filter by the tag key.</li>
+	// <li> `tag:tag-key` - String - Optional - Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
 	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The region corresponding to the flow log storage ID.
@@ -9160,9 +9201,9 @@ type DescribeFlowLogsRequest struct {
 	// The number of rows per page. Default value: 10.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Filter condition. `FlowLogIds` and `Filters` cannot be specified at the same time.
-	// <li>tag-key - String - Required: No - (Filter condition) Filter by tag key.</li>
-	// <li> tag:tag-key - String - Required: No - (Filter condition) Filter by tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
+	// Filter condition. `FlowLogId` and `Filters` cannot be specified at the same time.
+	// <li> `tag-key` - String - Optional - Filter by the tag key.</li>
+	// <li> `tag:tag-key` - String - Optional - Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key.</li>
 	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The region corresponding to the flow log storage ID.
@@ -10085,11 +10126,11 @@ func (r *DescribeNatGatewaysResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeNetDetectStatesRequestParams struct {
-	// The array of network detection instance `IDs`, such as [`netd-12345678`].
+	// The array of network probe IDs, such as [`netd-12345678`].
 	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
 	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
-	// <li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
+	// <li>`net-detect-id` - String - The network probe ID, such as `netd-12345678`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset. Default: 0.
@@ -10102,11 +10143,11 @@ type DescribeNetDetectStatesRequestParams struct {
 type DescribeNetDetectStatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The array of network detection instance `IDs`, such as [`netd-12345678`].
+	// The array of network probe IDs, such as [`netd-12345678`].
 	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
 	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
-	// <li>net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.</li>
+	// <li>`net-detect-id` - String - The network probe ID, such as `netd-12345678`.</li>
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// The offset. Default: 0.
@@ -10170,7 +10211,7 @@ func (r *DescribeNetDetectStatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeNetDetectsRequestParams struct {
-	// The array of network detection instance `IDs`, such as [`netd-12345678`].
+	// The array of network probe IDs, such as [`netd-12345678`].
 	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
 	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
@@ -10190,7 +10231,7 @@ type DescribeNetDetectsRequestParams struct {
 type DescribeNetDetectsRequest struct {
 	*tchttp.BaseRequest
 	
-	// The array of network detection instance `IDs`, such as [`netd-12345678`].
+	// The array of network probe IDs, such as [`netd-12345678`].
 	NetDetectIds []*string `json:"NetDetectIds,omitempty" name:"NetDetectIds"`
 
 	// Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.
@@ -12717,7 +12758,7 @@ func (r *DescribeVpnConnectionsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVpnGatewayCcnRoutesRequestParams struct {
-	// The ID of the VPN gateway instance.
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// Offset.
@@ -12730,7 +12771,7 @@ type DescribeVpnGatewayCcnRoutesRequestParams struct {
 type DescribeVpnGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of the VPN gateway instance.
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// Offset.
@@ -12791,7 +12832,7 @@ func (r *DescribeVpnGatewayCcnRoutesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVpnGatewayRoutesRequestParams struct {
-	// VPN gateway ID
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// Filter condition. Valid values: `DestinationCidr`, `InstanceId`, and `InstanceType`.
@@ -12807,7 +12848,7 @@ type DescribeVpnGatewayRoutesRequestParams struct {
 type DescribeVpnGatewayRoutesRequest struct {
 	*tchttp.BaseRequest
 	
-	// VPN gateway ID
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// Filter condition. Valid values: `DestinationCidr`, `InstanceId`, and `InstanceType`.
@@ -12846,6 +12887,10 @@ func (r *DescribeVpnGatewayRoutesRequest) FromJsonString(s string) error {
 type DescribeVpnGatewayRoutesResponseParams struct {
 	// Destination routes of the VPN gateway
 	Routes []*VpnGatewayRoute `json:"Routes,omitempty" name:"Routes"`
+
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -14523,10 +14568,10 @@ type GetCcnRegionBandwidthLimitsRequestParams struct {
 	// The sorting condition. Valid values: `BandwidthLimit` and `ExpireTime`.
 	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
 
-	// The offset.
+	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The returned quantity.
+	// Quantity of returned items
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// In ascending or descending order. Valid values: 'ASC' and 'DESC'.
@@ -14547,10 +14592,10 @@ type GetCcnRegionBandwidthLimitsRequest struct {
 	// The sorting condition. Valid values: `BandwidthLimit` and `ExpireTime`.
 	SortedBy *string `json:"SortedBy,omitempty" name:"SortedBy"`
 
-	// The offset.
+	// Offset
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// The returned quantity.
+	// Quantity of returned items
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
 	// In ascending or descending order. Valid values: 'ASC' and 'DESC'.
@@ -14584,7 +14629,7 @@ func (r *GetCcnRegionBandwidthLimitsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCcnRegionBandwidthLimitsResponseParams struct {
 	// The outbound bandwidth limits of regions in a CCN instance.
-	// Note: this field may return null, indicating that no valid value was found.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CcnBandwidthSet []*CcnBandwidthInfo `json:"CcnBandwidthSet,omitempty" name:"CcnBandwidthSet"`
 
 	// The number of eligible objects.
@@ -16716,17 +16761,19 @@ type ModifyNetDetectRequestParams struct {
 	// `DIRECTCONNECT`: Direct connect gateway;
 	// `PEERCONNECTION`: Peering connection;
 	// `NAT`: NAT gateway;
-	// `NORMAL_CVM`: normal CVM;
-	// `CCN`: CCN gateway.
+	// `NORMAL_CVM`: CVM instance;
+	// `CCN`: CCN instance;
+	// `NONEXTHOP`: No next hop.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// Next-hop destination gateway. Its value is determined by `NextHopType`.
-	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	// ID of the next-hop gateway. 
+	// `NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+	// `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+	// `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+	// `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+	// `NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+	// `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+	// `NextHopType` = `NONEXTHOP`: No next hop.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// Network detection description.
@@ -16750,17 +16797,19 @@ type ModifyNetDetectRequest struct {
 	// `DIRECTCONNECT`: Direct connect gateway;
 	// `PEERCONNECTION`: Peering connection;
 	// `NAT`: NAT gateway;
-	// `NORMAL_CVM`: normal CVM;
-	// `CCN`: CCN gateway.
+	// `NORMAL_CVM`: CVM instance;
+	// `CCN`: CCN instance;
+	// `NONEXTHOP`: No next hop.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// Next-hop destination gateway. Its value is determined by `NextHopType`.
-	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	// ID of the next-hop gateway. 
+	// `NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+	// `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+	// `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+	// `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+	// `NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+	// `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+	// `NextHopType` = `NONEXTHOP`: No next hop.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// Network detection description.
@@ -18123,7 +18172,7 @@ func (r *ModifyVpnGatewayAttributeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyVpnGatewayCcnRoutesRequestParams struct {
-	// The ID of the VPN gateway instance.
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// The CCN route (IDC IP range) list.
@@ -18133,7 +18182,7 @@ type ModifyVpnGatewayCcnRoutesRequestParams struct {
 type ModifyVpnGatewayCcnRoutesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of the VPN gateway instance.
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// The CCN route (IDC IP range) list.
@@ -18184,7 +18233,7 @@ func (r *ModifyVpnGatewayCcnRoutesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyVpnGatewayRoutesRequestParams struct {
-	// VPN gateway ID
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// Route parameters to modify
@@ -18194,7 +18243,7 @@ type ModifyVpnGatewayRoutesRequestParams struct {
 type ModifyVpnGatewayRoutesRequest struct {
 	*tchttp.BaseRequest
 	
-	// VPN gateway ID
+	// Instance ID of the VPN gateway
 	VpnGatewayId *string `json:"VpnGatewayId,omitempty" name:"VpnGatewayId"`
 
 	// Route parameters to modify
@@ -18401,22 +18450,24 @@ type NetDetect struct {
 	// The array of detection source IPv4 addresses automatically allocated by the system. The length is 2.
 	DetectSourceIp []*string `json:"DetectSourceIp,omitempty" name:"DetectSourceIp"`
 
-	// Type of the next hop. Valid values:
+	// Type of the next hop. Currently supported types are:
 	// VPN: VPN gateway;
-	// DIRECTCONNECT: direct connect gateway;
-	// PEERCONNECTION: peering connection;
-	// NAT: NAT gateway;
-	// NORMAL_CVM: normal CVM.
-	// CCN: CCN gateway.
+	// `DIRECTCONNECT`: Direct connect gateway;
+	// `PEERCONNECTION`: Peering connection;
+	// `NAT`: NAT gateway;
+	// `NORMAL_CVM`: CVM instance;
+	// `CCN`: CCN instance;
+	// `NONEXTHOP`: No next hop.
 	NextHopType *string `json:"NextHopType,omitempty" name:"NextHopType"`
 
-	// Next-hop destination gateway. Its value is determined by `NextHopType`.
-	// If `NextHopType` is set to `VPN`, the parameter value is the VPN gateway ID, such as `vpngw-12345678`.
-	// If `NextHopType` is set to `DIRECTCONNECT`, the parameter value is the direct connect gateway ID, such as `dcg-12345678`.
-	// If `NextHopType` is set to `PEERCONNECTION`, the parameter value is the peering connection ID, such as `pcx-12345678`.
-	// If `NextHopType` is set to `NAT`, the parameter value is the NAT gateway ID, such as `nat-12345678`.
-	// If `NextHopType` is set to `NORMAL_CVM`, the parameter value is the IPv4 address of the CVM instance, such as `10.0.0.12`.
-	// If `NextHopType` is set to `CCN`, the parameter value is the CCN ID, such as `ccn-12345678`.
+	// ID of the next-hop gateway. 
+	// `NextHopType` = `VPN`: VPN gateway ID, such as `vpngw-12345678`.
+	// `NextHopType` = `DIRECTCONNECT`: Direct connect gateway ID, such as `dcg-12345678`.
+	// `NextHopType` = `PEERCONNECTION`: Peering connection ID, such as `pcx-12345678`.
+	// `NextHopType` = `NAT`: NAT gateway ID, such as `nat-12345678`.
+	// `NextHopType` = `NORMAL_CVM`: CVM IPv4 address, such as `10.0.0.12`.
+	// `NextHopType` = `CCN`: CCN instance ID, such as `ccn-12345678`.
+	// `NextHopType` = `NONEXTHOP`: No next hop.
 	NextHopDestination *string `json:"NextHopDestination,omitempty" name:"NextHopDestination"`
 
 	// The name of the next-hop gateway.
@@ -19278,6 +19329,74 @@ func (r *ReplaceRoutesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ReplaceRoutesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReplaceSecurityGroupPoliciesRequestParams struct {
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group policy set object.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+
+	// (Optional) The old policy set of the security group, which is used for log records.
+	OriginalSecurityGroupPolicySet *SecurityGroupPolicySet `json:"OriginalSecurityGroupPolicySet,omitempty" name:"OriginalSecurityGroupPolicySet"`
+}
+
+type ReplaceSecurityGroupPoliciesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The security group instance ID, such as `sg-33ocnj9n`. This can be obtained through the `DescribeSecurityGroups` API.
+	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+
+	// Security group policy set object.
+	SecurityGroupPolicySet *SecurityGroupPolicySet `json:"SecurityGroupPolicySet,omitempty" name:"SecurityGroupPolicySet"`
+
+	// (Optional) The old policy set of the security group, which is used for log records.
+	OriginalSecurityGroupPolicySet *SecurityGroupPolicySet `json:"OriginalSecurityGroupPolicySet,omitempty" name:"OriginalSecurityGroupPolicySet"`
+}
+
+func (r *ReplaceSecurityGroupPoliciesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReplaceSecurityGroupPoliciesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SecurityGroupId")
+	delete(f, "SecurityGroupPolicySet")
+	delete(f, "OriginalSecurityGroupPolicySet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReplaceSecurityGroupPoliciesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReplaceSecurityGroupPoliciesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReplaceSecurityGroupPoliciesResponse struct {
+	*tchttp.BaseResponse
+	Response *ReplaceSecurityGroupPoliciesResponseParams `json:"Response"`
+}
+
+func (r *ReplaceSecurityGroupPoliciesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReplaceSecurityGroupPoliciesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -21142,10 +21261,10 @@ type VpnGatewayRoute struct {
 	// Route type. Valid values: `VPC`, `CCN` (CCN-propagated route), `Static`, and `BGP`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Creation time
+	// The creation time.
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
-	// Update time
+	// The update time.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
 }
 
