@@ -2062,7 +2062,7 @@ type EventSettingsDestinationResp struct {
 }
 
 type EventSettingsReq struct {
-	// Valid values: `INPUT_SWITCH`, `TIMED_RECORD`. If it is not specified, `INPUT_SWITCH` will be used.
+	// Valid values: `INPUT_SWITCH`, `TIMED_RECORD`, SCTE35_TIME_SIGNAL, SCTE35_SPLICE_INSERT, SCTE35_RETURN_TO_NETWORK. If it is not specified, `INPUT_SWITCH` will be used.
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// ID of the input to attach, which is required if `EventType` is `INPUT_SWITCH`
@@ -2088,7 +2088,7 @@ type EventSettingsReq struct {
 }
 
 type EventSettingsResp struct {
-	// Only `INPUT_SWITCH` is supported currently.
+	// Valid values: INPUT_SWITCH, TIMED_RECORD, SCTE35_TIME_SIGNAL, SCTE35_SPLICE_INSERT, SCTE35_RETURN_TO_NETWORK.
 	EventType *string `json:"EventType,omitempty" name:"EventType"`
 
 	// ID of the input attached, which is not empty if `EventType` is `INPUT_SWITCH`
