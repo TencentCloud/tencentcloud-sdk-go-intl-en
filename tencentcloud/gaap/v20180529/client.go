@@ -2581,6 +2581,74 @@ func (c *Client) DescribeAccessRegionsByDestRegionWithContext(ctx context.Contex
     return
 }
 
+func NewDescribeAuthSignatureRequest() (request *DescribeAuthSignatureRequest) {
+    request = &DescribeAuthSignatureRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("gaap", APIVersion, "DescribeAuthSignature")
+    
+    
+    return
+}
+
+func NewDescribeAuthSignatureResponse() (response *DescribeAuthSignatureResponse) {
+    response = &DescribeAuthSignatureResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAuthSignature
+// This API is used to get a request signature that can prevent parameter tampering in the process of triggering orders, getting quotes, or activating subscription services.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_USERNOTCONFIRMPROTOCOL = "FailedOperation.UserNotConfirmProtocol"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeAuthSignature(request *DescribeAuthSignatureRequest) (response *DescribeAuthSignatureResponse, err error) {
+    return c.DescribeAuthSignatureWithContext(context.Background(), request)
+}
+
+// DescribeAuthSignature
+// This API is used to get a request signature that can prevent parameter tampering in the process of triggering orders, getting quotes, or activating subscription services.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_NOTENTERPRISEAUTHORIZATION = "AuthFailure.NotEnterpriseAuthorization"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_USERNOTCONFIRMPROTOCOL = "FailedOperation.UserNotConfirmProtocol"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE_ACCOUNTVIOLATION = "ResourceUnavailable.AccountViolation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeAuthSignatureWithContext(ctx context.Context, request *DescribeAuthSignatureRequest) (response *DescribeAuthSignatureResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuthSignatureRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuthSignature require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuthSignatureResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBlackHeaderRequest() (request *DescribeBlackHeaderRequest) {
     request = &DescribeBlackHeaderRequest{
         BaseRequest: &tchttp.BaseRequest{},
