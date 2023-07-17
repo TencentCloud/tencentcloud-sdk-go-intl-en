@@ -17,12 +17,12 @@ package v20230306
 const (
 	// error codes for specific actions
 
-	// 
+	// Internal error.
 	INTERNALERROR = "InternalError"
 
-	// 
+	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
-	// 
+	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 )

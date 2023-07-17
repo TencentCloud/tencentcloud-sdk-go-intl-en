@@ -28,8 +28,8 @@ type DescribeEventsRequestParams struct {
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
 	ProductIds []*string `json:"ProductIds,omitempty" name:"ProductIds"`
 
-	// 1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
-	// 2. The region ID for non-region-specific products should be set to "non-regional".
+	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
+	// 2. The region ID for non-region-specific products should be set to non-regional.
 	RegionIds []*string `json:"RegionIds,omitempty" name:"RegionIds"`
 }
 
@@ -42,8 +42,8 @@ type DescribeEventsRequest struct {
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
 	ProductIds []*string `json:"ProductIds,omitempty" name:"ProductIds"`
 
-	// 1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
-	// 2. The region ID for non-region-specific products should be set to "non-regional".
+	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
+	// 2. The region ID for non-region-specific products should be set to non-regional.
 	RegionIds []*string `json:"RegionIds,omitempty" name:"RegionIds"`
 }
 
@@ -94,29 +94,30 @@ func (r *DescribeEventsResponse) FromJsonString(s string) error {
 }
 
 type EventDetail struct {
-	// Product ID
+	// Product ID.
 	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
 
-	// Product name
+	// Product name.
 	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
 
-	// Region ID
+	// Region ID.
 	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
 
-	// Region name
+	// Region name.
 	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
 
-	// Event start time
+	// Event start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
 	// Event end time. If the event is still ongoing and has not ended, the end time will be empty.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Current status: Normally, Informational, Degradation
+	// Current status: Normally, Informational, Degradation.
 	CurrentStatus *string `json:"CurrentStatus,omitempty" name:"CurrentStatus"`
 }
 
 type ProductEventList struct {
 	// Detailed event information.
+	// Note: this field may return null, indicating that no valid value is obtained.
 	EventList []*EventDetail `json:"EventList,omitempty" name:"EventList"`
 }

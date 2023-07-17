@@ -894,6 +894,161 @@ func (r *DescribeCustomerBillSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeCustomerInfoData struct {
+	// Customer UIN Note: This field may return null, indicating that no valid values can be obtained.
+	CustomerUin *string `json:"CustomerUin,omitempty" name:"CustomerUin"`
+
+	// Email Note: This field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitempty" name:"Email"`
+
+	// Mobile number Note: This field may return null, indicating that no valid values can be obtained.
+	Phone *string `json:"Phone,omitempty" name:"Phone"`
+
+	// Remarks Note: This field may return null, indicating that no valid values can be obtained.
+	Mark *string `json:"Mark,omitempty" name:"Mark"`
+
+	// Displayed name Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Binding time Note: This field may return null, indicating that no valid values can be obtained.
+	BindTime *string `json:"BindTime,omitempty" name:"BindTime"`
+
+	// Account status Valid values: `0` (Not frozen),  `1` (Frozen).  Note: This field may return null, indicating that no valid values can be obtained.
+	AccountStatus *string `json:"AccountStatus,omitempty" name:"AccountStatus"`
+
+	// Identity verification status Note: This field may return null, indicating that no valid values can be obtained.
+	AuthStatus *string `json:"AuthStatus,omitempty" name:"AuthStatus"`
+}
+
+// Predefined struct for user
+type DescribeCustomerInfoRequestParams struct {
+	// List of customer UINs
+	CustomerUin []*int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+type DescribeCustomerInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of customer UINs
+	CustomerUin []*int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+func (r *DescribeCustomerInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CustomerUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCustomerInfoResponseParams struct {
+	// Customer information Note: This field may return null, indicating that no valid values can be obtained.
+	Data []*DescribeCustomerInfoData `json:"Data,omitempty" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCustomerInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCustomerInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeCustomerInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeCustomerUinData struct {
+	// Customer UIN Note: This field may return null, indicating that no valid values can be obtained.
+	CustomerUin *string `json:"CustomerUin,omitempty" name:"CustomerUin"`
+}
+
+// Predefined struct for user
+type DescribeCustomerUinRequestParams struct {
+	// Page number
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of data entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+type DescribeCustomerUinRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page number
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// Number of data entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeCustomerUinRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerUinRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Page")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomerUinRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCustomerUinResponseParams struct {
+	// List of customer UINs Note: This field may return null, indicating that no valid values can be obtained.
+	Data []*DescribeCustomerUinData `json:"Data,omitempty" name:"Data"`
+
+	// The number of customers
+	Total *string `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeCustomerUinResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCustomerUinResponseParams `json:"Response"`
+}
+
+func (r *DescribeCustomerUinResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCustomerUinResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type GetCountryCodesRequestParams struct {
 
@@ -972,6 +1127,63 @@ type PayModeSummaryOverviewItem struct {
 	// Total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
+// Predefined struct for user
+type QueryAccountVerificationStatusRequestParams struct {
+	// Customer UIN
+	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+}
+
+type QueryAccountVerificationStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Customer UIN
+	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+}
+
+func (r *QueryAccountVerificationStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryAccountVerificationStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClientUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryAccountVerificationStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryAccountVerificationStatusResponseParams struct {
+	// Account verification status
+	AccountStatus *bool `json:"AccountStatus,omitempty" name:"AccountStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type QueryAccountVerificationStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryAccountVerificationStatusResponseParams `json:"Response"`
+}
+
+func (r *QueryAccountVerificationStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryAccountVerificationStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type QueryCreditAllocationHistoryData struct {
@@ -1118,6 +1330,57 @@ func (r *QueryCreditByUinListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *QueryCreditByUinListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryCreditQuotaRequestParams struct {
+
+}
+
+type QueryCreditQuotaRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *QueryCreditQuotaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryCreditQuotaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryCreditQuotaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryCreditQuotaResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type QueryCreditQuotaResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryCreditQuotaResponseParams `json:"Response"`
+}
+
+func (r *QueryCreditQuotaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryCreditQuotaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

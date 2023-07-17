@@ -467,6 +467,106 @@ func (c *Client) DescribeCustomerBillSummaryWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeCustomerInfoRequest() (request *DescribeCustomerInfoRequest) {
+    request = &DescribeCustomerInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerInfo")
+    
+    
+    return
+}
+
+func NewDescribeCustomerInfoResponse() (response *DescribeCustomerInfoResponse) {
+    response = &DescribeCustomerInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCustomerInfo
+// This API is used to query the customer information.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerInfo(request *DescribeCustomerInfoRequest) (response *DescribeCustomerInfoResponse, err error) {
+    return c.DescribeCustomerInfoWithContext(context.Background(), request)
+}
+
+// DescribeCustomerInfo
+// This API is used to query the customer information.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerInfoWithContext(ctx context.Context, request *DescribeCustomerInfoRequest) (response *DescribeCustomerInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomerUinRequest() (request *DescribeCustomerUinRequest) {
+    request = &DescribeCustomerUinRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerUin")
+    
+    
+    return
+}
+
+func NewDescribeCustomerUinResponse() (response *DescribeCustomerUinResponse) {
+    response = &DescribeCustomerUinResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCustomerUin
+// This API is used to query the list of customer UINs.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerUin(request *DescribeCustomerUinRequest) (response *DescribeCustomerUinResponse, err error) {
+    return c.DescribeCustomerUinWithContext(context.Background(), request)
+}
+
+// DescribeCustomerUin
+// This API is used to query the list of customer UINs.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerUinWithContext(ctx context.Context, request *DescribeCustomerUinRequest) (response *DescribeCustomerUinResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerUinRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerUin require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerUinResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
     request = &GetCountryCodesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -511,6 +611,68 @@ func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCou
     request.SetContext(ctx)
     
     response = NewGetCountryCodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryAccountVerificationStatusRequest() (request *QueryAccountVerificationStatusRequest) {
+    request = &QueryAccountVerificationStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryAccountVerificationStatus")
+    
+    
+    return
+}
+
+func NewQueryAccountVerificationStatusResponse() (response *QueryAccountVerificationStatusResponse) {
+    response = &QueryAccountVerificationStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryAccountVerificationStatus
+// This API is used to query the account verification status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UININVALID = "FailedOperation.UinInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) QueryAccountVerificationStatus(request *QueryAccountVerificationStatusRequest) (response *QueryAccountVerificationStatusResponse, err error) {
+    return c.QueryAccountVerificationStatusWithContext(context.Background(), request)
+}
+
+// QueryAccountVerificationStatus
+// This API is used to query the account verification status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UININVALID = "FailedOperation.UinInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) QueryAccountVerificationStatusWithContext(ctx context.Context, request *QueryAccountVerificationStatusRequest) (response *QueryAccountVerificationStatusResponse, err error) {
+    if request == nil {
+        request = NewQueryAccountVerificationStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryAccountVerificationStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryAccountVerificationStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -613,6 +775,54 @@ func (c *Client) QueryCreditByUinListWithContext(ctx context.Context, request *Q
     request.SetContext(ctx)
     
     response = NewQueryCreditByUinListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryCreditQuotaRequest() (request *QueryCreditQuotaRequest) {
+    request = &QueryCreditQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryCreditQuota")
+    
+    
+    return
+}
+
+func NewQueryCreditQuotaResponse() (response *QueryCreditQuotaResponse) {
+    response = &QueryCreditQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// QueryCreditQuota
+// This API is used to query customer credits.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) QueryCreditQuota(request *QueryCreditQuotaRequest) (response *QueryCreditQuotaResponse, err error) {
+    return c.QueryCreditQuotaWithContext(context.Background(), request)
+}
+
+// QueryCreditQuota
+// This API is used to query customer credits.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) QueryCreditQuotaWithContext(ctx context.Context, request *QueryCreditQuotaRequest) (response *QueryCreditQuotaResponse, err error) {
+    if request == nil {
+        request = NewQueryCreditQuotaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryCreditQuota require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryCreditQuotaResponse()
     err = c.Send(request, response)
     return
 }
