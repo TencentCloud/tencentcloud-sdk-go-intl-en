@@ -21,28 +21,28 @@ import (
 )
 
 type Account struct {
-	// Instance ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Account name (`root` for a root account)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Account name 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
 
-	// Account description information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Account description information 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Read/write policy. r: read-only; w: write-only; rw: read/write
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Read/write permission policy. Valid values: `r` (read-only),  `w` (write-only),  `rw`  (read/write). 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Privilege *string `json:"Privilege,omitempty" name:"Privilege"`
 
-	// Routing policy. master: master node; replication: secondary node
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Read-only routing policy. Valid values: `master` (master node),  `replication`  (replica node). 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitempty" name:"ReadonlyPolicy"`
 
-	// Sub-account status. 1: account is being changed; 2: account is valid; -4: account has been deleted
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Sub-account status. Valid values:  `1` (being changed),  `2` (valid). `4` (deleted). 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -428,20 +428,20 @@ func (r *ChangeMasterInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ChangeReplicaToMasterRequestParams struct {
-	// Instance ID
+	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Replica group ID, which is required for multi-AZ instances.
+	// ID of the replica node group. You can get more ID information of the multi-AZ replica node group though the [DescribeInstanceZoneInfo](https://intl.cloud.tencent.com/document/product/239/50312?from_cn_redirect=1) API.  This parameter is not required for a single-AZ replica node group.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 }
 
 type ChangeReplicaToMasterRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Replica group ID, which is required for multi-AZ instances.
+	// ID of the replica node group. You can get more ID information of the multi-AZ replica node group though the [DescribeInstanceZoneInfo](https://intl.cloud.tencent.com/document/product/239/50312?from_cn_redirect=1) API.  This parameter is not required for a single-AZ replica node group.
 	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
 }
 
@@ -1344,16 +1344,10 @@ func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
 }
 
 type DelayDistribution struct {
-	// Delay distribution. The mapping between delay range and `Ladder` value is as follows:
-	// [0ms,1ms]: 1;
-	// [1ms,5ms]: 5;
-	// [5ms,10ms]: 10;
-	// [10ms,50ms]: 50;
-	// [50ms,200ms]: 200;
-	// [200ms,∞]: -1.
+	// The delay distribution. The mapping between delay range and `Ladder` value is as follows:  - `1`: [0ms,1ms]. - `5`: [1ms,5ms]. - `10`: [5ms,10ms]. - `50`: [10ms,50ms]. - `200`:  [50ms,200ms]. - `-1`: [200ms,∞].
 	Ladder *int64 `json:"Ladder,omitempty" name:"Ladder"`
 
-	// The number of commands whose delay falls within the current delay range
+	// The number of commands with delay falling within the current delay range -
 	Size *int64 `json:"Size,omitempty" name:"Size"`
 
 	// Modification time
@@ -1480,14 +1474,14 @@ func (r *DeleteParamTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoBackupConfigRequestParams struct {
-	// Instance ID
+	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeAutoBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1512,19 +1506,19 @@ func (r *DescribeAutoBackupConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoBackupConfigResponseParams struct {
-	// Backup type. Automatic backup type: 1 (scheduled rollback)
+	// This parameter is retained due to compatibility and can be ignored.
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 
-	// Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+	// Backup cycle, which will be daily by default. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
 	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
-	// Time period.
+	// Time period for backup task initialization
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
-	// Number of days to retain full backup files
+	// Retention time of full backup files in days.  Default value: `7`.  To retain the files for more days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.
 	BackupStorageDays *int64 `json:"BackupStorageDays,omitempty" name:"BackupStorageDays"`
 
-	// Number of days to retain Tendis binlog backup files
+	// This parameter has been disused.
 	BinlogStorageDays *int64 `json:"BinlogStorageDays,omitempty" name:"BinlogStorageDays"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1959,7 +1953,7 @@ type DescribeDBSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1969,7 +1963,7 @@ type DescribeDBSecurityGroupsRequest struct {
 	// Database engine name, which is `redis` for this API.
 	Product *string `json:"Product,omitempty" name:"Product"`
 
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -1998,10 +1992,10 @@ type DescribeDBSecurityGroupsResponseParams struct {
 	// Security group rules
 	Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
 
-	// Private IP for which the security group takes effect
+	// Private IPv4 address of an instance
 	VIP *string `json:"VIP,omitempty" name:"VIP"`
 
-	// Private port for which the security group takes effect
+	// Private network port
 	VPort *string `json:"VPort,omitempty" name:"VPort"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2026,26 +2020,26 @@ func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceAccountRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Number of entries per page
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page offset
+	// Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Number of entries per page
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Page offset
+	// Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -2072,12 +2066,12 @@ func (r *DescribeInstanceAccountRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceAccountResponseParams struct {
-	// Account details
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Account details 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Accounts []*Account `json:"Accounts,omitempty" name:"Accounts"`
 
-	// Number of accounts
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of accounts 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2912,26 +2906,26 @@ func (r *DescribeInstanceMonitorTopNCmdTookResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeInstanceNodeInfoRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List size
+	// List size Size of node information returned per page.  Default value: `20`. Maximum value: `1000`.  This field has been disused.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The offset value
+	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1). This field has been disused.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceNodeInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// List size
+	// List size Size of node information returned per page.  Default value: `20`. Maximum value: `1000`.  This field has been disused.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// The offset value
+	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1). This field has been disused.
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 }
 
@@ -2961,22 +2955,22 @@ type DescribeInstanceNodeInfoResponseParams struct {
 	// The number of proxy nodes
 	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
 
-	// Proxy node information
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Proxy node information 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Proxy []*ProxyNodes `json:"Proxy,omitempty" name:"Proxy"`
 
-	// The number of redis nodes
+	// The number of Redis nodes
 	RedisCount *int64 `json:"RedisCount,omitempty" name:"RedisCount"`
 
-	// Redis node information
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Redis node information 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Redis []*RedisNodes `json:"Redis,omitempty" name:"Redis"`
 
-	// The number of tendis nodes
+	// This parameter has been disused.
 	TendisCount *int64 `json:"TendisCount,omitempty" name:"TendisCount"`
 
-	// Tendis node information
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// This parameter has been disused. 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Tendis []*TendisNodes `json:"Tendis,omitempty" name:"Tendis"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3075,14 +3069,14 @@ func (r *DescribeInstanceParamRecordsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceParamsRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceParamsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -3107,7 +3101,7 @@ func (r *DescribeInstanceParamsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceParamsResponseParams struct {
-	// Number of instance parameters
+	// Total number of the parameter lists
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// Instance parameter in Enum type
@@ -3144,14 +3138,14 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceSecurityGroupRequestParams struct {
-	// List of instances
+	// List of instance IDs,  such as "crs-f2ho5rsz\n".
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 type DescribeInstanceSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of instances
+	// List of instance IDs,  such as "crs-f2ho5rsz\n".
 	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
@@ -3176,7 +3170,7 @@ func (r *DescribeInstanceSecurityGroupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceSecurityGroupResponseParams struct {
-	// Security group information of the instance
+	// Security group information of an instance
 	InstanceSecurityGroupsDetail []*InstanceSecurityGroupDetail `json:"InstanceSecurityGroupsDetail,omitempty" name:"InstanceSecurityGroupsDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3201,20 +3195,20 @@ func (r *DescribeInstanceSecurityGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceShardsRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to filter out the replica node information
+	// Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
 	FilterSlave *bool `json:"FilterSlave,omitempty" name:"FilterSlave"`
 }
 
 type DescribeInstanceShardsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Whether to filter out the replica node information
+	// Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
 	FilterSlave *bool `json:"FilterSlave,omitempty" name:"FilterSlave"`
 }
 
@@ -3240,10 +3234,10 @@ func (r *DescribeInstanceShardsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceShardsResponseParams struct {
-	// Information list of instance shards
+	// List information of the instance shards, which includes  node information, node ID, key count, used capacity, and capacity slope.
 	InstanceShards []*InstanceClusterShard `json:"InstanceShards,omitempty" name:"InstanceShards"`
 
-	// Total number of instance shard nodes
+	// Number of instance shard nodes
 	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3268,14 +3262,14 @@ func (r *DescribeInstanceShardsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceZoneInfoRequestParams struct {
-	// Instance ID, such as crs-6ubhgouj
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceZoneInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, such as crs-6ubhgouj
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
@@ -3331,13 +3325,14 @@ type DescribeInstancesRequestParams struct {
 	// Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integral multiple of `Limit`.
+	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Instance ID, such as crs-6ubhgouj.
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+	// 
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Instance sorting criteria. The enumerated values are as listed below: <ul><li>projectId: Project ID. </li><li>createtime: Instance creation time. </li><li>instancename: Instance name. </li><li>type: Instance type. </li><li>curDeadline: Instance expiration time. </li></ul>
+	// Instance list sorting criteria. The enumerated values are as listed below:  <ul><li>`projectId`:  Project ID.  </li><li>`createtime`:  Instance creation time.  </li><li>`instancename`:  Instance name.  </li><li>`type`:  Instance type. </li><li>`curDeadline`:  Instance expiration time. </li></ul>
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
 	// Instance sorting order. <ul><li>`1`: Descending. </li><li>`0`: Ascending. Default value: `1`.</li></ul>
@@ -3376,13 +3371,13 @@ type DescribeInstancesRequestParams struct {
 	// Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
 	EngineName *string `json:"EngineName,omitempty" name:"EngineName"`
 
-	// Renewal mode. <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: No auto-renewal (set by user)</ul>
+	// Renewal mode. Valid values:  <ul><li>`0`:  Manual renewal </li><li>`1`:  Auto-renewal </li><li>`2`:  No renewal upon expiration </ul>
 	AutoRenew []*int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
 	// Billing mode. Only pay-as-you-go billing is supported.
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance type. <ul><li>`1`: Legacy Redis cluster edition. </li><li>`2`: Redis 2.8 master-replica edition. </li><li>`3`: CKV master-replica edition. </li><li>`4`: CKV cluster edition. </li><li>`5`: Redis 2.8 standalone edition. </li><li>`6`: Redis 4.0 master-replica edition. </li><li>`7`: Redis 4.0 cluster edition. </li><li>8: Redis 5.0 master-replica edition. </li><li>`9`: Redis 5.0 cluster edition. </li></ul>
+	// Instance type. Valid values:  - `2`: Redis 2.8 Memory Edition (Standard Architecture). - `3`: CKV 3.2 Memory Edition (Standard Architecture). - `4`: CKV 3.2 Memory Edition (Cluster Architecture). - `5`: Redis 2.8 Memory Edition (Standalone). - `6`: Redis 4.0 Memory Edition (Standard Architecture). - `7`: Redis 4.0 Memory Edition (Cluster Architecture). - `8`: Redis 5.0 Memory Edition (Standard Architecture). - `9`: Redis 5.0 Memory Edition (Cluster Architecture). - `15`: Redis 6.2 Memory Edition (Standard Architecture). - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Array of the search keywords, which can query the instance by its ID, name, IP address.
@@ -3400,7 +3395,7 @@ type DescribeInstancesRequestParams struct {
 	// Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
-	// Instance product version. If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default. <ul><li>`local`: local disk edition. </li><li>`cloud`: Cloud disk edition. </li><li>`cdc`: Dedicated cluster edition. </li></ul>
+	// Instance product version.  If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default.  <ul><li>`local`:  Local disk edition.  </li><li>`cdc`:  Dedicated cluster edition.  </li></ul>
 	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
 
 	// Batch query of the specified instances ID. The number of results returned is based on `Limit`.
@@ -3416,13 +3411,14 @@ type DescribeInstancesRequest struct {
 	// Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
 	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Pagination offset, which is an integral multiple of `Limit`.
+	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Instance ID, such as crs-6ubhgouj.
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
+	// 
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Instance sorting criteria. The enumerated values are as listed below: <ul><li>projectId: Project ID. </li><li>createtime: Instance creation time. </li><li>instancename: Instance name. </li><li>type: Instance type. </li><li>curDeadline: Instance expiration time. </li></ul>
+	// Instance list sorting criteria. The enumerated values are as listed below:  <ul><li>`projectId`:  Project ID.  </li><li>`createtime`:  Instance creation time.  </li><li>`instancename`:  Instance name.  </li><li>`type`:  Instance type. </li><li>`curDeadline`:  Instance expiration time. </li></ul>
 	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
 
 	// Instance sorting order. <ul><li>`1`: Descending. </li><li>`0`: Ascending. Default value: `1`.</li></ul>
@@ -3461,13 +3457,13 @@ type DescribeInstancesRequest struct {
 	// Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
 	EngineName *string `json:"EngineName,omitempty" name:"EngineName"`
 
-	// Renewal mode. <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: No auto-renewal (set by user)</ul>
+	// Renewal mode. Valid values:  <ul><li>`0`:  Manual renewal </li><li>`1`:  Auto-renewal </li><li>`2`:  No renewal upon expiration </ul>
 	AutoRenew []*int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
 
 	// Billing mode. Only pay-as-you-go billing is supported.
 	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
 
-	// Instance type. <ul><li>`1`: Legacy Redis cluster edition. </li><li>`2`: Redis 2.8 master-replica edition. </li><li>`3`: CKV master-replica edition. </li><li>`4`: CKV cluster edition. </li><li>`5`: Redis 2.8 standalone edition. </li><li>`6`: Redis 4.0 master-replica edition. </li><li>`7`: Redis 4.0 cluster edition. </li><li>8: Redis 5.0 master-replica edition. </li><li>`9`: Redis 5.0 cluster edition. </li></ul>
+	// Instance type. Valid values:  - `2`: Redis 2.8 Memory Edition (Standard Architecture). - `3`: CKV 3.2 Memory Edition (Standard Architecture). - `4`: CKV 3.2 Memory Edition (Cluster Architecture). - `5`: Redis 2.8 Memory Edition (Standalone). - `6`: Redis 4.0 Memory Edition (Standard Architecture). - `7`: Redis 4.0 Memory Edition (Cluster Architecture). - `8`: Redis 5.0 Memory Edition (Standard Architecture). - `9`: Redis 5.0 Memory Edition (Cluster Architecture). - `15`: Redis 6.2 Memory Edition (Standard Architecture). - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
 	Type *int64 `json:"Type,omitempty" name:"Type"`
 
 	// Array of the search keywords, which can query the instance by its ID, name, IP address.
@@ -3485,7 +3481,7 @@ type DescribeInstancesRequest struct {
 	// Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
 	TagKeys []*string `json:"TagKeys,omitempty" name:"TagKeys"`
 
-	// Instance product version. If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default. <ul><li>`local`: local disk edition. </li><li>`cloud`: Cloud disk edition. </li><li>`cdc`: Dedicated cluster edition. </li></ul>
+	// Instance product version.  If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default.  <ul><li>`local`:  Local disk edition.  </li><li>`cdc`:  Dedicated cluster edition.  </li></ul>
 	ProductVersions []*string `json:"ProductVersions,omitempty" name:"ProductVersions"`
 
 	// Batch query of the specified instances ID. The number of results returned is based on `Limit`.
@@ -3992,19 +3988,19 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxySlowLogRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start time
+	// Start time of slow query
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// End time
+	// End time of slow query
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Slow query threshold in milliseconds
+	// Slow query threshold  in milliseconds
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
-	// Maximum number of results returned per page
+	// Number of results per page.  Default value: `20`. Value range: [20,1000].
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
@@ -4014,19 +4010,19 @@ type DescribeProxySlowLogRequestParams struct {
 type DescribeProxySlowLogRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Start time
+	// Start time of slow query
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// End time
+	// End time of slow query
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Slow query threshold in milliseconds
+	// Slow query threshold  in milliseconds
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
-	// Maximum number of results returned per page
+	// Number of results per page.  Default value: `20`. Value range: [20,1000].
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
@@ -4243,22 +4239,22 @@ func (r *DescribeSSLStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSlowLogRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The start time
+	// Start time for prequerying a slow log
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// The end time
+	// End time for prequerying a slow log
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The average execution time threshold of slow query in ms.
+	// The average execution time threshold of slow query  in microseconds
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
-	// Number of slow queries displayed per page. Default value: `20`.
+	// Number of slow queries displayed per page. Default value: `20`. Value range:  [20,1000].
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Slow query offset, which is an integral multiple of `Limit`.
+	// Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
@@ -4268,22 +4264,22 @@ type DescribeSlowLogRequestParams struct {
 type DescribeSlowLogRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// The start time
+	// Start time for prequerying a slow log
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// The end time
+	// End time for prequerying a slow log
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The average execution time threshold of slow query in ms.
+	// The average execution time threshold of slow query  in microseconds
 	MinQueryTime *int64 `json:"MinQueryTime,omitempty" name:"MinQueryTime"`
 
-	// Number of slow queries displayed per page. Default value: `20`.
+	// Number of slow queries displayed per page. Default value: `20`. Value range:  [20,1000].
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Slow query offset, which is an integral multiple of `Limit`.
+	// Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
 	// Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
@@ -4414,80 +4410,80 @@ func (r *DescribeTaskInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskListRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Maximum number of results returned per page. Default value: 20. Maximum value: 100.
+	// Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit` (rounded down automatically).
+	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Project ID
+	// Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
 	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
-	// Task type
+	// Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. - `FLOW_BACKUPINSTANCE`: Back up an instance.
 	TaskTypes []*string `json:"TaskTypes,omitempty" name:"TaskTypes"`
 
-	// Start time
+	// Start time for executing a task,  in the format of  “2020-10-12 00:00:00”.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// End time
+	// End time for executing a task,  in the format of  “2021-12-30 20:59:35”.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Task status
+	// This parameter is only for internal use and can be ignored.
 	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
-	// Task status
+	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed)
 	Result []*int64 `json:"Result,omitempty" name:"Result"`
 
 	// The field `OperatorUin` has been disused and replaced by `OperateUin`.
 	OperatorUin []*int64 `json:"OperatorUin,omitempty" name:"OperatorUin"`
 
-	// Operator Uin
+	// Operator account ID or UIN
 	OperateUin []*string `json:"OperateUin,omitempty" name:"OperateUin"`
 }
 
 type DescribeTaskListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Instance name
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Maximum number of results returned per page. Default value: 20. Maximum value: 100.
+	// Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Offset, which is an integral multiple of `Limit` (rounded down automatically).
+	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Project ID
+	// Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
 	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
-	// Task type
+	// Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. - `FLOW_BACKUPINSTANCE`: Back up an instance.
 	TaskTypes []*string `json:"TaskTypes,omitempty" name:"TaskTypes"`
 
-	// Start time
+	// Start time for executing a task,  in the format of  “2020-10-12 00:00:00”.
 	BeginTime *string `json:"BeginTime,omitempty" name:"BeginTime"`
 
-	// End time
+	// End time for executing a task,  in the format of  “2021-12-30 20:59:35”.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Task status
+	// This parameter is only for internal use and can be ignored.
 	TaskStatus []*int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
 
-	// Task status
+	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed)
 	Result []*int64 `json:"Result,omitempty" name:"Result"`
 
 	// The field `OperatorUin` has been disused and replaced by `OperateUin`.
 	OperatorUin []*int64 `json:"OperatorUin,omitempty" name:"OperatorUin"`
 
-	// Operator Uin
+	// Operator account ID or UIN
 	OperateUin []*string `json:"OperateUin,omitempty" name:"OperateUin"`
 }
 
@@ -5255,16 +5251,16 @@ type InstanceClusterNode struct {
 	// Node name
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// ID of the runtime node of the instance
+	// ID of the runtime node of an instance
 	RunId *string `json:"RunId,omitempty" name:"RunId"`
 
-	// Cluster role. 0: master; 1: replica
+	// Cluster role. Valid values:  - `0` (master) - `1` (replica)
 	Role *int64 `json:"Role,omitempty" name:"Role"`
 
-	// Node status. 0: readwrite; 1: read; 2: backup
+	// Node status. Valid values:  - `0` (read/write) - `1` (read) - `2` (backup)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
-	// Service status. 0: down; 1: on
+	// Service status. Valid values: `0` (down), `1` (on).
 	Connected *int64 `json:"Connected,omitempty" name:"Connected"`
 
 	// Node creation time
@@ -5273,16 +5269,16 @@ type InstanceClusterNode struct {
 	// Node elimination time
 	DownTime *string `json:"DownTime,omitempty" name:"DownTime"`
 
-	// Distribution of node slots
+	// Node slot distribution range
 	Slots *string `json:"Slots,omitempty" name:"Slots"`
 
 	// Distribution of node keys
 	Keys *int64 `json:"Keys,omitempty" name:"Keys"`
 
-	// Node QPS
+	// Node QPS Number of executions per second on sharded nodes Unit: Counts/sec
 	Qps *int64 `json:"Qps,omitempty" name:"Qps"`
 
-	// Node QPS slope
+	// QPS slope of a node
 	QpsSlope *float64 `json:"QpsSlope,omitempty" name:"QpsSlope"`
 
 	// Node storage
@@ -5329,10 +5325,10 @@ type InstanceEnumParam struct {
 	// Parameter name
 	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
 
-	// Parameter type: Enum
+	// Parameter type, such as `Enum`.
 	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
 
-	// Whether restart is required after a modification is made. Valid values: true, false
+	// Whether to restart the database after modifying the parameters. Valid values: - `true` (required) - `false` (not required)
 	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
@@ -5341,13 +5337,13 @@ type InstanceEnumParam struct {
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
-	// Parameter description
+	// Description
 	Tips *string `json:"Tips,omitempty" name:"Tips"`
 
-	// Valid values of the parameter
+	// Acceptable values for the parameter
 	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
-	// Parameter status. 1: modifying; 2: modified
+	// Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -5388,10 +5384,10 @@ type InstanceMultiParam struct {
 	// Parameter name
 	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
 
-	// Parameter type: Multi
+	// Parameter Type such as  `MULTI`
 	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
 
-	// Whether restart is required after a modification is made. Valid values: true, false
+	// Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
 	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
@@ -5400,18 +5396,18 @@ type InstanceMultiParam struct {
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
-	// Parameter description
+	// Description
 	Tips *string `json:"Tips,omitempty" name:"Tips"`
 
-	// Parameter description
+	// Description
 	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
 
-	// Parameter status. 1: modifying; 2: modified
+	// Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
 type InstanceNode struct {
-	// Id
+	// Instance ID
 	Id *int64 `json:"Id,omitempty" name:"Id"`
 
 	// Node details
@@ -5467,7 +5463,7 @@ type InstanceSecurityGroupDetail struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Security group information
+	// Security group information, which includes  security group ID, name, outbound and inbound rules.
 	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitempty" name:"SecurityGroupDetails"`
 }
 
@@ -5702,10 +5698,10 @@ type InstanceTextParam struct {
 	// Parameter name
 	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
 
-	// Parameter type: Text
+	// Parameter type such as  `Text`.
 	ValueType *string `json:"ValueType,omitempty" name:"ValueType"`
 
-	// Whether restart is required after a modification is made. Valid values: true, false
+	// Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
 	NeedRestart *string `json:"NeedRestart,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
@@ -5714,13 +5710,13 @@ type InstanceTextParam struct {
 	// Current value
 	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
 
-	// Parameter description
+	// Description
 	Tips *string `json:"Tips,omitempty" name:"Tips"`
 
-	// Valid values of the parameter
+	// Acceptable values of the parameter
 	TextValue []*string `json:"TextValue,omitempty" name:"TextValue"`
 
-	// Parameter status. 1: modifying; 2: modified
+	// Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 }
 
@@ -5800,38 +5796,26 @@ type Instances struct {
 
 // Predefined struct for user
 type KillMasterGroupRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
-	// 2. It cannot start with a slash (/).
-	// 3. It must contain characters in at least two of the following types:
-	//     a. Lowercase letters (a–z)
-	//     b. Uppercase letters (A–Z)
-	//     c. Digits (0–9)
-	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	// A parameter used to configure the access password for a specified instance. If password-free authentication is enabled, this parameter will not be required. Required password strength. - It must contains 8-30 characters. We recommend that you use a password of more than 12 characters. - It must contain at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Node information of a single-AZ deployed instance
+	// Shard ID of a sharded cluster
 	ShardIds []*int64 `json:"ShardIds,omitempty" name:"ShardIds"`
 }
 
 type KillMasterGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
-	// 2. It cannot start with a slash (/).
-	// 3. It must contain characters in at least two of the following types:
-	//     a. Lowercase letters (a–z)
-	//     b. Uppercase letters (A–Z)
-	//     c. Digits (0–9)
-	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+	// A parameter used to configure the access password for a specified instance. If password-free authentication is enabled, this parameter will not be required. Required password strength. - It must contains 8-30 characters. We recommend that you use a password of more than 12 characters. - It must contain at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
 	Password *string `json:"Password,omitempty" name:"Password"`
 
-	// Node information of a single-AZ deployed instance
+	// Shard ID of a sharded cluster
 	ShardIds []*int64 `json:"ShardIds,omitempty" name:"ShardIds"`
 }
 
@@ -5883,26 +5867,26 @@ func (r *KillMasterGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ManualBackupInstanceRequestParams struct {
-	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup remarks
+	// Remarks for manual backup task
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Retention time in days. 0 indicates the default retention time.
+	// Retention period of backup data in days.  Default value: 7 days.  Value range: [0,1825].  If the value exceeds 7 days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application. - If this parameter is not configured, it will set to be the same as the period of automatic backup retention. - If automatic backup is not set, the default value will be 7 days.
 	StorageDays *int64 `json:"StorageDays,omitempty" name:"StorageDays"`
 }
 
 type ManualBackupInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Backup remarks
+	// Remarks for manual backup task
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Retention time in days. 0 indicates the default retention time.
+	// Retention period of backup data in days.  Default value: 7 days.  Value range: [0,1825].  If the value exceeds 7 days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application. - If this parameter is not configured, it will set to be the same as the period of automatic backup retention. - If automatic backup is not set, the default value will be 7 days.
 	StorageDays *int64 `json:"StorageDays,omitempty" name:"StorageDays"`
 }
 
@@ -6031,7 +6015,7 @@ func (r *ModfiyInstancePasswordResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAutoBackupConfigRequestParams struct {
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
@@ -6040,14 +6024,14 @@ type ModifyAutoBackupConfigRequestParams struct {
 	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
-	// Automatic backup type. `1`: Scheduled rollback.
+	// Automatic backup type.  Valid value:  `1` (scheduled backup).
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 }
 
 type ModifyAutoBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
@@ -6056,7 +6040,7 @@ type ModifyAutoBackupConfigRequest struct {
 	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
-	// Automatic backup type. `1`: Scheduled rollback.
+	// Automatic backup type.  Valid value:  `1` (scheduled backup).
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 }
 
@@ -6084,13 +6068,13 @@ func (r *ModifyAutoBackupConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAutoBackupConfigResponseParams struct {
-	// Automatic backup type: 1 (scheduled rollback)
+	// Automatic backup type.  Valid value:  `1` (scheduled backup).
 	AutoBackupType *int64 `json:"AutoBackupType,omitempty" name:"AutoBackupType"`
 
 	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
 	WeekDays []*string `json:"WeekDays,omitempty" name:"WeekDays"`
 
-	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
+	// Time period for automatic scheduled backup  in the format of  “00:00-01:00, 01:00-02:00...... 23:00-00:00”.
 	TimePeriod *string `json:"TimePeriod,omitempty" name:"TimePeriod"`
 
 	// Retention time of full backup files in days
@@ -7098,31 +7082,19 @@ type RedisBackupSet struct {
 	// Backup start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Backup ID
+	// Backup task ID
 	BackupId *string `json:"BackupId,omitempty" name:"BackupId"`
 
-	// Backup type
-	// 
-	// - `1`: Manual backup initiated by the user.
-	// - `0`: Automatic backup in the early morning initiated by the system.
+	// Backup type. Valid values:  `1` (Automatic backup in the early morning initiated by the system.) `0`: Manual backup initiated by the user.
 	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
 
-	// Backup status 
-	// 
-	// - `1`: The backup is locked by another process.
-	// - `2`: The backup is normal and not locked by any process.
-	// - `-1`: The backup expired.
-	// - `3`: The backup is being exported.
-	// - `4`: The backup was exported successfully.
+	// Backup status. Valid values:  - `1`: The backup is locked by another process. - `2`: The backup is normal and not locked by any process. - `-1`: The backup is expired. - `3`: The backup is being exported. - `4`: Exported the backup successfully.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
 
 	// Backup remarks
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
 
-	// Whether the backup is locked
-	// 
-	// - `0`: Not locked.
-	// - `1`: Locked.
+	// Whether the backup is locked. Valid values:  - `0` (no) - `1` (yes)
 	Locked *int64 `json:"Locked,omitempty" name:"Locked"`
 
 	// Internal field, which can be ignored.
@@ -7210,13 +7182,13 @@ type RedisCommonInstanceList struct {
 }
 
 type RedisNode struct {
-	// Number of keys on the node
+	// Number of keys on Redis nodes
 	Keys *int64 `json:"Keys,omitempty" name:"Keys"`
 
-	// Distribution of node slots
+	// Slot distribution range for Redis node.  Value range:  0-5460.
 	Slot *string `json:"Slot,omitempty" name:"Slot"`
 
-	// Node ID
+	// Node sequence ID
 	NodeId *string `json:"NodeId,omitempty" name:"NodeId"`
 
 	// Node status
@@ -7230,7 +7202,7 @@ type RedisNodeInfo struct {
 	// Node type. <ul><li>`0`: Master node.</li><li>`1`: Replica node.</li></ul>
 	NodeType *int64 `json:"NodeType,omitempty" name:"NodeType"`
 
-	// Master or replica node ID. <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance. </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul>
+	// ID of the master or replica node <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance by deleting a replica.  </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul> </li></ul>
 	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
 
 	// ID of the AZ of the master or replica node
@@ -7667,7 +7639,7 @@ type SecurityGroupDetail struct {
 	// Project ID
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Creation time
+	// Security group creation time
 	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
 
 	// Security group ID
@@ -7679,7 +7651,7 @@ type SecurityGroupDetail struct {
 	// Security group remarks
 	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
 
-	// Security group inbound rule
+	// Inbound rules of the security group, which control the access source to the database.
 	InboundRule []*SecurityGroupsInboundAndOutbound `json:"InboundRule,omitempty" name:"InboundRule"`
 
 	// Security group outbound rule
@@ -7687,10 +7659,10 @@ type SecurityGroupDetail struct {
 }
 
 type SecurityGroupsInboundAndOutbound struct {
-	// Action to be executed
+	// Identify whether the IP and port for accessing the database are allowed
 	Action *string `json:"Action,omitempty" name:"Action"`
 
-	// IP addresses
+	// IP address for accessing the database
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 
 	// Port number
@@ -7923,40 +7895,40 @@ func (r *SwitchProxyResponse) FromJsonString(s string) error {
 }
 
 type TaskInfoDetail struct {
-	// Task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task ID 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
 
-	// Start time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task start time 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Task type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. Backup instance 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
-	// Instance name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance name 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Instance ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Project ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Project ID 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// Task progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task progress 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Progress *float64 `json:"Progress,omitempty" name:"Progress"`
 
-	// End time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task end time 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// Task status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed) 
+	// Note:  This field may return null, indicating that no valid values can be obtained.
 	Result *int64 `json:"Result,omitempty" name:"Result"`
 }
 

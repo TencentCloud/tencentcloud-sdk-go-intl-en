@@ -418,6 +418,9 @@ type CreateTriggerRequestParams struct {
 
 	// Custom argument, supporting only the timer trigger.
 	CustomArgument *string `json:"CustomArgument,omitempty" name:"CustomArgument"`
+
+	// Trigger description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type CreateTriggerRequest struct {
@@ -446,6 +449,9 @@ type CreateTriggerRequest struct {
 
 	// Custom argument, supporting only the timer trigger.
 	CustomArgument *string `json:"CustomArgument,omitempty" name:"CustomArgument"`
+
+	// Trigger description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 func (r *CreateTriggerRequest) ToJsonString() string {
@@ -468,6 +474,7 @@ func (r *CreateTriggerRequest) FromJsonString(s string) error {
 	delete(f, "Qualifier")
 	delete(f, "Enable")
 	delete(f, "CustomArgument")
+	delete(f, "Description")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTriggerRequest has unknown keys!", "")
 	}
@@ -986,7 +993,8 @@ type Function struct {
 	// Creation time
 	AddTime *string `json:"AddTime,omitempty" name:"AddTime"`
 
-	// Running
+	// Runtime 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function name
@@ -2760,8 +2768,9 @@ type ListTriggersRequestParams struct {
 	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC
 	Order *string `json:"Order,omitempty" name:"Order"`
 
-	// * Qualifier:
-	// Function version, alias
+	// * Qualifier: Version/Alias of trigger function 
+	// *TriggerName: Name of the trigger 
+	// *Description: Function trigger description
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -2786,8 +2795,9 @@ type ListTriggersRequest struct {
 	// Indicates whether the returned results are sorted in ascending or descending order. Valid values: ASC, DESC. Default value: DESC
 	Order *string `json:"Order,omitempty" name:"Order"`
 
-	// * Qualifier:
-	// Function version, alias
+	// * Qualifier: Version/Alias of trigger function 
+	// *TriggerName: Name of the trigger 
+	// *Description: Function trigger description
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 }
 
@@ -3193,7 +3203,8 @@ type PublishVersionResponseParams struct {
 	// Function timeout
 	Timeout *int64 `json:"Timeout,omitempty" name:"Timeout"`
 
-	// Function running environment
+	// Function running environment 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
 	Runtime *string `json:"Runtime,omitempty" name:"Runtime"`
 
 	// Function namespace
@@ -3666,16 +3677,25 @@ type Trigger struct {
 	AvailableStatus *string `json:"AvailableStatus,omitempty" name:"AvailableStatus"`
 
 	// Minimum resource ID of trigger
+	//
+	// Deprecated: ResourceId is deprecated.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// Trigger-Function binding status
+	//
+	// Deprecated: BindStatus is deprecated.
 	BindStatus *string `json:"BindStatus,omitempty" name:"BindStatus"`
 
 	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+	//
+	// Deprecated: TriggerAttribute is deprecated.
 	TriggerAttribute *string `json:"TriggerAttribute,omitempty" name:"TriggerAttribute"`
 
 	// The alias or version bound with the trigger
 	Qualifier *string `json:"Qualifier,omitempty" name:"Qualifier"`
+
+	// Trigger description
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 type TriggerAction struct {
@@ -3765,13 +3785,23 @@ type TriggerInfo struct {
 	ModTime *string `json:"ModTime,omitempty" name:"ModTime"`
 
 	// Minimum resource ID of trigger
+	//
+	// Deprecated: ResourceId is deprecated.
 	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
 
 	// Trigger-Function binding status
+	//
+	// Deprecated: BindStatus is deprecated.
 	BindStatus *string `json:"BindStatus,omitempty" name:"BindStatus"`
 
 	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+	//
+	// Deprecated: TriggerAttribute is deprecated.
 	TriggerAttribute *string `json:"TriggerAttribute,omitempty" name:"TriggerAttribute"`
+
+	// Description of a custom trigger 
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
 }
 
 // Predefined struct for user
