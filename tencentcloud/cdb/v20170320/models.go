@@ -1719,7 +1719,7 @@ type CreateCdbProxyAddressRequestParams struct {
 	// Security group
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
-
+	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
 }
 
@@ -1777,6 +1777,7 @@ type CreateCdbProxyAddressRequest struct {
 	// Security group
 	SecurityGroup []*string `json:"SecurityGroup,omitempty" name:"SecurityGroup"`
 
+	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
 }
 
@@ -2859,6 +2860,73 @@ func (r *CreateDBInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDatabaseRequestParams struct {
+	// Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+
+	DBName *string `json:"DBName,omitempty" name:"DBName"`
+
+	// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
+	CharacterSetName *string `json:"CharacterSetName,omitempty" name:"CharacterSetName"`
+}
+
+type CreateDatabaseRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	DBName *string `json:"DBName,omitempty" name:"DBName"`
+
+	// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
+	CharacterSetName *string `json:"CharacterSetName,omitempty" name:"CharacterSetName"`
+}
+
+func (r *CreateDatabaseRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatabaseRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DBName")
+	delete(f, "CharacterSetName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDatabaseRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDatabaseResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDatabaseResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDatabaseResponseParams `json:"Response"`
+}
+
+func (r *CreateDatabaseResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDatabaseResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4360,10 +4428,10 @@ type DescribeBinlogsRequestParams struct {
 	// Number of entries per page. Value range: 1-100. Default value: 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Earliest Binlog start time in the format of  2016-03-17 02:10:37
+	// The earliest start time of binlog  in the format of 2016-03-17 02:10:37.
 	MinStartTime *string `json:"MinStartTime,omitempty" name:"MinStartTime"`
 
-	// Latest binlog start time in the format of  2016-03-17 02:10:37
+	// The latest start time of binlog  in the format of 2016-03-17 02:10:37.
 	MaxStartTime *string `json:"MaxStartTime,omitempty" name:"MaxStartTime"`
 }
 
@@ -4379,10 +4447,10 @@ type DescribeBinlogsRequest struct {
 	// Number of entries per page. Value range: 1-100. Default value: 20.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
 
-	// Earliest Binlog start time in the format of  2016-03-17 02:10:37
+	// The earliest start time of binlog  in the format of 2016-03-17 02:10:37.
 	MinStartTime *string `json:"MinStartTime,omitempty" name:"MinStartTime"`
 
-	// Latest binlog start time in the format of  2016-03-17 02:10:37
+	// The latest start time of binlog  in the format of 2016-03-17 02:10:37.
 	MaxStartTime *string `json:"MaxStartTime,omitempty" name:"MaxStartTime"`
 }
 
@@ -11300,8 +11368,8 @@ type ProxyInst struct {
 	// Instance name Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
 
-	// Instance type Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	// Instance type. Valid values:  `master` (source instance), `ro` (read-only instance), `dr` (disaster recovery instance), `sdr` (disaster recovery instance of small specifications). Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
 
 	// Instance status. Valid values:  `0` (creating), `1` (running), `4` (isolating), `5` (isolated). Note: This field may return null, indicating that no valid values can be obtained.
 	Status *int64 `json:"Status,omitempty" name:"Status"`
