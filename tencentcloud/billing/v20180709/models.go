@@ -990,7 +990,7 @@ func (r *DescribeBillSummaryByPayModeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByPayModeResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed cost distribution for all billing modes
@@ -1082,7 +1082,7 @@ func (r *DescribeBillSummaryByProductRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByProductResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Total cost details
@@ -1161,7 +1161,7 @@ func (r *DescribeBillSummaryByProjectRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByProjectResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed cost distribution for all projects
@@ -1236,7 +1236,7 @@ func (r *DescribeBillSummaryByRegionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByRegionResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed cost distribution for all regions
@@ -1325,7 +1325,7 @@ func (r *DescribeBillSummaryByTagRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryByTagResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first. Wait for 5-10 minutes and try again.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Details about cost distribution over different tags
@@ -1404,7 +1404,7 @@ func (r *DescribeBillSummaryRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillSummaryResponseParams struct {
-	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates the current UIN is initializing for the first billing. Wait for 5-10 minutes and try again.
+	// Indicates whether the data is ready. `0`: Not ready. `1`: Ready. If `Ready` is `0`, it indicates that the current UIN is initializing billing for the first time. Wait for 5-10 minutes and try again.
 	Ready *uint64 `json:"Ready,omitempty" name:"Ready"`
 
 	// Detailed summary of costs by multiple dimensions

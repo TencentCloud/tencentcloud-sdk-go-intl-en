@@ -163,6 +163,64 @@ func (c *Client) ApplyConfigToMachineGroupWithContext(ctx context.Context, reque
     return
 }
 
+func NewCheckRechargeKafkaServerRequest() (request *CheckRechargeKafkaServerRequest) {
+    request = &CheckRechargeKafkaServerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CheckRechargeKafkaServer")
+    
+    
+    return
+}
+
+func NewCheckRechargeKafkaServerResponse() (response *CheckRechargeKafkaServerResponse) {
+    response = &CheckRechargeKafkaServerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CheckRechargeKafkaServer
+// This API is used to check whether the Kafka service cluster is accessible.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CheckRechargeKafkaServer(request *CheckRechargeKafkaServerRequest) (response *CheckRechargeKafkaServerResponse, err error) {
+    return c.CheckRechargeKafkaServerWithContext(context.Background(), request)
+}
+
+// CheckRechargeKafkaServer
+// This API is used to check whether the Kafka service cluster is accessible.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CheckRechargeKafkaServerWithContext(ctx context.Context, request *CheckRechargeKafkaServerRequest) (response *CheckRechargeKafkaServerResponse, err error) {
+    if request == nil {
+        request = NewCheckRechargeKafkaServerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckRechargeKafkaServer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckRechargeKafkaServerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloseKafkaConsumerRequest() (request *CloseKafkaConsumerRequest) {
     request = &CloseKafkaConsumerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -571,6 +629,78 @@ func (c *Client) CreateCosRechargeWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateDataTransformRequest() (request *CreateDataTransformRequest) {
+    request = &CreateDataTransformRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateDataTransform")
+    
+    
+    return
+}
+
+func NewCreateDataTransformResponse() (response *CreateDataTransformResponse) {
+    response = &CreateDataTransformResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateDataTransform
+// This API is used to create a data processing task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateDataTransform(request *CreateDataTransformRequest) (response *CreateDataTransformResponse, err error) {
+    return c.CreateDataTransformWithContext(context.Background(), request)
+}
+
+// CreateDataTransform
+// This API is used to create a data processing task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateDataTransformWithContext(ctx context.Context, request *CreateDataTransformRequest) (response *CreateDataTransformResponse, err error) {
+    if request == nil {
+        request = NewCreateDataTransformRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDataTransform require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDataTransformResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateExportRequest() (request *CreateExportRequest) {
     request = &CreateExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -713,6 +843,72 @@ func (c *Client) CreateIndexWithContext(ctx context.Context, request *CreateInde
     request.SetContext(ctx)
     
     response = NewCreateIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateKafkaRechargeRequest() (request *CreateKafkaRechargeRequest) {
+    request = &CreateKafkaRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateKafkaRecharge")
+    
+    
+    return
+}
+
+func NewCreateKafkaRechargeResponse() (response *CreateKafkaRechargeResponse) {
+    response = &CreateKafkaRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateKafkaRecharge
+// This API is used to create a Kafka data subscription task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateKafkaRecharge(request *CreateKafkaRechargeRequest) (response *CreateKafkaRechargeResponse, err error) {
+    return c.CreateKafkaRechargeWithContext(context.Background(), request)
+}
+
+// CreateKafkaRecharge
+// This API is used to create a Kafka data subscription task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateKafkaRechargeWithContext(ctx context.Context, request *CreateKafkaRechargeRequest) (response *CreateKafkaRechargeResponse, err error) {
+    if request == nil {
+        request = NewCreateKafkaRechargeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateKafkaRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateKafkaRechargeResponse()
     err = c.Send(request, response)
     return
 }
@@ -1345,6 +1541,76 @@ func (c *Client) DeleteConsumerWithContext(ctx context.Context, request *DeleteC
     return
 }
 
+func NewDeleteDataTransformRequest() (request *DeleteDataTransformRequest) {
+    request = &DeleteDataTransformRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteDataTransform")
+    
+    
+    return
+}
+
+func NewDeleteDataTransformResponse() (response *DeleteDataTransformResponse) {
+    response = &DeleteDataTransformResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteDataTransform
+// This API is used to delete a data processing task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteDataTransform(request *DeleteDataTransformRequest) (response *DeleteDataTransformResponse, err error) {
+    return c.DeleteDataTransformWithContext(context.Background(), request)
+}
+
+// DeleteDataTransform
+// This API is used to delete a data processing task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteDataTransformWithContext(ctx context.Context, request *DeleteDataTransformRequest) (response *DeleteDataTransformResponse, err error) {
+    if request == nil {
+        request = NewDeleteDataTransformRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDataTransform require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDataTransformResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteExportRequest() (request *DeleteExportRequest) {
     request = &DeleteExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1475,6 +1741,70 @@ func (c *Client) DeleteIndexWithContext(ctx context.Context, request *DeleteInde
     request.SetContext(ctx)
     
     response = NewDeleteIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteKafkaRechargeRequest() (request *DeleteKafkaRechargeRequest) {
+    request = &DeleteKafkaRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteKafkaRecharge")
+    
+    
+    return
+}
+
+func NewDeleteKafkaRechargeResponse() (response *DeleteKafkaRechargeResponse) {
+    response = &DeleteKafkaRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteKafkaRecharge
+// This API is used to delete a Kafka data subscription task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteKafkaRecharge(request *DeleteKafkaRechargeRequest) (response *DeleteKafkaRechargeResponse, err error) {
+    return c.DeleteKafkaRechargeWithContext(context.Background(), request)
+}
+
+// DeleteKafkaRecharge
+// This API is used to delete a Kafka data subscription task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteKafkaRechargeWithContext(ctx context.Context, request *DeleteKafkaRechargeRequest) (response *DeleteKafkaRechargeResponse, err error) {
+    if request == nil {
+        request = NewDeleteKafkaRechargeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteKafkaRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteKafkaRechargeResponse()
     err = c.Send(request, response)
     return
 }
@@ -1682,7 +2012,7 @@ func NewDeleteShipperResponse() (response *DeleteShipperResponse) {
 }
 
 // DeleteShipper
-// This API is used to delete a shipping rule.
+// This API is used to delete a COS shipping task.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1702,7 +2032,7 @@ func (c *Client) DeleteShipper(request *DeleteShipperRequest) (response *DeleteS
 }
 
 // DeleteShipper
-// This API is used to delete a shipping rule.
+// This API is used to delete a COS shipping task.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2263,6 +2593,74 @@ func (c *Client) DescribeCosRechargesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeDataTransformInfoRequest() (request *DescribeDataTransformInfoRequest) {
+    request = &DescribeDataTransformInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeDataTransformInfo")
+    
+    
+    return
+}
+
+func NewDescribeDataTransformInfoResponse() (response *DescribeDataTransformInfoResponse) {
+    response = &DescribeDataTransformInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDataTransformInfo
+// This API is used to get the basic information of data processing tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeDataTransformInfo(request *DescribeDataTransformInfoRequest) (response *DescribeDataTransformInfoResponse, err error) {
+    return c.DescribeDataTransformInfoWithContext(context.Background(), request)
+}
+
+// DescribeDataTransformInfo
+// This API is used to get the basic information of data processing tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeDataTransformInfoWithContext(ctx context.Context, request *DescribeDataTransformInfoRequest) (response *DescribeDataTransformInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeDataTransformInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDataTransformInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDataTransformInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeExportsRequest() (request *DescribeExportsRequest) {
     request = &DescribeExportsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2399,6 +2797,76 @@ func (c *Client) DescribeIndexWithContext(ctx context.Context, request *Describe
     request.SetContext(ctx)
     
     response = NewDescribeIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKafkaRechargesRequest() (request *DescribeKafkaRechargesRequest) {
+    request = &DescribeKafkaRechargesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeKafkaRecharges")
+    
+    
+    return
+}
+
+func NewDescribeKafkaRechargesResponse() (response *DescribeKafkaRechargesResponse) {
+    response = &DescribeKafkaRechargesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeKafkaRecharges
+// This API is used to get the list of Kafka data subscription tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaRecharges(request *DescribeKafkaRechargesRequest) (response *DescribeKafkaRechargesResponse, err error) {
+    return c.DescribeKafkaRechargesWithContext(context.Background(), request)
+}
+
+// DescribeKafkaRecharges
+// This API is used to get the list of Kafka data subscription tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaRechargesWithContext(ctx context.Context, request *DescribeKafkaRechargesRequest) (response *DescribeKafkaRechargesResponse, err error) {
+    if request == nil {
+        request = NewDescribeKafkaRechargesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKafkaRecharges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKafkaRechargesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3623,6 +4091,80 @@ func (c *Client) ModifyCosRechargeWithContext(ctx context.Context, request *Modi
     return
 }
 
+func NewModifyDataTransformRequest() (request *ModifyDataTransformRequest) {
+    request = &ModifyDataTransformRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyDataTransform")
+    
+    
+    return
+}
+
+func NewModifyDataTransformResponse() (response *ModifyDataTransformResponse) {
+    response = &ModifyDataTransformResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDataTransform
+// This API is used to modify a data processing task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyDataTransform(request *ModifyDataTransformRequest) (response *ModifyDataTransformResponse, err error) {
+    return c.ModifyDataTransformWithContext(context.Background(), request)
+}
+
+// ModifyDataTransform
+// This API is used to modify a data processing task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyDataTransformWithContext(ctx context.Context, request *ModifyDataTransformRequest) (response *ModifyDataTransformResponse, err error) {
+    if request == nil {
+        request = NewModifyDataTransformRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDataTransform require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDataTransformResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyIndexRequest() (request *ModifyIndexRequest) {
     request = &ModifyIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3697,6 +4239,68 @@ func (c *Client) ModifyIndexWithContext(ctx context.Context, request *ModifyInde
     request.SetContext(ctx)
     
     response = NewModifyIndexResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyKafkaRechargeRequest() (request *ModifyKafkaRechargeRequest) {
+    request = &ModifyKafkaRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyKafkaRecharge")
+    
+    
+    return
+}
+
+func NewModifyKafkaRechargeResponse() (response *ModifyKafkaRechargeResponse) {
+    response = &ModifyKafkaRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyKafkaRecharge
+// This API is used to modify a Kafka data subscription task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyKafkaRecharge(request *ModifyKafkaRechargeRequest) (response *ModifyKafkaRechargeResponse, err error) {
+    return c.ModifyKafkaRechargeWithContext(context.Background(), request)
+}
+
+// ModifyKafkaRecharge
+// This API is used to modify a Kafka data subscription task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyKafkaRechargeWithContext(ctx context.Context, request *ModifyKafkaRechargeRequest) (response *ModifyKafkaRechargeResponse, err error) {
+    if request == nil {
+        request = NewModifyKafkaRechargeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyKafkaRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyKafkaRechargeResponse()
     err = c.Send(request, response)
     return
 }
@@ -4061,6 +4665,70 @@ func (c *Client) OpenKafkaConsumerWithContext(ctx context.Context, request *Open
     request.SetContext(ctx)
     
     response = NewOpenKafkaConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewPreviewKafkaRechargeRequest() (request *PreviewKafkaRechargeRequest) {
+    request = &PreviewKafkaRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "PreviewKafkaRecharge")
+    
+    
+    return
+}
+
+func NewPreviewKafkaRechargeResponse() (response *PreviewKafkaRechargeResponse) {
+    response = &PreviewKafkaRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// PreviewKafkaRecharge
+// This API is used to preview the logs of Kafka data subscription tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) PreviewKafkaRecharge(request *PreviewKafkaRechargeRequest) (response *PreviewKafkaRechargeResponse, err error) {
+    return c.PreviewKafkaRechargeWithContext(context.Background(), request)
+}
+
+// PreviewKafkaRecharge
+// This API is used to preview the logs of Kafka data subscription tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) PreviewKafkaRechargeWithContext(ctx context.Context, request *PreviewKafkaRechargeRequest) (response *PreviewKafkaRechargeResponse, err error) {
+    if request == nil {
+        request = NewPreviewKafkaRechargeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PreviewKafkaRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewPreviewKafkaRechargeResponse()
     err = c.Send(request, response)
     return
 }

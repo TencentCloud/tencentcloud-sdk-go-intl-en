@@ -370,6 +370,92 @@ type CallBackInfo struct {
 	Headers []*string `json:"Headers,omitempty" name:"Headers"`
 }
 
+// Predefined struct for user
+type CheckRechargeKafkaServerRequestParams struct {
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+}
+
+type CheckRechargeKafkaServerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+}
+
+func (r *CheckRechargeKafkaServerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckRechargeKafkaServerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "KafkaType")
+	delete(f, "KafkaInstance")
+	delete(f, "ServerAddr")
+	delete(f, "IsEncryptionAddr")
+	delete(f, "Protocol")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckRechargeKafkaServerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckRechargeKafkaServerResponseParams struct {
+	// Kafka cluster accessibility. 0: Accessible.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CheckRechargeKafkaServerResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckRechargeKafkaServerResponseParams `json:"Response"`
+}
+
+func (r *CheckRechargeKafkaServerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckRechargeKafkaServerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Ckafka struct {
 	// CKafka VIP
 	Vip *string `json:"Vip,omitempty" name:"Vip"`
@@ -831,6 +917,9 @@ type CreateConfigRequestParams struct {
 
 	// Custom collection rule, which is a serialized JSON string
 	UserDefineRule *string `json:"UserDefineRule,omitempty" name:"UserDefineRule"`
+
+	// Advanced collection configuration
+	AdvancedConfig *string `json:"AdvancedConfig,omitempty" name:"AdvancedConfig"`
 }
 
 type CreateConfigRequest struct {
@@ -856,6 +945,9 @@ type CreateConfigRequest struct {
 
 	// Custom collection rule, which is a serialized JSON string
 	UserDefineRule *string `json:"UserDefineRule,omitempty" name:"UserDefineRule"`
+
+	// Advanced collection configuration
+	AdvancedConfig *string `json:"AdvancedConfig,omitempty" name:"AdvancedConfig"`
 }
 
 func (r *CreateConfigRequest) ToJsonString() string {
@@ -877,6 +969,7 @@ func (r *CreateConfigRequest) FromJsonString(s string) error {
 	delete(f, "ExtractRule")
 	delete(f, "ExcludePaths")
 	delete(f, "UserDefineRule")
+	delete(f, "AdvancedConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConfigRequest has unknown keys!", "")
 	}
@@ -1107,6 +1200,112 @@ func (r *CreateCosRechargeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDataTransformRequestParams struct {
+	// Task type. Valid values: 1 (specified topic) and 2 (dynamically created).
+	FuncType *int64 `json:"FuncType,omitempty" name:"FuncType"`
+
+	// Source log topic
+	SrcTopicId *string `json:"SrcTopicId,omitempty" name:"SrcTopicId"`
+
+	// Data processing task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data processing statement
+	EtlContent *string `json:"EtlContent,omitempty" name:"EtlContent"`
+
+	// Data processing type. Valid values: `1`: Use random data from the source log topic for processing preview. `2`: Use user-defined test data for processing preview. `3`: Create a real processing task.
+	TaskType *int64 `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Task status. Valid values: 1 (enabled) and 2 (disabled).
+	EnableFlag *int64 `json:"EnableFlag,omitempty" name:"EnableFlag"`
+
+	// Target topic ID and alias of the data processing task
+	DstResources []*DataTransformResouceInfo `json:"DstResources,omitempty" name:"DstResources"`
+
+	// Test data used for previewing the processing result
+	PreviewLogStatistics []*PreviewLogStatistic `json:"PreviewLogStatistics,omitempty" name:"PreviewLogStatistics"`
+}
+
+type CreateDataTransformRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task type. Valid values: 1 (specified topic) and 2 (dynamically created).
+	FuncType *int64 `json:"FuncType,omitempty" name:"FuncType"`
+
+	// Source log topic
+	SrcTopicId *string `json:"SrcTopicId,omitempty" name:"SrcTopicId"`
+
+	// Data processing task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data processing statement
+	EtlContent *string `json:"EtlContent,omitempty" name:"EtlContent"`
+
+	// Data processing type. Valid values: `1`: Use random data from the source log topic for processing preview. `2`: Use user-defined test data for processing preview. `3`: Create a real processing task.
+	TaskType *int64 `json:"TaskType,omitempty" name:"TaskType"`
+
+	// Task status. Valid values: 1 (enabled) and 2 (disabled).
+	EnableFlag *int64 `json:"EnableFlag,omitempty" name:"EnableFlag"`
+
+	// Target topic ID and alias of the data processing task
+	DstResources []*DataTransformResouceInfo `json:"DstResources,omitempty" name:"DstResources"`
+
+	// Test data used for previewing the processing result
+	PreviewLogStatistics []*PreviewLogStatistic `json:"PreviewLogStatistics,omitempty" name:"PreviewLogStatistics"`
+}
+
+func (r *CreateDataTransformRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDataTransformRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FuncType")
+	delete(f, "SrcTopicId")
+	delete(f, "Name")
+	delete(f, "EtlContent")
+	delete(f, "TaskType")
+	delete(f, "EnableFlag")
+	delete(f, "DstResources")
+	delete(f, "PreviewLogStatistics")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDataTransformRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDataTransformResponseParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateDataTransformResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDataTransformResponseParams `json:"Response"`
+}
+
+func (r *CreateDataTransformResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDataTransformResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateExportRequestParams struct {
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
@@ -1298,6 +1497,133 @@ func (r *CreateIndexResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateKafkaRechargeRequestParams struct {
+	// Target topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Kafka data import configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address, which is required when `KafkaType` is set to `1`
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection, which is required when `KafkaType` is set to `1`
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Kafka consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Log import rule
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+}
+
+type CreateKafkaRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Target topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Kafka data import configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address, which is required when `KafkaType` is set to `1`
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection, which is required when `KafkaType` is set to `1`
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Kafka consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Log import rule
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+}
+
+func (r *CreateKafkaRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateKafkaRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "KafkaType")
+	delete(f, "UserKafkaTopics")
+	delete(f, "Offset")
+	delete(f, "KafkaInstance")
+	delete(f, "ServerAddr")
+	delete(f, "IsEncryptionAddr")
+	delete(f, "Protocol")
+	delete(f, "ConsumerGroupName")
+	delete(f, "LogRechargeRule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateKafkaRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateKafkaRechargeResponseParams struct {
+	// Kafka data import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateKafkaRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateKafkaRechargeResponseParams `json:"Response"`
+}
+
+func (r *CreateKafkaRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateKafkaRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateLogsetRequestParams struct {
 	// Logset name, which must be unique
 	LogsetName *string `json:"LogsetName,omitempty" name:"LogsetName"`
@@ -1484,7 +1810,7 @@ type CreateShipperRequestParams struct {
 	// Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
 	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100-256
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
 	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
 
 	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
@@ -1527,7 +1853,7 @@ type CreateShipperRequest struct {
 	// Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
 	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100-256
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
 	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
 
 	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
@@ -1753,6 +2079,55 @@ type CsvInfo struct {
 
 	// Content used to populate non-existing fields
 	NonExistingField *string `json:"NonExistingField,omitempty" name:"NonExistingField"`
+}
+
+type DataTransformResouceInfo struct {
+	// Target topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Alias
+	Alias *string `json:"Alias,omitempty" name:"Alias"`
+}
+
+type DataTransformTaskInfo struct {
+	// Data processing task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data processing task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Task status. Valid values: 1 (enabled) and 2 (disabled).
+	EnableFlag *int64 `json:"EnableFlag,omitempty" name:"EnableFlag"`
+
+	// Task type. Valid values: 1 (DSL) and 2 (SQL).
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Source log topic
+	SrcTopicId *string `json:"SrcTopicId,omitempty" name:"SrcTopicId"`
+
+	// Current task status. Valid values: 1 (preparing), 2 (in progress), 3 (being stopped), and 4 (stopped).
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Task creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Last modified time
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Last enabled time. If you need to rebuild a cluster, modify this time.
+	LastEnableTime *string `json:"LastEnableTime,omitempty" name:"LastEnableTime"`
+
+	// Log topic name
+	SrcTopicName *string `json:"SrcTopicName,omitempty" name:"SrcTopicName"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitempty" name:"LogsetId"`
+
+	// Target topic ID and alias of the data processing task
+	DstResources []*DataTransformResouceInfo `json:"DstResources,omitempty" name:"DstResources"`
+
+	// Logical function for data processing
+	EtlContent *string `json:"EtlContent,omitempty" name:"EtlContent"`
 }
 
 // Predefined struct for user
@@ -2033,6 +2408,60 @@ func (r *DeleteConsumerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteDataTransformRequestParams struct {
+	// Data processing task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type DeleteDataTransformRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data processing task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteDataTransformRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDataTransformRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDataTransformRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDataTransformResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteDataTransformResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDataTransformResponseParams `json:"Response"`
+}
+
+func (r *DeleteDataTransformResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDataTransformResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteExportRequestParams struct {
 	// Log export ID
 	ExportId *string `json:"ExportId,omitempty" name:"ExportId"`
@@ -2137,6 +2566,67 @@ func (r *DeleteIndexResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteIndexResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteKafkaRechargeRequestParams struct {
+	// Kafka data import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Target CLS log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
+type DeleteKafkaRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Kafka data import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Target CLS log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteKafkaRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteKafkaRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteKafkaRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteKafkaRechargeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteKafkaRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteKafkaRechargeResponseParams `json:"Response"`
+}
+
+func (r *DeleteKafkaRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteKafkaRechargeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3049,6 +3539,136 @@ func (r *DescribeCosRechargesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDataTransformInfoRequestParams struct {
+	// <br><li>taskName
+	// 
+	// Filter by **processing task name**.
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// <br><li>taskId
+	// 
+	// Filter by **processing task ID**.
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// <br><li>srctopicId
+	// 
+	// Filter by **source topic ID**.
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Task type. Valid values: 1: Get the details of a single task. 2 (default): Get the task list.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Task ID, which is required when `Type` is set to `1`
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+type DescribeDataTransformInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// <br><li>taskName
+	// 
+	// Filter by **processing task name**.
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// <br><li>taskId
+	// 
+	// Filter by **processing task ID**.
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// <br><li>srctopicId
+	// 
+	// Filter by **source topic ID**.
+	// Type: String
+	// 
+	// Required: No
+	// 
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+
+	// The pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Task type. Valid values: 1: Get the details of a single task. 2 (default): Get the task list.
+	Type *int64 `json:"Type,omitempty" name:"Type"`
+
+	// Task ID, which is required when `Type` is set to `1`
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeDataTransformInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataTransformInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Type")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDataTransformInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDataTransformInfoResponseParams struct {
+	// List of data processing tasks
+	DataTransformTaskInfos []*DataTransformTaskInfo `json:"DataTransformTaskInfos,omitempty" name:"DataTransformTaskInfos"`
+
+	// Total tasks
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeDataTransformInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDataTransformInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeDataTransformInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDataTransformInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeExportsRequestParams struct {
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
@@ -3199,6 +3819,80 @@ func (r *DescribeIndexResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIndexResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaRechargesRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Status. Valid values: 1 (running) and 2 (suspended).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+type DescribeKafkaRechargesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Status. Valid values: 1 (running) and 2 (suspended).
+	Status *uint64 `json:"Status,omitempty" name:"Status"`
+}
+
+func (r *DescribeKafkaRechargesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaRechargesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Id")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKafkaRechargesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaRechargesResponseParams struct {
+	// KafkaRechargeInfo list
+	Infos []*KafkaRechargeInfo `json:"Infos,omitempty" name:"Infos"`
+
+	// Total Kafka data records imported
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeKafkaRechargesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKafkaRechargesResponseParams `json:"Response"`
+}
+
+func (r *DescribeKafkaRechargesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaRechargesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3975,7 +4669,7 @@ func (r *DescribeShippersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicsRequestParams struct {
-	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+	// <li>topicName: Filter by **log topic name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required. No. <br><li>logsetName: Filter by **logset name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required: No. <br><li>topicId: Filter by **log topic ID**. Type: String. Required: No. <br><li>logsetId: Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset. Type: String. Required: No. <br><li>tagKey: Filter by **tag key**. Type: String. Required: No. <br><li>tag:tagKey: Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key, such as `tag:exampleKey`. Type: String. Required: No. <br><li>storageType: Filter by **log topic storage type**. Valid values: `hot` (standard storage) and `cold` (IA storage). Type: String. Required: No. Each request can have up to 10 `Filters` and 100 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0.
@@ -3983,12 +4677,24 @@ type DescribeTopicsRequestParams struct {
 
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Match mode for `Filters` fields.
+	// - 0: Fuzzy match for `topicName` and `logsetName`. This is the default value.
+	// - 1: Exact match for `topicName`.
+	// - 2: Exact match for `logsetName`.
+	// - 3: Exact match for `topicName` and `logsetName`.
+	PreciseSearch *uint64 `json:"PreciseSearch,omitempty" name:"PreciseSearch"`
+
+	// Topic type
+	// - 0 (default): Log topic.
+	// - 1: Metric topic.
+	BizType *uint64 `json:"BizType,omitempty" name:"BizType"`
 }
 
 type DescribeTopicsRequest struct {
 	*tchttp.BaseRequest
 	
-	// <br><li> `topicName` filters by **log topic name**. Type: String. Required: No<br><li> `logsetName` filters by **logset name**. Type: String. Required: No<br><li> `topicId` filters by **log topic ID**. Type: String. Required: No<br><li> `logsetId` filters by **logset ID**. You can call the `DescribeLogsets` API to query the list of created logsets or log in to the console to view them. You can also call the `CreateLogset` API to create a logset. Type: String. Required: No<br><li> `tagKey` filters by **tag key**. Type: String. Required: No<br><li> `tag:tagKey` filters by **tag key-value pair**. The tagKey should be replaced with a specified tag key, such as “tag:exampleKey”. Type: String. Required: No<br><li> `storageType` filters by **log topic storage type**. Valid values: `hot` (STANDARD storage); `cold`: (IA storage). Type: String. Required: No. Each request can contain up to 10 `Filters` and 100 `Filter.Values`.
+	// <li>topicName: Filter by **log topic name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required. No. <br><li>logsetName: Filter by **logset name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required: No. <br><li>topicId: Filter by **log topic ID**. Type: String. Required: No. <br><li>logsetId: Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset. Type: String. Required: No. <br><li>tagKey: Filter by **tag key**. Type: String. Required: No. <br><li>tag:tagKey: Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key, such as `tag:exampleKey`. Type: String. Required: No. <br><li>storageType: Filter by **log topic storage type**. Valid values: `hot` (standard storage) and `cold` (IA storage). Type: String. Required: No. Each request can have up to 10 `Filters` and 100 `Filter.Values`.
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0.
@@ -3996,6 +4702,18 @@ type DescribeTopicsRequest struct {
 
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Match mode for `Filters` fields.
+	// - 0: Fuzzy match for `topicName` and `logsetName`. This is the default value.
+	// - 1: Exact match for `topicName`.
+	// - 2: Exact match for `logsetName`.
+	// - 3: Exact match for `topicName` and `logsetName`.
+	PreciseSearch *uint64 `json:"PreciseSearch,omitempty" name:"PreciseSearch"`
+
+	// Topic type
+	// - 0 (default): Log topic.
+	// - 1: Metric topic.
+	BizType *uint64 `json:"BizType,omitempty" name:"BizType"`
 }
 
 func (r *DescribeTopicsRequest) ToJsonString() string {
@@ -4013,6 +4731,8 @@ func (r *DescribeTopicsRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "PreciseSearch")
+	delete(f, "BizType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicsRequest has unknown keys!", "")
 	}
@@ -4123,8 +4843,8 @@ type ExtractRuleInfo struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	BeginRegex *string `json:"BeginRegex,omitempty" name:"BeginRegex"`
 
-	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if `log_type` is `delimiter_log`. `json_log` logs use the key of JSON itself
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Key name of each extracted field. An empty key indicates to discard the field. This parameter is valid only if `log_type` is `delimiter_log`. `json_log` logs use the key of JSON itself. A maximum of 100 keys are supported.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Keys []*string `json:"Keys,omitempty" name:"Keys"`
 
 	// Log keys to be filtered and the corresponding regex
@@ -4175,7 +4895,7 @@ type ExtractRuleInfo struct {
 	// 3: Use the collection path to extract metadata.
 	MetadataType *int64 `json:"MetadataType,omitempty" name:"MetadataType"`
 
-	// Regular expression of the collection path, which is required when `MetadataType` is set to `3`.
+	// Regular expression of the collection configuration path, which is required when `MetadataType` is set to `3`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PathRegex *string `json:"PathRegex,omitempty" name:"PathRegex"`
 
@@ -4370,6 +5090,110 @@ type JsonInfo struct {
 	JsonType *int64 `json:"JsonType,omitempty" name:"JsonType"`
 }
 
+type KafkaConsumerContent struct {
+	// Format. Valid values: 0 (full-text) and 1 (JSON).
+	Format *int64 `json:"Format,omitempty" name:"Format"`
+
+	// Whether to ship tag information
+	// This parameter does not need to be set when `Format` is set to `0`.
+	EnableTag *bool `json:"EnableTag,omitempty" name:"EnableTag"`
+
+	// Metadata information list. Valid values: \_\_SOURCE\_\_, \_\_FILENAME\_\_,
+	// \_\_TIMESTAMP\_\_, \_\_HOSTNAME\_\_, and \_\_PKGID\_\_.
+	// This parameter does not need to be set when `Format` is set to `0`.
+	MetaFields []*string `json:"MetaFields,omitempty" name:"MetaFields"`
+
+	// Tag data processing mode. Valid values:
+	// 1 (default): Do not tile data.
+	// 2: Tile data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagTransaction *int64 `json:"TagTransaction,omitempty" name:"TagTransaction"`
+
+	// JSON data format. Valid values:
+	// 1 (default): Not escaped.
+	// 2: Escaped.
+	JsonType *int64 `json:"JsonType,omitempty" name:"JsonType"`
+}
+
+type KafkaProtocolInfo struct {
+	// Protocol type. Valid values: `plaintext`, `sasl_plaintext`, and `sasl_ssl`. `sasl_ssl` is recommended. Using this protocol will encrypt the connection and implement user authentication.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Encryption type. Valid values: `PLAIN`, `SCRAM-SHA-256`, and SCRAM-SHA-512`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Mechanism *string `json:"Mechanism,omitempty" name:"Mechanism"`
+
+	// Username
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserName *string `json:"UserName,omitempty" name:"UserName"`
+
+	// User password
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Password *string `json:"Password,omitempty" name:"Password"`
+}
+
+type KafkaRechargeInfo struct {
+	// Primary key ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Log topic ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Kafka data import task name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Kafka consumer group name	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Status. Valid values: 1 (running) and 2 (suspended).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitempty" name:"Status"`
+
+	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).  
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Creation time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Update time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+
+	// Log import rule
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+}
+
 type KeyRegexInfo struct {
 	// Log key to be filtered
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -4474,6 +5298,60 @@ type LogItem struct {
 type LogItems struct {
 	// Key-Value pair returned in analysis result
 	Data []*LogItem `json:"Data,omitempty" name:"Data"`
+}
+
+type LogRechargeRuleInfo struct {
+	// Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log u200d(single-line full regex)
+	RechargeType *string `json:"RechargeType,omitempty" name:"RechargeType"`
+
+	// Encoding format. Valid values: 0 (default, UTF-8) and 1 GBK).
+	EncodingFormat *uint64 `json:"EncodingFormat,omitempty" name:"EncodingFormat"`
+
+	// Whether to use the default time. Valid values: `true` (default) and `false`.
+	DefaultTimeSwitch *bool `json:"DefaultTimeSwitch,omitempty" name:"DefaultTimeSwitch"`
+
+	// Full log matching rule, which is valid only if `RechargeType` is `fullregex_log`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogRegex *string `json:"LogRegex,omitempty" name:"LogRegex"`
+
+	// Whether to upload the logs that failed to be parsed. Valid values: `true` and `false`.
+	UnMatchLogSwitch *bool `json:"UnMatchLogSwitch,omitempty" name:"UnMatchLogSwitch"`
+
+	// Key of the log that failed to be parsed
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnMatchLogKey *string `json:"UnMatchLogKey,omitempty" name:"UnMatchLogKey"`
+
+	// Time source of the log that failed to be parsed. Valid values: 0 (current system time) and 1 (Kafka message timestamp).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnMatchLogTimeSrc *uint64 `json:"UnMatchLogTimeSrc,omitempty" name:"UnMatchLogTimeSrc"`
+
+	// Default time source. Valid values: 0 (current system time) and 1 (Kafka message timestamp).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DefaultTimeSrc *uint64 `json:"DefaultTimeSrc,omitempty" name:"DefaultTimeSrc"`
+
+	// Time field
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeKey *string `json:"TimeKey,omitempty" name:"TimeKey"`
+
+	// Time regular expression
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeRegex *string `json:"TimeRegex,omitempty" name:"TimeRegex"`
+
+	// Time field format
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeFormat *string `json:"TimeFormat,omitempty" name:"TimeFormat"`
+
+	// Time zone
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeZone *string `json:"TimeZone,omitempty" name:"TimeZone"`
+
+	// Metadata information. Kafka supports import of kafka_topic, kafka_partition, kafka_offset, and kafka_timestamp.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Metadata []*string `json:"Metadata,omitempty" name:"Metadata"`
+
+	// List of log keys, which is required when `RechargeType` is set to `full_regex_log`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Keys []*string `json:"Keys,omitempty" name:"Keys"`
 }
 
 type LogsetInfo struct {
@@ -5131,6 +6009,88 @@ func (r *ModifyCosRechargeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDataTransformRequestParams struct {
+	// Data processing task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Data processing task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data processing statement
+	EtlContent *string `json:"EtlContent,omitempty" name:"EtlContent"`
+
+	// Task status. Valid values: 1 (enabled) and 2 (disabled).
+	EnableFlag *int64 `json:"EnableFlag,omitempty" name:"EnableFlag"`
+
+	// Destination topic ID and alias of the data processing task
+	DstResources []*DataTransformResouceInfo `json:"DstResources,omitempty" name:"DstResources"`
+}
+
+type ModifyDataTransformRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data processing task ID
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Data processing task name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Data processing statement
+	EtlContent *string `json:"EtlContent,omitempty" name:"EtlContent"`
+
+	// Task status. Valid values: 1 (enabled) and 2 (disabled).
+	EnableFlag *int64 `json:"EnableFlag,omitempty" name:"EnableFlag"`
+
+	// Destination topic ID and alias of the data processing task
+	DstResources []*DataTransformResouceInfo `json:"DstResources,omitempty" name:"DstResources"`
+}
+
+func (r *ModifyDataTransformRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDataTransformRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "Name")
+	delete(f, "EtlContent")
+	delete(f, "EnableFlag")
+	delete(f, "DstResources")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDataTransformRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDataTransformResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyDataTransformResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDataTransformResponseParams `json:"Response"`
+}
+
+func (r *ModifyDataTransformResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDataTransformResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyIndexRequestParams struct {
 	// Log topic ID
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
@@ -5219,6 +6179,137 @@ func (r *ModifyIndexResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyIndexResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyKafkaRechargeRequestParams struct {
+	// Kafka data import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Target topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Kafka data import configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Kafka consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Log import rule
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+
+	// Import control. Valid values: 1 (suspend) and 2 (resume).
+	StatusControl *uint64 `json:"StatusControl,omitempty" name:"StatusControl"`
+}
+
+type ModifyKafkaRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Kafka data import configuration ID
+	Id *string `json:"Id,omitempty" name:"Id"`
+
+	// Target topic ID
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// Kafka data import configuration name
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Kafka consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Log import rule
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+
+	// Import control. Valid values: 1 (suspend) and 2 (resume).
+	StatusControl *uint64 `json:"StatusControl,omitempty" name:"StatusControl"`
+}
+
+func (r *ModifyKafkaRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyKafkaRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "KafkaType")
+	delete(f, "KafkaInstance")
+	delete(f, "ServerAddr")
+	delete(f, "IsEncryptionAddr")
+	delete(f, "Protocol")
+	delete(f, "UserKafkaTopics")
+	delete(f, "ConsumerGroupName")
+	delete(f, "LogRechargeRule")
+	delete(f, "StatusControl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyKafkaRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyKafkaRechargeResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyKafkaRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyKafkaRechargeResponseParams `json:"Response"`
+}
+
+func (r *ModifyKafkaRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyKafkaRechargeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5420,7 +6511,7 @@ type ModifyShipperRequestParams struct {
 	// Shipping time interval in seconds. Default value: 300. Value range: 300–900
 	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100–256
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
 	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
 
 	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
@@ -5460,7 +6551,7 @@ type ModifyShipperRequest struct {
 	// Shipping time interval in seconds. Default value: 300. Value range: 300–900
 	Interval *uint64 `json:"Interval,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 100–256
+	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
 	MaxSize *uint64 `json:"MaxSize,omitempty" name:"MaxSize"`
 
 	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
@@ -5660,6 +6751,14 @@ type MonitorTime struct {
 	Time *int64 `json:"Time,omitempty" name:"Time"`
 }
 
+type MultiTopicSearchInformation struct {
+	// ID of the log topic to be searched for
+	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+
+	// You can pass through the `Context` value (validity: 1 hour) returned by the last API to continue to get logs, which can get up to 10,000 raw logs.
+	Context *string `json:"Context,omitempty" name:"Context"`
+}
+
 type NoticeReceiver struct {
 	// Recipient type. Valid values:
 	// <br><li> `Uin`: user ID
@@ -5694,6 +6793,9 @@ type OpenKafkaConsumerRequestParams struct {
 
 	// Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
 	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
+
+	// Kafka consumer data format
+	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitempty" name:"ConsumerContent"`
 }
 
 type OpenKafkaConsumerRequest struct {
@@ -5704,6 +6806,9 @@ type OpenKafkaConsumerRequest struct {
 
 	// Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
 	Compression *int64 `json:"Compression,omitempty" name:"Compression"`
+
+	// Kafka consumer data format
+	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitempty" name:"ConsumerContent"`
 }
 
 func (r *OpenKafkaConsumerRequest) ToJsonString() string {
@@ -5720,6 +6825,7 @@ func (r *OpenKafkaConsumerRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FromTopicId")
 	delete(f, "Compression")
+	delete(f, "ConsumerContent")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenKafkaConsumerRequest has unknown keys!", "")
 	}
@@ -5787,6 +6893,151 @@ type PartitionInfo struct {
 	// Last modified of read-only partition
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LastWriteTime *string `json:"LastWriteTime,omitempty" name:"LastWriteTime"`
+}
+
+// Predefined struct for user
+type PreviewKafkaRechargeRequestParams struct {
+	// Preview type. Valid values: 1 (source data preview) and 2 (result preview).
+	PreviewType *uint64 `json:"PreviewType,omitempty" name:"PreviewType"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Kafka consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Log import rule
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+}
+
+type PreviewKafkaRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Preview type. Valid values: 1 (source data preview) and 2 (result preview).
+	PreviewType *uint64 `json:"PreviewType,omitempty" name:"PreviewType"`
+
+	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	KafkaType *uint64 `json:"KafkaType,omitempty" name:"KafkaType"`
+
+	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	UserKafkaTopics *string `json:"UserKafkaTopics,omitempty" name:"UserKafkaTopics"`
+
+	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	KafkaInstance *string `json:"KafkaInstance,omitempty" name:"KafkaInstance"`
+
+	// Service address
+	ServerAddr *string `json:"ServerAddr,omitempty" name:"ServerAddr"`
+
+	// Whether the service address uses an encrypted connection
+	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitempty" name:"IsEncryptionAddr"`
+
+	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
+	Protocol *KafkaProtocolInfo `json:"Protocol,omitempty" name:"Protocol"`
+
+	// Kafka consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitempty" name:"ConsumerGroupName"`
+
+	// Log import rule
+	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitempty" name:"LogRechargeRule"`
+}
+
+func (r *PreviewKafkaRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PreviewKafkaRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PreviewType")
+	delete(f, "KafkaType")
+	delete(f, "UserKafkaTopics")
+	delete(f, "Offset")
+	delete(f, "KafkaInstance")
+	delete(f, "ServerAddr")
+	delete(f, "IsEncryptionAddr")
+	delete(f, "Protocol")
+	delete(f, "ConsumerGroupName")
+	delete(f, "LogRechargeRule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PreviewKafkaRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PreviewKafkaRechargeResponseParams struct {
+	// Log sample, which is returned when `PreviewType` is set to `2`
+	LogSample *string `json:"LogSample,omitempty" name:"LogSample"`
+
+	// Log preview result
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogData *string `json:"LogData,omitempty" name:"LogData"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type PreviewKafkaRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *PreviewKafkaRechargeResponseParams `json:"Response"`
+}
+
+func (r *PreviewKafkaRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PreviewKafkaRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type PreviewLogStatistic struct {
+	// Log content
+	LogContent *string `json:"LogContent,omitempty" name:"LogContent"`
+
+	// Line number
+	LineNum *int64 `json:"LineNum,omitempty" name:"LineNum"`
+
+	// Target log topic
+	DstTopicId *string `json:"DstTopicId,omitempty" name:"DstTopicId"`
+
+	// Error code. An empty string "" indicates no error.
+	FailReason *string `json:"FailReason,omitempty" name:"FailReason"`
+
+	// Log timestamp
+	Time *string `json:"Time,omitempty" name:"Time"`
+
+	// Target topic name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DstTopicName *string `json:"DstTopicName,omitempty" name:"DstTopicName"`
 }
 
 // Predefined struct for user
@@ -5864,7 +7115,9 @@ type RuleInfo struct {
 	Tag *RuleTagInfo `json:"Tag,omitempty" name:"Tag"`
 
 	// Dynamic index configuration. If the configuration is empty, dynamic indexing is not enabled.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This feature is currently in a beta test. To use it, please contact technical support.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	DynamicIndex *DynamicIndex `json:"DynamicIndex,omitempty" name:"DynamicIndex"`
 }
 
@@ -5897,7 +7150,8 @@ type SearchLogRequestParams struct {
 	// Queries all logs using * or an empty string
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// ID of the log topic to be searched
+	// - The ID of the log topic to be searched for. Only one log topic can be specified.
+	// - To search for multiple log topics at a time, use the `Topics` parameter.
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
 	// The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
@@ -5935,6 +7189,11 @@ type SearchLogRequestParams struct {
 	// `0` (default): Lucene; `1`: CQL.
 	// For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Syntax Rules</a>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitempty" name:"SyntaxRule"`
+
+	// - The IDs of the log topics (up to 20) to be searched for.
+	// - To search for a single log topic, use the `TopicId` parameter.
+	// - You cannot use both `TopicId` and `Topics`.
+	Topics []*MultiTopicSearchInformation `json:"Topics,omitempty" name:"Topics"`
 }
 
 type SearchLogRequest struct {
@@ -5951,7 +7210,8 @@ type SearchLogRequest struct {
 	// Queries all logs using * or an empty string
 	Query *string `json:"Query,omitempty" name:"Query"`
 
-	// ID of the log topic to be searched
+	// - The ID of the log topic to be searched for. Only one log topic can be specified.
+	// - To search for multiple log topics at a time, use the `Topics` parameter.
 	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
 
 	// The number of raw logs returned by a single query. Maximum value: 1000. You need to use `Context` to continue to get logs.
@@ -5989,6 +7249,11 @@ type SearchLogRequest struct {
 	// `0` (default): Lucene; `1`: CQL.
 	// For more information, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Syntax Rules</a>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitempty" name:"SyntaxRule"`
+
+	// - The IDs of the log topics (up to 20) to be searched for.
+	// - To search for a single log topic, use the `TopicId` parameter.
+	// - You cannot use both `TopicId` and `Topics`.
+	Topics []*MultiTopicSearchInformation `json:"Topics,omitempty" name:"Topics"`
 }
 
 func (r *SearchLogRequest) ToJsonString() string {
@@ -6013,6 +7278,7 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 	delete(f, "UseNewAnalysis")
 	delete(f, "SamplingRate")
 	delete(f, "SyntaxRule")
+	delete(f, "Topics")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchLogRequest has unknown keys!", "")
 	}
