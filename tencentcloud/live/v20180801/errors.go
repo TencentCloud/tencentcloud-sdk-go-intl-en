@@ -326,6 +326,12 @@ const (
 	// The gifted Tencent Cloud domain name has expired.
 	INVALIDPARAMETER_CLOUDDOMAINISSTOP = "InvalidParameter.CloudDomainIsStop"
 
+	// 
+	INVALIDPARAMETER_CONFINUSED = "InvalidParameter.ConfInUsed"
+
+	// 
+	INVALIDPARAMETER_CONFNOTFOUND = "InvalidParameter.ConfNotFound"
+
 	// The certificate is in use.
 	INVALIDPARAMETER_CRTDATEINUSING = "InvalidParameter.CrtDateInUsing"
 
@@ -386,6 +392,12 @@ const (
 	// Invalid layer parameter.
 	INVALIDPARAMETER_INVALIDLAYERPARAM = "InvalidParameter.InvalidLayerParam"
 
+	// 
+	INVALIDPARAMETER_INVALIDMIXINPUTPARAM = "InvalidParameter.InvalidMixInputParam"
+
+	// 
+	INVALIDPARAMETER_INVALIDOUTPUTPARAM = "InvalidParameter.InvalidOutputParam"
+
 	// The output stream ID is already used.
 	INVALIDPARAMETER_INVALIDOUTPUTSTREAMID = "InvalidParameter.InvalidOutputStreamID"
 
@@ -421,6 +433,12 @@ const (
 
 	// Other errors.
 	INVALIDPARAMETER_OTHERERROR = "InvalidParameter.OtherError"
+
+	// 
+	INVALIDPARAMETER_PROCESSORALREADYEXIST = "InvalidParameter.ProcessorAlreadyExist"
+
+	// 
+	INVALIDPARAMETER_RULENOTFOUND = "InvalidParameter.RuleNotFound"
 
 	// The output stream of the same session has changed.
 	INVALIDPARAMETER_SESSIONOUTPUTSTREAMCHANGED = "InvalidParameter.SessionOutputStreamChanged"
@@ -481,6 +499,9 @@ const (
 
 	// The domain name does not exist or is not matched.
 	RESOURCENOTFOUND_DOMAINNOTEXIST = "ResourceNotFound.DomainNotExist"
+
+	// 
+	RESOURCENOTFOUND_EMPTYDATA = "ResourceNotFound.EmptyData"
 
 	// You are blocked.
 	RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
