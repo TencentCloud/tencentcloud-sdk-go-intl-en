@@ -391,6 +391,213 @@ func (r *CreateAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CustomerBillDetailData struct {
+	// Reseller account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayerAccountId *int64 `json:"PayerAccountId,omitempty" name:"PayerAccountId"`
+
+	// Customer account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OwnerAccountId *int64 `json:"OwnerAccountId,omitempty" name:"OwnerAccountId"`
+
+	// Operator account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OperatorAccountId *int64 `json:"OperatorAccountId,omitempty" name:"OperatorAccountId"`
+
+	// Product name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+
+	// Billing mode
+	// `Monthly subscription` (Monthly subscription)
+	// `Pay-As-You-Go resources` (Pay-as-you-go)
+	// `Standard RI` (Reserved instance)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
+
+	// Project name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+
+	// Resource region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// Resource AZ
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AvailabilityZone *string `json:"AvailabilityZone,omitempty" name:"AvailabilityZone"`
+
+	// Instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+
+	// Subproduct name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubProductName *string `json:"SubProductName,omitempty" name:"SubProductName"`
+
+	// Settlement type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TransactionType *string `json:"TransactionType,omitempty" name:"TransactionType"`
+
+	// Transaction ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TransactionId *string `json:"TransactionId,omitempty" name:"TransactionId"`
+
+	// Settlement time
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TransactionTime *string `json:"TransactionTime,omitempty" name:"TransactionTime"`
+
+	// Start time of resource use
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UsageStartTime *string `json:"UsageStartTime,omitempty" name:"UsageStartTime"`
+
+	// End time of resource use
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UsageEndTime *string `json:"UsageEndTime,omitempty" name:"UsageEndTime"`
+
+	// Component
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentType *string `json:"ComponentType,omitempty" name:"ComponentType"`
+
+	// Component name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentName *string `json:"ComponentName,omitempty" name:"ComponentName"`
+
+	// Component list price
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentListPrice *string `json:"ComponentListPrice,omitempty" name:"ComponentListPrice"`
+
+	// Price unit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentPriceMeasurementUnit *string `json:"ComponentPriceMeasurementUnit,omitempty" name:"ComponentPriceMeasurementUnit"`
+
+	// Component usage
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentUsage *string `json:"ComponentUsage,omitempty" name:"ComponentUsage"`
+
+	// Component usage unit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentUsageUnit *string `json:"ComponentUsageUnit,omitempty" name:"ComponentUsageUnit"`
+
+	// Resource usage duration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UsageDuration *string `json:"UsageDuration,omitempty" name:"UsageDuration"`
+
+	// Duration unit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DurationUnit *string `json:"DurationUnit,omitempty" name:"DurationUnit"`
+
+	// Original cost
+	// Original cost = component list price * component usage * usage duration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+
+	// Currency
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Currency *string `json:"Currency,omitempty" name:"Currency"`
+
+	// Total cost = discounted total - voucher deduction
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+}
+
+// Predefined struct for user
+type DescribeBillDetailRequestParams struct {
+	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
+	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// A pagination parameter that specifies the number of entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// A pagination parameter that specifies the current page number
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// Billing mode. Valid values: `prePay` (Monthly subscription), postPay` (Pay-As-You-Go resources).
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Transaction type. Valid values: `prepay_purchase` (Purchase), `prepay_renew` (Renewal), `prepay_modify` (Upgrade/Downgrade), `prepay_return` ( Monthly subscription refund), `postpay_deduct` (Pay-as-you-go), `postpay_deduct_h` (Hourly settlement), `postpay_deduct_d` (Daily settlement), `postpay_deduct_m` (Monthly settlement), `offline_deduct` (Offline project deduction), `online_deduct` (Offline product deduction), `recon_deduct` (Adjustment - deduction), `recon_increase` (Adjustment - compensation), `ripay_purchase` (One-off RI Fee), `postpay_deduct_s` (Spot), `ri_hour_pay` (Hourly RI fee), `prePurchase` (New monthly subscription), `preRenew` (Monthly subscription renewal), `preUpgrade` (Upgrade/Downgrade), `preDowngrade` (Upgrade/Downgrade), `svp_hour_pay` (Hourly Savings Plan fee), `recon_guarantee` (Minimum spend deduction), `pre_purchase` (New monthly subscription), `pre_renew` (Monthly subscription renewal), `pre_upgrade` (Upgrade/Downgrade), `pre_downgrade` (Upgrade/Downgrade).
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+}
+
+type DescribeBillDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
+	Month *string `json:"Month,omitempty" name:"Month"`
+
+	// A pagination parameter that specifies the number of entries per page
+	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+
+	// A pagination parameter that specifies the current page number
+	Page *int64 `json:"Page,omitempty" name:"Page"`
+
+	// Billing mode. Valid values: `prePay` (Monthly subscription), postPay` (Pay-As-You-Go resources).
+	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+
+	// Transaction type. Valid values: `prepay_purchase` (Purchase), `prepay_renew` (Renewal), `prepay_modify` (Upgrade/Downgrade), `prepay_return` ( Monthly subscription refund), `postpay_deduct` (Pay-as-you-go), `postpay_deduct_h` (Hourly settlement), `postpay_deduct_d` (Daily settlement), `postpay_deduct_m` (Monthly settlement), `offline_deduct` (Offline project deduction), `online_deduct` (Offline product deduction), `recon_deduct` (Adjustment - deduction), `recon_increase` (Adjustment - compensation), `ripay_purchase` (One-off RI Fee), `postpay_deduct_s` (Spot), `ri_hour_pay` (Hourly RI fee), `prePurchase` (New monthly subscription), `preRenew` (Monthly subscription renewal), `preUpgrade` (Upgrade/Downgrade), `preDowngrade` (Upgrade/Downgrade), `svp_hour_pay` (Hourly Savings Plan fee), `recon_guarantee` (Minimum spend deduction), `pre_purchase` (New monthly subscription), `pre_renew` (Monthly subscription renewal), `pre_upgrade` (Upgrade/Downgrade), `pre_downgrade` (Upgrade/Downgrade).
+	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+}
+
+func (r *DescribeBillDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	delete(f, "PageSize")
+	delete(f, "Page")
+	delete(f, "PayMode")
+	delete(f, "ActionType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillDetailResponseParams struct {
+	// Data details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DetailSet []*CustomerBillDetailData `json:"DetailSet,omitempty" name:"DetailSet"`
+
+	// Total number of data entries
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitempty" name:"Total"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeBillDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type DescribeBillSummaryByPayModeRequestParams struct {
 	// Bill month in the format of "yyyy-MM"

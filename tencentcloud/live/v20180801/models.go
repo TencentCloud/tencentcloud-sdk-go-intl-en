@@ -7477,6 +7477,101 @@ func (r *DescribeProvinceIspPlayInfoListResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type DescribeRecordTaskRequestParams struct {
+	// The start time of the tasks to retrieve in Unix timestamp. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time of the tasks to retrieve in Unix timestamp. The EndTime must be greater than the StartTime. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week. (Note: the start and end times of the task must be within the query time range).
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Page token used for batch retrieval: If a single request cannot retrieve all data, the interface will return a ScrollToken. The next request carrying this token will start retrieving from the next record.
+	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
+}
+
+type DescribeRecordTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start time of the tasks to retrieve in Unix timestamp. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week.
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time of the tasks to retrieve in Unix timestamp. The EndTime must be greater than the StartTime. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week. (Note: the start and end times of the task must be within the query time range).
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Page token used for batch retrieval: If a single request cannot retrieve all data, the interface will return a ScrollToken. The next request carrying this token will start retrieving from the next record.
+	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
+}
+
+func (r *DescribeRecordTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "StreamName")
+	delete(f, "DomainName")
+	delete(f, "AppName")
+	delete(f, "ScrollToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordTaskResponseParams struct {
+	// Page token: When the request does not return all data, this field indicates the token of the next record. When this field is empty, it means there is no more data.
+	ScrollToken *string `json:"ScrollToken,omitempty" name:"ScrollToken"`
+
+	// List of recording tasks. When this field is empty, it means all data has been returned.
+	TaskList []*RecordTask `json:"TaskList,omitempty" name:"TaskList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeScreenShotSheetNumListRequestParams struct {
 	// Start time in UTC time in the format of `yyyy-mm-ddTHH:MM:SSZ`.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -10894,6 +10989,32 @@ type RecordParam struct {
 	// VOD subapplication category
 	// Note: this field may return `null`, indicating that no valid value is obtained.
 	ClassId *int64 `json:"ClassId,omitempty" name:"ClassId"`
+}
+
+type RecordTask struct {
+	// Recording task ID.
+	TaskId *string `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Push domain name.
+	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+
+	// Push path.
+	AppName *string `json:"AppName,omitempty" name:"AppName"`
+
+	// Stream name.
+	StreamName *string `json:"StreamName,omitempty" name:"StreamName"`
+
+	// The start time of the recording task in Unix timestamp. 
+	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+
+	// The end time of the recording task in Unix timestamp. 
+	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+
+	// Recording template ID.
+	TemplateId *uint64 `json:"TemplateId,omitempty" name:"TemplateId"`
+
+	// The StopRecordTask API call stops the task at the Unix timestamp. A value of 0 indicates that the API has not been called to stop the task.
+	Stopped *uint64 `json:"Stopped,omitempty" name:"Stopped"`
 }
 
 type RecordTemplateInfo struct {

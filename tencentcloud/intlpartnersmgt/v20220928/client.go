@@ -211,6 +211,58 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     return
 }
 
+func NewDescribeBillDetailRequest() (request *DescribeBillDetailRequest) {
+    request = &DescribeBillDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeBillDetail")
+    
+    
+    return
+}
+
+func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
+    response = &DescribeBillDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeBillDetail
+// This API is used to query the customer bill details.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (response *DescribeBillDetailResponse, err error) {
+    return c.DescribeBillDetailWithContext(context.Background(), request)
+}
+
+// DescribeBillDetail
+// This API is used to query the customer bill details.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *DescribeBillDetailRequest) (response *DescribeBillDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillSummaryByPayModeRequest() (request *DescribeBillSummaryByPayModeRequest) {
     request = &DescribeBillSummaryByPayModeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -539,6 +591,7 @@ func NewDescribeCustomerUinResponse() (response *DescribeCustomerUinResponse) {
 // This API is used to query the list of customer UINs.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeCustomerUin(request *DescribeCustomerUinRequest) (response *DescribeCustomerUinResponse, err error) {
@@ -549,6 +602,7 @@ func (c *Client) DescribeCustomerUin(request *DescribeCustomerUinRequest) (respo
 // This API is used to query the list of customer UINs.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeCustomerUinWithContext(ctx context.Context, request *DescribeCustomerUinRequest) (response *DescribeCustomerUinResponse, err error) {

@@ -56,6 +56,9 @@ const (
 	// InvalidParameter.MailFormatIncorrect
 	INVALIDPARAMETER_MAILFORMATINCORRECT = "InvalidParameter.MailFormatIncorrect"
 
+	// 
+	INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
+
 	// InvalidParameter.PasswordContentIncorrect
 	INVALIDPARAMETER_PASSWORDCONTENTINCORRECT = "InvalidParameter.PasswordContentIncorrect"
 

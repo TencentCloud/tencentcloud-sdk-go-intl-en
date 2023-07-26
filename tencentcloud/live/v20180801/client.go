@@ -6605,6 +6605,82 @@ func (c *Client) DescribeProvinceIspPlayInfoListWithContext(ctx context.Context,
     return
 }
 
+func NewDescribeRecordTaskRequest() (request *DescribeRecordTaskRequest) {
+    request = &DescribeRecordTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeRecordTask")
+    
+    
+    return
+}
+
+func NewDescribeRecordTaskResponse() (response *DescribeRecordTaskResponse) {
+    response = &DescribeRecordTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRecordTask
+// This API is used to retrieve a list of recording tasks that were started and ended within a specified time range. 
+//
+// - Prerequisites: 
+//
+// 1. This API is only used to query recording tasks created by the CreateRecordTask interface. 
+//
+// 2. It cannot retrieve recording tasks that have been deleted by the DeleteRecordTask interface or tasks that have expired (platform retains for 3 months).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRecordTask(request *DescribeRecordTaskRequest) (response *DescribeRecordTaskResponse, err error) {
+    return c.DescribeRecordTaskWithContext(context.Background(), request)
+}
+
+// DescribeRecordTask
+// This API is used to retrieve a list of recording tasks that were started and ended within a specified time range. 
+//
+// - Prerequisites: 
+//
+// 1. This API is only used to query recording tasks created by the CreateRecordTask interface. 
+//
+// 2. It cannot retrieve recording tasks that have been deleted by the DeleteRecordTask interface or tasks that have expired (platform retains for 3 months).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRecordTaskWithContext(ctx context.Context, request *DescribeRecordTaskRequest) (response *DescribeRecordTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeScreenShotSheetNumListRequest() (request *DescribeScreenShotSheetNumListRequest) {
     request = &DescribeScreenShotSheetNumListRequest{
         BaseRequest: &tchttp.BaseRequest{},
