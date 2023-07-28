@@ -191,6 +191,7 @@ func NewDescribeBillResourceSummaryResponse() (response *DescribeBillResourceSum
 // error code that may be returned:
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummaryRequest) (response *DescribeBillResourceSummaryResponse, err error) {
     return c.DescribeBillResourceSummaryWithContext(context.Background(), request)
 }
@@ -201,6 +202,7 @@ func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummar
 // error code that may be returned:
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) DescribeBillResourceSummaryWithContext(ctx context.Context, request *DescribeBillResourceSummaryRequest) (response *DescribeBillResourceSummaryResponse, err error) {
     if request == nil {
         request = NewDescribeBillResourceSummaryRequest()
@@ -297,6 +299,7 @@ func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByP
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
@@ -309,6 +312,7 @@ func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayM
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
@@ -352,6 +356,7 @@ func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByP
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
@@ -365,6 +370,7 @@ func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProd
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
@@ -407,6 +413,7 @@ func NewDescribeBillSummaryByProjectResponse() (response *DescribeBillSummaryByP
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProject(request *DescribeBillSummaryByProjectRequest) (response *DescribeBillSummaryByProjectResponse, err error) {
@@ -419,6 +426,7 @@ func (c *Client) DescribeBillSummaryByProject(request *DescribeBillSummaryByProj
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByProjectWithContext(ctx context.Context, request *DescribeBillSummaryByProjectRequest) (response *DescribeBillSummaryByProjectResponse, err error) {
@@ -461,6 +469,7 @@ func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRe
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
@@ -473,6 +482,7 @@ func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegio
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {

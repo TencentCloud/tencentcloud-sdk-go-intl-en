@@ -1970,6 +1970,9 @@ type AsrFullTextConfigureInfo struct {
 	// <li>srt</li>
 	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormats` instead.</font>
 	SubtitleFormat *string `json:"SubtitleFormat,omitempty" name:"SubtitleFormat"`
+
+	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note：</font> If it fills in an empty string or leave this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
+	SrcLanguage *string `json:"SrcLanguage,omitempty" name:"SrcLanguage"`
 }
 
 type AsrFullTextConfigureInfoForUpdate struct {
@@ -1986,6 +1989,9 @@ type AsrFullTextConfigureInfoForUpdate struct {
 	// <li>srt</li>
 	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormatsOperation` instead.</font>
 	SubtitleFormat *string `json:"SubtitleFormat,omitempty" name:"SubtitleFormat"`
+
+	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li>
+	SrcLanguage *string `json:"SrcLanguage,omitempty" name:"SrcLanguage"`
 }
 
 type AsrWordsConfigureInfo struct {

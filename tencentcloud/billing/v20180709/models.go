@@ -162,10 +162,10 @@ type BillDetailComponent struct {
 	// Component usage unit: The unit of measurement for component usage
 	UsedAmountUnit *string `json:"UsedAmountUnit,omitempty" name:"UsedAmountUnit"`
 
-
+	// Raw usage/duration: The raw usage/duration of a component before deduction. Note: This field may return null, indicating that no valid values can be obtained.
 	RealTotalMeasure *string `json:"RealTotalMeasure,omitempty" name:"RealTotalMeasure"`
 
-
+	// Deducted usage/duration (including packages): The usage/duration deducted with a package. Note: This field may return null, indicating that no valid values can be obtained.
 	DeductedMeasure *string `json:"DeductedMeasure,omitempty" name:"DeductedMeasure"`
 
 	// Usage duration: The resource usage duration
@@ -627,7 +627,7 @@ type DescribeBillDetailRequestParams struct {
 	// Context information returned by the last request. You can set `Month` to `2023-05` or later to accelerate queries. We recommend users whose data volume is over 100 thousand entries use the paginated query feature, which can help greatly speed up your queries.
 	Context *string `json:"Context,omitempty" name:"Context"`
 
-
+	// The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
@@ -710,6 +710,7 @@ type DescribeBillDetailRequest struct {
 	// Context information returned by the last request. You can set `Month` to `2023-05` or later to accelerate queries. We recommend users whose data volume is over 100 thousand entries use the paginated query feature, which can help greatly speed up your queries.
 	Context *string `json:"Context,omitempty" name:"Context"`
 
+	// The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
@@ -828,7 +829,7 @@ type DescribeBillResourceSummaryRequestParams struct {
 	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
-
+	// The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 
@@ -883,6 +884,7 @@ type DescribeBillResourceSummaryRequest struct {
 	// Note: To query the product codes used in the current month, call <a href="https://intl.cloud.tencent.com/document/product/555/35761?from_cn_redirect=1">DescribeBillSummaryByProduct</a>.
 	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
 
+	// The account ID of the payer, which is the unique identifier of a Tencent Cloud user. This account is allowed to query its own bills by default. If an organization admin account needs to query the self-pay bills of members, this field should be specified as the member account ID.
 	PayerUin *string `json:"PayerUin,omitempty" name:"PayerUin"`
 }
 

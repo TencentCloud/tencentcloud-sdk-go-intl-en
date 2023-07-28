@@ -3162,6 +3162,7 @@ func NewDeleteVodDomainResponse() (response *DeleteVodDomainResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteVodDomain(request *DeleteVodDomainRequest) (response *DeleteVodDomainResponse, err error) {
     return c.DeleteVodDomainWithContext(context.Background(), request)
@@ -3174,6 +3175,7 @@ func (c *Client) DeleteVodDomain(request *DeleteVodDomainRequest) (response *Del
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteVodDomainWithContext(ctx context.Context, request *DeleteVodDomainRequest) (response *DeleteVodDomainResponse, err error) {
     if request == nil {
