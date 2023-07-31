@@ -1625,6 +1625,9 @@ type McuLayout struct {
 
 	// Custom cropping.
 	CustomCrop *McuCustomCrop `json:"CustomCrop,omitempty" name:"CustomCrop"`
+
+	// The display mode of the sub-background image during output: 0 for cropping, 1 for scaling and displaying the background, 2 for scaling and displaying the black background, 3 for proportional scaling. If not filled in, the default is 3.
+	BackgroundRenderMode *uint64 `json:"BackgroundRenderMode,omitempty" name:"BackgroundRenderMode"`
 }
 
 type McuLayoutParams struct {
@@ -1718,6 +1721,9 @@ type McuVideoParams struct {
 
 	// The watermark information for the mixed stream.
 	WaterMarkList []*McuWaterMarkParams `json:"WaterMarkList,omitempty" name:"WaterMarkList"`
+
+	// Background image display mode during output: 0 for crop, 1 for scale and display with black background, 2 for proportional scaling. The backend default is proportional scaling.
+	BackgroundRenderMode *uint64 `json:"BackgroundRenderMode,omitempty" name:"BackgroundRenderMode"`
 }
 
 type McuWaterMarkImage struct {

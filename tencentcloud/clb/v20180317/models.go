@@ -1176,7 +1176,7 @@ type CreateLoadBalancerRequestParams struct {
 	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
+	// It only works on LCU-supported instances on private networks and all instances on public networks.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
 	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
@@ -1197,8 +1197,8 @@ type CreateLoadBalancerRequestParams struct {
 
 	// Creates an LCU-supported instance.
 	// <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
-	// <ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
-	// <li>If you enable ultra-large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul></li><li>This parameter is not required when you create a shared instance.</li></ul>
+	// <ul><li>The default specification is Super Large 1.
+	// <li>If you have enabled Super u200dLarge LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -1222,6 +1222,9 @@ type CreateLoadBalancerRequestParams struct {
 
 	// Whether to allow CLB traffic to the target group. `true`: allows CLB traffic to the target group and verifies security groups only on CLB; `false`: denies CLB traffic to the target group and verifies security groups on both CLB and backend instances.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
+
+	// Upgrades to domain name-based CLB
+	DynamicVip *bool `json:"DynamicVip,omitempty" name:"DynamicVip"`
 }
 
 type CreateLoadBalancerRequest struct {
@@ -1260,7 +1263,7 @@ type CreateLoadBalancerRequest struct {
 	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
+	// It only works on LCU-supported instances on private networks and all instances on public networks.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
 	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
@@ -1281,8 +1284,8 @@ type CreateLoadBalancerRequest struct {
 
 	// Creates an LCU-supported instance.
 	// <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
-	// <ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
-	// <li>If you enable ultra-large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul></li><li>This parameter is not required when you create a shared instance.</li></ul>
+	// <ul><li>The default specification is Super Large 1.
+	// <li>If you have enabled Super u200dLarge LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -1306,6 +1309,9 @@ type CreateLoadBalancerRequest struct {
 
 	// Whether to allow CLB traffic to the target group. `true`: allows CLB traffic to the target group and verifies security groups only on CLB; `false`: denies CLB traffic to the target group and verifies security groups on both CLB and backend instances.
 	LoadBalancerPassToTarget *bool `json:"LoadBalancerPassToTarget,omitempty" name:"LoadBalancerPassToTarget"`
+
+	// Upgrades to domain name-based CLB
+	DynamicVip *bool `json:"DynamicVip,omitempty" name:"DynamicVip"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
@@ -1344,6 +1350,7 @@ func (r *CreateLoadBalancerRequest) FromJsonString(s string) error {
 	delete(f, "SlaveZoneId")
 	delete(f, "EipAddressId")
 	delete(f, "LoadBalancerPassToTarget")
+	delete(f, "DynamicVip")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLoadBalancerRequest has unknown keys!", "")
 	}
@@ -4656,7 +4663,8 @@ type HealthCheck struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TimeOut *int64 `json:"TimeOut,omitempty" name:"TimeOut"`
 
-	// Health check interval in seconds. Value range: 5-300. Default value: 5.
+	// Health check probing interval period. It defaults to `5`. For IPv4 CLB instances, the range is 2-300. u200dFor IPv6 CLB instances, the range is 5-300. Unit: second
+	// Note: For some IPv4 CLB instances created long ago, the range is 5-300.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IntervalTime *int64 `json:"IntervalTime,omitempty" name:"IntervalTime"`
 
@@ -4751,7 +4759,12 @@ type InternetAccessible struct {
 	// BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
 	InternetChargeType *string `json:"InternetChargeType,omitempty" name:"InternetChargeType"`
 
-	// Maximum outbound bandwidth in Mbps, which applies only to public network CLB. Value range: 0-65,535. Default value: 10.
+	// Maximum outgoing bandwidth in Mbps. It works on LCU-supported instances on private networks and all instances on public networks.
+	// - For shared and dedicated CLB instances on public networks, the range is 1Mbps-2048Mbps.
+	// - For all LCU-supported CLB instances:
+	//   - It defaults to General LCU-supported instance. SLA corresponds to Super Large 1, and the range of maximum outgoing bandwidth is 1 Mbps - 10240 Mbps.
+	//   - If you have enabled Super Large specification, the range of maximum outgoing bandwidth is 1 Mbps - 61440 Mbps Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitempty" name:"InternetMaxBandwidthOut"`
 
 	// Bandwidth package type, such as SINGLEISP
@@ -6079,6 +6092,9 @@ type ModifyLoadBalancerAttributesRequestParams struct {
 
 	// Specifies whether to enable deletion protection.
 	DeleteProtect *bool `json:"DeleteProtect,omitempty" name:"DeleteProtect"`
+
+	// Modifies the second-level domain name of CLB from mycloud.com to tencentclb.com. Note that the sub-domain names will be changed as well. After the modification, mycloud.com will be invalidated. 
+	ModifyClassicDomain *bool `json:"ModifyClassicDomain,omitempty" name:"ModifyClassicDomain"`
 }
 
 type ModifyLoadBalancerAttributesRequest struct {
@@ -6104,6 +6120,9 @@ type ModifyLoadBalancerAttributesRequest struct {
 
 	// Specifies whether to enable deletion protection.
 	DeleteProtect *bool `json:"DeleteProtect,omitempty" name:"DeleteProtect"`
+
+	// Modifies the second-level domain name of CLB from mycloud.com to tencentclb.com. Note that the sub-domain names will be changed as well. After the modification, mycloud.com will be invalidated. 
+	ModifyClassicDomain *bool `json:"ModifyClassicDomain,omitempty" name:"ModifyClassicDomain"`
 }
 
 func (r *ModifyLoadBalancerAttributesRequest) ToJsonString() string {
@@ -6125,6 +6144,7 @@ func (r *ModifyLoadBalancerAttributesRequest) FromJsonString(s string) error {
 	delete(f, "LoadBalancerPassToTarget")
 	delete(f, "SnatPro")
 	delete(f, "DeleteProtect")
+	delete(f, "ModifyClassicDomain")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancerAttributesRequest has unknown keys!", "")
 	}
@@ -6238,10 +6258,10 @@ type ModifyRuleRequestParams struct {
 	// Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, and TRPC.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
 
-	// TRPC callee server route, which is required when `ForwardType` is "TRPC".
+	// TRPC callee server route, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// TRPC calling service API, which is required when `ForwardType` is "TRPC".
+	// TRPC calling service API, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
@@ -6273,10 +6293,10 @@ type ModifyRuleRequest struct {
 	// Forwarding protocol between CLB instance and real server. Default value: HTTP. Valid values: HTTP, HTTPS, and TRPC.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
 
-	// TRPC callee server route, which is required when `ForwardType` is "TRPC".
+	// TRPC callee server route, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// TRPC calling service API, which is required when `ForwardType` is "TRPC".
+	// TRPC calling service API, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 }
 
@@ -7110,6 +7130,10 @@ type Resource struct {
 	// Available resources
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AvailabilitySet []*ResourceAvailability `json:"AvailabilitySet,omitempty" name:"AvailabilitySet"`
+
+	// ISP Type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TypeSet []*TypeInfo `json:"TypeSet,omitempty" name:"TypeSet"`
 }
 
 type ResourceAvailability struct {
@@ -7218,7 +7242,7 @@ type RuleInput struct {
 	// They represent weighted round robin, least connections, and IP hash, respectively. Default value: WRR.
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Forwarding protocol between the CLB instance and real server. Currently, HTTP/HTTPS/TRPC are supported.
+	// Forwarding protocol between the CLB instance and real server. HTTP/HTTPS/TRPC are supported. TRPC is now only available for internal usage.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
 
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
@@ -7230,10 +7254,10 @@ type RuleInput struct {
 	// Target real server type. NODE: binding a general node; TARGETGROUP: binding a target group.
 	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
 
-	// TRPC callee server route, which is required when `ForwardType` is `TRPC`.
+	// TRPC callee server route, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// TRPC calling service API, which is required when `ForwardType` is `TRPC`.
+	// TRPC calling service API, which is required when `ForwardType` is "TRPC". This is now only for internal usage.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 
 	// Whether to enable QUIC. Note: QUIC can be enabled only for HTTPS domain names
@@ -7308,12 +7332,12 @@ type RuleOutput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WafDomainId *string `json:"WafDomainId,omitempty" name:"WafDomainId"`
 
-	// TRPC callee server route, which is valid when `ForwardType` is `TRPC`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// TRPC callee server route, which is valid when `ForwardType` is `TRPC`. This is now only for internal usage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrpcCallee *string `json:"TrpcCallee,omitempty" name:"TrpcCallee"`
 
-	// TRPC calling service API, which is valid when `ForwardType` is `TRPC`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// TRPC calling service API, which is valid when `ForwardType` is `TRPC`. This is now only for internal usage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrpcFunc *string `json:"TrpcFunc,omitempty" name:"TrpcFunc"`
 
 	// QUIC status
@@ -7685,6 +7709,16 @@ type SnatIp struct {
 	Ip *string `json:"Ip,omitempty" name:"Ip"`
 }
 
+type SpecAvailability struct {
+	// Specification type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecType *string `json:"SpecType,omitempty" name:"SpecType"`
+
+	// Specification availability
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Availability *string `json:"Availability,omitempty" name:"Availability"`
+}
+
 type TagInfo struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
@@ -7827,7 +7861,9 @@ type TargetHealth struct {
 	// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status.
 	HealthStatusDetail *string `json:"HealthStatusDetail,omitempty" name:"HealthStatusDetail"`
 
-	// Detailed information about the current health status. Alive: healthy; Dead: exceptional; Unknown: check not started/checking/unknown status. This parameter will be discarded soon. We recommend that you use the HealthStatusDetail parameter.
+	// (**This parameter will be disused soon. Please use `HealthStatusDetail` instead.**) Details of the current health status. Values: `Alive` (healthy), `Dead` (abnormal), `Unknown` (Health check not started/checking/unknown status)
+	//
+	// Deprecated: HealthStatusDetial is deprecated.
 	HealthStatusDetial *string `json:"HealthStatusDetial,omitempty" name:"HealthStatusDetial"`
 }
 
@@ -7837,6 +7873,16 @@ type TargetRegionInfo struct {
 
 	// Network of the target, which is in the format of vpc-abcd1234 for VPC or 0 for basic network
 	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+}
+
+type TypeInfo struct {
+	// ISP Type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// Specification availability
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SpecAvailabilitySet []*SpecAvailability `json:"SpecAvailabilitySet,omitempty" name:"SpecAvailabilitySet"`
 }
 
 type ZoneInfo struct {
