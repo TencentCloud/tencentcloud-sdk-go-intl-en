@@ -4080,7 +4080,7 @@ func NewModifyLoadBalancerSlaResponse() (response *ModifyLoadBalancerSlaResponse
 //
 // Limits
 //
-// - This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB u200dconsole.
+// - This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB console.
 //
 // - An LCU-supported instance cannot be changed back to a shared instance.
 //
@@ -4104,7 +4104,7 @@ func (c *Client) ModifyLoadBalancerSla(request *ModifyLoadBalancerSlaRequest) (r
 //
 // Limits
 //
-// - This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB u200dconsole.
+// - This API can only be used to upgrade pay-as-you-go shared instances. To upgrade monthly-subscribed shared instances, please go to the CLB console.
 //
 // - An LCU-supported instance cannot be changed back to a shared instance.
 //
