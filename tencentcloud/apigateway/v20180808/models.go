@@ -198,6 +198,7 @@ type ApiIdStatus struct {
 	ApiId *string `json:"ApiId,omitempty" name:"ApiId"`
 
 	// API description
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ApiDesc *string `json:"ApiDesc,omitempty" name:"ApiDesc"`
 
 	// API path.
@@ -246,6 +247,8 @@ type ApiIdStatus struct {
 
 	// List of business APIs associated with authorization API.
 	// Note: this field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: RelationBuniessApiIds is deprecated.
 	RelationBuniessApiIds []*string `json:"RelationBuniessApiIds,omitempty" name:"RelationBuniessApiIds"`
 
 	// OAuth configuration information.
@@ -1277,16 +1280,20 @@ func (r *BuildAPIDocResponse) FromJsonString(s string) error {
 }
 
 type ConstantParameter struct {
-	// Constant parameter name, which is used only if `ServiceType` is `HTTP`.
+	// Constant parameter name This is only applicable when `ServiceType` is `HTTP`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitempty" name:"Name"`
 
-	// Constant parameter description, which is used only if `ServiceType` is `HTTP`.
+	// Constant parameter description This is only applicable when `ServiceType` is `HTTP`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 
-	// Constant parameter position, which is used only if `ServiceType` is `HTTP`.
+	// Constant paramter location This is only applicable when `ServiceType` is `HTTP`.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Position *string `json:"Position,omitempty" name:"Position"`
 
-	// Default value of constant parameter, which is used only if `ServiceType` is `HTTP`.
+	// Default value of the constant parameter This is only applicable when `ServiceType` is `HTTP`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DefaultValue *string `json:"DefaultValue,omitempty" name:"DefaultValue"`
 }
 
@@ -6370,14 +6377,6 @@ func (r *DisableApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DocumentSDK struct {
-	// Download link of generated file. Generated documents will be stored in COS.
-	DocumentURL *string `json:"DocumentURL,omitempty" name:"DocumentURL"`
-
-	// Download link of generated SDK file. Generated SDK files will be stored in COS.
-	SdkURL *string `json:"SdkURL,omitempty" name:"SdkURL"`
-}
-
 type DomainSetList struct {
 	// Domain name.
 	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
@@ -6526,88 +6525,21 @@ type Filter struct {
 	Values []*string `json:"Values,omitempty" name:"Values"`
 }
 
-// Predefined struct for user
-type GenerateApiDocumentRequestParams struct {
-	// Unique service ID of the document to be created.
-	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
-
-	// Environment of the service for which to create an SDK.
-	GenEnvironment *string `json:"GenEnvironment,omitempty" name:"GenEnvironment"`
-
-	// Programming language of the SDK to be created. Currently, only Python and JavaScript are supported.
-	GenLanguage *string `json:"GenLanguage,omitempty" name:"GenLanguage"`
-}
-
-type GenerateApiDocumentRequest struct {
-	*tchttp.BaseRequest
-	
-	// Unique service ID of the document to be created.
-	ServiceId *string `json:"ServiceId,omitempty" name:"ServiceId"`
-
-	// Environment of the service for which to create an SDK.
-	GenEnvironment *string `json:"GenEnvironment,omitempty" name:"GenEnvironment"`
-
-	// Programming language of the SDK to be created. Currently, only Python and JavaScript are supported.
-	GenLanguage *string `json:"GenLanguage,omitempty" name:"GenLanguage"`
-}
-
-func (r *GenerateApiDocumentRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GenerateApiDocumentRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ServiceId")
-	delete(f, "GenEnvironment")
-	delete(f, "GenLanguage")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GenerateApiDocumentRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type GenerateApiDocumentResponseParams struct {
-	// API document and SDK link.
-	Result *DocumentSDK `json:"Result,omitempty" name:"Result"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type GenerateApiDocumentResponse struct {
-	*tchttp.BaseResponse
-	Response *GenerateApiDocumentResponseParams `json:"Response"`
-}
-
-func (r *GenerateApiDocumentResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GenerateApiDocumentResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type HealthCheckConf struct {
 	// Whether health check is enabled.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsHealthCheck *bool `json:"IsHealthCheck,omitempty" name:"IsHealthCheck"`
 
-	// Health check threshold.
+	// Health check threshold. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RequestVolumeThreshold *int64 `json:"RequestVolumeThreshold,omitempty" name:"RequestVolumeThreshold"`
 
-	// Window size.
+	// Window size. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SleepWindowInMilliseconds *int64 `json:"SleepWindowInMilliseconds,omitempty" name:"SleepWindowInMilliseconds"`
 
 	// Threshold percentage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorThresholdPercentage *int64 `json:"ErrorThresholdPercentage,omitempty" name:"ErrorThresholdPercentage"`
 }
 
@@ -9553,7 +9485,8 @@ type UsagePlan struct {
 	// Usage plan name.
 	UsagePlanName *string `json:"UsagePlanName,omitempty" name:"UsagePlanName"`
 
-	// Usage plan description.
+	// Usage plan description. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UsagePlanDesc *string `json:"UsagePlanDesc,omitempty" name:"UsagePlanDesc"`
 
 	// Usage plan QPS. `-1` indicates no limit.
