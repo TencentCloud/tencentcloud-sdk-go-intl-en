@@ -17,9 +17,6 @@ package v20220901
 const (
 	// error codes for specific actions
 
-	// CAM signature/authentication error.
-	AUTHFAILURE = "AuthFailure"
-
 	// DryRun operation, which means the DryRun parameter is passed in yet the request will still be successful.
 	DRYRUNOPERATION = "DryRunOperation"
 
@@ -29,8 +26,14 @@ const (
 	// The certificate does not exist.
 	FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
 
+	// Insufficient account balance
+	FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+
 	// The site status is invalid.
 	FAILEDOPERATION_INVALIDZONESTATUS = "FailedOperation.InvalidZoneStatus"
+
+	// 
+	FAILEDOPERATION_MODIFYFAILED = "FailedOperation.ModifyFailed"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
@@ -65,44 +68,23 @@ const (
 	// Internal system error.
 	INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 
+	// 
+	INTERNALERROR_UNKNOWERROR = "InternalError.UnknowError"
+
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
 	// Too many attempts. Please try again later.
 	INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 
+	// 
+	INVALIDPARAMETER_ALIASDOMAINNOTSUPPORTSMCERT = "InvalidParameter.AliasDomainNotSupportSMCert"
+
 	// The query string has too many values.
 	INVALIDPARAMETER_CACHEKEYQUERYSTRINGTOOMANYVALUE = "InvalidParameter.CacheKeyQueryStringTooManyValue"
 
-	// HTTPS certificate chain error.
-	INVALIDPARAMETER_CERTCHAINERROR = "InvalidParameter.CertChainError"
-
-	// Certificate error.
-	INVALIDPARAMETER_CERTCHECKERROR = "InvalidParameter.CertCheckError"
-
-	// Certificate error.
-	INVALIDPARAMETER_CERTCOMPLETEERROR = "InvalidParameter.CertCompleteError"
-
-	// Certificate error.
-	INVALIDPARAMETER_CERTFORMATERROR = "InvalidParameter.CertFormatError"
-
-	// The HTTPS certificate has expired.
-	INVALIDPARAMETER_CERTISEXPIRED = "InvalidParameter.CertIsExpired"
-
-	// Certificate error.
-	INVALIDPARAMETER_CERTNOCN = "InvalidParameter.CertNoCn"
-
-	// Invalid HTTPS certificate.
-	INVALIDPARAMETER_CERTNOINFO = "InvalidParameter.CertNoInfo"
-
 	// Mismatch between the HTTPS certificate and the domain name.
 	INVALIDPARAMETER_CERTNOTMATCHDOMAIN = "InvalidParameter.CertNotMatchDomain"
-
-	// Mismatch between the HTTPS certificate and the key.
-	INVALIDPARAMETER_CERTNOTMATCHKEY = "InvalidParameter.CertNotMatchKey"
-
-	// Certificate error.
-	INVALIDPARAMETER_CERTNOTPEM = "InvalidParameter.CertNotPem"
 
 	// Internal error.
 	INVALIDPARAMETER_CERTSYSTEMERROR = "InvalidParameter.CertSystemError"
@@ -113,16 +95,13 @@ const (
 	// Certificate error.
 	INVALIDPARAMETER_CERTTOOSHORTKEYSIZE = "InvalidParameter.CertTooShortKeySize"
 
-	// Certificate error.
-	INVALIDPARAMETER_CERTUNSUPPORTEDTYPE = "InvalidParameter.CertUnsupportedType"
-
-	// 
+	// IPv6 access conflicts with client IP geographical location.
 	INVALIDPARAMETER_CLIENTIPCOUNTRYCONFLICTSWITHIPV6 = "InvalidParameter.ClientIpCountryConflictsWithIpv6"
 
 	// Unable to apply for a wildcard certificate under CNAME mode.
 	INVALIDPARAMETER_CNAMEWILDHOSTNOTALLOWAPPLYCERTIFICATE = "InvalidParameter.CnameWildHostNotAllowApplyCertificate"
 
-	// 
+	// The origin cannot be the same as the domain name.
 	INVALIDPARAMETER_CONFLICTHOSTORIGIN = "InvalidParameter.ConflictHostOrigin"
 
 	// The domain name does not exist or is not belong to this account.
@@ -185,7 +164,7 @@ const (
 	// The condition has too many regular expressions.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYREGULAR = "InvalidParameter.ErrInvalidConditionValueTooManyRegular"
 
-	// 
+	// Invalid condition: The parameter value exceeds the limit.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYVALUES = "InvalidParameter.ErrInvalidConditionValueTooManyValues"
 
 	// Invalid condition: Too many wildcards in the parameter.
@@ -214,6 +193,15 @@ const (
 
 	// Invalid token authentication parameter.
 	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
+
+	// 
+	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPETIMEFORMAT = "InvalidParameter.InvalidAuthenticationTypeTimeFormat"
+
+	// 
+	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPETIMEPARAM = "InvalidParameter.InvalidAuthenticationTypeTimeParam"
+
+	// 
+	INVALIDPARAMETER_INVALIDAWSPRIVATEACCESS = "InvalidParameter.InvalidAwsPrivateAccess"
 
 	// Invalid secondary origin domain.
 	INVALIDPARAMETER_INVALIDBACKUPSERVERNAME = "InvalidParameter.InvalidBackupServerName"
@@ -257,7 +245,7 @@ const (
 	// The package does not support Smart Acceleration.
 	INVALIDPARAMETER_INVALIDDYNAMICROUTINEBILLING = "InvalidParameter.InvalidDynamicRoutineBilling"
 
-	// 
+	// Invalid custom error page.
 	INVALIDPARAMETER_INVALIDERRORPAGE = "InvalidParameter.InvalidErrorPage"
 
 	// Invalid custom error page.
@@ -266,7 +254,7 @@ const (
 	// Invalid parameter "https".
 	INVALIDPARAMETER_INVALIDHTTPS = "InvalidParameter.InvalidHttps"
 
-	// 
+	// Invalid HTTPS certificate.
 	INVALIDPARAMETER_INVALIDHTTPSCERTINFO = "InvalidParameter.InvalidHttpsCertInfo"
 
 	// The cipher suite does not match the TLS version.
@@ -281,8 +269,14 @@ const (
 	// Invalid IPv6 settings.
 	INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
 
+	// 
+	INVALIDPARAMETER_INVALIDMAXAGETIME = "InvalidParameter.InvalidMaxAgeTime"
+
 	// Invalid origin server.
 	INVALIDPARAMETER_INVALIDORIGIN = "InvalidParameter.InvalidOrigin"
+
+	// 
+	INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 
 	// Invalid parameter.
 	INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
@@ -292,6 +286,9 @@ const (
 
 	// Invalid POST request size.
 	INVALIDPARAMETER_INVALIDPOSTSIZEVALUE = "InvalidParameter.InvalidPostSizeValue"
+
+	// 
+	INVALIDPARAMETER_INVALIDPRIVATEACCESSPARAMS = "InvalidParameter.InvalidPrivateAccessParams"
 
 	// The plan does not support QUIC.
 	INVALIDPARAMETER_INVALIDQUICBILLING = "InvalidParameter.InvalidQuicBilling"
@@ -317,9 +314,6 @@ const (
 	// Invalid response header.
 	INVALIDPARAMETER_INVALIDRESPONSEHEADERVALUE = "InvalidParameter.InvalidResponseHeaderValue"
 
-	// Invalid rule engine settings.
-	INVALIDPARAMETER_INVALIDRULEENGINE = "InvalidParameter.InvalidRuleEngine"
-
 	// Invalid rule engine operation.
 	INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
 
@@ -338,6 +332,12 @@ const (
 	// Invalid origin domain.
 	INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
 
+	// 
+	INVALIDPARAMETER_INVALIDSTANDARDDEBUGCLIENTIP = "InvalidParameter.InvalidStandardDebugClientIp"
+
+	// 
+	INVALIDPARAMETER_INVALIDSTANDARDDEBUGEXPIRETIMELIMIT = "InvalidParameter.InvalidStandardDebugExpireTimeLimit"
+
 	// Origin-pull request configuration error: Invalid query string.
 	INVALIDPARAMETER_INVALIDUPSTREAMREQUESTQUERYSTRINGVALUE = "InvalidParameter.InvalidUpstreamRequestQueryStringValue"
 
@@ -355,6 +355,12 @@ const (
 
 	// Maximum parameter length exceeded.
 	INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+
+	// 
+	INVALIDPARAMETER_MULTIPLYLAYERNOTSUPPORTSMARTROUTING = "InvalidParameter.MultiplyLayerNotSupportSmartRouting"
+
+	// 
+	INVALIDPARAMETER_NOTSUPPORTTHISPRESET = "InvalidParameter.NotSupportThisPreset"
 
 	// The origin address cannot be a private IP address.
 	INVALIDPARAMETER_ORIGINISINNERIP = "InvalidParameter.OriginIsInnerIp"
@@ -404,6 +410,9 @@ const (
 	// DNS records conflict with DNSSEC.
 	INVALIDPARAMETERVALUE_CONFLICTWITHDNSSEC = "InvalidParameterValue.ConflictWithDNSSEC"
 
+	// This DNS record conflicts with NS records.
+	INVALIDPARAMETERVALUE_CONFLICTWITHNSRECORD = "InvalidParameterValue.ConflictWithNSRecord"
+
 	// The host record cannot be the same as the record value.
 	INVALIDPARAMETERVALUE_CONTENTSAMEASNAME = "InvalidParameterValue.ContentSameAsName"
 
@@ -431,6 +440,9 @@ const (
 	// Reached the daily upper limit of resource number
 	LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
 
+	// Not supported by the plan.
+	LIMITEXCEEDED_PACKNOTALLOW = "LimitExceeded.PackNotAllow"
+
 	// Query time limit exceeded.
 	LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
 
@@ -440,8 +452,14 @@ const (
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"
 
-	// 
+	// Please contact the sales rep to enable Cross-MLC-border acceleration.
 	OPERATIONDENIED_ACCELERATEMAINLANDDISABLE = "OperationDenied.AccelerateMainlandDisable"
+
+	// 
+	OPERATIONDENIED_ACCELERATEMAINLANDIPV6CONFLICT = "OperationDenied.AccelerateMainlandIpv6Conflict"
+
+	// The EdgeOne service of the site is being disabled. Please try again later.
+	OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
 
 	// Switch failed: There are domain names in the shared CNAME group.
 	OPERATIONDENIED_DOMAININSHARECNAMEGROUP = "OperationDenied.DomainInShareCnameGroup"
@@ -452,14 +470,29 @@ const (
 	// The domain name doesn't have an ICP filing number.
 	OPERATIONDENIED_DOMAINNOICP = "OperationDenied.DomainNoICP"
 
+	// The EdgeOne service of the site is disabled. Please enable it and try again.
+	OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+
+	// The security service must be enabled when you enable the DDoS Protection.
+	OPERATIONDENIED_INVALIDADVANCEDDEFENSESECURITYTYPE = "OperationDenied.InvalidAdvancedDefenseSecurityType"
+
+	// The acceleration regions of the site must be in the Chinese mainland when you enable the DDoS Protection.
+	OPERATIONDENIED_INVALIDADVANCEDDEFENSEZONEAREA = "OperationDenied.InvalidAdvancedDefenseZoneArea"
+
 	// Operation failed: The L4 proxy is blocked.
 	OPERATIONDENIED_L4PROXYINBANNEDSTATUS = "OperationDenied.L4ProxyInBannedStatus"
+
+	// The EdgeOne service cannot be disabled for the site: A L4 proxy instance is being deployed.
+	OPERATIONDENIED_L4PROXYINPROGRESSSTATUS = "OperationDenied.L4ProxyInProgressStatus"
+
+	// 
+	OPERATIONDENIED_L4PROXYINSTOPPINGSTATUS = "OperationDenied.L4ProxyInStoppingStatus"
 
 	// Unable to operate the L4 instance when it’s not running
 	OPERATIONDENIED_L4STATUSNOTINONLINE = "OperationDenied.L4StatusNotInOnline"
 
-	// The current intermediate IP is of the latest version. 
-	OPERATIONDENIED_LATESTVERSIONNOW = "OperationDenied.LatestVersionNow"
+	// The EdgeOne service cannot be disabled for the site: An accelerated domain name is being deployed.
+	OPERATIONDENIED_L7HOSTINPROCESSSTATUS = "OperationDenied.L7HostInProcessStatus"
 
 	// Unable to switch to NS for multiple sites using CNAME.
 	OPERATIONDENIED_MULTIPLECNAMEZONE = "OperationDenied.MultipleCnameZone"
@@ -530,7 +563,7 @@ const (
 	// The resource doesn’t exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
-	// 
+	// Maximum upload size is not configured.
 	RESOURCENOTFOUND_POSTMAXSIZEQUOTANOTFOUND = "ResourceNotFound.PostMaxSizeQuotaNotFound"
 
 	// The resource is unavailable.
@@ -547,9 +580,6 @@ const (
 
 	// The domain name does not exist or not use a proxy.
 	RESOURCEUNAVAILABLE_HOSTNOTFOUND = "ResourceUnavailable.HostNotFound"
-
-	// No proxied sites found
-	RESOURCEUNAVAILABLE_PROXYZONENOTFOUND = "ResourceUnavailable.ProxyZoneNotFound"
 
 	// The site does not exist or is not belong to this account.
 	RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
@@ -575,6 +605,6 @@ const (
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
-	// 
+	// The origin type of the target domain cannot be COS for an alias domain.
 	UNSUPPORTEDOPERATION_TARGETNAMEORIGINTYPECOS = "UnsupportedOperation.TargetNameOriginTypeCos"
 )

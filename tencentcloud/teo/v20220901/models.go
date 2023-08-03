@@ -21,7 +21,9 @@ import (
 )
 
 type AccelerateMainland struct {
-
+	// Whether to enable Cross-MLC-border acceleration. Valid values: 
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -448,6 +450,9 @@ type ApplicationProxy struct {
 
 	// List of rules.
 	ApplicationProxyRules []*ApplicationProxyRule `json:"ApplicationProxyRules,omitempty" name:"ApplicationProxyRules"`
+
+	// Cross-MLC-border acceleration.
+	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 }
 
 type ApplicationProxyRule struct {
@@ -601,15 +606,14 @@ type BotConfig struct {
 }
 
 type BotExtendAction struct {
-	// The action. Values:
-	// <li>`monitor`: Observe</li>
-	// <li>`trans`: Allow</li>
-	// <li>`alg`: JavaScript challenge</li>
-	// <li>`captcha`: Managed challenge</li>
-	// <li>`random`: Weighted random. Actions are executed based on the percentage specified in `ExtendActions`.</li>
-	// <li>`silence`: Drop w/o response</li>
-	// <li>`shortdelay`: Add short latency</li>
-	// <li>`longdelay`: Add long latency</li>
+	// Action. Valid values: 
+	// <li>`monitor`: Observe;</li>
+	// <li>`alg`: JavaScript challenge;</li>
+	// <li>`captcha`: Managed challenge;</li>
+	// <li>`random`: Actions are executed based on the percentage specified in `ExtendActions`;</li>
+	// <li>`silence`: Silence;</li>
+	// <li>`shortdelay`: Add short latency;</li>
+	// <li>`longdelay`: Add long latency.</li>
 	Action *string `json:"Action,omitempty" name:"Action"`
 
 	// The probability for triggering the action. Value range: 0-100.
@@ -679,15 +683,16 @@ type BotUserRule struct {
 
 	RuleName *string `json:"RuleName,omitempty" name:"RuleName"`
 
-	// The action. Values:
-	// <li>`drop`: Block</li>
-	// <li>`monitor`: Observe</li>
-	// <li>`trans`: Allow</li>
-	// <li>`alg`: JavaScript challenge</li>
-	// <li>`captcha`: Managed challenge</li>
-	// <li>`silence`: Drop w/o response</li>
-	// <li>`shortdelay`: Add short latency</li>
-	// <li>`longdelay`: Add long latency</li>
+	// Action. Valid values: 
+	// <li>`drop`: Block;</li>
+	// <li>`monitor`: Observe;</li>
+	// <li>`trans`: Allow;</li>
+	// <li>`alg`: JavaScript challenge;</li>
+	// <li>`captcha`: Managed challenge;</li>
+	// <li>`random`: Random action;</li>
+	// <li>`silence`: Silence;</li>
+	// <li>`shortdelay`: Add short latency;</li>
+	// <li>`longdelay`: Add long latency.</li>
 	Action *string `json:"Action,omitempty" name:"Action"`
 
 	// The rule status. Values:
@@ -779,8 +784,8 @@ type CacheKey struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IgnoreCase *string `json:"IgnoreCase,omitempty" name:"IgnoreCase"`
 
-	// Request parameter contained in `CacheKey`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Request parameter contained in `CacheKey`. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	QueryString *QueryString `json:"QueryString,omitempty" name:"QueryString"`
 }
 
@@ -795,75 +800,14 @@ type CachePrefresh struct {
 	Percent *int64 `json:"Percent,omitempty" name:"Percent"`
 }
 
-// Predefined struct for user
-type CheckCertificateRequestParams struct {
-	// Content of the certificate.
-	Certificate *string `json:"Certificate,omitempty" name:"Certificate"`
-
-	// Content of the private key.
-	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
-}
-
-type CheckCertificateRequest struct {
-	*tchttp.BaseRequest
-	
-	// Content of the certificate.
-	Certificate *string `json:"Certificate,omitempty" name:"Certificate"`
-
-	// Content of the private key.
-	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
-}
-
-func (r *CheckCertificateRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CheckCertificateRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Certificate")
-	delete(f, "PrivateKey")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckCertificateRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CheckCertificateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CheckCertificateResponse struct {
-	*tchttp.BaseResponse
-	Response *CheckCertificateResponseParams `json:"Response"`
-}
-
-func (r *CheckCertificateResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CheckCertificateResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type ClientIpCountry struct {
 	// Whether to enable configuration. Values:
 	// <li>`on`: Enable</li>
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// Header name of ClientIpCountry. This field is valid only when `Switch=on`.
-	// If it is left empty, the default value `EO-Client-IPCountry` will be used.
+	// Name of the request header that contains the client IP region. It is valid when `Switch=on`. 
+	// The default value `EO-Client-IPCountry` is used when it is not specified.
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
 }
 
@@ -873,89 +817,10 @@ type ClientIpHeader struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// The name of the HTTP header that contains the client IP, which is used for forwarding.
-	// If this field is not specified, the default value `X-Forwarded-IP` will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Name of the request header that contains the client IP for origin-pull. 
+	// The default value `X-Forwarded-IP` is used when it is not specified. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
-}
-
-type ClientRule struct {
-	// The client IP.
-	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
-
-	// The rule type.
-	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
-
-	// The rule ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
-
-	// The rule description.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// The blocking status. Values:
-	// <li>`block`: Block;</li>
-	// <li>`allow`: Allow.</li>
-	IpStatus *string `json:"IpStatus,omitempty" name:"IpStatus"`
-
-	// The blocking time recorded in UNIX timestamp.
-	BlockTime *int64 `json:"BlockTime,omitempty" name:"BlockTime"`
-
-	// The data entry ID.
-	Id *string `json:"Id,omitempty" name:"Id"`
-}
-
-type ClsLogTopicInfo struct {
-	// Name of the task.
-	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
-
-	// Name of the site.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-
-	// ID of the logset.
-	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
-
-	// ID of the log topic.
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
-
-	// Type of the task.
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
-
-	// Retention period of the log topic.
-	Period *int64 `json:"Period,omitempty" name:"Period"`
-
-	// Whether the log topic is enabled.
-	Enabled *bool `json:"Enabled,omitempty" name:"Enabled"`
-
-	// Whether the log topic is deleted.
-	Deleted *string `json:"Deleted,omitempty" name:"Deleted"`
-
-	// Creation time.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
-
-	// Target location. Values:
-	// <li>`cls`: Ship logs to CLS;</li>
-	// <li>`custom_enpoint`: Ship logs to a custom address.</li>
-	Target *string `json:"Target,omitempty" name:"Target"`
-
-	// Region of the logset.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	LogSetRegion *string `json:"LogSetRegion,omitempty" name:"LogSetRegion"`
-
-	// ID of the site.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Acceleration region. Values:
-	// <li>`mainland`: Chinese mainland;</li>
-	// <li>`overseas`: Global (outside the Chinese mainland).</li>
-	Area *string `json:"Area,omitempty" name:"Area"`
-
-	// Type of the shipping task. Values:
-	// <li>`cls`: Ship logs to CLS.</li>
-	// <li>`custom_endpoint`: Ship logs to custom APIs.</li>
-	LogSetType *string `json:"LogSetType,omitempty" name:"LogSetType"`
 }
 
 type CodeAction struct {
@@ -1135,11 +1000,11 @@ func (r *CreateAliasDomainResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateApplicationProxyRequestParams struct {
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// When `ProxyType=hostname`, this field indicates a domain name or subdomain name.
-	// When `ProxyType=instance`, it indicates a proxy instance.
+	// Domain name or subdomain name when `ProxyType=hostname`; 
+	// Instance name when `ProxyType=instance`.
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// The scheduling mode. Values:
@@ -1166,23 +1031,26 @@ type CreateApplicationProxyRequestParams struct {
 	// If not specified, this field uses the default value 600.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
 
-	// The IPv6 access configuration.
-	// If this field is not specified, IPv6 access will be disabled.
+	// Ipv6 access configuration. 
+	// IPv6 access is disabled if it is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
 	// The rule details.
 	// If this field is not specified, an application proxy rule will not be created.
 	ApplicationProxyRules []*ApplicationProxyRule `json:"ApplicationProxyRules,omitempty" name:"ApplicationProxyRules"`
+
+	// Cross-MLC-border acceleration. It is disabled if this parameter is not specified.
+	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 }
 
 type CreateApplicationProxyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// When `ProxyType=hostname`, this field indicates a domain name or subdomain name.
-	// When `ProxyType=instance`, it indicates a proxy instance.
+	// Domain name or subdomain name when `ProxyType=hostname`; 
+	// Instance name when `ProxyType=instance`.
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// The scheduling mode. Values:
@@ -1209,13 +1077,16 @@ type CreateApplicationProxyRequest struct {
 	// If not specified, this field uses the default value 600.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
 
-	// The IPv6 access configuration.
-	// If this field is not specified, IPv6 access will be disabled.
+	// Ipv6 access configuration. 
+	// IPv6 access is disabled if it is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
 	// The rule details.
 	// If this field is not specified, an application proxy rule will not be created.
 	ApplicationProxyRules []*ApplicationProxyRule `json:"ApplicationProxyRules,omitempty" name:"ApplicationProxyRules"`
+
+	// Cross-MLC-border acceleration. It is disabled if this parameter is not specified.
+	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 }
 
 func (r *CreateApplicationProxyRequest) ToJsonString() string {
@@ -1239,6 +1110,7 @@ func (r *CreateApplicationProxyRequest) FromJsonString(s string) error {
 	delete(f, "SessionPersistTime")
 	delete(f, "Ipv6")
 	delete(f, "ApplicationProxyRules")
+	delete(f, "AccelerateMainland")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationProxyRequest has unknown keys!", "")
 	}
@@ -1412,57 +1284,6 @@ func (r *CreateApplicationProxyRuleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateApplicationProxyRuleResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateCredentialRequestParams struct {
-
-}
-
-type CreateCredentialRequest struct {
-	*tchttp.BaseRequest
-	
-}
-
-func (r *CreateCredentialRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateCredentialRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCredentialRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateCredentialResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateCredentialResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateCredentialResponseParams `json:"Response"`
-}
-
-func (r *CreateCredentialResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateCredentialResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1666,8 +1487,9 @@ type CreatePrefetchTaskRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// List of resources to be pre-warmed, for example:
-	// http://www.example.com/example.txt
+	// Resources to be pre-warmed, for example: 
+	// http://www.example.com/example.txt 
+	// Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Whether to encode a URL according to RFC3986. Enable this field when the URL contains non-ASCII characters.
@@ -1683,8 +1505,9 @@ type CreatePrefetchTaskRequest struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// List of resources to be pre-warmed, for example:
-	// http://www.example.com/example.txt
+	// Resources to be pre-warmed, for example: 
+	// http://www.example.com/example.txt 
+	// Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Whether to encode a URL according to RFC3986. Enable this field when the URL contains non-ASCII characters.
@@ -1750,29 +1573,35 @@ type CreatePurgeTaskRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Mode of cache purging. Values:
-	// <li>`purge_url`: Purge by URL</li>
-	// <li>`purge_prefix`: Purge by prefix</li>
-	// <li>`purge_host`: Purge by hostname</li>
-	// <li>`purge_all`: Purge all caches</li>
-	// <li>`purge_cache_tag`: Purge by cache tag</li>
+	// Purging mode. Valid values: 
+	// <li>`purge_url`: Purge by URL;</li>
+	// <li>`purge_prefix`: Purge by directory;</li>
+	// <li>`purge_host`: Purge by hostname;</li>
+	// <li>`purge_all`: Puege all cache;</li>
+	// <li>`purge_cache_tag`: Purge by cache tag.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Target resource to be purged, which depends on the `Type` field.
-	// 1. When `Type = purge_host`:
-	// Enter the hostname, such as www.example.com and foo.bar.example.com.
-	// 2. When `Type = purge_prefix`:
-	// Enter the prefix, such as http://www.example.com/example.
-	// 3. When `Type = purge_url`:
-	// Enter the URL, such as https://www.example.com/example.jpg.
-	// 4. When `Type = purge_all`:
-	// This field can be left empty.
-	// 5. When `Type = purge_cache_tag`:
-	// Enter the cache tag, such as tag1.
+
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Resource to be purged, which depends on the `Type` field. 
+	// 1. When `Type = purge_host`: 
+	// Enter the hostname, such as www.example.com and foo.bar.example.com. 
+	// 2. When `Type = purge_prefix`: 
+	// Enter the prefix, such as http://www.example.com/example/. 
+	// 3. When `Type = purge_url`: 
+	// Enter the URL, such as https://www.example.com/example.jpg. 
+	// 4. When `Type = purge_all`: 
+	// `Targets` can be left empty. 
+	// 5. When `Type = purge_cache_tag`: 
+	// Enter the cache tag, such as tag1. 
+	// Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
 	// Note that if it’s enabled, the purging is based on the converted URLs.
+	//
+	// Deprecated: EncodeUrl is deprecated.
 	EncodeUrl *bool `json:"EncodeUrl,omitempty" name:"EncodeUrl"`
 }
 
@@ -1782,25 +1611,28 @@ type CreatePurgeTaskRequest struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Mode of cache purging. Values:
-	// <li>`purge_url`: Purge by URL</li>
-	// <li>`purge_prefix`: Purge by prefix</li>
-	// <li>`purge_host`: Purge by hostname</li>
-	// <li>`purge_all`: Purge all caches</li>
-	// <li>`purge_cache_tag`: Purge by cache tag</li>
+	// Purging mode. Valid values: 
+	// <li>`purge_url`: Purge by URL;</li>
+	// <li>`purge_prefix`: Purge by directory;</li>
+	// <li>`purge_host`: Purge by hostname;</li>
+	// <li>`purge_all`: Puege all cache;</li>
+	// <li>`purge_cache_tag`: Purge by cache tag.</li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Target resource to be purged, which depends on the `Type` field.
-	// 1. When `Type = purge_host`:
-	// Enter the hostname, such as www.example.com and foo.bar.example.com.
-	// 2. When `Type = purge_prefix`:
-	// Enter the prefix, such as http://www.example.com/example.
-	// 3. When `Type = purge_url`:
-	// Enter the URL, such as https://www.example.com/example.jpg.
-	// 4. When `Type = purge_all`:
-	// This field can be left empty.
-	// 5. When `Type = purge_cache_tag`:
-	// Enter the cache tag, such as tag1.
+	Method *string `json:"Method,omitempty" name:"Method"`
+
+	// Resource to be purged, which depends on the `Type` field. 
+	// 1. When `Type = purge_host`: 
+	// Enter the hostname, such as www.example.com and foo.bar.example.com. 
+	// 2. When `Type = purge_prefix`: 
+	// Enter the prefix, such as http://www.example.com/example/. 
+	// 3. When `Type = purge_url`: 
+	// Enter the URL, such as https://www.example.com/example.jpg. 
+	// 4. When `Type = purge_all`: 
+	// `Targets` can be left empty. 
+	// 5. When `Type = purge_cache_tag`: 
+	// Enter the cache tag, such as tag1. 
+	// Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -1822,6 +1654,7 @@ func (r *CreatePurgeTaskRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "Type")
+	delete(f, "Method")
 	delete(f, "Targets")
 	delete(f, "EncodeUrl")
 	if len(f) > 0 {
@@ -1856,66 +1689,6 @@ func (r *CreatePurgeTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreatePurgeTaskResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateReplayTaskRequestParams struct {
-	// List of replay task IDs.
-	Ids []*string `json:"Ids,omitempty" name:"Ids"`
-}
-
-type CreateReplayTaskRequest struct {
-	*tchttp.BaseRequest
-	
-	// List of replay task IDs.
-	Ids []*string `json:"Ids,omitempty" name:"Ids"`
-}
-
-func (r *CreateReplayTaskRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateReplayTaskRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Ids")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReplayTaskRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateReplayTaskResponseParams struct {
-	// ID of the task.
-	JobId *string `json:"JobId,omitempty" name:"JobId"`
-
-	// List of failed tasks and reasons.
-	FailedList []*FailReason `json:"FailedList,omitempty" name:"FailedList"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type CreateReplayTaskResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateReplayTaskResponseParams `json:"Response"`
-}
-
-func (r *CreateReplayTaskResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateReplayTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2009,63 +1782,66 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateSpeedTestingRequestParams struct {
-	// The site ID.
+type CreateSecurityIPGroupRequestParams struct {
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name to test.
-	Host *string `json:"Host,omitempty" name:"Host"`
+	// IP group information.
+	IPGroup *IPGroup `json:"IPGroup,omitempty" name:"IPGroup"`
 }
 
-type CreateSpeedTestingRequest struct {
+type CreateSecurityIPGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The subdomain name to test.
-	Host *string `json:"Host,omitempty" name:"Host"`
+	// IP group information.
+	IPGroup *IPGroup `json:"IPGroup,omitempty" name:"IPGroup"`
 }
 
-func (r *CreateSpeedTestingRequest) ToJsonString() string {
+func (r *CreateSecurityIPGroupRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateSpeedTestingRequest) FromJsonString(s string) error {
+func (r *CreateSecurityIPGroupRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
 	delete(f, "ZoneId")
-	delete(f, "Host")
+	delete(f, "IPGroup")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSpeedTestingRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecurityIPGroupRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
-type CreateSpeedTestingResponseParams struct {
+type CreateSecurityIPGroupResponseParams struct {
+	// IP group ID.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
 }
 
-type CreateSpeedTestingResponse struct {
+type CreateSecurityIPGroupResponse struct {
 	*tchttp.BaseResponse
-	Response *CreateSpeedTestingResponseParams `json:"Response"`
+	Response *CreateSecurityIPGroupResponseParams `json:"Response"`
 }
 
-func (r *CreateSpeedTestingResponse) ToJsonString() string {
+func (r *CreateSecurityIPGroupResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *CreateSpeedTestingResponse) FromJsonString(s string) error {
+func (r *CreateSecurityIPGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2661,6 +2437,67 @@ func (r *DeleteRulesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteSecurityIPGroupRequestParams struct {
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// IP group ID.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+}
+
+type DeleteSecurityIPGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// IP group ID.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+}
+
+func (r *DeleteSecurityIPGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityIPGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSecurityIPGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSecurityIPGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteSecurityIPGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSecurityIPGroupResponseParams `json:"Response"`
+}
+
+func (r *DeleteSecurityIPGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteZoneRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -2716,7 +2553,7 @@ func (r *DeleteZoneResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccelerationDomainsRequestParams struct {
-	// Site ID of the accelerated domain name. If it’s not specified, all accelerated domain names under the site are returned.
+	// ID of the site related with the accelerated domain name.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Filters. Each filter can have up to 20 entries. See below for details: 
@@ -2754,7 +2591,7 @@ type DescribeAccelerationDomainsRequestParams struct {
 type DescribeAccelerationDomainsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID of the accelerated domain name. If it’s not specified, all accelerated domain names under the site are returned.
+	// ID of the site related with the accelerated domain name.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Filters. Each filter can have up to 20 entries. See below for details: 
@@ -2839,97 +2676,6 @@ func (r *DescribeAccelerationDomainsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccelerationDomainsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAddableEntityListRequestParams struct {
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Type of the shipping entity. Values:
-	// <li>`domain`: L7 acceleration logs;</li>
-	// <li>`application`: L4 acceleration logs;</li>
-	// <li>`web-rateLiming`: Rate limiting logs;</li>
-	// <li>`web-attack`: Web security logs;</li>
-	// <li>`web-rule`: Custom rule logs;</li>
-	// <li>`web-bot`: Bot management logs.</li>
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
-
-	// The service region. Values:
-	// <li>`mainland`: Chinese mainland.</li>
-	// <li>`overseas`: Regions outside the Chinese mainland.</li>For an account registered on the Chinese site, it defaults to `mainland`. For an account registered on the international site, it defaults to `overseas`.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeAddableEntityListRequest struct {
-	*tchttp.BaseRequest
-	
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Type of the shipping entity. Values:
-	// <li>`domain`: L7 acceleration logs;</li>
-	// <li>`application`: L4 acceleration logs;</li>
-	// <li>`web-rateLiming`: Rate limiting logs;</li>
-	// <li>`web-attack`: Web security logs;</li>
-	// <li>`web-rule`: Custom rule logs;</li>
-	// <li>`web-bot`: Bot management logs.</li>
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
-
-	// The service region. Values:
-	// <li>`mainland`: Chinese mainland.</li>
-	// <li>`overseas`: Regions outside the Chinese mainland.</li>For an account registered on the Chinese site, it defaults to `mainland`. For an account registered on the international site, it defaults to `overseas`.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeAddableEntityListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAddableEntityListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "EntityType")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAddableEntityListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAddableEntityListResponseParams struct {
-	// Total number of query results.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// List of available shipping entities.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	EntityList []*string `json:"EntityList,omitempty" name:"EntityList"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeAddableEntityListResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAddableEntityListResponseParams `json:"Response"`
-}
-
-func (r *DescribeAddableEntityListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAddableEntityListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3142,124 +2888,6 @@ func (r *DescribeAvailablePlansResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAvailablePlansResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeClientRuleListRequestParams struct {
-	// The ID of the site to be queried.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The subdomain name to be queried.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Rule type. Values:
-	// <li>`acl`: Custom rules;</li>
-	// <li>`rate`: Rate limiting rules.</li>All rules will be queried if this field is not specified.
-	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
-
-	// The rule ID.
-	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
-
-	// The client IP.
-	SourceClientIp *string `json:"SourceClientIp,omitempty" name:"SourceClientIp"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeClientRuleListRequest struct {
-	*tchttp.BaseRequest
-	
-	// The ID of the site to be queried.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The subdomain name to be queried.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Rule type. Values:
-	// <li>`acl`: Custom rules;</li>
-	// <li>`rate`: Rate limiting rules.</li>All rules will be queried if this field is not specified.
-	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
-
-	// The rule ID.
-	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
-
-	// The client IP.
-	SourceClientIp *string `json:"SourceClientIp,omitempty" name:"SourceClientIp"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeClientRuleListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeClientRuleListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Domain")
-	delete(f, "RuleType")
-	delete(f, "RuleId")
-	delete(f, "SourceClientIp")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClientRuleListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeClientRuleListResponseParams struct {
-	// The blocked client information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*ClientRule `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeClientRuleListResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeClientRuleListResponseParams `json:"Response"`
-}
-
-func (r *DescribeClientRuleListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeClientRuleListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3817,102 +3445,6 @@ func (r *DescribeDefaultCertificatesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeDnsDataRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone`:<br>   Filter by <strong>site name</strong>, such as tencent.com (up to one entry)<br>   Type: String<br>   Required: No
-	// <li>`host`:<br>   Filter by <strong>domain name</strong>, such as test.tencent.com (up to one entry)<br>   Type: String<br>   Required: No
-	// <li>`type`:<br>   Filter by <strong>DNS record type</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `A`: A record<br>   `AAAA`: AAAA record<br>   `CNAME`: CNAME record<br>   `MX`: MX record<br>   `TXT`: TXT record<br>   `NS`: NS record<br>   `SRV`: SRV record<br>   `CAA`: CAA record
-	// <li>`code`:<br>   Filter by <strong>DNS status code</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `NoError`: Success<br>   `NXDomain`: Not found the request domain<br>   `NotImp`: Not supported request type<br>   `Refused`: The domain name server refuses to execute the request for policy reasons
-	// <li>`area`:<br>   Filter by <strong>DNS region</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `Asia`<br>   `Europe`<br>   `Africa`<br>   `Oceania`<br>   `Americas`
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>This field will be set to the default value `min` if not specified.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-}
-
-type DescribeDnsDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone`:<br>   Filter by <strong>site name</strong>, such as tencent.com (up to one entry)<br>   Type: String<br>   Required: No
-	// <li>`host`:<br>   Filter by <strong>domain name</strong>, such as test.tencent.com (up to one entry)<br>   Type: String<br>   Required: No
-	// <li>`type`:<br>   Filter by <strong>DNS record type</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `A`: A record<br>   `AAAA`: AAAA record<br>   `CNAME`: CNAME record<br>   `MX`: MX record<br>   `TXT`: TXT record<br>   `NS`: NS record<br>   `SRV`: SRV record<br>   `CAA`: CAA record
-	// <li>`code`:<br>   Filter by <strong>DNS status code</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `NoError`: Success<br>   `NXDomain`: Not found the request domain<br>   `NotImp`: Not supported request type<br>   `Refused`: The domain name server refuses to execute the request for policy reasons
-	// <li>`area`:<br>   Filter by <strong>DNS region</strong><br>   Type: String<br>   Required: No<br>   Values:<br>   `Asia`<br>   `Europe`<br>   `Africa`<br>   `Oceania`<br>   `Americas`
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>This field will be set to the default value `min` if not specified.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-}
-
-func (r *DescribeDnsDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDnsDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "Filters")
-	delete(f, "Interval")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDnsDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeDnsDataResponseParams struct {
-	// DNS statistics.
-	Data []*DnsData `json:"Data,omitempty" name:"Data"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeDnsDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeDnsDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeDnsDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeDnsDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeHostsSettingRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -4068,156 +3600,6 @@ func (r *DescribeIdentificationsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIdentificationsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeLogSetsRequestParams struct {
-	// Region of the logset.
-	LogSetRegion *string `json:"LogSetRegion,omitempty" name:"LogSetRegion"`
-
-	// ID of the logset.
-	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
-
-	// Name of the logset.
-	LogSetName *string `json:"LogSetName,omitempty" name:"LogSetName"`
-}
-
-type DescribeLogSetsRequest struct {
-	*tchttp.BaseRequest
-	
-	// Region of the logset.
-	LogSetRegion *string `json:"LogSetRegion,omitempty" name:"LogSetRegion"`
-
-	// ID of the logset.
-	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
-
-	// Name of the logset.
-	LogSetName *string `json:"LogSetName,omitempty" name:"LogSetName"`
-}
-
-func (r *DescribeLogSetsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLogSetsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "LogSetRegion")
-	delete(f, "LogSetId")
-	delete(f, "LogSetName")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogSetsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeLogSetsResponseParams struct {
-	// List of logsets.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	LogSetList []*LogSetInfo `json:"LogSetList,omitempty" name:"LogSetList"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeLogSetsResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeLogSetsResponseParams `json:"Response"`
-}
-
-func (r *DescribeLogSetsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLogSetsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeLogTopicTasksRequestParams struct {
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-}
-
-type DescribeLogTopicTasksRequest struct {
-	*tchttp.BaseRequest
-	
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// Page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-}
-
-func (r *DescribeLogTopicTasksRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLogTopicTasksRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogTopicTasksRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeLogTopicTasksResponseParams struct {
-	// List of shipping tasks.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	TopicList []*ClsLogTopicInfo `json:"TopicList,omitempty" name:"TopicList"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeLogTopicTasksResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeLogTopicTasksResponseParams `json:"Response"`
-}
-
-func (r *DescribeLogTopicTasksResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeLogTopicTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4852,312 +4234,6 @@ func (r *DescribeRulesSettingResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeSingleL7AnalysisDataRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// The query metric. Values:
-	// <li>`l7Flow_singleIpRequest`: Number of requests from a single IP.</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites
-	// If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// Filters
-	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-	// <li>`domain`:<br>u2003u2003 Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>u2003u2003 `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
-	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
-	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
-	// <li>`tagValue`:<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
-	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
-
-	// The query granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minutes;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Geolocation scope. Values:
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeSingleL7AnalysisDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// The query metric. Values:
-	// <li>`l7Flow_singleIpRequest`: Number of requests from a single IP.</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites
-	// If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// Filters
-	// <li>`country`:<br>   Filter by the specified <strong>country code</strong>. <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a> country codes are used.</li>
-	// <li>`domain`:<br>u2003u2003 Filter by the specified <strong>sub-domain name</strong>, such as `test.example.com`</li>
-	// <li>`protocol`:<br>   Filter by the specified <strong>HTTP protocol version</strong><br>   Values:<br>u2003u2003 `HTTP/1.0`: HTTP 1.0;<br>   `HTTP/1.1`: HTTP 1.1;<br>   `HTTP/2.0`: HTTP 2.0;<br>   `HTTP/3.0`: HTTP 3.0;<br>   `WebSocket`: WebSocket.</li>
-	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
-	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
-	// <li>`tagValue`:<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
-	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
-
-	// The query granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minutes;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Geolocation scope. Values:
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeSingleL7AnalysisDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSingleL7AnalysisDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "MetricNames")
-	delete(f, "ZoneIds")
-	delete(f, "Filters")
-	delete(f, "Interval")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSingleL7AnalysisDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSingleL7AnalysisDataResponseParams struct {
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The list of L7 dimensional data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SingleDataRecord `json:"Data,omitempty" name:"Data"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeSingleL7AnalysisDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeSingleL7AnalysisDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeSingleL7AnalysisDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSingleL7AnalysisDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSpeedTestingDetailsRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-type DescribeSpeedTestingDetailsRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-func (r *DescribeSpeedTestingDetailsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSpeedTestingDetailsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSpeedTestingDetailsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSpeedTestingDetailsResponseParams struct {
-	// The site’s load speed across regions.
-	SpeedTestingDetailData *SpeedTestingDetailData `json:"SpeedTestingDetailData,omitempty" name:"SpeedTestingDetailData"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeSpeedTestingDetailsResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeSpeedTestingDetailsResponseParams `json:"Response"`
-}
-
-func (r *DescribeSpeedTestingDetailsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSpeedTestingDetailsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSpeedTestingMetricDataRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-type DescribeSpeedTestingMetricDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-func (r *DescribeSpeedTestingMetricDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSpeedTestingMetricDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSpeedTestingMetricDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSpeedTestingMetricDataResponseParams struct {
-	// The site test metrics.
-	SpeedTestingMetricData *SpeedTestingMetricData `json:"SpeedTestingMetricData,omitempty" name:"SpeedTestingMetricData"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeSpeedTestingMetricDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeSpeedTestingMetricDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeSpeedTestingMetricDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSpeedTestingMetricDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSpeedTestingQuotaRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-type DescribeSpeedTestingQuotaRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-func (r *DescribeSpeedTestingQuotaRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSpeedTestingQuotaRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSpeedTestingQuotaRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeSpeedTestingQuotaResponseParams struct {
-	// The quota limit on site tests.
-	SpeedTestingQuota *SpeedTestingQuota `json:"SpeedTestingQuota,omitempty" name:"SpeedTestingQuota"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeSpeedTestingQuotaResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeSpeedTestingQuotaResponseParams `json:"Response"`
-}
-
-func (r *DescribeSpeedTestingQuotaResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeSpeedTestingQuotaResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeTimingL4DataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -5604,141 +4680,6 @@ func (r *DescribeTimingL7CacheDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeTimingL7SourceDataRequestParams struct {
-	// Start time of the query period.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time of the query period.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of metrics. Values:
-	// <li>`l7Flow_outFlux_hy`: EdgeOne request traffic</li>
-	// <li>`l7Flow_outBandwidth_hy`: EdgeOne request bandwidth</li>
-	// <li>`l7Flow_inFlux_hy`: Origin response traffic</li>
-	// <li>`l7Flow_inBandwidth_hy`: Origin response bandwidth</li>
-	// <li>`l7Flow_request_hy`: Origin-pull requests</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// The query granularity. Values:
-	// <li>`min`: 1 minute</li>
-	// <li>`5min`: 5 minutes</li>
-	// <li>`hour`: 1 hour</li>
-	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. **Query period < 1 hour**: 1-minute granularity; **1 hour < query period < 2 days**: 5-minute granularity; **2 days < query period < 7 days**: 1 hour granularity; **Query period > 7 days**: 1 day granularity.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Filter conditions. See below for details: 
-	// <li>`domain`:<br>   Filter by <strong>the origin domain</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`origin`:<br>   Filter by <strong>the origin</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`originGroup`:<br>   Filter by <strong>the origin group</strong>, such as origin-xxxxx.<br>   Type: String<br>   Required: No</li>
-	// <li>`flowType`:<br>   Filter by <strong>the origin response type</strong>. This parameter takes precedence over `MetricNames.N`.<br>   Type: String<br>   Required: No<br>   Values:<br>   `inFlow`: Origin response data, corresponding to `l7Flow_inFlux_hy`, `l7Flow_inBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.<br>   `outFlow`: EdgeOne request data, corresponding to `l7Flow_outFlux_hy`, `l7Flow_outBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.</li>
-	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
-
-	// Geolocation scope. Values:
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeTimingL7SourceDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// Start time of the query period.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// End time of the query period.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of metrics. Values:
-	// <li>`l7Flow_outFlux_hy`: EdgeOne request traffic</li>
-	// <li>`l7Flow_outBandwidth_hy`: EdgeOne request bandwidth</li>
-	// <li>`l7Flow_inFlux_hy`: Origin response traffic</li>
-	// <li>`l7Flow_inBandwidth_hy`: Origin response bandwidth</li>
-	// <li>`l7Flow_request_hy`: Origin-pull requests</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// The query granularity. Values:
-	// <li>`min`: 1 minute</li>
-	// <li>`5min`: 5 minutes</li>
-	// <li>`hour`: 1 hour</li>
-	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. **Query period < 1 hour**: 1-minute granularity; **1 hour < query period < 2 days**: 5-minute granularity; **2 days < query period < 7 days**: 1 hour granularity; **Query period > 7 days**: 1 day granularity.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Filter conditions. See below for details: 
-	// <li>`domain`:<br>   Filter by <strong>the origin domain</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`origin`:<br>   Filter by <strong>the origin</strong><br>   Type: String<br>   Required: No</li>
-	// <li>`originGroup`:<br>   Filter by <strong>the origin group</strong>, such as origin-xxxxx.<br>   Type: String<br>   Required: No</li>
-	// <li>`flowType`:<br>   Filter by <strong>the origin response type</strong>. This parameter takes precedence over `MetricNames.N`.<br>   Type: String<br>   Required: No<br>   Values:<br>   `inFlow`: Origin response data, corresponding to `l7Flow_inFlux_hy`, `l7Flow_inBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.<br>   `outFlow`: EdgeOne request data, corresponding to `l7Flow_outFlux_hy`, `l7Flow_outBandwidth_hy` and `l7Flow_request_hy` in `MetricNames.N`.</li>
-	Filters []*QueryCondition `json:"Filters,omitempty" name:"Filters"`
-
-	// Geolocation scope. Values:
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeTimingL7SourceDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeTimingL7SourceDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "MetricNames")
-	delete(f, "ZoneIds")
-	delete(f, "Interval")
-	delete(f, "Filters")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTimingL7SourceDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeTimingL7SourceDataResponseParams struct {
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// List of time series traffic data.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TimingDataRecords []*TimingDataRecord `json:"TimingDataRecords,omitempty" name:"TimingDataRecords"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeTimingL7SourceDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeTimingL7SourceDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeTimingL7SourceDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeTimingL7SourceDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeTopL7AnalysisDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
@@ -5746,27 +4687,27 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The metric to query. Values: 
-	// <li>`l7Flow_outFlux_country`: Traffic by country/region</li>
-	// <li>`l7Flow_outFlux_statusCode`: Traffic by status code</li>
-	// <li>`l7Flow_outFlux_domain`: Traffic by domain name</li>
-	// <li>`l7Flow_outFlux_url`: Traffic by URL</li>
-	// <li>`l7Flow_outFlux_resourceType`: Traffic by resource type</li>
-	// <li>`l7Flow_outFlux_sip`: Traffic by client IP</li>
-	// <li>`l7Flow_outFlux_referers`: Traffic by referer</li>
-	// <li>`l7Flow_outFlux_ua_device`: Traffic by device</li>
-	// <li>`l7Flow_outFlux_ua_browser`: Traffic by browser</li>
-	// <li>`l7Flow_outFlux_us_os`: Traffic by operating system</li>
-	// <li>`l7Flow_request_country`: Requests by country/region</li>
-	// <li>`l7Flow_request_statusCode`: Requests by status code</li>
-	// <li>`l7Flow_request_domain`: Requests by domain name</li>
-	// <li>`l7Flow_request_url`: Requests by URL</li>
-	// <li>`l7Flow_request_resourceType`: Requests by resource type</li>
-	// <li>`l7Flow_request_sip`: Requests by client IP</li>
-	// <li>`l7Flow_request_referer`: Requests by referer</li>
-	// <li>`l7Flow_request_ua_device`: Requests by device</li>
-	// <li>`l7Flow_request_ua_browser`: Requests by browser</li>
-	// <li>`l7Flow_request_us_os`: Requests by operating system</li>
+	// Metrics to query. Valid values: 
+	// <li>`l7Flow_outFlux_country`: Query traffic by country/region;</li>
+	// <li>`l7Flow_outFlux_statusCode`: Query traffic by status code;</li>
+	// <li>`l7Flow_outFlux_domain`: Query traffic by domain;</li>
+	// <li>`l7Flow_outFlux_url`: Query traffic by URL;</li>
+	// <li>`l7Flow_outFlux_resourceType`: Query traffic by resource type;</li>
+	// <li>`l7Flow_outFlux_sip`: Query traffic by source IP;</li>
+	// <li>`l7Flow_outFlux_referers`: Query traffic by refer information;</li>
+	// <li>`l7Flow_outFlux_ua_device`: Query traffic by device;</li>
+	// <li>`l7Flow_outFlux_ua_browser`: Query traffic by browser;</li>
+	// <li>`l7Flow_outFlux_us_os`: Query traffic by OS;</li>
+	// <li>`l7Flow_request_country`: Query requests by country/region;</li>
+	// <li>`l7Flow_request_statusCode`: Query requests by status code;</li>
+	// <li>`l7Flow_request_domain`: Query requests by domain;</li>
+	// <li>`l7Flow_request_url`: Query requests by URL;</li>
+	// <li>`l7Flow_request_resourceType`: Query requests by resource type;</li>
+	// <li>`l7Flow_request_sip`: Query requests by source IP;</li>
+	// <li>`l7Flow_request_referer`: Query requests by refer information;</li>
+	// <li>`l7Flow_request_ua_device`: Query requests by device;</li>
+	// <li>`l7Flow_request_ua_browser`: Query requests by browser;</li>
+	// <li>`l7Flow_request_us_os`: Query requests by OS.</li>
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// (Required) List of sites. No query results are returned if this field is not specified.
@@ -5818,27 +4759,27 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
-	// The metric to query. Values: 
-	// <li>`l7Flow_outFlux_country`: Traffic by country/region</li>
-	// <li>`l7Flow_outFlux_statusCode`: Traffic by status code</li>
-	// <li>`l7Flow_outFlux_domain`: Traffic by domain name</li>
-	// <li>`l7Flow_outFlux_url`: Traffic by URL</li>
-	// <li>`l7Flow_outFlux_resourceType`: Traffic by resource type</li>
-	// <li>`l7Flow_outFlux_sip`: Traffic by client IP</li>
-	// <li>`l7Flow_outFlux_referers`: Traffic by referer</li>
-	// <li>`l7Flow_outFlux_ua_device`: Traffic by device</li>
-	// <li>`l7Flow_outFlux_ua_browser`: Traffic by browser</li>
-	// <li>`l7Flow_outFlux_us_os`: Traffic by operating system</li>
-	// <li>`l7Flow_request_country`: Requests by country/region</li>
-	// <li>`l7Flow_request_statusCode`: Requests by status code</li>
-	// <li>`l7Flow_request_domain`: Requests by domain name</li>
-	// <li>`l7Flow_request_url`: Requests by URL</li>
-	// <li>`l7Flow_request_resourceType`: Requests by resource type</li>
-	// <li>`l7Flow_request_sip`: Requests by client IP</li>
-	// <li>`l7Flow_request_referer`: Requests by referer</li>
-	// <li>`l7Flow_request_ua_device`: Requests by device</li>
-	// <li>`l7Flow_request_ua_browser`: Requests by browser</li>
-	// <li>`l7Flow_request_us_os`: Requests by operating system</li>
+	// Metrics to query. Valid values: 
+	// <li>`l7Flow_outFlux_country`: Query traffic by country/region;</li>
+	// <li>`l7Flow_outFlux_statusCode`: Query traffic by status code;</li>
+	// <li>`l7Flow_outFlux_domain`: Query traffic by domain;</li>
+	// <li>`l7Flow_outFlux_url`: Query traffic by URL;</li>
+	// <li>`l7Flow_outFlux_resourceType`: Query traffic by resource type;</li>
+	// <li>`l7Flow_outFlux_sip`: Query traffic by source IP;</li>
+	// <li>`l7Flow_outFlux_referers`: Query traffic by refer information;</li>
+	// <li>`l7Flow_outFlux_ua_device`: Query traffic by device;</li>
+	// <li>`l7Flow_outFlux_ua_browser`: Query traffic by browser;</li>
+	// <li>`l7Flow_outFlux_us_os`: Query traffic by OS;</li>
+	// <li>`l7Flow_request_country`: Query requests by country/region;</li>
+	// <li>`l7Flow_request_statusCode`: Query requests by status code;</li>
+	// <li>`l7Flow_request_domain`: Query requests by domain;</li>
+	// <li>`l7Flow_request_url`: Query requests by URL;</li>
+	// <li>`l7Flow_request_resourceType`: Query requests by resource type;</li>
+	// <li>`l7Flow_request_sip`: Query requests by source IP;</li>
+	// <li>`l7Flow_request_referer`: Query requests by refer information;</li>
+	// <li>`l7Flow_request_ua_device`: Query requests by device;</li>
+	// <li>`l7Flow_request_ua_browser`: Query requests by browser;</li>
+	// <li>`l7Flow_request_us_os`: Query requests by OS.</li>
 	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
 
 	// (Required) List of sites. No query results are returned if this field is not specified.
@@ -6079,943 +5020,6 @@ func (r *DescribeTopL7CacheDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTopL7CacheDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebManagedRulesDataRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of statistical metric. Values:
-	// <li>`waf_interceptNum`: Requests blocked by WAF.</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebManagedRulesDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of statistical metric. Values:
-	// <li>`waf_interceptNum`: Requests blocked by WAF.</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebManagedRulesDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebManagedRulesDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "MetricNames")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "QueryCondition")
-	delete(f, "Interval")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebManagedRulesDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebManagedRulesDataResponseParams struct {
-	// The list of WAF attack data recorded over time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecEntry `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebManagedRulesDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebManagedRulesDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebManagedRulesDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebManagedRulesDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebManagedRulesHitRuleDetailRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebManagedRulesHitRuleDetailRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebManagedRulesHitRuleDetailRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebManagedRulesHitRuleDetailRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "Interval")
-	delete(f, "QueryCondition")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebManagedRulesHitRuleDetailRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebManagedRulesHitRuleDetailResponseParams struct {
-	// The hit rule information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecHitRuleInfo `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebManagedRulesHitRuleDetailResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebManagedRulesHitRuleDetailResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebManagedRulesHitRuleDetailResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebManagedRulesHitRuleDetailResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebManagedRulesLogRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Filters for the query. Values:
-	// <li>`attackType`: Attack type</li>
-	// <li>`riskLevel`: Risk level</li>
-	// <li>`action`: Action</li>
-	// <li>`ruleId`: Rule ID</li>
-	// <li>`sipCountryCode`: Country code of the attacker IP</li>
-	// <li>`attackIp`: Attacker IP</li>
-	// <li>`realClientIp`: Real client IP</li>
-	// <li>`oriDomain`: Attacked subdomain name</li>
-	// <li>`eventId`: Event ID</li>
-	// <li>`ua`: User agent</li>
-	// <li>`requestMethod`: Request method</li>
-	// <li>`uri`: Uniform resource identifier</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebManagedRulesLogRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Filters for the query. Values:
-	// <li>`attackType`: Attack type</li>
-	// <li>`riskLevel`: Risk level</li>
-	// <li>`action`: Action</li>
-	// <li>`ruleId`: Rule ID</li>
-	// <li>`sipCountryCode`: Country code of the attacker IP</li>
-	// <li>`attackIp`: Attacker IP</li>
-	// <li>`realClientIp`: Real client IP</li>
-	// <li>`oriDomain`: Attacked subdomain name</li>
-	// <li>`eventId`: Event ID</li>
-	// <li>`ua`: User agent</li>
-	// <li>`requestMethod`: Request method</li>
-	// <li>`uri`: Uniform resource identifier</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebManagedRulesLogRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebManagedRulesLogRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "QueryCondition")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebManagedRulesLogRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebManagedRulesLogResponseParams struct {
-	// The list of web log data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*WebLogs `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebManagedRulesLogResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebManagedRulesLogResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebManagedRulesLogResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebManagedRulesLogResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionClientIpListRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebProtectionClientIpListRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebProtectionClientIpListRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionClientIpListRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "Interval")
-	delete(f, "QueryCondition")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebProtectionClientIpListRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionClientIpListResponseParams struct {
-	// The list of CC attacker IPs.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecClientIp `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebProtectionClientIpListResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebProtectionClientIpListResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebProtectionClientIpListResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionClientIpListResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionDataRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Metrics to query. Values:
-	// <li>`ccRate_interceptNum`: Requests restricted by the rate limiting rules;</li>
-	// <li>`ccAcl_interceptNum`: Requests restricted by the custom rules.</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebProtectionDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// Metrics to query. Values:
-	// <li>`ccRate_interceptNum`: Requests restricted by the rate limiting rules;</li>
-	// <li>`ccAcl_interceptNum`: Requests restricted by the custom rules.</li>
-	MetricNames []*string `json:"MetricNames,omitempty" name:"MetricNames"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebProtectionDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "MetricNames")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "Interval")
-	delete(f, "QueryCondition")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebProtectionDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionDataResponseParams struct {
-	// The list of CC protection data recorded over time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecEntry `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebProtectionDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebProtectionDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebProtectionDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionHitRuleDetailRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// The rule type. Values:
-	// <li>`rate`: Rate limiting rules;</li>
-	// <li>`acl`: Custom rules.</li>
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebProtectionHitRuleDetailRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// The rule type. Values:
-	// <li>`rate`: Rate limiting rules;</li>
-	// <li>`acl`: Custom rules.</li>
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The page offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebProtectionHitRuleDetailRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionHitRuleDetailRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "EntityType")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "QueryCondition")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Interval")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebProtectionHitRuleDetailRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionHitRuleDetailResponseParams struct {
-	// The list of hit CC protection rules.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecHitRuleInfo `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebProtectionHitRuleDetailResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebProtectionHitRuleDetailResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebProtectionHitRuleDetailResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionHitRuleDetailResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionTopDataRequestParams struct {
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of statistical metric. Values:
-	// <li>`ccRate_requestNum_url`: Top-ranked URLs by rate limiting requests.</li>
-	// <li>`ccRate_cipRequestNum_region`: Top-ranked client IPs by rate limiting requests.</li>
-	// <li>`ccAcl_requestNum_url`: Top-ranked URLs by custom rule requests.</li>
-	// <li>`ccAcl_requestNum_cip`: Top-ranked client IPs by custom rule execution requests.</li>
-	// <li>`ccAcl_cipRequestNum_region`: Top-ranked clients by custom rule execution requests.</li>
-	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// Queries the top n rows of data. Top 10 rows of data will be queried if this field is not specified.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type DescribeWebProtectionTopDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// The start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
-
-	// The end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
-
-	// List of statistical metric. Values:
-	// <li>`ccRate_requestNum_url`: Top-ranked URLs by rate limiting requests.</li>
-	// <li>`ccRate_cipRequestNum_region`: Top-ranked client IPs by rate limiting requests.</li>
-	// <li>`ccAcl_requestNum_url`: Top-ranked URLs by custom rule requests.</li>
-	// <li>`ccAcl_requestNum_cip`: Top-ranked client IPs by custom rule execution requests.</li>
-	// <li>`ccAcl_cipRequestNum_region`: Top-ranked clients by custom rule execution requests.</li>
-	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-	// The query time granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minute;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the interval between the start time and end time as follows: 1-minute granularity applies for a 1-hour interval, 5-minute granularity for a 2-day interval, 1-hour granularity for a 7-day interval, and 1-day granularity for an interval of over 7 days.
-	Interval *string `json:"Interval,omitempty" name:"Interval"`
-
-	// List of sites to be queried. All sites will be selected if this field is not specified.
-	ZoneIds []*string `json:"ZoneIds,omitempty" name:"ZoneIds"`
-
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
-
-	// Queries the top n rows of data. Top 10 rows of data will be queried if this field is not specified.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
-
-	// The key of the parameter QueryCondition, which is used to specify a filter. Values:
-	// <li>`action`: The action;</li>
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitempty" name:"QueryCondition"`
-
-	// Data storage region. Values:
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
-	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-func (r *DescribeWebProtectionTopDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionTopDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "MetricName")
-	delete(f, "Interval")
-	delete(f, "ZoneIds")
-	delete(f, "Domains")
-	delete(f, "Limit")
-	delete(f, "QueryCondition")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebProtectionTopDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeWebProtectionTopDataResponseParams struct {
-	// The list of top-ranked CC protection data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*TopEntry `json:"Data,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type DescribeWebProtectionTopDataResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeWebProtectionTopDataResponseParams `json:"Response"`
-}
-
-func (r *DescribeWebProtectionTopDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeWebProtectionTopDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7285,22 +5289,6 @@ type DiffIPWhitelist struct {
 
 	// The intermediate IPs that remain unchanged.
 	NoChangeIPWhitelist *IPWhitelist `json:"NoChangeIPWhitelist,omitempty" name:"NoChangeIPWhitelist"`
-}
-
-type DistrictStatistics struct {
-	// The ISO 3166-2 Alpha-2 country code. For the list of country codes, see [ISO 3166-2](https://zh.m.wikipedia.org/zh-hans/ISO_3166-2).
-	Alpha2 *string `json:"Alpha2,omitempty" name:"Alpha2"`
-
-	// The overall load time, in milliseconds.
-	LoadTime *int64 `json:"LoadTime,omitempty" name:"LoadTime"`
-}
-
-type DnsData struct {
-	// The time.
-	Time *string `json:"Time,omitempty" name:"Time"`
-
-	// The value.
-	Value *uint64 `json:"Value,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
@@ -7703,9 +5691,9 @@ type ForceRedirect struct {
 }
 
 type Grpc struct {
-	// Whether to enable gRPC support
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
+	// Whether to enable gRPC support. Valid values: 
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -7723,8 +5711,8 @@ type Hsts struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// The MaxAge value in seconds. Maximum value: `86400` (one day)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// MaxAge (in seconds). The maximum value is 1 day. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	MaxAge *int64 `json:"MaxAge,omitempty" name:"MaxAge"`
 
 	// Whether to contain subdomain names. Values:
@@ -7753,12 +5741,12 @@ type Https struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OcspStapling *string `json:"OcspStapling,omitempty" name:"OcspStapling"`
 
-	// TLS version. Values:
-	// <li>`TLSv1`: TLSv1 version</li>
-	// <li>`TLSV1.1`: TLSv1.1 version</li>
-	// <li>`TLSV1.2`: TLSv1.2 version</li>
-	// <li>`TLSv1.3`: TLSv1.3 version</li>Only consecutive versions can be enabled at the same time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// TLS version. Valid values: 
+	// <li>`TLSv1`: TLSv1 version;</li>
+	// <li>`TLSV1.1`: TLSv1.1 version;</li>
+	// <li>`TLSV1.2`: TLSv1.2 version;</li>
+	// <li>`TLSv1.3`: TLSv1.3 version.</li>Only consecutive versions can be enabled at the same time. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	TlsVersion []*string `json:"TlsVersion,omitempty" name:"TlsVersion"`
 
 	// HSTS Configuration
@@ -7781,6 +5769,17 @@ type Https struct {
 	// <li>`strict-v2023`: Provides high security, disabling all insecure cipher suites. It supports TLS 1.2-1.3.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CipherSuite *string `json:"CipherSuite,omitempty" name:"CipherSuite"`
+}
+
+type IPGroup struct {
+	// Group ID. Enter `0`.
+	GroupId *int64 `json:"GroupId,omitempty" name:"GroupId"`
+
+	// Group name.
+	Name *string `json:"Name,omitempty" name:"Name"`
+
+	// IP group information, including IP and IP mask.
+	Content []*string `json:"Content,omitempty" name:"Content"`
 }
 
 type IPWhitelist struct {
@@ -7974,9 +5973,9 @@ type IpTableRule struct {
 }
 
 type Ipv6 struct {
-	// Whether to enable IPv6 access. Values:
-	// <li>`on`: Enable IPv6 access.</li>
-	// <li>`off`: Disable IPv6 access.</li>
+	// Whether to enable IPv6 access. Valid values: 
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -8023,22 +6022,6 @@ type L7OfflineLog struct {
 	// <li>`mainland`: Chinese mainland;</li>
 	// <li>`overseas`: Global (outside the Chinese mainland);</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
-}
-
-type LogSetInfo struct {
-	// Region of the logset.
-	LogSetRegion *string `json:"LogSetRegion,omitempty" name:"LogSetRegion"`
-
-	// Name of the logset.
-	LogSetName *string `json:"LogSetName,omitempty" name:"LogSetName"`
-
-	// ID of the logset.
-	LogSetId *string `json:"LogSetId,omitempty" name:"LogSetId"`
-
-	// Whether the logset is deleted. Values:
-	// <li>`no`: The logset is not deleted;</li>
-	// <li>`yes`: The logset is deleted.</li>
-	Deleted *string `json:"Deleted,omitempty" name:"Deleted"`
 }
 
 type MaxAge struct {
@@ -8365,14 +6348,14 @@ func (r *ModifyAliasDomainStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyApplicationProxyRequestParams struct {
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The proxy ID.
+	// Proxy ID.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
-	// The domain name or subdomain name when `ProxyType=hostname`.
-	// The instance name when `ProxyType=instance`.
+	// Domain name or subdomain name when `ProxyType=hostname`; 
+	// Instance name when `ProxyType=instance`.
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// The session persistence duration. Value range: 30-3600 (in seconds).
@@ -8384,21 +6367,24 @@ type ModifyApplicationProxyRequestParams struct {
 	// <li>`instance`: The proxy is created by instance.</li>If not specified, this field uses the default value `instance`.
 	ProxyType *string `json:"ProxyType,omitempty" name:"ProxyType"`
 
-	// The IPv6 access configuration. The original configuration will apply if this field is not specified.
+	// IPv6 access configuration. The original configuration will apply if it is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
+
+	// Cross-MLC-border acceleration. The original configuration will apply if it is not specified.
+	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 }
 
 type ModifyApplicationProxyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The proxy ID.
+	// Proxy ID.
 	ProxyId *string `json:"ProxyId,omitempty" name:"ProxyId"`
 
-	// The domain name or subdomain name when `ProxyType=hostname`.
-	// The instance name when `ProxyType=instance`.
+	// Domain name or subdomain name when `ProxyType=hostname`; 
+	// Instance name when `ProxyType=instance`.
 	ProxyName *string `json:"ProxyName,omitempty" name:"ProxyName"`
 
 	// The session persistence duration. Value range: 30-3600 (in seconds).
@@ -8410,8 +6396,11 @@ type ModifyApplicationProxyRequest struct {
 	// <li>`instance`: The proxy is created by instance.</li>If not specified, this field uses the default value `instance`.
 	ProxyType *string `json:"ProxyType,omitempty" name:"ProxyType"`
 
-	// The IPv6 access configuration. The original configuration will apply if this field is not specified.
+	// IPv6 access configuration. The original configuration will apply if it is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
+
+	// Cross-MLC-border acceleration. The original configuration will apply if it is not specified.
+	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 }
 
 func (r *ModifyApplicationProxyRequest) ToJsonString() string {
@@ -8432,6 +6421,7 @@ func (r *ModifyApplicationProxyRequest) FromJsonString(s string) error {
 	delete(f, "SessionPersistTime")
 	delete(f, "ProxyType")
 	delete(f, "Ipv6")
+	delete(f, "AccelerateMainland")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationProxyRequest has unknown keys!", "")
 	}
@@ -8765,78 +6755,6 @@ func (r *ModifyApplicationProxyStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyDefaultCertificateRequestParams struct {
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// ID of the certificate.
-	CertId *string `json:"CertId,omitempty" name:"CertId"`
-
-	// Status of the certificate. Values:
-	// <li>`deployed`: The certificate is deployed;</li>
-	// <li>`disabled`: The certificate is disabled.</li>When a deployment fails, you can try again.
-	Status *string `json:"Status,omitempty" name:"Status"`
-}
-
-type ModifyDefaultCertificateRequest struct {
-	*tchttp.BaseRequest
-	
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// ID of the certificate.
-	CertId *string `json:"CertId,omitempty" name:"CertId"`
-
-	// Status of the certificate. Values:
-	// <li>`deployed`: The certificate is deployed;</li>
-	// <li>`disabled`: The certificate is disabled.</li>When a deployment fails, you can try again.
-	Status *string `json:"Status,omitempty" name:"Status"`
-}
-
-func (r *ModifyDefaultCertificateRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyDefaultCertificateRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "CertId")
-	delete(f, "Status")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDefaultCertificateRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyDefaultCertificateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyDefaultCertificateResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyDefaultCertificateResponseParams `json:"Response"`
-}
-
-func (r *ModifyDefaultCertificateResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyDefaultCertificateResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type ModifyHostsCertificateRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -9026,67 +6944,6 @@ func (r *ModifyOriginGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyRulePriorityRequestParams struct {
-	// ID of the site
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Order of rule IDs. If there are multiple rules, they will be executed in order from top to bottom.
-	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
-}
-
-type ModifyRulePriorityRequest struct {
-	*tchttp.BaseRequest
-	
-	// ID of the site
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// Order of rule IDs. If there are multiple rules, they will be executed in order from top to bottom.
-	RuleIds []*string `json:"RuleIds,omitempty" name:"RuleIds"`
-}
-
-func (r *ModifyRulePriorityRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyRulePriorityRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "RuleIds")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRulePriorityRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyRulePriorityResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifyRulePriorityResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyRulePriorityResponseParams `json:"Response"`
-}
-
-func (r *ModifyRulePriorityResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyRulePriorityResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type ModifyRuleRequestParams struct {
 	// ID of the site
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -9183,6 +7040,80 @@ func (r *ModifyRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySecurityIPGroupRequestParams struct {
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// IP group configuration.
+	IPGroup *IPGroup `json:"IPGroup,omitempty" name:"IPGroup"`
+
+	// Operation type. Valid values: 
+	// <li>`append`: Add information of `Content` to `IPGroup`;</li>
+	// <li>`remove`: Delete information of `Content` from `IPGroup`;</li>
+	// <li>`update`: Replace all information of `IPGroup` and modify the IPGroup name.</li>
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
+type ModifySecurityIPGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// IP group configuration.
+	IPGroup *IPGroup `json:"IPGroup,omitempty" name:"IPGroup"`
+
+	// Operation type. Valid values: 
+	// <li>`append`: Add information of `Content` to `IPGroup`;</li>
+	// <li>`remove`: Delete information of `Content` from `IPGroup`;</li>
+	// <li>`update`: Replace all information of `IPGroup` and modify the IPGroup name.</li>
+	Mode *string `json:"Mode,omitempty" name:"Mode"`
+}
+
+func (r *ModifySecurityIPGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityIPGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "IPGroup")
+	delete(f, "Mode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityIPGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySecurityIPGroupResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifySecurityIPGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySecurityIPGroupResponseParams `json:"Response"`
+}
+
+func (r *ModifySecurityIPGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifySecurityPolicyRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
@@ -9254,134 +7185,6 @@ func (r *ModifySecurityPolicyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifySecurityWafGroupPolicyRequestParams struct {
-	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The subdomain name. You must specify either "ZoneId+Entity" or "TemplateId". 
-	Entity *string `json:"Entity,omitempty" name:"Entity"`
-
-	// Switch. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>If not specified, it defaults to the setting that was last configured.
-	Switch *string `json:"Switch,omitempty" name:"Switch"`
-
-	// The rule level. Values:
-	// <li>`loose`: Loose</li>
-	// <li>`normal`: Moderate</li>
-	// <li>`strict`: Strict</li>
-	// <li>`stricter`: Super strict</li>
-	// <li>`custom`: Custom</li>If not specified, it defaults to the setting that was last configured.
-	Level *string `json:"Level,omitempty" name:"Level"`
-
-	// The rule action. Values:
-	// <li>`block`: Block</li>
-	// <li>`observe`: Observe</li>If not specified, it defaults to the setting that was last configured.
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-
-	// The settings of the managed rule. If not specified, it defaults to the settings that were last configured.
-	WafRules *WafRule `json:"WafRules,omitempty" name:"WafRules"`
-
-	// The settings of the AI rule engine. If not specified, it defaults to the settings that were last configured.
-	AiRule *AiRule `json:"AiRule,omitempty" name:"AiRule"`
-
-	// The settings of the managed rule group. If not specified, it defaults to the settings that were last configured.
-	WafGroups []*WafGroup `json:"WafGroups,omitempty" name:"WafGroups"`
-
-	// The template ID. You must specify either this field or "ZoneId+Entity".
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
-}
-
-type ModifySecurityWafGroupPolicyRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID. You must specify either "ZoneId+Entity" or "TemplateId".
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The subdomain name. You must specify either "ZoneId+Entity" or "TemplateId". 
-	Entity *string `json:"Entity,omitempty" name:"Entity"`
-
-	// Switch. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>If not specified, it defaults to the setting that was last configured.
-	Switch *string `json:"Switch,omitempty" name:"Switch"`
-
-	// The rule level. Values:
-	// <li>`loose`: Loose</li>
-	// <li>`normal`: Moderate</li>
-	// <li>`strict`: Strict</li>
-	// <li>`stricter`: Super strict</li>
-	// <li>`custom`: Custom</li>If not specified, it defaults to the setting that was last configured.
-	Level *string `json:"Level,omitempty" name:"Level"`
-
-	// The rule action. Values:
-	// <li>`block`: Block</li>
-	// <li>`observe`: Observe</li>If not specified, it defaults to the setting that was last configured.
-	Mode *string `json:"Mode,omitempty" name:"Mode"`
-
-	// The settings of the managed rule. If not specified, it defaults to the settings that were last configured.
-	WafRules *WafRule `json:"WafRules,omitempty" name:"WafRules"`
-
-	// The settings of the AI rule engine. If not specified, it defaults to the settings that were last configured.
-	AiRule *AiRule `json:"AiRule,omitempty" name:"AiRule"`
-
-	// The settings of the managed rule group. If not specified, it defaults to the settings that were last configured.
-	WafGroups []*WafGroup `json:"WafGroups,omitempty" name:"WafGroups"`
-
-	// The template ID. You must specify either this field or "ZoneId+Entity".
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
-}
-
-func (r *ModifySecurityWafGroupPolicyRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifySecurityWafGroupPolicyRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "Entity")
-	delete(f, "Switch")
-	delete(f, "Level")
-	delete(f, "Mode")
-	delete(f, "WafRules")
-	delete(f, "AiRule")
-	delete(f, "WafGroups")
-	delete(f, "TemplateId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityWafGroupPolicyRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifySecurityWafGroupPolicyResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ModifySecurityWafGroupPolicyResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifySecurityWafGroupPolicyResponseParams `json:"Response"`
-}
-
-func (r *ModifySecurityWafGroupPolicyResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifySecurityWafGroupPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9466,7 +7269,7 @@ func (r *ModifyZoneResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyZoneSettingRequestParams struct {
-	// The site ID to be modified.
+	// Site ID to modify.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Cache expiration time configuration
@@ -9485,28 +7288,28 @@ type ModifyZoneSettingRequestParams struct {
 	// The original configuration will apply if this field is not specified.
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
-	// The QUIC access configuration.
-	// The original configuration will apply if this field is not specified.
+	// QUIC access configuration. 
+	// The original configuration will apply if it is not specified.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 
-	// The POST transport configuration.
-	// The original configuration will apply if this field is not specified.
+	// POST transport configuration. 
+	// The original configuration will apply if it is not specified.
 	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitempty" name:"PostMaxSize"`
 
 	// The smart compression configuration.
 	// The original configuration will apply if this field is not specified.
 	Compression *Compression `json:"Compression,omitempty" name:"Compression"`
 
-	// The HTTP2 origin-pull configuration.
-	// The original configuration will apply if this field is not specified.
+	// HTTP2 origin-pull configuration. 
+	// The original configuration will apply if it is not specified.
 	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitempty" name:"UpstreamHttp2"`
 
-	// The force HTTPS redirect configuration.
-	// The original configuration will apply if this field is not specified.
+	// Force HTTPS redirect configuration. 
+	// The original configuration will apply if it is not specified.
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
 
-	// The HTTPS acceleration configuration.
-	// The original configuration will apply if this field is not specified.
+	// HTTPS acceleration configuration. 
+	// The original configuration will apply if it is not specified.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
 	// The origin server configuration.
@@ -9517,35 +7320,42 @@ type ModifyZoneSettingRequestParams struct {
 	// The original configuration will apply if this field is not specified.
 	SmartRouting *SmartRouting `json:"SmartRouting,omitempty" name:"SmartRouting"`
 
-	// The WebSocket configuration.
-	// The original configuration will apply if this field is not specified.
+	// WebSocket configuration. 
+	// The original configuration will apply if it is not specified.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 
-	// The origin-pull client IP header configuration.
-	// The original configuration will apply if this field is not specified.
+	// Origin-pull client IP header configuration. 
+	// The original configuration will apply if it is not specified.
 	ClientIpHeader *ClientIpHeader `json:"ClientIpHeader,omitempty" name:"ClientIpHeader"`
 
 	// The cache prefresh configuration.
 	// The original configuration will apply if this field is not specified.
 	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitempty" name:"CachePrefresh"`
 
-	// The IPv6 access configuration.
-	// The original configuration will apply if this field is not specified.
+	// Ipv6 access configuration. 
+	// The original configuration will apply if it is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-	// Whether to carry the location information of the client IP during origin-pull.
-	// The original configuration will apply if this field is not specified.
+	// Whether to carry the location information of the client IP during origin-pull. 
+	// The original configuration will apply if it is not specified.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
 
-	// Configuration of gRPC support
-	// The original configuration will apply if this field is not specified.
+	// Configuration of gRPC support. 
+	// The original configuration will apply if it is not specified.
 	Grpc *Grpc `json:"Grpc,omitempty" name:"Grpc"`
+
+	// Image optimization. 
+	// It is disabled if this parameter is not specified.
+	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitempty" name:"ImageOptimize"`
+
+
+	StandardDebug *StandardDebug `json:"StandardDebug,omitempty" name:"StandardDebug"`
 }
 
 type ModifyZoneSettingRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID to be modified.
+	// Site ID to modify.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
 	// Cache expiration time configuration
@@ -9564,28 +7374,28 @@ type ModifyZoneSettingRequest struct {
 	// The original configuration will apply if this field is not specified.
 	OfflineCache *OfflineCache `json:"OfflineCache,omitempty" name:"OfflineCache"`
 
-	// The QUIC access configuration.
-	// The original configuration will apply if this field is not specified.
+	// QUIC access configuration. 
+	// The original configuration will apply if it is not specified.
 	Quic *Quic `json:"Quic,omitempty" name:"Quic"`
 
-	// The POST transport configuration.
-	// The original configuration will apply if this field is not specified.
+	// POST transport configuration. 
+	// The original configuration will apply if it is not specified.
 	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitempty" name:"PostMaxSize"`
 
 	// The smart compression configuration.
 	// The original configuration will apply if this field is not specified.
 	Compression *Compression `json:"Compression,omitempty" name:"Compression"`
 
-	// The HTTP2 origin-pull configuration.
-	// The original configuration will apply if this field is not specified.
+	// HTTP2 origin-pull configuration. 
+	// The original configuration will apply if it is not specified.
 	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitempty" name:"UpstreamHttp2"`
 
-	// The force HTTPS redirect configuration.
-	// The original configuration will apply if this field is not specified.
+	// Force HTTPS redirect configuration. 
+	// The original configuration will apply if it is not specified.
 	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitempty" name:"ForceRedirect"`
 
-	// The HTTPS acceleration configuration.
-	// The original configuration will apply if this field is not specified.
+	// HTTPS acceleration configuration. 
+	// The original configuration will apply if it is not specified.
 	Https *Https `json:"Https,omitempty" name:"Https"`
 
 	// The origin server configuration.
@@ -9596,29 +7406,35 @@ type ModifyZoneSettingRequest struct {
 	// The original configuration will apply if this field is not specified.
 	SmartRouting *SmartRouting `json:"SmartRouting,omitempty" name:"SmartRouting"`
 
-	// The WebSocket configuration.
-	// The original configuration will apply if this field is not specified.
+	// WebSocket configuration. 
+	// The original configuration will apply if it is not specified.
 	WebSocket *WebSocket `json:"WebSocket,omitempty" name:"WebSocket"`
 
-	// The origin-pull client IP header configuration.
-	// The original configuration will apply if this field is not specified.
+	// Origin-pull client IP header configuration. 
+	// The original configuration will apply if it is not specified.
 	ClientIpHeader *ClientIpHeader `json:"ClientIpHeader,omitempty" name:"ClientIpHeader"`
 
 	// The cache prefresh configuration.
 	// The original configuration will apply if this field is not specified.
 	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitempty" name:"CachePrefresh"`
 
-	// The IPv6 access configuration.
-	// The original configuration will apply if this field is not specified.
+	// Ipv6 access configuration. 
+	// The original configuration will apply if it is not specified.
 	Ipv6 *Ipv6 `json:"Ipv6,omitempty" name:"Ipv6"`
 
-	// Whether to carry the location information of the client IP during origin-pull.
-	// The original configuration will apply if this field is not specified.
+	// Whether to carry the location information of the client IP during origin-pull. 
+	// The original configuration will apply if it is not specified.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitempty" name:"ClientIpCountry"`
 
-	// Configuration of gRPC support
-	// The original configuration will apply if this field is not specified.
+	// Configuration of gRPC support. 
+	// The original configuration will apply if it is not specified.
 	Grpc *Grpc `json:"Grpc,omitempty" name:"Grpc"`
+
+	// Image optimization. 
+	// It is disabled if this parameter is not specified.
+	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitempty" name:"ImageOptimize"`
+
+	StandardDebug *StandardDebug `json:"StandardDebug,omitempty" name:"StandardDebug"`
 }
 
 func (r *ModifyZoneSettingRequest) ToJsonString() string {
@@ -9652,6 +7468,8 @@ func (r *ModifyZoneSettingRequest) FromJsonString(s string) error {
 	delete(f, "Ipv6")
 	delete(f, "ClientIpCountry")
 	delete(f, "Grpc")
+	delete(f, "ImageOptimize")
+	delete(f, "StandardDebug")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyZoneSettingRequest has unknown keys!", "")
 	}
@@ -9767,23 +7585,6 @@ type OfflineCache struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
-type OptimizeAction struct {
-	// The optimization metric. Values:
-	// <li>`Http2`</li>
-	// <li>`Http3`</li>
-	// <li>`Brotli`</li>
-	Name *string `json:"Name,omitempty" name:"Name"`
-
-	// The network environment.
-	Connectivity *string `json:"Connectivity,omitempty" name:"Connectivity"`
-
-	// The estimated load time, in milliseconds.
-	Value *int64 `json:"Value,omitempty" name:"Value"`
-
-	// The estimated improvement ratio, in %.
-	Ratio *int64 `json:"Ratio,omitempty" name:"Ratio"`
-}
-
 type Origin struct {
 	// Primary origin server list
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -9800,10 +7601,10 @@ type Origin struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitempty" name:"OriginPullProtocol"`
 
-	// Whether to allow private access to buckets when `OriginType=cos`. Values:
-	// <li>`on`: Allow private access.</li>
-	// <li>`off`: Allow public access.</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to allow private access to buckets when `OriginType=cos`. Valid values: 
+	// <li>`on`: Private access;</li>
+	// <li>`off`: Public access.</li>
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CosPrivateAccess *string `json:"CosPrivateAccess,omitempty" name:"CosPrivateAccess"`
 }
 
@@ -10032,9 +7833,9 @@ type PlanInfo struct {
 }
 
 type PostMaxSize struct {
-	// Whether to enable POST upload limit (default limit: 32 MB). Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
+	// Whether to enable POST upload limit (default limit: 32 MB). Valid values: 
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
 	// Maximum size. Value range: 1-500 MB.
@@ -10089,9 +7890,9 @@ type QueryString struct {
 }
 
 type Quic struct {
-	// Whether to enable QUIC. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
+	// Whether to enable QUIC. Valid values: 
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -10255,121 +8056,6 @@ type RateLimitUserRule struct {
 	// <li>`client_to_eo`: Requests from the client to EdgeOne</li>
 	// Note: A null value indicates responses from the origin server to EdgeOne are recorded.
 	FreqScope []*string `json:"FreqScope,omitempty" name:"FreqScope"`
-}
-
-// Predefined struct for user
-type ReclaimAliasDomainRequestParams struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-}
-
-type ReclaimAliasDomainRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-}
-
-func (r *ReclaimAliasDomainRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ReclaimAliasDomainRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	delete(f, "ZoneName")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReclaimAliasDomainRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ReclaimAliasDomainResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ReclaimAliasDomainResponse struct {
-	*tchttp.BaseResponse
-	Response *ReclaimAliasDomainResponseParams `json:"Response"`
-}
-
-func (r *ReclaimAliasDomainResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ReclaimAliasDomainResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ReclaimZoneRequestParams struct {
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-}
-
-type ReclaimZoneRequest struct {
-	*tchttp.BaseRequest
-	
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-}
-
-func (r *ReclaimZoneRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ReclaimZoneRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneName")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReclaimZoneRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ReclaimZoneResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type ReclaimZoneResponse struct {
-	*tchttp.BaseResponse
-	Response *ReclaimZoneResponseParams `json:"Response"`
-}
-
-func (r *ReclaimZoneResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ReclaimZoneResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type Resource struct {
@@ -10660,17 +8346,6 @@ type RulesSettingAction struct {
 	Properties []*RulesProperties `json:"Properties,omitempty" name:"Properties"`
 }
 
-type SecClientIp struct {
-	// IP of the client.
-	ClientIp *string `json:"ClientIp,omitempty" name:"ClientIp"`
-
-	// Maximum QPS.
-	RequestMaxQps *int64 `json:"RequestMaxQps,omitempty" name:"RequestMaxQps"`
-
-	// Number of requests.
-	RequestNum *int64 `json:"RequestNum,omitempty" name:"RequestNum"`
-}
-
 type SecEntry struct {
 	// The query dimension value.
 	Key *string `json:"Key,omitempty" name:"Key"`
@@ -10694,112 +8369,6 @@ type SecEntryValue struct {
 
 	// Sum
 	Sum *float64 `json:"Sum,omitempty" name:"Sum"`
-}
-
-type SecHitRuleInfo struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The rule ID.
-	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
-
-	// The rule type.
-	RuleTypeName *string `json:"RuleTypeName,omitempty" name:"RuleTypeName"`
-
-	// The hit time recorded in seconds using UNIX timestamp.
-	HitTime *int64 `json:"HitTime,omitempty" name:"HitTime"`
-
-	// The number of requests.
-	RequestNum *int64 `json:"RequestNum,omitempty" name:"RequestNum"`
-
-	// The rule description.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// The subdomain name.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// Action. Values:
-	// <li>`trans`: Allow;</li>
-	// <li>`alg`: Algorithm challenge;</li>
-	// <li>`drop`: Discard;</li>
-	// <li>`ban`: Block the source IP;</li>
-	// <li>`redirect`: Redirect;</li>
-	// <li>`page`: Return to the specified page;</li>
-	// <li>`monitor`: Observe.</li>
-	Action *string `json:"Action,omitempty" name:"Action"`
-
-	// The bot tag. Values:
-	// <li>`evil_bot`: Malicious bot</li>
-	// <li>`suspect_bot`: Suspected bot</li>
-	// <li>`good_bot`: Good bot</li>
-	// <li>`normal`: Normal request</li>
-	// <li>`none`: Uncategorized</li>
-	BotLabel *string `json:"BotLabel,omitempty" name:"BotLabel"`
-
-	// Whether to enable the rule
-	RuleEnabled *bool `json:"RuleEnabled,omitempty" name:"RuleEnabled"`
-
-	// Whether to enable alerting for this rule
-	AlarmEnabled *bool `json:"AlarmEnabled,omitempty" name:"AlarmEnabled"`
-
-	// Whether the rule is deleted. Values: 
-	// <li>`true`: The rule has been deleted (does not exist).</li>
-	// <li>`false`: The rule is not deleted (exists).</li>
-	RuleDeleted *bool `json:"RuleDeleted,omitempty" name:"RuleDeleted"`
-}
-
-type SecRuleRelatedInfo struct {
-	// The rule ID.
-	RuleId *int64 `json:"RuleId,omitempty" name:"RuleId"`
-
-	// Action. Values:
-	// <li>`trans`: Allow;</li>
-	// <li>`alg`: Algorithm challenge;</li>
-	// <li>`drop`: Discard;</li>
-	// <li>`ban`: Block the source IP;</li>
-	// <li>`redirect`: Redirect;</li>
-	// <li>`page`: Return to the specified page;</li>
-	// <li>`monitor`: Observe.</li>
-	Action *string `json:"Action,omitempty" name:"Action"`
-
-	// Risk level (only found in WAF logs). Values:
-	// <li>`high risk`: High risk;</li>
-	// <li>`middle risk`: Middle risk;</li>
-	// <li>`low risk`: Low risk;</li>
-	// <li>`unkonw`: Unknown.</li>
-	RiskLevel *string `json:"RiskLevel,omitempty" name:"RiskLevel"`
-
-	// Rule level. Values:
-	// <li>`normal`: Moderate.</li>
-	RuleLevel *string `json:"RuleLevel,omitempty" name:"RuleLevel"`
-
-	// Rule description.
-	Description *string `json:"Description,omitempty" name:"Description"`
-
-	// The rule type.
-	RuleTypeName *string `json:"RuleTypeName,omitempty" name:"RuleTypeName"`
-
-	// The attack content.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackContent *string `json:"AttackContent,omitempty" name:"AttackContent"`
-
-	// The rule type. Values:
-	// <li>`waf`: Tencent Cloud-managed rule</li>
-	// <li>`acl`: Custom rule</li>
-	// <li>`rate`: Rate limiting rule</li>
-	// <li>`bot`: Bot rule</li>
-	RuleType *string `json:"RuleType,omitempty" name:"RuleType"`
-
-	// Whether to enable the rule
-	RuleEnabled *bool `json:"RuleEnabled,omitempty" name:"RuleEnabled"`
-
-	// Whether the rule is deleted. Values: 
-	// <li>`true`: The rule has been deleted (does not exist).</li>
-	// <li>`false`: The rule is not deleted (exists).</li>
-	RuleDeleted *bool `json:"RuleDeleted,omitempty" name:"RuleDeleted"`
-
-	// Whether to enable alerting for this rule
-	AlarmEnabled *bool `json:"AlarmEnabled,omitempty" name:"AlarmEnabled"`
 }
 
 type SecurityConfig struct {
@@ -10882,22 +8451,6 @@ type ServerCertInfo struct {
 	// Domain name of the certificate.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CommonName *string `json:"CommonName,omitempty" name:"CommonName"`
-}
-
-type SingleDataRecord struct {
-	// The query dimension value.
-	TypeKey *string `json:"TypeKey,omitempty" name:"TypeKey"`
-
-	// Value of the metric under the query dimension.
-	TypeValue []*SingleTypeValue `json:"TypeValue,omitempty" name:"TypeValue"`
-}
-
-type SingleTypeValue struct {
-	// The metric name.
-	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-	// The metric value.
-	DetailData *int64 `json:"DetailData,omitempty" name:"DetailData"`
 }
 
 type SkipCondition struct {
@@ -10986,165 +8539,15 @@ type SmartRouting struct {
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
-type SpeedTestingConfig struct {
-	// The task type. Values:
-	// <li>`1`: Page performance</li>
-	// <li>`2`: File uploads</li>
-	// <li>`3`: File downloads</li>
-	// <li>`4`: Port performance</li>
-	// <li>`5`: Network quality</li>
-	// <li>`6`: Audio/Video experience</li>
-	TaskType *int64 `json:"TaskType,omitempty" name:"TaskType"`
+type StandardDebug struct {
 
-	// The URL.
-	Url *string `json:"Url,omitempty" name:"Url"`
+	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-	// The user agent.
-	UA *string `json:"UA,omitempty" name:"UA"`
 
-	// The network type.
-	Connectivity *string `json:"Connectivity,omitempty" name:"Connectivity"`
-}
+	AllowClientIPList []*string `json:"AllowClientIPList,omitempty" name:"AllowClientIPList"`
 
-type SpeedTestingDetailData struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-
-	// The site performance across regions.
-	DistrictStatistics []*DistrictStatistics `json:"DistrictStatistics,omitempty" name:"DistrictStatistics"`
-}
-
-type SpeedTestingInfo struct {
-	// The task status. Values:
-	// <li>`200`: The task completed.</li>
-	// <li>`100`: The task is running.</li>
-	// <li>`503`: The task failed.</li>
-	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
-
-	// ID of the site test task.
-	TestId *string `json:"TestId,omitempty" name:"TestId"`
-
-	// The settings of the site test task.
-	SpeedTestingConfig *SpeedTestingConfig `json:"SpeedTestingConfig,omitempty" name:"SpeedTestingConfig"`
-
-	// The site test result.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	SpeedTestingStatistics *SpeedTestingStatistics `json:"SpeedTestingStatistics,omitempty" name:"SpeedTestingStatistics"`
-}
-
-type SpeedTestingMetricData struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-
-	// The origin information.
-	OriginSpeedTestingInfo []*SpeedTestingInfo `json:"OriginSpeedTestingInfo,omitempty" name:"OriginSpeedTestingInfo"`
-
-	// The EdgeOne information.
-	ProxySpeedTestingInfo []*SpeedTestingInfo `json:"ProxySpeedTestingInfo,omitempty" name:"ProxySpeedTestingInfo"`
-
-	// The site status.
-	SpeedTestingStatus *SpeedTestingStatus `json:"SpeedTestingStatus,omitempty" name:"SpeedTestingStatus"`
-
-	// The optimization suggestions.
-	OptimizeAction []*OptimizeAction `json:"OptimizeAction,omitempty" name:"OptimizeAction"`
-
-	// The EdgeOne load time, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProxyLoadTime *int64 `json:"ProxyLoadTime,omitempty" name:"ProxyLoadTime"`
-
-	// The origin load time, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginLoadTime *int64 `json:"OriginLoadTime,omitempty" name:"OriginLoadTime"`
-}
-
-type SpeedTestingQuota struct {
-	// The total number of site tests.
-	TotalTestRuns *int64 `json:"TotalTestRuns,omitempty" name:"TotalTestRuns"`
-
-	// The number of available site tests.
-	AvailableTestRuns *int64 `json:"AvailableTestRuns,omitempty" name:"AvailableTestRuns"`
-}
-
-type SpeedTestingStatistics struct {
-	// Last contentful paint, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstContentfulPaint *int64 `json:"FirstContentfulPaint,omitempty" name:"FirstContentfulPaint"`
-
-	// Full content load, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstMeaningfulPaint *int64 `json:"FirstMeaningfulPaint,omitempty" name:"FirstMeaningfulPaint"`
-
-	// Average download speed, in KB/s.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	OverallDownloadSpeed *float64 `json:"OverallDownloadSpeed,omitempty" name:"OverallDownloadSpeed"`
-
-	// Rendering time, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RenderTime *int64 `json:"RenderTime,omitempty" name:"RenderTime"`
-
-	// DOM content loaded, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DocumentFinishTime *int64 `json:"DocumentFinishTime,omitempty" name:"DocumentFinishTime"`
-
-	// Average TCP connection, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	TcpConnectionTime *int64 `json:"TcpConnectionTime,omitempty" name:"TcpConnectionTime"`
-
-	// Average backend response, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ResponseTime *int64 `json:"ResponseTime,omitempty" name:"ResponseTime"`
-
-	// Average DOM content download, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	FileDownloadTime *int64 `json:"FileDownloadTime,omitempty" name:"FileDownloadTime"`
-
-	// Load time, in milliseconds.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	LoadTime *int64 `json:"LoadTime,omitempty" name:"LoadTime"`
-}
-
-type SpeedTestingStatus struct {
-	// The URL.
-	Url *string `json:"Url,omitempty" name:"Url"`
-
-	// Whether the URL uses HTTPS.
-	Tls *bool `json:"Tls,omitempty" name:"Tls"`
-
-	// Creation time of the task.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
-
-	// The task status. Values:
-	// <li>`200`: The task completed.</li>
-	// <li>`100`: The task is running.</li>
-	// <li>`503`: The task failed./li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	StatusCode *int64 `json:"StatusCode,omitempty" name:"StatusCode"`
-
-	// The user agent.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	UA *string `json:"UA,omitempty" name:"UA"`
-
-	// The network environment.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Connectivity *string `json:"Connectivity,omitempty" name:"Connectivity"`
-
-	// Whether the URL is reachable. Values:
-	// <li>`true`: Yes</li>
-	// <li>`false`: No</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Reachable *bool `json:"Reachable,omitempty" name:"Reachable"`
-
-	// Whether the URL connection timed out. Values:
-	// <li>`true`: Yes</li>
-	// <li>`false`: No</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	TimedOut *bool `json:"TimedOut,omitempty" name:"TimedOut"`
+	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
 type SubRule struct {
@@ -11283,64 +8686,10 @@ type TopEntryValue struct {
 	Count *int64 `json:"Count,omitempty" name:"Count"`
 }
 
-// Predefined struct for user
-type UpdateOriginProtectionIPWhitelistRequestParams struct {
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-type UpdateOriginProtectionIPWhitelistRequest struct {
-	*tchttp.BaseRequest
-	
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
-}
-
-func (r *UpdateOriginProtectionIPWhitelistRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateOriginProtectionIPWhitelistRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ZoneId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateOriginProtectionIPWhitelistRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type UpdateOriginProtectionIPWhitelistResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type UpdateOriginProtectionIPWhitelistResponse struct {
-	*tchttp.BaseResponse
-	Response *UpdateOriginProtectionIPWhitelistResponseParams `json:"Response"`
-}
-
-func (r *UpdateOriginProtectionIPWhitelistResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateOriginProtectionIPWhitelistResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
 type UpstreamHttp2 struct {
-	// Whether to enable HTTP2 origin-pull. Values:
-	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
+	// Whether to enable HTTP2 origin-pull. Valid values: 
+	// <li>`on`: Enable;</li>
+	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 }
 
@@ -11398,27 +8747,6 @@ type WafConfig struct {
 	AiRule *AiRule `json:"AiRule,omitempty" name:"AiRule"`
 }
 
-type WafGroup struct {
-	// Action to be executed. Values:
-	// <li>`block`: Block</li>
-	// <li>`observe: Observe</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Action *string `json:"Action,omitempty" name:"Action"`
-
-	// The protection level. Values:
-	// <li>`loose`: Loose</li>
-	// <li>`normal`: Moderate</li>
-	// <li>`strict`: Strict</li>
-	// <li>`stricter`: Super strict</li>
-	// <li>`custom`: Custom</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Level *string `json:"Level,omitempty" name:"Level"`
-
-	// ID of the rule type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	TypeId *int64 `json:"TypeId,omitempty" name:"TypeId"`
-}
-
 type WafRule struct {
 	// Whether to enable managed rules. Values:
 	// <li>`on`: Enable</li>
@@ -11430,51 +8758,6 @@ type WafRule struct {
 
 	// IDs of the rules to be executed in Observe mode.
 	ObserveRuleIDs []*int64 `json:"ObserveRuleIDs,omitempty" name:"ObserveRuleIDs"`
-}
-
-type WebLogs struct {
-	// The attack event ID.
-	EventId *string `json:"EventId,omitempty" name:"EventId"`
-
-	// The HTTP log content.
-	HttpLog *string `json:"HttpLog,omitempty" name:"HttpLog"`
-
-	// The attacked subdomain name.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
-
-	// The attacker IP.
-	AttackIp *string `json:"AttackIp,omitempty" name:"AttackIp"`
-
-	// The country code of the attacker IP, which is defined in ISO-3166 alpha-2. For the list of country codes, see [ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json).
-	SipCountryCode *string `json:"SipCountryCode,omitempty" name:"SipCountryCode"`
-
-	// The real client IP.
-	RealClientIp *string `json:"RealClientIp,omitempty" name:"RealClientIp"`
-
-	// The ISO-3166 alpha-2 country code of the real client IP.
-	RealClientIpCountryCode *string `json:"RealClientIpCountryCode,omitempty" name:"RealClientIpCountryCode"`
-
-	// The attack time recorded in seconds using UNIX timestamp.
-	AttackTime *uint64 `json:"AttackTime,omitempty" name:"AttackTime"`
-
-	// The request address.
-	RequestUri *string `json:"RequestUri,omitempty" name:"RequestUri"`
-
-	// The request type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReqMethod *string `json:"ReqMethod,omitempty" name:"ReqMethod"`
-
-	// The security rule information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleDetailList []*SecRuleRelatedInfo `json:"RuleDetailList,omitempty" name:"RuleDetailList"`
-
-	// The attack content.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackContent *string `json:"AttackContent,omitempty" name:"AttackContent"`
-
-	// Log region
-	// Note: This field may return `null`, indicating that no valid value was found.
-	Area *string `json:"Area,omitempty" name:"Area"`
 }
 
 type WebSocket struct {
@@ -11561,11 +8844,13 @@ type Zone struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
 
-	// Whether it’s a fake site. Values:
-	// <li>`0`: Non-fake site</li>
-	// <li>`1`: Fake site</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether it’s a fake site. Valid values: 
+	// <li>`0`: Non-fake site;</li>
+	// <li>`1`: Fake site.</li>
 	IsFake *int64 `json:"IsFake,omitempty" name:"IsFake"`
+
+	// Lock status. Valid values: <li>`enable`: Normal. Modifying is allowed;</li><li>`disable`: Locked. Modifying is not allowed.</li>
+	LockStatus *string `json:"LockStatus,omitempty" name:"LockStatus"`
 }
 
 type ZoneSetting struct {
@@ -11653,6 +8938,10 @@ type ZoneSetting struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitempty" name:"ImageOptimize"`
 
-
+	// Cross-MLC-border acceleration. 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
+
+
+	StandardDebug *StandardDebug `json:"StandardDebug,omitempty" name:"StandardDebug"`
 }
