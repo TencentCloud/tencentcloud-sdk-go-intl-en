@@ -107,6 +107,60 @@ func (c *Client) BindZoneToPlanWithContext(ctx context.Context, request *BindZon
     return
 }
 
+func NewCheckCnameStatusRequest() (request *CheckCnameStatusRequest) {
+    request = &CheckCnameStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CheckCnameStatus")
+    
+    
+    return
+}
+
+func NewCheckCnameStatusResponse() (response *CheckCnameStatusResponse) {
+    response = &CheckCnameStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CheckCnameStatus
+// This API is used to query the CNAME status of a domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) CheckCnameStatus(request *CheckCnameStatusRequest) (response *CheckCnameStatusResponse, err error) {
+    return c.CheckCnameStatusWithContext(context.Background(), request)
+}
+
+// CheckCnameStatus
+// This API is used to query the CNAME status of a domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) CheckCnameStatusWithContext(ctx context.Context, request *CheckCnameStatusRequest) (response *CheckCnameStatusResponse, err error) {
+    if request == nil {
+        request = NewCheckCnameStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckCnameStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckCnameStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccelerationDomainRequest() (request *CreateAccelerationDomainRequest) {
     request = &CreateAccelerationDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -626,7 +680,11 @@ func NewCreatePurgeTaskResponse() (response *CreatePurgeTaskResponse) {
 }
 
 // CreatePurgeTask
-// This API is used to create a cache purging task.
+// When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves u200dthe latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
+//
+// 
+//
+// </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1). </li>
 //
 // error code that may be returned:
 //  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"
@@ -648,7 +706,11 @@ func (c *Client) CreatePurgeTask(request *CreatePurgeTaskRequest) (response *Cre
 }
 
 // CreatePurgeTask
-// This API is used to create a cache purging task.
+// When there are resources updated on the origin with the TTL remaining valid, users cannot access the latest resources. In this case, you can purge the cache using this API. There are two methods: <li>Delete: This method deletes the node cache without verification and retrieves u200dthe latest resources from the origin when receiving a request.</li><li>Invalidate: This method marks the node cache as invalid and sends a request with the If-None-Match and If-Modified-Since headers to the origin. If the origin responses with 200, the latest resources are retrieved to be cached on the node. If a 304 response is returned, the latest resources are not cached on the node.
+//
+// 
+//
+// </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1). </li>
 //
 // error code that may be returned:
 //  INTERNALERROR_BACKENDERROR = "InternalError.BackendError"

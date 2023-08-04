@@ -698,7 +698,7 @@ type CloneLoadBalancerRequestParams struct {
 	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
-	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
 	// Applies for CLB instances for a specified VIP
@@ -762,7 +762,7 @@ type CloneLoadBalancerRequest struct {
 	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
-	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
 	// Applies for CLB instances for a specified VIP
@@ -977,7 +977,7 @@ type CreateListenerRequestParams struct {
 	// List of names of the listeners to be created. The array of names and array of ports are in one-to-one correspondence. If you do not want to name them now, you do not need to provide this parameter.
 	ListenerNames []*string `json:"ListenerNames,omitempty" name:"ListenerNames"`
 
-	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
+	// Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
 	// Certificate information. This parameter is only applicable to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
@@ -986,8 +986,8 @@ type CreateListenerRequestParams struct {
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
-	// They represent weighted round robin and least connections, respectively. Default value: WRR. This parameter is applicable only to TCP/UDP/TCP_SSL listeners.
+	// Listener forwarding mode. u200dValues: `WRR` (weighted round robin) and `LEAST_CONN` (least connections). 
+	// Default value: `WRR`. This parameter is only applicable to TCP, UDP, TCP_SSL and QUIC listeners.
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether to enable the SNI feature. This parameter is applicable only to HTTPS listeners
@@ -1036,7 +1036,7 @@ type CreateListenerRequest struct {
 	// List of names of the listeners to be created. The array of names and array of ports are in one-to-one correspondence. If you do not want to name them now, you do not need to provide this parameter.
 	ListenerNames []*string `json:"ListenerNames,omitempty" name:"ListenerNames"`
 
-	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
+	// Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
 	// Certificate information. This parameter is only applicable to TCP_SSL listeners and HTTPS listeners with the SNI feature not enabled. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
@@ -1045,8 +1045,8 @@ type CreateListenerRequest struct {
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
-	// They represent weighted round robin and least connections, respectively. Default value: WRR. This parameter is applicable only to TCP/UDP/TCP_SSL listeners.
+	// Listener forwarding mode. u200dValues: `WRR` (weighted round robin) and `LEAST_CONN` (least connections). 
+	// Default value: `WRR`. This parameter is only applicable to TCP, UDP, TCP_SSL and QUIC listeners.
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
 	// Whether to enable the SNI feature. This parameter is applicable only to HTTPS listeners
@@ -1163,7 +1163,7 @@ type CreateLoadBalancerRequestParams struct {
 	// ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
+	// It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: `IPV6` indicates IPv6 NAT64, while `IPv6FullChain` indicates IPv6. 
 	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
 
 	// Number of CLBs to be created. Default value: 1.
@@ -1179,7 +1179,7 @@ type CreateLoadBalancerRequestParams struct {
 	// It only works on LCU-supported instances on private networks and all instances on public networks.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
-	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
 	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
@@ -1196,9 +1196,8 @@ type CreateLoadBalancerRequestParams struct {
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
 	// Creates an LCU-supported instance.
-	// <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
-	// <ul><li>The default specification is Super Large 1.
-	// <li>If you have enabled Super Large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Super Large LCU-supported specification is in beta now. To join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
+	// <ul><li>To create an LCU-supported instance, this parameter must be set to `SLA`, which indicates the Super Large 1 specification. 
+	// <ul><li>If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -1250,7 +1249,7 @@ type CreateLoadBalancerRequest struct {
 	// ID of the project to which a CLB instance belongs, which can be obtained through the `DescribeProject` API. If this parameter is not entered, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
 
-	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). This parameter is only for public network CLB instances.
+	// It's only applicable to public network CLB instances. IP version. Values: `IPV4`, `IPV6` and `IPv6FullChain` (case-insensitive). Default: `IPV4`. Note: `IPV6` indicates IPv6 NAT64, while `IPv6FullChain` indicates IPv6. 
 	AddressIPVersion *string `json:"AddressIPVersion,omitempty" name:"AddressIPVersion"`
 
 	// Number of CLBs to be created. Default value: 1.
@@ -1266,7 +1265,7 @@ type CreateLoadBalancerRequest struct {
 	// It only works on LCU-supported instances on private networks and all instances on public networks.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitempty" name:"InternetAccessible"`
 
-	// This parameter is applicable only to public network CLB instances. Valid values: CMCC (China Mobile), CTCC (China Telecom), CUCC (China Unicom). If this parameter is not specified, BGP will be used by default. ISPs supported in a region can be queried with the `DescribeSingleIsp` API. If an ISP is specified, only bill-by-bandwidth-package (BANDWIDTH_PACKAGE) can be used as the network billing mode.
+	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
 	VipIsp *string `json:"VipIsp,omitempty" name:"VipIsp"`
 
 	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
@@ -1283,9 +1282,8 @@ type CreateLoadBalancerRequest struct {
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitempty" name:"ExclusiveCluster"`
 
 	// Creates an LCU-supported instance.
-	// <ul><li>To create an LCU-supported instance, set this parameter to `SLA`, which indicates that an LCU-supported instance is created with the default specification in pay-as-you-go mode.
-	// <ul><li>The default specification is Super Large 1.
-	// <li>If you have enabled Super Large LCU-supported instances, `SLA` corresponds to the Super Large 4 specification. Super Large LCU-supported specification is in beta now. To join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
+	// <ul><li>To create an LCU-supported instance, this parameter must be set to `SLA`, which indicates the Super Large 1 specification. 
+	// <ul><li>If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -3332,7 +3330,7 @@ type DescribeListenersRequestParams struct {
 	// Array of CLB listener IDs to query (100 IDs at most).
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
-	// Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
+	// Type of the listener protocols to be queried. Values: TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Port of the listeners to be queried
@@ -3348,7 +3346,7 @@ type DescribeListenersRequest struct {
 	// Array of CLB listener IDs to query (100 IDs at most).
 	ListenerIds []*string `json:"ListenerIds,omitempty" name:"ListenerIds"`
 
-	// Type of the listener protocols to be queried. Valid values: TCP, UDP, HTTP, HTTPS, and TCP_SSL.
+	// Type of the listener protocols to be queried. Values: TCP`, `UDP`, `HTTP`, `HTTPS`, `TCP_SSL` and `QUIC`.
 	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
 
 	// Port of the listeners to be queried
@@ -3708,7 +3706,7 @@ type DescribeLoadBalancersRequestParams struct {
 	// CLB instance name.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Domain name assigned to a CLB instance by Tencent Cloud. This parameter is meaningful only for the public network classic CLB.
+	// The domain name that Tencent Cloud assigned for the CLB instance.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// VIP address of a CLB instance (there can be multiple addresses)
@@ -3772,7 +3770,7 @@ type DescribeLoadBalancersRequest struct {
 	// CLB instance name.
 	LoadBalancerName *string `json:"LoadBalancerName,omitempty" name:"LoadBalancerName"`
 
-	// Domain name assigned to a CLB instance by Tencent Cloud. This parameter is meaningful only for the public network classic CLB.
+	// The domain name that Tencent Cloud assigned for the CLB instance.
 	Domain *string `json:"Domain,omitempty" name:"Domain"`
 
 	// VIP address of a CLB instance (there can be multiple addresses)
@@ -4685,8 +4683,8 @@ type HealthCheck struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpCheckPath *string `json:"HttpCheckPath,omitempty" name:"HttpCheckPath"`
 
-	// The target domain name for health check. It’s applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. It’s required for TCP listeners.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Health check domain name. It is only applicable to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. For HTTP health checks of TCP listeners, this parameter is required.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	HttpCheckDomain *string `json:"HttpCheckDomain,omitempty" name:"HttpCheckDomain"`
 
 	// Health check method (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Value range: HEAD, GET. Default value: HEAD.
@@ -4709,16 +4707,16 @@ type HealthCheck struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RecvContext *string `json:"RecvContext,omitempty" name:"RecvContext"`
 
-	// Health check protocol (a custom check parameter). Value range: TCP, HTTP, CUSTOM (applicable only to TCP/UDP listeners, where UDP listeners only support CUSTOM. If custom health check is used, this parameter is required).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// u200dHealth check protocol. Values: `TCP`, `HTTP`, `HTTPS`, `GRPC`, `PING`, and `CUSTOM`. UDP listeners support `PING`/`CUSTOM`. TCP listener support `TCP`/`HTTP`/`CUSTOM`. TCP_SSL and QUIC listeners support `TCP`/`HTTP`. HTTP rules support `HTTP`/`GRPC. HTTPS rules support `HTTP`/`HTTPS`/`GRPC`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	CheckType *string `json:"CheckType,omitempty" name:"CheckType"`
 
-	// Health check protocol (a custom check parameter), which is required if the value of CheckType is HTTP. This parameter represents the HTTP version of the real server. Value range: HTTP/1.0, HTTP/1.1. (Applicable only to TCP listeners.)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// HTTP version. HTTP version of the backend service. Values: `HTTP/1.0`, HTTP/1.1`. It is only applicable to TCP listeners, and is required when `CheckType`=`HTTP`. 
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	HttpVersion *string `json:"HttpVersion,omitempty" name:"HttpVersion"`
 
-	// Specifies the type of IP for health check. `0` (default): CLB VIP. `1`: Use the IP range starting with 100.64 as the source IP.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Specifies the type of health check source IP. `0` (default): CLB VIP. `1`: 100.64 IP range.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	SourceIpType *int64 `json:"SourceIpType,omitempty" name:"SourceIpType"`
 
 	// GRPC health check status code, which is only applicable to rules with GRPC as the backend forwarding protocol. It can be a single number (such as `20`), multiple numbers (such as `20,25`) or a range (such as `0-99`). The default value is `12`.
@@ -5923,10 +5921,10 @@ type ModifyListenerRequestParams struct {
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
+	// Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is only applicable to HTTPS/TCP_SSL listeners. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	// Certificate information. This parameter is only applicable to HTTPS/TCP_SSL/QUIC listeners. `Certificate` and `MultiCertInfo` cannot be both specified.
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
@@ -5976,10 +5974,10 @@ type ModifyListenerRequest struct {
 	// Session persistence time in seconds. Value range: 30-3,600. The default value is 0, indicating that session persistence is not enabled. This parameter is applicable only to TCP/UDP listeners.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitempty" name:"SessionExpireTime"`
 
-	// Health check parameter, which is applicable only to TCP, UDP, and TCP_SSL listeners.
+	// Health check parameter. It is only applicable only to TCP, UDP, TCP_SSL and QUIC listeners.
 	HealthCheck *HealthCheck `json:"HealthCheck,omitempty" name:"HealthCheck"`
 
-	// Certificate information. This parameter is only applicable to HTTPS/TCP_SSL listeners. `Certificate` and `MultiCertInfo` cannot be specified at the same time. 
+	// Certificate information. This parameter is only applicable to HTTPS/TCP_SSL/QUIC listeners. `Certificate` and `MultiCertInfo` cannot be both specified.
 	Certificate *CertificateInput `json:"Certificate,omitempty" name:"Certificate"`
 
 	// Forwarding method of a listener. Value range: WRR, LEAST_CONN.
@@ -7242,7 +7240,7 @@ type RuleInput struct {
 	// They represent weighted round robin, least connections, and IP hash, respectively. Default value: WRR.
 	Scheduler *string `json:"Scheduler,omitempty" name:"Scheduler"`
 
-	// Forwarding protocol between the CLB instance and real server. HTTP/HTTPS/TRPC are supported. TRPC is now only available for internal usage.
+	// Forwarding protocol between the CLB instance and backend service. Values: `HTTP`, `HTTPS`, `GRPC` and `TRPC` (only for internal usage). It defaults to `HTTP`.
 	ForwardType *string `json:"ForwardType,omitempty" name:"ForwardType"`
 
 	// Whether to set this domain name as the default domain name. Note: Only one default domain name can be set under one listener.
@@ -7695,9 +7693,8 @@ type SlaUpdateParam struct {
 	// ID of the CLB instance
 	LoadBalancerId *string `json:"LoadBalancerId,omitempty" name:"LoadBalancerId"`
 
-	// This parameter is set to a fixed value of `SLA`, which specifies to upgrade to an LCU-supported instance of default specification.
-	// <ul><li>If you enable general LCU-supported instances, `SLA` corresponds to the Super Large 1 specification. General LCU-supported instances are in beta testing, [submit a ticket](https://intl.cloud.tencent.com/apply/p/hf45esx99lf?from_cn_redirect=1) for application.</li>
-	// <li>If you enable ultra-large LCU-supported instances, SLA corresponds to the Super Large 4 specification. Ultra-large LCU-supported instances are in beta testing, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.</li></ul>
+	// u200dTo upgrade the instance to an LCU-support instance, set it to `SLA`. `SLA` indicates Super Large 1. 
+	// If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
 	SlaType *string `json:"SlaType,omitempty" name:"SlaType"`
 }
 

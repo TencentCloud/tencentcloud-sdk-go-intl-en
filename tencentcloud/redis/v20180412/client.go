@@ -322,12 +322,13 @@ func NewChangeMasterInstanceResponse() (response *ChangeMasterInstanceResponse) 
 }
 
 // ChangeMasterInstance
-// This API is used to switch with master instance in a replication group.
+// This API is used to set a read-only instance in a replication group as a master instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
 //  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
 //  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
@@ -340,12 +341,13 @@ func (c *Client) ChangeMasterInstance(request *ChangeMasterInstanceRequest) (res
 }
 
 // ChangeMasterInstance
-// This API is used to switch with master instance in a replication group.
+// This API is used to set a read-only instance in a replication group as a master instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETERVALUE_CHECKNOTPASS = "InvalidParameterValue.CheckNotPass"
 //  INVALIDPARAMETERVALUE_REPLICATIONGROUPNOTEXISTS = "InvalidParameterValue.ReplicationGroupNotExists"
 //  LIMITEXCEEDED_REPLICATIONGROUPLOCKED = "LimitExceeded.ReplicationGroupLocked"
@@ -3086,7 +3088,7 @@ func NewDescribeTaskInfoResponse() (response *DescribeTaskInfoResponse) {
 }
 
 // DescribeTaskInfo
-// This API is used to query the task result.
+// This API is used to get the execution of a specified task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -3097,7 +3099,7 @@ func (c *Client) DescribeTaskInfo(request *DescribeTaskInfoRequest) (response *D
 }
 
 // DescribeTaskInfo
-// This API is used to query the task result.
+// This API is used to get the execution of a specified task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5176,7 +5178,7 @@ func NewUpgradeInstanceVersionResponse() (response *UpgradeInstanceVersionRespon
 }
 
 // UpgradeInstanceVersion
-// This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
+// This API is used to upgrade the instance to a later version or u200dto upgrade the current standard architecture to the cluster architecture.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5189,7 +5191,7 @@ func (c *Client) UpgradeInstanceVersion(request *UpgradeInstanceVersionRequest) 
 }
 
 // UpgradeInstanceVersion
-// This API is used to upgrade compatible instance version (for example, from Redis 2.8 to 4.0), or upgrade instance architecture (for example, from standard architecture to cluster architecture).
+// This API is used to upgrade the instance to a later version or u200dto upgrade the current standard architecture to the cluster architecture.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"

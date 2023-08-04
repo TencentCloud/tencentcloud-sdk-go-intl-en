@@ -364,21 +364,33 @@ func (r *ChangeInstanceRoleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ChangeMasterInstanceRequestParams struct {
-	// Replication group ID
+	// Replication group ID, such as `crs-rpl-m3zt****`. It is the unique identifier automatically assigned by the system when creating a replication group. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication list.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Instance ID
+	// ID of the read-only instance to be promoted to the master instance, such as `crs-xjhsdj****`. Log in to the the [TencentDB for Redis console](https://console.cloud.tencent.com/redis), and copy it in the instance list.
+	// 
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to promote the read-only instance to the master instance forcibly. Valid values:
+	// - `true`: Yes
+	// - `false`: No
+	ForceSwitch *bool `json:"ForceSwitch,omitempty" name:"ForceSwitch"`
 }
 
 type ChangeMasterInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Replication group ID
+	// Replication group ID, such as `crs-rpl-m3zt****`. It is the unique identifier automatically assigned by the system when creating a replication group. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication list.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Instance ID
+	// ID of the read-only instance to be promoted to the master instance, such as `crs-xjhsdj****`. Log in to the the [TencentDB for Redis console](https://console.cloud.tencent.com/redis), and copy it in the instance list.
+	// 
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Whether to promote the read-only instance to the master instance forcibly. Valid values:
+	// - `true`: Yes
+	// - `false`: No
+	ForceSwitch *bool `json:"ForceSwitch,omitempty" name:"ForceSwitch"`
 }
 
 func (r *ChangeMasterInstanceRequest) ToJsonString() string {
@@ -395,6 +407,7 @@ func (r *ChangeMasterInstanceRequest) FromJsonString(s string) error {
 	}
 	delete(f, "GroupId")
 	delete(f, "InstanceId")
+	delete(f, "ForceSwitch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChangeMasterInstanceRequest has unknown keys!", "")
 	}
@@ -4089,10 +4102,10 @@ type DescribeReplicationGroupRequestParams struct {
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Replication group ID
+	// ID of the specified replication group, such as `crs-rpl-m3zt****`. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication group list.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Key words for fuzzy query, which can be set as the ID or name of a replication group.
+	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get u200dthem in the global replication group list.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -4105,10 +4118,10 @@ type DescribeReplicationGroupRequest struct {
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
 
-	// Replication group ID
+	// ID of the specified replication group, such as `crs-rpl-m3zt****`. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication group list.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Key words for fuzzy query, which can be set as the ID or name of a replication group.
+	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get u200dthem in the global replication group list.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -4373,19 +4386,24 @@ func (r *DescribeTaskInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskInfoResponseParams struct {
-	// Task status. preparing: to be run; running: running; succeed: succeeded; failed: failed; error: running error.
+	// Task status. Valid values: 
+	// - `preparing`: To be run
+	// - `running`: Running
+	// - `succeed`: Succeedu200ded
+	// - `failed`: Failed
+	// - `Error`: Error occurred while running
 	Status *string `json:"Status,omitempty" name:"Status"`
 
 	// Task start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Task type
+	// Task type, including `Create`, `Configure`, u200d`Disable Instance`, `Clear Instance`, `Reset Password`, `Upgrade Version`, `Back up Instance`, `Modify Network`, `Migrate to New AZ` and `Promote to Master`.
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Task message, which is displayed in case of an error. It will be blank if the status is running or succeeded.
+	// Message returned by task execution, which will be au200dn error message when execution fails or be empty when the status is `running `or `succeed-`.
 	TaskMessage *string `json:"TaskMessage,omitempty" name:"TaskMessage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4953,7 +4971,7 @@ type Groups struct {
 	// User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
 	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
 
-	// Region ID
+	// Region ID. Valid values:
 	// - `1`: Guangzhou 
 	// - `4`: Shanghai 
 	// - `5`: Hong Kong (China) 
@@ -4970,7 +4988,6 @@ type Groups struct {
 	// - `21`: India 
 	// - `22`: Virginia (East US)
 	// - `23`: Thailand 
-	// - `24`: Russia 
 	// - `25`: Japan
 	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
 
@@ -5746,7 +5763,7 @@ type Instances struct {
 	RedisShardSize *int64 `json:"RedisShardSize,omitempty" name:"RedisShardSize"`
 
 	// Instance disk size
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
 	// Engine: Redis Community Edition, Tencent Cloud CKV.
@@ -8082,26 +8099,38 @@ func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeInstanceVersionRequestParams struct {
-	// Target instance type after the change, which is the same as the `Type` of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
+	// Target instance type after the change, which is the same as the `TypeId` of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
+	// - For Redis 4.0 or later, a standard architecture instance can be upgraded to a cluster architecture instance on the same version; for example, you can upgrade from Redis 4.0 Standard Architecture to Redis 4.0 Cluster Architecture.
+	// - Cross-version architecture upgrade is not supported; for example, you cannot upgrade from Redis 4.0 Standard Architecture to Redis 5.0 Cluster Architecture.
+	// - The architecture of Redis 2.8 cannot be upgraded.
+	// - Cluster architecture cannot be downgraded to standard architecture.
 	TargetInstanceType *string `json:"TargetInstanceType,omitempty" name:"TargetInstanceType"`
 
-	// Switch mode. Valid values: 1 (switch during the maintenance time), 2 (switch now).
+	// Switch time. Valid values:
+	// - `1`: Switch in the maintenance time.
+	// - `2` (default value): Switch now.
 	SwitchOption *int64 `json:"SwitchOption,omitempty" name:"SwitchOption"`
 
-	// Instance ID
+	// ID of the specified instance, such as `crs-xjhsdj****`. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 
 type UpgradeInstanceVersionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Target instance type after the change, which is the same as the `Type` of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
+	// Target instance type after the change, which is the same as the `TypeId` of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
+	// - For Redis 4.0 or later, a standard architecture instance can be upgraded to a cluster architecture instance on the same version; for example, you can upgrade from Redis 4.0 Standard Architecture to Redis 4.0 Cluster Architecture.
+	// - Cross-version architecture upgrade is not supported; for example, you cannot upgrade from Redis 4.0 Standard Architecture to Redis 5.0 Cluster Architecture.
+	// - The architecture of Redis 2.8 cannot be upgraded.
+	// - Cluster architecture cannot be downgraded to standard architecture.
 	TargetInstanceType *string `json:"TargetInstanceType,omitempty" name:"TargetInstanceType"`
 
-	// Switch mode. Valid values: 1 (switch during the maintenance time), 2 (switch now).
+	// Switch time. Valid values:
+	// - `1`: Switch in the maintenance time.
+	// - `2` (default value): Switch now.
 	SwitchOption *int64 `json:"SwitchOption,omitempty" name:"SwitchOption"`
 
-	// Instance ID
+	// ID of the specified instance, such as `crs-xjhsdj****`. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it in the instance list.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 }
 

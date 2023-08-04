@@ -500,6 +500,10 @@ type ApplicationProxyRule struct {
 	// <li>`false`: Disable</li>Default value: false
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
 
+	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
+
 	// The origin port, which can be:
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
@@ -752,8 +756,10 @@ type Cache struct {
 
 	// Whether to enable force cache. Values:
 	// <li>`on`: Enable</li>
-	// <li>`off`: Disable</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <li>`off`: Disable </li>
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: IgnoreCacheControl is deprecated.
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitempty" name:"IgnoreCacheControl"`
 }
 
@@ -800,6 +806,70 @@ type CachePrefresh struct {
 	Percent *int64 `json:"Percent,omitempty" name:"Percent"`
 }
 
+// Predefined struct for user
+type CheckCnameStatusRequestParams struct {
+	// ID of the site.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of domain names.
+	RecordNames []*string `json:"RecordNames,omitempty" name:"RecordNames"`
+}
+
+type CheckCnameStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site.
+	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
+
+	// List of domain names.
+	RecordNames []*string `json:"RecordNames,omitempty" name:"RecordNames"`
+}
+
+func (r *CheckCnameStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckCnameStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "RecordNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckCnameStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckCnameStatusResponseParams struct {
+	// List of CNAME statuses.
+	CnameStatus []*CnameStatus `json:"CnameStatus,omitempty" name:"CnameStatus"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CheckCnameStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckCnameStatusResponseParams `json:"Response"`
+}
+
+func (r *CheckCnameStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckCnameStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ClientIpCountry struct {
 	// Whether to enable configuration. Values:
 	// <li>`on`: Enable</li>
@@ -821,6 +891,21 @@ type ClientIpHeader struct {
 	// The default value `X-Forwarded-IP` is used when it is not specified. 
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	HeaderName *string `json:"HeaderName,omitempty" name:"HeaderName"`
+}
+
+type CnameStatus struct {
+	// The domain name.
+	RecordName *string `json:"RecordName,omitempty" name:"RecordName"`
+
+	// The CNAME address.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Cname *string `json:"Cname,omitempty" name:"Cname"`
+
+	// The CNAME status. Values:
+	// <li>`active`: Activated</li>
+	// <li>`moved`: Not activated </li>
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitempty" name:"Status"`
 }
 
 type CodeAction struct {
@@ -1182,6 +1267,9 @@ type CreateApplicationProxyRuleRequestParams struct {
 	// <li>`false`: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
 
+	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
+
 	// The origin port, which can be:
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
@@ -1229,6 +1317,9 @@ type CreateApplicationProxyRuleRequest struct {
 	// <li>`false`: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
 
+	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
+
 	// The origin port, which can be:
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
@@ -1255,6 +1346,7 @@ func (r *CreateApplicationProxyRuleRequest) FromJsonString(s string) error {
 	delete(f, "OriginValue")
 	delete(f, "ForwardClientIp")
 	delete(f, "SessionPersist")
+	delete(f, "SessionPersistTime")
 	delete(f, "OriginPort")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationProxyRuleRequest has unknown keys!", "")
@@ -1573,29 +1665,18 @@ type CreatePurgeTaskRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Purging mode. Valid values: 
-	// <li>`purge_url`: Purge by URL;</li>
-	// <li>`purge_prefix`: Purge by directory;</li>
-	// <li>`purge_host`: Purge by hostname;</li>
-	// <li>`purge_all`: Puege all cache;</li>
-	// <li>`purge_cache_tag`: Purge by cache tag.</li>
+	// Type of cache purging. Values:
+	// <li>`purge_url`: Purge by the URL</li>
+	// <li>`purge_prefix`: Purge by the directory</li>
+	// <li>`purge_host`: Purge by the hostname</li>
+	// <li>`purge_all`: Purge all caches</li>
+	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-
+	// Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
 	Method *string `json:"Method,omitempty" name:"Method"`
 
-	// Resource to be purged, which depends on the `Type` field. 
-	// 1. When `Type = purge_host`: 
-	// Enter the hostname, such as www.example.com and foo.bar.example.com. 
-	// 2. When `Type = purge_prefix`: 
-	// Enter the prefix, such as http://www.example.com/example/. 
-	// 3. When `Type = purge_url`: 
-	// Enter the URL, such as https://www.example.com/example.jpg. 
-	// 4. When `Type = purge_all`: 
-	// `Targets` can be left empty. 
-	// 5. When `Type = purge_cache_tag`: 
-	// Enter the cache tag, such as tag1. 
-	// Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
+	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -1611,28 +1692,18 @@ type CreatePurgeTaskRequest struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// Purging mode. Valid values: 
-	// <li>`purge_url`: Purge by URL;</li>
-	// <li>`purge_prefix`: Purge by directory;</li>
-	// <li>`purge_host`: Purge by hostname;</li>
-	// <li>`purge_all`: Puege all cache;</li>
-	// <li>`purge_cache_tag`: Purge by cache tag.</li>
+	// Type of cache purging. Values:
+	// <li>`purge_url`: Purge by the URL</li>
+	// <li>`purge_prefix`: Purge by the directory</li>
+	// <li>`purge_host`: Purge by the hostname</li>
+	// <li>`purge_all`: Purge all caches</li>
+	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitempty" name:"Type"`
 
+	// Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
 	Method *string `json:"Method,omitempty" name:"Method"`
 
-	// Resource to be purged, which depends on the `Type` field. 
-	// 1. When `Type = purge_host`: 
-	// Enter the hostname, such as www.example.com and foo.bar.example.com. 
-	// 2. When `Type = purge_prefix`: 
-	// Enter the prefix, such as http://www.example.com/example/. 
-	// 3. When `Type = purge_url`: 
-	// Enter the URL, such as https://www.example.com/example.jpg. 
-	// 4. When `Type = purge_all`: 
-	// `Targets` can be left empty. 
-	// 5. When `Type = purge_cache_tag`: 
-	// Enter the cache tag, such as tag1. 
-	// Note: The number of submitted tasks is limited by the quota of the plan. For details, see [Billing Overview](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1).
+	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
 	Targets []*string `json:"Targets,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -1851,8 +1922,9 @@ type CreateZoneRequestParams struct {
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 
 	// The access mode. Values:
-	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record. Note that you should verify your site with the IdentifyZone API before starting site access.</li>If it is left empty, the default value `full` is used.
+	// <li> `full`: Access through a name server.</li>
+	// <li> `partial`: Access through a CNAME. Before using this access mode, first verify your site with the site verification API (IdentifyZone).<li>`noDomainAccess`: Access without using a domain name. If this value is passed, only the Tags field needs to be set. </li>
+	// If not specified, this field uses the default value `full`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Whether to skip scanning the existing DNS records of the site. Default value: false.
@@ -1877,8 +1949,9 @@ type CreateZoneRequest struct {
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 
 	// The access mode. Values:
-	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record. Note that you should verify your site with the IdentifyZone API before starting site access.</li>If it is left empty, the default value `full` is used.
+	// <li> `full`: Access through a name server.</li>
+	// <li> `partial`: Access through a CNAME. Before using this access mode, first verify your site with the site verification API (IdentifyZone).<li>`noDomainAccess`: Access without using a domain name. If this value is passed, only the Tags field needs to be set. </li>
+	// If not specified, this field uses the default value `full`.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Whether to skip scanning the existing DNS records of the site. Default value: false.
@@ -6495,6 +6568,9 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// <li>`false`: Disable</li>If it is left empty, the default value `false` is used.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
 
+	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
+
 	// The origin port, which can be:
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
@@ -6547,6 +6623,9 @@ type ModifyApplicationProxyRuleRequest struct {
 	// <li>`false`: Disable</li>If it is left empty, the default value `false` is used.
 	SessionPersist *bool `json:"SessionPersist,omitempty" name:"SessionPersist"`
 
+	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitempty" name:"SessionPersistTime"`
+
 	// The origin port, which can be:
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
@@ -6574,6 +6653,7 @@ func (r *ModifyApplicationProxyRuleRequest) FromJsonString(s string) error {
 	delete(f, "OriginValue")
 	delete(f, "ForwardClientIp")
 	delete(f, "SessionPersist")
+	delete(f, "SessionPersistTime")
 	delete(f, "OriginPort")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationProxyRuleRequest has unknown keys!", "")
@@ -6766,8 +6846,8 @@ type ModifyHostsCertificateRequestParams struct {
 	ServerCertInfo []*ServerCertInfo `json:"ServerCertInfo,omitempty" name:"ServerCertInfo"`
 
 	// Whether the certificate is managed by EdgeOne. Values:
-	// <li>`apply`: Managed by EdgeOne</li>
-	// <li>`none`: Not managed by EdgeOne</li>If it is left empty, the default value `apply` is used.
+	// <li>`apply`: Managed by EdgeOne.</li>
+	// <li>`none`: Not managed by EdgeOne.</li>If not specified, this field uses the default value `none`.
 	ApplyType *string `json:"ApplyType,omitempty" name:"ApplyType"`
 }
 
@@ -6784,8 +6864,8 @@ type ModifyHostsCertificateRequest struct {
 	ServerCertInfo []*ServerCertInfo `json:"ServerCertInfo,omitempty" name:"ServerCertInfo"`
 
 	// Whether the certificate is managed by EdgeOne. Values:
-	// <li>`apply`: Managed by EdgeOne</li>
-	// <li>`none`: Not managed by EdgeOne</li>If it is left empty, the default value `apply` is used.
+	// <li>`apply`: Managed by EdgeOne.</li>
+	// <li>`none`: Not managed by EdgeOne.</li>If not specified, this field uses the default value `none`.
 	ApplyType *string `json:"ApplyType,omitempty" name:"ApplyType"`
 }
 
@@ -7193,16 +7273,25 @@ type ModifyZoneRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The site access method. Values:
-	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record.</li>The original configuration will apply if this field is not specified.
+	// Access mode of the site. Values:
+	// <li> `full`: Access through a name server.</li>
+	// <li> `partial`: Access through a CNAME u200drecord. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// The custom name servers. If this field is not specified, the default name servers will be used.
+	// The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
 	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitempty" name:"VanityNameServers"`
 
 	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
 	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
+
+	// The region where the site requests access. Values:
+	// <li> `global`: Global coverage</li>
+	// <li> `mainland`: Chinese mainland</li>
+	// <li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 }
 
 type ModifyZoneRequest struct {
@@ -7211,16 +7300,25 @@ type ModifyZoneRequest struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitempty" name:"ZoneId"`
 
-	// The site access method. Values:
-	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record.</li>The original configuration will apply if this field is not specified.
+	// Access mode of the site. Values:
+	// <li> `full`: Access through a name server.</li>
+	// <li> `partial`: Access through a CNAME u200drecord. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// The custom name servers. If this field is not specified, the default name servers will be used.
+	// The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
 	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitempty" name:"VanityNameServers"`
 
 	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
 	AliasZoneName *string `json:"AliasZoneName,omitempty" name:"AliasZoneName"`
+
+	// The region where the site requests access. Values:
+	// <li> `global`: Global coverage</li>
+	// <li> `mainland`: Chinese mainland</li>
+	// <li> `overseas`: Outside the Chinese mainland </li>It is not allowed to pass this field when a site is connected without using a domain name.
+	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// Name of the site. This field takes effect only when the site switches from domainless access to CNAME access.
+	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
 }
 
 func (r *ModifyZoneRequest) ToJsonString() string {
@@ -7239,6 +7337,8 @@ func (r *ModifyZoneRequest) FromJsonString(s string) error {
 	delete(f, "Type")
 	delete(f, "VanityNameServers")
 	delete(f, "AliasZoneName")
+	delete(f, "Area")
+	delete(f, "ZoneName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyZoneRequest has unknown keys!", "")
 	}
@@ -7348,7 +7448,7 @@ type ModifyZoneSettingRequestParams struct {
 	// It is disabled if this parameter is not specified.
 	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitempty" name:"ImageOptimize"`
 
-
+	// Standard debugging configuration.
 	StandardDebug *StandardDebug `json:"StandardDebug,omitempty" name:"StandardDebug"`
 }
 
@@ -7434,6 +7534,7 @@ type ModifyZoneSettingRequest struct {
 	// It is disabled if this parameter is not specified.
 	ImageOptimize *ImageOptimize `json:"ImageOptimize,omitempty" name:"ImageOptimize"`
 
+	// Standard debugging configuration.
 	StandardDebug *StandardDebug `json:"StandardDebug,omitempty" name:"StandardDebug"`
 }
 
@@ -7676,11 +7777,12 @@ type OriginGroup struct {
 }
 
 type OriginInfo struct {
-	// The origin type. Values: 
+	// The origin type. Values:
 	// <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
-	// <li>`COS`: COS bucket address</li>
-	// <li>`ORIGIN_GROUP`: Origin group</li>
-	// <li>`AWS_S3`: AWS S3 bucket address</li>
+	// <li>`COS`: COS bucket address </li>
+	// <li>`ORIGIN_GROUP`: Origin group </li>
+	// <li>`AWS_S3`: AWS S3 bucket address </li>
+	// <li>`SPACE`: EdgeOne Shield Space </li>
 	OriginType *string `json:"OriginType,omitempty" name:"OriginType"`
 
 	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
@@ -8098,6 +8200,17 @@ type Resource struct {
 	// <li>`overseas`: Regions outside the Chinese mainland</li>
 	// <li>`global`: Global</li>
 	Area *string `json:"Area,omitempty" name:"Area"`
+
+	// The resource type. Values:
+	// <li>`plan`: Plan resources</li>
+	// <li>`pay-as-you-go`: Pay-as-you-go resources </li>
+	// <li>`value-added`: Value-added resources </li>
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// The sites that are associated with the current resources.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ZoneNumber *int64 `json:"ZoneNumber,omitempty" name:"ZoneNumber"`
 }
 
 type RewriteAction struct {
@@ -8540,13 +8653,15 @@ type SmartRouting struct {
 }
 
 type StandardDebug struct {
-
+	// Whether to enable standard debugging. Values:
+	// <li>`on`: Enable</li>
+	// <li>`off`: Disable </li>
 	Switch *string `json:"Switch,omitempty" name:"Switch"`
 
-
+	// The client IP to allow. It can be an IPv4/IPv6 address or a CIDR block. If not specified, it means to allow any client IP
 	AllowClientIPList []*string `json:"AllowClientIPList,omitempty" name:"AllowClientIPList"`
 
-
+	// The time when the standard debugging setting expires. If it is exceeded, this feature u200dbecomes invalid.
 	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
 }
 
@@ -8573,6 +8688,23 @@ type Sv struct {
 
 	// The parameter value.
 	Value *string `json:"Value,omitempty" name:"Value"`
+
+	// Quota for a resource. Values:
+	// <li>`zone`: Quota for sites</li>
+	// <li>`custom-rule`: Quota for custom rules</li>
+	// <li>`rate-limiting-rule`: Quota for rate limiting rules</li>
+	// <li>`l4-proxy-instance`: Quota for L4 proxy instances </li>
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Pack *string `json:"Pack,omitempty" name:"Pack"`
+
+	// ID of the L4 proxy instance.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The protection specification.
+	// Values: <li> `cm_30G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_60G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_100G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `anycast_300G`: 300 Gbps Anycast-based protection in **Global (MLC)** service area</li><li> `anycast_unlimited`: Unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_300G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_unlimited`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_300G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_unlimited`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_100G_anycast_300G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_100G_anycast_unlimited`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area </li>
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ProtectionSpecs *string `json:"ProtectionSpecs,omitempty" name:"ProtectionSpecs"`
 }
 
 type SwitchConfig struct {
@@ -8790,9 +8922,10 @@ type Zone struct {
 	// <li>`deactivated`: The site is blocked.</li>
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// The site access method. Values:
-	// <li>`full`: Access through a name server.</li>
-	// <li>`partial`: Access through a CNAME record.</li>
+	// Access mode of the site. Values:
+	// <li> `full`: Access through a name server.</li>
+	// <li> `partial`: Access through a CNAME record.</li>
+	// <li> `noDomainAccess`: Access without using a domain name </li>
 	Type *string `json:"Type,omitempty" name:"Type"`
 
 	// Whether the site is disabled.
@@ -8942,6 +9075,7 @@ type ZoneSetting struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitempty" name:"AccelerateMainland"`
 
-
+	// Standard debugging configuration.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	StandardDebug *StandardDebug `json:"StandardDebug,omitempty" name:"StandardDebug"`
 }
