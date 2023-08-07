@@ -4105,7 +4105,7 @@ type DescribeReplicationGroupRequestParams struct {
 	// ID of the specified replication group, such as `crs-rpl-m3zt****`. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication group list.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get u200dthem in the global replication group list.
+	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get them in the global replication group list.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -4121,7 +4121,7 @@ type DescribeReplicationGroupRequest struct {
 	// ID of the specified replication group, such as `crs-rpl-m3zt****`. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication group list.
 	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
 
-	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get u200dthem in the global replication group list.
+	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get them in the global replication group list.
 	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
 }
 
@@ -4389,7 +4389,7 @@ type DescribeTaskInfoResponseParams struct {
 	// Task status. Valid values: 
 	// - `preparing`: To be run
 	// - `running`: Running
-	// - `succeed`: Succeedu200ded
+	// - `succeed`: Succeeded
 	// - `failed`: Failed
 	// - `Error`: Error occurred while running
 	Status *string `json:"Status,omitempty" name:"Status"`
@@ -4397,13 +4397,13 @@ type DescribeTaskInfoResponseParams struct {
 	// Task start time
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// Task type, including `Create`, `Configure`, u200d`Disable Instance`, `Clear Instance`, `Reset Password`, `Upgrade Version`, `Back up Instance`, `Modify Network`, `Migrate to New AZ` and `Promote to Master`.
+	// Task type, including `Create`, `Configure`, `Disable Instance`, `Clear Instance`, `Reset Password`, `Upgrade Version`, `Back up Instance`, `Modify Network`, `Migrate to New AZ` and `Promote to Master`.
 	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
 
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
-	// Message returned by task execution, which will be au200dn error message when execution fails or be empty when the status is `running `or `succeed-`.
+	// Message returned by task execution, which will be an error message when execution fails or be empty when the status is `running `or `succeed-`.
 	TaskMessage *string `json:"TaskMessage,omitempty" name:"TaskMessage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5763,7 +5763,7 @@ type Instances struct {
 	RedisShardSize *int64 `json:"RedisShardSize,omitempty" name:"RedisShardSize"`
 
 	// Instance disk size
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DiskSize *int64 `json:"DiskSize,omitempty" name:"DiskSize"`
 
 	// Engine: Redis Community Edition, Tencent Cloud CKV.
