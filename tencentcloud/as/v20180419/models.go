@@ -61,7 +61,9 @@ type Activity struct {
 	// Creation time of the scaling activity.
 	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
 
-	// Information set of the instances related to the scaling activity.
+	// This parameter has been deprecated.
+	//
+	// Deprecated: ActivityRelatedInstanceSet is deprecated.
 	ActivityRelatedInstanceSet []*ActivtyRelatedInstance `json:"ActivityRelatedInstanceSet,omitempty" name:"ActivityRelatedInstanceSet"`
 
 	// Brief description of the scaling activity status.
@@ -75,6 +77,9 @@ type Activity struct {
 
 	// Result of the command execution
 	InvocationResultSet []*InvocationResult `json:"InvocationResultSet,omitempty" name:"InvocationResultSet"`
+
+	// Information set of the instances related to the scaling activity.
+	RelatedInstanceSet []*RelatedInstance `json:"RelatedInstanceSet,omitempty" name:"RelatedInstanceSet"`
 }
 
 type ActivtyRelatedInstance struct {
@@ -98,6 +103,11 @@ type Advice struct {
 
 	// Recommended resolutions
 	Solution *string `json:"Solution,omitempty" name:"Solution"`
+
+	// u200dRisk level of the scaling group configuration. Valid values: <br>
+	// <li>WARNING<br>
+	// <li>CRITICAL<br>
+	Level *string `json:"Level,omitempty" name:"Level"`
 }
 
 // Predefined struct for user
@@ -4665,8 +4675,8 @@ type ModifyScalingPolicyRequestParams struct {
 	// Whether to disable scale-in. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>`true`: Scaling in is not allowed.</li><li>`false`: Allows both scale-out and scale-in</li>
 	DisableScaleIn *bool `json:"DisableScaleIn,omitempty" name:"DisableScaleIn"`
 
-	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-	// If you want to clear the user group, you need to pass in the specific string "NULL" to the list.
+	// This parameter is diused. Please use [CreateNotificationConfiguration](https://intl.cloud.tencent.com/document/api/377/33185?from_cn_redirect=1) instead.
+	// Notification group ID, which is the set of user group IDs.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
@@ -4703,8 +4713,8 @@ type ModifyScalingPolicyRequest struct {
 	// Whether to disable scale-in. It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Valid values: <br><li>`true`: Scaling in is not allowed.</li><li>`false`: Allows both scale-out and scale-in</li>
 	DisableScaleIn *bool `json:"DisableScaleIn,omitempty" name:"DisableScaleIn"`
 
-	// Notification group ID, which is the set of user group IDs. You can query the user group IDs through the [ListGroups](https://intl.cloud.tencent.com/document/product/598/34589?from_cn_redirect=1) API.
-	// If you want to clear the user group, you need to pass in the specific string "NULL" to the list.
+	// This parameter is diused. Please use [CreateNotificationConfiguration](https://intl.cloud.tencent.com/document/api/377/33185?from_cn_redirect=1) instead.
+	// Notification group ID, which is the set of user group IDs.
 	NotificationUserGroupIds []*string `json:"NotificationUserGroupIds,omitempty" name:"NotificationUserGroupIds"`
 }
 
@@ -4875,6 +4885,18 @@ type NotificationTarget struct {
 
 	// Topic name. This parameter is required when `TargetType` is `CMQ_TOPIC` or `TDMQ_CMQ_TOPIC`.
 	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+}
+
+type RelatedInstance struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Status of the instance in the scaling activity. Valid values:
+	// `INIT`: Initializing
+	// `RUNNING`: u200dProcessing u200dthe instance
+	// `SUCCESSFUL`: Task succeeded on the instance
+	// `FAILED`: Task failed on the instance
+	InstanceStatus *string `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
 }
 
 // Predefined struct for user
