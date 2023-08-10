@@ -311,6 +311,7 @@ func NewCreateCmqQueueResponse() (response *CreateCmqQueueResponse) {
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
 //  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateCmqQueue(request *CreateCmqQueueRequest) (response *CreateCmqQueueResponse, err error) {
     return c.CreateCmqQueueWithContext(context.Background(), request)
 }
@@ -331,6 +332,7 @@ func (c *Client) CreateCmqQueue(request *CreateCmqQueueRequest) (response *Creat
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  RESOURCEUNAVAILABLE_CREATEFAILED = "ResourceUnavailable.CreateFailed"
 //  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateCmqQueueWithContext(ctx context.Context, request *CreateCmqQueueRequest) (response *CreateCmqQueueResponse, err error) {
     if request == nil {
         request = NewCreateCmqQueueRequest()
@@ -625,6 +627,58 @@ func (c *Client) CreateEnvironmentRoleWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateRabbitMQUserRequest() (request *CreateRabbitMQUserRequest) {
+    request = &CreateRabbitMQUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "CreateRabbitMQUser")
+    
+    
+    return
+}
+
+func NewCreateRabbitMQUserResponse() (response *CreateRabbitMQUserResponse) {
+    response = &CreateRabbitMQUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRabbitMQUser
+// This API is used to create a TDMQ for RabbitMQ user.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRabbitMQUser(request *CreateRabbitMQUserRequest) (response *CreateRabbitMQUserResponse, err error) {
+    return c.CreateRabbitMQUserWithContext(context.Background(), request)
+}
+
+// CreateRabbitMQUser
+// This API is used to create a TDMQ for RabbitMQ user.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRabbitMQUserWithContext(ctx context.Context, request *CreateRabbitMQUserRequest) (response *CreateRabbitMQUserResponse, err error) {
+    if request == nil {
+        request = NewCreateRabbitMQUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRabbitMQUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRabbitMQUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRabbitMQVipInstanceRequest() (request *CreateRabbitMQVipInstanceRequest) {
     request = &CreateRabbitMQVipInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -673,6 +727,58 @@ func (c *Client) CreateRabbitMQVipInstanceWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewCreateRabbitMQVipInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRabbitMQVirtualHostRequest() (request *CreateRabbitMQVirtualHostRequest) {
+    request = &CreateRabbitMQVirtualHostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "CreateRabbitMQVirtualHost")
+    
+    
+    return
+}
+
+func NewCreateRabbitMQVirtualHostResponse() (response *CreateRabbitMQVirtualHostResponse) {
+    response = &CreateRabbitMQVirtualHostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateRabbitMQVirtualHost
+// This API is used to create a TDMQ for RabbitMQ vhost.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRabbitMQVirtualHost(request *CreateRabbitMQVirtualHostRequest) (response *CreateRabbitMQVirtualHostResponse, err error) {
+    return c.CreateRabbitMQVirtualHostWithContext(context.Background(), request)
+}
+
+// CreateRabbitMQVirtualHost
+// This API is used to create a TDMQ for RabbitMQ vhost.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateRabbitMQVirtualHostWithContext(ctx context.Context, request *CreateRabbitMQVirtualHostRequest) (response *CreateRabbitMQVirtualHostResponse, err error) {
+    if request == nil {
+        request = NewCreateRabbitMQVirtualHostRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRabbitMQVirtualHost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRabbitMQVirtualHostResponse()
     err = c.Send(request, response)
     return
 }
@@ -839,6 +945,7 @@ func NewCreateRocketMQNamespaceResponse() (response *CreateRocketMQNamespaceResp
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateRocketMQNamespace(request *CreateRocketMQNamespaceRequest) (response *CreateRocketMQNamespaceResponse, err error) {
     return c.CreateRocketMQNamespaceWithContext(context.Background(), request)
 }
@@ -857,6 +964,7 @@ func (c *Client) CreateRocketMQNamespace(request *CreateRocketMQNamespaceRequest
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) CreateRocketMQNamespaceWithContext(ctx context.Context, request *CreateRocketMQNamespaceRequest) (response *CreateRocketMQNamespaceResponse, err error) {
     if request == nil {
         request = NewCreateRocketMQNamespaceRequest()
@@ -1515,6 +1623,162 @@ func (c *Client) DeleteEnvironmentsWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeleteEnvironmentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRabbitMQUserRequest() (request *DeleteRabbitMQUserRequest) {
+    request = &DeleteRabbitMQUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DeleteRabbitMQUser")
+    
+    
+    return
+}
+
+func NewDeleteRabbitMQUserResponse() (response *DeleteRabbitMQUserResponse) {
+    response = &DeleteRabbitMQUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRabbitMQUser
+// This API is used to delete a TDMQ for RabbitMQ user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRabbitMQUser(request *DeleteRabbitMQUserRequest) (response *DeleteRabbitMQUserResponse, err error) {
+    return c.DeleteRabbitMQUserWithContext(context.Background(), request)
+}
+
+// DeleteRabbitMQUser
+// This API is used to delete a TDMQ for RabbitMQ user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRabbitMQUserWithContext(ctx context.Context, request *DeleteRabbitMQUserRequest) (response *DeleteRabbitMQUserResponse, err error) {
+    if request == nil {
+        request = NewDeleteRabbitMQUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRabbitMQUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRabbitMQUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRabbitMQVipInstanceRequest() (request *DeleteRabbitMQVipInstanceRequest) {
+    request = &DeleteRabbitMQVipInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DeleteRabbitMQVipInstance")
+    
+    
+    return
+}
+
+func NewDeleteRabbitMQVipInstanceResponse() (response *DeleteRabbitMQVipInstanceResponse) {
+    response = &DeleteRabbitMQVipInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRabbitMQVipInstance
+// This API is used to delete a TDMQ for RabbitMQ exclusive instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteRabbitMQVipInstance(request *DeleteRabbitMQVipInstanceRequest) (response *DeleteRabbitMQVipInstanceResponse, err error) {
+    return c.DeleteRabbitMQVipInstanceWithContext(context.Background(), request)
+}
+
+// DeleteRabbitMQVipInstance
+// This API is used to delete a TDMQ for RabbitMQ exclusive instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteRabbitMQVipInstanceWithContext(ctx context.Context, request *DeleteRabbitMQVipInstanceRequest) (response *DeleteRabbitMQVipInstanceResponse, err error) {
+    if request == nil {
+        request = NewDeleteRabbitMQVipInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRabbitMQVipInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRabbitMQVipInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRabbitMQVirtualHostRequest() (request *DeleteRabbitMQVirtualHostRequest) {
+    request = &DeleteRabbitMQVirtualHostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DeleteRabbitMQVirtualHost")
+    
+    
+    return
+}
+
+func NewDeleteRabbitMQVirtualHostResponse() (response *DeleteRabbitMQVirtualHostResponse) {
+    response = &DeleteRabbitMQVirtualHostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteRabbitMQVirtualHost
+// This API is used to delete a TDMQ for RabbitMQ vhost.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRabbitMQVirtualHost(request *DeleteRabbitMQVirtualHostRequest) (response *DeleteRabbitMQVirtualHostResponse, err error) {
+    return c.DeleteRabbitMQVirtualHostWithContext(context.Background(), request)
+}
+
+// DeleteRabbitMQVirtualHost
+// This API is used to delete a TDMQ for RabbitMQ vhost.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRabbitMQVirtualHostWithContext(ctx context.Context, request *DeleteRabbitMQVirtualHostRequest) (response *DeleteRabbitMQVirtualHostResponse, err error) {
+    if request == nil {
+        request = NewDeleteRabbitMQVirtualHostRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRabbitMQVirtualHost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRabbitMQVirtualHostResponse()
     err = c.Send(request, response)
     return
 }
@@ -2905,6 +3169,60 @@ func (c *Client) DescribeRabbitMQNodeListWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeRabbitMQUserRequest() (request *DescribeRabbitMQUserRequest) {
+    request = &DescribeRabbitMQUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRabbitMQUser")
+    
+    
+    return
+}
+
+func NewDescribeRabbitMQUserResponse() (response *DescribeRabbitMQUserResponse) {
+    response = &DescribeRabbitMQUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRabbitMQUser
+// This API is used to query the list of TDMQ for RabbitMQ users.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRabbitMQUser(request *DescribeRabbitMQUserRequest) (response *DescribeRabbitMQUserResponse, err error) {
+    return c.DescribeRabbitMQUserWithContext(context.Background(), request)
+}
+
+// DescribeRabbitMQUser
+// This API is used to query the list of TDMQ for RabbitMQ users.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRabbitMQUserWithContext(ctx context.Context, request *DescribeRabbitMQUserRequest) (response *DescribeRabbitMQUserResponse, err error) {
+    if request == nil {
+        request = NewDescribeRabbitMQUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRabbitMQUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRabbitMQUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRabbitMQVipInstancesRequest() (request *DescribeRabbitMQVipInstancesRequest) {
     request = &DescribeRabbitMQVipInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2928,7 +3246,9 @@ func NewDescribeRabbitMQVipInstancesResponse() (response *DescribeRabbitMQVipIns
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRabbitMQVipInstances(request *DescribeRabbitMQVipInstancesRequest) (response *DescribeRabbitMQVipInstancesResponse, err error) {
     return c.DescribeRabbitMQVipInstancesWithContext(context.Background(), request)
 }
@@ -2938,7 +3258,9 @@ func (c *Client) DescribeRabbitMQVipInstances(request *DescribeRabbitMQVipInstan
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRabbitMQVipInstancesWithContext(ctx context.Context, request *DescribeRabbitMQVipInstancesRequest) (response *DescribeRabbitMQVipInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeRabbitMQVipInstancesRequest()
@@ -2951,6 +3273,108 @@ func (c *Client) DescribeRabbitMQVipInstancesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeRabbitMQVipInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRabbitMQVirtualHostRequest() (request *DescribeRabbitMQVirtualHostRequest) {
+    request = &DescribeRabbitMQVirtualHostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRabbitMQVirtualHost")
+    
+    
+    return
+}
+
+func NewDescribeRabbitMQVirtualHostResponse() (response *DescribeRabbitMQVirtualHostResponse) {
+    response = &DescribeRabbitMQVirtualHostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRabbitMQVirtualHost
+// This API is used to query the list of TDMQ for RabbitMQ vhosts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRabbitMQVirtualHost(request *DescribeRabbitMQVirtualHostRequest) (response *DescribeRabbitMQVirtualHostResponse, err error) {
+    return c.DescribeRabbitMQVirtualHostWithContext(context.Background(), request)
+}
+
+// DescribeRabbitMQVirtualHost
+// This API is used to query the list of TDMQ for RabbitMQ vhosts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRabbitMQVirtualHostWithContext(ctx context.Context, request *DescribeRabbitMQVirtualHostRequest) (response *DescribeRabbitMQVirtualHostResponse, err error) {
+    if request == nil {
+        request = NewDescribeRabbitMQVirtualHostRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRabbitMQVirtualHost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRabbitMQVirtualHostResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRabbitMQVirtualHostListRequest() (request *DescribeRabbitMQVirtualHostListRequest) {
+    request = &DescribeRabbitMQVirtualHostListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRabbitMQVirtualHostList")
+    
+    
+    return
+}
+
+func NewDescribeRabbitMQVirtualHostListResponse() (response *DescribeRabbitMQVirtualHostListResponse) {
+    response = &DescribeRabbitMQVirtualHostListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRabbitMQVirtualHostList
+// This API is used to query the list of TDMQ for RabbitMQ exclusive vhosts.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribeRabbitMQVirtualHostList(request *DescribeRabbitMQVirtualHostListRequest) (response *DescribeRabbitMQVirtualHostListResponse, err error) {
+    return c.DescribeRabbitMQVirtualHostListWithContext(context.Background(), request)
+}
+
+// DescribeRabbitMQVirtualHostList
+// This API is used to query the list of TDMQ for RabbitMQ exclusive vhosts.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribeRabbitMQVirtualHostListWithContext(ctx context.Context, request *DescribeRabbitMQVirtualHostListRequest) (response *DescribeRabbitMQVirtualHostListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRabbitMQVirtualHostListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRabbitMQVirtualHostList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRabbitMQVirtualHostListResponse()
     err = c.Send(request, response)
     return
 }
@@ -3092,6 +3516,7 @@ func NewDescribeRocketMQGroupsResponse() (response *DescribeRocketMQGroupsRespon
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQGroups(request *DescribeRocketMQGroupsRequest) (response *DescribeRocketMQGroupsResponse, err error) {
     return c.DescribeRocketMQGroupsWithContext(context.Background(), request)
@@ -3106,6 +3531,7 @@ func (c *Client) DescribeRocketMQGroups(request *DescribeRocketMQGroupsRequest) 
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQGroupsWithContext(ctx context.Context, request *DescribeRocketMQGroupsRequest) (response *DescribeRocketMQGroupsResponse, err error) {
     if request == nil {
@@ -3119,6 +3545,56 @@ func (c *Client) DescribeRocketMQGroupsWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeRocketMQGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRocketMQMsgRequest() (request *DescribeRocketMQMsgRequest) {
+    request = &DescribeRocketMQMsgRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "DescribeRocketMQMsg")
+    
+    
+    return
+}
+
+func NewDescribeRocketMQMsgResponse() (response *DescribeRocketMQMsgResponse) {
+    response = &DescribeRocketMQMsgResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeRocketMQMsg
+// This API is used to query the TDMQ for RocketMQ message details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribeRocketMQMsg(request *DescribeRocketMQMsgRequest) (response *DescribeRocketMQMsgResponse, err error) {
+    return c.DescribeRocketMQMsgWithContext(context.Background(), request)
+}
+
+// DescribeRocketMQMsg
+// This API is used to query the TDMQ for RocketMQ message details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+func (c *Client) DescribeRocketMQMsgWithContext(ctx context.Context, request *DescribeRocketMQMsgRequest) (response *DescribeRocketMQMsgResponse, err error) {
+    if request == nil {
+        request = NewDescribeRocketMQMsgRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRocketMQMsg require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRocketMQMsgResponse()
     err = c.Send(request, response)
     return
 }
@@ -3273,6 +3749,7 @@ func NewDescribeRocketMQVipInstanceDetailResponse() (response *DescribeRocketMQV
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQVipInstanceDetail(request *DescribeRocketMQVipInstanceDetailRequest) (response *DescribeRocketMQVipInstanceDetailResponse, err error) {
     return c.DescribeRocketMQVipInstanceDetailWithContext(context.Background(), request)
 }
@@ -3287,6 +3764,7 @@ func (c *Client) DescribeRocketMQVipInstanceDetail(request *DescribeRocketMQVipI
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQVipInstanceDetailWithContext(ctx context.Context, request *DescribeRocketMQVipInstanceDetailRequest) (response *DescribeRocketMQVipInstanceDetailResponse, err error) {
     if request == nil {
         request = NewDescribeRocketMQVipInstanceDetailRequest()
@@ -3331,6 +3809,7 @@ func NewDescribeRocketMQVipInstancesResponse() (response *DescribeRocketMQVipIns
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQVipInstances(request *DescribeRocketMQVipInstancesRequest) (response *DescribeRocketMQVipInstancesResponse, err error) {
     return c.DescribeRocketMQVipInstancesWithContext(context.Background(), request)
 }
@@ -3345,6 +3824,7 @@ func (c *Client) DescribeRocketMQVipInstances(request *DescribeRocketMQVipInstan
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DescribeRocketMQVipInstancesWithContext(ctx context.Context, request *DescribeRocketMQVipInstancesRequest) (response *DescribeRocketMQVipInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeRocketMQVipInstancesRequest()
@@ -3866,6 +4346,7 @@ func NewModifyEnvironmentRoleResponse() (response *ModifyEnvironmentRoleResponse
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENTROLE = "ResourceNotFound.EnvironmentRole"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ModifyEnvironmentRole(request *ModifyEnvironmentRoleRequest) (response *ModifyEnvironmentRoleResponse, err error) {
     return c.ModifyEnvironmentRoleWithContext(context.Background(), request)
 }
@@ -3881,6 +4362,7 @@ func (c *Client) ModifyEnvironmentRole(request *ModifyEnvironmentRoleRequest) (r
 //  MISSINGPARAMETER_NEEDMOREPARAMS = "MissingParameter.NeedMoreParams"
 //  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
 //  RESOURCENOTFOUND_ENVIRONMENTROLE = "ResourceNotFound.EnvironmentRole"
+//  RESOURCEUNAVAILABLE_FUNDREQUIRED = "ResourceUnavailable.FundRequired"
 func (c *Client) ModifyEnvironmentRoleWithContext(ctx context.Context, request *ModifyEnvironmentRoleRequest) (response *ModifyEnvironmentRoleResponse, err error) {
     if request == nil {
         request = NewModifyEnvironmentRoleRequest()
@@ -3893,6 +4375,110 @@ func (c *Client) ModifyEnvironmentRoleWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifyEnvironmentRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRabbitMQUserRequest() (request *ModifyRabbitMQUserRequest) {
+    request = &ModifyRabbitMQUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "ModifyRabbitMQUser")
+    
+    
+    return
+}
+
+func NewModifyRabbitMQUserResponse() (response *ModifyRabbitMQUserResponse) {
+    response = &ModifyRabbitMQUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRabbitMQUser
+// This API is used to modify a TDMQ for RabbitMQ user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRabbitMQUser(request *ModifyRabbitMQUserRequest) (response *ModifyRabbitMQUserResponse, err error) {
+    return c.ModifyRabbitMQUserWithContext(context.Background(), request)
+}
+
+// ModifyRabbitMQUser
+// This API is used to modify a TDMQ for RabbitMQ user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRabbitMQUserWithContext(ctx context.Context, request *ModifyRabbitMQUserRequest) (response *ModifyRabbitMQUserResponse, err error) {
+    if request == nil {
+        request = NewModifyRabbitMQUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRabbitMQUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRabbitMQUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRabbitMQVirtualHostRequest() (request *ModifyRabbitMQVirtualHostRequest) {
+    request = &ModifyRabbitMQVirtualHostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "ModifyRabbitMQVirtualHost")
+    
+    
+    return
+}
+
+func NewModifyRabbitMQVirtualHostResponse() (response *ModifyRabbitMQVirtualHostResponse) {
+    response = &ModifyRabbitMQVirtualHostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRabbitMQVirtualHost
+// This API is used to modify a TDMQ for RabbitMQ vhost.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRabbitMQVirtualHost(request *ModifyRabbitMQVirtualHostRequest) (response *ModifyRabbitMQVirtualHostResponse, err error) {
+    return c.ModifyRabbitMQVirtualHostWithContext(context.Background(), request)
+}
+
+// ModifyRabbitMQVirtualHost
+// This API is used to modify a TDMQ for RabbitMQ vhost.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRabbitMQVirtualHostWithContext(ctx context.Context, request *ModifyRabbitMQVirtualHostRequest) (response *ModifyRabbitMQVirtualHostResponse, err error) {
+    if request == nil {
+        request = NewModifyRabbitMQVirtualHostRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRabbitMQVirtualHost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRabbitMQVirtualHostResponse()
     err = c.Send(request, response)
     return
 }
@@ -4013,6 +4599,62 @@ func (c *Client) ModifyRocketMQGroupWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyRocketMQGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRocketMQInstanceSpecRequest() (request *ModifyRocketMQInstanceSpecRequest) {
+    request = &ModifyRocketMQInstanceSpecRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "ModifyRocketMQInstanceSpec")
+    
+    
+    return
+}
+
+func NewModifyRocketMQInstanceSpecResponse() (response *ModifyRocketMQInstanceSpecResponse) {
+    response = &ModifyRocketMQInstanceSpecResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyRocketMQInstanceSpec
+// This API is used to modify the configurations of a TDMQ for RocketMQ exclusive instance, including the upgrade of the instance specification, node count, and storage, and the downgrade of the instance specification. After you call this API to place the order and make payments, the configuration modification will be in progress. You can query whether the modification has been completed through the `DescribeRocketMQVipInstances` API`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLTRADE = "FailedOperation.CallTrade"
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  INVALIDPARAMETERVALUE_ATLEASTONE = "InvalidParameterValue.AtLeastOne"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  UNSUPPORTEDOPERATION_INSTANCEDOWNGRADE = "UnsupportedOperation.InstanceDowngrade"
+func (c *Client) ModifyRocketMQInstanceSpec(request *ModifyRocketMQInstanceSpecRequest) (response *ModifyRocketMQInstanceSpecResponse, err error) {
+    return c.ModifyRocketMQInstanceSpecWithContext(context.Background(), request)
+}
+
+// ModifyRocketMQInstanceSpec
+// This API is used to modify the configurations of a TDMQ for RocketMQ exclusive instance, including the upgrade of the instance specification, node count, and storage, and the downgrade of the instance specification. After you call this API to place the order and make payments, the configuration modification will be in progress. You can query whether the modification has been completed through the `DescribeRocketMQVipInstances` API`.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLTRADE = "FailedOperation.CallTrade"
+//  FAILEDOPERATION_INSTANCENOTREADY = "FailedOperation.InstanceNotReady"
+//  INVALIDPARAMETERVALUE_ATLEASTONE = "InvalidParameterValue.AtLeastOne"
+//  RESOURCENOTFOUND_INSTANCE = "ResourceNotFound.Instance"
+//  UNSUPPORTEDOPERATION_INSTANCEDOWNGRADE = "UnsupportedOperation.InstanceDowngrade"
+func (c *Client) ModifyRocketMQInstanceSpecWithContext(ctx context.Context, request *ModifyRocketMQInstanceSpecRequest) (response *ModifyRocketMQInstanceSpecResponse, err error) {
+    if request == nil {
+        request = NewModifyRocketMQInstanceSpecRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRocketMQInstanceSpec require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRocketMQInstanceSpecResponse()
     err = c.Send(request, response)
     return
 }
@@ -4780,7 +5422,9 @@ func NewSendMessagesResponse() (response *SendMessagesResponse) {
 }
 
 // SendMessages
-// This API is used to send one message.
+// This API is used to send a single message.
+//
+// The message cannot be sent to a persistent topic.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEPRODUCERERROR = "FailedOperation.CreateProducerError"
@@ -4799,7 +5443,9 @@ func (c *Client) SendMessages(request *SendMessagesRequest) (response *SendMessa
 }
 
 // SendMessages
-// This API is used to send one message.
+// This API is used to send a single message.
+//
+// The message cannot be sent to a persistent topic.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEPRODUCERERROR = "FailedOperation.CreateProducerError"
@@ -4891,6 +5537,58 @@ func (c *Client) SendMsgWithContext(ctx context.Context, request *SendMsgRequest
     request.SetContext(ctx)
     
     response = NewSendMsgResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSendRocketMQMessageRequest() (request *SendRocketMQMessageRequest) {
+    request = &SendRocketMQMessageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "SendRocketMQMessage")
+    
+    
+    return
+}
+
+func NewSendRocketMQMessageResponse() (response *SendRocketMQMessageResponse) {
+    response = &SendRocketMQMessageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SendRocketMQMessage
+// This document is used to send a TDMQ for RocketMQ message.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+func (c *Client) SendRocketMQMessage(request *SendRocketMQMessageRequest) (response *SendRocketMQMessageResponse, err error) {
+    return c.SendRocketMQMessageWithContext(context.Background(), request)
+}
+
+// SendRocketMQMessage
+// This document is used to send a TDMQ for RocketMQ message.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  RESOURCENOTFOUND_TOPIC = "ResourceNotFound.Topic"
+func (c *Client) SendRocketMQMessageWithContext(ctx context.Context, request *SendRocketMQMessageRequest) (response *SendRocketMQMessageResponse, err error) {
+    if request == nil {
+        request = NewSendRocketMQMessageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendRocketMQMessage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSendRocketMQMessageResponse()
     err = c.Send(request, response)
     return
 }

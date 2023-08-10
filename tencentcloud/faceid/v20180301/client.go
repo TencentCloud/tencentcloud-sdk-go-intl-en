@@ -153,6 +153,66 @@ func (c *Client) ApplySdkVerificationTokenWithContext(ctx context.Context, reque
     return
 }
 
+func NewApplyWebVerificationBizTokenIntlRequest() (request *ApplyWebVerificationBizTokenIntlRequest) {
+    request = &ApplyWebVerificationBizTokenIntlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ApplyWebVerificationBizTokenIntl")
+    
+    
+    return
+}
+
+func NewApplyWebVerificationBizTokenIntlResponse() (response *ApplyWebVerificationBizTokenIntlResponse) {
+    response = &ApplyWebVerificationBizTokenIntlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ApplyWebVerificationBizTokenIntl
+// This API is used to apply for a BizToken before calling the web-based verification service each time. This token is required for initiating a verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
+//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) ApplyWebVerificationBizTokenIntl(request *ApplyWebVerificationBizTokenIntlRequest) (response *ApplyWebVerificationBizTokenIntlResponse, err error) {
+    return c.ApplyWebVerificationBizTokenIntlWithContext(context.Background(), request)
+}
+
+// ApplyWebVerificationBizTokenIntl
+// This API is used to apply for a BizToken before calling the web-based verification service each time. This token is required for initiating a verification process and getting the result after the verification is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
+//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) ApplyWebVerificationBizTokenIntlWithContext(ctx context.Context, request *ApplyWebVerificationBizTokenIntlRequest) (response *ApplyWebVerificationBizTokenIntlResponse, err error) {
+    if request == nil {
+        request = NewApplyWebVerificationBizTokenIntlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyWebVerificationBizTokenIntl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplyWebVerificationBizTokenIntlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewApplyWebVerificationTokenRequest() (request *ApplyWebVerificationTokenRequest) {
     request = &ApplyWebVerificationTokenRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -695,6 +755,64 @@ func (c *Client) GetWebVerificationResultWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewGetWebVerificationResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetWebVerificationResultIntlRequest() (request *GetWebVerificationResultIntlRequest) {
+    request = &GetWebVerificationResultIntlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetWebVerificationResultIntl")
+    
+    
+    return
+}
+
+func NewGetWebVerificationResultIntlResponse() (response *GetWebVerificationResultIntlResponse) {
+    response = &GetWebVerificationResultIntlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// GetWebVerificationResultIntl
+// This API is used to get the verification result with the corresponding BizToken after the u200dweb-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetWebVerificationResultIntl(request *GetWebVerificationResultIntlRequest) (response *GetWebVerificationResultIntlResponse, err error) {
+    return c.GetWebVerificationResultIntlWithContext(context.Background(), request)
+}
+
+// GetWebVerificationResultIntl
+// This API is used to get the verification result with the corresponding BizToken after the u200dweb-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BIZTOKENEXPIRED = "InvalidParameterValue.BizTokenExpired"
+//  INVALIDPARAMETERVALUE_BIZTOKENILLEGAL = "InvalidParameterValue.BizTokenIllegal"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetWebVerificationResultIntlWithContext(ctx context.Context, request *GetWebVerificationResultIntlRequest) (response *GetWebVerificationResultIntlResponse, err error) {
+    if request == nil {
+        request = NewGetWebVerificationResultIntlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetWebVerificationResultIntl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetWebVerificationResultIntlResponse()
     err = c.Send(request, response)
     return
 }

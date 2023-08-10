@@ -232,6 +232,82 @@ func (r *ApplySdkVerificationTokenResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ApplyWebVerificationBizTokenIntlRequestParams struct {
+	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.
+	CompareImageBase64 *string `json:"CompareImageBase64,omitempty" name:"CompareImageBase64"`
+
+	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
+	// After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+	RedirectURL *string `json:"RedirectURL,omitempty" name:"RedirectURL"`
+
+	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
+	Extra *string `json:"Extra,omitempty" name:"Extra"`
+}
+
+type ApplyWebVerificationBizTokenIntlRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.
+	CompareImageBase64 *string `json:"CompareImageBase64,omitempty" name:"CompareImageBase64"`
+
+	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
+	// After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+	RedirectURL *string `json:"RedirectURL,omitempty" name:"RedirectURL"`
+
+	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
+	Extra *string `json:"Extra,omitempty" name:"Extra"`
+}
+
+func (r *ApplyWebVerificationBizTokenIntlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyWebVerificationBizTokenIntlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CompareImageBase64")
+	delete(f, "RedirectURL")
+	delete(f, "Extra")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyWebVerificationBizTokenIntlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplyWebVerificationBizTokenIntlResponseParams struct {
+	// The URL of this verification process, which will be returned to the frontend of the browser for starting the process.
+	VerificationUrl *string `json:"VerificationUrl,omitempty" name:"VerificationUrl"`
+
+	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
+	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ApplyWebVerificationBizTokenIntlResponse struct {
+	*tchttp.BaseResponse
+	Response *ApplyWebVerificationBizTokenIntlResponseParams `json:"Response"`
+}
+
+func (r *ApplyWebVerificationBizTokenIntlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyWebVerificationBizTokenIntlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ApplyWebVerificationTokenRequestParams struct {
 	// The web redirect URL after the verification is completed.
 	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
@@ -1053,6 +1129,81 @@ func (r *GetSdkVerificationResultResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type GetWebVerificationResultIntlRequestParams struct {
+	// The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
+	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+}
+
+type GetWebVerificationResultIntlRequest struct {
+	*tchttp.BaseRequest
+	
+	// The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
+	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+}
+
+func (r *GetWebVerificationResultIntlRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetWebVerificationResultIntlRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BizToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetWebVerificationResultIntlRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetWebVerificationResultIntlResponseParams struct {
+	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
+	// For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
+
+	// The description of the final verification result.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+
+	// The detailed verification result list of this process. Retries are allowed, so a verification process may have several entries of results.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitempty" name:"VerificationDetailList"`
+
+	// The Base64-encoded string of the video collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no video is collected, null is returned.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
+
+	// The Base64-encoded string of the best face screenshot u200dcollected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	BestFrameBase64 *string `json:"BestFrameBase64,omitempty" name:"BestFrameBase64"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type GetWebVerificationResultIntlResponse struct {
+	*tchttp.BaseResponse
+	Response *GetWebVerificationResultIntlResponseParams `json:"Response"`
+}
+
+func (r *GetWebVerificationResultIntlResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetWebVerificationResultIntlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetWebVerificationResultRequestParams struct {
 	// The token for the web-based verification, which is generated with the `ApplyWebVerificationToken` API.
 	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
@@ -1291,15 +1442,15 @@ func (r *LivenessCompareResponse) FromJsonString(s string) error {
 
 type VerificationDetail struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
 
 	// The result of this liveness detection process. `0` indicates success.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	LivenessErrorCode *int64 `json:"LivenessErrorCode,omitempty" name:"LivenessErrorCode"`
 
 	// The result description of this liveness detection process.
@@ -1307,19 +1458,19 @@ type VerificationDetail struct {
 	LivenessErrorMsg *string `json:"LivenessErrorMsg,omitempty" name:"LivenessErrorMsg"`
 
 	// The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	CompareErrorCode *int64 `json:"CompareErrorCode,omitempty" name:"CompareErrorCode"`
 
 	// The result description of this comparison process.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	CompareErrorMsg *string `json:"CompareErrorMsg,omitempty" name:"CompareErrorMsg"`
 
 	// The timestamp (ms) of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReqTimestamp *uint64 `json:"ReqTimestamp,omitempty" name:"ReqTimestamp"`
 
-	// The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Valid range: [0.00, 100.00]. By default, the person in the screenshot is judged as the same person in the image if the similarity is greater than or equal to 70.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Value range: [0.00, 100.00]. By default, the person in the screenshot is determined to be the same person in the image if the similarity is greater than or equal to 70.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	Similarity *float64 `json:"Similarity,omitempty" name:"Similarity"`
 
 	// Unique ID of this verification process.

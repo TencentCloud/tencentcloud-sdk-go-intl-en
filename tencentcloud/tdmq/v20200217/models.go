@@ -728,7 +728,7 @@ func (r *CreateClusterResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCmqQueueRequestParams struct {
-	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	// Queue name, which is unique under the same account in a single region. It is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
 	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
@@ -783,7 +783,7 @@ type CreateCmqQueueRequestParams struct {
 type CreateCmqQueueRequest struct {
 	*tchttp.BaseRequest
 	
-	// Queue name, which must be unique under the same account in the same region. It can contain up to 64 letters, digits, and hyphens and must begin with a letter.
+	// Queue name, which is unique under the same account in a single region. It is a string of up to 64 characters. It can contain letters, digits, and hyphens (-) and must start with a letter.
 	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
 
 	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
@@ -1109,6 +1109,9 @@ type CreateEnvironmentRequestParams struct {
 
 	// Message retention policy
 	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+
+	// Whether to enable "Auto-Create Subscription"
+	AutoSubscriptionCreation *bool `json:"AutoSubscriptionCreation,omitempty" name:"AutoSubscriptionCreation"`
 }
 
 type CreateEnvironmentRequest struct {
@@ -1128,6 +1131,9 @@ type CreateEnvironmentRequest struct {
 
 	// Message retention policy
 	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+
+	// Whether to enable "Auto-Create Subscription"
+	AutoSubscriptionCreation *bool `json:"AutoSubscriptionCreation,omitempty" name:"AutoSubscriptionCreation"`
 }
 
 func (r *CreateEnvironmentRequest) ToJsonString() string {
@@ -1147,6 +1153,7 @@ func (r *CreateEnvironmentRequest) FromJsonString(s string) error {
 	delete(f, "Remark")
 	delete(f, "ClusterId")
 	delete(f, "RetentionPolicy")
+	delete(f, "AutoSubscriptionCreation")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEnvironmentRequest has unknown keys!", "")
 	}
@@ -1260,6 +1267,107 @@ func (r *CreateEnvironmentRoleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateEnvironmentRoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRabbitMQUserRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Password, which is used for login.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// User tag, which defines a user's permission scope for accessing RabbitMQ Managementu200d.
+	// Valid values: `management` (Common console user), monitoring` (Console admin user), other values: Non-console user.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// The maximum number of connections for the user. If this parameter is left empty, there's no limit for the number.
+	MaxConnections *int64 `json:"MaxConnections,omitempty" name:"MaxConnections"`
+
+	// The maximum number of channels for the user. If this parameter is left empty, there's no limit for the number.
+	MaxChannels *int64 `json:"MaxChannels,omitempty" name:"MaxChannels"`
+}
+
+type CreateRabbitMQUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Password, which is used for login.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// User tag, which defines a user's permission scope for accessing RabbitMQ Managementu200d.
+	// Valid values: `management` (Common console user), monitoring` (Console admin user), other values: Non-console user.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// The maximum number of connections for the user. If this parameter is left empty, there's no limit for the number.
+	MaxConnections *int64 `json:"MaxConnections,omitempty" name:"MaxConnections"`
+
+	// The maximum number of channels for the user. If this parameter is left empty, there's no limit for the number.
+	MaxChannels *int64 `json:"MaxChannels,omitempty" name:"MaxChannels"`
+}
+
+func (r *CreateRabbitMQUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRabbitMQUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "User")
+	delete(f, "Password")
+	delete(f, "Description")
+	delete(f, "Tags")
+	delete(f, "MaxConnections")
+	delete(f, "MaxChannels")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRabbitMQUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRabbitMQUserResponseParams struct {
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateRabbitMQUserResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRabbitMQUserResponseParams `json:"Response"`
+}
+
+func (r *CreateRabbitMQUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRabbitMQUserResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1385,6 +1493,84 @@ func (r *CreateRabbitMQVipInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateRabbitMQVipInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRabbitMQVirtualHostRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Message trace flag. Valid values: `true` (Enabled), `false` (Disabled, which is the default value).
+	TraceFlag *bool `json:"TraceFlag,omitempty" name:"TraceFlag"`
+}
+
+type CreateRabbitMQVirtualHostRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Message trace flag. Valid values: `true` (Enabled), `false` (Disabled, which is the default value).
+	TraceFlag *bool `json:"TraceFlag,omitempty" name:"TraceFlag"`
+}
+
+func (r *CreateRabbitMQVirtualHostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRabbitMQVirtualHostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "VirtualHost")
+	delete(f, "Description")
+	delete(f, "TraceFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRabbitMQVirtualHostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRabbitMQVirtualHostResponseParams struct {
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateRabbitMQVirtualHostResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRabbitMQVirtualHostResponseParams `json:"Response"`
+}
+
+func (r *CreateRabbitMQVirtualHostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRabbitMQVirtualHostResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1563,10 +1749,10 @@ type CreateRocketMQNamespaceRequestParams struct {
 	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds–15 days
+	// This parameter is disused.
 	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
 
-	// Retention time of persisted messages in milliseconds
+	// This parameter is disused.
 	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
 
 	// Remarks (up to 128 characters)
@@ -1582,10 +1768,10 @@ type CreateRocketMQNamespaceRequest struct {
 	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds–15 days
+	// This parameter is disused.
 	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
 
-	// Retention time of persisted messages in milliseconds
+	// This parameter is disused.
 	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
 
 	// Remarks (up to 128 characters)
@@ -1783,6 +1969,10 @@ type CreateRoleResponseParams struct {
 	// Remarks
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Namespaces that are bound in batches
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	EnvironmentRoleSets []*EnvironmentRoleSet `json:"EnvironmentRoleSets,omitempty" name:"EnvironmentRoleSets"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
@@ -2400,6 +2590,190 @@ func (r *DeleteEnvironmentsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteEnvironmentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRabbitMQUserRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+}
+
+type DeleteRabbitMQUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+}
+
+func (r *DeleteRabbitMQUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRabbitMQUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "User")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRabbitMQUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRabbitMQUserResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteRabbitMQUserResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRabbitMQUserResponseParams `json:"Response"`
+}
+
+func (r *DeleteRabbitMQUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRabbitMQUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRabbitMQVipInstanceRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+type DeleteRabbitMQVipInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+}
+
+func (r *DeleteRabbitMQVipInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRabbitMQVipInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRabbitMQVipInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRabbitMQVipInstanceResponseParams struct {
+	// Order ID
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	TranId *string `json:"TranId,omitempty" name:"TranId"`
+
+	// Instance ID
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteRabbitMQVipInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRabbitMQVipInstanceResponseParams `json:"Response"`
+}
+
+func (r *DeleteRabbitMQVipInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRabbitMQVipInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRabbitMQVirtualHostRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+}
+
+type DeleteRabbitMQVirtualHostRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+}
+
+func (r *DeleteRabbitMQVirtualHostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRabbitMQVirtualHostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "VirtualHost")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRabbitMQVirtualHostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRabbitMQVirtualHostResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DeleteRabbitMQVirtualHostResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRabbitMQVirtualHostResponseParams `json:"Response"`
+}
+
+func (r *DeleteRabbitMQVirtualHostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRabbitMQVirtualHostResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4339,6 +4713,101 @@ func (r *DescribeRabbitMQNodeListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRabbitMQUserRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username search by prefix or suffix
+	SearchUser *string `json:"SearchUser,omitempty" name:"SearchUser"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Username, which is queried by exact match.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// User tag, which is used to filter users.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+}
+
+type DescribeRabbitMQUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username search by prefix or suffix
+	SearchUser *string `json:"SearchUser,omitempty" name:"SearchUser"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Username, which is queried by exact match.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// User tag, which is used to filter users.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+}
+
+func (r *DescribeRabbitMQUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "SearchUser")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "User")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQUserResponseParams struct {
+	// Returned number of users
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// The list of the created TDMQ for RabbitMQ users
+	RabbitMQUserList []*RabbitMQUser `json:"RabbitMQUserList,omitempty" name:"RabbitMQUserList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRabbitMQUserResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRabbitMQUserResponseParams `json:"Response"`
+}
+
+func (r *DescribeRabbitMQUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeRabbitMQVipInstancesRequestParams struct {
 	// Query condition filter
 	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
@@ -4409,6 +4878,181 @@ func (r *DescribeRabbitMQVipInstancesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRabbitMQVipInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQVirtualHostListRequestParams struct {
+	// A default parameter that won’t be used
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+type DescribeRabbitMQVirtualHostListRequest struct {
+	*tchttp.BaseRequest
+	
+	// A default parameter that won’t be used
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+
+	// The maximum number of entries per page
+	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRabbitMQVirtualHostListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQVirtualHostListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQVirtualHostListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQVirtualHostListResponseParams struct {
+	// The number of clusters
+	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// Cluster list
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	VirtualHostList []*RabbitMQPrivateVirtualHost `json:"VirtualHostList,omitempty" name:"VirtualHostList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRabbitMQVirtualHostListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRabbitMQVirtualHostListResponseParams `json:"Response"`
+}
+
+func (r *DescribeRabbitMQVirtualHostListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQVirtualHostListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQVirtualHostRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name. If this parameter is not specified, all will be queried by default.
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Fuzzy query by vhost name
+	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
+
+
+	SortElement *string `json:"SortElement,omitempty" name:"SortElement"`
+
+
+	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
+}
+
+type DescribeRabbitMQVirtualHostRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name. If this parameter is not specified, all will be queried by default.
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Pagination offset
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Pagination limit
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Fuzzy query by vhost name
+	Filters *Filter `json:"Filters,omitempty" name:"Filters"`
+
+	SortElement *string `json:"SortElement,omitempty" name:"SortElement"`
+
+	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
+}
+
+func (r *DescribeRabbitMQVirtualHostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQVirtualHostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "VirtualHost")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "SortElement")
+	delete(f, "SortOrder")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQVirtualHostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRabbitMQVirtualHostResponseParams struct {
+	// Returned number of vhosts
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of vhost details
+	VirtualHostList []*RabbitMQVirtualHostInfo `json:"VirtualHostList,omitempty" name:"VirtualHostList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRabbitMQVirtualHostResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRabbitMQVirtualHostResponseParams `json:"Response"`
+}
+
+func (r *DescribeRabbitMQVirtualHostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRabbitMQVirtualHostResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4699,6 +5343,118 @@ func (r *DescribeRocketMQGroupsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRocketMQGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRocketMQMsgRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name. Pass in the group ID when querying a dead letter queue.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Message ID
+	MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
+
+	// ID of a TDMQ for Pulsar message
+	PulsarMsgId *string `json:"PulsarMsgId,omitempty" name:"PulsarMsgId"`
+
+	// The value of this parameter is `true` when you query a dead letter queue. It only applies to TDMQ for RocketMQ.
+	QueryDlqMsg *bool `json:"QueryDlqMsg,omitempty" name:"QueryDlqMsg"`
+}
+
+type DescribeRocketMQMsgRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace ID
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Topic name. Pass in the group ID when querying a dead letter queue.
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Message ID
+	MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
+
+	// ID of a TDMQ for Pulsar message
+	PulsarMsgId *string `json:"PulsarMsgId,omitempty" name:"PulsarMsgId"`
+
+	// The value of this parameter is `true` when you query a dead letter queue. It only applies to TDMQ for RocketMQ.
+	QueryDlqMsg *bool `json:"QueryDlqMsg,omitempty" name:"QueryDlqMsg"`
+}
+
+func (r *DescribeRocketMQMsgRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRocketMQMsgRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "EnvironmentId")
+	delete(f, "TopicName")
+	delete(f, "MsgId")
+	delete(f, "PulsarMsgId")
+	delete(f, "QueryDlqMsg")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRocketMQMsgRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRocketMQMsgResponseParams struct {
+	// Message body
+	Body *string `json:"Body,omitempty" name:"Body"`
+
+	// Details parameter
+	Properties *string `json:"Properties,omitempty" name:"Properties"`
+
+	// Production time
+	ProduceTime *string `json:"ProduceTime,omitempty" name:"ProduceTime"`
+
+	// Message ID
+	MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
+
+	// Producer address
+	ProducerAddr *string `json:"ProducerAddr,omitempty" name:"ProducerAddr"`
+
+	// Consumption details of a consumer group
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MessageTracks []*RocketMQMessageTrack `json:"MessageTracks,omitempty" name:"MessageTracks"`
+
+	// Topic name displayed on the details page
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ShowTopicName *string `json:"ShowTopicName,omitempty" name:"ShowTopicName"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeRocketMQMsgResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRocketMQMsgResponseParams `json:"Response"`
+}
+
+func (r *DescribeRocketMQMsgResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRocketMQMsgResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5364,6 +6120,10 @@ type Environment struct {
 	// Message retention policy.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+
+	// Whether to enable "Auto-Create Subscription"
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	AutoSubscriptionCreation *bool `json:"AutoSubscriptionCreation,omitempty" name:"AutoSubscriptionCreation"`
 }
 
 type EnvironmentRole struct {
@@ -5384,6 +6144,17 @@ type EnvironmentRole struct {
 
 	// Update time.
 	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+}
+
+type EnvironmentRoleSet struct {
+	// The IDs of the bound namespaces cannot be delicate and the namespaces must contain resources
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	EnvironmentId *string `json:"EnvironmentId,omitempty" name:"EnvironmentId"`
+
+	// Permissions to be bound to a namespace. Enumerated values: `consume`, `produce`, and `consume, produce`. This parameter cannot be left empty.
+	// 
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Permissions []*string `json:"Permissions,omitempty" name:"Permissions"`
 }
 
 type Filter struct {
@@ -5840,6 +6611,9 @@ type ModifyEnvironmentAttributesRequestParams struct {
 
 	// Message retention policy
 	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+
+	// Whether to enable "Auto-Create Subscription"
+	AutoSubscriptionCreation *bool `json:"AutoSubscriptionCreation,omitempty" name:"AutoSubscriptionCreation"`
 }
 
 type ModifyEnvironmentAttributesRequest struct {
@@ -5859,6 +6633,9 @@ type ModifyEnvironmentAttributesRequest struct {
 
 	// Message retention policy
 	RetentionPolicy *RetentionPolicy `json:"RetentionPolicy,omitempty" name:"RetentionPolicy"`
+
+	// Whether to enable "Auto-Create Subscription"
+	AutoSubscriptionCreation *bool `json:"AutoSubscriptionCreation,omitempty" name:"AutoSubscriptionCreation"`
 }
 
 func (r *ModifyEnvironmentAttributesRequest) ToJsonString() string {
@@ -5878,6 +6655,7 @@ func (r *ModifyEnvironmentAttributesRequest) FromJsonString(s string) error {
 	delete(f, "Remark")
 	delete(f, "ClusterId")
 	delete(f, "RetentionPolicy")
+	delete(f, "AutoSubscriptionCreation")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEnvironmentAttributesRequest has unknown keys!", "")
 	}
@@ -5996,6 +6774,177 @@ func (r *ModifyEnvironmentRoleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyRabbitMQUserRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Password, which is used for login.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Description. If this parameter is not passed in, it won't be modified.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// User tag, which defines a user's permission scope for accessing RabbitMQ Management. If this parameter is not passed in, it won't be modified.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// The maximum number of connections for the user. If this parameter is not passed in, it won't be modified.
+	MaxConnections *int64 `json:"MaxConnections,omitempty" name:"MaxConnections"`
+
+	// The maximum number of channels for the user. If this parameter is not passed in, it won't be modified.
+	MaxChannels *int64 `json:"MaxChannels,omitempty" name:"MaxChannels"`
+}
+
+type ModifyRabbitMQUserRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Password, which is used for login.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// Description. If this parameter is not passed in, it won't be modified.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// User tag, which defines a user's permission scope for accessing RabbitMQ Management. If this parameter is not passed in, it won't be modified.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// The maximum number of connections for the user. If this parameter is not passed in, it won't be modified.
+	MaxConnections *int64 `json:"MaxConnections,omitempty" name:"MaxConnections"`
+
+	// The maximum number of channels for the user. If this parameter is not passed in, it won't be modified.
+	MaxChannels *int64 `json:"MaxChannels,omitempty" name:"MaxChannels"`
+}
+
+func (r *ModifyRabbitMQUserRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRabbitMQUserRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "User")
+	delete(f, "Password")
+	delete(f, "Description")
+	delete(f, "Tags")
+	delete(f, "MaxConnections")
+	delete(f, "MaxChannels")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRabbitMQUserRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRabbitMQUserResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRabbitMQUserResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRabbitMQUserResponseParams `json:"Response"`
+}
+
+func (r *ModifyRabbitMQUserResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRabbitMQUserResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRabbitMQVirtualHostRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Message trace flag. Valid values: `true` (Enabled), `false` (Disabled).
+	TraceFlag *bool `json:"TraceFlag,omitempty" name:"TraceFlag"`
+}
+
+type ModifyRabbitMQVirtualHostRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Message trace flag. Valid values: `true` (Enabled), `false` (Disabled).
+	TraceFlag *bool `json:"TraceFlag,omitempty" name:"TraceFlag"`
+}
+
+func (r *ModifyRabbitMQVirtualHostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRabbitMQVirtualHostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "VirtualHost")
+	delete(f, "Description")
+	delete(f, "TraceFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRabbitMQVirtualHostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRabbitMQVirtualHostResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRabbitMQVirtualHostResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRabbitMQVirtualHostResponseParams `json:"Response"`
+}
+
+func (r *ModifyRabbitMQVirtualHostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRabbitMQVirtualHostResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyRocketMQClusterRequestParams struct {
 	// RocketMQ cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -6005,6 +6954,9 @@ type ModifyRocketMQClusterRequestParams struct {
 
 	// Remarks (up to 128 characters)
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable the HTTP access over the public network
+	PublicAccessEnabled *bool `json:"PublicAccessEnabled,omitempty" name:"PublicAccessEnabled"`
 }
 
 type ModifyRocketMQClusterRequest struct {
@@ -6018,6 +6970,9 @@ type ModifyRocketMQClusterRequest struct {
 
 	// Remarks (up to 128 characters)
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable the HTTP access over the public network
+	PublicAccessEnabled *bool `json:"PublicAccessEnabled,omitempty" name:"PublicAccessEnabled"`
 }
 
 func (r *ModifyRocketMQClusterRequest) ToJsonString() string {
@@ -6035,6 +6990,7 @@ func (r *ModifyRocketMQClusterRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "ClusterName")
 	delete(f, "Remark")
+	delete(f, "PublicAccessEnabled")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRocketMQClusterRequest has unknown keys!", "")
 	}
@@ -6160,6 +7116,93 @@ func (r *ModifyRocketMQGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyRocketMQInstanceSpecRequestParams struct {
+	// ID of the exclusive instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance specification.
+	// Valid values: `rocket-vip-basic-1` (Basic),
+	// `rocket-vip-basic-2` (Standard),
+	// `rocket-vip-basic-3` (Advanced I),
+	// `rocket-vip-basic-4` (Advanced II).
+	Specification *string `json:"Specification,omitempty" name:"Specification"`
+
+	// Node count
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Storage space in GB
+	StorageSize *uint64 `json:"StorageSize,omitempty" name:"StorageSize"`
+}
+
+type ModifyRocketMQInstanceSpecRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the exclusive instance
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance specification.
+	// Valid values: `rocket-vip-basic-1` (Basic),
+	// `rocket-vip-basic-2` (Standard),
+	// `rocket-vip-basic-3` (Advanced I),
+	// `rocket-vip-basic-4` (Advanced II).
+	Specification *string `json:"Specification,omitempty" name:"Specification"`
+
+	// Node count
+	NodeCount *uint64 `json:"NodeCount,omitempty" name:"NodeCount"`
+
+	// Storage space in GB
+	StorageSize *uint64 `json:"StorageSize,omitempty" name:"StorageSize"`
+}
+
+func (r *ModifyRocketMQInstanceSpecRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRocketMQInstanceSpecRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Specification")
+	delete(f, "NodeCount")
+	delete(f, "StorageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRocketMQInstanceSpecRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRocketMQInstanceSpecResponseParams struct {
+	// Order ID
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	OrderId *string `json:"OrderId,omitempty" name:"OrderId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyRocketMQInstanceSpecResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRocketMQInstanceSpecResponseParams `json:"Response"`
+}
+
+func (r *ModifyRocketMQInstanceSpecResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRocketMQInstanceSpecResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyRocketMQNamespaceRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -6167,14 +7210,17 @@ type ModifyRocketMQNamespaceRequestParams struct {
 	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds–15 days
+	// This parameter is disused.
 	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
 
-	// Retention time for persisted messages in milliseconds
+	// This parameter is disused.
 	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
 
 	// Remarks (up to 128 characters)
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable the public network access
+	PublicAccessEnabled *bool `json:"PublicAccessEnabled,omitempty" name:"PublicAccessEnabled"`
 }
 
 type ModifyRocketMQNamespaceRequest struct {
@@ -6186,14 +7232,17 @@ type ModifyRocketMQNamespaceRequest struct {
 	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Retention time of unconsumed messages in milliseconds. Value range: 60 seconds–15 days
+	// This parameter is disused.
 	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
 
-	// Retention time for persisted messages in milliseconds
+	// This parameter is disused.
 	RetentionTime *uint64 `json:"RetentionTime,omitempty" name:"RetentionTime"`
 
 	// Remarks (up to 128 characters)
 	Remark *string `json:"Remark,omitempty" name:"Remark"`
+
+	// Whether to enable the public network access
+	PublicAccessEnabled *bool `json:"PublicAccessEnabled,omitempty" name:"PublicAccessEnabled"`
 }
 
 func (r *ModifyRocketMQNamespaceRequest) ToJsonString() string {
@@ -6213,6 +7262,7 @@ func (r *ModifyRocketMQNamespaceRequest) FromJsonString(s string) error {
 	delete(f, "Ttl")
 	delete(f, "RetentionTime")
 	delete(f, "Remark")
+	delete(f, "PublicAccessEnabled")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRocketMQNamespaceRequest has unknown keys!", "")
 	}
@@ -6698,6 +7748,10 @@ type PulsarProClusterInfo struct {
 
 	// Max storage capacity in MB
 	MaxStorage *uint64 `json:"MaxStorage,omitempty" name:"MaxStorage"`
+
+	// Whether the route can be modified
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	CanEditRoute *bool `json:"CanEditRoute,omitempty" name:"CanEditRoute"`
 }
 
 type PulsarProClusterSpecInfo struct {
@@ -6801,6 +7855,44 @@ type RabbitMQPrivateNode struct {
 	ProcessNumber *uint64 `json:"ProcessNumber,omitempty" name:"ProcessNumber"`
 }
 
+type RabbitMQPrivateVirtualHost struct {
+	// Vhost name
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	VirtualHostName *string `json:"VirtualHostName,omitempty" name:"VirtualHostName"`
+
+	// Vhost description
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type RabbitMQUser struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Username, which is used for login.
+	User *string `json:"User,omitempty" name:"User"`
+
+	// Password, which is used for login.
+	Password *string `json:"Password,omitempty" name:"Password"`
+
+	// User description
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// User tag, which defines a user's permission scope for accessing RabbitMQ Managementu200d.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// User creation time
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Last user modification time
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// User type. Valid values: `System` (Created by system), `User` (Created by user).
+	Type *string `json:"Type,omitempty" name:"Type"`
+}
+
 type RabbitMQVipInstance struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
@@ -6849,6 +7941,67 @@ type RabbitMQVipInstance struct {
 	// Cluster exception
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExceptionInformation *string `json:"ExceptionInformation,omitempty" name:"ExceptionInformation"`
+
+	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
+	// This parameter is used to display the instance status additionally and distinguish from the `Status` parameter.
+	ClusterStatus *int64 `json:"ClusterStatus,omitempty" name:"ClusterStatus"`
+}
+
+type RabbitMQVirtualHostInfo struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Vhost name
+	VirtualHost *string `json:"VirtualHost,omitempty" name:"VirtualHost"`
+
+	// Vhost description
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Vhost tag
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Tags []*string `json:"Tags,omitempty" name:"Tags"`
+
+	// Creation time
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+
+	// Modification time
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitempty" name:"ModifyTime"`
+
+	// Statistics of vhost overview
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	VirtualHostStatistics *RabbitMQVirtualHostStatistics `json:"VirtualHostStatistics,omitempty" name:"VirtualHostStatistics"`
+
+
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+
+	MessageHeapCount *int64 `json:"MessageHeapCount,omitempty" name:"MessageHeapCount"`
+
+
+	MessageRateIn *float64 `json:"MessageRateIn,omitempty" name:"MessageRateIn"`
+
+
+	MessageRateOut *float64 `json:"MessageRateOut,omitempty" name:"MessageRateOut"`
+}
+
+type RabbitMQVirtualHostStatistics struct {
+	// The number of queues in the current vhost
+	CurrentQueues *int64 `json:"CurrentQueues,omitempty" name:"CurrentQueues"`
+
+	// The number of exchanges in the current vhost
+	CurrentExchanges *int64 `json:"CurrentExchanges,omitempty" name:"CurrentExchanges"`
+
+	// The number of connections in the current vhost
+	CurrentConnections *int64 `json:"CurrentConnections,omitempty" name:"CurrentConnections"`
+
+	// The number of channels in the current vhost
+	CurrentChannels *int64 `json:"CurrentChannels,omitempty" name:"CurrentChannels"`
+
+	// The number of users in the current vhost
+	CurrentUsers *int64 `json:"CurrentUsers,omitempty" name:"CurrentUsers"`
 }
 
 // Predefined struct for user
@@ -7315,6 +8468,14 @@ type RocketMQClusterInfo struct {
 	// HTTP-based VPC access address
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpVpcEndpoint *string `json:"HttpVpcEndpoint,omitempty" name:"HttpVpcEndpoint"`
+
+	// Internal TCP access address
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	InternalEndpoint *string `json:"InternalEndpoint,omitempty" name:"InternalEndpoint"`
+
+	// Internal HTTP access address
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	HttpInternalEndpoint *string `json:"HttpInternalEndpoint,omitempty" name:"HttpInternalEndpoint"`
 }
 
 type RocketMQClusterRecentStats struct {
@@ -7421,11 +8582,26 @@ type RocketMQInstanceConfig struct {
 	MaxQueuesPerTopic *uint64 `json:"MaxQueuesPerTopic,omitempty" name:"MaxQueuesPerTopic"`
 }
 
+type RocketMQMessageTrack struct {
+	// Consumer group
+	Group *string `json:"Group,omitempty" name:"Group"`
+
+	// Consumption status
+	ConsumeStatus *string `json:"ConsumeStatus,omitempty" name:"ConsumeStatus"`
+
+	// Message trace type
+	TrackType *string `json:"TrackType,omitempty" name:"TrackType"`
+
+	// Exception information
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ExceptionDesc *string `json:"ExceptionDesc,omitempty" name:"ExceptionDesc"`
+}
+
 type RocketMQNamespace struct {
 	// Namespace name, which can contain 3–64 letters, digits, hyphens, and underscores.
 	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
 
-	// Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds–15 days.
+	// Retention period for unconsumed messages in milliseconds. Valid range: 60 seconds–15 days. This parameter is disused.
 	Ttl *uint64 `json:"Ttl,omitempty" name:"Ttl"`
 
 	// Retention period for persistently stored messages in milliseconds.
@@ -7442,6 +8618,10 @@ type RocketMQNamespace struct {
 	// VPC access point address.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VpcEndpoint *string `json:"VpcEndpoint,omitempty" name:"VpcEndpoint"`
+
+	// Internal access point address
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	InternalEndpoint *string `json:"InternalEndpoint,omitempty" name:"InternalEndpoint"`
 }
 
 type RocketMQTopic struct {
@@ -7520,6 +8700,18 @@ type RocketMQVipInstance struct {
 
 	// Instance specification ID
 	SpecName *string `json:"SpecName,omitempty" name:"SpecName"`
+
+	// The maximum message retention period in hours
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MaxRetention *int64 `json:"MaxRetention,omitempty" name:"MaxRetention"`
+
+	// The minimum message retention period in hours
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MinRetention *int64 `json:"MinRetention,omitempty" name:"MinRetention"`
+
+	// Instance message retention period in hours
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Retention *int64 `json:"Retention,omitempty" name:"Retention"`
 }
 
 type Role struct {
@@ -7902,6 +9094,102 @@ func (r *SendMsgResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *SendMsgResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SendRocketMQMessageRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace ID
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Message content
+	MsgBody *string `json:"MsgBody,omitempty" name:"MsgBody"`
+
+	// Message key
+	MsgKey *string `json:"MsgKey,omitempty" name:"MsgKey"`
+
+	// Message tag
+	MsgTag *string `json:"MsgTag,omitempty" name:"MsgTag"`
+}
+
+type SendRocketMQMessageRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Namespace ID
+	NamespaceId *string `json:"NamespaceId,omitempty" name:"NamespaceId"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+
+	// Message content
+	MsgBody *string `json:"MsgBody,omitempty" name:"MsgBody"`
+
+	// Message key
+	MsgKey *string `json:"MsgKey,omitempty" name:"MsgKey"`
+
+	// Message tag
+	MsgTag *string `json:"MsgTag,omitempty" name:"MsgTag"`
+}
+
+func (r *SendRocketMQMessageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SendRocketMQMessageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "NamespaceId")
+	delete(f, "TopicName")
+	delete(f, "MsgBody")
+	delete(f, "MsgKey")
+	delete(f, "MsgTag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendRocketMQMessageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SendRocketMQMessageResponseParams struct {
+	// Message sending result
+	Result *bool `json:"Result,omitempty" name:"Result"`
+
+	// Message ID
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MsgId *string `json:"MsgId,omitempty" name:"MsgId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type SendRocketMQMessageResponse struct {
+	*tchttp.BaseResponse
+	Response *SendRocketMQMessageResponseParams `json:"Response"`
+}
+
+func (r *SendRocketMQMessageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SendRocketMQMessageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
