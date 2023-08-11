@@ -89,6 +89,9 @@ const (
 	// Database proxy in an exceptional status.
 	FAILEDOPERATION_PROXYGROUPSTATUSERROR = "FailedOperation.ProxyGroupStatusError"
 
+	// Failed to query the audit task
+	FAILEDOPERATION_QUERYAUDITTASKFAILERROR = "FailedOperation.QueryAuditTaskFailError"
+
 	// Log query failed.
 	FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
 
@@ -124,6 +127,9 @@ const (
 
 	// An error occurred while querying async tasks.
 	INTERNALERROR_ASYNCREQUESTERROR = "InternalError.AsyncRequestError"
+
+	// Failed to query the audit log
+	INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
 
 	// An error occurred in the internal service of the audit service.
 	INTERNALERROR_AUDITERROR = "InternalError.AuditError"
@@ -445,6 +451,15 @@ const (
 
 	// This operation is not allowed during database proxy upgrade task.
 	OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
+
+	// Failed to query the audit log
+	OPERATIONDENIED_QUERYAUDITLOGSERROR = "OperationDenied.QueryAuditLogsError"
+
+	// The resource was not found.
+	OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+
+	// The resource was not found.
+	OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
 
 	// The maximum number of results has been reached. Please narrow down your query.
 	OPERATIONDENIED_RESULTOVERLIMIT = "OperationDenied.ResultOverLimit"

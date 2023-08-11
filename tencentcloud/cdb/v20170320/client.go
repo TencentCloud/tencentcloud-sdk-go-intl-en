@@ -812,6 +812,7 @@ func NewCreateBackupResponse() (response *CreateBackupResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
 //  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
@@ -837,6 +838,7 @@ func (c *Client) CreateBackup(request *CreateBackupRequest) (response *CreateBac
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED_ACTIONINPROCESS = "OperationDenied.ActionInProcess"
 //  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
@@ -933,6 +935,7 @@ func NewCreateCdbProxyAddressResponse() (response *CreateCdbProxyAddressResponse
 // This API is used to create a database proxy address.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_VPCIPINUSEERROR = "FailedOperation.VpcIpInUseError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
@@ -946,6 +949,7 @@ func (c *Client) CreateCdbProxyAddress(request *CreateCdbProxyAddressRequest) (r
 // This API is used to create a database proxy address.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
 //  FAILEDOPERATION_VPCIPINUSEERROR = "FailedOperation.VpcIpInUseError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
@@ -1383,6 +1387,7 @@ func NewCreateDatabaseResponse() (response *CreateDatabaseResponse) {
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
 func (c *Client) CreateDatabase(request *CreateDatabaseRequest) (response *CreateDatabaseResponse, err error) {
     return c.CreateDatabaseWithContext(context.Background(), request)
 }
@@ -1405,6 +1410,7 @@ func (c *Client) CreateDatabase(request *CreateDatabaseRequest) (response *Creat
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
 func (c *Client) CreateDatabaseWithContext(ctx context.Context, request *CreateDatabaseRequest) (response *CreateDatabaseResponse, err error) {
     if request == nil {
         request = NewCreateDatabaseRequest()
@@ -2129,6 +2135,86 @@ func (c *Client) DescribeAsyncRequestInfoWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeAuditLogsRequest() (request *DescribeAuditLogsRequest) {
+    request = &DescribeAuditLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeAuditLogs")
+    
+    
+    return
+}
+
+func NewDescribeAuditLogsResponse() (response *DescribeAuditLogsResponse) {
+    response = &DescribeAuditLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeAuditLogs
+// This API is used to query a database audit log.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYAUDITTASKFAILERROR = "FailedOperation.QueryAuditTaskFailError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_QUERYAUDITLOGSERROR = "OperationDenied.QueryAuditLogsError"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAuditLogs(request *DescribeAuditLogsRequest) (response *DescribeAuditLogsResponse, err error) {
+    return c.DescribeAuditLogsWithContext(context.Background(), request)
+}
+
+// DescribeAuditLogs
+// This API is used to query a database audit log.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYAUDITTASKFAILERROR = "FailedOperation.QueryAuditTaskFailError"
+//  INTERNALERROR_AUDITDESCRIBELOGERROR = "InternalError.AuditDescribeLogError"
+//  INTERNALERROR_AUDITERROR = "InternalError.AuditError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_DATABASEACCESSERROR = "InternalError.DatabaseAccessError"
+//  INTERNALERROR_SERVERERROR = "InternalError.ServerError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_QUERYAUDITLOGSERROR = "OperationDenied.QueryAuditLogsError"
+//  OPERATIONDENIED_RESOURCENOTFOUNDERROR = "OperationDenied.ResourceNotFoundError"
+//  OPERATIONDENIED_RESOURCENOTFUNDERROR = "OperationDenied.ResourceNotFundError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAuditLogsWithContext(ctx context.Context, request *DescribeAuditLogsRequest) (response *DescribeAuditLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditLogsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAuditPoliciesRequest() (request *DescribeAuditPoliciesRequest) {
     request = &DescribeAuditPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2789,76 +2875,6 @@ func (c *Client) DescribeBinlogsWithContext(ctx context.Context, request *Descri
     return
 }
 
-func NewDescribeCDBProxyRequest() (request *DescribeCDBProxyRequest) {
-    request = &DescribeCDBProxyRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeCDBProxy")
-    
-    
-    return
-}
-
-func NewDescribeCDBProxyResponse() (response *DescribeCDBProxyResponse) {
-    response = &DescribeCDBProxyResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeCDBProxy
-// 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
-//
-// 
-//
-// This API is deprecated and replaced by the `DescribeCdbProxyInfo` API. 
-//
-// 
-//
-// This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
-//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) DescribeCDBProxy(request *DescribeCDBProxyRequest) (response *DescribeCDBProxyResponse, err error) {
-    return c.DescribeCDBProxyWithContext(context.Background(), request)
-}
-
-// DescribeCDBProxy
-// 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
-//
-// 
-//
-// This API is deprecated and replaced by the `DescribeCdbProxyInfo` API. 
-//
-// 
-//
-// This API is used to query database proxy. It will be deprecated and replaced by the `QueryCDBProxy` API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
-//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) DescribeCDBProxyWithContext(ctx context.Context, request *DescribeCDBProxyRequest) (response *DescribeCDBProxyResponse, err error) {
-    if request == nil {
-        request = NewDescribeCDBProxyRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCDBProxy require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCDBProxyResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeCdbProxyInfoRequest() (request *DescribeCdbProxyInfoRequest) {
     request = &DescribeCdbProxyInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3041,6 +3057,8 @@ func NewDescribeDBFeaturesResponse() (response *DescribeDBFeaturesResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -3055,6 +3073,8 @@ func (c *Client) DescribeDBFeatures(request *DescribeDBFeaturesRequest) (respons
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -3344,6 +3364,8 @@ func NewDescribeDBInstanceInfoResponse() (response *DescribeDBInstanceInfoRespon
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCENOTEXISTS = "InvalidParameter.ResourceNotExists"
@@ -3356,6 +3378,8 @@ func (c *Client) DescribeDBInstanceInfo(request *DescribeDBInstanceInfoRequest) 
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR_JSONERROR = "InternalError.JSONError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_RESOURCENOTEXISTS = "InvalidParameter.ResourceNotExists"
@@ -4389,72 +4413,6 @@ func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, r
     return
 }
 
-func NewDescribeProxyConnectionPoolConfRequest() (request *DescribeProxyConnectionPoolConfRequest) {
-    request = &DescribeProxyConnectionPoolConfRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "DescribeProxyConnectionPoolConf")
-    
-    
-    return
-}
-
-func NewDescribeProxyConnectionPoolConfResponse() (response *DescribeProxyConnectionPoolConfResponse) {
-    response = &DescribeProxyConnectionPoolConfResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// DescribeProxyConnectionPoolConf
-// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
-//
-// 
-//
-// This API has been deprecated and replaced by the `DescribeCdbProxyInfo` API. 
-//
-// 
-//
-// This API is used to query the connection pool configuration of a database proxy.
-//
-// error code that may be returned:
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) DescribeProxyConnectionPoolConf(request *DescribeProxyConnectionPoolConfRequest) (response *DescribeProxyConnectionPoolConfResponse, err error) {
-    return c.DescribeProxyConnectionPoolConfWithContext(context.Background(), request)
-}
-
-// DescribeProxyConnectionPoolConf
-// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
-//
-// 
-//
-// This API has been deprecated and replaced by the `DescribeCdbProxyInfo` API. 
-//
-// 
-//
-// This API is used to query the connection pool configuration of a database proxy.
-//
-// error code that may be returned:
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) DescribeProxyConnectionPoolConfWithContext(ctx context.Context, request *DescribeProxyConnectionPoolConfRequest) (response *DescribeProxyConnectionPoolConfResponse, err error) {
-    if request == nil {
-        request = NewDescribeProxyConnectionPoolConfRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeProxyConnectionPoolConf require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeProxyConnectionPoolConfResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeProxyCustomConfRequest() (request *DescribeProxyCustomConfRequest) {
     request = &DescribeProxyCustomConfRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5249,6 +5207,7 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
@@ -5268,6 +5227,7 @@ func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *Describ
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 //  OPERATIONDENIED_WRONGSTATUS = "OperationDenied.WrongStatus"
@@ -5560,6 +5520,7 @@ func NewIsolateDBInstanceResponse() (response *IsolateDBInstanceResponse) {
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5584,6 +5545,7 @@ func (c *Client) IsolateDBInstance(request *IsolateDBInstanceRequest) (response 
 //  INTERNALERROR_TRADEERROR = "InternalError.TradeError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
 //  OPERATIONDENIED = "OperationDenied"
@@ -6027,6 +5989,7 @@ func NewModifyAutoRenewFlagResponse() (response *ModifyAutoRenewFlagResponse) {
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -6043,6 +6006,7 @@ func (c *Client) ModifyAutoRenewFlag(request *ModifyAutoRenewFlagRequest) (respo
 //  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -6249,204 +6213,6 @@ func (c *Client) ModifyBackupEncryptionStatusWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewModifyBackupEncryptionStatusResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyCDBProxyConnectionPoolRequest() (request *ModifyCDBProxyConnectionPoolRequest) {
-    request = &ModifyCDBProxyConnectionPoolRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyCDBProxyConnectionPool")
-    
-    
-    return
-}
-
-func NewModifyCDBProxyConnectionPoolResponse() (response *ModifyCDBProxyConnectionPoolResponse) {
-    response = &ModifyCDBProxyConnectionPoolResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyCDBProxyConnectionPool
-// 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `AdjustCdbProxyAddress`. 
-//
-// 
-//
-// This API is used to configure the connection pool of database proxy. The supported configurations can be obtained by the `DescribeProxyConnectionPoolConf` API.
-//
-// error code that may be returned:
-//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) ModifyCDBProxyConnectionPool(request *ModifyCDBProxyConnectionPoolRequest) (response *ModifyCDBProxyConnectionPoolResponse, err error) {
-    return c.ModifyCDBProxyConnectionPoolWithContext(context.Background(), request)
-}
-
-// ModifyCDBProxyConnectionPool
-// 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `AdjustCdbProxyAddress`. 
-//
-// 
-//
-// This API is used to configure the connection pool of database proxy. The supported configurations can be obtained by the `DescribeProxyConnectionPoolConf` API.
-//
-// error code that may be returned:
-//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) ModifyCDBProxyConnectionPoolWithContext(ctx context.Context, request *ModifyCDBProxyConnectionPoolRequest) (response *ModifyCDBProxyConnectionPoolResponse, err error) {
-    if request == nil {
-        request = NewModifyCDBProxyConnectionPoolRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyCDBProxyConnectionPool require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyCDBProxyConnectionPoolResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyCDBProxyDescRequest() (request *ModifyCDBProxyDescRequest) {
-    request = &ModifyCDBProxyDescRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyCDBProxyDesc")
-    
-    
-    return
-}
-
-func NewModifyCDBProxyDescResponse() (response *ModifyCDBProxyDescResponse) {
-    response = &ModifyCDBProxyDescResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyCDBProxyDesc
-// 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `ModifyCdbProxyAddressDesc`. 
-//
-// 
-//
-// This API is used to modify the description of a database proxy.
-//
-// error code that may be returned:
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) ModifyCDBProxyDesc(request *ModifyCDBProxyDescRequest) (response *ModifyCDBProxyDescResponse, err error) {
-    return c.ModifyCDBProxyDescWithContext(context.Background(), request)
-}
-
-// ModifyCDBProxyDesc
-// 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `ModifyCdbProxyAddressDesc`. 
-//
-// 
-//
-// This API is used to modify the description of a database proxy.
-//
-// error code that may be returned:
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-func (c *Client) ModifyCDBProxyDescWithContext(ctx context.Context, request *ModifyCDBProxyDescRequest) (response *ModifyCDBProxyDescResponse, err error) {
-    if request == nil {
-        request = NewModifyCDBProxyDescRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyCDBProxyDesc require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyCDBProxyDescResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyCDBProxyVipVPortRequest() (request *ModifyCDBProxyVipVPortRequest) {
-    request = &ModifyCDBProxyVipVPortRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "ModifyCDBProxyVipVPort")
-    
-    
-    return
-}
-
-func NewModifyCDBProxyVipVPortResponse() (response *ModifyCDBProxyVipVPortResponse) {
-    response = &ModifyCDBProxyVipVPortResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// ModifyCDBProxyVipVPort
-// 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `ModifyCdbProxyAddressVipAndVPort`. 
-//
-// 
-//
-// This API is used to modify the VIP or the port of a database proxy.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-func (c *Client) ModifyCDBProxyVipVPort(request *ModifyCDBProxyVipVPortRequest) (response *ModifyCDBProxyVipVPortResponse, err error) {
-    return c.ModifyCDBProxyVipVPortWithContext(context.Background(), request)
-}
-
-// ModifyCDBProxyVipVPort
-// 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `ModifyCdbProxyAddressVipAndVPort`. 
-//
-// 
-//
-// This API is used to modify the VIP or the port of a database proxy.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DESCRIBEPROXYGROUPERROR = "FailedOperation.DescribeProxyGroupError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-func (c *Client) ModifyCDBProxyVipVPortWithContext(ctx context.Context, request *ModifyCDBProxyVipVPortRequest) (response *ModifyCDBProxyVipVPortResponse, err error) {
-    if request == nil {
-        request = NewModifyCDBProxyVipVPortRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyCDBProxyVipVPort require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyCDBProxyVipVPortResponse()
     err = c.Send(request, response)
     return
 }
@@ -7801,76 +7567,6 @@ func (c *Client) OpenWanServiceWithContext(ctx context.Context, request *OpenWan
     request.SetContext(ctx)
     
     response = NewOpenWanServiceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewQueryCDBProxyRequest() (request *QueryCDBProxyRequest) {
-    request = &QueryCDBProxyRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdb", APIVersion, "QueryCDBProxy")
-    
-    
-    return
-}
-
-func NewQueryCDBProxyResponse() (response *QueryCDBProxyResponse) {
-    response = &QueryCDBProxyResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// QueryCDBProxy
-// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `DescribeCdbProxyInfo`. 
-//
-// 
-//
-// This API is used to query the proxy details.
-//
-// error code that may be returned:
-//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
-//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
-func (c *Client) QueryCDBProxy(request *QueryCDBProxyRequest) (response *QueryCDBProxyResponse, err error) {
-    return c.QueryCDBProxyWithContext(context.Background(), request)
-}
-
-// QueryCDBProxy
-// 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
-//
-// 
-//
-// This API has been deprecated and replaced with `DescribeCdbProxyInfo`. 
-//
-// 
-//
-// This API is used to query the proxy details.
-//
-// error code that may be returned:
-//  INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
-//  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
-func (c *Client) QueryCDBProxyWithContext(ctx context.Context, request *QueryCDBProxyRequest) (response *QueryCDBProxyResponse, err error) {
-    if request == nil {
-        request = NewQueryCDBProxyRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("QueryCDBProxy require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewQueryCDBProxyResponse()
     err = c.Send(request, response)
     return
 }
