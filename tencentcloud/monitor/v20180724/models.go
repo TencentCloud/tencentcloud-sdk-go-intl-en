@@ -854,7 +854,7 @@ type Condition struct {
 
 type ConditionsTemp struct {
 	// Template name
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
 	// Metric trigger condition
@@ -4458,6 +4458,9 @@ type DescribeAlarmNoticesRequestParams struct {
 
 	// Filter templates by tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Schedule list
+	OnCallFormIDs []*string `json:"OnCallFormIDs,omitempty" name:"OnCallFormIDs"`
 }
 
 type DescribeAlarmNoticesRequest struct {
@@ -4495,6 +4498,9 @@ type DescribeAlarmNoticesRequest struct {
 
 	// Filter templates by tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// Schedule list
+	OnCallFormIDs []*string `json:"OnCallFormIDs,omitempty" name:"OnCallFormIDs"`
 }
 
 func (r *DescribeAlarmNoticesRequest) ToJsonString() string {
@@ -4520,6 +4526,7 @@ func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
 	delete(f, "GroupIds")
 	delete(f, "NoticeIds")
 	delete(f, "Tags")
+	delete(f, "OnCallFormIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmNoticesRequest has unknown keys!", "")
 	}
@@ -4603,7 +4610,7 @@ type DescribeAlarmPoliciesRequestParams struct {
 	// [Project Management](https://console.cloud.tencent.com/project)
 	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
-	// ID list of the notification template, which can be obtained by querying the notification template list.
+	// List of the notification template IDs, which can be obtained by querying the notification template list.
 	// It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1).
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
@@ -4628,14 +4635,20 @@ type DescribeAlarmPoliciesRequestParams struct {
 	// Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. `ONECLICK`: Display quick alarm policies; `NOT_ONECLICK`: Display non-quick alarm policies.
 	OneClickPolicyType []*string `json:"OneClickPolicyType,omitempty" name:"OneClickPolicyType"`
 
-	// Whether the returned result filters policies associated with all objects. Valid values: `1` (Yes), `0` (No).
+	// Whether the returned result needs to filter policies associated with all objects. Valid values: `1` (Yes), `0` (No).
 	NotBindAll *int64 `json:"NotBindAll,omitempty" name:"NotBindAll"`
 
-	// Whether the returned result filters policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
+	// Whether the returned result needs to filter policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
 	NotInstanceGroup *int64 `json:"NotInstanceGroup,omitempty" name:"NotInstanceGroup"`
 
 	// Filter policies by tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ID of the TencentCloud Managed Service for Prometheus instance, which is used for customizing a metric policy.
+	PromInsId *string `json:"PromInsId,omitempty" name:"PromInsId"`
+
+	// Search by schedule
+	ReceiverOnCallFormIDs []*string `json:"ReceiverOnCallFormIDs,omitempty" name:"ReceiverOnCallFormIDs"`
 }
 
 type DescribeAlarmPoliciesRequest struct {
@@ -4688,7 +4701,7 @@ type DescribeAlarmPoliciesRequest struct {
 	// [Project Management](https://console.cloud.tencent.com/project)
 	ProjectIds []*int64 `json:"ProjectIds,omitempty" name:"ProjectIds"`
 
-	// ID list of the notification template, which can be obtained by querying the notification template list.
+	// List of the notification template IDs, which can be obtained by querying the notification template list.
 	// It can be queried with the API [DescribeAlarmNotices](https://intl.cloud.tencent.com/document/product/248/51280?from_cn_redirect=1).
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
@@ -4713,14 +4726,20 @@ type DescribeAlarmPoliciesRequest struct {
 	// Filter by quick alarm policy. If this parameter is left empty, all policies are displayed. `ONECLICK`: Display quick alarm policies; `NOT_ONECLICK`: Display non-quick alarm policies.
 	OneClickPolicyType []*string `json:"OneClickPolicyType,omitempty" name:"OneClickPolicyType"`
 
-	// Whether the returned result filters policies associated with all objects. Valid values: `1` (Yes), `0` (No).
+	// Whether the returned result needs to filter policies associated with all objects. Valid values: `1` (Yes), `0` (No).
 	NotBindAll *int64 `json:"NotBindAll,omitempty" name:"NotBindAll"`
 
-	// Whether the returned result filters policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
+	// Whether the returned result needs to filter policies associated with instance groups. Valid values: `1` (Yes), `0` (No).
 	NotInstanceGroup *int64 `json:"NotInstanceGroup,omitempty" name:"NotInstanceGroup"`
 
 	// Filter policies by tag
 	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+
+	// ID of the TencentCloud Managed Service for Prometheus instance, which is used for customizing a metric policy.
+	PromInsId *string `json:"PromInsId,omitempty" name:"PromInsId"`
+
+	// Search by schedule
+	ReceiverOnCallFormIDs []*string `json:"ReceiverOnCallFormIDs,omitempty" name:"ReceiverOnCallFormIDs"`
 }
 
 func (r *DescribeAlarmPoliciesRequest) ToJsonString() string {
@@ -4759,6 +4778,8 @@ func (r *DescribeAlarmPoliciesRequest) FromJsonString(s string) error {
 	delete(f, "NotBindAll")
 	delete(f, "NotInstanceGroup")
 	delete(f, "Tags")
+	delete(f, "PromInsId")
+	delete(f, "ReceiverOnCallFormIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmPoliciesRequest has unknown keys!", "")
 	}
@@ -5513,6 +5534,57 @@ func (r *DescribeBindingPolicyObjectListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBindingPolicyObjectListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterAgentCreatingProgressRequestParams struct {
+
+}
+
+type DescribeClusterAgentCreatingProgressRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeClusterAgentCreatingProgressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterAgentCreatingProgressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterAgentCreatingProgressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterAgentCreatingProgressResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterAgentCreatingProgressResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterAgentCreatingProgressResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterAgentCreatingProgressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterAgentCreatingProgressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10286,6 +10358,14 @@ type Metric struct {
 	// Integration center product ID.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ProductId *int64 `json:"ProductId,omitempty" name:"ProductId"`
+
+	// Matching operator
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Operators []*Operator `json:"Operators,omitempty" name:"Operators"`
+
+	// Metric monitoring granularity
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Periods []*int64 `json:"Periods,omitempty" name:"Periods"`
 }
 
 type MetricConfig struct {
@@ -10313,14 +10393,6 @@ type MetricDataPoint struct {
 
 	// Data point list
 	Values []*Point `json:"Values,omitempty" name:"Values"`
-}
-
-type MetricDatum struct {
-	// Metric name.
-	MetricName *string `json:"MetricName,omitempty" name:"MetricName"`
-
-	// Metric value.
-	Value *uint64 `json:"Value,omitempty" name:"Value"`
 }
 
 type MetricObjectMeaning struct {
@@ -10512,7 +10584,7 @@ type ModifyAlarmPolicyConditionRequestParams struct {
 	// Log alarm creation request parameters
 	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
 
-	// Template ID, which is dedicated to TMP.
+	// Template ID, which is dedicated to TencentCloud Managed Service for Prometheus.
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
 	// Status (`0`: Disabled; `1`: Enabled)
@@ -10552,7 +10624,7 @@ type ModifyAlarmPolicyConditionRequest struct {
 	// Log alarm creation request parameters
 	LogAlarmReqInfo *LogAlarmReq `json:"LogAlarmReqInfo,omitempty" name:"LogAlarmReqInfo"`
 
-	// Template ID, which is dedicated to TMP.
+	// Template ID, which is dedicated to TencentCloud Managed Service for Prometheus.
 	NoticeIds []*string `json:"NoticeIds,omitempty" name:"NoticeIds"`
 
 	// Status (`0`: Disabled; `1`: Enabled)
@@ -12591,81 +12663,6 @@ type PrometheusZoneItem struct {
 
 	// AZ name
 	ZoneName *string `json:"ZoneName,omitempty" name:"ZoneName"`
-}
-
-// Predefined struct for user
-type PutMonitorDataRequestParams struct {
-	// A group of metrics and data.
-	Metrics []*MetricDatum `json:"Metrics,omitempty" name:"Metrics"`
-
-	// IP address that is automatically specified when monitoring data is reported.
-	AnnounceIp *string `json:"AnnounceIp,omitempty" name:"AnnounceIp"`
-
-	// Timestamp that is automatically specified when monitoring data is reported.
-	AnnounceTimestamp *uint64 `json:"AnnounceTimestamp,omitempty" name:"AnnounceTimestamp"`
-
-	// IP address or product instance ID that is automatically specified when monitoring data is reported.
-	AnnounceInstance *string `json:"AnnounceInstance,omitempty" name:"AnnounceInstance"`
-}
-
-type PutMonitorDataRequest struct {
-	*tchttp.BaseRequest
-	
-	// A group of metrics and data.
-	Metrics []*MetricDatum `json:"Metrics,omitempty" name:"Metrics"`
-
-	// IP address that is automatically specified when monitoring data is reported.
-	AnnounceIp *string `json:"AnnounceIp,omitempty" name:"AnnounceIp"`
-
-	// Timestamp that is automatically specified when monitoring data is reported.
-	AnnounceTimestamp *uint64 `json:"AnnounceTimestamp,omitempty" name:"AnnounceTimestamp"`
-
-	// IP address or product instance ID that is automatically specified when monitoring data is reported.
-	AnnounceInstance *string `json:"AnnounceInstance,omitempty" name:"AnnounceInstance"`
-}
-
-func (r *PutMonitorDataRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *PutMonitorDataRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Metrics")
-	delete(f, "AnnounceIp")
-	delete(f, "AnnounceTimestamp")
-	delete(f, "AnnounceInstance")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PutMonitorDataRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type PutMonitorDataResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
-}
-
-type PutMonitorDataResponse struct {
-	*tchttp.BaseResponse
-	Response *PutMonitorDataResponseParams `json:"Response"`
-}
-
-func (r *PutMonitorDataResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *PutMonitorDataResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type ReceiverInfo struct {
@@ -14903,4 +14900,8 @@ type UserNotice struct {
 	// Notification cycle. The values 1-7 indicate Monday to Sunday.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Weekday []*int64 `json:"Weekday,omitempty" name:"Weekday"`
+
+	// List of schedule IDs
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	OnCallFormIDs []*string `json:"OnCallFormIDs,omitempty" name:"OnCallFormIDs"`
 }

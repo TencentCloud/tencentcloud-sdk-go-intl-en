@@ -167,6 +167,7 @@ func NewCheckIsPrometheusNewUserResponse() (response *CheckIsPrometheusNewUserRe
 // This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -180,6 +181,7 @@ func (c *Client) CheckIsPrometheusNewUser(request *CheckIsPrometheusNewUserReque
 // This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -540,7 +542,7 @@ func NewCreateGrafanaInstanceResponse() (response *CreateGrafanaInstanceResponse
 }
 
 // CreateGrafanaInstance
-// This API is used to create a Grafana instance.
+// This API is used to create a monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -554,7 +556,7 @@ func (c *Client) CreateGrafanaInstance(request *CreateGrafanaInstanceRequest) (r
 }
 
 // CreateGrafanaInstance
-// This API is used to create a Grafana instance.
+// This API is used to create a monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -835,12 +837,16 @@ func NewCreatePrometheusAlertPolicyResponse() (response *CreatePrometheusAlertPo
 // This API is used to create an alerting rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreatePrometheusAlertPolicy(request *CreatePrometheusAlertPolicyRequest) (response *CreatePrometheusAlertPolicyResponse, err error) {
@@ -851,12 +857,16 @@ func (c *Client) CreatePrometheusAlertPolicy(request *CreatePrometheusAlertPolic
 // This API is used to create an alerting rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreatePrometheusAlertPolicyWithContext(ctx context.Context, request *CreatePrometheusAlertPolicyRequest) (response *CreatePrometheusAlertPolicyResponse, err error) {
@@ -962,6 +972,7 @@ func NewCreatePrometheusConfigResponse() (response *CreatePrometheusConfigRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -981,6 +992,7 @@ func (c *Client) CreatePrometheusConfig(request *CreatePrometheusConfigRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -1561,6 +1573,7 @@ func NewDeleteAlarmNoticesResponse() (response *DeleteAlarmNoticesResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1575,6 +1588,7 @@ func (c *Client) DeleteAlarmNotices(request *DeleteAlarmNoticesRequest) (respons
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -1818,7 +1832,7 @@ func NewDeleteGrafanaInstanceResponse() (response *DeleteGrafanaInstanceResponse
 }
 
 // DeleteGrafanaInstance
-// This API is used to delete a Grafana instance.
+// This API is used to refund a monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
@@ -1829,7 +1843,7 @@ func (c *Client) DeleteGrafanaInstance(request *DeleteGrafanaInstanceRequest) (r
 }
 
 // DeleteGrafanaInstance
-// This API is used to delete a Grafana instance.
+// This API is used to refund a monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
@@ -2219,6 +2233,7 @@ func NewDeletePrometheusConfigResponse() (response *DeletePrometheusConfigRespon
 // This API is used to delete Prometheus configurations. If the target cluster does not exist, a result indicating success will be returned.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -2233,6 +2248,7 @@ func (c *Client) DeletePrometheusConfig(request *DeletePrometheusConfigRequest) 
 // This API is used to delete Prometheus configurations. If the target cluster does not exist, a result indicating success will be returned.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -3315,8 +3331,6 @@ func NewDescribeBaseMetricsResponse() (response *DescribeBaseMetricsResponse) {
 // This API is used to get the attributes of basic metrics.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBaseMetrics(request *DescribeBaseMetricsRequest) (response *DescribeBaseMetricsResponse, err error) {
     return c.DescribeBaseMetricsWithContext(context.Background(), request)
@@ -3326,8 +3340,6 @@ func (c *Client) DescribeBaseMetrics(request *DescribeBaseMetricsRequest) (respo
 // This API is used to get the attributes of basic metrics.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeBaseMetricsWithContext(ctx context.Context, request *DescribeBaseMetricsRequest) (response *DescribeBaseMetricsResponse, err error) {
     if request == nil {
@@ -3527,6 +3539,56 @@ func (c *Client) DescribeBindingPolicyObjectListWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewDescribeBindingPolicyObjectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterAgentCreatingProgressRequest() (request *DescribeClusterAgentCreatingProgressRequest) {
+    request = &DescribeClusterAgentCreatingProgressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeClusterAgentCreatingProgress")
+    
+    
+    return
+}
+
+func NewDescribeClusterAgentCreatingProgressResponse() (response *DescribeClusterAgentCreatingProgressResponse) {
+    response = &DescribeClusterAgentCreatingProgressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeClusterAgentCreatingProgress
+// This API is used to u200dobtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribeClusterAgentCreatingProgress(request *DescribeClusterAgentCreatingProgressRequest) (response *DescribeClusterAgentCreatingProgressResponse, err error) {
+    return c.DescribeClusterAgentCreatingProgressWithContext(context.Background(), request)
+}
+
+// DescribeClusterAgentCreatingProgress
+// This API is used to u200dobtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribeClusterAgentCreatingProgressWithContext(ctx context.Context, request *DescribeClusterAgentCreatingProgressRequest) (response *DescribeClusterAgentCreatingProgressResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterAgentCreatingProgressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterAgentCreatingProgress require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterAgentCreatingProgressResponse()
     err = c.Send(request, response)
     return
 }
@@ -4251,6 +4313,7 @@ func NewDescribePolicyConditionListResponse() (response *DescribePolicyCondition
 //  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
 //  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
 //  FAILEDOPERATION_DIMQUERYREQUESTFAILED = "FailedOperation.DimQueryRequestFailed"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 //  FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
 //  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
@@ -4295,6 +4358,7 @@ func (c *Client) DescribePolicyConditionList(request *DescribePolicyConditionLis
 //  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
 //  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
 //  FAILEDOPERATION_DIMQUERYREQUESTFAILED = "FailedOperation.DimQueryRequestFailed"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  FAILEDOPERATION_DRUIDQUERYFAILED = "FailedOperation.DruidQueryFailed"
 //  FAILEDOPERATION_DUPLICATENAME = "FailedOperation.DuplicateName"
 //  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
@@ -4776,6 +4840,7 @@ func NewDescribePrometheusAlertPolicyResponse() (response *DescribePrometheusAle
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -4786,6 +4851,7 @@ func NewDescribePrometheusAlertPolicyResponse() (response *DescribePrometheusAle
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribePrometheusAlertPolicy(request *DescribePrometheusAlertPolicyRequest) (response *DescribePrometheusAlertPolicyResponse, err error) {
     return c.DescribePrometheusAlertPolicyWithContext(context.Background(), request)
 }
@@ -4797,6 +4863,7 @@ func (c *Client) DescribePrometheusAlertPolicy(request *DescribePrometheusAlertP
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -4807,6 +4874,7 @@ func (c *Client) DescribePrometheusAlertPolicy(request *DescribePrometheusAlertP
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribePrometheusAlertPolicyWithContext(ctx context.Context, request *DescribePrometheusAlertPolicyRequest) (response *DescribePrometheusAlertPolicyResponse, err error) {
     if request == nil {
         request = NewDescribePrometheusAlertPolicyRequest()
@@ -4926,6 +4994,7 @@ func NewDescribePrometheusConfigResponse() (response *DescribePrometheusConfigRe
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -4948,6 +5017,7 @@ func (c *Client) DescribePrometheusConfig(request *DescribePrometheusConfigReque
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_DB = "FailedOperation.Db"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -5178,6 +5248,7 @@ func NewDescribePrometheusInstanceInitStatusResponse() (response *DescribePromet
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -5194,6 +5265,7 @@ func (c *Client) DescribePrometheusInstanceInitStatus(request *DescribePrometheu
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -5393,6 +5465,7 @@ func NewDescribePrometheusInstancesOverviewResponse() (response *DescribePrometh
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -5407,6 +5480,7 @@ func (c *Client) DescribePrometheusInstancesOverview(request *DescribePrometheus
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -5779,6 +5853,7 @@ func NewDescribePrometheusTempSyncResponse() (response *DescribePrometheusTempSy
 // This API is used to get the information of instances associated with a template. It takes effect for v2 instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -5793,6 +5868,7 @@ func (c *Client) DescribePrometheusTempSync(request *DescribePrometheusTempSyncR
 // This API is used to get the information of instances associated with a template. It takes effect for v2 instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -6786,6 +6862,7 @@ func NewModifyAlarmPolicyNoticeResponse() (response *ModifyAlarmPolicyNoticeResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -6799,6 +6876,7 @@ func (c *Client) ModifyAlarmPolicyNotice(request *ModifyAlarmPolicyNoticeRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DOHTTPTRANSFERFAILED = "FailedOperation.DoHTTPTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -7555,126 +7633,6 @@ func (c *Client) ModifyPrometheusTempWithContext(ctx context.Context, request *M
     return
 }
 
-func NewPutMonitorDataRequest() (request *PutMonitorDataRequest) {
-    request = &PutMonitorDataRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("monitor", APIVersion, "PutMonitorData")
-    
-    
-    return
-}
-
-func NewPutMonitorDataResponse() (response *PutMonitorDataResponse) {
-    response = &PutMonitorDataResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    }
-    return
-}
-
-// PutMonitorData
-// 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
-//
-// 
-//
-// This API is not deprecated, but its related console features and backend services were deactivated two years ago.
-//
-// 
-//
-// The default API request rate limit is 50 requests/sec.
-//
-// The default upper limit on metrics of a single tenant is 100.
-//
-// A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
-//
-// 
-//
-// The reporting timestamp is the timestamp when you want to save the data. We recommend that you construct a timestamp at integer minutes.
-//
-// The time range of a timestamp is from 300 seconds before the current time to the current time.
-//
-// The data of the same IP metric/value pair must be reported by minute in chronological order.
-//
-// error code that may be returned:
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_EXETIMEOUT = "InternalError.ExeTimeout"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  LIMITEXCEEDED_METRICQUOTAEXCEEDED = "LimitExceeded.MetricQuotaExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) PutMonitorData(request *PutMonitorDataRequest) (response *PutMonitorDataResponse, err error) {
-    return c.PutMonitorDataWithContext(context.Background(), request)
-}
-
-// PutMonitorData
-// 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
-//
-// 
-//
-// This API is not deprecated, but its related console features and backend services were deactivated two years ago.
-//
-// 
-//
-// The default API request rate limit is 50 requests/sec.
-//
-// The default upper limit on metrics of a single tenant is 100.
-//
-// A maximum of 30 metric/value pairs can be reported at a time. When an error is returned for a request, no metrics/values in the request will be saved.
-//
-// 
-//
-// The reporting timestamp is the timestamp when you want to save the data. We recommend that you construct a timestamp at integer minutes.
-//
-// The time range of a timestamp is from 300 seconds before the current time to the current time.
-//
-// The data of the same IP metric/value pair must be reported by minute in chronological order.
-//
-// error code that may be returned:
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_EXETIMEOUT = "InternalError.ExeTimeout"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  LIMITEXCEEDED_METRICQUOTAEXCEEDED = "LimitExceeded.MetricQuotaExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) PutMonitorDataWithContext(ctx context.Context, request *PutMonitorDataRequest) (response *PutMonitorDataResponse, err error) {
-    if request == nil {
-        request = NewPutMonitorDataRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("PutMonitorData require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewPutMonitorDataResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewResumeGrafanaInstanceRequest() (request *ResumeGrafanaInstanceRequest) {
     request = &ResumeGrafanaInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7694,51 +7652,29 @@ func NewResumeGrafanaInstanceResponse() (response *ResumeGrafanaInstanceResponse
 }
 
 // ResumeGrafanaInstance
-// This API is used to restore a Grafana instance.
+// This API is used to renew a monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
 //
 // error code that may be returned:
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_EXETIMEOUT = "InternalError.ExeTimeout"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  LIMITEXCEEDED_METRICQUOTAEXCEEDED = "LimitExceeded.MetricQuotaExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ResumeGrafanaInstance(request *ResumeGrafanaInstanceRequest) (response *ResumeGrafanaInstanceResponse, err error) {
     return c.ResumeGrafanaInstanceWithContext(context.Background(), request)
 }
 
 // ResumeGrafanaInstance
-// This API is used to restore a Grafana instance.
+// This API is used to renew a monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
 //
 // error code that may be returned:
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_SERVICENOTENABLED = "FailedOperation.ServiceNotEnabled"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_EXETIMEOUT = "InternalError.ExeTimeout"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  LIMITEXCEEDED_METRICQUOTAEXCEEDED = "LimitExceeded.MetricQuotaExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ResumeGrafanaInstanceWithContext(ctx context.Context, request *ResumeGrafanaInstanceRequest) (response *ResumeGrafanaInstanceResponse, err error) {
     if request == nil {
         request = NewResumeGrafanaInstanceRequest()
@@ -7960,6 +7896,7 @@ func NewSyncPrometheusTempResponse() (response *SyncPrometheusTempResponse) {
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
@@ -7980,6 +7917,7 @@ func (c *Client) SyncPrometheusTemp(request *SyncPrometheusTempRequest) (respons
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
