@@ -139,6 +139,7 @@ func NewAddClusterSlaveZoneResponse() (response *AddClusterSlaveZoneResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
@@ -153,6 +154,7 @@ func (c *Client) AddClusterSlaveZone(request *AddClusterSlaveZoneRequest) (respo
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
@@ -429,6 +431,68 @@ func (c *Client) CloseClusterPasswordComplexityWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewCloseClusterPasswordComplexityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCloseProxyRequest() (request *CloseProxyRequest) {
+    request = &CloseProxyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "CloseProxy")
+    
+    
+    return
+}
+
+func NewCloseProxyResponse() (response *CloseProxyResponse) {
+    response = &CloseProxyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CloseProxy
+// This API is used to disable u200dthe database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CloseProxy(request *CloseProxyRequest) (response *CloseProxyResponse, err error) {
+    return c.CloseProxyWithContext(context.Background(), request)
+}
+
+// CloseProxy
+// This API is used to disable u200dthe database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CloseProxyWithContext(ctx context.Context, request *CloseProxyRequest) (response *CloseProxyResponse, err error) {
+    if request == nil {
+        request = NewCloseProxyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseProxy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseProxyResponse()
     err = c.Send(request, response)
     return
 }
@@ -881,6 +945,7 @@ func NewCreateClustersResponse() (response *CreateClustersResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_INVALIDSPEC = "InvalidParameterValue.InvalidSpec"
 //  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
 //  INVALIDPARAMETERVALUE_REGIONZONEUNAVAILABLE = "InvalidParameterValue.RegionZoneUnavailable"
 //  INVALIDPARAMETERVALUE_SUBNETNOTFOUND = "InvalidParameterValue.SubnetNotFound"
 //  INVALIDPARAMETERVALUE_VPCNOTFOUND = "InvalidParameterValue.VpcNotFound"
@@ -913,6 +978,7 @@ func (c *Client) CreateClusters(request *CreateClustersRequest) (response *Creat
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_INVALIDSPEC = "InvalidParameterValue.InvalidSpec"
 //  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
 //  INVALIDPARAMETERVALUE_REGIONZONEUNAVAILABLE = "InvalidParameterValue.RegionZoneUnavailable"
 //  INVALIDPARAMETERVALUE_SUBNETNOTFOUND = "InvalidParameterValue.SubnetNotFound"
 //  INVALIDPARAMETERVALUE_VPCNOTFOUND = "InvalidParameterValue.VpcNotFound"
@@ -960,6 +1026,7 @@ func NewCreateParamTemplateResponse() (response *CreateParamTemplateResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -972,6 +1039,7 @@ func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -987,6 +1055,136 @@ func (c *Client) CreateParamTemplateWithContext(ctx context.Context, request *Cr
     request.SetContext(ctx)
     
     response = NewCreateParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProxyRequest() (request *CreateProxyRequest) {
+    request = &CreateProxyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "CreateProxy")
+    
+    
+    return
+}
+
+func NewCreateProxyResponse() (response *CreateProxyResponse) {
+    response = &CreateProxyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateProxy
+// This API is used to create a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateProxy(request *CreateProxyRequest) (response *CreateProxyResponse, err error) {
+    return c.CreateProxyWithContext(context.Background(), request)
+}
+
+// CreateProxy
+// This API is used to create a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateProxyWithContext(ctx context.Context, request *CreateProxyRequest) (response *CreateProxyResponse, err error) {
+    if request == nil {
+        request = NewCreateProxyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProxy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateProxyEndPointRequest() (request *CreateProxyEndPointRequest) {
+    request = &CreateProxyEndPointRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "CreateProxyEndPoint")
+    
+    
+    return
+}
+
+func NewCreateProxyEndPointResponse() (response *CreateProxyEndPointResponse) {
+    response = &CreateProxyEndPointResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateProxyEndPoint
+// This API is used to create a database proxy connection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateProxyEndPoint(request *CreateProxyEndPointRequest) (response *CreateProxyEndPointResponse, err error) {
+    return c.CreateProxyEndPointWithContext(context.Background(), request)
+}
+
+// CreateProxyEndPoint
+// This API is used to create a database proxy connection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDZONEIDERROR = "InvalidParameterValue.InvalidZoneIdError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateProxyEndPointWithContext(ctx context.Context, request *CreateProxyEndPointRequest) (response *CreateProxyEndPointResponse, err error) {
+    if request == nil {
+        request = NewCreateProxyEndPointRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProxyEndPoint require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProxyEndPointResponse()
     err = c.Send(request, response)
     return
 }
@@ -1252,6 +1450,8 @@ func NewDeleteClusterDatabaseResponse() (response *DeleteClusterDatabaseResponse
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DeleteClusterDatabase(request *DeleteClusterDatabaseRequest) (response *DeleteClusterDatabaseResponse, err error) {
@@ -1263,6 +1463,8 @@ func (c *Client) DeleteClusterDatabase(request *DeleteClusterDatabaseRequest) (r
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
 //  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DeleteClusterDatabaseWithContext(ctx context.Context, request *DeleteClusterDatabaseRequest) (response *DeleteClusterDatabaseResponse, err error) {
@@ -2385,6 +2587,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsRequest) (response *DescribeDBSecurityGroupsResponse, err error) {
@@ -2397,6 +2600,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeDBSecurityGroupsWithContext(ctx context.Context, request *DescribeDBSecurityGroupsRequest) (response *DescribeDBSecurityGroupsResponse, err error) {
@@ -2740,6 +2944,7 @@ func NewDescribeInstanceSpecsResponse() (response *DescribeInstanceSpecsResponse
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeInstanceSpecs(request *DescribeInstanceSpecsRequest) (response *DescribeInstanceSpecsResponse, err error) {
     return c.DescribeInstanceSpecsWithContext(context.Background(), request)
@@ -2752,6 +2957,7 @@ func (c *Client) DescribeInstanceSpecs(request *DescribeInstanceSpecsRequest) (r
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeInstanceSpecsWithContext(ctx context.Context, request *DescribeInstanceSpecsRequest) (response *DescribeInstanceSpecsResponse, err error) {
     if request == nil {
@@ -2867,6 +3073,7 @@ func NewDescribeMaintainPeriodResponse() (response *DescribeMaintainPeriodRespon
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeMaintainPeriod(request *DescribeMaintainPeriodRequest) (response *DescribeMaintainPeriodResponse, err error) {
@@ -2881,6 +3088,7 @@ func (c *Client) DescribeMaintainPeriod(request *DescribeMaintainPeriodRequest) 
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) DescribeMaintainPeriodWithContext(ctx context.Context, request *DescribeMaintainPeriodRequest) (response *DescribeMaintainPeriodResponse, err error) {
@@ -3051,6 +3259,172 @@ func (c *Client) DescribeProjectSecurityGroupsWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeProjectSecurityGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProxiesRequest() (request *DescribeProxiesRequest) {
+    request = &DescribeProxiesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeProxies")
+    
+    
+    return
+}
+
+func NewDescribeProxiesResponse() (response *DescribeProxiesResponse) {
+    response = &DescribeProxiesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeProxies
+// This API is used to query the list of database proxies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_ILLEGALORDERBY = "InvalidParameterValue.IllegalOrderBy"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMBOTHSETERROR = "InvalidParameterValue.ParamBothSetError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeProxies(request *DescribeProxiesRequest) (response *DescribeProxiesResponse, err error) {
+    return c.DescribeProxiesWithContext(context.Background(), request)
+}
+
+// DescribeProxies
+// This API is used to query the list of database proxies.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_ILLEGALORDERBY = "InvalidParameterValue.IllegalOrderBy"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMBOTHSETERROR = "InvalidParameterValue.ParamBothSetError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeProxiesWithContext(ctx context.Context, request *DescribeProxiesRequest) (response *DescribeProxiesResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxiesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProxies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProxyNodesRequest() (request *DescribeProxyNodesRequest) {
+    request = &DescribeProxyNodesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeProxyNodes")
+    
+    
+    return
+}
+
+func NewDescribeProxyNodesResponse() (response *DescribeProxyNodesResponse) {
+    response = &DescribeProxyNodesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeProxyNodes
+// This API is used to query the list of proxy nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeProxyNodes(request *DescribeProxyNodesRequest) (response *DescribeProxyNodesResponse, err error) {
+    return c.DescribeProxyNodesWithContext(context.Background(), request)
+}
+
+// DescribeProxyNodes
+// This API is used to query the list of proxy nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeProxyNodesWithContext(ctx context.Context, request *DescribeProxyNodesRequest) (response *DescribeProxyNodesResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyNodesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProxyNodes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxyNodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProxySpecsRequest() (request *DescribeProxySpecsRequest) {
+    request = &DescribeProxySpecsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeProxySpecs")
+    
+    
+    return
+}
+
+func NewDescribeProxySpecsResponse() (response *DescribeProxySpecsResponse) {
+    response = &DescribeProxySpecsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeProxySpecs
+// This API is used to query the specifications of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+func (c *Client) DescribeProxySpecs(request *DescribeProxySpecsRequest) (response *DescribeProxySpecsResponse, err error) {
+    return c.DescribeProxySpecsWithContext(context.Background(), request)
+}
+
+// DescribeProxySpecs
+// This API is used to query the specifications of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+func (c *Client) DescribeProxySpecsWithContext(ctx context.Context, request *DescribeProxySpecsRequest) (response *DescribeProxySpecsResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxySpecsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProxySpecs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxySpecsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3395,6 +3769,68 @@ func (c *Client) DescribeRollbackTimeValidityWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeRollbackTimeValidityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSupportProxyVersionRequest() (request *DescribeSupportProxyVersionRequest) {
+    request = &DescribeSupportProxyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeSupportProxyVersion")
+    
+    
+    return
+}
+
+func NewDescribeSupportProxyVersionResponse() (response *DescribeSupportProxyVersionResponse) {
+    response = &DescribeSupportProxyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeSupportProxyVersion
+// This API is used to query the supported database proxy versions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeSupportProxyVersion(request *DescribeSupportProxyVersionRequest) (response *DescribeSupportProxyVersionResponse, err error) {
+    return c.DescribeSupportProxyVersionWithContext(context.Background(), request)
+}
+
+// DescribeSupportProxyVersion
+// This API is used to query the supported database proxy versions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeSupportProxyVersionWithContext(ctx context.Context, request *DescribeSupportProxyVersionRequest) (response *DescribeSupportProxyVersionResponse, err error) {
+    if request == nil {
+        request = NewDescribeSupportProxyVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSupportProxyVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSupportProxyVersionResponse()
     err = c.Send(request, response)
     return
 }
@@ -4826,6 +5262,7 @@ func NewModifyInstanceParamResponse() (response *ModifyInstanceParamResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
@@ -4840,6 +5277,7 @@ func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
@@ -4967,6 +5405,124 @@ func (c *Client) ModifyParamTemplateWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyParamTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyProxyDescRequest() (request *ModifyProxyDescRequest) {
+    request = &ModifyProxyDescRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "ModifyProxyDesc")
+    
+    
+    return
+}
+
+func NewModifyProxyDescResponse() (response *ModifyProxyDescResponse) {
+    response = &ModifyProxyDescResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyProxyDesc
+// This API is used to modify the description of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyProxyDesc(request *ModifyProxyDescRequest) (response *ModifyProxyDescResponse, err error) {
+    return c.ModifyProxyDescWithContext(context.Background(), request)
+}
+
+// ModifyProxyDesc
+// This API is used to modify the description of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyProxyDescWithContext(ctx context.Context, request *ModifyProxyDescRequest) (response *ModifyProxyDescResponse, err error) {
+    if request == nil {
+        request = NewModifyProxyDescRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyProxyDesc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyProxyDescResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyProxyRwSplitRequest() (request *ModifyProxyRwSplitRequest) {
+    request = &ModifyProxyRwSplitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "ModifyProxyRwSplit")
+    
+    
+    return
+}
+
+func NewModifyProxyRwSplitResponse() (response *ModifyProxyRwSplitResponse) {
+    response = &ModifyProxyRwSplitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyProxyRwSplit
+// This API is used to configure the read/write separation of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyProxyRwSplit(request *ModifyProxyRwSplitRequest) (response *ModifyProxyRwSplitResponse, err error) {
+    return c.ModifyProxyRwSplitWithContext(context.Background(), request)
+}
+
+// ModifyProxyRwSplit
+// This API is used to configure the read/write separation of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSDENIEDERROR = "OperationDenied.InstanceStatusDeniedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyProxyRwSplitWithContext(ctx context.Context, request *ModifyProxyRwSplitRequest) (response *ModifyProxyRwSplitResponse, err error) {
+    if request == nil {
+        request = NewModifyProxyRwSplitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyProxyRwSplit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyProxyRwSplitResponse()
     err = c.Send(request, response)
     return
 }
@@ -5409,6 +5965,66 @@ func (c *Client) OpenClusterPasswordComplexityWithContext(ctx context.Context, r
     return
 }
 
+func NewOpenClusterReadOnlyInstanceGroupAccessRequest() (request *OpenClusterReadOnlyInstanceGroupAccessRequest) {
+    request = &OpenClusterReadOnlyInstanceGroupAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "OpenClusterReadOnlyInstanceGroupAccess")
+    
+    
+    return
+}
+
+func NewOpenClusterReadOnlyInstanceGroupAccessResponse() (response *OpenClusterReadOnlyInstanceGroupAccessResponse) {
+    response = &OpenClusterReadOnlyInstanceGroupAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// OpenClusterReadOnlyInstanceGroupAccess
+// This API is used to enable the access to read-only instance group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) OpenClusterReadOnlyInstanceGroupAccess(request *OpenClusterReadOnlyInstanceGroupAccessRequest) (response *OpenClusterReadOnlyInstanceGroupAccessResponse, err error) {
+    return c.OpenClusterReadOnlyInstanceGroupAccessWithContext(context.Background(), request)
+}
+
+// OpenClusterReadOnlyInstanceGroupAccess
+// This API is used to enable the access to read-only instance group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) OpenClusterReadOnlyInstanceGroupAccessWithContext(ctx context.Context, request *OpenClusterReadOnlyInstanceGroupAccessRequest) (response *OpenClusterReadOnlyInstanceGroupAccessResponse, err error) {
+    if request == nil {
+        request = NewOpenClusterReadOnlyInstanceGroupAccessRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenClusterReadOnlyInstanceGroupAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenClusterReadOnlyInstanceGroupAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenReadOnlyInstanceExclusiveAccessRequest() (request *OpenReadOnlyInstanceExclusiveAccessRequest) {
     request = &OpenReadOnlyInstanceExclusiveAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5645,6 +6261,58 @@ func (c *Client) RefundResourcePackageWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewRefundResourcePackageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReloadBalanceProxyNodeRequest() (request *ReloadBalanceProxyNodeRequest) {
+    request = &ReloadBalanceProxyNodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "ReloadBalanceProxyNode")
+    
+    
+    return
+}
+
+func NewReloadBalanceProxyNodeResponse() (response *ReloadBalanceProxyNodeResponse) {
+    response = &ReloadBalanceProxyNodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ReloadBalanceProxyNode
+// This API is used to rebalance the load on the database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) ReloadBalanceProxyNode(request *ReloadBalanceProxyNodeRequest) (response *ReloadBalanceProxyNodeResponse, err error) {
+    return c.ReloadBalanceProxyNodeWithContext(context.Background(), request)
+}
+
+// ReloadBalanceProxyNode
+// This API is used to rebalance the load on the database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+func (c *Client) ReloadBalanceProxyNodeWithContext(ctx context.Context, request *ReloadBalanceProxyNodeRequest) (response *ReloadBalanceProxyNodeResponse, err error) {
+    if request == nil {
+        request = NewReloadBalanceProxyNodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReloadBalanceProxyNode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReloadBalanceProxyNodeResponse()
     err = c.Send(request, response)
     return
 }
@@ -6581,6 +7249,114 @@ func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *Upgrad
     request.SetContext(ctx)
     
     response = NewUpgradeInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeProxyRequest() (request *UpgradeProxyRequest) {
+    request = &UpgradeProxyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "UpgradeProxy")
+    
+    
+    return
+}
+
+func NewUpgradeProxyResponse() (response *UpgradeProxyResponse) {
+    response = &UpgradeProxyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeProxy
+// This API is used to upgrade the configuration of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+func (c *Client) UpgradeProxy(request *UpgradeProxyRequest) (response *UpgradeProxyResponse, err error) {
+    return c.UpgradeProxyWithContext(context.Background(), request)
+}
+
+// UpgradeProxy
+// This API is used to upgrade the configuration of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+func (c *Client) UpgradeProxyWithContext(ctx context.Context, request *UpgradeProxyRequest) (response *UpgradeProxyResponse, err error) {
+    if request == nil {
+        request = NewUpgradeProxyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeProxy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeProxyVersionRequest() (request *UpgradeProxyVersionRequest) {
+    request = &UpgradeProxyVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "UpgradeProxyVersion")
+    
+    
+    return
+}
+
+func NewUpgradeProxyVersionResponse() (response *UpgradeProxyVersionResponse) {
+    response = &UpgradeProxyVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeProxyVersion
+// This API is used to upgrade the version of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+func (c *Client) UpgradeProxyVersion(request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
+    return c.UpgradeProxyVersionWithContext(context.Background(), request)
+}
+
+// UpgradeProxyVersion
+// This API is used to upgrade the version of a database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+func (c *Client) UpgradeProxyVersionWithContext(ctx context.Context, request *UpgradeProxyVersionRequest) (response *UpgradeProxyVersionResponse, err error) {
+    if request == nil {
+        request = NewUpgradeProxyVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeProxyVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeProxyVersionResponse()
     err = c.Send(request, response)
     return
 }

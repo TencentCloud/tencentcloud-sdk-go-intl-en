@@ -644,6 +644,80 @@ func (r *CloseClusterPasswordComplexityResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type CloseProxyRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Whether only to disable read/write separation. Valid values: `true`, `false`.
+	OnlyCloseRW *bool `json:"OnlyCloseRW,omitempty" name:"OnlyCloseRW"`
+}
+
+type CloseProxyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Whether only to disable read/write separation. Valid values: `true`, `false`.
+	OnlyCloseRW *bool `json:"OnlyCloseRW,omitempty" name:"OnlyCloseRW"`
+}
+
+func (r *CloseProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ProxyGroupId")
+	delete(f, "OnlyCloseRW")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseProxyResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CloseProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseProxyResponseParams `json:"Response"`
+}
+
+func (r *CloseProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CloseWanRequestParams struct {
 	// Instance group ID
 	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
@@ -727,6 +801,21 @@ type ClusterInstanceDetail struct {
 
 	// Instance role
 	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+
+	// Execution start time in seconds from 0:00	
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MaintainStartTime *int64 `json:"MaintainStartTime,omitempty" name:"MaintainStartTime"`
+
+	// Duration in seconds	
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
+
+	// Execution time. Valid values: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, Sat`, `Sun`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
+
+
+	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
 }
 
 // Predefined struct for user
@@ -1504,10 +1593,10 @@ type CreateParamTemplateRequestParams struct {
 	// MySQL version number
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
-	// The description of a template
+	// Template description
 	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
 
-	// (Optional) ID of the template to be copied
+	// ID of the template to be copied
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
 	// Database type. Valid values:  `NORMAL` (default), `SERVERLESS`.
@@ -1526,10 +1615,10 @@ type CreateParamTemplateRequest struct {
 	// MySQL version number
 	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
 
-	// The description of a template
+	// Template description
 	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
 
-	// (Optional) ID of the template to be copied
+	// ID of the template to be copied
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
 	// Database type. Valid values:  `NORMAL` (default), `SERVERLESS`.
@@ -1589,6 +1678,336 @@ func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateProxyEndPointRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// VPC ID, which is the same as that of the cluster by defaultu200d.
+	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+
+	// VPCe subnet ID, which is the same as that of the cluster by default.
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool threshold in seconds
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// VIP information
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Weight mode. 
+	// Valid values: `system` (system-assigned), `custom` (custom).
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Whether to enable failover
+	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Consistency type. Valid values: 
+	// `eventual`, `global`, `session`.
+	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+
+	// Read-write attribute. Valid values: 
+	// `READWRITE`, `READONLY`.
+	RwType *string `json:"RwType,omitempty" name:"RwType"`
+
+	// Consistency timeout period
+	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+
+	// Transaction split
+	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+
+	// Connection mode. Valid values:
+	// `nearby`, `balance`.
+	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+
+	// Instance weight
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+}
+
+type CreateProxyEndPointRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// VPC ID, which is the same as that of the cluster by defaultu200d.
+	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+
+	// VPCe subnet ID, which is the same as that of the cluster by default.
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool threshold in seconds
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// VIP information
+	Vip *string `json:"Vip,omitempty" name:"Vip"`
+
+	// Weight mode. 
+	// Valid values: `system` (system-assigned), `custom` (custom).
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Whether to enable failover
+	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Consistency type. Valid values: 
+	// `eventual`, `global`, `session`.
+	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+
+	// Read-write attribute. Valid values: 
+	// `READWRITE`, `READONLY`.
+	RwType *string `json:"RwType,omitempty" name:"RwType"`
+
+	// Consistency timeout period
+	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+
+	// Transaction split
+	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+
+	// Connection mode. Valid values:
+	// `nearby`, `balance`.
+	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+
+	// Instance weight
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+}
+
+func (r *CreateProxyEndPointRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProxyEndPointRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "UniqueVpcId")
+	delete(f, "UniqueSubnetId")
+	delete(f, "ConnectionPoolType")
+	delete(f, "OpenConnectionPool")
+	delete(f, "ConnectionPoolTimeOut")
+	delete(f, "SecurityGroupIds")
+	delete(f, "Description")
+	delete(f, "Vip")
+	delete(f, "WeightMode")
+	delete(f, "AutoAddRo")
+	delete(f, "FailOver")
+	delete(f, "ConsistencyType")
+	delete(f, "RwType")
+	delete(f, "ConsistencyTimeOut")
+	delete(f, "TransSplit")
+	delete(f, "AccessMode")
+	delete(f, "InstanceWeights")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyEndPointRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProxyEndPointResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateProxyEndPointResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateProxyEndPointResponseParams `json:"Response"`
+}
+
+func (r *CreateProxyEndPointResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProxyEndPointResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProxyRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// VPC ID, which is the same as that of the cluster by defaultu200d.
+	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+
+	// VPC subnet ID, which is the same as that of the cluster by default.
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+
+	// Number of nodes in the proxy group
+	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool threshold in seconds
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Database node information
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+}
+
+type CreateProxyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// VPC ID, which is the same as that of the cluster by defaultu200d.
+	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+
+	// VPC subnet ID, which is the same as that of the cluster by default.
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+
+	// Number of nodes in the proxy group
+	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool threshold in seconds
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Array of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+
+	// Description
+	Description *string `json:"Description,omitempty" name:"Description"`
+
+	// Database node information
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+}
+
+func (r *CreateProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Cpu")
+	delete(f, "Mem")
+	delete(f, "UniqueVpcId")
+	delete(f, "UniqueSubnetId")
+	delete(f, "ProxyCount")
+	delete(f, "ConnectionPoolType")
+	delete(f, "OpenConnectionPool")
+	delete(f, "ConnectionPoolTimeOut")
+	delete(f, "SecurityGroupIds")
+	delete(f, "Description")
+	delete(f, "ProxyZones")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateProxyResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type CreateProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateProxyResponseParams `json:"Response"`
+}
+
+func (r *CreateProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateResourcePackageRequestParams struct {
 	// Instance type
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
@@ -1596,7 +2015,7 @@ type CreateResourcePackageRequestParams struct {
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
 	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
 
-	// Resource pack type. Valid values:  `CCU` (compute resource pack), `DISK` (storage resource pack).
+	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
@@ -1624,7 +2043,7 @@ type CreateResourcePackageRequest struct {
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
 	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
 
-	// Resource pack type. Valid values:  `CCU` (compute resource pack), `DISK` (storage resource pack).
+	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
 	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
 
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
@@ -2426,7 +2845,7 @@ type DbInfo struct {
 	// Database status
 	Status *string `json:"Status,omitempty" name:"Status"`
 
-	// Collation rule
+	// Collation
 	CollateRule *string `json:"CollateRule,omitempty" name:"CollateRule"`
 
 	// Database remarks Note: This field may return null, indicating that no valid values can be obtained.
@@ -2864,6 +3283,9 @@ type DescribeAccountsRequestParams struct {
 
 	// Offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Keywords for fuzzy search (match `AccountName` and `AccountHost` at the same time), which supports regex. The union results will be returned.
+	AccountRegular *string `json:"AccountRegular,omitempty" name:"AccountRegular"`
 }
 
 type DescribeAccountsRequest struct {
@@ -2888,6 +3310,9 @@ type DescribeAccountsRequest struct {
 
 	// Offset
 	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Keywords for fuzzy search (match `AccountName` and `AccountHost` at the same time), which supports regex. The union results will be returned.
+	AccountRegular *string `json:"AccountRegular,omitempty" name:"AccountRegular"`
 }
 
 func (r *DescribeAccountsRequest) ToJsonString() string {
@@ -2908,6 +3333,7 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 	delete(f, "Hosts")
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "AccountRegular")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountsRequest has unknown keys!", "")
 	}
@@ -5043,6 +5469,264 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeProxiesRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of returned results. Default value: `20`. Maximum value: `100`,
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Record offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting field. Valid values:
+	// <li> CREATETIME: Creation time</li>
+	// <li> PERIODENDTIME: Expiration time</li>
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values:
+	// <li> `ASC`: Ascending.</li>
+	// <li> `DESC`: Descending</li>
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	Filters []*QueryParamFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeProxiesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of returned results. Default value: `20`. Maximum value: `100`,
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Record offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting field. Valid values:
+	// <li> CREATETIME: Creation time</li>
+	// <li> PERIODENDTIME: Expiration time</li>
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values:
+	// <li> `ASC`: Ascending.</li>
+	// <li> `DESC`: Descending</li>
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	Filters []*QueryParamFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeProxiesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxiesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxiesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProxiesResponseParams struct {
+	// Number of database proxy groups
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of database proxy groups
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ProxyGroupInfos []*ProxyGroupInfo `json:"ProxyGroupInfos,omitempty" name:"ProxyGroupInfos"`
+
+	// Database proxy node
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitempty" name:"ProxyNodeInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeProxiesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProxiesResponseParams `json:"Response"`
+}
+
+func (r *DescribeProxiesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxiesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProxyNodesRequestParams struct {
+	// Number of returned results. Default value: `20`. Maximum value: `100`,
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Record offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting field. Valid values:
+	// <li> CREATETIME: Creation time</li>
+	// <li> PERIODENDTIME: Expiration time</li>
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values:
+	// <li> `ASC`: Ascending.</li>
+	// <li> `DESC`: Descending</li>
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
+type DescribeProxyNodesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of returned results. Default value: `20`. Maximum value: `100`,
+	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+
+	// Record offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+
+	// Sorting field. Valid values:
+	// <li> CREATETIME: Creation time</li>
+	// <li> PERIODENDTIME: Expiration time</li>
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values:
+	// <li> `ASC`: Ascending.</li>
+	// <li> `DESC`: Descending</li>
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+
+	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+}
+
+func (r *DescribeProxyNodesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxyNodesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxyNodesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProxyNodesResponseParams struct {
+	// Number of the database proxy nodes
+	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+
+	// List of the database proxy nodes
+	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitempty" name:"ProxyNodeInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeProxyNodesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProxyNodesResponseParams `json:"Response"`
+}
+
+func (r *DescribeProxyNodesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxyNodesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProxySpecsRequestParams struct {
+
+}
+
+type DescribeProxySpecsRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeProxySpecsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxySpecsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeProxySpecsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeProxySpecsResponseParams struct {
+	// List of database proxyspecifications
+	ProxySpecs []*ProxySpec `json:"ProxySpecs,omitempty" name:"ProxySpecs"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeProxySpecsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeProxySpecsResponseParams `json:"Response"`
+}
+
+func (r *DescribeProxySpecsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeProxySpecsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeResourcePackageDetailRequestParams struct {
 	// The unique ID of a resource pack
 	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
@@ -5553,6 +6237,75 @@ func (r *DescribeRollbackTimeValidityResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSupportProxyVersionRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+type DescribeSupportProxyVersionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+func (r *DescribeSupportProxyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSupportProxyVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ProxyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSupportProxyVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSupportProxyVersionResponseParams struct {
+	// Collection of supported database proxy versions
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	SupportProxyVersions []*string `json:"SupportProxyVersions,omitempty" name:"SupportProxyVersions"`
+
+	// The current proxy version
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitempty" name:"CurrentProxyVersion"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type DescribeSupportProxyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSupportProxyVersionResponseParams `json:"Response"`
+}
+
+func (r *DescribeSupportProxyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSupportProxyVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeZonesRequestParams struct {
 	// Whether the virtual zone is included.–
 	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitempty" name:"IncludeVirtualZones"`
@@ -5774,6 +6527,12 @@ type ExportInstanceSlowQueriesRequestParams struct {
 
 	// File type. Valid values: csv, original.
 	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// Sorting field. Valid values: u200d`QueryTime`, `LockTime`, `RowsExamined`, and `RowsSent`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `asc`, `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
 type ExportInstanceSlowQueriesRequest struct {
@@ -5805,6 +6564,12 @@ type ExportInstanceSlowQueriesRequest struct {
 
 	// File type. Valid values: csv, original.
 	FileType *string `json:"FileType,omitempty" name:"FileType"`
+
+	// Sorting field. Valid values: u200d`QueryTime`, `LockTime`, `RowsExamined`, and `RowsSent`.
+	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+
+	// Sorting order. Valid values: `asc`, `desc`.
+	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
 }
 
 func (r *ExportInstanceSlowQueriesRequest) ToJsonString() string {
@@ -5828,6 +6593,8 @@ func (r *ExportInstanceSlowQueriesRequest) FromJsonString(s string) error {
 	delete(f, "Host")
 	delete(f, "Database")
 	delete(f, "FileType")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExportInstanceSlowQueriesRequest has unknown keys!", "")
 	}
@@ -7632,10 +8399,10 @@ type ModifyParamTemplateRequestParams struct {
 	// Template ID
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Template Name
+	// Template name
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// The template description
+	// Template description
 	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
 
 	// Parameter list
@@ -7648,10 +8415,10 @@ type ModifyParamTemplateRequest struct {
 	// Template ID
 	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
 
-	// Template Name
+	// Template name
 	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
 
-	// The template description
+	// Template description
 	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
 
 	// Parameter list
@@ -7699,6 +8466,240 @@ func (r *ModifyParamTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProxyDescRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Database proxy description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+type ModifyProxyDescRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Database proxy description
+	Description *string `json:"Description,omitempty" name:"Description"`
+}
+
+func (r *ModifyProxyDescRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProxyDescRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ProxyGroupId")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyProxyDescRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProxyDescResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyProxyDescResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyProxyDescResponseParams `json:"Response"`
+}
+
+func (r *ModifyProxyDescResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProxyDescResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProxyRwSplitRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+
+	// Consistency timeout period
+	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+
+	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Read-Only weight of an instance
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+
+	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
+	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Whether to automatically add read-only instances. Valid values: `true`, `false`
+	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Whether to enable read/write separation
+	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+
+	// Read/Write type. Valid values:
+	// `READWRITE`, `READONLY`.
+	RwType *string `json:"RwType,omitempty" name:"RwType"`
+
+	// Transaction split
+	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+
+	// Connection mode. Valid values:
+	// `nearby`, `balance`.
+	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+
+	// Whether to enable the connection pool. Valid values: 
+	// `yes`, `no`.
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool type. Valid values:
+	// `ConnectionPoolType`, `SessionConnectionPool`.
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Connection u200dpersistence timeout
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+}
+
+type ModifyProxyRwSplitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+
+	// Consistency timeout period
+	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+
+	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Read-Only weight of an instance
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+
+	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
+	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Whether to automatically add read-only instances. Valid values: `true`, `false`
+	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Whether to enable read/write separation
+	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+
+	// Read/Write type. Valid values:
+	// `READWRITE`, `READONLY`.
+	RwType *string `json:"RwType,omitempty" name:"RwType"`
+
+	// Transaction split
+	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+
+	// Connection mode. Valid values:
+	// `nearby`, `balance`.
+	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+
+	// Whether to enable the connection pool. Valid values: 
+	// `yes`, `no`.
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool type. Valid values:
+	// `ConnectionPoolType`, `SessionConnectionPool`.
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+
+	// Connection u200dpersistence timeout
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+}
+
+func (r *ModifyProxyRwSplitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProxyRwSplitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ProxyGroupId")
+	delete(f, "ConsistencyType")
+	delete(f, "ConsistencyTimeOut")
+	delete(f, "WeightMode")
+	delete(f, "InstanceWeights")
+	delete(f, "FailOver")
+	delete(f, "AutoAddRo")
+	delete(f, "OpenRw")
+	delete(f, "RwType")
+	delete(f, "TransSplit")
+	delete(f, "AccessMode")
+	delete(f, "OpenConnectionPool")
+	delete(f, "ConnectionPoolType")
+	delete(f, "ConnectionPoolTimeOut")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyProxyRwSplitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProxyRwSplitResponseParams struct {
+	// Async FlowId
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ModifyProxyRwSplitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyProxyRwSplitResponseParams `json:"Response"`
+}
+
+func (r *ModifyProxyRwSplitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProxyRwSplitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8334,6 +9335,57 @@ func (r *OpenClusterPasswordComplexityResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type OpenClusterReadOnlyInstanceGroupAccessRequestParams struct {
+
+}
+
+type OpenClusterReadOnlyInstanceGroupAccessRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *OpenClusterReadOnlyInstanceGroupAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenClusterReadOnlyInstanceGroupAccessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenClusterReadOnlyInstanceGroupAccessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenClusterReadOnlyInstanceGroupAccessResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type OpenClusterReadOnlyInstanceGroupAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenClusterReadOnlyInstanceGroupAccessResponseParams `json:"Response"`
+}
+
+func (r *OpenClusterReadOnlyInstanceGroupAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenClusterReadOnlyInstanceGroupAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type OpenReadOnlyInstanceExclusiveAccessRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
@@ -8787,7 +9839,7 @@ type PolicyRule struct {
 	// Policy, which can be `ACCEPT` or `DROP`
 	Action *string `json:"Action,omitempty" name:"Action"`
 
-	// Source IP or IP range, such as 192.168.0.0/16
+	// Source IP or source IP range, such as 192.168.0.0/16
 	CidrIp *string `json:"CidrIp,omitempty" name:"CidrIp"`
 
 	// Port
@@ -8809,6 +9861,167 @@ type PolicyRule struct {
 	Desc *string `json:"Desc,omitempty" name:"Desc"`
 }
 
+type ProxyConnectionPoolInfo struct {
+	// Connection persistence timeout in seconds
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Whether the connection pool is enabled
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+
+	// Connection pool type. Valid value: `SessionConnectionPool` (session-level).
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+}
+
+type ProxyGroup struct {
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Number of nodes in the proxy group
+	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitempty" name:"ProxyNodeCount"`
+
+	// Database proxy u200dgroup status
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+
+	// Current proxy version
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitempty" name:"CurrentProxyVersion"`
+
+	// Cluster ID
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// User `AppId`
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Enabling read/write separation for database proxy
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+}
+
+type ProxyGroupInfo struct {
+	// Database proxy group
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ProxyGroup *ProxyGroup `json:"ProxyGroup,omitempty" name:"ProxyGroup"`
+
+	// Read/write separation information of the database proxy u200dgroup
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ProxyGroupRwInfo *ProxyGroupRwInfo `json:"ProxyGroupRwInfo,omitempty" name:"ProxyGroupRwInfo"`
+
+	// Node information of the u200ddatabase proxy
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ProxyNodes []*ProxyNodeInfo `json:"ProxyNodes,omitempty" name:"ProxyNodes"`
+
+	// Connection pool information for the database proxy
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	ConnectionPool *ProxyConnectionPoolInfo `json:"ConnectionPool,omitempty" name:"ConnectionPool"`
+
+	// Network information for database proxy
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	NetAddrInfos []*NetAddr `json:"NetAddrInfos,omitempty" name:"NetAddrInfos"`
+
+	// Task set of the database proxy
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+}
+
+type ProxyGroupRwInfo struct {
+	// Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
+	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+
+	// Consistency timeout period
+	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+
+	// Weight mode. Valid values: `system` (auto-assigned), `custom`.
+	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+
+	// Whether to enable failover
+	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+
+	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+
+	// Instance weight array
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+
+	// Whether to enable read-write node. Valid values: `yes`, `no`.
+	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
+	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+
+	// Read/write attribute. Valid values: `READWRITE`, `READONLY`.
+	RwType *string `json:"RwType,omitempty" name:"RwType"`
+
+	// Transaction split
+	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+
+	// Connection mode. Valid values: `balance`, `nearby`.
+	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+}
+
+type ProxyInstanceWeight struct {
+	// InstanID
+	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+
+	// Instance weight
+	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
+}
+
+type ProxyNodeInfo struct {
+	// Database proxy node ID
+	ProxyNodeId *string `json:"ProxyNodeId,omitempty" name:"ProxyNodeId"`
+
+	// Current node connections, which is not returned by the `DescribeProxyNodes` API.
+	ProxyNodeConnections *int64 `json:"ProxyNodeConnections,omitempty" name:"ProxyNodeConnections"`
+
+	// CPU of the database proxy node
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory of the database proxy node
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Status of the database proxy node
+	Status *string `json:"Status,omitempty" name:"Status"`
+
+	// Database proxy group ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// User AppID
+	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+
+	// Region
+	Region *string `json:"Region,omitempty" name:"Region"`
+
+	// AZ
+	Zone *string `json:"Zone,omitempty" name:"Zone"`
+}
+
+type ProxySpec struct {
+	// Number of database proxy CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Database proxy memory
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+}
+
+type ProxyZone struct {
+	// AZ u200dof the proxy node
+	ProxyNodeZone *string `json:"ProxyNodeZone,omitempty" name:"ProxyNodeZone"`
+
+	// The number of proxy nodes
+	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitempty" name:"ProxyNodeCount"`
+}
+
 type QueryFilter struct {
 	// Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
 	Names []*string `json:"Names,omitempty" name:"Names"`
@@ -8824,6 +10037,17 @@ type QueryFilter struct {
 
 	// Operator
 	Operator *string `json:"Operator,omitempty" name:"Operator"`
+}
+
+type QueryParamFilter struct {
+	// Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
+	Names []*string `json:"Names,omitempty" name:"Names"`
+
+	// Search string
+	Values []*string `json:"Values,omitempty" name:"Values"`
+
+	// Whether to use exact match
+	ExactMatch *bool `json:"ExactMatch,omitempty" name:"ExactMatch"`
 }
 
 // Predefined struct for user
@@ -8880,6 +10104,73 @@ func (r *RefundResourcePackageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RefundResourcePackageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReloadBalanceProxyNodeRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+type ReloadBalanceProxyNodeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+}
+
+func (r *ReloadBalanceProxyNodeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReloadBalanceProxyNodeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ProxyGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReloadBalanceProxyNodeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReloadBalanceProxyNodeResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type ReloadBalanceProxyNodeResponse struct {
+	*tchttp.BaseResponse
+	Response *ReloadBalanceProxyNodeResponseParams `json:"Response"`
+}
+
+func (r *ReloadBalanceProxyNodeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReloadBalanceProxyNodeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10083,6 +11374,203 @@ func (r *UpgradeInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeProxyRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Number of nodes in the proxy group
+	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+	// ID of the database proxy group (disused)
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Load rebalance mode. Valid values: `auto`, `manual`
+	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
+
+	// Upgrade time. Valid values: `no` (upon upgrade completion), `timeWindow` (upgrade during instance maintenance time)
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+
+	// Node information of the atabase proxy
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+}
+
+type UpgradeProxyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Number of CPU cores
+	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+
+	// Memory
+	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+
+	// Number of nodes in the proxy group
+	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+
+	// ID of the database proxy group (disused)
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Load rebalance mode. Valid values: `auto`, `manual`
+	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
+
+	// Upgrade time. Valid values: `no` (upon upgrade completion), `timeWindow` (upgrade during instance maintenance time)
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+
+	// Node information of the atabase proxy
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+}
+
+func (r *UpgradeProxyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeProxyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Cpu")
+	delete(f, "Mem")
+	delete(f, "ProxyCount")
+	delete(f, "ProxyGroupId")
+	delete(f, "ReloadBalance")
+	delete(f, "IsInMaintainPeriod")
+	delete(f, "ProxyZones")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeProxyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeProxyResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpgradeProxyResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeProxyResponseParams `json:"Response"`
+}
+
+func (r *UpgradeProxyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeProxyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeProxyVersionRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Current version of database proxy
+	SrcProxyVersion *string `json:"SrcProxyVersion,omitempty" name:"SrcProxyVersion"`
+
+	// Target version of database proxy
+	DstProxyVersion *string `json:"DstProxyVersion,omitempty" name:"DstProxyVersion"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Upgrade time. Valid values: `no` (upon upgrade completion), `yes` (upgrade during instance maintenance time)
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+}
+
+type UpgradeProxyVersionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+
+	// Current version of database proxy
+	SrcProxyVersion *string `json:"SrcProxyVersion,omitempty" name:"SrcProxyVersion"`
+
+	// Target version of database proxy
+	DstProxyVersion *string `json:"DstProxyVersion,omitempty" name:"DstProxyVersion"`
+
+	// Database proxy u200dgroup ID
+	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+
+	// Upgrade time. Valid values: `no` (upon upgrade completion), `yes` (upgrade during instance maintenance time)
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+}
+
+func (r *UpgradeProxyVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeProxyVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SrcProxyVersion")
+	delete(f, "DstProxyVersion")
+	delete(f, "ProxyGroupId")
+	delete(f, "IsInMaintainPeriod")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeProxyVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeProxyVersionResponseParams struct {
+	// Async flow ID
+	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+
+	// Async task ID
+	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type UpgradeProxyVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeProxyVersionResponseParams `json:"Response"`
+}
+
+func (r *UpgradeProxyVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeProxyVersionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
