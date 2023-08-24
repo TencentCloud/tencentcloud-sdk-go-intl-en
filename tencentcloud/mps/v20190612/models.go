@@ -240,6 +240,10 @@ type AdaptiveDynamicStreamingTaskInput struct {
 
 	// The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
 	SegmentObjectName *string `json:"SegmentObjectName,omitempty" name:"SegmentObjectName"`
+
+	// The subtitle file to add.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitempty" name:"AddOnSubtitles"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -298,6 +302,19 @@ type AdaptiveStreamTemplate struct {
 	// <li>0: no,</li>
 	// <li>1: yes.</li>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitempty" name:"RemoveVideo"`
+}
+
+type AddOnSubtitle struct {
+	// The mode. Valid values:
+	// <li>`subtitle-stream`: Add a subtitle track.</li>
+	// <li>`close-caption-708`: u200dEmbed EA-708 subtitles in SEI frames.</li>
+	// <li>`close-caption-608`: Embed CEA-608 subtitles in SEI frames.</li>
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitempty" name:"Type"`
+
+	// The subtitle file.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Subtitle *MediaInputInfo `json:"Subtitle,omitempty" name:"Subtitle"`
 }
 
 type AiAnalysisResult struct {
@@ -9188,15 +9205,25 @@ type OverrideTranscodeParameter struct {
 	// Audio stream configuration parameter.
 	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitempty" name:"AudioTemplate"`
 
-	// TESHD transcoding parameter.
+	// The TSC transcoding parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitempty" name:"TEHDConfig"`
 
 	// The subtitle settings.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitempty" name:"SubtitleTemplate"`
 
 	// The information of the external audio track to add.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AddonAudioStream []*MediaInputInfo `json:"AddonAudioStream,omitempty" name:"AddonAudioStream"`
+
+	// An extended field for transcoding.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	StdExtInfo *string `json:"StdExtInfo,omitempty" name:"StdExtInfo"`
+
+	// The subtitle file to add.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitempty" name:"AddOnSubtitles"`
 }
 
 // Predefined struct for user
@@ -10570,29 +10597,35 @@ type SnapshotByTimeOffsetTemplate struct {
 
 type SubtitleTemplate struct {
 	// The URL of the subtitles to add to the video.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitempty" name:"Path"`
 
 	// The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	StreamIndex *int64 `json:"StreamIndex,omitempty" name:"StreamIndex"`
 
 	// The font. Valid values:
-	// <li>hei.ttf</li>
-	// <li>song.ttf</li>
-	// <li>simkai.ttf</li>
-	// <li>arial.ttf (for English only)</li>
+	// <li>`hei.ttf`: Heiti.</li>
+	// <li>`song.ttf`: Songti.</li>
+	// <li>`simkai.ttf`: Kaiti.</li>
+	// <li>`arial.ttf`: Arial.</li>
 	// The default is `hei.ttf`.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	FontType *string `json:"FontType,omitempty" name:"FontType"`
 
 	// The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	FontSize *string `json:"FontSize,omitempty" name:"FontSize"`
 
 	// The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	FontColor *string `json:"FontColor,omitempty" name:"FontColor"`
 
 	// The text transparency. Value range: 0-1.
-	// <li>0: Completely transparent</li>
-	// <li>1: Completely opaque</li>
+	// <li>`0`: Fully transparent.</li>
+	// <li>`1`: u200dFully opaque.</li>
 	// Default value: 1.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	FontAlpha *float64 `json:"FontAlpha,omitempty" name:"FontAlpha"`
 }
 
@@ -10677,12 +10710,15 @@ type TEHDConfig struct {
 }
 
 type TEHDConfigForUpdate struct {
-	// TESHD type. Valid values:
-	// <li>TEHD-100: TESHD-100.</li>
+	// The TSC type. Valid values:
+	// <li>`TEHD-100`: TSC-100 (video TSC). </li>
+	// <li>`TEHD-200`: TSC-200 (audio TSC). </li>
 	// If this parameter is left blank, no modification will be made.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitempty" name:"Type"`
 
-	// Maximum bitrate. If this parameter is left empty, no modification will be made.
+	// u200dThe maximum video bitrate. If this parameter is not specified, no modifications will be made.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	MaxVideoBitrate *uint64 `json:"MaxVideoBitrate,omitempty" name:"MaxVideoBitrate"`
 }
 

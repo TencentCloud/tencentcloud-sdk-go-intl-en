@@ -2138,7 +2138,7 @@ type HlsRemuxSettingsInfo struct {
 	// PDT duration in seconds. Value range: (0,3000]. Default value: 600.
 	PdtDuration *uint64 `json:"PdtDuration,omitempty" name:"PdtDuration"`
 
-	// Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`
+	// Audio/Video packaging scheme. Valid values: `SEPARATE`, `MERGE`. Default value is: SEPARATE.
 	Scheme *string `json:"Scheme,omitempty" name:"Scheme"`
 
 	// The segment type. Valid values: `ts` (default), `fmp4`.
@@ -2147,6 +2147,15 @@ type HlsRemuxSettingsInfo struct {
 
 	// The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
 	H265PackageType *string `json:"H265PackageType,omitempty" name:"H265PackageType"`
+
+
+	LowLatency *uint64 `json:"LowLatency,omitempty" name:"LowLatency"`
+
+
+	PartialSegmentDuration *uint64 `json:"PartialSegmentDuration,omitempty" name:"PartialSegmentDuration"`
+
+
+	PartialSegmentPlaySite *uint64 `json:"PartialSegmentPlaySite,omitempty" name:"PartialSegmentPlaySite"`
 }
 
 type InputInfo struct {

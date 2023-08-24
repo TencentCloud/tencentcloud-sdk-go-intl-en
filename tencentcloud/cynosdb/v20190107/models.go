@@ -362,7 +362,7 @@ func (r *AddInstancesResponse) FromJsonString(s string) error {
 }
 
 type Addr struct {
-	// IP
+	// IP address
 	IP *string `json:"IP,omitempty" name:"IP"`
 
 	// Port
@@ -505,7 +505,8 @@ func (r *BindClusterResourcePackagesResponse) FromJsonString(s string) error {
 }
 
 type BindInstanceInfo struct {
-	// The ID of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
+	// ID of the bound cluster
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
 
 	// Region of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
@@ -513,6 +514,10 @@ type BindInstanceInfo struct {
 
 	// Type of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+
+	// ID of the instance in the bound cluster
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ExtendIds []*string `json:"ExtendIds,omitempty" name:"ExtendIds"`
 }
 
 type BinlogItem struct {
@@ -814,7 +819,8 @@ type ClusterInstanceDetail struct {
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
 
-
+	// Serverless instance u200denablement status
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
 }
 
@@ -2383,7 +2389,7 @@ type CynosdbClusterDetail struct {
 	// vport
 	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
 
-	// vport for read/write separation
+	// VIP u200dand vport of the read-only instance in a cluster
 	RoAddr []*Addr `json:"RoAddr,omitempty" name:"RoAddr"`
 
 	// Features supported by the cluster
@@ -5731,7 +5737,7 @@ type DescribeResourcePackageDetailRequestParams struct {
 	// The unique ID of a resource pack
 	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
 
-	// Instance ID
+	// Cluster ID
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
 	// Start time
@@ -5745,6 +5751,9 @@ type DescribeResourcePackageDetailRequestParams struct {
 
 	// Limit
 	Limit *string `json:"Limit,omitempty" name:"Limit"`
+
+	// Instance D
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 type DescribeResourcePackageDetailRequest struct {
@@ -5753,7 +5762,7 @@ type DescribeResourcePackageDetailRequest struct {
 	// The unique ID of a resource pack
 	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
 
-	// Instance ID
+	// Cluster ID
 	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
 
 	// Start time
@@ -5767,6 +5776,9 @@ type DescribeResourcePackageDetailRequest struct {
 
 	// Limit
 	Limit *string `json:"Limit,omitempty" name:"Limit"`
+
+	// Instance D
+	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeResourcePackageDetailRequest) ToJsonString() string {
@@ -5787,6 +5799,7 @@ func (r *DescribeResourcePackageDetailRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "InstanceIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResourcePackageDetailRequest has unknown keys!", "")
 	}
@@ -6865,6 +6878,18 @@ type InstanceInitInfo struct {
 
 	// Number of the instances. Value range: 1-15.
 	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+
+	// Minimum number of serverless instances. Value range: 1-15.
+	MinRoCount *int64 `json:"MinRoCount,omitempty" name:"MinRoCount"`
+
+	// Maximum number of serverless instances. Value range: 1-15.
+	MaxRoCount *int64 `json:"MaxRoCount,omitempty" name:"MaxRoCount"`
+
+	// Minimum specifications for serverless instance
+	MinRoCpu *float64 `json:"MinRoCpu,omitempty" name:"MinRoCpu"`
+
+	// Maximum specifications for serverless instance
+	MaxRoCpu *float64 `json:"MaxRoCpu,omitempty" name:"MaxRoCpu"`
 }
 
 type InstanceNetInfo struct {
