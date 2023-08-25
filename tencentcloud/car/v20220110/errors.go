@@ -23,6 +23,9 @@ const (
 	// Concurrency quota not requested or request timed out.
 	FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
 
+	// Failed to find the path.
+	FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
+
 	// Processing timed out.
 	FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
 
@@ -32,11 +35,17 @@ const (
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
+	// Parameter error.
+	INVALIDPARAMETER = "InvalidParameter"
+
 	// JSON parsing error.
 	INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
 
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// The number of roles in a **multi-person interaction** scenario exceeds the limit.
+	LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
 
 	// Operation denied.
 	OPERATIONDENIED = "OperationDenied"

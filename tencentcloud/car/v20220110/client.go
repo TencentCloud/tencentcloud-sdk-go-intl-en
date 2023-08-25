@@ -64,7 +64,7 @@ func NewApplyConcurrentResponse() (response *ApplyConcurrentResponse) {
 }
 
 // ApplyConcurrent
-// This API is used to request concurrency quota.
+// This API is used to request a concurrency. The timeout period of the API is 20 seconds.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -80,7 +80,7 @@ func (c *Client) ApplyConcurrent(request *ApplyConcurrentRequest) (response *App
 }
 
 // ApplyConcurrent
-// This API is used to request concurrency quota.
+// This API is used to request a concurrency. The timeout period of the API is 20 seconds.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -126,16 +126,18 @@ func NewCreateSessionResponse() (response *CreateSessionResponse) {
 }
 
 // CreateSession
-// This API is used to create a session.
+// This API is used to create a session. The timeout period of the API is 5 seconds.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
+//  FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
 //  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
 //  FAILEDOPERATION_SLOWDOWN = "FailedOperation.SlowDown"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
 //  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
@@ -146,16 +148,18 @@ func (c *Client) CreateSession(request *CreateSessionRequest) (response *CreateS
 }
 
 // CreateSession
-// This API is used to create a session.
+// This API is used to create a session. The timeout period of the API is 5 seconds.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
+//  FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
 //  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
 //  FAILEDOPERATION_SLOWDOWN = "FailedOperation.SlowDown"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
 //  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
@@ -229,6 +233,122 @@ func (c *Client) DestroySessionWithContext(ctx context.Context, request *Destroy
     request.SetContext(ctx)
     
     response = NewDestroySessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartPublishStreamRequest() (request *StartPublishStreamRequest) {
+    request = &StartPublishStreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "StartPublishStream")
+    
+    
+    return
+}
+
+func NewStartPublishStreamResponse() (response *StartPublishStreamResponse) {
+    response = &StartPublishStreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StartPublishStream
+// This API is used to start stream push.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+func (c *Client) StartPublishStream(request *StartPublishStreamRequest) (response *StartPublishStreamResponse, err error) {
+    return c.StartPublishStreamWithContext(context.Background(), request)
+}
+
+// StartPublishStream
+// This API is used to start stream push.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+func (c *Client) StartPublishStreamWithContext(ctx context.Context, request *StartPublishStreamRequest) (response *StartPublishStreamResponse, err error) {
+    if request == nil {
+        request = NewStartPublishStreamRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartPublishStream require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartPublishStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopPublishStreamRequest() (request *StopPublishStreamRequest) {
+    request = &StopPublishStreamRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "StopPublishStream")
+    
+    
+    return
+}
+
+func NewStopPublishStreamResponse() (response *StopPublishStreamResponse) {
+    response = &StopPublishStreamResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// StopPublishStream
+// This API is used to stop stream push.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+func (c *Client) StopPublishStream(request *StopPublishStreamRequest) (response *StopPublishStreamResponse, err error) {
+    return c.StopPublishStreamWithContext(context.Background(), request)
+}
+
+// StopPublishStream
+// This API is used to stop stream push.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+func (c *Client) StopPublishStreamWithContext(ctx context.Context, request *StopPublishStreamRequest) (response *StopPublishStreamResponse, err error) {
+    if request == nil {
+        request = NewStopPublishStreamRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopPublishStream require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopPublishStreamResponse()
     err = c.Send(request, response)
     return
 }

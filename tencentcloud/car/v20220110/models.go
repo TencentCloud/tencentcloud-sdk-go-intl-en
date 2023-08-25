@@ -120,7 +120,11 @@ type CreateSessionRequestParams struct {
 
 	// Application startup parameter.
 	// If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
+	//  
 	// If the user requests a prelaunch-enabled single-application project, this parameter is invalid.
+	// 
+	// Note: When this parameter takes effect, the `ApplicationParameters` parameter will be appended to the end of the application startup parameter. The application startup parameter is set in the application or project configuration in the console.
+	// For example, for a prelaunch-disabled single-application project, if its application startup parameter `bar` is `0` and the `ApplicationParameters` parameter `foo` is `1`, the actual application startup parameters will be `bar=0 foo=1`.
 	ApplicationParameters *string `json:"ApplicationParameters,omitempty" name:"ApplicationParameters"`
 
 	// The user ID of the host in **multi-person interaction** scenarios, which is required.
@@ -152,7 +156,11 @@ type CreateSessionRequest struct {
 
 	// Application startup parameter.
 	// If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
+	//  
 	// If the user requests a prelaunch-enabled single-application project, this parameter is invalid.
+	// 
+	// Note: When this parameter takes effect, the `ApplicationParameters` parameter will be appended to the end of the application startup parameter. The application startup parameter is set in the application or project configuration in the console.
+	// For example, for a prelaunch-disabled single-application project, if its application startup parameter `bar` is `0` and the `ApplicationParameters` parameter `foo` is `1`, the actual application startup parameters will be `bar=0 foo=1`.
 	ApplicationParameters *string `json:"ApplicationParameters,omitempty" name:"ApplicationParameters"`
 
 	// The user ID of the host in **multi-person interaction** scenarios, which is required.
@@ -266,5 +274,120 @@ func (r *DestroySessionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DestroySessionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartPublishStreamRequestParams struct {
+	// Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Push parameter, which is a custom parameter carried during stream pushing.
+	PublishStreamArgs *string `json:"PublishStreamArgs,omitempty" name:"PublishStreamArgs"`
+}
+
+type StartPublishStreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+
+	// Push parameter, which is a custom parameter carried during stream pushing.
+	PublishStreamArgs *string `json:"PublishStreamArgs,omitempty" name:"PublishStreamArgs"`
+}
+
+func (r *StartPublishStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartPublishStreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserId")
+	delete(f, "PublishStreamArgs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartPublishStreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartPublishStreamResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StartPublishStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *StartPublishStreamResponseParams `json:"Response"`
+}
+
+func (r *StartPublishStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartPublishStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopPublishStreamRequestParams struct {
+	// Unique user ID, which is customized by you and is not understood by CAR. It can also be randomly generated using the timestamp and should be kept unchanged during user reconnection.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+}
+
+type StopPublishStreamRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique user ID, which is customized by you and is not understood by CAR. It can also be randomly generated using the timestamp and should be kept unchanged during user reconnection.
+	UserId *string `json:"UserId,omitempty" name:"UserId"`
+}
+
+func (r *StopPublishStreamRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopPublishStreamRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopPublishStreamRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopPublishStreamResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+}
+
+type StopPublishStreamResponse struct {
+	*tchttp.BaseResponse
+	Response *StopPublishStreamResponseParams `json:"Response"`
+}
+
+func (r *StopPublishStreamResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopPublishStreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
