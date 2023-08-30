@@ -2139,6 +2139,7 @@ func NewDeleteAIRecognitionTemplateResponse() (response *DeleteAIRecognitionTemp
 // This API is used to delete a custom video content recognition template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
@@ -2152,6 +2153,7 @@ func (c *Client) DeleteAIRecognitionTemplate(request *DeleteAIRecognitionTemplat
 // This API is used to delete a custom video content recognition template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
@@ -2417,6 +2419,7 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
 // This API is used to delete a custom audio/video moderation template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
@@ -2432,6 +2435,7 @@ func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplat
 // This API is used to delete a custom audio/video moderation template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
@@ -2535,6 +2539,7 @@ func NewDeleteImageSpriteTemplateResponse() (response *DeleteImageSpriteTemplate
 // This API is used to delete an image sprite generating template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2546,6 +2551,7 @@ func (c *Client) DeleteImageSpriteTemplate(request *DeleteImageSpriteTemplateReq
 // This API is used to delete an image sprite generating template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2933,6 +2939,7 @@ func NewDeleteSampleSnapshotTemplateResponse() (response *DeleteSampleSnapshotTe
 // This API is used to delete a custom sampled screencapturing template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -2944,6 +2951,7 @@ func (c *Client) DeleteSampleSnapshotTemplate(request *DeleteSampleSnapshotTempl
 // This API is used to delete a custom sampled screencapturing template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -5891,6 +5899,110 @@ func (c *Client) DescribeWordSamplesWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeWordSamplesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEditMediaRequest() (request *EditMediaRequest) {
+    request = &EditMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "EditMedia")
+    
+    
+    return
+}
+
+func NewEditMediaResponse() (response *EditMediaResponse) {
+    response = &EditMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// EditMedia
+// This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
+//
+// 
+//
+// 1. Clipping a file in VOD to generate a new video;
+//
+// 2. Splicing multiple files in VOD to generate a new video;
+//
+// 3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
+//
+// 4. Directly generating a new video from a stream in VOD;
+//
+// 5. Clipping a stream in VOD to generate a new video;
+//
+// 6. Splicing multiple streams in VOD to generate a new video;
+//
+// 7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
+//
+// 
+//
+// You can also specify whether to perform a task flow for the generated new video.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaResponse, err error) {
+    return c.EditMediaWithContext(context.Background(), request)
+}
+
+// EditMedia
+// This API is used to edit a video (by clipping, splicing, etc.) to generate a new VOD video. Editing features include:
+//
+// 
+//
+// 1. Clipping a file in VOD to generate a new video;
+//
+// 2. Splicing multiple files in VOD to generate a new video;
+//
+// 3. Clipping multiple files in VOD and then splicing the clips to generate a new video;
+//
+// 4. Directly generating a new video from a stream in VOD;
+//
+// 5. Clipping a stream in VOD to generate a new video;
+//
+// 6. Splicing multiple streams in VOD to generate a new video;
+//
+// 7. Clipping multiple streams in VOD and then splicing the clips to generate a new video.
+//
+// 
+//
+// You can also specify whether to perform a task flow for the generated new video.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaRequest) (response *EditMediaResponse, err error) {
+    if request == nil {
+        request = NewEditMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EditMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEditMediaResponse()
     err = c.Send(request, response)
     return
 }
