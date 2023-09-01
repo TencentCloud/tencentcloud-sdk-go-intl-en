@@ -3878,7 +3878,9 @@ func (r *DeleteRecordTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAllStreamPlayInfoListRequestParams struct {
-	// The time point to query in the format of “yyyy-mm-dd HH:MM:00”(accurate to the minute). You can query data from the last month. Because there is a five-minute delay in the data, if you want to get the latest data, we recommend you pass in a time point five minutes earlier than the current time.
+	// The query time of the request, supports data query for the last one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
 
 	// The playback domains to query. If you leave this empty, all playback domains will be queried.
@@ -3888,7 +3890,9 @@ type DescribeAllStreamPlayInfoListRequestParams struct {
 type DescribeAllStreamPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// The time point to query in the format of “yyyy-mm-dd HH:MM:00”(accurate to the minute). You can query data from the last month. Because there is a five-minute delay in the data, if you want to get the latest data, we recommend you pass in a time point five minutes earlier than the current time.
+	// The query time of the request, supports data query for the last one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
 
 	// The playback domains to query. If you leave this empty, all playback domains will be queried.
@@ -3917,7 +3921,7 @@ func (r *DescribeAllStreamPlayInfoListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAllStreamPlayInfoListResponseParams struct {
-	// The time point queried, whose value is the same as that of the corresponding request parameter.
+	// The time point queried, whose format is the same as that of the corresponding request parameter.
 	QueryTime *string `json:"QueryTime,omitempty" name:"QueryTime"`
 
 	// The playback data.
@@ -3945,10 +3949,14 @@ func (r *DescribeAllStreamPlayInfoListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillBandwidthAndFluxListRequestParams struct {
-	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
+	// The end time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If this parameter is left empty, full data will be queried.
@@ -3987,10 +3995,14 @@ type DescribeBillBandwidthAndFluxListRequestParams struct {
 type DescribeBillBandwidthAndFluxListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 3 years can be queried.
+	// The end time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If this parameter is left empty, full data will be queried.
@@ -4097,12 +4109,14 @@ type DescribeConcurrentRecordStreamNumRequestParams struct {
 	// NormalLive: LVB.
 	LiveType *string `json:"LiveType,omitempty" name:"LiveType"`
 
-	// Start time in the format of `yyyy-mm-dd HH:MM:SS`.
-	// Data for the last 180 days can be queried.
+	// The start time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time in the format of `yyyy-mm-dd HH:MM:SS`.
-	// The maximum time span supported is 31 days.
+	// The end time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
@@ -4119,12 +4133,14 @@ type DescribeConcurrentRecordStreamNumRequest struct {
 	// NormalLive: LVB.
 	LiveType *string `json:"LiveType,omitempty" name:"LiveType"`
 
-	// Start time in the format of `yyyy-mm-dd HH:MM:SS`.
-	// Data for the last 180 days can be queried.
+	// The start time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time in the format of `yyyy-mm-dd HH:MM:SS`.
-	// The maximum time span supported is 31 days.
+	// The end time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
@@ -4184,20 +4200,28 @@ func (r *DescribeConcurrentRecordStreamNumResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeDeliverBandwidthListRequestParams struct {
-	// Start time in the format of "%Y-%m-%d %H:%M:%S".
+	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time in the format of "%Y-%m-%d %H:%M:%S". Data in the last 3 months can be queried, and the query period is up to 1 month.
+	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
 type DescribeDeliverBandwidthListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time in the format of "%Y-%m-%d %H:%M:%S".
+	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time in the format of "%Y-%m-%d %H:%M:%S". Data in the last 3 months can be queried, and the query period is up to 1 month.
+	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 }
 
@@ -4248,11 +4272,14 @@ func (r *DescribeDeliverBandwidthListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeGroupProIspPlayInfoListRequestParams struct {
-	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of `yyyy-mm-dd HH:MM:SS`
-	// The time span is (0,3 hours]. Data for the last month can be queried.
+	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried.
@@ -4271,11 +4298,14 @@ type DescribeGroupProIspPlayInfoListRequestParams struct {
 type DescribeGroupProIspPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time point in the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of `yyyy-mm-dd HH:MM:SS`
-	// The time span is (0,3 hours]. Data for the last month can be queried.
+	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried.
@@ -4342,13 +4372,14 @@ func (r *DescribeGroupProIspPlayInfoListResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeHttpStatusInfoListRequestParams struct {
-	// Start time (Beijing time).
-	// Format: yyyy-mm-dd HH:MM:SS.
+	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time).
-	// Format: yyyy-mm-dd HH:MM:SS.
-	// Note: data in the last 3 months can be queried and the query period is up to 1 day.
+	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list.
@@ -4358,13 +4389,14 @@ type DescribeHttpStatusInfoListRequestParams struct {
 type DescribeHttpStatusInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time (Beijing time).
-	// Format: yyyy-mm-dd HH:MM:SS.
+	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time).
-	// Format: yyyy-mm-dd HH:MM:SS.
-	// Note: data in the last 3 months can be queried and the query period is up to 1 day.
+	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list.
@@ -6540,7 +6572,7 @@ type DescribeLiveTranscodeDetailInfoRequestParams struct {
 
 	// Query date (UTC+8)
 	// Format: yyyymmdd
-	// Note: you can query the statistics for a day in the past month, with yesterday as the latest date allowed.
+	// Note: you can query the statistics for a day in the past three months, with yesterday as the latest date allowed.
 	DayTime *string `json:"DayTime,omitempty" name:"DayTime"`
 
 	// Number of pages. Default value: 1.
@@ -6551,14 +6583,14 @@ type DescribeLiveTranscodeDetailInfoRequestParams struct {
 	// Value range: [10,1000].
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
-	// Start day time (Beijing time),
-	// In the format of `yyyymmdd`.
-	// Note: details for the last month can be queried.
+	// Start date (UTC+8)
+	// Format: yyyymmdd
+	// Note: details for the last three months can be queried.
 	StartDayTime *string `json:"StartDayTime,omitempty" name:"StartDayTime"`
 
 	// End date (UTC+8)
 	// Format: yyyymmdd
-	// Note: you can query the statistics for a period in the past month, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
+	// Note: you can query the statistics for a period in the past three months, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
 	EndDayTime *string `json:"EndDayTime,omitempty" name:"EndDayTime"`
 }
 
@@ -6573,7 +6605,7 @@ type DescribeLiveTranscodeDetailInfoRequest struct {
 
 	// Query date (UTC+8)
 	// Format: yyyymmdd
-	// Note: you can query the statistics for a day in the past month, with yesterday as the latest date allowed.
+	// Note: you can query the statistics for a day in the past three months, with yesterday as the latest date allowed.
 	DayTime *string `json:"DayTime,omitempty" name:"DayTime"`
 
 	// Number of pages. Default value: 1.
@@ -6584,14 +6616,14 @@ type DescribeLiveTranscodeDetailInfoRequest struct {
 	// Value range: [10,1000].
 	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
 
-	// Start day time (Beijing time),
-	// In the format of `yyyymmdd`.
-	// Note: details for the last month can be queried.
+	// Start date (UTC+8)
+	// Format: yyyymmdd
+	// Note: details for the last three months can be queried.
 	StartDayTime *string `json:"StartDayTime,omitempty" name:"StartDayTime"`
 
 	// End date (UTC+8)
 	// Format: yyyymmdd
-	// Note: you can query the statistics for a period in the past month, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
+	// Note: you can query the statistics for a period in the past three months, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
 	EndDayTime *string `json:"EndDayTime,omitempty" name:"EndDayTime"`
 }
 
@@ -6836,12 +6868,14 @@ func (r *DescribeLiveTranscodeTemplatesResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeLiveTranscodeTotalInfoRequestParams struct {
-	// Start time (Beijing time)
-	// Format: yyyy-mm-dd HH:MM:SS
+	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time)
-	// Format: yyyy-mm-dd HH:MM:SS
+	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// List of push domains to query. If this parameter is left empty, the data of all domains is queried.
@@ -6858,12 +6892,14 @@ type DescribeLiveTranscodeTotalInfoRequestParams struct {
 type DescribeLiveTranscodeTotalInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time (Beijing time)
-	// Format: yyyy-mm-dd HH:MM:SS
+	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time)
-	// Format: yyyy-mm-dd HH:MM:SS
+	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// List of push domains to query. If this parameter is left empty, the data of all domains is queried.
@@ -7095,13 +7131,14 @@ func (r *DescribeLiveWatermarksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePlayErrorCodeDetailInfoListRequestParams struct {
-	// Start time (Beijing time),
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time),
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Query granularity:
@@ -7121,13 +7158,14 @@ type DescribePlayErrorCodeDetailInfoListRequestParams struct {
 type DescribePlayErrorCodeDetailInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time (Beijing time),
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time (Beijing time),
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Query granularity:
@@ -7198,13 +7236,14 @@ func (r *DescribePlayErrorCodeDetailInfoListResponse) FromJsonString(s string) e
 
 // Predefined struct for user
 type DescribePlayErrorCodeSumInfoListRequestParams struct {
-	// Start point in time (Beijing time).
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End point in time (Beijing time).
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
@@ -7229,13 +7268,14 @@ type DescribePlayErrorCodeSumInfoListRequestParams struct {
 type DescribePlayErrorCodeSumInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start point in time (Beijing time).
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End point in time (Beijing time).
-	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
@@ -7340,13 +7380,14 @@ func (r *DescribePlayErrorCodeSumInfoListResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeProvinceIspPlayInfoListRequestParams struct {
-	// Start point in time (Beijing time).
-	// Example: 2019-02-21 10:00:00.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End point in time (Beijing time).
-	// Example: 2019-02-21 12:00:00.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Supported granularities:
@@ -7382,13 +7423,14 @@ type DescribeProvinceIspPlayInfoListRequestParams struct {
 type DescribeProvinceIspPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start point in time (Beijing time).
-	// Example: 2019-02-21 10:00:00.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End point in time (Beijing time).
-	// Example: 2019-02-21 12:00:00.
-	// Note: `EndTime` and `StartTime` only support querying data for the last day.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Supported granularities:
@@ -7770,12 +7812,12 @@ func (r *DescribeStreamDayPlayInfoListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStreamPlayInfoListRequestParams struct {
-	// The start time of the query,supports data query for the last ont months,the gap between the start time and the end time cannot exceed twenty-four hours. Interface query supports two time formats:
-	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The end time of the query,supports data query for the last ont months,the gap between the start time and the end time cannot exceed twenty-four hours. Interface query supports two time formats:
+	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
@@ -7800,12 +7842,12 @@ type DescribeStreamPlayInfoListRequestParams struct {
 type DescribeStreamPlayInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// The start time of the query,supports data query for the last ont months,the gap between the start time and the end time cannot exceed twenty-four hours. Interface query supports two time formats:
-	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The end time of the query,supports data query for the last ont months,the gap between the start time and the end time cannot exceed twenty-four hours. Interface query supports two time formats:
+	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
@@ -8168,11 +8210,14 @@ func (r *DescribeTimeShiftStreamListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopClientIpSumInfoListRequestParams struct {
-	// Start point in time in the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End point in time in the format of `yyyy-mm-dd HH:MM:SS`
-	// The time span is [0,4 hours]. Data for the last day can be queried.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
@@ -8197,11 +8242,14 @@ type DescribeTopClientIpSumInfoListRequestParams struct {
 type DescribeTopClientIpSumInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start point in time in the format of `yyyy-mm-dd HH:MM:SS`.
+	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End point in time in the format of `yyyy-mm-dd HH:MM:SS`
-	// The time span is [0,4 hours]. Data for the last day can be queried.
+	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
@@ -8291,10 +8339,14 @@ func (r *DescribeTopClientIpSumInfoListResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeTranscodeTaskNumRequestParams struct {
-	// The start time in the format of yyyy-mm-dd HH:MM:SS.
+	// The start time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The end time in the format of yyyy-mm-dd HH:MM:SS.
+	// The end time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// The push domains to query. If you do not pass a value, all push domains will be queried.
@@ -8304,10 +8356,14 @@ type DescribeTranscodeTaskNumRequestParams struct {
 type DescribeTranscodeTaskNumRequest struct {
 	*tchttp.BaseRequest
 	
-	// The start time in the format of yyyy-mm-dd HH:MM:SS.
+	// The start time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// The end time in the format of yyyy-mm-dd HH:MM:SS.
+	// The end time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// The push domains to query. If you do not pass a value, all push domains will be queried.
@@ -8362,10 +8418,14 @@ func (r *DescribeTranscodeTaskNumResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUploadStreamNumsRequestParams struct {
-	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 31 days can be queried.
+	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB domain names. If this parameter is left empty, data of all domain names will be queried.
@@ -8381,10 +8441,14 @@ type DescribeUploadStreamNumsRequestParams struct {
 type DescribeUploadStreamNumsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time point in the format of yyyy-mm-dd HH:MM:SS.
+	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
 
-	// End time point in the format of yyyy-mm-dd HH:MM:SS. The difference between the start time and end time cannot be greater than 31 days. Data in the last 31 days can be queried.
+	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
+	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
 	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
 
 	// LVB domain names. If this parameter is left empty, data of all domain names will be queried.

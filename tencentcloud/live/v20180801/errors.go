@@ -380,6 +380,9 @@ const (
 	// Invalid background length and width.
 	INVALIDPARAMETER_INVALIDBACKGROUDRESOLUTION = "InvalidParameter.InvalidBackgroudResolution"
 
+	// 
+	INVALIDPARAMETER_INVALIDBACKUPTOURL = "InvalidParameter.InvalidBackupToUrl"
+
 	// Invalid output bitrate.
 	INVALIDPARAMETER_INVALIDBITRATE = "InvalidParameter.InvalidBitrate"
 
