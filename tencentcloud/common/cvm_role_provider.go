@@ -1,9 +1,9 @@
 package common
 
 import (
-	"encoding/json"
 	"errors"
 	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 	"io/ioutil"
 	"net/http"
 	"time"
