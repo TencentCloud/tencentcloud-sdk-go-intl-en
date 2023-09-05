@@ -15,74 +15,74 @@
 package v20190823
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type Subtitle struct {
 	// The word in the text that is sent.
-	Text *string `json:"Text,omitempty" name:"Text"`
+	Text *string `json:"Text,omitnil" name:"Text"`
 
 	// The start timestamp of the word in the synthesized audio data, in milliseconds.
-	BeginTime *int64 `json:"BeginTime,omitempty" name:"BeginTime"`
+	BeginTime *int64 `json:"BeginTime,omitnil" name:"BeginTime"`
 
 	// The end timestamp of the word in the synthesized audio data, in milliseconds.
-	EndTime *int64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The start index of the character in the whole sentence, starting from 0.
-	BeginIndex *int64 `json:"BeginIndex,omitempty" name:"BeginIndex"`
+	BeginIndex *int64 `json:"BeginIndex,omitnil" name:"BeginIndex"`
 
 	// The end index of the character in the whole sentence, starting from 0.
-	EndIndex *int64 `json:"EndIndex,omitempty" name:"EndIndex"`
+	EndIndex *int64 `json:"EndIndex,omitnil" name:"EndIndex"`
 
 	// The phonemes of the word.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Phoneme *string `json:"Phoneme,omitempty" name:"Phoneme"`
+	Phoneme *string `json:"Phoneme,omitnil" name:"Phoneme"`
 }
 
 // Predefined struct for user
 type TextToVoiceRequestParams struct {
 	// The source text for synthesizing speech, which is encoded in UTF-8.
 	// It can contain up to 150 Chinese characters (a full-width punctuation as a Chinese character) or 500 letters ( a half-width punctuation as a letter).
-	Text *string `json:"Text,omitempty" name:"Text"`
+	Text *string `json:"Text,omitnil" name:"Text"`
 
 	// The `SessionId` of a request, which will be returned as-is. We recommend that you pass characters like uuid to prevent repetition.
-	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// Volume range: [0, 10], corresponding to 11 volume levels. 0 is the default value, indicating the normal volume. There is no mute option.
-	Volume *float64 `json:"Volume,omitempty" name:"Volume"`
+	Volume *float64 `json:"Volume,omitnil" name:"Volume"`
 
 	// Speed range: [-2, 6], corresponding to different speeds<li>-2 for 0.6 times</li><li>-1 for 0.8 times</li><li>0 for 1.0 time (default)</li><li>1 for 1.2 times</li><li>2 for 1.5 times</li><li>6 for 2.5 times</li>To set finer-grained speed levels, keep one decimal place, such as 0.5, 1.1, and 1.8.<br>
-	Speed *float64 `json:"Speed,omitempty" name:"Speed"`
+	Speed *float64 `json:"Speed,omitnil" name:"Speed"`
 
 	// Project ID, which defaults to 0 and can be customized.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Model type, with `1` for the default model.
-	ModelType *int64 `json:"ModelType,omitempty" name:"ModelType"`
+	ModelType *int64 `json:"ModelType,omitnil" name:"ModelType"`
 
 	// Standard voices <li>10510000-zhixiaoyao (Chinese)</li><li>1001-zhiyu (Chinese)</li><li>1002-zhiling (Chinese)</li><li>1003-zhimei (Chinese)</li><li>1004-zhiyun (Chinese)</li><li>1005-zhili (Chinese)</li><li>1007-zhina (Chinese)</li><li>1008-zhiqi (Chinese)</li><li>1009-zhiyun (Chinese)</li><li>1010-zhihua (Chinese)</li><li>1017-zhirong (Chinese)</li><li>1018-zhijing (Chinese)</li><li>1050-WeJack (English)</li><li>1051-WeRose (English)</li>Premium voices<br>Premium voices have higher fidelity and more natural-sounding quality than standard voices. For price details, see [Purchase Guide](https://www.tencentcloud.com/document/product/1154/47874).<br><li>100510000-zhixiaoyao (Chinese)</li><li>101001-zhiyu (Chinese)</li><li>101002-zhiling (Chinese)</li><li>101003-zhimei (Chinese)</li><li>101004-zhiyun (Chinese)</li><li>101005-zhili (Chinese)</li><li>101006-zhiyan (Chinese)</li><li>101007-zhina (Chinese)</li><li>101008-zhiqi (Chinese)</li><li>101009-zhiyun (Chinese)</li><li>101010-zhihua (Chinese)</li><li>101011-zhiyan (Chinese)</li><li>101012-zhidan (Chinese)</li><li>101013-zhihui (Chinese)</li><li>101014-zhining (Chinese)</li><li>101015-zhimeng (Chinese)</li><li>101016-zhitian (Chinese)</li><li>101017-zhirong (Chinese)</li><li>101018-zhijing (Chinese)</li><li>101019-zhitong (Cantonese)</li><li>101020-zhigang (Chinese)</li><li>101021-zhirui (Chinese)</li><li>101022-zhihong (Chinese)</li><li>101023-zhixuan (Chinese)</li><li>101024-zhihao (Chinese)</li><li>101025-zhiwei (Chinese)</li><li>101026-zhixi (Chinese)</li><li>101027-zhimei (Chinese)</li><li>101028-zhijie (Chinese)</li><li>101029-zhikai (Chinese)</li><li>101030-zhike (Chinese)</li><li>101031-zhikui (Chinese)</li><li>101032-zhifang (Chinese)</li><li>101033-zhibei (Chinese)</li><li>101034-zhilian (Chinese)</li><li>101035-zhiyi (Chinese)</li><li>101040-zhichuan (Sichuan dialect)</li><li>101050-WeJack (English)</li><li>101051-WeRose (English)</li><li>101052-zhiwei (Chinese)</li>
 	// <li>101053-zhifang (Chinese)</li>
 	// <li>101054-zhiyou (Chinese)</li>
 	// <li>101055-zhiyou (Chinese)</li>
 	// <li>101056-zhilin (Northeastern Mandarin)</li>
-	VoiceType *int64 `json:"VoiceType,omitempty" name:"VoiceType"`
+	VoiceType *int64 `json:"VoiceType,omitnil" name:"VoiceType"`
 
 	// Primary language type: <li>1 - Chinese (default)</li><li>2 - English</li>
-	PrimaryLanguage *int64 `json:"PrimaryLanguage,omitempty" name:"PrimaryLanguage"`
+	PrimaryLanguage *int64 `json:"PrimaryLanguage,omitnil" name:"PrimaryLanguage"`
 
 	// Audio sample rate: <li>16000: 16k (default)</li><li>8000: 8k</li>
-	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
+	SampleRate *uint64 `json:"SampleRate,omitnil" name:"SampleRate"`
 
 	// Format of returned audio. Valid values: WAV (default), MP3, and PCM.
-	Codec *string `json:"Codec,omitempty" name:"Codec"`
+	Codec *string `json:"Codec,omitnil" name:"Codec"`
 
 	// Whether to enable the timestamp feature. Default value: `false`.
-	EnableSubtitle *bool `json:"EnableSubtitle,omitempty" name:"EnableSubtitle"`
+	EnableSubtitle *bool `json:"EnableSubtitle,omitnil" name:"EnableSubtitle"`
 
 	// The threshold of speech segmentation sensibility, which can be `0` (default), `1`, or `2`. A larger value indicates fewer segments, and the model tends to only segment sentences based on punctuation marks. We recommend you not change this parameter to avoid adverse effect on speech synthesis.
-	SegmentRate *uint64 `json:"SegmentRate,omitempty" name:"SegmentRate"`
+	SegmentRate *uint64 `json:"SegmentRate,omitnil" name:"SegmentRate"`
 }
 
 type TextToVoiceRequest struct {
@@ -90,44 +90,44 @@ type TextToVoiceRequest struct {
 	
 	// The source text for synthesizing speech, which is encoded in UTF-8.
 	// It can contain up to 150 Chinese characters (a full-width punctuation as a Chinese character) or 500 letters ( a half-width punctuation as a letter).
-	Text *string `json:"Text,omitempty" name:"Text"`
+	Text *string `json:"Text,omitnil" name:"Text"`
 
 	// The `SessionId` of a request, which will be returned as-is. We recommend that you pass characters like uuid to prevent repetition.
-	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// Volume range: [0, 10], corresponding to 11 volume levels. 0 is the default value, indicating the normal volume. There is no mute option.
-	Volume *float64 `json:"Volume,omitempty" name:"Volume"`
+	Volume *float64 `json:"Volume,omitnil" name:"Volume"`
 
 	// Speed range: [-2, 6], corresponding to different speeds<li>-2 for 0.6 times</li><li>-1 for 0.8 times</li><li>0 for 1.0 time (default)</li><li>1 for 1.2 times</li><li>2 for 1.5 times</li><li>6 for 2.5 times</li>To set finer-grained speed levels, keep one decimal place, such as 0.5, 1.1, and 1.8.<br>
-	Speed *float64 `json:"Speed,omitempty" name:"Speed"`
+	Speed *float64 `json:"Speed,omitnil" name:"Speed"`
 
 	// Project ID, which defaults to 0 and can be customized.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Model type, with `1` for the default model.
-	ModelType *int64 `json:"ModelType,omitempty" name:"ModelType"`
+	ModelType *int64 `json:"ModelType,omitnil" name:"ModelType"`
 
 	// Standard voices <li>10510000-zhixiaoyao (Chinese)</li><li>1001-zhiyu (Chinese)</li><li>1002-zhiling (Chinese)</li><li>1003-zhimei (Chinese)</li><li>1004-zhiyun (Chinese)</li><li>1005-zhili (Chinese)</li><li>1007-zhina (Chinese)</li><li>1008-zhiqi (Chinese)</li><li>1009-zhiyun (Chinese)</li><li>1010-zhihua (Chinese)</li><li>1017-zhirong (Chinese)</li><li>1018-zhijing (Chinese)</li><li>1050-WeJack (English)</li><li>1051-WeRose (English)</li>Premium voices<br>Premium voices have higher fidelity and more natural-sounding quality than standard voices. For price details, see [Purchase Guide](https://www.tencentcloud.com/document/product/1154/47874).<br><li>100510000-zhixiaoyao (Chinese)</li><li>101001-zhiyu (Chinese)</li><li>101002-zhiling (Chinese)</li><li>101003-zhimei (Chinese)</li><li>101004-zhiyun (Chinese)</li><li>101005-zhili (Chinese)</li><li>101006-zhiyan (Chinese)</li><li>101007-zhina (Chinese)</li><li>101008-zhiqi (Chinese)</li><li>101009-zhiyun (Chinese)</li><li>101010-zhihua (Chinese)</li><li>101011-zhiyan (Chinese)</li><li>101012-zhidan (Chinese)</li><li>101013-zhihui (Chinese)</li><li>101014-zhining (Chinese)</li><li>101015-zhimeng (Chinese)</li><li>101016-zhitian (Chinese)</li><li>101017-zhirong (Chinese)</li><li>101018-zhijing (Chinese)</li><li>101019-zhitong (Cantonese)</li><li>101020-zhigang (Chinese)</li><li>101021-zhirui (Chinese)</li><li>101022-zhihong (Chinese)</li><li>101023-zhixuan (Chinese)</li><li>101024-zhihao (Chinese)</li><li>101025-zhiwei (Chinese)</li><li>101026-zhixi (Chinese)</li><li>101027-zhimei (Chinese)</li><li>101028-zhijie (Chinese)</li><li>101029-zhikai (Chinese)</li><li>101030-zhike (Chinese)</li><li>101031-zhikui (Chinese)</li><li>101032-zhifang (Chinese)</li><li>101033-zhibei (Chinese)</li><li>101034-zhilian (Chinese)</li><li>101035-zhiyi (Chinese)</li><li>101040-zhichuan (Sichuan dialect)</li><li>101050-WeJack (English)</li><li>101051-WeRose (English)</li><li>101052-zhiwei (Chinese)</li>
 	// <li>101053-zhifang (Chinese)</li>
 	// <li>101054-zhiyou (Chinese)</li>
 	// <li>101055-zhiyou (Chinese)</li>
 	// <li>101056-zhilin (Northeastern Mandarin)</li>
-	VoiceType *int64 `json:"VoiceType,omitempty" name:"VoiceType"`
+	VoiceType *int64 `json:"VoiceType,omitnil" name:"VoiceType"`
 
 	// Primary language type: <li>1 - Chinese (default)</li><li>2 - English</li>
-	PrimaryLanguage *int64 `json:"PrimaryLanguage,omitempty" name:"PrimaryLanguage"`
+	PrimaryLanguage *int64 `json:"PrimaryLanguage,omitnil" name:"PrimaryLanguage"`
 
 	// Audio sample rate: <li>16000: 16k (default)</li><li>8000: 8k</li>
-	SampleRate *uint64 `json:"SampleRate,omitempty" name:"SampleRate"`
+	SampleRate *uint64 `json:"SampleRate,omitnil" name:"SampleRate"`
 
 	// Format of returned audio. Valid values: WAV (default), MP3, and PCM.
-	Codec *string `json:"Codec,omitempty" name:"Codec"`
+	Codec *string `json:"Codec,omitnil" name:"Codec"`
 
 	// Whether to enable the timestamp feature. Default value: `false`.
-	EnableSubtitle *bool `json:"EnableSubtitle,omitempty" name:"EnableSubtitle"`
+	EnableSubtitle *bool `json:"EnableSubtitle,omitnil" name:"EnableSubtitle"`
 
 	// The threshold of speech segmentation sensibility, which can be `0` (default), `1`, or `2`. A larger value indicates fewer segments, and the model tends to only segment sentences based on punctuation marks. We recommend you not change this parameter to avoid adverse effect on speech synthesis.
-	SegmentRate *uint64 `json:"SegmentRate,omitempty" name:"SegmentRate"`
+	SegmentRate *uint64 `json:"SegmentRate,omitnil" name:"SegmentRate"`
 }
 
 func (r *TextToVoiceRequest) ToJsonString() string {
@@ -163,16 +163,16 @@ func (r *TextToVoiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type TextToVoiceResponseParams struct {
 	// Base64-encoded WAV/MP3 audio data
-	Audio *string `json:"Audio,omitempty" name:"Audio"`
+	Audio *string `json:"Audio,omitnil" name:"Audio"`
 
 	// The `SessionId` of a request
-	SessionId *string `json:"SessionId,omitempty" name:"SessionId"`
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// Timestamp information. If the timestamp feature is not enabled, an empty array will be returned.
-	Subtitles []*Subtitle `json:"Subtitles,omitempty" name:"Subtitles"`
+	Subtitles []*Subtitle `json:"Subtitles,omitnil" name:"Subtitles"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type TextToVoiceResponse struct {

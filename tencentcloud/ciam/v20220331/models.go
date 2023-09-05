@@ -15,28 +15,28 @@
 package v20220331
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type CreateApiImportUserJobRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Imported user data
-	DataFlowUserCreateList []*ImportUser `json:"DataFlowUserCreateList,omitempty" name:"DataFlowUserCreateList"`
+	DataFlowUserCreateList []*ImportUser `json:"DataFlowUserCreateList,omitnil" name:"DataFlowUserCreateList"`
 }
 
 type CreateApiImportUserJobRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Imported user data
-	DataFlowUserCreateList []*ImportUser `json:"DataFlowUserCreateList,omitempty" name:"DataFlowUserCreateList"`
+	DataFlowUserCreateList []*ImportUser `json:"DataFlowUserCreateList,omitnil" name:"DataFlowUserCreateList"`
 }
 
 func (r *CreateApiImportUserJobRequest) ToJsonString() string {
@@ -62,10 +62,10 @@ func (r *CreateApiImportUserJobRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateApiImportUserJobResponseParams struct {
 	// Data flow task
-	Job *Job `json:"Job,omitempty" name:"Job"`
+	Job *Job `json:"Job,omitnil" name:"Job"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateApiImportUserJobResponse struct {
@@ -87,44 +87,44 @@ func (r *CreateApiImportUserJobResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateFileExportUserJobRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Exported data type
 	// 
 	// <li> **NDJSON** </li>  New-line Delimited JSON
 	// <li> **CSV** </li>  Comma-Separated Values
-	Format *string `json:"Format,omitempty" name:"Format"`
+	Format *string `json:"Format,omitnil" name:"Format"`
 
 	// Valid values of `Key`: `condition`, `userGroupId`.
 	// 
 	// <li> **condition** </li>	Values = Query condition, which can be user ID, username, mobile number, or email address.
 	// <li> **userGroupId** </li>	Values = User group ID
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Attributes and mapping names included in the exported user information. If this parameter is empty, all attributes will be included.
-	ExportPropertyMaps []*ExportPropertyMap `json:"ExportPropertyMaps,omitempty" name:"ExportPropertyMaps"`
+	ExportPropertyMaps []*ExportPropertyMap `json:"ExportPropertyMaps,omitnil" name:"ExportPropertyMaps"`
 }
 
 type CreateFileExportUserJobRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Exported data type
 	// 
 	// <li> **NDJSON** </li>  New-line Delimited JSON
 	// <li> **CSV** </li>  Comma-Separated Values
-	Format *string `json:"Format,omitempty" name:"Format"`
+	Format *string `json:"Format,omitnil" name:"Format"`
 
 	// Valid values of `Key`: `condition`, `userGroupId`.
 	// 
 	// <li> **condition** </li>	Values = Query condition, which can be user ID, username, mobile number, or email address.
 	// <li> **userGroupId** </li>	Values = User group ID
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Attributes and mapping names included in the exported user information. If this parameter is empty, all attributes will be included.
-	ExportPropertyMaps []*ExportPropertyMap `json:"ExportPropertyMaps,omitempty" name:"ExportPropertyMaps"`
+	ExportPropertyMaps []*ExportPropertyMap `json:"ExportPropertyMaps,omitnil" name:"ExportPropertyMaps"`
 }
 
 func (r *CreateFileExportUserJobRequest) ToJsonString() string {
@@ -152,10 +152,10 @@ func (r *CreateFileExportUserJobRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateFileExportUserJobResponseParams struct {
 	// Data flow task
-	Job *Job `json:"Job,omitempty" name:"Job"`
+	Job *Job `json:"Job,omitnil" name:"Job"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateFileExportUserJobResponse struct {
@@ -177,98 +177,98 @@ func (r *CreateFileExportUserJobResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateUserRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Mobile number
-	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+	PhoneNumber *string `json:"PhoneNumber,omitnil" name:"PhoneNumber"`
 
 	// Email address
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Password
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Nickname
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// User group ID
-	UserGroup []*string `json:"UserGroup,omitempty" name:"UserGroup"`
+	UserGroup []*string `json:"UserGroup,omitnil" name:"UserGroup"`
 
 	// Date of birth
-	Birthdate *int64 `json:"Birthdate,omitempty" name:"Birthdate"`
+	Birthdate *int64 `json:"Birthdate,omitnil" name:"Birthdate"`
 
 	// Custom attribute
-	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitnil" name:"CustomizationAttributes"`
 
 	// Index field 1
-	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitnil" name:"IndexedAttribute1"`
 
 	// Index field 2
-	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitnil" name:"IndexedAttribute2"`
 
 	// Index field 3
-	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitnil" name:"IndexedAttribute3"`
 
 	// Index field 4
-	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitnil" name:"IndexedAttribute4"`
 
 	// Index field 5
-	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitnil" name:"IndexedAttribute5"`
 }
 
 type CreateUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Mobile number
-	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+	PhoneNumber *string `json:"PhoneNumber,omitnil" name:"PhoneNumber"`
 
 	// Email address
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Password
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Nickname
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// User group ID
-	UserGroup []*string `json:"UserGroup,omitempty" name:"UserGroup"`
+	UserGroup []*string `json:"UserGroup,omitnil" name:"UserGroup"`
 
 	// Date of birth
-	Birthdate *int64 `json:"Birthdate,omitempty" name:"Birthdate"`
+	Birthdate *int64 `json:"Birthdate,omitnil" name:"Birthdate"`
 
 	// Custom attribute
-	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitnil" name:"CustomizationAttributes"`
 
 	// Index field 1
-	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitnil" name:"IndexedAttribute1"`
 
 	// Index field 2
-	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitnil" name:"IndexedAttribute2"`
 
 	// Index field 3
-	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitnil" name:"IndexedAttribute3"`
 
 	// Index field 4
-	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitnil" name:"IndexedAttribute4"`
 
 	// Index field 5
-	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitnil" name:"IndexedAttribute5"`
 }
 
 func (r *CreateUserRequest) ToJsonString() string {
@@ -308,10 +308,10 @@ func (r *CreateUserRequest) FromJsonString(s string) error {
 type CreateUserResponseParams struct {
 	// Information of the created user
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	User *User `json:"User,omitempty" name:"User"`
+	User *User `json:"User,omitnil" name:"User"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateUserResponse struct {
@@ -333,20 +333,20 @@ func (r *CreateUserResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUsersRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Array of user IDs
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 }
 
 type DeleteUsersRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Array of user IDs
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 }
 
 func (r *DeleteUsersRequest) ToJsonString() string {
@@ -372,7 +372,7 @@ func (r *DeleteUsersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUsersResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteUsersResponse struct {
@@ -394,32 +394,32 @@ func (r *DeleteUsersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserByIdRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Whether the content is passed through
 	// 
 	// <li> **false** </li>Default. The returned information is desensitized.
 	// <li> **true** </li>Return the original content.
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 }
 
 type DescribeUserByIdRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Whether the content is passed through
 	// 
 	// <li> **false** </li>Default. The returned information is desensitized.
 	// <li> **true** </li>Return the original content.
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 }
 
 func (r *DescribeUserByIdRequest) ToJsonString() string {
@@ -447,10 +447,10 @@ func (r *DescribeUserByIdRequest) FromJsonString(s string) error {
 type DescribeUserByIdResponseParams struct {
 	// User information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	User *User `json:"User,omitempty" name:"User"`
+	User *User `json:"User,omitnil" name:"User"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserByIdResponse struct {
@@ -472,38 +472,38 @@ func (r *DescribeUserByIdResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Pagination data
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// Query condition (`propertycode` and `propertykey`)
-	Filters []*QueryUserFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryUserFilter `json:"Filters,omitnil" name:"Filters"`
 
 	// Whether the plaintext is returned
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 
 	// Sorting configuration
-	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+	Sort *Sort `json:"Sort,omitnil" name:"Sort"`
 }
 
 type DescribeUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Pagination data
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// Query condition (`propertycode` and `propertykey`)
-	Filters []*QueryUserFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryUserFilter `json:"Filters,omitnil" name:"Filters"`
 
 	// Whether the plaintext is returned
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 
 	// Sorting configuration
-	Sort *Sort `json:"Sort,omitempty" name:"Sort"`
+	Sort *Sort `json:"Sort,omitnil" name:"Sort"`
 }
 
 func (r *DescribeUserRequest) ToJsonString() string {
@@ -533,18 +533,18 @@ func (r *DescribeUserRequest) FromJsonString(s string) error {
 type DescribeUserResponseParams struct {
 	// The total number of returned results.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Pagination object
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// User List
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Content []*User `json:"Content,omitempty" name:"Content"`
+	Content []*User `json:"Content,omitnil" name:"Content"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserResponse struct {
@@ -566,139 +566,139 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
 type ErrorDetails struct {
 	// User information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Failure cause
-	Error *string `json:"Error,omitempty" name:"Error"`
+	Error *string `json:"Error,omitnil" name:"Error"`
 }
 
 type ExportPropertyMap struct {
 	// User attribute code
-	UserPropertyCode *string `json:"UserPropertyCode,omitempty" name:"UserPropertyCode"`
+	UserPropertyCode *string `json:"UserPropertyCode,omitnil" name:"UserPropertyCode"`
 
 	// User attribute mapping name
-	ColumnName *string `json:"ColumnName,omitempty" name:"ColumnName"`
+	ColumnName *string `json:"ColumnName,omitnil" name:"ColumnName"`
 }
 
 type FailedUsers struct {
 	// ID of the failed user
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FailedUserIdentification *string `json:"FailedUserIdentification,omitempty" name:"FailedUserIdentification"`
+	FailedUserIdentification *string `json:"FailedUserIdentification,omitnil" name:"FailedUserIdentification"`
 
 	// Failure cause for user import
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FailedReason *string `json:"FailedReason,omitempty" name:"FailedReason"`
+	FailedReason *string `json:"FailedReason,omitnil" name:"FailedReason"`
 }
 
 type Filter struct {
 	// Key value
-	Key *string `json:"Key,omitempty" name:"Key"`
+	Key *string `json:"Key,omitnil" name:"Key"`
 
 	// Value
-	Values []*string `json:"Values,omitempty" name:"Values"`
+	Values []*string `json:"Values,omitnil" name:"Values"`
 
 	// Logical value
-	Logic *bool `json:"Logic,omitempty" name:"Logic"`
+	Logic *bool `json:"Logic,omitnil" name:"Logic"`
 }
 
 type ImportUser struct {
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Mobile number
-	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+	PhoneNumber *string `json:"PhoneNumber,omitnil" name:"PhoneNumber"`
 
 	// Email address
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// ID card number
-	ResidentIdentityCard *string `json:"ResidentIdentityCard,omitempty" name:"ResidentIdentityCard"`
+	ResidentIdentityCard *string `json:"ResidentIdentityCard,omitnil" name:"ResidentIdentityCard"`
 
 	// Nickname
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// User group ID
-	UserGroup []*string `json:"UserGroup,omitempty" name:"UserGroup"`
+	UserGroup []*string `json:"UserGroup,omitnil" name:"UserGroup"`
 
 	// `qqOpenId` on QQ
-	QqOpenId *string `json:"QqOpenId,omitempty" name:"QqOpenId"`
+	QqOpenId *string `json:"QqOpenId,omitnil" name:"QqOpenId"`
 
 	// `qqUnionId` on QQ
-	QqUnionId *string `json:"QqUnionId,omitempty" name:"QqUnionId"`
+	QqUnionId *string `json:"QqUnionId,omitnil" name:"QqUnionId"`
 
 	// `wechatOpenId` on WeChat
-	WechatOpenId *string `json:"WechatOpenId,omitempty" name:"WechatOpenId"`
+	WechatOpenId *string `json:"WechatOpenId,omitnil" name:"WechatOpenId"`
 
 	// `wechatUnionId` on WeChat
-	WechatUnionId *string `json:"WechatUnionId,omitempty" name:"WechatUnionId"`
+	WechatUnionId *string `json:"WechatUnionId,omitnil" name:"WechatUnionId"`
 
 	// `alipayUserId` on Alipay
-	AlipayUserId *string `json:"AlipayUserId,omitempty" name:"AlipayUserId"`
+	AlipayUserId *string `json:"AlipayUserId,omitnil" name:"AlipayUserId"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Date of birth
-	Birthdate *string `json:"Birthdate,omitempty" name:"Birthdate"`
+	Birthdate *string `json:"Birthdate,omitnil" name:"Birthdate"`
 
 	// Name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Coordinate
-	Locale *string `json:"Locale,omitempty" name:"Locale"`
+	Locale *string `json:"Locale,omitnil" name:"Locale"`
 
 	// Gender. Valid values: `MALE`, `FEMALE`, `UNKNOWN`.
-	Gender *string `json:"Gender,omitempty" name:"Gender"`
+	Gender *string `json:"Gender,omitnil" name:"Gender"`
 
 	// Identity verification method
-	IdentityVerificationMethod *string `json:"IdentityVerificationMethod,omitempty" name:"IdentityVerificationMethod"`
+	IdentityVerificationMethod *string `json:"IdentityVerificationMethod,omitnil" name:"IdentityVerificationMethod"`
 
 	// Whether the identity is verified
-	IdentityVerified *bool `json:"IdentityVerified,omitempty" name:"IdentityVerified"`
+	IdentityVerified *bool `json:"IdentityVerified,omitnil" name:"IdentityVerified"`
 
 	// Job
-	Job *string `json:"Job,omitempty" name:"Job"`
+	Job *string `json:"Job,omitnil" name:"Job"`
 
 	// Country/Region
-	Nationality *string `json:"Nationality,omitempty" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
 
 	// Time zone
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Password ciphertext
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Custom attribute
-	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitnil" name:"CustomizationAttributes"`
 
 	// Password salt
-	Salt *Salt `json:"Salt,omitempty" name:"Salt"`
+	Salt *Salt `json:"Salt,omitnil" name:"Salt"`
 
 	// Password encryption method. Valid values: `SHA1`, `BCRYPT`.
-	PasswordEncryptTypeEnum *string `json:"PasswordEncryptTypeEnum,omitempty" name:"PasswordEncryptTypeEnum"`
+	PasswordEncryptTypeEnum *string `json:"PasswordEncryptTypeEnum,omitnil" name:"PasswordEncryptTypeEnum"`
 
 	// Index field 1
-	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitnil" name:"IndexedAttribute1"`
 
 	// Index field 2
-	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitnil" name:"IndexedAttribute2"`
 
 	// Index field 3
-	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitnil" name:"IndexedAttribute3"`
 
 	// Index field 4
-	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitnil" name:"IndexedAttribute4"`
 
 	// Index field 5
-	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitnil" name:"IndexedAttribute5"`
 }
 
 type Job struct {
 	// Task ID
-	Id *string `json:"Id,omitempty" name:"Id"`
+	Id *string `json:"Id,omitnil" name:"Id"`
 
 	// Task status
 	// 
@@ -706,72 +706,72 @@ type Job struct {
 	// <li> **PROCESSING** </li>  Executing
 	// <li> **COMPLETED** </li>  Completed
 	// <li> **FAILED** </li>  Failed
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Task type
 	// 
 	// <li> **IMPORT_USER** </li>  User import
 	// <li> **EXPORT_USER** </li>  User export
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Task creation time
-	CreatedDate *int64 `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *int64 `json:"CreatedDate,omitnil" name:"CreatedDate"`
 
 	// Data type of the task
 	// 
 	// <li> **NDJSON** </li>  New-line Delimited JSON
 	// <li> **CSV** </li>  Comma-Separated Values
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Format *string `json:"Format,omitempty" name:"Format"`
+	Format *string `json:"Format,omitnil" name:"Format"`
 
 	// Task result download address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Location *string `json:"Location,omitempty" name:"Location"`
+	Location *string `json:"Location,omitnil" name:"Location"`
 
 	// Failure details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorDetails []*ErrorDetails `json:"ErrorDetails,omitempty" name:"ErrorDetails"`
+	ErrorDetails []*ErrorDetails `json:"ErrorDetails,omitnil" name:"ErrorDetails"`
 
 	// Failed user
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FailedUsers []*FailedUsers `json:"FailedUsers,omitempty" name:"FailedUsers"`
+	FailedUsers []*FailedUsers `json:"FailedUsers,omitnil" name:"FailedUsers"`
 }
 
 // Predefined struct for user
 type LinkAccountRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Primary user ID
-	PrimaryUserId *string `json:"PrimaryUserId,omitempty" name:"PrimaryUserId"`
+	PrimaryUserId *string `json:"PrimaryUserId,omitnil" name:"PrimaryUserId"`
 
 	// Secondary user ID
-	SecondaryUserId *string `json:"SecondaryUserId,omitempty" name:"SecondaryUserId"`
+	SecondaryUserId *string `json:"SecondaryUserId,omitnil" name:"SecondaryUserId"`
 
 	// Fusion attribute
 	// 
 	// <li> **PHONENUMBER** </li>	  Mobile number
 	// <li> **EMAIL** </li>  Email
-	UserLinkedOnAttribute *string `json:"UserLinkedOnAttribute,omitempty" name:"UserLinkedOnAttribute"`
+	UserLinkedOnAttribute *string `json:"UserLinkedOnAttribute,omitnil" name:"UserLinkedOnAttribute"`
 }
 
 type LinkAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Primary user ID
-	PrimaryUserId *string `json:"PrimaryUserId,omitempty" name:"PrimaryUserId"`
+	PrimaryUserId *string `json:"PrimaryUserId,omitnil" name:"PrimaryUserId"`
 
 	// Secondary user ID
-	SecondaryUserId *string `json:"SecondaryUserId,omitempty" name:"SecondaryUserId"`
+	SecondaryUserId *string `json:"SecondaryUserId,omitnil" name:"SecondaryUserId"`
 
 	// Fusion attribute
 	// 
 	// <li> **PHONENUMBER** </li>	  Mobile number
 	// <li> **EMAIL** </li>  Email
-	UserLinkedOnAttribute *string `json:"UserLinkedOnAttribute,omitempty" name:"UserLinkedOnAttribute"`
+	UserLinkedOnAttribute *string `json:"UserLinkedOnAttribute,omitnil" name:"UserLinkedOnAttribute"`
 }
 
 func (r *LinkAccountRequest) ToJsonString() string {
@@ -799,7 +799,7 @@ func (r *LinkAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type LinkAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type LinkAccountResponse struct {
@@ -821,20 +821,20 @@ func (r *LinkAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListJobsRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// List of task IDs. If this parameter is empty, all tasks will be returned.
-	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
+	JobIds []*string `json:"JobIds,omitnil" name:"JobIds"`
 }
 
 type ListJobsRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// List of task IDs. If this parameter is empty, all tasks will be returned.
-	JobIds []*string `json:"JobIds,omitempty" name:"JobIds"`
+	JobIds []*string `json:"JobIds,omitnil" name:"JobIds"`
 }
 
 func (r *ListJobsRequest) ToJsonString() string {
@@ -861,10 +861,10 @@ func (r *ListJobsRequest) FromJsonString(s string) error {
 type ListJobsResponseParams struct {
 	// List of tasks
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobSet []*Job `json:"JobSet,omitempty" name:"JobSet"`
+	JobSet []*Job `json:"JobSet,omitnil" name:"JobSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListJobsResponse struct {
@@ -886,36 +886,36 @@ func (r *ListJobsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListLogMessageByConditionRequestParams struct {
 	// User pool ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Pagination data
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// Start timestamp accurate to the millisecond
-	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Valid values of `Key`: `events`.
 	// 
 	// <li> **events** </li>	Values can be one or multiple items in ["SIGNUP", "USER_UPDATE", "USER_DELETE", "USER_CREATE", "ACCOUNT_LINKING"].
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type ListLogMessageByConditionRequest struct {
 	*tchttp.BaseRequest
 	
 	// User pool ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Pagination data
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// Start timestamp accurate to the millisecond
-	StartTime *int64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Valid values of `Key`: `events`.
 	// 
 	// <li> **events** </li>	Values can be one or multiple items in ["SIGNUP", "USER_UPDATE", "USER_DELETE", "USER_CREATE", "ACCOUNT_LINKING"].
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *ListLogMessageByConditionRequest) ToJsonString() string {
@@ -943,17 +943,17 @@ func (r *ListLogMessageByConditionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListLogMessageByConditionResponseParams struct {
 	// Total number
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Pagination object
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// List of logs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Content []*LogMessage `json:"Content,omitempty" name:"Content"`
+	Content []*LogMessage `json:"Content,omitnil" name:"Content"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListLogMessageByConditionResponse struct {
@@ -975,38 +975,38 @@ func (r *ListLogMessageByConditionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListUserByPropertyRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Query attribute
 	// 
 	// <li> **phoneNumber** </li>	  Mobile number
 	// <li> **email** </li>  Email
-	PropertyCode *string `json:"PropertyCode,omitempty" name:"PropertyCode"`
+	PropertyCode *string `json:"PropertyCode,omitnil" name:"PropertyCode"`
 
 	// Attribute value
-	PropertyValue *string `json:"PropertyValue,omitempty" name:"PropertyValue"`
+	PropertyValue *string `json:"PropertyValue,omitnil" name:"PropertyValue"`
 
 	// Whether the content is passed through
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 }
 
 type ListUserByPropertyRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Query attribute
 	// 
 	// <li> **phoneNumber** </li>	  Mobile number
 	// <li> **email** </li>  Email
-	PropertyCode *string `json:"PropertyCode,omitempty" name:"PropertyCode"`
+	PropertyCode *string `json:"PropertyCode,omitnil" name:"PropertyCode"`
 
 	// Attribute value
-	PropertyValue *string `json:"PropertyValue,omitempty" name:"PropertyValue"`
+	PropertyValue *string `json:"PropertyValue,omitnil" name:"PropertyValue"`
 
 	// Whether the content is passed through
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 }
 
 func (r *ListUserByPropertyRequest) ToJsonString() string {
@@ -1035,10 +1035,10 @@ func (r *ListUserByPropertyRequest) FromJsonString(s string) error {
 type ListUserByPropertyResponseParams struct {
 	// List of users
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Users []*User `json:"Users,omitempty" name:"Users"`
+	Users []*User `json:"Users,omitnil" name:"Users"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUserByPropertyResponse struct {
@@ -1060,38 +1060,38 @@ func (r *ListUserByPropertyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListUserRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Pagination data
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// Valid values of `Key`: `condition`, `userGroupId`.
 	// 
 	// <li> **condition** </li>	Values = Query condition, which can be user ID, username, mobile number, or email address.
 	// <li> **userGroupId** </li>	Values = User group ID
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Whether the content is passed through
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 }
 
 type ListUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Pagination data
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// Valid values of `Key`: `condition`, `userGroupId`.
 	// 
 	// <li> **condition** </li>	Values = Query condition, which can be user ID, username, mobile number, or email address.
 	// <li> **userGroupId** </li>	Values = User group ID
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Whether the content is passed through
-	Original *bool `json:"Original,omitempty" name:"Original"`
+	Original *bool `json:"Original,omitnil" name:"Original"`
 }
 
 func (r *ListUserRequest) ToJsonString() string {
@@ -1120,18 +1120,18 @@ func (r *ListUserRequest) FromJsonString(s string) error {
 type ListUserResponseParams struct {
 	// Total number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Pagination object
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// List of users
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Content []*User `json:"Content,omitempty" name:"Content"`
+	Content []*User `json:"Content,omitnil" name:"Content"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUserResponse struct {
@@ -1152,127 +1152,127 @@ func (r *ListUserResponse) FromJsonString(s string) error {
 
 type LogMessage struct {
 	// Log ID
-	LogId *string `json:"LogId,omitempty" name:"LogId"`
+	LogId *string `json:"LogId,omitnil" name:"LogId"`
 
 	// Tenant ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TenantId *string `json:"TenantId,omitempty" name:"TenantId"`
+	TenantId *string `json:"TenantId,omitnil" name:"TenantId"`
 
 	// User pool ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Event code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventCode *string `json:"EventCode,omitempty" name:"EventCode"`
+	EventCode *string `json:"EventCode,omitnil" name:"EventCode"`
 
 	// Event timestamp in milliseconds
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventDate *int64 `json:"EventDate,omitempty" name:"EventDate"`
+	EventDate *int64 `json:"EventDate,omitnil" name:"EventDate"`
 
 	// Description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Event participant
 	// 
 	// <li> **TENANT** </li>  Tenant
 	// <li> **USER** </li>  User
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Participant *string `json:"Participant,omitempty" name:"Participant"`
+	Participant *string `json:"Participant,omitnil" name:"Participant"`
 
 	// Application `clientId`
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ApplicationClientId *string `json:"ApplicationClientId,omitempty" name:"ApplicationClientId"`
+	ApplicationClientId *string `json:"ApplicationClientId,omitnil" name:"ApplicationClientId"`
 
 	// Application name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+	ApplicationName *string `json:"ApplicationName,omitnil" name:"ApplicationName"`
 
 	// Authentication source ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuthSourceId *string `json:"AuthSourceId,omitempty" name:"AuthSourceId"`
+	AuthSourceId *string `json:"AuthSourceId,omitnil" name:"AuthSourceId"`
 
 	// Authentication source name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuthSourceName *string `json:"AuthSourceName,omitempty" name:"AuthSourceName"`
+	AuthSourceName *string `json:"AuthSourceName,omitnil" name:"AuthSourceName"`
 
 	// Authentication source type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuthSourceType *string `json:"AuthSourceType,omitempty" name:"AuthSourceType"`
+	AuthSourceType *string `json:"AuthSourceType,omitnil" name:"AuthSourceType"`
 
 	// Authentication source category
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuthSourceCategory *string `json:"AuthSourceCategory,omitempty" name:"AuthSourceCategory"`
+	AuthSourceCategory *string `json:"AuthSourceCategory,omitnil" name:"AuthSourceCategory"`
 
 	// IP address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
+	Ip *string `json:"Ip,omitnil" name:"Ip"`
 
 	// User agent
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserAgent *string `json:"UserAgent,omitempty" name:"UserAgent"`
+	UserAgent *string `json:"UserAgent,omitnil" name:"UserAgent"`
 
 	// User ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Detail *string `json:"Detail,omitempty" name:"Detail"`
+	Detail *string `json:"Detail,omitnil" name:"Detail"`
 }
 
 type MemberMap struct {
 	// Key
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Value
-	Value *string `json:"Value,omitempty" name:"Value"`
+	Value *string `json:"Value,omitnil" name:"Value"`
 
 	// Type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type Pageable struct {
 	// Number of entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// Current page number
-	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
 }
 
 type QueryUserFilter struct {
 	// Property key
-	PropertyKey *string `json:"PropertyKey,omitempty" name:"PropertyKey"`
+	PropertyKey *string `json:"PropertyKey,omitnil" name:"PropertyKey"`
 
 	// Property value
-	PropertyValue *string `json:"PropertyValue,omitempty" name:"PropertyValue"`
+	PropertyValue *string `json:"PropertyValue,omitnil" name:"PropertyValue"`
 
 	// Logic value. `True` or `False`
-	Logic *bool `json:"Logic,omitempty" name:"Logic"`
+	Logic *bool `json:"Logic,omitnil" name:"Logic"`
 
 	// Operator. Values: `>`, `<`, `=`, `>=`, `<=`, `!=` and `between`. 
-	OperateLogic *string `json:"OperateLogic,omitempty" name:"OperateLogic"`
+	OperateLogic *string `json:"OperateLogic,omitnil" name:"OperateLogic"`
 }
 
 // Predefined struct for user
 type ResetPasswordRequestParams struct {
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 }
 
 type ResetPasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 }
 
 func (r *ResetPasswordRequest) ToJsonString() string {
@@ -1298,10 +1298,10 @@ func (r *ResetPasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetPasswordResponseParams struct {
 	// User password after reset
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ResetPasswordResponse struct {
@@ -1322,48 +1322,48 @@ func (r *ResetPasswordResponse) FromJsonString(s string) error {
 
 type Salt struct {
 	// Salt value
-	SaltValue *string `json:"SaltValue,omitempty" name:"SaltValue"`
+	SaltValue *string `json:"SaltValue,omitnil" name:"SaltValue"`
 
 	// Salt value location
-	SaltLocation *SaltLocation `json:"SaltLocation,omitempty" name:"SaltLocation"`
+	SaltLocation *SaltLocation `json:"SaltLocation,omitnil" name:"SaltLocation"`
 }
 
 type SaltLocation struct {
 	// Password salt type. Valid values: `HEAD`, `TAIL`, `OTHER`.
-	SaltLocationTypeEnum *string `json:"SaltLocationTypeEnum,omitempty" name:"SaltLocationTypeEnum"`
+	SaltLocationTypeEnum *string `json:"SaltLocationTypeEnum,omitnil" name:"SaltLocationTypeEnum"`
 
 	// Salting rule
-	SaltLocationRule *SaltLocationRule `json:"SaltLocationRule,omitempty" name:"SaltLocationRule"`
+	SaltLocationRule *SaltLocationRule `json:"SaltLocationRule,omitnil" name:"SaltLocationRule"`
 }
 
 type SaltLocationRule struct {
 	// Expression
-	Regex *string `json:"Regex,omitempty" name:"Regex"`
+	Regex *string `json:"Regex,omitnil" name:"Regex"`
 }
 
 // Predefined struct for user
 type SetPasswordRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Password
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 }
 
 type SetPasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Password
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 }
 
 func (r *SetPasswordRequest) ToJsonString() string {
@@ -1390,7 +1390,7 @@ func (r *SetPasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetPasswordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetPasswordResponse struct {
@@ -1411,107 +1411,107 @@ func (r *SetPasswordResponse) FromJsonString(s string) error {
 
 type Sort struct {
 	// Key for sorting. See custom attributes
-	PropertyKey *string `json:"PropertyKey,omitempty" name:"PropertyKey"`
+	PropertyKey *string `json:"PropertyKey,omitnil" name:"PropertyKey"`
 
 	// `ASC` or `DESC`
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 }
 
 // Predefined struct for user
 type UpdateUserRequestParams struct {
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Mobile number
-	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+	PhoneNumber *string `json:"PhoneNumber,omitnil" name:"PhoneNumber"`
 
 	// Email address
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Nickname
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// User group
-	UserGroup []*string `json:"UserGroup,omitempty" name:"UserGroup"`
+	UserGroup []*string `json:"UserGroup,omitnil" name:"UserGroup"`
 
 	// Date of birth
-	Birthdate *int64 `json:"Birthdate,omitempty" name:"Birthdate"`
+	Birthdate *int64 `json:"Birthdate,omitnil" name:"Birthdate"`
 
 	// Custom attribute
-	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitnil" name:"CustomizationAttributes"`
 
 	// Index field 1
-	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitnil" name:"IndexedAttribute1"`
 
 	// Index field 2
-	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitnil" name:"IndexedAttribute2"`
 
 	// Index field 3
-	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitnil" name:"IndexedAttribute3"`
 
 	// Index field 4
-	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitnil" name:"IndexedAttribute4"`
 
 	// Index field 5
-	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitnil" name:"IndexedAttribute5"`
 }
 
 type UpdateUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Mobile number
-	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+	PhoneNumber *string `json:"PhoneNumber,omitnil" name:"PhoneNumber"`
 
 	// Email address
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Nickname
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// User group
-	UserGroup []*string `json:"UserGroup,omitempty" name:"UserGroup"`
+	UserGroup []*string `json:"UserGroup,omitnil" name:"UserGroup"`
 
 	// Date of birth
-	Birthdate *int64 `json:"Birthdate,omitempty" name:"Birthdate"`
+	Birthdate *int64 `json:"Birthdate,omitnil" name:"Birthdate"`
 
 	// Custom attribute
-	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitempty" name:"CustomizationAttributes"`
+	CustomizationAttributes []*MemberMap `json:"CustomizationAttributes,omitnil" name:"CustomizationAttributes"`
 
 	// Index field 1
-	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitnil" name:"IndexedAttribute1"`
 
 	// Index field 2
-	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitnil" name:"IndexedAttribute2"`
 
 	// Index field 3
-	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitnil" name:"IndexedAttribute3"`
 
 	// Index field 4
-	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitnil" name:"IndexedAttribute4"`
 
 	// Index field 5
-	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitnil" name:"IndexedAttribute5"`
 }
 
 func (r *UpdateUserRequest) ToJsonString() string {
@@ -1551,10 +1551,10 @@ func (r *UpdateUserRequest) FromJsonString(s string) error {
 type UpdateUserResponseParams struct {
 	// User information after update
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	User *User `json:"User,omitempty" name:"User"`
+	User *User `json:"User,omitnil" name:"User"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateUserResponse struct {
@@ -1576,34 +1576,34 @@ func (r *UpdateUserResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateUserStatusRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User status
 	// 
 	// <li> **NORMAL** </li>	  Normal
 	// <li> **LOCK** </li>  Locked
 	// <li> **FREEZE** </li>	  Frozen
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
 type UpdateUserStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User status
 	// 
 	// <li> **NORMAL** </li>	  Normal
 	// <li> **LOCK** </li>  Locked
 	// <li> **FREEZE** </li>	  Frozen
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
 func (r *UpdateUserStatusRequest) ToJsonString() string {
@@ -1630,7 +1630,7 @@ func (r *UpdateUserStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateUserStatusResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateUserStatusResponse struct {
@@ -1651,162 +1651,162 @@ func (r *UpdateUserStatusResponse) FromJsonString(s string) error {
 
 type User struct {
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Mobile number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhoneNumber *string `json:"PhoneNumber,omitempty" name:"PhoneNumber"`
+	PhoneNumber *string `json:"PhoneNumber,omitnil" name:"PhoneNumber"`
 
 	// Email address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Last login time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastSignOn *int64 `json:"LastSignOn,omitempty" name:"LastSignOn"`
+	LastSignOn *int64 `json:"LastSignOn,omitnil" name:"LastSignOn"`
 
 	// Creation time
-	CreatedDate *int64 `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *int64 `json:"CreatedDate,omitnil" name:"CreatedDate"`
 
 	// Status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// User source
-	UserDataSourceEnum *string `json:"UserDataSourceEnum,omitempty" name:"UserDataSourceEnum"`
+	UserDataSourceEnum *string `json:"UserDataSourceEnum,omitnil" name:"UserDataSourceEnum"`
 
 	// Nickname
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// Date of birth
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthdate *int64 `json:"Birthdate,omitempty" name:"Birthdate"`
+	Birthdate *int64 `json:"Birthdate,omitnil" name:"Birthdate"`
 
 	// User group ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserGroups []*string `json:"UserGroups,omitempty" name:"UserGroups"`
+	UserGroups []*string `json:"UserGroups,omitnil" name:"UserGroups"`
 
 	// Last modified time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastModifiedDate *int64 `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *int64 `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 
 	// Custom attribute
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CustomAttributes []*MemberMap `json:"CustomAttributes,omitempty" name:"CustomAttributes"`
+	CustomAttributes []*MemberMap `json:"CustomAttributes,omitnil" name:"CustomAttributes"`
 
 	// ID card number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ResidentIdentityCard *string `json:"ResidentIdentityCard,omitempty" name:"ResidentIdentityCard"`
+	ResidentIdentityCard *string `json:"ResidentIdentityCard,omitnil" name:"ResidentIdentityCard"`
 
 	// `OpenId` on QQ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	QqOpenId *string `json:"QqOpenId,omitempty" name:"QqOpenId"`
+	QqOpenId *string `json:"QqOpenId,omitnil" name:"QqOpenId"`
 
 	// `UnionId` on QQ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	QqUnionId *string `json:"QqUnionId,omitempty" name:"QqUnionId"`
+	QqUnionId *string `json:"QqUnionId,omitnil" name:"QqUnionId"`
 
 	// `WechatOpenId` on WeChat
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WechatOpenId *string `json:"WechatOpenId,omitempty" name:"WechatOpenId"`
+	WechatOpenId *string `json:"WechatOpenId,omitnil" name:"WechatOpenId"`
 
 	// `WechatUnionId` on WeChat
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WechatUnionId *string `json:"WechatUnionId,omitempty" name:"WechatUnionId"`
+	WechatUnionId *string `json:"WechatUnionId,omitnil" name:"WechatUnionId"`
 
 	// `AlipayUserId` on Alipay
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AlipayUserId *string `json:"AlipayUserId,omitempty" name:"AlipayUserId"`
+	AlipayUserId *string `json:"AlipayUserId,omitnil" name:"AlipayUserId"`
 
 	// Description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Coordinate
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Locale *string `json:"Locale,omitempty" name:"Locale"`
+	Locale *string `json:"Locale,omitnil" name:"Locale"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Gender *string `json:"Gender,omitempty" name:"Gender"`
+	Gender *string `json:"Gender,omitnil" name:"Gender"`
 
 	// Identity verification method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityVerificationMethod *string `json:"IdentityVerificationMethod,omitempty" name:"IdentityVerificationMethod"`
+	IdentityVerificationMethod *string `json:"IdentityVerificationMethod,omitnil" name:"IdentityVerificationMethod"`
 
 	// Whether the identity is verified
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityVerified *bool `json:"IdentityVerified,omitempty" name:"IdentityVerified"`
+	IdentityVerified *bool `json:"IdentityVerified,omitnil" name:"IdentityVerified"`
 
 	// Job
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Job *string `json:"Job,omitempty" name:"Job"`
+	Job *string `json:"Job,omitnil" name:"Job"`
 
 	// Country/Region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Nationality *string `json:"Nationality,omitempty" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
 
 	// Whether the account is the primary account (after account merge, this parameter is `true` for primary accounts and `false` for secondary account).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Primary *bool `json:"Primary,omitempty" name:"Primary"`
+	Primary *bool `json:"Primary,omitnil" name:"Primary"`
 
 	// Time zone
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Whether the account has ever logged in.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AlreadyFirstLogin *bool `json:"AlreadyFirstLogin,omitempty" name:"AlreadyFirstLogin"`
+	AlreadyFirstLogin *bool `json:"AlreadyFirstLogin,omitnil" name:"AlreadyFirstLogin"`
 
 	// Tenant ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TenantId *string `json:"TenantId,omitempty" name:"TenantId"`
+	TenantId *string `json:"TenantId,omitnil" name:"TenantId"`
 
 	// User directory ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Version *int64 `json:"Version,omitempty" name:"Version"`
+	Version *int64 `json:"Version,omitnil" name:"Version"`
 
 	// Lock type (locked by admin or locked by login policy)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LockType *string `json:"LockType,omitempty" name:"LockType"`
+	LockType *string `json:"LockType,omitnil" name:"LockType"`
 
 	// Lock time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LockTime *int64 `json:"LockTime,omitempty" name:"LockTime"`
+	LockTime *int64 `json:"LockTime,omitnil" name:"LockTime"`
 
 	// Index field 1
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IndexedAttribute1 *string `json:"IndexedAttribute1,omitempty" name:"IndexedAttribute1"`
+	IndexedAttribute1 *string `json:"IndexedAttribute1,omitnil" name:"IndexedAttribute1"`
 
 	// Index field 2
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IndexedAttribute2 *string `json:"IndexedAttribute2,omitempty" name:"IndexedAttribute2"`
+	IndexedAttribute2 *string `json:"IndexedAttribute2,omitnil" name:"IndexedAttribute2"`
 
 	// Index field 3
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IndexedAttribute3 *string `json:"IndexedAttribute3,omitempty" name:"IndexedAttribute3"`
+	IndexedAttribute3 *string `json:"IndexedAttribute3,omitnil" name:"IndexedAttribute3"`
 
 	// Index field 4
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IndexedAttribute4 *string `json:"IndexedAttribute4,omitempty" name:"IndexedAttribute4"`
+	IndexedAttribute4 *string `json:"IndexedAttribute4,omitnil" name:"IndexedAttribute4"`
 
 	// Index field 5
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IndexedAttribute5 *string `json:"IndexedAttribute5,omitempty" name:"IndexedAttribute5"`
+	IndexedAttribute5 *string `json:"IndexedAttribute5,omitnil" name:"IndexedAttribute5"`
 }

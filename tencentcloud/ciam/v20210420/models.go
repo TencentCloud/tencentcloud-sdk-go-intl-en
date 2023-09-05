@@ -15,40 +15,40 @@
 package v20210420
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type ListUserGroupsRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Number of queried pages
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of entries per page
-	Size *int64 `json:"Size,omitempty" name:"Size"`
+	Size *int64 `json:"Size,omitnil" name:"Size"`
 
 	// Query conditions (user group ID or user group name)
-	Condition *string `json:"Condition,omitempty" name:"Condition"`
+	Condition *string `json:"Condition,omitnil" name:"Condition"`
 }
 
 type ListUserGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Number of queried pages
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of entries per page
-	Size *int64 `json:"Size,omitempty" name:"Size"`
+	Size *int64 `json:"Size,omitnil" name:"Size"`
 
 	// Query conditions (user group ID or user group name)
-	Condition *string `json:"Condition,omitempty" name:"Condition"`
+	Condition *string `json:"Condition,omitnil" name:"Condition"`
 }
 
 func (r *ListUserGroupsRequest) ToJsonString() string {
@@ -77,18 +77,18 @@ func (r *ListUserGroupsRequest) FromJsonString(s string) error {
 type ListUserGroupsResponseParams struct {
 	// User group list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Content []*UserGroup `json:"Content,omitempty" name:"Content"`
+	Content []*UserGroup `json:"Content,omitnil" name:"Content"`
 
 	// Total number
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Pagination
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Pageable *Pageable `json:"Pageable,omitempty" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUserGroupsResponse struct {
@@ -109,26 +109,26 @@ func (r *ListUserGroupsResponse) FromJsonString(s string) error {
 
 type Pageable struct {
 	// Number of entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// Current page number
-	PageNumber *int64 `json:"PageNumber,omitempty" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
 }
 
 type UserGroup struct {
 	// User group ID
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// User group name
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User group description
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitempty" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
 
 	// Tenant ID
-	TenantId *string `json:"TenantId,omitempty" name:"TenantId"`
+	TenantId *string `json:"TenantId,omitnil" name:"TenantId"`
 }

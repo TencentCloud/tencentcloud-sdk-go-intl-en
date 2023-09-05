@@ -15,34 +15,34 @@
 package v20210331
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type AddOrganizationNodeRequestParams struct {
 	// Parent node ID, which can be obtained through the `DescribeOrganizationNodes` API.
-	ParentNodeId *uint64 `json:"ParentNodeId,omitempty" name:"ParentNodeId"`
+	ParentNodeId *uint64 `json:"ParentNodeId,omitnil" name:"ParentNodeId"`
 
 	// Node name, which can contain up to 40 letters, digits, and symbols `+@&._[]-`.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 }
 
 type AddOrganizationNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Parent node ID, which can be obtained through the `DescribeOrganizationNodes` API.
-	ParentNodeId *uint64 `json:"ParentNodeId,omitempty" name:"ParentNodeId"`
+	ParentNodeId *uint64 `json:"ParentNodeId,omitnil" name:"ParentNodeId"`
 
 	// Node name, which can contain up to 40 letters, digits, and symbols `+@&._[]-`.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 }
 
 func (r *AddOrganizationNodeRequest) ToJsonString() string {
@@ -69,10 +69,10 @@ func (r *AddOrganizationNodeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddOrganizationNodeResponseParams struct {
 	// Node ID.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddOrganizationNodeResponse struct {
@@ -94,26 +94,26 @@ func (r *AddOrganizationNodeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BindOrganizationMemberAuthAccountRequestParams struct {
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy ID, which can be obtained through the `DescribeOrganizationMemberPolicies` API.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// List of sub-account UINs of the organization admin, which can contain up to five UINs.
-	OrgSubAccountUins []*int64 `json:"OrgSubAccountUins,omitempty" name:"OrgSubAccountUins"`
+	OrgSubAccountUins []*int64 `json:"OrgSubAccountUins,omitnil" name:"OrgSubAccountUins"`
 }
 
 type BindOrganizationMemberAuthAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy ID, which can be obtained through the `DescribeOrganizationMemberPolicies` API.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// List of sub-account UINs of the organization admin, which can contain up to five UINs.
-	OrgSubAccountUins []*int64 `json:"OrgSubAccountUins,omitempty" name:"OrgSubAccountUins"`
+	OrgSubAccountUins []*int64 `json:"OrgSubAccountUins,omitnil" name:"OrgSubAccountUins"`
 }
 
 func (r *BindOrganizationMemberAuthAccountRequest) ToJsonString() string {
@@ -140,7 +140,7 @@ func (r *BindOrganizationMemberAuthAccountRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type BindOrganizationMemberAuthAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BindOrganizationMemberAuthAccountResponse struct {
@@ -162,26 +162,26 @@ func (r *BindOrganizationMemberAuthAccountResponse) FromJsonString(s string) err
 // Predefined struct for user
 type CancelOrganizationMemberAuthAccountRequestParams struct {
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy ID.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// Organization sub-account UIN.
-	OrgSubAccountUin *int64 `json:"OrgSubAccountUin,omitempty" name:"OrgSubAccountUin"`
+	OrgSubAccountUin *int64 `json:"OrgSubAccountUin,omitnil" name:"OrgSubAccountUin"`
 }
 
 type CancelOrganizationMemberAuthAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy ID.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// Organization sub-account UIN.
-	OrgSubAccountUin *int64 `json:"OrgSubAccountUin,omitempty" name:"OrgSubAccountUin"`
+	OrgSubAccountUin *int64 `json:"OrgSubAccountUin,omitnil" name:"OrgSubAccountUin"`
 }
 
 func (r *CancelOrganizationMemberAuthAccountRequest) ToJsonString() string {
@@ -208,7 +208,7 @@ func (r *CancelOrganizationMemberAuthAccountRequest) FromJsonString(s string) er
 // Predefined struct for user
 type CancelOrganizationMemberAuthAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CancelOrganizationMemberAuthAccountResponse struct {
@@ -230,32 +230,32 @@ func (r *CancelOrganizationMemberAuthAccountResponse) FromJsonString(s string) e
 // Predefined struct for user
 type CreateOrganizationMemberPolicyRequestParams struct {
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy name, which can contain up to 128 letters, digits, and symbols `+=,.@_-`.
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+	PolicyName *string `json:"PolicyName,omitnil" name:"PolicyName"`
 
 	// Member access identity ID, which can be obtained through the `DescribeOrganizationMemberAuthIdentities` API.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CreateOrganizationMemberPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy name, which can contain up to 128 letters, digits, and symbols `+=,.@_-`.
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+	PolicyName *string `json:"PolicyName,omitnil" name:"PolicyName"`
 
 	// Member access identity ID, which can be obtained through the `DescribeOrganizationMemberAuthIdentities` API.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *CreateOrganizationMemberPolicyRequest) ToJsonString() string {
@@ -284,10 +284,10 @@ func (r *CreateOrganizationMemberPolicyRequest) FromJsonString(s string) error {
 type CreateOrganizationMemberPolicyResponseParams struct {
 	// Policy ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateOrganizationMemberPolicyResponse struct {
@@ -309,68 +309,68 @@ func (r *CreateOrganizationMemberPolicyResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type CreateOrganizationMemberRequestParams struct {
 	// Member name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Relationship policy. Valid value: `Financial`.
-	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
+	PolicyType *string `json:"PolicyType,omitnil" name:"PolicyType"`
 
 	// List of member financial permission IDs. `7` indicates paying, which is the default value.
-	PermissionIds []*uint64 `json:"PermissionIds,omitempty" name:"PermissionIds"`
+	PermissionIds []*uint64 `json:"PermissionIds,omitnil" name:"PermissionIds"`
 
 	// ID of the node of the member's department, which can be obtained through the `DescribeOrganizationNodes` API.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Account name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 
 	// Member creation record ID, which is required during retry upon creation exception.
-	RecordId *int64 `json:"RecordId,omitempty" name:"RecordId"`
+	RecordId *int64 `json:"RecordId,omitnil" name:"RecordId"`
 
 	// Payer UIN, which is required during paying for a member.
-	PayUin *string `json:"PayUin,omitempty" name:"PayUin"`
+	PayUin *string `json:"PayUin,omitnil" name:"PayUin"`
 
 	// List of member access identity IDs, which can be obtained through the `ListOrganizationIdentity` API. `1` indicates supported, which is the default value.
-	IdentityRoleID []*uint64 `json:"IdentityRoleID,omitempty" name:"IdentityRoleID"`
+	IdentityRoleID []*uint64 `json:"IdentityRoleID,omitnil" name:"IdentityRoleID"`
 
 	// Verified entity relationship ID, which is required during creating members for different entities.
-	AuthRelationId *int64 `json:"AuthRelationId,omitempty" name:"AuthRelationId"`
+	AuthRelationId *int64 `json:"AuthRelationId,omitnil" name:"AuthRelationId"`
 }
 
 type CreateOrganizationMemberRequest struct {
 	*tchttp.BaseRequest
 	
 	// Member name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Relationship policy. Valid value: `Financial`.
-	PolicyType *string `json:"PolicyType,omitempty" name:"PolicyType"`
+	PolicyType *string `json:"PolicyType,omitnil" name:"PolicyType"`
 
 	// List of member financial permission IDs. `7` indicates paying, which is the default value.
-	PermissionIds []*uint64 `json:"PermissionIds,omitempty" name:"PermissionIds"`
+	PermissionIds []*uint64 `json:"PermissionIds,omitnil" name:"PermissionIds"`
 
 	// ID of the node of the member's department, which can be obtained through the `DescribeOrganizationNodes` API.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Account name, which can contain up to 25 letters, digits, and symbols `+@&._[]-:,`.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 
 	// Member creation record ID, which is required during retry upon creation exception.
-	RecordId *int64 `json:"RecordId,omitempty" name:"RecordId"`
+	RecordId *int64 `json:"RecordId,omitnil" name:"RecordId"`
 
 	// Payer UIN, which is required during paying for a member.
-	PayUin *string `json:"PayUin,omitempty" name:"PayUin"`
+	PayUin *string `json:"PayUin,omitnil" name:"PayUin"`
 
 	// List of member access identity IDs, which can be obtained through the `ListOrganizationIdentity` API. `1` indicates supported, which is the default value.
-	IdentityRoleID []*uint64 `json:"IdentityRoleID,omitempty" name:"IdentityRoleID"`
+	IdentityRoleID []*uint64 `json:"IdentityRoleID,omitnil" name:"IdentityRoleID"`
 
 	// Verified entity relationship ID, which is required during creating members for different entities.
-	AuthRelationId *int64 `json:"AuthRelationId,omitempty" name:"AuthRelationId"`
+	AuthRelationId *int64 `json:"AuthRelationId,omitnil" name:"AuthRelationId"`
 }
 
 func (r *CreateOrganizationMemberRequest) ToJsonString() string {
@@ -405,10 +405,10 @@ func (r *CreateOrganizationMemberRequest) FromJsonString(s string) error {
 type CreateOrganizationMemberResponseParams struct {
 	// Member UIN.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Uin *int64 `json:"Uin,omitempty" name:"Uin"`
+	Uin *int64 `json:"Uin,omitnil" name:"Uin"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateOrganizationMemberResponse struct {
@@ -430,14 +430,14 @@ func (r *CreateOrganizationMemberResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOrganizationMembersRequestParams struct {
 	// List of UINs of the members to be deleted.
-	MemberUin []*int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin []*int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 }
 
 type DeleteOrganizationMembersRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of UINs of the members to be deleted.
-	MemberUin []*int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin []*int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 }
 
 func (r *DeleteOrganizationMembersRequest) ToJsonString() string {
@@ -462,7 +462,7 @@ func (r *DeleteOrganizationMembersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOrganizationMembersResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteOrganizationMembersResponse struct {
@@ -484,14 +484,14 @@ func (r *DeleteOrganizationMembersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOrganizationNodesRequestParams struct {
 	// List of node IDs.
-	NodeId []*int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId []*int64 `json:"NodeId,omitnil" name:"NodeId"`
 }
 
 type DeleteOrganizationNodesRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of node IDs.
-	NodeId []*int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId []*int64 `json:"NodeId,omitnil" name:"NodeId"`
 }
 
 func (r *DeleteOrganizationNodesRequest) ToJsonString() string {
@@ -516,7 +516,7 @@ func (r *DeleteOrganizationNodesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOrganizationNodesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteOrganizationNodesResponse struct {
@@ -538,32 +538,32 @@ func (r *DeleteOrganizationNodesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOrganizationMemberAuthAccountsRequestParams struct {
 	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number of returned results.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy ID.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 }
 
 type DescribeOrganizationMemberAuthAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number of returned results.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Policy ID.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 }
 
 func (r *DescribeOrganizationMemberAuthAccountsRequest) ToJsonString() string {
@@ -592,14 +592,14 @@ func (r *DescribeOrganizationMemberAuthAccountsRequest) FromJsonString(s string)
 type DescribeOrganizationMemberAuthAccountsResponseParams struct {
 	// List
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*OrgMemberAuthAccount `json:"Items,omitempty" name:"Items"`
+	Items []*OrgMemberAuthAccount `json:"Items,omitnil" name:"Items"`
 
 	// Total number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrganizationMemberAuthAccountsResponse struct {
@@ -621,26 +621,26 @@ func (r *DescribeOrganizationMemberAuthAccountsResponse) FromJsonString(s string
 // Predefined struct for user
 type DescribeOrganizationMemberAuthIdentitiesRequestParams struct {
 	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit, which defaults to `10`. Value range: 1-50.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Organization member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 }
 
 type DescribeOrganizationMemberAuthIdentitiesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit, which defaults to `10`. Value range: 1-50.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Organization member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 }
 
 func (r *DescribeOrganizationMemberAuthIdentitiesRequest) ToJsonString() string {
@@ -668,14 +668,14 @@ func (r *DescribeOrganizationMemberAuthIdentitiesRequest) FromJsonString(s strin
 type DescribeOrganizationMemberAuthIdentitiesResponseParams struct {
 	// List of authorizable identities
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*OrgMemberAuthIdentity `json:"Items,omitempty" name:"Items"`
+	Items []*OrgMemberAuthIdentity `json:"Items,omitnil" name:"Items"`
 
 	// Total number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrganizationMemberAuthIdentitiesResponse struct {
@@ -697,32 +697,32 @@ func (r *DescribeOrganizationMemberAuthIdentitiesResponse) FromJsonString(s stri
 // Predefined struct for user
 type DescribeOrganizationMemberPoliciesRequestParams struct {
 	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number of returned results. Maximum value: `50`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Search keyword, which can be the policy name or description.
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 }
 
 type DescribeOrganizationMemberPoliciesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number of returned results. Maximum value: `50`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Member UIN.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Search keyword, which can be the policy name or description.
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 }
 
 func (r *DescribeOrganizationMemberPoliciesRequest) ToJsonString() string {
@@ -751,14 +751,14 @@ func (r *DescribeOrganizationMemberPoliciesRequest) FromJsonString(s string) err
 type DescribeOrganizationMemberPoliciesResponseParams struct {
 	// List.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*OrgMemberPolicy `json:"Items,omitempty" name:"Items"`
+	Items []*OrgMemberPolicy `json:"Items,omitnil" name:"Items"`
 
 	// Total number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrganizationMemberPoliciesResponse struct {
@@ -780,44 +780,44 @@ func (r *DescribeOrganizationMemberPoliciesResponse) FromJsonString(s string) er
 // Predefined struct for user
 type DescribeOrganizationMembersRequestParams struct {
 	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit, which defaults to `10`. Value range: 1-50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
-	Lang *string `json:"Lang,omitempty" name:"Lang"`
+	Lang *string `json:"Lang,omitnil" name:"Lang"`
 
 	// Search by member name or ID.
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 
 	// Entity name.
-	AuthName *string `json:"AuthName,omitempty" name:"AuthName"`
+	AuthName *string `json:"AuthName,omitnil" name:"AuthName"`
 
 	// Abbreviation of the trusted service, which is required during querying the trusted service admin.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeOrganizationMembersRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset, which is an integer multiple of the value of `Limit`. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit, which defaults to `10`. Value range: 1-50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
-	Lang *string `json:"Lang,omitempty" name:"Lang"`
+	Lang *string `json:"Lang,omitnil" name:"Lang"`
 
 	// Search by member name or ID.
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 
 	// Entity name.
-	AuthName *string `json:"AuthName,omitempty" name:"AuthName"`
+	AuthName *string `json:"AuthName,omitnil" name:"AuthName"`
 
 	// Abbreviation of the trusted service, which is required during querying the trusted service admin.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeOrganizationMembersRequest) ToJsonString() string {
@@ -847,13 +847,13 @@ func (r *DescribeOrganizationMembersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOrganizationMembersResponseParams struct {
 	// Member list.
-	Items []*OrgMember `json:"Items,omitempty" name:"Items"`
+	Items []*OrgMember `json:"Items,omitnil" name:"Items"`
 
 	// Total number.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrganizationMembersResponse struct {
@@ -875,20 +875,20 @@ func (r *DescribeOrganizationMembersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOrganizationNodesRequestParams struct {
 	// Maximum number of returned results. Maximum value: `50`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 type DescribeOrganizationNodesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Maximum number of returned results. Maximum value: `50`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 func (r *DescribeOrganizationNodesRequest) ToJsonString() string {
@@ -915,14 +915,14 @@ func (r *DescribeOrganizationNodesRequest) FromJsonString(s string) error {
 type DescribeOrganizationNodesResponseParams struct {
 	// Total number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// List details.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*OrgNode `json:"Items,omitempty" name:"Items"`
+	Items []*OrgNode `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrganizationNodesResponse struct {
@@ -944,20 +944,20 @@ func (r *DescribeOrganizationNodesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOrganizationRequestParams struct {
 	// Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
-	Lang *string `json:"Lang,omitempty" name:"Lang"`
+	Lang *string `json:"Lang,omitnil" name:"Lang"`
 
 	// Abbreviation of the trusted service, which is required during querying the trusted service admin.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeOrganizationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
-	Lang *string `json:"Lang,omitempty" name:"Lang"`
+	Lang *string `json:"Lang,omitnil" name:"Lang"`
 
 	// Abbreviation of the trusted service, which is required during querying the trusted service admin.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeOrganizationRequest) ToJsonString() string {
@@ -984,70 +984,70 @@ func (r *DescribeOrganizationRequest) FromJsonString(s string) error {
 type DescribeOrganizationResponseParams struct {
 	// Organization ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgId *int64 `json:"OrgId,omitempty" name:"OrgId"`
+	OrgId *int64 `json:"OrgId,omitnil" name:"OrgId"`
 
 	// Creator UIN.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HostUin *int64 `json:"HostUin,omitempty" name:"HostUin"`
+	HostUin *int64 `json:"HostUin,omitnil" name:"HostUin"`
 
 	// Creator name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NickName *string `json:"NickName,omitempty" name:"NickName"`
+	NickName *string `json:"NickName,omitnil" name:"NickName"`
 
 	// Organization type.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgType *int64 `json:"OrgType,omitempty" name:"OrgType"`
+	OrgType *int64 `json:"OrgType,omitnil" name:"OrgType"`
 
 	// Whether the member is the organization admin. Valid values: `true` (yes); `false` (no).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsManager *bool `json:"IsManager,omitempty" name:"IsManager"`
+	IsManager *bool `json:"IsManager,omitnil" name:"IsManager"`
 
 	// Policy type. Valid values: `Financial` (finance management).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgPolicyType *string `json:"OrgPolicyType,omitempty" name:"OrgPolicyType"`
+	OrgPolicyType *string `json:"OrgPolicyType,omitnil" name:"OrgPolicyType"`
 
 	// Policy name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgPolicyName *string `json:"OrgPolicyName,omitempty" name:"OrgPolicyName"`
+	OrgPolicyName *string `json:"OrgPolicyName,omitnil" name:"OrgPolicyName"`
 
 	// List of member financial permissions.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgPermission []*OrgPermission `json:"OrgPermission,omitempty" name:"OrgPermission"`
+	OrgPermission []*OrgPermission `json:"OrgPermission,omitnil" name:"OrgPermission"`
 
 	// Organization root node ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RootNodeId *int64 `json:"RootNodeId,omitempty" name:"RootNodeId"`
+	RootNodeId *int64 `json:"RootNodeId,omitnil" name:"RootNodeId"`
 
 	// Organization creation time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Member joining time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JoinTime *string `json:"JoinTime,omitempty" name:"JoinTime"`
+	JoinTime *string `json:"JoinTime,omitnil" name:"JoinTime"`
 
 	// Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsAllowQuit *string `json:"IsAllowQuit,omitempty" name:"IsAllowQuit"`
+	IsAllowQuit *string `json:"IsAllowQuit,omitnil" name:"IsAllowQuit"`
 
 	// Payer UIN.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayUin *string `json:"PayUin,omitempty" name:"PayUin"`
+	PayUin *string `json:"PayUin,omitnil" name:"PayUin"`
 
 	// Payer name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayName *string `json:"PayName,omitempty" name:"PayName"`
+	PayName *string `json:"PayName,omitnil" name:"PayName"`
 
 	// Whether the member is the trusted service admin. Valid values: `true` (yes); `false` (no).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsAssignManager *bool `json:"IsAssignManager,omitempty" name:"IsAssignManager"`
+	IsAssignManager *bool `json:"IsAssignManager,omitnil" name:"IsAssignManager"`
 
 	// Whether the member is the verified entity admin. Valid values: `true` (yes); `false` (no).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsAuthManager *bool `json:"IsAuthManager,omitempty" name:"IsAuthManager"`
+	IsAuthManager *bool `json:"IsAuthManager,omitnil" name:"IsAuthManager"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrganizationResponse struct {
@@ -1068,47 +1068,47 @@ func (r *DescribeOrganizationResponse) FromJsonString(s string) error {
 
 type IdentityPolicy struct {
 	// Policy ID
-	PolicyId *uint64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// Policy name
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+	PolicyName *string `json:"PolicyName,omitnil" name:"PolicyName"`
 }
 
 // Predefined struct for user
 type ListOrganizationIdentityRequestParams struct {
 	// Offset.  It must be an integer multiple of the value of `Limit`.  Default value: `0`.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The limit for the number of query results.  Value range:  1-50.  Default value:  `10`.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Search by name.
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 
 	// Search by identity ID.
-	IdentityId *uint64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *uint64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Identity type.  Valid values: `1` (Preset), `2` (Custom).
-	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
+	IdentityType *uint64 `json:"IdentityType,omitnil" name:"IdentityType"`
 }
 
 type ListOrganizationIdentityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset.  It must be an integer multiple of the value of `Limit`.  Default value: `0`.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The limit for the number of query results.  Value range:  1-50.  Default value:  `10`.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Search by name.
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 
 	// Search by identity ID.
-	IdentityId *uint64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *uint64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Identity type.  Valid values: `1` (Preset), `2` (Custom).
-	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
+	IdentityType *uint64 `json:"IdentityType,omitnil" name:"IdentityType"`
 }
 
 func (r *ListOrganizationIdentityRequest) ToJsonString() string {
@@ -1138,14 +1138,14 @@ func (r *ListOrganizationIdentityRequest) FromJsonString(s string) error {
 type ListOrganizationIdentityResponseParams struct {
 	// Total number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Item details.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*OrgIdentity `json:"Items,omitempty" name:"Items"`
+	Items []*OrgIdentity `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListOrganizationIdentityResponse struct {
@@ -1167,30 +1167,30 @@ func (r *ListOrganizationIdentityResponse) FromJsonString(s string) error {
 type MemberIdentity struct {
 	// Identity ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Identity name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityAliasName *string `json:"IdentityAliasName,omitempty" name:"IdentityAliasName"`
+	IdentityAliasName *string `json:"IdentityAliasName,omitnil" name:"IdentityAliasName"`
 }
 
 // Predefined struct for user
 type MoveOrganizationNodeMembersRequestParams struct {
 	// Organization node ID.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Member UIN list.
-	MemberUin []*int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin []*int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 }
 
 type MoveOrganizationNodeMembersRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node ID.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Member UIN list.
-	MemberUin []*int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin []*int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 }
 
 func (r *MoveOrganizationNodeMembersRequest) ToJsonString() string {
@@ -1216,7 +1216,7 @@ func (r *MoveOrganizationNodeMembersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type MoveOrganizationNodeMembersResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type MoveOrganizationNodeMembersResponse struct {
@@ -1238,258 +1238,258 @@ func (r *MoveOrganizationNodeMembersResponse) FromJsonString(s string) error {
 type OrgIdentity struct {
 	// Identity ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Identity name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityAliasName *string `json:"IdentityAliasName,omitempty" name:"IdentityAliasName"`
+	IdentityAliasName *string `json:"IdentityAliasName,omitnil" name:"IdentityAliasName"`
 
 	// Description.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Identity policy.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityPolicy []*IdentityPolicy `json:"IdentityPolicy,omitempty" name:"IdentityPolicy"`
+	IdentityPolicy []*IdentityPolicy `json:"IdentityPolicy,omitnil" name:"IdentityPolicy"`
 
 	// Identity type. Valid values: `1` (preset); `2` (custom).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
+	IdentityType *uint64 `json:"IdentityType,omitnil" name:"IdentityType"`
 
 	// Update time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 }
 
 type OrgMember struct {
 	// Member UIN
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MemberUin *int64 `json:"MemberUin,omitempty" name:"MemberUin"`
+	MemberUin *int64 `json:"MemberUin,omitnil" name:"MemberUin"`
 
 	// Member name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Member type. Valid values: `Invite` (invited); `Create` (created).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MemberType *string `json:"MemberType,omitempty" name:"MemberType"`
+	MemberType *string `json:"MemberType,omitnil" name:"MemberType"`
 
 	// Relationship policy type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgPolicyType *string `json:"OrgPolicyType,omitempty" name:"OrgPolicyType"`
+	OrgPolicyType *string `json:"OrgPolicyType,omitnil" name:"OrgPolicyType"`
 
 	// Relationship policy name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgPolicyName *string `json:"OrgPolicyName,omitempty" name:"OrgPolicyName"`
+	OrgPolicyName *string `json:"OrgPolicyName,omitnil" name:"OrgPolicyName"`
 
 	// Relationship policy permission
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgPermission []*OrgPermission `json:"OrgPermission,omitempty" name:"OrgPermission"`
+	OrgPermission []*OrgPermission `json:"OrgPermission,omitnil" name:"OrgPermission"`
 
 	// Node ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Node name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NodeName *string `json:"NodeName,omitempty" name:"NodeName"`
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
 
 	// Remarks
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 
 	// Creation time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Whether the member is allowed to leave. Valid values: `Allow`, `Denied`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsAllowQuit *string `json:"IsAllowQuit,omitempty" name:"IsAllowQuit"`
+	IsAllowQuit *string `json:"IsAllowQuit,omitnil" name:"IsAllowQuit"`
 
 	// Payer UIN
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayUin *string `json:"PayUin,omitempty" name:"PayUin"`
+	PayUin *string `json:"PayUin,omitnil" name:"PayUin"`
 
 	// Payer name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayName *string `json:"PayName,omitempty" name:"PayName"`
+	PayName *string `json:"PayName,omitnil" name:"PayName"`
 
 	// Management identity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgIdentity []*MemberIdentity `json:"OrgIdentity,omitempty" name:"OrgIdentity"`
+	OrgIdentity []*MemberIdentity `json:"OrgIdentity,omitnil" name:"OrgIdentity"`
 
 	// Security information binding status. Valid values: `Unbound`, `Valid`, `Success`, `Failed`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BindStatus *string `json:"BindStatus,omitempty" name:"BindStatus"`
+	BindStatus *string `json:"BindStatus,omitnil" name:"BindStatus"`
 
 	// Member permission status. Valid values: `Confirmed`, `UnConfirmed`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PermissionStatus *string `json:"PermissionStatus,omitempty" name:"PermissionStatus"`
+	PermissionStatus *string `json:"PermissionStatus,omitnil" name:"PermissionStatus"`
 }
 
 type OrgMemberAuthAccount struct {
 	// Organization sub-account UIN.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgSubAccountUin *int64 `json:"OrgSubAccountUin,omitempty" name:"OrgSubAccountUin"`
+	OrgSubAccountUin *int64 `json:"OrgSubAccountUin,omitnil" name:"OrgSubAccountUin"`
 
 	// Policy ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// Policy name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+	PolicyName *string `json:"PolicyName,omitnil" name:"PolicyName"`
 
 	// Identity ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Identity role name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityRoleName *string `json:"IdentityRoleName,omitempty" name:"IdentityRoleName"`
+	IdentityRoleName *string `json:"IdentityRoleName,omitnil" name:"IdentityRoleName"`
 
 	// Identity role alias.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitempty" name:"IdentityRoleAliasName"`
+	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitnil" name:"IdentityRoleAliasName"`
 
 	// Creation time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Sub-account name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrgSubAccountName *string `json:"OrgSubAccountName,omitempty" name:"OrgSubAccountName"`
+	OrgSubAccountName *string `json:"OrgSubAccountName,omitnil" name:"OrgSubAccountName"`
 }
 
 type OrgMemberAuthIdentity struct {
 	// Identity ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Role name of an identity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityRoleName *string `json:"IdentityRoleName,omitempty" name:"IdentityRoleName"`
+	IdentityRoleName *string `json:"IdentityRoleName,omitnil" name:"IdentityRoleName"`
 
 	// Role alias of an identity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitempty" name:"IdentityRoleAliasName"`
+	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitnil" name:"IdentityRoleAliasName"`
 
 	// Description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Identity type (`1`: Preset; `2`: Custom)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityType *uint64 `json:"IdentityType,omitempty" name:"IdentityType"`
+	IdentityType *uint64 `json:"IdentityType,omitnil" name:"IdentityType"`
 }
 
 type OrgMemberPolicy struct {
 	// Policy ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolicyId *int64 `json:"PolicyId,omitempty" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
 
 	// Policy name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolicyName *string `json:"PolicyName,omitempty" name:"PolicyName"`
+	PolicyName *string `json:"PolicyName,omitnil" name:"PolicyName"`
 
 	// Identity ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityId *int64 `json:"IdentityId,omitempty" name:"IdentityId"`
+	IdentityId *int64 `json:"IdentityId,omitnil" name:"IdentityId"`
 
 	// Identity role name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityRoleName *string `json:"IdentityRoleName,omitempty" name:"IdentityRoleName"`
+	IdentityRoleName *string `json:"IdentityRoleName,omitnil" name:"IdentityRoleName"`
 
 	// Identity role alias.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitempty" name:"IdentityRoleAliasName"`
+	IdentityRoleAliasName *string `json:"IdentityRoleAliasName,omitnil" name:"IdentityRoleAliasName"`
 
 	// Description.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 }
 
 type OrgNode struct {
 	// Organization node ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NodeId *int64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Parent node ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ParentNodeId *int64 `json:"ParentNodeId,omitempty" name:"ParentNodeId"`
+	ParentNodeId *int64 `json:"ParentNodeId,omitnil" name:"ParentNodeId"`
 
 	// Remarks
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 
 	// Creation time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 }
 
 type OrgPermission struct {
 	// Permission ID
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Permission name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 }
 
 // Predefined struct for user
 type UpdateOrganizationNodeRequestParams struct {
 	// Node ID.
-	NodeId *uint64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *uint64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Node name, which can contain up to 40 letters, digits, and symbols `+@&._[]-`.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 }
 
 type UpdateOrganizationNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Node ID.
-	NodeId *uint64 `json:"NodeId,omitempty" name:"NodeId"`
+	NodeId *uint64 `json:"NodeId,omitnil" name:"NodeId"`
 
 	// Node name, which can contain up to 40 letters, digits, and symbols `+@&._[]-`.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 }
 
 func (r *UpdateOrganizationNodeRequest) ToJsonString() string {
@@ -1516,7 +1516,7 @@ func (r *UpdateOrganizationNodeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateOrganizationNodeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateOrganizationNodeResponse struct {

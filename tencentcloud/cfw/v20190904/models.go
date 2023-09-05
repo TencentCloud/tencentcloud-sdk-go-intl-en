@@ -15,68 +15,68 @@
 package v20190904
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type AcListsData struct {
 	// Rule ID
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Access source
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SourceIp *string `json:"SourceIp,omitempty" name:"SourceIp"`
+	SourceIp *string `json:"SourceIp,omitnil" name:"SourceIp"`
 
 	// Access destination
 	// Note: This field may return `null`, indicating that no valid value was found.
-	TargetIp *string `json:"TargetIp,omitempty" name:"TargetIp"`
+	TargetIp *string `json:"TargetIp,omitnil" name:"TargetIp"`
 
 	// Protocol
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Port
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Policy
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Strategy *uint64 `json:"Strategy,omitempty" name:"Strategy"`
+	Strategy *uint64 `json:"Strategy,omitnil" name:"Strategy"`
 
 	// Description
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Detail *string `json:"Detail,omitempty" name:"Detail"`
+	Detail *string `json:"Detail,omitnil" name:"Detail"`
 
 	// Hit count
-	Count *uint64 `json:"Count,omitempty" name:"Count"`
+	Count *uint64 `json:"Count,omitnil" name:"Count"`
 
 	// Priority
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Alert rule ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	LogId *string `json:"LogId,omitempty" name:"LogId"`
+	LogId *string `json:"LogId,omitnil" name:"LogId"`
 }
 
 // Predefined struct for user
 type AddAcRuleRequestParams struct {
 	// -1: lowest priority; 1: highest priority
-	OrderIndex *string `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *string `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// The action that Cloud Firewall performs on the traffic. Valid values:
 	// accept: allow
 	// drop: deny
 	// log: observe
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// The traffic direction for access control rules. Valid values:
 	// in: incoming traffic access control
 	// out: outgoing traffic access control
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
+	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// The description of access control rules.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The type of source address in access control rules. Valid values:
 	// net: source IP or range (IP or CIDR)
@@ -84,7 +84,7 @@ type AddAcRuleRequestParams struct {
 	// template: CFW address template
 	// instance: instance ID
 	// vendor: Cloud vendor
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
 
 	// The source address in the access control policy. 
 	// When `SourceType` is `net`, `SourceContent` is the source IP or CIDR block.
@@ -100,7 +100,7 @@ type AddAcRuleRequestParams struct {
 	// 
 	// When `SourceType` is `vendor`, `SourceContent` is the cloud service provider.
 	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// The type of destination address in access control rules. Valid values:
 	// net: destination IP or range (IP or CIDR)
@@ -109,7 +109,7 @@ type AddAcRuleRequestParams struct {
 	// instance: instance ID
 	// vendor: Cloud vendor
 	// domain: Domain name or IP.
-	DestType *string `json:"DestType,omitempty" name:"DestType"`
+	DestType *string `json:"DestType,omitnil" name:"DestType"`
 
 	// The destination address in the access control policy. 
 	// When `DestType` is `net`, `DestContent` is the destination IP or CIDR block.
@@ -128,45 +128,45 @@ type AddAcRuleRequestParams struct {
 	// 
 	// When `DestType`, `DestContent` is the selected cloud service provider.
 	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	DestContent *string `json:"DestContent,omitempty" name:"DestContent"`
+	DestContent *string `json:"DestContent,omitnil" name:"DestContent"`
 
 	// The port to apply access control rules. Valid values:
 	// -1/-1: all ports
 	// 80,443: 80 or 443
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// The protocol type of traffic in access control rules. Valid value: TCP. Only TCP is supported for edge firewall rules. If this parameter is not specified, it defaults to TCP.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// The Layer 7 protocol. Valid values:
 	// HTTP/HTTPS
 	// TLS/SSL
-	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+	ApplicationName *string `json:"ApplicationName,omitnil" name:"ApplicationName"`
 
 	// Indicates whether to enable the rules. Default: enable. Valid values:
 	// true: enable; false: disable
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 }
 
 type AddAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// -1: lowest priority; 1: highest priority
-	OrderIndex *string `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *string `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// The action that Cloud Firewall performs on the traffic. Valid values:
 	// accept: allow
 	// drop: deny
 	// log: observe
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// The traffic direction for access control rules. Valid values:
 	// in: incoming traffic access control
 	// out: outgoing traffic access control
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
+	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// The description of access control rules.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The type of source address in access control rules. Valid values:
 	// net: source IP or range (IP or CIDR)
@@ -174,7 +174,7 @@ type AddAcRuleRequest struct {
 	// template: CFW address template
 	// instance: instance ID
 	// vendor: Cloud vendor
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
 
 	// The source address in the access control policy. 
 	// When `SourceType` is `net`, `SourceContent` is the source IP or CIDR block.
@@ -190,7 +190,7 @@ type AddAcRuleRequest struct {
 	// 
 	// When `SourceType` is `vendor`, `SourceContent` is the cloud service provider.
 	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// The type of destination address in access control rules. Valid values:
 	// net: destination IP or range (IP or CIDR)
@@ -199,7 +199,7 @@ type AddAcRuleRequest struct {
 	// instance: instance ID
 	// vendor: Cloud vendor
 	// domain: Domain name or IP.
-	DestType *string `json:"DestType,omitempty" name:"DestType"`
+	DestType *string `json:"DestType,omitnil" name:"DestType"`
 
 	// The destination address in the access control policy. 
 	// When `DestType` is `net`, `DestContent` is the destination IP or CIDR block.
@@ -218,24 +218,24 @@ type AddAcRuleRequest struct {
 	// 
 	// When `DestType`, `DestContent` is the selected cloud service provider.
 	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	DestContent *string `json:"DestContent,omitempty" name:"DestContent"`
+	DestContent *string `json:"DestContent,omitnil" name:"DestContent"`
 
 	// The port to apply access control rules. Valid values:
 	// -1/-1: all ports
 	// 80,443: 80 or 443
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// The protocol type of traffic in access control rules. Valid value: TCP. Only TCP is supported for edge firewall rules. If this parameter is not specified, it defaults to TCP.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// The Layer 7 protocol. Valid values:
 	// HTTP/HTTPS
 	// TLS/SSL
-	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+	ApplicationName *string `json:"ApplicationName,omitnil" name:"ApplicationName"`
 
 	// Indicates whether to enable the rules. Default: enable. Valid values:
 	// true: enable; false: disable
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 }
 
 func (r *AddAcRuleRequest) ToJsonString() string {
@@ -271,16 +271,16 @@ func (r *AddAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddAcRuleResponseParams struct {
 	// UUID of the new rule
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// 0: operation successful; -1: operation failed
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// success: operation successful; failed: operation failed
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddAcRuleResponse struct {
@@ -302,32 +302,32 @@ func (r *AddAcRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AddEnterpriseSecurityGroupRulesRequestParams struct {
 	// Creates rule data
-	Data []*SecurityGroupRule `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupRule `json:"Data,omitnil" name:"Data"`
 
 	// Adding type. 0: add to the end; 1: add to the front; 2: insert. Default: 0
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// An identifier to ensure the idempotency of the request. The value of the ClientToken parameter is a unique string that is generated by your client and can contain up to 64 ASCII characters in length.
-	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitnil" name:"ClientToken"`
 
 	// Indicates whether to delay publishing. 1: delay; other values: do not delay
-	IsDelay *uint64 `json:"IsDelay,omitempty" name:"IsDelay"`
+	IsDelay *uint64 `json:"IsDelay,omitnil" name:"IsDelay"`
 }
 
 type AddEnterpriseSecurityGroupRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Creates rule data
-	Data []*SecurityGroupRule `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupRule `json:"Data,omitnil" name:"Data"`
 
 	// Adding type. 0: add to the end; 1: add to the front; 2: insert. Default: 0
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// An identifier to ensure the idempotency of the request. The value of the ClientToken parameter is a unique string that is generated by your client and can contain up to 64 ASCII characters in length.
-	ClientToken *string `json:"ClientToken,omitempty" name:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitnil" name:"ClientToken"`
 
 	// Indicates whether to delay publishing. 1: delay; other values: do not delay
-	IsDelay *uint64 `json:"IsDelay,omitempty" name:"IsDelay"`
+	IsDelay *uint64 `json:"IsDelay,omitnil" name:"IsDelay"`
 }
 
 func (r *AddEnterpriseSecurityGroupRulesRequest) ToJsonString() string {
@@ -355,10 +355,10 @@ func (r *AddEnterpriseSecurityGroupRulesRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type AddEnterpriseSecurityGroupRulesResponseParams struct {
 	// Status value. 0: added successfully; non-0: failed to add
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddEnterpriseSecurityGroupRulesResponse struct {
@@ -380,20 +380,20 @@ func (r *AddEnterpriseSecurityGroupRulesResponse) FromJsonString(s string) error
 // Predefined struct for user
 type AddNatAcRuleRequestParams struct {
 	// NAT access control rules to be added.
-	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+	Rules []*CreateNatRuleItem `json:"Rules,omitnil" name:"Rules"`
 
 	// Source of the rules to be added. Generally, this parameter is not used. The value insert_rule indicates that rules in the specified location are inserted, and the value batch_import indicates that rules are imported in batches. If the parameter is left empty, rules defined in the API request are added.
-	From *string `json:"From,omitempty" name:"From"`
+	From *string `json:"From,omitnil" name:"From"`
 }
 
 type AddNatAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// NAT access control rules to be added.
-	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+	Rules []*CreateNatRuleItem `json:"Rules,omitnil" name:"Rules"`
 
 	// Source of the rules to be added. Generally, this parameter is not used. The value insert_rule indicates that rules in the specified location are inserted, and the value batch_import indicates that rules are imported in batches. If the parameter is left empty, rules defined in the API request are added.
-	From *string `json:"From,omitempty" name:"From"`
+	From *string `json:"From,omitnil" name:"From"`
 }
 
 func (r *AddNatAcRuleRequest) ToJsonString() string {
@@ -419,10 +419,10 @@ func (r *AddNatAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddNatAcRuleResponseParams struct {
 	// ID list of new rules.
-	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid []*int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddNatAcRuleResponse struct {
@@ -443,151 +443,151 @@ func (r *AddNatAcRuleResponse) FromJsonString(s string) error {
 
 type AssetZone struct {
 	// Region
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Region
-	ZoneEng *string `json:"ZoneEng,omitempty" name:"ZoneEng"`
+	ZoneEng *string `json:"ZoneEng,omitnil" name:"ZoneEng"`
 }
 
 type AssociatedInstanceInfo struct {
 	// Instance ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Instance type. 3: CVM instance; 4: CLB instance; 5: ENI instance; 6: Cloud database
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// VPC ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// VPC name
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+	VpcName *string `json:"VpcName,omitnil" name:"VpcName"`
 
 	// Public IP
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PublicIp *string `json:"PublicIp,omitempty" name:"PublicIp"`
+	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
 
 	// Private IP
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
+	Ip *string `json:"Ip,omitnil" name:"Ip"`
 
 	// The number of associated security groups
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SecurityGroupCount *uint64 `json:"SecurityGroupCount,omitempty" name:"SecurityGroupCount"`
+	SecurityGroupCount *uint64 `json:"SecurityGroupCount,omitnil" name:"SecurityGroupCount"`
 }
 
 type BetaInfoByACL struct {
 	// Task ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// Task name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TaskName *string `json:"TaskName,omitempty" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
 
 	// Last execution time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastTime *string `json:"LastTime,omitempty" name:"LastTime"`
+	LastTime *string `json:"LastTime,omitnil" name:"LastTime"`
 }
 
 type BlockIgnoreRule struct {
 	// Domain name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
 	// Rule IP.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ioc *string `json:"Ioc,omitempty" name:"Ioc"`
+	Ioc *string `json:"Ioc,omitnil" name:"Ioc"`
 
 	// Threat level.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Level *string `json:"Level,omitempty" name:"Level"`
+	Level *string `json:"Level,omitnil" name:"Level"`
 
 	// Source event name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventName *string `json:"EventName,omitempty" name:"EventName"`
+	EventName *string `json:"EventName,omitnil" name:"EventName"`
 
 	// Direction. Valid values: 0: outbound; 1: inbound.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Direction *int64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *int64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Protocol.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Address.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// Rule type. Valid values: 1: block; 2: allow.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Action *int64 `json:"Action,omitempty" name:"Action"`
+	Action *int64 `json:"Action,omitnil" name:"Action"`
 
 	// Time when a rule starts to take effect.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Time when a rule expires.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Reason for ignoring.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IgnoreReason *string `json:"IgnoreReason,omitempty" name:"IgnoreReason"`
+	IgnoreReason *string `json:"IgnoreReason,omitnil" name:"IgnoreReason"`
 
 	// Security event source.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Source *string `json:"Source,omitempty" name:"Source"`
+	Source *string `json:"Source,omitnil" name:"Source"`
 
 	// Rule ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UniqueId *string `json:"UniqueId,omitempty" name:"UniqueId"`
+	UniqueId *string `json:"UniqueId,omitnil" name:"UniqueId"`
 
 	// Number of rule matching times.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MatchTimes *int64 `json:"MatchTimes,omitempty" name:"MatchTimes"`
+	MatchTimes *int64 `json:"MatchTimes,omitnil" name:"MatchTimes"`
 
 	// Country.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Country *string `json:"Country,omitempty" name:"Country"`
+	Country *string `json:"Country,omitnil" name:"Country"`
 
 
-	Comment *string `json:"Comment,omitempty" name:"Comment"`
+	Comment *string `json:"Comment,omitnil" name:"Comment"`
 }
 
 type CfwNatDnatRule struct {
 	// Network protocol. Valid values: TCP or UDP.
-	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+	IpProtocol *string `json:"IpProtocol,omitnil" name:"IpProtocol"`
 
 	// Elastic IP.
-	PublicIpAddress *string `json:"PublicIpAddress,omitempty" name:"PublicIpAddress"`
+	PublicIpAddress *string `json:"PublicIpAddress,omitnil" name:"PublicIpAddress"`
 
 	// Public port.
-	PublicPort *int64 `json:"PublicPort,omitempty" name:"PublicPort"`
+	PublicPort *int64 `json:"PublicPort,omitnil" name:"PublicPort"`
 
 	// Private address.
-	PrivateIpAddress *string `json:"PrivateIpAddress,omitempty" name:"PrivateIpAddress"`
+	PrivateIpAddress *string `json:"PrivateIpAddress,omitnil" name:"PrivateIpAddress"`
 
 	// Private port.
-	PrivatePort *int64 `json:"PrivatePort,omitempty" name:"PrivatePort"`
+	PrivatePort *int64 `json:"PrivatePort,omitnil" name:"PrivatePort"`
 
 	// The description of NAT firewall forwarding rules.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CommonFilter struct {
 	// Search key.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Search values.
-	Values []*string `json:"Values,omitempty" name:"Values"`
+	Values []*string `json:"Values,omitnil" name:"Values"`
 
 	// Enum of integers that represent relations between Name and Values.
 	// enum FilterOperatorType {
@@ -618,62 +618,62 @@ type CommonFilter struct {
 	//     // Regular
 	//     FILTER_OPERATOR_TYPE_REGULAR = 12;
 	// }
-	OperatorType *int64 `json:"OperatorType,omitempty" name:"OperatorType"`
+	OperatorType *int64 `json:"OperatorType,omitnil" name:"OperatorType"`
 }
 
 // Predefined struct for user
 type CreateAcRulesRequestParams struct {
 	// Creates rule data
-	Data []*RuleInfoData `json:"Data,omitempty" name:"Data"`
+	Data []*RuleInfoData `json:"Data,omitnil" name:"Data"`
 
 	// 0: add (default); 1: insert
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// Edge ID
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Access control rule status
-	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
 
 	// 0: add; 1: overwrite
-	Overwrite *uint64 `json:"Overwrite,omitempty" name:"Overwrite"`
+	Overwrite *uint64 `json:"Overwrite,omitnil" name:"Overwrite"`
 
 	// NAT instance ID, required when the parameter Area exists
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// portScan: from port scanning; patchImport: from batch import
-	From *string `json:"From,omitempty" name:"From"`
+	From *string `json:"From,omitnil" name:"From"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 type CreateAcRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Creates rule data
-	Data []*RuleInfoData `json:"Data,omitempty" name:"Data"`
+	Data []*RuleInfoData `json:"Data,omitnil" name:"Data"`
 
 	// 0: add (default); 1: insert
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// Edge ID
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Access control rule status
-	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
 
 	// 0: add; 1: overwrite
-	Overwrite *uint64 `json:"Overwrite,omitempty" name:"Overwrite"`
+	Overwrite *uint64 `json:"Overwrite,omitnil" name:"Overwrite"`
 
 	// NAT instance ID, required when the parameter Area exists
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// portScan: from port scanning; patchImport: from batch import
-	From *string `json:"From,omitempty" name:"From"`
+	From *string `json:"From,omitnil" name:"From"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 func (r *CreateAcRulesRequest) ToJsonString() string {
@@ -705,14 +705,14 @@ func (r *CreateAcRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAcRulesResponseParams struct {
 	// Status value. 0: operation successful
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Returns redundant information
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Info *string `json:"Info,omitempty" name:"Info"`
+	Info *string `json:"Info,omitnil" name:"Info"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateAcRulesResponse struct {
@@ -734,62 +734,62 @@ func (r *CreateAcRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateNatFwInstanceRequestParams struct {
 	// Firewall instance name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Bandwidth
-	Width *int64 `json:"Width,omitempty" name:"Width"`
+	Width *int64 `json:"Width,omitnil" name:"Width"`
 
 	// Mode. 1: use existing; 0: create new
-	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *int64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Parameter passed for the Create New mode. Either NewModeItems or NatgwList is required.
-	NewModeItems *NewModeItems `json:"NewModeItems,omitempty" name:"NewModeItems"`
+	NewModeItems *NewModeItems `json:"NewModeItems,omitnil" name:"NewModeItems"`
 
 	// NAT gateway list for the Using Existing mode. Either NewModeItems or NatgwList is required.
-	NatGwList []*string `json:"NatGwList,omitempty" name:"NatGwList"`
+	NatGwList []*string `json:"NatGwList,omitnil" name:"NatGwList"`
 
 	// Primary zone. The default zone is selected if it is empty.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Secondary zone. The default zone is selected if it is empty.
-	ZoneBak *string `json:"ZoneBak,omitempty" name:"ZoneBak"`
+	ZoneBak *string `json:"ZoneBak,omitnil" name:"ZoneBak"`
 
 	// Remote disaster recovery. 1: enable; 0: disable; empty: disable by default
-	CrossAZone *int64 `json:"CrossAZone,omitempty" name:"CrossAZone"`
+	CrossAZone *int64 `json:"CrossAZone,omitnil" name:"CrossAZone"`
 
 	// IP range of the firewall
-	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitnil" name:"FwCidrInfo"`
 }
 
 type CreateNatFwInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Firewall instance name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Bandwidth
-	Width *int64 `json:"Width,omitempty" name:"Width"`
+	Width *int64 `json:"Width,omitnil" name:"Width"`
 
 	// Mode. 1: use existing; 0: create new
-	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *int64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Parameter passed for the Create New mode. Either NewModeItems or NatgwList is required.
-	NewModeItems *NewModeItems `json:"NewModeItems,omitempty" name:"NewModeItems"`
+	NewModeItems *NewModeItems `json:"NewModeItems,omitnil" name:"NewModeItems"`
 
 	// NAT gateway list for the Using Existing mode. Either NewModeItems or NatgwList is required.
-	NatGwList []*string `json:"NatGwList,omitempty" name:"NatGwList"`
+	NatGwList []*string `json:"NatGwList,omitnil" name:"NatGwList"`
 
 	// Primary zone. The default zone is selected if it is empty.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Secondary zone. The default zone is selected if it is empty.
-	ZoneBak *string `json:"ZoneBak,omitempty" name:"ZoneBak"`
+	ZoneBak *string `json:"ZoneBak,omitnil" name:"ZoneBak"`
 
 	// Remote disaster recovery. 1: enable; 0: disable; empty: disable by default
-	CrossAZone *int64 `json:"CrossAZone,omitempty" name:"CrossAZone"`
+	CrossAZone *int64 `json:"CrossAZone,omitnil" name:"CrossAZone"`
 
 	// IP range of the firewall
-	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitnil" name:"FwCidrInfo"`
 }
 
 func (r *CreateNatFwInstanceRequest) ToJsonString() string {
@@ -822,10 +822,10 @@ func (r *CreateNatFwInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateNatFwInstanceResponseParams struct {
 	// Firewall instance ID
-	CfwInsId *string `json:"CfwInsId,omitempty" name:"CfwInsId"`
+	CfwInsId *string `json:"CfwInsId,omitnil" name:"CfwInsId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateNatFwInstanceResponse struct {
@@ -847,74 +847,74 @@ func (r *CreateNatFwInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateNatFwInstanceWithDomainRequestParams struct {
 	// Firewall instance name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Bandwidth
-	Width *int64 `json:"Width,omitempty" name:"Width"`
+	Width *int64 `json:"Width,omitnil" name:"Width"`
 
 	// Mode. 1: use existing; 0: create new
-	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *int64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Parameter passed for the Create New mode. Either NewModeItems or NatgwList is required.
-	NewModeItems *NewModeItems `json:"NewModeItems,omitempty" name:"NewModeItems"`
+	NewModeItems *NewModeItems `json:"NewModeItems,omitnil" name:"NewModeItems"`
 
 	// NAT gateway list for the Using Existing mode. Either NewModeItems or NatgwList is required.
-	NatGwList []*string `json:"NatGwList,omitempty" name:"NatGwList"`
+	NatGwList []*string `json:"NatGwList,omitnil" name:"NatGwList"`
 
 	// Primary zone. The default zone is selected if it is empty.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Secondary zone. The default zone is selected if it is empty.
-	ZoneBak *string `json:"ZoneBak,omitempty" name:"ZoneBak"`
+	ZoneBak *string `json:"ZoneBak,omitnil" name:"ZoneBak"`
 
 	// Remote disaster recovery. 1: enable; 0: disable; empty: disable by default
-	CrossAZone *int64 `json:"CrossAZone,omitempty" name:"CrossAZone"`
+	CrossAZone *int64 `json:"CrossAZone,omitnil" name:"CrossAZone"`
 
 	// 0: not create; 1: create
-	IsCreateDomain *int64 `json:"IsCreateDomain,omitempty" name:"IsCreateDomain"`
+	IsCreateDomain *int64 `json:"IsCreateDomain,omitnil" name:"IsCreateDomain"`
 
 	// Required for creating a domain name
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
 	// IP range of the firewall
-	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitnil" name:"FwCidrInfo"`
 }
 
 type CreateNatFwInstanceWithDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Firewall instance name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Bandwidth
-	Width *int64 `json:"Width,omitempty" name:"Width"`
+	Width *int64 `json:"Width,omitnil" name:"Width"`
 
 	// Mode. 1: use existing; 0: create new
-	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *int64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Parameter passed for the Create New mode. Either NewModeItems or NatgwList is required.
-	NewModeItems *NewModeItems `json:"NewModeItems,omitempty" name:"NewModeItems"`
+	NewModeItems *NewModeItems `json:"NewModeItems,omitnil" name:"NewModeItems"`
 
 	// NAT gateway list for the Using Existing mode. Either NewModeItems or NatgwList is required.
-	NatGwList []*string `json:"NatGwList,omitempty" name:"NatGwList"`
+	NatGwList []*string `json:"NatGwList,omitnil" name:"NatGwList"`
 
 	// Primary zone. The default zone is selected if it is empty.
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Secondary zone. The default zone is selected if it is empty.
-	ZoneBak *string `json:"ZoneBak,omitempty" name:"ZoneBak"`
+	ZoneBak *string `json:"ZoneBak,omitnil" name:"ZoneBak"`
 
 	// Remote disaster recovery. 1: enable; 0: disable; empty: disable by default
-	CrossAZone *int64 `json:"CrossAZone,omitempty" name:"CrossAZone"`
+	CrossAZone *int64 `json:"CrossAZone,omitnil" name:"CrossAZone"`
 
 	// 0: not create; 1: create
-	IsCreateDomain *int64 `json:"IsCreateDomain,omitempty" name:"IsCreateDomain"`
+	IsCreateDomain *int64 `json:"IsCreateDomain,omitnil" name:"IsCreateDomain"`
 
 	// Required for creating a domain name
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
 	// IP range of the firewall
-	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitnil" name:"FwCidrInfo"`
 }
 
 func (r *CreateNatFwInstanceWithDomainRequest) ToJsonString() string {
@@ -950,10 +950,10 @@ func (r *CreateNatFwInstanceWithDomainRequest) FromJsonString(s string) error {
 type CreateNatFwInstanceWithDomainResponseParams struct {
 	// NAT instance info
 	// Note: This field may return `null`, indicating that no valid value was found.
-	CfwInsId *string `json:"CfwInsId,omitempty" name:"CfwInsId"`
+	CfwInsId *string `json:"CfwInsId,omitnil" name:"CfwInsId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateNatFwInstanceWithDomainResponse struct {
@@ -974,71 +974,71 @@ func (r *CreateNatFwInstanceWithDomainResponse) FromJsonString(s string) error {
 
 type CreateNatRuleItem struct {
 	// Access source. Example: `net: IP/CIDR(192.168.0.2)`
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// Access source type. Values for inbound rules: `ip`, `net`, `template`, and `location`. Values for outbound rules: `ip`, `net`, `template`, `instance`, `group`, and `tag`.
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
 
 	// Access target. Example: `net: IP/CIDR(192.168.0.2); domain: domain name rule, e.g., *.qq.com
-	TargetContent *string `json:"TargetContent,omitempty" name:"TargetContent"`
+	TargetContent *string `json:"TargetContent,omitnil" name:"TargetContent"`
 
 	// Access target type. Values for inbound rules: `ip`, `net`, `template`, `instance`, `group`, and `tag`. Values for outbound rules: `ip`, `net`, `domain`, `template`, and `location`.
-	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+	TargetType *string `json:"TargetType,omitnil" name:"TargetType"`
 
 	// Protocol. Values: `TCP`, `UDP`, `ICMP`, `ANY`, `HTTP`, `HTTPS`, `HTTP/HTTPS`, `SMTP`, `SMTPS`, `SMTP/SMTPS`, `FTP`, and `DNS`.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Specify how the CFW instance deals with the traffic hit the access control rule. Values: `accept` (allow), `drop` (reject), and `log` (observe).
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// The port of the access control rule. Values: `-1/-1` (all ports) and `80` (Port 80)
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Rule direction. Values: `1` (Inbound) and `0` (Outbound)
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Rule sequence number
-	OrderIndex *int64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *int64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Rule status. `true` (Enabled); `false` (Disabled)
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 
 	// The unique ID of the rule, which is not required when you create a rule.
-	Uuid *int64 `json:"Uuid,omitempty" name:"Uuid"`
+	Uuid *int64 `json:"Uuid,omitnil" name:"Uuid"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 // Predefined struct for user
 type CreateSecurityGroupRulesRequestParams struct {
 	// Added enterprise security group rule data
-	Data []*SecurityGroupListData `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupListData `json:"Data,omitnil" name:"Data"`
 
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// 0: at the end; 1: at the top; 2: in the middle. 0 by default
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// Indicates whether to enable rules after addition. 0: disable; 1: enable. 1 by default
-	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *uint64 `json:"Enable,omitnil" name:"Enable"`
 }
 
 type CreateSecurityGroupRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Added enterprise security group rule data
-	Data []*SecurityGroupListData `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupListData `json:"Data,omitnil" name:"Data"`
 
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// 0: at the end; 1: at the top; 2: in the middle. 0 by default
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 
 	// Indicates whether to enable rules after addition. 0: disable; 1: enable. 1 by default
-	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *uint64 `json:"Enable,omitnil" name:"Enable"`
 }
 
 func (r *CreateSecurityGroupRulesRequest) ToJsonString() string {
@@ -1066,10 +1066,10 @@ func (r *CreateSecurityGroupRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSecurityGroupRulesResponseParams struct {
 	// Status value. 0: added successfully; non-0: failed to add
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateSecurityGroupRulesResponse struct {
@@ -1091,32 +1091,32 @@ func (r *CreateSecurityGroupRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAcRuleRequestParams struct {
 	// The ID of the rule to delete. It can be queried via the DescribeAcLists API.
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Edge ID between two VPCs
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// NAT region, e.g. ap-shanghai/ap-guangzhou/ap-chongqing
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 type DeleteAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of the rule to delete. It can be queried via the DescribeAcLists API.
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Edge ID between two VPCs
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// NAT region, e.g. ap-shanghai/ap-guangzhou/ap-chongqing
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 func (r *DeleteAcRuleRequest) ToJsonString() string {
@@ -1144,14 +1144,14 @@ func (r *DeleteAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAcRuleResponseParams struct {
 	// Status value. 0: deleted successfully; !0: deletion failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Returns redundant information
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Info *string `json:"Info,omitempty" name:"Info"`
+	Info *string `json:"Info,omitnil" name:"Info"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAcRuleResponse struct {
@@ -1173,26 +1173,26 @@ func (r *DeleteAcRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAllAccessControlRuleRequestParams struct {
 	// Direction. 0: outbound; 1: inbound. 0 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Deletes all the access control rules for inter-VPC firewall toggles associated with the EdgeId. It is empty by default. Enter either EdgeId or Area.
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Deletes all the access control rules for NAT firewalls of this region. It is empty by default. Enter either EdgeId or Area.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 type DeleteAllAccessControlRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Direction. 0: outbound; 1: inbound. 0 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Deletes all the access control rules for inter-VPC firewall toggles associated with the EdgeId. It is empty by default. Enter either EdgeId or Area.
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Deletes all the access control rules for NAT firewalls of this region. It is empty by default. Enter either EdgeId or Area.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 func (r *DeleteAllAccessControlRuleRequest) ToJsonString() string {
@@ -1219,14 +1219,14 @@ func (r *DeleteAllAccessControlRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAllAccessControlRuleResponseParams struct {
 	// Status of the task. `0`: Modified successfully; Others: Modification failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Number of access control rules deleted.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Info *int64 `json:"Info,omitempty" name:"Info"`
+	Info *int64 `json:"Info,omitnil" name:"Info"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAllAccessControlRuleResponse struct {
@@ -1248,14 +1248,14 @@ func (r *DeleteAllAccessControlRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteResourceGroupRequestParams struct {
 	// Group ID
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 }
 
 type DeleteResourceGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Group ID
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 }
 
 func (r *DeleteResourceGroupRequest) ToJsonString() string {
@@ -1280,7 +1280,7 @@ func (r *DeleteResourceGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteResourceGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteResourceGroupResponse struct {
@@ -1302,32 +1302,32 @@ func (r *DeleteResourceGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecurityGroupRuleRequestParams struct {
 	// ID of the rule to delete
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Tencent Cloud region (abbreviation)
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Indicates whether to delete the reverse rule. 0: no; 1: yes
-	IsDelReverse *uint64 `json:"IsDelReverse,omitempty" name:"IsDelReverse"`
+	IsDelReverse *uint64 `json:"IsDelReverse,omitnil" name:"IsDelReverse"`
 }
 
 type DeleteSecurityGroupRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the rule to delete
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Tencent Cloud region (abbreviation)
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Indicates whether to delete the reverse rule. 0: no; 1: yes
-	IsDelReverse *uint64 `json:"IsDelReverse,omitempty" name:"IsDelReverse"`
+	IsDelReverse *uint64 `json:"IsDelReverse,omitnil" name:"IsDelReverse"`
 }
 
 func (r *DeleteSecurityGroupRuleRequest) ToJsonString() string {
@@ -1355,14 +1355,14 @@ func (r *DeleteSecurityGroupRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecurityGroupRuleResponseParams struct {
 	// Status value. 0: operation successful; non-0: operation failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Returns redundant information
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Info *string `json:"Info,omitempty" name:"Info"`
+	Info *string `json:"Info,omitnil" name:"Info"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteSecurityGroupRuleResponse struct {
@@ -1413,7 +1413,7 @@ func (r *DeleteVpcInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteVpcInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteVpcInstanceResponse struct {
@@ -1435,168 +1435,168 @@ func (r *DeleteVpcInstanceResponse) FromJsonString(s string) error {
 type DescAcItem struct {
 	// Access source.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// Access destination.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TargetContent *string `json:"TargetContent,omitempty" name:"TargetContent"`
+	TargetContent *string `json:"TargetContent,omitnil" name:"TargetContent"`
 
 	// Protocol.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Port.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Action that Cloud Firewall performs on the traffic. Valid values: accept (allow), drop (reject), and log (monitor).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// Description.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Number of rule matching times.
-	Count *uint64 `json:"Count,omitempty" name:"Count"`
+	Count *uint64 `json:"Count,omitnil" name:"Count"`
 
 	// Rule sequence number.
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Access source type. Valid values for an inbound rule: ip, net, template, and location; valid values for an outbound rule: ip, net, template, instance, group, and tag.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
 
 	// Access destination type. Valid values for an inbound rule: ip, net, template, instance, group, and tag; valid values for an outbound rule: ip, net, domain, template, and location.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TargetType *string `json:"TargetType,omitempty" name:"TargetType"`
+	TargetType *string `json:"TargetType,omitnil" name:"TargetType"`
 
 	// Unique ID of the rule.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Uuid *uint64 `json:"Uuid,omitempty" name:"Uuid"`
+	Uuid *uint64 `json:"Uuid,omitnil" name:"Uuid"`
 
 	// Rule validity.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Invalid *uint64 `json:"Invalid,omitempty" name:"Invalid"`
+	Invalid *uint64 `json:"Invalid,omitnil" name:"Invalid"`
 
 	// Valid values: 0: common rules; 1: regional rules.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsRegion *uint64 `json:"IsRegion,omitempty" name:"IsRegion"`
+	IsRegion *uint64 `json:"IsRegion,omitnil" name:"IsRegion"`
 
 	// Country ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CountryCode *uint64 `json:"CountryCode,omitempty" name:"CountryCode"`
+	CountryCode *uint64 `json:"CountryCode,omitnil" name:"CountryCode"`
 
 	// City ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CityCode *uint64 `json:"CityCode,omitempty" name:"CityCode"`
+	CityCode *uint64 `json:"CityCode,omitnil" name:"CityCode"`
 
 	// Country name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CountryName *string `json:"CountryName,omitempty" name:"CountryName"`
+	CountryName *string `json:"CountryName,omitnil" name:"CountryName"`
 
 	// City name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CityName *string `json:"CityName,omitempty" name:"CityName"`
+	CityName *string `json:"CityName,omitnil" name:"CityName"`
 
 	// Cloud provider code.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CloudCode *string `json:"CloudCode,omitempty" name:"CloudCode"`
+	CloudCode *string `json:"CloudCode,omitnil" name:"CloudCode"`
 
 	// Valid values: 0: common rules; 1: cloud provider rules.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsCloud *uint64 `json:"IsCloud,omitempty" name:"IsCloud"`
+	IsCloud *uint64 `json:"IsCloud,omitnil" name:"IsCloud"`
 
 	// Rule status. Valid values: true: enabled; false: disabled.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 
 	// Rule direction. Valid values: 1: inbound; 0: outbound.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Instance name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// UUID for internal use. Generally, this field is not required.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InternalUuid *int64 `json:"InternalUuid,omitempty" name:"InternalUuid"`
+	InternalUuid *int64 `json:"InternalUuid,omitnil" name:"InternalUuid"`
 
 	// Rule status. This field is valid when you query rule matching details. Valid values: 0: new; 1: deleted; 2: edited and deleted.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Details of associated tasks
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	BetaList []*BetaInfoByACL `json:"BetaList,omitempty" name:"BetaList"`
+	BetaList []*BetaInfoByACL `json:"BetaList,omitnil" name:"BetaList"`
 }
 
 // Predefined struct for user
 type DescribeAcListsRequestParams struct {
 	// Protocol
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Policy
-	Strategy *string `json:"Strategy,omitempty" name:"Strategy"`
+	Strategy *string `json:"Strategy,omitnil" name:"Strategy"`
 
 	// Search value
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Number of entries per page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Indicates whether it is outbound or inbound. 1: inbound; 0: outbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// EdgeId value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Indicates whether the rule is enabled. '0': disabled; '1': enabled. '0' by default
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 type DescribeAcListsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Protocol
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Policy
-	Strategy *string `json:"Strategy,omitempty" name:"Strategy"`
+	Strategy *string `json:"Strategy,omitnil" name:"Strategy"`
 
 	// Search value
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Number of entries per page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Indicates whether it is outbound or inbound. 1: inbound; 0: outbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// EdgeId value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Indicates whether the rule is enabled. '0': disabled; '1': enabled. '0' by default
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 func (r *DescribeAcListsRequest) ToJsonString() string {
@@ -1630,20 +1630,20 @@ func (r *DescribeAcListsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAcListsResponseParams struct {
 	// Total entries
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// Access control list data
-	Data []*AcListsData `json:"Data,omitempty" name:"Data"`
+	Data []*AcListsData `json:"Data,omitnil" name:"Data"`
 
 	// Total entries excluding the filtered ones
-	AllTotal *uint64 `json:"AllTotal,omitempty" name:"AllTotal"`
+	AllTotal *uint64 `json:"AllTotal,omitnil" name:"AllTotal"`
 
 	// All access control rules enabled/disabled
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *uint64 `json:"Enable,omitnil" name:"Enable"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAcListsResponse struct {
@@ -1665,56 +1665,56 @@ func (r *DescribeAcListsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAssociatedInstanceListRequestParams struct {
 	// List offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of records per page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Region code (e.g. ap-guangzhou). All Tencent Cloud regions are supported.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Additional search criteria (JSON string)
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Sorting field
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 
 	// Sort order. asc: ascending; desc: descending
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
 
 	// Instance type. '3': CVM instance; '4': CLB instance; '5': ENI instance; '6': Cloud database
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type DescribeAssociatedInstanceListRequest struct {
 	*tchttp.BaseRequest
 	
 	// List offset
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of records per page
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Region code (e.g. ap-guangzhou). All Tencent Cloud regions are supported.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Additional search criteria (JSON string)
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Sorting field
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 
 	// Sort order. asc: ascending; desc: descending
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
 
 	// Instance type. '3': CVM instance; '4': CLB instance; '5': ENI instance; '6': Cloud database
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 func (r *DescribeAssociatedInstanceListRequest) ToJsonString() string {
@@ -1747,14 +1747,14 @@ func (r *DescribeAssociatedInstanceListRequest) FromJsonString(s string) error {
 type DescribeAssociatedInstanceListResponseParams struct {
 	// Number of instances
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// Instance list
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Data []*AssociatedInstanceInfo `json:"Data,omitempty" name:"Data"`
+	Data []*AssociatedInstanceInfo `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAssociatedInstanceListResponse struct {
@@ -1776,56 +1776,56 @@ func (r *DescribeAssociatedInstanceListResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeBlockByIpTimesListRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// IP search criteria
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
+	Ip *string `json:"Ip,omitnil" name:"Ip"`
 
 	// Region
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Direction
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
+	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// Source
-	Source *string `json:"Source,omitempty" name:"Source"`
+	Source *string `json:"Source,omitnil" name:"Source"`
 
 	// Inter-VPC firewall toggle edge ID
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Log source. move: inter-VPC firewall
-	LogSource *string `json:"LogSource,omitempty" name:"LogSource"`
+	LogSource *string `json:"LogSource,omitnil" name:"LogSource"`
 }
 
 type DescribeBlockByIpTimesListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// IP search criteria
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
+	Ip *string `json:"Ip,omitnil" name:"Ip"`
 
 	// Region
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Direction
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
+	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// Source
-	Source *string `json:"Source,omitempty" name:"Source"`
+	Source *string `json:"Source,omitnil" name:"Source"`
 
 	// Inter-VPC firewall toggle edge ID
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Log source. move: inter-VPC firewall
-	LogSource *string `json:"LogSource,omitempty" name:"LogSource"`
+	LogSource *string `json:"LogSource,omitnil" name:"LogSource"`
 }
 
 func (r *DescribeBlockByIpTimesListRequest) ToJsonString() string {
@@ -1857,10 +1857,10 @@ func (r *DescribeBlockByIpTimesListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlockByIpTimesListResponseParams struct {
 	// Response data
-	Data []*IpStatic `json:"Data,omitempty" name:"Data"`
+	Data []*IpStatic `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBlockByIpTimesListResponse struct {
@@ -1882,50 +1882,50 @@ func (r *DescribeBlockByIpTimesListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlockIgnoreListRequestParams struct {
 	// Number of entries per page.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Page offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Direction. Valid values: 1: inbound public access; 0: outbound public access; 3: private network access; empty string: all access.
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
+	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// Rule type. Valid values: 1: block; 2: allow.
-	RuleType *uint64 `json:"RuleType,omitempty" name:"RuleType"`
+	RuleType *uint64 `json:"RuleType,omitnil" name:"RuleType"`
 
 	// Column by which rules are sorted. Valid values: EndTime: end time; StartTime: start time; MatchTimes: number of matching times.
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Sort order. Valid values: desc: descending; asc: ascending.
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 
 	// Search keys, in a JSON string. Valid values: {}: empty; domain: domain name; level: threat level; ignore_reason: reason for allowing access; rule_source: source of a security event; address: geographical location; common: fuzzy search.
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 type DescribeBlockIgnoreListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of entries per page.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Page offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Direction. Valid values: 1: inbound public access; 0: outbound public access; 3: private network access; empty string: all access.
-	Direction *string `json:"Direction,omitempty" name:"Direction"`
+	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// Rule type. Valid values: 1: block; 2: allow.
-	RuleType *uint64 `json:"RuleType,omitempty" name:"RuleType"`
+	RuleType *uint64 `json:"RuleType,omitnil" name:"RuleType"`
 
 	// Column by which rules are sorted. Valid values: EndTime: end time; StartTime: start time; MatchTimes: number of matching times.
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Sort order. Valid values: desc: descending; asc: ascending.
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 
 	// Search keys, in a JSON string. Valid values: {}: empty; domain: domain name; level: threat level; ignore_reason: reason for allowing access; rule_source: source of a security event; address: geographical location; common: fuzzy search.
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 func (r *DescribeBlockIgnoreListRequest) ToJsonString() string {
@@ -1956,19 +1956,19 @@ func (r *DescribeBlockIgnoreListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlockIgnoreListResponseParams struct {
 	// List data.
-	Data []*BlockIgnoreRule `json:"Data,omitempty" name:"Data"`
+	Data []*BlockIgnoreRule `json:"Data,omitnil" name:"Data"`
 
 	// Total number of results, which is used for pagination.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Status code. Valid values: 0: successful; others: failed.
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// Status message. Valid values: success: successful query; fail: failed query.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBlockIgnoreListResponse struct {
@@ -1990,38 +1990,38 @@ func (r *DescribeBlockIgnoreListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlockStaticListRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// List type. Valid values: port, address, or IP
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Number of top results returned
-	Top *int64 `json:"Top,omitempty" name:"Top"`
+	Top *int64 `json:"Top,omitnil" name:"Top"`
 
 	// Search criteria
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 type DescribeBlockStaticListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// List type. Valid values: port, address, or IP
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Number of top results returned
-	Top *int64 `json:"Top,omitempty" name:"Top"`
+	Top *int64 `json:"Top,omitnil" name:"Top"`
 
 	// Search criteria
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 func (r *DescribeBlockStaticListRequest) ToJsonString() string {
@@ -2050,10 +2050,10 @@ func (r *DescribeBlockStaticListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlockStaticListResponseParams struct {
 	// None
-	Data []*StaticInfo `json:"Data,omitempty" name:"Data"`
+	Data []*StaticInfo `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBlockStaticListResponse struct {
@@ -2104,28 +2104,28 @@ func (r *DescribeDefenseSwitchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDefenseSwitchResponseParams struct {
 	// Whether to enable the Basic Protection feature
-	BasicRuleSwitch *int64 `json:"BasicRuleSwitch,omitempty" name:"BasicRuleSwitch"`
+	BasicRuleSwitch *int64 `json:"BasicRuleSwitch,omitnil" name:"BasicRuleSwitch"`
 
 	// Whether to enable the Security Baseline feature
-	BaselineAllSwitch *int64 `json:"BaselineAllSwitch,omitempty" name:"BaselineAllSwitch"`
+	BaselineAllSwitch *int64 `json:"BaselineAllSwitch,omitnil" name:"BaselineAllSwitch"`
 
 	// Whether to enable the Treat Intelligence feature
-	TiSwitch *int64 `json:"TiSwitch,omitempty" name:"TiSwitch"`
+	TiSwitch *int64 `json:"TiSwitch,omitnil" name:"TiSwitch"`
 
 	// Whether to enable the Virtual Patch feature
-	VirtualPatchSwitch *int64 `json:"VirtualPatchSwitch,omitempty" name:"VirtualPatchSwitch"`
+	VirtualPatchSwitch *int64 `json:"VirtualPatchSwitch,omitnil" name:"VirtualPatchSwitch"`
 
 	// Whether it has been enabled before
-	HistoryOpen *int64 `json:"HistoryOpen,omitempty" name:"HistoryOpen"`
+	HistoryOpen *int64 `json:"HistoryOpen,omitnil" name:"HistoryOpen"`
 
 	// Status code. `0`: Succeeded. Others: Failed
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// Status message. `success` and `fail.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDefenseSwitchResponse struct {
@@ -2149,12 +2149,12 @@ type DescribeEnterpriseSecurityGroupRuleRequestParams struct {
 	// Page number of the current page displayed for query by page number.
 	// 
 	// 1 by default.
-	PageNo *string `json:"PageNo,omitempty" name:"PageNo"`
+	PageNo *string `json:"PageNo,omitnil" name:"PageNo"`
 
 	// Maximum number of entries per page displayed for query by page number.
 	// 
 	// Maximum value: 50.
-	PageSize *string `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *string `json:"PageSize,omitnil" name:"PageSize"`
 
 	// Source example:
 	// net: IP/CIDR (192.168.0.2)
@@ -2164,7 +2164,7 @@ type DescribeEnterpriseSecurityGroupRuleRequestParams struct {
 	// tag: resource tag ({"Key":"tag key","Value":"tag value"})
 	// region: region (ap-gaungzhou)
 	// Wildcards are supported.
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// Destination example:
 	// net: IP/CIDR (192.168.0.2)
@@ -2174,30 +2174,30 @@ type DescribeEnterpriseSecurityGroupRuleRequestParams struct {
 	// tag: resource tag ({"Key":"tag key","Value":"tag value"})
 	// region: region (ap-gaungzhou)
 	// Wildcards are supported.
-	DestContent *string `json:"DestContent,omitempty" name:"DestContent"`
+	DestContent *string `json:"DestContent,omitnil" name:"DestContent"`
 
 	// Rule description. Wildcards are supported.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The action that Cloud Firewall performs on the traffic. Valid values:
 	// accept: allow
 	// drop: deny
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// Indicates whether to enable the rules. Default: enable. Valid values:
 	// true: enable; false: disable
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 
 	// The port to apply access control rules. Valid values:
 	// -1/-1: all ports
 	// 80: port 80
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Protocol. TCP/UDP/ICMP/ANY
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Parameter template ID of port and protocol type; mutually exclusive with Protocol and Port
-	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitnil" name:"ServiceTemplateId"`
 }
 
 type DescribeEnterpriseSecurityGroupRuleRequest struct {
@@ -2206,12 +2206,12 @@ type DescribeEnterpriseSecurityGroupRuleRequest struct {
 	// Page number of the current page displayed for query by page number.
 	// 
 	// 1 by default.
-	PageNo *string `json:"PageNo,omitempty" name:"PageNo"`
+	PageNo *string `json:"PageNo,omitnil" name:"PageNo"`
 
 	// Maximum number of entries per page displayed for query by page number.
 	// 
 	// Maximum value: 50.
-	PageSize *string `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *string `json:"PageSize,omitnil" name:"PageSize"`
 
 	// Source example:
 	// net: IP/CIDR (192.168.0.2)
@@ -2221,7 +2221,7 @@ type DescribeEnterpriseSecurityGroupRuleRequest struct {
 	// tag: resource tag ({"Key":"tag key","Value":"tag value"})
 	// region: region (ap-gaungzhou)
 	// Wildcards are supported.
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// Destination example:
 	// net: IP/CIDR (192.168.0.2)
@@ -2231,30 +2231,30 @@ type DescribeEnterpriseSecurityGroupRuleRequest struct {
 	// tag: resource tag ({"Key":"tag key","Value":"tag value"})
 	// region: region (ap-gaungzhou)
 	// Wildcards are supported.
-	DestContent *string `json:"DestContent,omitempty" name:"DestContent"`
+	DestContent *string `json:"DestContent,omitnil" name:"DestContent"`
 
 	// Rule description. Wildcards are supported.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The action that Cloud Firewall performs on the traffic. Valid values:
 	// accept: allow
 	// drop: deny
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// Indicates whether to enable the rules. Default: enable. Valid values:
 	// true: enable; false: disable
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 
 	// The port to apply access control rules. Valid values:
 	// -1/-1: all ports
 	// 80: port 80
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Protocol. TCP/UDP/ICMP/ANY
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Parameter template ID of port and protocol type; mutually exclusive with Protocol and Port
-	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitnil" name:"ServiceTemplateId"`
 }
 
 func (r *DescribeEnterpriseSecurityGroupRuleRequest) ToJsonString() string {
@@ -2288,19 +2288,19 @@ func (r *DescribeEnterpriseSecurityGroupRuleRequest) FromJsonString(s string) er
 // Predefined struct for user
 type DescribeEnterpriseSecurityGroupRuleResponseParams struct {
 	// Page number of the current page displayed for query by page number.
-	PageNo *string `json:"PageNo,omitempty" name:"PageNo"`
+	PageNo *string `json:"PageNo,omitnil" name:"PageNo"`
 
 	// Maximum number of entries per page displayed for query by page number.
-	PageSize *string `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *string `json:"PageSize,omitnil" name:"PageSize"`
 
 	// Access control rule list
-	Rules []*SecurityGroupRule `json:"Rules,omitempty" name:"Rules"`
+	Rules []*SecurityGroupRule `json:"Rules,omitnil" name:"Rules"`
 
 	// Total number of access control rules
-	TotalCount *string `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *string `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeEnterpriseSecurityGroupRuleResponse struct {
@@ -2351,10 +2351,10 @@ func (r *DescribeGuideScanInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGuideScanInfoResponseParams struct {
 	// Scan information
-	Data *ScanInfo `json:"Data,omitempty" name:"Data"`
+	Data *ScanInfo `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeGuideScanInfoResponse struct {
@@ -2376,14 +2376,14 @@ func (r *DescribeGuideScanInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIPStatusListRequestParams struct {
 	// Asset ID
-	IPList []*string `json:"IPList,omitempty" name:"IPList"`
+	IPList []*string `json:"IPList,omitnil" name:"IPList"`
 }
 
 type DescribeIPStatusListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Asset ID
-	IPList []*string `json:"IPList,omitempty" name:"IPList"`
+	IPList []*string `json:"IPList,omitnil" name:"IPList"`
 }
 
 func (r *DescribeIPStatusListRequest) ToJsonString() string {
@@ -2408,16 +2408,16 @@ func (r *DescribeIPStatusListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIPStatusListResponseParams struct {
 	// IP status information
-	StatusList []*IPDefendStatus `json:"StatusList,omitempty" name:"StatusList"`
+	StatusList []*IPDefendStatus `json:"StatusList,omitnil" name:"StatusList"`
 
 	// Status code
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// Status information
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIPStatusListResponse struct {
@@ -2439,56 +2439,56 @@ func (r *DescribeIPStatusListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNatAcRuleRequestParams struct {
 	// Number of entries per page.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Page offset.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Index to be queried. This parameter is optional, and is used only in specific cases.
-	Index *string `json:"Index,omitempty" name:"Index"`
+	Index *string `json:"Index,omitnil" name:"Index"`
 
 	// Filter condition combination.
-	Filters []*CommonFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*CommonFilter `json:"Filters,omitnil" name:"Filters"`
 
 	// Start time for search. This parameter is optional.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time for search. This parameter is optional.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Valid values: desc: descending; asc: ascending. The returned results are sorted by the value of By. If this parameter is specified, By is also required.
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Field by which the returned results are sorted.
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 }
 
 type DescribeNatAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of entries per page.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Page offset.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Index to be queried. This parameter is optional, and is used only in specific cases.
-	Index *string `json:"Index,omitempty" name:"Index"`
+	Index *string `json:"Index,omitnil" name:"Index"`
 
 	// Filter condition combination.
-	Filters []*CommonFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*CommonFilter `json:"Filters,omitnil" name:"Filters"`
 
 	// Start time for search. This parameter is optional.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time for search. This parameter is optional.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Valid values: desc: descending; asc: ascending. The returned results are sorted by the value of By. If this parameter is specified, By is also required.
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Field by which the returned results are sorted.
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 }
 
 func (r *DescribeNatAcRuleRequest) ToJsonString() string {
@@ -2520,17 +2520,17 @@ func (r *DescribeNatAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNatAcRuleResponseParams struct {
 	// Total number of entries.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// NAT access control list data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*DescAcItem `json:"Data,omitempty" name:"Data"`
+	Data []*DescAcItem `json:"Data,omitnil" name:"Data"`
 
 	// Total number of entries returned without filtering.
-	AllTotal *uint64 `json:"AllTotal,omitempty" name:"AllTotal"`
+	AllTotal *uint64 `json:"AllTotal,omitnil" name:"AllTotal"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeNatAcRuleResponse struct {
@@ -2582,22 +2582,22 @@ func (r *DescribeNatFwInfoCountRequest) FromJsonString(s string) error {
 type DescribeNatFwInfoCountResponseParams struct {
 	// Response parameter
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Number of NAT instances of the current tenant
 	// Note: This field may return `null`, indicating that no valid value was found.
-	NatFwInsCount *int64 `json:"NatFwInsCount,omitempty" name:"NatFwInsCount"`
+	NatFwInsCount *int64 `json:"NatFwInsCount,omitnil" name:"NatFwInsCount"`
 
 	// Number of subnets connected by the current tenant
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SubnetCount *int64 `json:"SubnetCount,omitempty" name:"SubnetCount"`
+	SubnetCount *int64 `json:"SubnetCount,omitnil" name:"SubnetCount"`
 
 	// Number of firewalls enabled
 	// Note: This field may return `null`, indicating that no valid value was found.
-	OpenSwitchCount *int64 `json:"OpenSwitchCount,omitempty" name:"OpenSwitchCount"`
+	OpenSwitchCount *int64 `json:"OpenSwitchCount,omitnil" name:"OpenSwitchCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeNatFwInfoCountResponse struct {
@@ -2648,10 +2648,10 @@ func (r *DescribeNatFwInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNatFwInstanceResponseParams struct {
 	// Instance array
-	NatinsLst []*NatFwInstance `json:"NatinsLst,omitempty" name:"NatinsLst"`
+	NatinsLst []*NatFwInstance `json:"NatinsLst,omitnil" name:"NatinsLst"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeNatFwInstanceResponse struct {
@@ -2703,10 +2703,10 @@ func (r *DescribeNatFwInstanceWithRegionRequest) FromJsonString(s string) error 
 type DescribeNatFwInstanceWithRegionResponseParams struct {
 	// Instance array
 	// Note: This field may return `null`, indicating that no valid value was found.
-	NatinsLst []*NatFwInstance `json:"NatinsLst,omitempty" name:"NatinsLst"`
+	NatinsLst []*NatFwInstance `json:"NatinsLst,omitnil" name:"NatinsLst"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeNatFwInstanceWithRegionResponse struct {
@@ -2728,26 +2728,26 @@ func (r *DescribeNatFwInstanceWithRegionResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeNatFwInstancesInfoRequestParams struct {
 	// Gets filtering fields of instance list
-	Filter []*NatFwFilter `json:"Filter,omitempty" name:"Filter"`
+	Filter []*NatFwFilter `json:"Filter,omitnil" name:"Filter"`
 
 	// Page number
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Page length
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeNatFwInstancesInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Gets filtering fields of instance list
-	Filter []*NatFwFilter `json:"Filter,omitempty" name:"Filter"`
+	Filter []*NatFwFilter `json:"Filter,omitnil" name:"Filter"`
 
 	// Page number
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Page length
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeNatFwInstancesInfoRequest) ToJsonString() string {
@@ -2775,14 +2775,14 @@ func (r *DescribeNatFwInstancesInfoRequest) FromJsonString(s string) error {
 type DescribeNatFwInstancesInfoResponseParams struct {
 	// Instance card info array
 	// Note: This field may return `null`, indicating that no valid value was found.
-	NatinsLst []*NatInstanceInfo `json:"NatinsLst,omitempty" name:"NatinsLst"`
+	NatinsLst []*NatInstanceInfo `json:"NatinsLst,omitnil" name:"NatinsLst"`
 
 	// Number of NAT firewalls
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeNatFwInstancesInfoResponse struct {
@@ -2804,32 +2804,32 @@ func (r *DescribeNatFwInstancesInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNatFwVpcDnsLstRequestParams struct {
 	// NAT firewall instance ID
-	NatFwInsId *string `json:"NatFwInsId,omitempty" name:"NatFwInsId"`
+	NatFwInsId *string `json:"NatFwInsId,omitnil" name:"NatFwInsId"`
 
 	// Content filtered by NAT firewall, separated with ","
-	NatInsIdFilter *string `json:"NatInsIdFilter,omitempty" name:"NatInsIdFilter"`
+	NatInsIdFilter *string `json:"NatInsIdFilter,omitnil" name:"NatInsIdFilter"`
 
 	// Number of pages
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum entries per page
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeNatFwVpcDnsLstRequest struct {
 	*tchttp.BaseRequest
 	
 	// NAT firewall instance ID
-	NatFwInsId *string `json:"NatFwInsId,omitempty" name:"NatFwInsId"`
+	NatFwInsId *string `json:"NatFwInsId,omitnil" name:"NatFwInsId"`
 
 	// Content filtered by NAT firewall, separated with ","
-	NatInsIdFilter *string `json:"NatInsIdFilter,omitempty" name:"NatInsIdFilter"`
+	NatInsIdFilter *string `json:"NatInsIdFilter,omitnil" name:"NatInsIdFilter"`
 
 	// Number of pages
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum entries per page
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeNatFwVpcDnsLstRequest) ToJsonString() string {
@@ -2858,18 +2858,18 @@ func (r *DescribeNatFwVpcDnsLstRequest) FromJsonString(s string) error {
 type DescribeNatFwVpcDnsLstResponseParams struct {
 	// VPC DNS info array of NAT firewall
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcDnsSwitchLst []*VpcDnsInfo `json:"VpcDnsSwitchLst,omitempty" name:"VpcDnsSwitchLst"`
+	VpcDnsSwitchLst []*VpcDnsInfo `json:"VpcDnsSwitchLst,omitnil" name:"VpcDnsSwitchLst"`
 
 	// Response parameter
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Total number of toggles
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeNatFwVpcDnsLstResponse struct {
@@ -2891,26 +2891,26 @@ func (r *DescribeNatFwVpcDnsLstResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourceGroupNewRequestParams struct {
 	// Query type. Network–VPC; business recognition–resource; resource tag–tag
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Asset group ID, 0: all asset group IDs
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// all: all, including subgroups; own: my asset groups only
-	ShowType *string `json:"ShowType,omitempty" name:"ShowType"`
+	ShowType *string `json:"ShowType,omitnil" name:"ShowType"`
 }
 
 type DescribeResourceGroupNewRequest struct {
 	*tchttp.BaseRequest
 	
 	// Query type. Network–VPC; business recognition–resource; resource tag–tag
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Asset group ID, 0: all asset group IDs
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// all: all, including subgroups; own: my asset groups only
-	ShowType *string `json:"ShowType,omitempty" name:"ShowType"`
+	ShowType *string `json:"ShowType,omitnil" name:"ShowType"`
 }
 
 func (r *DescribeResourceGroupNewRequest) ToJsonString() string {
@@ -2937,19 +2937,19 @@ func (r *DescribeResourceGroupNewRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourceGroupNewResponseParams struct {
 	// Returns a tree structure
-	Data *string `json:"Data,omitempty" name:"Data"`
+	Data *string `json:"Data,omitnil" name:"Data"`
 
 	// Number of uncategorizd instances
-	UnResourceNum *int64 `json:"UnResourceNum,omitempty" name:"UnResourceNum"`
+	UnResourceNum *int64 `json:"UnResourceNum,omitnil" name:"UnResourceNum"`
 
 	// Response message
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Return code. 0: Request successful
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeResourceGroupNewResponse struct {
@@ -2971,14 +2971,14 @@ func (r *DescribeResourceGroupNewResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRuleOverviewRequestParams struct {
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 type DescribeRuleOverviewRequest struct {
 	*tchttp.BaseRequest
 	
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 func (r *DescribeRuleOverviewRequest) ToJsonString() string {
@@ -3004,26 +3004,26 @@ func (r *DescribeRuleOverviewRequest) FromJsonString(s string) error {
 type DescribeRuleOverviewResponseParams struct {
 	// Total number of rules
 	// Note: This field may return `null`, indicating that no valid value was found.
-	AllTotal *uint64 `json:"AllTotal,omitempty" name:"AllTotal"`
+	AllTotal *uint64 `json:"AllTotal,omitnil" name:"AllTotal"`
 
 	// Number of blocking rules
 	// Note: This field may return `null`, indicating that no valid value was found.
-	StrategyNum *uint64 `json:"StrategyNum,omitempty" name:"StrategyNum"`
+	StrategyNum *uint64 `json:"StrategyNum,omitnil" name:"StrategyNum"`
 
 	// Number of enabled rules
 	// Note: This field may return `null`, indicating that no valid value was found.
-	StartRuleNum *uint64 `json:"StartRuleNum,omitempty" name:"StartRuleNum"`
+	StartRuleNum *uint64 `json:"StartRuleNum,omitnil" name:"StartRuleNum"`
 
 	// Number of disabled rules
 	// Note: This field may return `null`, indicating that no valid value was found.
-	StopRuleNum *uint64 `json:"StopRuleNum,omitempty" name:"StopRuleNum"`
+	StopRuleNum *uint64 `json:"StopRuleNum,omitnil" name:"StopRuleNum"`
 
 	// Remaining quota
 	// Note: This field may return `null`, indicating that no valid value was found.
-	RemainingNum *int64 `json:"RemainingNum,omitempty" name:"RemainingNum"`
+	RemainingNum *int64 `json:"RemainingNum,omitnil" name:"RemainingNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRuleOverviewResponse struct {
@@ -3045,50 +3045,50 @@ func (r *DescribeRuleOverviewResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityGroupListRequestParams struct {
 	// 0: outbound rule; 1: inbound rule
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Region code (e.g. ap-guangzhou ). All Tencent Cloud regions are supported.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Search value
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Number of entries per page. Default: 10
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default: 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Status. Null: all; '0': filter disabled rules; '1': filter enabled rules
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// 0: not filter; 1: filter out normal rules to retain abnormal rules
-	Filter *uint64 `json:"Filter,omitempty" name:"Filter"`
+	Filter *uint64 `json:"Filter,omitnil" name:"Filter"`
 }
 
 type DescribeSecurityGroupListRequest struct {
 	*tchttp.BaseRequest
 	
 	// 0: outbound rule; 1: inbound rule
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Region code (e.g. ap-guangzhou ). All Tencent Cloud regions are supported.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Search value
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Number of entries per page. Default: 10
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default: 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Status. Null: all; '0': filter disabled rules; '1': filter enabled rules
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// 0: not filter; 1: filter out normal rules to retain abnormal rules
-	Filter *uint64 `json:"Filter,omitempty" name:"Filter"`
+	Filter *uint64 `json:"Filter,omitnil" name:"Filter"`
 }
 
 func (r *DescribeSecurityGroupListRequest) ToJsonString() string {
@@ -3119,20 +3119,20 @@ func (r *DescribeSecurityGroupListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityGroupListResponseParams struct {
 	// Total rules in the list
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// Security group rule list data
-	Data []*SecurityGroupListData `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupListData `json:"Data,omitnil" name:"Data"`
 
 	// Total entries excluding the filtered ones
-	AllTotal *uint64 `json:"AllTotal,omitempty" name:"AllTotal"`
+	AllTotal *uint64 `json:"AllTotal,omitnil" name:"AllTotal"`
 
 	// All access control rules enabled/disabled
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *uint64 `json:"Enable,omitnil" name:"Enable"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSecurityGroupListResponse struct {
@@ -3154,44 +3154,44 @@ func (r *DescribeSecurityGroupListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSourceAssetRequestParams struct {
 	// Fuzzy search
-	FuzzySearch *string `json:"FuzzySearch,omitempty" name:"FuzzySearch"`
+	FuzzySearch *string `json:"FuzzySearch,omitnil" name:"FuzzySearch"`
 
 	// Asset type. 1: public network; 2: private network
-	InsType *string `json:"InsType,omitempty" name:"InsType"`
+	InsType *string `json:"InsType,omitnil" name:"InsType"`
 
 	// If ChooseType is 1, grouped assets are queried; if ChooseType is not 1, non-grouped assets are queried
-	ChooseType *string `json:"ChooseType,omitempty" name:"ChooseType"`
+	ChooseType *string `json:"ChooseType,omitnil" name:"ChooseType"`
 
 	// Region
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Maximum number of results returned per page. For example, if it is set to 10, 10 results will be returned at most.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset of search results
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 type DescribeSourceAssetRequest struct {
 	*tchttp.BaseRequest
 	
 	// Fuzzy search
-	FuzzySearch *string `json:"FuzzySearch,omitempty" name:"FuzzySearch"`
+	FuzzySearch *string `json:"FuzzySearch,omitnil" name:"FuzzySearch"`
 
 	// Asset type. 1: public network; 2: private network
-	InsType *string `json:"InsType,omitempty" name:"InsType"`
+	InsType *string `json:"InsType,omitnil" name:"InsType"`
 
 	// If ChooseType is 1, grouped assets are queried; if ChooseType is not 1, non-grouped assets are queried
-	ChooseType *string `json:"ChooseType,omitempty" name:"ChooseType"`
+	ChooseType *string `json:"ChooseType,omitnil" name:"ChooseType"`
 
 	// Region
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Maximum number of results returned per page. For example, if it is set to 10, 10 results will be returned at most.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset of search results
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 func (r *DescribeSourceAssetRequest) ToJsonString() string {
@@ -3221,16 +3221,16 @@ func (r *DescribeSourceAssetRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSourceAssetResponseParams struct {
 	// Region collection
-	ZoneList []*AssetZone `json:"ZoneList,omitempty" name:"ZoneList"`
+	ZoneList []*AssetZone `json:"ZoneList,omitnil" name:"ZoneList"`
 
 	// Data
-	Data []*InstanceInfo `json:"Data,omitempty" name:"Data"`
+	Data []*InstanceInfo `json:"Data,omitnil" name:"Data"`
 
 	// Total number of returned data
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSourceAssetResponse struct {
@@ -3252,56 +3252,56 @@ func (r *DescribeSourceAssetResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSwitchListsRequestParams struct {
 	// Firewall status. 0: disabled; 1: enabled
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Asset type, e.g. CVM/NAT/VPN/CLB/others
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Region, e.g. Shanghai, Chongqing, Guangzhou, etc.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Search value, e.g. "{"common":"106.54.189.45"}"
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Number of entries. Default: 10
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default: 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sort order. desc: descending; asc: ascending
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Sorting field. PortTimes (number of risky ports)
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 }
 
 type DescribeSwitchListsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Firewall status. 0: disabled; 1: enabled
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Asset type, e.g. CVM/NAT/VPN/CLB/others
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Region, e.g. Shanghai, Chongqing, Guangzhou, etc.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Search value, e.g. "{"common":"106.54.189.45"}"
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 
 	// Number of entries. Default: 10
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default: 0
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sort order. desc: descending; asc: ascending
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 
 	// Sorting field. PortTimes (number of risky ports)
-	By *string `json:"By,omitempty" name:"By"`
+	By *string `json:"By,omitnil" name:"By"`
 }
 
 func (r *DescribeSwitchListsRequest) ToJsonString() string {
@@ -3333,24 +3333,24 @@ func (r *DescribeSwitchListsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSwitchListsResponseParams struct {
 	// Total entries
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// List data
-	Data []*SwitchListsData `json:"Data,omitempty" name:"Data"`
+	Data []*SwitchListsData `json:"Data,omitnil" name:"Data"`
 
 	// Region list
-	AreaLists []*string `json:"AreaLists,omitempty" name:"AreaLists"`
+	AreaLists []*string `json:"AreaLists,omitnil" name:"AreaLists"`
 
 	// Number of enabled firewalls
 	// Note: This field may return `null`, indicating that no valid value was found.
-	OnNum *uint64 `json:"OnNum,omitempty" name:"OnNum"`
+	OnNum *uint64 `json:"OnNum,omitnil" name:"OnNum"`
 
 	// Number of disabled firewalls
 	// Note: This field may return `null`, indicating that no valid value was found.
-	OffNum *uint64 `json:"OffNum,omitempty" name:"OffNum"`
+	OffNum *uint64 `json:"OffNum,omitnil" name:"OffNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSwitchListsResponse struct {
@@ -3372,32 +3372,32 @@ func (r *DescribeSwitchListsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTLogInfoRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Type. 1: alert; 2: block
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Search criteria
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 type DescribeTLogInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Type. 1: alert; 2: block
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Search criteria
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 func (r *DescribeTLogInfoRequest) ToJsonString() string {
@@ -3430,10 +3430,10 @@ type DescribeTLogInfoResponseParams struct {
 	//   `VulNum`: Number of vulnerability exploits
 	//   "OutNum`: Number of compromised servers
 	// "BruteForceNum": 0
-	Data *TLogInfo `json:"Data,omitempty" name:"Data"`
+	Data *TLogInfo `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTLogInfoResponse struct {
@@ -3455,38 +3455,38 @@ func (r *DescribeTLogInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTLogIpListRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Type. 1: alert; 2: block
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Number of top results returned
-	Top *int64 `json:"Top,omitempty" name:"Top"`
+	Top *int64 `json:"Top,omitnil" name:"Top"`
 
 	// Search criteria
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 type DescribeTLogIpListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Type. 1: alert; 2: block
-	QueryType *string `json:"QueryType,omitempty" name:"QueryType"`
+	QueryType *string `json:"QueryType,omitnil" name:"QueryType"`
 
 	// Number of top results returned
-	Top *int64 `json:"Top,omitempty" name:"Top"`
+	Top *int64 `json:"Top,omitnil" name:"Top"`
 
 	// Search criteria
-	SearchValue *string `json:"SearchValue,omitempty" name:"SearchValue"`
+	SearchValue *string `json:"SearchValue,omitnil" name:"SearchValue"`
 }
 
 func (r *DescribeTLogIpListRequest) ToJsonString() string {
@@ -3515,10 +3515,10 @@ func (r *DescribeTLogIpListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTLogIpListResponseParams struct {
 	// Data collection
-	Data []*StaticInfo `json:"Data,omitempty" name:"Data"`
+	Data []*StaticInfo `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTLogIpListResponse struct {
@@ -3540,32 +3540,32 @@ func (r *DescribeTLogIpListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTableStatusRequestParams struct {
 	// Edge ID between two VPCs, required for VPCs
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Status value. 0: the only default value
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// NAT region, required for NAT
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Direction. 0: outbound; 1: inbound. 0 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 type DescribeTableStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Edge ID between two VPCs, required for VPCs
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Status value. 0: the only default value
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// NAT region, required for NAT
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Direction. 0: outbound; 1: inbound. 0 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 func (r *DescribeTableStatusRequest) ToJsonString() string {
@@ -3594,10 +3594,10 @@ func (r *DescribeTableStatusRequest) FromJsonString(s string) error {
 type DescribeTableStatusResponseParams struct {
 	// 0: normal; non-0: abnormal
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTableStatusResponse struct {
@@ -3619,26 +3619,26 @@ func (r *DescribeTableStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUnHandleEventTabListRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Gets example ID
-	AssetID *string `json:"AssetID,omitempty" name:"AssetID"`
+	AssetID *string `json:"AssetID,omitnil" name:"AssetID"`
 }
 
 type DescribeUnHandleEventTabListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Gets example ID
-	AssetID *string `json:"AssetID,omitempty" name:"AssetID"`
+	AssetID *string `json:"AssetID,omitnil" name:"AssetID"`
 }
 
 func (r *DescribeUnHandleEventTabListRequest) ToJsonString() string {
@@ -3666,16 +3666,16 @@ func (r *DescribeUnHandleEventTabListRequest) FromJsonString(s string) error {
 type DescribeUnHandleEventTabListResponseParams struct {
 	// Gets unhandled security events
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Data *UnHandleEvent `json:"Data,omitempty" name:"Data"`
+	Data *UnHandleEvent `json:"Data,omitnil" name:"Data"`
 
 	// Error code. 0: success; non-0: error
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// Return message: success
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUnHandleEventTabListResponse struct {
@@ -3696,35 +3696,35 @@ func (r *DescribeUnHandleEventTabListResponse) FromJsonString(s string) error {
 
 type DnsVpcSwitch struct {
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 }
 
 // Predefined struct for user
 type ExpandCfwVerticalRequestParams struct {
 	// nat: NAT firewall, ew: east-west firewall
-	FwType *string `json:"FwType,omitempty" name:"FwType"`
+	FwType *string `json:"FwType,omitnil" name:"FwType"`
 
 	// Bandwidth value
-	Width *uint64 `json:"Width,omitempty" name:"Width"`
+	Width *uint64 `json:"Width,omitnil" name:"Width"`
 
 	// Firewall instance ID
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 }
 
 type ExpandCfwVerticalRequest struct {
 	*tchttp.BaseRequest
 	
 	// nat: NAT firewall, ew: east-west firewall
-	FwType *string `json:"FwType,omitempty" name:"FwType"`
+	FwType *string `json:"FwType,omitnil" name:"FwType"`
 
 	// Bandwidth value
-	Width *uint64 `json:"Width,omitempty" name:"Width"`
+	Width *uint64 `json:"Width,omitnil" name:"Width"`
 
 	// Firewall instance ID
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 }
 
 func (r *ExpandCfwVerticalRequest) ToJsonString() string {
@@ -3751,7 +3751,7 @@ func (r *ExpandCfwVerticalRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ExpandCfwVerticalResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ExpandCfwVerticalResponse struct {
@@ -3772,125 +3772,125 @@ func (r *ExpandCfwVerticalResponse) FromJsonString(s string) error {
 
 type FwCidrInfo struct {
 	// The IP range type of the firewall. Values: `VpcSelf` (VPC IP range preferred); `Assis` (Secondary IP range preferred); `Custom` (Custom IP range)
-	FwCidrType *string `json:"FwCidrType,omitempty" name:"FwCidrType"`
+	FwCidrType *string `json:"FwCidrType,omitnil" name:"FwCidrType"`
 
 	// The IP segment assigned for each VPC.
-	FwCidrLst []*FwVpcCidr `json:"FwCidrLst,omitempty" name:"FwCidrLst"`
+	FwCidrLst []*FwVpcCidr `json:"FwCidrLst,omitnil" name:"FwCidrLst"`
 
 	// The IP segment used by other firewalls. Specify this if you want to assign a dedicated segment for the firewall.
-	ComFwCidr *string `json:"ComFwCidr,omitempty" name:"ComFwCidr"`
+	ComFwCidr *string `json:"ComFwCidr,omitnil" name:"ComFwCidr"`
 }
 
 type FwVpcCidr struct {
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// IP range of the firewall. The mask must be at least /24.
-	FwCidr *string `json:"FwCidr,omitempty" name:"FwCidr"`
+	FwCidr *string `json:"FwCidr,omitnil" name:"FwCidr"`
 }
 
 type IPDefendStatus struct {
 	// IP address
-	IP *string `json:"IP,omitempty" name:"IP"`
+	IP *string `json:"IP,omitnil" name:"IP"`
 
 	// Protection status. 1: enabled; -1: incorrect address; others: disabled
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 }
 
 type InstanceInfo struct {
 	// App ID
-	AppId *string `json:"AppId,omitempty" name:"AppId"`
+	AppId *string `json:"AppId,omitnil" name:"AppId"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// VPC name
-	VPCName *string `json:"VPCName,omitempty" name:"VPCName"`
+	VPCName *string `json:"VPCName,omitnil" name:"VPCName"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Asset ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Asset name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Asset type
 	//  3: CVM instance; 4: CLB instance; 5: ENI instance; 6: MySQL; 7: Redis; 8: NAT; 9: VPN; 10: ES; 11: MariaDB; 12: Kafka; 13: NATFW
-	InsType *int64 `json:"InsType,omitempty" name:"InsType"`
+	InsType *int64 `json:"InsType,omitnil" name:"InsType"`
 
 	// Public IP
-	PublicIp *string `json:"PublicIp,omitempty" name:"PublicIp"`
+	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
 
 	// Private IP
-	PrivateIp *string `json:"PrivateIp,omitempty" name:"PrivateIp"`
+	PrivateIp *string `json:"PrivateIp,omitnil" name:"PrivateIp"`
 
 	// Number of ports
-	PortNum *string `json:"PortNum,omitempty" name:"PortNum"`
+	PortNum *string `json:"PortNum,omitnil" name:"PortNum"`
 
 	// Number of vulnerabilities
-	LeakNum *string `json:"LeakNum,omitempty" name:"LeakNum"`
+	LeakNum *string `json:"LeakNum,omitnil" name:"LeakNum"`
 
 	// 1: public network; 2: private network
-	InsSource *string `json:"InsSource,omitempty" name:"InsSource"`
+	InsSource *string `json:"InsSource,omitnil" name:"InsSource"`
 
 	// [a,b]
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ResourcePath []*string `json:"ResourcePath,omitempty" name:"ResourcePath"`
+	ResourcePath []*string `json:"ResourcePath,omitnil" name:"ResourcePath"`
 }
 
 type IocListData struct {
 	// IP address to be handled. Either IP or Domain is required.
-	IP *string `json:"IP,omitempty" name:"IP"`
+	IP *string `json:"IP,omitnil" name:"IP"`
 
 	// 0 or 1. 0: outbound; 1: inbound
-	Direction *int64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *int64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Domain name to be handled. Either IP or Domain is required.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 }
 
 type IpStatic struct {
 	// Value
-	Num *int64 `json:"Num,omitempty" name:"Num"`
+	Num *int64 `json:"Num,omitnil" name:"Num"`
 
 	// Time shown on the x-axis of the line graph
-	StatTime *string `json:"StatTime,omitempty" name:"StatTime"`
+	StatTime *string `json:"StatTime,omitnil" name:"StatTime"`
 }
 
 // Predefined struct for user
 type ModifyAcRuleRequestParams struct {
 	// Array of rules
-	Data []*RuleInfoData `json:"Data,omitempty" name:"Data"`
+	Data []*RuleInfoData `json:"Data,omitnil" name:"Data"`
 
 	// EdgeId value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Access rule status
-	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 type ModifyAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of rules
-	Data []*RuleInfoData `json:"Data,omitempty" name:"Data"`
+	Data []*RuleInfoData `json:"Data,omitnil" name:"Data"`
 
 	// EdgeId value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Access rule status
-	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 func (r *ModifyAcRuleRequest) ToJsonString() string {
@@ -3918,14 +3918,14 @@ func (r *ModifyAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAcRuleResponseParams struct {
 	// Status value. 0: operation successful; non-0: operation failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Returns redundant information
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Info *string `json:"Info,omitempty" name:"Info"`
+	Info *string `json:"Info,omitnil" name:"Info"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAcRuleResponse struct {
@@ -3947,20 +3947,20 @@ func (r *ModifyAcRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAllPublicIPSwitchStatusRequestParams struct {
 	// Status. 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// ID of the selected firewall toggle
-	FireWallPublicIPs []*string `json:"FireWallPublicIPs,omitempty" name:"FireWallPublicIPs"`
+	FireWallPublicIPs []*string `json:"FireWallPublicIPs,omitnil" name:"FireWallPublicIPs"`
 }
 
 type ModifyAllPublicIPSwitchStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Status. 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// ID of the selected firewall toggle
-	FireWallPublicIPs []*string `json:"FireWallPublicIPs,omitempty" name:"FireWallPublicIPs"`
+	FireWallPublicIPs []*string `json:"FireWallPublicIPs,omitnil" name:"FireWallPublicIPs"`
 }
 
 func (r *ModifyAllPublicIPSwitchStatusRequest) ToJsonString() string {
@@ -3987,14 +3987,14 @@ func (r *ModifyAllPublicIPSwitchStatusRequest) FromJsonString(s string) error {
 type ModifyAllPublicIPSwitchStatusResponseParams struct {
 	// Return message
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Error code. 0: success; non-0: failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAllPublicIPSwitchStatusResponse struct {
@@ -4016,32 +4016,32 @@ func (r *ModifyAllPublicIPSwitchStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAllRuleStatusRequestParams struct {
 	// Status. 0: all disabled; 1: all enabled
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Edge ID value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 type ModifyAllRuleStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Status. 0: all disabled; 1: all enabled
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Edge ID value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 }
 
 func (r *ModifyAllRuleStatusRequest) ToJsonString() string {
@@ -4070,10 +4070,10 @@ func (r *ModifyAllRuleStatusRequest) FromJsonString(s string) error {
 type ModifyAllRuleStatusResponseParams struct {
 	// 0: modified successfully; non-0: modification failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAllRuleStatusResponse struct {
@@ -4095,20 +4095,20 @@ func (r *ModifyAllRuleStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAllVPCSwitchStatusRequestParams struct {
 	// Status. 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// ID of the selected firewall toggle
-	FireWallVpcIds []*string `json:"FireWallVpcIds,omitempty" name:"FireWallVpcIds"`
+	FireWallVpcIds []*string `json:"FireWallVpcIds,omitnil" name:"FireWallVpcIds"`
 }
 
 type ModifyAllVPCSwitchStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Status. 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// ID of the selected firewall toggle
-	FireWallVpcIds []*string `json:"FireWallVpcIds,omitempty" name:"FireWallVpcIds"`
+	FireWallVpcIds []*string `json:"FireWallVpcIds,omitnil" name:"FireWallVpcIds"`
 }
 
 func (r *ModifyAllVPCSwitchStatusRequest) ToJsonString() string {
@@ -4134,7 +4134,7 @@ func (r *ModifyAllVPCSwitchStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAllVPCSwitchStatusResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAllVPCSwitchStatusResponse struct {
@@ -4156,44 +4156,44 @@ func (r *ModifyAllVPCSwitchStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAssetScanRequestParams struct {
 	// Scan range. 1: port; 2: port + vulnerability scan
-	ScanRange *int64 `json:"ScanRange,omitempty" name:"ScanRange"`
+	ScanRange *int64 `json:"ScanRange,omitnil" name:"ScanRange"`
 
 	// Scan mode: 'heavy', 'medium', 'light'
-	ScanDeep *string `json:"ScanDeep,omitempty" name:"ScanDeep"`
+	ScanDeep *string `json:"ScanDeep,omitnil" name:"ScanDeep"`
 
 	// Scan type. 1: scan now; 2: periodic scan
-	RangeType *int64 `json:"RangeType,omitempty" name:"RangeType"`
+	RangeType *int64 `json:"RangeType,omitnil" name:"RangeType"`
 
 	// Scheduled task time, required when RangeType is 2
-	ScanPeriod *string `json:"ScanPeriod,omitempty" name:"ScanPeriod"`
+	ScanPeriod *string `json:"ScanPeriod,omitnil" name:"ScanPeriod"`
 
 	// Scans this field now and passes the filtered IPs
-	ScanFilterIp []*string `json:"ScanFilterIp,omitempty" name:"ScanFilterIp"`
+	ScanFilterIp []*string `json:"ScanFilterIp,omitnil" name:"ScanFilterIp"`
 
 	// 1: all; 2: single
-	ScanType *int64 `json:"ScanType,omitempty" name:"ScanType"`
+	ScanType *int64 `json:"ScanType,omitnil" name:"ScanType"`
 }
 
 type ModifyAssetScanRequest struct {
 	*tchttp.BaseRequest
 	
 	// Scan range. 1: port; 2: port + vulnerability scan
-	ScanRange *int64 `json:"ScanRange,omitempty" name:"ScanRange"`
+	ScanRange *int64 `json:"ScanRange,omitnil" name:"ScanRange"`
 
 	// Scan mode: 'heavy', 'medium', 'light'
-	ScanDeep *string `json:"ScanDeep,omitempty" name:"ScanDeep"`
+	ScanDeep *string `json:"ScanDeep,omitnil" name:"ScanDeep"`
 
 	// Scan type. 1: scan now; 2: periodic scan
-	RangeType *int64 `json:"RangeType,omitempty" name:"RangeType"`
+	RangeType *int64 `json:"RangeType,omitnil" name:"RangeType"`
 
 	// Scheduled task time, required when RangeType is 2
-	ScanPeriod *string `json:"ScanPeriod,omitempty" name:"ScanPeriod"`
+	ScanPeriod *string `json:"ScanPeriod,omitnil" name:"ScanPeriod"`
 
 	// Scans this field now and passes the filtered IPs
-	ScanFilterIp []*string `json:"ScanFilterIp,omitempty" name:"ScanFilterIp"`
+	ScanFilterIp []*string `json:"ScanFilterIp,omitnil" name:"ScanFilterIp"`
 
 	// 1: all; 2: single
-	ScanType *int64 `json:"ScanType,omitempty" name:"ScanType"`
+	ScanType *int64 `json:"ScanType,omitnil" name:"ScanType"`
 }
 
 func (r *ModifyAssetScanRequest) ToJsonString() string {
@@ -4224,17 +4224,17 @@ func (r *ModifyAssetScanRequest) FromJsonString(s string) error {
 type ModifyAssetScanResponseParams struct {
 	// Return message
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Error code. 0: success; non-0: failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// Status value. 0: success; 1: scanning; others: failed
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAssetScanResponse struct {
@@ -4256,38 +4256,38 @@ func (r *ModifyAssetScanResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBlockIgnoreListRequestParams struct {
 	// Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
-	RuleType *int64 `json:"RuleType,omitempty" name:"RuleType"`
+	RuleType *int64 `json:"RuleType,omitnil" name:"RuleType"`
 
 	// Either IP or Domain is required
-	IOC []*IocListData `json:"IOC,omitempty" name:"IOC"`
+	IOC []*IocListData `json:"IOC,omitnil" name:"IOC"`
 
 	// Optional values: delete, edit, and add
-	IocAction *string `json:"IocAction,omitempty" name:"IocAction"`
+	IocAction *string `json:"IocAction,omitnil" name:"IocAction"`
 
 	// Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 }
 
 type ModifyBlockIgnoreListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Type of the rule. Values: `1` (Blocklist); `2` (Allowlist)
-	RuleType *int64 `json:"RuleType,omitempty" name:"RuleType"`
+	RuleType *int64 `json:"RuleType,omitnil" name:"RuleType"`
 
 	// Either IP or Domain is required
-	IOC []*IocListData `json:"IOC,omitempty" name:"IOC"`
+	IOC []*IocListData `json:"IOC,omitnil" name:"IOC"`
 
 	// Optional values: delete, edit, and add
-	IocAction *string `json:"IocAction,omitempty" name:"IocAction"`
+	IocAction *string `json:"IocAction,omitnil" name:"IocAction"`
 
 	// Time format: yyyy-MM-dd HH:mm:ss. Required when IocAction is edit or add
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time of the period in the format of yyyy-MM-dd HH:mm:ss. It must be later than both the start time and the current time. It’s required when `IocAction` is `edit` or `add`. 
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 }
 
 func (r *ModifyBlockIgnoreListRequest) ToJsonString() string {
@@ -4316,13 +4316,13 @@ func (r *ModifyBlockIgnoreListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBlockIgnoreListResponseParams struct {
 	// Return message
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Error code. 0: success; non-0: failed
-	ReturnCode *uint64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *uint64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyBlockIgnoreListResponse struct {
@@ -4344,20 +4344,20 @@ func (r *ModifyBlockIgnoreListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBlockTopRequestParams struct {
 	// Record ID
-	UniqueId *string `json:"UniqueId,omitempty" name:"UniqueId"`
+	UniqueId *string `json:"UniqueId,omitnil" name:"UniqueId"`
 
 	// Operation type. 1: pin to top; 0: unpin
-	OpeType *string `json:"OpeType,omitempty" name:"OpeType"`
+	OpeType *string `json:"OpeType,omitnil" name:"OpeType"`
 }
 
 type ModifyBlockTopRequest struct {
 	*tchttp.BaseRequest
 	
 	// Record ID
-	UniqueId *string `json:"UniqueId,omitempty" name:"UniqueId"`
+	UniqueId *string `json:"UniqueId,omitnil" name:"UniqueId"`
 
 	// Operation type. 1: pin to top; 0: unpin
-	OpeType *string `json:"OpeType,omitempty" name:"OpeType"`
+	OpeType *string `json:"OpeType,omitnil" name:"OpeType"`
 }
 
 func (r *ModifyBlockTopRequest) ToJsonString() string {
@@ -4383,7 +4383,7 @@ func (r *ModifyBlockTopRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBlockTopResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyBlockTopResponse struct {
@@ -4405,14 +4405,14 @@ func (r *ModifyBlockTopResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyEnterpriseSecurityDispatchStatusRequestParams struct {
 	// Status. Values: `0` (Publish now), `1` (Stop publishing)
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 }
 
 type ModifyEnterpriseSecurityDispatchStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Status. Values: `0` (Publish now), `1` (Stop publishing)
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 }
 
 func (r *ModifyEnterpriseSecurityDispatchStatusRequest) ToJsonString() string {
@@ -4438,10 +4438,10 @@ func (r *ModifyEnterpriseSecurityDispatchStatusRequest) FromJsonString(s string)
 type ModifyEnterpriseSecurityDispatchStatusResponseParams struct {
 	// `0`: Modified successfully; Others: Modification failed
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyEnterpriseSecurityDispatchStatusResponse struct {
@@ -4463,32 +4463,32 @@ func (r *ModifyEnterpriseSecurityDispatchStatusResponse) FromJsonString(s string
 // Predefined struct for user
 type ModifyEnterpriseSecurityGroupRuleRequestParams struct {
 	// UUID of the rule, which can be obtained by querying the rule list
-	RuleUuid *uint64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *uint64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// Modification type. Values: `0` (Modify rule content), `1` (Toggle on/off a rule) and `2` (Toggle on/off all rules)
-	ModifyType *uint64 `json:"ModifyType,omitempty" name:"ModifyType"`
+	ModifyType *uint64 `json:"ModifyType,omitnil" name:"ModifyType"`
 
 	// The new rule content you want. It’s only required when you want to modify the rule content (`ModifyType=0`)
-	Data *SecurityGroupRule `json:"Data,omitempty" name:"Data"`
+	Data *SecurityGroupRule `json:"Data,omitnil" name:"Data"`
 
 	// `0`: Do not enable; `1`: Enable
-	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *uint64 `json:"Enable,omitnil" name:"Enable"`
 }
 
 type ModifyEnterpriseSecurityGroupRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// UUID of the rule, which can be obtained by querying the rule list
-	RuleUuid *uint64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *uint64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// Modification type. Values: `0` (Modify rule content), `1` (Toggle on/off a rule) and `2` (Toggle on/off all rules)
-	ModifyType *uint64 `json:"ModifyType,omitempty" name:"ModifyType"`
+	ModifyType *uint64 `json:"ModifyType,omitnil" name:"ModifyType"`
 
 	// The new rule content you want. It’s only required when you want to modify the rule content (`ModifyType=0`)
-	Data *SecurityGroupRule `json:"Data,omitempty" name:"Data"`
+	Data *SecurityGroupRule `json:"Data,omitnil" name:"Data"`
 
 	// `0`: Do not enable; `1`: Enable
-	Enable *uint64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *uint64 `json:"Enable,omitnil" name:"Enable"`
 }
 
 func (r *ModifyEnterpriseSecurityGroupRuleRequest) ToJsonString() string {
@@ -4516,13 +4516,13 @@ func (r *ModifyEnterpriseSecurityGroupRuleRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type ModifyEnterpriseSecurityGroupRuleResponseParams struct {
 	// Status value. `0`: Edited successfully; Others: Failed to edit
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// ID of new rule generated after the modification
-	NewRuleUuid *uint64 `json:"NewRuleUuid,omitempty" name:"NewRuleUuid"`
+	NewRuleUuid *uint64 `json:"NewRuleUuid,omitnil" name:"NewRuleUuid"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyEnterpriseSecurityGroupRuleResponse struct {
@@ -4544,14 +4544,14 @@ func (r *ModifyEnterpriseSecurityGroupRuleResponse) FromJsonString(s string) err
 // Predefined struct for user
 type ModifyNatAcRuleRequestParams struct {
 	// Array of rules to be modified.
-	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+	Rules []*CreateNatRuleItem `json:"Rules,omitnil" name:"Rules"`
 }
 
 type ModifyNatAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of rules to be modified.
-	Rules []*CreateNatRuleItem `json:"Rules,omitempty" name:"Rules"`
+	Rules []*CreateNatRuleItem `json:"Rules,omitnil" name:"Rules"`
 }
 
 func (r *ModifyNatAcRuleRequest) ToJsonString() string {
@@ -4576,10 +4576,10 @@ func (r *ModifyNatAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatAcRuleResponseParams struct {
 	// ID list of new rules that have been successfully modified.
-	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid []*int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyNatAcRuleResponse struct {
@@ -4601,38 +4601,38 @@ func (r *ModifyNatAcRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatFwReSelectRequestParams struct {
 	// Mode. 1: use existing; 0: create new
-	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *int64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Firewall instance ID
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 
 	// List of NAT gateways reconnected for the Using Existing mode. Only one of NatGwList and VpcList can be passed.
-	NatGwList []*string `json:"NatGwList,omitempty" name:"NatGwList"`
+	NatGwList []*string `json:"NatGwList,omitnil" name:"NatGwList"`
 
 	// List of VPCs reconnected for the Create New mode. Only one of NatGwList and VpcList can be passed.
-	VpcList []*string `json:"VpcList,omitempty" name:"VpcList"`
+	VpcList []*string `json:"VpcList,omitnil" name:"VpcList"`
 
 	// IP range of the firewall
-	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitnil" name:"FwCidrInfo"`
 }
 
 type ModifyNatFwReSelectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mode. 1: use existing; 0: create new
-	Mode *int64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *int64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Firewall instance ID
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 
 	// List of NAT gateways reconnected for the Using Existing mode. Only one of NatGwList and VpcList can be passed.
-	NatGwList []*string `json:"NatGwList,omitempty" name:"NatGwList"`
+	NatGwList []*string `json:"NatGwList,omitnil" name:"NatGwList"`
 
 	// List of VPCs reconnected for the Create New mode. Only one of NatGwList and VpcList can be passed.
-	VpcList []*string `json:"VpcList,omitempty" name:"VpcList"`
+	VpcList []*string `json:"VpcList,omitnil" name:"VpcList"`
 
 	// IP range of the firewall
-	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitempty" name:"FwCidrInfo"`
+	FwCidrInfo *FwCidrInfo `json:"FwCidrInfo,omitnil" name:"FwCidrInfo"`
 }
 
 func (r *ModifyNatFwReSelectRequest) ToJsonString() string {
@@ -4661,7 +4661,7 @@ func (r *ModifyNatFwReSelectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatFwReSelectResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyNatFwReSelectResponse struct {
@@ -4683,32 +4683,32 @@ func (r *ModifyNatFwReSelectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatFwSwitchRequestParams struct {
 	// Status. 0: off; 1: on
-	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
 
 	// List of firewall instance IDs. Only one of CfwInsIdList, SubnetIdList, and RouteTableIdList can be passed.
-	CfwInsIdList []*string `json:"CfwInsIdList,omitempty" name:"CfwInsIdList"`
+	CfwInsIdList []*string `json:"CfwInsIdList,omitnil" name:"CfwInsIdList"`
 
 	// List of subnet IDs. Only one of CfwInsIdList, SubnetIdList, and RouteTableIdList can be passed.
-	SubnetIdList []*string `json:"SubnetIdList,omitempty" name:"SubnetIdList"`
+	SubnetIdList []*string `json:"SubnetIdList,omitnil" name:"SubnetIdList"`
 
 	// List of route table IDs. Only one of CfwInsIdList, SubnetIdList, and RouteTableIdList can be passed.
-	RouteTableIdList []*string `json:"RouteTableIdList,omitempty" name:"RouteTableIdList"`
+	RouteTableIdList []*string `json:"RouteTableIdList,omitnil" name:"RouteTableIdList"`
 }
 
 type ModifyNatFwSwitchRequest struct {
 	*tchttp.BaseRequest
 	
 	// Status. 0: off; 1: on
-	Enable *int64 `json:"Enable,omitempty" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
 
 	// List of firewall instance IDs. Only one of CfwInsIdList, SubnetIdList, and RouteTableIdList can be passed.
-	CfwInsIdList []*string `json:"CfwInsIdList,omitempty" name:"CfwInsIdList"`
+	CfwInsIdList []*string `json:"CfwInsIdList,omitnil" name:"CfwInsIdList"`
 
 	// List of subnet IDs. Only one of CfwInsIdList, SubnetIdList, and RouteTableIdList can be passed.
-	SubnetIdList []*string `json:"SubnetIdList,omitempty" name:"SubnetIdList"`
+	SubnetIdList []*string `json:"SubnetIdList,omitnil" name:"SubnetIdList"`
 
 	// List of route table IDs. Only one of CfwInsIdList, SubnetIdList, and RouteTableIdList can be passed.
-	RouteTableIdList []*string `json:"RouteTableIdList,omitempty" name:"RouteTableIdList"`
+	RouteTableIdList []*string `json:"RouteTableIdList,omitnil" name:"RouteTableIdList"`
 }
 
 func (r *ModifyNatFwSwitchRequest) ToJsonString() string {
@@ -4736,7 +4736,7 @@ func (r *ModifyNatFwSwitchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatFwSwitchResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyNatFwSwitchResponse struct {
@@ -4758,20 +4758,20 @@ func (r *ModifyNatFwSwitchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatFwVpcDnsSwitchRequestParams struct {
 	// NAT firewall ID
-	NatFwInsId *string `json:"NatFwInsId,omitempty" name:"NatFwInsId"`
+	NatFwInsId *string `json:"NatFwInsId,omitnil" name:"NatFwInsId"`
 
 	// DNS toggle list
-	DnsVpcSwitchLst []*DnsVpcSwitch `json:"DnsVpcSwitchLst,omitempty" name:"DnsVpcSwitchLst"`
+	DnsVpcSwitchLst []*DnsVpcSwitch `json:"DnsVpcSwitchLst,omitnil" name:"DnsVpcSwitchLst"`
 }
 
 type ModifyNatFwVpcDnsSwitchRequest struct {
 	*tchttp.BaseRequest
 	
 	// NAT firewall ID
-	NatFwInsId *string `json:"NatFwInsId,omitempty" name:"NatFwInsId"`
+	NatFwInsId *string `json:"NatFwInsId,omitnil" name:"NatFwInsId"`
 
 	// DNS toggle list
-	DnsVpcSwitchLst []*DnsVpcSwitch `json:"DnsVpcSwitchLst,omitempty" name:"DnsVpcSwitchLst"`
+	DnsVpcSwitchLst []*DnsVpcSwitch `json:"DnsVpcSwitchLst,omitnil" name:"DnsVpcSwitchLst"`
 }
 
 func (r *ModifyNatFwVpcDnsSwitchRequest) ToJsonString() string {
@@ -4798,10 +4798,10 @@ func (r *ModifyNatFwVpcDnsSwitchRequest) FromJsonString(s string) error {
 type ModifyNatFwVpcDnsSwitchResponseParams struct {
 	// Modified successfully
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyNatFwVpcDnsSwitchResponse struct {
@@ -4823,20 +4823,20 @@ func (r *ModifyNatFwVpcDnsSwitchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatSequenceRulesRequestParams struct {
 	// Rule sequence number. Values: `OrderIndex` (Original sequence number), `NewOrderIndex` (New sequence number)
-	RuleChangeItems []*RuleChangeItem `json:"RuleChangeItems,omitempty" name:"RuleChangeItems"`
+	RuleChangeItems []*RuleChangeItem `json:"RuleChangeItems,omitnil" name:"RuleChangeItems"`
 
 	// Rule direction. Values: `1` (Inbound) and `0` (Outbound)
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 type ModifyNatSequenceRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Rule sequence number. Values: `OrderIndex` (Original sequence number), `NewOrderIndex` (New sequence number)
-	RuleChangeItems []*RuleChangeItem `json:"RuleChangeItems,omitempty" name:"RuleChangeItems"`
+	RuleChangeItems []*RuleChangeItem `json:"RuleChangeItems,omitnil" name:"RuleChangeItems"`
 
 	// Rule direction. Values: `1` (Inbound) and `0` (Outbound)
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 func (r *ModifyNatSequenceRulesRequest) ToJsonString() string {
@@ -4862,7 +4862,7 @@ func (r *ModifyNatSequenceRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNatSequenceRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyNatSequenceRulesResponse struct {
@@ -4884,20 +4884,20 @@ func (r *ModifyNatSequenceRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyPublicIPSwitchStatusRequestParams struct {
 	// Public IP
-	FireWallPublicIP *string `json:"FireWallPublicIP,omitempty" name:"FireWallPublicIP"`
+	FireWallPublicIP *string `json:"FireWallPublicIP,omitnil" name:"FireWallPublicIP"`
 
 	// Status value. 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 }
 
 type ModifyPublicIPSwitchStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Public IP
-	FireWallPublicIP *string `json:"FireWallPublicIP,omitempty" name:"FireWallPublicIP"`
+	FireWallPublicIP *string `json:"FireWallPublicIP,omitnil" name:"FireWallPublicIP"`
 
 	// Status value. 0: off; 1: on
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 }
 
 func (r *ModifyPublicIPSwitchStatusRequest) ToJsonString() string {
@@ -4924,13 +4924,13 @@ func (r *ModifyPublicIPSwitchStatusRequest) FromJsonString(s string) error {
 type ModifyPublicIPSwitchStatusResponseParams struct {
 	// Return message
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// Error code. 0: success; non-0: failed
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyPublicIPSwitchStatusResponse struct {
@@ -4952,26 +4952,26 @@ func (r *ModifyPublicIPSwitchStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourceGroupRequestParams struct {
 	// Group ID
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Group name
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Parent group ID
-	ParentId *string `json:"ParentId,omitempty" name:"ParentId"`
+	ParentId *string `json:"ParentId,omitnil" name:"ParentId"`
 }
 
 type ModifyResourceGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Group ID
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Group name
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Parent group ID
-	ParentId *string `json:"ParentId,omitempty" name:"ParentId"`
+	ParentId *string `json:"ParentId,omitnil" name:"ParentId"`
 }
 
 func (r *ModifyResourceGroupRequest) ToJsonString() string {
@@ -4998,7 +4998,7 @@ func (r *ModifyResourceGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourceGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyResourceGroupResponse struct {
@@ -5020,14 +5020,14 @@ func (r *ModifyResourceGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRunSyncAssetRequestParams struct {
 	// 0: edge firewall toggle; 1: VPC firewall toggle
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 }
 
 type ModifyRunSyncAssetRequest struct {
 	*tchttp.BaseRequest
 	
 	// 0: edge firewall toggle; 1: VPC firewall toggle
-	Type *uint64 `json:"Type,omitempty" name:"Type"`
+	Type *uint64 `json:"Type,omitnil" name:"Type"`
 }
 
 func (r *ModifyRunSyncAssetRequest) ToJsonString() string {
@@ -5052,10 +5052,10 @@ func (r *ModifyRunSyncAssetRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRunSyncAssetResponseParams struct {
 	// 0: synced successfully, 1: updating assets, 2: failed to sync by calling the API at the backend
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyRunSyncAssetResponse struct {
@@ -5077,26 +5077,26 @@ func (r *ModifyRunSyncAssetResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySecurityGroupItemRuleStatusRequestParams struct {
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Toggle status. 0: off; 1: on
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Modified priority of enterprise security group rules
-	RuleSequence *uint64 `json:"RuleSequence,omitempty" name:"RuleSequence"`
+	RuleSequence *uint64 `json:"RuleSequence,omitnil" name:"RuleSequence"`
 }
 
 type ModifySecurityGroupItemRuleStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Toggle status. 0: off; 1: on
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Modified priority of enterprise security group rules
-	RuleSequence *uint64 `json:"RuleSequence,omitempty" name:"RuleSequence"`
+	RuleSequence *uint64 `json:"RuleSequence,omitnil" name:"RuleSequence"`
 }
 
 func (r *ModifySecurityGroupItemRuleStatusRequest) ToJsonString() string {
@@ -5123,10 +5123,10 @@ func (r *ModifySecurityGroupItemRuleStatusRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type ModifySecurityGroupItemRuleStatusResponseParams struct {
 	// Status value. 0: modified successfully; non-0: failed to modify
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifySecurityGroupItemRuleStatusResponse struct {
@@ -5148,20 +5148,20 @@ func (r *ModifySecurityGroupItemRuleStatusResponse) FromJsonString(s string) err
 // Predefined struct for user
 type ModifySecurityGroupSequenceRulesRequestParams struct {
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Sorting data of enterprise security group rules
-	Data []*SecurityGroupOrderIndexData `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupOrderIndexData `json:"Data,omitnil" name:"Data"`
 }
 
 type ModifySecurityGroupSequenceRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Sorting data of enterprise security group rules
-	Data []*SecurityGroupOrderIndexData `json:"Data,omitempty" name:"Data"`
+	Data []*SecurityGroupOrderIndexData `json:"Data,omitnil" name:"Data"`
 }
 
 func (r *ModifySecurityGroupSequenceRulesRequest) ToJsonString() string {
@@ -5187,10 +5187,10 @@ func (r *ModifySecurityGroupSequenceRulesRequest) FromJsonString(s string) error
 // Predefined struct for user
 type ModifySecurityGroupSequenceRulesResponseParams struct {
 	// Status value. 0: modified successfully; non-0: failed to modify
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifySecurityGroupSequenceRulesResponse struct {
@@ -5212,32 +5212,32 @@ func (r *ModifySecurityGroupSequenceRulesResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type ModifySequenceRulesRequestParams struct {
 	// Edge ID value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Modifies data
-	Data []*SequenceData `json:"Data,omitempty" name:"Data"`
+	Data []*SequenceData `json:"Data,omitnil" name:"Data"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 type ModifySequenceRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Edge ID value
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Modifies data
-	Data []*SequenceData `json:"Data,omitempty" name:"Data"`
+	Data []*SequenceData `json:"Data,omitnil" name:"Data"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 func (r *ModifySequenceRulesRequest) ToJsonString() string {
@@ -5266,10 +5266,10 @@ func (r *ModifySequenceRulesRequest) FromJsonString(s string) error {
 type ModifySequenceRulesResponseParams struct {
 	// 0: modified successfully; non-0: modification failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifySequenceRulesResponse struct {
@@ -5320,7 +5320,7 @@ func (r *ModifyStorageSettingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyStorageSettingResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyStorageSettingResponse struct {
@@ -5342,32 +5342,32 @@ func (r *ModifyStorageSettingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTableStatusRequestParams struct {
 	// Edge ID between two VPCs
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Status value. 1: table locked; 2: table unlocked
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 type ModifyTableStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Edge ID between two VPCs
-	EdgeId *string `json:"EdgeId,omitempty" name:"EdgeId"`
+	EdgeId *string `json:"EdgeId,omitnil" name:"EdgeId"`
 
 	// Status value. 1: table locked; 2: table unlocked
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// NAT region
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 func (r *ModifyTableStatusRequest) ToJsonString() string {
@@ -5396,10 +5396,10 @@ func (r *ModifyTableStatusRequest) FromJsonString(s string) error {
 type ModifyTableStatusResponseParams struct {
 	// 0: normal; -1: abnormal
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyTableStatusResponse struct {
@@ -5420,120 +5420,120 @@ func (r *ModifyTableStatusResponse) FromJsonString(s string) error {
 
 type NatFwFilter struct {
 	// Filter type, e.g., instance ID
-	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
 	// Filtered content, separated with ","
-	FilterContent *string `json:"FilterContent,omitempty" name:"FilterContent"`
+	FilterContent *string `json:"FilterContent,omitnil" name:"FilterContent"`
 }
 
 type NatFwInstance struct {
 	// NAT instance ID
-	NatinsId *string `json:"NatinsId,omitempty" name:"NatinsId"`
+	NatinsId *string `json:"NatinsId,omitnil" name:"NatinsId"`
 
 	// NAT instance name
-	NatinsName *string `json:"NatinsName,omitempty" name:"NatinsName"`
+	NatinsName *string `json:"NatinsName,omitnil" name:"NatinsName"`
 
 	// Instance region
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// 0: create new; 1: use existing
 	// Note: This field may return `null`, indicating that no valid value was found.
-	FwMode *int64 `json:"FwMode,omitempty" name:"FwMode"`
+	FwMode *int64 `json:"FwMode,omitnil" name:"FwMode"`
 
 	// 0: normal; 1: creating
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// NAT public IP
 	// Note: This field may return `null`, indicating that no valid value was found.
-	NatIp *string `json:"NatIp,omitempty" name:"NatIp"`
+	NatIp *string `json:"NatIp,omitnil" name:"NatIp"`
 }
 
 type NatInstanceInfo struct {
 	// NAT instance ID
-	NatinsId *string `json:"NatinsId,omitempty" name:"NatinsId"`
+	NatinsId *string `json:"NatinsId,omitnil" name:"NatinsId"`
 
 	// NAT instance name
-	NatinsName *string `json:"NatinsName,omitempty" name:"NatinsName"`
+	NatinsName *string `json:"NatinsName,omitnil" name:"NatinsName"`
 
 	// Instance region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// 0: create new; 1: use existing
-	FwMode *int64 `json:"FwMode,omitempty" name:"FwMode"`
+	FwMode *int64 `json:"FwMode,omitnil" name:"FwMode"`
 
 	// Instance bandwidth (Mbps)
-	BandWidth *int64 `json:"BandWidth,omitempty" name:"BandWidth"`
+	BandWidth *int64 `json:"BandWidth,omitnil" name:"BandWidth"`
 
 	// Inbound traffic peak bandwidth (bps)
-	InFlowMax *int64 `json:"InFlowMax,omitempty" name:"InFlowMax"`
+	InFlowMax *int64 `json:"InFlowMax,omitnil" name:"InFlowMax"`
 
 	// Outbound traffic peak bandwidth (bps)
-	OutFlowMax *uint64 `json:"OutFlowMax,omitempty" name:"OutFlowMax"`
+	OutFlowMax *uint64 `json:"OutFlowMax,omitnil" name:"OutFlowMax"`
 
 	// Chinese region information
-	RegionZh *string `json:"RegionZh,omitempty" name:"RegionZh"`
+	RegionZh *string `json:"RegionZh,omitnil" name:"RegionZh"`
 
 	// Public IP array
 	// Note: This field may return `null`, indicating that no valid value was found.
-	EipAddress []*string `json:"EipAddress,omitempty" name:"EipAddress"`
+	EipAddress []*string `json:"EipAddress,omitnil" name:"EipAddress"`
 
 	// Array of internal and external IPs
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcIp []*string `json:"VpcIp,omitempty" name:"VpcIp"`
+	VpcIp []*string `json:"VpcIp,omitnil" name:"VpcIp"`
 
 	// Array of subnets associated with an instance
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Subnets []*string `json:"Subnets,omitempty" name:"Subnets"`
+	Subnets []*string `json:"Subnets,omitnil" name:"Subnets"`
 
 	// 0: normal 1: initializing
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Region information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegionDetail *string `json:"RegionDetail,omitempty" name:"RegionDetail"`
+	RegionDetail *string `json:"RegionDetail,omitnil" name:"RegionDetail"`
 
 	// Availability zone of the instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneZh *string `json:"ZoneZh,omitempty" name:"ZoneZh"`
+	ZoneZh *string `json:"ZoneZh,omitnil" name:"ZoneZh"`
 
 	// Availability zone of the instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneZhBak *string `json:"ZoneZhBak,omitempty" name:"ZoneZhBak"`
+	ZoneZhBak *string `json:"ZoneZhBak,omitnil" name:"ZoneZhBak"`
 
 	// Number of used rules.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleUsed *uint64 `json:"RuleUsed,omitempty" name:"RuleUsed"`
+	RuleUsed *uint64 `json:"RuleUsed,omitnil" name:"RuleUsed"`
 
 	// The maximum number of rules allowed in the instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleMax *uint64 `json:"RuleMax,omitempty" name:"RuleMax"`
+	RuleMax *uint64 `json:"RuleMax,omitnil" name:"RuleMax"`
 }
 
 type NewModeItems struct {
 	// VPC list for the Create New mode
-	VpcList []*string `json:"VpcList,omitempty" name:"VpcList"`
+	VpcList []*string `json:"VpcList,omitnil" name:"VpcList"`
 
 	// The list of egress public EIPs bound for the Create New mode. Either Eips or AddCount is required.
-	Eips []*string `json:"Eips,omitempty" name:"Eips"`
+	Eips []*string `json:"Eips,omitnil" name:"Eips"`
 
 	// The number of egress public EIPs newly bound for the Create New mode. Either Eips or AddCount is required.
-	AddCount *int64 `json:"AddCount,omitempty" name:"AddCount"`
+	AddCount *int64 `json:"AddCount,omitnil" name:"AddCount"`
 }
 
 // Predefined struct for user
 type RemoveAcRuleRequestParams struct {
 	// UUID of the rule, which can be obtained by querying the rule list
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 }
 
 type RemoveAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// UUID of the rule, which can be obtained by querying the rule list
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 }
 
 func (r *RemoveAcRuleRequest) ToJsonString() string {
@@ -5558,18 +5558,18 @@ func (r *RemoveAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveAcRuleResponseParams struct {
 	// Returns the UUID of the deleted policy after the deletion is successful
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// 0: operation successful; -1: operation failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnCode *int64 `json:"ReturnCode,omitempty" name:"ReturnCode"`
+	ReturnCode *int64 `json:"ReturnCode,omitnil" name:"ReturnCode"`
 
 	// success: operation successful; failed: operation failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitempty" name:"ReturnMsg"`
+	ReturnMsg *string `json:"ReturnMsg,omitnil" name:"ReturnMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RemoveAcRuleResponse struct {
@@ -5591,20 +5591,20 @@ func (r *RemoveAcRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveEnterpriseSecurityGroupRuleRequestParams struct {
 	// UUID of the rule, which can be obtained by querying the rule list
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// Type of deletion. 0: delete a single entry, and enter ID of the deleted rule for RuleUuid; 1: delete all, and enter 0 for RuleUuid
-	RemoveType *int64 `json:"RemoveType,omitempty" name:"RemoveType"`
+	RemoveType *int64 `json:"RemoveType,omitnil" name:"RemoveType"`
 }
 
 type RemoveEnterpriseSecurityGroupRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// UUID of the rule, which can be obtained by querying the rule list
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// Type of deletion. 0: delete a single entry, and enter ID of the deleted rule for RuleUuid; 1: delete all, and enter 0 for RuleUuid
-	RemoveType *int64 `json:"RemoveType,omitempty" name:"RemoveType"`
+	RemoveType *int64 `json:"RemoveType,omitnil" name:"RemoveType"`
 }
 
 func (r *RemoveEnterpriseSecurityGroupRuleRequest) ToJsonString() string {
@@ -5630,14 +5630,14 @@ func (r *RemoveEnterpriseSecurityGroupRuleRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type RemoveEnterpriseSecurityGroupRuleResponseParams struct {
 	// Returns the UUID of the deleted policy after the deletion is successful
-	RuleUuid *int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid *int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// 0: operation successful; -1: operation failed
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RemoveEnterpriseSecurityGroupRuleResponse struct {
@@ -5659,20 +5659,20 @@ func (r *RemoveEnterpriseSecurityGroupRuleResponse) FromJsonString(s string) err
 // Predefined struct for user
 type RemoveNatAcRuleRequestParams struct {
 	// UUIDs of the rules to delete, which can be obtained by querying the rule list. Note: If [-1] is passed in, all rules are deleted.
-	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid []*int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// Rule direction. Valid values: 1: inbound; 0: outbound.
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 type RemoveNatAcRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// UUIDs of the rules to delete, which can be obtained by querying the rule list. Note: If [-1] is passed in, all rules are deleted.
-	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid []*int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// Rule direction. Valid values: 1: inbound; 0: outbound.
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 }
 
 func (r *RemoveNatAcRuleRequest) ToJsonString() string {
@@ -5698,10 +5698,10 @@ func (r *RemoveNatAcRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveNatAcRuleResponseParams struct {
 	// UUID list of the deleted rules.
-	RuleUuid []*int64 `json:"RuleUuid,omitempty" name:"RuleUuid"`
+	RuleUuid []*int64 `json:"RuleUuid,omitnil" name:"RuleUuid"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RemoveNatAcRuleResponse struct {
@@ -5722,275 +5722,275 @@ func (r *RemoveNatAcRuleResponse) FromJsonString(s string) error {
 
 type RuleChangeItem struct {
 	// Original sequence number
-	OrderIndex *int64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *int64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// New sequence number
-	NewOrderIndex *int64 `json:"NewOrderIndex,omitempty" name:"NewOrderIndex"`
+	NewOrderIndex *int64 `json:"NewOrderIndex,omitnil" name:"NewOrderIndex"`
 }
 
 type RuleInfoData struct {
 	// Priority
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Access source
-	SourceIp *string `json:"SourceIp,omitempty" name:"SourceIp"`
+	SourceIp *string `json:"SourceIp,omitnil" name:"SourceIp"`
 
 	// Access destination
-	TargetIp *string `json:"TargetIp,omitempty" name:"TargetIp"`
+	TargetIp *string `json:"TargetIp,omitnil" name:"TargetIp"`
 
 	// Protocol
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Policy. 0: observe; 1: block; 2: allow
-	Strategy *string `json:"Strategy,omitempty" name:"Strategy"`
+	Strategy *string `json:"Strategy,omitnil" name:"Strategy"`
 
 	// Access source type. 1: IP; 3: domain name; 4: IP address template; 5: domain name address template
-	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *uint64 `json:"SourceType,omitnil" name:"SourceType"`
 
 	// Direction. 0: outbound; 1: inbound
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Description
-	Detail *string `json:"Detail,omitempty" name:"Detail"`
+	Detail *string `json:"Detail,omitnil" name:"Detail"`
 
 	// Access destination type. 1: IP, 3: domain name; 4: IP address template; 5: domain name address template
-	TargetType *uint64 `json:"TargetType,omitempty" name:"TargetType"`
+	TargetType *uint64 `json:"TargetType,omitnil" name:"TargetType"`
 
 	// Port
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// ID value
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Log ID, required when an alert log is created
-	LogId *string `json:"LogId,omitempty" name:"LogId"`
+	LogId *string `json:"LogId,omitnil" name:"LogId"`
 
 	// City code
-	City *uint64 `json:"City,omitempty" name:"City"`
+	City *uint64 `json:"City,omitnil" name:"City"`
 
 	// Country code
-	Country *uint64 `json:"Country,omitempty" name:"Country"`
+	Country *uint64 `json:"Country,omitnil" name:"Country"`
 
 	// Cloud vendor. Multiple vendors are supported and separated with commas. 1: Tencent Cloud (only in Hong Kong, China and overseas); 2: Alibaba Cloud; 3: Amazon Cloud; 4: Huawei Cloud; 5: Microsoft Cloud
-	CloudCode *string `json:"CloudCode,omitempty" name:"CloudCode"`
+	CloudCode *string `json:"CloudCode,omitnil" name:"CloudCode"`
 
 	// Indicates whether it is a region
-	IsRegion *uint64 `json:"IsRegion,omitempty" name:"IsRegion"`
+	IsRegion *uint64 `json:"IsRegion,omitnil" name:"IsRegion"`
 
 	// City name
-	CityName *string `json:"CityName,omitempty" name:"CityName"`
+	CityName *string `json:"CityName,omitnil" name:"CityName"`
 
 	// Country name
-	CountryName *string `json:"CountryName,omitempty" name:"CountryName"`
+	CountryName *string `json:"CountryName,omitnil" name:"CountryName"`
 }
 
 type ScanInfo struct {
 	// Scanning result information
-	ScanResultInfo *ScanResultInfo `json:"ScanResultInfo,omitempty" name:"ScanResultInfo"`
+	ScanResultInfo *ScanResultInfo `json:"ScanResultInfo,omitnil" name:"ScanResultInfo"`
 
 	// Scanning status. 0: scanning; 1: completed; 2: auto scanning unselected
-	ScanStatus *int64 `json:"ScanStatus,omitempty" name:"ScanStatus"`
+	ScanStatus *int64 `json:"ScanStatus,omitnil" name:"ScanStatus"`
 
 	// Progress
-	ScanPercent *float64 `json:"ScanPercent,omitempty" name:"ScanPercent"`
+	ScanPercent *float64 `json:"ScanPercent,omitnil" name:"ScanPercent"`
 
 	// Estimated completion time
-	ScanTime *string `json:"ScanTime,omitempty" name:"ScanTime"`
+	ScanTime *string `json:"ScanTime,omitnil" name:"ScanTime"`
 }
 
 type ScanResultInfo struct {
 	// Number of vulnerability exploits
-	LeakNum *uint64 `json:"LeakNum,omitempty" name:"LeakNum"`
+	LeakNum *uint64 `json:"LeakNum,omitnil" name:"LeakNum"`
 
 	// Number of protected IPs
-	IPNum *uint64 `json:"IPNum,omitempty" name:"IPNum"`
+	IPNum *uint64 `json:"IPNum,omitnil" name:"IPNum"`
 
 	// Number of exposed ports
-	PortNum *uint64 `json:"PortNum,omitempty" name:"PortNum"`
+	PortNum *uint64 `json:"PortNum,omitnil" name:"PortNum"`
 
 	// Protection status
-	IPStatus *bool `json:"IPStatus,omitempty" name:"IPStatus"`
+	IPStatus *bool `json:"IPStatus,omitnil" name:"IPStatus"`
 
 	// Attack blocking status
-	IdpStatus *bool `json:"IdpStatus,omitempty" name:"IdpStatus"`
+	IdpStatus *bool `json:"IdpStatus,omitnil" name:"IdpStatus"`
 
 	// Port blocking status
-	BanStatus *bool `json:"BanStatus,omitempty" name:"BanStatus"`
+	BanStatus *bool `json:"BanStatus,omitnil" name:"BanStatus"`
 }
 
 type SecurityGroupBothWayInfo struct {
 	// Priority
 	// Note: This field may return `null`, indicating that no valid value was found.
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Access source
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SourceId *string `json:"SourceId,omitempty" name:"SourceId"`
+	SourceId *string `json:"SourceId,omitnil" name:"SourceId"`
 
 	// Access source type. Default: 0. 0: IP; 1: VPC; 2: SUBNET; 3: CVM; 4: CLB; 5: ENI; 6: CDB; 7: Parameter template. 100: asset group
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *uint64 `json:"SourceType,omitnil" name:"SourceType"`
 
 	// Access destination
 	// Note: This field may return `null`, indicating that no valid value was found.
-	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
+	TargetId *string `json:"TargetId,omitnil" name:"TargetId"`
 
 	// Access destination type. Default: 0. 0: IP; 1: VPC; 2: SUBNET; 3: CVM; 4: CLB; 5: ENI; 6: CDB; 7: Parameter template. 100: asset group
 	// Note: This field may return `null`, indicating that no valid value was found.
-	TargetType *uint64 `json:"TargetType,omitempty" name:"TargetType"`
+	TargetType *uint64 `json:"TargetType,omitnil" name:"TargetType"`
 
 	// Protocol
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Destination port
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Policy. 1: block; 2: allow
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Strategy *uint64 `json:"Strategy,omitempty" name:"Strategy"`
+	Strategy *uint64 `json:"Strategy,omitnil" name:"Strategy"`
 
 	// Direction. 0: outbound; 1: inbound. 1 by default
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// Description
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Detail *string `json:"Detail,omitempty" name:"Detail"`
+	Detail *string `json:"Detail,omitnil" name:"Detail"`
 
 	// Toggle status. 0: off; 1: on
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Indicates whether the rule is normal. 0: normal; 1: abnormal
 	// Note: This field may return `null`, indicating that no valid value was found.
-	IsNew *uint64 `json:"IsNew,omitempty" name:"IsNew"`
+	IsNew *uint64 `json:"IsNew,omitnil" name:"IsNew"`
 
 	// One-way/two-way. 0: one-way; 1: two-way
 	// Note: This field may return `null`, indicating that no valid value was found.
-	BothWay *uint64 `json:"BothWay,omitempty" name:"BothWay"`
+	BothWay *uint64 `json:"BothWay,omitnil" name:"BothWay"`
 
 	// VPC ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Instance name
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Public IP. Multiple IPs are separated by commas.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PublicIp *string `json:"PublicIp,omitempty" name:"PublicIp"`
+	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
 
 	// Private IP. Multiple IPs are separated by commas.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PrivateIp *string `json:"PrivateIp,omitempty" name:"PrivateIp"`
+	PrivateIp *string `json:"PrivateIp,omitnil" name:"PrivateIp"`
 
 	// Masked address. Multiple addresses are separated by commas.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Cidr *string `json:"Cidr,omitempty" name:"Cidr"`
+	Cidr *string `json:"Cidr,omitnil" name:"Cidr"`
 
 	// Port protocol template ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitnil" name:"ServiceTemplateId"`
 
 	// Indicates whether to use the port protocol template. 0: no; 1: yes
-	ProtocolPortType *uint64 `json:"ProtocolPortType,omitempty" name:"ProtocolPortType"`
+	ProtocolPortType *uint64 `json:"ProtocolPortType,omitnil" name:"ProtocolPortType"`
 }
 
 type SecurityGroupListData struct {
 	// Priority
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Access source
-	SourceId *string `json:"SourceId,omitempty" name:"SourceId"`
+	SourceId *string `json:"SourceId,omitnil" name:"SourceId"`
 
 	// Access source type. Default: 0. 1: VPC; 2: SUBNET; 3: CVM; 4: CLB; 5: ENI; 6: CDB; 7: Parameter template. 100: Resource group
-	SourceType *uint64 `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *uint64 `json:"SourceType,omitnil" name:"SourceType"`
 
 	// Access destination
-	TargetId *string `json:"TargetId,omitempty" name:"TargetId"`
+	TargetId *string `json:"TargetId,omitnil" name:"TargetId"`
 
 	// Access destination type. Default: 0. 1: VPC; 2: SUBNET; 3: CVM; 4: CLB; 5: ENI; 6: CDB; 7: Parameter template; 100: resource group
-	TargetType *uint64 `json:"TargetType,omitempty" name:"TargetType"`
+	TargetType *uint64 `json:"TargetType,omitnil" name:"TargetType"`
 
 	// Protocol
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// Destination port
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Policy. 1: block; 2: allow
-	Strategy *uint64 `json:"Strategy,omitempty" name:"Strategy"`
+	Strategy *uint64 `json:"Strategy,omitnil" name:"Strategy"`
 
 	// Description
-	Detail *string `json:"Detail,omitempty" name:"Detail"`
+	Detail *string `json:"Detail,omitnil" name:"Detail"`
 
 	// One-way/two-way. 0: one-way; 1: two-way
-	BothWay *uint64 `json:"BothWay,omitempty" name:"BothWay"`
+	BothWay *uint64 `json:"BothWay,omitnil" name:"BothWay"`
 
 	// Rule ID
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Toggle status. 0: off; 1: on
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Indicates whether the rule is normal. 0: normal; 1: abnormal
-	IsNew *uint64 `json:"IsNew,omitempty" name:"IsNew"`
+	IsNew *uint64 `json:"IsNew,omitnil" name:"IsNew"`
 
 	// VPC ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Instance name
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Public IP. Multiple IPs are separated by commas.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PublicIp *string `json:"PublicIp,omitempty" name:"PublicIp"`
+	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
 
 	// Private IP. Multiple IPs are separated by commas.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PrivateIp *string `json:"PrivateIp,omitempty" name:"PrivateIp"`
+	PrivateIp *string `json:"PrivateIp,omitnil" name:"PrivateIp"`
 
 	// Masked address. Multiple addresses are separated by commas.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Cidr *string `json:"Cidr,omitempty" name:"Cidr"`
+	Cidr *string `json:"Cidr,omitnil" name:"Cidr"`
 
 	// Port protocol template ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitnil" name:"ServiceTemplateId"`
 
 	// Two-way rules
 	// Note: This field may return `null`, indicating that no valid value was found.
-	BothWayInfo []*SecurityGroupBothWayInfo `json:"BothWayInfo,omitempty" name:"BothWayInfo"`
+	BothWayInfo []*SecurityGroupBothWayInfo `json:"BothWayInfo,omitnil" name:"BothWayInfo"`
 
 	// Direction. 0: outbound; 1: inbound. 1 by default
-	Direction *uint64 `json:"Direction,omitempty" name:"Direction"`
+	Direction *uint64 `json:"Direction,omitnil" name:"Direction"`
 
 	// Indicates whether to use the port protocol template. 0: no; 1: yes
-	ProtocolPortType *uint64 `json:"ProtocolPortType,omitempty" name:"ProtocolPortType"`
+	ProtocolPortType *uint64 `json:"ProtocolPortType,omitnil" name:"ProtocolPortType"`
 }
 
 type SecurityGroupOrderIndexData struct {
 	// Current priority of enterprise security group rules
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// New priority of enterprise security group rules
-	NewOrderIndex *uint64 `json:"NewOrderIndex,omitempty" name:"NewOrderIndex"`
+	NewOrderIndex *uint64 `json:"NewOrderIndex,omitnil" name:"NewOrderIndex"`
 }
 
 type SecurityGroupRule struct {
@@ -6001,10 +6001,10 @@ type SecurityGroupRule struct {
 	// resourcegroup: asset group (/all groups/group 1/subgroup 1)
 	// tag: resource tag ({"Key":"tag key","Value":"tag value"})
 	// region: region (ap-gaungzhou)
-	SourceContent *string `json:"SourceContent,omitempty" name:"SourceContent"`
+	SourceContent *string `json:"SourceContent,omitnil" name:"SourceContent"`
 
 	// Access source type. Valid values: net|template|instance|resourcegroup|tag|region
-	SourceType *string `json:"SourceType,omitempty" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
 
 	// Destination example:
 	// net: IP/CIDR (192.168.0.2)
@@ -6013,95 +6013,95 @@ type SecurityGroupRule struct {
 	// resourcegroup: asset group (/all groups/group 1/subgroup 1)
 	// tag: resource tag ({"Key":"tag key","Value":"tag value"})
 	// region: region (ap-gaungzhou)
-	DestContent *string `json:"DestContent,omitempty" name:"DestContent"`
+	DestContent *string `json:"DestContent,omitnil" name:"DestContent"`
 
 	// Access destination type. Valid values: net|template|instance|resourcegroup|tag|region
-	DestType *string `json:"DestType,omitempty" name:"DestType"`
+	DestType *string `json:"DestType,omitnil" name:"DestType"`
 
 	// The action that Cloud Firewall performs on the traffic. Valid values:
 	// accept: allow
 	// drop: deny
-	RuleAction *string `json:"RuleAction,omitempty" name:"RuleAction"`
+	RuleAction *string `json:"RuleAction,omitnil" name:"RuleAction"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Rule priority. -1: lowest; 1: highest
-	OrderIndex *string `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *string `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Protocol. TCP/UDP/ICMP/ANY
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// The port to apply access control rules. Valid values:
 	// -1/-1: all ports
 	// 80: port 80
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// Parameter template ID of port and protocol type; mutually exclusive with Protocol and Port
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ServiceTemplateId *string `json:"ServiceTemplateId,omitempty" name:"ServiceTemplateId"`
+	ServiceTemplateId *string `json:"ServiceTemplateId,omitnil" name:"ServiceTemplateId"`
 
 	// The unique ID of the rule
-	Id *string `json:"Id,omitempty" name:"Id"`
+	Id *string `json:"Id,omitnil" name:"Id"`
 
 	// Rule status. true: enabled; false: disabled
-	Enable *string `json:"Enable,omitempty" name:"Enable"`
+	Enable *string `json:"Enable,omitnil" name:"Enable"`
 }
 
 type SequenceData struct {
 	// Rule ID
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Rule priority before change
-	OrderIndex *uint64 `json:"OrderIndex,omitempty" name:"OrderIndex"`
+	OrderIndex *uint64 `json:"OrderIndex,omitnil" name:"OrderIndex"`
 
 	// Rule priority after change
-	NewOrderIndex *uint64 `json:"NewOrderIndex,omitempty" name:"NewOrderIndex"`
+	NewOrderIndex *uint64 `json:"NewOrderIndex,omitnil" name:"NewOrderIndex"`
 }
 
 // Predefined struct for user
 type SetNatFwDnatRuleRequestParams struct {
 	// 0: Create new; 1: Use existing
-	Mode *uint64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *uint64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Operation type. Valid values: add, del, and modify.
-	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+	OperationType *string `json:"OperationType,omitnil" name:"OperationType"`
 
 	// Firewall instance ID. This field is required.
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 
 	// List of added/deleted DNAT rules
-	AddOrDelDnatRules []*CfwNatDnatRule `json:"AddOrDelDnatRules,omitempty" name:"AddOrDelDnatRules"`
+	AddOrDelDnatRules []*CfwNatDnatRule `json:"AddOrDelDnatRules,omitnil" name:"AddOrDelDnatRules"`
 
 	// Original DNAT rule before change
-	OriginDnat *CfwNatDnatRule `json:"OriginDnat,omitempty" name:"OriginDnat"`
+	OriginDnat *CfwNatDnatRule `json:"OriginDnat,omitnil" name:"OriginDnat"`
 
 	// New DNAT rule after change
-	NewDnat *CfwNatDnatRule `json:"NewDnat,omitempty" name:"NewDnat"`
+	NewDnat *CfwNatDnatRule `json:"NewDnat,omitnil" name:"NewDnat"`
 }
 
 type SetNatFwDnatRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// 0: Create new; 1: Use existing
-	Mode *uint64 `json:"Mode,omitempty" name:"Mode"`
+	Mode *uint64 `json:"Mode,omitnil" name:"Mode"`
 
 	// Operation type. Valid values: add, del, and modify.
-	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+	OperationType *string `json:"OperationType,omitnil" name:"OperationType"`
 
 	// Firewall instance ID. This field is required.
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 
 	// List of added/deleted DNAT rules
-	AddOrDelDnatRules []*CfwNatDnatRule `json:"AddOrDelDnatRules,omitempty" name:"AddOrDelDnatRules"`
+	AddOrDelDnatRules []*CfwNatDnatRule `json:"AddOrDelDnatRules,omitnil" name:"AddOrDelDnatRules"`
 
 	// Original DNAT rule before change
-	OriginDnat *CfwNatDnatRule `json:"OriginDnat,omitempty" name:"OriginDnat"`
+	OriginDnat *CfwNatDnatRule `json:"OriginDnat,omitnil" name:"OriginDnat"`
 
 	// New DNAT rule after change
-	NewDnat *CfwNatDnatRule `json:"NewDnat,omitempty" name:"NewDnat"`
+	NewDnat *CfwNatDnatRule `json:"NewDnat,omitnil" name:"NewDnat"`
 }
 
 func (r *SetNatFwDnatRuleRequest) ToJsonString() string {
@@ -6131,7 +6131,7 @@ func (r *SetNatFwDnatRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetNatFwDnatRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetNatFwDnatRuleResponse struct {
@@ -6153,26 +6153,26 @@ func (r *SetNatFwDnatRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SetNatFwEipRequestParams struct {
 	// bind: bind EIP; unbind: unbind EIP; newAdd: add firewall EIP
-	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+	OperationType *string `json:"OperationType,omitnil" name:"OperationType"`
 
 	// Firewall instance ID
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 
 	// This field is required when OperationType is "bind" or "unbind".
-	EipList []*string `json:"EipList,omitempty" name:"EipList"`
+	EipList []*string `json:"EipList,omitnil" name:"EipList"`
 }
 
 type SetNatFwEipRequest struct {
 	*tchttp.BaseRequest
 	
 	// bind: bind EIP; unbind: unbind EIP; newAdd: add firewall EIP
-	OperationType *string `json:"OperationType,omitempty" name:"OperationType"`
+	OperationType *string `json:"OperationType,omitnil" name:"OperationType"`
 
 	// Firewall instance ID
-	CfwInstance *string `json:"CfwInstance,omitempty" name:"CfwInstance"`
+	CfwInstance *string `json:"CfwInstance,omitnil" name:"CfwInstance"`
 
 	// This field is required when OperationType is "bind" or "unbind".
-	EipList []*string `json:"EipList,omitempty" name:"EipList"`
+	EipList []*string `json:"EipList,omitnil" name:"EipList"`
 }
 
 func (r *SetNatFwEipRequest) ToJsonString() string {
@@ -6199,7 +6199,7 @@ func (r *SetNatFwEipRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetNatFwEipResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetNatFwEipResponse struct {
@@ -6220,35 +6220,35 @@ func (r *SetNatFwEipResponse) FromJsonString(s string) error {
 
 type StaticInfo struct {
 	// Number
-	Num *int64 `json:"Num,omitempty" name:"Num"`
+	Num *int64 `json:"Num,omitnil" name:"Num"`
 
 	// Port
-	Port *string `json:"Port,omitempty" name:"Port"`
+	Port *string `json:"Port,omitnil" name:"Port"`
 
 	// IP
-	Ip *string `json:"Ip,omitempty" name:"Ip"`
+	Ip *string `json:"Ip,omitnil" name:"Ip"`
 
 	// Address
-	Address *string `json:"Address,omitempty" name:"Address"`
+	Address *string `json:"Address,omitnil" name:"Address"`
 
 	// Asset ID
-	InsID *string `json:"InsID,omitempty" name:"InsID"`
+	InsID *string `json:"InsID,omitnil" name:"InsID"`
 
 	// Asset name
-	InsName *string `json:"InsName,omitempty" name:"InsName"`
+	InsName *string `json:"InsName,omitnil" name:"InsName"`
 }
 
 // Predefined struct for user
 type StopSecurityGroupRuleDispatchRequestParams struct {
 	// Stops all if set to 1
-	StopType *int64 `json:"StopType,omitempty" name:"StopType"`
+	StopType *int64 `json:"StopType,omitnil" name:"StopType"`
 }
 
 type StopSecurityGroupRuleDispatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// Stops all if set to 1
-	StopType *int64 `json:"StopType,omitempty" name:"StopType"`
+	StopType *int64 `json:"StopType,omitnil" name:"StopType"`
 }
 
 func (r *StopSecurityGroupRuleDispatchRequest) ToJsonString() string {
@@ -6274,10 +6274,10 @@ func (r *StopSecurityGroupRuleDispatchRequest) FromJsonString(s string) error {
 type StopSecurityGroupRuleDispatchResponseParams struct {
 	// true: operation successful; false: error
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *bool `json:"Status,omitempty" name:"Status"`
+	Status *bool `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type StopSecurityGroupRuleDispatchResponse struct {
@@ -6299,124 +6299,124 @@ func (r *StopSecurityGroupRuleDispatchResponse) FromJsonString(s string) error {
 type SwitchListsData struct {
 	// Public IP
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PublicIp *string `json:"PublicIp,omitempty" name:"PublicIp"`
+	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
 
 	// Private IP
 	// Note: This field may return `null`, indicating that no valid value was found.
-	IntranetIp *string `json:"IntranetIp,omitempty" name:"IntranetIp"`
+	IntranetIp *string `json:"IntranetIp,omitnil" name:"IntranetIp"`
 
 	// Instance name
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Instance ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Asset type
-	AssetType *string `json:"AssetType,omitempty" name:"AssetType"`
+	AssetType *string `json:"AssetType,omitnil" name:"AssetType"`
 
 	// Region
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Firewall toggle
-	Switch *int64 `json:"Switch,omitempty" name:"Switch"`
+	Switch *int64 `json:"Switch,omitnil" name:"Switch"`
 
 	// ID value
-	Id *uint64 `json:"Id,omitempty" name:"Id"`
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
 	// Public IP type
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PublicIpType *uint64 `json:"PublicIpType,omitempty" name:"PublicIpType"`
+	PublicIpType *uint64 `json:"PublicIpType,omitnil" name:"PublicIpType"`
 
 	// Number of risky ports
 	// Note: This field may return `null`, indicating that no valid value was found.
-	PortTimes *uint64 `json:"PortTimes,omitempty" name:"PortTimes"`
+	PortTimes *uint64 `json:"PortTimes,omitnil" name:"PortTimes"`
 
 	// Last scan time
 	// Note: This field may return `null`, indicating that no valid value was found.
-	LastTime *string `json:"LastTime,omitempty" name:"LastTime"`
+	LastTime *string `json:"LastTime,omitnil" name:"LastTime"`
 
 	// Scan mode
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ScanMode *string `json:"ScanMode,omitempty" name:"ScanMode"`
+	ScanMode *string `json:"ScanMode,omitnil" name:"ScanMode"`
 
 	// Scan status
 	// Note: This field may return `null`, indicating that no valid value was found.
-	ScanStatus *uint64 `json:"ScanStatus,omitempty" name:"ScanStatus"`
+	ScanStatus *uint64 `json:"ScanStatus,omitnil" name:"ScanStatus"`
 }
 
 type TLogInfo struct {
 	// Compromised servers
-	OutNum *int64 `json:"OutNum,omitempty" name:"OutNum"`
+	OutNum *int64 `json:"OutNum,omitnil" name:"OutNum"`
 
 	// Unhandled alerts
-	HandleNum *int64 `json:"HandleNum,omitempty" name:"HandleNum"`
+	HandleNum *int64 `json:"HandleNum,omitnil" name:"HandleNum"`
 
 	// Vulnerability attacks
-	VulNum *int64 `json:"VulNum,omitempty" name:"VulNum"`
+	VulNum *int64 `json:"VulNum,omitnil" name:"VulNum"`
 
 	// Detected networks
-	NetworkNum *int64 `json:"NetworkNum,omitempty" name:"NetworkNum"`
+	NetworkNum *int64 `json:"NetworkNum,omitnil" name:"NetworkNum"`
 
 	// Blocklist
-	BanNum *int64 `json:"BanNum,omitempty" name:"BanNum"`
+	BanNum *int64 `json:"BanNum,omitnil" name:"BanNum"`
 
 	// Brute force attacks
-	BruteForceNum *int64 `json:"BruteForceNum,omitempty" name:"BruteForceNum"`
+	BruteForceNum *int64 `json:"BruteForceNum,omitnil" name:"BruteForceNum"`
 }
 
 type UnHandleEvent struct {
 	// Unhandled event type
-	EventTableListStruct []*UnHandleEventDetail `json:"EventTableListStruct,omitempty" name:"EventTableListStruct"`
+	EventTableListStruct []*UnHandleEventDetail `json:"EventTableListStruct,omitnil" name:"EventTableListStruct"`
 
 	// 1: yes; 0: no
-	BaseLineUser *uint64 `json:"BaseLineUser,omitempty" name:"BaseLineUser"`
+	BaseLineUser *uint64 `json:"BaseLineUser,omitnil" name:"BaseLineUser"`
 
 	// 1: on; 0: off
-	BaseLineInSwitch *uint64 `json:"BaseLineInSwitch,omitempty" name:"BaseLineInSwitch"`
+	BaseLineInSwitch *uint64 `json:"BaseLineInSwitch,omitnil" name:"BaseLineInSwitch"`
 
 	// 1: on; 0: off
-	BaseLineOutSwitch *uint64 `json:"BaseLineOutSwitch,omitempty" name:"BaseLineOutSwitch"`
+	BaseLineOutSwitch *uint64 `json:"BaseLineOutSwitch,omitnil" name:"BaseLineOutSwitch"`
 
 	// Number of inter-VPC firewall instances
 	// Note: This field may return `null`, indicating that no valid value was found.
-	VpcFwCount *uint64 `json:"VpcFwCount,omitempty" name:"VpcFwCount"`
+	VpcFwCount *uint64 `json:"VpcFwCount,omitnil" name:"VpcFwCount"`
 }
 
 type UnHandleEventDetail struct {
 	// Security event name
-	EventName *string `json:"EventName,omitempty" name:"EventName"`
+	EventName *string `json:"EventName,omitnil" name:"EventName"`
 
 	// Number of unhandled events
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 }
 
 type VpcDnsInfo struct {
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// VPC name
-	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+	VpcName *string `json:"VpcName,omitnil" name:"VpcName"`
 
 	// NAT firewall mode. 0: Create new; 1: Use existing
-	FwMode *int64 `json:"FwMode,omitempty" name:"FwMode"`
+	FwMode *int64 `json:"FwMode,omitnil" name:"FwMode"`
 
 	// VPC IPv4 CIDR block (Classless Inter-Domain Routing)
-	VpcIpv4Cidr *string `json:"VpcIpv4Cidr,omitempty" name:"VpcIpv4Cidr"`
+	VpcIpv4Cidr *string `json:"VpcIpv4Cidr,omitnil" name:"VpcIpv4Cidr"`
 
 	// Public EIP, which is the firewall DNS resolution address
-	DNSEip *string `json:"DNSEip,omitempty" name:"DNSEip"`
+	DNSEip *string `json:"DNSEip,omitnil" name:"DNSEip"`
 
 	// NAT gateway ID
 	// Note: This field may return `null`, indicating that no valid value was found.
-	NatInsId *string `json:"NatInsId,omitempty" name:"NatInsId"`
+	NatInsId *string `json:"NatInsId,omitnil" name:"NatInsId"`
 
 	// NAT gateway name
 	// Note: This field may return `null`, indicating that no valid value was found.
-	NatInsName *string `json:"NatInsName,omitempty" name:"NatInsName"`
+	NatInsName *string `json:"NatInsName,omitnil" name:"NatInsName"`
 
 	// 0: off; 1: on
-	SwitchStatus *int64 `json:"SwitchStatus,omitempty" name:"SwitchStatus"`
+	SwitchStatus *int64 `json:"SwitchStatus,omitnil" name:"SwitchStatus"`
 }

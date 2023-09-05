@@ -15,132 +15,132 @@
 package v20180808
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type AdminContact struct {
 	// The first name.
-	FirstName *string `json:"FirstName,omitempty" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
 
 	// The last name.
-	LastName *string `json:"LastName,omitempty" name:"LastName"`
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
 
 	// The country or region name, such as `CN`.
-	Country *string `json:"Country,omitempty" name:"Country"`
+	Country *string `json:"Country,omitnil" name:"Country"`
 
 	// The province or state name.
-	Province *string `json:"Province,omitempty" name:"Province"`
+	Province *string `json:"Province,omitnil" name:"Province"`
 
 	// The city name.
-	City *string `json:"City,omitempty" name:"City"`
+	City *string `json:"City,omitnil" name:"City"`
 
 	// The address line 1.
-	AddressLine *string `json:"AddressLine,omitempty" name:"AddressLine"`
+	AddressLine *string `json:"AddressLine,omitnil" name:"AddressLine"`
 
 	// The zip code.
-	ZipCode *string `json:"ZipCode,omitempty" name:"ZipCode"`
+	ZipCode *string `json:"ZipCode,omitnil" name:"ZipCode"`
 
 	// The email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// The mobile number, such as `+86.13600000000`.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// The company or organization name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompanyName *string `json:"CompanyName,omitempty" name:"CompanyName"`
+	CompanyName *string `json:"CompanyName,omitnil" name:"CompanyName"`
 
 	// The job title.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobTitle *string `json:"JobTitle,omitempty" name:"JobTitle"`
+	JobTitle *string `json:"JobTitle,omitnil" name:"JobTitle"`
 
 	// The address line 2.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AddressLineTwo *string `json:"AddressLineTwo,omitempty" name:"AddressLineTwo"`
+	AddressLineTwo *string `json:"AddressLineTwo,omitnil" name:"AddressLineTwo"`
 
 	// The fax number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Fax *string `json:"Fax,omitempty" name:"Fax"`
+	Fax *string `json:"Fax,omitnil" name:"Fax"`
 }
 
 type BatchDomainBuyDetails struct {
 	// The details ID.
-	Id *int64 `json:"Id,omitempty" name:"Id"`
+	Id *int64 `json:"Id,omitnil" name:"Id"`
 
 	// The bulk operation type. Valid values: `new` (register domains), `batch_transfer_prohibition_on` (enable transfer prohibition), `batch_transfer_prohibition_off` (disable transfer prohibition), `batch_update_prohibition_on` (enable update prohibition), `batch_update_prohibition_off` (disable update prohibition).
-	Action *string `json:"Action,omitempty" name:"Action"`
+	Action *string `json:"Action,omitnil" name:"Action"`
 
 	// The domains.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
 	// The status. Valid values: `SUCCESS`, `FAILURE`
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The reason for failure.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Reason *string `json:"Reason,omitempty" name:"Reason"`
+	Reason *string `json:"Reason,omitnil" name:"Reason"`
 
 	// The creation time.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
 
 	// The update time.
-	UpdatedOn *string `json:"UpdatedOn,omitempty" name:"UpdatedOn"`
+	UpdatedOn *string `json:"UpdatedOn,omitnil" name:"UpdatedOn"`
 
 	// Null: The DNS service is not transferred. `false`: The DNS service failed to be transferred. `true`: The DNS service is transferred successfully.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransferDnsResult *bool `json:"TransferDnsResult,omitempty" name:"TransferDnsResult"`
+	TransferDnsResult *bool `json:"TransferDnsResult,omitnil" name:"TransferDnsResult"`
 
 	// The reason for failure, expressed in Chinese.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReasonZh *string `json:"ReasonZh,omitempty" name:"ReasonZh"`
+	ReasonZh *string `json:"ReasonZh,omitnil" name:"ReasonZh"`
 
 	// The payment status.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayStatus *int64 `json:"PayStatus,omitempty" name:"PayStatus"`
+	PayStatus *int64 `json:"PayStatus,omitnil" name:"PayStatus"`
 }
 
 type BatchDomainBuyLog struct {
 	// The log ID.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The bulk operation type. Valid values: `new` (register domains), `batch_transfer_prohibition_on` (enable transfer prohibition), `batch_transfer_prohibition_off` (disable transfer prohibition), `batch_update_prohibition_on` (enable update prohibition), `batch_update_prohibition_off` (disable update prohibition).
-	Action *string `json:"Action,omitempty" name:"Action"`
+	Action *string `json:"Action,omitnil" name:"Action"`
 
 	// The quantity.
-	Number *int64 `json:"Number,omitempty" name:"Number"`
+	Number *int64 `json:"Number,omitnil" name:"Number"`
 
 	// The execution status. Valid values: `doing`, `done`
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The submission time.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
 }
 
 // Predefined struct for user
 type BatchModifyIntlDomainDNSRequestParams struct {
 	// The target domains.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The domain DNS array.
-	Dns []*string `json:"Dns,omitempty" name:"Dns"`
+	Dns []*string `json:"Dns,omitnil" name:"Dns"`
 
 	// Valid values: `batch_modify_domain_dns1`, `batch_modify_domain_dns2`, `batch_modify_domain_dns3`
-	BatchAction *string `json:"BatchAction,omitempty" name:"BatchAction"`
+	BatchAction *string `json:"BatchAction,omitnil" name:"BatchAction"`
 }
 
 type BatchModifyIntlDomainDNSRequest struct {
 	*tchttp.BaseRequest
 	
 	// The target domains.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The domain DNS array.
-	Dns []*string `json:"Dns,omitempty" name:"Dns"`
+	Dns []*string `json:"Dns,omitnil" name:"Dns"`
 
 	// Valid values: `batch_modify_domain_dns1`, `batch_modify_domain_dns2`, `batch_modify_domain_dns3`
-	BatchAction *string `json:"BatchAction,omitempty" name:"BatchAction"`
+	BatchAction *string `json:"BatchAction,omitnil" name:"BatchAction"`
 }
 
 func (r *BatchModifyIntlDomainDNSRequest) ToJsonString() string {
@@ -167,10 +167,10 @@ func (r *BatchModifyIntlDomainDNSRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchModifyIntlDomainDNSResponseParams struct {
 	// The log ID.
-	LogId *uint64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *uint64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchModifyIntlDomainDNSResponse struct {
@@ -192,26 +192,26 @@ func (r *BatchModifyIntlDomainDNSResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchModifyIntlDomainInfoRequestParams struct {
 	// The domains whose information is to be modified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Whether to enable the 60-day inter-registrar transfer lock.
-	LockTransfer *bool `json:"LockTransfer,omitempty" name:"LockTransfer"`
+	LockTransfer *bool `json:"LockTransfer,omitnil" name:"LockTransfer"`
 }
 
 type BatchModifyIntlDomainInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domains whose information is to be modified.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Whether to enable the 60-day inter-registrar transfer lock.
-	LockTransfer *bool `json:"LockTransfer,omitempty" name:"LockTransfer"`
+	LockTransfer *bool `json:"LockTransfer,omitnil" name:"LockTransfer"`
 }
 
 func (r *BatchModifyIntlDomainInfoRequest) ToJsonString() string {
@@ -238,10 +238,10 @@ func (r *BatchModifyIntlDomainInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchModifyIntlDomainInfoResponseParams struct {
 	// The log ID.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchModifyIntlDomainInfoResponse struct {
@@ -262,66 +262,66 @@ func (r *BatchModifyIntlDomainInfoResponse) FromJsonString(s string) error {
 
 type BillingContact struct {
 	// The first name.
-	FirstName *string `json:"FirstName,omitempty" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
 
 	// The last name.
-	LastName *string `json:"LastName,omitempty" name:"LastName"`
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
 
 	// The country or region name, such as `CN`.
-	Country *string `json:"Country,omitempty" name:"Country"`
+	Country *string `json:"Country,omitnil" name:"Country"`
 
 	// The province or state name.
-	Province *string `json:"Province,omitempty" name:"Province"`
+	Province *string `json:"Province,omitnil" name:"Province"`
 
 	// The city name.
-	City *string `json:"City,omitempty" name:"City"`
+	City *string `json:"City,omitnil" name:"City"`
 
 	// The address line 1.
-	AddressLine *string `json:"AddressLine,omitempty" name:"AddressLine"`
+	AddressLine *string `json:"AddressLine,omitnil" name:"AddressLine"`
 
 	// The zip code.
-	ZipCode *string `json:"ZipCode,omitempty" name:"ZipCode"`
+	ZipCode *string `json:"ZipCode,omitnil" name:"ZipCode"`
 
 	// The email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// The mobile number, such as `+86.13600000000`.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// The company or organization name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompanyName *string `json:"CompanyName,omitempty" name:"CompanyName"`
+	CompanyName *string `json:"CompanyName,omitnil" name:"CompanyName"`
 
 	// The job title.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobTitle *string `json:"JobTitle,omitempty" name:"JobTitle"`
+	JobTitle *string `json:"JobTitle,omitnil" name:"JobTitle"`
 
 	// The address line 2.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AddressLineTwo *string `json:"AddressLineTwo,omitempty" name:"AddressLineTwo"`
+	AddressLineTwo *string `json:"AddressLineTwo,omitnil" name:"AddressLineTwo"`
 
 	// The fax number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Fax *string `json:"Fax,omitempty" name:"Fax"`
+	Fax *string `json:"Fax,omitnil" name:"Fax"`
 }
 
 // Predefined struct for user
 type CheckIntlDomainNewRequestParams struct {
 	// The name of the domain to be checked.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
 	// Period, in years. If this parameter is left empty, premium domains cannot be queried.
-	Period *string `json:"Period,omitempty" name:"Period"`
+	Period *string `json:"Period,omitnil" name:"Period"`
 }
 
 type CheckIntlDomainNewRequest struct {
 	*tchttp.BaseRequest
 	
 	// The name of the domain to be checked.
-	Domain *string `json:"Domain,omitempty" name:"Domain"`
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
 	// Period, in years. If this parameter is left empty, premium domains cannot be queried.
-	Period *string `json:"Period,omitempty" name:"Period"`
+	Period *string `json:"Period,omitnil" name:"Period"`
 }
 
 func (r *CheckIntlDomainNewRequest) ToJsonString() string {
@@ -347,53 +347,53 @@ func (r *CheckIntlDomainNewRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckIntlDomainNewResponseParams struct {
 	// The name of the domain checked.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
 
 	// Whether the domain is available for registration.
-	Available *bool `json:"Available,omitempty" name:"Available"`
+	Available *bool `json:"Available,omitnil" name:"Available"`
 
 	// The reason why the domain cannot be registered.
-	Reason *string `json:"Reason,omitempty" name:"Reason"`
+	Reason *string `json:"Reason,omitnil" name:"Reason"`
 
 	// Whether the domain is a premium one.
-	Premium *bool `json:"Premium,omitempty" name:"Premium"`
+	Premium *bool `json:"Premium,omitnil" name:"Premium"`
 
 	// The domain price.
-	Price *float64 `json:"Price,omitempty" name:"Price"`
+	Price *float64 `json:"Price,omitnil" name:"Price"`
 
 	// Whether the domain name involves restricted words.
-	BlackWord *bool `json:"BlackWord,omitempty" name:"BlackWord"`
+	BlackWord *bool `json:"BlackWord,omitnil" name:"BlackWord"`
 
 	// The premium domain description.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Describe *string `json:"Describe,omitempty" name:"Describe"`
+	Describe *string `json:"Describe,omitnil" name:"Describe"`
 
 	// The price for renewing the premium domain.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FeeRenew *float64 `json:"FeeRenew,omitempty" name:"FeeRenew"`
+	FeeRenew *float64 `json:"FeeRenew,omitnil" name:"FeeRenew"`
 
 	// The real price of the domain. For a premium domain, its price varies depending on the period. For a non-premium domain, the price is the 1-year price.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RealPrice *float64 `json:"RealPrice,omitempty" name:"RealPrice"`
+	RealPrice *float64 `json:"RealPrice,omitnil" name:"RealPrice"`
 
 	// The price for transferring a premium domain in.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FeeTransfer *float64 `json:"FeeTransfer,omitempty" name:"FeeTransfer"`
+	FeeTransfer *float64 `json:"FeeTransfer,omitnil" name:"FeeTransfer"`
 
 	// The price for redeeming a premium domain.
-	FeeRestore *float64 `json:"FeeRestore,omitempty" name:"FeeRestore"`
+	FeeRestore *float64 `json:"FeeRestore,omitnil" name:"FeeRestore"`
 
 	// The period (in years) of the domain.
-	Period *uint64 `json:"Period,omitempty" name:"Period"`
+	Period *uint64 `json:"Period,omitnil" name:"Period"`
 
 	// The reason why the domain cannot be registered, expressed in Chinese.
-	ReasonZh *string `json:"ReasonZh,omitempty" name:"ReasonZh"`
+	ReasonZh *string `json:"ReasonZh,omitnil" name:"ReasonZh"`
 
 	// The internal error code.
-	ResCode *string `json:"ResCode,omitempty" name:"ResCode"`
+	ResCode *string `json:"ResCode,omitnil" name:"ResCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CheckIntlDomainNewResponse struct {
@@ -415,56 +415,56 @@ func (r *CheckIntlDomainNewResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateIntlDomainBatchRequestParams struct {
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The purchase period (years) of the domain. Value range: [1-10]
-	Period *int64 `json:"Period,omitempty" name:"Period"`
+	Period *int64 `json:"Period,omitnil" name:"Period"`
 
 	// The domains (maximum 4,000) to purchase.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The payment method. Valid values: `0` (online payment), `1` (account balance), `2` (package), `3` (offline settlement).
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Whether to enable auto-renewal.
-	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
 	// Whether to enable the transfer prohibition lock.
-	TransferProhibition *bool `json:"TransferProhibition,omitempty" name:"TransferProhibition"`
+	TransferProhibition *bool `json:"TransferProhibition,omitnil" name:"TransferProhibition"`
 
 	// Whether to enable the update prohibition lock.
-	UpdateProhibition *bool `json:"UpdateProhibition,omitempty" name:"UpdateProhibition"`
+	UpdateProhibition *bool `json:"UpdateProhibition,omitnil" name:"UpdateProhibition"`
 
 	// The custom DNS servers
-	CustomDns []*string `json:"CustomDns,omitempty" name:"CustomDns"`
+	CustomDns []*string `json:"CustomDns,omitnil" name:"CustomDns"`
 }
 
 type CreateIntlDomainBatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The purchase period (years) of the domain. Value range: [1-10]
-	Period *int64 `json:"Period,omitempty" name:"Period"`
+	Period *int64 `json:"Period,omitnil" name:"Period"`
 
 	// The domains (maximum 4,000) to purchase.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The payment method. Valid values: `0` (online payment), `1` (account balance), `2` (package), `3` (offline settlement).
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Whether to enable auto-renewal.
-	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
 	// Whether to enable the transfer prohibition lock.
-	TransferProhibition *bool `json:"TransferProhibition,omitempty" name:"TransferProhibition"`
+	TransferProhibition *bool `json:"TransferProhibition,omitnil" name:"TransferProhibition"`
 
 	// Whether to enable the update prohibition lock.
-	UpdateProhibition *bool `json:"UpdateProhibition,omitempty" name:"UpdateProhibition"`
+	UpdateProhibition *bool `json:"UpdateProhibition,omitnil" name:"UpdateProhibition"`
 
 	// The custom DNS servers
-	CustomDns []*string `json:"CustomDns,omitempty" name:"CustomDns"`
+	CustomDns []*string `json:"CustomDns,omitnil" name:"CustomDns"`
 }
 
 func (r *CreateIntlDomainBatchRequest) ToJsonString() string {
@@ -497,10 +497,10 @@ func (r *CreateIntlDomainBatchRequest) FromJsonString(s string) error {
 type CreateIntlDomainBatchResponseParams struct {
 	// The bulk purchase log ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateIntlDomainBatchResponse struct {
@@ -522,26 +522,26 @@ func (r *CreateIntlDomainBatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateIntlPhoneEmailRequestParams struct {
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 
 	// The verification code.
-	VerifyCode *string `json:"VerifyCode,omitempty" name:"VerifyCode"`
+	VerifyCode *string `json:"VerifyCode,omitnil" name:"VerifyCode"`
 }
 
 type CreateIntlPhoneEmailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 
 	// The verification code.
-	VerifyCode *string `json:"VerifyCode,omitempty" name:"VerifyCode"`
+	VerifyCode *string `json:"VerifyCode,omitnil" name:"VerifyCode"`
 }
 
 func (r *CreateIntlPhoneEmailRequest) ToJsonString() string {
@@ -568,7 +568,7 @@ func (r *CreateIntlPhoneEmailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateIntlPhoneEmailResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateIntlPhoneEmailResponse struct {
@@ -590,38 +590,38 @@ func (r *CreateIntlPhoneEmailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateIntlTemplateRequestParams struct {
 	// The registrant contact.
-	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitempty" name:"RegistrantContact"`
+	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitnil" name:"RegistrantContact"`
 
 	// The admin contact.
-	AdminContact *AdminContact `json:"AdminContact,omitempty" name:"AdminContact"`
+	AdminContact *AdminContact `json:"AdminContact,omitnil" name:"AdminContact"`
 
 	// The technical contact.
-	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitempty" name:"TechnicalContact"`
+	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitnil" name:"TechnicalContact"`
 
 	// The contact person for bills.
-	BillingContact *BillingContact `json:"BillingContact,omitempty" name:"BillingContact"`
+	BillingContact *BillingContact `json:"BillingContact,omitnil" name:"BillingContact"`
 
 	// The profile type. Valid values: `I` (individual, default), `E` (organization).
-	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+	TemplateType *string `json:"TemplateType,omitnil" name:"TemplateType"`
 }
 
 type CreateIntlTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// The registrant contact.
-	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitempty" name:"RegistrantContact"`
+	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitnil" name:"RegistrantContact"`
 
 	// The admin contact.
-	AdminContact *AdminContact `json:"AdminContact,omitempty" name:"AdminContact"`
+	AdminContact *AdminContact `json:"AdminContact,omitnil" name:"AdminContact"`
 
 	// The technical contact.
-	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitempty" name:"TechnicalContact"`
+	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitnil" name:"TechnicalContact"`
 
 	// The contact person for bills.
-	BillingContact *BillingContact `json:"BillingContact,omitempty" name:"BillingContact"`
+	BillingContact *BillingContact `json:"BillingContact,omitnil" name:"BillingContact"`
 
 	// The profile type. Valid values: `I` (individual, default), `E` (organization).
-	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+	TemplateType *string `json:"TemplateType,omitnil" name:"TemplateType"`
 }
 
 func (r *CreateIntlTemplateRequest) ToJsonString() string {
@@ -650,10 +650,10 @@ func (r *CreateIntlTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateIntlTemplateResponseParams struct {
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateIntlTemplateResponse struct {
@@ -675,20 +675,20 @@ func (r *CreateIntlTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteIntlPhoneEmailRequestParams struct {
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 }
 
 type DeleteIntlPhoneEmailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 }
 
 func (r *DeleteIntlPhoneEmailRequest) ToJsonString() string {
@@ -714,7 +714,7 @@ func (r *DeleteIntlPhoneEmailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteIntlPhoneEmailResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteIntlPhoneEmailResponse struct {
@@ -736,14 +736,14 @@ func (r *DeleteIntlPhoneEmailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteIntlTemplateRequestParams struct {
 	// The unique ID of the target registrant profile.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 type DeleteIntlTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of the target registrant profile.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 func (r *DeleteIntlTemplateRequest) ToJsonString() string {
@@ -768,7 +768,7 @@ func (r *DeleteIntlTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteIntlTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteIntlTemplateResponse struct {
@@ -790,14 +790,14 @@ func (r *DeleteIntlTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlBatchDetailStatusRequestParams struct {
 	// The IDs of the logs to be queried.
-	LogIds []*int64 `json:"LogIds,omitempty" name:"LogIds"`
+	LogIds []*int64 `json:"LogIds,omitnil" name:"LogIds"`
 }
 
 type DescribeIntlBatchDetailStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// The IDs of the logs to be queried.
-	LogIds []*int64 `json:"LogIds,omitempty" name:"LogIds"`
+	LogIds []*int64 `json:"LogIds,omitnil" name:"LogIds"`
 }
 
 func (r *DescribeIntlBatchDetailStatusRequest) ToJsonString() string {
@@ -822,10 +822,10 @@ func (r *DescribeIntlBatchDetailStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlBatchDetailStatusResponseParams struct {
 	// The details.
-	Details []*IntlBatchDetails `json:"Details,omitempty" name:"Details"`
+	Details []*IntlBatchDetails `json:"Details,omitnil" name:"Details"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlBatchDetailStatusResponse struct {
@@ -847,20 +847,20 @@ func (r *DescribeIntlBatchDetailStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlBatchOperationLogsRequestParams struct {
 	// The offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeIntlBatchOperationLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// The offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeIntlBatchOperationLogsRequest) ToJsonString() string {
@@ -886,14 +886,14 @@ func (r *DescribeIntlBatchOperationLogsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlBatchOperationLogsResponseParams struct {
 	// The total count.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The log list.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DomainBatchLogSet []*BatchDomainBuyLog `json:"DomainBatchLogSet,omitempty" name:"DomainBatchLogSet"`
+	DomainBatchLogSet []*BatchDomainBuyLog `json:"DomainBatchLogSet,omitnil" name:"DomainBatchLogSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlBatchOperationLogsResponse struct {
@@ -915,38 +915,38 @@ func (r *DescribeIntlBatchOperationLogsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeIntlDomainBatchDetailsRequestParams struct {
 	// The log ID.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The sort key. Valid values: `Domain`, `UpdateOn`, `Status`
-	OrderByKey *string `json:"OrderByKey,omitempty" name:"OrderByKey"`
+	OrderByKey *string `json:"OrderByKey,omitnil" name:"OrderByKey"`
 
 	// Valid values: `0` (ascending), `1` (descending).
-	OrderBy *int64 `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *int64 `json:"OrderBy,omitnil" name:"OrderBy"`
 }
 
 type DescribeIntlDomainBatchDetailsRequest struct {
 	*tchttp.BaseRequest
 	
 	// The log ID.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The sort key. Valid values: `Domain`, `UpdateOn`, `Status`
-	OrderByKey *string `json:"OrderByKey,omitempty" name:"OrderByKey"`
+	OrderByKey *string `json:"OrderByKey,omitnil" name:"OrderByKey"`
 
 	// Valid values: `0` (ascending), `1` (descending).
-	OrderBy *int64 `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *int64 `json:"OrderBy,omitnil" name:"OrderBy"`
 }
 
 func (r *DescribeIntlDomainBatchDetailsRequest) ToJsonString() string {
@@ -975,14 +975,14 @@ func (r *DescribeIntlDomainBatchDetailsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlDomainBatchDetailsResponseParams struct {
 	// The total count.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The list of log details.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DomainBatchDetailSet []*BatchDomainBuyDetails `json:"DomainBatchDetailSet,omitempty" name:"DomainBatchDetailSet"`
+	DomainBatchDetailSet []*BatchDomainBuyDetails `json:"DomainBatchDetailSet,omitnil" name:"DomainBatchDetailSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlDomainBatchDetailsResponse struct {
@@ -1004,19 +1004,19 @@ func (r *DescribeIntlDomainBatchDetailsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeIntlDomainListRequestParams struct {
 	// The page number in pagination cases.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of records on each page in pagination cases.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The domain keyword for fuzzy search.
-	KeyWord *string `json:"KeyWord,omitempty" name:"KeyWord"`
+	KeyWord *string `json:"KeyWord,omitnil" name:"KeyWord"`
 
 	// The registration time sort order. Valid values: `1` (descending), `2` (ascending).
-	OrderByRegTime *int64 `json:"OrderByRegTime,omitempty" name:"OrderByRegTime"`
+	OrderByRegTime *int64 `json:"OrderByRegTime,omitnil" name:"OrderByRegTime"`
 
 	// The expiration time sort order. Valid values: `1` (descending), `2` (ascending).
-	OrderByExpireTime *int64 `json:"OrderByExpireTime,omitempty" name:"OrderByExpireTime"`
+	OrderByExpireTime *int64 `json:"OrderByExpireTime,omitnil" name:"OrderByExpireTime"`
 
 	// The domain status.
 	// `all`: All domains.
@@ -1024,32 +1024,32 @@ type DescribeIntlDomainListRequestParams struct {
 	// `RedemptionPending`: The domains that are in urgent need of redemption.
 	// `nosubmit`: The domains with unverified identities.
 	// `tran`: The domains that are being transferred in.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The DNS type. Valid values: `1` (DNSPod), `2` (others).
-	DnsStatus *uint64 `json:"DnsStatus,omitempty" name:"DnsStatus"`
+	DnsStatus *uint64 `json:"DnsStatus,omitnil" name:"DnsStatus"`
 
 	// The domain sort order. Valid values: `1` (descending), `2` (ascending).
-	OrderByDomainName *uint64 `json:"OrderByDomainName,omitempty" name:"OrderByDomainName"`
+	OrderByDomainName *uint64 `json:"OrderByDomainName,omitnil" name:"OrderByDomainName"`
 }
 
 type DescribeIntlDomainListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The page number in pagination cases.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of records on each page in pagination cases.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The domain keyword for fuzzy search.
-	KeyWord *string `json:"KeyWord,omitempty" name:"KeyWord"`
+	KeyWord *string `json:"KeyWord,omitnil" name:"KeyWord"`
 
 	// The registration time sort order. Valid values: `1` (descending), `2` (ascending).
-	OrderByRegTime *int64 `json:"OrderByRegTime,omitempty" name:"OrderByRegTime"`
+	OrderByRegTime *int64 `json:"OrderByRegTime,omitnil" name:"OrderByRegTime"`
 
 	// The expiration time sort order. Valid values: `1` (descending), `2` (ascending).
-	OrderByExpireTime *int64 `json:"OrderByExpireTime,omitempty" name:"OrderByExpireTime"`
+	OrderByExpireTime *int64 `json:"OrderByExpireTime,omitnil" name:"OrderByExpireTime"`
 
 	// The domain status.
 	// `all`: All domains.
@@ -1057,13 +1057,13 @@ type DescribeIntlDomainListRequest struct {
 	// `RedemptionPending`: The domains that are in urgent need of redemption.
 	// `nosubmit`: The domains with unverified identities.
 	// `tran`: The domains that are being transferred in.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The DNS type. Valid values: `1` (DNSPod), `2` (others).
-	DnsStatus *uint64 `json:"DnsStatus,omitempty" name:"DnsStatus"`
+	DnsStatus *uint64 `json:"DnsStatus,omitnil" name:"DnsStatus"`
 
 	// The domain sort order. Valid values: `1` (descending), `2` (ascending).
-	OrderByDomainName *uint64 `json:"OrderByDomainName,omitempty" name:"OrderByDomainName"`
+	OrderByDomainName *uint64 `json:"OrderByDomainName,omitnil" name:"OrderByDomainName"`
 }
 
 func (r *DescribeIntlDomainListRequest) ToJsonString() string {
@@ -1095,13 +1095,13 @@ func (r *DescribeIntlDomainListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlDomainListResponseParams struct {
 	// The domain information set.
-	DomainSet []*IntlDomainInfo `json:"DomainSet,omitempty" name:"DomainSet"`
+	DomainSet []*IntlDomainInfo `json:"DomainSet,omitnil" name:"DomainSet"`
 
 	// The total number of domains.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlDomainListResponse struct {
@@ -1123,26 +1123,26 @@ func (r *DescribeIntlDomainListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlDomainPriceNewListRequestParams struct {
 	// The list of domain suffixes for which you want to query prices. This parameter defaults to all suffixes.
-	TldList []*string `json:"TldList,omitempty" name:"TldList"`
+	TldList []*string `json:"TldList,omitnil" name:"TldList"`
 
 	// The purchase year of the domains for which you want to query prices. This parameter defaults to all years.
-	Year []*int64 `json:"Year,omitempty" name:"Year"`
+	Year []*int64 `json:"Year,omitnil" name:"Year"`
 
 	// The domain purchase type. Valid values: `new`, `renew`, `redem` (redeem), `tran` (transfer in).
-	Operation []*string `json:"Operation,omitempty" name:"Operation"`
+	Operation []*string `json:"Operation,omitnil" name:"Operation"`
 }
 
 type DescribeIntlDomainPriceNewListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The list of domain suffixes for which you want to query prices. This parameter defaults to all suffixes.
-	TldList []*string `json:"TldList,omitempty" name:"TldList"`
+	TldList []*string `json:"TldList,omitnil" name:"TldList"`
 
 	// The purchase year of the domains for which you want to query prices. This parameter defaults to all years.
-	Year []*int64 `json:"Year,omitempty" name:"Year"`
+	Year []*int64 `json:"Year,omitnil" name:"Year"`
 
 	// The domain purchase type. Valid values: `new`, `renew`, `redem` (redeem), `tran` (transfer in).
-	Operation []*string `json:"Operation,omitempty" name:"Operation"`
+	Operation []*string `json:"Operation,omitnil" name:"Operation"`
 }
 
 func (r *DescribeIntlDomainPriceNewListRequest) ToJsonString() string {
@@ -1169,10 +1169,10 @@ func (r *DescribeIntlDomainPriceNewListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlDomainPriceNewListResponseParams struct {
 	// The price list of domains.
-	PriceList []*PriceInfoNew `json:"PriceList,omitempty" name:"PriceList"`
+	PriceList []*PriceInfoNew `json:"PriceList,omitnil" name:"PriceList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlDomainPriceNewListResponse struct {
@@ -1194,14 +1194,14 @@ func (r *DescribeIntlDomainPriceNewListResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeIntlDomainRequestParams struct {
 	// The domain ID.
-	DomainId *string `json:"DomainId,omitempty" name:"DomainId"`
+	DomainId *string `json:"DomainId,omitnil" name:"DomainId"`
 }
 
 type DescribeIntlDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domain ID.
-	DomainId *string `json:"DomainId,omitempty" name:"DomainId"`
+	DomainId *string `json:"DomainId,omitnil" name:"DomainId"`
 }
 
 func (r *DescribeIntlDomainRequest) ToJsonString() string {
@@ -1226,10 +1226,10 @@ func (r *DescribeIntlDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlDomainResponseParams struct {
 	// The domain information.
-	DomainInfo *IntlDomainInfo `json:"DomainInfo,omitempty" name:"DomainInfo"`
+	DomainInfo *IntlDomainInfo `json:"DomainInfo,omitnil" name:"DomainInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlDomainResponse struct {
@@ -1251,26 +1251,26 @@ func (r *DescribeIntlDomainResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlPhoneEmailListRequestParams struct {
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The number of records on each page in pagination cases.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page number in pagination cases.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 type DescribeIntlPhoneEmailListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The number of records on each page in pagination cases.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page number in pagination cases.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 func (r *DescribeIntlPhoneEmailListRequest) ToJsonString() string {
@@ -1297,13 +1297,13 @@ func (r *DescribeIntlPhoneEmailListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlPhoneEmailListResponseParams struct {
 	// The list of verified mobile numbers and email addresses.
-	PhoneEmailList []*IntlPhoneEmailLists `json:"PhoneEmailList,omitempty" name:"PhoneEmailList"`
+	PhoneEmailList []*IntlPhoneEmailLists `json:"PhoneEmailList,omitnil" name:"PhoneEmailList"`
 
 	// The total count.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlPhoneEmailListResponse struct {
@@ -1325,32 +1325,32 @@ func (r *DescribeIntlPhoneEmailListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlTemplateListRequestParams struct {
 	// The offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The maximum number of entries.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The domain registrant keyword for exact match.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// The type. Valid values: `all` (all types), `I` (individual), `E` (organization).
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type DescribeIntlTemplateListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The maximum number of entries.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The domain registrant keyword for exact match.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// The type. Valid values: `all` (all types), `I` (individual), `E` (organization).
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 func (r *DescribeIntlTemplateListRequest) ToJsonString() string {
@@ -1378,13 +1378,13 @@ func (r *DescribeIntlTemplateListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlTemplateListResponseParams struct {
 	// The registrant profile list information.
-	TemplateSet []*IntlTemplate `json:"TemplateSet,omitempty" name:"TemplateSet"`
+	TemplateSet []*IntlTemplate `json:"TemplateSet,omitnil" name:"TemplateSet"`
 
 	// The total count.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlTemplateListResponse struct {
@@ -1406,14 +1406,14 @@ func (r *DescribeIntlTemplateListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlTemplateRequestParams struct {
 	// The unique ID of a registrant profile.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 type DescribeIntlTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a registrant profile.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 func (r *DescribeIntlTemplateRequest) ToJsonString() string {
@@ -1438,10 +1438,10 @@ func (r *DescribeIntlTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIntlTemplateResponseParams struct {
 	// The details of the registrant profile.
-	Template *IntlTemplateInfo `json:"Template,omitempty" name:"Template"`
+	Template *IntlTemplateInfo `json:"Template,omitnil" name:"Template"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeIntlTemplateResponse struct {
@@ -1462,77 +1462,77 @@ func (r *DescribeIntlTemplateResponse) FromJsonString(s string) error {
 
 type IntlBatchDetails struct {
 	// The ID of the bulk task.
-	Id *int64 `json:"Id,omitempty" name:"Id"`
+	Id *int64 `json:"Id,omitnil" name:"Id"`
 
 	// The task status.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The reason.
-	Reason *string `json:"Reason,omitempty" name:"Reason"`
+	Reason *string `json:"Reason,omitnil" name:"Reason"`
 
 	// The reason, expressed in Chinese.
-	ReasonZh *string `json:"ReasonZh,omitempty" name:"ReasonZh"`
+	ReasonZh *string `json:"ReasonZh,omitnil" name:"ReasonZh"`
 }
 
 type IntlContactInfo struct {
 	// The city name.
-	City *string `json:"City,omitempty" name:"City"`
+	City *string `json:"City,omitnil" name:"City"`
 
 	// The country or region name.
-	Country *string `json:"Country,omitempty" name:"Country"`
+	Country *string `json:"Country,omitnil" name:"Country"`
 
 	// The email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// The domain registrant.
-	OrganizationName *string `json:"OrganizationName,omitempty" name:"OrganizationName"`
+	OrganizationName *string `json:"OrganizationName,omitnil" name:"OrganizationName"`
 
 	// The province or state name.
-	Province *string `json:"Province,omitempty" name:"Province"`
+	Province *string `json:"Province,omitnil" name:"Province"`
 
 	// The name of the registrant.
-	RegistrantName *string `json:"RegistrantName,omitempty" name:"RegistrantName"`
+	RegistrantName *string `json:"RegistrantName,omitnil" name:"RegistrantName"`
 
 	// The registrant type. Valid values: `I` (individual), `E` (organization).
-	RegistrantType *string `json:"RegistrantType,omitempty" name:"RegistrantType"`
+	RegistrantType *string `json:"RegistrantType,omitnil" name:"RegistrantType"`
 
 	// The detailed address.
-	Street *string `json:"Street,omitempty" name:"Street"`
+	Street *string `json:"Street,omitnil" name:"Street"`
 
 	// The mobile number.
-	Telephone *string `json:"Telephone,omitempty" name:"Telephone"`
+	Telephone *string `json:"Telephone,omitnil" name:"Telephone"`
 
 	// The zip code.
-	ZipCode *string `json:"ZipCode,omitempty" name:"ZipCode"`
+	ZipCode *string `json:"ZipCode,omitnil" name:"ZipCode"`
 
 	// The first name.
-	FirstName *string `json:"FirstName,omitempty" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
 
 	// The last name.
-	LastName *string `json:"LastName,omitempty" name:"LastName"`
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
 
 	// The company name.
-	CompanyName *string `json:"CompanyName,omitempty" name:"CompanyName"`
+	CompanyName *string `json:"CompanyName,omitnil" name:"CompanyName"`
 }
 
 type IntlDomainInfo struct {
 	// The auto-renewal flag. Valid values: `0` (disabled by default), `1` (enabled), `2` (disabled).
-	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+	AutoRenew *int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
 
 	// The registration time.
-	CreationDate *string `json:"CreationDate,omitempty" name:"CreationDate"`
+	CreationDate *string `json:"CreationDate,omitnil" name:"CreationDate"`
 
 	// The domain ID.
-	DomainId *string `json:"DomainId,omitempty" name:"DomainId"`
+	DomainId *string `json:"DomainId,omitnil" name:"DomainId"`
 
 	// The DNS status. Valid values: `1` (DNSPod), `2` (others), `3` (unknown).
-	DnsStatus *int64 `json:"DnsStatus,omitempty" name:"DnsStatus"`
+	DnsStatus *int64 `json:"DnsStatus,omitnil" name:"DnsStatus"`
 
 	// The domains.
-	DomainName *string `json:"DomainName,omitempty" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
 
 	// The domain status.
-	DomainStatus []*string `json:"DomainStatus,omitempty" name:"DomainStatus"`
+	DomainStatus []*string `json:"DomainStatus,omitnil" name:"DomainStatus"`
 
 	// The purchase status of the domain. Valid values:
 	// `ok`: Normal.
@@ -1546,140 +1546,140 @@ type IntlDomainInfo struct {
 	// `TransferPending`: Pending transfer.
 	// `TransferTransing`: Transfer in progress.
 	// `TransferFailed`: Transfer failed.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The expiration date.
-	ExpirationDate *string `json:"ExpirationDate,omitempty" name:"ExpirationDate"`
+	ExpirationDate *string `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
 
 	// The auto-renewal flag. Valid values: `1` (enabled), `2` (disabled), `3` (disabled by default).
-	ExpireMessage *int64 `json:"ExpireMessage,omitempty" name:"ExpireMessage"`
+	ExpireMessage *int64 `json:"ExpireMessage,omitnil" name:"ExpireMessage"`
 
 	// Whether the domain is a premium one.
-	IsPremium *bool `json:"IsPremium,omitempty" name:"IsPremium"`
+	IsPremium *bool `json:"IsPremium,omitnil" name:"IsPremium"`
 
 	// The DNS server of the domain.
-	Dns []*string `json:"Dns,omitempty" name:"Dns"`
+	Dns []*string `json:"Dns,omitnil" name:"Dns"`
 
 	// The contact information.
-	ContactInfo *IntlContactInfo `json:"ContactInfo,omitempty" name:"ContactInfo"`
+	ContactInfo *IntlContactInfo `json:"ContactInfo,omitnil" name:"ContactInfo"`
 
 	// The number of years available for renewal. The value `0` indicates that the domain has reached its maximum validity period (10 years) and cannot be renewed.
-	CanRenewYears *int64 `json:"CanRenewYears,omitempty" name:"CanRenewYears"`
+	CanRenewYears *int64 `json:"CanRenewYears,omitnil" name:"CanRenewYears"`
 
 	// The registrar type. If the value is `epp`, the registration time on the page is followed by (UTC). Otherwise, it is followed by (UTC+8).
-	RegistrarType *string `json:"RegistrarType,omitempty" name:"RegistrarType"`
+	RegistrarType *string `json:"RegistrarType,omitnil" name:"RegistrarType"`
 
 	// The account to which the domain belongs.
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Whether DNSSEC is supported.
-	SupportDnssec *bool `json:"SupportDnssec,omitempty" name:"SupportDnssec"`
+	SupportDnssec *bool `json:"SupportDnssec,omitnil" name:"SupportDnssec"`
 
 	// WHOIS privacy service status. Valid values: `1` (enabled), `2` (disabled), `3` (enabling), `4` (disabling).
-	WhoisPrivacy *int64 `json:"WhoisPrivacy,omitempty" name:"WhoisPrivacy"`
+	WhoisPrivacy *int64 `json:"WhoisPrivacy,omitnil" name:"WhoisPrivacy"`
 
 	// Valid values: `NotModify` (not modified), `Modifying`, `Failed` (failed to modify)
-	ModifyStatus *string `json:"ModifyStatus,omitempty" name:"ModifyStatus"`
+	ModifyStatus *string `json:"ModifyStatus,omitnil" name:"ModifyStatus"`
 
 	// Valid values: `NotModify` (not modified), `Modifying`, `Failed` (failed to modify)
-	DnsModifyStatus *string `json:"DnsModifyStatus,omitempty" name:"DnsModifyStatus"`
+	DnsModifyStatus *string `json:"DnsModifyStatus,omitnil" name:"DnsModifyStatus"`
 }
 
 type IntlPhoneEmailLists struct {
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The verification time.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
 }
 
 type IntlTemplate struct {
 	// The registrant contact.
-	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitempty" name:"RegistrantContact"`
+	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitnil" name:"RegistrantContact"`
 
 	// The admin contact.
-	AdminContact *AdminContact `json:"AdminContact,omitempty" name:"AdminContact"`
+	AdminContact *AdminContact `json:"AdminContact,omitnil" name:"AdminContact"`
 
 	// The technical contact.
-	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitempty" name:"TechnicalContact"`
+	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitnil" name:"TechnicalContact"`
 
 	// The contact person for bills.
-	BillingContact *BillingContact `json:"BillingContact,omitempty" name:"BillingContact"`
+	BillingContact *BillingContact `json:"BillingContact,omitnil" name:"BillingContact"`
 
 	// The creation time.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
 
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Whether the profile is the default one.
-	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
+	IsDefault *int64 `json:"IsDefault,omitnil" name:"IsDefault"`
 
 	// The last update time.
-	UpdatedOn *string `json:"UpdatedOn,omitempty" name:"UpdatedOn"`
+	UpdatedOn *string `json:"UpdatedOn,omitnil" name:"UpdatedOn"`
 }
 
 type IntlTemplateInfo struct {
 	// The registrant contact.
-	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitempty" name:"RegistrantContact"`
+	RegistrantContact *RegistrantContact `json:"RegistrantContact,omitnil" name:"RegistrantContact"`
 
 	// The admin contact.
-	AdminContact *AdminContact `json:"AdminContact,omitempty" name:"AdminContact"`
+	AdminContact *AdminContact `json:"AdminContact,omitnil" name:"AdminContact"`
 
 	// The technical contact.
-	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitempty" name:"TechnicalContact"`
+	TechnicalContact *TechnicalContact `json:"TechnicalContact,omitnil" name:"TechnicalContact"`
 
 	// The contact person for bills.
-	BillingContact *BillingContact `json:"BillingContact,omitempty" name:"BillingContact"`
+	BillingContact *BillingContact `json:"BillingContact,omitnil" name:"BillingContact"`
 
 	// The creation time.
-	CreatedOn *string `json:"CreatedOn,omitempty" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
 
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The registrant type. Valid values: `I` (individual), `E` (organization).
-	TemplateType *string `json:"TemplateType,omitempty" name:"TemplateType"`
+	TemplateType *string `json:"TemplateType,omitnil" name:"TemplateType"`
 
 	// The last updated time.
-	UpdatedOn *string `json:"UpdatedOn,omitempty" name:"UpdatedOn"`
+	UpdatedOn *string `json:"UpdatedOn,omitnil" name:"UpdatedOn"`
 
 	// The account ID.
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// Whether the profile is the default one.
-	IsDefault *int64 `json:"IsDefault,omitempty" name:"IsDefault"`
+	IsDefault *int64 `json:"IsDefault,omitnil" name:"IsDefault"`
 }
 
 // Predefined struct for user
 type ModifyOwnerIntlBatchRequestParams struct {
 	// The domains.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The user ID.
-	ToUin *string `json:"ToUin,omitempty" name:"ToUin"`
+	ToUin *string `json:"ToUin,omitnil" name:"ToUin"`
 
 	// Whether to transfer the DNS service.
-	DnsTransfer *bool `json:"DnsTransfer,omitempty" name:"DnsTransfer"`
+	DnsTransfer *bool `json:"DnsTransfer,omitnil" name:"DnsTransfer"`
 }
 
 type ModifyOwnerIntlBatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domains.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The user ID.
-	ToUin *string `json:"ToUin,omitempty" name:"ToUin"`
+	ToUin *string `json:"ToUin,omitnil" name:"ToUin"`
 
 	// Whether to transfer the DNS service.
-	DnsTransfer *bool `json:"DnsTransfer,omitempty" name:"DnsTransfer"`
+	DnsTransfer *bool `json:"DnsTransfer,omitnil" name:"DnsTransfer"`
 }
 
 func (r *ModifyOwnerIntlBatchRequest) ToJsonString() string {
@@ -1706,10 +1706,10 @@ func (r *ModifyOwnerIntlBatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyOwnerIntlBatchResponseParams struct {
 	// The ID of the bulk task.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyOwnerIntlBatchResponse struct {
@@ -1730,99 +1730,99 @@ func (r *ModifyOwnerIntlBatchResponse) FromJsonString(s string) error {
 
 type PriceInfoNew struct {
 	// The domain suffix, such as `.com`.
-	Tld *string `json:"Tld,omitempty" name:"Tld"`
+	Tld *string `json:"Tld,omitnil" name:"Tld"`
 
 	// The purchase years. Value range: [1-10]
-	Year *uint64 `json:"Year,omitempty" name:"Year"`
+	Year *uint64 `json:"Year,omitnil" name:"Year"`
 
 	// The original price of the domain.
-	Price *float64 `json:"Price,omitempty" name:"Price"`
+	Price *float64 `json:"Price,omitnil" name:"Price"`
 
 	// The current price of the domain.
-	RealPrice *float64 `json:"RealPrice,omitempty" name:"RealPrice"`
+	RealPrice *float64 `json:"RealPrice,omitnil" name:"RealPrice"`
 
 	// The domain purchase type. Valid values: `new`, `renew`, `redem` (redeem), `tran` (transfer in).
-	Operation *string `json:"Operation,omitempty" name:"Operation"`
+	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
 	// The title.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Title *string `json:"Title,omitempty" name:"Title"`
+	Title *string `json:"Title,omitnil" name:"Title"`
 }
 
 type RegistrantContact struct {
 	// The first name.
-	FirstName *string `json:"FirstName,omitempty" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
 
 	// The last name.
-	LastName *string `json:"LastName,omitempty" name:"LastName"`
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
 
 	// The country or region name, such as `CN`.
-	Country *string `json:"Country,omitempty" name:"Country"`
+	Country *string `json:"Country,omitnil" name:"Country"`
 
 	// The province or state name.
-	Province *string `json:"Province,omitempty" name:"Province"`
+	Province *string `json:"Province,omitnil" name:"Province"`
 
 	// The city name.
-	City *string `json:"City,omitempty" name:"City"`
+	City *string `json:"City,omitnil" name:"City"`
 
 	// The address line 1.
-	AddressLine *string `json:"AddressLine,omitempty" name:"AddressLine"`
+	AddressLine *string `json:"AddressLine,omitnil" name:"AddressLine"`
 
 	// The zip code.
-	ZipCode *string `json:"ZipCode,omitempty" name:"ZipCode"`
+	ZipCode *string `json:"ZipCode,omitnil" name:"ZipCode"`
 
 	// The email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// The mobile number, such as `+86.1360000000`.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// The company or organization name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompanyName *string `json:"CompanyName,omitempty" name:"CompanyName"`
+	CompanyName *string `json:"CompanyName,omitnil" name:"CompanyName"`
 
 	// The job title.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobTitle *string `json:"JobTitle,omitempty" name:"JobTitle"`
+	JobTitle *string `json:"JobTitle,omitnil" name:"JobTitle"`
 
 	// The address line 2.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AddressLineTwo *string `json:"AddressLineTwo,omitempty" name:"AddressLineTwo"`
+	AddressLineTwo *string `json:"AddressLineTwo,omitnil" name:"AddressLineTwo"`
 
 	// The fax number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Fax *string `json:"Fax,omitempty" name:"Fax"`
+	Fax *string `json:"Fax,omitnil" name:"Fax"`
 }
 
 // Predefined struct for user
 type RenewIntlDomainBatchRequestParams struct {
 	// The domains to check.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The period (1 to 10 years). If this parameter is left empty, premium domains cannot be checked.
-	Period *int64 `json:"Period,omitempty" name:"Period"`
+	Period *int64 `json:"Period,omitnil" name:"Period"`
 
 	// Payment method. Valid value: `1` (account balance).
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Whether to enable auto-renewal.
-	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 }
 
 type RenewIntlDomainBatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domains to check.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The period (1 to 10 years). If this parameter is left empty, premium domains cannot be checked.
-	Period *int64 `json:"Period,omitempty" name:"Period"`
+	Period *int64 `json:"Period,omitnil" name:"Period"`
 
 	// Payment method. Valid value: `1` (account balance).
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Whether to enable auto-renewal.
-	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 }
 
 func (r *RenewIntlDomainBatchRequest) ToJsonString() string {
@@ -1850,10 +1850,10 @@ func (r *RenewIntlDomainBatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewIntlDomainBatchResponseParams struct {
 	// The ID of the bulk task.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RenewIntlDomainBatchResponse struct {
@@ -1875,20 +1875,20 @@ func (r *RenewIntlDomainBatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SendIntlPhoneEmailCodeRequestParams struct {
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 }
 
 type SendIntlPhoneEmailCodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// The type. Valid values: `1` (mobile number), `2` (email address).
-	Type *int64 `json:"Type,omitempty" name:"Type"`
+	Type *int64 `json:"Type,omitnil" name:"Type"`
 
 	// The mobile number or email address.
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 }
 
 func (r *SendIntlPhoneEmailCodeRequest) ToJsonString() string {
@@ -1914,7 +1914,7 @@ func (r *SendIntlPhoneEmailCodeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SendIntlPhoneEmailCodeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SendIntlPhoneEmailCodeResponse struct {
@@ -1936,20 +1936,20 @@ func (r *SendIntlPhoneEmailCodeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SetIntlDomainAutoRenewRequestParams struct {
 	// The domain ID.
-	DomainId *string `json:"DomainId,omitempty" name:"DomainId"`
+	DomainId *string `json:"DomainId,omitnil" name:"DomainId"`
 
 	// Whether to enable auto-renewal. Valid values: `1` (enable), `2` (disable).
-	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+	AutoRenew *int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
 }
 
 type SetIntlDomainAutoRenewRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domain ID.
-	DomainId *string `json:"DomainId,omitempty" name:"DomainId"`
+	DomainId *string `json:"DomainId,omitnil" name:"DomainId"`
 
 	// Whether to enable auto-renewal. Valid values: `1` (enable), `2` (disable).
-	AutoRenew *int64 `json:"AutoRenew,omitempty" name:"AutoRenew"`
+	AutoRenew *int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
 }
 
 func (r *SetIntlDomainAutoRenewRequest) ToJsonString() string {
@@ -1975,7 +1975,7 @@ func (r *SetIntlDomainAutoRenewRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetIntlDomainAutoRenewResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetIntlDomainAutoRenewResponse struct {
@@ -1996,102 +1996,102 @@ func (r *SetIntlDomainAutoRenewResponse) FromJsonString(s string) error {
 
 type TechnicalContact struct {
 	// The first name.
-	FirstName *string `json:"FirstName,omitempty" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
 
 	// The last name.
-	LastName *string `json:"LastName,omitempty" name:"LastName"`
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
 
 	// The country or region name, such as `CN`.
-	Country *string `json:"Country,omitempty" name:"Country"`
+	Country *string `json:"Country,omitnil" name:"Country"`
 
 	// The province or state name.
-	Province *string `json:"Province,omitempty" name:"Province"`
+	Province *string `json:"Province,omitnil" name:"Province"`
 
 	// The city name.
-	City *string `json:"City,omitempty" name:"City"`
+	City *string `json:"City,omitnil" name:"City"`
 
 	// The address line 1.
-	AddressLine *string `json:"AddressLine,omitempty" name:"AddressLine"`
+	AddressLine *string `json:"AddressLine,omitnil" name:"AddressLine"`
 
 	// The zip code.
-	ZipCode *string `json:"ZipCode,omitempty" name:"ZipCode"`
+	ZipCode *string `json:"ZipCode,omitnil" name:"ZipCode"`
 
 	// The email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// The mobile number, such as `+86.13600000000`.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// The company or organization name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompanyName *string `json:"CompanyName,omitempty" name:"CompanyName"`
+	CompanyName *string `json:"CompanyName,omitnil" name:"CompanyName"`
 
 	// The job title.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobTitle *string `json:"JobTitle,omitempty" name:"JobTitle"`
+	JobTitle *string `json:"JobTitle,omitnil" name:"JobTitle"`
 
 	// The address line 2.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AddressLineTwo *string `json:"AddressLineTwo,omitempty" name:"AddressLineTwo"`
+	AddressLineTwo *string `json:"AddressLineTwo,omitnil" name:"AddressLineTwo"`
 
 	// The fax number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Fax *string `json:"Fax,omitempty" name:"Fax"`
+	Fax *string `json:"Fax,omitnil" name:"Fax"`
 }
 
 // Predefined struct for user
 type TransferInIntlDomainBatchRequestParams struct {
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The transfer passwords for the domains.
-	PassWords []*string `json:"PassWords,omitempty" name:"PassWords"`
+	PassWords []*string `json:"PassWords,omitnil" name:"PassWords"`
 
 	// The domains to be bulk transferred in.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The payment method. Valid value: `1` (account balance).
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Whether to enable auto-renewal.
-	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
 	// Whether to enable the transfer prohibition lock.
-	TransferProhibition *bool `json:"TransferProhibition,omitempty" name:"TransferProhibition"`
+	TransferProhibition *bool `json:"TransferProhibition,omitnil" name:"TransferProhibition"`
 
 	// Whether to enable the update prohibition lock.
-	UpdateProhibition *bool `json:"UpdateProhibition,omitempty" name:"UpdateProhibition"`
+	UpdateProhibition *bool `json:"UpdateProhibition,omitnil" name:"UpdateProhibition"`
 
 	// Whether to enable the 60-day inter-registrar transfer lock.
-	LockTransfer *bool `json:"LockTransfer,omitempty" name:"LockTransfer"`
+	LockTransfer *bool `json:"LockTransfer,omitnil" name:"LockTransfer"`
 }
 
 type TransferInIntlDomainBatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// The profile ID.
-	TemplateId *string `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The transfer passwords for the domains.
-	PassWords []*string `json:"PassWords,omitempty" name:"PassWords"`
+	PassWords []*string `json:"PassWords,omitnil" name:"PassWords"`
 
 	// The domains to be bulk transferred in.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The payment method. Valid value: `1` (account balance).
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Whether to enable auto-renewal.
-	AutoRenewFlag *bool `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *bool `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
 	// Whether to enable the transfer prohibition lock.
-	TransferProhibition *bool `json:"TransferProhibition,omitempty" name:"TransferProhibition"`
+	TransferProhibition *bool `json:"TransferProhibition,omitnil" name:"TransferProhibition"`
 
 	// Whether to enable the update prohibition lock.
-	UpdateProhibition *bool `json:"UpdateProhibition,omitempty" name:"UpdateProhibition"`
+	UpdateProhibition *bool `json:"UpdateProhibition,omitnil" name:"UpdateProhibition"`
 
 	// Whether to enable the 60-day inter-registrar transfer lock.
-	LockTransfer *bool `json:"LockTransfer,omitempty" name:"LockTransfer"`
+	LockTransfer *bool `json:"LockTransfer,omitnil" name:"LockTransfer"`
 }
 
 func (r *TransferInIntlDomainBatchRequest) ToJsonString() string {
@@ -2124,10 +2124,10 @@ func (r *TransferInIntlDomainBatchRequest) FromJsonString(s string) error {
 type TransferInIntlDomainBatchResponseParams struct {
 	// The bulk purchase log ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type TransferInIntlDomainBatchResponse struct {
@@ -2149,20 +2149,20 @@ func (r *TransferInIntlDomainBatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type TransferProhibitionIntlBatchRequestParams struct {
 	// The domain array.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// Whether to enable transfer prohibition. Valid values: `true` (enable), `false` (disable).
-	Status *bool `json:"Status,omitempty" name:"Status"`
+	Status *bool `json:"Status,omitnil" name:"Status"`
 }
 
 type TransferProhibitionIntlBatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domain array.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// Whether to enable transfer prohibition. Valid values: `true` (enable), `false` (disable).
-	Status *bool `json:"Status,omitempty" name:"Status"`
+	Status *bool `json:"Status,omitnil" name:"Status"`
 }
 
 func (r *TransferProhibitionIntlBatchRequest) ToJsonString() string {
@@ -2188,10 +2188,10 @@ func (r *TransferProhibitionIntlBatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type TransferProhibitionIntlBatchResponseParams struct {
 	// The log ID.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type TransferProhibitionIntlBatchResponse struct {
@@ -2213,20 +2213,20 @@ func (r *TransferProhibitionIntlBatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateProhibitionIntlBatchRequestParams struct {
 	// The domain array.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// Whether to enable update prohibition. Valid values: `true` (enable), `false` (disable).
-	Status *bool `json:"Status,omitempty" name:"Status"`
+	Status *bool `json:"Status,omitnil" name:"Status"`
 }
 
 type UpdateProhibitionIntlBatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domain array.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// Whether to enable update prohibition. Valid values: `true` (enable), `false` (disable).
-	Status *bool `json:"Status,omitempty" name:"Status"`
+	Status *bool `json:"Status,omitnil" name:"Status"`
 }
 
 func (r *UpdateProhibitionIntlBatchRequest) ToJsonString() string {
@@ -2252,10 +2252,10 @@ func (r *UpdateProhibitionIntlBatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateProhibitionIntlBatchResponseParams struct {
 	// The log ID.
-	LogId *int64 `json:"LogId,omitempty" name:"LogId"`
+	LogId *int64 `json:"LogId,omitnil" name:"LogId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateProhibitionIntlBatchResponse struct {

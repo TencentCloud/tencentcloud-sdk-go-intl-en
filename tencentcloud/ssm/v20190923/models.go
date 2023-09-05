@@ -15,15 +15,15 @@
 package v20190923
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type CreateProductSecretRequestParams struct {
 	// Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.
 	// Supported character sets include:
@@ -32,50 +32,50 @@ type CreateProductSecretRequestParams struct {
 	// Uppercase letters: [A, Z].
 	// Special symbols: underscore.
 	// The prefix must begin with a letter.
-	UserNamePrefix *string `json:"UserNamePrefix,omitempty" name:"UserNamePrefix"`
+	UserNamePrefix *string `json:"UserNamePrefix,omitnil" name:"UserNamePrefix"`
 
 	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`. The `DescribeSupportedProducts` API can be used to get the names of the supported Tencent Cloud services.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Tencent Cloud service instance ID.
-	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
 
 	// Domain name of the account in the form of IP. You can enter `%`.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
-	PrivilegesList []*ProductPrivilegeUnit `json:"PrivilegesList,omitempty" name:"PrivilegesList"`
+	PrivilegesList []*ProductPrivilegeUnit `json:"PrivilegesList,omitnil" name:"PrivilegesList"`
 
 	// Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Specifies the KMS CMK that encrypts the credential.
 	// If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
 	// You can also specify a custom KMS CMK created in the same region for encryption.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.
 	// When `EnableRotation` is `True`, this parameter is required.
-	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
+	RotationBeginTime *string `json:"RotationBeginTime,omitnil" name:"RotationBeginTime"`
 
 	// Specifies whether to enable rotation
 	// True - enable
 	// False - do not enable
 	// If this parameter is not specified, `False` will be used by default.
-	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+	EnableRotation *bool `json:"EnableRotation,omitnil" name:"EnableRotation"`
 
 	// Rotation frequency in days. Default value: 1 day.
-	RotationFrequency *int64 `json:"RotationFrequency,omitempty" name:"RotationFrequency"`
+	RotationFrequency *int64 `json:"RotationFrequency,omitnil" name:"RotationFrequency"`
 }
 
 type CreateProductSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Credential name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens, and underscores and must begin with a letter or digit.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Prefix of the user account name, which is specified by you and can contain up to 8 characters.
 	// Supported character sets include:
@@ -84,43 +84,43 @@ type CreateProductSecretRequest struct {
 	// Uppercase letters: [A, Z].
 	// Special symbols: underscore.
 	// The prefix must begin with a letter.
-	UserNamePrefix *string `json:"UserNamePrefix,omitempty" name:"UserNamePrefix"`
+	UserNamePrefix *string `json:"UserNamePrefix,omitnil" name:"UserNamePrefix"`
 
 	// Name of the Tencent Cloud service bound to the credential, such as `Mysql`. The `DescribeSupportedProducts` API can be used to get the names of the supported Tencent Cloud services.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Tencent Cloud service instance ID.
-	InstanceID *string `json:"InstanceID,omitempty" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
 
 	// Domain name of the account in the form of IP. You can enter `%`.
-	Domains []*string `json:"Domains,omitempty" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// List of permissions that need to be granted when the credential is bound to a Tencent Cloud service.
-	PrivilegesList []*ProductPrivilegeUnit `json:"PrivilegesList,omitempty" name:"PrivilegesList"`
+	PrivilegesList []*ProductPrivilegeUnit `json:"PrivilegesList,omitnil" name:"PrivilegesList"`
 
 	// Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Specifies the KMS CMK that encrypts the credential.
 	// If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
 	// You can also specify a custom KMS CMK created in the same region for encryption.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// User-Defined rotation start time in the format of 2006-01-02 15:04:05.
 	// When `EnableRotation` is `True`, this parameter is required.
-	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
+	RotationBeginTime *string `json:"RotationBeginTime,omitnil" name:"RotationBeginTime"`
 
 	// Specifies whether to enable rotation
 	// True - enable
 	// False - do not enable
 	// If this parameter is not specified, `False` will be used by default.
-	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+	EnableRotation *bool `json:"EnableRotation,omitnil" name:"EnableRotation"`
 
 	// Rotation frequency in days. Default value: 1 day.
-	RotationFrequency *int64 `json:"RotationFrequency,omitempty" name:"RotationFrequency"`
+	RotationFrequency *int64 `json:"RotationFrequency,omitnil" name:"RotationFrequency"`
 }
 
 func (r *CreateProductSecretRequest) ToJsonString() string {
@@ -156,22 +156,22 @@ func (r *CreateProductSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProductSecretResponseParams struct {
 	// Name of the created credential.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Tag operation return code. 0: success; 1: internal error; 2: business processing error.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+	TagCode *uint64 `json:"TagCode,omitnil" name:"TagCode"`
 
 	// Tag operation return message.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
+	TagMsg *string `json:"TagMsg,omitnil" name:"TagMsg"`
 
 	// ID of the created Tencent Cloud service credential async task.
-	FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+	FlowID *int64 `json:"FlowID,omitnil" name:"FlowID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateProductSecretResponse struct {
@@ -193,48 +193,48 @@ func (r *CreateProductSecretResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSSHKeyPairSecretRequestParams struct {
 	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the project to which the created SSH key belongs.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Description, such as what it is used for. It contains up to 2,048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Specifies a KMS CMK to encrypt the secret.
 	// If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
 	// You can also specify a custom KMS CMK created in the same region for encryption.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
-	SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
+	SSHKeyName *string `json:"SSHKeyName,omitnil" name:"SSHKeyName"`
 }
 
 type CreateSSHKeyPairSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Secret name, which must be unique in the same region. It can contain 128 bytes of letters, digits, hyphens and underscores and must begin with a letter or digit.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the project to which the created SSH key belongs.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Description, such as what it is used for. It contains up to 2,048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Specifies a KMS CMK to encrypt the secret.
 	// If this parameter is left empty, the CMK created by Secrets Manager by default will be used for encryption.
 	// You can also specify a custom KMS CMK created in the same region for encryption.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// Name of the SSH key pair, which only contains digits, letters and underscores and must start with a digit or letter. The maximum length is 25 characters.
-	SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
+	SSHKeyName *string `json:"SSHKeyName,omitnil" name:"SSHKeyName"`
 }
 
 func (r *CreateSSHKeyPairSecretRequest) ToJsonString() string {
@@ -264,24 +264,24 @@ func (r *CreateSSHKeyPairSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSSHKeyPairSecretResponseParams struct {
 	// Name of the created secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the created SSH key.
-	SSHKeyID *string `json:"SSHKeyID,omitempty" name:"SSHKeyID"`
+	SSHKeyID *string `json:"SSHKeyID,omitnil" name:"SSHKeyID"`
 
 	// Name of the created SSH key.
-	SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
+	SSHKeyName *string `json:"SSHKeyName,omitnil" name:"SSHKeyName"`
 
 	// Tag return code. `0`: success; `1`: internal error; `2`: business processing error.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+	TagCode *uint64 `json:"TagCode,omitnil" name:"TagCode"`
 
 	// Tag return message.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
+	TagMsg *string `json:"TagMsg,omitnil" name:"TagMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateSSHKeyPairSecretResponse struct {
@@ -303,50 +303,50 @@ func (r *CreateSSHKeyPairSecretResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSecretRequestParams struct {
 	// Secret name, which must be unique within a region. The name can be up to 128 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Description information, such as the detailed use cases. It can be up to 2048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// KMS CMK used for Secret encryption. If this parameter is left empty, SecretsManager will create a CMK by default. You can also specify a KMS CMK that is created in the same region.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// Base64-encoded plaintext of a binary Secret. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// Plaintext of a Secret, in text format. Base64 encoding is not required. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 }
 
 type CreateSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Secret name, which must be unique within a region. The name can be up to 128 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Description information, such as the detailed use cases. It can be up to 2048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// KMS CMK used for Secret encryption. If this parameter is left empty, SecretsManager will create a CMK by default. You can also specify a KMS CMK that is created in the same region.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// Base64-encoded plaintext of a binary Secret. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// Plaintext of a Secret, in text format. Base64 encoding is not required. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 
 	// List of tags.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 }
 
 func (r *CreateSecretRequest) ToJsonString() string {
@@ -377,21 +377,21 @@ func (r *CreateSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSecretResponseParams struct {
 	// Name of the new Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the new Secret version.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Return code of tag operation. `0`: success; `1`: internal error; `2`: business processing error
 	// Note: This field may return `null`, indicating that no valid value was found.
-	TagCode *uint64 `json:"TagCode,omitempty" name:"TagCode"`
+	TagCode *uint64 `json:"TagCode,omitnil" name:"TagCode"`
 
 	// Return message of tag operation.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	TagMsg *string `json:"TagMsg,omitempty" name:"TagMsg"`
+	TagMsg *string `json:"TagMsg,omitnil" name:"TagMsg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateSecretResponse struct {
@@ -413,32 +413,32 @@ func (r *CreateSecretResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecretRequestParams struct {
 	// Name of the Secret to be deleted.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Scheduled deletion time (in days), indicating the number of retention days for the secret. Value range: 0-30. If it is `0`, the secret is deleted immediately.
 	// For an SSH key secret, this field can only be `0`.
-	RecoveryWindowInDays *uint64 `json:"RecoveryWindowInDays,omitempty" name:"RecoveryWindowInDays"`
+	RecoveryWindowInDays *uint64 `json:"RecoveryWindowInDays,omitnil" name:"RecoveryWindowInDays"`
 
 	// Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only valid for SSH key secrets. Valid values:
 	// `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.
 	// `False`: only deletes the SSH key information in the secret.
-	CleanSSHKey *bool `json:"CleanSSHKey,omitempty" name:"CleanSSHKey"`
+	CleanSSHKey *bool `json:"CleanSSHKey,omitnil" name:"CleanSSHKey"`
 }
 
 type DeleteSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the Secret to be deleted.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Scheduled deletion time (in days), indicating the number of retention days for the secret. Value range: 0-30. If it is `0`, the secret is deleted immediately.
 	// For an SSH key secret, this field can only be `0`.
-	RecoveryWindowInDays *uint64 `json:"RecoveryWindowInDays,omitempty" name:"RecoveryWindowInDays"`
+	RecoveryWindowInDays *uint64 `json:"RecoveryWindowInDays,omitnil" name:"RecoveryWindowInDays"`
 
 	// Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only valid for SSH key secrets. Valid values:
 	// `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.
 	// `False`: only deletes the SSH key information in the secret.
-	CleanSSHKey *bool `json:"CleanSSHKey,omitempty" name:"CleanSSHKey"`
+	CleanSSHKey *bool `json:"CleanSSHKey,omitnil" name:"CleanSSHKey"`
 }
 
 func (r *DeleteSecretRequest) ToJsonString() string {
@@ -465,13 +465,13 @@ func (r *DeleteSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecretResponseParams struct {
 	// Name of deleted Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Secret deletion time, formatted as a Unix timestamp.
-	DeleteTime *int64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
+	DeleteTime *int64 `json:"DeleteTime,omitnil" name:"DeleteTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteSecretResponse struct {
@@ -493,20 +493,20 @@ func (r *DeleteSecretResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecretVersionRequestParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the Secret version to be deleted.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 }
 
 type DeleteSecretVersionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the Secret version to be deleted.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 }
 
 func (r *DeleteSecretVersionRequest) ToJsonString() string {
@@ -532,13 +532,13 @@ func (r *DeleteSecretVersionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecretVersionResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Version ID of the Secret.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteSecretVersionResponse struct {
@@ -560,14 +560,14 @@ func (r *DeleteSecretVersionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAsyncRequestInfoRequestParams struct {
 	// Async task ID.
-	FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+	FlowID *int64 `json:"FlowID,omitnil" name:"FlowID"`
 }
 
 type DescribeAsyncRequestInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Async task ID.
-	FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+	FlowID *int64 `json:"FlowID,omitnil" name:"FlowID"`
 }
 
 func (r *DescribeAsyncRequestInfoRequest) ToJsonString() string {
@@ -592,13 +592,13 @@ func (r *DescribeAsyncRequestInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAsyncRequestInfoResponseParams struct {
 	// 0: processing, 1: processing succeeded, 2: processing failed
-	TaskStatus *int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+	TaskStatus *int64 `json:"TaskStatus,omitnil" name:"TaskStatus"`
 
 	// Task description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAsyncRequestInfoResponse struct {
@@ -620,14 +620,14 @@ func (r *DescribeAsyncRequestInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRotationDetailRequestParams struct {
 	// Specifies the name of the credential for which to get the credential rotation details.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type DescribeRotationDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Specifies the name of the credential for which to get the credential rotation details.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *DescribeRotationDetailRequest) ToJsonString() string {
@@ -652,22 +652,22 @@ func (r *DescribeRotationDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRotationDetailResponseParams struct {
 	// Whether to enable rotation. `true`: enabled; `false`: disabled.
-	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+	EnableRotation *bool `json:"EnableRotation,omitnil" name:"EnableRotation"`
 
 	// Rotation frequency in days. Default value: 1 day.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Frequency *int64 `json:"Frequency,omitempty" name:"Frequency"`
+	Frequency *int64 `json:"Frequency,omitnil" name:"Frequency"`
 
 	// Last rotation time, which is an explicitly visible time string in the format of 2006-01-02 15:04:05.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestRotateTime *string `json:"LatestRotateTime,omitempty" name:"LatestRotateTime"`
+	LatestRotateTime *string `json:"LatestRotateTime,omitnil" name:"LatestRotateTime"`
 
 	// Next rotation start time, which is an explicitly visible time string in the format of 2006-01-02 15:04:05.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NextRotateBeginTime *string `json:"NextRotateBeginTime,omitempty" name:"NextRotateBeginTime"`
+	NextRotateBeginTime *string `json:"NextRotateBeginTime,omitnil" name:"NextRotateBeginTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRotationDetailResponse struct {
@@ -689,14 +689,14 @@ func (r *DescribeRotationDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRotationHistoryRequestParams struct {
 	// Specifies the name of the credential for which to get the credential rotation records.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type DescribeRotationHistoryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Specifies the name of the credential for which to get the credential rotation records.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *DescribeRotationHistoryRequest) ToJsonString() string {
@@ -721,13 +721,13 @@ func (r *DescribeRotationHistoryRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRotationHistoryResponseParams struct {
 	// List of version numbers.
-	VersionIDs []*string `json:"VersionIDs,omitempty" name:"VersionIDs"`
+	VersionIDs []*string `json:"VersionIDs,omitnil" name:"VersionIDs"`
 
 	// Number of version numbers. The maximum number of version numbers that can be shown to users is 10.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRotationHistoryResponse struct {
@@ -749,14 +749,14 @@ func (r *DescribeRotationHistoryResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecretRequestParams struct {
 	// Name of a Secret whose detailed information is to be obtained.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type DescribeSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of a Secret whose detailed information is to be obtained.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *DescribeSecretRequest) ToJsonString() string {
@@ -781,64 +781,64 @@ func (r *DescribeSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecretResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Description of the Secret.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// ID of the KMS CMK used for encryption.
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// Creator UIN.
-	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+	CreateUin *uint64 `json:"CreateUin,omitnil" name:"CreateUin"`
 
 	// Credential status: Enabled, Disabled, PendingDelete, Creating, Failed.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Deletion time, formatted as a Unix timestamp. For a Secret that is not in `PendingDelete` status, this value is 0.
-	DeleteTime *uint64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
+	DeleteTime *uint64 `json:"DeleteTime,omitnil" name:"DeleteTime"`
 
 	// Creation time.
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// `0`: user-defined secret; `1`: database credential; `2`: SSH key secret.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	SecretType *int64 `json:"SecretType,omitempty" name:"SecretType"`
+	SecretType *int64 `json:"SecretType,omitnil" name:"SecretType"`
 
 	// Tencent Cloud service name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Tencent Cloud service instance ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResourceID *string `json:"ResourceID,omitempty" name:"ResourceID"`
+	ResourceID *string `json:"ResourceID,omitnil" name:"ResourceID"`
 
 	// Whether to enable rotation. `True`: enable rotation; `False`: disable rotation.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RotationStatus *bool `json:"RotationStatus,omitempty" name:"RotationStatus"`
+	RotationStatus *bool `json:"RotationStatus,omitnil" name:"RotationStatus"`
 
 	// Rotation frequency in days by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RotationFrequency *int64 `json:"RotationFrequency,omitempty" name:"RotationFrequency"`
+	RotationFrequency *int64 `json:"RotationFrequency,omitnil" name:"RotationFrequency"`
 
 	// Secret name. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+	ResourceName *string `json:"ResourceName,omitnil" name:"ResourceName"`
 
 	// Project ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
 
 	// ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitempty" name:"AssociatedInstanceIDs"`
+	AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitnil" name:"AssociatedInstanceIDs"`
 
 	// UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+	TargetUin *uint64 `json:"TargetUin,omitnil" name:"TargetUin"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSecretResponse struct {
@@ -889,13 +889,13 @@ func (r *DescribeSupportedProductsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSupportedProductsResponseParams struct {
 	// List of supported services.
-	Products []*string `json:"Products,omitempty" name:"Products"`
+	Products []*string `json:"Products,omitnil" name:"Products"`
 
 	// Number of supported services
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSupportedProductsResponse struct {
@@ -917,14 +917,14 @@ func (r *DescribeSupportedProductsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisableSecretRequestParams struct {
 	// Name of the Secret to be disabled.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type DisableSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the Secret to be disabled.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *DisableSecretRequest) ToJsonString() string {
@@ -949,10 +949,10 @@ func (r *DisableSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisableSecretResponseParams struct {
 	// Name of the disabled Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DisableSecretResponse struct {
@@ -974,14 +974,14 @@ func (r *DisableSecretResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableSecretRequestParams struct {
 	// Name of the Secret to be enabled.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type EnableSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the Secret to be enabled.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *EnableSecretRequest) ToJsonString() string {
@@ -1006,10 +1006,10 @@ func (r *EnableSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableSecretResponseParams struct {
 	// Name of the enabled Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type EnableSecretResponse struct {
@@ -1060,10 +1060,10 @@ func (r *GetRegionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetRegionsResponseParams struct {
 	// List of regions.
-	Regions []*string `json:"Regions,omitempty" name:"Regions"`
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetRegionsResponse struct {
@@ -1085,20 +1085,20 @@ func (r *GetRegionsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSSHKeyPairValueRequestParams struct {
 	// Secret name. This field is only valid for SSH key secrets.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the key pair, which is the unique identifier of the key pair in the CVM.
-	SSHKeyId *string `json:"SSHKeyId,omitempty" name:"SSHKeyId"`
+	SSHKeyId *string `json:"SSHKeyId,omitnil" name:"SSHKeyId"`
 }
 
 type GetSSHKeyPairValueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Secret name. This field is only valid for SSH key secrets.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the key pair, which is the unique identifier of the key pair in the CVM.
-	SSHKeyId *string `json:"SSHKeyId,omitempty" name:"SSHKeyId"`
+	SSHKeyId *string `json:"SSHKeyId,omitnil" name:"SSHKeyId"`
 }
 
 func (r *GetSSHKeyPairValueRequest) ToJsonString() string {
@@ -1124,27 +1124,27 @@ func (r *GetSSHKeyPairValueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSSHKeyPairValueResponseParams struct {
 	// ID of the SSH key.
-	SSHKeyID *string `json:"SSHKeyID,omitempty" name:"SSHKeyID"`
+	SSHKeyID *string `json:"SSHKeyID,omitnil" name:"SSHKeyID"`
 
 	// Plaintext value of the Base64-encoded public key.
-	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
 
 	// Plaintext value of the Base64-encoded private key.
-	PrivateKey *string `json:"PrivateKey,omitempty" name:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
 
 	// ID of the project to which the SSH key belongs.
-	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
 
 	// Description of the SSH key.
 	// The description can be modified in the CVM console.
-	SSHKeyDescription *string `json:"SSHKeyDescription,omitempty" name:"SSHKeyDescription"`
+	SSHKeyDescription *string `json:"SSHKeyDescription,omitnil" name:"SSHKeyDescription"`
 
 	// Name of the SSH key.
 	// The name can be modified in the CVM console.
-	SSHKeyName *string `json:"SSHKeyName,omitempty" name:"SSHKeyName"`
+	SSHKeyName *string `json:"SSHKeyName,omitnil" name:"SSHKeyName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetSSHKeyPairValueResponse struct {
@@ -1166,22 +1166,22 @@ func (r *GetSSHKeyPairValueResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSecretValueRequestParams struct {
 	// Name of a Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Specifies the version number of the corresponding credential.
 	// For Tencent Cloud service credentials such as MySQL credentials, this API is used to get the plaintext information of a previously rotated credential by specifying the credential name and historical version number. If you want to get the plaintext of the credential version currently in use, you need to specify the version number as `SSM_Current`.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 }
 
 type GetSecretValueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of a Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Specifies the version number of the corresponding credential.
 	// For Tencent Cloud service credentials such as MySQL credentials, this API is used to get the plaintext information of a previously rotated credential by specifying the credential name and historical version number. If you want to get the plaintext of the credential version currently in use, you need to specify the version number as `SSM_Current`.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 }
 
 func (r *GetSecretValueRequest) ToJsonString() string {
@@ -1207,21 +1207,21 @@ func (r *GetSecretValueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSecretValueResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the Secret version.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// When creating a credential (CreateSecret), if you specify binary data, this field will be the Base64-encoded returned result. The application needs to Base64-decode the result to get the original data.
 	// Either `SecretBinary` or `SecretString` cannot be empty.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// When creating a credential (CreateSecret), if you specify general text data, this field will be the returned result.
 	// Either `SecretBinary` or `SecretString` cannot be empty.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetSecretValueResponse struct {
@@ -1272,17 +1272,17 @@ func (r *GetServiceStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetServiceStatusResponseParams struct {
 	// `true`: The service is activated; `false`: The service is not activated.
-	ServiceEnabled *bool `json:"ServiceEnabled,omitempty" name:"ServiceEnabled"`
+	ServiceEnabled *bool `json:"ServiceEnabled,omitnil" name:"ServiceEnabled"`
 
 	// Invalid service type. `0`: not purchased; `1`: normal; `2`: suspended due to arrears; `3`: resource released
-	InvalidType *int64 `json:"InvalidType,omitempty" name:"InvalidType"`
+	InvalidType *int64 `json:"InvalidType,omitnil" name:"InvalidType"`
 
 	// `true`: Allow SSM to manage Tencent Cloud API key secrets.
 	// `false`: Forbid SSM to manage Tencent Cloud API key secrets.
-	AccessKeyEscrowEnabled *bool `json:"AccessKeyEscrowEnabled,omitempty" name:"AccessKeyEscrowEnabled"`
+	AccessKeyEscrowEnabled *bool `json:"AccessKeyEscrowEnabled,omitnil" name:"AccessKeyEscrowEnabled"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetServiceStatusResponse struct {
@@ -1304,14 +1304,14 @@ func (r *GetServiceStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListSecretVersionIdsRequestParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type ListSecretVersionIdsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *ListSecretVersionIdsRequest) ToJsonString() string {
@@ -1336,14 +1336,14 @@ func (r *ListSecretVersionIdsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListSecretVersionIdsResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// `VersionId` list.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	Versions []*VersionInfo `json:"Versions,omitempty" name:"Versions"`
+	Versions []*VersionInfo `json:"Versions,omitnil" name:"Versions"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListSecretVersionIdsResponse struct {
@@ -1365,13 +1365,13 @@ func (r *ListSecretVersionIdsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListSecretsRequestParams struct {
 	// Starting position of the list, starting at 0. If not specified, 0 is used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number of returned Secrets in a query. If not set or set to 0, 20 is used by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Sorting order according to the creation time. If not set or set to 0, descending order is used; if set to 1, ascending order is used.
-	OrderType *uint64 `json:"OrderType,omitempty" name:"OrderType"`
+	OrderType *uint64 `json:"OrderType,omitnil" name:"OrderType"`
 
 	// Filter based on credential status.
 	// The default value is 0, indicating to query all.
@@ -1381,39 +1381,39 @@ type ListSecretsRequestParams struct {
 	// 4: query the list of credentials in `PendingCreate` status.
 	// 5: query the list of credentials in `CreateFailed` status.
 	// The `PendingCreate` and `CreateFailed` status only take effect when `SecretType` is Tencent Cloud service credential
-	State *uint64 `json:"State,omitempty" name:"State"`
+	State *uint64 `json:"State,omitnil" name:"State"`
 
 	// Filter according to Secret names. If left empty, this filter is not applied.
-	SearchSecretName *string `json:"SearchSecretName,omitempty" name:"SearchSecretName"`
+	SearchSecretName *string `json:"SearchSecretName,omitnil" name:"SearchSecretName"`
 
 	// Tag filter.
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+	TagFilters []*TagFilter `json:"TagFilters,omitnil" name:"TagFilters"`
 
 	// `0` (default): user-defined secret.
 	// `1`: Tencent Cloud services secret.
 	// `2`: SSH key secret.
 	// `3`: Tencent Cloud API key secret.
-	SecretType *uint64 `json:"SecretType,omitempty" name:"SecretType"`
+	SecretType *uint64 `json:"SecretType,omitnil" name:"SecretType"`
 
 	// This parameter is valid only when SecretType is `1`.
 	//  
 	// An empty value indicates querying all types of Tencent Cloud service secrets.
 	// `Mysql`: queries MySQL database credentials.
 	// `Tdsql-mysql`: queries TDSQL MySQL database credentials.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 }
 
 type ListSecretsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Starting position of the list, starting at 0. If not specified, 0 is used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number of returned Secrets in a query. If not set or set to 0, 20 is used by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Sorting order according to the creation time. If not set or set to 0, descending order is used; if set to 1, ascending order is used.
-	OrderType *uint64 `json:"OrderType,omitempty" name:"OrderType"`
+	OrderType *uint64 `json:"OrderType,omitnil" name:"OrderType"`
 
 	// Filter based on credential status.
 	// The default value is 0, indicating to query all.
@@ -1423,26 +1423,26 @@ type ListSecretsRequest struct {
 	// 4: query the list of credentials in `PendingCreate` status.
 	// 5: query the list of credentials in `CreateFailed` status.
 	// The `PendingCreate` and `CreateFailed` status only take effect when `SecretType` is Tencent Cloud service credential
-	State *uint64 `json:"State,omitempty" name:"State"`
+	State *uint64 `json:"State,omitnil" name:"State"`
 
 	// Filter according to Secret names. If left empty, this filter is not applied.
-	SearchSecretName *string `json:"SearchSecretName,omitempty" name:"SearchSecretName"`
+	SearchSecretName *string `json:"SearchSecretName,omitnil" name:"SearchSecretName"`
 
 	// Tag filter.
-	TagFilters []*TagFilter `json:"TagFilters,omitempty" name:"TagFilters"`
+	TagFilters []*TagFilter `json:"TagFilters,omitnil" name:"TagFilters"`
 
 	// `0` (default): user-defined secret.
 	// `1`: Tencent Cloud services secret.
 	// `2`: SSH key secret.
 	// `3`: Tencent Cloud API key secret.
-	SecretType *uint64 `json:"SecretType,omitempty" name:"SecretType"`
+	SecretType *uint64 `json:"SecretType,omitnil" name:"SecretType"`
 
 	// This parameter is valid only when SecretType is `1`.
 	//  
 	// An empty value indicates querying all types of Tencent Cloud service secrets.
 	// `Mysql`: queries MySQL database credentials.
 	// `Tdsql-mysql`: queries TDSQL MySQL database credentials.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 }
 
 func (r *ListSecretsRequest) ToJsonString() string {
@@ -1474,13 +1474,13 @@ func (r *ListSecretsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListSecretsResponseParams struct {
 	// Number of filtered Secrets according to `State` and `SearchSecretName`.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// List of Secret information.
-	SecretMetadatas []*SecretMetadata `json:"SecretMetadatas,omitempty" name:"SecretMetadatas"`
+	SecretMetadatas []*SecretMetadata `json:"SecretMetadatas,omitnil" name:"SecretMetadatas"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListSecretsResponse struct {
@@ -1511,7 +1511,7 @@ type ProductPrivilegeUnit struct {
 	// When the permission is `TablePrivileges`, the database name and the table name in the database must be specified by the `Database` and `TableName` parameters;
 	// 
 	// When the permission is `ColumnPrivileges`, the database name, table name in the database, and column name in the table must be specified by the `Database`, `TableName`, and `ColumnName` parameters.
-	PrivilegeName *string `json:"PrivilegeName,omitempty" name:"PrivilegeName"`
+	PrivilegeName *string `json:"PrivilegeName,omitnil" name:"PrivilegeName"`
 
 	// Permission list.
 	// For the `Mysql` service, optional permission values are:
@@ -1527,51 +1527,51 @@ type ProductPrivilegeUnit struct {
 	// 
 	// 4. Valid values of `ColumnPrivileges`: "SELECT","INSERT","UPDATE","REFERENCES".
 	// Note: if this parameter is not passed in, it means to clear the permission.
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
 
 	// This value takes effect only when `PrivilegeName` is `DatabasePrivileges`.
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// This value takes effect only when `PrivilegeName` is `TablePrivileges`, and the `Database` parameter is required in this case to explicitly indicate the database instance.
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
+	TableName *string `json:"TableName,omitnil" name:"TableName"`
 
 	// This value takes effect only when `PrivilegeName` is `ColumnPrivileges`, and the following parameters are required in this case:
 	// Database: explicitly indicate the database instance.
 	// TableName: explicitly indicate the table
-	ColumnName *string `json:"ColumnName,omitempty" name:"ColumnName"`
+	ColumnName *string `json:"ColumnName,omitnil" name:"ColumnName"`
 }
 
 // Predefined struct for user
 type PutSecretValueRequestParams struct {
 	// Name of a Secret where the version is added to.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the new Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Base64-encoded binary credential information.
 	// Either `SecretBinary` or `SecretString` must be set.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// Secret information plaintext in text format, base64 encoding is not needed. Either `SecretBinary` or `SecretString` must be set.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 }
 
 type PutSecretValueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of a Secret where the version is added to.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the new Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Base64-encoded binary credential information.
 	// Either `SecretBinary` or `SecretString` must be set.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// Secret information plaintext in text format, base64 encoding is not needed. Either `SecretBinary` or `SecretString` must be set.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 }
 
 func (r *PutSecretValueRequest) ToJsonString() string {
@@ -1599,13 +1599,13 @@ func (r *PutSecretValueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type PutSecretValueResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Version ID that is newly added.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type PutSecretValueResponse struct {
@@ -1627,14 +1627,14 @@ func (r *PutSecretValueResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RestoreSecretRequestParams struct {
 	// Name of the Secret to be restored.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type RestoreSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the Secret to be restored.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *RestoreSecretRequest) ToJsonString() string {
@@ -1659,10 +1659,10 @@ func (r *RestoreSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RestoreSecretResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RestoreSecretResponse struct {
@@ -1684,14 +1684,14 @@ func (r *RestoreSecretResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RotateProductSecretRequestParams struct {
 	// Name of the credential to be rotated.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 type RotateProductSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the credential to be rotated.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 }
 
 func (r *RotateProductSecretRequest) ToJsonString() string {
@@ -1716,10 +1716,10 @@ func (r *RotateProductSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RotateProductSecretResponseParams struct {
 	// Asynchronous rotation task ID. This field is valid when `SecretType` is `1` (i.e., the secret type is Tencent Cloud services secret, such as MySQL/TDSQL credentials).
-	FlowID *int64 `json:"FlowID,omitempty" name:"FlowID"`
+	FlowID *int64 `json:"FlowID,omitnil" name:"FlowID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RotateProductSecretResponse struct {
@@ -1740,98 +1740,98 @@ func (r *RotateProductSecretResponse) FromJsonString(s string) error {
 
 type SecretMetadata struct {
 	// Credential name
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Credential description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// KMS `KeyId` used to encrypt the credential
-	KmsKeyId *string `json:"KmsKeyId,omitempty" name:"KmsKeyId"`
+	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
 	// Creator UIN
-	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+	CreateUin *uint64 `json:"CreateUin,omitnil" name:"CreateUin"`
 
 	// Credential status: Enabled, Disabled, PendingDelete, Creating, Failed.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Credential deletion date, which takes effect for credentials in `PendingDelete` status and is in UNIX timestamp format
-	DeleteTime *uint64 `json:"DeleteTime,omitempty" name:"DeleteTime"`
+	DeleteTime *uint64 `json:"DeleteTime,omitnil" name:"DeleteTime"`
 
 	// Credential creation time in UNIX timestamp format
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Type of the KMS CMK used to encrypt the credential. `DEFAULT` represents the default key created by Secrets Manager, and `CUSTOMER` represents the user-specified key
-	KmsKeyType *string `json:"KmsKeyType,omitempty" name:"KmsKeyType"`
+	KmsKeyType *string `json:"KmsKeyType,omitnil" name:"KmsKeyType"`
 
 	// 1: enable rotation; 0: disable rotation
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RotationStatus *int64 `json:"RotationStatus,omitempty" name:"RotationStatus"`
+	RotationStatus *int64 `json:"RotationStatus,omitnil" name:"RotationStatus"`
 
 	// Start time of the next rotation in UNIX timestamp format
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NextRotationTime *uint64 `json:"NextRotationTime,omitempty" name:"NextRotationTime"`
+	NextRotationTime *uint64 `json:"NextRotationTime,omitnil" name:"NextRotationTime"`
 
 	// `0`: user-defined secret.
 	// `1`: Tencent Cloud services secret.
 	// `2`: SSH key secret.
 	// `3`: Tencent Cloud API key secret.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	SecretType *int64 `json:"SecretType,omitempty" name:"SecretType"`
+	SecretType *int64 `json:"SecretType,omitnil" name:"SecretType"`
 
 	// Tencent Cloud service name, which takes effect only when `SecretType` is 1 (Tencent Cloud service credential)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Secret name. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+	ResourceName *string `json:"ResourceName,omitnil" name:"ResourceName"`
 
 	// Project ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
 
 	// ID of the CVM instance associated with the SSH key. ID. This field is only valid when the `SecretType` is set to `2` (SSH key secret).
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitempty" name:"AssociatedInstanceIDs"`
+	AssociatedInstanceIDs []*string `json:"AssociatedInstanceIDs,omitnil" name:"AssociatedInstanceIDs"`
 
 	// UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TargetUin *uint64 `json:"TargetUin,omitempty" name:"TargetUin"`
+	TargetUin *uint64 `json:"TargetUin,omitnil" name:"TargetUin"`
 }
 
 type Tag struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Tag value
-	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 }
 
 type TagFilter struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Tag value
-	TagValue []*string `json:"TagValue,omitempty" name:"TagValue"`
+	TagValue []*string `json:"TagValue,omitnil" name:"TagValue"`
 }
 
 // Predefined struct for user
 type UpdateDescriptionRequestParams struct {
 	// Name of a Secret whose description is to be updated.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// New description information, which can be up to 2048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type UpdateDescriptionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of a Secret whose description is to be updated.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// New description information, which can be up to 2048 bytes.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *UpdateDescriptionRequest) ToJsonString() string {
@@ -1857,10 +1857,10 @@ func (r *UpdateDescriptionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateDescriptionResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateDescriptionResponse struct {
@@ -1882,38 +1882,38 @@ func (r *UpdateDescriptionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateRotationStatusRequestParams struct {
 	// Tencent Cloud service credential name.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Specifies whether to enable rotation.
 	// `true`: enables rotation.
 	// `false`: disables rotation.
-	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+	EnableRotation *bool `json:"EnableRotation,omitnil" name:"EnableRotation"`
 
 	// Rotation frequency in days. Value range: 30–365.
-	Frequency *int64 `json:"Frequency,omitempty" name:"Frequency"`
+	Frequency *int64 `json:"Frequency,omitnil" name:"Frequency"`
 
 	// User-defined rotation start time in the format of 2006-01-02 15:04:05.
 	// When `EnableRotation` is `true` and `RotationBeginTime` is left empty, the current time will be entered by default.
-	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
+	RotationBeginTime *string `json:"RotationBeginTime,omitnil" name:"RotationBeginTime"`
 }
 
 type UpdateRotationStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tencent Cloud service credential name.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Specifies whether to enable rotation.
 	// `true`: enables rotation.
 	// `false`: disables rotation.
-	EnableRotation *bool `json:"EnableRotation,omitempty" name:"EnableRotation"`
+	EnableRotation *bool `json:"EnableRotation,omitnil" name:"EnableRotation"`
 
 	// Rotation frequency in days. Value range: 30–365.
-	Frequency *int64 `json:"Frequency,omitempty" name:"Frequency"`
+	Frequency *int64 `json:"Frequency,omitnil" name:"Frequency"`
 
 	// User-defined rotation start time in the format of 2006-01-02 15:04:05.
 	// When `EnableRotation` is `true` and `RotationBeginTime` is left empty, the current time will be entered by default.
-	RotationBeginTime *string `json:"RotationBeginTime,omitempty" name:"RotationBeginTime"`
+	RotationBeginTime *string `json:"RotationBeginTime,omitnil" name:"RotationBeginTime"`
 }
 
 func (r *UpdateRotationStatusRequest) ToJsonString() string {
@@ -1941,7 +1941,7 @@ func (r *UpdateRotationStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateRotationStatusResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateRotationStatusResponse struct {
@@ -1963,34 +1963,34 @@ func (r *UpdateRotationStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateSecretRequestParams struct {
 	// Name of a Secret whose content is to be updated.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the Secret version whose content is to be updated.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// This field should be used and Base64-encoded if the content of the new credential is binary.
 	// Either `SecretBinary` or `SecretString` cannot be empty.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// This field should be used without being Base64-encoded if the content of the new credential is text. Either `SecretBinary` or `SecretString` cannot be empty.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 }
 
 type UpdateSecretRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of a Secret whose content is to be updated.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// ID of the Secret version whose content is to be updated.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// This field should be used and Base64-encoded if the content of the new credential is binary.
 	// Either `SecretBinary` or `SecretString` cannot be empty.
-	SecretBinary *string `json:"SecretBinary,omitempty" name:"SecretBinary"`
+	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// This field should be used without being Base64-encoded if the content of the new credential is text. Either `SecretBinary` or `SecretString` cannot be empty.
-	SecretString *string `json:"SecretString,omitempty" name:"SecretString"`
+	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
 }
 
 func (r *UpdateSecretRequest) ToJsonString() string {
@@ -2018,13 +2018,13 @@ func (r *UpdateSecretRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateSecretResponseParams struct {
 	// Name of the Secret.
-	SecretName *string `json:"SecretName,omitempty" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
 	// Version ID of the Secret.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateSecretResponse struct {
@@ -2045,8 +2045,8 @@ func (r *UpdateSecretResponse) FromJsonString(s string) error {
 
 type VersionInfo struct {
 	// Version ID.
-	VersionId *string `json:"VersionId,omitempty" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Creation time, formatted as a Unix timestamp.
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 }

@@ -15,36 +15,36 @@
 package v20220613
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type BatchContent struct {
 	// Message body
-	Body *string `json:"Body,omitempty" name:"Body"`
+	Body *string `json:"Body,omitnil" name:"Body"`
 
 	// Key of a message
-	Key *string `json:"Key,omitempty" name:"Key"`
+	Key *string `json:"Key,omitnil" name:"Key"`
 }
 
 // Predefined struct for user
 type SendMessageRequestParams struct {
 	// ID of the integrated resource
-	DataHubId *string `json:"DataHubId,omitempty" name:"DataHubId"`
+	DataHubId *string `json:"DataHubId,omitnil" name:"DataHubId"`
 
 	// A batch of messages
-	Message []*BatchContent `json:"Message,omitempty" name:"Message"`
+	Message []*BatchContent `json:"Message,omitnil" name:"Message"`
 }
 
 type SendMessageRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the integrated resource
-	DataHubId *string `json:"DataHubId,omitempty" name:"DataHubId"`
+	DataHubId *string `json:"DataHubId,omitnil" name:"DataHubId"`
 
 	// A batch of messages
-	Message []*BatchContent `json:"Message,omitempty" name:"Message"`
+	Message []*BatchContent `json:"Message,omitnil" name:"Message"`
 }
 
 func (r *SendMessageRequest) ToJsonString() string {
@@ -70,10 +70,10 @@ func (r *SendMessageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SendMessageResponseParams struct {
 	// Message ID
-	MessageId []*string `json:"MessageId,omitempty" name:"MessageId"`
+	MessageId []*string `json:"MessageId,omitnil" name:"MessageId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SendMessageResponse struct {

@@ -15,9 +15,9 @@
 package v20180301
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
@@ -28,7 +28,7 @@ type ApplyLivenessTokenRequestParams struct {
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 }
 
 type ApplyLivenessTokenRequest struct {
@@ -40,7 +40,7 @@ type ApplyLivenessTokenRequest struct {
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 }
 
 func (r *ApplyLivenessTokenRequest) ToJsonString() string {
@@ -65,10 +65,10 @@ func (r *ApplyLivenessTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyLivenessTokenResponseParams struct {
 	// The token used to identify an SDK-based verification process. It is valid for 10 minutes and can be used to get the verification result after the process is completed.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ApplyLivenessTokenResponse struct {
@@ -90,14 +90,14 @@ func (r *ApplyLivenessTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplySdkVerificationTokenRequestParams struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
-	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitempty" name:"NeedVerifyIdCard"`
+	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil" name:"NeedVerifyIdCard"`
 
 	// The verification mode. Valid values:
 	// 1: OCR + liveness detection + face comparison
 	// 2: Liveness detection + face comparison
 	// 3: Liveness detection
 	// Default value: 1
-	CheckMode *int64 `json:"CheckMode,omitempty" name:"CheckMode"`
+	CheckMode *int64 `json:"CheckMode,omitnil" name:"CheckMode"`
 
 	// The security level of the verification. Valid values:
 	// 1: Video-based liveness detection
@@ -105,7 +105,7 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// 3: Reflection-based liveness detection
 	// 4: Motion- and reflection-based liveness detection
 	// Default value: 4
-	SecurityLevel *int64 `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
+	SecurityLevel *int64 `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
 
 	// The identity document type. Valid values: 
 	// 1. `HK` (default): Identity card of Hong Kong (China)
@@ -117,34 +117,34 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// 7. `PhilippinesSSSID`: Philippine SSS ID card
 	// 8. `PhilippinesUMID`: Philippine UMID card
 	// 9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
-	IdCardType *string `json:"IdCardType,omitempty" name:"IdCardType"`
+	IdCardType *string `json:"IdCardType,omitnil" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
-	CompareImage *string `json:"CompareImage,omitempty" name:"CompareImage"`
+	CompareImage *string `json:"CompareImage,omitnil" name:"CompareImage"`
 
 	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
-	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitempty" name:"DisableChangeOcrResult"`
+	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil" name:"DisableChangeOcrResult"`
 
 	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
 	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
-	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitempty" name:"DisableCheckOcrWarnings"`
+	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil" name:"DisableCheckOcrWarnings"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
-	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitempty" name:"NeedVerifyIdCard"`
+	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil" name:"NeedVerifyIdCard"`
 
 	// The verification mode. Valid values:
 	// 1: OCR + liveness detection + face comparison
 	// 2: Liveness detection + face comparison
 	// 3: Liveness detection
 	// Default value: 1
-	CheckMode *int64 `json:"CheckMode,omitempty" name:"CheckMode"`
+	CheckMode *int64 `json:"CheckMode,omitnil" name:"CheckMode"`
 
 	// The security level of the verification. Valid values:
 	// 1: Video-based liveness detection
@@ -152,7 +152,7 @@ type ApplySdkVerificationTokenRequest struct {
 	// 3: Reflection-based liveness detection
 	// 4: Motion- and reflection-based liveness detection
 	// Default value: 4
-	SecurityLevel *int64 `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
+	SecurityLevel *int64 `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
 
 	// The identity document type. Valid values: 
 	// 1. `HK` (default): Identity card of Hong Kong (China)
@@ -164,20 +164,20 @@ type ApplySdkVerificationTokenRequest struct {
 	// 7. `PhilippinesSSSID`: Philippine SSS ID card
 	// 8. `PhilippinesUMID`: Philippine UMID card
 	// 9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
-	IdCardType *string `json:"IdCardType,omitempty" name:"IdCardType"`
+	IdCardType *string `json:"IdCardType,omitnil" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
-	CompareImage *string `json:"CompareImage,omitempty" name:"CompareImage"`
+	CompareImage *string `json:"CompareImage,omitnil" name:"CompareImage"`
 
 	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
-	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitempty" name:"DisableChangeOcrResult"`
+	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil" name:"DisableChangeOcrResult"`
 
 	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
 	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
-	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitempty" name:"DisableCheckOcrWarnings"`
+	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil" name:"DisableCheckOcrWarnings"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -209,10 +209,10 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplySdkVerificationTokenResponseParams struct {
 	// The token used to identify an SDK-based verification process. It is valid for 7,200s and can be used to get the verification result after the process is completed.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ApplySdkVerificationTokenResponse struct {
@@ -234,28 +234,28 @@ func (r *ApplySdkVerificationTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyWebVerificationBizTokenIntlRequestParams struct {
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.
-	CompareImageBase64 *string `json:"CompareImageBase64,omitempty" name:"CompareImageBase64"`
+	CompareImageBase64 *string `json:"CompareImageBase64,omitnil" name:"CompareImageBase64"`
 
 	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
 	// After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
-	RedirectURL *string `json:"RedirectURL,omitempty" name:"RedirectURL"`
+	RedirectURL *string `json:"RedirectURL,omitnil" name:"RedirectURL"`
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 }
 
 type ApplyWebVerificationBizTokenIntlRequest struct {
 	*tchttp.BaseRequest
 	
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.
-	CompareImageBase64 *string `json:"CompareImageBase64,omitempty" name:"CompareImageBase64"`
+	CompareImageBase64 *string `json:"CompareImageBase64,omitnil" name:"CompareImageBase64"`
 
 	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
 	// After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
-	RedirectURL *string `json:"RedirectURL,omitempty" name:"RedirectURL"`
+	RedirectURL *string `json:"RedirectURL,omitnil" name:"RedirectURL"`
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 }
 
 func (r *ApplyWebVerificationBizTokenIntlRequest) ToJsonString() string {
@@ -282,13 +282,13 @@ func (r *ApplyWebVerificationBizTokenIntlRequest) FromJsonString(s string) error
 // Predefined struct for user
 type ApplyWebVerificationBizTokenIntlResponseParams struct {
 	// The URL of this verification process, which will be returned to the frontend of the browser for starting the process.
-	VerificationUrl *string `json:"VerificationUrl,omitempty" name:"VerificationUrl"`
+	VerificationUrl *string `json:"VerificationUrl,omitnil" name:"VerificationUrl"`
 
 	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
-	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ApplyWebVerificationBizTokenIntlResponse struct {
@@ -310,30 +310,30 @@ func (r *ApplyWebVerificationBizTokenIntlResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type ApplyWebVerificationTokenRequestParams struct {
 	// The web redirect URL after the verification is completed.
-	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+	RedirectUrl *string `json:"RedirectUrl,omitnil" name:"RedirectUrl"`
 
 	// The COS URL of the image for face comparison, which can be obtained with one of the following methods:
 	// 1. Call the `CreateUploadUrl` API to generate a URL and call it again after the image is successfully uploaded.
 	// 2. Use an existing COS URL. For a private bucket, grant the download permission with a pre-signed URL. The corresponding COS bucket must be in the same region as the input parameter `Region`.
-	CompareImageUrl *string `json:"CompareImageUrl,omitempty" name:"CompareImageUrl"`
+	CompareImageUrl *string `json:"CompareImageUrl,omitnil" name:"CompareImageUrl"`
 
 	// The MD5 hash values of the image for face comparison (CompareImageUrl).
-	CompareImageMd5 *string `json:"CompareImageMd5,omitempty" name:"CompareImageMd5"`
+	CompareImageMd5 *string `json:"CompareImageMd5,omitnil" name:"CompareImageMd5"`
 }
 
 type ApplyWebVerificationTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// The web redirect URL after the verification is completed.
-	RedirectUrl *string `json:"RedirectUrl,omitempty" name:"RedirectUrl"`
+	RedirectUrl *string `json:"RedirectUrl,omitnil" name:"RedirectUrl"`
 
 	// The COS URL of the image for face comparison, which can be obtained with one of the following methods:
 	// 1. Call the `CreateUploadUrl` API to generate a URL and call it again after the image is successfully uploaded.
 	// 2. Use an existing COS URL. For a private bucket, grant the download permission with a pre-signed URL. The corresponding COS bucket must be in the same region as the input parameter `Region`.
-	CompareImageUrl *string `json:"CompareImageUrl,omitempty" name:"CompareImageUrl"`
+	CompareImageUrl *string `json:"CompareImageUrl,omitnil" name:"CompareImageUrl"`
 
 	// The MD5 hash values of the image for face comparison (CompareImageUrl).
-	CompareImageMd5 *string `json:"CompareImageMd5,omitempty" name:"CompareImageMd5"`
+	CompareImageMd5 *string `json:"CompareImageMd5,omitnil" name:"CompareImageMd5"`
 }
 
 func (r *ApplyWebVerificationTokenRequest) ToJsonString() string {
@@ -360,13 +360,13 @@ func (r *ApplyWebVerificationTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyWebVerificationTokenResponseParams struct {
 	// The verification URL to be opened with a browser to start the verification process.
-	VerificationUrl *string `json:"VerificationUrl,omitempty" name:"VerificationUrl"`
+	VerificationUrl *string `json:"VerificationUrl,omitnil" name:"VerificationUrl"`
 
 	// The token used to identify a web-based verification process. It is valid for 7,200s and can be used to get the verification result after the process is completed.
-	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ApplyWebVerificationTokenResponse struct {
@@ -387,15 +387,15 @@ func (r *ApplyWebVerificationTokenResponse) FromJsonString(s string) error {
 
 type CardVerifyResult struct {
 	// Whether the authentication or OCR process is successful.
-	IsPass *bool `json:"IsPass,omitempty" name:"IsPass"`
+	IsPass *bool `json:"IsPass,omitnil" name:"IsPass"`
 
 	// The download URL of the video used for identity document verification, which is valid for 10 minutes. This parameter is returned only if video-based identity document verification is enabled.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CardVideo *FileInfo `json:"CardVideo,omitempty" name:"CardVideo"`
+	CardVideo *FileInfo `json:"CardVideo,omitnil" name:"CardVideo"`
 
 	// The download URL of the identity document image, which is valid for 10 minutes.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CardImage *FileInfo `json:"CardImage,omitempty" name:"CardImage"`
+	CardImage *FileInfo `json:"CardImage,omitnil" name:"CardImage"`
 
 	// The OCR result (in JSON) of the identity document image. If verification or OCR fails, this parameter is left empty. The URL is valid for 10 minutes.
 	// (1) Hong Kong (China) identity card
@@ -494,10 +494,10 @@ type CardVerifyResult struct {
 	// - IssuingCountry (string): Issuing country.
 	// - NationalityCode (string): Country/region code.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CardInfoOcrJson *FileInfo `json:"CardInfoOcrJson,omitempty" name:"CardInfoOcrJson"`
+	CardInfoOcrJson *FileInfo `json:"CardInfoOcrJson,omitnil" name:"CardInfoOcrJson"`
 
 	// The request ID of a single process.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CompareResult struct {
@@ -511,32 +511,32 @@ type CompareResult struct {
 	// 2014: The resolution of the uploaded image is too low . Please upload a new one.
 	// 2015: Face comparison failed.
 	// 2016: The similarity did not reach the passing standard.
-	ErrorCode *string `json:"ErrorCode,omitempty" name:"ErrorCode"`
+	ErrorCode *string `json:"ErrorCode,omitnil" name:"ErrorCode"`
 
 	// The description of the final verification result.
-	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
 
 	// The liveness algorithm package generated during this SDK-based liveness detection.
-	LiveData *FileInfo `json:"LiveData,omitempty" name:"LiveData"`
+	LiveData *FileInfo `json:"LiveData,omitnil" name:"LiveData"`
 
 	// The download URL of the video used for verification, which is valid for 10 minutes.
-	LiveVideo *FileInfo `json:"LiveVideo,omitempty" name:"LiveVideo"`
+	LiveVideo *FileInfo `json:"LiveVideo,omitnil" name:"LiveVideo"`
 
 	// The liveness detection result code.
 	// 0: Success.
 	// 1001: Failed to call the liveness detection engine.
 	// 1004: Face detection failed.
-	LiveErrorCode *string `json:"LiveErrorCode,omitempty" name:"LiveErrorCode"`
+	LiveErrorCode *string `json:"LiveErrorCode,omitnil" name:"LiveErrorCode"`
 
 	// The description of the liveness detection result.
-	LiveErrorMsg *string `json:"LiveErrorMsg,omitempty" name:"LiveErrorMsg"`
+	LiveErrorMsg *string `json:"LiveErrorMsg,omitnil" name:"LiveErrorMsg"`
 
 	// The download URL of the face screenshot during verification, which is valid for 10 minutes.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	BestFrame *FileInfo `json:"BestFrame,omitempty" name:"BestFrame"`
+	BestFrame *FileInfo `json:"BestFrame,omitnil" name:"BestFrame"`
 
 	// The download URL of the profile photo screenshot from the identity document, which is valid for 10 minutes.
-	ProfileImage *FileInfo `json:"ProfileImage,omitempty" name:"ProfileImage"`
+	ProfileImage *FileInfo `json:"ProfileImage,omitnil" name:"ProfileImage"`
 
 	// The face comparison result code.
 	// 0: Success.
@@ -547,38 +547,38 @@ type CompareResult struct {
 	// 2015: Face comparison failed.
 	// 2016: The similarity did not reach the passing standard.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CompareErrorCode *string `json:"CompareErrorCode,omitempty" name:"CompareErrorCode"`
+	CompareErrorCode *string `json:"CompareErrorCode,omitnil" name:"CompareErrorCode"`
 
 	// The description of the face comparison result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompareErrorMsg *string `json:"CompareErrorMsg,omitempty" name:"CompareErrorMsg"`
+	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil" name:"CompareErrorMsg"`
 
 	// The similarity score of face comparison.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sim *float64 `json:"Sim,omitempty" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
 
 	// This parameter is disused.
-	IsNeedCharge *bool `json:"IsNeedCharge,omitempty" name:"IsNeedCharge"`
+	IsNeedCharge *bool `json:"IsNeedCharge,omitnil" name:"IsNeedCharge"`
 
 	// The identity document photo info edited by the user. Currently, this parameter is not applied.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CardInfoInputJson *FileInfo `json:"CardInfoInputJson,omitempty" name:"CardInfoInputJson"`
+	CardInfoInputJson *FileInfo `json:"CardInfoInputJson,omitnil" name:"CardInfoInputJson"`
 
 	// The request ID of this verification process.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 // Predefined struct for user
 type CreateUploadUrlRequestParams struct {
 	// Target API
-	TargetAction *string `json:"TargetAction,omitempty" name:"TargetAction"`
+	TargetAction *string `json:"TargetAction,omitnil" name:"TargetAction"`
 }
 
 type CreateUploadUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Target API
-	TargetAction *string `json:"TargetAction,omitempty" name:"TargetAction"`
+	TargetAction *string `json:"TargetAction,omitnil" name:"TargetAction"`
 }
 
 func (r *CreateUploadUrlRequest) ToJsonString() string {
@@ -603,16 +603,16 @@ func (r *CreateUploadUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateUploadUrlResponseParams struct {
 	// The URL for uploading contents with the `HTTP PUT` method.
-	UploadUrl *string `json:"UploadUrl,omitempty" name:"UploadUrl"`
+	UploadUrl *string `json:"UploadUrl,omitnil" name:"UploadUrl"`
 
 	// The resource URL obtained after this upload is completed and to be passed in where it is required later.
-	ResourceUrl *string `json:"ResourceUrl,omitempty" name:"ResourceUrl"`
+	ResourceUrl *string `json:"ResourceUrl,omitnil" name:"ResourceUrl"`
 
 	// The point in time when the upload/download link expires, which is a 10-bit Unix timestamp.
-	ExpiredTimestamp *int64 `json:"ExpiredTimestamp,omitempty" name:"ExpiredTimestamp"`
+	ExpiredTimestamp *int64 `json:"ExpiredTimestamp,omitnil" name:"ExpiredTimestamp"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateUploadUrlResponse struct {
@@ -634,32 +634,32 @@ func (r *CreateUploadUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DetectReflectLivenessAndCompareRequestParams struct {
 	// URL of the liveness detection data package generated by the SDK
-	LiveDataUrl *string `json:"LiveDataUrl,omitempty" name:"LiveDataUrl"`
+	LiveDataUrl *string `json:"LiveDataUrl,omitnil" name:"LiveDataUrl"`
 
 	// MD5 hash value (32-bit) of the liveness detection data package generated by the SDK, which is used to verify the LiveData consistency.
-	LiveDataMd5 *string `json:"LiveDataMd5,omitempty" name:"LiveDataMd5"`
+	LiveDataMd5 *string `json:"LiveDataMd5,omitnil" name:"LiveDataMd5"`
 
 	// URL of the target image for comparison
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
 
 	// MD5 hash value (32-bit) of the target image for comparison, which is used to verify the `Image` consistency.
-	ImageMd5 *string `json:"ImageMd5,omitempty" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
 }
 
 type DetectReflectLivenessAndCompareRequest struct {
 	*tchttp.BaseRequest
 	
 	// URL of the liveness detection data package generated by the SDK
-	LiveDataUrl *string `json:"LiveDataUrl,omitempty" name:"LiveDataUrl"`
+	LiveDataUrl *string `json:"LiveDataUrl,omitnil" name:"LiveDataUrl"`
 
 	// MD5 hash value (32-bit) of the liveness detection data package generated by the SDK, which is used to verify the LiveData consistency.
-	LiveDataMd5 *string `json:"LiveDataMd5,omitempty" name:"LiveDataMd5"`
+	LiveDataMd5 *string `json:"LiveDataMd5,omitnil" name:"LiveDataMd5"`
 
 	// URL of the target image for comparison
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
 
 	// MD5 hash value (32-bit) of the target image for comparison, which is used to verify the `Image` consistency.
-	ImageMd5 *string `json:"ImageMd5,omitempty" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
 }
 
 func (r *DetectReflectLivenessAndCompareRequest) ToJsonString() string {
@@ -687,22 +687,22 @@ func (r *DetectReflectLivenessAndCompareRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DetectReflectLivenessAndCompareResponseParams struct {
 	// Temporary URL of the best screenshot (.jpg) of the video after successful verification. Both the screenshot and the URL are valid for two hours only, so you need to download the screenshot within this period.
-	BestFrameUrl *string `json:"BestFrameUrl,omitempty" name:"BestFrameUrl"`
+	BestFrameUrl *string `json:"BestFrameUrl,omitnil" name:"BestFrameUrl"`
 
 	// MD5 hash value (32-bit) of the best screenshot of the video after successful verification, which is used to verify the `BestFrame` consistency.
-	BestFrameMd5 *string `json:"BestFrameMd5,omitempty" name:"BestFrameMd5"`
+	BestFrameMd5 *string `json:"BestFrameMd5,omitnil" name:"BestFrameMd5"`
 
 	// Service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
-	Result *string `json:"Result,omitempty" name:"Result"`
+	Result *string `json:"Result,omitnil" name:"Result"`
 
 	// Service result description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two faces are of the same person. You can adjust the threshold according to your specific scenario (the FAR at the threshold of 70 is 0.1%, and FAR at the threshold of 80 is 0.01%).
-	Sim *float64 `json:"Sim,omitempty" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DetectReflectLivenessAndCompareResponse struct {
@@ -723,44 +723,44 @@ func (r *DetectReflectLivenessAndCompareResponse) FromJsonString(s string) error
 
 type FileInfo struct {
 	// The URL for downloading the file
-	Url *string `json:"Url,omitempty" name:"Url"`
+	Url *string `json:"Url,omitnil" name:"Url"`
 
 	// The 32-bit MD5 checksum of the file
-	MD5 *string `json:"MD5,omitempty" name:"MD5"`
+	MD5 *string `json:"MD5,omitnil" name:"MD5"`
 
 	// The file size
-	Size *int64 `json:"Size,omitempty" name:"Size"`
+	Size *int64 `json:"Size,omitnil" name:"Size"`
 }
 
 // Predefined struct for user
 type GenerateReflectSequenceRequestParams struct {
 	// The resource URL of the data package generated by the SDK.
-	DeviceDataUrl *string `json:"DeviceDataUrl,omitempty" name:"DeviceDataUrl"`
+	DeviceDataUrl *string `json:"DeviceDataUrl,omitnil" name:"DeviceDataUrl"`
 
 	// The MD5 hash value of the data package generated by the SDK.
-	DeviceDataMd5 *string `json:"DeviceDataMd5,omitempty" name:"DeviceDataMd5"`
+	DeviceDataMd5 *string `json:"DeviceDataMd5,omitnil" name:"DeviceDataMd5"`
 
 	// 1 - silent
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecurityLevel *string `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
+	SecurityLevel *string `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
 }
 
 type GenerateReflectSequenceRequest struct {
 	*tchttp.BaseRequest
 	
 	// The resource URL of the data package generated by the SDK.
-	DeviceDataUrl *string `json:"DeviceDataUrl,omitempty" name:"DeviceDataUrl"`
+	DeviceDataUrl *string `json:"DeviceDataUrl,omitnil" name:"DeviceDataUrl"`
 
 	// The MD5 hash value of the data package generated by the SDK.
-	DeviceDataMd5 *string `json:"DeviceDataMd5,omitempty" name:"DeviceDataMd5"`
+	DeviceDataMd5 *string `json:"DeviceDataMd5,omitnil" name:"DeviceDataMd5"`
 
 	// 1 - silent
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecurityLevel *string `json:"SecurityLevel,omitempty" name:"SecurityLevel"`
+	SecurityLevel *string `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
 }
 
 func (r *GenerateReflectSequenceRequest) ToJsonString() string {
@@ -787,13 +787,13 @@ func (r *GenerateReflectSequenceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GenerateReflectSequenceResponseParams struct {
 	// The resource URL of the light sequence, which needs to be downloaded and passed through to the SDK to start the identity verification process.
-	ReflectSequenceUrl *string `json:"ReflectSequenceUrl,omitempty" name:"ReflectSequenceUrl"`
+	ReflectSequenceUrl *string `json:"ReflectSequenceUrl,omitnil" name:"ReflectSequenceUrl"`
 
 	// The MD5 hash value of the light sequence, which is used to check whether the light sequence is altered.
-	ReflectSequenceMd5 *string `json:"ReflectSequenceMd5,omitempty" name:"ReflectSequenceMd5"`
+	ReflectSequenceMd5 *string `json:"ReflectSequenceMd5,omitnil" name:"ReflectSequenceMd5"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GenerateReflectSequenceResponse struct {
@@ -815,14 +815,14 @@ func (r *GenerateReflectSequenceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetFaceIdResultIntlRequestParams struct {
 	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 }
 
 type GetFaceIdResultIntlRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 }
 
 func (r *GetFaceIdResultIntlRequest) ToJsonString() string {
@@ -857,27 +857,27 @@ type GetFaceIdResultIntlResponseParams struct {
 	// 2015: Face comparison failed.
 	// 2016: The similarity did not reach the standard passing threshold.
 	// -999: The verification process wasn't finished.
-	Result *string `json:"Result,omitempty" name:"Result"`
+	Result *string `json:"Result,omitnil" name:"Result"`
 
 	// The description of the verification result.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The best frame screenshot (in Base64) obtained during the verification.
-	BestFrame *string `json:"BestFrame,omitempty" name:"BestFrame"`
+	BestFrame *string `json:"BestFrame,omitnil" name:"BestFrame"`
 
 	// The video file (Base64) for verification.
-	Video *string `json:"Video,omitempty" name:"Video"`
+	Video *string `json:"Video,omitnil" name:"Video"`
 
 	// The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Similarity *float64 `json:"Similarity,omitempty" name:"Similarity"`
+	Similarity *float64 `json:"Similarity,omitnil" name:"Similarity"`
 
 	// The pass-through parameter.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetFaceIdResultIntlResponse struct {
@@ -902,7 +902,7 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// `liveness`: Liveness detection only.
 	// `compare`: Liveness detection and face comparison.
 	// Default value: `liveness`.
-	CheckMode *string `json:"CheckMode,omitempty" name:"CheckMode"`
+	CheckMode *string `json:"CheckMode,omitnil" name:"CheckMode"`
 
 	// The verification security level. Valid values:
 	// `1`: Video-based liveness detection.
@@ -910,13 +910,13 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// `3`: Reflection-based liveness detection.
 	// `4`: Motion- and reflection-based liveness detection.
 	// Default value: `4`.
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 
 	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
-	Image *string `json:"Image,omitempty" name:"Image"`
+	Image *string `json:"Image,omitnil" name:"Image"`
 
 	// The pass-through parameter, which can be omitted if there are no special requirements.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 }
 
 type GetFaceIdTokenIntlRequest struct {
@@ -926,7 +926,7 @@ type GetFaceIdTokenIntlRequest struct {
 	// `liveness`: Liveness detection only.
 	// `compare`: Liveness detection and face comparison.
 	// Default value: `liveness`.
-	CheckMode *string `json:"CheckMode,omitempty" name:"CheckMode"`
+	CheckMode *string `json:"CheckMode,omitnil" name:"CheckMode"`
 
 	// The verification security level. Valid values:
 	// `1`: Video-based liveness detection.
@@ -934,13 +934,13 @@ type GetFaceIdTokenIntlRequest struct {
 	// `3`: Reflection-based liveness detection.
 	// `4`: Motion- and reflection-based liveness detection.
 	// Default value: `4`.
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 
 	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
-	Image *string `json:"Image,omitempty" name:"Image"`
+	Image *string `json:"Image,omitnil" name:"Image"`
 
 	// The pass-through parameter, which can be omitted if there are no special requirements.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 }
 
 func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
@@ -968,10 +968,10 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetFaceIdTokenIntlResponseParams struct {
 	// The SDK token, which is used throughout the verification process and to get the verification result.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetFaceIdTokenIntlResponse struct {
@@ -993,14 +993,14 @@ func (r *GetFaceIdTokenIntlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetLivenessResultRequestParams struct {
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 }
 
 type GetLivenessResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 }
 
 func (r *GetLivenessResultRequest) ToJsonString() string {
@@ -1025,19 +1025,19 @@ func (r *GetLivenessResultRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetLivenessResultResponseParams struct {
 	// The final verification result.
-	Result *string `json:"Result,omitempty" name:"Result"`
+	Result *string `json:"Result,omitnil" name:"Result"`
 
 	// The description of the final verification result.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The face screenshot.
-	BestFrame *FileInfo `json:"BestFrame,omitempty" name:"BestFrame"`
+	BestFrame *FileInfo `json:"BestFrame,omitnil" name:"BestFrame"`
 
 	// The video for the detection.
-	Video *FileInfo `json:"Video,omitempty" name:"Video"`
+	Video *FileInfo `json:"Video,omitnil" name:"Video"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetLivenessResultResponse struct {
@@ -1059,14 +1059,14 @@ func (r *GetLivenessResultResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSdkVerificationResultRequestParams struct {
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 }
 
 type GetSdkVerificationResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitempty" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
 }
 
 func (r *GetSdkVerificationResultRequest) ToJsonString() string {
@@ -1091,25 +1091,25 @@ func (r *GetSdkVerificationResultRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSdkVerificationResultResponseParams struct {
 	// The result code of the verification result.
-	Result *string `json:"Result,omitempty" name:"Result"`
+	Result *string `json:"Result,omitnil" name:"Result"`
 
 	// The verification result description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The charge count.
-	ChargeCount *int64 `json:"ChargeCount,omitempty" name:"ChargeCount"`
+	ChargeCount *int64 `json:"ChargeCount,omitnil" name:"ChargeCount"`
 
 	// The results of multiple OCR processes (in order). The result of the final process is used as the valid result.
-	CardVerifyResults []*CardVerifyResult `json:"CardVerifyResults,omitempty" name:"CardVerifyResults"`
+	CardVerifyResults []*CardVerifyResult `json:"CardVerifyResults,omitnil" name:"CardVerifyResults"`
 
 	// The results of multiple liveness detection processes (in order). The result of the final process is used as the valid result.
-	CompareResults []*CompareResult `json:"CompareResults,omitempty" name:"CompareResults"`
+	CompareResults []*CompareResult `json:"CompareResults,omitnil" name:"CompareResults"`
 
 	// Data passed through in the process of getting the token.
-	Extra *string `json:"Extra,omitempty" name:"Extra"`
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetSdkVerificationResultResponse struct {
@@ -1131,14 +1131,14 @@ func (r *GetSdkVerificationResultResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWebVerificationResultIntlRequestParams struct {
 	// The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
-	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 }
 
 type GetWebVerificationResultIntlRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
-	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 }
 
 func (r *GetWebVerificationResultIntlRequest) ToJsonString() string {
@@ -1165,26 +1165,26 @@ type GetWebVerificationResultIntlResponseParams struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
 
 	// The description of the final verification result.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
 
 	// The detailed verification result list of this process. Retries are allowed, so a verification process may have several entries of results.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitempty" name:"VerificationDetailList"`
+	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil" name:"VerificationDetailList"`
 
 	// The Base64-encoded string of the video collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no video is collected, null is returned.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
 
 	// The Base64-encoded string of the best face screenshot u200dcollected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	BestFrameBase64 *string `json:"BestFrameBase64,omitempty" name:"BestFrameBase64"`
+	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetWebVerificationResultIntlResponse struct {
@@ -1206,14 +1206,14 @@ func (r *GetWebVerificationResultIntlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWebVerificationResultRequestParams struct {
 	// The token for the web-based verification, which is generated with the `ApplyWebVerificationToken` API.
-	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 }
 
 type GetWebVerificationResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token for the web-based verification, which is generated with the `ApplyWebVerificationToken` API.
-	BizToken *string `json:"BizToken,omitempty" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 }
 
 func (r *GetWebVerificationResultRequest) ToJsonString() string {
@@ -1239,34 +1239,34 @@ func (r *GetWebVerificationResultRequest) FromJsonString(s string) error {
 type GetWebVerificationResultResponseParams struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
 
 	// The description of the final verification result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
 
 	// The temporary URL of the best face screenshot collected from the video stream. It is valid for 10 minutes. Download the image if needed.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoBestFrameUrl *string `json:"VideoBestFrameUrl,omitempty" name:"VideoBestFrameUrl"`
+	VideoBestFrameUrl *string `json:"VideoBestFrameUrl,omitnil" name:"VideoBestFrameUrl"`
 
 	// The MD5 hash value of the best face screenshot collected from the video stream. It can be used to check whether the image content is consistent with the file content.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoBestFrameMd5 *string `json:"VideoBestFrameMd5,omitempty" name:"VideoBestFrameMd5"`
+	VideoBestFrameMd5 *string `json:"VideoBestFrameMd5,omitnil" name:"VideoBestFrameMd5"`
 
 	// The details list of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitempty" name:"VerificationDetailList"`
+	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil" name:"VerificationDetailList"`
 
 	// The temporary URL of the video collected from the video stream. It is valid for 10 minutes. Download the video if needed.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 
 	// The MD5 hash value of the video collected from the video stream. It can be used to check whether the video content is consistent with the file content.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoMd5 *string `json:"VideoMd5,omitempty" name:"VideoMd5"`
+	VideoMd5 *string `json:"VideoMd5,omitnil" name:"VideoMd5"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetWebVerificationResultResponse struct {
@@ -1289,46 +1289,46 @@ func (r *GetWebVerificationResultResponse) FromJsonString(s string) error {
 type LivenessCompareRequestParams struct {
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
 	// LIP: numeric mode; ACTION: motion mode; SILENT: silent mode. You need to select a mode to input.
-	LivenessType *string `json:"LivenessType,omitempty" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
 
 	// Base64 string of the image for face comparison.
 	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
-	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
 
 	// URL of the image for face comparison. The size of the downloaded image after Base64 encoding can be up to 3 MB. JPG and PNG formats are supported.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
 	// 
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
 
 	// Lip mode: set this parameter to a custom 4-digit verification code.
 	// Action mode: set this parameter to a custom action sequence (e.g., `2,1` or `1,2`).
 	// Silent mode: do not pass in this parameter.
-	ValidateData *string `json:"ValidateData,omitempty" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
 
 	// Optional configuration (a JSON string)
 	// {
 	// "BestFrameNum": 2  // Return multiple best screenshots. Value range: 2−10
 	// }
-	Optional *string `json:"Optional,omitempty" name:"Optional"`
+	Optional *string `json:"Optional,omitnil" name:"Optional"`
 
 	// Base64 string of the video for liveness detection.
 	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
-	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
 
 	// URL of the video for liveness detection. The size of the downloaded video after Base64 encoding can be up to 8 MB. It takes no more than 4 seconds to download. MP4, AVI, and FLV formats are supported.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
 	// 
 	// We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 }
 
 type LivenessCompareRequest struct {
@@ -1336,46 +1336,46 @@ type LivenessCompareRequest struct {
 	
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
 	// LIP: numeric mode; ACTION: motion mode; SILENT: silent mode. You need to select a mode to input.
-	LivenessType *string `json:"LivenessType,omitempty" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
 
 	// Base64 string of the image for face comparison.
 	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
-	ImageBase64 *string `json:"ImageBase64,omitempty" name:"ImageBase64"`
+	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
 
 	// URL of the image for face comparison. The size of the downloaded image after Base64 encoding can be up to 3 MB. JPG and PNG formats are supported.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
 	// 
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
 
 	// Lip mode: set this parameter to a custom 4-digit verification code.
 	// Action mode: set this parameter to a custom action sequence (e.g., `2,1` or `1,2`).
 	// Silent mode: do not pass in this parameter.
-	ValidateData *string `json:"ValidateData,omitempty" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
 
 	// Optional configuration (a JSON string)
 	// {
 	// "BestFrameNum": 2  // Return multiple best screenshots. Value range: 2−10
 	// }
-	Optional *string `json:"Optional,omitempty" name:"Optional"`
+	Optional *string `json:"Optional,omitnil" name:"Optional"`
 
 	// Base64 string of the video for liveness detection.
 	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
-	VideoBase64 *string `json:"VideoBase64,omitempty" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
 
 	// URL of the video for liveness detection. The size of the downloaded video after Base64 encoding can be up to 8 MB. It takes no more than 4 seconds to download. MP4, AVI, and FLV formats are supported.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
 	// 
 	// We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 }
 
 func (r *LivenessCompareRequest) ToJsonString() string {
@@ -1406,22 +1406,22 @@ func (r *LivenessCompareRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type LivenessCompareResponseParams struct {
 	// The best screenshot of the video after successful verification. The photo is Base64-encoded and in JPG format.
-	BestFrameBase64 *string `json:"BestFrameBase64,omitempty" name:"BestFrameBase64"`
+	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
 
 	// Similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two faces are of the same person. You can adjust the threshold according to your specific scenario (the FAR at the threshold of 70 is 0.1%, and FAR at the threshold of 80 is 0.01%).
-	Sim *float64 `json:"Sim,omitempty" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
 
 	// Service error code. `Success` will be returned for success. For error information, please see the `FailedOperation` section in the error code list below.
-	Result *string `json:"Result,omitempty" name:"Result"`
+	Result *string `json:"Result,omitnil" name:"Result"`
 
 	// Service result description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 
-	BestFrameList []*string `json:"BestFrameList,omitempty" name:"BestFrameList"`
+	BestFrameList []*string `json:"BestFrameList,omitnil" name:"BestFrameList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type LivenessCompareResponse struct {
@@ -1443,39 +1443,39 @@ func (r *LivenessCompareResponse) FromJsonString(s string) error {
 type VerificationDetail struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorCode *int64 `json:"ErrorCode,omitempty" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
 
 	// The description of the final verification result.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorMsg *string `json:"ErrorMsg,omitempty" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
 
 	// The result of this liveness detection process. `0` indicates success.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	LivenessErrorCode *int64 `json:"LivenessErrorCode,omitempty" name:"LivenessErrorCode"`
+	LivenessErrorCode *int64 `json:"LivenessErrorCode,omitnil" name:"LivenessErrorCode"`
 
 	// The result description of this liveness detection process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LivenessErrorMsg *string `json:"LivenessErrorMsg,omitempty" name:"LivenessErrorMsg"`
+	LivenessErrorMsg *string `json:"LivenessErrorMsg,omitnil" name:"LivenessErrorMsg"`
 
 	// The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	CompareErrorCode *int64 `json:"CompareErrorCode,omitempty" name:"CompareErrorCode"`
+	CompareErrorCode *int64 `json:"CompareErrorCode,omitnil" name:"CompareErrorCode"`
 
 	// The result description of this comparison process.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	CompareErrorMsg *string `json:"CompareErrorMsg,omitempty" name:"CompareErrorMsg"`
+	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil" name:"CompareErrorMsg"`
 
 	// The timestamp (ms) of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReqTimestamp *uint64 `json:"ReqTimestamp,omitempty" name:"ReqTimestamp"`
+	ReqTimestamp *uint64 `json:"ReqTimestamp,omitnil" name:"ReqTimestamp"`
 
 	// The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Value range: [0.00, 100.00]. By default, the person in the screenshot is determined to be the same person in the image if the similarity is greater than or equal to 70.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	Similarity *float64 `json:"Similarity,omitempty" name:"Similarity"`
+	Similarity *float64 `json:"Similarity,omitnil" name:"Similarity"`
 
 	// Unique ID of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Seq *string `json:"Seq,omitempty" name:"Seq"`
+	Seq *string `json:"Seq,omitnil" name:"Seq"`
 }
 
 // Predefined struct for user
@@ -1483,27 +1483,27 @@ type VideoLivenessCompareRequestParams struct {
 	// The URL of the photo for face comparison. The downloaded image after Base64 encoding can be up to 3 MB and must be in JPG or PNG.
 	// 
 	// The image must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate an image URL by using `CreateUploadUrl` or purchase the COS service.
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
 
 	// The 32-bit MD5 checksum of the image for comparison
-	ImageMd5 *string `json:"ImageMd5,omitempty" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
 
 	// The URL of the video for liveness detection. The downloaded video after Base64 encoding can be up to 8 MB and must be in MP4, AVI, or FLV. It takes no more than 4s to download the video.
 	// 
 	// The video must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate a video URL by using `CreateUploadUrl` or purchase the COS service.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 
 	// The 32-bit MD5 checksum of the video
-	VideoMd5 *string `json:"VideoMd5,omitempty" name:"VideoMd5"`
+	VideoMd5 *string `json:"VideoMd5,omitnil" name:"VideoMd5"`
 
 	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
 	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-	LivenessType *string `json:"LivenessType,omitempty" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
 
 	// LIP parameter: Pass in a custom 4-digit verification code.
 	// ACTION parameter: Pass in a custom action sequence (`2,1` or `1,2`).
 	// SILENT parameter: Null.
-	ValidateData *string `json:"ValidateData,omitempty" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
 }
 
 type VideoLivenessCompareRequest struct {
@@ -1512,27 +1512,27 @@ type VideoLivenessCompareRequest struct {
 	// The URL of the photo for face comparison. The downloaded image after Base64 encoding can be up to 3 MB and must be in JPG or PNG.
 	// 
 	// The image must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate an image URL by using `CreateUploadUrl` or purchase the COS service.
-	ImageUrl *string `json:"ImageUrl,omitempty" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
 
 	// The 32-bit MD5 checksum of the image for comparison
-	ImageMd5 *string `json:"ImageMd5,omitempty" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
 
 	// The URL of the video for liveness detection. The downloaded video after Base64 encoding can be up to 8 MB and must be in MP4, AVI, or FLV. It takes no more than 4s to download the video.
 	// 
 	// The video must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate a video URL by using `CreateUploadUrl` or purchase the COS service.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 
 	// The 32-bit MD5 checksum of the video
-	VideoMd5 *string `json:"VideoMd5,omitempty" name:"VideoMd5"`
+	VideoMd5 *string `json:"VideoMd5,omitnil" name:"VideoMd5"`
 
 	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
 	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-	LivenessType *string `json:"LivenessType,omitempty" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
 
 	// LIP parameter: Pass in a custom 4-digit verification code.
 	// ACTION parameter: Pass in a custom action sequence (`2,1` or `1,2`).
 	// SILENT parameter: Null.
-	ValidateData *string `json:"ValidateData,omitempty" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
 }
 
 func (r *VideoLivenessCompareRequest) ToJsonString() string {
@@ -1562,20 +1562,20 @@ func (r *VideoLivenessCompareRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type VideoLivenessCompareResponseParams struct {
 	// The similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two persons are of the same person. You can adjust the threshold according to your specific scenario (the FARs at the thresholds of 70 and 80 are 0.1% and 0.01%, respectively).
-	Sim *float64 `json:"Sim,omitempty" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
 
 	// The service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
-	Result *string `json:"Result,omitempty" name:"Result"`
+	Result *string `json:"Result,omitnil" name:"Result"`
 
 	// The service result description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The best video screenshot after successful verification
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BestFrame *FileInfo `json:"BestFrame,omitempty" name:"BestFrame"`
+	BestFrame *FileInfo `json:"BestFrame,omitnil" name:"BestFrame"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type VideoLivenessCompareResponse struct {

@@ -15,34 +15,34 @@
 package v20191016
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type AddUserContactRequestParams struct {
 	// Contact name, which needs to be unique and can contain 2-60 characters, supporting uppercase and lowercase letters, numbers, and underline “_”. It cannot start with “_”.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Email address, which can contain uppercase and lowercase letters, numbers, and underline “_”, and cannot start with “_”.
-	ContactInfo *string `json:"ContactInfo,omitempty" name:"ContactInfo"`
+	ContactInfo *string `json:"ContactInfo,omitnil" name:"ContactInfo"`
 
 	// Service type, which is fixed to “mysql”.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type AddUserContactRequest struct {
 	*tchttp.BaseRequest
 	
 	// Contact name, which needs to be unique and can contain 2-60 characters, supporting uppercase and lowercase letters, numbers, and underline “_”. It cannot start with “_”.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Email address, which can contain uppercase and lowercase letters, numbers, and underline “_”, and cannot start with “_”.
-	ContactInfo *string `json:"ContactInfo,omitempty" name:"ContactInfo"`
+	ContactInfo *string `json:"ContactInfo,omitnil" name:"ContactInfo"`
 
 	// Service type, which is fixed to “mysql”.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *AddUserContactRequest) ToJsonString() string {
@@ -69,10 +69,10 @@ func (r *AddUserContactRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddUserContactResponseParams struct {
 	// The successfully added contact ID
-	Id *int64 `json:"Id,omitempty" name:"Id"`
+	Id *int64 `json:"Id,omitnil" name:"Id"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddUserContactResponse struct {
@@ -93,62 +93,62 @@ func (r *AddUserContactResponse) FromJsonString(s string) error {
 
 type ContactItem struct {
 	// Contact ID.
-	Id *int64 `json:"Id,omitempty" name:"Id"`
+	Id *int64 `json:"Id,omitnil" name:"Id"`
 
 	// Contact name.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The email address of the contact.
-	Mail *string `json:"Mail,omitempty" name:"Mail"`
+	Mail *string `json:"Mail,omitnil" name:"Mail"`
 }
 
 // Predefined struct for user
 type CreateDBDiagReportTaskRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as `2020-11-08T14:00:00+08:00`.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as `2020-11-09T14:00:00+08:00`.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Whether to send an email. Valid values: 0 - Yes, 1 - No.
-	SendMailFlag *int64 `json:"SendMailFlag,omitempty" name:"SendMailFlag"`
+	SendMailFlag *int64 `json:"SendMailFlag,omitnil" name:"SendMailFlag"`
 
 	// An array of contact IDs to receive the email.
-	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson"`
+	ContactPerson []*int64 `json:"ContactPerson,omitnil" name:"ContactPerson"`
 
 	// An array of contact group IDs to receive the email.
-	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
+	ContactGroup []*int64 `json:"ContactGroup,omitnil" name:"ContactGroup"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type CreateDBDiagReportTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as `2020-11-08T14:00:00+08:00`.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as `2020-11-09T14:00:00+08:00`.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Whether to send an email. Valid values: 0 - Yes, 1 - No.
-	SendMailFlag *int64 `json:"SendMailFlag,omitempty" name:"SendMailFlag"`
+	SendMailFlag *int64 `json:"SendMailFlag,omitnil" name:"SendMailFlag"`
 
 	// An array of contact IDs to receive the email.
-	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson"`
+	ContactPerson []*int64 `json:"ContactPerson,omitnil" name:"ContactPerson"`
 
 	// An array of contact group IDs to receive the email.
-	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
+	ContactGroup []*int64 `json:"ContactGroup,omitnil" name:"ContactGroup"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *CreateDBDiagReportTaskRequest) ToJsonString() string {
@@ -180,10 +180,10 @@ func (r *CreateDBDiagReportTaskRequest) FromJsonString(s string) error {
 type CreateDBDiagReportTaskResponseParams struct {
 	// ID of an async task request, which can be used to query the execution result of an async task.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateDBDiagReportTaskResponse struct {
@@ -205,26 +205,26 @@ func (r *CreateDBDiagReportTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDBDiagReportUrlRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// The health report task ID, which can be queried through `DescribeDBDiagReportTasks`.
-	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type CreateDBDiagReportUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// The health report task ID, which can be queried through `DescribeDBDiagReportTasks`.
-	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *CreateDBDiagReportUrlRequest) ToJsonString() string {
@@ -251,13 +251,13 @@ func (r *CreateDBDiagReportUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDBDiagReportUrlResponseParams struct {
 	// The URL of the health report.
-	ReportUrl *string `json:"ReportUrl,omitempty" name:"ReportUrl"`
+	ReportUrl *string `json:"ReportUrl,omitnil" name:"ReportUrl"`
 
 	// The expiration timestamp of the health report URL (in seconds).
-	ExpireTime *int64 `json:"ExpireTime,omitempty" name:"ExpireTime"`
+	ExpireTime *int64 `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateDBDiagReportUrlResponse struct {
@@ -279,44 +279,44 @@ func (r *CreateDBDiagReportUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMailProfileRequestParams struct {
 	// Email configurations
-	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitnil" name:"ProfileInfo"`
 
 	// Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). For database inspection report, it should be `User`; and for scheduled task reports, it should be `Instance`.
-	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
+	ProfileLevel *string `json:"ProfileLevel,omitnil" name:"ProfileLevel"`
 
 	// Configuration name, which needs to be unique. For database inspection reports, this name can be customize as needed. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 
 	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
-	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+	ProfileType *string `json:"ProfileType,omitnil" name:"ProfileType"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Instance ID bound with the configuration, which is set when the configuration level is "Instance". Only one instance can be bound at a time. When the configuration level is “User”, leave this parameter empty.
-	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds"`
+	BindInstanceIds []*string `json:"BindInstanceIds,omitnil" name:"BindInstanceIds"`
 }
 
 type CreateMailProfileRequest struct {
 	*tchttp.BaseRequest
 	
 	// Email configurations
-	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitnil" name:"ProfileInfo"`
 
 	// Configuration level. Valid values: "User" (user-level), "Instance" (instance-level). For database inspection report, it should be `User`; and for scheduled task reports, it should be `Instance`.
-	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
+	ProfileLevel *string `json:"ProfileLevel,omitnil" name:"ProfileLevel"`
 
 	// Configuration name, which needs to be unique. For database inspection reports, this name can be customize as needed. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 
 	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
-	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+	ProfileType *string `json:"ProfileType,omitnil" name:"ProfileType"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Instance ID bound with the configuration, which is set when the configuration level is "Instance". Only one instance can be bound at a time. When the configuration level is “User”, leave this parameter empty.
-	BindInstanceIds []*string `json:"BindInstanceIds,omitempty" name:"BindInstanceIds"`
+	BindInstanceIds []*string `json:"BindInstanceIds,omitnil" name:"BindInstanceIds"`
 }
 
 func (r *CreateMailProfileRequest) ToJsonString() string {
@@ -346,7 +346,7 @@ func (r *CreateMailProfileRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMailProfileResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateMailProfileResponse struct {
@@ -368,38 +368,38 @@ func (r *CreateMailProfileResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSchedulerMailProfileRequestParams struct {
 	// Value range: 1-7, representing Monday to Sunday respectively.
-	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration"`
+	WeekConfiguration []*int64 `json:"WeekConfiguration,omitnil" name:"WeekConfiguration"`
 
 	// Email configurations
-	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitnil" name:"ProfileInfo"`
 
 	// Configuration name, which needs to be unique. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 
 	// Configure the instance ID that you need to generate the health report.
-	BindInstanceId *string `json:"BindInstanceId,omitempty" name:"BindInstanceId"`
+	BindInstanceId *string `json:"BindInstanceId,omitnil" name:"BindInstanceId"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type CreateSchedulerMailProfileRequest struct {
 	*tchttp.BaseRequest
 	
 	// Value range: 1-7, representing Monday to Sunday respectively.
-	WeekConfiguration []*int64 `json:"WeekConfiguration,omitempty" name:"WeekConfiguration"`
+	WeekConfiguration []*int64 `json:"WeekConfiguration,omitnil" name:"WeekConfiguration"`
 
 	// Email configurations
-	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitnil" name:"ProfileInfo"`
 
 	// Configuration name, which needs to be unique. For scheduled task reports, the name should be in the format of "scheduler_" + {instanceId}, such as "schduler_cdb-test".
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 
 	// Configure the instance ID that you need to generate the health report.
-	BindInstanceId *string `json:"BindInstanceId,omitempty" name:"BindInstanceId"`
+	BindInstanceId *string `json:"BindInstanceId,omitnil" name:"BindInstanceId"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *CreateSchedulerMailProfileRequest) ToJsonString() string {
@@ -428,7 +428,7 @@ func (r *CreateSchedulerMailProfileRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSchedulerMailProfileResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateSchedulerMailProfileResponse struct {
@@ -450,20 +450,20 @@ func (r *CreateSchedulerMailProfileResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAllUserContactRequestParams struct {
 	// Service type, which is fixed to “mysql”.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// An array of contact name. Fuzzy search is supported.
-	Names []*string `json:"Names,omitempty" name:"Names"`
+	Names []*string `json:"Names,omitnil" name:"Names"`
 }
 
 type DescribeAllUserContactRequest struct {
 	*tchttp.BaseRequest
 	
 	// Service type, which is fixed to “mysql”.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// An array of contact name. Fuzzy search is supported.
-	Names []*string `json:"Names,omitempty" name:"Names"`
+	Names []*string `json:"Names,omitnil" name:"Names"`
 }
 
 func (r *DescribeAllUserContactRequest) ToJsonString() string {
@@ -489,14 +489,14 @@ func (r *DescribeAllUserContactRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAllUserContactResponseParams struct {
 	// Total number of contacts.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Contact information.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Contacts []*ContactItem `json:"Contacts,omitempty" name:"Contacts"`
+	Contacts []*ContactItem `json:"Contacts,omitnil" name:"Contacts"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAllUserContactResponse struct {
@@ -518,20 +518,20 @@ func (r *DescribeAllUserContactResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAllUserGroupRequestParams struct {
 	// Service type, which is fixed to “mysql”.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// An array of contact group name. Fuzzy search is supported.
-	Names []*string `json:"Names,omitempty" name:"Names"`
+	Names []*string `json:"Names,omitnil" name:"Names"`
 }
 
 type DescribeAllUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Service type, which is fixed to “mysql”.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// An array of contact group name. Fuzzy search is supported.
-	Names []*string `json:"Names,omitempty" name:"Names"`
+	Names []*string `json:"Names,omitnil" name:"Names"`
 }
 
 func (r *DescribeAllUserGroupRequest) ToJsonString() string {
@@ -557,14 +557,14 @@ func (r *DescribeAllUserGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAllUserGroupResponseParams struct {
 	// Total number of contact groups.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Contact group information.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Groups []*GroupItem `json:"Groups,omitempty" name:"Groups"`
+	Groups []*GroupItem `json:"Groups,omitnil" name:"Groups"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAllUserGroupResponse struct {
@@ -586,26 +586,26 @@ func (r *DescribeAllUserGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBDiagEventRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Event ID, which can be obtained through the `DescribeDBDiagHistory` API.
-	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+	EventId *int64 `json:"EventId,omitnil" name:"EventId"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeDBDiagEventRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Event ID, which can be obtained through the `DescribeDBDiagHistory` API.
-	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+	EventId *int64 `json:"EventId,omitnil" name:"EventId"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeDBDiagEventRequest) ToJsonString() string {
@@ -632,41 +632,41 @@ func (r *DescribeDBDiagEventRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBDiagEventResponseParams struct {
 	// Diagnosis item.
-	DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
+	DiagItem *string `json:"DiagItem,omitnil" name:"DiagItem"`
 
 	// Diagnosis type.
-	DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
+	DiagType *string `json:"DiagType,omitnil" name:"DiagType"`
 
 	// Event ID.
-	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+	EventId *int64 `json:"EventId,omitnil" name:"EventId"`
 
 	// Event details.
-	Explanation *string `json:"Explanation,omitempty" name:"Explanation"`
+	Explanation *string `json:"Explanation,omitnil" name:"Explanation"`
 
 	// Summary.
-	Outline *string `json:"Outline,omitempty" name:"Outline"`
+	Outline *string `json:"Outline,omitnil" name:"Outline"`
 
 	// Problem found.
-	Problem *string `json:"Problem,omitempty" name:"Problem"`
+	Problem *string `json:"Problem,omitnil" name:"Problem"`
 
 	// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
-	Severity *int64 `json:"Severity,omitempty" name:"Severity"`
+	Severity *int64 `json:"Severity,omitnil" name:"Severity"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Suggestion.
-	Suggestions *string `json:"Suggestions,omitempty" name:"Suggestions"`
+	Suggestions *string `json:"Suggestions,omitnil" name:"Suggestions"`
 
 	// Reserved field.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Metric *string `json:"Metric,omitempty" name:"Metric"`
+	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// End time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDBDiagEventResponse struct {
@@ -688,32 +688,32 @@ func (r *DescribeDBDiagEventResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBDiagHistoryRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as "2019-09-10 12:13:14".
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeDBDiagHistoryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as "2019-09-10 12:13:14".
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as "2019-09-11 12:13:14". The interval between the end time and the start time can be up to 2 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeDBDiagHistoryRequest) ToJsonString() string {
@@ -741,10 +741,10 @@ func (r *DescribeDBDiagHistoryRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBDiagHistoryResponseParams struct {
 	// Event description.
-	Events []*DiagHistoryEventItem `json:"Events,omitempty" name:"Events"`
+	Events []*DiagHistoryEventItem `json:"Events,omitnil" name:"Events"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDBDiagHistoryResponse struct {
@@ -766,62 +766,62 @@ func (r *DescribeDBDiagHistoryResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBDiagReportTasksRequestParams struct {
 	// Start time of the first task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time of the last task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Instance ID array, which is used to filter the task list of a specified instance.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (timed generation), and `MANUAL` (manual trigger).
-	Sources []*string `json:"Sources,omitempty" name:"Sources"`
+	Sources []*string `json:"Sources,omitnil" name:"Sources"`
 
 	// Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
-	HealthLevels *string `json:"HealthLevels,omitempty" name:"HealthLevels"`
+	HealthLevels *string `json:"HealthLevels,omitnil" name:"HealthLevels"`
 
 	// The task status. Valid values: `created` (create), `chosen` (to be executed), `running` (being executed), `failed` (failed), and `finished` (completed).
-	TaskStatuses *string `json:"TaskStatuses,omitempty" name:"TaskStatuses"`
+	TaskStatuses *string `json:"TaskStatuses,omitnil" name:"TaskStatuses"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeDBDiagReportTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time of the first task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time of the last task in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14. It is used for queries by time range.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Instance ID array, which is used to filter the task list of a specified instance.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (timed generation), and `MANUAL` (manual trigger).
-	Sources []*string `json:"Sources,omitempty" name:"Sources"`
+	Sources []*string `json:"Sources,omitnil" name:"Sources"`
 
 	// Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
-	HealthLevels *string `json:"HealthLevels,omitempty" name:"HealthLevels"`
+	HealthLevels *string `json:"HealthLevels,omitnil" name:"HealthLevels"`
 
 	// The task status. Valid values: `created` (create), `chosen` (to be executed), `running` (being executed), `failed` (failed), and `finished` (completed).
-	TaskStatuses *string `json:"TaskStatuses,omitempty" name:"TaskStatuses"`
+	TaskStatuses *string `json:"TaskStatuses,omitnil" name:"TaskStatuses"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeDBDiagReportTasksRequest) ToJsonString() string {
@@ -854,13 +854,13 @@ func (r *DescribeDBDiagReportTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBDiagReportTasksResponseParams struct {
 	// Total number of tasks.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Task list.
-	Tasks []*HealthReportTask `json:"Tasks,omitempty" name:"Tasks"`
+	Tasks []*HealthReportTask `json:"Tasks,omitnil" name:"Tasks"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDBDiagReportTasksResponse struct {
@@ -882,26 +882,26 @@ func (r *DescribeDBDiagReportTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSpaceStatusRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Query period in days. The end date is the current date and the query period is 7 days by default.
-	RangeDays *int64 `json:"RangeDays,omitempty" name:"RangeDays"`
+	RangeDays *int64 `json:"RangeDays,omitnil" name:"RangeDays"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeDBSpaceStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Query period in days. The end date is the current date and the query period is 7 days by default.
-	RangeDays *int64 `json:"RangeDays,omitempty" name:"RangeDays"`
+	RangeDays *int64 `json:"RangeDays,omitnil" name:"RangeDays"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeDBSpaceStatusRequest) ToJsonString() string {
@@ -928,19 +928,19 @@ func (r *DescribeDBSpaceStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSpaceStatusResponseParams struct {
 	// Disk usage growth in MB.
-	Growth *int64 `json:"Growth,omitempty" name:"Growth"`
+	Growth *int64 `json:"Growth,omitnil" name:"Growth"`
 
 	// Available disk space in MB.
-	Remain *int64 `json:"Remain,omitempty" name:"Remain"`
+	Remain *int64 `json:"Remain,omitnil" name:"Remain"`
 
 	// Total disk space in MB.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Estimated number of available days.
-	AvailableDays *int64 `json:"AvailableDays,omitempty" name:"AvailableDays"`
+	AvailableDays *int64 `json:"AvailableDays,omitnil" name:"AvailableDays"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDBSpaceStatusResponse struct {
@@ -962,50 +962,50 @@ func (r *DescribeDBSpaceStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDiagDBInstancesRequestParams struct {
 	// Whether it is an instance supported by DBbrain. It is fixed to “true”.
-	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
+	IsSupported *bool `json:"IsSupported,omitnil" name:"IsSupported"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Pagination parameter indicating the offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Pagination parameter indicating the number of entries for each page.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Query by instance name.
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
+	InstanceNames []*string `json:"InstanceNames,omitnil" name:"InstanceNames"`
 
 	// Query by instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Query by region.
-	Regions []*string `json:"Regions,omitempty" name:"Regions"`
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
 }
 
 type DescribeDiagDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Whether it is an instance supported by DBbrain. It is fixed to “true”.
-	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
+	IsSupported *bool `json:"IsSupported,omitnil" name:"IsSupported"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Pagination parameter indicating the offset.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Pagination parameter indicating the number of entries for each page.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Query by instance name.
-	InstanceNames []*string `json:"InstanceNames,omitempty" name:"InstanceNames"`
+	InstanceNames []*string `json:"InstanceNames,omitnil" name:"InstanceNames"`
 
 	// Query by instance ID.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Query by region.
-	Regions []*string `json:"Regions,omitempty" name:"Regions"`
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
 }
 
 func (r *DescribeDiagDBInstancesRequest) ToJsonString() string {
@@ -1036,16 +1036,16 @@ func (r *DescribeDiagDBInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDiagDBInstancesResponseParams struct {
 	// Total Number of Instances
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Status of all instance inspection. 0: all instance inspection enabled, 1: all instance inspection disabled
-	DbScanStatus *int64 `json:"DbScanStatus,omitempty" name:"DbScanStatus"`
+	DbScanStatus *int64 `json:"DbScanStatus,omitnil" name:"DbScanStatus"`
 
 	// Instance related information
-	Items []*InstanceInfo `json:"Items,omitempty" name:"Items"`
+	Items []*InstanceInfo `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDiagDBInstancesResponse struct {
@@ -1067,26 +1067,26 @@ func (r *DescribeDiagDBInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHealthScoreRequestParams struct {
 	// The instance ID that needs to obtain the health score
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Time to obtain the health score
-	Time *string `json:"Time,omitempty" name:"Time"`
+	Time *string `json:"Time,omitnil" name:"Time"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeHealthScoreRequest struct {
 	*tchttp.BaseRequest
 	
 	// The instance ID that needs to obtain the health score
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Time to obtain the health score
-	Time *string `json:"Time,omitempty" name:"Time"`
+	Time *string `json:"Time,omitnil" name:"Time"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeHealthScoreRequest) ToJsonString() string {
@@ -1113,10 +1113,10 @@ func (r *DescribeHealthScoreRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHealthScoreResponseParams struct {
 	// Health score and deduction for exceptions
-	Data *HealthScoreInfo `json:"Data,omitempty" name:"Data"`
+	Data *HealthScoreInfo `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeHealthScoreResponse struct {
@@ -1138,38 +1138,38 @@ func (r *DescribeHealthScoreResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMailProfileRequestParams struct {
 	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
-	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+	ProfileType *string `json:"ProfileType,omitnil" name:"ProfileType"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of results per page in paginated queries. Maximum value: 50
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Query by the name of email configuration. The name of the regularly sent email configuration should be in the format of "scheduler_"+{instanceId}.
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 }
 
 type DescribeMailProfileRequest struct {
 	*tchttp.BaseRequest
 	
 	// Configuration type. Valid values: "dbScan_mail_configuration" (email configuration of database inspection report), "scheduler_mail_configuration" (email configuration of scheduled task report).
-	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+	ProfileType *string `json:"ProfileType,omitnil" name:"ProfileType"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// The number of results per page in paginated queries. Maximum value: 50
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Query by the name of email configuration. The name of the regularly sent email configuration should be in the format of "scheduler_"+{instanceId}.
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 }
 
 func (r *DescribeMailProfileRequest) ToJsonString() string {
@@ -1199,14 +1199,14 @@ func (r *DescribeMailProfileRequest) FromJsonString(s string) error {
 type DescribeMailProfileResponseParams struct {
 	// Email configuration details
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ProfileList []*UserProfile `json:"ProfileList,omitempty" name:"ProfileList"`
+	ProfileList []*UserProfile `json:"ProfileList,omitnil" name:"ProfileList"`
 
 	// Total number of email templates
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeMailProfileResponse struct {
@@ -1228,32 +1228,32 @@ func (r *DescribeMailProfileResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogTimeSeriesStatsRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as "2019-09-10 12:13:14".
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeSlowLogTimeSeriesStatsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as "2019-09-10 12:13:14".
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeSlowLogTimeSeriesStatsRequest) ToJsonString() string {
@@ -1281,16 +1281,16 @@ func (r *DescribeSlowLogTimeSeriesStatsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogTimeSeriesStatsResponseParams struct {
 	// Time range in seconds in histogram.
-	Period *int64 `json:"Period,omitempty" name:"Period"`
+	Period *int64 `json:"Period,omitnil" name:"Period"`
 
 	// Number of slow logs in specified time range.
-	TimeSeries []*TimeSlice `json:"TimeSeries,omitempty" name:"TimeSeries"`
+	TimeSeries []*TimeSlice `json:"TimeSeries,omitnil" name:"TimeSeries"`
 
 	// Instance CPU utilization monitoring data in specified time range.
-	SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
+	SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitnil" name:"SeriesData"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSlowLogTimeSeriesStatsResponse struct {
@@ -1312,62 +1312,62 @@ func (r *DescribeSlowLogTimeSeriesStatsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeSlowLogTopSqlsRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as "2019-09-10 12:13:14".
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Sorting key. Valid values: QueryTime, ExecTimes, RowsSent, LockTime, RowsExamined.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Sorting order. Valid values: ASC (ascending), DESC (descending).
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Database name array.
-	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList"`
+	SchemaList []*SchemaItem `json:"SchemaList,omitnil" name:"SchemaList"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeSlowLogTopSqlsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time, such as "2019-09-10 12:13:14".
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time, such as "2019-09-10 12:13:14". The interval between the end time and the start time can be up to 7 days.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Sorting key. Valid values: QueryTime, ExecTimes, RowsSent, LockTime, RowsExamined.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Sorting order. Valid values: ASC (ascending), DESC (descending).
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Database name array.
-	SchemaList []*SchemaItem `json:"SchemaList,omitempty" name:"SchemaList"`
+	SchemaList []*SchemaItem `json:"SchemaList,omitnil" name:"SchemaList"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeSlowLogTopSqlsRequest) ToJsonString() string {
@@ -1400,13 +1400,13 @@ func (r *DescribeSlowLogTopSqlsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogTopSqlsResponseParams struct {
 	// Number of eligible entries.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// List of top slow SQL statements
-	Rows []*SlowLogTopSqlItem `json:"Rows,omitempty" name:"Rows"`
+	Rows []*SlowLogTopSqlItem `json:"Rows,omitnil" name:"Rows"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSlowLogTopSqlsResponse struct {
@@ -1428,32 +1428,32 @@ func (r *DescribeSlowLogTopSqlsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogUserHostStatsRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeSlowLogUserHostStatsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Start time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time of the time range in the format of yyyy-MM-dd HH:mm:ss, such as 2019-09-10 12:13:14.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TDSQL-C for MySQL). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeSlowLogUserHostStatsRequest) ToJsonString() string {
@@ -1481,13 +1481,13 @@ func (r *DescribeSlowLogUserHostStatsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogUserHostStatsResponseParams struct {
 	// Total number of source addresses.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Detailed list of the proportion of slow logs from each source address.
-	Items []*SlowLogHost `json:"Items,omitempty" name:"Items"`
+	Items []*SlowLogHost `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSlowLogUserHostStatsResponse struct {
@@ -1509,44 +1509,44 @@ func (r *DescribeSlowLogUserHostStatsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopSpaceSchemaTimeSeriesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top databases. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`; for other database instances, the default value is `TotalLength`.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
-	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
 
 	// End date. It can be as early as 29 days before the current date, and defaults to the current date.
-	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeTopSpaceSchemaTimeSeriesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top databases. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`; for other database instances, the default value is `TotalLength`.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
-	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
 
 	// End date. It can be as early as 29 days before the current date, and defaults to the current date.
-	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeTopSpaceSchemaTimeSeriesRequest) ToJsonString() string {
@@ -1576,10 +1576,10 @@ func (r *DescribeTopSpaceSchemaTimeSeriesRequest) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeTopSpaceSchemaTimeSeriesResponseParams struct {
 	// Time series list of the returned space statistics of top databases.
-	TopSpaceSchemaTimeSeries []*SchemaSpaceTimeSeries `json:"TopSpaceSchemaTimeSeries,omitempty" name:"TopSpaceSchemaTimeSeries"`
+	TopSpaceSchemaTimeSeries []*SchemaSpaceTimeSeries `json:"TopSpaceSchemaTimeSeries,omitnil" name:"TopSpaceSchemaTimeSeries"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTopSpaceSchemaTimeSeriesResponse struct {
@@ -1601,32 +1601,32 @@ func (r *DescribeTopSpaceSchemaTimeSeriesResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeTopSpaceSchemasRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top databases. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`; for other database instances, the default value is `TotalLength`.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeTopSpaceSchemasRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top databases. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (supported only by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is `PhysicalFileSize`; for other database instances, the default value is `TotalLength`.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeTopSpaceSchemasRequest) ToJsonString() string {
@@ -1654,13 +1654,13 @@ func (r *DescribeTopSpaceSchemasRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopSpaceSchemasResponseParams struct {
 	// List of the returned space statistics of top databases.
-	TopSpaceSchemas []*SchemaSpaceData `json:"TopSpaceSchemas,omitempty" name:"TopSpaceSchemas"`
+	TopSpaceSchemas []*SchemaSpaceData `json:"TopSpaceSchemas,omitnil" name:"TopSpaceSchemas"`
 
 	// Timestamp (in seconds) of database space data collect points
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTopSpaceSchemasResponse struct {
@@ -1682,44 +1682,44 @@ func (r *DescribeTopSpaceSchemasResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopSpaceTableTimeSeriesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top tables. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
-	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
 
 	// End date. It can be as early as 29 days before the current date, and defaults to the current date.
-	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeTopSpaceTableTimeSeriesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top tables. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: DataLength, IndexLength, TotalLength, DataFree, FragRatio, TableRows, PhysicalFileSize. Default value: PhysicalFileSize.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Start date. It can be as early as 29 days before the current date, and defaults to 6 days before the end date.
-	StartDate *string `json:"StartDate,omitempty" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
 
 	// End date. It can be as early as 29 days before the current date, and defaults to the current date.
-	EndDate *string `json:"EndDate,omitempty" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeTopSpaceTableTimeSeriesRequest) ToJsonString() string {
@@ -1749,10 +1749,10 @@ func (r *DescribeTopSpaceTableTimeSeriesRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeTopSpaceTableTimeSeriesResponseParams struct {
 	// Time series list of the returned space statistics of top tables.
-	TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitempty" name:"TopSpaceTableTimeSeries"`
+	TopSpaceTableTimeSeries []*TableSpaceTimeSeries `json:"TopSpaceTableTimeSeries,omitnil" name:"TopSpaceTableTimeSeries"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTopSpaceTableTimeSeriesResponse struct {
@@ -1774,32 +1774,32 @@ func (r *DescribeTopSpaceTableTimeSeriesResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeTopSpaceTablesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top tables. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (only supported by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is PhysicalFileSize; for other database instances, the default value is `TotalLength`.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 type DescribeTopSpaceTablesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Number of returned top tables. Maximum value: 100. Default value: 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Field used to sort top tables. Valid values: `DataLength`, `IndexLength`, `TotalLength`, `DataFree`, `FragRatio`, `TableRows`, and `PhysicalFileSize` (only supported by TencentDB for MySQL instances). For TencentDB for MySQL instances, the default value is PhysicalFileSize; for other database instances, the default value is `TotalLength`.
-	SortBy *string `json:"SortBy,omitempty" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)). Default value: `mysql`.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 }
 
 func (r *DescribeTopSpaceTablesRequest) ToJsonString() string {
@@ -1827,13 +1827,13 @@ func (r *DescribeTopSpaceTablesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopSpaceTablesResponseParams struct {
 	// List of the returned space statistics of top tables.
-	TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitempty" name:"TopSpaceTables"`
+	TopSpaceTables []*TableSpaceData `json:"TopSpaceTables,omitnil" name:"TopSpaceTables"`
 
 	// Timestamp (in seconds) of tablespace data collect points
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTopSpaceTablesResponse struct {
@@ -1855,26 +1855,26 @@ func (r *DescribeTopSpaceTablesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserSqlAdviceRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// SQL statement.
-	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+	SqlText *string `json:"SqlText,omitnil" name:"SqlText"`
 
 	// Database name.
-	Schema *string `json:"Schema,omitempty" name:"Schema"`
+	Schema *string `json:"Schema,omitnil" name:"Schema"`
 }
 
 type DescribeUserSqlAdviceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// SQL statement.
-	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+	SqlText *string `json:"SqlText,omitnil" name:"SqlText"`
 
 	// Database name.
-	Schema *string `json:"Schema,omitempty" name:"Schema"`
+	Schema *string `json:"Schema,omitnil" name:"Schema"`
 }
 
 func (r *DescribeUserSqlAdviceRequest) ToJsonString() string {
@@ -1901,28 +1901,28 @@ func (r *DescribeUserSqlAdviceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserSqlAdviceResponseParams struct {
 	// SQL statement optimization suggestions, which can be parsed into JSON arrays.
-	Advices *string `json:"Advices,omitempty" name:"Advices"`
+	Advices *string `json:"Advices,omitnil" name:"Advices"`
 
 	// Notes of SQL statement optimization suggestions, which can be parsed into String arrays.
-	Comments *string `json:"Comments,omitempty" name:"Comments"`
+	Comments *string `json:"Comments,omitnil" name:"Comments"`
 
 	// SQL statement.
-	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+	SqlText *string `json:"SqlText,omitnil" name:"SqlText"`
 
 	// Database name.
-	Schema *string `json:"Schema,omitempty" name:"Schema"`
+	Schema *string `json:"Schema,omitnil" name:"Schema"`
 
 	// DDL information of related tables, which can be parsed into JSON arrays.
-	Tables *string `json:"Tables,omitempty" name:"Tables"`
+	Tables *string `json:"Tables,omitnil" name:"Tables"`
 
 	// SQL execution plan, which can be parsed into JSON.
-	SqlPlan *string `json:"SqlPlan,omitempty" name:"SqlPlan"`
+	SqlPlan *string `json:"SqlPlan,omitnil" name:"SqlPlan"`
 
 	// Cost saving details after SQL statement optimization, which can be parsed into JSON.
-	Cost *string `json:"Cost,omitempty" name:"Cost"`
+	Cost *string `json:"Cost,omitnil" name:"Cost"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserSqlAdviceResponse struct {
@@ -1943,305 +1943,305 @@ func (r *DescribeUserSqlAdviceResponse) FromJsonString(s string) error {
 
 type DiagHistoryEventItem struct {
 	// Diagnosis type.
-	DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
+	DiagType *string `json:"DiagType,omitnil" name:"DiagType"`
 
 	// End time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Event ID.
-	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+	EventId *int64 `json:"EventId,omitnil" name:"EventId"`
 
 	// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
-	Severity *int64 `json:"Severity,omitempty" name:"Severity"`
+	Severity *int64 `json:"Severity,omitnil" name:"Severity"`
 
 	// Summary.
-	Outline *string `json:"Outline,omitempty" name:"Outline"`
+	Outline *string `json:"Outline,omitnil" name:"Outline"`
 
 	// Diagnosis item.
-	DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
+	DiagItem *string `json:"DiagItem,omitnil" name:"DiagItem"`
 
 	// Instance ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Reserved field
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Metric *string `json:"Metric,omitempty" name:"Metric"`
+	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// Region
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 }
 
 type EventInfo struct {
 	// Event ID
-	EventId *int64 `json:"EventId,omitempty" name:"EventId"`
+	EventId *int64 `json:"EventId,omitnil" name:"EventId"`
 
 	// Diagnosis type
-	DiagType *string `json:"DiagType,omitempty" name:"DiagType"`
+	DiagType *string `json:"DiagType,omitnil" name:"DiagType"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Summary
-	Outline *string `json:"Outline,omitempty" name:"Outline"`
+	Outline *string `json:"Outline,omitnil" name:"Outline"`
 
 	// Severity, which can be divided into 5 levels: 1: fatal, 2: severe, 3: warning, 4: notice, 5: healthy.
-	Severity *int64 `json:"Severity,omitempty" name:"Severity"`
+	Severity *int64 `json:"Severity,omitnil" name:"Severity"`
 
 	// Deduction
-	ScoreLost *int64 `json:"ScoreLost,omitempty" name:"ScoreLost"`
+	ScoreLost *int64 `json:"ScoreLost,omitnil" name:"ScoreLost"`
 
 	// Reserved field
-	Metric *string `json:"Metric,omitempty" name:"Metric"`
+	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// The number of alarms
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 }
 
 type GroupItem struct {
 	// Group ID.
-	Id *int64 `json:"Id,omitempty" name:"Id"`
+	Id *int64 `json:"Id,omitnil" name:"Id"`
 
 	// Group name.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Number of group members.
-	MemberCount *int64 `json:"MemberCount,omitempty" name:"MemberCount"`
+	MemberCount *int64 `json:"MemberCount,omitnil" name:"MemberCount"`
 }
 
 type HealthReportTask struct {
 	// Async task request ID.
-	AsyncRequestId *int64 `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// Source that triggers the task. Valid values: `DAILY_INSPECTION` (instance inspection), `SCHEDULED` (timed generation), and `MANUAL` (manual trigger).
-	Source *string `json:"Source,omitempty" name:"Source"`
+	Source *string `json:"Source,omitnil" name:"Source"`
 
 	// Task progress in %.
-	Progress *int64 `json:"Progress,omitempty" name:"Progress"`
+	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
 
 	// Task creation time.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Task start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Task end time.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Basic information about the instance to which the task belongs.
-	InstanceInfo *InstanceBasicInfo `json:"InstanceInfo,omitempty" name:"InstanceInfo"`
+	InstanceInfo *InstanceBasicInfo `json:"InstanceInfo,omitnil" name:"InstanceInfo"`
 
 	// Health information in a health report.
-	HealthStatus *HealthStatus `json:"HealthStatus,omitempty" name:"HealthStatus"`
+	HealthStatus *HealthStatus `json:"HealthStatus,omitnil" name:"HealthStatus"`
 }
 
 type HealthScoreInfo struct {
 	// Exception details
-	IssueTypes []*IssueTypeInfo `json:"IssueTypes,omitempty" name:"IssueTypes"`
+	IssueTypes []*IssueTypeInfo `json:"IssueTypes,omitnil" name:"IssueTypes"`
 
 	// Total number of the exceptions
-	EventsTotalCount *int64 `json:"EventsTotalCount,omitempty" name:"EventsTotalCount"`
+	EventsTotalCount *int64 `json:"EventsTotalCount,omitnil" name:"EventsTotalCount"`
 
 	// Health score
-	HealthScore *int64 `json:"HealthScore,omitempty" name:"HealthScore"`
+	HealthScore *int64 `json:"HealthScore,omitnil" name:"HealthScore"`
 
 	// Health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
-	HealthLevel *string `json:"HealthLevel,omitempty" name:"HealthLevel"`
+	HealthLevel *string `json:"HealthLevel,omitnil" name:"HealthLevel"`
 }
 
 type HealthStatus struct {
 	// Health score out of 100 points.
-	HealthScore *int64 `json:"HealthScore,omitempty" name:"HealthScore"`
+	HealthScore *int64 `json:"HealthScore,omitnil" name:"HealthScore"`
 
 	// Health level. Valid values: `HEALTH` (healthy), `SUB_HEALTH` (suboptimal), `RISK` (risky), and `HIGH_RISK` (critical).
-	HealthLevel *string `json:"HealthLevel,omitempty" name:"HealthLevel"`
+	HealthLevel *string `json:"HealthLevel,omitnil" name:"HealthLevel"`
 
 	// Total scores deducted.
-	ScoreLost *int64 `json:"ScoreLost,omitempty" name:"ScoreLost"`
+	ScoreLost *int64 `json:"ScoreLost,omitnil" name:"ScoreLost"`
 
 	// Deduction details.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ScoreDetails []*ScoreDetail `json:"ScoreDetails,omitempty" name:"ScoreDetails"`
+	ScoreDetails []*ScoreDetail `json:"ScoreDetails,omitnil" name:"ScoreDetails"`
 }
 
 type InstanceBasicInfo struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Private IP of the instance.
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Private network port of the instance.
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Instance product.
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Instance engine version.
-	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 }
 
 type InstanceConfs struct {
 	// Whether to enable database inspection. Valid values: Yes/No.
-	DailyInspection *string `json:"DailyInspection,omitempty" name:"DailyInspection"`
+	DailyInspection *string `json:"DailyInspection,omitnil" name:"DailyInspection"`
 
 	// Whether to enable instance overview. Valid values: Yes/No.
-	OverviewDisplay *string `json:"OverviewDisplay,omitempty" name:"OverviewDisplay"`
+	OverviewDisplay *string `json:"OverviewDisplay,omitnil" name:"OverviewDisplay"`
 }
 
 type InstanceInfo struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// The region where the instance belongs
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// Health score
-	HealthScore *int64 `json:"HealthScore,omitempty" name:"HealthScore"`
+	HealthScore *int64 `json:"HealthScore,omitnil" name:"HealthScore"`
 
 	// Service
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// Number of exceptions
-	EventCount *int64 `json:"EventCount,omitempty" name:"EventCount"`
+	EventCount *int64 `json:"EventCount,omitnil" name:"EventCount"`
 
 	// Instance type. Valid values: 1: MASTER, 2: DR, 3: RO, 4: SDR
-	InstanceType *int64 `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Number of cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory in MB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Disk storage in GB
-	Volume *int64 `json:"Volume,omitempty" name:"Volume"`
+	Volume *int64 `json:"Volume,omitnil" name:"Volume"`
 
 	// Database version
-	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
 	// Private network address
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Private network port
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Access source
-	Source *string `json:"Source,omitempty" name:"Source"`
+	Source *string `json:"Source,omitnil" name:"Source"`
 
 	// Group ID
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Group name
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Instance status. Valid values: 0: Delivering, 1: Running, 4: Terminating, 5: Isolated
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// Subnet unified ID
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// cdb (TencentDB instance) type
-	DeployMode *string `json:"DeployMode,omitempty" name:"DeployMode"`
+	DeployMode *string `json:"DeployMode,omitnil" name:"DeployMode"`
 
 	// cdb (TencentDB instance) initialization flag. Valid values: 0: not initialized, 1: initialized
-	InitFlag *int64 `json:"InitFlag,omitempty" name:"InitFlag"`
+	InitFlag *int64 `json:"InitFlag,omitnil" name:"InitFlag"`
 
 	// Task status
-	TaskStatus *int64 `json:"TaskStatus,omitempty" name:"TaskStatus"`
+	TaskStatus *int64 `json:"TaskStatus,omitnil" name:"TaskStatus"`
 
 	// Unified VPC ID
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Instance inspection/overview status
-	InstanceConf *InstanceConfs `json:"InstanceConf,omitempty" name:"InstanceConf"`
+	InstanceConf *InstanceConfs `json:"InstanceConf,omitnil" name:"InstanceConf"`
 
 	// Resource expiration time
-	DeadlineTime *string `json:"DeadlineTime,omitempty" name:"DeadlineTime"`
+	DeadlineTime *string `json:"DeadlineTime,omitnil" name:"DeadlineTime"`
 
 	// Whether it is an instance supported by DBbrain.
-	IsSupported *bool `json:"IsSupported,omitempty" name:"IsSupported"`
+	IsSupported *bool `json:"IsSupported,omitnil" name:"IsSupported"`
 
 	// The status of instance security audit log. ON: enabled, OFF: disabled.
-	SecAuditStatus *string `json:"SecAuditStatus,omitempty" name:"SecAuditStatus"`
+	SecAuditStatus *string `json:"SecAuditStatus,omitnil" name:"SecAuditStatus"`
 
 	// The status of instance audit log. ALL_AUDIT: full audit is enabled, RULE_AUDIT: rule audit is enabled, UNBOUND: audit is disabled.
-	AuditPolicyStatus *string `json:"AuditPolicyStatus,omitempty" name:"AuditPolicyStatus"`
+	AuditPolicyStatus *string `json:"AuditPolicyStatus,omitnil" name:"AuditPolicyStatus"`
 
 	// The running status of instance audit log. normal: running, paused: suspension due to arrears
-	AuditRunningStatus *string `json:"AuditRunningStatus,omitempty" name:"AuditRunningStatus"`
+	AuditRunningStatus *string `json:"AuditRunningStatus,omitnil" name:"AuditRunningStatus"`
 }
 
 type IssueTypeInfo struct {
 	// Metric categories: AVAILABILITY, MAINTAINABILITY, PERFORMANCE, and RELIABILITY
-	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
+	IssueType *string `json:"IssueType,omitnil" name:"IssueType"`
 
 	// Exception
-	Events []*EventInfo `json:"Events,omitempty" name:"Events"`
+	Events []*EventInfo `json:"Events,omitnil" name:"Events"`
 
 	// Total number of the exceptions
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 }
 
 type MailConfiguration struct {
 	// Whether to enable email sending. Valid values: 0 (No), 1 (Yes).
-	SendMail *int64 `json:"SendMail,omitempty" name:"SendMail"`
+	SendMail *int64 `json:"SendMail,omitnil" name:"SendMail"`
 
 	// Region configuration, such as "ap-guangzhou", "ap-shanghai". For the inspection email sending template, configure the region where you need to send the inspection email. For the subscription email sending template, configure the region to which the current subscribed instance belongs.
-	Region []*string `json:"Region,omitempty" name:"Region"`
+	Region []*string `json:"Region,omitnil" name:"Region"`
 
 	// Sending a report with the specified health level, such as "HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK".
-	HealthStatus []*string `json:"HealthStatus,omitempty" name:"HealthStatus"`
+	HealthStatus []*string `json:"HealthStatus,omitnil" name:"HealthStatus"`
 
 	// Contact ID. Either `ContactGroup` or `ContactID` should be passed in.
-	ContactPerson []*int64 `json:"ContactPerson,omitempty" name:"ContactPerson"`
+	ContactPerson []*int64 `json:"ContactPerson,omitnil" name:"ContactPerson"`
 
 	// Contact group ID. Either `ContactGroup` or `ContactID` should be passed in.
-	ContactGroup []*int64 `json:"ContactGroup,omitempty" name:"ContactGroup"`
+	ContactGroup []*int64 `json:"ContactGroup,omitnil" name:"ContactGroup"`
 }
 
 // Predefined struct for user
 type ModifyDiagDBInstanceConfRequestParams struct {
 	// Whether to enable inspection
-	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitempty" name:"InstanceConfs"`
+	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitnil" name:"InstanceConfs"`
 
 	// Target regions of the request. If the value is `All`, it is applied to all regions.
-	Regions *string `json:"Regions,omitempty" name:"Regions"`
+	Regions *string `json:"Regions,omitnil" name:"Regions"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// ID of the instance to modify.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 type ModifyDiagDBInstanceConfRequest struct {
 	*tchttp.BaseRequest
 	
 	// Whether to enable inspection
-	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitempty" name:"InstanceConfs"`
+	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitnil" name:"InstanceConfs"`
 
 	// Target regions of the request. If the value is `All`, it is applied to all regions.
-	Regions *string `json:"Regions,omitempty" name:"Regions"`
+	Regions *string `json:"Regions,omitnil" name:"Regions"`
 
 	// Service type. Valid values: `mysql` (TencentDB for MySQL), `cynosdb` (TencentDB for CynosDB (compatible with MySQL)).
-	Product *string `json:"Product,omitempty" name:"Product"`
+	Product *string `json:"Product,omitnil" name:"Product"`
 
 	// ID of the instance to modify.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 func (r *ModifyDiagDBInstanceConfRequest) ToJsonString() string {
@@ -2269,7 +2269,7 @@ func (r *ModifyDiagDBInstanceConfRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDiagDBInstanceConfResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyDiagDBInstanceConfResponse struct {
@@ -2290,280 +2290,280 @@ func (r *ModifyDiagDBInstanceConfResponse) FromJsonString(s string) error {
 
 type MonitorFloatMetric struct {
 	// Metric name.
-	Metric *string `json:"Metric,omitempty" name:"Metric"`
+	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// Metric unit.
-	Unit *string `json:"Unit,omitempty" name:"Unit"`
+	Unit *string `json:"Unit,omitnil" name:"Unit"`
 
 	// Metric value.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Values []*float64 `json:"Values,omitempty" name:"Values"`
+	Values []*float64 `json:"Values,omitnil" name:"Values"`
 }
 
 type MonitorFloatMetricSeriesData struct {
 	// Monitoring metric.
-	Series []*MonitorFloatMetric `json:"Series,omitempty" name:"Series"`
+	Series []*MonitorFloatMetric `json:"Series,omitnil" name:"Series"`
 
 	// Timestamp corresponding to monitoring metric.
-	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp []*int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 }
 
 type MonitorMetric struct {
 	// Metric name.
-	Metric *string `json:"Metric,omitempty" name:"Metric"`
+	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// Metric unit.
-	Unit *string `json:"Unit,omitempty" name:"Unit"`
+	Unit *string `json:"Unit,omitnil" name:"Unit"`
 
 	// Metric value.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Values []*int64 `json:"Values,omitempty" name:"Values"`
+	Values []*int64 `json:"Values,omitnil" name:"Values"`
 }
 
 type MonitorMetricSeriesData struct {
 	// Monitoring metric.
-	Series []*MonitorMetric `json:"Series,omitempty" name:"Series"`
+	Series []*MonitorMetric `json:"Series,omitnil" name:"Series"`
 
 	// Timestamp corresponding to monitoring metric.
-	Timestamp []*int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp []*int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 }
 
 type ProfileInfo struct {
 	// Language of the email, such as `en`.
-	Language *string `json:"Language,omitempty" name:"Language"`
+	Language *string `json:"Language,omitnil" name:"Language"`
 
 	// The content of email template.
-	MailConfiguration *MailConfiguration `json:"MailConfiguration,omitempty" name:"MailConfiguration"`
+	MailConfiguration *MailConfiguration `json:"MailConfiguration,omitnil" name:"MailConfiguration"`
 }
 
 type SchemaItem struct {
 	// Database name
-	Schema *string `json:"Schema,omitempty" name:"Schema"`
+	Schema *string `json:"Schema,omitnil" name:"Schema"`
 }
 
 type SchemaSpaceData struct {
 	// Database name.
-	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
+	TableSchema *string `json:"TableSchema,omitnil" name:"TableSchema"`
 
 	// Data space in MB.
-	DataLength *float64 `json:"DataLength,omitempty" name:"DataLength"`
+	DataLength *float64 `json:"DataLength,omitnil" name:"DataLength"`
 
 	// Index space in MB.
-	IndexLength *float64 `json:"IndexLength,omitempty" name:"IndexLength"`
+	IndexLength *float64 `json:"IndexLength,omitnil" name:"IndexLength"`
 
 	// Fragmented space in MB.
-	DataFree *float64 `json:"DataFree,omitempty" name:"DataFree"`
+	DataFree *float64 `json:"DataFree,omitnil" name:"DataFree"`
 
 	// Total space usage in MB.
-	TotalLength *float64 `json:"TotalLength,omitempty" name:"TotalLength"`
+	TotalLength *float64 `json:"TotalLength,omitnil" name:"TotalLength"`
 
 	// Fragmented rate (%).
-	FragRatio *float64 `json:"FragRatio,omitempty" name:"FragRatio"`
+	FragRatio *float64 `json:"FragRatio,omitnil" name:"FragRatio"`
 
 	// Number of rows.
-	TableRows *int64 `json:"TableRows,omitempty" name:"TableRows"`
+	TableRows *int64 `json:"TableRows,omitnil" name:"TableRows"`
 
 	// The total size of the independent physical files corresponding to all the database tables (MB).
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	PhysicalFileSize *float64 `json:"PhysicalFileSize,omitempty" name:"PhysicalFileSize"`
+	PhysicalFileSize *float64 `json:"PhysicalFileSize,omitnil" name:"PhysicalFileSize"`
 }
 
 type SchemaSpaceTimeSeries struct {
 	// Database name
-	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
+	TableSchema *string `json:"TableSchema,omitnil" name:"TableSchema"`
 
 	// Monitoring metric data in a unit of time interval.
-	SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
+	SeriesData *MonitorMetricSeriesData `json:"SeriesData,omitnil" name:"SeriesData"`
 }
 
 type ScoreDetail struct {
 	// Deduction item types. Valid values: availability, maintainability, performance, and reliability.
-	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
+	IssueType *string `json:"IssueType,omitnil" name:"IssueType"`
 
 	// Total scores deducted.
-	ScoreLost *int64 `json:"ScoreLost,omitempty" name:"ScoreLost"`
+	ScoreLost *int64 `json:"ScoreLost,omitnil" name:"ScoreLost"`
 
 	// Upper limit of the deducted scores.
-	ScoreLostMax *int64 `json:"ScoreLostMax,omitempty" name:"ScoreLostMax"`
+	ScoreLostMax *int64 `json:"ScoreLostMax,omitnil" name:"ScoreLostMax"`
 
 	// Deduction item list.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	Items []*ScoreItem `json:"Items,omitempty" name:"Items"`
+	Items []*ScoreItem `json:"Items,omitnil" name:"Items"`
 }
 
 type ScoreItem struct {
 	// Exception diagnosis item name.
-	DiagItem *string `json:"DiagItem,omitempty" name:"DiagItem"`
+	DiagItem *string `json:"DiagItem,omitnil" name:"DiagItem"`
 
 	// Diagnosis item types. Valid values: availability, maintainability, performance, and reliability.
-	IssueType *string `json:"IssueType,omitempty" name:"IssueType"`
+	IssueType *string `json:"IssueType,omitnil" name:"IssueType"`
 
 	// Health level. Valid values: information, reminder, alarm, serious, fatal.
-	TopSeverity *string `json:"TopSeverity,omitempty" name:"TopSeverity"`
+	TopSeverity *string `json:"TopSeverity,omitnil" name:"TopSeverity"`
 
 	// Number of occurrences of this exception diagnosis item.
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 
 	// Scores deducted.
-	ScoreLost *int64 `json:"ScoreLost,omitempty" name:"ScoreLost"`
+	ScoreLost *int64 `json:"ScoreLost,omitnil" name:"ScoreLost"`
 }
 
 type SlowLogHost struct {
 	// Source addresses.
-	UserHost *string `json:"UserHost,omitempty" name:"UserHost"`
+	UserHost *string `json:"UserHost,omitnil" name:"UserHost"`
 
 	// The proportion (in %) of slow logs from this source address to the total number of slow logs
-	Ratio *float64 `json:"Ratio,omitempty" name:"Ratio"`
+	Ratio *float64 `json:"Ratio,omitnil" name:"Ratio"`
 
 	// Number of slow logs from this source address.
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 }
 
 type SlowLogTopSqlItem struct {
 	// Total SQL lock wait time
-	LockTime *float64 `json:"LockTime,omitempty" name:"LockTime"`
+	LockTime *float64 `json:"LockTime,omitnil" name:"LockTime"`
 
 	// Maximum lock wait time
-	LockTimeMax *float64 `json:"LockTimeMax,omitempty" name:"LockTimeMax"`
+	LockTimeMax *float64 `json:"LockTimeMax,omitnil" name:"LockTimeMax"`
 
 	// Minimum lock wait time
-	LockTimeMin *float64 `json:"LockTimeMin,omitempty" name:"LockTimeMin"`
+	LockTimeMin *float64 `json:"LockTimeMin,omitnil" name:"LockTimeMin"`
 
 	// Total number of scanned rows
-	RowsExamined *int64 `json:"RowsExamined,omitempty" name:"RowsExamined"`
+	RowsExamined *int64 `json:"RowsExamined,omitnil" name:"RowsExamined"`
 
 	// Maximum number of scanned rows
-	RowsExaminedMax *int64 `json:"RowsExaminedMax,omitempty" name:"RowsExaminedMax"`
+	RowsExaminedMax *int64 `json:"RowsExaminedMax,omitnil" name:"RowsExaminedMax"`
 
 	// Minimum number of scanned rows
-	RowsExaminedMin *int64 `json:"RowsExaminedMin,omitempty" name:"RowsExaminedMin"`
+	RowsExaminedMin *int64 `json:"RowsExaminedMin,omitnil" name:"RowsExaminedMin"`
 
 	// Total duration
-	QueryTime *float64 `json:"QueryTime,omitempty" name:"QueryTime"`
+	QueryTime *float64 `json:"QueryTime,omitnil" name:"QueryTime"`
 
 	// Maximum execution time
-	QueryTimeMax *float64 `json:"QueryTimeMax,omitempty" name:"QueryTimeMax"`
+	QueryTimeMax *float64 `json:"QueryTimeMax,omitnil" name:"QueryTimeMax"`
 
 	// Minimum execution time
-	QueryTimeMin *float64 `json:"QueryTimeMin,omitempty" name:"QueryTimeMin"`
+	QueryTimeMin *float64 `json:"QueryTimeMin,omitnil" name:"QueryTimeMin"`
 
 	// Total number of returned rows
-	RowsSent *int64 `json:"RowsSent,omitempty" name:"RowsSent"`
+	RowsSent *int64 `json:"RowsSent,omitnil" name:"RowsSent"`
 
 	// Maximum number of returned rows
-	RowsSentMax *int64 `json:"RowsSentMax,omitempty" name:"RowsSentMax"`
+	RowsSentMax *int64 `json:"RowsSentMax,omitnil" name:"RowsSentMax"`
 
 	// Minimum number of returned rows
-	RowsSentMin *int64 `json:"RowsSentMin,omitempty" name:"RowsSentMin"`
+	RowsSentMin *int64 `json:"RowsSentMin,omitnil" name:"RowsSentMin"`
 
 	// Number of executions
-	ExecTimes *int64 `json:"ExecTimes,omitempty" name:"ExecTimes"`
+	ExecTimes *int64 `json:"ExecTimes,omitnil" name:"ExecTimes"`
 
 	// SQL template
-	SqlTemplate *string `json:"SqlTemplate,omitempty" name:"SqlTemplate"`
+	SqlTemplate *string `json:"SqlTemplate,omitnil" name:"SqlTemplate"`
 
 	// SQL with parameter (random)
-	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+	SqlText *string `json:"SqlText,omitnil" name:"SqlText"`
 
 	// Database name
-	Schema *string `json:"Schema,omitempty" name:"Schema"`
+	Schema *string `json:"Schema,omitnil" name:"Schema"`
 
 	// Ratio of total duration
-	QueryTimeRatio *float64 `json:"QueryTimeRatio,omitempty" name:"QueryTimeRatio"`
+	QueryTimeRatio *float64 `json:"QueryTimeRatio,omitnil" name:"QueryTimeRatio"`
 
 	// Ratio of total SQL lock wait time
-	LockTimeRatio *float64 `json:"LockTimeRatio,omitempty" name:"LockTimeRatio"`
+	LockTimeRatio *float64 `json:"LockTimeRatio,omitnil" name:"LockTimeRatio"`
 
 	// Ratio of total number of scanned rows
-	RowsExaminedRatio *float64 `json:"RowsExaminedRatio,omitempty" name:"RowsExaminedRatio"`
+	RowsExaminedRatio *float64 `json:"RowsExaminedRatio,omitnil" name:"RowsExaminedRatio"`
 
 	// Ratio of total number of returned rows
-	RowsSentRatio *float64 `json:"RowsSentRatio,omitempty" name:"RowsSentRatio"`
+	RowsSentRatio *float64 `json:"RowsSentRatio,omitnil" name:"RowsSentRatio"`
 
 	// Average execution time
-	QueryTimeAvg *float64 `json:"QueryTimeAvg,omitempty" name:"QueryTimeAvg"`
+	QueryTimeAvg *float64 `json:"QueryTimeAvg,omitnil" name:"QueryTimeAvg"`
 
 	// Average number of rows returned
-	RowsSentAvg *float64 `json:"RowsSentAvg,omitempty" name:"RowsSentAvg"`
+	RowsSentAvg *float64 `json:"RowsSentAvg,omitnil" name:"RowsSentAvg"`
 
 	// Average lock wait time
-	LockTimeAvg *float64 `json:"LockTimeAvg,omitempty" name:"LockTimeAvg"`
+	LockTimeAvg *float64 `json:"LockTimeAvg,omitnil" name:"LockTimeAvg"`
 
 	// Average number of rows scanned
-	RowsExaminedAvg *float64 `json:"RowsExaminedAvg,omitempty" name:"RowsExaminedAvg"`
+	RowsExaminedAvg *float64 `json:"RowsExaminedAvg,omitnil" name:"RowsExaminedAvg"`
 }
 
 type TableSpaceData struct {
 	// Table name.
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
+	TableName *string `json:"TableName,omitnil" name:"TableName"`
 
 	// Database name.
-	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
+	TableSchema *string `json:"TableSchema,omitnil" name:"TableSchema"`
 
 	// Database table storage engine.
-	Engine *string `json:"Engine,omitempty" name:"Engine"`
+	Engine *string `json:"Engine,omitnil" name:"Engine"`
 
 	// Data space in MB.
-	DataLength *float64 `json:"DataLength,omitempty" name:"DataLength"`
+	DataLength *float64 `json:"DataLength,omitnil" name:"DataLength"`
 
 	// Index space in MB.
-	IndexLength *float64 `json:"IndexLength,omitempty" name:"IndexLength"`
+	IndexLength *float64 `json:"IndexLength,omitnil" name:"IndexLength"`
 
 	// Fragmented space in MB.
-	DataFree *float64 `json:"DataFree,omitempty" name:"DataFree"`
+	DataFree *float64 `json:"DataFree,omitnil" name:"DataFree"`
 
 	// Total space usage in MB.
-	TotalLength *float64 `json:"TotalLength,omitempty" name:"TotalLength"`
+	TotalLength *float64 `json:"TotalLength,omitnil" name:"TotalLength"`
 
 	// Fragmented rate (%).
-	FragRatio *float64 `json:"FragRatio,omitempty" name:"FragRatio"`
+	FragRatio *float64 `json:"FragRatio,omitnil" name:"FragRatio"`
 
 	// Number of rows.
-	TableRows *int64 `json:"TableRows,omitempty" name:"TableRows"`
+	TableRows *int64 `json:"TableRows,omitnil" name:"TableRows"`
 
 	// Size in MB of the physical file exclusive to a table.
-	PhysicalFileSize *float64 `json:"PhysicalFileSize,omitempty" name:"PhysicalFileSize"`
+	PhysicalFileSize *float64 `json:"PhysicalFileSize,omitnil" name:"PhysicalFileSize"`
 }
 
 type TableSpaceTimeSeries struct {
 	// Table name.
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
+	TableName *string `json:"TableName,omitnil" name:"TableName"`
 
 	// Database name.
-	TableSchema *string `json:"TableSchema,omitempty" name:"TableSchema"`
+	TableSchema *string `json:"TableSchema,omitnil" name:"TableSchema"`
 
 	// Database table storage engine.
-	Engine *string `json:"Engine,omitempty" name:"Engine"`
+	Engine *string `json:"Engine,omitnil" name:"Engine"`
 
 	// Monitoring metric data in a unit of time interval.
-	SeriesData *MonitorFloatMetricSeriesData `json:"SeriesData,omitempty" name:"SeriesData"`
+	SeriesData *MonitorFloatMetricSeriesData `json:"SeriesData,omitnil" name:"SeriesData"`
 }
 
 type TimeSlice struct {
 	// Total number
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 
 	// Statistics start time
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 }
 
 type UserProfile struct {
 	// Configured ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ProfileId *string `json:"ProfileId,omitempty" name:"ProfileId"`
+	ProfileId *string `json:"ProfileId,omitnil" name:"ProfileId"`
 
 	// Configuration type
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ProfileType *string `json:"ProfileType,omitempty" name:"ProfileType"`
+	ProfileType *string `json:"ProfileType,omitnil" name:"ProfileType"`
 
 	// Configuration level. Valid values: “User” or “Instance”
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ProfileLevel *string `json:"ProfileLevel,omitempty" name:"ProfileLevel"`
+	ProfileLevel *string `json:"ProfileLevel,omitnil" name:"ProfileLevel"`
 
 	// Configuration name
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ProfileName *string `json:"ProfileName,omitempty" name:"ProfileName"`
+	ProfileName *string `json:"ProfileName,omitnil" name:"ProfileName"`
 
 	// Configuration details
-	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitempty" name:"ProfileInfo"`
+	ProfileInfo *ProfileInfo `json:"ProfileInfo,omitnil" name:"ProfileInfo"`
 }

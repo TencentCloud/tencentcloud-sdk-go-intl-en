@@ -15,50 +15,50 @@
 package v20220928
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type ActionSummaryOverviewItem struct {
 	// Transaction type code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 
 	// Transaction type name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ActionTypeName *string `json:"ActionTypeName,omitempty" name:"ActionTypeName"`
+	ActionTypeName *string `json:"ActionTypeName,omitnil" name:"ActionTypeName"`
 
 	// The actual total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *string `json:"OriginalCost,omitnil" name:"OriginalCost"`
 
 	// The deducted voucher amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil" name:"VoucherPayAmount"`
 
 	// Total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
 }
 
 // Predefined struct for user
 type AllocateCustomerCreditRequestParams struct {
 	// Specific value of the credit allocated to the customer
-	AddedCredit *float64 `json:"AddedCredit,omitempty" name:"AddedCredit"`
+	AddedCredit *float64 `json:"AddedCredit,omitnil" name:"AddedCredit"`
 
 	// Customer UIN
-	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *uint64 `json:"ClientUin,omitnil" name:"ClientUin"`
 }
 
 type AllocateCustomerCreditRequest struct {
 	*tchttp.BaseRequest
 	
 	// Specific value of the credit allocated to the customer
-	AddedCredit *float64 `json:"AddedCredit,omitempty" name:"AddedCredit"`
+	AddedCredit *float64 `json:"AddedCredit,omitnil" name:"AddedCredit"`
 
 	// Customer UIN
-	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *uint64 `json:"ClientUin,omitnil" name:"ClientUin"`
 }
 
 func (r *AllocateCustomerCreditRequest) ToJsonString() string {
@@ -84,13 +84,13 @@ func (r *AllocateCustomerCreditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AllocateCustomerCreditResponseParams struct {
 	// The updated total credit
-	TotalCredit *float64 `json:"TotalCredit,omitempty" name:"TotalCredit"`
+	TotalCredit *float64 `json:"TotalCredit,omitnil" name:"TotalCredit"`
 
 	// The updated available credit
-	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+	RemainingCredit *float64 `json:"RemainingCredit,omitnil" name:"RemainingCredit"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AllocateCustomerCreditResponse struct {
@@ -112,232 +112,232 @@ func (r *AllocateCustomerCreditResponse) FromJsonString(s string) error {
 type BillDetailData struct {
 	// Reseller account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayerAccountId *int64 `json:"PayerAccountId,omitempty" name:"PayerAccountId"`
+	PayerAccountId *int64 `json:"PayerAccountId,omitnil" name:"PayerAccountId"`
 
 	// Customer account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OwnerAccountId *int64 `json:"OwnerAccountId,omitempty" name:"OwnerAccountId"`
+	OwnerAccountId *int64 `json:"OwnerAccountId,omitnil" name:"OwnerAccountId"`
 
 	// Operator account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OperatorAccountId *int64 `json:"OperatorAccountId,omitempty" name:"OperatorAccountId"`
+	OperatorAccountId *int64 `json:"OperatorAccountId,omitnil" name:"OperatorAccountId"`
 
 	// Product name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Billing mode
 	// `Monthly subscription` (Monthly subscription)
 	// `Pay-As-You-Go resources` (Pay-as-you-go)
 	// `Standard RI` (Reserved instance)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
+	BillingMode *string `json:"BillingMode,omitnil" name:"BillingMode"`
 
 	// Project name
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+	ProjectName *string `json:"ProjectName,omitnil" name:"ProjectName"`
 
 	// Resource region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// Resource AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AvailabilityZone *string `json:"AvailabilityZone,omitempty" name:"AvailabilityZone"`
+	AvailabilityZone *string `json:"AvailabilityZone,omitnil" name:"AvailabilityZone"`
 
 	// Instance ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Subproduct name
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubProductName *string `json:"SubProductName,omitempty" name:"SubProductName"`
+	SubProductName *string `json:"SubProductName,omitnil" name:"SubProductName"`
 
 	// Settlement type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransactionType *string `json:"TransactionType,omitempty" name:"TransactionType"`
+	TransactionType *string `json:"TransactionType,omitnil" name:"TransactionType"`
 
 	// Transaction ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransactionId *string `json:"TransactionId,omitempty" name:"TransactionId"`
+	TransactionId *string `json:"TransactionId,omitnil" name:"TransactionId"`
 
 	// Settlement time
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransactionTime *string `json:"TransactionTime,omitempty" name:"TransactionTime"`
+	TransactionTime *string `json:"TransactionTime,omitnil" name:"TransactionTime"`
 
 	// Start time of resource use
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UsageStartTime *string `json:"UsageStartTime,omitempty" name:"UsageStartTime"`
+	UsageStartTime *string `json:"UsageStartTime,omitnil" name:"UsageStartTime"`
 
 	// End time of resource use
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UsageEndTime *string `json:"UsageEndTime,omitempty" name:"UsageEndTime"`
+	UsageEndTime *string `json:"UsageEndTime,omitnil" name:"UsageEndTime"`
 
 	// Component
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentType *string `json:"ComponentType,omitempty" name:"ComponentType"`
+	ComponentType *string `json:"ComponentType,omitnil" name:"ComponentType"`
 
 	// Component name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentName *string `json:"ComponentName,omitempty" name:"ComponentName"`
+	ComponentName *string `json:"ComponentName,omitnil" name:"ComponentName"`
 
 	// Component list price
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentListPrice *string `json:"ComponentListPrice,omitempty" name:"ComponentListPrice"`
+	ComponentListPrice *string `json:"ComponentListPrice,omitnil" name:"ComponentListPrice"`
 
 	// Price unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentPriceMeasurementUnit *string `json:"ComponentPriceMeasurementUnit,omitempty" name:"ComponentPriceMeasurementUnit"`
+	ComponentPriceMeasurementUnit *string `json:"ComponentPriceMeasurementUnit,omitnil" name:"ComponentPriceMeasurementUnit"`
 
 	// Component usage
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentUsage *string `json:"ComponentUsage,omitempty" name:"ComponentUsage"`
+	ComponentUsage *string `json:"ComponentUsage,omitnil" name:"ComponentUsage"`
 
 	// Component usage unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentUsageUnit *string `json:"ComponentUsageUnit,omitempty" name:"ComponentUsageUnit"`
+	ComponentUsageUnit *string `json:"ComponentUsageUnit,omitnil" name:"ComponentUsageUnit"`
 
 	// Resource usage duration
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UsageDuration *string `json:"UsageDuration,omitempty" name:"UsageDuration"`
+	UsageDuration *string `json:"UsageDuration,omitnil" name:"UsageDuration"`
 
 	// Duration unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DurationUnit *string `json:"DurationUnit,omitempty" name:"DurationUnit"`
+	DurationUnit *string `json:"DurationUnit,omitnil" name:"DurationUnit"`
 
 	// Original cost
 	// Original cost = component list price * component usage * usage duration
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *string `json:"OriginalCost,omitnil" name:"OriginalCost"`
 
 	// Discount, which defaults to `1`, indicating there is no discount.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DiscountRate *string `json:"DiscountRate,omitempty" name:"DiscountRate"`
+	DiscountRate *string `json:"DiscountRate,omitnil" name:"DiscountRate"`
 
 	// Currency
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Currency *string `json:"Currency,omitempty" name:"Currency"`
+	Currency *string `json:"Currency,omitnil" name:"Currency"`
 
 	// Discounted total
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalAmountAfterDiscount *string `json:"TotalAmountAfterDiscount,omitempty" name:"TotalAmountAfterDiscount"`
+	TotalAmountAfterDiscount *string `json:"TotalAmountAfterDiscount,omitnil" name:"TotalAmountAfterDiscount"`
 
 	// Voucher deduction
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VoucherDeduction *string `json:"VoucherDeduction,omitempty" name:"VoucherDeduction"`
+	VoucherDeduction *string `json:"VoucherDeduction,omitnil" name:"VoucherDeduction"`
 
 	// Total cost = discounted total - voucher deduction
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
 }
 
 type BusinessSummaryOverviewItem struct {
 	// Product code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BusinessCode *string `json:"BusinessCode,omitempty" name:"BusinessCode"`
+	BusinessCode *string `json:"BusinessCode,omitnil" name:"BusinessCode"`
 
 	// Product name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BusinessCodeName *string `json:"BusinessCodeName,omitempty" name:"BusinessCodeName"`
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil" name:"BusinessCodeName"`
 
 	// List price accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *string `json:"OriginalCost,omitnil" name:"OriginalCost"`
 
 	// The deducted voucher amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil" name:"VoucherPayAmount"`
 
 	// Consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
 }
 
 type CountryCodeItem struct {
 	// Country/region name in English
-	EnName *string `json:"EnName,omitempty" name:"EnName"`
+	EnName *string `json:"EnName,omitnil" name:"EnName"`
 
 	// Country/region name in Chinese
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 
-	IOS2 *string `json:"IOS2,omitempty" name:"IOS2"`
+	IOS2 *string `json:"IOS2,omitnil" name:"IOS2"`
 
 
-	IOS3 *string `json:"IOS3,omitempty" name:"IOS3"`
+	IOS3 *string `json:"IOS3,omitnil" name:"IOS3"`
 
 	// International dialing code
-	Code *string `json:"Code,omitempty" name:"Code"`
+	Code *string `json:"Code,omitnil" name:"Code"`
 }
 
 // Predefined struct for user
 type CreateAccountRequestParams struct {
 	// Account type of a new customer. Valid values: `personal`, `company`.
-	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
+	AccountType *string `json:"AccountType,omitnil" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
 	// For example, account@qq.com.
-	Mail *string `json:"Mail,omitempty" name:"Mail"`
+	Mail *string `json:"Mail,omitnil" name:"Mail"`
 
 	// Account password
 	// Length limit: 8-20 characters
 	// A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not allowed.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// The confirmed password, which must be the same as that entered in the `Password` field.
-	ConfirmPassword *string `json:"ConfirmPassword,omitempty" name:"ConfirmPassword"`
+	ConfirmPassword *string `json:"ConfirmPassword,omitnil" name:"ConfirmPassword"`
 
 	// Customer mobile number, which should be valid and correct.
 	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
-	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
+	PhoneNum *string `json:"PhoneNum,omitnil" name:"PhoneNum"`
 
 	// Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
-	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
+	CountryCode *string `json:"CountryCode,omitnil" name:"CountryCode"`
 
 	// Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Extension field, which is left empty by default.
-	Extended *string `json:"Extended,omitempty" name:"Extended"`
+	Extended *string `json:"Extended,omitnil" name:"Extended"`
 }
 
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Account type of a new customer. Valid values: `personal`, `company`.
-	AccountType *string `json:"AccountType,omitempty" name:"AccountType"`
+	AccountType *string `json:"AccountType,omitnil" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
 	// For example, account@qq.com.
-	Mail *string `json:"Mail,omitempty" name:"Mail"`
+	Mail *string `json:"Mail,omitnil" name:"Mail"`
 
 	// Account password
 	// Length limit: 8-20 characters
 	// A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not allowed.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// The confirmed password, which must be the same as that entered in the `Password` field.
-	ConfirmPassword *string `json:"ConfirmPassword,omitempty" name:"ConfirmPassword"`
+	ConfirmPassword *string `json:"ConfirmPassword,omitnil" name:"ConfirmPassword"`
 
 	// Customer mobile number, which should be valid and correct.
 	// A global mobile number within 1-32 digits is allowed, such as 18888888888.
-	PhoneNum *string `json:"PhoneNum,omitempty" name:"PhoneNum"`
+	PhoneNum *string `json:"PhoneNum,omitnil" name:"PhoneNum"`
 
 	// Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
-	CountryCode *string `json:"CountryCode,omitempty" name:"CountryCode"`
+	CountryCode *string `json:"CountryCode,omitnil" name:"CountryCode"`
 
 	// Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
-	Area *string `json:"Area,omitempty" name:"Area"`
+	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Extension field, which is left empty by default.
-	Extended *string `json:"Extended,omitempty" name:"Extended"`
+	Extended *string `json:"Extended,omitnil" name:"Extended"`
 }
 
 func (r *CreateAccountRequest) ToJsonString() string {
@@ -369,10 +369,10 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccountResponseParams struct {
 	// Account UIN
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateAccountResponse struct {
@@ -394,155 +394,155 @@ func (r *CreateAccountResponse) FromJsonString(s string) error {
 type CustomerBillDetailData struct {
 	// Reseller account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayerAccountId *int64 `json:"PayerAccountId,omitempty" name:"PayerAccountId"`
+	PayerAccountId *int64 `json:"PayerAccountId,omitnil" name:"PayerAccountId"`
 
 	// Customer account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OwnerAccountId *int64 `json:"OwnerAccountId,omitempty" name:"OwnerAccountId"`
+	OwnerAccountId *int64 `json:"OwnerAccountId,omitnil" name:"OwnerAccountId"`
 
 	// Operator account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OperatorAccountId *int64 `json:"OperatorAccountId,omitempty" name:"OperatorAccountId"`
+	OperatorAccountId *int64 `json:"OperatorAccountId,omitnil" name:"OperatorAccountId"`
 
 	// Product name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Billing mode
 	// `Monthly subscription` (Monthly subscription)
 	// `Pay-As-You-Go resources` (Pay-as-you-go)
 	// `Standard RI` (Reserved instance)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BillingMode *string `json:"BillingMode,omitempty" name:"BillingMode"`
+	BillingMode *string `json:"BillingMode,omitnil" name:"BillingMode"`
 
 	// Project name
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProjectName *string `json:"ProjectName,omitempty" name:"ProjectName"`
+	ProjectName *string `json:"ProjectName,omitnil" name:"ProjectName"`
 
 	// Resource region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// Resource AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AvailabilityZone *string `json:"AvailabilityZone,omitempty" name:"AvailabilityZone"`
+	AvailabilityZone *string `json:"AvailabilityZone,omitnil" name:"AvailabilityZone"`
 
 	// Instance ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Subproduct name
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubProductName *string `json:"SubProductName,omitempty" name:"SubProductName"`
+	SubProductName *string `json:"SubProductName,omitnil" name:"SubProductName"`
 
 	// Settlement type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransactionType *string `json:"TransactionType,omitempty" name:"TransactionType"`
+	TransactionType *string `json:"TransactionType,omitnil" name:"TransactionType"`
 
 	// Transaction ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransactionId *string `json:"TransactionId,omitempty" name:"TransactionId"`
+	TransactionId *string `json:"TransactionId,omitnil" name:"TransactionId"`
 
 	// Settlement time
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransactionTime *string `json:"TransactionTime,omitempty" name:"TransactionTime"`
+	TransactionTime *string `json:"TransactionTime,omitnil" name:"TransactionTime"`
 
 	// Start time of resource use
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UsageStartTime *string `json:"UsageStartTime,omitempty" name:"UsageStartTime"`
+	UsageStartTime *string `json:"UsageStartTime,omitnil" name:"UsageStartTime"`
 
 	// End time of resource use
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UsageEndTime *string `json:"UsageEndTime,omitempty" name:"UsageEndTime"`
+	UsageEndTime *string `json:"UsageEndTime,omitnil" name:"UsageEndTime"`
 
 	// Component
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentType *string `json:"ComponentType,omitempty" name:"ComponentType"`
+	ComponentType *string `json:"ComponentType,omitnil" name:"ComponentType"`
 
 	// Component name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentName *string `json:"ComponentName,omitempty" name:"ComponentName"`
+	ComponentName *string `json:"ComponentName,omitnil" name:"ComponentName"`
 
 	// Component list price
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentListPrice *string `json:"ComponentListPrice,omitempty" name:"ComponentListPrice"`
+	ComponentListPrice *string `json:"ComponentListPrice,omitnil" name:"ComponentListPrice"`
 
 	// Price unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentPriceMeasurementUnit *string `json:"ComponentPriceMeasurementUnit,omitempty" name:"ComponentPriceMeasurementUnit"`
+	ComponentPriceMeasurementUnit *string `json:"ComponentPriceMeasurementUnit,omitnil" name:"ComponentPriceMeasurementUnit"`
 
 	// Component usage
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentUsage *string `json:"ComponentUsage,omitempty" name:"ComponentUsage"`
+	ComponentUsage *string `json:"ComponentUsage,omitnil" name:"ComponentUsage"`
 
 	// Component usage unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ComponentUsageUnit *string `json:"ComponentUsageUnit,omitempty" name:"ComponentUsageUnit"`
+	ComponentUsageUnit *string `json:"ComponentUsageUnit,omitnil" name:"ComponentUsageUnit"`
 
 	// Resource usage duration
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UsageDuration *string `json:"UsageDuration,omitempty" name:"UsageDuration"`
+	UsageDuration *string `json:"UsageDuration,omitnil" name:"UsageDuration"`
 
 	// Duration unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DurationUnit *string `json:"DurationUnit,omitempty" name:"DurationUnit"`
+	DurationUnit *string `json:"DurationUnit,omitnil" name:"DurationUnit"`
 
 	// Original cost
 	// Original cost = component list price * component usage * usage duration
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *string `json:"OriginalCost,omitnil" name:"OriginalCost"`
 
 	// Currency
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Currency *string `json:"Currency,omitempty" name:"Currency"`
+	Currency *string `json:"Currency,omitnil" name:"Currency"`
 
 	// Total cost = discounted total - voucher deduction
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
 }
 
 // Predefined struct for user
 type DescribeBillDetailRequestParams struct {
 	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
-	Month *string `json:"Month,omitempty" name:"Month"`
+	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// A pagination parameter that specifies the number of entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values: `prePay` (Monthly subscription), postPay` (Pay-As-You-Go resources).
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Transaction type. Valid values: `prepay_purchase` (Purchase), `prepay_renew` (Renewal), `prepay_modify` (Upgrade/Downgrade), `prepay_return` ( Monthly subscription refund), `postpay_deduct` (Pay-as-you-go), `postpay_deduct_h` (Hourly settlement), `postpay_deduct_d` (Daily settlement), `postpay_deduct_m` (Monthly settlement), `offline_deduct` (Offline project deduction), `online_deduct` (Offline product deduction), `recon_deduct` (Adjustment - deduction), `recon_increase` (Adjustment - compensation), `ripay_purchase` (One-off RI Fee), `postpay_deduct_s` (Spot), `ri_hour_pay` (Hourly RI fee), `prePurchase` (New monthly subscription), `preRenew` (Monthly subscription renewal), `preUpgrade` (Upgrade/Downgrade), `preDowngrade` (Upgrade/Downgrade), `svp_hour_pay` (Hourly Savings Plan fee), `recon_guarantee` (Minimum spend deduction), `pre_purchase` (New monthly subscription), `pre_renew` (Monthly subscription renewal), `pre_upgrade` (Upgrade/Downgrade), `pre_downgrade` (Upgrade/Downgrade).
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 }
 
 type DescribeBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
-	Month *string `json:"Month,omitempty" name:"Month"`
+	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// A pagination parameter that specifies the number of entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values: `prePay` (Monthly subscription), postPay` (Pay-As-You-Go resources).
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Transaction type. Valid values: `prepay_purchase` (Purchase), `prepay_renew` (Renewal), `prepay_modify` (Upgrade/Downgrade), `prepay_return` ( Monthly subscription refund), `postpay_deduct` (Pay-as-you-go), `postpay_deduct_h` (Hourly settlement), `postpay_deduct_d` (Daily settlement), `postpay_deduct_m` (Monthly settlement), `offline_deduct` (Offline project deduction), `online_deduct` (Offline product deduction), `recon_deduct` (Adjustment - deduction), `recon_increase` (Adjustment - compensation), `ripay_purchase` (One-off RI Fee), `postpay_deduct_s` (Spot), `ri_hour_pay` (Hourly RI fee), `prePurchase` (New monthly subscription), `preRenew` (Monthly subscription renewal), `preUpgrade` (Upgrade/Downgrade), `preDowngrade` (Upgrade/Downgrade), `svp_hour_pay` (Hourly Savings Plan fee), `recon_guarantee` (Minimum spend deduction), `pre_purchase` (New monthly subscription), `pre_renew` (Monthly subscription renewal), `pre_upgrade` (Upgrade/Downgrade), `pre_downgrade` (Upgrade/Downgrade).
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 }
 
 func (r *DescribeBillDetailRequest) ToJsonString() string {
@@ -572,14 +572,14 @@ func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
 type DescribeBillDetailResponseParams struct {
 	// Data details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DetailSet []*CustomerBillDetailData `json:"DetailSet,omitempty" name:"DetailSet"`
+	DetailSet []*CustomerBillDetailData `json:"DetailSet,omitnil" name:"DetailSet"`
 
 	// Total number of data entries
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBillDetailResponse struct {
@@ -601,20 +601,20 @@ func (r *DescribeBillDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBillSummaryByPayModeRequestParams struct {
 	// Bill month in the format of "yyyy-MM"
-	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+	BillMonth *string `json:"BillMonth,omitnil" name:"BillMonth"`
 
 	// Customer UIN
-	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 type DescribeBillSummaryByPayModeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Bill month in the format of "yyyy-MM"
-	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+	BillMonth *string `json:"BillMonth,omitnil" name:"BillMonth"`
 
 	// Customer UIN
-	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 func (r *DescribeBillSummaryByPayModeRequest) ToJsonString() string {
@@ -641,10 +641,10 @@ func (r *DescribeBillSummaryByPayModeRequest) FromJsonString(s string) error {
 type DescribeBillSummaryByPayModeResponseParams struct {
 	// Payment mode details in the customer bill data totaled by payment mode
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+	SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitnil" name:"SummaryOverview"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBillSummaryByPayModeResponse struct {
@@ -666,20 +666,20 @@ func (r *DescribeBillSummaryByPayModeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBillSummaryByProductRequestParams struct {
 	// Bill month in the format of "yyyy-MM"
-	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+	BillMonth *string `json:"BillMonth,omitnil" name:"BillMonth"`
 
 	// Customer UIN
-	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 type DescribeBillSummaryByProductRequest struct {
 	*tchttp.BaseRequest
 	
 	// Bill month in the format of "yyyy-MM"
-	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+	BillMonth *string `json:"BillMonth,omitnil" name:"BillMonth"`
 
 	// Customer UIN
-	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 func (r *DescribeBillSummaryByProductRequest) ToJsonString() string {
@@ -706,10 +706,10 @@ func (r *DescribeBillSummaryByProductRequest) FromJsonString(s string) error {
 type DescribeBillSummaryByProductResponseParams struct {
 	// Bill details from the product dimension
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+	SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitnil" name:"SummaryOverview"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBillSummaryByProductResponse struct {
@@ -731,20 +731,20 @@ func (r *DescribeBillSummaryByProductResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBillSummaryByRegionRequestParams struct {
 	// Bill month in the format of "yyyy-MM"
-	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+	BillMonth *string `json:"BillMonth,omitnil" name:"BillMonth"`
 
 	// Customer UIN
-	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 type DescribeBillSummaryByRegionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Bill month in the format of "yyyy-MM"
-	BillMonth *string `json:"BillMonth,omitempty" name:"BillMonth"`
+	BillMonth *string `json:"BillMonth,omitnil" name:"BillMonth"`
 
 	// Customer UIN
-	CustomerUin *int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 func (r *DescribeBillSummaryByRegionRequest) ToJsonString() string {
@@ -771,10 +771,10 @@ func (r *DescribeBillSummaryByRegionRequest) FromJsonString(s string) error {
 type DescribeBillSummaryByRegionResponseParams struct {
 	// Region details in the customer bill data totaled by region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitempty" name:"SummaryOverview"`
+	SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitnil" name:"SummaryOverview"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBillSummaryByRegionResponse struct {
@@ -796,21 +796,21 @@ func (r *DescribeBillSummaryByRegionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomerBillDetailRequestParams struct {
 	// Customer UIN
-	CustomerUin *uint64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *uint64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 
 	// The queried month in “YYYY-MM” format, such as 2023-01.
-	Month *string `json:"Month,omitempty" name:"Month"`
+	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// A pagination parameter that specifies the number of entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values:
 	// `prePay` (Monthly subscription)
 	// `postPay` (Pay-as-you-go)
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Transaction type. Valid values:
 	// `prepay_purchase` (Purchase)
@@ -838,34 +838,34 @@ type DescribeCustomerBillDetailRequestParams struct {
 	// `pre_renew` (Monthly subscription renewal)
 	// `pre_upgrade` (Upgrade/Downgrade)
 	// `pre_downgrade` (Upgrade/Downgrade)
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 
 	// Payment status
 	// `0`: N/A
 	// `1`: Paid
 	// `2`: Unpaid
-	IsConfirmed *string `json:"IsConfirmed,omitempty" name:"IsConfirmed"`
+	IsConfirmed *string `json:"IsConfirmed,omitnil" name:"IsConfirmed"`
 }
 
 type DescribeCustomerBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Customer UIN
-	CustomerUin *uint64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *uint64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 
 	// The queried month in “YYYY-MM” format, such as 2023-01.
-	Month *string `json:"Month,omitempty" name:"Month"`
+	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// A pagination parameter that specifies the number of entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values:
 	// `prePay` (Monthly subscription)
 	// `postPay` (Pay-as-you-go)
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Transaction type. Valid values:
 	// `prepay_purchase` (Purchase)
@@ -893,13 +893,13 @@ type DescribeCustomerBillDetailRequest struct {
 	// `pre_renew` (Monthly subscription renewal)
 	// `pre_upgrade` (Upgrade/Downgrade)
 	// `pre_downgrade` (Upgrade/Downgrade)
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 
 	// Payment status
 	// `0`: N/A
 	// `1`: Paid
 	// `2`: Unpaid
-	IsConfirmed *string `json:"IsConfirmed,omitempty" name:"IsConfirmed"`
+	IsConfirmed *string `json:"IsConfirmed,omitnil" name:"IsConfirmed"`
 }
 
 func (r *DescribeCustomerBillDetailRequest) ToJsonString() string {
@@ -930,14 +930,14 @@ func (r *DescribeCustomerBillDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomerBillDetailResponseParams struct {
 	// Total number of data entries
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Data details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DetailSet []*BillDetailData `json:"DetailSet,omitempty" name:"DetailSet"`
+	DetailSet []*BillDetailData `json:"DetailSet,omitnil" name:"DetailSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeCustomerBillDetailResponse struct {
@@ -959,15 +959,15 @@ func (r *DescribeCustomerBillDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomerBillSummaryRequestParams struct {
 	// Customer UIN
-	CustomerUin *uint64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *uint64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 
 	// The queried month in “YYYY-MM” format, such as 2023-01.
-	Month *string `json:"Month,omitempty" name:"Month"`
+	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// Billing mode. Valid values:
 	// `prePay` (Monthly subscription)
 	// `postPay` (Pay-as-you-go)
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Transaction type. Valid values:
 	// `prepay_purchase` (Purchase)
@@ -995,28 +995,28 @@ type DescribeCustomerBillSummaryRequestParams struct {
 	// `pre_renew` (Monthly subscription renewal)
 	// `pre_upgrade` (Upgrade/Downgrade)
 	// `pre_downgrade` (Upgrade/Downgrade)
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 
 	// Payment status
 	// `0`: N/A
 	// `1`: Paid
 	// `2`: Unpaid
-	IsConfirmed *string `json:"IsConfirmed,omitempty" name:"IsConfirmed"`
+	IsConfirmed *string `json:"IsConfirmed,omitnil" name:"IsConfirmed"`
 }
 
 type DescribeCustomerBillSummaryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Customer UIN
-	CustomerUin *uint64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *uint64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 
 	// The queried month in “YYYY-MM” format, such as 2023-01.
-	Month *string `json:"Month,omitempty" name:"Month"`
+	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// Billing mode. Valid values:
 	// `prePay` (Monthly subscription)
 	// `postPay` (Pay-as-you-go)
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Transaction type. Valid values:
 	// `prepay_purchase` (Purchase)
@@ -1044,13 +1044,13 @@ type DescribeCustomerBillSummaryRequest struct {
 	// `pre_renew` (Monthly subscription renewal)
 	// `pre_upgrade` (Upgrade/Downgrade)
 	// `pre_downgrade` (Upgrade/Downgrade)
-	ActionType *string `json:"ActionType,omitempty" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
 
 	// Payment status
 	// `0`: N/A
 	// `1`: Paid
 	// `2`: Unpaid
-	IsConfirmed *string `json:"IsConfirmed,omitempty" name:"IsConfirmed"`
+	IsConfirmed *string `json:"IsConfirmed,omitnil" name:"IsConfirmed"`
 }
 
 func (r *DescribeCustomerBillSummaryRequest) ToJsonString() string {
@@ -1079,10 +1079,10 @@ func (r *DescribeCustomerBillSummaryRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomerBillSummaryResponseParams struct {
 	// Total amount
-	TotalCost *float64 `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *float64 `json:"TotalCost,omitnil" name:"TotalCost"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeCustomerBillSummaryResponse struct {
@@ -1103,41 +1103,41 @@ func (r *DescribeCustomerBillSummaryResponse) FromJsonString(s string) error {
 
 type DescribeCustomerInfoData struct {
 	// Customer UIN Note: This field may return null, indicating that no valid values can be obtained.
-	CustomerUin *string `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *string `json:"CustomerUin,omitnil" name:"CustomerUin"`
 
 	// Email Note: This field may return null, indicating that no valid values can be obtained.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Mobile number Note: This field may return null, indicating that no valid values can be obtained.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// Remarks Note: This field may return null, indicating that no valid values can be obtained.
-	Mark *string `json:"Mark,omitempty" name:"Mark"`
+	Mark *string `json:"Mark,omitnil" name:"Mark"`
 
 	// Displayed name Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Binding time Note: This field may return null, indicating that no valid values can be obtained.
-	BindTime *string `json:"BindTime,omitempty" name:"BindTime"`
+	BindTime *string `json:"BindTime,omitnil" name:"BindTime"`
 
 	// Account status Valid values: `0` (Not frozen),  `1` (Frozen).  Note: This field may return null, indicating that no valid values can be obtained.
-	AccountStatus *string `json:"AccountStatus,omitempty" name:"AccountStatus"`
+	AccountStatus *string `json:"AccountStatus,omitnil" name:"AccountStatus"`
 
 	// Identity verification status Note: This field may return null, indicating that no valid values can be obtained.
-	AuthStatus *string `json:"AuthStatus,omitempty" name:"AuthStatus"`
+	AuthStatus *string `json:"AuthStatus,omitnil" name:"AuthStatus"`
 }
 
 // Predefined struct for user
 type DescribeCustomerInfoRequestParams struct {
 	// List of customer UINs
-	CustomerUin []*int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin []*int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 type DescribeCustomerInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of customer UINs
-	CustomerUin []*int64 `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin []*int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 func (r *DescribeCustomerInfoRequest) ToJsonString() string {
@@ -1162,10 +1162,10 @@ func (r *DescribeCustomerInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomerInfoResponseParams struct {
 	// Customer information Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*DescribeCustomerInfoData `json:"Data,omitempty" name:"Data"`
+	Data []*DescribeCustomerInfoData `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeCustomerInfoResponse struct {
@@ -1186,26 +1186,26 @@ func (r *DescribeCustomerInfoResponse) FromJsonString(s string) error {
 
 type DescribeCustomerUinData struct {
 	// Customer UIN Note: This field may return null, indicating that no valid values can be obtained.
-	CustomerUin *string `json:"CustomerUin,omitempty" name:"CustomerUin"`
+	CustomerUin *string `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 // Predefined struct for user
 type DescribeCustomerUinRequestParams struct {
 	// Page number
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of data entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 }
 
 type DescribeCustomerUinRequest struct {
 	*tchttp.BaseRequest
 	
 	// Page number
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of data entries per page
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 }
 
 func (r *DescribeCustomerUinRequest) ToJsonString() string {
@@ -1231,13 +1231,13 @@ func (r *DescribeCustomerUinRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomerUinResponseParams struct {
 	// List of customer UINs Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*DescribeCustomerUinData `json:"Data,omitempty" name:"Data"`
+	Data []*DescribeCustomerUinData `json:"Data,omitnil" name:"Data"`
 
 	// The number of customers
-	Total *string `json:"Total,omitempty" name:"Total"`
+	Total *string `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeCustomerUinResponse struct {
@@ -1288,10 +1288,10 @@ func (r *GetCountryCodesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCountryCodesResponseParams struct {
 	// List of country/region codes
-	Data []*CountryCodeItem `json:"Data,omitempty" name:"Data"`
+	Data []*CountryCodeItem `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetCountryCodesResponse struct {
@@ -1313,40 +1313,40 @@ func (r *GetCountryCodesResponse) FromJsonString(s string) error {
 type PayModeSummaryOverviewItem struct {
 	// Billing mode
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayMode *string `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Billing mode name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayModeName *string `json:"PayModeName,omitempty" name:"PayModeName"`
+	PayModeName *string `json:"PayModeName,omitnil" name:"PayModeName"`
 
 	// The actual total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *string `json:"OriginalCost,omitnil" name:"OriginalCost"`
 
 	// Bill details in each payment mode
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Detail []*ActionSummaryOverviewItem `json:"Detail,omitempty" name:"Detail"`
+	Detail []*ActionSummaryOverviewItem `json:"Detail,omitnil" name:"Detail"`
 
 	// The deducted voucher amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil" name:"VoucherPayAmount"`
 
 	// Total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
 }
 
 // Predefined struct for user
 type QueryAccountVerificationStatusRequestParams struct {
 	// Customer UIN
-	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *int64 `json:"ClientUin,omitnil" name:"ClientUin"`
 }
 
 type QueryAccountVerificationStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Customer UIN
-	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *int64 `json:"ClientUin,omitnil" name:"ClientUin"`
 }
 
 func (r *QueryAccountVerificationStatusRequest) ToJsonString() string {
@@ -1371,10 +1371,10 @@ func (r *QueryAccountVerificationStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryAccountVerificationStatusResponseParams struct {
 	// Account verification status
-	AccountStatus *bool `json:"AccountStatus,omitempty" name:"AccountStatus"`
+	AccountStatus *bool `json:"AccountStatus,omitnil" name:"AccountStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryAccountVerificationStatusResponse struct {
@@ -1395,41 +1395,41 @@ func (r *QueryAccountVerificationStatusResponse) FromJsonString(s string) error 
 
 type QueryCreditAllocationHistoryData struct {
 	// Allocation time
-	AllocatedTime *string `json:"AllocatedTime,omitempty" name:"AllocatedTime"`
+	AllocatedTime *string `json:"AllocatedTime,omitnil" name:"AllocatedTime"`
 
 	// Operator
-	Operator *string `json:"Operator,omitempty" name:"Operator"`
+	Operator *string `json:"Operator,omitnil" name:"Operator"`
 
 	// Allocated credit value
-	Credit *float64 `json:"Credit,omitempty" name:"Credit"`
+	Credit *float64 `json:"Credit,omitnil" name:"Credit"`
 
 	// The allocated total credit
-	AllocatedCredit *float64 `json:"AllocatedCredit,omitempty" name:"AllocatedCredit"`
+	AllocatedCredit *float64 `json:"AllocatedCredit,omitnil" name:"AllocatedCredit"`
 }
 
 // Predefined struct for user
 type QueryCreditAllocationHistoryRequestParams struct {
 	// Customer UIN
-	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *uint64 `json:"ClientUin,omitnil" name:"ClientUin"`
 
 	// Page number
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of data entries per page
-	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
 }
 
 type QueryCreditAllocationHistoryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Customer UIN
-	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *uint64 `json:"ClientUin,omitnil" name:"ClientUin"`
 
 	// Page number
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of data entries per page
-	PageSize *uint64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
 }
 
 func (r *QueryCreditAllocationHistoryRequest) ToJsonString() string {
@@ -1457,14 +1457,14 @@ func (r *QueryCreditAllocationHistoryRequest) FromJsonString(s string) error {
 type QueryCreditAllocationHistoryResponseParams struct {
 	// Total number of records
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// List of record details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	History []*QueryCreditAllocationHistoryData `json:"History,omitempty" name:"History"`
+	History []*QueryCreditAllocationHistoryData `json:"History,omitnil" name:"History"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryCreditAllocationHistoryResponse struct {
@@ -1486,14 +1486,14 @@ func (r *QueryCreditAllocationHistoryResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryCreditByUinListRequestParams struct {
 	// User list
-	UinList []*uint64 `json:"UinList,omitempty" name:"UinList"`
+	UinList []*uint64 `json:"UinList,omitnil" name:"UinList"`
 }
 
 type QueryCreditByUinListRequest struct {
 	*tchttp.BaseRequest
 	
 	// User list
-	UinList []*uint64 `json:"UinList,omitempty" name:"UinList"`
+	UinList []*uint64 `json:"UinList,omitnil" name:"UinList"`
 }
 
 func (r *QueryCreditByUinListRequest) ToJsonString() string {
@@ -1518,10 +1518,10 @@ func (r *QueryCreditByUinListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryCreditByUinListResponseParams struct {
 	// User information list
-	Data []*QueryDirectCustomersCreditData `json:"Data,omitempty" name:"Data"`
+	Data []*QueryDirectCustomersCreditData `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryCreditByUinListResponse struct {
@@ -1572,7 +1572,7 @@ func (r *QueryCreditQuotaRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryCreditQuotaResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryCreditQuotaResponse struct {
@@ -1593,80 +1593,80 @@ func (r *QueryCreditQuotaResponse) FromJsonString(s string) error {
 
 type QueryCustomersCreditData struct {
 	// Name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Type
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Mobile number
-	Mobile *string `json:"Mobile,omitempty" name:"Mobile"`
+	Mobile *string `json:"Mobile,omitnil" name:"Mobile"`
 
 	// Email
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Overdue payment flag
-	Arrears *string `json:"Arrears,omitempty" name:"Arrears"`
+	Arrears *string `json:"Arrears,omitnil" name:"Arrears"`
 
 	// Binding time
-	AssociationTime *string `json:"AssociationTime,omitempty" name:"AssociationTime"`
+	AssociationTime *string `json:"AssociationTime,omitnil" name:"AssociationTime"`
 
 	// Expiration time
-	RecentExpiry *string `json:"RecentExpiry,omitempty" name:"RecentExpiry"`
+	RecentExpiry *string `json:"RecentExpiry,omitnil" name:"RecentExpiry"`
 
 	// Customer UIN
-	ClientUin *uint64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *uint64 `json:"ClientUin,omitnil" name:"ClientUin"`
 
 	// Credit allocated to a customer
-	Credit *float64 `json:"Credit,omitempty" name:"Credit"`
+	Credit *float64 `json:"Credit,omitnil" name:"Credit"`
 
 	// The remaining credit of a customer
-	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+	RemainingCredit *float64 `json:"RemainingCredit,omitnil" name:"RemainingCredit"`
 
 	// `0`: Identity not verified; `1`: Individual identity verified; `2`: Enterprise identity verified.
-	IdentifyType *uint64 `json:"IdentifyType,omitempty" name:"IdentifyType"`
+	IdentifyType *uint64 `json:"IdentifyType,omitnil" name:"IdentifyType"`
 
 	// Customer remarks
-	Remark *string `json:"Remark,omitempty" name:"Remark"`
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 
 	// Forced status
-	Force *int64 `json:"Force,omitempty" name:"Force"`
+	Force *int64 `json:"Force,omitnil" name:"Force"`
 }
 
 // Predefined struct for user
 type QueryCustomersCreditRequestParams struct {
 	// Search condition type. You can only search by customer ID, name, remarks, or email.
-	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
 	// Search condition
-	Filter *string `json:"Filter,omitempty" name:"Filter"`
+	Filter *string `json:"Filter,omitnil" name:"Filter"`
 
 	// A pagination parameter that specifies the current page number, with a value starting from 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// A pagination parameter that specifies the number of entries per page.
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A sort parameter that specifies the sort order. Valid values: `desc` (descending order), or `asc` (ascending order) based on `AssociationTime`. The value will be `desc` if left empty.
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 }
 
 type QueryCustomersCreditRequest struct {
 	*tchttp.BaseRequest
 	
 	// Search condition type. You can only search by customer ID, name, remarks, or email.
-	FilterType *string `json:"FilterType,omitempty" name:"FilterType"`
+	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
 	// Search condition
-	Filter *string `json:"Filter,omitempty" name:"Filter"`
+	Filter *string `json:"Filter,omitnil" name:"Filter"`
 
 	// A pagination parameter that specifies the current page number, with a value starting from 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// A pagination parameter that specifies the number of entries per page.
-	PageSize *int64 `json:"PageSize,omitempty" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A sort parameter that specifies the sort order. Valid values: `desc` (descending order), or `asc` (ascending order) based on `AssociationTime`. The value will be `desc` if left empty.
-	Order *string `json:"Order,omitempty" name:"Order"`
+	Order *string `json:"Order,omitnil" name:"Order"`
 }
 
 func (r *QueryCustomersCreditRequest) ToJsonString() string {
@@ -1696,13 +1696,13 @@ func (r *QueryCustomersCreditRequest) FromJsonString(s string) error {
 type QueryCustomersCreditResponseParams struct {
 	// The list of queried customers
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*QueryCustomersCreditData `json:"Data,omitempty" name:"Data"`
+	Data []*QueryCustomersCreditData `json:"Data,omitnil" name:"Data"`
 
 	// Number of customers
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryCustomersCreditResponse struct {
@@ -1723,13 +1723,13 @@ func (r *QueryCustomersCreditResponse) FromJsonString(s string) error {
 
 type QueryDirectCustomersCreditData struct {
 	// User UIN
-	Uin *uint64 `json:"Uin,omitempty" name:"Uin"`
+	Uin *uint64 `json:"Uin,omitnil" name:"Uin"`
 
 	// Total credit
-	TotalCredit *float64 `json:"TotalCredit,omitempty" name:"TotalCredit"`
+	TotalCredit *float64 `json:"TotalCredit,omitnil" name:"TotalCredit"`
 
 	// Remaining credit
-	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+	RemainingCredit *float64 `json:"RemainingCredit,omitnil" name:"RemainingCredit"`
 }
 
 // Predefined struct for user
@@ -1764,10 +1764,10 @@ func (r *QueryDirectCustomersCreditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryDirectCustomersCreditResponseParams struct {
 	// Direct customer information list
-	Data []*QueryDirectCustomersCreditData `json:"Data,omitempty" name:"Data"`
+	Data []*QueryDirectCustomersCreditData `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryDirectCustomersCreditResponse struct {
@@ -1818,16 +1818,16 @@ func (r *QueryPartnerCreditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryPartnerCreditResponseParams struct {
 	// Allocated credit
-	AllocatedCredit *float64 `json:"AllocatedCredit,omitempty" name:"AllocatedCredit"`
+	AllocatedCredit *float64 `json:"AllocatedCredit,omitnil" name:"AllocatedCredit"`
 
 	// Total credit
-	TotalCredit *float64 `json:"TotalCredit,omitempty" name:"TotalCredit"`
+	TotalCredit *float64 `json:"TotalCredit,omitnil" name:"TotalCredit"`
 
 	// Remaining credit
-	RemainingCredit *float64 `json:"RemainingCredit,omitempty" name:"RemainingCredit"`
+	RemainingCredit *float64 `json:"RemainingCredit,omitnil" name:"RemainingCredit"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryPartnerCreditResponse struct {
@@ -1848,26 +1848,26 @@ func (r *QueryPartnerCreditResponse) FromJsonString(s string) error {
 
 type QueryVoucherAmountByUinItem struct {
 	// Customer UIN
-	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *int64 `json:"ClientUin,omitnil" name:"ClientUin"`
 
 	// Voucher quota
-	TotalAmount *float64 `json:"TotalAmount,omitempty" name:"TotalAmount"`
+	TotalAmount *float64 `json:"TotalAmount,omitnil" name:"TotalAmount"`
 
 	// Voucher amount
-	RemainAmount *float64 `json:"RemainAmount,omitempty" name:"RemainAmount"`
+	RemainAmount *float64 `json:"RemainAmount,omitnil" name:"RemainAmount"`
 }
 
 // Predefined struct for user
 type QueryVoucherAmountByUinRequestParams struct {
 	// Customer UIN list
-	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 }
 
 type QueryVoucherAmountByUinRequest struct {
 	*tchttp.BaseRequest
 	
 	// Customer UIN list
-	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 }
 
 func (r *QueryVoucherAmountByUinRequest) ToJsonString() string {
@@ -1892,10 +1892,10 @@ func (r *QueryVoucherAmountByUinRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryVoucherAmountByUinResponseParams struct {
 	// Customer voucher quota information
-	Data []*QueryVoucherAmountByUinItem `json:"Data,omitempty" name:"Data"`
+	Data []*QueryVoucherAmountByUinItem `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryVoucherAmountByUinResponse struct {
@@ -1916,32 +1916,32 @@ func (r *QueryVoucherAmountByUinResponse) FromJsonString(s string) error {
 
 type QueryVoucherListByUinItem struct {
 	// Customer UIN
-	ClientUin *int64 `json:"ClientUin,omitempty" name:"ClientUin"`
+	ClientUin *int64 `json:"ClientUin,omitnil" name:"ClientUin"`
 
 	// The total number of vouchers
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Voucher details
-	Data []*QueryVoucherListByUinVoucherItem `json:"Data,omitempty" name:"Data"`
+	Data []*QueryVoucherListByUinVoucherItem `json:"Data,omitnil" name:"Data"`
 }
 
 // Predefined struct for user
 type QueryVoucherListByUinRequestParams struct {
 	// Customer UIN list
-	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 
 	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
 type QueryVoucherListByUinRequest struct {
 	*tchttp.BaseRequest
 	
 	// Customer UIN list
-	ClientUins []*uint64 `json:"ClientUins,omitempty" name:"ClientUins"`
+	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 
 	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
 func (r *QueryVoucherListByUinRequest) ToJsonString() string {
@@ -1967,10 +1967,10 @@ func (r *QueryVoucherListByUinRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryVoucherListByUinResponseParams struct {
 	// Customer voucher information
-	Data []*QueryVoucherListByUinItem `json:"Data,omitempty" name:"Data"`
+	Data []*QueryVoucherListByUinItem `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryVoucherListByUinResponse struct {
@@ -1991,16 +1991,16 @@ func (r *QueryVoucherListByUinResponse) FromJsonString(s string) error {
 
 type QueryVoucherListByUinVoucherItem struct {
 	// Voucher ID
-	VoucherId *string `json:"VoucherId,omitempty" name:"VoucherId"`
+	VoucherId *string `json:"VoucherId,omitnil" name:"VoucherId"`
 
 	// Voucher status
-	VoucherStatus *string `json:"VoucherStatus,omitempty" name:"VoucherStatus"`
+	VoucherStatus *string `json:"VoucherStatus,omitnil" name:"VoucherStatus"`
 
 	// Voucher value
-	TotalAmount *float64 `json:"TotalAmount,omitempty" name:"TotalAmount"`
+	TotalAmount *float64 `json:"TotalAmount,omitnil" name:"TotalAmount"`
 
 	// Balance
-	RemainAmount *float64 `json:"RemainAmount,omitempty" name:"RemainAmount"`
+	RemainAmount *float64 `json:"RemainAmount,omitnil" name:"RemainAmount"`
 }
 
 // Predefined struct for user
@@ -2035,22 +2035,22 @@ func (r *QueryVoucherPoolRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryVoucherPoolResponseParams struct {
 	// Reseller name
-	AgentName *string `json:"AgentName,omitempty" name:"AgentName"`
+	AgentName *string `json:"AgentName,omitnil" name:"AgentName"`
 
 	// Reseller role type (1: Reseller; 2: Distributor; 3: Second-level reseller)
-	AccountType *int64 `json:"AccountType,omitempty" name:"AccountType"`
+	AccountType *int64 `json:"AccountType,omitnil" name:"AccountType"`
 
 	// Total quota
-	TotalQuota *float64 `json:"TotalQuota,omitempty" name:"TotalQuota"`
+	TotalQuota *float64 `json:"TotalQuota,omitnil" name:"TotalQuota"`
 
 	// Remaining quota
-	RemainingQuota *float64 `json:"RemainingQuota,omitempty" name:"RemainingQuota"`
+	RemainingQuota *float64 `json:"RemainingQuota,omitnil" name:"RemainingQuota"`
 
 	// The number of issued vouchers
-	IssuedNum *int64 `json:"IssuedNum,omitempty" name:"IssuedNum"`
+	IssuedNum *int64 `json:"IssuedNum,omitnil" name:"IssuedNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type QueryVoucherPoolResponse struct {
@@ -2072,21 +2072,21 @@ func (r *QueryVoucherPoolResponse) FromJsonString(s string) error {
 type RegionSummaryOverviewItem struct {
 	// Region ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
 
 	// Region name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
 
 	// The actual total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginalCost *string `json:"OriginalCost,omitempty" name:"OriginalCost"`
+	OriginalCost *string `json:"OriginalCost,omitnil" name:"OriginalCost"`
 
 	// The deducted voucher amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VoucherPayAmount *string `json:"VoucherPayAmount,omitempty" name:"VoucherPayAmount"`
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil" name:"VoucherPayAmount"`
 
 	// Total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCost *string `json:"TotalCost,omitempty" name:"TotalCost"`
+	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
 }

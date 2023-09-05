@@ -15,22 +15,22 @@
 package v20190304
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type ClearQueueRequestParams struct {
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 type ClearQueueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 func (r *ClearQueueRequest) ToJsonString() string {
@@ -55,7 +55,7 @@ func (r *ClearQueueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ClearQueueResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ClearQueueResponse struct {
@@ -77,20 +77,20 @@ func (r *ClearQueueResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ClearSubscriptionFilterTagsRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 }
 
 type ClearSubscriptionFilterTagsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 }
 
 func (r *ClearSubscriptionFilterTagsRequest) ToJsonString() string {
@@ -116,7 +116,7 @@ func (r *ClearSubscriptionFilterTagsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ClearSubscriptionFilterTagsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ClearSubscriptionFilterTagsResponse struct {
@@ -138,98 +138,98 @@ func (r *ClearSubscriptionFilterTagsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateQueueRequestParams struct {
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
-	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitnil" name:"MaxMsgHeapNum"`
 
 	// Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
-	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitnil" name:"PollingWaitSeconds"`
 
 	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
-	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitnil" name:"VisibilityTimeout"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Whether to enable the message rewinding feature for a queue. Value range: 0–msgRetentionSeconds, where 0 means not to enable this feature, while `msgRetentionSeconds` indicates that the maximum rewindable period is the message retention period of the queue.
-	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+	RewindSeconds *uint64 `json:"RewindSeconds,omitnil" name:"RewindSeconds"`
 
 	// 1: transaction queue, 0: general queue
-	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
+	Transaction *uint64 `json:"Transaction,omitnil" name:"Transaction"`
 
 	// First lookback interval
-	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitnil" name:"FirstQueryInterval"`
 
 	// Maximum number of lookbacks
-	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitnil" name:"MaxQueryCount"`
 
 	// Dead letter queue name
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// Dead letter policy. 0: message has been consumed multiple times but not deleted, 1: `Time-To-Live` has elapsed
-	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+	Policy *uint64 `json:"Policy,omitnil" name:"Policy"`
 
 	// Maximum receipt times. Value range: 1–1000
-	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitnil" name:"MaxReceiveCount"`
 
 	// Maximum period in seconds before an unconsumed message expires, which is required if `policy` is 1. Value range: 300–43200. This value should be smaller than `msgRetentionSeconds` (maximum message retention period)
-	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitnil" name:"MaxTimeToLive"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is not set, the feature will not be enabled
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 type CreateQueueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
-	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitnil" name:"MaxMsgHeapNum"`
 
 	// Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
-	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitnil" name:"PollingWaitSeconds"`
 
 	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
-	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitnil" name:"VisibilityTimeout"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Whether to enable the message rewinding feature for a queue. Value range: 0–msgRetentionSeconds, where 0 means not to enable this feature, while `msgRetentionSeconds` indicates that the maximum rewindable period is the message retention period of the queue.
-	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+	RewindSeconds *uint64 `json:"RewindSeconds,omitnil" name:"RewindSeconds"`
 
 	// 1: transaction queue, 0: general queue
-	Transaction *uint64 `json:"Transaction,omitempty" name:"Transaction"`
+	Transaction *uint64 `json:"Transaction,omitnil" name:"Transaction"`
 
 	// First lookback interval
-	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitnil" name:"FirstQueryInterval"`
 
 	// Maximum number of lookbacks
-	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitnil" name:"MaxQueryCount"`
 
 	// Dead letter queue name
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// Dead letter policy. 0: message has been consumed multiple times but not deleted, 1: `Time-To-Live` has elapsed
-	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+	Policy *uint64 `json:"Policy,omitnil" name:"Policy"`
 
 	// Maximum receipt times. Value range: 1–1000
-	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitnil" name:"MaxReceiveCount"`
 
 	// Maximum period in seconds before an unconsumed message expires, which is required if `policy` is 1. Value range: 300–43200. This value should be smaller than `msgRetentionSeconds` (maximum message retention period)
-	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitnil" name:"MaxTimeToLive"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is not set, the feature will not be enabled
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 func (r *CreateQueueRequest) ToJsonString() string {
@@ -268,10 +268,10 @@ func (r *CreateQueueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateQueueResponseParams struct {
 	// `queueId` of a successfully created queue
-	QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
+	QueueId *string `json:"QueueId,omitnil" name:"QueueId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateQueueResponse struct {
@@ -293,56 +293,56 @@ func (r *CreateQueueResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSubscribeRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 
 	// Subscription protocol. Currently, two protocols are supported: http and queue. To use the `http` protocol, you need to build your own web server to receive messages. With the `queue` protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// `Endpoint` for notification receipt, which is distinguished by `Protocol`. For `http`, `Endpoint` must begin with `http://` and `host` can be a domain name or IP. For `Queue`, enter `QueueName`. Please note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for `Endpoint`, pushed messages will not be received. Currently, messages can be pushed only to the public network and basic network.
-	Endpoint *string `json:"Endpoint,omitempty" name:"Endpoint"`
+	Endpoint *string `json:"Endpoint,omitnil" name:"Endpoint"`
 
 	// CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values: 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
-	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+	NotifyStrategy *string `json:"NotifyStrategy,omitnil" name:"NotifyStrategy"`
 
 	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not set, no matter whether `MsgTag` is set, the subscription will receive all messages published to the topic; 2. If the `FilterTag` array has a value, only when at least one of the values in the array also exists in the `MsgTag` array (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the `FilterTag` array has a value, but `MsgTag` is not set, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-	FilterTag []*string `json:"FilterTag,omitempty" name:"FilterTag"`
+	FilterTag []*string `json:"FilterTag,omitnil" name:"FilterTag"`
 
 	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` can contain up to 15 `.`, i.e., up to 16 phrases.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+	BindingKey []*string `json:"BindingKey,omitnil" name:"BindingKey"`
 
 	// Push content format. Valid values: 1. JSON, 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `http`, both options are acceptable, and the default value is `JSON`.
-	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitnil" name:"NotifyContentFormat"`
 }
 
 type CreateSubscribeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 
 	// Subscription protocol. Currently, two protocols are supported: http and queue. To use the `http` protocol, you need to build your own web server to receive messages. With the `queue` protocol, messages are automatically pushed to a CMQ queue and you can pull them concurrently.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// `Endpoint` for notification receipt, which is distinguished by `Protocol`. For `http`, `Endpoint` must begin with `http://` and `host` can be a domain name or IP. For `Queue`, enter `QueueName`. Please note that currently the push service cannot push messages to a VPC; therefore, if a VPC domain name or address is entered for `Endpoint`, pushed messages will not be received. Currently, messages can be pushed only to the public network and basic network.
-	Endpoint *string `json:"Endpoint,omitempty" name:"Endpoint"`
+	Endpoint *string `json:"Endpoint,omitnil" name:"Endpoint"`
 
 	// CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values: 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message; 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
-	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+	NotifyStrategy *string `json:"NotifyStrategy,omitnil" name:"NotifyStrategy"`
 
 	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not set, no matter whether `MsgTag` is set, the subscription will receive all messages published to the topic; 2. If the `FilterTag` array has a value, only when at least one of the values in the array also exists in the `MsgTag` array (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the `FilterTag` array has a value, but `MsgTag` is not set, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-	FilterTag []*string `json:"FilterTag,omitempty" name:"FilterTag"`
+	FilterTag []*string `json:"FilterTag,omitnil" name:"FilterTag"`
 
 	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` can contain up to 15 `.`, i.e., up to 16 phrases.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+	BindingKey []*string `json:"BindingKey,omitnil" name:"BindingKey"`
 
 	// Push content format. Valid values: 1. JSON, 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `http`, both options are acceptable, and the default value is `JSON`.
-	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitnil" name:"NotifyContentFormat"`
 }
 
 func (r *CreateSubscribeRequest) ToJsonString() string {
@@ -374,10 +374,10 @@ func (r *CreateSubscribeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSubscribeResponseParams struct {
 	// SubscriptionId
-	SubscriptionId *string `json:"SubscriptionId,omitempty" name:"SubscriptionId"`
+	SubscriptionId *string `json:"SubscriptionId,omitnil" name:"SubscriptionId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateSubscribeResponse struct {
@@ -399,38 +399,38 @@ func (r *CreateSubscribeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTopicRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message match policy for a specified topic.
-	FilterType *uint64 `json:"FilterType,omitempty" name:"FilterType"`
+	FilterType *uint64 `json:"FilterType,omitnil" name:"FilterType"`
 
 	// Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is left empty, the feature will not be enabled.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 type CreateTopicRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message match policy for a specified topic.
-	FilterType *uint64 `json:"FilterType,omitempty" name:"FilterType"`
+	FilterType *uint64 `json:"FilterType,omitnil" name:"FilterType"`
 
 	// Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is left empty, the feature will not be enabled.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -459,10 +459,10 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTopicResponseParams struct {
 	// TopicName
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+	TopicId *string `json:"TopicId,omitnil" name:"TopicId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateTopicResponse struct {
@@ -484,46 +484,46 @@ func (r *CreateTopicResponse) FromJsonString(s string) error {
 type DeadLetterPolicy struct {
 	// DeadLetterQueueName
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// DeadLetterQueue
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeadLetterQueue *string `json:"DeadLetterQueue,omitempty" name:"DeadLetterQueue"`
+	DeadLetterQueue *string `json:"DeadLetterQueue,omitnil" name:"DeadLetterQueue"`
 
 	// Policy
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+	Policy *uint64 `json:"Policy,omitnil" name:"Policy"`
 
 	// MaxTimeToLive
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitnil" name:"MaxTimeToLive"`
 
 	// MaxReceiveCount
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitnil" name:"MaxReceiveCount"`
 }
 
 type DeadLetterSource struct {
 	// QueueId
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
+	QueueId *string `json:"QueueId,omitnil" name:"QueueId"`
 
 	// QueueName
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 // Predefined struct for user
 type DeleteQueueRequestParams struct {
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 type DeleteQueueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 func (r *DeleteQueueRequest) ToJsonString() string {
@@ -548,7 +548,7 @@ func (r *DeleteQueueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteQueueResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteQueueResponse struct {
@@ -570,20 +570,20 @@ func (r *DeleteQueueResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSubscribeRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 }
 
 type DeleteSubscribeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 }
 
 func (r *DeleteSubscribeRequest) ToJsonString() string {
@@ -609,7 +609,7 @@ func (r *DeleteSubscribeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSubscribeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteSubscribeResponse struct {
@@ -631,14 +631,14 @@ func (r *DeleteSubscribeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteTopicRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 }
 
 type DeleteTopicRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 }
 
 func (r *DeleteTopicRequest) ToJsonString() string {
@@ -663,7 +663,7 @@ func (r *DeleteTopicRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteTopicResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteTopicResponse struct {
@@ -685,32 +685,32 @@ func (r *DeleteTopicResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDeadLetterSourceQueuesRequestParams struct {
 	// Dead letter queue name
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// Starting position of topic list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Filters source queue name of dead letter queue. Currently, only filtering by `SourceQueueName` is supported
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeDeadLetterSourceQueuesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Dead letter queue name
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// Starting position of topic list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Filters source queue name of dead letter queue. Currently, only filtering by `SourceQueueName` is supported
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *DescribeDeadLetterSourceQueuesRequest) ToJsonString() string {
@@ -738,13 +738,13 @@ func (r *DescribeDeadLetterSourceQueuesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDeadLetterSourceQueuesResponseParams struct {
 	// Number of eligible queues
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Source queues of dead letter queue
-	QueueSet []*DeadLetterSource `json:"QueueSet,omitempty" name:"QueueSet"`
+	QueueSet []*DeadLetterSource `json:"QueueSet,omitnil" name:"QueueSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDeadLetterSourceQueuesResponse struct {
@@ -766,38 +766,38 @@ func (r *DescribeDeadLetterSourceQueuesResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeQueueDetailRequestParams struct {
 	// Starting position of queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Filter parameter. Currently, filtering by `QueueName` is supported, and only one keyword is allowed
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Tag search
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Exact match by `QueueName`
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 type DescribeQueueDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Starting position of queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Filter parameter. Currently, filtering by `QueueName` is supported, and only one keyword is allowed
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Tag search
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Exact match by `QueueName`
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 func (r *DescribeQueueDetailRequest) ToJsonString() string {
@@ -826,13 +826,13 @@ func (r *DescribeQueueDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeQueueDetailResponseParams struct {
 	// Total number of queues
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Queue list
-	QueueSet []*QueueSet `json:"QueueSet,omitempty" name:"QueueSet"`
+	QueueSet []*QueueSet `json:"QueueSet,omitnil" name:"QueueSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeQueueDetailResponse struct {
@@ -854,32 +854,32 @@ func (r *DescribeQueueDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSubscriptionDetailRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Starting position of topic list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Filter parameter. Currently, only filtering by `SubscriptionName` is supported, and only one keyword is allowed.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeSubscriptionDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Starting position of topic list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Filter parameter. Currently, only filtering by `SubscriptionName` is supported, and only one keyword is allowed.
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *DescribeSubscriptionDetailRequest) ToJsonString() string {
@@ -907,14 +907,14 @@ func (r *DescribeSubscriptionDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSubscriptionDetailResponseParams struct {
 	// Total number
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Subscription attribute set
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubscriptionSet []*Subscription `json:"SubscriptionSet,omitempty" name:"SubscriptionSet"`
+	SubscriptionSet []*Subscription `json:"SubscriptionSet,omitnil" name:"SubscriptionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSubscriptionDetailResponse struct {
@@ -936,38 +936,38 @@ func (r *DescribeSubscriptionDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopicDetailRequestParams struct {
 	// Starting position of queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Currently, only filtering by `TopicName` is supported, and only one filter value can be entered
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Tag match
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Exact match by `TopicName`
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 }
 
 type DescribeTopicDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Starting position of queue list to be returned on the current page in case of paginated return. If a value is entered, `limit` is required. If this parameter is left empty, 0 will be used by default.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of queues to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Currently, only filtering by `TopicName` is supported, and only one filter value can be entered
-	Filters []*Filter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// Tag match
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Exact match by `TopicName`
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 }
 
 func (r *DescribeTopicDetailRequest) ToJsonString() string {
@@ -996,13 +996,13 @@ func (r *DescribeTopicDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopicDetailResponseParams struct {
 	// TotalCount
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// TopicSet
-	TopicSet []*TopicSet `json:"TopicSet,omitempty" name:"TopicSet"`
+	TopicSet []*TopicSet `json:"TopicSet,omitnil" name:"TopicSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeTopicDetailResponse struct {
@@ -1023,101 +1023,101 @@ func (r *DescribeTopicDetailResponse) FromJsonString(s string) error {
 
 type Filter struct {
 	// Filter parameter name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Value
-	Values []*string `json:"Values,omitempty" name:"Values"`
+	Values []*string `json:"Values,omitnil" name:"Values"`
 }
 
 // Predefined struct for user
 type ModifyQueueAttributeRequestParams struct {
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
-	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitnil" name:"MaxMsgHeapNum"`
 
 	// Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
-	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitnil" name:"PollingWaitSeconds"`
 
 	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
-	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitnil" name:"VisibilityTimeout"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Maximum message rewindable period. Value range: 0–msgRetentionSeconds (maximum message retention period of a queue). 0 means not to enable message rewinding.
-	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+	RewindSeconds *uint64 `json:"RewindSeconds,omitnil" name:"RewindSeconds"`
 
 	// First query time
-	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitnil" name:"FirstQueryInterval"`
 
 	// Maximum number of queries
-	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitnil" name:"MaxQueryCount"`
 
 	// Dead letter queue name
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// Maximum period in seconds before an unconsumed message expires, which is required if `MaxTimeToLivepolicy` is 1. Value range: 300–43200. This value should be smaller than `MsgRetentionSeconds` (maximum message retention period)
-	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitnil" name:"MaxTimeToLive"`
 
 	// Maximum number of receipts
-	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitnil" name:"MaxReceiveCount"`
 
 	// Dead letter queue policy
-	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+	Policy *uint64 `json:"Policy,omitnil" name:"Policy"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is left empty, the feature will not be enabled.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 type ModifyQueueAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// Maximum number of heaped messages. The value range is 1,000,000–10,000,000 during the beta test and can be 1,000,000–1,000,000,000 after the product is officially released. The default value is 10,000,000 during the beta test and will be 100,000,000 after the product is officially released.
-	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitnil" name:"MaxMsgHeapNum"`
 
 	// Long polling wait time for message reception. Value range: 0–30 seconds. Default value: 0.
-	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitnil" name:"PollingWaitSeconds"`
 
 	// Message visibility timeout period. Value range: 1–43200 seconds (i.e., 12 hours). Default value: 30.
-	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitnil" name:"VisibilityTimeout"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message retention period. Value range: 60–1296000 seconds (i.e., 1 minute–15 days). Default value: 345600 (i.e., 4 days).
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Maximum message rewindable period. Value range: 0–msgRetentionSeconds (maximum message retention period of a queue). 0 means not to enable message rewinding.
-	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+	RewindSeconds *uint64 `json:"RewindSeconds,omitnil" name:"RewindSeconds"`
 
 	// First query time
-	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitnil" name:"FirstQueryInterval"`
 
 	// Maximum number of queries
-	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitnil" name:"MaxQueryCount"`
 
 	// Dead letter queue name
-	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitempty" name:"DeadLetterQueueName"`
+	DeadLetterQueueName *string `json:"DeadLetterQueueName,omitnil" name:"DeadLetterQueueName"`
 
 	// Maximum period in seconds before an unconsumed message expires, which is required if `MaxTimeToLivepolicy` is 1. Value range: 300–43200. This value should be smaller than `MsgRetentionSeconds` (maximum message retention period)
-	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitempty" name:"MaxTimeToLive"`
+	MaxTimeToLive *uint64 `json:"MaxTimeToLive,omitnil" name:"MaxTimeToLive"`
 
 	// Maximum number of receipts
-	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitempty" name:"MaxReceiveCount"`
+	MaxReceiveCount *uint64 `json:"MaxReceiveCount,omitnil" name:"MaxReceiveCount"`
 
 	// Dead letter queue policy
-	Policy *uint64 `json:"Policy,omitempty" name:"Policy"`
+	Policy *uint64 `json:"Policy,omitnil" name:"Policy"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is left empty, the feature will not be enabled.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 func (r *ModifyQueueAttributeRequest) ToJsonString() string {
@@ -1155,7 +1155,7 @@ func (r *ModifyQueueAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyQueueAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyQueueAttributeResponse struct {
@@ -1177,48 +1177,48 @@ func (r *ModifyQueueAttributeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySubscriptionAttributeRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 
 	// CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values:
 	// 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message.
 	// 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
-	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+	NotifyStrategy *string `json:"NotifyStrategy,omitnil" name:"NotifyStrategy"`
 
 	// Push content format. Valid values: 1. JSON, 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `HTTP`, both options are acceptable, and the default value is `JSON`.
-	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitnil" name:"NotifyContentFormat"`
 
 	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not set, no matter whether `MsgTag` is set, the subscription will receive all messages published to the topic; 2. If the `FilterTag` array has a value, only when at least one of the values in the array also exists in the `MsgTag` array (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the `FilterTag` array has a value, but `MsgTag` is not set, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags"`
+	FilterTags []*string `json:"FilterTags,omitnil" name:"FilterTags"`
 
 	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` can contain up to 15 `.`, i.e., up to 16 phrases.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+	BindingKey []*string `json:"BindingKey,omitnil" name:"BindingKey"`
 }
 
 type ModifySubscriptionAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Subscription name, which is unique in the same topic under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 
 	// CMQ push server retry policy in case an error occurs while pushing a message to `Endpoint`. Valid values:
 	// 1. BACKOFF_RETRY: backoff retry, which is to retry at a fixed interval, discard the message after a certain number of retries, and continue to push the next message.
 	// 2. EXPONENTIAL_DECAY_RETRY: exponential decay retry, which is to retry at an exponentially increasing interval, such as 1s, 2s, 4s, 8s, and so on. As a message can be retained in a topic for one day, failed messages will be discarded at most after one day of retry. Default value: EXPONENTIAL_DECAY_RETRY.
-	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+	NotifyStrategy *string `json:"NotifyStrategy,omitnil" name:"NotifyStrategy"`
 
 	// Push content format. Valid values: 1. JSON, 2. SIMPLIFIED, i.e., the raw format. If `Protocol` is `queue`, this value must be `SIMPLIFIED`. If `Protocol` is `HTTP`, both options are acceptable, and the default value is `JSON`.
-	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitnil" name:"NotifyContentFormat"`
 
 	// Message body tag (used for message filtering). The number of tags cannot exceed 5, and each tag can contain up to 16 characters. It is used in conjunction with the `MsgTag` parameter of `(Batch)PublishMessage`. Rules: 1. If `FilterTag` is not set, no matter whether `MsgTag` is set, the subscription will receive all messages published to the topic; 2. If the `FilterTag` array has a value, only when at least one of the values in the array also exists in the `MsgTag` array (i.e., `FilterTag` and `MsgTag` have an intersection) can the subscription receive messages published to the topic; 3. If the `FilterTag` array has a value, but `MsgTag` is not set, then no message published to the topic will be received, which can be considered as a special case of rule 2 as `FilterTag` and `MsgTag` do not intersect in this case. The overall design idea of rules is based on the intention of the subscriber.
-	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags"`
+	FilterTags []*string `json:"FilterTags,omitnil" name:"FilterTags"`
 
 	// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` can contain up to 15 `.`, i.e., up to 16 phrases.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+	BindingKey []*string `json:"BindingKey,omitnil" name:"BindingKey"`
 }
 
 func (r *ModifySubscriptionAttributeRequest) ToJsonString() string {
@@ -1248,7 +1248,7 @@ func (r *ModifySubscriptionAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySubscriptionAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifySubscriptionAttributeResponse struct {
@@ -1270,32 +1270,32 @@ func (r *ModifySubscriptionAttributeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTopicAttributeRequestParams struct {
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is left empty, the feature will not be enabled.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 type ModifyTopicAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Topic name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// Maximum message length. Value range: 1024–65536 bytes (i.e., 1–64 KB). Default value: 65536.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Message retention period. Value range: 60–86400 seconds (i.e., 1 minute–1 day). Default value: 86400.
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// Whether to enable message trace. true: yes, false: no. If this field is left empty, the feature will not be enabled.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 func (r *ModifyTopicAttributeRequest) ToJsonString() string {
@@ -1323,7 +1323,7 @@ func (r *ModifyTopicAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTopicAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyTopicAttributeResponse struct {
@@ -1344,121 +1344,121 @@ func (r *ModifyTopicAttributeResponse) FromJsonString(s string) error {
 
 type QueueSet struct {
 	// QueueId
-	QueueId *string `json:"QueueId,omitempty" name:"QueueId"`
+	QueueId *string `json:"QueueId,omitnil" name:"QueueId"`
 
 	// QueueName
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// Qps
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Qps *uint64 `json:"Qps,omitempty" name:"Qps"`
+	Qps *uint64 `json:"Qps,omitnil" name:"Qps"`
 
 	// Bps
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Bps *uint64 `json:"Bps,omitempty" name:"Bps"`
+	Bps *uint64 `json:"Bps,omitnil" name:"Bps"`
 
 	// MaxDelaySeconds
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxDelaySeconds *uint64 `json:"MaxDelaySeconds,omitempty" name:"MaxDelaySeconds"`
+	MaxDelaySeconds *uint64 `json:"MaxDelaySeconds,omitnil" name:"MaxDelaySeconds"`
 
 	// MaxMsgHeapNum
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitempty" name:"MaxMsgHeapNum"`
+	MaxMsgHeapNum *uint64 `json:"MaxMsgHeapNum,omitnil" name:"MaxMsgHeapNum"`
 
 	// PollingWaitSeconds
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitempty" name:"PollingWaitSeconds"`
+	PollingWaitSeconds *uint64 `json:"PollingWaitSeconds,omitnil" name:"PollingWaitSeconds"`
 
 	// MsgRetentionSeconds
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// VisibilityTimeout
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitempty" name:"VisibilityTimeout"`
+	VisibilityTimeout *uint64 `json:"VisibilityTimeout,omitnil" name:"VisibilityTimeout"`
 
 	// MaxMsgSize
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// RewindSeconds
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RewindSeconds *uint64 `json:"RewindSeconds,omitempty" name:"RewindSeconds"`
+	RewindSeconds *uint64 `json:"RewindSeconds,omitnil" name:"RewindSeconds"`
 
 	// CreateTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// LastModifyTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifyTime *uint64 `json:"LastModifyTime,omitempty" name:"LastModifyTime"`
+	LastModifyTime *uint64 `json:"LastModifyTime,omitnil" name:"LastModifyTime"`
 
 	// ActiveMsgNum
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ActiveMsgNum *uint64 `json:"ActiveMsgNum,omitempty" name:"ActiveMsgNum"`
+	ActiveMsgNum *uint64 `json:"ActiveMsgNum,omitnil" name:"ActiveMsgNum"`
 
 	// InactiveMsgNum
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InactiveMsgNum *uint64 `json:"InactiveMsgNum,omitempty" name:"InactiveMsgNum"`
+	InactiveMsgNum *uint64 `json:"InactiveMsgNum,omitnil" name:"InactiveMsgNum"`
 
 	// DelayMsgNum
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DelayMsgNum *uint64 `json:"DelayMsgNum,omitempty" name:"DelayMsgNum"`
+	DelayMsgNum *uint64 `json:"DelayMsgNum,omitnil" name:"DelayMsgNum"`
 
 	// RewindMsgNum
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	RewindMsgNum *uint64 `json:"RewindMsgNum,omitempty" name:"RewindMsgNum"`
+	RewindMsgNum *uint64 `json:"RewindMsgNum,omitnil" name:"RewindMsgNum"`
 
 	// MinMsgTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MinMsgTime *uint64 `json:"MinMsgTime,omitempty" name:"MinMsgTime"`
+	MinMsgTime *uint64 `json:"MinMsgTime,omitnil" name:"MinMsgTime"`
 
 	// Transaction
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Transaction *bool `json:"Transaction,omitempty" name:"Transaction"`
+	Transaction *bool `json:"Transaction,omitnil" name:"Transaction"`
 
 	// DeadLetterSource
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeadLetterSource []*DeadLetterSource `json:"DeadLetterSource,omitempty" name:"DeadLetterSource"`
+	DeadLetterSource []*DeadLetterSource `json:"DeadLetterSource,omitnil" name:"DeadLetterSource"`
 
 	// DeadLetterPolicy
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DeadLetterPolicy *DeadLetterPolicy `json:"DeadLetterPolicy,omitempty" name:"DeadLetterPolicy"`
+	DeadLetterPolicy *DeadLetterPolicy `json:"DeadLetterPolicy,omitnil" name:"DeadLetterPolicy"`
 
 	// TransactionPolicy
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TransactionPolicy *TransactionPolicy `json:"TransactionPolicy,omitempty" name:"TransactionPolicy"`
+	TransactionPolicy *TransactionPolicy `json:"TransactionPolicy,omitnil" name:"TransactionPolicy"`
 
 	// Creator `uin`
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+	CreateUin *uint64 `json:"CreateUin,omitnil" name:"CreateUin"`
 
 	// Tag
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// Message trace flag. true: enabled, false: not enabled
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 // Predefined struct for user
 type RewindQueueRequestParams struct {
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// After this time is set, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
-	StartConsumeTime *uint64 `json:"StartConsumeTime,omitempty" name:"StartConsumeTime"`
+	StartConsumeTime *uint64 `json:"StartConsumeTime,omitnil" name:"StartConsumeTime"`
 }
 
 type RewindQueueRequest struct {
 	*tchttp.BaseRequest
 	
 	// Queue name, which is unique under the same account in an individual region. It is a string of up to 64 characters, which must begin with a letter and can contain letters, digits, and dashes (`-`).
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
 	// After this time is set, the `(Batch)receiveMessage` API will consume the messages received after this timestamp in the order in which they are produced.
-	StartConsumeTime *uint64 `json:"StartConsumeTime,omitempty" name:"StartConsumeTime"`
+	StartConsumeTime *uint64 `json:"StartConsumeTime,omitnil" name:"StartConsumeTime"`
 }
 
 func (r *RewindQueueRequest) ToJsonString() string {
@@ -1484,7 +1484,7 @@ func (r *RewindQueueRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RewindQueueResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RewindQueueResponse struct {
@@ -1506,134 +1506,134 @@ func (r *RewindQueueResponse) FromJsonString(s string) error {
 type Subscription struct {
 	// SubscriptionName
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubscriptionName *string `json:"SubscriptionName,omitempty" name:"SubscriptionName"`
+	SubscriptionName *string `json:"SubscriptionName,omitnil" name:"SubscriptionName"`
 
 	// SubscriptionId
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubscriptionId *string `json:"SubscriptionId,omitempty" name:"SubscriptionId"`
+	SubscriptionId *string `json:"SubscriptionId,omitnil" name:"SubscriptionId"`
 
 	// TopicOwner
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicOwner *uint64 `json:"TopicOwner,omitempty" name:"TopicOwner"`
+	TopicOwner *uint64 `json:"TopicOwner,omitnil" name:"TopicOwner"`
 
 	// MsgCount
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgCount *uint64 `json:"MsgCount,omitempty" name:"MsgCount"`
+	MsgCount *uint64 `json:"MsgCount,omitnil" name:"MsgCount"`
 
 	// LastModifyTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifyTime *uint64 `json:"LastModifyTime,omitempty" name:"LastModifyTime"`
+	LastModifyTime *uint64 `json:"LastModifyTime,omitnil" name:"LastModifyTime"`
 
 	// CreateTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// BindingKey
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BindingKey []*string `json:"BindingKey,omitempty" name:"BindingKey"`
+	BindingKey []*string `json:"BindingKey,omitnil" name:"BindingKey"`
 
 	// Endpoint
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Endpoint *string `json:"Endpoint,omitempty" name:"Endpoint"`
+	Endpoint *string `json:"Endpoint,omitnil" name:"Endpoint"`
 
 	// FilterTags
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FilterTags []*string `json:"FilterTags,omitempty" name:"FilterTags"`
+	FilterTags []*string `json:"FilterTags,omitnil" name:"FilterTags"`
 
 	// Protocol
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Protocol *string `json:"Protocol,omitempty" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
 
 	// NotifyStrategy
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NotifyStrategy *string `json:"NotifyStrategy,omitempty" name:"NotifyStrategy"`
+	NotifyStrategy *string `json:"NotifyStrategy,omitnil" name:"NotifyStrategy"`
 
 	// NotifyContentFormat
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NotifyContentFormat *string `json:"NotifyContentFormat,omitempty" name:"NotifyContentFormat"`
+	NotifyContentFormat *string `json:"NotifyContentFormat,omitnil" name:"NotifyContentFormat"`
 }
 
 type Tag struct {
 	// Tag key
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Tag value
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 }
 
 type TopicSet struct {
 	// TopicId
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicId *string `json:"TopicId,omitempty" name:"TopicId"`
+	TopicId *string `json:"TopicId,omitnil" name:"TopicId"`
 
 	// TopicName
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TopicName *string `json:"TopicName,omitempty" name:"TopicName"`
+	TopicName *string `json:"TopicName,omitnil" name:"TopicName"`
 
 	// MsgRetentionSeconds
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitempty" name:"MsgRetentionSeconds"`
+	MsgRetentionSeconds *uint64 `json:"MsgRetentionSeconds,omitnil" name:"MsgRetentionSeconds"`
 
 	// MaxMsgSize
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxMsgSize *uint64 `json:"MaxMsgSize,omitempty" name:"MaxMsgSize"`
+	MaxMsgSize *uint64 `json:"MaxMsgSize,omitnil" name:"MaxMsgSize"`
 
 	// Qps
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Qps *uint64 `json:"Qps,omitempty" name:"Qps"`
+	Qps *uint64 `json:"Qps,omitnil" name:"Qps"`
 
 	// FilterType
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FilterType *uint64 `json:"FilterType,omitempty" name:"FilterType"`
+	FilterType *uint64 `json:"FilterType,omitnil" name:"FilterType"`
 
 	// CreateTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateTime *uint64 `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// LastModifyTime
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifyTime *uint64 `json:"LastModifyTime,omitempty" name:"LastModifyTime"`
+	LastModifyTime *uint64 `json:"LastModifyTime,omitnil" name:"LastModifyTime"`
 
 	// MsgCount
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MsgCount *uint64 `json:"MsgCount,omitempty" name:"MsgCount"`
+	MsgCount *uint64 `json:"MsgCount,omitnil" name:"MsgCount"`
 
 	// CreateUin
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreateUin *uint64 `json:"CreateUin,omitempty" name:"CreateUin"`
+	CreateUin *uint64 `json:"CreateUin,omitnil" name:"CreateUin"`
 
 	// Tags
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitempty" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// Whether to enable message trace for a topic. true: yes, false: no
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Trace *bool `json:"Trace,omitempty" name:"Trace"`
+	Trace *bool `json:"Trace,omitnil" name:"Trace"`
 }
 
 type TransactionPolicy struct {
 	// FirstQueryInterval
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitempty" name:"FirstQueryInterval"`
+	FirstQueryInterval *uint64 `json:"FirstQueryInterval,omitnil" name:"FirstQueryInterval"`
 
 	// MaxQueryCount
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	MaxQueryCount *uint64 `json:"MaxQueryCount,omitempty" name:"MaxQueryCount"`
+	MaxQueryCount *uint64 `json:"MaxQueryCount,omitnil" name:"MaxQueryCount"`
 }
 
 // Predefined struct for user
 type UnbindDeadLetterRequestParams struct {
 	// Source queue name of dead letter policy. Calling this API will clear the dead letter queue policy of this queue.
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 type UnbindDeadLetterRequest struct {
 	*tchttp.BaseRequest
 	
 	// Source queue name of dead letter policy. Calling this API will clear the dead letter queue policy of this queue.
-	QueueName *string `json:"QueueName,omitempty" name:"QueueName"`
+	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 }
 
 func (r *UnbindDeadLetterRequest) ToJsonString() string {
@@ -1658,7 +1658,7 @@ func (r *UnbindDeadLetterRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UnbindDeadLetterResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UnbindDeadLetterResponse struct {

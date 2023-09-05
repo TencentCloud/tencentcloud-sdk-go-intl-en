@@ -15,47 +15,47 @@
 package v20210420
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type AccountGroupInfo struct {
 	// Account group ID.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// Account group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Remarks.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 }
 
 type AccountGroupSearchCriteria struct {
 	// Keyword
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 // Predefined struct for user
 type AddAccountToAccountGroupRequestParams struct {
 	// Account group ID
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// List of IDs of the accounts to be added to the account group.
-	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds"`
+	AccountIds []*string `json:"AccountIds,omitnil" name:"AccountIds"`
 }
 
 type AddAccountToAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Account group ID
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// List of IDs of the accounts to be added to the account group.
-	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds"`
+	AccountIds []*string `json:"AccountIds,omitnil" name:"AccountIds"`
 }
 
 func (r *AddAccountToAccountGroupRequest) ToJsonString() string {
@@ -81,7 +81,7 @@ func (r *AddAccountToAccountGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddAccountToAccountGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddAccountToAccountGroupResponse struct {
@@ -103,20 +103,20 @@ func (r *AddAccountToAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AddUserToUserGroupRequestParams struct {
 	// List of IDs of the users to be added to the user group.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 type AddUserToUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of IDs of the users to be added to the user group.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 func (r *AddUserToUserGroupRequest) ToJsonString() string {
@@ -143,10 +143,10 @@ func (r *AddUserToUserGroupRequest) FromJsonString(s string) error {
 type AddUserToUserGroupResponseParams struct {
 	// List of IDs of the users failed to be added to the user group.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FailedItems []*string `json:"FailedItems,omitempty" name:"FailedItems"`
+	FailedItems []*string `json:"FailedItems,omitnil" name:"FailedItems"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddUserToUserGroupResponse struct {
@@ -167,167 +167,167 @@ func (r *AddUserToUserGroupResponse) FromJsonString(s string) error {
 
 type AppAccountInfo struct {
 	// Account ID.
-	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+	AccountId *string `json:"AccountId,omitnil" name:"AccountId"`
 
 	// Account name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// User information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserList []*LinkUserInfo `json:"UserList,omitempty" name:"UserList"`
+	UserList []*LinkUserInfo `json:"UserList,omitnil" name:"UserList"`
 
 	// Description.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 }
 
 type AppAccountSearchCriteria struct {
 	// Keyword
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 type ApplicationAuthorizationInfo struct {
 	// List of the user's accounts under authorized applications
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationAccounts []*string `json:"ApplicationAccounts,omitempty" name:"ApplicationAccounts"`
+	ApplicationAccounts []*string `json:"ApplicationAccounts,omitnil" name:"ApplicationAccounts"`
 
 	// Application ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// List of IDs of the user's user groups and organization nodes that have access to the application.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InheritedForm *InheritedForm `json:"InheritedForm,omitempty" name:"InheritedForm"`
+	InheritedForm *InheritedForm `json:"InheritedForm,omitnil" name:"InheritedForm"`
 
 	// Application name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationName *string `json:"ApplicationName,omitempty" name:"ApplicationName"`
+	ApplicationName *string `json:"ApplicationName,omitnil" name:"ApplicationName"`
 
 	// Application creation time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 }
 
 type ApplicationInfoSearchCriteria struct {
 	// Application search keyword, which can be application name or ID.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// Application type. Valid values: OAUTH2, JWT, CAS, SAML2, FORM, OIDC, APIGW
-	ApplicationType *string `json:"ApplicationType,omitempty" name:"ApplicationType"`
+	ApplicationType *string `json:"ApplicationType,omitnil" name:"ApplicationType"`
 }
 
 type ApplicationInformation struct {
 	// Application ID, which is globally unique.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Displayed application name, which can contain up to 64 characters and is the same as the application name by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Application creation time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 
 	// Last update time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifiedDate *string `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 
 	// Application status.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AppStatus *bool `json:"AppStatus,omitempty" name:"AppStatus"`
+	AppStatus *bool `json:"AppStatus,omitnil" name:"AppStatus"`
 
 	// Application icon.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Icon *string `json:"Icon,omitempty" name:"Icon"`
+	Icon *string `json:"Icon,omitnil" name:"Icon"`
 
 	// Application type.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationType *string `json:"ApplicationType,omitempty" name:"ApplicationType"`
+	ApplicationType *string `json:"ApplicationType,omitnil" name:"ApplicationType"`
 
 	// Client ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+	ClientId *string `json:"ClientId,omitnil" name:"ClientId"`
 }
 
 type AuthorizationInfo struct {
 	// Unique application ID.
-	AppId *string `json:"AppId,omitempty" name:"AppId"`
+	AppId *string `json:"AppId,omitnil" name:"AppId"`
 
 	// Application name.
-	AppName *string `json:"AppName,omitempty" name:"AppName"`
+	AppName *string `json:"AppName,omitnil" name:"AppName"`
 
 	// Type name.
-	EntityName *string `json:"EntityName,omitempty" name:"EntityName"`
+	EntityName *string `json:"EntityName,omitnil" name:"EntityName"`
 
 	// Unique type ID.
-	EntityId *string `json:"EntityId,omitempty" name:"EntityId"`
+	EntityId *string `json:"EntityId,omitnil" name:"EntityId"`
 
 	// Last update time in ISO 8601 format.
-	LastModifiedDate *string `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 
 	// Unique authorization type ID.
-	AuthorizationId *string `json:"AuthorizationId,omitempty" name:"AuthorizationId"`
+	AuthorizationId *string `json:"AuthorizationId,omitnil" name:"AuthorizationId"`
 }
 
 type AuthorizationInfoSearchCriteria struct {
 	// Search by name. When the query type is user, the match criteria include username and application name. When the query type is user group, the match criteria include user group name and application name. When the query type is organization, the match criteria include organization name and application name.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 type AuthorizationUserResouceInfo struct {
 	// Resource ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResourceId *string `json:"ResourceId,omitempty" name:"ResourceId"`
+	ResourceId *string `json:"ResourceId,omitnil" name:"ResourceId"`
 
 	// Resource type
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResourceType *string `json:"ResourceType,omitempty" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
 
 	// Authorized resource
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Resource *string `json:"Resource,omitempty" name:"Resource"`
+	Resource *string `json:"Resource,omitnil" name:"Resource"`
 
 	// Inheritance relationship
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InheritedForm *InheritedForm `json:"InheritedForm,omitempty" name:"InheritedForm"`
+	InheritedForm *InheritedForm `json:"InheritedForm,omitnil" name:"InheritedForm"`
 
 	// Application account
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationAccounts []*string `json:"ApplicationAccounts,omitempty" name:"ApplicationAccounts"`
+	ApplicationAccounts []*string `json:"ApplicationAccounts,omitnil" name:"ApplicationAccounts"`
 
 	// Resource name
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResourceName *string `json:"ResourceName,omitempty" name:"ResourceName"`
+	ResourceName *string `json:"ResourceName,omitnil" name:"ResourceName"`
 }
 
 // Predefined struct for user
 type CreateAccountGroupRequestParams struct {
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Account group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CreateAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Account group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *CreateAccountGroupRequest) ToJsonString() string {
@@ -355,10 +355,10 @@ func (r *CreateAccountGroupRequest) FromJsonString(s string) error {
 type CreateAccountGroupResponseParams struct {
 	// Account group ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateAccountGroupResponse struct {
@@ -380,32 +380,32 @@ func (r *CreateAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAppAccountRequestParams struct {
 	// Application ID
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Account password
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CreateAppAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Account password
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *CreateAppAccountRequest) ToJsonString() string {
@@ -434,10 +434,10 @@ func (r *CreateAppAccountRequest) FromJsonString(s string) error {
 type CreateAppAccountResponseParams struct {
 	// Account ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+	AccountId *string `json:"AccountId,omitnil" name:"AccountId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateAppAccountResponse struct {
@@ -459,32 +459,32 @@ func (r *CreateAppAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateOrgNodeRequestParams struct {
 	// Organization node name, which can contain up to 64 characters.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Parent organization node ID. If this parameter is left empty, the organization will be created under the root organization node by default.
-	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitempty" name:"ParentOrgNodeId"`
+	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitnil" name:"ParentOrgNodeId"`
 
 	// Organization node description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// External ID of the organization node, which is optional and customizable. If this parameter is specified, its uniqueness will be verified.
-	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitempty" name:"CustomizedOrgNodeId"`
+	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitnil" name:"CustomizedOrgNodeId"`
 }
 
 type CreateOrgNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node name, which can contain up to 64 characters.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Parent organization node ID. If this parameter is left empty, the organization will be created under the root organization node by default.
-	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitempty" name:"ParentOrgNodeId"`
+	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitnil" name:"ParentOrgNodeId"`
 
 	// Organization node description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// External ID of the organization node, which is optional and customizable. If this parameter is specified, its uniqueness will be verified.
-	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitempty" name:"CustomizedOrgNodeId"`
+	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitnil" name:"CustomizedOrgNodeId"`
 }
 
 func (r *CreateOrgNodeRequest) ToJsonString() string {
@@ -513,10 +513,10 @@ func (r *CreateOrgNodeRequest) FromJsonString(s string) error {
 type CreateOrgNodeResponseParams struct {
 	// Organization node ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateOrgNodeResponse struct {
@@ -538,20 +538,20 @@ func (r *CreateOrgNodeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateUserGroupRequestParams struct {
 	// User group nickname, which is unique and can contain up to 64 characters.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User group remarks, which can contain up to 512 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CreateUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// User group nickname, which is unique and can contain up to 64 characters.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User group remarks, which can contain up to 512 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *CreateUserGroupRequest) ToJsonString() string {
@@ -578,10 +578,10 @@ func (r *CreateUserGroupRequest) FromJsonString(s string) error {
 type CreateUserGroupResponseParams struct {
 	// User group ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateUserGroupResponse struct {
@@ -603,74 +603,74 @@ func (r *CreateUserGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateUserRequestParams struct {
 	// Username, which can contain up to 64 characters.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User password, which needs to be configured according to the password policy.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User remarks, which can contain up to 512 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// List of IDs of the user's user groups.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// User's mobile number, such as `+86-1xxxxxxxxxx`.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// Unique ID of the user's primary organization. If this parameter is left empty, the user will be created under the root node by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// User expiration time in ISO 8601 format.
-	ExpirationTime *string `json:"ExpirationTime,omitempty" name:"ExpirationTime"`
+	ExpirationTime *string `json:"ExpirationTime,omitnil" name:"ExpirationTime"`
 
 	// User's email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Whether the password needs to be reset. Default value: false (no).
-	PwdNeedReset *bool `json:"PwdNeedReset,omitempty" name:"PwdNeedReset"`
+	PwdNeedReset *bool `json:"PwdNeedReset,omitnil" name:"PwdNeedReset"`
 
 	// List of IDs of the user's secondary organizations.
-	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitempty" name:"SecondaryOrgNodeIdList"`
+	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitnil" name:"SecondaryOrgNodeIdList"`
 }
 
 type CreateUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// Username, which can contain up to 64 characters.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User password, which needs to be configured according to the password policy.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User remarks, which can contain up to 512 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// List of IDs of the user's user groups.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// User's mobile number, such as `+86-1xxxxxxxxxx`.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// Unique ID of the user's primary organization. If this parameter is left empty, the user will be created under the root node by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// User expiration time in ISO 8601 format.
-	ExpirationTime *string `json:"ExpirationTime,omitempty" name:"ExpirationTime"`
+	ExpirationTime *string `json:"ExpirationTime,omitnil" name:"ExpirationTime"`
 
 	// User's email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Whether the password needs to be reset. Default value: false (no).
-	PwdNeedReset *bool `json:"PwdNeedReset,omitempty" name:"PwdNeedReset"`
+	PwdNeedReset *bool `json:"PwdNeedReset,omitnil" name:"PwdNeedReset"`
 
 	// List of IDs of the user's secondary organizations.
-	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitempty" name:"SecondaryOrgNodeIdList"`
+	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitnil" name:"SecondaryOrgNodeIdList"`
 }
 
 func (r *CreateUserRequest) ToJsonString() string {
@@ -706,10 +706,10 @@ func (r *CreateUserRequest) FromJsonString(s string) error {
 type CreateUserResponseParams struct {
 	// Returned ID of the newly created user, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateUserResponse struct {
@@ -731,14 +731,14 @@ func (r *CreateUserResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccountGroupRequestParams struct {
 	// Array of account group IDs.
-	AccountGroupIdList []*string `json:"AccountGroupIdList,omitempty" name:"AccountGroupIdList"`
+	AccountGroupIdList []*string `json:"AccountGroupIdList,omitnil" name:"AccountGroupIdList"`
 }
 
 type DeleteAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of account group IDs.
-	AccountGroupIdList []*string `json:"AccountGroupIdList,omitempty" name:"AccountGroupIdList"`
+	AccountGroupIdList []*string `json:"AccountGroupIdList,omitnil" name:"AccountGroupIdList"`
 }
 
 func (r *DeleteAccountGroupRequest) ToJsonString() string {
@@ -763,7 +763,7 @@ func (r *DeleteAccountGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccountGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAccountGroupResponse struct {
@@ -785,14 +785,14 @@ func (r *DeleteAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAppAccountRequestParams struct {
 	// Array of account IDs .
-	AccountIdList []*string `json:"AccountIdList,omitempty" name:"AccountIdList"`
+	AccountIdList []*string `json:"AccountIdList,omitnil" name:"AccountIdList"`
 }
 
 type DeleteAppAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of account IDs .
-	AccountIdList []*string `json:"AccountIdList,omitempty" name:"AccountIdList"`
+	AccountIdList []*string `json:"AccountIdList,omitnil" name:"AccountIdList"`
 }
 
 func (r *DeleteAppAccountRequest) ToJsonString() string {
@@ -817,7 +817,7 @@ func (r *DeleteAppAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAppAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAppAccountResponse struct {
@@ -839,14 +839,14 @@ func (r *DeleteAppAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOrgNodeRequestParams struct {
 	// Organization node ID, which is globally unique.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 }
 
 type DeleteOrgNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node ID, which is globally unique.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 }
 
 func (r *DeleteOrgNodeRequest) ToJsonString() string {
@@ -871,7 +871,7 @@ func (r *DeleteOrgNodeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOrgNodeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteOrgNodeResponse struct {
@@ -893,14 +893,14 @@ func (r *DeleteOrgNodeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUserGroupRequestParams struct {
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 type DeleteUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 func (r *DeleteUserGroupRequest) ToJsonString() string {
@@ -925,7 +925,7 @@ func (r *DeleteUserGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUserGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteUserGroupResponse struct {
@@ -947,20 +947,20 @@ func (r *DeleteUserGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUserRequestParams struct {
 	// Username, which can contain up to 32 characters. You need to select either `UserName` or `UserId` as the search criterion; if both are selected, `UserName` will be used by default.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User ID. You need to select either `UserName` or `UserId` as the search criterion. If both are selected, `UserName` will be used by default.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type DeleteUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// Username, which can contain up to 32 characters. You need to select either `UserName` or `UserId` as the search criterion; if both are selected, `UserName` will be used by default.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User ID. You need to select either `UserName` or `UserId` as the search criterion. If both are selected, `UserName` will be used by default.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 func (r *DeleteUserRequest) ToJsonString() string {
@@ -986,7 +986,7 @@ func (r *DeleteUserRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUserResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteUserResponse struct {
@@ -1008,20 +1008,20 @@ func (r *DeleteUserResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteUsersRequestParams struct {
 	// List of IDs of the users to be deleted. You need to specify at least `DeleteIdList` or `DeleteNameList`. If both are specified, `DeleteNameList` will be used first.
-	DeleteIdList []*string `json:"DeleteIdList,omitempty" name:"DeleteIdList"`
+	DeleteIdList []*string `json:"DeleteIdList,omitnil" name:"DeleteIdList"`
 
 	// List of usernames of the users to be deleted. You need to specify at least `DeleteIdList` or `DeleteNameList`. If both are specified, `DeleteNameList` will be used first.
-	DeleteNameList []*string `json:"DeleteNameList,omitempty" name:"DeleteNameList"`
+	DeleteNameList []*string `json:"DeleteNameList,omitnil" name:"DeleteNameList"`
 }
 
 type DeleteUsersRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of IDs of the users to be deleted. You need to specify at least `DeleteIdList` or `DeleteNameList`. If both are specified, `DeleteNameList` will be used first.
-	DeleteIdList []*string `json:"DeleteIdList,omitempty" name:"DeleteIdList"`
+	DeleteIdList []*string `json:"DeleteIdList,omitnil" name:"DeleteIdList"`
 
 	// List of usernames of the users to be deleted. You need to specify at least `DeleteIdList` or `DeleteNameList`. If both are specified, `DeleteNameList` will be used first.
-	DeleteNameList []*string `json:"DeleteNameList,omitempty" name:"DeleteNameList"`
+	DeleteNameList []*string `json:"DeleteNameList,omitnil" name:"DeleteNameList"`
 }
 
 func (r *DeleteUsersRequest) ToJsonString() string {
@@ -1048,10 +1048,10 @@ func (r *DeleteUsersRequest) FromJsonString(s string) error {
 type DeleteUsersResponseParams struct {
 	// Information of the users failed to be deleted. When the business parameter is `DeleteIdList`, this field will return the list of IDs of the users failed to be deleted. When the business parameter is `DeleteNameList`, this field will return the list of usernames of the users failed to be deleted.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FailedItems []*string `json:"FailedItems,omitempty" name:"FailedItems"`
+	FailedItems []*string `json:"FailedItems,omitnil" name:"FailedItems"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteUsersResponse struct {
@@ -1073,32 +1073,32 @@ func (r *DeleteUsersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountGroupRequestParams struct {
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeAccountGroupRequest) ToJsonString() string {
@@ -1127,18 +1127,18 @@ func (r *DescribeAccountGroupRequest) FromJsonString(s string) error {
 type DescribeAccountGroupResponseParams struct {
 	// Total number of records returned for the query.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Application ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Returned list of eligible data.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountGroupList []*AccountGroupInfo `json:"AccountGroupList,omitempty" name:"AccountGroupList"`
+	AccountGroupList []*AccountGroupInfo `json:"AccountGroupList,omitnil" name:"AccountGroupList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAccountGroupResponse struct {
@@ -1160,32 +1160,32 @@ func (r *DescribeAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAppAccountRequestParams struct {
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *AppAccountSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AppAccountSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeAppAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *AppAccountSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AppAccountSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeAppAccountRequest) ToJsonString() string {
@@ -1214,18 +1214,18 @@ func (r *DescribeAppAccountRequest) FromJsonString(s string) error {
 type DescribeAppAccountResponseParams struct {
 	// Total number of records returned for the query.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Application ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Returned list of eligible data.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AppAccountList []*AppAccountInfo `json:"AppAccountList,omitempty" name:"AppAccountList"`
+	AppAccountList []*AppAccountInfo `json:"AppAccountList,omitnil" name:"AppAccountList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAppAccountResponse struct {
@@ -1247,20 +1247,20 @@ func (r *DescribeAppAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeApplicationRequestParams struct {
 	// Application ID, which is globally unique. You must specify at least this parameter or `ClientId`.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Client ID. You must specify at least this parameter or `ApplicationId`.
-	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+	ClientId *string `json:"ClientId,omitnil" name:"ClientId"`
 }
 
 type DescribeApplicationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID, which is globally unique. You must specify at least this parameter or `ClientId`.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Client ID. You must specify at least this parameter or `ApplicationId`.
-	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+	ClientId *string `json:"ClientId,omitnil" name:"ClientId"`
 }
 
 func (r *DescribeApplicationRequest) ToJsonString() string {
@@ -1287,66 +1287,66 @@ func (r *DescribeApplicationRequest) FromJsonString(s string) error {
 type DescribeApplicationResponseParams struct {
 	// Key ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
 
 	// Displayed application name, which can contain up to 64 characters and is the same as the application name by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Last modification time of the application in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifiedDate *string `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 
 	// Client ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClientId *string `json:"ClientId,omitempty" name:"ClientId"`
+	ClientId *string `json:"ClientId,omitnil" name:"ClientId"`
 
 	// Application type, i.e., the application template type selected during application creation.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationType *string `json:"ApplicationType,omitempty" name:"ApplicationType"`
+	ApplicationType *string `json:"ApplicationType,omitnil" name:"ApplicationType"`
 
 	// Application creation time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 
 	// Application ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Token validity period in seconds.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TokenExpired *int64 `json:"TokenExpired,omitempty" name:"TokenExpired"`
+	TokenExpired *int64 `json:"TokenExpired,omitnil" name:"TokenExpired"`
 
 	// Client secret.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClientSecret *string `json:"ClientSecret,omitempty" name:"ClientSecret"`
+	ClientSecret *string `json:"ClientSecret,omitnil" name:"ClientSecret"`
 
 	// Public key information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
 
 	// Authorization address.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AuthorizeUrl *string `json:"AuthorizeUrl,omitempty" name:"AuthorizeUrl"`
+	AuthorizeUrl *string `json:"AuthorizeUrl,omitnil" name:"AuthorizeUrl"`
 
 	// Access address of the application icon image.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IconUrl *string `json:"IconUrl,omitempty" name:"IconUrl"`
+	IconUrl *string `json:"IconUrl,omitnil" name:"IconUrl"`
 
 	// Security level.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 
 	// Application status.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AppStatus *bool `json:"AppStatus,omitempty" name:"AppStatus"`
+	AppStatus *bool `json:"AppStatus,omitnil" name:"AppStatus"`
 
 	// Description.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeApplicationResponse struct {
@@ -1368,20 +1368,20 @@ func (r *DescribeApplicationResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOrgNodeRequestParams struct {
 	// Organization node ID, which is globally unique and can contain up to 64 characters. If this parameter is left empty, the information of the root organization node will be read by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Whether to read the information of its sub-nodes. When this parameter is left empty or specified as `false`, only the information of the current organization node will be read by default. When it is specified as `true`, the information of the current organization node and its level-1 sub-nodes will be read.
-	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitempty" name:"IncludeOrgNodeChildInfo"`
+	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitnil" name:"IncludeOrgNodeChildInfo"`
 }
 
 type DescribeOrgNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node ID, which is globally unique and can contain up to 64 characters. If this parameter is left empty, the information of the root organization node will be read by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Whether to read the information of its sub-nodes. When this parameter is left empty or specified as `false`, only the information of the current organization node will be read by default. When it is specified as `true`, the information of the current organization node and its level-1 sub-nodes will be read.
-	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitempty" name:"IncludeOrgNodeChildInfo"`
+	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitnil" name:"IncludeOrgNodeChildInfo"`
 }
 
 func (r *DescribeOrgNodeRequest) ToJsonString() string {
@@ -1408,42 +1408,42 @@ func (r *DescribeOrgNodeRequest) FromJsonString(s string) error {
 type DescribeOrgNodeResponseParams struct {
 	// Displayed organization node name, which can contain up to 64 characters and is the same as the organization name by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Last modification time of the organization node in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifiedDate *string `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 
 	// External ID of the organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitempty" name:"CustomizedOrgNodeId"`
+	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitnil" name:"CustomizedOrgNodeId"`
 
 	// Parent node ID of the current organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitempty" name:"ParentOrgNodeId"`
+	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitnil" name:"ParentOrgNodeId"`
 
 	// Organization node ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Data source.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DataSource *string `json:"DataSource,omitempty" name:"DataSource"`
+	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
 	// Organization node creation time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 
 	// List of sub-nodes under the current organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeChildInfo []*OrgNodeChildInfo `json:"OrgNodeChildInfo,omitempty" name:"OrgNodeChildInfo"`
+	OrgNodeChildInfo []*OrgNodeChildInfo `json:"OrgNodeChildInfo,omitnil" name:"OrgNodeChildInfo"`
 
 	// Organization node description.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeOrgNodeResponse struct {
@@ -1465,14 +1465,14 @@ func (r *DescribeOrgNodeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePublicKeyRequestParams struct {
 	// Application ID, which is globally unique.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 }
 
 type DescribePublicKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID, which is globally unique.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 }
 
 func (r *DescribePublicKeyRequest) ToJsonString() string {
@@ -1498,18 +1498,18 @@ func (r *DescribePublicKeyRequest) FromJsonString(s string) error {
 type DescribePublicKeyResponseParams struct {
 	// Public key information used for JWT signature verification.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PublicKey *string `json:"PublicKey,omitempty" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
 
 	// JWT key ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	KeyId *string `json:"KeyId,omitempty" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
 
 	// Application ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribePublicKeyResponse struct {
@@ -1531,14 +1531,14 @@ func (r *DescribePublicKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserGroupRequestParams struct {
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 type DescribeUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 func (r *DescribeUserGroupRequest) ToJsonString() string {
@@ -1564,18 +1564,18 @@ func (r *DescribeUserGroupRequest) FromJsonString(s string) error {
 type DescribeUserGroupResponseParams struct {
 	// User group nickname, which is not unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User group remarks, which can contain up to 512 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// User group ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserGroupResponse struct {
@@ -1597,20 +1597,20 @@ func (r *DescribeUserGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserInfoRequestParams struct {
 	// Username, which can contain up to 64 characters. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User ID, which can contain up to 64 characters. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type DescribeUserInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Username, which can contain up to 64 characters. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User ID, which can contain up to 64 characters. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 func (r *DescribeUserInfoRequest) ToJsonString() string {
@@ -1637,66 +1637,66 @@ func (r *DescribeUserInfoRequest) FromJsonString(s string) error {
 type DescribeUserInfoResponseParams struct {
 	// Username.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User status. Valid values: NORMAL: normal; FREEZE: frozen; LOCKED: locked; NOT_ENABLED: disabled.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Nickname
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User remarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// List of IDs of the user's user groups.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// User ID, which can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User's email address.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// User's mobile number.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// Unique ID of the user's primary organization.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Data source
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DataSource *string `json:"DataSource,omitempty" name:"DataSource"`
+	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
 	// User expiration time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ExpirationTime *string `json:"ExpirationTime,omitempty" name:"ExpirationTime"`
+	ExpirationTime *string `json:"ExpirationTime,omitnil" name:"ExpirationTime"`
 
 	// User activation time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ActivationTime *string `json:"ActivationTime,omitempty" name:"ActivationTime"`
+	ActivationTime *string `json:"ActivationTime,omitnil" name:"ActivationTime"`
 
 	// Whether the password of the current user needs to be reset. `false` indicates no.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PwdNeedReset *bool `json:"PwdNeedReset,omitempty" name:"PwdNeedReset"`
+	PwdNeedReset *bool `json:"PwdNeedReset,omitnil" name:"PwdNeedReset"`
 
 	// List of IDs of the user's secondary organizations.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitempty" name:"SecondaryOrgNodeIdList"`
+	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitnil" name:"SecondaryOrgNodeIdList"`
 
 	// Whether the user is an admin. Valid values: 0: no; 1: yes.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AdminFlag *int64 `json:"AdminFlag,omitempty" name:"AdminFlag"`
+	AdminFlag *int64 `json:"AdminFlag,omitnil" name:"AdminFlag"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserInfoResponse struct {
@@ -1718,32 +1718,32 @@ func (r *DescribeUserInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserResourcesAuthorizationRequestParams struct {
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// User ID. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Whether the query scope includes the application access of the user groups and organizations associated with the user. Valid values: false: no; true: yes. Default value: false.
-	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitempty" name:"IncludeInheritedAuthorizations"`
+	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitnil" name:"IncludeInheritedAuthorizations"`
 }
 
 type DescribeUserResourcesAuthorizationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// User ID. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username. You need to specify at least `UserName` or `UserId`. If both are specified, `UserName` will be used first.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Whether the query scope includes the application access of the user groups and organizations associated with the user. Valid values: false: no; true: yes. Default value: false.
-	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitempty" name:"IncludeInheritedAuthorizations"`
+	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitnil" name:"IncludeInheritedAuthorizations"`
 }
 
 func (r *DescribeUserResourcesAuthorizationRequest) ToJsonString() string {
@@ -1771,26 +1771,26 @@ func (r *DescribeUserResourcesAuthorizationRequest) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeUserResourcesAuthorizationResponseParams struct {
 	// Unique application ID.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Application account.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationAccounts []*string `json:"ApplicationAccounts,omitempty" name:"ApplicationAccounts"`
+	ApplicationAccounts []*string `json:"ApplicationAccounts,omitnil" name:"ApplicationAccounts"`
 
 	// Unique ID of the authorized user.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username of the authorized user.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Returned resource list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AuthorizationUserResourceList []*AuthorizationUserResouceInfo `json:"AuthorizationUserResourceList,omitempty" name:"AuthorizationUserResourceList"`
+	AuthorizationUserResourceList []*AuthorizationUserResouceInfo `json:"AuthorizationUserResourceList,omitnil" name:"AuthorizationUserResourceList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserResourcesAuthorizationResponse struct {
@@ -1812,20 +1812,20 @@ func (r *DescribeUserResourcesAuthorizationResponse) FromJsonString(s string) er
 // Predefined struct for user
 type DescribeUserThirdPartyAccountInfoRequestParams struct {
 	// Username. You need to specify at least `Username` or `UserId`. If both are specified, `Username` will be used first.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User ID. You need to specify at least `Username` or `UserId`. If both are specified, `Username` will be used first.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type DescribeUserThirdPartyAccountInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Username. You need to specify at least `Username` or `UserId`. If both are specified, `Username` will be used first.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User ID. You need to specify at least `Username` or `UserId`. If both are specified, `Username` will be used first.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 func (r *DescribeUserThirdPartyAccountInfoRequest) ToJsonString() string {
@@ -1851,17 +1851,17 @@ func (r *DescribeUserThirdPartyAccountInfoRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeUserThirdPartyAccountInfoResponseParams struct {
 	// User ID.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Third-Party account binding information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ThirdPartyAccounts []*ThirdPartyAccountInfo `json:"ThirdPartyAccounts,omitempty" name:"ThirdPartyAccounts"`
+	ThirdPartyAccounts []*ThirdPartyAccountInfo `json:"ThirdPartyAccounts,omitnil" name:"ThirdPartyAccounts"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserThirdPartyAccountInfoResponse struct {
@@ -1883,52 +1883,52 @@ func (r *DescribeUserThirdPartyAccountInfoResponse) FromJsonString(s string) err
 type InheritedForm struct {
 	// List of IDs of the user's user groups.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// List of IDs of the user's organization nodes.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeIds []*string `json:"OrgNodeIds,omitempty" name:"OrgNodeIds"`
+	OrgNodeIds []*string `json:"OrgNodeIds,omitnil" name:"OrgNodeIds"`
 }
 
 type LinkUserInfo struct {
 	// User ID, which is globally unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 }
 
 // Predefined struct for user
 type ListAccountInAccountGroupRequestParams struct {
 	// Account group ID.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges.
-	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type ListAccountInAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Account group ID.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges.
-	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AccountGroupSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *ListAccountInAccountGroupRequest) ToJsonString() string {
@@ -1957,18 +1957,18 @@ func (r *ListAccountInAccountGroupRequest) FromJsonString(s string) error {
 type ListAccountInAccountGroupResponseParams struct {
 	// List of accounts returned for the query.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountList []*AppAccountInfo `json:"AccountList,omitempty" name:"AccountList"`
+	AccountList []*AppAccountInfo `json:"AccountList,omitnil" name:"AccountList"`
 
 	// Total number of accounts returned for the query.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Account group ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListAccountInAccountGroupResponse struct {
@@ -1990,38 +1990,38 @@ func (r *ListAccountInAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListApplicationAuthorizationsRequestParams struct {
 	// Query type. Valid values: User: user; UserGroup: user group; OrgNode: organization.
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
+	EntityType *string `json:"EntityType,omitnil" name:"EntityType"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *AuthorizationInfoSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AuthorizationInfoSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. You can sort the results by last modification time (lastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by application name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type ListApplicationAuthorizationsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Query type. Valid values: User: user; UserGroup: user group; OrgNode: organization.
-	EntityType *string `json:"EntityType,omitempty" name:"EntityType"`
+	EntityType *string `json:"EntityType,omitnil" name:"EntityType"`
 
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *AuthorizationInfoSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *AuthorizationInfoSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. You can sort the results by last modification time (lastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by application name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *ListApplicationAuthorizationsRequest) ToJsonString() string {
@@ -2051,14 +2051,14 @@ func (r *ListApplicationAuthorizationsRequest) FromJsonString(s string) error {
 type ListApplicationAuthorizationsResponseParams struct {
 	// Returned list of application authorization information.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AuthorizationInfoList []*AuthorizationInfo `json:"AuthorizationInfoList,omitempty" name:"AuthorizationInfoList"`
+	AuthorizationInfoList []*AuthorizationInfo `json:"AuthorizationInfoList,omitnil" name:"AuthorizationInfoList"`
 
 	// Total number of returned application information items.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListApplicationAuthorizationsResponse struct {
@@ -2080,38 +2080,38 @@ func (r *ListApplicationAuthorizationsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListApplicationsRequestParams struct {
 	// Fuzzy match search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, and an asterisk (*) at the end of the field indicates partial match. The fuzzy match search feature and the exact match query feature will not take effect at the same time. If both `SearchCondition` and `ApplicationIdList` are specified, `ApplicationIdList` will take effect by default for exact match query; otherwise, the information of all applications will be returned by default.
-	SearchCondition *ApplicationInfoSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *ApplicationInfoSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. Valid values: DisplayName: application name; CreatedDate: creation time; LastModifiedDate: last modification time. If this field is left empty, the results will be sorted in alphabetical order by application name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Set of sort criteria. Valid values: DisplayName: application name; CreatedDate: creation time; LastModifiedDate: last modification time. If this field is left empty, the results will be sorted in alphabetical order by application name.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Application ID list, through which the corresponding application information will be matched exactly. The fuzzy match search feature and the exact match query feature will not take effect at the same time. If both `SearchCondition` and `ApplicationIdList` are specified, `ApplicationIdList` will take effect by default for exact match query; otherwise, the information of all applications will be returned by default.
-	ApplicationIdList []*string `json:"ApplicationIdList,omitempty" name:"ApplicationIdList"`
+	ApplicationIdList []*string `json:"ApplicationIdList,omitnil" name:"ApplicationIdList"`
 }
 
 type ListApplicationsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Fuzzy match search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, and an asterisk (*) at the end of the field indicates partial match. The fuzzy match search feature and the exact match query feature will not take effect at the same time. If both `SearchCondition` and `ApplicationIdList` are specified, `ApplicationIdList` will take effect by default for exact match query; otherwise, the information of all applications will be returned by default.
-	SearchCondition *ApplicationInfoSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *ApplicationInfoSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. Valid values: DisplayName: application name; CreatedDate: creation time; LastModifiedDate: last modification time. If this field is left empty, the results will be sorted in alphabetical order by application name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Set of sort criteria. Valid values: DisplayName: application name; CreatedDate: creation time; LastModifiedDate: last modification time. If this field is left empty, the results will be sorted in alphabetical order by application name.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Application ID list, through which the corresponding application information will be matched exactly. The fuzzy match search feature and the exact match query feature will not take effect at the same time. If both `SearchCondition` and `ApplicationIdList` are specified, `ApplicationIdList` will take effect by default for exact match query; otherwise, the information of all applications will be returned by default.
-	ApplicationIdList []*string `json:"ApplicationIdList,omitempty" name:"ApplicationIdList"`
+	ApplicationIdList []*string `json:"ApplicationIdList,omitnil" name:"ApplicationIdList"`
 }
 
 func (r *ListApplicationsRequest) ToJsonString() string {
@@ -2141,14 +2141,14 @@ func (r *ListApplicationsRequest) FromJsonString(s string) error {
 type ListApplicationsResponseParams struct {
 	// Total number of returned application information items.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Returned application information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationInfoList []*ApplicationInformation `json:"ApplicationInfoList,omitempty" name:"ApplicationInfoList"`
+	ApplicationInfoList []*ApplicationInformation `json:"ApplicationInfoList,omitnil" name:"ApplicationInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListApplicationsResponse struct {
@@ -2170,14 +2170,14 @@ func (r *ListApplicationsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListAuthorizedApplicationsToOrgNodeRequestParams struct {
 	// Organization node ID.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 }
 
 type ListAuthorizedApplicationsToOrgNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node ID.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 }
 
 func (r *ListAuthorizedApplicationsToOrgNodeRequest) ToJsonString() string {
@@ -2203,10 +2203,10 @@ func (r *ListAuthorizedApplicationsToOrgNodeRequest) FromJsonString(s string) er
 type ListAuthorizedApplicationsToOrgNodeResponseParams struct {
 	// List of IDs of the applications accessible to the organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationIds []*string `json:"ApplicationIds,omitempty" name:"ApplicationIds"`
+	ApplicationIds []*string `json:"ApplicationIds,omitnil" name:"ApplicationIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListAuthorizedApplicationsToOrgNodeResponse struct {
@@ -2228,14 +2228,14 @@ func (r *ListAuthorizedApplicationsToOrgNodeResponse) FromJsonString(s string) e
 // Predefined struct for user
 type ListAuthorizedApplicationsToUserGroupRequestParams struct {
 	// User group ID.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 type ListAuthorizedApplicationsToUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// User group ID.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 func (r *ListAuthorizedApplicationsToUserGroupRequest) ToJsonString() string {
@@ -2261,10 +2261,10 @@ func (r *ListAuthorizedApplicationsToUserGroupRequest) FromJsonString(s string) 
 type ListAuthorizedApplicationsToUserGroupResponseParams struct {
 	// List of IDs of the applications accessible to the user group.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationIds []*string `json:"ApplicationIds,omitempty" name:"ApplicationIds"`
+	ApplicationIds []*string `json:"ApplicationIds,omitnil" name:"ApplicationIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListAuthorizedApplicationsToUserGroupResponse struct {
@@ -2286,20 +2286,20 @@ func (r *ListAuthorizedApplicationsToUserGroupResponse) FromJsonString(s string)
 // Predefined struct for user
 type ListAuthorizedApplicationsToUserRequestParams struct {
 	// User ID.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Whether the query scope includes the application access of the user groups and organizations associated with the user. Valid values: false: no; true: yes. Default value: false.
-	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitempty" name:"IncludeInheritedAuthorizations"`
+	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitnil" name:"IncludeInheritedAuthorizations"`
 }
 
 type ListAuthorizedApplicationsToUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User ID.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Whether the query scope includes the application access of the user groups and organizations associated with the user. Valid values: false: no; true: yes. Default value: false.
-	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitempty" name:"IncludeInheritedAuthorizations"`
+	IncludeInheritedAuthorizations *bool `json:"IncludeInheritedAuthorizations,omitnil" name:"IncludeInheritedAuthorizations"`
 }
 
 func (r *ListAuthorizedApplicationsToUserRequest) ToJsonString() string {
@@ -2326,10 +2326,10 @@ func (r *ListAuthorizedApplicationsToUserRequest) FromJsonString(s string) error
 type ListAuthorizedApplicationsToUserResponseParams struct {
 	// List of information of the applications accessible to the user.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ApplicationAuthorizationInfo []*ApplicationAuthorizationInfo `json:"ApplicationAuthorizationInfo,omitempty" name:"ApplicationAuthorizationInfo"`
+	ApplicationAuthorizationInfo []*ApplicationAuthorizationInfo `json:"ApplicationAuthorizationInfo,omitnil" name:"ApplicationAuthorizationInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListAuthorizedApplicationsToUserResponse struct {
@@ -2351,38 +2351,38 @@ func (r *ListAuthorizedApplicationsToUserResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type ListUserGroupsOfUserRequestParams struct {
 	// User ID, which is globally unique.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Fuzzy search criterion. You can search by user group name (DisplayName). If this field is left empty, all of the user's user groups will be displayed by default.
-	SearchCondition *UserGroupInformationSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserGroupInformationSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. Valid values: DisplayName: user group name; UserGroupId: user group ID; CreatedDate: creation time. If this field is left empty, the results will be sorted in alphabetical order by user group name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 user groups will be returned.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 user groups will be returned.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type ListUserGroupsOfUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User ID, which is globally unique.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Fuzzy search criterion. You can search by user group name (DisplayName). If this field is left empty, all of the user's user groups will be displayed by default.
-	SearchCondition *UserGroupInformationSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserGroupInformationSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. Valid values: DisplayName: user group name; UserGroupId: user group ID; CreatedDate: creation time. If this field is left empty, the results will be sorted in alphabetical order by user group name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 user groups will be returned.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 user groups will be returned.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *ListUserGroupsOfUserRequest) ToJsonString() string {
@@ -2412,22 +2412,22 @@ func (r *ListUserGroupsOfUserRequest) FromJsonString(s string) error {
 type ListUserGroupsOfUserResponseParams struct {
 	// List of IDs of the user's user groups.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// User ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// List of information of the user's user groups.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupInfoList []*UserGroupInfo `json:"UserGroupInfoList,omitempty" name:"UserGroupInfoList"`
+	UserGroupInfoList []*UserGroupInfo `json:"UserGroupInfoList,omitnil" name:"UserGroupInfoList"`
 
 	// Total number of returned user group information items.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUserGroupsOfUserResponse struct {
@@ -2449,32 +2449,32 @@ func (r *ListUserGroupsOfUserResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListUserGroupsRequestParams struct {
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *UserGroupInfoSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserGroupInfoSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. The supported attributes for sorting include user group name (DisplayName), user group ID (UserGroupId), and last modification time (LastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by user group name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type ListUserGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Search criterion. You can combine multiple search criteria and search in multiple data ranges. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, and an empty field indicates to query the full table by default.
-	SearchCondition *UserGroupInfoSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserGroupInfoSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. The supported attributes for sorting include user group name (DisplayName), user group ID (UserGroupId), and last modification time (LastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by user group name.
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *ListUserGroupsRequest) ToJsonString() string {
@@ -2503,14 +2503,14 @@ func (r *ListUserGroupsRequest) FromJsonString(s string) error {
 type ListUserGroupsResponseParams struct {
 	// Returned user group list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupList []*UserGroupInformation `json:"UserGroupList,omitempty" name:"UserGroupList"`
+	UserGroupList []*UserGroupInformation `json:"UserGroupList,omitnil" name:"UserGroupList"`
 
 	// Total number of returned user group information items.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUserGroupsResponse struct {
@@ -2532,44 +2532,44 @@ func (r *ListUserGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListUsersInOrgNodeRequestParams struct {
 	// Organization node ID, which is globally unique and can contain up to 64 characters. If this parameter is left empty, the user information under the root organization node will be read by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Whether to read the information of its sub-nodes. When this parameter is left empty or specified as `false`, only the information of the current organization node will be read by default. When it is specified as `true`, the information of the current organization node and its level-1 sub-nodes will be read.
-	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitempty" name:"IncludeOrgNodeChildInfo"`
+	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitnil" name:"IncludeOrgNodeChildInfo"`
 
 	// User attribute search criterion. The supported search criteria include username, mobile number, email address, user locking status, user freezing status, creation time, and last modification time, which can also be combined. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, brackets separated by a comma ([Min,Max]) indicate query within a closed interval, braces separated by a comma ({Min,Max}) indicate query within an open interval, and a bracket and a brace can be used together (for example, {Min,Max] indicates that the minimum value is excluded and the maximum value is included in the query). Range query supports using an asterisk (for example, {20,*] indicates an interval including all data greater than 20) and querying by time period. The supported attributes include creation time (CreationTime) and last modification time (LastUpdateTime) in ISO 8601 format, such as `2021-01-13T09:44:07.182+0000`.
-	SearchCondition *ListUsersInOrgNodeSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *ListUsersInOrgNodeSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. The supported attributes for sorting include username (UserName), mobile number (Phone), email address (Email), user status (Status), creation time (CreatedDate), and last modification time (LastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by nickname (DisplayName).
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type ListUsersInOrgNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node ID, which is globally unique and can contain up to 64 characters. If this parameter is left empty, the user information under the root organization node will be read by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Whether to read the information of its sub-nodes. When this parameter is left empty or specified as `false`, only the information of the current organization node will be read by default. When it is specified as `true`, the information of the current organization node and its level-1 sub-nodes will be read.
-	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitempty" name:"IncludeOrgNodeChildInfo"`
+	IncludeOrgNodeChildInfo *bool `json:"IncludeOrgNodeChildInfo,omitnil" name:"IncludeOrgNodeChildInfo"`
 
 	// User attribute search criterion. The supported search criteria include username, mobile number, email address, user locking status, user freezing status, creation time, and last modification time, which can also be combined. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, brackets separated by a comma ([Min,Max]) indicate query within a closed interval, braces separated by a comma ({Min,Max}) indicate query within an open interval, and a bracket and a brace can be used together (for example, {Min,Max] indicates that the minimum value is excluded and the maximum value is included in the query). Range query supports using an asterisk (for example, {20,*] indicates an interval including all data greater than 20) and querying by time period. The supported attributes include creation time (CreationTime) and last modification time (LastUpdateTime) in ISO 8601 format, such as `2021-01-13T09:44:07.182+0000`.
-	SearchCondition *ListUsersInOrgNodeSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *ListUsersInOrgNodeSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. The supported attributes for sorting include username (UserName), mobile number (Phone), email address (Email), user status (Status), creation time (CreatedDate), and last modification time (LastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by nickname (DisplayName).
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *ListUsersInOrgNodeRequest) ToJsonString() string {
@@ -2600,30 +2600,30 @@ func (r *ListUsersInOrgNodeRequest) FromJsonString(s string) error {
 type ListUsersInOrgNodeResponseParams struct {
 	// User information list under the organization sub-node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeChildUserInfo []*OrgNodeChildUserInfo `json:"OrgNodeChildUserInfo,omitempty" name:"OrgNodeChildUserInfo"`
+	OrgNodeChildUserInfo []*OrgNodeChildUserInfo `json:"OrgNodeChildUserInfo,omitnil" name:"OrgNodeChildUserInfo"`
 
 	// Organization node ID, which is globally unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// User information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserInfo []*UserInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+	UserInfo []*UserInfo `json:"UserInfo,omitnil" name:"UserInfo"`
 
 	// Total number of users under the current organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalUserNum *int64 `json:"TotalUserNum,omitempty" name:"TotalUserNum"`
+	TotalUserNum *int64 `json:"TotalUserNum,omitnil" name:"TotalUserNum"`
 
 	// Organization ID path.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeIdPath *string `json:"OrgNodeIdPath,omitempty" name:"OrgNodeIdPath"`
+	OrgNodeIdPath *string `json:"OrgNodeIdPath,omitnil" name:"OrgNodeIdPath"`
 
 	// Organization name path.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeNamePath *string `json:"OrgNodeNamePath,omitempty" name:"OrgNodeNamePath"`
+	OrgNodeNamePath *string `json:"OrgNodeNamePath,omitnil" name:"OrgNodeNamePath"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUsersInOrgNodeResponse struct {
@@ -2644,62 +2644,62 @@ func (r *ListUsersInOrgNodeResponse) FromJsonString(s string) error {
 
 type ListUsersInOrgNodeSearchCriteria struct {
 	// Username, which can contain up to 64 characters.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User's mobile number.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// User's email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// User status. Valid values: NORMAL: normal; FREEZE: frozen; LOCKED: locked; NOT_ENABLED: disabled.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// User creation time in ISO 8601 format.
-	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
 
 	// Last update time of the user.
-	LastUpdateTime *string `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
+	LastUpdateTime *string `json:"LastUpdateTime,omitnil" name:"LastUpdateTime"`
 
 	// Search by name. The match criteria include username and user's mobile number.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 // Predefined struct for user
 type ListUsersInUserGroupRequestParams struct {
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// User attribute search criterion. The supported search criteria include username, mobile number, email address, user locking status, user freezing status, creation time, and last modification time, which can also be combined. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, brackets separated by a comma ([Min,Max]) indicate query within a closed interval, braces separated by a comma ({Min,Max}) indicate query within an open interval, and a bracket and a brace can be used together (for example, {Min,Max] indicates that the minimum value is excluded and the maximum value is included in the query). Range query supports using an asterisk (for example, {20,*] indicates an interval including all data greater than 20) and querying by time period. The supported attributes include creation time (CreationTime) and last modification time (LastUpdateTime) in ISO 8601 format, such as `2021-01-13T09:44:07.182+0000`.
-	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. The supported attributes for sorting include username (UserName), nickname (DisplayName), mobile number (Phone), email address (Email), user status (Status), creation time (CreatedDate), and last modification time (LastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by nickname (DisplayName).
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type ListUsersInUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// User attribute search criterion. The supported search criteria include username, mobile number, email address, user locking status, user freezing status, creation time, and last modification time, which can also be combined. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, brackets separated by a comma ([Min,Max]) indicate query within a closed interval, braces separated by a comma ({Min,Max}) indicate query within an open interval, and a bracket and a brace can be used together (for example, {Min,Max] indicates that the minimum value is excluded and the maximum value is included in the query). Range query supports using an asterisk (for example, {20,*] indicates an interval including all data greater than 20) and querying by time period. The supported attributes include creation time (CreationTime) and last modification time (LastUpdateTime) in ISO 8601 format, such as `2021-01-13T09:44:07.182+0000`.
-	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// Set of sort criteria. The supported attributes for sorting include username (UserName), nickname (DisplayName), mobile number (Phone), email address (Email), user status (Status), creation time (CreatedDate), and last modification time (LastModifiedDate). If this field is left empty, the results will be sorted in alphabetical order by nickname (DisplayName).
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 50 users will be returned.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *ListUsersInUserGroupRequest) ToJsonString() string {
@@ -2729,18 +2729,18 @@ func (r *ListUsersInUserGroupRequest) FromJsonString(s string) error {
 type ListUsersInUserGroupResponseParams struct {
 	// User group ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// Returned user information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserInfo []*UserInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+	UserInfo []*UserInfo `json:"UserInfo,omitnil" name:"UserInfo"`
 
 	// Total number of returned user information items.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalNum *int64 `json:"TotalNum,omitempty" name:"TotalNum"`
+	TotalNum *int64 `json:"TotalNum,omitnil" name:"TotalNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUsersInUserGroupResponse struct {
@@ -2762,44 +2762,44 @@ func (r *ListUsersInUserGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListUsersRequestParams struct {
 	// User attribute search criterion. The supported search criteria include username, mobile number, email address, user locking status, user freezing status, creation time, and last modification time, which can also be combined. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, brackets separated by a comma ([Min,Max]) indicate query within a closed interval, braces separated by a comma ({Min,Max}) indicate query within an open interval, and a bracket and a brace can be used together (for example, {Min,Max] indicates that the minimum value is excluded and the maximum value is included in the query). Range query supports using an asterisk (for example, {20,*] indicates an interval including all data greater than 20) and querying by time period. The supported attributes include creation time (CreationTime) and last modification time (LastUpdateTime) in ISO 8601 format, such as `2021-01-13T09:44:07.182+0000`.
-	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// User attributes expected to be returned. All built-in user attributes will be returned by default, including user UUID (UserId), nickname (DisplayName), username (UserName), mobile number (Phone), email address (Email), status (Status), user group (SubjectGroups), organization path (OrgPath), remarks (Description), creation time (CreationTime), last modification time (LastUpdateTime), and last login time (LastLoginTime).
-	ExpectedFields []*string `json:"ExpectedFields,omitempty" name:"ExpectedFields"`
+	ExpectedFields []*string `json:"ExpectedFields,omitnil" name:"ExpectedFields"`
 
 	// Set of sort criteria. The supported attributes for sorting include username (UserName), nickname (DisplayName), mobile number (Phone), email address (Email), user status (Status), creation time (CreatedDate), last modification time (LastUpdateTime), and last login time (LastLoginTime). If this field is left empty, the results will be sorted in alphabetical order by nickname (DisplayName).
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 1,000 users will be returned.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 1,000 users will be returned.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Whether to view the total number of search results. Default value: false (no).
-	IncludeTotal *bool `json:"IncludeTotal,omitempty" name:"IncludeTotal"`
+	IncludeTotal *bool `json:"IncludeTotal,omitnil" name:"IncludeTotal"`
 }
 
 type ListUsersRequest struct {
 	*tchttp.BaseRequest
 	
 	// User attribute search criterion. The supported search criteria include username, mobile number, email address, user locking status, user freezing status, creation time, and last modification time, which can also be combined. In addition, multiple query methods such as full match, partial match, and range match are supported. Specifically, double quotation marks ("") indicate full match, an asterisk (*) at the end of the field indicates partial match, brackets separated by a comma ([Min,Max]) indicate query within a closed interval, braces separated by a comma ({Min,Max}) indicate query within an open interval, and a bracket and a brace can be used together (for example, {Min,Max] indicates that the minimum value is excluded and the maximum value is included in the query). Range query supports using an asterisk (for example, {20,*] indicates an interval including all data greater than 20) and querying by time period. The supported attributes include creation time (CreationTime) and last modification time (LastUpdateTime) in ISO 8601 format, such as `2021-01-13T09:44:07.182+0000`.
-	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitempty" name:"SearchCondition"`
+	SearchCondition *UserSearchCriteria `json:"SearchCondition,omitnil" name:"SearchCondition"`
 
 	// User attributes expected to be returned. All built-in user attributes will be returned by default, including user UUID (UserId), nickname (DisplayName), username (UserName), mobile number (Phone), email address (Email), status (Status), user group (SubjectGroups), organization path (OrgPath), remarks (Description), creation time (CreationTime), last modification time (LastUpdateTime), and last login time (LastLoginTime).
-	ExpectedFields []*string `json:"ExpectedFields,omitempty" name:"ExpectedFields"`
+	ExpectedFields []*string `json:"ExpectedFields,omitnil" name:"ExpectedFields"`
 
 	// Set of sort criteria. The supported attributes for sorting include username (UserName), nickname (DisplayName), mobile number (Phone), email address (Email), user status (Status), creation time (CreatedDate), last modification time (LastUpdateTime), and last login time (LastLoginTime). If this field is left empty, the results will be sorted in alphabetical order by nickname (DisplayName).
-	Sort *SortCondition `json:"Sort,omitempty" name:"Sort"`
+	Sort *SortCondition `json:"Sort,omitnil" name:"Sort"`
 
 	// Pagination offset. Default value: 0. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 1,000 users will be returned.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of results read per page. Default value: 50. Maximum value: 100. The `Offset` and `Limit` fields need to be used together; otherwise, the query results will not be paginated, and up to 1,000 users will be returned.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Whether to view the total number of search results. Default value: false (no).
-	IncludeTotal *bool `json:"IncludeTotal,omitempty" name:"IncludeTotal"`
+	IncludeTotal *bool `json:"IncludeTotal,omitnil" name:"IncludeTotal"`
 }
 
 func (r *ListUsersRequest) ToJsonString() string {
@@ -2830,14 +2830,14 @@ func (r *ListUsersRequest) FromJsonString(s string) error {
 type ListUsersResponseParams struct {
 	// List of users returned for the query.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserList []*UserInformation `json:"UserList,omitempty" name:"UserList"`
+	UserList []*UserInformation `json:"UserList,omitnil" name:"UserList"`
 
 	// Total number of users returned for the query, which will be returned only when the `IncludeTotal` input parameter is set to `true`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ListUsersResponse struct {
@@ -2859,26 +2859,26 @@ func (r *ListUsersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountGroupRequestParams struct {
 	// Account group ID.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// Account group name. When this parameter is not specified, the name will not be modified.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Description. When this parameter is not specified, the description will not be modified.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type ModifyAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Account group ID.
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// Account group name. When this parameter is not specified, the name will not be modified.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// Description. When this parameter is not specified, the description will not be modified.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *ModifyAccountGroupRequest) ToJsonString() string {
@@ -2905,7 +2905,7 @@ func (r *ModifyAccountGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAccountGroupResponse struct {
@@ -2927,32 +2927,32 @@ func (r *ModifyAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAppAccountRequestParams struct {
 	// Account ID.
-	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+	AccountId *string `json:"AccountId,omitnil" name:"AccountId"`
 
 	// Account name. When this parameter is not specified, the name will not be modified.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Account password. When this parameter is not specified, the password will not be changed.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Description. When this parameter is not specified, the description will not be modified.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type ModifyAppAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Account ID.
-	AccountId *string `json:"AccountId,omitempty" name:"AccountId"`
+	AccountId *string `json:"AccountId,omitnil" name:"AccountId"`
 
 	// Account name. When this parameter is not specified, the name will not be modified.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Account password. When this parameter is not specified, the password will not be changed.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Description. When this parameter is not specified, the description will not be modified.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *ModifyAppAccountRequest) ToJsonString() string {
@@ -2980,7 +2980,7 @@ func (r *ModifyAppAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAppAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAppAccountResponse struct {
@@ -3002,44 +3002,44 @@ func (r *ModifyAppAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationRequestParams struct {
 	// Application ID, which is globally unique.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Security level.
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 
 	// Displayed application name, which can contain up to 32 characters and is the same as the application name by default.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Application status. Valid values: true: enabled; false: disabled.
-	AppStatus *bool `json:"AppStatus,omitempty" name:"AppStatus"`
+	AppStatus *bool `json:"AppStatus,omitnil" name:"AppStatus"`
 
 	// Access address of the application icon image.
-	IconUrl *string `json:"IconUrl,omitempty" name:"IconUrl"`
+	IconUrl *string `json:"IconUrl,omitnil" name:"IconUrl"`
 
 	// Description, which can contain up to 128 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type ModifyApplicationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Application ID, which is globally unique.
-	ApplicationId *string `json:"ApplicationId,omitempty" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// Security level.
-	SecureLevel *string `json:"SecureLevel,omitempty" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
 
 	// Displayed application name, which can contain up to 32 characters and is the same as the application name by default.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Application status. Valid values: true: enabled; false: disabled.
-	AppStatus *bool `json:"AppStatus,omitempty" name:"AppStatus"`
+	AppStatus *bool `json:"AppStatus,omitnil" name:"AppStatus"`
 
 	// Access address of the application icon image.
-	IconUrl *string `json:"IconUrl,omitempty" name:"IconUrl"`
+	IconUrl *string `json:"IconUrl,omitnil" name:"IconUrl"`
 
 	// Description, which can contain up to 128 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *ModifyApplicationRequest) ToJsonString() string {
@@ -3069,7 +3069,7 @@ func (r *ModifyApplicationRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyApplicationResponse struct {
@@ -3091,80 +3091,80 @@ func (r *ModifyApplicationResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyUserInfoRequestParams struct {
 	// Username, which can contain up to 32 characters. You need to select either `Username` or `UserId` as the search criterion; if both are selected, `Username` will be used by default.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User remarks, which can contain up to 512 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// List of IDs of the user's user groups.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// User ID. You need to select either `UserName` or `UserId` as the search criterion. If both are selected, `UserName` will be used by default.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User's mobile number.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// User expiration time in ISO 8601 format.
-	ExpirationTime *string `json:"ExpirationTime,omitempty" name:"ExpirationTime"`
+	ExpirationTime *string `json:"ExpirationTime,omitnil" name:"ExpirationTime"`
 
 	// User password, which needs to be configured according to the password policy.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// User's email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Whether the password needs to be reset. Default value: false (no).
-	PwdNeedReset *bool `json:"PwdNeedReset,omitempty" name:"PwdNeedReset"`
+	PwdNeedReset *bool `json:"PwdNeedReset,omitnil" name:"PwdNeedReset"`
 
 	// Unique ID of the user's primary organization. If this parameter is left empty, the user will be created under the root node by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// List of IDs of the user's secondary organizations.
-	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitempty" name:"SecondaryOrgNodeIdList"`
+	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitnil" name:"SecondaryOrgNodeIdList"`
 }
 
 type ModifyUserInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Username, which can contain up to 32 characters. You need to select either `Username` or `UserId` as the search criterion; if both are selected, `Username` will be used by default.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User remarks, which can contain up to 512 characters.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// List of IDs of the user's user groups.
-	UserGroupIds []*string `json:"UserGroupIds,omitempty" name:"UserGroupIds"`
+	UserGroupIds []*string `json:"UserGroupIds,omitnil" name:"UserGroupIds"`
 
 	// User ID. You need to select either `UserName` or `UserId` as the search criterion. If both are selected, `UserName` will be used by default.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// User's mobile number.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// User expiration time in ISO 8601 format.
-	ExpirationTime *string `json:"ExpirationTime,omitempty" name:"ExpirationTime"`
+	ExpirationTime *string `json:"ExpirationTime,omitnil" name:"ExpirationTime"`
 
 	// User password, which needs to be configured according to the password policy.
-	Password *string `json:"Password,omitempty" name:"Password"`
+	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// User's email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Whether the password needs to be reset. Default value: false (no).
-	PwdNeedReset *bool `json:"PwdNeedReset,omitempty" name:"PwdNeedReset"`
+	PwdNeedReset *bool `json:"PwdNeedReset,omitnil" name:"PwdNeedReset"`
 
 	// Unique ID of the user's primary organization. If this parameter is left empty, the user will be created under the root node by default.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// List of IDs of the user's secondary organizations.
-	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitempty" name:"SecondaryOrgNodeIdList"`
+	SecondaryOrgNodeIdList []*string `json:"SecondaryOrgNodeIdList,omitnil" name:"SecondaryOrgNodeIdList"`
 }
 
 func (r *ModifyUserInfoRequest) ToJsonString() string {
@@ -3200,7 +3200,7 @@ func (r *ModifyUserInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyUserInfoResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyUserInfoResponse struct {
@@ -3222,76 +3222,76 @@ func (r *ModifyUserInfoResponse) FromJsonString(s string) error {
 type OrgNodeChildInfo struct {
 	// Displayed organization node name, which can contain up to 64 characters and is the same as the organization name by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Last modification time of the organization node in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifiedDate *string `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 
 	// External ID of the organization node, which is optional and customizable.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitempty" name:"CustomizedOrgNodeId"`
+	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitnil" name:"CustomizedOrgNodeId"`
 
 	// Parent node ID of the current organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitempty" name:"ParentOrgNodeId"`
+	ParentOrgNodeId *string `json:"ParentOrgNodeId,omitnil" name:"ParentOrgNodeId"`
 
 	// Organization node ID, which is globally unique.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Data source.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DataSource *string `json:"DataSource,omitempty" name:"DataSource"`
+	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
 	// Organization node creation time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 
 	// Organization node description.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type OrgNodeChildUserInfo struct {
 	// Organization node ID, which is globally unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// User information list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserInfo []*UserInfo `json:"UserInfo,omitempty" name:"UserInfo"`
+	UserInfo []*UserInfo `json:"UserInfo,omitnil" name:"UserInfo"`
 
 	// Total number of users under the current organization node.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TotalUserNum *int64 `json:"TotalUserNum,omitempty" name:"TotalUserNum"`
+	TotalUserNum *int64 `json:"TotalUserNum,omitnil" name:"TotalUserNum"`
 
 	// Organization ID path.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeIdPath *string `json:"OrgNodeIdPath,omitempty" name:"OrgNodeIdPath"`
+	OrgNodeIdPath *string `json:"OrgNodeIdPath,omitnil" name:"OrgNodeIdPath"`
 
 	// Organization name path.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgNodeNamePath *string `json:"OrgNodeNamePath,omitempty" name:"OrgNodeNamePath"`
+	OrgNodeNamePath *string `json:"OrgNodeNamePath,omitnil" name:"OrgNodeNamePath"`
 }
 
 // Predefined struct for user
 type RemoveAccountFromAccountGroupRequestParams struct {
 	// Account group ID
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// List of IDs of the accounts to be removed.
-	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds"`
+	AccountIds []*string `json:"AccountIds,omitnil" name:"AccountIds"`
 }
 
 type RemoveAccountFromAccountGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Account group ID
-	AccountGroupId *string `json:"AccountGroupId,omitempty" name:"AccountGroupId"`
+	AccountGroupId *string `json:"AccountGroupId,omitnil" name:"AccountGroupId"`
 
 	// List of IDs of the accounts to be removed.
-	AccountIds []*string `json:"AccountIds,omitempty" name:"AccountIds"`
+	AccountIds []*string `json:"AccountIds,omitnil" name:"AccountIds"`
 }
 
 func (r *RemoveAccountFromAccountGroupRequest) ToJsonString() string {
@@ -3317,7 +3317,7 @@ func (r *RemoveAccountFromAccountGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveAccountFromAccountGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RemoveAccountFromAccountGroupResponse struct {
@@ -3339,20 +3339,20 @@ func (r *RemoveAccountFromAccountGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveUserFromUserGroupRequestParams struct {
 	// List of IDs of the users to be added to the user group.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 type RemoveUserFromUserGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of IDs of the users to be added to the user group.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 
 	// User group ID, which is globally unique.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 }
 
 func (r *RemoveUserFromUserGroupRequest) ToJsonString() string {
@@ -3378,7 +3378,7 @@ func (r *RemoveUserFromUserGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveUserFromUserGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RemoveUserFromUserGroupResponse struct {
@@ -3399,51 +3399,51 @@ func (r *RemoveUserFromUserGroupResponse) FromJsonString(s string) error {
 
 type SortCondition struct {
 	// Sorting attribute.
-	SortKey *string `json:"SortKey,omitempty" name:"SortKey"`
+	SortKey *string `json:"SortKey,omitnil" name:"SortKey"`
 
 	// Sorting order. Valid values: ASC: ascending order; DESC: descending order.
-	SortOrder *string `json:"SortOrder,omitempty" name:"SortOrder"`
+	SortOrder *string `json:"SortOrder,omitnil" name:"SortOrder"`
 }
 
 type ThirdPartyAccountInfo struct {
 	// Third-Party account code. `2` indicates WeCom account.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountCode *string `json:"AccountCode,omitempty" name:"AccountCode"`
+	AccountCode *string `json:"AccountCode,omitnil" name:"AccountCode"`
 
 	// Username of the account.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 }
 
 // Predefined struct for user
 type UpdateOrgNodeRequestParams struct {
 	// Organization node ID, which is globally unique.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Organization node name, which can contain up to 64 characters.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Organization node description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// External ID of the organization node, which is optional and customizable. If this parameter is specified, its uniqueness will be verified.
-	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitempty" name:"CustomizedOrgNodeId"`
+	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitnil" name:"CustomizedOrgNodeId"`
 }
 
 type UpdateOrgNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Organization node ID, which is globally unique.
-	OrgNodeId *string `json:"OrgNodeId,omitempty" name:"OrgNodeId"`
+	OrgNodeId *string `json:"OrgNodeId,omitnil" name:"OrgNodeId"`
 
 	// Organization node name, which can contain up to 64 characters.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Organization node description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// External ID of the organization node, which is optional and customizable. If this parameter is specified, its uniqueness will be verified.
-	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitempty" name:"CustomizedOrgNodeId"`
+	CustomizedOrgNodeId *string `json:"CustomizedOrgNodeId,omitnil" name:"CustomizedOrgNodeId"`
 }
 
 func (r *UpdateOrgNodeRequest) ToJsonString() string {
@@ -3471,7 +3471,7 @@ func (r *UpdateOrgNodeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateOrgNodeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpdateOrgNodeResponse struct {
@@ -3493,142 +3493,142 @@ func (r *UpdateOrgNodeResponse) FromJsonString(s string) error {
 type UserGroupInfo struct {
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User group ID, which is globally unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// User group remarks.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedDate *string `json:"CreatedDate,omitempty" name:"CreatedDate"`
+	CreatedDate *string `json:"CreatedDate,omitnil" name:"CreatedDate"`
 }
 
 type UserGroupInfoSearchCriteria struct {
 	// Search by name. The match criteria include user group name and user group ID.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 type UserGroupInformation struct {
 	// User group ID.
-	UserGroupId *string `json:"UserGroupId,omitempty" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
 
 	// User group name.
-	UserGroupName *string `json:"UserGroupName,omitempty" name:"UserGroupName"`
+	UserGroupName *string `json:"UserGroupName,omitnil" name:"UserGroupName"`
 
 	// Last update time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastModifiedDate *string `json:"LastModifiedDate,omitempty" name:"LastModifiedDate"`
+	LastModifiedDate *string `json:"LastModifiedDate,omitnil" name:"LastModifiedDate"`
 }
 
 type UserGroupInformationSearchCriteria struct {
 	// Search by name. The match criteria include user group name.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 type UserInfo struct {
 	// User ID, which is globally unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// Username.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User's mobile number.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// Email address.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// User status.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Data source.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DataSource *string `json:"DataSource,omitempty" name:"DataSource"`
+	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 }
 
 type UserInformation struct {
 	// Username, which can contain up to 32 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User status.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Nickname, which can contain up to 64 characters and is the same as the username by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DisplayName *string `json:"DisplayName,omitempty" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
 
 	// User remarks, which can contain up to 512 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Last update time of the user in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastUpdateTime *string `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
+	LastUpdateTime *string `json:"LastUpdateTime,omitnil" name:"LastUpdateTime"`
 
 	// User creation time in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
 
 	// Path ID of the user's primary organization.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	OrgPath *string `json:"OrgPath,omitempty" name:"OrgPath"`
+	OrgPath *string `json:"OrgPath,omitnil" name:"OrgPath"`
 
 	// User's mobile number with country code, such as `+86-00000000000`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// List of IDs of the user's user groups.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	SubjectGroups []*string `json:"SubjectGroups,omitempty" name:"SubjectGroups"`
+	SubjectGroups []*string `json:"SubjectGroups,omitnil" name:"SubjectGroups"`
 
 	// User's email address.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// Last login time of the user in ISO 8601 format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LastLoginTime *string `json:"LastLoginTime,omitempty" name:"LastLoginTime"`
+	LastLoginTime *string `json:"LastLoginTime,omitnil" name:"LastLoginTime"`
 
 	// User ID, which is globally unique and can contain up to 64 characters.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type UserSearchCriteria struct {
 	// Username, which can contain up to 64 characters.
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// User's mobile number.
-	Phone *string `json:"Phone,omitempty" name:"Phone"`
+	Phone *string `json:"Phone,omitnil" name:"Phone"`
 
 	// User's email address.
-	Email *string `json:"Email,omitempty" name:"Email"`
+	Email *string `json:"Email,omitnil" name:"Email"`
 
 	// User status. Valid values: NORMAL: normal; FREEZE: frozen; LOCKED: locked; NOT_ENABLED: disabled.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// User creation time in ISO 8601 format.
-	CreationTime *string `json:"CreationTime,omitempty" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
 
 	// The user's last update time.
-	LastUpdateTime *string `json:"LastUpdateTime,omitempty" name:"LastUpdateTime"`
+	LastUpdateTime *string `json:"LastUpdateTime,omitnil" name:"LastUpdateTime"`
 
 	// Search by name. The match criteria include username and user ID.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }

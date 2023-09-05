@@ -15,34 +15,34 @@
 package v20220817
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type AddGroupMemberRequestParams struct {
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 type AddGroupMemberRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 func (r *AddGroupMemberRequest) ToJsonString() string {
@@ -69,7 +69,7 @@ func (r *AddGroupMemberRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddGroupMemberResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddGroupMemberResponse struct {
@@ -90,75 +90,75 @@ func (r *AddGroupMemberResponse) FromJsonString(s string) error {
 
 type AnswerInfo struct {
 	// The username.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The answer. Bits are used to indicate the options chosen. For example, `0x1` indicates that option A is chosen; `0x11` indicates that A and B are chosen, and so on.
-	Answer *uint64 `json:"Answer,omitempty" name:"Answer"`
+	Answer *uint64 `json:"Answer,omitnil" name:"Answer"`
 
 	// The time used.
-	CostTime *uint64 `json:"CostTime,omitempty" name:"CostTime"`
+	CostTime *uint64 `json:"CostTime,omitnil" name:"CostTime"`
 
 	// The user ID.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Whether the answer is correct. `1`: Correct; `0`: Incorrect.
-	IsCorrect *uint64 `json:"IsCorrect,omitempty" name:"IsCorrect"`
+	IsCorrect *uint64 `json:"IsCorrect,omitnil" name:"IsCorrect"`
 }
 
 type AnswerStat struct {
 	// The answer. Bits are used to indicate the options chosen. For example, `0x1` indicates that option A is chosen; `0x11` indicates that A and B are chosen, and so on.
-	Answer *int64 `json:"Answer,omitempty" name:"Answer"`
+	Answer *int64 `json:"Answer,omitnil" name:"Answer"`
 
 	// The number of users that submitted the answer.
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 }
 
 type AppCustomContent struct {
 	// Multiple scenarios can be set for an application.
-	Scene *string `json:"Scene,omitempty" name:"Scene"`
+	Scene *string `json:"Scene,omitnil" name:"Scene"`
 
 	// Logo URL
-	LogoUrl *string `json:"LogoUrl,omitempty" name:"LogoUrl"`
+	LogoUrl *string `json:"LogoUrl,omitnil" name:"LogoUrl"`
 
 	// Homepage URL, which can be used for redirection
-	HomeUrl *string `json:"HomeUrl,omitempty" name:"HomeUrl"`
+	HomeUrl *string `json:"HomeUrl,omitnil" name:"HomeUrl"`
 
 	// Custom JS URL
-	JsUrl *string `json:"JsUrl,omitempty" name:"JsUrl"`
+	JsUrl *string `json:"JsUrl,omitnil" name:"JsUrl"`
 
 	// Custom CSS URL
-	CssUrl *string `json:"CssUrl,omitempty" name:"CssUrl"`
+	CssUrl *string `json:"CssUrl,omitnil" name:"CssUrl"`
 }
 
 type BackgroundPictureConfig struct {
 	// The URL of the background image.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Url *string `json:"Url,omitempty" name:"Url"`
+	Url *string `json:"Url,omitnil" name:"Url"`
 }
 
 // Predefined struct for user
 type BatchAddGroupMemberRequestParams struct {
 	// The target group IDs. Array length limit: 100.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users to add. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 type BatchAddGroupMemberRequest struct {
 	*tchttp.BaseRequest
 	
 	// The target group IDs. Array length limit: 100.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users to add. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 func (r *BatchAddGroupMemberRequest) ToJsonString() string {
@@ -185,7 +185,7 @@ func (r *BatchAddGroupMemberRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchAddGroupMemberResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchAddGroupMemberResponse struct {
@@ -207,26 +207,26 @@ func (r *BatchAddGroupMemberResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchCreateGroupWithMembersRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The information of the groups to create. Array length limit: 256.
-	GroupBaseInfos []*GroupBaseInfo `json:"GroupBaseInfos,omitempty" name:"GroupBaseInfos"`
+	GroupBaseInfos []*GroupBaseInfo `json:"GroupBaseInfos,omitnil" name:"GroupBaseInfos"`
 
 	// The group members. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 type BatchCreateGroupWithMembersRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The information of the groups to create. Array length limit: 256.
-	GroupBaseInfos []*GroupBaseInfo `json:"GroupBaseInfos,omitempty" name:"GroupBaseInfos"`
+	GroupBaseInfos []*GroupBaseInfo `json:"GroupBaseInfos,omitnil" name:"GroupBaseInfos"`
 
 	// The group members. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 func (r *BatchCreateGroupWithMembersRequest) ToJsonString() string {
@@ -253,10 +253,10 @@ func (r *BatchCreateGroupWithMembersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchCreateGroupWithMembersResponseParams struct {
 	// The IDs of the groups created, which are in the same order as the elements in the request parameter `GroupBaseInfos.N`.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchCreateGroupWithMembersResponse struct {
@@ -278,20 +278,20 @@ func (r *BatchCreateGroupWithMembersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchCreateRoomRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The information of the rooms to create.
-	RoomInfos []*RoomInfo `json:"RoomInfos,omitempty" name:"RoomInfos"`
+	RoomInfos []*RoomInfo `json:"RoomInfos,omitnil" name:"RoomInfos"`
 }
 
 type BatchCreateRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The information of the rooms to create.
-	RoomInfos []*RoomInfo `json:"RoomInfos,omitempty" name:"RoomInfos"`
+	RoomInfos []*RoomInfo `json:"RoomInfos,omitnil" name:"RoomInfos"`
 }
 
 func (r *BatchCreateRoomRequest) ToJsonString() string {
@@ -317,10 +317,10 @@ func (r *BatchCreateRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchCreateRoomResponseParams struct {
 	// The IDs of the rooms created, which are in the same order as they are passed in.
-	RoomIds []*uint64 `json:"RoomIds,omitempty" name:"RoomIds"`
+	RoomIds []*uint64 `json:"RoomIds,omitnil" name:"RoomIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchCreateRoomResponse struct {
@@ -342,26 +342,26 @@ func (r *BatchCreateRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchDeleteGroupMemberRequestParams struct {
 	// The target group IDs. Array length limit: 100.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users to remove. Array length limit: 256.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 type BatchDeleteGroupMemberRequest struct {
 	*tchttp.BaseRequest
 	
 	// The target group IDs. Array length limit: 100.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users to remove. Array length limit: 256.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 func (r *BatchDeleteGroupMemberRequest) ToJsonString() string {
@@ -388,7 +388,7 @@ func (r *BatchDeleteGroupMemberRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchDeleteGroupMemberResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchDeleteGroupMemberResponse struct {
@@ -410,20 +410,20 @@ func (r *BatchDeleteGroupMemberResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchDeleteRecordRequestParams struct {
 	// The room IDs.
-	RoomIds []*int64 `json:"RoomIds,omitempty" name:"RoomIds"`
+	RoomIds []*int64 `json:"RoomIds,omitnil" name:"RoomIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 type BatchDeleteRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room IDs.
-	RoomIds []*int64 `json:"RoomIds,omitempty" name:"RoomIds"`
+	RoomIds []*int64 `json:"RoomIds,omitnil" name:"RoomIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 func (r *BatchDeleteRecordRequest) ToJsonString() string {
@@ -449,10 +449,10 @@ func (r *BatchDeleteRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchDeleteRecordResponseParams struct {
 	// The IDs of the rooms whose recordings are deleted. Note: This field may return null, indicating that no valid values can be obtained.
-	RoomIds []*int64 `json:"RoomIds,omitempty" name:"RoomIds"`
+	RoomIds []*int64 `json:"RoomIds,omitnil" name:"RoomIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchDeleteRecordResponse struct {
@@ -474,50 +474,50 @@ func (r *BatchDeleteRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchDescribeDocumentRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
-	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission []*uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The user ID of the courseware owner. If you do not specify this, the information of all courseware under the application will be returned.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// The filename keyword.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// The courseware IDs. Non-existent IDs will be ignored.
-	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId []*string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 type BatchDescribeDocumentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
-	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission []*uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The user ID of the courseware owner. If you do not specify this, the information of all courseware under the application will be returned.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// The filename keyword.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// The courseware IDs. Non-existent IDs will be ignored.
-	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId []*string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 func (r *BatchDescribeDocumentRequest) ToJsonString() string {
@@ -548,14 +548,14 @@ func (r *BatchDescribeDocumentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchDescribeDocumentResponseParams struct {
 	// The total number of records that meet the conditions.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The information of the courseware.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
+	Documents []*DocumentInfo `json:"Documents,omitnil" name:"Documents"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchDescribeDocumentResponse struct {
@@ -577,14 +577,14 @@ func (r *BatchDescribeDocumentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchRegisterRequestParams struct {
 	// The information of the users to register.
-	Users []*BatchUserRequest `json:"Users,omitempty" name:"Users"`
+	Users []*BatchUserRequest `json:"Users,omitnil" name:"Users"`
 }
 
 type BatchRegisterRequest struct {
 	*tchttp.BaseRequest
 	
 	// The information of the users to register.
-	Users []*BatchUserRequest `json:"Users,omitempty" name:"Users"`
+	Users []*BatchUserRequest `json:"Users,omitnil" name:"Users"`
 }
 
 func (r *BatchRegisterRequest) ToJsonString() string {
@@ -609,10 +609,10 @@ func (r *BatchRegisterRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchRegisterResponseParams struct {
 	// The information of the successfully registered users. Note: This field may return null, indicating that no valid values can be obtained.
-	Users []*BatchUserInfo `json:"Users,omitempty" name:"Users"`
+	Users []*BatchUserInfo `json:"Users,omitnil" name:"Users"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BatchRegisterResponse struct {
@@ -633,54 +633,54 @@ func (r *BatchRegisterResponse) FromJsonString(s string) error {
 
 type BatchUserInfo struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
 }
 
 type BatchUserRequest struct {
 	// The SDKAppID assigned by LCIC.  Note: This field may return null, indicating that no valid values can be obtained.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The username.  Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The user’s ID in your system, which must be unique across the same application.  Note: This field may return null, indicating that no valid values can be obtained.
-	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
 
 	// The user’s profile photo.  Note: This field may return null, indicating that no valid values can be obtained.
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 }
 
 // Predefined struct for user
 type BindDocumentToRoomRequestParams struct {
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// Document ID
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 
 	// Binding type. The default value is `0`. The backend passes through this parameter to clients so that the clients can implement business logic based on this parameter.
-	BindType *uint64 `json:"BindType,omitempty" name:"BindType"`
+	BindType *uint64 `json:"BindType,omitnil" name:"BindType"`
 }
 
 type BindDocumentToRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// Document ID
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 
 	// Binding type. The default value is `0`. The backend passes through this parameter to clients so that the clients can implement business logic based on this parameter.
-	BindType *uint64 `json:"BindType,omitempty" name:"BindType"`
+	BindType *uint64 `json:"BindType,omitnil" name:"BindType"`
 }
 
 func (r *BindDocumentToRoomRequest) ToJsonString() string {
@@ -707,7 +707,7 @@ func (r *BindDocumentToRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BindDocumentToRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BindDocumentToRoomResponse struct {
@@ -729,56 +729,56 @@ func (r *BindDocumentToRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDocumentRequestParams struct {
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Document URL	
-	DocumentUrl *string `json:"DocumentUrl,omitempty" name:"DocumentUrl"`
+	DocumentUrl *string `json:"DocumentUrl,omitnil" name:"DocumentUrl"`
 
 	// Document name	
-	DocumentName *string `json:"DocumentName,omitempty" name:"DocumentName"`
+	DocumentName *string `json:"DocumentName,omitnil" name:"DocumentName"`
 
 	// Document owner ID	
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// Transcoding type. Valid values: `0`: No transcoding required (default); `1`: Documents that need to be transcoded: ppt, pptx, pdf, doc, docx; `2`: Videos that need to be transcoded: mp4, 3pg, mpeg, avi, flv, wmv, rm, h264, etc.; `2`: Audio that needs to be transcoded: mp3, wav, wma, aac, flac, opus
-	TranscodeType *uint64 `json:"TranscodeType,omitempty" name:"TranscodeType"`
+	TranscodeType *uint64 `json:"TranscodeType,omitnil" name:"TranscodeType"`
 
 	// Permission. Valid values: `0`: Private document (default); `1`: Public document
-	Permission *uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission *uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// Document extension
-	DocumentType *string `json:"DocumentType,omitempty" name:"DocumentType"`
+	DocumentType *string `json:"DocumentType,omitnil" name:"DocumentType"`
 
 	// Document size, in bytes
-	DocumentSize *uint64 `json:"DocumentSize,omitempty" name:"DocumentSize"`
+	DocumentSize *uint64 `json:"DocumentSize,omitnil" name:"DocumentSize"`
 }
 
 type CreateDocumentRequest struct {
 	*tchttp.BaseRequest
 	
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Document URL	
-	DocumentUrl *string `json:"DocumentUrl,omitempty" name:"DocumentUrl"`
+	DocumentUrl *string `json:"DocumentUrl,omitnil" name:"DocumentUrl"`
 
 	// Document name	
-	DocumentName *string `json:"DocumentName,omitempty" name:"DocumentName"`
+	DocumentName *string `json:"DocumentName,omitnil" name:"DocumentName"`
 
 	// Document owner ID	
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// Transcoding type. Valid values: `0`: No transcoding required (default); `1`: Documents that need to be transcoded: ppt, pptx, pdf, doc, docx; `2`: Videos that need to be transcoded: mp4, 3pg, mpeg, avi, flv, wmv, rm, h264, etc.; `2`: Audio that needs to be transcoded: mp3, wav, wma, aac, flac, opus
-	TranscodeType *uint64 `json:"TranscodeType,omitempty" name:"TranscodeType"`
+	TranscodeType *uint64 `json:"TranscodeType,omitnil" name:"TranscodeType"`
 
 	// Permission. Valid values: `0`: Private document (default); `1`: Public document
-	Permission *uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission *uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// Document extension
-	DocumentType *string `json:"DocumentType,omitempty" name:"DocumentType"`
+	DocumentType *string `json:"DocumentType,omitnil" name:"DocumentType"`
 
 	// Document size, in bytes
-	DocumentSize *uint64 `json:"DocumentSize,omitempty" name:"DocumentSize"`
+	DocumentSize *uint64 `json:"DocumentSize,omitnil" name:"DocumentSize"`
 }
 
 func (r *CreateDocumentRequest) ToJsonString() string {
@@ -810,10 +810,10 @@ func (r *CreateDocumentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDocumentResponseParams struct {
 	// Document ID
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateDocumentResponse struct {
@@ -835,32 +835,32 @@ func (r *CreateDocumentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateGroupWithMembersRequestParams struct {
 	// The group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user ID of the teacher.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The group members. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 type CreateGroupWithMembersRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user ID of the teacher.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The group members. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 func (r *CreateGroupWithMembersRequest) ToJsonString() string {
@@ -888,10 +888,10 @@ func (r *CreateGroupWithMembersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateGroupWithMembersResponseParams struct {
 	// The ID of the successfully created group.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateGroupWithMembersResponse struct {
@@ -913,32 +913,32 @@ func (r *CreateGroupWithMembersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateGroupWithSubGroupRequestParams struct {
 	// The group name after merging.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The IDs of the groups to merge. Duplicate group IDs are not allowed. Array length limit: 40.
-	SubGroupIds []*string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
+	SubGroupIds []*string `json:"SubGroupIds,omitnil" name:"SubGroupIds"`
 
 	// The user ID of the teacher.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 }
 
 type CreateGroupWithSubGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group name after merging.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The IDs of the groups to merge. Duplicate group IDs are not allowed. Array length limit: 40.
-	SubGroupIds []*string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
+	SubGroupIds []*string `json:"SubGroupIds,omitnil" name:"SubGroupIds"`
 
 	// The user ID of the teacher.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 }
 
 func (r *CreateGroupWithSubGroupRequest) ToJsonString() string {
@@ -966,10 +966,10 @@ func (r *CreateGroupWithSubGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateGroupWithSubGroupResponseParams struct {
 	// The ID of the merged group.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateGroupWithSubGroupResponse struct {
@@ -991,120 +991,120 @@ func (r *CreateGroupWithSubGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRoomRequestParams struct {
 	// Room name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Reserved room start time, in UNIX timestamp format
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Reserved room end time, in UNIX timestamp format
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
+	SubType *string `json:"SubType,omitnil" name:"SubType"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs. The user specified will have teacher permissions in the room created.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
-	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
+	AutoMic *uint64 `json:"AutoMic,omitnil" name:"AutoMic"`
 
 	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
-	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
+	TurnOffMic *uint64 `json:"TurnOffMic,omitnil" name:"TurnOffMic"`
 
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
-	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
+	AudioQuality *uint64 `json:"AudioQuality,omitnil" name:"AudioQuality"`
 
 	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
-	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
+	DisableRecord *uint64 `json:"DisableRecord,omitnil" name:"DisableRecord"`
 
 	// The user IDs of the teaching assistants. User IDs are returned by the user registration APIs. The users specified will have teaching assistant permissions in the room created.
-	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+	Assistants []*string `json:"Assistants,omitnil" name:"Assistants"`
 
 	// The number of RTC users.
-	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
+	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitnil" name:"RTCAudienceNumber"`
 
 	// The audience type.
-	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
+	AudienceType *uint64 `json:"AudienceType,omitnil" name:"AudienceType"`
 
 	// Recording layout
-	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
+	RecordLayout *uint64 `json:"RecordLayout,omitnil" name:"RecordLayout"`
 
 	// The ID of the group to bind. If you specify this parameter, only members of the group can enter this room.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Whether the teacher/teaching assistant can control students' cameras/microphones without the students' consent. Valid values: 
 	// `0` (default): No (consent required)
 	// `1`: Yes (no consent required)
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 }
 
 type CreateRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// Room name
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Reserved room start time, in UNIX timestamp format
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Reserved room end time, in UNIX timestamp format
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
+	SubType *string `json:"SubType,omitnil" name:"SubType"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs. The user specified will have teacher permissions in the room created.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
-	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
+	AutoMic *uint64 `json:"AutoMic,omitnil" name:"AutoMic"`
 
 	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
-	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
+	TurnOffMic *uint64 `json:"TurnOffMic,omitnil" name:"TurnOffMic"`
 
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
-	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
+	AudioQuality *uint64 `json:"AudioQuality,omitnil" name:"AudioQuality"`
 
 	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
-	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
+	DisableRecord *uint64 `json:"DisableRecord,omitnil" name:"DisableRecord"`
 
 	// The user IDs of the teaching assistants. User IDs are returned by the user registration APIs. The users specified will have teaching assistant permissions in the room created.
-	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+	Assistants []*string `json:"Assistants,omitnil" name:"Assistants"`
 
 	// The number of RTC users.
-	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
+	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitnil" name:"RTCAudienceNumber"`
 
 	// The audience type.
-	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
+	AudienceType *uint64 `json:"AudienceType,omitnil" name:"AudienceType"`
 
 	// Recording layout
-	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
+	RecordLayout *uint64 `json:"RecordLayout,omitnil" name:"RecordLayout"`
 
 	// The ID of the group to bind. If you specify this parameter, only members of the group can enter this room.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Whether the teacher/teaching assistant can control students' cameras/microphones without the students' consent. Valid values: 
 	// `0` (default): No (consent required)
 	// `1`: Yes (no consent required)
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 }
 
 func (r *CreateRoomRequest) ToJsonString() string {
@@ -1146,10 +1146,10 @@ func (r *CreateRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRoomResponseParams struct {
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateRoomResponse struct {
@@ -1171,20 +1171,20 @@ func (r *CreateRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSupervisorRequestParams struct {
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user IDs.
-	Users []*string `json:"Users,omitempty" name:"Users"`
+	Users []*string `json:"Users,omitnil" name:"Users"`
 }
 
 type CreateSupervisorRequest struct {
 	*tchttp.BaseRequest
 	
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user IDs.
-	Users []*string `json:"Users,omitempty" name:"Users"`
+	Users []*string `json:"Users,omitnil" name:"Users"`
 }
 
 func (r *CreateSupervisorRequest) ToJsonString() string {
@@ -1210,7 +1210,7 @@ func (r *CreateSupervisorRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSupervisorResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateSupervisorResponse struct {
@@ -1232,20 +1232,20 @@ func (r *CreateSupervisorResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAppCustomContentRequestParams struct {
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
-	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
+	Scenes []*string `json:"Scenes,omitnil" name:"Scenes"`
 }
 
 type DeleteAppCustomContentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The custom elements (for which a scene has been configured) to delete. If this is empty, all custom elements will be deleted.
-	Scenes []*string `json:"Scenes,omitempty" name:"Scenes"`
+	Scenes []*string `json:"Scenes,omitnil" name:"Scenes"`
 }
 
 func (r *DeleteAppCustomContentRequest) ToJsonString() string {
@@ -1271,7 +1271,7 @@ func (r *DeleteAppCustomContentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAppCustomContentResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAppCustomContentResponse struct {
@@ -1293,14 +1293,14 @@ func (r *DeleteAppCustomContentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDocumentRequestParams struct {
 	// The document ID.
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 type DeleteDocumentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The document ID.
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 func (r *DeleteDocumentRequest) ToJsonString() string {
@@ -1325,7 +1325,7 @@ func (r *DeleteDocumentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDocumentResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteDocumentResponse struct {
@@ -1347,26 +1347,26 @@ func (r *DeleteDocumentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteGroupMemberRequestParams struct {
 	// The group ID. You cannot remove members from a merged group.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 type DeleteGroupMemberRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID. You cannot remove members from a merged group.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The users. Array length limit: 200.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 }
 
 func (r *DeleteGroupMemberRequest) ToJsonString() string {
@@ -1393,7 +1393,7 @@ func (r *DeleteGroupMemberRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteGroupMemberResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteGroupMemberResponse struct {
@@ -1415,20 +1415,20 @@ func (r *DeleteGroupMemberResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteGroupRequestParams struct {
 	// The IDs of the groups to delete.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 type DeleteGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// The IDs of the groups to delete.
-	GroupIds []*string `json:"GroupIds,omitempty" name:"GroupIds"`
+	GroupIds []*string `json:"GroupIds,omitnil" name:"GroupIds"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 func (r *DeleteGroupRequest) ToJsonString() string {
@@ -1454,7 +1454,7 @@ func (r *DeleteGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteGroupResponse struct {
@@ -1476,20 +1476,20 @@ func (r *DeleteGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRecordRequestParams struct {
 	// The room ID.
-	RoomId *int64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *int64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 type DeleteRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *int64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *int64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 func (r *DeleteRecordRequest) ToJsonString() string {
@@ -1515,7 +1515,7 @@ func (r *DeleteRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRecordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteRecordResponse struct {
@@ -1537,14 +1537,14 @@ func (r *DeleteRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRoomRequestParams struct {
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 type DeleteRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 func (r *DeleteRoomRequest) ToJsonString() string {
@@ -1569,7 +1569,7 @@ func (r *DeleteRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteRoomResponse struct {
@@ -1591,20 +1591,20 @@ func (r *DeleteRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSupervisorRequestParams struct {
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user IDs.
-	Users []*string `json:"Users,omitempty" name:"Users"`
+	Users []*string `json:"Users,omitnil" name:"Users"`
 }
 
 type DeleteSupervisorRequest struct {
 	*tchttp.BaseRequest
 	
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user IDs.
-	Users []*string `json:"Users,omitempty" name:"Users"`
+	Users []*string `json:"Users,omitnil" name:"Users"`
 }
 
 func (r *DeleteSupervisorRequest) ToJsonString() string {
@@ -1630,7 +1630,7 @@ func (r *DeleteSupervisorRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSupervisorResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteSupervisorResponse struct {
@@ -1652,26 +1652,26 @@ func (r *DeleteSupervisorResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAnswerListRequestParams struct {
 	// The question ID.
-	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
+	QuestionId *string `json:"QuestionId,omitnil" name:"QuestionId"`
 
 	// 1
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeAnswerListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The question ID.
-	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
+	QuestionId *string `json:"QuestionId,omitnil" name:"QuestionId"`
 
 	// 1
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeAnswerListRequest) ToJsonString() string {
@@ -1698,14 +1698,14 @@ func (r *DescribeAnswerListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAnswerListResponseParams struct {
 	// The total number of answers.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// A list of the answers.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AnswerInfo []*AnswerInfo `json:"AnswerInfo,omitempty" name:"AnswerInfo"`
+	AnswerInfo []*AnswerInfo `json:"AnswerInfo,omitnil" name:"AnswerInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAnswerListResponse struct {
@@ -1727,26 +1727,26 @@ func (r *DescribeAnswerListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCurrentMemberListRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed 1000.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeCurrentMemberListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed 1000.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeCurrentMemberListRequest) ToJsonString() string {
@@ -1773,13 +1773,13 @@ func (r *DescribeCurrentMemberListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCurrentMemberListResponseParams struct {
 	// The total number of records.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The user list.
-	MemberRecords []*MemberRecord `json:"MemberRecords,omitempty" name:"MemberRecords"`
+	MemberRecords []*MemberRecord `json:"MemberRecords,omitnil" name:"MemberRecords"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeCurrentMemberListResponse struct {
@@ -1830,10 +1830,10 @@ func (r *DescribeDeveloperRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDeveloperResponseParams struct {
 	// The developer ID.
-	DeveloperId *string `json:"DeveloperId,omitempty" name:"DeveloperId"`
+	DeveloperId *string `json:"DeveloperId,omitnil" name:"DeveloperId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDeveloperResponse struct {
@@ -1855,14 +1855,14 @@ func (r *DescribeDeveloperResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDocumentRequestParams struct {
 	// The (unique) document ID.
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 type DescribeDocumentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The (unique) document ID.
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 func (r *DescribeDocumentRequest) ToJsonString() string {
@@ -1887,49 +1887,49 @@ func (r *DescribeDocumentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDocumentResponseParams struct {
 	// The document ID.
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 
 	// The document’s original URL.
-	DocumentUrl *string `json:"DocumentUrl,omitempty" name:"DocumentUrl"`
+	DocumentUrl *string `json:"DocumentUrl,omitnil" name:"DocumentUrl"`
 
 	// The document title.
-	DocumentName *string `json:"DocumentName,omitempty" name:"DocumentName"`
+	DocumentName *string `json:"DocumentName,omitnil" name:"DocumentName"`
 
 	// The user ID of the document’s owner.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The document access type.
-	Permission *uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission *uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The transcoding result. If the file is not transcoded, this parameter will be empty. If it is successfully transcoded, this parameter will be the URL of the transcoded file. If transcoding fails, this parameter will indicate the error code.
-	TranscodeResult *string `json:"TranscodeResult,omitempty" name:"TranscodeResult"`
+	TranscodeResult *string `json:"TranscodeResult,omitnil" name:"TranscodeResult"`
 
 	// The transcoding type.
-	TranscodeType *uint64 `json:"TranscodeType,omitempty" name:"TranscodeType"`
+	TranscodeType *uint64 `json:"TranscodeType,omitnil" name:"TranscodeType"`
 
 	// The transcoding progress. Value range: 0-100.
-	TranscodeProgress *uint64 `json:"TranscodeProgress,omitempty" name:"TranscodeProgress"`
+	TranscodeProgress *uint64 `json:"TranscodeProgress,omitnil" name:"TranscodeProgress"`
 
 	// The transcoding status. 0: The file is not transcoded. 1: The file is being transcoded. 2: Transcoding failed. 3: Transcoding is successful.
-	TranscodeState *uint64 `json:"TranscodeState,omitempty" name:"TranscodeState"`
+	TranscodeState *uint64 `json:"TranscodeState,omitnil" name:"TranscodeState"`
 
 	// The error message for failed transcoding.
-	TranscodeInfo *string `json:"TranscodeInfo,omitempty" name:"TranscodeInfo"`
+	TranscodeInfo *string `json:"TranscodeInfo,omitnil" name:"TranscodeInfo"`
 
 	// The document type.
-	DocumentType *string `json:"DocumentType,omitempty" name:"DocumentType"`
+	DocumentType *string `json:"DocumentType,omitnil" name:"DocumentType"`
 
 	// The document size (bytes).
-	DocumentSize *uint64 `json:"DocumentSize,omitempty" name:"DocumentSize"`
+	DocumentSize *uint64 `json:"DocumentSize,omitnil" name:"DocumentSize"`
 
 	// The time (Unix timestamp) when the document was last updated.
-	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *uint64 `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDocumentResponse struct {
@@ -1951,44 +1951,44 @@ func (r *DescribeDocumentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDocumentsByRoomRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records to return per page. The maximum value can be 1000. The default value is 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The document access type. [0]: The private documents of the owner. [1]: The public documents of the owner. [0,1]: The private and public documents of the owner. [2]: The private and public documents of all users (including the owner). Default value: [2].
-	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission []*uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The user ID of the document owner. If you do not specify this, the information of all documents under the application will be returned.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 }
 
 type DescribeDocumentsByRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records to return per page. The maximum value can be 1000. The default value is 100.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The document access type. [0]: The private documents of the owner. [1]: The public documents of the owner. [0,1]: The private and public documents of the owner. [2]: The private and public documents of all users (including the owner). Default value: [2].
-	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission []*uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The user ID of the document owner. If you do not specify this, the information of all documents under the application will be returned.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 }
 
 func (r *DescribeDocumentsByRoomRequest) ToJsonString() string {
@@ -2019,13 +2019,13 @@ func (r *DescribeDocumentsByRoomRequest) FromJsonString(s string) error {
 type DescribeDocumentsByRoomResponseParams struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
+	Documents []*DocumentInfo `json:"Documents,omitnil" name:"Documents"`
 
 	// The total number of records that meet the conditions.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDocumentsByRoomResponse struct {
@@ -2047,50 +2047,50 @@ func (r *DescribeDocumentsByRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDocumentsRequestParams struct {
 	// The school ID.
-	SchoolId *uint64 `json:"SchoolId,omitempty" name:"SchoolId"`
+	SchoolId *uint64 `json:"SchoolId,omitnil" name:"SchoolId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
-	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission []*uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The user ID of the courseware owner. If you do not specify this parameter, all courseware under the school ID will be returned.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// The filename keyword.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// The courseware IDs. Non-existent IDs will be ignored.
-	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId []*string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 type DescribeDocumentsRequest struct {
 	*tchttp.BaseRequest
 	
 	// The school ID.
-	SchoolId *uint64 `json:"SchoolId,omitempty" name:"SchoolId"`
+	SchoolId *uint64 `json:"SchoolId,omitnil" name:"SchoolId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed `1000`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The courseware access. [0]: The private courseware of the specified user (`Owner`) will be returned; [1]: The public courseware of the specified user will be returned; [0,1]: Both the private and public courseware of the specified user will be returned; [2]: The private courseware of the specified user and the public courseware of all users (including `Owner`) will be returned.
-	Permission []*uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission []*uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The user ID of the courseware owner. If you do not specify this parameter, all courseware under the school ID will be returned.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// The filename keyword.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
 	// The courseware IDs. Non-existent IDs will be ignored.
-	DocumentId []*string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId []*string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 func (r *DescribeDocumentsRequest) ToJsonString() string {
@@ -2121,14 +2121,14 @@ func (r *DescribeDocumentsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDocumentsResponseParams struct {
 	// The total number of records that meet the conditions.
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The information of the courseware.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Documents []*DocumentInfo `json:"Documents,omitempty" name:"Documents"`
+	Documents []*DocumentInfo `json:"Documents,omitnil" name:"Documents"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDocumentsResponse struct {
@@ -2150,38 +2150,38 @@ func (r *DescribeDocumentsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGroupListRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The user ID of the teacher, which is used as the filter. This parameter and MemberId are mutually exclusive. If both are specified, only this parameter will take effect.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The user ID of a member, which is used as the filter. This parameter and TeacherId are mutually exclusive.
-	MemberId *string `json:"MemberId,omitempty" name:"MemberId"`
+	MemberId *string `json:"MemberId,omitnil" name:"MemberId"`
 }
 
 type DescribeGroupListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The user ID of the teacher, which is used as the filter. This parameter and MemberId are mutually exclusive. If both are specified, only this parameter will take effect.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The user ID of a member, which is used as the filter. This parameter and TeacherId are mutually exclusive.
-	MemberId *string `json:"MemberId,omitempty" name:"MemberId"`
+	MemberId *string `json:"MemberId,omitnil" name:"MemberId"`
 }
 
 func (r *DescribeGroupListRequest) ToJsonString() string {
@@ -2210,14 +2210,14 @@ func (r *DescribeGroupListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGroupListResponseParams struct {
 	// The total number of groups that meet the conditions.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GroupInfos []*GroupInfo `json:"GroupInfos,omitempty" name:"GroupInfos"`
+	GroupInfos []*GroupInfo `json:"GroupInfos,omitnil" name:"GroupInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeGroupListResponse struct {
@@ -2239,32 +2239,32 @@ func (r *DescribeGroupListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGroupMemberListRequestParams struct {
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. The default value is 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeGroupMemberListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. The default value is 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records per page. The value of this parameter cannot exceed 1000 and is 20 by default.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeGroupMemberListRequest) ToJsonString() string {
@@ -2292,14 +2292,14 @@ func (r *DescribeGroupMemberListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGroupMemberListResponseParams struct {
 	// The total number of records that meet the conditions.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MemberIds []*string `json:"MemberIds,omitempty" name:"MemberIds"`
+	MemberIds []*string `json:"MemberIds,omitnil" name:"MemberIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeGroupMemberListResponse struct {
@@ -2321,20 +2321,20 @@ func (r *DescribeGroupMemberListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGroupRequestParams struct {
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 type DescribeGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 func (r *DescribeGroupRequest) ToJsonString() string {
@@ -2360,24 +2360,24 @@ func (r *DescribeGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGroupResponseParams struct {
 	// The group ID.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The group type. 0: Ordinary group. 1: Merged group. If the group queried is a merged group, the IDs of the sub-groups will be returned.
-	GroupType *uint64 `json:"GroupType,omitempty" name:"GroupType"`
+	GroupType *uint64 `json:"GroupType,omitnil" name:"GroupType"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubGroupIds []*string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
+	SubGroupIds []*string `json:"SubGroupIds,omitnil" name:"SubGroupIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeGroupResponse struct {
@@ -2399,26 +2399,26 @@ func (r *DescribeGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeQuestionListRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeQuestionListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeQuestionListRequest) ToJsonString() string {
@@ -2445,14 +2445,14 @@ func (r *DescribeQuestionListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeQuestionListResponseParams struct {
 	// The total number of quiz questions.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// A list of the questions.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	QuestionInfo []*QuestionInfo `json:"QuestionInfo,omitempty" name:"QuestionInfo"`
+	QuestionInfo []*QuestionInfo `json:"QuestionInfo,omitnil" name:"QuestionInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeQuestionListResponse struct {
@@ -2474,14 +2474,14 @@ func (r *DescribeQuestionListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRoomRequestParams struct {
 	// Room ID	
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 type DescribeRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// Room ID	
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 func (r *DescribeRoomRequest) ToJsonString() string {
@@ -2506,55 +2506,55 @@ func (r *DescribeRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRoomResponseParams struct {
 	// Room name	
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Reserved room start time, in UNIX timestamp format	
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Reserved room end time, in UNIX timestamp format	
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Teacher ID	
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// LCIC SdkAppId	
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Resolution. Valid values: 1: SD; 2: HD; 3: FHD
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// Whether to automatically turn the mic on when the user enters a room. Valid values: 0: No (default value); 1: Yes.
-	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
+	AutoMic *uint64 `json:"AutoMic,omitnil" name:"AutoMic"`
 
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
-	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
+	AudioQuality *uint64 `json:"AudioQuality,omitnil" name:"AudioQuality"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
+	SubType *string `json:"SubType,omitnil" name:"SubType"`
 
 	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
-	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
+	DisableRecord *uint64 `json:"DisableRecord,omitnil" name:"DisableRecord"`
 
 	// Assistant ID list Note: This field may return null, indicating that no valid values can be obtained.
-	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+	Assistants []*string `json:"Assistants,omitnil" name:"Assistants"`
 
 	// Recording URL. This parameter exists only after a room is ended. Note: This field may return null, indicating that no valid values can be obtained.
-	RecordUrl *string `json:"RecordUrl,omitempty" name:"RecordUrl"`
+	RecordUrl *string `json:"RecordUrl,omitnil" name:"RecordUrl"`
 
 	// The class status. 0: The class has not started. 1: The class has started. 2: The class ended. 3: The class expired. Note: This field may return null, indicating that no valid values can be obtained.
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Whether the students' consent is required to control their cameras/microphones.
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRoomResponse struct {
@@ -2576,26 +2576,26 @@ func (r *DescribeRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRoomStatisticsRequestParams struct {
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// Current page in pagination, which starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of data entries to return per page. Maximum value: 1000
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeRoomStatisticsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Room ID
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// Current page in pagination, which starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// Number of data entries to return per page. Maximum value: 1000
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeRoomStatisticsRequest) ToJsonString() string {
@@ -2622,31 +2622,31 @@ func (r *DescribeRoomStatisticsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRoomStatisticsResponseParams struct {
 	// Peak number of online members
-	PeakMemberNumber *uint64 `json:"PeakMemberNumber,omitempty" name:"PeakMemberNumber"`
+	PeakMemberNumber *uint64 `json:"PeakMemberNumber,omitnil" name:"PeakMemberNumber"`
 
 	// Accumulated number of online members
-	MemberNumber *uint64 `json:"MemberNumber,omitempty" name:"MemberNumber"`
+	MemberNumber *uint64 `json:"MemberNumber,omitnil" name:"MemberNumber"`
 
 	// Total number of records, including members who entered the room and members who should attend the class but did not
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// Member record list
-	MemberRecords []*MemberRecord `json:"MemberRecords,omitempty" name:"MemberRecords"`
+	MemberRecords []*MemberRecord `json:"MemberRecords,omitnil" name:"MemberRecords"`
 
 	// The actual start time of the room, in Unix timestamp, accurate to seconds. Note: This field may return null, indicating that no valid values can be obtained.
-	RealStartTime *uint64 `json:"RealStartTime,omitempty" name:"RealStartTime"`
+	RealStartTime *uint64 `json:"RealStartTime,omitnil" name:"RealStartTime"`
 
 	// The actual end time of the room, in Unix timestamp, accurate to seconds. Note: This field may return null, indicating that no valid values can be obtained.
-	RealEndTime *uint64 `json:"RealEndTime,omitempty" name:"RealEndTime"`
+	RealEndTime *uint64 `json:"RealEndTime,omitnil" name:"RealEndTime"`
 
 	// The total message count of the room.
-	MessageCount *uint64 `json:"MessageCount,omitempty" name:"MessageCount"`
+	MessageCount *uint64 `json:"MessageCount,omitnil" name:"MessageCount"`
 
 	// The total number of mic-on students in the room.
-	MicCount *uint64 `json:"MicCount,omitempty" name:"MicCount"`
+	MicCount *uint64 `json:"MicCount,omitnil" name:"MicCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRoomStatisticsResponse struct {
@@ -2668,26 +2668,26 @@ func (r *DescribeRoomStatisticsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSdkAppIdUsersRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. The default value is 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records to return per page. The default value is 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeSdkAppIdUsersRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The page to return records from. The default value is 1.
-	Page *int64 `json:"Page,omitempty" name:"Page"`
+	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records to return per page. The default value is 20.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeSdkAppIdUsersRequest) ToJsonString() string {
@@ -2714,13 +2714,13 @@ func (r *DescribeSdkAppIdUsersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSdkAppIdUsersResponseParams struct {
 	// The total number of users.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The information of the users. Note: This field may return null, indicating that no valid values can be obtained.
-	Users []*UserInfo `json:"Users,omitempty" name:"Users"`
+	Users []*UserInfo `json:"Users,omitnil" name:"Users"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSdkAppIdUsersResponse struct {
@@ -2742,26 +2742,26 @@ func (r *DescribeSdkAppIdUsersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSupervisorsRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The maximum number of records per page. The maximum value allowed is 100, and the default value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 }
 
 type DescribeSupervisorsRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The maximum number of records per page. The maximum value allowed is 100, and the default value is 20.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page to return records from. Pagination starts from 1, which is also the default value of this parameter.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 }
 
 func (r *DescribeSupervisorsRequest) ToJsonString() string {
@@ -2788,19 +2788,19 @@ func (r *DescribeSupervisorsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSupervisorsResponseParams struct {
 	// The total number of spectators.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The current page number.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The number of records on the current page.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// A list of the spectators.
-	UserIds []*string `json:"UserIds,omitempty" name:"UserIds"`
+	UserIds []*string `json:"UserIds,omitnil" name:"UserIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSupervisorsResponse struct {
@@ -2822,14 +2822,14 @@ func (r *DescribeSupervisorsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserRequestParams struct {
 	// User ID	
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type DescribeUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User ID	
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 func (r *DescribeUserRequest) ToJsonString() string {
@@ -2854,19 +2854,19 @@ func (r *DescribeUserRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUserResponseParams struct {
 	// The application ID.	
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// User ID	
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username	
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// URL of user profile photo.	
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeUserResponse struct {
@@ -2887,75 +2887,75 @@ func (r *DescribeUserResponse) FromJsonString(s string) error {
 
 type DocumentInfo struct {
 	// The document ID. Note: This field may return null, indicating that no valid values can be obtained.
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 
 	// The document’s original URL. Note: This field may return null, indicating that no valid values can be obtained.
-	DocumentUrl *string `json:"DocumentUrl,omitempty" name:"DocumentUrl"`
+	DocumentUrl *string `json:"DocumentUrl,omitnil" name:"DocumentUrl"`
 
 	// The document title. Note: This field may return null, indicating that no valid values can be obtained.
-	DocumentName *string `json:"DocumentName,omitempty" name:"DocumentName"`
+	DocumentName *string `json:"DocumentName,omitnil" name:"DocumentName"`
 
 	// The user ID of the document’s owner. Note: This field may return null, indicating that no valid values can be obtained.
-	Owner *string `json:"Owner,omitempty" name:"Owner"`
+	Owner *string `json:"Owner,omitnil" name:"Owner"`
 
 	// The application ID. Note: This field may return null, indicating that no valid values can be obtained.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The document access type. 0: Private; 1: Public. Note: This field may return null, indicating that no valid values can be obtained.
-	Permission *uint64 `json:"Permission,omitempty" name:"Permission"`
+	Permission *uint64 `json:"Permission,omitnil" name:"Permission"`
 
 	// The transcoding result. If the file is not transcoded, this parameter will be empty. If it is successfully transcoded, this parameter will be the URL of the transcoded file. If transcoding fails, this parameter will indicate the error code. Note: This field may return null, indicating that no valid values can be obtained.
-	TranscodeResult *string `json:"TranscodeResult,omitempty" name:"TranscodeResult"`
+	TranscodeResult *string `json:"TranscodeResult,omitnil" name:"TranscodeResult"`
 
 	// The transcoding type. Note: This field may return null, indicating that no valid values can be obtained.
-	TranscodeType *uint64 `json:"TranscodeType,omitempty" name:"TranscodeType"`
+	TranscodeType *uint64 `json:"TranscodeType,omitnil" name:"TranscodeType"`
 
 	// The transcoding progress. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
-	TranscodeProgress *uint64 `json:"TranscodeProgress,omitempty" name:"TranscodeProgress"`
+	TranscodeProgress *uint64 `json:"TranscodeProgress,omitnil" name:"TranscodeProgress"`
 
 	// The transcoding status. 0: The file is not transcoded. 1: The file is being transcoded. 2: Transcoding failed. 3: Transcoding is successful. Note: This field may return null, indicating that no valid values can be obtained.
-	TranscodeState *uint64 `json:"TranscodeState,omitempty" name:"TranscodeState"`
+	TranscodeState *uint64 `json:"TranscodeState,omitnil" name:"TranscodeState"`
 
 	// The error message for failed transcoding. Note: This field may return null, indicating that no valid values can be obtained.
-	TranscodeInfo *string `json:"TranscodeInfo,omitempty" name:"TranscodeInfo"`
+	TranscodeInfo *string `json:"TranscodeInfo,omitnil" name:"TranscodeInfo"`
 
 	// The document type. Note: This field may return null, indicating that no valid values can be obtained.
-	DocumentType *string `json:"DocumentType,omitempty" name:"DocumentType"`
+	DocumentType *string `json:"DocumentType,omitnil" name:"DocumentType"`
 
 	// The document size (bytes). Note: This field may return null, indicating that no valid values can be obtained.
-	DocumentSize *uint64 `json:"DocumentSize,omitempty" name:"DocumentSize"`
+	DocumentSize *uint64 `json:"DocumentSize,omitnil" name:"DocumentSize"`
 
 	// The time (Unix timestamp) when the document was last updated. Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *uint64 `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *uint64 `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// The number of pages.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *uint64 `json:"Pages,omitempty" name:"Pages"`
+	Pages *uint64 `json:"Pages,omitnil" name:"Pages"`
 
 	// The width. This parameter is valid only if static document transcoding is used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Width *uint64 `json:"Width,omitempty" name:"Width"`
+	Width *uint64 `json:"Width,omitnil" name:"Width"`
 
 	// The height. This parameter is valid only if static document transcoding is used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Height *uint64 `json:"Height,omitempty" name:"Height"`
+	Height *uint64 `json:"Height,omitnil" name:"Height"`
 
 	// The thumbnail. Only transcoded courseware has thumbnails.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Cover *string `json:"Cover,omitempty" name:"Cover"`
+	Cover *string `json:"Cover,omitnil" name:"Cover"`
 }
 
 // Predefined struct for user
 type EndRoomRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 type EndRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 func (r *EndRoomRequest) ToJsonString() string {
@@ -2980,7 +2980,7 @@ func (r *EndRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type EndRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type EndRoomResponse struct {
@@ -3002,16 +3002,16 @@ func (r *EndRoomResponse) FromJsonString(s string) error {
 type EventDataInfo struct {
 	// The room ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The ID of the user to whom the event occurred.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type EventInfo struct {
 	// The Unix timestamp (seconds) when the event occurred.
-	Timestamp *uint64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *uint64 `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// The event type. Valid values: 
 	// `RoomStart`: The class started. `RoomEnd`: The class ended. `MemberJoin`: A user joined. `MemberQuit`: A user left. `RecordFinish`: Recording is finished.
@@ -3023,26 +3023,26 @@ type EventInfo struct {
 	// `ScreenOff`: Screen sharing is disabled.
 	// `VisibleOn`: The page is visible.
 	// `VisibleOff`: The page is invisible.
-	EventType *string `json:"EventType,omitempty" name:"EventType"`
+	EventType *string `json:"EventType,omitnil" name:"EventType"`
 
 	// The details of the event, including the room ID and the user to whom the event occurred.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventData *EventDataInfo `json:"EventData,omitempty" name:"EventData"`
+	EventData *EventDataInfo `json:"EventData,omitnil" name:"EventData"`
 }
 
 // Predefined struct for user
 type GetRoomEventRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The starting page. Pagination starts from 1. This parameter is valid only if `keyword` is empty.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records (up to 200) per page. This parameter is valid only if `keyword` is empty.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The type of events to query. Valid values:
 	// `RoomStart`: The class started.
@@ -3050,23 +3050,23 @@ type GetRoomEventRequestParams struct {
 	// `MemberJoin`: A user joined.
 	// `MemberQuit`: A user left.
 	// `RecordFinish`: Recording is finished.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 type GetRoomEventRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The application ID.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The starting page. Pagination starts from 1. This parameter is valid only if `keyword` is empty.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The maximum number of records (up to 200) per page. This parameter is valid only if `keyword` is empty.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The type of events to query. Valid values:
 	// `RoomStart`: The class started.
@@ -3074,7 +3074,7 @@ type GetRoomEventRequest struct {
 	// `MemberJoin`: A user joined.
 	// `MemberQuit`: A user left.
 	// `RecordFinish`: Recording is finished.
-	Keyword *string `json:"Keyword,omitempty" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 }
 
 func (r *GetRoomEventRequest) ToJsonString() string {
@@ -3103,14 +3103,14 @@ func (r *GetRoomEventRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetRoomEventResponseParams struct {
 	// The total number of events for the room. The value of this parameter is not affected by `keyword`.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The event details, including the type and time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Events []*EventInfo `json:"Events,omitempty" name:"Events"`
+	Events []*EventInfo `json:"Events,omitnil" name:"Events"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetRoomEventResponse struct {
@@ -3132,32 +3132,32 @@ func (r *GetRoomEventResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetRoomMessageRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The starting message sequence. Messages before this sequence will be returned (not including the message whose sequence is `seq`).
-	Seq *int64 `json:"Seq,omitempty" name:"Seq"`
+	Seq *int64 `json:"Seq,omitnil" name:"Seq"`
 
 	// The maximum number of messages to return. The value of this parameter cannot exceed the maximum message count allowed by your package.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type GetRoomMessageRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *int64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The starting message sequence. Messages before this sequence will be returned (not including the message whose sequence is `seq`).
-	Seq *int64 `json:"Seq,omitempty" name:"Seq"`
+	Seq *int64 `json:"Seq,omitnil" name:"Seq"`
 
 	// The maximum number of messages to return. The value of this parameter cannot exceed the maximum message count allowed by your package.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *GetRoomMessageRequest) ToJsonString() string {
@@ -3185,10 +3185,10 @@ func (r *GetRoomMessageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetRoomMessageResponseParams struct {
 	// The message list.
-	Messages []*MessageList `json:"Messages,omitempty" name:"Messages"`
+	Messages []*MessageList `json:"Messages,omitnil" name:"Messages"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetRoomMessageResponse struct {
@@ -3210,38 +3210,38 @@ func (r *GetRoomMessageResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetRoomsRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The start time. The default start time is 30 minutes before the current time.
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// The end time. The default end time is 30 minutes after the current time.
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The number of records per page. The default is 10.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type GetRoomsRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The start time. The default start time is 30 minutes before the current time.
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// The end time. The default end time is 30 minutes after the current time.
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The page to return records from. Pagination starts from 1.
-	Page *uint64 `json:"Page,omitempty" name:"Page"`
+	Page *uint64 `json:"Page,omitnil" name:"Page"`
 
 	// The number of records per page. The default is 10.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *GetRoomsRequest) ToJsonString() string {
@@ -3270,13 +3270,13 @@ func (r *GetRoomsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetRoomsResponseParams struct {
 	// The total number of rooms.
-	Total *uint64 `json:"Total,omitempty" name:"Total"`
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
 
 	// The room list.
-	Rooms []*RoomItem `json:"Rooms,omitempty" name:"Rooms"`
+	Rooms []*RoomItem `json:"Rooms,omitnil" name:"Rooms"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetRoomsResponse struct {
@@ -3298,14 +3298,14 @@ func (r *GetRoomsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWatermarkRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 type GetWatermarkRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 func (r *GetWatermarkRequest) ToJsonString() string {
@@ -3330,19 +3330,19 @@ func (r *GetWatermarkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWatermarkResponseParams struct {
 	// The watermark settings for the teacher’s video. Note: This field may return null, indicating that no valid values can be obtained.
-	TeacherLogo *WatermarkConfig `json:"TeacherLogo,omitempty" name:"TeacherLogo"`
+	TeacherLogo *WatermarkConfig `json:"TeacherLogo,omitnil" name:"TeacherLogo"`
 
 	// The watermark settings for the whiteboard. Note: This field may return null, indicating that no valid values can be obtained.
-	BoardLogo *WatermarkConfig `json:"BoardLogo,omitempty" name:"BoardLogo"`
+	BoardLogo *WatermarkConfig `json:"BoardLogo,omitnil" name:"BoardLogo"`
 
 	// The background image. Note: This field may return null, indicating that no valid values can be obtained.
-	BackgroundPicture *BackgroundPictureConfig `json:"BackgroundPicture,omitempty" name:"BackgroundPicture"`
+	BackgroundPicture *BackgroundPictureConfig `json:"BackgroundPicture,omitnil" name:"BackgroundPicture"`
 
 	// The watermark text. Note: This field may return null, indicating that no valid values can be obtained.
-	Text *TextMarkConfig `json:"Text,omitempty" name:"Text"`
+	Text *TextMarkConfig `json:"Text,omitnil" name:"Text"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type GetWatermarkResponse struct {
@@ -3363,73 +3363,73 @@ func (r *GetWatermarkResponse) FromJsonString(s string) error {
 
 type GroupBaseInfo struct {
 	// The group names. Note: This field may return null, indicating that no valid values can be obtained.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// The user ID of the teacher. Note: This field may return null, indicating that no valid values can be obtained.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 }
 
 type GroupInfo struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GroupType *uint64 `json:"GroupType,omitempty" name:"GroupType"`
+	GroupType *uint64 `json:"GroupType,omitnil" name:"GroupType"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubGroupIds *string `json:"SubGroupIds,omitempty" name:"SubGroupIds"`
+	SubGroupIds *string `json:"SubGroupIds,omitnil" name:"SubGroupIds"`
 }
 
 // Predefined struct for user
 type KickUserFromRoomRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The ID of the user to be removed.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// The removal type: 
 	// `1`: Keep the user out temporarily. The `Duration` parameter specifies the ban duration, during which the user is banned from entering the room. 
 	// `2`: Remove the user permanently.
-	KickType *uint64 `json:"KickType,omitempty" name:"KickType"`
+	KickType *uint64 `json:"KickType,omitnil" name:"KickType"`
 
 	// The ban duration (seconds). This parameter is valid if `KickType` is `1`. The default value is `0`.
-	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
 }
 
 type KickUserFromRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The ID of the user to be removed.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// The removal type: 
 	// `1`: Keep the user out temporarily. The `Duration` parameter specifies the ban duration, during which the user is banned from entering the room. 
 	// `2`: Remove the user permanently.
-	KickType *uint64 `json:"KickType,omitempty" name:"KickType"`
+	KickType *uint64 `json:"KickType,omitnil" name:"KickType"`
 
 	// The ban duration (seconds). This parameter is valid if `KickType` is `1`. The default value is `0`.
-	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
 }
 
 func (r *KickUserFromRoomRequest) ToJsonString() string {
@@ -3458,7 +3458,7 @@ func (r *KickUserFromRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type KickUserFromRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type KickUserFromRoomResponse struct {
@@ -3480,20 +3480,20 @@ func (r *KickUserFromRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type LoginOriginIdRequestParams struct {
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// User's ID in the customer system, which should be unique under the same application
-	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
 }
 
 type LoginOriginIdRequest struct {
 	*tchttp.BaseRequest
 	
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// User's ID in the customer system, which should be unique under the same application
-	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
 }
 
 func (r *LoginOriginIdRequest) ToJsonString() string {
@@ -3519,13 +3519,13 @@ func (r *LoginOriginIdRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type LoginOriginIdResponseParams struct {
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Login status token returned after successful login or registration. The token is valid for seven days.
-	Token *string `json:"Token,omitempty" name:"Token"`
+	Token *string `json:"Token,omitnil" name:"Token"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type LoginOriginIdResponse struct {
@@ -3547,14 +3547,14 @@ func (r *LoginOriginIdResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type LoginUserRequestParams struct {
 	// User ID obtained during registration
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 type LoginUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// User ID obtained during registration
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
 func (r *LoginUserRequest) ToJsonString() string {
@@ -3579,13 +3579,13 @@ func (r *LoginUserRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type LoginUserResponseParams struct {
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Login status token returned after successful login or registration. The token is valid for seven days.
-	Token *string `json:"Token,omitempty" name:"Token"`
+	Token *string `json:"Token,omitnil" name:"Token"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type LoginUserResponse struct {
@@ -3606,123 +3606,123 @@ func (r *LoginUserResponse) FromJsonString(s string) error {
 
 type MemberRecord struct {
 	// User ID
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Online duration, in seconds
-	PresentTime *uint64 `json:"PresentTime,omitempty" name:"PresentTime"`
+	PresentTime *uint64 `json:"PresentTime,omitnil" name:"PresentTime"`
 
 	// Whether the camera is enabled
-	Camera *uint64 `json:"Camera,omitempty" name:"Camera"`
+	Camera *uint64 `json:"Camera,omitnil" name:"Camera"`
 
 	// Whether the mic is enabled
-	Mic *uint64 `json:"Mic,omitempty" name:"Mic"`
+	Mic *uint64 `json:"Mic,omitnil" name:"Mic"`
 
 	// Whether the user is muted
-	Silence *uint64 `json:"Silence,omitempty" name:"Silence"`
+	Silence *uint64 `json:"Silence,omitnil" name:"Silence"`
 
 	// Number of questions answered by the user
-	AnswerQuestions *uint64 `json:"AnswerQuestions,omitempty" name:"AnswerQuestions"`
+	AnswerQuestions *uint64 `json:"AnswerQuestions,omitnil" name:"AnswerQuestions"`
 
 	// Number of hand raising times
-	HandUps *uint64 `json:"HandUps,omitempty" name:"HandUps"`
+	HandUps *uint64 `json:"HandUps,omitnil" name:"HandUps"`
 
 	// First time that the user entered the room, in UNIX timestamp format
-	FirstJoinTimestamp *uint64 `json:"FirstJoinTimestamp,omitempty" name:"FirstJoinTimestamp"`
+	FirstJoinTimestamp *uint64 `json:"FirstJoinTimestamp,omitnil" name:"FirstJoinTimestamp"`
 
 	// Last time that the user left the room, in UNIX timestamp format
-	LastQuitTimestamp *uint64 `json:"LastQuitTimestamp,omitempty" name:"LastQuitTimestamp"`
+	LastQuitTimestamp *uint64 `json:"LastQuitTimestamp,omitnil" name:"LastQuitTimestamp"`
 
 	// Number of rewards received
-	Rewords *uint64 `json:"Rewords,omitempty" name:"Rewords"`
+	Rewords *uint64 `json:"Rewords,omitnil" name:"Rewords"`
 
 	// The user’s IP address.
-	IPAddress *string `json:"IPAddress,omitempty" name:"IPAddress"`
+	IPAddress *string `json:"IPAddress,omitnil" name:"IPAddress"`
 
 	// The user’s location.
-	Location *string `json:"Location,omitempty" name:"Location"`
+	Location *string `json:"Location,omitnil" name:"Location"`
 
 	// The user’s device type. 0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
-	Device *int64 `json:"Device,omitempty" name:"Device"`
+	Device *int64 `json:"Device,omitnil" name:"Device"`
 
 	// The number of times a user turned their mic on.
-	PerMemberMicCount *int64 `json:"PerMemberMicCount,omitempty" name:"PerMemberMicCount"`
+	PerMemberMicCount *int64 `json:"PerMemberMicCount,omitnil" name:"PerMemberMicCount"`
 
 	// The number of messages sent by a user.
-	PerMemberMessageCount *int64 `json:"PerMemberMessageCount,omitempty" name:"PerMemberMessageCount"`
+	PerMemberMessageCount *int64 `json:"PerMemberMessageCount,omitnil" name:"PerMemberMessageCount"`
 
 	// The user role. `0`: Student; `1`: Teacher; `2`: Teaching Assistant; `3`: Spectator.
-	Role *uint64 `json:"Role,omitempty" name:"Role"`
+	Role *uint64 `json:"Role,omitnil" name:"Role"`
 
 	// The class number.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The sub-class number.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubGroupId []*string `json:"SubGroupId,omitempty" name:"SubGroupId"`
+	SubGroupId []*string `json:"SubGroupId,omitnil" name:"SubGroupId"`
 
 	// Whether the user is on the stage.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Stage *int64 `json:"Stage,omitempty" name:"Stage"`
+	Stage *int64 `json:"Stage,omitnil" name:"Stage"`
 }
 
 type MessageItem struct {
 	// The message type. `0`: Text; `1`: Image.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MessageType *int64 `json:"MessageType,omitempty" name:"MessageType"`
+	MessageType *int64 `json:"MessageType,omitnil" name:"MessageType"`
 
 	// The text. This parameter is valid if `MessageType` is `0`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TextMessage *string `json:"TextMessage,omitempty" name:"TextMessage"`
+	TextMessage *string `json:"TextMessage,omitnil" name:"TextMessage"`
 
 	// The image URL. This parameter is valid if `MessageType` is `1`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ImageMessage *string `json:"ImageMessage,omitempty" name:"ImageMessage"`
+	ImageMessage *string `json:"ImageMessage,omitnil" name:"ImageMessage"`
 }
 
 type MessageList struct {
 	// The message timestamp.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// The sender.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FromAccount *string `json:"FromAccount,omitempty" name:"FromAccount"`
+	FromAccount *string `json:"FromAccount,omitnil" name:"FromAccount"`
 
 	// The message sequence, which is unique across a class. The earlier a message is sent, the lower the sequence.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Seq *int64 `json:"Seq,omitempty" name:"Seq"`
+	Seq *int64 `json:"Seq,omitnil" name:"Seq"`
 
 	// The message content.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MessageBody []*MessageItem `json:"MessageBody,omitempty" name:"MessageBody"`
+	MessageBody []*MessageItem `json:"MessageBody,omitnil" name:"MessageBody"`
 }
 
 // Predefined struct for user
 type ModifyAppRequestParams struct {
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Callback URL. Currently, only port 80 and port 443 are supported.
-	Callback *string `json:"Callback,omitempty" name:"Callback"`
+	Callback *string `json:"Callback,omitnil" name:"Callback"`
 
 	// The callback key.
-	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
 type ModifyAppRequest struct {
 	*tchttp.BaseRequest
 	
 	// LCIC SdkAppId
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Callback URL. Currently, only port 80 and port 443 are supported.
-	Callback *string `json:"Callback,omitempty" name:"Callback"`
+	Callback *string `json:"Callback,omitnil" name:"Callback"`
 
 	// The callback key.
-	CallbackKey *string `json:"CallbackKey,omitempty" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
 func (r *ModifyAppRequest) ToJsonString() string {
@@ -3749,7 +3749,7 @@ func (r *ModifyAppRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAppResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAppResponse struct {
@@ -3771,32 +3771,32 @@ func (r *ModifyAppResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyGroupRequestParams struct {
 	// The ID of the group to modify.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user ID of the teacher.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The new group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 }
 
 type ModifyGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of the group to modify.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The user ID of the teacher.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The new group name.
-	GroupName *string `json:"GroupName,omitempty" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
 }
 
 func (r *ModifyGroupRequest) ToJsonString() string {
@@ -3824,7 +3824,7 @@ func (r *ModifyGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyGroupResponse struct {
@@ -3846,98 +3846,98 @@ func (r *ModifyGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRoomRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The room start time (Unix timestamp).
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// The room end time (Unix timestamp).
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The room name.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The resolution. Valid values: 1: SD; 2: HD; 3: FHD.
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes.
-	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
+	AutoMic *uint64 `json:"AutoMic,omitnil" name:"AutoMic"`
 
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
-	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
+	AudioQuality *uint64 `json:"AudioQuality,omitnil" name:"AudioQuality"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only; coteaching: Dual-teacher.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
+	SubType *string `json:"SubType,omitnil" name:"SubType"`
 
 	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
-	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
+	DisableRecord *uint64 `json:"DisableRecord,omitnil" name:"DisableRecord"`
 
 	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
-	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+	Assistants []*string `json:"Assistants,omitnil" name:"Assistants"`
 
 	// The ID of the group to bind.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Whether the students' consent is required to control their cameras/microphones.
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 }
 
 type ModifyRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The room start time (Unix timestamp).
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// The room end time (Unix timestamp).
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// The room name.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The resolution. Valid values: 1: SD; 2: HD; 3: FHD.
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// Whether to automatically turn the mic on when a user enters the room. Valid values: 0: No (default value); 1: Yes.
-	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
+	AutoMic *uint64 `json:"AutoMic,omitnil" name:"AutoMic"`
 
 	// Whether to enable the high audio quality mode. Valid values: 0: No (default value); 1: Yes.
-	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
+	AudioQuality *uint64 `json:"AudioQuality,omitnil" name:"AudioQuality"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only; coteaching: Dual-teacher.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
+	SubType *string `json:"SubType,omitnil" name:"SubType"`
 
 	// Whether to disable auto recording. Valid values: 0: No (default); 1: Yes. If this parameter is 0, recording will start when the class starts and stops when the class ends.
-	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
+	DisableRecord *uint64 `json:"DisableRecord,omitnil" name:"DisableRecord"`
 
 	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
-	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+	Assistants []*string `json:"Assistants,omitnil" name:"Assistants"`
 
 	// The ID of the group to bind.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Whether the students' consent is required to control their cameras/microphones.
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 }
 
 func (r *ModifyRoomRequest) ToJsonString() string {
@@ -3976,7 +3976,7 @@ func (r *ModifyRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyRoomResponse struct {
@@ -3998,26 +3998,26 @@ func (r *ModifyRoomResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyUserProfileRequestParams struct {
 	// The ID of the user whose profile will be modified.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// The new username to use.
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// The URL of the new profile photo.
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 }
 
 type ModifyUserProfileRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of the user whose profile will be modified.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// The new username to use.
-	Nickname *string `json:"Nickname,omitempty" name:"Nickname"`
+	Nickname *string `json:"Nickname,omitnil" name:"Nickname"`
 
 	// The URL of the new profile photo.
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 }
 
 func (r *ModifyUserProfileRequest) ToJsonString() string {
@@ -4044,7 +4044,7 @@ func (r *ModifyUserProfileRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyUserProfileResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyUserProfileResponse struct {
@@ -4065,51 +4065,51 @@ func (r *ModifyUserProfileResponse) FromJsonString(s string) error {
 
 type QuestionInfo struct {
 	// The question ID.
-	QuestionId *string `json:"QuestionId,omitempty" name:"QuestionId"`
+	QuestionId *string `json:"QuestionId,omitnil" name:"QuestionId"`
 
 	// The question.
-	QuestionContent *string `json:"QuestionContent,omitempty" name:"QuestionContent"`
+	QuestionContent *string `json:"QuestionContent,omitnil" name:"QuestionContent"`
 
 	// The time limit for the question. If you set this parameter to `0`, there will not be a time limit.
-	Duration *uint64 `json:"Duration,omitempty" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
 
 	// The correct answer. Bits are used to indicate the options that should be chosen. For example, `0x1` indicates option A; `0x11` indicates A and B, and so on.
-	CorrectAnswer *int64 `json:"CorrectAnswer,omitempty" name:"CorrectAnswer"`
+	CorrectAnswer *int64 `json:"CorrectAnswer,omitnil" name:"CorrectAnswer"`
 
 	// The statistics for each type of answer.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AnswerStats []*AnswerStat `json:"AnswerStats,omitempty" name:"AnswerStats"`
+	AnswerStats []*AnswerStat `json:"AnswerStats,omitnil" name:"AnswerStats"`
 }
 
 // Predefined struct for user
 type RegisterUserRequestParams struct {
 	// LCIC SdkAppId	
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Username	
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// User's ID in the customer system, which should be unique under the same application	
-	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
 
 	// User's profile photo	
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 }
 
 type RegisterUserRequest struct {
 	*tchttp.BaseRequest
 	
 	// LCIC SdkAppId	
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Username	
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// User's ID in the customer system, which should be unique under the same application	
-	OriginId *string `json:"OriginId,omitempty" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
 
 	// User's profile photo	
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 }
 
 func (r *RegisterUserRequest) ToJsonString() string {
@@ -4137,13 +4137,13 @@ func (r *RegisterUserRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterUserResponseParams struct {
 	// User ID	
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// Login status token returned after successful login or registration. The token is valid for seven days.	
-	Token *string `json:"Token,omitempty" name:"Token"`
+	Token *string `json:"Token,omitnil" name:"Token"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RegisterUserResponse struct {
@@ -4164,130 +4164,130 @@ func (r *RegisterUserResponse) FromJsonString(s string) error {
 
 type RoomInfo struct {
 	// The room name.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The room start time (Unix timestamp).
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// The room end time (Unix timestamp).
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The resolution. Valid values: `1`: SD; `2`: HD; `3`: FHD.
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// The maximum number of mic-on users (excluding the teacher). Value range: 0-16.
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: `videodoc`: Document + Video; `video`: Video only; `coteaching`: Dual-teacher.
-	SubType *string `json:"SubType,omitempty" name:"SubType"`
+	SubType *string `json:"SubType,omitnil" name:"SubType"`
 
 	// The user ID of the teacher. User IDs are returned by the user registration APIs.
-	TeacherId *string `json:"TeacherId,omitempty" name:"TeacherId"`
+	TeacherId *string `json:"TeacherId,omitnil" name:"TeacherId"`
 
 	// Whether to automatically turn the mic on when a user enters the room. Valid values: `0` (default): No; `1`: Yes.
-	AutoMic *uint64 `json:"AutoMic,omitempty" name:"AutoMic"`
+	AutoMic *uint64 `json:"AutoMic,omitnil" name:"AutoMic"`
 
 	// Whether to disconnect communication after audio/video permissions are revoked. Valid values: `0` (default): Yes; `1`: No.
-	TurnOffMic *uint64 `json:"TurnOffMic,omitempty" name:"TurnOffMic"`
+	TurnOffMic *uint64 `json:"TurnOffMic,omitnil" name:"TurnOffMic"`
 
 	// Whether to enable the high audio quality mode. Valid values: `0` (default): No; `1`: Yes.
-	AudioQuality *uint64 `json:"AudioQuality,omitempty" name:"AudioQuality"`
+	AudioQuality *uint64 `json:"AudioQuality,omitnil" name:"AudioQuality"`
 
 	// Whether to disable auto recording. Valid values: `0` (default): No; `1`: Yes. If this parameter is `0`, recording will start when the class starts and stops when the class ends.
-	DisableRecord *uint64 `json:"DisableRecord,omitempty" name:"DisableRecord"`
+	DisableRecord *uint64 `json:"DisableRecord,omitnil" name:"DisableRecord"`
 
 	// The user IDs of the teacher assistants. User IDs are returned by the user registration APIs.
-	Assistants []*string `json:"Assistants,omitempty" name:"Assistants"`
+	Assistants []*string `json:"Assistants,omitnil" name:"Assistants"`
 
 	// The number of RTC users.
-	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitempty" name:"RTCAudienceNumber"`
+	RTCAudienceNumber *uint64 `json:"RTCAudienceNumber,omitnil" name:"RTCAudienceNumber"`
 
 	// The audience type.
-	AudienceType *uint64 `json:"AudienceType,omitempty" name:"AudienceType"`
+	AudienceType *uint64 `json:"AudienceType,omitnil" name:"AudienceType"`
 
 	// The recording layout.
-	RecordLayout *uint64 `json:"RecordLayout,omitempty" name:"RecordLayout"`
+	RecordLayout *uint64 `json:"RecordLayout,omitnil" name:"RecordLayout"`
 
 	// The ID of the group to bind. Note: This field may return null, indicating that no valid values can be obtained.
-	GroupId *string `json:"GroupId,omitempty" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Whether the students' consent is required to control their cameras/microphones.
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 }
 
 type RoomItem struct {
 	// The name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// The room ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// The room status. `0`: Not started; `1`: Started; `2`: Ended.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *uint64 `json:"Status,omitempty" name:"Status"`
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
 
 	// The scheduled start time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StartTime *uint64 `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
 
 	// The scheduled end time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EndTime *uint64 `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The actual start time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RealStartTime *uint64 `json:"RealStartTime,omitempty" name:"RealStartTime"`
+	RealStartTime *uint64 `json:"RealStartTime,omitnil" name:"RealStartTime"`
 
 	// The actual end time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RealEndTime *uint64 `json:"RealEndTime,omitempty" name:"RealEndTime"`
+	RealEndTime *uint64 `json:"RealEndTime,omitnil" name:"RealEndTime"`
 
 	// The resolution. `1`: SD.
 	// `2`: HD
 	// `3`: FHD
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Resolution *uint64 `json:"Resolution,omitempty" name:"Resolution"`
+	Resolution *uint64 `json:"Resolution,omitnil" name:"Resolution"`
 
 	// The maximum number of mic-on users allowed.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MaxRTCMember *uint64 `json:"MaxRTCMember,omitempty" name:"MaxRTCMember"`
+	MaxRTCMember *uint64 `json:"MaxRTCMember,omitnil" name:"MaxRTCMember"`
 
 	// The URL of the room's recording. This parameter has been deprecated. Please use `RecordUrl` instead.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReplayUrl *string `json:"ReplayUrl,omitempty" name:"ReplayUrl"`
+	ReplayUrl *string `json:"ReplayUrl,omitnil" name:"ReplayUrl"`
 
 	// The recording URL (HTTPS), which is generated only after a room ends.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RecordUrl *string `json:"RecordUrl,omitempty" name:"RecordUrl"`
+	RecordUrl *string `json:"RecordUrl,omitnil" name:"RecordUrl"`
 
 	// The maximum number of users allowed (including teachers) in the room. The default value is `0`, which indicates that no limit is set. 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MaxMicNumber *uint64 `json:"MaxMicNumber,omitempty" name:"MaxMicNumber"`
+	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil" name:"MaxMicNumber"`
 
 	// Whether the students' consent is required to control their cameras/microphones.
 	// Note: This field may return null, indicating that no valid value was found.
-	EnableDirectControl *uint64 `json:"EnableDirectControl,omitempty" name:"EnableDirectControl"`
+	EnableDirectControl *uint64 `json:"EnableDirectControl,omitnil" name:"EnableDirectControl"`
 }
 
 // Predefined struct for user
 type SetAppCustomContentRequestParams struct {
 	// Custom content
-	CustomContent []*AppCustomContent `json:"CustomContent,omitempty" name:"CustomContent"`
+	CustomContent []*AppCustomContent `json:"CustomContent,omitnil" name:"CustomContent"`
 
 	// Application ID
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 type SetAppCustomContentRequest struct {
 	*tchttp.BaseRequest
 	
 	// Custom content
-	CustomContent []*AppCustomContent `json:"CustomContent,omitempty" name:"CustomContent"`
+	CustomContent []*AppCustomContent `json:"CustomContent,omitnil" name:"CustomContent"`
 
 	// Application ID
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 }
 
 func (r *SetAppCustomContentRequest) ToJsonString() string {
@@ -4313,7 +4313,7 @@ func (r *SetAppCustomContentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetAppCustomContentResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetAppCustomContentResponse struct {
@@ -4335,92 +4335,92 @@ func (r *SetAppCustomContentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SetWatermarkRequestParams struct {
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The URL of the watermark for the teacher’s video. If you pass in an empty string, the teacher’s video will not have a watermark.
-	TeacherUrl *string `json:"TeacherUrl,omitempty" name:"TeacherUrl"`
+	TeacherUrl *string `json:"TeacherUrl,omitnil" name:"TeacherUrl"`
 
 	// The URL of the watermark for the whiteboard. If you pass in an empty string, the whiteboard video will not have a watermark.
-	BoardUrl *string `json:"BoardUrl,omitempty" name:"BoardUrl"`
+	BoardUrl *string `json:"BoardUrl,omitnil" name:"BoardUrl"`
 
 	// The image displayed when there is no video. If you pass in an empty string, no images will be displayed.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 
 	// The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
-	BoardW *float64 `json:"BoardW,omitempty" name:"BoardW"`
+	BoardW *float64 `json:"BoardW,omitnil" name:"BoardW"`
 
 	// The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
-	BoardH *float64 `json:"BoardH,omitempty" name:"BoardH"`
+	BoardH *float64 `json:"BoardH,omitnil" name:"BoardH"`
 
 	// The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
-	BoardX *float64 `json:"BoardX,omitempty" name:"BoardX"`
+	BoardX *float64 `json:"BoardX,omitnil" name:"BoardX"`
 
 	// The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
-	BoardY *float64 `json:"BoardY,omitempty" name:"BoardY"`
+	BoardY *float64 `json:"BoardY,omitnil" name:"BoardY"`
 
 	// The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
-	TeacherW *float64 `json:"TeacherW,omitempty" name:"TeacherW"`
+	TeacherW *float64 `json:"TeacherW,omitnil" name:"TeacherW"`
 
 	// The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
-	TeacherH *float64 `json:"TeacherH,omitempty" name:"TeacherH"`
+	TeacherH *float64 `json:"TeacherH,omitnil" name:"TeacherH"`
 
 	// The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
-	TeacherX *float64 `json:"TeacherX,omitempty" name:"TeacherX"`
+	TeacherX *float64 `json:"TeacherX,omitnil" name:"TeacherX"`
 
 	// The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
-	TeacherY *float64 `json:"TeacherY,omitempty" name:"TeacherY"`
+	TeacherY *float64 `json:"TeacherY,omitnil" name:"TeacherY"`
 
 	// The watermark text. If you pass in an empty string, there will be no text.
-	Text *string `json:"Text,omitempty" name:"Text"`
+	Text *string `json:"Text,omitnil" name:"Text"`
 
 	// The watermark text color.
-	TextColor *string `json:"TextColor,omitempty" name:"TextColor"`
+	TextColor *string `json:"TextColor,omitnil" name:"TextColor"`
 }
 
 type SetWatermarkRequest struct {
 	*tchttp.BaseRequest
 	
 	// The SDKAppID assigned by LCIC.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// The URL of the watermark for the teacher’s video. If you pass in an empty string, the teacher’s video will not have a watermark.
-	TeacherUrl *string `json:"TeacherUrl,omitempty" name:"TeacherUrl"`
+	TeacherUrl *string `json:"TeacherUrl,omitnil" name:"TeacherUrl"`
 
 	// The URL of the watermark for the whiteboard. If you pass in an empty string, the whiteboard video will not have a watermark.
-	BoardUrl *string `json:"BoardUrl,omitempty" name:"BoardUrl"`
+	BoardUrl *string `json:"BoardUrl,omitnil" name:"BoardUrl"`
 
 	// The image displayed when there is no video. If you pass in an empty string, no images will be displayed.
-	VideoUrl *string `json:"VideoUrl,omitempty" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
 
 	// The width of the whiteboard’s watermark, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
-	BoardW *float64 `json:"BoardW,omitempty" name:"BoardW"`
+	BoardW *float64 `json:"BoardW,omitnil" name:"BoardW"`
 
 	// The height of the whiteboard’s watermark, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
-	BoardH *float64 `json:"BoardH,omitempty" name:"BoardH"`
+	BoardH *float64 `json:"BoardH,omitnil" name:"BoardH"`
 
 	// The horizontal offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
-	BoardX *float64 `json:"BoardX,omitempty" name:"BoardX"`
+	BoardX *float64 `json:"BoardX,omitnil" name:"BoardX"`
 
 	// The vertical offset of the whiteboard’s watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
-	BoardY *float64 `json:"BoardY,omitempty" name:"BoardY"`
+	BoardY *float64 `json:"BoardY,omitnil" name:"BoardY"`
 
 	// The width of the watermark for the teacher’s video, which is expressed as a percentage of the video width. The value range is 0-100, and the default value is 0.
-	TeacherW *float64 `json:"TeacherW,omitempty" name:"TeacherW"`
+	TeacherW *float64 `json:"TeacherW,omitnil" name:"TeacherW"`
 
 	// The height of the watermark for the teacher’s video, which is expressed as a percentage of the video height. The value range is 0-100, and the default value is 0.
-	TeacherH *float64 `json:"TeacherH,omitempty" name:"TeacherH"`
+	TeacherH *float64 `json:"TeacherH,omitnil" name:"TeacherH"`
 
 	// The horizontal offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100.
-	TeacherX *float64 `json:"TeacherX,omitempty" name:"TeacherX"`
+	TeacherX *float64 `json:"TeacherX,omitnil" name:"TeacherX"`
 
 	// The vertical offset of the watermark for the teacher’s video, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100.
-	TeacherY *float64 `json:"TeacherY,omitempty" name:"TeacherY"`
+	TeacherY *float64 `json:"TeacherY,omitnil" name:"TeacherY"`
 
 	// The watermark text. If you pass in an empty string, there will be no text.
-	Text *string `json:"Text,omitempty" name:"Text"`
+	Text *string `json:"Text,omitnil" name:"Text"`
 
 	// The watermark text color.
-	TextColor *string `json:"TextColor,omitempty" name:"TextColor"`
+	TextColor *string `json:"TextColor,omitnil" name:"TextColor"`
 }
 
 func (r *SetWatermarkRequest) ToJsonString() string {
@@ -4458,7 +4458,7 @@ func (r *SetWatermarkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetWatermarkResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetWatermarkResponse struct {
@@ -4480,14 +4480,14 @@ func (r *SetWatermarkResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StartRoomRequestParams struct {
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 type StartRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// The room ID.
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 }
 
 func (r *StartRoomRequest) ToJsonString() string {
@@ -4512,7 +4512,7 @@ func (r *StartRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type StartRoomResponse struct {
@@ -4533,29 +4533,29 @@ func (r *StartRoomResponse) FromJsonString(s string) error {
 
 type TextMarkConfig struct {
 	// The watermark text. Note: This field may return null, indicating that no valid values can be obtained.
-	Text *string `json:"Text,omitempty" name:"Text"`
+	Text *string `json:"Text,omitnil" name:"Text"`
 
 	// The watermark text color. Note: This field may return null, indicating that no valid values can be obtained.
-	Color *string `json:"Color,omitempty" name:"Color"`
+	Color *string `json:"Color,omitnil" name:"Color"`
 }
 
 // Predefined struct for user
 type UnbindDocumentFromRoomRequestParams struct {
 	// Room ID	
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// Document ID	
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 type UnbindDocumentFromRoomRequest struct {
 	*tchttp.BaseRequest
 	
 	// Room ID	
-	RoomId *uint64 `json:"RoomId,omitempty" name:"RoomId"`
+	RoomId *uint64 `json:"RoomId,omitnil" name:"RoomId"`
 
 	// Document ID	
-	DocumentId *string `json:"DocumentId,omitempty" name:"DocumentId"`
+	DocumentId *string `json:"DocumentId,omitnil" name:"DocumentId"`
 }
 
 func (r *UnbindDocumentFromRoomRequest) ToJsonString() string {
@@ -4581,7 +4581,7 @@ func (r *UnbindDocumentFromRoomRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UnbindDocumentFromRoomResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UnbindDocumentFromRoomResponse struct {
@@ -4603,34 +4603,34 @@ func (r *UnbindDocumentFromRoomResponse) FromJsonString(s string) error {
 type UserInfo struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SdkAppId *uint64 `json:"SdkAppId,omitempty" name:"SdkAppId"`
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UserId *string `json:"UserId,omitempty" name:"UserId"`
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Avatar *string `json:"Avatar,omitempty" name:"Avatar"`
+	Avatar *string `json:"Avatar,omitnil" name:"Avatar"`
 }
 
 type WatermarkConfig struct {
 	// The URL of the watermark image. Note: This field may return null, indicating that no valid values can be obtained.
-	Url *string `json:"Url,omitempty" name:"Url"`
+	Url *string `json:"Url,omitnil" name:"Url"`
 
 	// The watermark width, which is expressed as a percentage of the video width. Note: This field may return null, indicating that no valid values can be obtained.
-	Width *float64 `json:"Width,omitempty" name:"Width"`
+	Width *float64 `json:"Width,omitnil" name:"Width"`
 
 	// The watermark height, which is expressed as a percentage of the video height. Note: This field may return null, indicating that no valid values can be obtained.
-	Height *float64 `json:"Height,omitempty" name:"Height"`
+	Height *float64 `json:"Height,omitnil" name:"Height"`
 
 	// The horizontal offset of the watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle horizontally. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
-	LocationX *float64 `json:"LocationX,omitempty" name:"LocationX"`
+	LocationX *float64 `json:"LocationX,omitnil" name:"LocationX"`
 
 	// The vertical offset of the watermark, which is expressed as a percentage of the video width. For example, 50 indicates that the watermark will appear in the middle vertically. Value range: 0-100. Note: This field may return null, indicating that no valid values can be obtained.
-	LocationY *float64 `json:"LocationY,omitempty" name:"LocationY"`
+	LocationY *float64 `json:"LocationY,omitnil" name:"LocationY"`
 }

@@ -15,36 +15,36 @@
 package v20230306
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 // Predefined struct for user
 type DescribeEventsRequestParams struct {
 	// event occurrence date
-	EventDate *string `json:"EventDate,omitempty" name:"EventDate"`
+	EventDate *string `json:"EventDate,omitnil" name:"EventDate"`
 
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
-	ProductIds []*string `json:"ProductIds,omitempty" name:"ProductIds"`
+	ProductIds []*string `json:"ProductIds,omitnil" name:"ProductIds"`
 
 	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
 	// 2. The region ID for non-region-specific products should be set to non-regional.
-	RegionIds []*string `json:"RegionIds,omitempty" name:"RegionIds"`
+	RegionIds []*string `json:"RegionIds,omitnil" name:"RegionIds"`
 }
 
 type DescribeEventsRequest struct {
 	*tchttp.BaseRequest
 	
 	// event occurrence date
-	EventDate *string `json:"EventDate,omitempty" name:"EventDate"`
+	EventDate *string `json:"EventDate,omitnil" name:"EventDate"`
 
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
-	ProductIds []*string `json:"ProductIds,omitempty" name:"ProductIds"`
+	ProductIds []*string `json:"ProductIds,omitnil" name:"ProductIds"`
 
 	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
 	// 2. The region ID for non-region-specific products should be set to non-regional.
-	RegionIds []*string `json:"RegionIds,omitempty" name:"RegionIds"`
+	RegionIds []*string `json:"RegionIds,omitnil" name:"RegionIds"`
 }
 
 func (r *DescribeEventsRequest) ToJsonString() string {
@@ -71,10 +71,10 @@ func (r *DescribeEventsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeEventsResponseParams struct {
 	// Detailed event information.
-	Data *ProductEventList `json:"Data,omitempty" name:"Data"`
+	Data *ProductEventList `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeEventsResponse struct {
@@ -95,29 +95,29 @@ func (r *DescribeEventsResponse) FromJsonString(s string) error {
 
 type EventDetail struct {
 	// Product ID.
-	ProductId *string `json:"ProductId,omitempty" name:"ProductId"`
+	ProductId *string `json:"ProductId,omitnil" name:"ProductId"`
 
 	// Product name.
-	ProductName *string `json:"ProductName,omitempty" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
 
 	// Region ID.
-	RegionId *string `json:"RegionId,omitempty" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
 
 	// Region name.
-	RegionName *string `json:"RegionName,omitempty" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
 
 	// Event start time.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Event end time. If the event is still ongoing and has not ended, the end time will be empty.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Current status: Normally, Informational, Degradation.
-	CurrentStatus *string `json:"CurrentStatus,omitempty" name:"CurrentStatus"`
+	CurrentStatus *string `json:"CurrentStatus,omitnil" name:"CurrentStatus"`
 }
 
 type ProductEventList struct {
 	// Detailed event information.
 	// Note: this field may return null, indicating that no valid value is obtained.
-	EventList []*EventDetail `json:"EventList,omitempty" name:"EventList"`
+	EventList []*EventDetail `json:"EventList,omitnil" name:"EventList"`
 }

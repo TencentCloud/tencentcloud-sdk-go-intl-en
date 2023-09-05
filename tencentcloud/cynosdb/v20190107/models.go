@@ -15,64 +15,64 @@
 package v20190107
 
 import (
-    "encoding/json"
     tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
     tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+    "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
 type Ability struct {
 	// Whether secondary AZ is supported
-	IsSupportSlaveZone *string `json:"IsSupportSlaveZone,omitempty" name:"IsSupportSlaveZone"`
+	IsSupportSlaveZone *string `json:"IsSupportSlaveZone,omitnil" name:"IsSupportSlaveZone"`
 
 	// The reason why secondary AZ is not supported
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NonsupportSlaveZoneReason *string `json:"NonsupportSlaveZoneReason,omitempty" name:"NonsupportSlaveZoneReason"`
+	NonsupportSlaveZoneReason *string `json:"NonsupportSlaveZoneReason,omitnil" name:"NonsupportSlaveZoneReason"`
 
 	// Whether read-only instance is supported
-	IsSupportRo *string `json:"IsSupportRo,omitempty" name:"IsSupportRo"`
+	IsSupportRo *string `json:"IsSupportRo,omitnil" name:"IsSupportRo"`
 
 	// The reason why read-only instance is not supported
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NonsupportRoReason *string `json:"NonsupportRoReason,omitempty" name:"NonsupportRoReason"`
+	NonsupportRoReason *string `json:"NonsupportRoReason,omitnil" name:"NonsupportRoReason"`
 }
 
 type Account struct {
 	// Database account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Database account description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// The max connections
-	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil" name:"MaxUserConnections"`
 }
 
 // Predefined struct for user
 type ActivateInstanceRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of instance IDs in the format of `cynosdbmysql-ins-n7ocdslw` as displayed in the TDSQL-C for MySQL console. You can use the instance list querying API to query the ID, i.e., the `InstanceId` value in the output parameters.
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+	InstanceIdList []*string `json:"InstanceIdList,omitnil" name:"InstanceIdList"`
 }
 
 type ActivateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of instance IDs in the format of `cynosdbmysql-ins-n7ocdslw` as displayed in the TDSQL-C for MySQL console. You can use the instance list querying API to query the ID, i.e., the `InstanceId` value in the output parameters.
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+	InstanceIdList []*string `json:"InstanceIdList,omitnil" name:"InstanceIdList"`
 }
 
 func (r *ActivateInstanceRequest) ToJsonString() string {
@@ -98,10 +98,10 @@ func (r *ActivateInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ActivateInstanceResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ActivateInstanceResponse struct {
@@ -123,20 +123,20 @@ func (r *ActivateInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AddClusterSlaveZoneRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Replica AZ
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	SlaveZone *string `json:"SlaveZone,omitnil" name:"SlaveZone"`
 }
 
 type AddClusterSlaveZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Replica AZ
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	SlaveZone *string `json:"SlaveZone,omitnil" name:"SlaveZone"`
 }
 
 func (r *AddClusterSlaveZoneRequest) ToJsonString() string {
@@ -162,10 +162,10 @@ func (r *AddClusterSlaveZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddClusterSlaveZoneResponseParams struct {
 	// Async FlowId
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddClusterSlaveZoneResponse struct {
@@ -187,106 +187,106 @@ func (r *AddClusterSlaveZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AddInstancesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Number of added read-only instances. Value range: (0,16].
-	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitempty" name:"ReadOnlyCount"`
+	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitnil" name:"ReadOnlyCount"`
 
 	// Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID. If `VpcId` is set, `SubnetId` is required.
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// The port used when adding an RO group. Value range: [0,65535).
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 
 	// Instance name. String length range: [0,64).
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
-	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Order source. String length range: [0,64).
-	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+	OrderSource *string `json:"OrderSource,omitnil" name:"OrderSource"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+	DealMode *int64 `json:"DealMode,omitnil" name:"DealMode"`
 
 	// Parameter template ID
-	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil" name:"ParamTemplateId"`
 
 	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
-	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitempty" name:"InstanceParams"`
+	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitnil" name:"InstanceParams"`
 
 	// Security group ID. You can specify an security group when creating a read-only instance.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 type AddInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Number of added read-only instances. Value range: (0,16].
-	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitempty" name:"ReadOnlyCount"`
+	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitnil" name:"ReadOnlyCount"`
 
 	// Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID. If `VpcId` is set, `SubnetId` is required.
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// The port used when adding an RO group. Value range: [0,65535).
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 
 	// Instance name. String length range: [0,64).
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
-	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Order source. String length range: [0,64).
-	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+	OrderSource *string `json:"OrderSource,omitnil" name:"OrderSource"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+	DealMode *int64 `json:"DealMode,omitnil" name:"DealMode"`
 
 	// Parameter template ID
-	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil" name:"ParamTemplateId"`
 
 	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
-	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitempty" name:"InstanceParams"`
+	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitnil" name:"InstanceParams"`
 
 	// Security group ID. You can specify an security group when creating a read-only instance.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 func (r *AddInstancesRequest) ToJsonString() string {
@@ -327,22 +327,22 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 type AddInstancesResponseParams struct {
 	// Freezing transaction. One freezing transaction ID is generated each time an instance is added.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TranId *string `json:"TranId,omitempty" name:"TranId"`
+	TranId *string `json:"TranId,omitnil" name:"TranId"`
 
 	// Pay-as-You-Go order ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// List of IDs of delivered resources
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
 	// Big order ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BigDealIds []*string `json:"BigDealIds,omitempty" name:"BigDealIds"`
+	BigDealIds []*string `json:"BigDealIds,omitnil" name:"BigDealIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type AddInstancesResponse struct {
@@ -363,103 +363,103 @@ func (r *AddInstancesResponse) FromJsonString(s string) error {
 
 type Addr struct {
 	// IP address
-	IP *string `json:"IP,omitempty" name:"IP"`
+	IP *string `json:"IP,omitnil" name:"IP"`
 
 	// Port
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 }
 
 type AuditRuleFilters struct {
 	// Audit rule
-	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
 }
 
 type AuditRuleTemplateInfo struct {
 	// Rule template ID
-	RuleTemplateId *string `json:"RuleTemplateId,omitempty" name:"RuleTemplateId"`
+	RuleTemplateId *string `json:"RuleTemplateId,omitnil" name:"RuleTemplateId"`
 
 	// Rule template name
-	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil" name:"RuleTemplateName"`
 
 	// Filter of the rule template
-	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
 
 	// Description of a rule template
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Creation time of a rule template
-	CreateAt *string `json:"CreateAt,omitempty" name:"CreateAt"`
+	CreateAt *string `json:"CreateAt,omitnil" name:"CreateAt"`
 }
 
 type BackupFileInfo struct {
 	// Snapshot file ID, which is deprecated. You need to use `BackupId`.
-	SnapshotId *uint64 `json:"SnapshotId,omitempty" name:"SnapshotId"`
+	SnapshotId *uint64 `json:"SnapshotId,omitnil" name:"SnapshotId"`
 
 	// Backup file name
-	FileName *string `json:"FileName,omitempty" name:"FileName"`
+	FileName *string `json:"FileName,omitnil" name:"FileName"`
 
 	// Backup file size
-	FileSize *uint64 `json:"FileSize,omitempty" name:"FileSize"`
+	FileSize *uint64 `json:"FileSize,omitnil" name:"FileSize"`
 
 	// Backup start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Backup end time
-	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 
 	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 
 	// Back mode. auto: auto backup; manual: manual backup
-	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
+	BackupMethod *string `json:"BackupMethod,omitnil" name:"BackupMethod"`
 
 	// Backup file status. success: backup succeeded; fail: backup failed; creating: creating backup file; deleting: deleting backup file
-	BackupStatus *string `json:"BackupStatus,omitempty" name:"BackupStatus"`
+	BackupStatus *string `json:"BackupStatus,omitnil" name:"BackupStatus"`
 
 	// Backup file time
-	SnapshotTime *string `json:"SnapshotTime,omitempty" name:"SnapshotTime"`
+	SnapshotTime *string `json:"SnapshotTime,omitnil" name:"SnapshotTime"`
 
 	// Backup ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+	BackupId *int64 `json:"BackupId,omitnil" name:"BackupId"`
 
 
-	SnapShotType *string `json:"SnapShotType,omitempty" name:"SnapShotType"`
+	SnapShotType *string `json:"SnapShotType,omitnil" name:"SnapShotType"`
 
 	// Backup file alias
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
 }
 
 type BillingResourceInfo struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Order ID
-	DealName *string `json:"DealName,omitempty" name:"DealName"`
+	DealName *string `json:"DealName,omitnil" name:"DealName"`
 }
 
 // Predefined struct for user
 type BindClusterResourcePackagesRequestParams struct {
 	// The unique ID of a resource pack
-	PackageIds []*string `json:"PackageIds,omitempty" name:"PackageIds"`
+	PackageIds []*string `json:"PackageIds,omitnil" name:"PackageIds"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type BindClusterResourcePackagesRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a resource pack
-	PackageIds []*string `json:"PackageIds,omitempty" name:"PackageIds"`
+	PackageIds []*string `json:"PackageIds,omitnil" name:"PackageIds"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *BindClusterResourcePackagesRequest) ToJsonString() string {
@@ -485,7 +485,7 @@ func (r *BindClusterResourcePackagesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BindClusterResourcePackagesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type BindClusterResourcePackagesResponse struct {
@@ -507,47 +507,47 @@ func (r *BindClusterResourcePackagesResponse) FromJsonString(s string) error {
 type BindInstanceInfo struct {
 	// ID of the bound cluster
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Region of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceRegion *string `json:"InstanceRegion,omitempty" name:"InstanceRegion"`
+	InstanceRegion *string `json:"InstanceRegion,omitnil" name:"InstanceRegion"`
 
 	// Type of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// ID of the instance in the bound cluster
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ExtendIds []*string `json:"ExtendIds,omitempty" name:"ExtendIds"`
+	ExtendIds []*string `json:"ExtendIds,omitnil" name:"ExtendIds"`
 }
 
 type BinlogItem struct {
 	// Binlog filename
-	FileName *string `json:"FileName,omitempty" name:"FileName"`
+	FileName *string `json:"FileName,omitnil" name:"FileName"`
 
 	// File size in bytes
-	FileSize *int64 `json:"FileSize,omitempty" name:"FileSize"`
+	FileSize *int64 `json:"FileSize,omitnil" name:"FileSize"`
 
 	// Transaction start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Transaction end time
-	FinishTime *string `json:"FinishTime,omitempty" name:"FinishTime"`
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 
 	// Binlog file ID
-	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
+	BinlogId *int64 `json:"BinlogId,omitnil" name:"BinlogId"`
 }
 
 // Predefined struct for user
 type CloseAuditServiceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 type CloseAuditServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 func (r *CloseAuditServiceRequest) ToJsonString() string {
@@ -572,7 +572,7 @@ func (r *CloseAuditServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseAuditServiceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CloseAuditServiceResponse struct {
@@ -594,14 +594,14 @@ func (r *CloseAuditServiceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseClusterPasswordComplexityRequestParams struct {
 	// Cluster IDs in array
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 }
 
 type CloseClusterPasswordComplexityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster IDs in array
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 }
 
 func (r *CloseClusterPasswordComplexityRequest) ToJsonString() string {
@@ -626,10 +626,10 @@ func (r *CloseClusterPasswordComplexityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseClusterPasswordComplexityResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CloseClusterPasswordComplexityResponse struct {
@@ -651,26 +651,26 @@ func (r *CloseClusterPasswordComplexityResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type CloseProxyRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Whether only to disable read/write separation. Valid values: `true`, `false`.
-	OnlyCloseRW *bool `json:"OnlyCloseRW,omitempty" name:"OnlyCloseRW"`
+	OnlyCloseRW *bool `json:"OnlyCloseRW,omitnil" name:"OnlyCloseRW"`
 }
 
 type CloseProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Whether only to disable read/write separation. Valid values: `true`, `false`.
-	OnlyCloseRW *bool `json:"OnlyCloseRW,omitempty" name:"OnlyCloseRW"`
+	OnlyCloseRW *bool `json:"OnlyCloseRW,omitnil" name:"OnlyCloseRW"`
 }
 
 func (r *CloseProxyRequest) ToJsonString() string {
@@ -697,13 +697,13 @@ func (r *CloseProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseProxyResponseParams struct {
 	// Async flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CloseProxyResponse struct {
@@ -725,14 +725,14 @@ func (r *CloseProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseWanRequestParams struct {
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 }
 
 type CloseWanRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 }
 
 func (r *CloseWanRequest) ToJsonString() string {
@@ -757,10 +757,10 @@ func (r *CloseWanRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseWanResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CloseWanResponse struct {
@@ -781,66 +781,66 @@ func (r *CloseWanResponse) FromJsonString(s string) error {
 
 type ClusterInstanceDetail struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Engine type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Instance status
-	InstanceStatus *string `json:"InstanceStatus,omitempty" name:"InstanceStatus"`
+	InstanceStatus *string `json:"InstanceStatus,omitnil" name:"InstanceStatus"`
 
 	// Instance status description
-	InstanceStatusDesc *string `json:"InstanceStatusDesc,omitempty" name:"InstanceStatusDesc"`
+	InstanceStatusDesc *string `json:"InstanceStatusDesc,omitnil" name:"InstanceStatusDesc"`
 
 	// Number of CPU cores
-	InstanceCpu *int64 `json:"InstanceCpu,omitempty" name:"InstanceCpu"`
+	InstanceCpu *int64 `json:"InstanceCpu,omitnil" name:"InstanceCpu"`
 
 	// Memory
-	InstanceMemory *int64 `json:"InstanceMemory,omitempty" name:"InstanceMemory"`
+	InstanceMemory *int64 `json:"InstanceMemory,omitnil" name:"InstanceMemory"`
 
 	// Disk
-	InstanceStorage *int64 `json:"InstanceStorage,omitempty" name:"InstanceStorage"`
+	InstanceStorage *int64 `json:"InstanceStorage,omitnil" name:"InstanceStorage"`
 
 	// Instance role
-	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+	InstanceRole *string `json:"InstanceRole,omitnil" name:"InstanceRole"`
 
 	// Execution start time in seconds from 0:00	
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	MaintainStartTime *int64 `json:"MaintainStartTime,omitempty" name:"MaintainStartTime"`
+	MaintainStartTime *int64 `json:"MaintainStartTime,omitnil" name:"MaintainStartTime"`
 
 	// Duration in seconds	
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
+	MaintainDuration *int64 `json:"MaintainDuration,omitnil" name:"MaintainDuration"`
 
 	// Execution time. Valid values: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, Sat`, `Sun`.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil" name:"MaintainWeekDays"`
 
 	// Serverless instance u200denablement status
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+	ServerlessStatus *string `json:"ServerlessStatus,omitnil" name:"ServerlessStatus"`
 }
 
 // Predefined struct for user
 type CopyClusterPasswordComplexityRequestParams struct {
 	// A parameter used to replicate the array of cluster IDs
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 
 	// Cluster ID
-	SourceClusterId *string `json:"SourceClusterId,omitempty" name:"SourceClusterId"`
+	SourceClusterId *string `json:"SourceClusterId,omitnil" name:"SourceClusterId"`
 }
 
 type CopyClusterPasswordComplexityRequest struct {
 	*tchttp.BaseRequest
 	
 	// A parameter used to replicate the array of cluster IDs
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 
 	// Cluster ID
-	SourceClusterId *string `json:"SourceClusterId,omitempty" name:"SourceClusterId"`
+	SourceClusterId *string `json:"SourceClusterId,omitnil" name:"SourceClusterId"`
 }
 
 func (r *CopyClusterPasswordComplexityRequest) ToJsonString() string {
@@ -866,10 +866,10 @@ func (r *CopyClusterPasswordComplexityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CopyClusterPasswordComplexityResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CopyClusterPasswordComplexityResponse struct {
@@ -891,20 +891,20 @@ func (r *CopyClusterPasswordComplexityResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccountsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of new accounts
-	Accounts []*NewAccount `json:"Accounts,omitempty" name:"Accounts"`
+	Accounts []*NewAccount `json:"Accounts,omitnil" name:"Accounts"`
 }
 
 type CreateAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of new accounts
-	Accounts []*NewAccount `json:"Accounts,omitempty" name:"Accounts"`
+	Accounts []*NewAccount `json:"Accounts,omitnil" name:"Accounts"`
 }
 
 func (r *CreateAccountsRequest) ToJsonString() string {
@@ -930,7 +930,7 @@ func (r *CreateAccountsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccountsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateAccountsResponse struct {
@@ -952,26 +952,26 @@ func (r *CreateAccountsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAuditRuleTemplateRequestParams struct {
 	// Audit rule
-	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
 
 	// Rule template name
-	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil" name:"RuleTemplateName"`
 
 	// Rule template description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CreateAuditRuleTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Audit rule
-	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
 
 	// Rule template name
-	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil" name:"RuleTemplateName"`
 
 	// Rule template description.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *CreateAuditRuleTemplateRequest) ToJsonString() string {
@@ -999,10 +999,10 @@ func (r *CreateAuditRuleTemplateRequest) FromJsonString(s string) error {
 type CreateAuditRuleTemplateResponseParams struct {
 	// The generated rule template ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleTemplateId *string `json:"RuleTemplateId,omitempty" name:"RuleTemplateId"`
+	RuleTemplateId *string `json:"RuleTemplateId,omitnil" name:"RuleTemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateAuditRuleTemplateResponse struct {
@@ -1024,38 +1024,38 @@ func (r *CreateAuditRuleTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateBackupRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup type. Valid values: `logic` (logic backup), `snapshot` (physical backup)
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 
 	// Backup database, which is valid when `BackupType` is `logic`.
-	BackupDatabases []*string `json:"BackupDatabases,omitempty" name:"BackupDatabases"`
+	BackupDatabases []*string `json:"BackupDatabases,omitnil" name:"BackupDatabases"`
 
 	// Backup table, which is valid when `BackupType` is `logic`.
-	BackupTables []*DatabaseTables `json:"BackupTables,omitempty" name:"BackupTables"`
+	BackupTables []*DatabaseTables `json:"BackupTables,omitnil" name:"BackupTables"`
 
 	// Backup name
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
 }
 
 type CreateBackupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup type. Valid values: `logic` (logic backup), `snapshot` (physical backup)
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 
 	// Backup database, which is valid when `BackupType` is `logic`.
-	BackupDatabases []*string `json:"BackupDatabases,omitempty" name:"BackupDatabases"`
+	BackupDatabases []*string `json:"BackupDatabases,omitnil" name:"BackupDatabases"`
 
 	// Backup table, which is valid when `BackupType` is `logic`.
-	BackupTables []*DatabaseTables `json:"BackupTables,omitempty" name:"BackupTables"`
+	BackupTables []*DatabaseTables `json:"BackupTables,omitnil" name:"BackupTables"`
 
 	// Backup name
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -1084,10 +1084,10 @@ func (r *CreateBackupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateBackupResponseParams struct {
 	// Async task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateBackupResponse struct {
@@ -1109,44 +1109,44 @@ func (r *CreateBackupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateClusterDatabaseRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 
 	// Character set
-	CharacterSet *string `json:"CharacterSet,omitempty" name:"CharacterSet"`
+	CharacterSet *string `json:"CharacterSet,omitnil" name:"CharacterSet"`
 
 	// Collation
-	CollateRule *string `json:"CollateRule,omitempty" name:"CollateRule"`
+	CollateRule *string `json:"CollateRule,omitnil" name:"CollateRule"`
 
 	// Host permissions of the authorized user
-	UserHostPrivileges []*UserHostPrivilege `json:"UserHostPrivileges,omitempty" name:"UserHostPrivileges"`
+	UserHostPrivileges []*UserHostPrivilege `json:"UserHostPrivileges,omitnil" name:"UserHostPrivileges"`
 
 	// Remarks
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type CreateClusterDatabaseRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 
 	// Character set
-	CharacterSet *string `json:"CharacterSet,omitempty" name:"CharacterSet"`
+	CharacterSet *string `json:"CharacterSet,omitnil" name:"CharacterSet"`
 
 	// Collation
-	CollateRule *string `json:"CollateRule,omitempty" name:"CollateRule"`
+	CollateRule *string `json:"CollateRule,omitnil" name:"CollateRule"`
 
 	// Host permissions of the authorized user
-	UserHostPrivileges []*UserHostPrivilege `json:"UserHostPrivileges,omitempty" name:"UserHostPrivileges"`
+	UserHostPrivileges []*UserHostPrivilege `json:"UserHostPrivileges,omitnil" name:"UserHostPrivileges"`
 
 	// Remarks
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *CreateClusterDatabaseRequest) ToJsonString() string {
@@ -1176,7 +1176,7 @@ func (r *CreateClusterDatabaseRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateClusterDatabaseResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateClusterDatabaseResponse struct {
@@ -1198,296 +1198,296 @@ func (r *CreateClusterDatabaseResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateClustersRequestParams struct {
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Database version. Valid values: 
 	// <li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
-	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
 
 	// Project ID.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
 	// Number of CPU cores of normal instance
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
 	// Memory of a non-serverless instance in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// This parameter has been deprecated.
 	// Storage capacity in GB
-	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
 	// Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 
 	// Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
-	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+	AdminPassword *string `json:"AdminPassword,omitnil" name:"AdminPassword"`
 
 	// Port. Valid range: [0, 65535). Default value: 3306
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 
 	// Billing mode. `0`: pay-as-you-go; `1`: monthly subscription. Default value: `0`
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Number of purchased clusters. Valid range: [1,50]. Default value: 1
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 
 	// Rollback type:
 	// noneRollback: no rollback;
 	// snapRollback: rollback by snapshot;
 	// timeRollback: rollback by time point
-	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
+	RollbackStrategy *string `json:"RollbackStrategy,omitnil" name:"RollbackStrategy"`
 
 	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
-	RollbackId *uint64 `json:"RollbackId,omitempty" name:"RollbackId"`
+	RollbackId *uint64 `json:"RollbackId,omitnil" name:"RollbackId"`
 
 	// The source cluster ID passed in during rollback to find the source `poolId`
-	OriginalClusterId *string `json:"OriginalClusterId,omitempty" name:"OriginalClusterId"`
+	OriginalClusterId *string `json:"OriginalClusterId,omitnil" name:"OriginalClusterId"`
 
 	// Specified time for time point rollback or snapshot time for snapshot rollback
-	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
+	ExpectTime *string `json:"ExpectTime,omitnil" name:"ExpectTime"`
 
 	// This parameter has been deprecated.
 	// Specified allowed time range for time point rollback
-	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
+	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitnil" name:"ExpectTimeThresh"`
 
 	// Storage upper limit of normal instance in GB
 	// If `DbType` is `MYSQL` and the storage billing mode is monthly subscription, the parameter value can’t exceed the maximum storage corresponding to the CPU and memory specifications.
-	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *int64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Number of Instances. Valid range: (0,16]
-	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+	InstanceCount *int64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
 	// Purchase duration of monthly subscription plan
-	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
 
 	// Duration unit of monthly subscription. Valid values: `s`, `d`, `m`, `y`
-	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 
 	// Whether auto-renewal is enabled for monthly subscription plan. Default value: `0`
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
 	// Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
-	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
-	HaCount *int64 `json:"HaCount,omitempty" name:"HaCount"`
+	HaCount *int64 `json:"HaCount,omitnil" name:"HaCount"`
 
 	// Order source
-	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+	OrderSource *string `json:"OrderSource,omitnil" name:"OrderSource"`
 
 	// Array of tags to be bound to the created cluster
-	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+	ResourceTags []*Tag `json:"ResourceTags,omitnil" name:"ResourceTags"`
 
 	// Database type
 	// Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
 	// <li>NORMAL</li>
 	// <li>SERVERLESS</li>
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// This parameter is required if `DbMode` is `SERVERLESS`.
 	// Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
-	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+	MinCpu *float64 `json:"MinCpu,omitnil" name:"MinCpu"`
 
 	// This parameter is required if `DbMode` is `SERVERLESS`.
 	// Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
-	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+	MaxCpu *float64 `json:"MaxCpu,omitnil" name:"MaxCpu"`
 
 	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
 	// <li>yes</li>
 	// <li>no</li>
 	// Default value: yes
-	AutoPause *string `json:"AutoPause,omitempty" name:"AutoPause"`
+	AutoPause *string `json:"AutoPause,omitnil" name:"AutoPause"`
 
 	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
 	// Default value: `600`
-	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
+	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil" name:"AutoPauseDelay"`
 
 	// The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription). Default value: `0`.
 	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
 	// Clusters with storage billed in monthly subscription can’t be cloned or rolled back.
-	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Array of alarm policy IDs
-	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitempty" name:"AlarmPolicyIds"`
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil" name:"AlarmPolicyIds"`
 
 	// Array of parameters. Valid values: `character_set_server` (utf8｜latin1｜gbk｜utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
-	ClusterParams []*ParamItem `json:"ClusterParams,omitempty" name:"ClusterParams"`
+	ClusterParams []*ParamItem `json:"ClusterParams,omitnil" name:"ClusterParams"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+	DealMode *int64 `json:"DealMode,omitnil" name:"DealMode"`
 
 	// Parameter template ID, which can be obtained by querying parameter template information “DescribeParamTemplates”
-	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil" name:"ParamTemplateId"`
 
 	// Multi-AZ address
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	SlaveZone *string `json:"SlaveZone,omitnil" name:"SlaveZone"`
 
 	// Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
-	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitempty" name:"InstanceInitInfos"`
+	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitnil" name:"InstanceInitInfos"`
 }
 
 type CreateClustersRequest struct {
 	*tchttp.BaseRequest
 	
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Database version. Valid values: 
 	// <li> Valid values for `MYSQL`: 5.7 and 8.0 </li>
-	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
 
 	// Project ID.
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
 	// Number of CPU cores of normal instance
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// It is required when `DbMode` is set to `NORMAL` or left empty.
 	// Memory of a non-serverless instance in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// This parameter has been deprecated.
 	// Storage capacity in GB
-	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
 	// Cluster name, which can contain less than 64 letters, digits, or symbols (-_.).
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 
 	// Account password, which must contain 8-64 characters in at least three of the following four types: uppercase letters, lowercase letters, digits, and symbols (~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/).
-	AdminPassword *string `json:"AdminPassword,omitempty" name:"AdminPassword"`
+	AdminPassword *string `json:"AdminPassword,omitnil" name:"AdminPassword"`
 
 	// Port. Valid range: [0, 65535). Default value: 3306
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 
 	// Billing mode. `0`: pay-as-you-go; `1`: monthly subscription. Default value: `0`
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Number of purchased clusters. Valid range: [1,50]. Default value: 1
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 
 	// Rollback type:
 	// noneRollback: no rollback;
 	// snapRollback: rollback by snapshot;
 	// timeRollback: rollback by time point
-	RollbackStrategy *string `json:"RollbackStrategy,omitempty" name:"RollbackStrategy"`
+	RollbackStrategy *string `json:"RollbackStrategy,omitnil" name:"RollbackStrategy"`
 
 	// `snapshotId` for snapshot rollback or `queryId` for time point rollback. 0 indicates to determine whether the time point is valid
-	RollbackId *uint64 `json:"RollbackId,omitempty" name:"RollbackId"`
+	RollbackId *uint64 `json:"RollbackId,omitnil" name:"RollbackId"`
 
 	// The source cluster ID passed in during rollback to find the source `poolId`
-	OriginalClusterId *string `json:"OriginalClusterId,omitempty" name:"OriginalClusterId"`
+	OriginalClusterId *string `json:"OriginalClusterId,omitnil" name:"OriginalClusterId"`
 
 	// Specified time for time point rollback or snapshot time for snapshot rollback
-	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
+	ExpectTime *string `json:"ExpectTime,omitnil" name:"ExpectTime"`
 
 	// This parameter has been deprecated.
 	// Specified allowed time range for time point rollback
-	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
+	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitnil" name:"ExpectTimeThresh"`
 
 	// Storage upper limit of normal instance in GB
 	// If `DbType` is `MYSQL` and the storage billing mode is monthly subscription, the parameter value can’t exceed the maximum storage corresponding to the CPU and memory specifications.
-	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *int64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Number of Instances. Valid range: (0,16]
-	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+	InstanceCount *int64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
 	// Purchase duration of monthly subscription plan
-	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
 
 	// Duration unit of monthly subscription. Valid values: `s`, `d`, `m`, `y`
-	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 
 	// Whether auto-renewal is enabled for monthly subscription plan. Default value: `0`
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
 	// Whether to automatically select a voucher. `1`: yes; `0`: no. Default value: `0`
-	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Number of instances (this parameter has been disused and is retained only for compatibility with existing instances)
-	HaCount *int64 `json:"HaCount,omitempty" name:"HaCount"`
+	HaCount *int64 `json:"HaCount,omitnil" name:"HaCount"`
 
 	// Order source
-	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+	OrderSource *string `json:"OrderSource,omitnil" name:"OrderSource"`
 
 	// Array of tags to be bound to the created cluster
-	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+	ResourceTags []*Tag `json:"ResourceTags,omitnil" name:"ResourceTags"`
 
 	// Database type
 	// Valid values when `DbType` is `MYSQL` (default value: `NORMAL`):
 	// <li>NORMAL</li>
 	// <li>SERVERLESS</li>
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// This parameter is required if `DbMode` is `SERVERLESS`.
 	// Minimum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
-	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+	MinCpu *float64 `json:"MinCpu,omitnil" name:"MinCpu"`
 
 	// This parameter is required if `DbMode` is `SERVERLESS`.
 	// Maximum number of CPU cores. For the value range, see the returned result of `DescribeServerlessInstanceSpecs`.
-	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+	MaxCpu *float64 `json:"MaxCpu,omitnil" name:"MaxCpu"`
 
 	// This parameter specifies whether the cluster will be automatically paused if `DbMode` is `SERVERLESS`. Valid values:
 	// <li>yes</li>
 	// <li>no</li>
 	// Default value: yes
-	AutoPause *string `json:"AutoPause,omitempty" name:"AutoPause"`
+	AutoPause *string `json:"AutoPause,omitnil" name:"AutoPause"`
 
 	// This parameter specifies the delay for automatic cluster pause in seconds if `DbMode` is `SERVERLESS`. Value range: [600,691200]
 	// Default value: `600`
-	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitempty" name:"AutoPauseDelay"`
+	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil" name:"AutoPauseDelay"`
 
 	// The billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription). Default value: `0`.
 	// If `DbType` is `MYSQL` and the billing mode of cluster compute is pay-as-you-go (or the `DbMode` is `SERVERLESS`), the billing mode of cluster storage must be pay-as-you-go.
 	// Clusters with storage billed in monthly subscription can’t be cloned or rolled back.
-	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Array of alarm policy IDs
-	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitempty" name:"AlarmPolicyIds"`
+	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil" name:"AlarmPolicyIds"`
 
 	// Array of parameters. Valid values: `character_set_server` (utf8｜latin1｜gbk｜utf8mb4), `lower_case_table_names`. 0: case-sensitive; 1: case-insensitive).
-	ClusterParams []*ParamItem `json:"ClusterParams,omitempty" name:"ClusterParams"`
+	ClusterParams []*ParamItem `json:"ClusterParams,omitnil" name:"ClusterParams"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+	DealMode *int64 `json:"DealMode,omitnil" name:"DealMode"`
 
 	// Parameter template ID, which can be obtained by querying parameter template information “DescribeParamTemplates”
-	ParamTemplateId *int64 `json:"ParamTemplateId,omitempty" name:"ParamTemplateId"`
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil" name:"ParamTemplateId"`
 
 	// Multi-AZ address
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	SlaveZone *string `json:"SlaveZone,omitnil" name:"SlaveZone"`
 
 	// Instance initialization configuration information, which is used to select instances with different specifications when purchasing a cluster.
-	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitempty" name:"InstanceInitInfos"`
+	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitnil" name:"InstanceInitInfos"`
 }
 
 func (r *CreateClustersRequest) ToJsonString() string {
@@ -1553,26 +1553,26 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 type CreateClustersResponseParams struct {
 	// Freezing transaction ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TranId *string `json:"TranId,omitempty" name:"TranId"`
+	TranId *string `json:"TranId,omitnil" name:"TranId"`
 
 	// Order ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// List of resource IDs (This field has been deprecated. You need to use `dealNames` in the `DescribeResourcesByDealName` API to get resource IDs.)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
 	// List of cluster IDs (This field has been deprecated. You need to use `dealNames` in the `DescribeResourcesByDealName` API to get cluster IDs.)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 
 	// Big order ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BigDealIds []*string `json:"BigDealIds,omitempty" name:"BigDealIds"`
+	BigDealIds []*string `json:"BigDealIds,omitnil" name:"BigDealIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateClustersResponse struct {
@@ -1594,44 +1594,44 @@ func (r *CreateClustersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateParamTemplateRequestParams struct {
 	// Template name
-	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
 
 	// MySQL version number
-	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
 	// Template description
-	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+	TemplateDescription *string `json:"TemplateDescription,omitnil" name:"TemplateDescription"`
 
 	// ID of the template to be copied
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Database type. Valid values:  `NORMAL` (default), `SERVERLESS`.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// List of the parameters
-	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
+	ParamList []*ParamItem `json:"ParamList,omitnil" name:"ParamList"`
 }
 
 type CreateParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template name
-	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
 
 	// MySQL version number
-	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
 	// Template description
-	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+	TemplateDescription *string `json:"TemplateDescription,omitnil" name:"TemplateDescription"`
 
 	// ID of the template to be copied
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Database type. Valid values:  `NORMAL` (default), `SERVERLESS`.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// List of the parameters
-	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
+	ParamList []*ParamItem `json:"ParamList,omitnil" name:"ParamList"`
 }
 
 func (r *CreateParamTemplateRequest) ToJsonString() string {
@@ -1661,10 +1661,10 @@ func (r *CreateParamTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateParamTemplateResponseParams struct {
 	// Template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateParamTemplateResponse struct {
@@ -1686,124 +1686,124 @@ func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProxyEndPointRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// VPC ID, which is the same as that of the cluster by defaultu200d.
-	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+	UniqueVpcId *string `json:"UniqueVpcId,omitnil" name:"UniqueVpcId"`
 
 	// VPCe subnet ID, which is the same as that of the cluster by default.
-	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil" name:"UniqueSubnetId"`
 
 	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 
 	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool threshold in seconds
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// VIP information
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Weight mode. 
 	// Valid values: `system` (system-assigned), `custom` (custom).
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+	WeightMode *string `json:"WeightMode,omitnil" name:"WeightMode"`
 
 	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
-	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+	AutoAddRo *string `json:"AutoAddRo,omitnil" name:"AutoAddRo"`
 
 	// Whether to enable failover
-	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
 
 	// Consistency type. Valid values: 
 	// `eventual`, `global`, `session`.
-	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+	ConsistencyType *string `json:"ConsistencyType,omitnil" name:"ConsistencyType"`
 
 	// Read-write attribute. Valid values: 
 	// `READWRITE`, `READONLY`.
-	RwType *string `json:"RwType,omitempty" name:"RwType"`
+	RwType *string `json:"RwType,omitnil" name:"RwType"`
 
 	// Consistency timeout period
-	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitnil" name:"ConsistencyTimeOut"`
 
 	// Transaction split
-	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+	TransSplit *bool `json:"TransSplit,omitnil" name:"TransSplit"`
 
 	// Connection mode. Valid values:
 	// `nearby`, `balance`.
-	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+	AccessMode *string `json:"AccessMode,omitnil" name:"AccessMode"`
 
 	// Instance weight
-	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil" name:"InstanceWeights"`
 }
 
 type CreateProxyEndPointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// VPC ID, which is the same as that of the cluster by defaultu200d.
-	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+	UniqueVpcId *string `json:"UniqueVpcId,omitnil" name:"UniqueVpcId"`
 
 	// VPCe subnet ID, which is the same as that of the cluster by default.
-	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil" name:"UniqueSubnetId"`
 
 	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 
 	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool threshold in seconds
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// VIP information
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Weight mode. 
 	// Valid values: `system` (system-assigned), `custom` (custom).
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+	WeightMode *string `json:"WeightMode,omitnil" name:"WeightMode"`
 
 	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
-	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+	AutoAddRo *string `json:"AutoAddRo,omitnil" name:"AutoAddRo"`
 
 	// Whether to enable failover
-	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
 
 	// Consistency type. Valid values: 
 	// `eventual`, `global`, `session`.
-	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+	ConsistencyType *string `json:"ConsistencyType,omitnil" name:"ConsistencyType"`
 
 	// Read-write attribute. Valid values: 
 	// `READWRITE`, `READONLY`.
-	RwType *string `json:"RwType,omitempty" name:"RwType"`
+	RwType *string `json:"RwType,omitnil" name:"RwType"`
 
 	// Consistency timeout period
-	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitnil" name:"ConsistencyTimeOut"`
 
 	// Transaction split
-	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+	TransSplit *bool `json:"TransSplit,omitnil" name:"TransSplit"`
 
 	// Connection mode. Valid values:
 	// `nearby`, `balance`.
-	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+	AccessMode *string `json:"AccessMode,omitnil" name:"AccessMode"`
 
 	// Instance weight
-	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil" name:"InstanceWeights"`
 }
 
 func (r *CreateProxyEndPointRequest) ToJsonString() string {
@@ -1845,16 +1845,16 @@ func (r *CreateProxyEndPointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProxyEndPointResponseParams struct {
 	// Async flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateProxyEndPointResponse struct {
@@ -1876,80 +1876,80 @@ func (r *CreateProxyEndPointResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProxyRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+	Mem *int64 `json:"Mem,omitnil" name:"Mem"`
 
 	// VPC ID, which is the same as that of the cluster by defaultu200d.
-	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+	UniqueVpcId *string `json:"UniqueVpcId,omitnil" name:"UniqueVpcId"`
 
 	// VPC subnet ID, which is the same as that of the cluster by default.
-	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil" name:"UniqueSubnetId"`
 
 	// Number of nodes in the proxy group
-	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+	ProxyCount *int64 `json:"ProxyCount,omitnil" name:"ProxyCount"`
 
 	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 
 	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool threshold in seconds
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Database node information
-	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil" name:"ProxyZones"`
 }
 
 type CreateProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+	Mem *int64 `json:"Mem,omitnil" name:"Mem"`
 
 	// VPC ID, which is the same as that of the cluster by defaultu200d.
-	UniqueVpcId *string `json:"UniqueVpcId,omitempty" name:"UniqueVpcId"`
+	UniqueVpcId *string `json:"UniqueVpcId,omitnil" name:"UniqueVpcId"`
 
 	// VPC subnet ID, which is the same as that of the cluster by default.
-	UniqueSubnetId *string `json:"UniqueSubnetId,omitempty" name:"UniqueSubnetId"`
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil" name:"UniqueSubnetId"`
 
 	// Number of nodes in the proxy group
-	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+	ProxyCount *int64 `json:"ProxyCount,omitnil" name:"ProxyCount"`
 
 	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 
 	// Whether to enable connection pool. Valid value: `yes` (enable), `no` u200d(disable).
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool threshold in seconds
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 
 	// Array of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Database node information
-	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil" name:"ProxyZones"`
 }
 
 func (r *CreateProxyRequest) ToJsonString() string {
@@ -1985,16 +1985,16 @@ func (r *CreateProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProxyResponseParams struct {
 	// Async flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateProxyResponse struct {
@@ -2016,56 +2016,56 @@ func (r *CreateProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateResourcePackageRequestParams struct {
 	// Instance type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion *string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
-	PackageVersion *string `json:"PackageVersion,omitempty" name:"PackageVersion"`
+	PackageVersion *string `json:"PackageVersion,omitnil" name:"PackageVersion"`
 
 	// Resource pack size. Unit of the compute resource pack: Ten thousand.  Unit of the storage resource pack:  GB
-	PackageSpec *float64 `json:"PackageSpec,omitempty" name:"PackageSpec"`
+	PackageSpec *float64 `json:"PackageSpec,omitnil" name:"PackageSpec"`
 
 	// Validity period of a resource pack in days
-	ExpireDay *int64 `json:"ExpireDay,omitempty" name:"ExpireDay"`
+	ExpireDay *int64 `json:"ExpireDay,omitnil" name:"ExpireDay"`
 
 	// Number of the resource packs to be purchased
-	PackageCount *int64 `json:"PackageCount,omitempty" name:"PackageCount"`
+	PackageCount *int64 `json:"PackageCount,omitnil" name:"PackageCount"`
 
 	// Resource pack name
-	PackageName *string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName *string `json:"PackageName,omitnil" name:"PackageName"`
 }
 
 type CreateResourcePackageRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion *string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
-	PackageVersion *string `json:"PackageVersion,omitempty" name:"PackageVersion"`
+	PackageVersion *string `json:"PackageVersion,omitnil" name:"PackageVersion"`
 
 	// Resource pack size. Unit of the compute resource pack: Ten thousand.  Unit of the storage resource pack:  GB
-	PackageSpec *float64 `json:"PackageSpec,omitempty" name:"PackageSpec"`
+	PackageSpec *float64 `json:"PackageSpec,omitnil" name:"PackageSpec"`
 
 	// Validity period of a resource pack in days
-	ExpireDay *int64 `json:"ExpireDay,omitempty" name:"ExpireDay"`
+	ExpireDay *int64 `json:"ExpireDay,omitnil" name:"ExpireDay"`
 
 	// Number of the resource packs to be purchased
-	PackageCount *int64 `json:"PackageCount,omitempty" name:"PackageCount"`
+	PackageCount *int64 `json:"PackageCount,omitnil" name:"PackageCount"`
 
 	// Resource pack name
-	PackageName *string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName *string `json:"PackageName,omitnil" name:"PackageName"`
 }
 
 func (r *CreateResourcePackageRequest) ToJsonString() string {
@@ -2097,13 +2097,13 @@ func (r *CreateResourcePackageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateResourcePackageResponseParams struct {
 	// Big order number
-	BigDealIds []*string `json:"BigDealIds,omitempty" name:"BigDealIds"`
+	BigDealIds []*string `json:"BigDealIds,omitnil" name:"BigDealIds"`
 
 	// Each item has only one `dealName`, through which you need to ensure the idempotency of the delivery API.
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type CreateResourcePackageResponse struct {
@@ -2133,769 +2133,769 @@ type CynosdbCluster struct {
 	// offlined (deactivated)
 	// deleting
 	// deleted
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// Database version
-	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of instances
-	InstanceNum *int64 `json:"InstanceNum,omitempty" name:"InstanceNum"`
+	InstanceNum *int64 `json:"InstanceNum,omitnil" name:"InstanceNum"`
 
 	// User UIN
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// Engine type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// User `appid`
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// Cluster status description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
 
 	// Cluster creation time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Billing mode. `0`: Pay-as-you-go; `1`: Monthly subscription.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// End time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
 
 	// Cluster read-write VIP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Cluster read-write vport
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Project ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
 
 	// VPC ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// TDSQL-C kernel version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+	CynosVersion *string `json:"CynosVersion,omitnil" name:"CynosVersion"`
 
 	// Storage capacity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *int64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Renewal flag
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
+	RenewFlag *int64 `json:"RenewFlag,omitnil" name:"RenewFlag"`
 
 	// Task in progress
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProcessingTask *string `json:"ProcessingTask,omitempty" name:"ProcessingTask"`
+	ProcessingTask *string `json:"ProcessingTask,omitnil" name:"ProcessingTask"`
 
 	// Array of tasks in the cluster
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+	Tasks []*ObjectTask `json:"Tasks,omitnil" name:"Tasks"`
 
 	// Array of tags bound to the cluster
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+	ResourceTags []*Tag `json:"ResourceTags,omitnil" name:"ResourceTags"`
 
 	// Database type. Valid values: `NORMAL`, `SERVERLESS`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// Serverless cluster status when the database type is `SERVERLESS`. Valid values:
 	// `resume`
 	// `pause`
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+	ServerlessStatus *string `json:"ServerlessStatus,omitnil" name:"ServerlessStatus"`
 
 	// Prepaid cluster storage capacity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
 	// Cluster storage ID used in prepaid storage modification
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+	StorageId *string `json:"StorageId,omitnil" name:"StorageId"`
 
 	// Billing mode of cluster storage. Valid values: `0` (pay-as-you-go), `1` (monthly subscription).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// The minimum storage corresponding to the compute specification of the cluster
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MinStorageSize *int64 `json:"MinStorageSize,omitempty" name:"MinStorageSize"`
+	MinStorageSize *int64 `json:"MinStorageSize,omitnil" name:"MinStorageSize"`
 
 	// The maximum storage corresponding to the compute specification of the cluster
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MaxStorageSize *int64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
+	MaxStorageSize *int64 `json:"MaxStorageSize,omitnil" name:"MaxStorageSize"`
 
 	// Network information of the cluster
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NetAddrs []*NetAddr `json:"NetAddrs,omitempty" name:"NetAddrs"`
+	NetAddrs []*NetAddr `json:"NetAddrs,omitnil" name:"NetAddrs"`
 
 	// Physical AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+	PhysicalZone *string `json:"PhysicalZone,omitnil" name:"PhysicalZone"`
 
 	// Primary AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+	MasterZone *string `json:"MasterZone,omitnil" name:"MasterZone"`
 
 	// Whether there is a secondary AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HasSlaveZone *string `json:"HasSlaveZone,omitempty" name:"HasSlaveZone"`
+	HasSlaveZone *string `json:"HasSlaveZone,omitnil" name:"HasSlaveZone"`
 
 	// Secondary AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+	SlaveZones []*string `json:"SlaveZones,omitnil" name:"SlaveZones"`
 
 	// Business type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
+	BusinessType *string `json:"BusinessType,omitnil" name:"BusinessType"`
 
 	// Whether to freeze
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsFreeze *string `json:"IsFreeze,omitempty" name:"IsFreeze"`
+	IsFreeze *string `json:"IsFreeze,omitnil" name:"IsFreeze"`
 
 	// Order source
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OrderSource *string `json:"OrderSource,omitempty" name:"OrderSource"`
+	OrderSource *string `json:"OrderSource,omitnil" name:"OrderSource"`
 
 	// Capability
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ability *Ability `json:"Ability,omitempty" name:"Ability"`
+	Ability *Ability `json:"Ability,omitnil" name:"Ability"`
 
 	// Information of the resource pack bound to an instance when `packageType` is `DISK`. Note: This field may return null, indicating that no valid values can be obtained.
-	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitempty" name:"ResourcePackages"`
+	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitnil" name:"ResourcePackages"`
 }
 
 type CynosdbClusterDetail struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Physical AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+	PhysicalZone *string `json:"PhysicalZone,omitnil" name:"PhysicalZone"`
 
 	// Status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Status description
-	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
 
 	// Serverless cluster status when the database type is `SERVERLESS`. Valid values:
 	// resume
 	// resuming
 	// pause
 	// pausing
-	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+	ServerlessStatus *string `json:"ServerlessStatus,omitnil" name:"ServerlessStatus"`
 
 	// Storage ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+	StorageId *string `json:"StorageId,omitnil" name:"StorageId"`
 
 	// Storage capacity in GB
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
 	// Maximum storage specification in GB
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MaxStorageSize *int64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
+	MaxStorageSize *int64 `json:"MaxStorageSize,omitnil" name:"MaxStorageSize"`
 
 	// Minimum storage specification in GB
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MinStorageSize *int64 `json:"MinStorageSize,omitempty" name:"MinStorageSize"`
+	MinStorageSize *int64 `json:"MinStorageSize,omitnil" name:"MinStorageSize"`
 
 	// Storage billing mode. Valid values: `1` (monthly subscription), `0` (pay-as-you-go).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// VPC name
-	VpcName *string `json:"VpcName,omitempty" name:"VpcName"`
+	VpcName *string `json:"VpcName,omitnil" name:"VpcName"`
 
 	// Unique VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet name
-	SubnetName *string `json:"SubnetName,omitempty" name:"SubnetName"`
+	SubnetName *string `json:"SubnetName,omitnil" name:"SubnetName"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Character set
-	Charset *string `json:"Charset,omitempty" name:"Charset"`
+	Charset *string `json:"Charset,omitnil" name:"Charset"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Database type
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Database type. Valid values: `normal`, `serverless`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// Database version
-	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
 
 	// Maximum storage space
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *int64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Used capacity
-	UsedStorage *int64 `json:"UsedStorage,omitempty" name:"UsedStorage"`
+	UsedStorage *int64 `json:"UsedStorage,omitnil" name:"UsedStorage"`
 
 	// VIP
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// vport
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// VIP u200dand vport of the read-only instance in a cluster
-	RoAddr []*Addr `json:"RoAddr,omitempty" name:"RoAddr"`
+	RoAddr []*Addr `json:"RoAddr,omitnil" name:"RoAddr"`
 
 	// Features supported by the cluster
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ability *Ability `json:"Ability,omitempty" name:"Ability"`
+	Ability *Ability `json:"Ability,omitnil" name:"Ability"`
 
 	// TDSQL-C version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+	CynosVersion *string `json:"CynosVersion,omitnil" name:"CynosVersion"`
 
 	// Business type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
+	BusinessType *string `json:"BusinessType,omitnil" name:"BusinessType"`
 
 	// Whether there is a secondary AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HasSlaveZone *string `json:"HasSlaveZone,omitempty" name:"HasSlaveZone"`
+	HasSlaveZone *string `json:"HasSlaveZone,omitnil" name:"HasSlaveZone"`
 
 	// Whether to freeze
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsFreeze *string `json:"IsFreeze,omitempty" name:"IsFreeze"`
+	IsFreeze *string `json:"IsFreeze,omitnil" name:"IsFreeze"`
 
 	// Task list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+	Tasks []*ObjectTask `json:"Tasks,omitnil" name:"Tasks"`
 
 	// Primary AZ
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+	MasterZone *string `json:"MasterZone,omitnil" name:"MasterZone"`
 
 	// Secondary AZ list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+	SlaveZones []*string `json:"SlaveZones,omitnil" name:"SlaveZones"`
 
 	// Instance information
-	InstanceSet []*ClusterInstanceDetail `json:"InstanceSet,omitempty" name:"InstanceSet"`
+	InstanceSet []*ClusterInstanceDetail `json:"InstanceSet,omitnil" name:"InstanceSet"`
 
 	// Billing mode
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Expiration time
-	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
 
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitempty" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
 
 	// Array of tags bound to instance
-	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+	ResourceTags []*Tag `json:"ResourceTags,omitnil" name:"ResourceTags"`
 
 	// Proxy status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProxyStatus *string `json:"ProxyStatus,omitempty" name:"ProxyStatus"`
+	ProxyStatus *string `json:"ProxyStatus,omitnil" name:"ProxyStatus"`
 
 	// Binlog switch. Valid values: `ON`, `OFF`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LogBin *string `json:"LogBin,omitempty" name:"LogBin"`
+	LogBin *string `json:"LogBin,omitnil" name:"LogBin"`
 
 	// Whether to skip the transaction
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsSkipTrade *string `json:"IsSkipTrade,omitempty" name:"IsSkipTrade"`
+	IsSkipTrade *string `json:"IsSkipTrade,omitnil" name:"IsSkipTrade"`
 
 	// PITR type. Valid values: `normal`, `redo_pitr`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PitrType *string `json:"PitrType,omitempty" name:"PitrType"`
+	PitrType *string `json:"PitrType,omitnil" name:"PitrType"`
 
 	// Whether to enable password complexity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsOpenPasswordComplexity *string `json:"IsOpenPasswordComplexity,omitempty" name:"IsOpenPasswordComplexity"`
+	IsOpenPasswordComplexity *string `json:"IsOpenPasswordComplexity,omitnil" name:"IsOpenPasswordComplexity"`
 
 	// Network type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NetworkStatus *string `json:"NetworkStatus,omitempty" name:"NetworkStatus"`
+	NetworkStatus *string `json:"NetworkStatus,omitnil" name:"NetworkStatus"`
 
 	// Information of the resource pack bound to a cluster Note: This field may return null, indicating that no valid values can be obtained.
-	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitempty" name:"ResourcePackages"`
+	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitnil" name:"ResourcePackages"`
 
 	// The auto-renewal flag. Valid values: `0`: (manual renewal, default), `1` (auto-renewal). Note: This field may return null, indicating that no valid values can be obtained.
-	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
+	RenewFlag *int64 `json:"RenewFlag,omitnil" name:"RenewFlag"`
 }
 
 type CynosdbErrorLogItem struct {
 	// Log timestamp Note: This field may return null, indicating that no valid values can be obtained.
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// Log level Note: This field may return null, indicating that no valid values can be obtained.
-	Level *string `json:"Level,omitempty" name:"Level"`
+	Level *string `json:"Level,omitnil" name:"Level"`
 
 	// Log content Note: This field may return null, indicating that no valid values can be obtained.
-	Content *string `json:"Content,omitempty" name:"Content"`
+	Content *string `json:"Content,omitnil" name:"Content"`
 }
 
 type CynosdbInstance struct {
 	// User `Uin`
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// User `AppId`
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Instance status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Instance status description
-	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
 
 	// Instance type, which is used to indicate whether it is a serverless instance.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// Database type
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Database version
-	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Storage capacity in GB
-	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
 	// Instance type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Current instance role
-	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+	InstanceRole *string `json:"InstanceRole,omitnil" name:"InstanceRole"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Private IP of instance
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Private port of instance
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Billing mode
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Instance expiration time
-	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
 
 	// Termination deadline
-	DestroyDeadlineText *string `json:"DestroyDeadlineText,omitempty" name:"DestroyDeadlineText"`
+	DestroyDeadlineText *string `json:"DestroyDeadlineText,omitnil" name:"DestroyDeadlineText"`
 
 	// Isolation time
-	IsolateTime *string `json:"IsolateTime,omitempty" name:"IsolateTime"`
+	IsolateTime *string `json:"IsolateTime,omitnil" name:"IsolateTime"`
 
 	// Network type
-	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
+	NetType *int64 `json:"NetType,omitnil" name:"NetType"`
 
 	// Public domain name
-	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
 
 	// Public IP
-	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
+	WanIP *string `json:"WanIP,omitnil" name:"WanIP"`
 
 	// Public port
-	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+	WanPort *int64 `json:"WanPort,omitnil" name:"WanPort"`
 
 	// Public network status
-	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
+	WanStatus *string `json:"WanStatus,omitnil" name:"WanStatus"`
 
 	// Instance termination time
-	DestroyTime *string `json:"DestroyTime,omitempty" name:"DestroyTime"`
+	DestroyTime *string `json:"DestroyTime,omitnil" name:"DestroyTime"`
 
 	// TDSQL-C kernel version
-	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+	CynosVersion *string `json:"CynosVersion,omitnil" name:"CynosVersion"`
 
 	// Task in progress
-	ProcessingTask *string `json:"ProcessingTask,omitempty" name:"ProcessingTask"`
+	ProcessingTask *string `json:"ProcessingTask,omitnil" name:"ProcessingTask"`
 
 	// Renewal flag
-	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
+	RenewFlag *int64 `json:"RenewFlag,omitnil" name:"RenewFlag"`
 
 	// Minimum number of CPU cores for serverless instance
-	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+	MinCpu *float64 `json:"MinCpu,omitnil" name:"MinCpu"`
 
 	// Maximum number of CPU cores for serverless instance
-	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+	MaxCpu *float64 `json:"MaxCpu,omitnil" name:"MaxCpu"`
 
 	// Serverless instance status. Valid values:
 	// resume
 	// pause
-	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+	ServerlessStatus *string `json:"ServerlessStatus,omitnil" name:"ServerlessStatus"`
 
 	// Prepaid storage ID
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	StorageId *string `json:"StorageId,omitempty" name:"StorageId"`
+	StorageId *string `json:"StorageId,omitnil" name:"StorageId"`
 
 	// Storage billing mode
-	StoragePayMode *int64 `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *int64 `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// Physical zone
-	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+	PhysicalZone *string `json:"PhysicalZone,omitnil" name:"PhysicalZone"`
 
 	// Business type
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	BusinessType *string `json:"BusinessType,omitempty" name:"BusinessType"`
+	BusinessType *string `json:"BusinessType,omitnil" name:"BusinessType"`
 
 	// Task
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+	Tasks []*ObjectTask `json:"Tasks,omitnil" name:"Tasks"`
 
 	// Whether to freeze
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsFreeze *string `json:"IsFreeze,omitempty" name:"IsFreeze"`
+	IsFreeze *string `json:"IsFreeze,omitnil" name:"IsFreeze"`
 
 	// The resource tag
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ResourceTags []*Tag `json:"ResourceTags,omitempty" name:"ResourceTags"`
+	ResourceTags []*Tag `json:"ResourceTags,omitnil" name:"ResourceTags"`
 
 	// Source AZ
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	MasterZone *string `json:"MasterZone,omitempty" name:"MasterZone"`
+	MasterZone *string `json:"MasterZone,omitnil" name:"MasterZone"`
 
 	// Replica AZ
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	SlaveZones []*string `json:"SlaveZones,omitempty" name:"SlaveZones"`
+	SlaveZones []*string `json:"SlaveZones,omitnil" name:"SlaveZones"`
 
 	// Instance network information
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	InstanceNetInfo []*InstanceNetInfo `json:"InstanceNetInfo,omitempty" name:"InstanceNetInfo"`
+	InstanceNetInfo []*InstanceNetInfo `json:"InstanceNetInfo,omitnil" name:"InstanceNetInfo"`
 
 	// Information of the resource pack bound to an instance when `packageType` is `CCU`. Note: This field may return null, indicating that no valid values can be obtained.
-	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitempty" name:"ResourcePackages"`
+	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitnil" name:"ResourcePackages"`
 }
 
 type CynosdbInstanceDetail struct {
 	// User `Uin`
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// User `AppId`
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Instance status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Instance status description
-	StatusDesc *string `json:"StatusDesc,omitempty" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
 
 	// Database type
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Database version
-	DbVersion *string `json:"DbVersion,omitempty" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Storage capacity in GB
-	Storage *int64 `json:"Storage,omitempty" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
 	// Instance type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Current instance role
-	InstanceRole *string `json:"InstanceRole,omitempty" name:"InstanceRole"`
+	InstanceRole *string `json:"InstanceRole,omitnil" name:"InstanceRole"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Billing mode
-	PayMode *int64 `json:"PayMode,omitempty" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
 
 	// Instance expiration time
-	PeriodEndTime *string `json:"PeriodEndTime,omitempty" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
 
 	// Network type
-	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
+	NetType *int64 `json:"NetType,omitnil" name:"NetType"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Private IP of instance
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Private port of instance
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Public domain name of instance
-	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
 
 	// Character set
-	Charset *string `json:"Charset,omitempty" name:"Charset"`
+	Charset *string `json:"Charset,omitnil" name:"Charset"`
 
 	// TDSQL-C kernel version
-	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+	CynosVersion *string `json:"CynosVersion,omitnil" name:"CynosVersion"`
 
 	// Renewal flag
-	RenewFlag *int64 `json:"RenewFlag,omitempty" name:"RenewFlag"`
+	RenewFlag *int64 `json:"RenewFlag,omitnil" name:"RenewFlag"`
 
 	// The minimum number of CPU cores for a serverless instance
-	MinCpu *float64 `json:"MinCpu,omitempty" name:"MinCpu"`
+	MinCpu *float64 `json:"MinCpu,omitnil" name:"MinCpu"`
 
 	// The maximum number of CPU cores for a serverless instance
-	MaxCpu *float64 `json:"MaxCpu,omitempty" name:"MaxCpu"`
+	MaxCpu *float64 `json:"MaxCpu,omitnil" name:"MaxCpu"`
 
 	// Serverless instance status. Valid values:
 	// resume
 	// pause
-	ServerlessStatus *string `json:"ServerlessStatus,omitempty" name:"ServerlessStatus"`
+	ServerlessStatus *string `json:"ServerlessStatus,omitnil" name:"ServerlessStatus"`
 }
 
 type CynosdbInstanceGrp struct {
 	// User `appId`
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Creation time
-	CreatedTime *string `json:"CreatedTime,omitempty" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
 
 	// Deletion time
-	DeletedTime *string `json:"DeletedTime,omitempty" name:"DeletedTime"`
+	DeletedTime *string `json:"DeletedTime,omitnil" name:"DeletedTime"`
 
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 
 	// Status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Instance group type. ha: HA group; ro: RO group
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Update time
-	UpdatedTime *string `json:"UpdatedTime,omitempty" name:"UpdatedTime"`
+	UpdatedTime *string `json:"UpdatedTime,omitnil" name:"UpdatedTime"`
 
 	// Private IP
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Private port
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Public domain name
-	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
 
 	// Public IP
-	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
+	WanIP *string `json:"WanIP,omitnil" name:"WanIP"`
 
 	// Public port
-	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+	WanPort *int64 `json:"WanPort,omitnil" name:"WanPort"`
 
 	// Public network status
-	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
+	WanStatus *string `json:"WanStatus,omitnil" name:"WanStatus"`
 
 	// Information of instances contained in instance group
-	InstanceSet []*CynosdbInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
+	InstanceSet []*CynosdbInstance `json:"InstanceSet,omitnil" name:"InstanceSet"`
 
 	// VPC ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Subnet ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// Information of the old IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OldAddrInfo *OldAddrInfo `json:"OldAddrInfo,omitempty" name:"OldAddrInfo"`
+	OldAddrInfo *OldAddrInfo `json:"OldAddrInfo,omitnil" name:"OldAddrInfo"`
 
 	// Task in progress
-	ProcessingTasks []*string `json:"ProcessingTasks,omitempty" name:"ProcessingTasks"`
+	ProcessingTasks []*string `json:"ProcessingTasks,omitnil" name:"ProcessingTasks"`
 
 	// Task list
-	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+	Tasks []*ObjectTask `json:"Tasks,omitnil" name:"Tasks"`
 
 	// biz_net_service table ID
-	NetServiceId *int64 `json:"NetServiceId,omitempty" name:"NetServiceId"`
+	NetServiceId *int64 `json:"NetServiceId,omitnil" name:"NetServiceId"`
 }
 
 type DatabasePrivileges struct {
 	// Database
-	Db *string `json:"Db,omitempty" name:"Db"`
+	Db *string `json:"Db,omitnil" name:"Db"`
 
 	// Permission list
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
 }
 
 type DatabaseTables struct {
 	// Database name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Table name list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tables []*string `json:"Tables,omitempty" name:"Tables"`
+	Tables []*string `json:"Tables,omitnil" name:"Tables"`
 }
 
 type DbInfo struct {
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 
 	// Character set
-	CharacterSet *string `json:"CharacterSet,omitempty" name:"CharacterSet"`
+	CharacterSet *string `json:"CharacterSet,omitnil" name:"CharacterSet"`
 
 	// Database status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Collation
-	CollateRule *string `json:"CollateRule,omitempty" name:"CollateRule"`
+	CollateRule *string `json:"CollateRule,omitnil" name:"CollateRule"`
 
 	// Database remarks Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// User permissions Note: This field may return null, indicating that no valid values can be obtained.
-	UserHostPrivileges []*UserHostPrivilege `json:"UserHostPrivileges,omitempty" name:"UserHostPrivileges"`
+	UserHostPrivileges []*UserHostPrivilege `json:"UserHostPrivileges,omitnil" name:"UserHostPrivileges"`
 
 	// Database ID Note: This field may return null, indicating that no valid values can be obtained.
-	DbId *int64 `json:"DbId,omitempty" name:"DbId"`
+	DbId *int64 `json:"DbId,omitnil" name:"DbId"`
 
 	// Creation time Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Update time Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitempty" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// User appid Note: This field may return null, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// User Uin Note: This field may return null, indicating that no valid values can be obtained.
-	Uin *string `json:"Uin,omitempty" name:"Uin"`
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
 
 	// Cluster ID Note: This field may return null, indicating that no valid values can be obtained.
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 // Predefined struct for user
 type DeleteAccountsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Accounts in array, which contains `account` and `host`.
-	Accounts []*InputAccount `json:"Accounts,omitempty" name:"Accounts"`
+	Accounts []*InputAccount `json:"Accounts,omitnil" name:"Accounts"`
 }
 
 type DeleteAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Accounts in array, which contains `account` and `host`.
-	Accounts []*InputAccount `json:"Accounts,omitempty" name:"Accounts"`
+	Accounts []*InputAccount `json:"Accounts,omitnil" name:"Accounts"`
 }
 
 func (r *DeleteAccountsRequest) ToJsonString() string {
@@ -2921,7 +2921,7 @@ func (r *DeleteAccountsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccountsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAccountsResponse struct {
@@ -2943,14 +2943,14 @@ func (r *DeleteAccountsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAuditRuleTemplatesRequestParams struct {
 	// Audit rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 }
 
 type DeleteAuditRuleTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Audit rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 }
 
 func (r *DeleteAuditRuleTemplatesRequest) ToJsonString() string {
@@ -2975,7 +2975,7 @@ func (r *DeleteAuditRuleTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAuditRuleTemplatesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteAuditRuleTemplatesResponse struct {
@@ -2997,26 +2997,26 @@ func (r *DeleteAuditRuleTemplatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteBackupRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup file ID. This field is used by legacy versions and thus not recommended.
-	SnapshotIdList []*int64 `json:"SnapshotIdList,omitempty" name:"SnapshotIdList"`
+	SnapshotIdList []*int64 `json:"SnapshotIdList,omitnil" name:"SnapshotIdList"`
 
 	// Backup file ID. This field is recommended.
-	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
+	BackupIds []*int64 `json:"BackupIds,omitnil" name:"BackupIds"`
 }
 
 type DeleteBackupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup file ID. This field is used by legacy versions and thus not recommended.
-	SnapshotIdList []*int64 `json:"SnapshotIdList,omitempty" name:"SnapshotIdList"`
+	SnapshotIdList []*int64 `json:"SnapshotIdList,omitnil" name:"SnapshotIdList"`
 
 	// Backup file ID. This field is recommended.
-	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
+	BackupIds []*int64 `json:"BackupIds,omitnil" name:"BackupIds"`
 }
 
 func (r *DeleteBackupRequest) ToJsonString() string {
@@ -3043,7 +3043,7 @@ func (r *DeleteBackupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteBackupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteBackupResponse struct {
@@ -3065,19 +3065,19 @@ func (r *DeleteBackupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteClusterDatabaseRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 
-	DbNames []*string `json:"DbNames,omitempty" name:"DbNames"`
+	DbNames []*string `json:"DbNames,omitnil" name:"DbNames"`
 }
 
 type DeleteClusterDatabaseRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
-	DbNames []*string `json:"DbNames,omitempty" name:"DbNames"`
+	DbNames []*string `json:"DbNames,omitnil" name:"DbNames"`
 }
 
 func (r *DeleteClusterDatabaseRequest) ToJsonString() string {
@@ -3103,7 +3103,7 @@ func (r *DeleteClusterDatabaseRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteClusterDatabaseResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteClusterDatabaseResponse struct {
@@ -3125,14 +3125,14 @@ func (r *DeleteClusterDatabaseResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteParamTemplateRequestParams struct {
 	// Parameter template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 type DeleteParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Parameter template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 func (r *DeleteParamTemplateRequest) ToJsonString() string {
@@ -3157,7 +3157,7 @@ func (r *DeleteParamTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteParamTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DeleteParamTemplateResponse struct {
@@ -3179,44 +3179,44 @@ func (r *DeleteParamTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountPrivilegesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// When the database name is “*”, the value specified in `Type` and `TableName` will be ignored, indicating that the user's global permissions are being modified.
-	Db *string `json:"Db,omitempty" name:"Db"`
+	Db *string `json:"Db,omitnil" name:"Db"`
 
 	// Object type in a specified database. Valid values: `table`, `*`.
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// The database name can be specified when `Type` is 'table'.
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
+	TableName *string `json:"TableName,omitnil" name:"TableName"`
 }
 
 type DescribeAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// When the database name is “*”, the value specified in `Type` and `TableName` will be ignored, indicating that the user's global permissions are being modified.
-	Db *string `json:"Db,omitempty" name:"Db"`
+	Db *string `json:"Db,omitnil" name:"Db"`
 
 	// Object type in a specified database. Valid values: `table`, `*`.
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// The database name can be specified when `Type` is 'table'.
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
+	TableName *string `json:"TableName,omitnil" name:"TableName"`
 }
 
 func (r *DescribeAccountPrivilegesRequest) ToJsonString() string {
@@ -3246,10 +3246,10 @@ func (r *DescribeAccountPrivilegesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountPrivilegesResponseParams struct {
 	// The list of permissions, such as  ["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"]
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAccountPrivilegesResponse struct {
@@ -3271,54 +3271,54 @@ func (r *DescribeAccountPrivilegesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of accounts to be filtered
-	AccountNames []*string `json:"AccountNames,omitempty" name:"AccountNames"`
+	AccountNames []*string `json:"AccountNames,omitnil" name:"AccountNames"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// List of accounts to be filtered
-	Hosts []*string `json:"Hosts,omitempty" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
 
 	// Maximum entries returned per page
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Keywords for fuzzy search (match `AccountName` and `AccountHost` at the same time), which supports regex. The union results will be returned.
-	AccountRegular *string `json:"AccountRegular,omitempty" name:"AccountRegular"`
+	AccountRegular *string `json:"AccountRegular,omitnil" name:"AccountRegular"`
 }
 
 type DescribeAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of accounts to be filtered
-	AccountNames []*string `json:"AccountNames,omitempty" name:"AccountNames"`
+	AccountNames []*string `json:"AccountNames,omitnil" name:"AccountNames"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// List of accounts to be filtered
-	Hosts []*string `json:"Hosts,omitempty" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
 
 	// Maximum entries returned per page
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Keywords for fuzzy search (match `AccountName` and `AccountHost` at the same time), which supports regex. The union results will be returned.
-	AccountRegular *string `json:"AccountRegular,omitempty" name:"AccountRegular"`
+	AccountRegular *string `json:"AccountRegular,omitnil" name:"AccountRegular"`
 }
 
 func (r *DescribeAccountsRequest) ToJsonString() string {
@@ -3350,13 +3350,13 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 type DescribeAccountsResponseParams struct {
 	// Database account list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AccountSet []*Account `json:"AccountSet,omitempty" name:"AccountSet"`
+	AccountSet []*Account `json:"AccountSet,omitnil" name:"AccountSet"`
 
 	// Total number of accounts
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAccountsResponse struct {
@@ -3378,32 +3378,32 @@ func (r *DescribeAccountsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditRuleTemplatesRequestParams struct {
 	// Rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 
 	// Rule template name
-	RuleTemplateNames []*string `json:"RuleTemplateNames,omitempty" name:"RuleTemplateNames"`
+	RuleTemplateNames []*string `json:"RuleTemplateNames,omitnil" name:"RuleTemplateNames"`
 
 	// Number of results returned per request. Default value: `20`.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 type DescribeAuditRuleTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 
 	// Rule template name
-	RuleTemplateNames []*string `json:"RuleTemplateNames,omitempty" name:"RuleTemplateNames"`
+	RuleTemplateNames []*string `json:"RuleTemplateNames,omitnil" name:"RuleTemplateNames"`
 
 	// Number of results returned per request. Default value: `20`.
-	Limit *uint64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 func (r *DescribeAuditRuleTemplatesRequest) ToJsonString() string {
@@ -3431,14 +3431,14 @@ func (r *DescribeAuditRuleTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditRuleTemplatesResponseParams struct {
 	// Number of eligible instances
-	TotalCount *uint64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// List of rule template details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*AuditRuleTemplateInfo `json:"Items,omitempty" name:"Items"`
+	Items []*AuditRuleTemplateInfo `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAuditRuleTemplatesResponse struct {
@@ -3460,14 +3460,14 @@ func (r *DescribeAuditRuleTemplatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditRuleWithInstanceIdsRequestParams struct {
 	// Instance ID. Currently, only one single instance can be queried.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 type DescribeAuditRuleWithInstanceIdsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID. Currently, only one single instance can be queried.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 func (r *DescribeAuditRuleWithInstanceIdsRequest) ToJsonString() string {
@@ -3492,14 +3492,14 @@ func (r *DescribeAuditRuleWithInstanceIdsRequest) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeAuditRuleWithInstanceIdsResponseParams struct {
 	// None
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Audit rule information of the instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*InstanceAuditRule `json:"Items,omitempty" name:"Items"`
+	Items []*InstanceAuditRule `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeAuditRuleWithInstanceIdsResponse struct {
@@ -3521,14 +3521,14 @@ func (r *DescribeAuditRuleWithInstanceIdsResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeBackupConfigRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type DescribeBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *DescribeBackupConfigRequest) ToJsonString() string {
@@ -3553,24 +3553,24 @@ func (r *DescribeBackupConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupConfigResponseParams struct {
 	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
-	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitempty" name:"BackupTimeBeg"`
+	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil" name:"BackupTimeBeg"`
 
 	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
-	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitempty" name:"BackupTimeEnd"`
+	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil" name:"BackupTimeEnd"`
 
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800
-	ReserveDuration *uint64 `json:"ReserveDuration,omitempty" name:"ReserveDuration"`
+	ReserveDuration *uint64 `json:"ReserveDuration,omitnil" name:"ReserveDuration"`
 
 	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BackupFreq []*string `json:"BackupFreq,omitempty" name:"BackupFreq"`
+	BackupFreq []*string `json:"BackupFreq,omitnil" name:"BackupFreq"`
 
 	// Backup mode. logic: logic backup; snapshot: snapshot backup
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBackupConfigResponse struct {
@@ -3592,20 +3592,20 @@ func (r *DescribeBackupConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupDownloadUrlRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup ID
-	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+	BackupId *int64 `json:"BackupId,omitnil" name:"BackupId"`
 }
 
 type DescribeBackupDownloadUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup ID
-	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+	BackupId *int64 `json:"BackupId,omitnil" name:"BackupId"`
 }
 
 func (r *DescribeBackupDownloadUrlRequest) ToJsonString() string {
@@ -3631,10 +3631,10 @@ func (r *DescribeBackupDownloadUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupDownloadUrlResponseParams struct {
 	// Backup download address
-	DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
+	DownloadUrl *string `json:"DownloadUrl,omitnil" name:"DownloadUrl"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBackupDownloadUrlResponse struct {
@@ -3656,86 +3656,86 @@ func (r *DescribeBackupDownloadUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupListRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// The number of results to be returned. Value range: (0,100]
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Value range: [0,INF)
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Backup ID
-	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
+	BackupIds []*int64 `json:"BackupIds,omitnil" name:"BackupIds"`
 
 	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 
 	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
-	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
+	BackupMethod *string `json:"BackupMethod,omitnil" name:"BackupMethod"`
 
 
-	SnapShotType *string `json:"SnapShotType,omitempty" name:"SnapShotType"`
+	SnapShotType *string `json:"SnapShotType,omitnil" name:"SnapShotType"`
 
 	// Backup start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Backup end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 
-	FileNames []*string `json:"FileNames,omitempty" name:"FileNames"`
+	FileNames []*string `json:"FileNames,omitnil" name:"FileNames"`
 
 	// Backup alias, which supports fuzzy query.
-	BackupNames []*string `json:"BackupNames,omitempty" name:"BackupNames"`
+	BackupNames []*string `json:"BackupNames,omitnil" name:"BackupNames"`
 
 	// ID list of the snapshot backup
-	SnapshotIdList []*int64 `json:"SnapshotIdList,omitempty" name:"SnapshotIdList"`
+	SnapshotIdList []*int64 `json:"SnapshotIdList,omitnil" name:"SnapshotIdList"`
 }
 
 type DescribeBackupListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// The number of results to be returned. Value range: (0,100]
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Value range: [0,INF)
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Backup ID
-	BackupIds []*int64 `json:"BackupIds,omitempty" name:"BackupIds"`
+	BackupIds []*int64 `json:"BackupIds,omitnil" name:"BackupIds"`
 
 	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 
 	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
-	BackupMethod *string `json:"BackupMethod,omitempty" name:"BackupMethod"`
+	BackupMethod *string `json:"BackupMethod,omitnil" name:"BackupMethod"`
 
-	SnapShotType *string `json:"SnapShotType,omitempty" name:"SnapShotType"`
+	SnapShotType *string `json:"SnapShotType,omitnil" name:"SnapShotType"`
 
 	// Backup start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Backup end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	FileNames []*string `json:"FileNames,omitempty" name:"FileNames"`
+	FileNames []*string `json:"FileNames,omitnil" name:"FileNames"`
 
 	// Backup alias, which supports fuzzy query.
-	BackupNames []*string `json:"BackupNames,omitempty" name:"BackupNames"`
+	BackupNames []*string `json:"BackupNames,omitnil" name:"BackupNames"`
 
 	// ID list of the snapshot backup
-	SnapshotIdList []*int64 `json:"SnapshotIdList,omitempty" name:"SnapshotIdList"`
+	SnapshotIdList []*int64 `json:"SnapshotIdList,omitnil" name:"SnapshotIdList"`
 }
 
 func (r *DescribeBackupListRequest) ToJsonString() string {
@@ -3772,13 +3772,13 @@ func (r *DescribeBackupListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupListResponseParams struct {
 	// Total number of backup files
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Backup file list
-	BackupList []*BackupFileInfo `json:"BackupList,omitempty" name:"BackupList"`
+	BackupList []*BackupFileInfo `json:"BackupList,omitnil" name:"BackupList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBackupListResponse struct {
@@ -3800,20 +3800,20 @@ func (r *DescribeBackupListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBinlogDownloadUrlRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Binlog file ID
-	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
+	BinlogId *int64 `json:"BinlogId,omitnil" name:"BinlogId"`
 }
 
 type DescribeBinlogDownloadUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Binlog file ID
-	BinlogId *int64 `json:"BinlogId,omitempty" name:"BinlogId"`
+	BinlogId *int64 `json:"BinlogId,omitnil" name:"BinlogId"`
 }
 
 func (r *DescribeBinlogDownloadUrlRequest) ToJsonString() string {
@@ -3839,10 +3839,10 @@ func (r *DescribeBinlogDownloadUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBinlogDownloadUrlResponseParams struct {
 	// Download address
-	DownloadUrl *string `json:"DownloadUrl,omitempty" name:"DownloadUrl"`
+	DownloadUrl *string `json:"DownloadUrl,omitnil" name:"DownloadUrl"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBinlogDownloadUrlResponse struct {
@@ -3864,14 +3864,14 @@ func (r *DescribeBinlogDownloadUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBinlogSaveDaysRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type DescribeBinlogSaveDaysRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *DescribeBinlogSaveDaysRequest) ToJsonString() string {
@@ -3896,10 +3896,10 @@ func (r *DescribeBinlogSaveDaysRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBinlogSaveDaysResponseParams struct {
 	// Binlog retention period in days
-	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitempty" name:"BinlogSaveDays"`
+	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil" name:"BinlogSaveDays"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBinlogSaveDaysResponse struct {
@@ -3921,38 +3921,38 @@ func (r *DescribeBinlogSaveDaysResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBinlogsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeBinlogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Maximum number
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeBinlogsRequest) ToJsonString() string {
@@ -3981,14 +3981,14 @@ func (r *DescribeBinlogsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBinlogsResponseParams struct {
 	// Total number of records
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Binlog list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Binlogs []*BinlogItem `json:"Binlogs,omitempty" name:"Binlogs"`
+	Binlogs []*BinlogItem `json:"Binlogs,omitnil" name:"Binlogs"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeBinlogsResponse struct {
@@ -4010,32 +4010,32 @@ func (r *DescribeBinlogsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterDetailDatabasesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Offset. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: `20`. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 }
 
 type DescribeClusterDetailDatabasesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Offset. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Number of returned results. Default value: `20`. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 }
 
 func (r *DescribeClusterDetailDatabasesRequest) ToJsonString() string {
@@ -4063,13 +4063,13 @@ func (r *DescribeClusterDetailDatabasesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterDetailDatabasesResponseParams struct {
 	// Database information Note: This field may return null, indicating that no valid values can be obtained.
-	DbInfos []*DbInfo `json:"DbInfos,omitempty" name:"DbInfos"`
+	DbInfos []*DbInfo `json:"DbInfos,omitnil" name:"DbInfos"`
 
 	// The total count
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeClusterDetailDatabasesResponse struct {
@@ -4091,14 +4091,14 @@ func (r *DescribeClusterDetailDatabasesResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeClusterDetailRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type DescribeClusterDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *DescribeClusterDetailRequest) ToJsonString() string {
@@ -4123,10 +4123,10 @@ func (r *DescribeClusterDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterDetailResponseParams struct {
 	// Cluster details
-	Detail *CynosdbClusterDetail `json:"Detail,omitempty" name:"Detail"`
+	Detail *CynosdbClusterDetail `json:"Detail,omitnil" name:"Detail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeClusterDetailResponse struct {
@@ -4148,14 +4148,14 @@ func (r *DescribeClusterDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterInstanceGrpsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type DescribeClusterInstanceGrpsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *DescribeClusterInstanceGrpsRequest) ToJsonString() string {
@@ -4180,13 +4180,13 @@ func (r *DescribeClusterInstanceGrpsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterInstanceGrpsResponseParams struct {
 	// Number of instance groups
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Instance group list
-	InstanceGrpInfoList []*CynosdbInstanceGrp `json:"InstanceGrpInfoList,omitempty" name:"InstanceGrpInfoList"`
+	InstanceGrpInfoList []*CynosdbInstanceGrp `json:"InstanceGrpInfoList,omitnil" name:"InstanceGrpInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeClusterInstanceGrpsResponse struct {
@@ -4208,20 +4208,20 @@ func (r *DescribeClusterInstanceGrpsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterParamsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 }
 
 type DescribeClusterParamsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 }
 
 func (r *DescribeClusterParamsRequest) ToJsonString() string {
@@ -4247,14 +4247,14 @@ func (r *DescribeClusterParamsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterParamsResponseParams struct {
 	// Number of parameters
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Instance parameter list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*ParamInfo `json:"Items,omitempty" name:"Items"`
+	Items []*ParamInfo `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeClusterParamsResponse struct {
@@ -4276,14 +4276,14 @@ func (r *DescribeClusterParamsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClusterPasswordComplexityRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type DescribeClusterPasswordComplexityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *DescribeClusterPasswordComplexityRequest) ToJsonString() string {
@@ -4308,25 +4308,25 @@ func (r *DescribeClusterPasswordComplexityRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeClusterPasswordComplexityResponseParams struct {
 	// Data dictionary parameter Note: This field may return null, indicating that no valid values can be obtained.
-	ValidatePasswordDictionary *ParamInfo `json:"ValidatePasswordDictionary,omitempty" name:"ValidatePasswordDictionary"`
+	ValidatePasswordDictionary *ParamInfo `json:"ValidatePasswordDictionary,omitnil" name:"ValidatePasswordDictionary"`
 
 	// The length of the password Note: This field may return null, indicating that no valid values can be obtained.
-	ValidatePasswordLength *ParamInfo `json:"ValidatePasswordLength,omitempty" name:"ValidatePasswordLength"`
+	ValidatePasswordLength *ParamInfo `json:"ValidatePasswordLength,omitnil" name:"ValidatePasswordLength"`
 
 	// Number of case-sensitive characters Note: This field may return null, indicating that no valid values can be obtained.
-	ValidatePasswordMixedCaseCount *ParamInfo `json:"ValidatePasswordMixedCaseCount,omitempty" name:"ValidatePasswordMixedCaseCount"`
+	ValidatePasswordMixedCaseCount *ParamInfo `json:"ValidatePasswordMixedCaseCount,omitnil" name:"ValidatePasswordMixedCaseCount"`
 
 	// Number of digits Note: This field may return null, indicating that no valid values can be obtained.
-	ValidatePasswordNumberCount *ParamInfo `json:"ValidatePasswordNumberCount,omitempty" name:"ValidatePasswordNumberCount"`
+	ValidatePasswordNumberCount *ParamInfo `json:"ValidatePasswordNumberCount,omitnil" name:"ValidatePasswordNumberCount"`
 
 	// Password level Note: This field may return null, indicating that no valid values can be obtained.
-	ValidatePasswordPolicy *ParamInfo `json:"ValidatePasswordPolicy,omitempty" name:"ValidatePasswordPolicy"`
+	ValidatePasswordPolicy *ParamInfo `json:"ValidatePasswordPolicy,omitnil" name:"ValidatePasswordPolicy"`
 
 	// Number of symbols Note: This field may return null, indicating that no valid values can be obtained.
-	ValidatePasswordSpecialCharCount *ParamInfo `json:"ValidatePasswordSpecialCharCount,omitempty" name:"ValidatePasswordSpecialCharCount"`
+	ValidatePasswordSpecialCharCount *ParamInfo `json:"ValidatePasswordSpecialCharCount,omitnil" name:"ValidatePasswordSpecialCharCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeClusterPasswordComplexityResponse struct {
@@ -4348,52 +4348,52 @@ func (r *DescribeClusterPasswordComplexityResponse) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeClustersRequestParams struct {
 	// Engine type. Currently, `MYSQL` is supported.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sort by field. Valid values:
 	// <li> CREATETIME: creation time</li>
 	// <li> PERIODENDTIME: expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> ASC: ascending</li>
 	// <li> DESC: descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
-	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeClustersRequest struct {
 	*tchttp.BaseRequest
 	
 	// Engine type. Currently, `MYSQL` is supported.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sort by field. Valid values:
 	// <li> CREATETIME: creation time</li>
 	// <li> PERIODENDTIME: expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> ASC: ascending</li>
 	// <li> DESC: descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
-	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *DescribeClustersRequest) ToJsonString() string {
@@ -4423,13 +4423,13 @@ func (r *DescribeClustersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeClustersResponseParams struct {
 	// Number of clusters
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Cluster list
-	ClusterSet []*CynosdbCluster `json:"ClusterSet,omitempty" name:"ClusterSet"`
+	ClusterSet []*CynosdbCluster `json:"ClusterSet,omitnil" name:"ClusterSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeClustersResponse struct {
@@ -4451,14 +4451,14 @@ func (r *DescribeClustersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSecurityGroupsRequestParams struct {
 	// Instance group ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 type DescribeDBSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance group ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 func (r *DescribeDBSecurityGroupsRequest) ToJsonString() string {
@@ -4483,10 +4483,10 @@ func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSecurityGroupsResponseParams struct {
 	// Security group information
-	Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
+	Groups []*SecurityGroup `json:"Groups,omitnil" name:"Groups"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeDBSecurityGroupsResponse struct {
@@ -4508,14 +4508,14 @@ func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFlowRequestParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 }
 
 type DescribeFlowRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 }
 
 func (r *DescribeFlowRequest) ToJsonString() string {
@@ -4540,10 +4540,10 @@ func (r *DescribeFlowRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFlowResponseParams struct {
 	// Task flow status. Valid values: `0` (succeeded), `1` (failed), `2` (Processing).
-	Status *int64 `json:"Status,omitempty" name:"Status"`
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeFlowResponse struct {
@@ -4565,14 +4565,14 @@ func (r *DescribeFlowResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceDetailRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 type DescribeInstanceDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceDetailRequest) ToJsonString() string {
@@ -4597,10 +4597,10 @@ func (r *DescribeInstanceDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceDetailResponseParams struct {
 	// Instance details
-	Detail *CynosdbInstanceDetail `json:"Detail,omitempty" name:"Detail"`
+	Detail *CynosdbInstanceDetail `json:"Detail,omitnil" name:"Detail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeInstanceDetailResponse struct {
@@ -4622,61 +4622,61 @@ func (r *DescribeInstanceDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceErrorLogsRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Limit on the number of logs
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset of the log number
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Sorting field. Valid value: 'Timestamp'.
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `ASC`, `DESC`.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
-	LogLevels []*string `json:"LogLevels,omitempty" name:"LogLevels"`
+	LogLevels []*string `json:"LogLevels,omitnil" name:"LogLevels"`
 
 
-	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords"`
+	KeyWords []*string `json:"KeyWords,omitnil" name:"KeyWords"`
 }
 
 type DescribeInstanceErrorLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Limit on the number of logs
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset of the log number
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Sorting field. Valid value: 'Timestamp'.
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `ASC`, `DESC`.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
-	LogLevels []*string `json:"LogLevels,omitempty" name:"LogLevels"`
+	LogLevels []*string `json:"LogLevels,omitnil" name:"LogLevels"`
 
-	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords"`
+	KeyWords []*string `json:"KeyWords,omitnil" name:"KeyWords"`
 }
 
 func (r *DescribeInstanceErrorLogsRequest) ToJsonString() string {
@@ -4709,13 +4709,13 @@ func (r *DescribeInstanceErrorLogsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceErrorLogsResponseParams struct {
 	// Number of logs Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Error log list Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorLogs []*CynosdbErrorLogItem `json:"ErrorLogs,omitempty" name:"ErrorLogs"`
+	ErrorLogs []*CynosdbErrorLogItem `json:"ErrorLogs,omitnil" name:"ErrorLogs"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeInstanceErrorLogsResponse struct {
@@ -4737,26 +4737,26 @@ func (r *DescribeInstanceErrorLogsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceParamsRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID, which supports batch query.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Search condition for a parameter name, which supports fuzzy search.
-	ParamKeyword *string `json:"ParamKeyword,omitempty" name:"ParamKeyword"`
+	ParamKeyword *string `json:"ParamKeyword,omitnil" name:"ParamKeyword"`
 }
 
 type DescribeInstanceParamsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID, which supports batch query.
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Search condition for a parameter name, which supports fuzzy search.
-	ParamKeyword *string `json:"ParamKeyword,omitempty" name:"ParamKeyword"`
+	ParamKeyword *string `json:"ParamKeyword,omitnil" name:"ParamKeyword"`
 }
 
 func (r *DescribeInstanceParamsRequest) ToJsonString() string {
@@ -4783,10 +4783,10 @@ func (r *DescribeInstanceParamsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceParamsResponseParams struct {
 	// List of instance parameters
-	Items []*InstanceParamItem `json:"Items,omitempty" name:"Items"`
+	Items []*InstanceParamItem `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeInstanceParamsResponse struct {
@@ -4808,68 +4808,68 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceSlowQueriesRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Transaction start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Transaction end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Maximum number
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Username
-	Username *string `json:"Username,omitempty" name:"Username"`
+	Username *string `json:"Username,omitnil" name:"Username"`
 
 	// Client host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Sorting field. Valid values: QueryTime, LockTime, RowsExamined, RowsSent.
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: asc, desc.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 }
 
 type DescribeInstanceSlowQueriesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Transaction start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Transaction end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Maximum number
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Username
-	Username *string `json:"Username,omitempty" name:"Username"`
+	Username *string `json:"Username,omitnil" name:"Username"`
 
 	// Client host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Sorting field. Valid values: QueryTime, LockTime, RowsExamined, RowsSent.
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: asc, desc.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 }
 
 func (r *DescribeInstanceSlowQueriesRequest) ToJsonString() string {
@@ -4903,13 +4903,13 @@ func (r *DescribeInstanceSlowQueriesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceSlowQueriesResponseParams struct {
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Slow query record
-	SlowQueries []*SlowQueriesItem `json:"SlowQueries,omitempty" name:"SlowQueries"`
+	SlowQueries []*SlowQueriesItem `json:"SlowQueries,omitnil" name:"SlowQueries"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeInstanceSlowQueriesResponse struct {
@@ -4932,10 +4932,10 @@ func (r *DescribeInstanceSlowQueriesResponse) FromJsonString(s string) error {
 type DescribeInstanceSpecsRequestParams struct {
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Whether to return the AZ information.
-	IncludeZoneStocks *bool `json:"IncludeZoneStocks,omitempty" name:"IncludeZoneStocks"`
+	IncludeZoneStocks *bool `json:"IncludeZoneStocks,omitnil" name:"IncludeZoneStocks"`
 }
 
 type DescribeInstanceSpecsRequest struct {
@@ -4943,10 +4943,10 @@ type DescribeInstanceSpecsRequest struct {
 	
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Whether to return the AZ information.
-	IncludeZoneStocks *bool `json:"IncludeZoneStocks,omitempty" name:"IncludeZoneStocks"`
+	IncludeZoneStocks *bool `json:"IncludeZoneStocks,omitnil" name:"IncludeZoneStocks"`
 }
 
 func (r *DescribeInstanceSpecsRequest) ToJsonString() string {
@@ -4972,10 +4972,10 @@ func (r *DescribeInstanceSpecsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceSpecsResponseParams struct {
 	// Specification information
-	InstanceSpecSet []*InstanceSpec `json:"InstanceSpecSet,omitempty" name:"InstanceSpecSet"`
+	InstanceSpecSet []*InstanceSpec `json:"InstanceSpecSet,omitnil" name:"InstanceSpecSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeInstanceSpecsResponse struct {
@@ -4997,26 +4997,26 @@ func (r *DescribeInstanceSpecsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sort by field. Valid values:
 	// <li> CREATETIME: creation time</li>
 	// <li> PERIODENDTIME: expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> ASC: ascending</li>
 	// <li> DESC: descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
-	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryFilter `json:"Filters,omitnil" name:"Filters"`
 
 	// Engine type. Currently, `MYSQL` is supported.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Instance status. Valid values:
 	// creating
@@ -5026,36 +5026,36 @@ type DescribeInstancesRequestParams struct {
 	// activating: Removing the instance from isolation
 	// offlining: Eliminating the instance
 	// offlined: Instance eliminated
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Instance ID list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: 0
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sort by field. Valid values:
 	// <li> CREATETIME: creation time</li>
 	// <li> PERIODENDTIME: expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> ASC: ascending</li>
 	// <li> DESC: descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If more than one filter exists, the logical relationship between these filters is `AND`.
-	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryFilter `json:"Filters,omitnil" name:"Filters"`
 
 	// Engine type. Currently, `MYSQL` is supported.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Instance status. Valid values:
 	// creating
@@ -5065,10 +5065,10 @@ type DescribeInstancesRequest struct {
 	// activating: Removing the instance from isolation
 	// offlining: Eliminating the instance
 	// offlined: Instance eliminated
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Instance ID list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -5100,13 +5100,13 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesResponseParams struct {
 	// Number of instances
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Instance list
-	InstanceSet []*CynosdbInstance `json:"InstanceSet,omitempty" name:"InstanceSet"`
+	InstanceSet []*CynosdbInstance `json:"InstanceSet,omitnil" name:"InstanceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeInstancesResponse struct {
@@ -5128,14 +5128,14 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMaintainPeriodRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 type DescribeMaintainPeriodRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 func (r *DescribeMaintainPeriodRequest) ToJsonString() string {
@@ -5160,16 +5160,16 @@ func (r *DescribeMaintainPeriodRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMaintainPeriodResponseParams struct {
 	// Maintenance days of the week
-	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil" name:"MaintainWeekDays"`
 
 	// Maintenance start time in seconds
-	MaintainStartTime *int64 `json:"MaintainStartTime,omitempty" name:"MaintainStartTime"`
+	MaintainStartTime *int64 `json:"MaintainStartTime,omitnil" name:"MaintainStartTime"`
 
 	// Maintenance duration in seconds
-	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
+	MaintainDuration *int64 `json:"MaintainDuration,omitnil" name:"MaintainDuration"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeMaintainPeriodResponse struct {
@@ -5191,14 +5191,14 @@ func (r *DescribeMaintainPeriodResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplateDetailRequestParams struct {
 	// Parameter template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 type DescribeParamTemplateDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Parameter template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 }
 
 func (r *DescribeParamTemplateDetailRequest) ToJsonString() string {
@@ -5223,28 +5223,28 @@ func (r *DescribeParamTemplateDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplateDetailResponseParams struct {
 	// Parameter template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Parameter template name
-	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
 
 	// Parameter template description
-	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+	TemplateDescription *string `json:"TemplateDescription,omitnil" name:"TemplateDescription"`
 
 	// Engine version
-	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
 	// Total number of parameters
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// List of parameters
-	Items []*ParamDetail `json:"Items,omitempty" name:"Items"`
+	Items []*ParamDetail `json:"Items,omitnil" name:"Items"`
 
 	// Database type. Valid values:  `NORMAL`, `SERVERLESS`.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeParamTemplateDetailResponse struct {
@@ -5266,74 +5266,74 @@ func (r *DescribeParamTemplateDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplatesRequestParams struct {
 	// Database engine version number
-	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
+	EngineVersions []*string `json:"EngineVersions,omitnil" name:"EngineVersions"`
 
 	// Template name
-	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+	TemplateNames []*string `json:"TemplateNames,omitnil" name:"TemplateNames"`
 
 	// Template ID
-	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
+	TemplateIds []*int64 `json:"TemplateIds,omitnil" name:"TemplateIds"`
 
 	// Database Type. Valid values: `NORMAL`, `SERVERLESS`.
-	DbModes []*string `json:"DbModes,omitempty" name:"DbModes"`
+	DbModes []*string `json:"DbModes,omitnil" name:"DbModes"`
 
 	// Offset for query
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit on queries
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Product type of the queried template
-	Products []*string `json:"Products,omitempty" name:"Products"`
+	Products []*string `json:"Products,omitnil" name:"Products"`
 
 	// Template type
-	TemplateTypes []*string `json:"TemplateTypes,omitempty" name:"TemplateTypes"`
+	TemplateTypes []*string `json:"TemplateTypes,omitnil" name:"TemplateTypes"`
 
 	// Version type
-	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
+	EngineTypes []*string `json:"EngineTypes,omitnil" name:"EngineTypes"`
 
 	// The sorting order of the returned results
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `desc`, `asc `.
-	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+	OrderDirection *string `json:"OrderDirection,omitnil" name:"OrderDirection"`
 }
 
 type DescribeParamTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine version number
-	EngineVersions []*string `json:"EngineVersions,omitempty" name:"EngineVersions"`
+	EngineVersions []*string `json:"EngineVersions,omitnil" name:"EngineVersions"`
 
 	// Template name
-	TemplateNames []*string `json:"TemplateNames,omitempty" name:"TemplateNames"`
+	TemplateNames []*string `json:"TemplateNames,omitnil" name:"TemplateNames"`
 
 	// Template ID
-	TemplateIds []*int64 `json:"TemplateIds,omitempty" name:"TemplateIds"`
+	TemplateIds []*int64 `json:"TemplateIds,omitnil" name:"TemplateIds"`
 
 	// Database Type. Valid values: `NORMAL`, `SERVERLESS`.
-	DbModes []*string `json:"DbModes,omitempty" name:"DbModes"`
+	DbModes []*string `json:"DbModes,omitnil" name:"DbModes"`
 
 	// Offset for query
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit on queries
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Product type of the queried template
-	Products []*string `json:"Products,omitempty" name:"Products"`
+	Products []*string `json:"Products,omitnil" name:"Products"`
 
 	// Template type
-	TemplateTypes []*string `json:"TemplateTypes,omitempty" name:"TemplateTypes"`
+	TemplateTypes []*string `json:"TemplateTypes,omitnil" name:"TemplateTypes"`
 
 	// Version type
-	EngineTypes []*string `json:"EngineTypes,omitempty" name:"EngineTypes"`
+	EngineTypes []*string `json:"EngineTypes,omitnil" name:"EngineTypes"`
 
 	// The sorting order of the returned results
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `desc`, `asc `.
-	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+	OrderDirection *string `json:"OrderDirection,omitnil" name:"OrderDirection"`
 }
 
 func (r *DescribeParamTemplatesRequest) ToJsonString() string {
@@ -5368,13 +5368,13 @@ func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplatesResponseParams struct {
 	// Number of parameter templates
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Parameter template information
-	Items []*ParamTemplateListInfo `json:"Items,omitempty" name:"Items"`
+	Items []*ParamTemplateListInfo `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeParamTemplatesResponse struct {
@@ -5396,32 +5396,32 @@ func (r *DescribeParamTemplatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupsRequestParams struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Maximum entries returned per page
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Search by keyword
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 }
 
 type DescribeProjectSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Maximum entries returned per page
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Search by keyword
-	SearchKey *string `json:"SearchKey,omitempty" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
 }
 
 func (r *DescribeProjectSecurityGroupsRequest) ToJsonString() string {
@@ -5449,13 +5449,13 @@ func (r *DescribeProjectSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupsResponseParams struct {
 	// Security group details
-	Groups []*SecurityGroup `json:"Groups,omitempty" name:"Groups"`
+	Groups []*SecurityGroup `json:"Groups,omitnil" name:"Groups"`
 
 	// The total number of groups
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeProjectSecurityGroupsResponse struct {
@@ -5477,52 +5477,52 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxiesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of returned results. Default value: `20`. Maximum value: `100`,
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sorting field. Valid values:
 	// <li> CREATETIME: Creation time</li>
 	// <li> PERIODENDTIME: Expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> `ASC`: Ascending.</li>
 	// <li> `DESC`: Descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
-	Filters []*QueryParamFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryParamFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeProxiesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of returned results. Default value: `20`. Maximum value: `100`,
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sorting field. Valid values:
 	// <li> CREATETIME: Creation time</li>
 	// <li> PERIODENDTIME: Expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> `ASC`: Ascending.</li>
 	// <li> `DESC`: Descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
-	Filters []*QueryParamFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryParamFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *DescribeProxiesRequest) ToJsonString() string {
@@ -5552,18 +5552,18 @@ func (r *DescribeProxiesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxiesResponseParams struct {
 	// Number of database proxy groups
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// List of database proxy groups
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ProxyGroupInfos []*ProxyGroupInfo `json:"ProxyGroupInfos,omitempty" name:"ProxyGroupInfos"`
+	ProxyGroupInfos []*ProxyGroupInfo `json:"ProxyGroupInfos,omitnil" name:"ProxyGroupInfos"`
 
 	// Database proxy node
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitempty" name:"ProxyNodeInfos"`
+	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitnil" name:"ProxyNodeInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeProxiesResponse struct {
@@ -5585,46 +5585,46 @@ func (r *DescribeProxiesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxyNodesRequestParams struct {
 	// Number of returned results. Default value: `20`. Maximum value: `100`,
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sorting field. Valid values:
 	// <li> CREATETIME: Creation time</li>
 	// <li> PERIODENDTIME: Expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> `ASC`: Ascending.</li>
 	// <li> `DESC`: Descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
-	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeProxyNodesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of returned results. Default value: `20`. Maximum value: `100`,
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Record offset. Default value: `0`.
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Sorting field. Valid values:
 	// <li> CREATETIME: Creation time</li>
 	// <li> PERIODENDTIME: Expiration time</li>
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values:
 	// <li> `ASC`: Ascending.</li>
 	// <li> `DESC`: Descending</li>
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 
 	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
-	Filters []*QueryFilter `json:"Filters,omitempty" name:"Filters"`
+	Filters []*QueryFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *DescribeProxyNodesRequest) ToJsonString() string {
@@ -5653,13 +5653,13 @@ func (r *DescribeProxyNodesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxyNodesResponseParams struct {
 	// Number of the database proxy nodes
-	TotalCount *int64 `json:"TotalCount,omitempty" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// List of the database proxy nodes
-	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitempty" name:"ProxyNodeInfos"`
+	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitnil" name:"ProxyNodeInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeProxyNodesResponse struct {
@@ -5710,10 +5710,10 @@ func (r *DescribeProxySpecsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxySpecsResponseParams struct {
 	// List of database proxyspecifications
-	ProxySpecs []*ProxySpec `json:"ProxySpecs,omitempty" name:"ProxySpecs"`
+	ProxySpecs []*ProxySpec `json:"ProxySpecs,omitnil" name:"ProxySpecs"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeProxySpecsResponse struct {
@@ -5735,50 +5735,50 @@ func (r *DescribeProxySpecsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourcePackageDetailRequestParams struct {
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Cluster ID
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Offset
-	Offset *string `json:"Offset,omitempty" name:"Offset"`
+	Offset *string `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit
-	Limit *string `json:"Limit,omitempty" name:"Limit"`
+	Limit *string `json:"Limit,omitnil" name:"Limit"`
 
 	// Instance D
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 type DescribeResourcePackageDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Cluster ID
-	ClusterIds []*string `json:"ClusterIds,omitempty" name:"ClusterIds"`
+	ClusterIds []*string `json:"ClusterIds,omitnil" name:"ClusterIds"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Offset
-	Offset *string `json:"Offset,omitempty" name:"Offset"`
+	Offset *string `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit
-	Limit *string `json:"Limit,omitempty" name:"Limit"`
+	Limit *string `json:"Limit,omitnil" name:"Limit"`
 
 	// Instance D
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 }
 
 func (r *DescribeResourcePackageDetailRequest) ToJsonString() string {
@@ -5809,13 +5809,13 @@ func (r *DescribeResourcePackageDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourcePackageDetailResponseParams struct {
 	// Total number of deducted resource packs
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Resource pack details
-	Detail []*PackageDetail `json:"Detail,omitempty" name:"Detail"`
+	Detail []*PackageDetail `json:"Detail,omitnil" name:"Detail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeResourcePackageDetailResponse struct {
@@ -5837,64 +5837,64 @@ func (r *DescribeResourcePackageDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourcePackageListRequestParams struct {
 	// The unique ID of a resource pack
-	PackageId []*string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId []*string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Resource pack name
-	PackageName []*string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName []*string `json:"PackageName,omitnil" name:"PackageName"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
-	PackageType []*string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType []*string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-	PackageRegion []*string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion []*string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack status. Valid values: `using`, `expired`, `normal_finish` (used up), `apply_refund` (requesting a refund), `refund` (refunded).
-	Status []*string `json:"Status,omitempty" name:"Status"`
+	Status []*string `json:"Status,omitnil" name:"Status"`
 
 	// Sorting conditions. Valid values: `startTime` (effective time), `expireTime` (expiration date), `packageUsedSpec` (used capacity), `packageTotalSpec` (total storage capacity). 
 	// Sorting by array order
-	OrderBy []*string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy []*string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `ASC` (ascending), `DESC` (descending).
-	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+	OrderDirection *string `json:"OrderDirection,omitnil" name:"OrderDirection"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeResourcePackageListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a resource pack
-	PackageId []*string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId []*string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Resource pack name
-	PackageName []*string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName []*string `json:"PackageName,omitnil" name:"PackageName"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack).
-	PackageType []*string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType []*string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-	PackageRegion []*string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion []*string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack status. Valid values: `using`, `expired`, `normal_finish` (used up), `apply_refund` (requesting a refund), `refund` (refunded).
-	Status []*string `json:"Status,omitempty" name:"Status"`
+	Status []*string `json:"Status,omitnil" name:"Status"`
 
 	// Sorting conditions. Valid values: `startTime` (effective time), `expireTime` (expiration date), `packageUsedSpec` (used capacity), `packageTotalSpec` (total storage capacity). 
 	// Sorting by array order
-	OrderBy []*string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy []*string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `ASC` (ascending), `DESC` (descending).
-	OrderDirection *string `json:"OrderDirection,omitempty" name:"OrderDirection"`
+	OrderDirection *string `json:"OrderDirection,omitnil" name:"OrderDirection"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeResourcePackageListRequest) ToJsonString() string {
@@ -5927,13 +5927,13 @@ func (r *DescribeResourcePackageListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourcePackageListResponseParams struct {
 	// Total number of resource packs
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Resource pack details Note: This field may return null, indicating that no valid values can be obtained.
-	Detail []*Package `json:"Detail,omitempty" name:"Detail"`
+	Detail []*Package `json:"Detail,omitnil" name:"Detail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeResourcePackageListResponse struct {
@@ -5955,38 +5955,38 @@ func (r *DescribeResourcePackageListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourcePackageSaleSpecRequestParams struct {
 	// Instance type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion *string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack, `DISK` (storage resource pack).
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 type DescribeResourcePackageSaleSpecRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance type
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland).
-	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion *string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack, `DISK` (storage resource pack).
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Limit
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 }
 
 func (r *DescribeResourcePackageSaleSpecRequest) ToJsonString() string {
@@ -6015,13 +6015,13 @@ func (r *DescribeResourcePackageSaleSpecRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeResourcePackageSaleSpecResponseParams struct {
 	// Total number of available resource packs
-	Total *int64 `json:"Total,omitempty" name:"Total"`
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 
 	// Resource pack details Note: This field may return null, indicating that no valid values can be obtained.
-	Detail []*SalePackageSpec `json:"Detail,omitempty" name:"Detail"`
+	Detail []*SalePackageSpec `json:"Detail,omitnil" name:"Detail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeResourcePackageSaleSpecResponse struct {
@@ -6043,20 +6043,20 @@ func (r *DescribeResourcePackageSaleSpecResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeResourcesByDealNameRequestParams struct {
 	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
-	DealName *string `json:"DealName,omitempty" name:"DealName"`
+	DealName *string `json:"DealName,omitnil" name:"DealName"`
 
 	// Order ID, which can be used to query the resource information of multiple orders ID (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 }
 
 type DescribeResourcesByDealNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// Order ID. (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
-	DealName *string `json:"DealName,omitempty" name:"DealName"`
+	DealName *string `json:"DealName,omitnil" name:"DealName"`
 
 	// Order ID, which can be used to query the resource information of multiple orders ID (If the cluster is not delivered yet, the `DescribeResourcesByDealName` API may return the `InvalidParameterValue.DealNameNotFound` error. Call the API again until it succeeds.)
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 }
 
 func (r *DescribeResourcesByDealNameRequest) ToJsonString() string {
@@ -6082,10 +6082,10 @@ func (r *DescribeResourcesByDealNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourcesByDealNameResponseParams struct {
 	// Billable resource ID information array
-	BillingResourceInfos []*BillingResourceInfo `json:"BillingResourceInfos,omitempty" name:"BillingResourceInfos"`
+	BillingResourceInfos []*BillingResourceInfo `json:"BillingResourceInfos,omitnil" name:"BillingResourceInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeResourcesByDealNameResponse struct {
@@ -6107,14 +6107,14 @@ func (r *DescribeResourcesByDealNameResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRollbackTimeRangeRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type DescribeRollbackTimeRangeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *DescribeRollbackTimeRangeRequest) ToJsonString() string {
@@ -6140,17 +6140,17 @@ func (r *DescribeRollbackTimeRangeRequest) FromJsonString(s string) error {
 type DescribeRollbackTimeRangeResponseParams struct {
 	// Start time of valid rollback time range (disused)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TimeRangeStart *string `json:"TimeRangeStart,omitempty" name:"TimeRangeStart"`
+	TimeRangeStart *string `json:"TimeRangeStart,omitnil" name:"TimeRangeStart"`
 
 	// End time of valid rollback time range (disused)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TimeRangeEnd *string `json:"TimeRangeEnd,omitempty" name:"TimeRangeEnd"`
+	TimeRangeEnd *string `json:"TimeRangeEnd,omitnil" name:"TimeRangeEnd"`
 
 	// Time range available for rollback
-	RollbackTimeRanges []*RollbackTimeRange `json:"RollbackTimeRanges,omitempty" name:"RollbackTimeRanges"`
+	RollbackTimeRanges []*RollbackTimeRange `json:"RollbackTimeRanges,omitnil" name:"RollbackTimeRanges"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRollbackTimeRangeResponse struct {
@@ -6172,26 +6172,26 @@ func (r *DescribeRollbackTimeRangeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRollbackTimeValidityRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Expected time point to roll back to
-	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
+	ExpectTime *string `json:"ExpectTime,omitnil" name:"ExpectTime"`
 
 	// Error tolerance range for rollback time point
-	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
+	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitnil" name:"ExpectTimeThresh"`
 }
 
 type DescribeRollbackTimeValidityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Expected time point to roll back to
-	ExpectTime *string `json:"ExpectTime,omitempty" name:"ExpectTime"`
+	ExpectTime *string `json:"ExpectTime,omitnil" name:"ExpectTime"`
 
 	// Error tolerance range for rollback time point
-	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitempty" name:"ExpectTimeThresh"`
+	ExpectTimeThresh *uint64 `json:"ExpectTimeThresh,omitnil" name:"ExpectTimeThresh"`
 }
 
 func (r *DescribeRollbackTimeValidityRequest) ToJsonString() string {
@@ -6218,19 +6218,19 @@ func (r *DescribeRollbackTimeValidityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRollbackTimeValidityResponseParams struct {
 	// Storage `poolID`
-	PoolId *uint64 `json:"PoolId,omitempty" name:"PoolId"`
+	PoolId *uint64 `json:"PoolId,omitnil" name:"PoolId"`
 
 	// Rollback task ID, which needs to be passed in when rolling back to this time point
-	QueryId *uint64 `json:"QueryId,omitempty" name:"QueryId"`
+	QueryId *uint64 `json:"QueryId,omitnil" name:"QueryId"`
 
 	// Whether the time point is valid. pass: check passed; fail: check failed
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Suggested time point. This value takes effect only if `Status` is `fail`
-	SuggestTime *string `json:"SuggestTime,omitempty" name:"SuggestTime"`
+	SuggestTime *string `json:"SuggestTime,omitnil" name:"SuggestTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeRollbackTimeValidityResponse struct {
@@ -6252,20 +6252,20 @@ func (r *DescribeRollbackTimeValidityResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSupportProxyVersionRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 }
 
 type DescribeSupportProxyVersionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 }
 
 func (r *DescribeSupportProxyVersionRequest) ToJsonString() string {
@@ -6292,14 +6292,14 @@ func (r *DescribeSupportProxyVersionRequest) FromJsonString(s string) error {
 type DescribeSupportProxyVersionResponseParams struct {
 	// Collection of supported database proxy versions
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	SupportProxyVersions []*string `json:"SupportProxyVersions,omitempty" name:"SupportProxyVersions"`
+	SupportProxyVersions []*string `json:"SupportProxyVersions,omitnil" name:"SupportProxyVersions"`
 
 	// The current proxy version
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitempty" name:"CurrentProxyVersion"`
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil" name:"CurrentProxyVersion"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeSupportProxyVersionResponse struct {
@@ -6321,20 +6321,20 @@ func (r *DescribeSupportProxyVersionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZonesRequestParams struct {
 	// Whether the virtual zone is included.–
-	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitempty" name:"IncludeVirtualZones"`
+	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitnil" name:"IncludeVirtualZones"`
 
 	// Whether to display all AZs in a region and the user’s permissions in each AZ.
-	ShowPermission *bool `json:"ShowPermission,omitempty" name:"ShowPermission"`
+	ShowPermission *bool `json:"ShowPermission,omitnil" name:"ShowPermission"`
 }
 
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Whether the virtual zone is included.–
-	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitempty" name:"IncludeVirtualZones"`
+	IncludeVirtualZones *bool `json:"IncludeVirtualZones,omitnil" name:"IncludeVirtualZones"`
 
 	// Whether to display all AZs in a region and the user’s permissions in each AZ.
-	ShowPermission *bool `json:"ShowPermission,omitempty" name:"ShowPermission"`
+	ShowPermission *bool `json:"ShowPermission,omitnil" name:"ShowPermission"`
 }
 
 func (r *DescribeZonesRequest) ToJsonString() string {
@@ -6360,10 +6360,10 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZonesResponseParams struct {
 	// Region information
-	RegionSet []*SaleRegion `json:"RegionSet,omitempty" name:"RegionSet"`
+	RegionSet []*SaleRegion `json:"RegionSet,omitnil" name:"RegionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type DescribeZonesResponse struct {
@@ -6384,79 +6384,79 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 
 type ErrorLogItemExport struct {
 	// Time Note: This field may return null, indicating that no valid values can be obtained.
-	Timestamp *string `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *string `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// Log level. Valid values: `error`, `warning`, `note`. Note: This field may return null, indicating that no valid values can be obtained.
-	Level *string `json:"Level,omitempty" name:"Level"`
+	Level *string `json:"Level,omitnil" name:"Level"`
 
 	// Log content Note: This field may return null, indicating that no valid values can be obtained.
-	Content *string `json:"Content,omitempty" name:"Content"`
+	Content *string `json:"Content,omitnil" name:"Content"`
 }
 
 // Predefined struct for user
 type ExportInstanceErrorLogsRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Log start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Log end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The max number of returned results
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Log level
-	LogLevels []*string `json:"LogLevels,omitempty" name:"LogLevels"`
+	LogLevels []*string `json:"LogLevels,omitnil" name:"LogLevels"`
 
 
-	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords"`
+	KeyWords []*string `json:"KeyWords,omitnil" name:"KeyWords"`
 
 	// The template type. Valid values: `csv`, `original`.
-	FileType *string `json:"FileType,omitempty" name:"FileType"`
+	FileType *string `json:"FileType,omitnil" name:"FileType"`
 
 	// Valid value: `Timestamp`
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Valid values: `ASC` or `DESC`.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 }
 
 type ExportInstanceErrorLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Log start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Log end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The max number of returned results
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Log level
-	LogLevels []*string `json:"LogLevels,omitempty" name:"LogLevels"`
+	LogLevels []*string `json:"LogLevels,omitnil" name:"LogLevels"`
 
-	KeyWords []*string `json:"KeyWords,omitempty" name:"KeyWords"`
+	KeyWords []*string `json:"KeyWords,omitnil" name:"KeyWords"`
 
 	// The template type. Valid values: `csv`, `original`.
-	FileType *string `json:"FileType,omitempty" name:"FileType"`
+	FileType *string `json:"FileType,omitnil" name:"FileType"`
 
 	// Valid value: `Timestamp`
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Valid values: `ASC` or `DESC`.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 }
 
 func (r *ExportInstanceErrorLogsRequest) ToJsonString() string {
@@ -6490,10 +6490,10 @@ func (r *ExportInstanceErrorLogsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ExportInstanceErrorLogsResponseParams struct {
 	// Export content of the error log Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorLogItems []*ErrorLogItemExport `json:"ErrorLogItems,omitempty" name:"ErrorLogItems"`
+	ErrorLogItems []*ErrorLogItemExport `json:"ErrorLogItems,omitnil" name:"ErrorLogItems"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ExportInstanceErrorLogsResponse struct {
@@ -6515,74 +6515,74 @@ func (r *ExportInstanceErrorLogsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ExportInstanceSlowQueriesRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Transaction start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Transaction end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Maximum number
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Username
-	Username *string `json:"Username,omitempty" name:"Username"`
+	Username *string `json:"Username,omitnil" name:"Username"`
 
 	// Client host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// File type. Valid values: csv, original.
-	FileType *string `json:"FileType,omitempty" name:"FileType"`
+	FileType *string `json:"FileType,omitnil" name:"FileType"`
 
 	// Sorting field. Valid values: u200d`QueryTime`, `LockTime`, `RowsExamined`, and `RowsSent`.
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `asc`, `desc`.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 }
 
 type ExportInstanceSlowQueriesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Transaction start time
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Transaction end time
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Maximum number
-	Limit *int64 `json:"Limit,omitempty" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Offset
-	Offset *int64 `json:"Offset,omitempty" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Username
-	Username *string `json:"Username,omitempty" name:"Username"`
+	Username *string `json:"Username,omitnil" name:"Username"`
 
 	// Client host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// File type. Valid values: csv, original.
-	FileType *string `json:"FileType,omitempty" name:"FileType"`
+	FileType *string `json:"FileType,omitnil" name:"FileType"`
 
 	// Sorting field. Valid values: u200d`QueryTime`, `LockTime`, `RowsExamined`, and `RowsSent`.
-	OrderBy *string `json:"OrderBy,omitempty" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
 	// Sorting order. Valid values: `asc`, `desc`.
-	OrderByType *string `json:"OrderByType,omitempty" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
 }
 
 func (r *ExportInstanceSlowQueriesRequest) ToJsonString() string {
@@ -6617,10 +6617,10 @@ func (r *ExportInstanceSlowQueriesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ExportInstanceSlowQueriesResponseParams struct {
 	// Slow query export content
-	FileContent *string `json:"FileContent,omitempty" name:"FileContent"`
+	FileContent *string `json:"FileContent,omitnil" name:"FileContent"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ExportInstanceSlowQueriesResponse struct {
@@ -6641,77 +6641,77 @@ func (r *ExportInstanceSlowQueriesResponse) FromJsonString(s string) error {
 
 type InputAccount struct {
 	// Account
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Host. Default value: `%`
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 }
 
 // Predefined struct for user
 type InquirePriceCreateRequestParams struct {
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Number of compute node to purchase
-	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
 
 	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
-	InstancePayMode *string `json:"InstancePayMode,omitempty" name:"InstancePayMode"`
+	InstancePayMode *string `json:"InstancePayMode,omitnil" name:"InstancePayMode"`
 
 	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
-	StoragePayMode *string `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *string `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
-	Ccu *float64 `json:"Ccu,omitempty" name:"Ccu"`
+	Ccu *float64 `json:"Ccu,omitnil" name:"Ccu"`
 
 	// Storage size, which is required when `StoragePayMode` is `PREPAID`.
-	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *int64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Validity period, which is required when `InstancePayMode` is `PREPAID`.
-	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
 
 	// Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
-	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 }
 
 type InquirePriceCreateRequest struct {
 	*tchttp.BaseRequest
 	
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Number of compute node to purchase
-	GoodsNum *int64 `json:"GoodsNum,omitempty" name:"GoodsNum"`
+	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
 
 	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
-	InstancePayMode *string `json:"InstancePayMode,omitempty" name:"InstancePayMode"`
+	InstancePayMode *string `json:"InstancePayMode,omitnil" name:"InstancePayMode"`
 
 	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
-	StoragePayMode *string `json:"StoragePayMode,omitempty" name:"StoragePayMode"`
+	StoragePayMode *string `json:"StoragePayMode,omitnil" name:"StoragePayMode"`
 
 	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
-	Ccu *float64 `json:"Ccu,omitempty" name:"Ccu"`
+	Ccu *float64 `json:"Ccu,omitnil" name:"Ccu"`
 
 	// Storage size, which is required when `StoragePayMode` is `PREPAID`.
-	StorageLimit *int64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *int64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Validity period, which is required when `InstancePayMode` is `PREPAID`.
-	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
 
 	// Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
-	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 }
 
 func (r *InquirePriceCreateRequest) ToJsonString() string {
@@ -6745,13 +6745,13 @@ func (r *InquirePriceCreateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateResponseParams struct {
 	// Instance price
-	InstancePrice *TradePrice `json:"InstancePrice,omitempty" name:"InstancePrice"`
+	InstancePrice *TradePrice `json:"InstancePrice,omitnil" name:"InstancePrice"`
 
 	// Storage price
-	StoragePrice *TradePrice `json:"StoragePrice,omitempty" name:"StoragePrice"`
+	StoragePrice *TradePrice `json:"StoragePrice,omitnil" name:"StoragePrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type InquirePriceCreateResponse struct {
@@ -6773,26 +6773,26 @@ func (r *InquirePriceCreateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceRenewRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Validity period, which needs to be used together with `TimeUnit`.
-	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
 
 	// Unit of validity period, which needs to be used together with `TimeSpan`. Valid values: `d` (day), `m` (month).
-	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 }
 
 type InquirePriceRenewRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Validity period, which needs to be used together with `TimeUnit`.
-	TimeSpan *int64 `json:"TimeSpan,omitempty" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
 
 	// Unit of validity period, which needs to be used together with `TimeSpan`. Valid values: `d` (day), `m` (month).
-	TimeUnit *string `json:"TimeUnit,omitempty" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 }
 
 func (r *InquirePriceRenewRequest) ToJsonString() string {
@@ -6819,22 +6819,22 @@ func (r *InquirePriceRenewRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceRenewResponseParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID list
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// Price of instance specification in array
-	Prices []*TradePrice `json:"Prices,omitempty" name:"Prices"`
+	Prices []*TradePrice `json:"Prices,omitnil" name:"Prices"`
 
 	// Total renewal price of compute node
-	InstanceRealTotalPrice *int64 `json:"InstanceRealTotalPrice,omitempty" name:"InstanceRealTotalPrice"`
+	InstanceRealTotalPrice *int64 `json:"InstanceRealTotalPrice,omitnil" name:"InstanceRealTotalPrice"`
 
 	// Total renewal price of storage node
-	StorageRealTotalPrice *int64 `json:"StorageRealTotalPrice,omitempty" name:"StorageRealTotalPrice"`
+	StorageRealTotalPrice *int64 `json:"StorageRealTotalPrice,omitnil" name:"StorageRealTotalPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type InquirePriceRenewResponse struct {
@@ -6855,147 +6855,147 @@ func (r *InquirePriceRenewResponse) FromJsonString(s string) error {
 
 type InstanceAuditRule struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Whether the audit is rule audit. Valid values: `true` (rule audit), `false` (full audit).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuditRule *bool `json:"AuditRule,omitempty" name:"AuditRule"`
+	AuditRule *bool `json:"AuditRule,omitnil" name:"AuditRule"`
 
 	// Audit rule details, which is valid only when `AuditRule` is `true`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 }
 
 type InstanceInitInfo struct {
 	// Instance CPU
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Instance memory
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Instance type. Valid values:`rw`, `ro`.
-	InstanceType *string `json:"InstanceType,omitempty" name:"InstanceType"`
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
 	// Number of the instances. Value range: 1-15.
-	InstanceCount *int64 `json:"InstanceCount,omitempty" name:"InstanceCount"`
+	InstanceCount *int64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
 	// Minimum number of serverless instances. Value range: 1-15.
-	MinRoCount *int64 `json:"MinRoCount,omitempty" name:"MinRoCount"`
+	MinRoCount *int64 `json:"MinRoCount,omitnil" name:"MinRoCount"`
 
 	// Maximum number of serverless instances. Value range: 1-15.
-	MaxRoCount *int64 `json:"MaxRoCount,omitempty" name:"MaxRoCount"`
+	MaxRoCount *int64 `json:"MaxRoCount,omitnil" name:"MaxRoCount"`
 
 	// Minimum specifications for serverless instance
-	MinRoCpu *float64 `json:"MinRoCpu,omitempty" name:"MinRoCpu"`
+	MinRoCpu *float64 `json:"MinRoCpu,omitnil" name:"MinRoCpu"`
 
 	// Maximum specifications for serverless instance
-	MaxRoCpu *float64 `json:"MaxRoCpu,omitempty" name:"MaxRoCpu"`
+	MaxRoCpu *float64 `json:"MaxRoCpu,omitnil" name:"MaxRoCpu"`
 }
 
 type InstanceNetInfo struct {
 	// Network type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceGroupType *string `json:"InstanceGroupType,omitempty" name:"InstanceGroupType"`
+	InstanceGroupType *string `json:"InstanceGroupType,omitnil" name:"InstanceGroupType"`
 
 	// Instance group ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceGroupId *string `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
+	InstanceGroupId *string `json:"InstanceGroupId,omitnil" name:"InstanceGroupId"`
 
 	// VPC ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Subnet ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Network type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NetType *int64 `json:"NetType,omitempty" name:"NetType"`
+	NetType *int64 `json:"NetType,omitnil" name:"NetType"`
 
 	// VPC IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// VPC port
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Public network domain name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
 
 
-	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
+	WanIP *string `json:"WanIP,omitnil" name:"WanIP"`
 
 	// Public network port
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+	WanPort *int64 `json:"WanPort,omitnil" name:"WanPort"`
 
 	// Public network status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
+	WanStatus *string `json:"WanStatus,omitnil" name:"WanStatus"`
 }
 
 type InstanceParamItem struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// List of instance parameters
-	ParamsItems []*ParamItemDetail `json:"ParamsItems,omitempty" name:"ParamsItems"`
+	ParamsItems []*ParamItemDetail `json:"ParamsItems,omitnil" name:"ParamsItems"`
 }
 
 type InstanceSpec struct {
 	// Number of instance CPU cores
-	Cpu *uint64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *uint64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Instance memory in GB
-	Memory *uint64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *uint64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Maximum instance storage capacity GB
-	MaxStorageSize *uint64 `json:"MaxStorageSize,omitempty" name:"MaxStorageSize"`
+	MaxStorageSize *uint64 `json:"MaxStorageSize,omitnil" name:"MaxStorageSize"`
 
 	// Minimum instance storage capacity GB
-	MinStorageSize *uint64 `json:"MinStorageSize,omitempty" name:"MinStorageSize"`
+	MinStorageSize *uint64 `json:"MinStorageSize,omitnil" name:"MinStorageSize"`
 
 	// Whether there is an inventory.
-	HasStock *bool `json:"HasStock,omitempty" name:"HasStock"`
+	HasStock *bool `json:"HasStock,omitnil" name:"HasStock"`
 
 	// Machine type
-	MachineType *string `json:"MachineType,omitempty" name:"MachineType"`
+	MachineType *string `json:"MachineType,omitnil" name:"MachineType"`
 
 	// Maximum IOPS
-	MaxIops *int64 `json:"MaxIops,omitempty" name:"MaxIops"`
+	MaxIops *int64 `json:"MaxIops,omitnil" name:"MaxIops"`
 
 	// Maximum bandwidth
-	MaxIoBandWidth *int64 `json:"MaxIoBandWidth,omitempty" name:"MaxIoBandWidth"`
+	MaxIoBandWidth *int64 `json:"MaxIoBandWidth,omitnil" name:"MaxIoBandWidth"`
 
 	// Inventory information in a region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneStockInfos []*ZoneStockInfo `json:"ZoneStockInfos,omitempty" name:"ZoneStockInfos"`
+	ZoneStockInfos []*ZoneStockInfo `json:"ZoneStockInfos,omitnil" name:"ZoneStockInfos"`
 
 	// Quantity in stock
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StockCount *int64 `json:"StockCount,omitempty" name:"StockCount"`
+	StockCount *int64 `json:"StockCount,omitnil" name:"StockCount"`
 }
 
 // Predefined struct for user
 type IsolateClusterRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 }
 
 type IsolateClusterRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 }
 
 func (r *IsolateClusterRequest) ToJsonString() string {
@@ -7022,14 +7022,14 @@ func (r *IsolateClusterRequest) FromJsonString(s string) error {
 type IsolateClusterResponseParams struct {
 	// Task flow ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Refund order ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type IsolateClusterResponse struct {
@@ -7051,26 +7051,26 @@ func (r *IsolateClusterResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateInstanceRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID array
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+	InstanceIdList []*string `json:"InstanceIdList,omitnil" name:"InstanceIdList"`
 
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 }
 
 type IsolateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID array
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+	InstanceIdList []*string `json:"InstanceIdList,omitnil" name:"InstanceIdList"`
 
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 }
 
 func (r *IsolateInstanceRequest) ToJsonString() string {
@@ -7097,14 +7097,14 @@ func (r *IsolateInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateInstanceResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Order ID for isolated instance (prepaid instance)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type IsolateInstanceResponse struct {
@@ -7130,32 +7130,32 @@ type ModifiableInfo struct {
 // Predefined struct for user
 type ModifyAccountDescriptionRequestParams struct {
 	// Database account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Database account description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Host. Default value: `%`
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 }
 
 type ModifyAccountDescriptionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Database account description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Host. Default value: `%`
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 }
 
 func (r *ModifyAccountDescriptionRequest) ToJsonString() string {
@@ -7183,7 +7183,7 @@ func (r *ModifyAccountDescriptionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountDescriptionResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAccountDescriptionResponse struct {
@@ -7205,26 +7205,26 @@ func (r *ModifyAccountDescriptionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountHostRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// New host
-	NewHost *string `json:"NewHost,omitempty" name:"NewHost"`
+	NewHost *string `json:"NewHost,omitnil" name:"NewHost"`
 
 	// Account infomation
-	Account *InputAccount `json:"Account,omitempty" name:"Account"`
+	Account *InputAccount `json:"Account,omitnil" name:"Account"`
 }
 
 type ModifyAccountHostRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// New host
-	NewHost *string `json:"NewHost,omitempty" name:"NewHost"`
+	NewHost *string `json:"NewHost,omitnil" name:"NewHost"`
 
 	// Account infomation
-	Account *InputAccount `json:"Account,omitempty" name:"Account"`
+	Account *InputAccount `json:"Account,omitnil" name:"Account"`
 }
 
 func (r *ModifyAccountHostRequest) ToJsonString() string {
@@ -7251,7 +7251,7 @@ func (r *ModifyAccountHostRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountHostResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAccountHostResponse struct {
@@ -7273,38 +7273,38 @@ func (r *ModifyAccountHostResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountPrivilegesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Account infomation
-	Account *InputAccount `json:"Account,omitempty" name:"Account"`
+	Account *InputAccount `json:"Account,omitnil" name:"Account"`
 
 	// Array of global permissions
-	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil" name:"GlobalPrivileges"`
 
 	// Array of database permissions
-	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
+	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitnil" name:"DatabasePrivileges"`
 
 	// Array of table permissions
-	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
+	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitnil" name:"TablePrivileges"`
 }
 
 type ModifyAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Account infomation
-	Account *InputAccount `json:"Account,omitempty" name:"Account"`
+	Account *InputAccount `json:"Account,omitnil" name:"Account"`
 
 	// Array of global permissions
-	GlobalPrivileges []*string `json:"GlobalPrivileges,omitempty" name:"GlobalPrivileges"`
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil" name:"GlobalPrivileges"`
 
 	// Array of database permissions
-	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitempty" name:"DatabasePrivileges"`
+	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitnil" name:"DatabasePrivileges"`
 
 	// Array of table permissions
-	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitempty" name:"TablePrivileges"`
+	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitnil" name:"TablePrivileges"`
 }
 
 func (r *ModifyAccountPrivilegesRequest) ToJsonString() string {
@@ -7333,7 +7333,7 @@ func (r *ModifyAccountPrivilegesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountPrivilegesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAccountPrivilegesResponse struct {
@@ -7355,32 +7355,32 @@ func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAuditRuleTemplatesRequestParams struct {
 	// Audit rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 
 	// Audit rule after modification
-	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
 
 	// New name of the rule template
-	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil" name:"RuleTemplateName"`
 
 	// New description of the rule template
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type ModifyAuditRuleTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Audit rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 
 	// Audit rule after modification
-	RuleFilters []*RuleFilters `json:"RuleFilters,omitempty" name:"RuleFilters"`
+	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
 
 	// New name of the rule template
-	RuleTemplateName *string `json:"RuleTemplateName,omitempty" name:"RuleTemplateName"`
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil" name:"RuleTemplateName"`
 
 	// New description of the rule template
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *ModifyAuditRuleTemplatesRequest) ToJsonString() string {
@@ -7408,7 +7408,7 @@ func (r *ModifyAuditRuleTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAuditRuleTemplatesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAuditRuleTemplatesResponse struct {
@@ -7430,44 +7430,44 @@ func (r *ModifyAuditRuleTemplatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAuditServiceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Log retention period
-	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+	LogExpireDay *uint64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
 
 	// Frequent log retention period
-	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil" name:"HighLogExpireDay"`
 
 	// The parameter used to change the audit rule of the instance to full audit
-	AuditAll *bool `json:"AuditAll,omitempty" name:"AuditAll"`
+	AuditAll *bool `json:"AuditAll,omitnil" name:"AuditAll"`
 
 	// Rule audit
-	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 
 	// Rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 }
 
 type ModifyAuditServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Log retention period
-	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+	LogExpireDay *uint64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
 
 	// Frequent log retention period
-	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil" name:"HighLogExpireDay"`
 
 	// The parameter used to change the audit rule of the instance to full audit
-	AuditAll *bool `json:"AuditAll,omitempty" name:"AuditAll"`
+	AuditAll *bool `json:"AuditAll,omitnil" name:"AuditAll"`
 
 	// Rule audit
-	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 
 	// Rule template ID
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 }
 
 func (r *ModifyAuditServiceRequest) ToJsonString() string {
@@ -7497,7 +7497,7 @@ func (r *ModifyAuditServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAuditServiceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyAuditServiceResponse struct {
@@ -7519,44 +7519,44 @@ func (r *ModifyAuditServiceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBackupConfigRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
-	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitempty" name:"BackupTimeBeg"`
+	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil" name:"BackupTimeBeg"`
 
 	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
-	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitempty" name:"BackupTimeEnd"`
+	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil" name:"BackupTimeEnd"`
 
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
-	ReserveDuration *uint64 `json:"ReserveDuration,omitempty" name:"ReserveDuration"`
+	ReserveDuration *uint64 `json:"ReserveDuration,omitnil" name:"ReserveDuration"`
 
 	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
-	BackupFreq []*string `json:"BackupFreq,omitempty" name:"BackupFreq"`
+	BackupFreq []*string `json:"BackupFreq,omitnil" name:"BackupFreq"`
 
 	// Backup mode. logic: logic backup; snapshot: snapshot backup. This parameter cannot be modified currently and doesn't need to be entered.
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 }
 
 type ModifyBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
-	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitempty" name:"BackupTimeBeg"`
+	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil" name:"BackupTimeBeg"`
 
 	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
-	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitempty" name:"BackupTimeEnd"`
+	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil" name:"BackupTimeEnd"`
 
 	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
-	ReserveDuration *uint64 `json:"ReserveDuration,omitempty" name:"ReserveDuration"`
+	ReserveDuration *uint64 `json:"ReserveDuration,omitnil" name:"ReserveDuration"`
 
 	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
-	BackupFreq []*string `json:"BackupFreq,omitempty" name:"BackupFreq"`
+	BackupFreq []*string `json:"BackupFreq,omitnil" name:"BackupFreq"`
 
 	// Backup mode. logic: logic backup; snapshot: snapshot backup. This parameter cannot be modified currently and doesn't need to be entered.
-	BackupType *string `json:"BackupType,omitempty" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
 }
 
 func (r *ModifyBackupConfigRequest) ToJsonString() string {
@@ -7586,7 +7586,7 @@ func (r *ModifyBackupConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBackupConfigResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyBackupConfigResponse struct {
@@ -7608,26 +7608,26 @@ func (r *ModifyBackupConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBackupNameRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup file ID
-	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+	BackupId *int64 `json:"BackupId,omitnil" name:"BackupId"`
 
 	// Backup name, which can contain up to 60 characters.
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
 }
 
 type ModifyBackupNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Backup file ID
-	BackupId *int64 `json:"BackupId,omitempty" name:"BackupId"`
+	BackupId *int64 `json:"BackupId,omitnil" name:"BackupId"`
 
 	// Backup name, which can contain up to 60 characters.
-	BackupName *string `json:"BackupName,omitempty" name:"BackupName"`
+	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
 }
 
 func (r *ModifyBackupNameRequest) ToJsonString() string {
@@ -7654,7 +7654,7 @@ func (r *ModifyBackupNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBackupNameResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyBackupNameResponse struct {
@@ -7676,20 +7676,20 @@ func (r *ModifyBackupNameResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBinlogSaveDaysRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Binlog retention period in days
-	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitempty" name:"BinlogSaveDays"`
+	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil" name:"BinlogSaveDays"`
 }
 
 type ModifyBinlogSaveDaysRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Binlog retention period in days
-	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitempty" name:"BinlogSaveDays"`
+	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil" name:"BinlogSaveDays"`
 }
 
 func (r *ModifyBinlogSaveDaysRequest) ToJsonString() string {
@@ -7715,7 +7715,7 @@ func (r *ModifyBinlogSaveDaysRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBinlogSaveDaysResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyBinlogSaveDaysResponse struct {
@@ -7737,38 +7737,38 @@ func (r *ModifyBinlogSaveDaysResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterDatabaseRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 
 	// Host permissions of the new authorized user
-	NewUserHostPrivileges []*UserHostPrivilege `json:"NewUserHostPrivileges,omitempty" name:"NewUserHostPrivileges"`
+	NewUserHostPrivileges []*UserHostPrivilege `json:"NewUserHostPrivileges,omitnil" name:"NewUserHostPrivileges"`
 
 	// Remarks
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Host permissions of previously authorized users
-	OldUserHostPrivileges []*UserHostPrivilege `json:"OldUserHostPrivileges,omitempty" name:"OldUserHostPrivileges"`
+	OldUserHostPrivileges []*UserHostPrivilege `json:"OldUserHostPrivileges,omitnil" name:"OldUserHostPrivileges"`
 }
 
 type ModifyClusterDatabaseRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	DbName *string `json:"DbName,omitempty" name:"DbName"`
+	DbName *string `json:"DbName,omitnil" name:"DbName"`
 
 	// Host permissions of the new authorized user
-	NewUserHostPrivileges []*UserHostPrivilege `json:"NewUserHostPrivileges,omitempty" name:"NewUserHostPrivileges"`
+	NewUserHostPrivileges []*UserHostPrivilege `json:"NewUserHostPrivileges,omitnil" name:"NewUserHostPrivileges"`
 
 	// Remarks
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Host permissions of previously authorized users
-	OldUserHostPrivileges []*UserHostPrivilege `json:"OldUserHostPrivileges,omitempty" name:"OldUserHostPrivileges"`
+	OldUserHostPrivileges []*UserHostPrivilege `json:"OldUserHostPrivileges,omitnil" name:"OldUserHostPrivileges"`
 }
 
 func (r *ModifyClusterDatabaseRequest) ToJsonString() string {
@@ -7797,7 +7797,7 @@ func (r *ModifyClusterDatabaseRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterDatabaseResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyClusterDatabaseResponse struct {
@@ -7819,20 +7819,20 @@ func (r *ModifyClusterDatabaseResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterNameRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type ModifyClusterNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Cluster name
-	ClusterName *string `json:"ClusterName,omitempty" name:"ClusterName"`
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 func (r *ModifyClusterNameRequest) ToJsonString() string {
@@ -7858,7 +7858,7 @@ func (r *ModifyClusterNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterNameResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyClusterNameResponse struct {
@@ -7880,26 +7880,26 @@ func (r *ModifyClusterNameResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterParamRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
-	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
+	ParamList []*ParamItem `json:"ParamList,omitnil" name:"ParamList"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 type ModifyClusterParamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// List of the parameters to be modified. Each element in the list is a combination of `ParamName`, `CurrentValue`, and `OldValue`. `ParamName` is the parameter name; `CurrentValue` is the current value; `OldValue` is the old value that doesn’t need to be verified.
-	ParamList []*ParamItem `json:"ParamList,omitempty" name:"ParamList"`
+	ParamList []*ParamItem `json:"ParamList,omitnil" name:"ParamList"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 func (r *ModifyClusterParamRequest) ToJsonString() string {
@@ -7926,10 +7926,10 @@ func (r *ModifyClusterParamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterParamResponseParams struct {
 	// Async request ID used to query the result
-	AsyncRequestId *string `json:"AsyncRequestId,omitempty" name:"AsyncRequestId"`
+	AsyncRequestId *string `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyClusterParamResponse struct {
@@ -7951,50 +7951,50 @@ func (r *ModifyClusterParamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterPasswordComplexityRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Password length
-	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitempty" name:"ValidatePasswordLength"`
+	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitnil" name:"ValidatePasswordLength"`
 
 	// Number of letters
-	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitempty" name:"ValidatePasswordMixedCaseCount"`
+	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitnil" name:"ValidatePasswordMixedCaseCount"`
 
 	// Number of symbols
-	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitempty" name:"ValidatePasswordSpecialCharCount"`
+	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitnil" name:"ValidatePasswordSpecialCharCount"`
 
 	// Number of digits
-	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitempty" name:"ValidatePasswordNumberCount"`
+	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitnil" name:"ValidatePasswordNumberCount"`
 
 	// Password strength. Valid values: `MEDIUM`, `STRONG`.
-	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitempty" name:"ValidatePasswordPolicy"`
+	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitnil" name:"ValidatePasswordPolicy"`
 
 	// Data dictionary
-	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitempty" name:"ValidatePasswordDictionary"`
+	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitnil" name:"ValidatePasswordDictionary"`
 }
 
 type ModifyClusterPasswordComplexityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Password length
-	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitempty" name:"ValidatePasswordLength"`
+	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitnil" name:"ValidatePasswordLength"`
 
 	// Number of letters
-	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitempty" name:"ValidatePasswordMixedCaseCount"`
+	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitnil" name:"ValidatePasswordMixedCaseCount"`
 
 	// Number of symbols
-	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitempty" name:"ValidatePasswordSpecialCharCount"`
+	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitnil" name:"ValidatePasswordSpecialCharCount"`
 
 	// Number of digits
-	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitempty" name:"ValidatePasswordNumberCount"`
+	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitnil" name:"ValidatePasswordNumberCount"`
 
 	// Password strength. Valid values: `MEDIUM`, `STRONG`.
-	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitempty" name:"ValidatePasswordPolicy"`
+	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitnil" name:"ValidatePasswordPolicy"`
 
 	// Data dictionary
-	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitempty" name:"ValidatePasswordDictionary"`
+	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitnil" name:"ValidatePasswordDictionary"`
 }
 
 func (r *ModifyClusterPasswordComplexityRequest) ToJsonString() string {
@@ -8025,10 +8025,10 @@ func (r *ModifyClusterPasswordComplexityRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type ModifyClusterPasswordComplexityResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyClusterPasswordComplexityResponse struct {
@@ -8050,26 +8050,26 @@ func (r *ModifyClusterPasswordComplexityResponse) FromJsonString(s string) error
 // Predefined struct for user
 type ModifyClusterSlaveZoneRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Old replica AZ
-	OldSlaveZone *string `json:"OldSlaveZone,omitempty" name:"OldSlaveZone"`
+	OldSlaveZone *string `json:"OldSlaveZone,omitnil" name:"OldSlaveZone"`
 
 	// New replica AZ
-	NewSlaveZone *string `json:"NewSlaveZone,omitempty" name:"NewSlaveZone"`
+	NewSlaveZone *string `json:"NewSlaveZone,omitnil" name:"NewSlaveZone"`
 }
 
 type ModifyClusterSlaveZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Old replica AZ
-	OldSlaveZone *string `json:"OldSlaveZone,omitempty" name:"OldSlaveZone"`
+	OldSlaveZone *string `json:"OldSlaveZone,omitnil" name:"OldSlaveZone"`
 
 	// New replica AZ
-	NewSlaveZone *string `json:"NewSlaveZone,omitempty" name:"NewSlaveZone"`
+	NewSlaveZone *string `json:"NewSlaveZone,omitnil" name:"NewSlaveZone"`
 }
 
 func (r *ModifyClusterSlaveZoneRequest) ToJsonString() string {
@@ -8096,10 +8096,10 @@ func (r *ModifyClusterSlaveZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyClusterSlaveZoneResponseParams struct {
 	// Async FlowId
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyClusterSlaveZoneResponse struct {
@@ -8121,26 +8121,26 @@ func (r *ModifyClusterSlaveZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsRequestParams struct {
 	// Instance group ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 }
 
 type ModifyDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance group ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 }
 
 func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
@@ -8167,7 +8167,7 @@ func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyDBInstanceSecurityGroupsResponse struct {
@@ -8189,20 +8189,20 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type ModifyInstanceNameRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 }
 
 type ModifyInstanceNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitempty" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 }
 
 func (r *ModifyInstanceNameRequest) ToJsonString() string {
@@ -8228,7 +8228,7 @@ func (r *ModifyInstanceNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceNameResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyInstanceNameResponse struct {
@@ -8250,38 +8250,38 @@ func (r *ModifyInstanceNameResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceParamRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// List of cluster parameters
-	ClusterParamList []*ModifyParamItem `json:"ClusterParamList,omitempty" name:"ClusterParamList"`
+	ClusterParamList []*ModifyParamItem `json:"ClusterParamList,omitnil" name:"ClusterParamList"`
 
 	// List of the instance parameters
-	InstanceParamList []*ModifyParamItem `json:"InstanceParamList,omitempty" name:"InstanceParamList"`
+	InstanceParamList []*ModifyParamItem `json:"InstanceParamList,omitnil" name:"InstanceParamList"`
 
 	// Valid values: `yes` (modify in maintenance window),  `no`  (execute now by default).
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 type ModifyInstanceParamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitempty" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
 	// List of cluster parameters
-	ClusterParamList []*ModifyParamItem `json:"ClusterParamList,omitempty" name:"ClusterParamList"`
+	ClusterParamList []*ModifyParamItem `json:"ClusterParamList,omitnil" name:"ClusterParamList"`
 
 	// List of the instance parameters
-	InstanceParamList []*ModifyParamItem `json:"InstanceParamList,omitempty" name:"InstanceParamList"`
+	InstanceParamList []*ModifyParamItem `json:"InstanceParamList,omitnil" name:"InstanceParamList"`
 
 	// Valid values: `yes` (modify in maintenance window),  `no`  (execute now by default).
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 func (r *ModifyInstanceParamRequest) ToJsonString() string {
@@ -8310,10 +8310,10 @@ func (r *ModifyInstanceParamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceParamResponseParams struct {
 	// Task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyInstanceParamResponse struct {
@@ -8335,32 +8335,32 @@ func (r *ModifyInstanceParamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMaintainPeriodConfigRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Maintenance start time in seconds. For example, 03:00 AM is represented by 10800
-	MaintainStartTime *int64 `json:"MaintainStartTime,omitempty" name:"MaintainStartTime"`
+	MaintainStartTime *int64 `json:"MaintainStartTime,omitnil" name:"MaintainStartTime"`
 
 	// Maintenance duration in seconds. For example, one hour is represented by 3600
-	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
+	MaintainDuration *int64 `json:"MaintainDuration,omitnil" name:"MaintainDuration"`
 
 	// Maintenance days of the week. Valid values: [Mon, Tue, Wed, Thu, Fri, Sat, Sun].
-	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil" name:"MaintainWeekDays"`
 }
 
 type ModifyMaintainPeriodConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Maintenance start time in seconds. For example, 03:00 AM is represented by 10800
-	MaintainStartTime *int64 `json:"MaintainStartTime,omitempty" name:"MaintainStartTime"`
+	MaintainStartTime *int64 `json:"MaintainStartTime,omitnil" name:"MaintainStartTime"`
 
 	// Maintenance duration in seconds. For example, one hour is represented by 3600
-	MaintainDuration *int64 `json:"MaintainDuration,omitempty" name:"MaintainDuration"`
+	MaintainDuration *int64 `json:"MaintainDuration,omitnil" name:"MaintainDuration"`
 
 	// Maintenance days of the week. Valid values: [Mon, Tue, Wed, Thu, Fri, Sat, Sun].
-	MaintainWeekDays []*string `json:"MaintainWeekDays,omitempty" name:"MaintainWeekDays"`
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil" name:"MaintainWeekDays"`
 }
 
 func (r *ModifyMaintainPeriodConfigRequest) ToJsonString() string {
@@ -8388,7 +8388,7 @@ func (r *ModifyMaintainPeriodConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMaintainPeriodConfigResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyMaintainPeriodConfigResponse struct {
@@ -8409,45 +8409,45 @@ func (r *ModifyMaintainPeriodConfigResponse) FromJsonString(s string) error {
 
 type ModifyParamItem struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 
 	// Current parameter value
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
 
 	// Old parameter value, which is used only in output parameters.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+	OldValue *string `json:"OldValue,omitnil" name:"OldValue"`
 }
 
 // Predefined struct for user
 type ModifyParamTemplateRequestParams struct {
 	// Template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Template name
-	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
 
 	// Template description
-	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+	TemplateDescription *string `json:"TemplateDescription,omitnil" name:"TemplateDescription"`
 
 	// Parameter list
-	ParamList []*ModifyParamItem `json:"ParamList,omitempty" name:"ParamList"`
+	ParamList []*ModifyParamItem `json:"ParamList,omitnil" name:"ParamList"`
 }
 
 type ModifyParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID
-	TemplateId *int64 `json:"TemplateId,omitempty" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
 
 	// Template name
-	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
 
 	// Template description
-	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+	TemplateDescription *string `json:"TemplateDescription,omitnil" name:"TemplateDescription"`
 
 	// Parameter list
-	ParamList []*ModifyParamItem `json:"ParamList,omitempty" name:"ParamList"`
+	ParamList []*ModifyParamItem `json:"ParamList,omitnil" name:"ParamList"`
 }
 
 func (r *ModifyParamTemplateRequest) ToJsonString() string {
@@ -8475,7 +8475,7 @@ func (r *ModifyParamTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyParamTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyParamTemplateResponse struct {
@@ -8497,26 +8497,26 @@ func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProxyDescRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Database proxy description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 type ModifyProxyDescRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Database proxy description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 }
 
 func (r *ModifyProxyDescRequest) ToJsonString() string {
@@ -8543,7 +8543,7 @@ func (r *ModifyProxyDescRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProxyDescResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyProxyDescResponse struct {
@@ -8565,106 +8565,106 @@ func (r *ModifyProxyDescResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProxyRwSplitRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
-	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+	ConsistencyType *string `json:"ConsistencyType,omitnil" name:"ConsistencyType"`
 
 	// Consistency timeout period
-	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitnil" name:"ConsistencyTimeOut"`
 
 	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+	WeightMode *string `json:"WeightMode,omitnil" name:"WeightMode"`
 
 	// Read-Only weight of an instance
-	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil" name:"InstanceWeights"`
 
 	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
-	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
 
 	// Whether to automatically add read-only instances. Valid values: `true`, `false`
-	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+	AutoAddRo *string `json:"AutoAddRo,omitnil" name:"AutoAddRo"`
 
 	// Whether to enable read/write separation
-	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+	OpenRw *string `json:"OpenRw,omitnil" name:"OpenRw"`
 
 	// Read/Write type. Valid values:
 	// `READWRITE`, `READONLY`.
-	RwType *string `json:"RwType,omitempty" name:"RwType"`
+	RwType *string `json:"RwType,omitnil" name:"RwType"`
 
 	// Transaction split
-	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+	TransSplit *bool `json:"TransSplit,omitnil" name:"TransSplit"`
 
 	// Connection mode. Valid values:
 	// `nearby`, `balance`.
-	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+	AccessMode *string `json:"AccessMode,omitnil" name:"AccessMode"`
 
 	// Whether to enable the connection pool. Valid values: 
 	// `yes`, `no`.
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool type. Valid values:
 	// `ConnectionPoolType`, `SessionConnectionPool`.
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 
 	// Connection u200dpersistence timeout
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 }
 
 type ModifyProxyRwSplitRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
-	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+	ConsistencyType *string `json:"ConsistencyType,omitnil" name:"ConsistencyType"`
 
 	// Consistency timeout period
-	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitnil" name:"ConsistencyTimeOut"`
 
 	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+	WeightMode *string `json:"WeightMode,omitnil" name:"WeightMode"`
 
 	// Read-Only weight of an instance
-	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil" name:"InstanceWeights"`
 
 	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
-	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
 
 	// Whether to automatically add read-only instances. Valid values: `true`, `false`
-	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+	AutoAddRo *string `json:"AutoAddRo,omitnil" name:"AutoAddRo"`
 
 	// Whether to enable read/write separation
-	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+	OpenRw *string `json:"OpenRw,omitnil" name:"OpenRw"`
 
 	// Read/Write type. Valid values:
 	// `READWRITE`, `READONLY`.
-	RwType *string `json:"RwType,omitempty" name:"RwType"`
+	RwType *string `json:"RwType,omitnil" name:"RwType"`
 
 	// Transaction split
-	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+	TransSplit *bool `json:"TransSplit,omitnil" name:"TransSplit"`
 
 	// Connection mode. Valid values:
 	// `nearby`, `balance`.
-	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+	AccessMode *string `json:"AccessMode,omitnil" name:"AccessMode"`
 
 	// Whether to enable the connection pool. Valid values: 
 	// `yes`, `no`.
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool type. Valid values:
 	// `ConnectionPoolType`, `SessionConnectionPool`.
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 
 	// Connection u200dpersistence timeout
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 }
 
 func (r *ModifyProxyRwSplitRequest) ToJsonString() string {
@@ -8703,13 +8703,13 @@ func (r *ModifyProxyRwSplitRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProxyRwSplitResponseParams struct {
 	// Async FlowId
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyProxyRwSplitResponse struct {
@@ -8731,26 +8731,26 @@ func (r *ModifyProxyRwSplitResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourcePackageClustersRequestParams struct {
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// ID of the cluster to be bound
-	BindClusterIds []*string `json:"BindClusterIds,omitempty" name:"BindClusterIds"`
+	BindClusterIds []*string `json:"BindClusterIds,omitnil" name:"BindClusterIds"`
 
 	// ID of the cluster to be unbound
-	UnbindClusterIds []*string `json:"UnbindClusterIds,omitempty" name:"UnbindClusterIds"`
+	UnbindClusterIds []*string `json:"UnbindClusterIds,omitnil" name:"UnbindClusterIds"`
 }
 
 type ModifyResourcePackageClustersRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// ID of the cluster to be bound
-	BindClusterIds []*string `json:"BindClusterIds,omitempty" name:"BindClusterIds"`
+	BindClusterIds []*string `json:"BindClusterIds,omitnil" name:"BindClusterIds"`
 
 	// ID of the cluster to be unbound
-	UnbindClusterIds []*string `json:"UnbindClusterIds,omitempty" name:"UnbindClusterIds"`
+	UnbindClusterIds []*string `json:"UnbindClusterIds,omitnil" name:"UnbindClusterIds"`
 }
 
 func (r *ModifyResourcePackageClustersRequest) ToJsonString() string {
@@ -8777,7 +8777,7 @@ func (r *ModifyResourcePackageClustersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourcePackageClustersResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyResourcePackageClustersResponse struct {
@@ -8799,20 +8799,20 @@ func (r *ModifyResourcePackageClustersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourcePackageNameRequestParams struct {
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Custom resource pack name, which can contains up to 120 characters.
-	PackageName *string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName *string `json:"PackageName,omitnil" name:"PackageName"`
 }
 
 type ModifyResourcePackageNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Custom resource pack name, which can contains up to 120 characters.
-	PackageName *string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName *string `json:"PackageName,omitnil" name:"PackageName"`
 }
 
 func (r *ModifyResourcePackageNameRequest) ToJsonString() string {
@@ -8838,7 +8838,7 @@ func (r *ModifyResourcePackageNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourcePackageNameResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyResourcePackageNameResponse struct {
@@ -8860,46 +8860,46 @@ func (r *ModifyResourcePackageNameResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyVipVportRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 
 	// Target IP to be modified
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Target port to be modified
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Valid hours of old IPs. If it is set to `0` hours, the IPs will be released immediately.
-	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitnil" name:"OldIpReserveHours"`
 }
 
 type ModifyVipVportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 
 	// Target IP to be modified
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Target port to be modified
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Database type. Valid values: 
 	// <li> MYSQL </li>
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Valid hours of old IPs. If it is set to `0` hours, the IPs will be released immediately.
-	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitnil" name:"OldIpReserveHours"`
 }
 
 func (r *ModifyVipVportRequest) ToJsonString() string {
@@ -8929,10 +8929,10 @@ func (r *ModifyVipVportRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyVipVportResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ModifyVipVportResponse struct {
@@ -8953,107 +8953,107 @@ func (r *ModifyVipVportResponse) FromJsonString(s string) error {
 
 type Module struct {
 	// Whether it is supported. Valid values: `yes`, `no`.
-	IsDisable *string `json:"IsDisable,omitempty" name:"IsDisable"`
+	IsDisable *string `json:"IsDisable,omitnil" name:"IsDisable"`
 
 	// Module name
-	ModuleName *string `json:"ModuleName,omitempty" name:"ModuleName"`
+	ModuleName *string `json:"ModuleName,omitnil" name:"ModuleName"`
 }
 
 type NetAddr struct {
 	// Private network IP
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Private network port number
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Public network domain name
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	WanDomain *string `json:"WanDomain,omitempty" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
 
 	// Public network port number
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	WanPort *int64 `json:"WanPort,omitempty" name:"WanPort"`
+	WanPort *int64 `json:"WanPort,omitnil" name:"WanPort"`
 
 	// Network type. Valid values: `ro` (read-only), `rw` or `ha` (read-write)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	NetType *string `json:"NetType,omitempty" name:"NetType"`
+	NetType *string `json:"NetType,omitnil" name:"NetType"`
 
 	// Subnet ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// VPC ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Public IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanIP *string `json:"WanIP,omitempty" name:"WanIP"`
+	WanIP *string `json:"WanIP,omitnil" name:"WanIP"`
 
 	// Public network status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanStatus *string `json:"WanStatus,omitempty" name:"WanStatus"`
+	WanStatus *string `json:"WanStatus,omitnil" name:"WanStatus"`
 
 	// Instance group ID Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceGroupId *string `json:"InstanceGroupId,omitempty" name:"InstanceGroupId"`
+	InstanceGroupId *string `json:"InstanceGroupId,omitnil" name:"InstanceGroupId"`
 }
 
 type NewAccount struct {
 	// Account name, which can contain 1-16 letters, digits, and underscores. It must begin with a letter and end with a letter or digit.
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// Password, which can contain 8-64 characters.
-	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
 
 	// Host
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 
 	// Description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Maximum number of user connections, which cannot be above 10,240.
-	MaxUserConnections *int64 `json:"MaxUserConnections,omitempty" name:"MaxUserConnections"`
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil" name:"MaxUserConnections"`
 }
 
 type ObjectTask struct {
 	// Auto-Incrementing task ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// Task type
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TaskType *string `json:"TaskType,omitempty" name:"TaskType"`
+	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
 
 	// Task status
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TaskStatus *string `json:"TaskStatus,omitempty" name:"TaskStatus"`
+	TaskStatus *string `json:"TaskStatus,omitnil" name:"TaskStatus"`
 
 	// Task ID (cluster ID | instance group ID | instance ID)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ObjectId *string `json:"ObjectId,omitempty" name:"ObjectId"`
+	ObjectId *string `json:"ObjectId,omitnil" name:"ObjectId"`
 
 	// Task type
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ObjectType *string `json:"ObjectType,omitempty" name:"ObjectType"`
+	ObjectType *string `json:"ObjectType,omitnil" name:"ObjectType"`
 }
 
 // Predefined struct for user
 type OfflineClusterRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type OfflineClusterRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *OfflineClusterRequest) ToJsonString() string {
@@ -9078,10 +9078,10 @@ func (r *OfflineClusterRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type OfflineClusterResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OfflineClusterResponse struct {
@@ -9103,20 +9103,20 @@ func (r *OfflineClusterResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type OfflineInstanceRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID array
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+	InstanceIdList []*string `json:"InstanceIdList,omitnil" name:"InstanceIdList"`
 }
 
 type OfflineInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Instance ID array
-	InstanceIdList []*string `json:"InstanceIdList,omitempty" name:"InstanceIdList"`
+	InstanceIdList []*string `json:"InstanceIdList,omitnil" name:"InstanceIdList"`
 }
 
 func (r *OfflineInstanceRequest) ToJsonString() string {
@@ -9142,10 +9142,10 @@ func (r *OfflineInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type OfflineInstanceResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OfflineInstanceResponse struct {
@@ -9167,52 +9167,52 @@ func (r *OfflineInstanceResponse) FromJsonString(s string) error {
 type OldAddrInfo struct {
 	// IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitempty" name:"Vip"`
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
 
 	// Port
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vport *int64 `json:"Vport,omitempty" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
 
 	// Expected valid hours of old IPs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReturnTime *string `json:"ReturnTime,omitempty" name:"ReturnTime"`
+	ReturnTime *string `json:"ReturnTime,omitnil" name:"ReturnTime"`
 }
 
 // Predefined struct for user
 type OpenAuditServiceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Log retention period
-	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+	LogExpireDay *uint64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
 
 	// Frequent log retention period
-	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil" name:"HighLogExpireDay"`
 
 	// Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
-	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 
 	// Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 }
 
 type OpenAuditServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Log retention period
-	LogExpireDay *uint64 `json:"LogExpireDay,omitempty" name:"LogExpireDay"`
+	LogExpireDay *uint64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
 
 	// Frequent log retention period
-	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitempty" name:"HighLogExpireDay"`
+	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil" name:"HighLogExpireDay"`
 
 	// Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
-	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitempty" name:"AuditRuleFilters"`
+	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 
 	// Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
-	RuleTemplateIds []*string `json:"RuleTemplateIds,omitempty" name:"RuleTemplateIds"`
+	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
 }
 
 func (r *OpenAuditServiceRequest) ToJsonString() string {
@@ -9241,7 +9241,7 @@ func (r *OpenAuditServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type OpenAuditServiceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OpenAuditServiceResponse struct {
@@ -9263,50 +9263,50 @@ func (r *OpenAuditServiceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type OpenClusterPasswordComplexityRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Password length
-	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitempty" name:"ValidatePasswordLength"`
+	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitnil" name:"ValidatePasswordLength"`
 
 	// Number of letters
-	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitempty" name:"ValidatePasswordMixedCaseCount"`
+	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitnil" name:"ValidatePasswordMixedCaseCount"`
 
 	// Number of symbols
-	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitempty" name:"ValidatePasswordSpecialCharCount"`
+	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitnil" name:"ValidatePasswordSpecialCharCount"`
 
 	// Number of digits
-	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitempty" name:"ValidatePasswordNumberCount"`
+	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitnil" name:"ValidatePasswordNumberCount"`
 
 	// Password strength. Valid values: `MEDIUM`, `STRONG`.
-	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitempty" name:"ValidatePasswordPolicy"`
+	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitnil" name:"ValidatePasswordPolicy"`
 
 	// Data dictionary
-	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitempty" name:"ValidatePasswordDictionary"`
+	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitnil" name:"ValidatePasswordDictionary"`
 }
 
 type OpenClusterPasswordComplexityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Password length
-	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitempty" name:"ValidatePasswordLength"`
+	ValidatePasswordLength *int64 `json:"ValidatePasswordLength,omitnil" name:"ValidatePasswordLength"`
 
 	// Number of letters
-	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitempty" name:"ValidatePasswordMixedCaseCount"`
+	ValidatePasswordMixedCaseCount *int64 `json:"ValidatePasswordMixedCaseCount,omitnil" name:"ValidatePasswordMixedCaseCount"`
 
 	// Number of symbols
-	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitempty" name:"ValidatePasswordSpecialCharCount"`
+	ValidatePasswordSpecialCharCount *int64 `json:"ValidatePasswordSpecialCharCount,omitnil" name:"ValidatePasswordSpecialCharCount"`
 
 	// Number of digits
-	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitempty" name:"ValidatePasswordNumberCount"`
+	ValidatePasswordNumberCount *int64 `json:"ValidatePasswordNumberCount,omitnil" name:"ValidatePasswordNumberCount"`
 
 	// Password strength. Valid values: `MEDIUM`, `STRONG`.
-	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitempty" name:"ValidatePasswordPolicy"`
+	ValidatePasswordPolicy *string `json:"ValidatePasswordPolicy,omitnil" name:"ValidatePasswordPolicy"`
 
 	// Data dictionary
-	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitempty" name:"ValidatePasswordDictionary"`
+	ValidatePasswordDictionary []*string `json:"ValidatePasswordDictionary,omitnil" name:"ValidatePasswordDictionary"`
 }
 
 func (r *OpenClusterPasswordComplexityRequest) ToJsonString() string {
@@ -9337,10 +9337,10 @@ func (r *OpenClusterPasswordComplexityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type OpenClusterPasswordComplexityResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OpenClusterPasswordComplexityResponse struct {
@@ -9391,7 +9391,7 @@ func (r *OpenClusterReadOnlyInstanceGroupAccessRequest) FromJsonString(s string)
 // Predefined struct for user
 type OpenClusterReadOnlyInstanceGroupAccessResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OpenClusterReadOnlyInstanceGroupAccessResponse struct {
@@ -9413,44 +9413,44 @@ func (r *OpenClusterReadOnlyInstanceGroupAccessResponse) FromJsonString(s string
 // Predefined struct for user
 type OpenReadOnlyInstanceExclusiveAccessRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// ID of the read-only instance with dedicated access to be enabled
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Specified VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Specified subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Port
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 
 	// Security group
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 type OpenReadOnlyInstanceExclusiveAccessRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// ID of the read-only instance with dedicated access to be enabled
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Specified VPC ID
-	VpcId *string `json:"VpcId,omitempty" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
 	// Specified subnet ID
-	SubnetId *string `json:"SubnetId,omitempty" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Port
-	Port *int64 `json:"Port,omitempty" name:"Port"`
+	Port *int64 `json:"Port,omitnil" name:"Port"`
 
 	// Security group
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitempty" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 func (r *OpenReadOnlyInstanceExclusiveAccessRequest) ToJsonString() string {
@@ -9480,10 +9480,10 @@ func (r *OpenReadOnlyInstanceExclusiveAccessRequest) FromJsonString(s string) er
 // Predefined struct for user
 type OpenReadOnlyInstanceExclusiveAccessResponseParams struct {
 	// Activation process ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OpenReadOnlyInstanceExclusiveAccessResponse struct {
@@ -9505,14 +9505,14 @@ func (r *OpenReadOnlyInstanceExclusiveAccessResponse) FromJsonString(s string) e
 // Predefined struct for user
 type OpenWanRequestParams struct {
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 }
 
 type OpenWanRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance group ID
-	InstanceGrpId *string `json:"InstanceGrpId,omitempty" name:"InstanceGrpId"`
+	InstanceGrpId *string `json:"InstanceGrpId,omitnil" name:"InstanceGrpId"`
 }
 
 func (r *OpenWanRequest) ToJsonString() string {
@@ -9537,10 +9537,10 @@ func (r *OpenWanRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type OpenWanResponseParams struct {
 	// Task flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type OpenWanResponse struct {
@@ -9561,258 +9561,258 @@ func (r *OpenWanResponse) FromJsonString(s string) error {
 
 type Package struct {
 	// AppID Note: This field may return null, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// The unique ID of a resource pack Note: This field may return null, indicating that no valid values can be obtained.
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Resource pack name Note: This field may return null, indicating that no valid values can be obtained.
-	PackageName *string `json:"PackageName,omitempty" name:"PackageName"`
+	PackageName *string `json:"PackageName,omitnil" name:"PackageName"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack). Note: This field may return null, indicating that no valid values can be obtained.
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Region of the resource pack. Valid values: `China` (Chinese mainland), `overseas` (outside Chinese mainland). Note: This field may return null, indicating that no valid values can be obtained.
-	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion *string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack status. Valid values: `creating`, `using`, `expired`, `normal_finish` (used up), `apply_refund` (requesting a refund), `refund` (refunded). 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Total number of resource packs Note: This field may return null, indicating that no valid values can be obtained.
-	PackageTotalSpec *float64 `json:"PackageTotalSpec,omitempty" name:"PackageTotalSpec"`
+	PackageTotalSpec *float64 `json:"PackageTotalSpec,omitnil" name:"PackageTotalSpec"`
 
 	// Consumed usage of resource packs Note: This field may return null, indicating that no valid values can be obtained.
-	PackageUsedSpec *float64 `json:"PackageUsedSpec,omitempty" name:"PackageUsedSpec"`
+	PackageUsedSpec *float64 `json:"PackageUsedSpec,omitnil" name:"PackageUsedSpec"`
 
 	// Remaining usage of resource packs Note: This field may return null, indicating that no valid values can be obtained.
-	HasQuota *bool `json:"HasQuota,omitempty" name:"HasQuota"`
+	HasQuota *bool `json:"HasQuota,omitnil" name:"HasQuota"`
 
 	// Information of the instance bound Note: This field may return null, indicating that no valid values can be obtained.
-	BindInstanceInfos []*BindInstanceInfo `json:"BindInstanceInfos,omitempty" name:"BindInstanceInfos"`
+	BindInstanceInfos []*BindInstanceInfo `json:"BindInstanceInfos,omitnil" name:"BindInstanceInfos"`
 
 	// Validity time:  2022-07-01 00:00:00 Note: This field may return null, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Validity time:  2022-08-01 00:00:00 Note: This field may return null, indicating that no valid values can be obtained.
-	ExpireTime *string `json:"ExpireTime,omitempty" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
 }
 
 type PackageDetail struct {
 	// Account ID of `AppId` Note: This field may return null, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// The unique ID of a resource pack Note: This field may return null, indicating that no valid values can be obtained.
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Instance ID Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// The successfully deducted capacity Note: This field may return null, indicating that no valid values can be obtained.
-	SuccessDeductSpec *float64 `json:"SuccessDeductSpec,omitempty" name:"SuccessDeductSpec"`
+	SuccessDeductSpec *float64 `json:"SuccessDeductSpec,omitnil" name:"SuccessDeductSpec"`
 
 	// Used capacity of a resource pack as of now Note: This field may return null, indicating that no valid values can be obtained.
-	PackageTotalUsedSpec *float64 `json:"PackageTotalUsedSpec,omitempty" name:"PackageTotalUsedSpec"`
+	PackageTotalUsedSpec *float64 `json:"PackageTotalUsedSpec,omitnil" name:"PackageTotalUsedSpec"`
 
 	// Deduction start time Note: This field may return null, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitempty" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Deduction end time Note: This field may return null, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitempty" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Extended information Note: This field may return null, indicating that no valid values can be obtained.
-	ExtendInfo *string `json:"ExtendInfo,omitempty" name:"ExtendInfo"`
+	ExtendInfo *string `json:"ExtendInfo,omitnil" name:"ExtendInfo"`
 }
 
 type ParamDetail struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 
 	// Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
-	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
+	ParamType *string `json:"ParamType,omitnil" name:"ParamType"`
 
 	// Whether `func` is supported. Valid values: `true` (supported), `false` (not supported).
-	SupportFunc *bool `json:"SupportFunc,omitempty" name:"SupportFunc"`
+	SupportFunc *bool `json:"SupportFunc,omitnil" name:"SupportFunc"`
 
 	// Default value
-	Default *string `json:"Default,omitempty" name:"Default"`
+	Default *string `json:"Default,omitnil" name:"Default"`
 
 	// Parameter description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Current value of the parameter
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
 
 	// Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes).
-	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+	NeedReboot *int64 `json:"NeedReboot,omitnil" name:"NeedReboot"`
 
 	// Maximum value of the parameter
-	Max *string `json:"Max,omitempty" name:"Max"`
+	Max *string `json:"Max,omitnil" name:"Max"`
 
 	// Minimum value of the parameter
-	Min *string `json:"Min,omitempty" name:"Min"`
+	Min *string `json:"Min,omitnil" name:"Min"`
 
 	// Enumerated values of the parameter.  It is null if the parameter is non-enumerated. Note: This field may return null, indicating that no valid values can be obtained.
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
 
 	// Valid values: `1` (global parameter),  `0`  (non-global parameter).
-	IsGlobal *int64 `json:"IsGlobal,omitempty" name:"IsGlobal"`
+	IsGlobal *int64 `json:"IsGlobal,omitnil" name:"IsGlobal"`
 
 	// The match type. Valid value: `multiVal`.
-	MatchType *string `json:"MatchType,omitempty" name:"MatchType"`
+	MatchType *string `json:"MatchType,omitnil" name:"MatchType"`
 
 	// Match values, which will be separated by comma when `MatchType` is `multiVal`.
-	MatchValue *string `json:"MatchValue,omitempty" name:"MatchValue"`
+	MatchValue *string `json:"MatchValue,omitnil" name:"MatchValue"`
 
 	// Whether it is a `func` type. Valid values: `true` (yes), `false` (no). Note: This field may return null, indicating that no valid values can be obtained.
-	IsFunc *bool `json:"IsFunc,omitempty" name:"IsFunc"`
+	IsFunc *bool `json:"IsFunc,omitnil" name:"IsFunc"`
 
 	// Formula content returned when `ParamType` is `func`. Note: This field may return null, indicating that no valid values can be obtained.
-	Func *string `json:"Func,omitempty" name:"Func"`
+	Func *string `json:"Func,omitnil" name:"Func"`
 
 	// Whether the parameter can be modified Note: This field may return null, indicating that no valid values can be obtained.
-	ModifiableInfo *ModifiableInfo `json:"ModifiableInfo,omitempty" name:"ModifiableInfo"`
+	ModifiableInfo *ModifiableInfo `json:"ModifiableInfo,omitnil" name:"ModifiableInfo"`
 }
 
 type ParamInfo struct {
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
 
 	// Default value
-	Default *string `json:"Default,omitempty" name:"Default"`
+	Default *string `json:"Default,omitnil" name:"Default"`
 
 	// List of valid values when parameter type is `enum`, `string` or `bool`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
 
 	// Maximum value when parameter type is `float` or `integer`.
-	Max *string `json:"Max,omitempty" name:"Max"`
+	Max *string `json:"Max,omitnil" name:"Max"`
 
 	// Minimum value when parameter type is `float` or `integer`.
-	Min *string `json:"Min,omitempty" name:"Min"`
+	Min *string `json:"Min,omitnil" name:"Min"`
 
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 
 	// Whether to restart the instance for the modified parameters to take effect.
-	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+	NeedReboot *int64 `json:"NeedReboot,omitnil" name:"NeedReboot"`
 
 	// Parameter type: `integer`, `float`, `string`, `enum`, `bool`.
-	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
+	ParamType *string `json:"ParamType,omitnil" name:"ParamType"`
 
 	// Match type. Regex can be used when parameter type is `string`. Valid value: `multiVal`.
-	MatchType *string `json:"MatchType,omitempty" name:"MatchType"`
+	MatchType *string `json:"MatchType,omitnil" name:"MatchType"`
 
 	// Match values, which will be separated by semicolon when match type is `multiVal`.
-	MatchValue *string `json:"MatchValue,omitempty" name:"MatchValue"`
+	MatchValue *string `json:"MatchValue,omitnil" name:"MatchValue"`
 
 	// Parameter description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Whether it is global parameter
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsGlobal *int64 `json:"IsGlobal,omitempty" name:"IsGlobal"`
+	IsGlobal *int64 `json:"IsGlobal,omitnil" name:"IsGlobal"`
 
 	// Whether the parameter can be modified
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ModifiableInfo *ModifiableInfo `json:"ModifiableInfo,omitempty" name:"ModifiableInfo"`
+	ModifiableInfo *ModifiableInfo `json:"ModifiableInfo,omitnil" name:"ModifiableInfo"`
 
 	// Whether it is a function
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsFunc *bool `json:"IsFunc,omitempty" name:"IsFunc"`
+	IsFunc *bool `json:"IsFunc,omitnil" name:"IsFunc"`
 
 	// Function
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Func *string `json:"Func,omitempty" name:"Func"`
+	Func *string `json:"Func,omitnil" name:"Func"`
 }
 
 type ParamItem struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 
 	// New value
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
 
 	// Original value
-	OldValue *string `json:"OldValue,omitempty" name:"OldValue"`
+	OldValue *string `json:"OldValue,omitnil" name:"OldValue"`
 }
 
 type ParamItemDetail struct {
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
 
 	// Default value
-	Default *string `json:"Default,omitempty" name:"Default"`
+	Default *string `json:"Default,omitnil" name:"Default"`
 
 	// Enumerated values of the parameter It is null if the parameter is non-enumerated.
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
 
 	// Valid values: `1` (global parameter),  `0`  (non-global parameter).
-	IsGlobal *int64 `json:"IsGlobal,omitempty" name:"IsGlobal"`
+	IsGlobal *int64 `json:"IsGlobal,omitnil" name:"IsGlobal"`
 
 	// Maximum value
-	Max *string `json:"Max,omitempty" name:"Max"`
+	Max *string `json:"Max,omitnil" name:"Max"`
 
 	// Minimum value
-	Min *string `json:"Min,omitempty" name:"Min"`
+	Min *string `json:"Min,omitnil" name:"Min"`
 
 	// Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes)
-	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+	NeedReboot *int64 `json:"NeedReboot,omitnil" name:"NeedReboot"`
 
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 
 	// Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
-	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
+	ParamType *string `json:"ParamType,omitnil" name:"ParamType"`
 
 	// Parameter description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Whether `ParamType` is a `func` Note: This field may return null, indicating that no valid values can be obtained.
-	IsFunc *bool `json:"IsFunc,omitempty" name:"IsFunc"`
+	IsFunc *bool `json:"IsFunc,omitnil" name:"IsFunc"`
 
 	// Parameter configuration formula Note: This field may return null, indicating that no valid values can be obtained.
-	Func *string `json:"Func,omitempty" name:"Func"`
+	Func *string `json:"Func,omitnil" name:"Func"`
 }
 
 type ParamTemplateListInfo struct {
 	// Parameter template ID
-	Id *int64 `json:"Id,omitempty" name:"Id"`
+	Id *int64 `json:"Id,omitnil" name:"Id"`
 
 	// Parameter template name
-	TemplateName *string `json:"TemplateName,omitempty" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
 
 	// Parameter template description
-	TemplateDescription *string `json:"TemplateDescription,omitempty" name:"TemplateDescription"`
+	TemplateDescription *string `json:"TemplateDescription,omitnil" name:"TemplateDescription"`
 
 	// Engine version
-	EngineVersion *string `json:"EngineVersion,omitempty" name:"EngineVersion"`
+	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
 	// Database Type. Valid values: `NORMAL`, `SERVERLESS`.
-	DbMode *string `json:"DbMode,omitempty" name:"DbMode"`
+	DbMode *string `json:"DbMode,omitnil" name:"DbMode"`
 
 	// Parameter template details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ParamInfoSet []*TemplateParamInfo `json:"ParamInfoSet,omitempty" name:"ParamInfoSet"`
+	ParamInfoSet []*TemplateParamInfo `json:"ParamInfoSet,omitnil" name:"ParamInfoSet"`
 }
 
 // Predefined struct for user
 type PauseServerlessRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Whether to pause forcibly and ignore the current user connections. Valid values: `0` (no), `1` (yes). Default value: `1`
-	ForcePause *int64 `json:"ForcePause,omitempty" name:"ForcePause"`
+	ForcePause *int64 `json:"ForcePause,omitnil" name:"ForcePause"`
 }
 
 type PauseServerlessRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Whether to pause forcibly and ignore the current user connections. Valid values: `0` (no), `1` (yes). Default value: `1`
-	ForcePause *int64 `json:"ForcePause,omitempty" name:"ForcePause"`
+	ForcePause *int64 `json:"ForcePause,omitnil" name:"ForcePause"`
 }
 
 func (r *PauseServerlessRequest) ToJsonString() string {
@@ -9838,10 +9838,10 @@ func (r *PauseServerlessRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type PauseServerlessResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type PauseServerlessResponse struct {
@@ -9862,230 +9862,230 @@ func (r *PauseServerlessResponse) FromJsonString(s string) error {
 
 type PolicyRule struct {
 	// Policy, which can be `ACCEPT` or `DROP`
-	Action *string `json:"Action,omitempty" name:"Action"`
+	Action *string `json:"Action,omitnil" name:"Action"`
 
 	// Source IP or source IP range, such as 192.168.0.0/16
-	CidrIp *string `json:"CidrIp,omitempty" name:"CidrIp"`
+	CidrIp *string `json:"CidrIp,omitnil" name:"CidrIp"`
 
 	// Port
-	PortRange *string `json:"PortRange,omitempty" name:"PortRange"`
+	PortRange *string `json:"PortRange,omitnil" name:"PortRange"`
 
 	// Network protocol, such as UDP and TCP
-	IpProtocol *string `json:"IpProtocol,omitempty" name:"IpProtocol"`
+	IpProtocol *string `json:"IpProtocol,omitnil" name:"IpProtocol"`
 
 	// Protocol port ID or protocol port group ID.
-	ServiceModule *string `json:"ServiceModule,omitempty" name:"ServiceModule"`
+	ServiceModule *string `json:"ServiceModule,omitnil" name:"ServiceModule"`
 
 	// IP address ID or IP address group ID.
-	AddressModule *string `json:"AddressModule,omitempty" name:"AddressModule"`
+	AddressModule *string `json:"AddressModule,omitnil" name:"AddressModule"`
 
 	// id
-	Id *string `json:"Id,omitempty" name:"Id"`
+	Id *string `json:"Id,omitnil" name:"Id"`
 
 	// Description
-	Desc *string `json:"Desc,omitempty" name:"Desc"`
+	Desc *string `json:"Desc,omitnil" name:"Desc"`
 }
 
 type ProxyConnectionPoolInfo struct {
 	// Connection persistence timeout in seconds
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitempty" name:"ConnectionPoolTimeOut"`
+	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil" name:"ConnectionPoolTimeOut"`
 
 	// Whether the connection pool is enabled
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	OpenConnectionPool *string `json:"OpenConnectionPool,omitempty" name:"OpenConnectionPool"`
+	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil" name:"OpenConnectionPool"`
 
 	// Connection pool type. Valid value: `SessionConnectionPool` (session-level).
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ConnectionPoolType *string `json:"ConnectionPoolType,omitempty" name:"ConnectionPoolType"`
+	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil" name:"ConnectionPoolType"`
 }
 
 type ProxyGroup struct {
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Number of nodes in the proxy group
-	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitempty" name:"ProxyNodeCount"`
+	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitnil" name:"ProxyNodeCount"`
 
 	// Database proxy u200dgroup status
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Current proxy version
-	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitempty" name:"CurrentProxyVersion"`
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil" name:"CurrentProxyVersion"`
 
 	// Cluster ID
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// User `AppId`
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// Enabling read/write separation for database proxy
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+	OpenRw *string `json:"OpenRw,omitnil" name:"OpenRw"`
 }
 
 type ProxyGroupInfo struct {
 	// Database proxy group
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ProxyGroup *ProxyGroup `json:"ProxyGroup,omitempty" name:"ProxyGroup"`
+	ProxyGroup *ProxyGroup `json:"ProxyGroup,omitnil" name:"ProxyGroup"`
 
 	// Read/write separation information of the database proxy u200dgroup
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ProxyGroupRwInfo *ProxyGroupRwInfo `json:"ProxyGroupRwInfo,omitempty" name:"ProxyGroupRwInfo"`
+	ProxyGroupRwInfo *ProxyGroupRwInfo `json:"ProxyGroupRwInfo,omitnil" name:"ProxyGroupRwInfo"`
 
 	// Node information of the u200ddatabase proxy
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ProxyNodes []*ProxyNodeInfo `json:"ProxyNodes,omitempty" name:"ProxyNodes"`
+	ProxyNodes []*ProxyNodeInfo `json:"ProxyNodes,omitnil" name:"ProxyNodes"`
 
 	// Connection pool information for the database proxy
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	ConnectionPool *ProxyConnectionPoolInfo `json:"ConnectionPool,omitempty" name:"ConnectionPool"`
+	ConnectionPool *ProxyConnectionPoolInfo `json:"ConnectionPool,omitnil" name:"ConnectionPool"`
 
 	// Network information for database proxy
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	NetAddrInfos []*NetAddr `json:"NetAddrInfos,omitempty" name:"NetAddrInfos"`
+	NetAddrInfos []*NetAddr `json:"NetAddrInfos,omitnil" name:"NetAddrInfos"`
 
 	// Task set of the database proxy
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	Tasks []*ObjectTask `json:"Tasks,omitempty" name:"Tasks"`
+	Tasks []*ObjectTask `json:"Tasks,omitnil" name:"Tasks"`
 }
 
 type ProxyGroupRwInfo struct {
 	// Consistency type. Valid values: `eventual` (eventual consistency), `session` (session consistency), `global` (global consistency).
-	ConsistencyType *string `json:"ConsistencyType,omitempty" name:"ConsistencyType"`
+	ConsistencyType *string `json:"ConsistencyType,omitnil" name:"ConsistencyType"`
 
 	// Consistency timeout period
-	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitempty" name:"ConsistencyTimeOut"`
+	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitnil" name:"ConsistencyTimeOut"`
 
 	// Weight mode. Valid values: `system` (auto-assigned), `custom`.
-	WeightMode *string `json:"WeightMode,omitempty" name:"WeightMode"`
+	WeightMode *string `json:"WeightMode,omitnil" name:"WeightMode"`
 
 	// Whether to enable failover
-	FailOver *string `json:"FailOver,omitempty" name:"FailOver"`
+	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
 
 	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
-	AutoAddRo *string `json:"AutoAddRo,omitempty" name:"AutoAddRo"`
+	AutoAddRo *string `json:"AutoAddRo,omitnil" name:"AutoAddRo"`
 
 	// Instance weight array
-	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitempty" name:"InstanceWeights"`
+	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil" name:"InstanceWeights"`
 
 	// Whether to enable read-write node. Valid values: `yes`, `no`.
 	// Note: u200dThis field may returnu200d·nullu200d·, indicating that no valid values can be obtained.
-	OpenRw *string `json:"OpenRw,omitempty" name:"OpenRw"`
+	OpenRw *string `json:"OpenRw,omitnil" name:"OpenRw"`
 
 	// Read/write attribute. Valid values: `READWRITE`, `READONLY`.
-	RwType *string `json:"RwType,omitempty" name:"RwType"`
+	RwType *string `json:"RwType,omitnil" name:"RwType"`
 
 	// Transaction split
-	TransSplit *bool `json:"TransSplit,omitempty" name:"TransSplit"`
+	TransSplit *bool `json:"TransSplit,omitnil" name:"TransSplit"`
 
 	// Connection mode. Valid values: `balance`, `nearby`.
-	AccessMode *string `json:"AccessMode,omitempty" name:"AccessMode"`
+	AccessMode *string `json:"AccessMode,omitnil" name:"AccessMode"`
 }
 
 type ProxyInstanceWeight struct {
 	// InstanID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Instance weight
-	Weight *int64 `json:"Weight,omitempty" name:"Weight"`
+	Weight *int64 `json:"Weight,omitnil" name:"Weight"`
 }
 
 type ProxyNodeInfo struct {
 	// Database proxy node ID
-	ProxyNodeId *string `json:"ProxyNodeId,omitempty" name:"ProxyNodeId"`
+	ProxyNodeId *string `json:"ProxyNodeId,omitnil" name:"ProxyNodeId"`
 
 	// Current node connections, which is not returned by the `DescribeProxyNodes` API.
-	ProxyNodeConnections *int64 `json:"ProxyNodeConnections,omitempty" name:"ProxyNodeConnections"`
+	ProxyNodeConnections *int64 `json:"ProxyNodeConnections,omitnil" name:"ProxyNodeConnections"`
 
 	// CPU of the database proxy node
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory of the database proxy node
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+	Mem *int64 `json:"Mem,omitnil" name:"Mem"`
 
 	// Status of the database proxy node
-	Status *string `json:"Status,omitempty" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Database proxy group ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// User AppID
-	AppId *int64 `json:"AppId,omitempty" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
 
 	// Region
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 }
 
 type ProxySpec struct {
 	// Number of database proxy CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Database proxy memory
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+	Mem *int64 `json:"Mem,omitnil" name:"Mem"`
 }
 
 type ProxyZone struct {
 	// AZ u200dof the proxy node
-	ProxyNodeZone *string `json:"ProxyNodeZone,omitempty" name:"ProxyNodeZone"`
+	ProxyNodeZone *string `json:"ProxyNodeZone,omitnil" name:"ProxyNodeZone"`
 
 	// The number of proxy nodes
-	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitempty" name:"ProxyNodeCount"`
+	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitnil" name:"ProxyNodeCount"`
 }
 
 type QueryFilter struct {
 	// Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
-	Names []*string `json:"Names,omitempty" name:"Names"`
+	Names []*string `json:"Names,omitnil" name:"Names"`
 
 	// Search string
-	Values []*string `json:"Values,omitempty" name:"Values"`
+	Values []*string `json:"Values,omitnil" name:"Values"`
 
 	// Whether to use exact match
-	ExactMatch *bool `json:"ExactMatch,omitempty" name:"ExactMatch"`
+	ExactMatch *bool `json:"ExactMatch,omitnil" name:"ExactMatch"`
 
 	// Search field
-	Name *string `json:"Name,omitempty" name:"Name"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// Operator
-	Operator *string `json:"Operator,omitempty" name:"Operator"`
+	Operator *string `json:"Operator,omitnil" name:"Operator"`
 }
 
 type QueryParamFilter struct {
 	// Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
-	Names []*string `json:"Names,omitempty" name:"Names"`
+	Names []*string `json:"Names,omitnil" name:"Names"`
 
 	// Search string
-	Values []*string `json:"Values,omitempty" name:"Values"`
+	Values []*string `json:"Values,omitnil" name:"Values"`
 
 	// Whether to use exact match
-	ExactMatch *bool `json:"ExactMatch,omitempty" name:"ExactMatch"`
+	ExactMatch *bool `json:"ExactMatch,omitnil" name:"ExactMatch"`
 }
 
 // Predefined struct for user
 type RefundResourcePackageRequestParams struct {
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 }
 
 type RefundResourcePackageRequest struct {
 	*tchttp.BaseRequest
 	
 	// The unique ID of a resource pack
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 }
 
 func (r *RefundResourcePackageRequest) ToJsonString() string {
@@ -10110,10 +10110,10 @@ func (r *RefundResourcePackageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RefundResourcePackageResponseParams struct {
 	// Each item has only one `dealName`, through which you can ensure the idempotency of the delivery API.
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RefundResourcePackageResponse struct {
@@ -10135,20 +10135,20 @@ func (r *RefundResourcePackageResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ReloadBalanceProxyNodeRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 }
 
 type ReloadBalanceProxyNodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 }
 
 func (r *ReloadBalanceProxyNodeRequest) ToJsonString() string {
@@ -10174,13 +10174,13 @@ func (r *ReloadBalanceProxyNodeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ReloadBalanceProxyNodeResponseParams struct {
 	// Async flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ReloadBalanceProxyNodeResponse struct {
@@ -10202,20 +10202,20 @@ func (r *ReloadBalanceProxyNodeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveClusterSlaveZoneRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Replica AZ
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	SlaveZone *string `json:"SlaveZone,omitnil" name:"SlaveZone"`
 }
 
 type RemoveClusterSlaveZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Replica AZ
-	SlaveZone *string `json:"SlaveZone,omitempty" name:"SlaveZone"`
+	SlaveZone *string `json:"SlaveZone,omitnil" name:"SlaveZone"`
 }
 
 func (r *RemoveClusterSlaveZoneRequest) ToJsonString() string {
@@ -10241,10 +10241,10 @@ func (r *RemoveClusterSlaveZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveClusterSlaveZoneResponseParams struct {
 	// Async FlowId
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RemoveClusterSlaveZoneResponse struct {
@@ -10266,32 +10266,32 @@ func (r *RemoveClusterSlaveZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetAccountPasswordRequestParams struct {
 	// Database account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// New password of the database account
-	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Host. Default value: `%`
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 }
 
 type ResetAccountPasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database account name
-	AccountName *string `json:"AccountName,omitempty" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
 
 	// New password of the database account
-	AccountPassword *string `json:"AccountPassword,omitempty" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
 
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Host. Default value: `%`
-	Host *string `json:"Host,omitempty" name:"Host"`
+	Host *string `json:"Host,omitnil" name:"Host"`
 }
 
 func (r *ResetAccountPasswordRequest) ToJsonString() string {
@@ -10319,7 +10319,7 @@ func (r *ResetAccountPasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetAccountPasswordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ResetAccountPasswordResponse struct {
@@ -10340,23 +10340,23 @@ func (r *ResetAccountPasswordResponse) FromJsonString(s string) error {
 
 type ResourcePackage struct {
 	// The unique ID of a resource pack Note: This field may return null, indicating that no valid values can be obtained.
-	PackageId *string `json:"PackageId,omitempty" name:"PackageId"`
+	PackageId *string `json:"PackageId,omitnil" name:"PackageId"`
 
 	// Resource pack type. Valid values:  `CCU` (compute resource pack),  `DISK`  (storage resource pack). Note: This field may return null, indicating that no valid values can be obtained.
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 }
 
 // Predefined struct for user
 type RestartInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 type RestartInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 }
 
 func (r *RestartInstanceRequest) ToJsonString() string {
@@ -10381,10 +10381,10 @@ func (r *RestartInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RestartInstanceResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type RestartInstanceResponse struct {
@@ -10406,14 +10406,14 @@ func (r *RestartInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeServerlessRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 type ResumeServerlessRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 }
 
 func (r *ResumeServerlessRequest) ToJsonString() string {
@@ -10438,10 +10438,10 @@ func (r *ResumeServerlessRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeServerlessResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type ResumeServerlessResponse struct {
@@ -10462,121 +10462,121 @@ func (r *ResumeServerlessResponse) FromJsonString(s string) error {
 
 type RollbackTimeRange struct {
 	// Start time
-	TimeRangeStart *string `json:"TimeRangeStart,omitempty" name:"TimeRangeStart"`
+	TimeRangeStart *string `json:"TimeRangeStart,omitnil" name:"TimeRangeStart"`
 
 	// End time
-	TimeRangeEnd *string `json:"TimeRangeEnd,omitempty" name:"TimeRangeEnd"`
+	TimeRangeEnd *string `json:"TimeRangeEnd,omitnil" name:"TimeRangeEnd"`
 }
 
 type RuleFilters struct {
 	// Filter parameter name of the audit rule. Valid values: `host` (client IP), `user` (database account), `dbName` (database name), `sqlType` (SQL type), `sql` (SQL statement).
-	Type *string `json:"Type,omitempty" name:"Type"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Filter match type of the audit rule. Valid values: `INC` (including), `EXC` (excluding), `EQS` (equal to), `NEQ` (not equal to).
-	Compare *string `json:"Compare,omitempty" name:"Compare"`
+	Compare *string `json:"Compare,omitnil" name:"Compare"`
 
 	// Filter match value of the audit rule
-	Value []*string `json:"Value,omitempty" name:"Value"`
+	Value []*string `json:"Value,omitnil" name:"Value"`
 }
 
 type SalePackageSpec struct {
 	// Region of the resource pack Note: This field may return null, indicating that no valid values can be obtained.
-	PackageRegion *string `json:"PackageRegion,omitempty" name:"PackageRegion"`
+	PackageRegion *string `json:"PackageRegion,omitnil" name:"PackageRegion"`
 
 	// Resource pack type. Valid values: `CCU` (compute resource pack), `DISK` (storage resource pack). Note: This field may return null, indicating that no valid values can be obtained.
-	PackageType *string `json:"PackageType,omitempty" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
 
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition). Note: This field may return null, indicating that no valid values can be obtained.
-	PackageVersion *string `json:"PackageVersion,omitempty" name:"PackageVersion"`
+	PackageVersion *string `json:"PackageVersion,omitnil" name:"PackageVersion"`
 
 	// Minimum number of resources for the current edition of the resource pack.  Unit of the compute resources: pcs.  Unit of the storage resources: GB. Note: This field may return null, indicating that no valid values can be obtained.
-	MinPackageSpec *float64 `json:"MinPackageSpec,omitempty" name:"MinPackageSpec"`
+	MinPackageSpec *float64 `json:"MinPackageSpec,omitnil" name:"MinPackageSpec"`
 
 	// Maximum number of resources for the current edition of the resource pack.  Unit of the compute resources: pcs.  Unit of the storage resources: GB. Note: This field may return null, indicating that no valid values can be obtained.
-	MaxPackageSpec *float64 `json:"MaxPackageSpec,omitempty" name:"MaxPackageSpec"`
+	MaxPackageSpec *float64 `json:"MaxPackageSpec,omitnil" name:"MaxPackageSpec"`
 
 	// Validity period of a resource pack in days Note: This field may return null, indicating that no valid values can be obtained.
-	ExpireDay *int64 `json:"ExpireDay,omitempty" name:"ExpireDay"`
+	ExpireDay *int64 `json:"ExpireDay,omitnil" name:"ExpireDay"`
 }
 
 type SaleRegion struct {
 	// Region name
-	Region *string `json:"Region,omitempty" name:"Region"`
+	Region *string `json:"Region,omitnil" name:"Region"`
 
 	// Numeric ID of a region
-	RegionId *int64 `json:"RegionId,omitempty" name:"RegionId"`
+	RegionId *int64 `json:"RegionId,omitnil" name:"RegionId"`
 
 	// Region name
-	RegionZh *string `json:"RegionZh,omitempty" name:"RegionZh"`
+	RegionZh *string `json:"RegionZh,omitnil" name:"RegionZh"`
 
 	// List of purchasable AZs
-	ZoneSet []*SaleZone `json:"ZoneSet,omitempty" name:"ZoneSet"`
+	ZoneSet []*SaleZone `json:"ZoneSet,omitnil" name:"ZoneSet"`
 
 	// Engine type
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Supported modules in a region
-	Modules []*Module `json:"Modules,omitempty" name:"Modules"`
+	Modules []*Module `json:"Modules,omitnil" name:"Modules"`
 }
 
 type SaleZone struct {
 	// AZ name
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Numeric ID of an AZ
-	ZoneId *int64 `json:"ZoneId,omitempty" name:"ZoneId"`
+	ZoneId *int64 `json:"ZoneId,omitnil" name:"ZoneId"`
 
 	// AZ name
-	ZoneZh *string `json:"ZoneZh,omitempty" name:"ZoneZh"`
+	ZoneZh *string `json:"ZoneZh,omitnil" name:"ZoneZh"`
 
 	// Whether serverless cluster is supported. Valid values: <br>
 	// `0`: No<br>
 	// `1`: Yes
-	IsSupportServerless *int64 `json:"IsSupportServerless,omitempty" name:"IsSupportServerless"`
+	IsSupportServerless *int64 `json:"IsSupportServerless,omitnil" name:"IsSupportServerless"`
 
 	// Whether standard cluster is supported. Valid values: <br>
 	// `0`: No<br>
 	// `1`: Yes
-	IsSupportNormal *int64 `json:"IsSupportNormal,omitempty" name:"IsSupportNormal"`
+	IsSupportNormal *int64 `json:"IsSupportNormal,omitnil" name:"IsSupportNormal"`
 
 	// Physical zone
-	PhysicalZone *string `json:"PhysicalZone,omitempty" name:"PhysicalZone"`
+	PhysicalZone *string `json:"PhysicalZone,omitnil" name:"PhysicalZone"`
 
 	// Whether the user has AZ permission
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HasPermission *bool `json:"HasPermission,omitempty" name:"HasPermission"`
+	HasPermission *bool `json:"HasPermission,omitnil" name:"HasPermission"`
 
 	// Whether it is a full-linkage RDMA AZ.
-	IsWholeRdmaZone *string `json:"IsWholeRdmaZone,omitempty" name:"IsWholeRdmaZone"`
+	IsWholeRdmaZone *string `json:"IsWholeRdmaZone,omitnil" name:"IsWholeRdmaZone"`
 }
 
 // Predefined struct for user
 type SearchClusterDatabasesRequestParams struct {
 	// The cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Whether to search exactly
 	// Valid values: `0` (fuzzy search), `1` (exact search). 
 	// Default value: `0`.
-	MatchType *int64 `json:"MatchType,omitempty" name:"MatchType"`
+	MatchType *int64 `json:"MatchType,omitnil" name:"MatchType"`
 }
 
 type SearchClusterDatabasesRequest struct {
 	*tchttp.BaseRequest
 	
 	// The cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Whether to search exactly
 	// Valid values: `0` (fuzzy search), `1` (exact search). 
 	// Default value: `0`.
-	MatchType *int64 `json:"MatchType,omitempty" name:"MatchType"`
+	MatchType *int64 `json:"MatchType,omitnil" name:"MatchType"`
 }
 
 func (r *SearchClusterDatabasesRequest) ToJsonString() string {
@@ -10604,10 +10604,10 @@ func (r *SearchClusterDatabasesRequest) FromJsonString(s string) error {
 type SearchClusterDatabasesResponseParams struct {
 	// Database List
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Databases []*string `json:"Databases,omitempty" name:"Databases"`
+	Databases []*string `json:"Databases,omitnil" name:"Databases"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SearchClusterDatabasesResponse struct {
@@ -10629,38 +10629,38 @@ func (r *SearchClusterDatabasesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SearchClusterTablesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Data table name
-	Table *string `json:"Table,omitempty" name:"Table"`
+	Table *string `json:"Table,omitnil" name:"Table"`
 
 	// Data table type. Valid values:
 	// `view`: Only return to view,
 	// `base_table`: Only return to basic table,
 	// `all`: Return to view and table.
-	TableType *string `json:"TableType,omitempty" name:"TableType"`
+	TableType *string `json:"TableType,omitnil" name:"TableType"`
 }
 
 type SearchClusterTablesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Data table name
-	Table *string `json:"Table,omitempty" name:"Table"`
+	Table *string `json:"Table,omitnil" name:"Table"`
 
 	// Data table type. Valid values:
 	// `view`: Only return to view,
 	// `base_table`: Only return to basic table,
 	// `all`: Return to view and table.
-	TableType *string `json:"TableType,omitempty" name:"TableType"`
+	TableType *string `json:"TableType,omitnil" name:"TableType"`
 }
 
 func (r *SearchClusterTablesRequest) ToJsonString() string {
@@ -10689,10 +10689,10 @@ func (r *SearchClusterTablesRequest) FromJsonString(s string) error {
 type SearchClusterTablesResponseParams struct {
 	// Data table list
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tables []*DatabaseTables `json:"Tables,omitempty" name:"Tables"`
+	Tables []*DatabaseTables `json:"Tables,omitnil" name:"Tables"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SearchClusterTablesResponse struct {
@@ -10713,44 +10713,44 @@ func (r *SearchClusterTablesResponse) FromJsonString(s string) error {
 
 type SecurityGroup struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitempty" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Creation time in the format of yyyy-mm-dd hh:mm:ss
-	CreateTime *string `json:"CreateTime,omitempty" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// Inbound rule
-	Inbound []*PolicyRule `json:"Inbound,omitempty" name:"Inbound"`
+	Inbound []*PolicyRule `json:"Inbound,omitnil" name:"Inbound"`
 
 	// Outbound rule
-	Outbound []*PolicyRule `json:"Outbound,omitempty" name:"Outbound"`
+	Outbound []*PolicyRule `json:"Outbound,omitnil" name:"Outbound"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitempty" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
 
 	// Security group name
-	SecurityGroupName *string `json:"SecurityGroupName,omitempty" name:"SecurityGroupName"`
+	SecurityGroupName *string `json:"SecurityGroupName,omitnil" name:"SecurityGroupName"`
 
 	// Security group remarks
-	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitempty" name:"SecurityGroupRemark"`
+	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil" name:"SecurityGroupRemark"`
 }
 
 // Predefined struct for user
 type SetRenewFlagRequestParams struct {
 	// ID of the instance to be manipulated
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
 	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal.
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 }
 
 type SetRenewFlagRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be manipulated
-	ResourceIds []*string `json:"ResourceIds,omitempty" name:"ResourceIds"`
+	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
 	// Auto-renewal flag. 0: normal renewal, 1: auto-renewal, 2: no renewal.
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitempty" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 }
 
 func (r *SetRenewFlagRequest) ToJsonString() string {
@@ -10776,10 +10776,10 @@ func (r *SetRenewFlagRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetRenewFlagResponseParams struct {
 	// Number of successfully manipulated instances
-	Count *int64 `json:"Count,omitempty" name:"Count"`
+	Count *int64 `json:"Count,omitnil" name:"Count"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SetRenewFlagResponse struct {
@@ -10800,68 +10800,68 @@ func (r *SetRenewFlagResponse) FromJsonString(s string) error {
 
 type SlowQueriesItem struct {
 	// Execution timestamp
-	Timestamp *int64 `json:"Timestamp,omitempty" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
 
 	// Execution duration in seconds
-	QueryTime *float64 `json:"QueryTime,omitempty" name:"QueryTime"`
+	QueryTime *float64 `json:"QueryTime,omitnil" name:"QueryTime"`
 
 	// SQL statement
-	SqlText *string `json:"SqlText,omitempty" name:"SqlText"`
+	SqlText *string `json:"SqlText,omitnil" name:"SqlText"`
 
 	// Client host
-	UserHost *string `json:"UserHost,omitempty" name:"UserHost"`
+	UserHost *string `json:"UserHost,omitnil" name:"UserHost"`
 
 	// Username
-	UserName *string `json:"UserName,omitempty" name:"UserName"`
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
 
 	// Database name
-	Database *string `json:"Database,omitempty" name:"Database"`
+	Database *string `json:"Database,omitnil" name:"Database"`
 
 	// Lock duration in seconds
-	LockTime *float64 `json:"LockTime,omitempty" name:"LockTime"`
+	LockTime *float64 `json:"LockTime,omitnil" name:"LockTime"`
 
 	// Number of scanned rows
-	RowsExamined *int64 `json:"RowsExamined,omitempty" name:"RowsExamined"`
+	RowsExamined *int64 `json:"RowsExamined,omitnil" name:"RowsExamined"`
 
 	// Number of returned rows
-	RowsSent *int64 `json:"RowsSent,omitempty" name:"RowsSent"`
+	RowsSent *int64 `json:"RowsSent,omitnil" name:"RowsSent"`
 
 	// SQL template
-	SqlTemplate *string `json:"SqlTemplate,omitempty" name:"SqlTemplate"`
+	SqlTemplate *string `json:"SqlTemplate,omitnil" name:"SqlTemplate"`
 
 	// MD5 value of the SQL statement
-	SqlMd5 *string `json:"SqlMd5,omitempty" name:"SqlMd5"`
+	SqlMd5 *string `json:"SqlMd5,omitnil" name:"SqlMd5"`
 }
 
 // Predefined struct for user
 type SwitchClusterVpcRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// VPC ID in string
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Subnet ID in string
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// Valid hours of old IP
-	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitnil" name:"OldIpReserveHours"`
 }
 
 type SwitchClusterVpcRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// VPC ID in string
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Subnet ID in string
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// Valid hours of old IP
-	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitnil" name:"OldIpReserveHours"`
 }
 
 func (r *SwitchClusterVpcRequest) ToJsonString() string {
@@ -10889,10 +10889,10 @@ func (r *SwitchClusterVpcRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchClusterVpcResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SwitchClusterVpcResponse struct {
@@ -10914,32 +10914,32 @@ func (r *SwitchClusterVpcResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchClusterZoneRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// The current AZ
-	OldZone *string `json:"OldZone,omitempty" name:"OldZone"`
+	OldZone *string `json:"OldZone,omitnil" name:"OldZone"`
 
 	// New AZ
-	NewZone *string `json:"NewZone,omitempty" name:"NewZone"`
+	NewZone *string `json:"NewZone,omitnil" name:"NewZone"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 type SwitchClusterZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// The current AZ
-	OldZone *string `json:"OldZone,omitempty" name:"OldZone"`
+	OldZone *string `json:"OldZone,omitnil" name:"OldZone"`
 
 	// New AZ
-	NewZone *string `json:"NewZone,omitempty" name:"NewZone"`
+	NewZone *string `json:"NewZone,omitnil" name:"NewZone"`
 
 	// Valid values: `yes` (execute during maintenance time), `no` (execute now)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 func (r *SwitchClusterZoneRequest) ToJsonString() string {
@@ -10967,10 +10967,10 @@ func (r *SwitchClusterZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchClusterZoneResponseParams struct {
 	// Async FlowId
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SwitchClusterZoneResponse struct {
@@ -10992,38 +10992,38 @@ func (r *SwitchClusterZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchProxyVpcRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// VPC ID in string
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Subnet ID in string
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// Valid hours of old IP
-	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitnil" name:"OldIpReserveHours"`
 
 	// Database proxy group ID (required), which can be obtained through the `DescribeProxies` API.
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 }
 
 type SwitchProxyVpcRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// VPC ID in string
-	UniqVpcId *string `json:"UniqVpcId,omitempty" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
 
 	// Subnet ID in string
-	UniqSubnetId *string `json:"UniqSubnetId,omitempty" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
 
 	// Valid hours of old IP
-	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitempty" name:"OldIpReserveHours"`
+	OldIpReserveHours *int64 `json:"OldIpReserveHours,omitnil" name:"OldIpReserveHours"`
 
 	// Database proxy group ID (required), which can be obtained through the `DescribeProxies` API.
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 }
 
 func (r *SwitchProxyVpcRequest) ToJsonString() string {
@@ -11052,10 +11052,10 @@ func (r *SwitchProxyVpcRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchProxyVpcResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type SwitchProxyVpcResponse struct {
@@ -11076,96 +11076,96 @@ func (r *SwitchProxyVpcResponse) FromJsonString(s string) error {
 
 type TablePrivileges struct {
 	// Database name
-	Db *string `json:"Db,omitempty" name:"Db"`
+	Db *string `json:"Db,omitnil" name:"Db"`
 
 	// Table name
-	TableName *string `json:"TableName,omitempty" name:"TableName"`
+	TableName *string `json:"TableName,omitnil" name:"TableName"`
 
 	// Permission list
-	Privileges []*string `json:"Privileges,omitempty" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
 }
 
 type Tag struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitempty" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Tag value
-	TagValue *string `json:"TagValue,omitempty" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 }
 
 type TemplateParamInfo struct {
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitempty" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
 
 	// Default value
-	Default *string `json:"Default,omitempty" name:"Default"`
+	Default *string `json:"Default,omitnil" name:"Default"`
 
 	// The collection of valid value types when parameter type is `enum`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EnumValue []*string `json:"EnumValue,omitempty" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
 
 	// Maximum value when parameter type is `float` or `integer`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Max *string `json:"Max,omitempty" name:"Max"`
+	Max *string `json:"Max,omitnil" name:"Max"`
 
 	// Minimum value when parameter type is `float` or `integer`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Min *string `json:"Min,omitempty" name:"Min"`
+	Min *string `json:"Min,omitnil" name:"Min"`
 
 	// Parameter name
-	ParamName *string `json:"ParamName,omitempty" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
 
 	// Whether to restart the instance for the parameter to take effect
-	NeedReboot *int64 `json:"NeedReboot,omitempty" name:"NeedReboot"`
+	NeedReboot *int64 `json:"NeedReboot,omitnil" name:"NeedReboot"`
 
 	// Parameter description
-	Description *string `json:"Description,omitempty" name:"Description"`
+	Description *string `json:"Description,omitnil" name:"Description"`
 
 	// Parameter type. Valid value: `integer`, `float`, `string`, `enum`.
-	ParamType *string `json:"ParamType,omitempty" name:"ParamType"`
+	ParamType *string `json:"ParamType,omitnil" name:"ParamType"`
 }
 
 type TradePrice struct {
 	// The non-discounted total price of monthly subscribed resources (unit: US cent)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalPrice *int64 `json:"TotalPrice,omitempty" name:"TotalPrice"`
+	TotalPrice *int64 `json:"TotalPrice,omitnil" name:"TotalPrice"`
 
 	// Total discount. `100` means no discount.
-	Discount *float64 `json:"Discount,omitempty" name:"Discount"`
+	Discount *float64 `json:"Discount,omitnil" name:"Discount"`
 
 	// The discounted total price of monthly subscribed resources (unit: US cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalPriceDiscount *int64 `json:"TotalPriceDiscount,omitempty" name:"TotalPriceDiscount"`
+	TotalPriceDiscount *int64 `json:"TotalPriceDiscount,omitnil" name:"TotalPriceDiscount"`
 
 	// The non-discounted unit price of pay-as-you-go resources (unit: US cent)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UnitPrice *int64 `json:"UnitPrice,omitempty" name:"UnitPrice"`
+	UnitPrice *int64 `json:"UnitPrice,omitnil" name:"UnitPrice"`
 
 	// The discounted unit price of pay-as-you-go resources (unit: US cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UnitPriceDiscount *int64 `json:"UnitPriceDiscount,omitempty" name:"UnitPriceDiscount"`
+	UnitPriceDiscount *int64 `json:"UnitPriceDiscount,omitnil" name:"UnitPriceDiscount"`
 
 	// Price unit
-	ChargeUnit *string `json:"ChargeUnit,omitempty" name:"ChargeUnit"`
+	ChargeUnit *string `json:"ChargeUnit,omitnil" name:"ChargeUnit"`
 }
 
 // Predefined struct for user
 type UnbindClusterResourcePackagesRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// The unique ID of a resource pack. If this parameter is left empty, all resource packs of the instance will be unbound.
-	PackageIds []*string `json:"PackageIds,omitempty" name:"PackageIds"`
+	PackageIds []*string `json:"PackageIds,omitnil" name:"PackageIds"`
 }
 
 type UnbindClusterResourcePackagesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// The unique ID of a resource pack. If this parameter is left empty, all resource packs of the instance will be unbound.
-	PackageIds []*string `json:"PackageIds,omitempty" name:"PackageIds"`
+	PackageIds []*string `json:"PackageIds,omitnil" name:"PackageIds"`
 }
 
 func (r *UnbindClusterResourcePackagesRequest) ToJsonString() string {
@@ -11191,7 +11191,7 @@ func (r *UnbindClusterResourcePackagesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UnbindClusterResourcePackagesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UnbindClusterResourcePackagesResponse struct {
@@ -11213,26 +11213,26 @@ func (r *UnbindClusterResourcePackagesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeClusterVersionRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Kernel version
-	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+	CynosVersion *string `json:"CynosVersion,omitnil" name:"CynosVersion"`
 
 	// Upgrade time type. Valid values: `upgradeImmediate`, `upgradeInMaintain`.
-	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+	UpgradeType *string `json:"UpgradeType,omitnil" name:"UpgradeType"`
 }
 
 type UpgradeClusterVersionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Kernel version
-	CynosVersion *string `json:"CynosVersion,omitempty" name:"CynosVersion"`
+	CynosVersion *string `json:"CynosVersion,omitnil" name:"CynosVersion"`
 
 	// Upgrade time type. Valid values: `upgradeImmediate`, `upgradeInMaintain`.
-	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+	UpgradeType *string `json:"UpgradeType,omitnil" name:"UpgradeType"`
 }
 
 func (r *UpgradeClusterVersionRequest) ToJsonString() string {
@@ -11259,10 +11259,10 @@ func (r *UpgradeClusterVersionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeClusterVersionResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpgradeClusterVersionResponse struct {
@@ -11284,62 +11284,62 @@ func (r *UpgradeClusterVersionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Database CPU
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Database memory in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
-	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+	UpgradeType *string `json:"UpgradeType,omitnil" name:"UpgradeType"`
 
 	// This parameter has been disused.
-	StorageLimit *uint64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *uint64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
-	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+	DealMode *int64 `json:"DealMode,omitnil" name:"DealMode"`
 
 	// Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
-	UpgradeMode *string `json:"UpgradeMode,omitempty" name:"UpgradeMode"`
+	UpgradeMode *string `json:"UpgradeMode,omitnil" name:"UpgradeMode"`
 }
 
 type UpgradeInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitempty" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Database CPU
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Database memory in GB
-	Memory *int64 `json:"Memory,omitempty" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
-	UpgradeType *string `json:"UpgradeType,omitempty" name:"UpgradeType"`
+	UpgradeType *string `json:"UpgradeType,omitnil" name:"UpgradeType"`
 
 	// This parameter has been disused.
-	StorageLimit *uint64 `json:"StorageLimit,omitempty" name:"StorageLimit"`
+	StorageLimit *uint64 `json:"StorageLimit,omitnil" name:"StorageLimit"`
 
 	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
-	AutoVoucher *int64 `json:"AutoVoucher,omitempty" name:"AutoVoucher"`
+	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// This parameter has been disused.
-	DbType *string `json:"DbType,omitempty" name:"DbType"`
+	DbType *string `json:"DbType,omitnil" name:"DbType"`
 
 	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
-	DealMode *int64 `json:"DealMode,omitempty" name:"DealMode"`
+	DealMode *int64 `json:"DealMode,omitnil" name:"DealMode"`
 
 	// Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
-	UpgradeMode *string `json:"UpgradeMode,omitempty" name:"UpgradeMode"`
+	UpgradeMode *string `json:"UpgradeMode,omitnil" name:"UpgradeMode"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -11373,17 +11373,17 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 type UpgradeInstanceResponseParams struct {
 	// Freezing transaction ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TranId *string `json:"TranId,omitempty" name:"TranId"`
+	TranId *string `json:"TranId,omitnil" name:"TranId"`
 
 	// Big order ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BigDealIds []*string `json:"BigDealIds,omitempty" name:"BigDealIds"`
+	BigDealIds []*string `json:"BigDealIds,omitnil" name:"BigDealIds"`
 
 	// Order ID
-	DealNames []*string `json:"DealNames,omitempty" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpgradeInstanceResponse struct {
@@ -11405,56 +11405,56 @@ func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeProxyRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+	Mem *int64 `json:"Mem,omitnil" name:"Mem"`
 
 	// Number of nodes in the proxy group
-	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+	ProxyCount *int64 `json:"ProxyCount,omitnil" name:"ProxyCount"`
 
 	// ID of the database proxy group (disused)
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Load rebalance mode. Valid values: `auto`, `manual`
-	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
+	ReloadBalance *string `json:"ReloadBalance,omitnil" name:"ReloadBalance"`
 
 	// Upgrade time. Valid values: `no` (upon upgrade completion), `timeWindow` (upgrade during instance maintenance time)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 
 	// Node information of the atabase proxy
-	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil" name:"ProxyZones"`
 }
 
 type UpgradeProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Number of CPU cores
-	Cpu *int64 `json:"Cpu,omitempty" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
 	// Memory
-	Mem *int64 `json:"Mem,omitempty" name:"Mem"`
+	Mem *int64 `json:"Mem,omitnil" name:"Mem"`
 
 	// Number of nodes in the proxy group
-	ProxyCount *int64 `json:"ProxyCount,omitempty" name:"ProxyCount"`
+	ProxyCount *int64 `json:"ProxyCount,omitnil" name:"ProxyCount"`
 
 	// ID of the database proxy group (disused)
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Load rebalance mode. Valid values: `auto`, `manual`
-	ReloadBalance *string `json:"ReloadBalance,omitempty" name:"ReloadBalance"`
+	ReloadBalance *string `json:"ReloadBalance,omitnil" name:"ReloadBalance"`
 
 	// Upgrade time. Valid values: `no` (upon upgrade completion), `timeWindow` (upgrade during instance maintenance time)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 
 	// Node information of the atabase proxy
-	ProxyZones []*ProxyZone `json:"ProxyZones,omitempty" name:"ProxyZones"`
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil" name:"ProxyZones"`
 }
 
 func (r *UpgradeProxyRequest) ToJsonString() string {
@@ -11486,13 +11486,13 @@ func (r *UpgradeProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeProxyResponseParams struct {
 	// Async flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpgradeProxyResponse struct {
@@ -11514,38 +11514,38 @@ func (r *UpgradeProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeProxyVersionRequestParams struct {
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Current version of database proxy
-	SrcProxyVersion *string `json:"SrcProxyVersion,omitempty" name:"SrcProxyVersion"`
+	SrcProxyVersion *string `json:"SrcProxyVersion,omitnil" name:"SrcProxyVersion"`
 
 	// Target version of database proxy
-	DstProxyVersion *string `json:"DstProxyVersion,omitempty" name:"DstProxyVersion"`
+	DstProxyVersion *string `json:"DstProxyVersion,omitnil" name:"DstProxyVersion"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Upgrade time. Valid values: `no` (upon upgrade completion), `yes` (upgrade during instance maintenance time)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 type UpgradeProxyVersionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cluster ID
-	ClusterId *string `json:"ClusterId,omitempty" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
 
 	// Current version of database proxy
-	SrcProxyVersion *string `json:"SrcProxyVersion,omitempty" name:"SrcProxyVersion"`
+	SrcProxyVersion *string `json:"SrcProxyVersion,omitnil" name:"SrcProxyVersion"`
 
 	// Target version of database proxy
-	DstProxyVersion *string `json:"DstProxyVersion,omitempty" name:"DstProxyVersion"`
+	DstProxyVersion *string `json:"DstProxyVersion,omitnil" name:"DstProxyVersion"`
 
 	// Database proxy u200dgroup ID
-	ProxyGroupId *string `json:"ProxyGroupId,omitempty" name:"ProxyGroupId"`
+	ProxyGroupId *string `json:"ProxyGroupId,omitnil" name:"ProxyGroupId"`
 
 	// Upgrade time. Valid values: `no` (upon upgrade completion), `yes` (upgrade during instance maintenance time)
-	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitempty" name:"IsInMaintainPeriod"`
+	IsInMaintainPeriod *string `json:"IsInMaintainPeriod,omitnil" name:"IsInMaintainPeriod"`
 }
 
 func (r *UpgradeProxyVersionRequest) ToJsonString() string {
@@ -11574,13 +11574,13 @@ func (r *UpgradeProxyVersionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeProxyVersionResponseParams struct {
 	// Async flow ID
-	FlowId *int64 `json:"FlowId,omitempty" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
 
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitempty" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitempty" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
 
 type UpgradeProxyVersionResponse struct {
@@ -11601,22 +11601,22 @@ func (r *UpgradeProxyVersionResponse) FromJsonString(s string) error {
 
 type UserHostPrivilege struct {
 	// Authorized user
-	DbUserName *string `json:"DbUserName,omitempty" name:"DbUserName"`
+	DbUserName *string `json:"DbUserName,omitnil" name:"DbUserName"`
 
 	// Client IP Note: This field may return null, indicating that no valid values can be obtained.
-	DbHost *string `json:"DbHost,omitempty" name:"DbHost"`
+	DbHost *string `json:"DbHost,omitnil" name:"DbHost"`
 
 	// User permissions Note: This field may return null, indicating that no valid values can be obtained.
-	DbPrivilege *string `json:"DbPrivilege,omitempty" name:"DbPrivilege"`
+	DbPrivilege *string `json:"DbPrivilege,omitnil" name:"DbPrivilege"`
 }
 
 type ZoneStockInfo struct {
 	// AZ
-	Zone *string `json:"Zone,omitempty" name:"Zone"`
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
 	// Whether there is an inventory.
-	HasStock *bool `json:"HasStock,omitempty" name:"HasStock"`
+	HasStock *bool `json:"HasStock,omitnil" name:"HasStock"`
 
 	// Quantity in stock
-	StockCount *int64 `json:"StockCount,omitempty" name:"StockCount"`
+	StockCount *int64 `json:"StockCount,omitnil" name:"StockCount"`
 }
