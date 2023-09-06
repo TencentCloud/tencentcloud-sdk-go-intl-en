@@ -197,6 +197,66 @@ func (c *Client) CheckInstanceNameWithContext(ctx context.Context, request *Chec
     return
 }
 
+func NewCreateCustomAccountRequest() (request *CreateCustomAccountRequest) {
+    request = &CreateCustomAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateCustomAccount")
+    
+    
+    return
+}
+
+func NewCreateCustomAccountResponse() (response *CreateCustomAccountResponse) {
+    response = &CreateCustomAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCustomAccount
+// This API is used to create a custom account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_QUOTAOVERLIMIT = "OperationDenied.QuotaOverLimit"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCustomAccount(request *CreateCustomAccountRequest) (response *CreateCustomAccountResponse, err error) {
+    return c.CreateCustomAccountWithContext(context.Background(), request)
+}
+
+// CreateCustomAccount
+// This API is used to create a custom account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_QUOTAOVERLIMIT = "OperationDenied.QuotaOverLimit"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCustomAccountWithContext(ctx context.Context, request *CreateCustomAccountRequest) (response *CreateCustomAccountResponse, err error) {
+    if request == nil {
+        request = NewCreateCustomAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCustomAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCustomAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateImageAccelerationServiceRequest() (request *CreateImageAccelerationServiceRequest) {
     request = &CreateImageAccelerationServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -284,9 +344,11 @@ func NewCreateImmutableTagRulesResponse() (response *CreateImmutableTagRulesResp
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
 //  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateImmutableTagRules(request *CreateImmutableTagRulesRequest) (response *CreateImmutableTagRulesResponse, err error) {
     return c.CreateImmutableTagRulesWithContext(context.Background(), request)
 }
@@ -298,9 +360,11 @@ func (c *Client) CreateImmutableTagRules(request *CreateImmutableTagRulesRequest
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
 //  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateImmutableTagRulesWithContext(ctx context.Context, request *CreateImmutableTagRulesRequest) (response *CreateImmutableTagRulesResponse, err error) {
     if request == nil {
         request = NewCreateImmutableTagRulesRequest()
@@ -568,6 +632,7 @@ func NewCreateMultipleSecurityPolicyResponse() (response *CreateMultipleSecurity
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
 //  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
 //  FAILEDOPERATION_GETTCRCLIENT = "FailedOperation.GetTcrClient"
 //  INTERNALERROR = "InternalError"
@@ -587,6 +652,7 @@ func (c *Client) CreateMultipleSecurityPolicy(request *CreateMultipleSecurityPol
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DEPENDENCEERROR = "FailedOperation.DependenceError"
+//  FAILEDOPERATION_ERRORGETDBDATAERROR = "FailedOperation.ErrorGetDBDataError"
 //  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
 //  FAILEDOPERATION_GETTCRCLIENT = "FailedOperation.GetTcrClient"
 //  INTERNALERROR = "InternalError"
@@ -901,6 +967,66 @@ func (c *Client) CreateSecurityPolicyWithContext(ctx context.Context, request *C
     return
 }
 
+func NewCreateServiceAccountRequest() (request *CreateServiceAccountRequest) {
+    request = &CreateServiceAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "CreateServiceAccount")
+    
+    
+    return
+}
+
+func NewCreateServiceAccountResponse() (response *CreateServiceAccountResponse) {
+    response = &CreateServiceAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateServiceAccount
+// This API is used to create a service account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_QUOTAOVERLIMIT = "OperationDenied.QuotaOverLimit"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateServiceAccount(request *CreateServiceAccountRequest) (response *CreateServiceAccountResponse, err error) {
+    return c.CreateServiceAccountWithContext(context.Background(), request)
+}
+
+// CreateServiceAccount
+// This API is used to create a service account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_QUOTAOVERLIMIT = "OperationDenied.QuotaOverLimit"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateServiceAccountWithContext(ctx context.Context, request *CreateServiceAccountRequest) (response *CreateServiceAccountResponse, err error) {
+    if request == nil {
+        request = NewCreateServiceAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateServiceAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateServiceAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSignatureRequest() (request *CreateSignatureRequest) {
     request = &CreateSignatureRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1121,6 +1247,7 @@ func NewCreateTagRetentionRuleResponse() (response *CreateTagRetentionRuleRespon
 //  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -1142,6 +1269,7 @@ func (c *Client) CreateTagRetentionRule(request *CreateTagRetentionRuleRequest) 
 //  INTERNALERROR_ERRNOTEXIST = "InternalError.ErrNotExist"
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -1221,6 +1349,62 @@ func (c *Client) CreateWebhookTriggerWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateWebhookTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCustomAccountRequest() (request *DeleteCustomAccountRequest) {
+    request = &DeleteCustomAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteCustomAccount")
+    
+    
+    return
+}
+
+func NewDeleteCustomAccountResponse() (response *DeleteCustomAccountResponse) {
+    response = &DeleteCustomAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteCustomAccount
+// This API is used to delete a custom account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteCustomAccount(request *DeleteCustomAccountRequest) (response *DeleteCustomAccountResponse, err error) {
+    return c.DeleteCustomAccountWithContext(context.Background(), request)
+}
+
+// DeleteCustomAccount
+// This API is used to delete a custom account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteCustomAccountWithContext(ctx context.Context, request *DeleteCustomAccountRequest) (response *DeleteCustomAccountResponse, err error) {
+    if request == nil {
+        request = NewDeleteCustomAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCustomAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCustomAccountResponse()
     err = c.Send(request, response)
     return
 }
@@ -1380,6 +1564,7 @@ func NewDeleteImmutableTagRulesResponse() (response *DeleteImmutableTagRulesResp
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteImmutableTagRules(request *DeleteImmutableTagRulesRequest) (response *DeleteImmutableTagRulesResponse, err error) {
     return c.DeleteImmutableTagRulesWithContext(context.Background(), request)
 }
@@ -1393,6 +1578,7 @@ func (c *Client) DeleteImmutableTagRules(request *DeleteImmutableTagRulesRequest
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNKNOWN = "InternalError.Unknown"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteImmutableTagRulesWithContext(ctx context.Context, request *DeleteImmutableTagRulesRequest) (response *DeleteImmutableTagRulesResponse, err error) {
     if request == nil {
         request = NewDeleteImmutableTagRulesRequest()
@@ -1436,6 +1622,7 @@ func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
@@ -1453,6 +1640,7 @@ func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (response *Delet
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNKNOWNPARAMETER = "UnknownParameter"
@@ -1495,6 +1683,7 @@ func NewDeleteInstanceCustomizedDomainResponse() (response *DeleteInstanceCustom
 // This API is used to delete a custom domain name.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
@@ -1516,6 +1705,7 @@ func (c *Client) DeleteInstanceCustomizedDomain(request *DeleteInstanceCustomize
 // This API is used to delete a custom domain name.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRCONFLICT = "InternalError.ErrConflict"
@@ -1692,6 +1882,7 @@ func NewDeleteNamespaceResponse() (response *DeleteNamespaceResponse) {
 //  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
 //  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
 //  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_PRECONDITIONFAILED = "FailedOperation.PreconditionFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
@@ -1717,6 +1908,7 @@ func (c *Client) DeleteNamespace(request *DeleteNamespaceRequest) (response *Del
 //  FAILEDOPERATION_ERRORTCRRESOURCECONFLICT = "FailedOperation.ErrorTcrResourceConflict"
 //  FAILEDOPERATION_ERRORTCRUNAUTHORIZED = "FailedOperation.ErrorTcrUnauthorized"
 //  FAILEDOPERATION_GETDBDATAERROR = "FailedOperation.GetDBDataError"
+//  FAILEDOPERATION_PRECONDITIONFAILED = "FailedOperation.PreconditionFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
@@ -1964,7 +2156,11 @@ func NewDeleteSecurityPolicyResponse() (response *DeleteSecurityPolicyResponse) 
 }
 
 // DeleteSecurityPolicy
-// This API is used to delete a public network access allowlist policy of an instance.
+// This API is used to delete a public network access allow policy.
+//
+// 
+//
+// Note: When both `PolicyIndex` and `CidrBlock` are specified, `CidrBlock` takes the higher priority
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1980,7 +2176,11 @@ func (c *Client) DeleteSecurityPolicy(request *DeleteSecurityPolicyRequest) (res
 }
 
 // DeleteSecurityPolicy
-// This API is used to delete a public network access allowlist policy of an instance.
+// This API is used to delete a public network access allow policy.
+//
+// 
+//
+// Note: When both `PolicyIndex` and `CidrBlock` are specified, `CidrBlock` takes the higher priority
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2003,6 +2203,62 @@ func (c *Client) DeleteSecurityPolicyWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteServiceAccountRequest() (request *DeleteServiceAccountRequest) {
+    request = &DeleteServiceAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DeleteServiceAccount")
+    
+    
+    return
+}
+
+func NewDeleteServiceAccountResponse() (response *DeleteServiceAccountResponse) {
+    response = &DeleteServiceAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DeleteServiceAccount
+// This API is used to delete a service account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteServiceAccount(request *DeleteServiceAccountRequest) (response *DeleteServiceAccountResponse, err error) {
+    return c.DeleteServiceAccountWithContext(context.Background(), request)
+}
+
+// DeleteServiceAccount
+// This API is used to delete a service account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteServiceAccountWithContext(ctx context.Context, request *DeleteServiceAccountRequest) (response *DeleteServiceAccountResponse, err error) {
+    if request == nil {
+        request = NewDeleteServiceAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteServiceAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteServiceAccountResponse()
     err = c.Send(request, response)
     return
 }
@@ -2273,6 +2529,64 @@ func (c *Client) DescribeChartDownloadInfoWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeCustomAccountsRequest() (request *DescribeCustomAccountsRequest) {
+    request = &DescribeCustomAccountsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeCustomAccounts")
+    
+    
+    return
+}
+
+func NewDescribeCustomAccountsResponse() (response *DescribeCustomAccountsResponse) {
+    response = &DescribeCustomAccountsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCustomAccounts
+// This API is used to query custom accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCustomAccounts(request *DescribeCustomAccountsRequest) (response *DescribeCustomAccountsResponse, err error) {
+    return c.DescribeCustomAccountsWithContext(context.Background(), request)
+}
+
+// DescribeCustomAccounts
+// This API is used to query custom accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCustomAccountsWithContext(ctx context.Context, request *DescribeCustomAccountsRequest) (response *DescribeCustomAccountsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomAccountsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomAccounts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeExternalEndpointStatusRequest() (request *DescribeExternalEndpointStatusRequest) {
     request = &DescribeExternalEndpointStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2488,6 +2802,7 @@ func NewDescribeImageManifestsResponse() (response *DescribeImageManifestsRespon
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
 //  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
@@ -2508,6 +2823,7 @@ func (c *Client) DescribeImageManifests(request *DescribeImageManifestsRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
 //  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
@@ -2557,7 +2873,9 @@ func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
 // This API is used to query the list of image tags or the information of the specified container image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
 //  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
@@ -2576,7 +2894,9 @@ func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *Descr
 // This API is used to query the list of image tags or the information of the specified container image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
 //  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
@@ -3405,8 +3725,10 @@ func NewDescribeRepositoriesResponse() (response *DescribeRepositoriesResponse) 
 // This API is used to query the image repository list or the information of the specified image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_EMPTYCOREBODY = "FailedOperation.EmptyCoreBody"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
 //  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
@@ -3426,8 +3748,10 @@ func (c *Client) DescribeRepositories(request *DescribeRepositoriesRequest) (res
 // This API is used to query the image repository list or the information of the specified image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_EMPTYCOREBODY = "FailedOperation.EmptyCoreBody"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
 //  INTERNALERROR_ERRORTCRINVALIDMEDIATYPE = "InternalError.ErrorTcrInvalidMediaType"
 //  INTERNALERROR_ERRORTCRRESOURCECONFLICT = "InternalError.ErrorTcrResourceConflict"
@@ -3527,6 +3851,64 @@ func (c *Client) DescribeSecurityPoliciesWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeServiceAccountsRequest() (request *DescribeServiceAccountsRequest) {
+    request = &DescribeServiceAccountsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "DescribeServiceAccounts")
+    
+    
+    return
+}
+
+func NewDescribeServiceAccountsResponse() (response *DescribeServiceAccountsResponse) {
+    response = &DescribeServiceAccountsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeServiceAccounts
+// This API is used to query service accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeServiceAccounts(request *DescribeServiceAccountsRequest) (response *DescribeServiceAccountsResponse, err error) {
+    return c.DescribeServiceAccountsWithContext(context.Background(), request)
+}
+
+// DescribeServiceAccounts
+// This API is used to query service accounts.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeServiceAccountsWithContext(ctx context.Context, request *DescribeServiceAccountsRequest) (response *DescribeServiceAccountsResponse, err error) {
+    if request == nil {
+        request = NewDescribeServiceAccountsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeServiceAccounts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeServiceAccountsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTagRetentionExecutionRequest() (request *DescribeTagRetentionExecutionRequest) {
     request = &DescribeTagRetentionExecutionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3556,6 +3938,7 @@ func NewDescribeTagRetentionExecutionResponse() (response *DescribeTagRetentionE
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -3576,6 +3959,7 @@ func (c *Client) DescribeTagRetentionExecution(request *DescribeTagRetentionExec
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRORTCRINVALIDPARAMETER = "InvalidParameter.ErrorTcrInvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -3697,6 +4081,7 @@ func NewDescribeTagRetentionRulesResponse() (response *DescribeTagRetentionRules
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -3719,6 +4104,7 @@ func (c *Client) DescribeTagRetentionRules(request *DescribeTagRetentionRulesReq
 //  INTERNALERROR_ERRORCONFLICT = "InternalError.ErrorConflict"
 //  INTERNALERROR_ERROROVERLIMIT = "InternalError.ErrorOverLimit"
 //  INTERNALERROR_ERRORTCRINTERNAL = "InternalError.ErrorTcrInternal"
+//  INTERNALERROR_ERRORTCRUNAUTHORIZED = "InternalError.ErrorTcrUnauthorized"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -4123,6 +4509,62 @@ func (c *Client) ManageReplicationWithContext(ctx context.Context, request *Mana
     return
 }
 
+func NewModifyCustomAccountRequest() (request *ModifyCustomAccountRequest) {
+    request = &ModifyCustomAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyCustomAccount")
+    
+    
+    return
+}
+
+func NewModifyCustomAccountResponse() (response *ModifyCustomAccountResponse) {
+    response = &ModifyCustomAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCustomAccount
+// This API is used to update a custom account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyCustomAccount(request *ModifyCustomAccountRequest) (response *ModifyCustomAccountResponse, err error) {
+    return c.ModifyCustomAccountWithContext(context.Background(), request)
+}
+
+// ModifyCustomAccount
+// This API is used to update a custom account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyCustomAccountWithContext(ctx context.Context, request *ModifyCustomAccountRequest) (response *ModifyCustomAccountResponse, err error) {
+    if request == nil {
+        request = NewModifyCustomAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCustomAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCustomAccountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyImmutableTagRulesRequest() (request *ModifyImmutableTagRulesRequest) {
     request = &ModifyImmutableTagRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4499,6 +4941,62 @@ func (c *Client) ModifySecurityPolicyWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifySecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyServiceAccountRequest() (request *ModifyServiceAccountRequest) {
+    request = &ModifyServiceAccountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcr", APIVersion, "ModifyServiceAccount")
+    
+    
+    return
+}
+
+func NewModifyServiceAccountResponse() (response *ModifyServiceAccountResponse) {
+    response = &ModifyServiceAccountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyServiceAccount
+// This API is used to update a service account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyServiceAccount(request *ModifyServiceAccountRequest) (response *ModifyServiceAccountResponse, err error) {
+    return c.ModifyServiceAccountWithContext(context.Background(), request)
+}
+
+// ModifyServiceAccount
+// This API is used to update a service account.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DbError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyServiceAccountWithContext(ctx context.Context, request *ModifyServiceAccountRequest) (response *ModifyServiceAccountResponse, err error) {
+    if request == nil {
+        request = NewModifyServiceAccountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyServiceAccount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyServiceAccountResponse()
     err = c.Send(request, response)
     return
 }

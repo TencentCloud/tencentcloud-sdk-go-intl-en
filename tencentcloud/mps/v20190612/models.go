@@ -244,6 +244,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// The subtitle file to add.
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil" name:"AddOnSubtitles"`
+
+	// Information of Drm.   Note: This field may return·null, indicating that no valid values can be obtained.
+	DrmInfo *DrmInfo `json:"DrmInfo,omitnil" name:"DrmInfo"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -5886,6 +5889,14 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DrmInfo struct {
+
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+
+	SimpleAesDrm *SimpleAesDrm `json:"SimpleAesDrm,omitnil" name:"SimpleAesDrm"`
+}
+
 type EditMediaFileInfo struct {
 	// Video input information.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil" name:"InputInfo"`
@@ -10510,6 +10521,17 @@ type SharpEnhanceConfig struct {
 	// Default value: 0.0
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Intensity *float64 `json:"Intensity,omitnil" name:"Intensity"`
+}
+
+type SimpleAesDrm struct {
+
+	Uri *string `json:"Uri,omitnil" name:"Uri"`
+
+
+	Key *string `json:"Key,omitnil" name:"Key"`
+
+
+	Vector *string `json:"Vector,omitnil" name:"Vector"`
 }
 
 type SnapshotByTimeOffsetTaskInput struct {

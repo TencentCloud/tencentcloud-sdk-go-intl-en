@@ -623,6 +623,80 @@ func (c *Client) CreateDCDBInstanceWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateDedicatedClusterDCDBInstanceRequest() (request *CreateDedicatedClusterDCDBInstanceRequest) {
+    request = &CreateDedicatedClusterDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "CreateDedicatedClusterDCDBInstance")
+    
+    
+    return
+}
+
+func NewCreateDedicatedClusterDCDBInstanceResponse() (response *CreateDedicatedClusterDCDBInstanceResponse) {
+    response = &CreateDedicatedClusterDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateDedicatedClusterDCDBInstance
+// This API is used to create a dedicated TDSQL cluster instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQUOTAEXCEEDLIMIT = "FailedOperation.TagQuotaExceedLimit"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_FENCEERROR = "InternalError.FenceError"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALEXCLUSTERID = "InvalidParameterValue.IllegalExclusterID"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEUNAVAILABLE_EXCLUSTERSTATUSABNORMAL = "ResourceUnavailable.ExclusterStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateDedicatedClusterDCDBInstance(request *CreateDedicatedClusterDCDBInstanceRequest) (response *CreateDedicatedClusterDCDBInstanceResponse, err error) {
+    return c.CreateDedicatedClusterDCDBInstanceWithContext(context.Background(), request)
+}
+
+// CreateDedicatedClusterDCDBInstance
+// This API is used to create a dedicated TDSQL cluster instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQUOTAEXCEEDLIMIT = "FailedOperation.TagQuotaExceedLimit"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_FENCEERROR = "InternalError.FenceError"
+//  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
+//  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
+//  INVALIDPARAMETER_VPCNOTFOUND = "InvalidParameter.VpcNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALEXCLUSTERID = "InvalidParameterValue.IllegalExclusterID"
+//  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
+//  INVALIDPARAMETERVALUE_SPECIDILLEGAL = "InvalidParameterValue.SpecIdIllegal"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCEUNAVAILABLE_EXCLUSTERSTATUSABNORMAL = "ResourceUnavailable.ExclusterStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CreateDedicatedClusterDCDBInstanceWithContext(ctx context.Context, request *CreateDedicatedClusterDCDBInstanceRequest) (response *CreateDedicatedClusterDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateDedicatedClusterDCDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDedicatedClusterDCDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDedicatedClusterDCDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateHourDCDBInstanceRequest() (request *CreateHourDCDBInstanceRequest) {
     request = &CreateHourDCDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1345,6 +1419,56 @@ func (c *Client) DescribeDBSyncModeWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeDBTmpInstancesRequest() (request *DescribeDBTmpInstancesRequest) {
+    request = &DescribeDBTmpInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeDBTmpInstances")
+    
+    
+    return
+}
+
+func NewDescribeDBTmpInstancesResponse() (response *DescribeDBTmpInstancesResponse) {
+    response = &DescribeDBTmpInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBTmpInstances
+// This API is used to obtain u200da temp rollback instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDBTmpInstances(request *DescribeDBTmpInstancesRequest) (response *DescribeDBTmpInstancesResponse, err error) {
+    return c.DescribeDBTmpInstancesWithContext(context.Background(), request)
+}
+
+// DescribeDBTmpInstances
+// This API is used to obtain u200da temp rollback instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeDBTmpInstancesWithContext(ctx context.Context, request *DescribeDBTmpInstancesRequest) (response *DescribeDBTmpInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBTmpInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBTmpInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBTmpInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDCDBInstanceDetailRequest() (request *DescribeDCDBInstanceDetailRequest) {
     request = &DescribeDCDBInstanceDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1997,6 +2121,66 @@ func (c *Client) DescribeFlowWithContext(ctx context.Context, request *DescribeF
     request.SetContext(ctx)
     
     response = NewDescribeFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogFileRetentionPeriodRequest() (request *DescribeLogFileRetentionPeriodRequest) {
+    request = &DescribeLogFileRetentionPeriodRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "DescribeLogFileRetentionPeriod")
+    
+    
+    return
+}
+
+func NewDescribeLogFileRetentionPeriodResponse() (response *DescribeLogFileRetentionPeriodResponse) {
+    response = &DescribeLogFileRetentionPeriodResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeLogFileRetentionPeriod
+// This API is used to view the backup log retention days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeLogFileRetentionPeriod(request *DescribeLogFileRetentionPeriodRequest) (response *DescribeLogFileRetentionPeriodResponse, err error) {
+    return c.DescribeLogFileRetentionPeriodWithContext(context.Background(), request)
+}
+
+// DescribeLogFileRetentionPeriod
+// This API is used to view the backup log retention days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OSSOPERATIONFAILED = "FailedOperation.OssOperationFailed"
+//  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
+//  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeLogFileRetentionPeriodWithContext(ctx context.Context, request *DescribeLogFileRetentionPeriodRequest) (response *DescribeLogFileRetentionPeriodResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogFileRetentionPeriodRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogFileRetentionPeriod require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogFileRetentionPeriodResponse()
     err = c.Send(request, response)
     return
 }
@@ -2835,6 +3019,7 @@ func NewModifyAccountPrivilegesResponse() (response *ModifyAccountPrivilegesResp
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INVALIDPARAMETERVALUE_BADUSERRIGHT = "InvalidParameterValue.BadUserRight"
 //  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest) (response *ModifyAccountPrivilegesResponse, err error) {
     return c.ModifyAccountPrivilegesWithContext(context.Background(), request)
@@ -2850,6 +3035,7 @@ func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INVALIDPARAMETERVALUE_BADUSERRIGHT = "InvalidParameterValue.BadUserRight"
 //  RESOURCEUNAVAILABLE_INSTANCEHASBEENLOCKED = "ResourceUnavailable.InstanceHasBeenLocked"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 func (c *Client) ModifyAccountPrivilegesWithContext(ctx context.Context, request *ModifyAccountPrivilegesRequest) (response *ModifyAccountPrivilegesResponse, err error) {
     if request == nil {
@@ -3661,6 +3847,68 @@ func (c *Client) TerminateDedicatedDBInstanceWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewTerminateDedicatedDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeDedicatedDCDBInstanceRequest() (request *UpgradeDedicatedDCDBInstanceRequest) {
+    request = &UpgradeDedicatedDCDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dcdb", APIVersion, "UpgradeDedicatedDCDBInstance")
+    
+    
+    return
+}
+
+func NewUpgradeDedicatedDCDBInstanceResponse() (response *UpgradeDedicatedDCDBInstanceResponse) {
+    response = &UpgradeDedicatedDCDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// UpgradeDedicatedDCDBInstance
+// This API is used to u200dupgrade a dedicated TDSQL cluster instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_FENCEERROR = "InternalError.FenceError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALEXCLUSTERID = "InvalidParameterValue.IllegalExclusterID"
+//  RESOURCEUNAVAILABLE_EXCLUSTERSTATUSABNORMAL = "ResourceUnavailable.ExclusterStatusAbnormal"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) UpgradeDedicatedDCDBInstance(request *UpgradeDedicatedDCDBInstanceRequest) (response *UpgradeDedicatedDCDBInstanceResponse, err error) {
+    return c.UpgradeDedicatedDCDBInstanceWithContext(context.Background(), request)
+}
+
+// UpgradeDedicatedDCDBInstance
+// This API is used to u200dupgrade a dedicated TDSQL cluster instance.
+//
+// error code that may be returned:
+//  INTERNALERROR_FENCEERROR = "InternalError.FenceError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_ILLEGALEXCLUSTERID = "InvalidParameterValue.IllegalExclusterID"
+//  RESOURCEUNAVAILABLE_EXCLUSTERSTATUSABNORMAL = "ResourceUnavailable.ExclusterStatusAbnormal"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
+func (c *Client) UpgradeDedicatedDCDBInstanceWithContext(ctx context.Context, request *UpgradeDedicatedDCDBInstanceRequest) (response *UpgradeDedicatedDCDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewUpgradeDedicatedDCDBInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeDedicatedDCDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeDedicatedDCDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

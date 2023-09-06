@@ -1928,7 +1928,7 @@ type DescribeDBInstanceDetailResponseParams struct {
 	// Unclaimed network resource
 	ReservedNetResources []*ReservedNetResource `json:"ReservedNetResources,omitnil" name:"ReservedNetResources"`
 
-
+	// Whether physical replication is supported.
 	IsPhysicalReplicationSupported *bool `json:"IsPhysicalReplicationSupported,omitnil" name:"IsPhysicalReplicationSupported"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2470,6 +2470,63 @@ func (r *DescribeDBSlowLogsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBSlowLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBTmpInstancesRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type DescribeDBTmpInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *DescribeDBTmpInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBTmpInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBTmpInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBTmpInstancesResponseParams struct {
+	// Temp instance
+	TmpInstances []*TmpInstance `json:"TmpInstances,omitnil" name:"TmpInstances"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeDBTmpInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBTmpInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBTmpInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBTmpInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4820,6 +4877,68 @@ func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TmpInstance struct {
+	// Application ID
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+
+	// Creation time
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Instance remarks
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	InstanceRemark *string `json:"InstanceRemark,omitnil" name:"InstanceRemark"`
+
+	// Whether it is a temp instance. Valid values: `0` (non-temp instance), `1` (invalid temp instance), `2` (valid temp rollback instance).
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	TempType *int64 `json:"TempType,omitnil" name:"TempType"`
+
+	// Instance status. Valid values: `0` (to be initialized), `1` (in process), `2` (running), `-1` (isolated), `-2` (eliminated).
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+
+	// Instance ID in the format of `tdsql-ow728lmc`
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Virtual instance IP
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
+
+	// Virtual instance port
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+
+	// Validity end time
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
+
+	// Source instance ID in the format of `tdsql-ow728lmc`
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil" name:"SrcInstanceId"`
+
+	// Instance status description
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+
+	// Instance region
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// AZ of the instance
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Virtual IPv6 of the instance
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+
+	// Instance IPv6 flag
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
 }
 
 // Predefined struct for user

@@ -859,6 +859,262 @@ func (r *CreateDCDBInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDedicatedClusterDCDBInstanceRequestParams struct {
+	// Number of created instances
+	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+
+	// Shard u200dcount
+	ShardNum *int64 `json:"ShardNum,omitnil" name:"ShardNum"`
+
+	// Shard memory size in GB
+	ShardMemory *int64 `json:"ShardMemory,omitnil" name:"ShardMemory"`
+
+	// Shard disk size in GB
+	ShardStorage *int64 `json:"ShardStorage,omitnil" name:"ShardStorage"`
+
+	// UUID of the dedicated cluster
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+
+	// (Disused) AZ
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+
+	// (Disused) u200dNumber of CPU u200dcores
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+
+	// (Disused) Shard model
+	ShardMachine *string `json:"ShardMachine,omitnil" name:"ShardMachine"`
+
+	// Number of shard nodes
+	ShardNodeNum *int64 `json:"ShardNodeNum,omitnil" name:"ShardNodeNum"`
+
+	// (Disused) Number of node CPU cores. Value range: 1-100.
+	ShardNodeCpu *int64 `json:"ShardNodeCpu,omitnil" name:"ShardNodeCpu"`
+
+	// (Disused) Node memory size in GB
+	ShardNodeMemory *int64 `json:"ShardNodeMemory,omitnil" name:"ShardNodeMemory"`
+
+	// (Disused) Node disk size in GB
+	ShardNodeStorage *int64 `json:"ShardNodeStorage,omitnil" name:"ShardNodeStorage"`
+
+	// Database version
+	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+
+	// List of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+
+	// DCN source instance ID
+	DcnInstanceId *string `json:"DcnInstanceId,omitnil" name:"DcnInstanceId"`
+
+	// Region of DCN source instance
+	DcnRegion *string `json:"DcnRegion,omitnil" name:"DcnRegion"`
+
+	// Custom instance name
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+
+	// Tag
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+
+	// Whether IPv6 flag is supported. Valid values: `1` (yes), `0` (no).
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+
+	// (Disused) Pid, which can be queried by the u200d`DescribeSpecInfo` API.
+	Pid *int64 `json:"Pid,omitnil" name:"Pid"`
+
+	// List of parameters. Valid values: `character_set_server` (character set; required), `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive), `innodb_page_size` (InnoDB data page; default size: 16 KB), `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync. Default value: u200d`2`).
+	InitParams []*DBParamValue `json:"InitParams,omitnil" name:"InitParams"`
+
+	// Specified UUID for the source node. If left empty, it will be assigned by the system randomly.
+	MasterHostId *string `json:"MasterHostId,omitnil" name:"MasterHostId"`
+
+	// Specified UUID for the u200dreplica node. If left empty, it will be assigned by the system randomly.
+	SlaveHostIds []*string `json:"SlaveHostIds,omitnil" name:"SlaveHostIds"`
+
+	// ID of the u200dsource instance to be rolled back
+	RollbackInstanceId *string `json:"RollbackInstanceId,omitnil" name:"RollbackInstanceId"`
+
+	// Rollback time
+	RollbackTime *string `json:"RollbackTime,omitnil" name:"RollbackTime"`
+}
+
+type CreateDedicatedClusterDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of created instances
+	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+
+	// Shard u200dcount
+	ShardNum *int64 `json:"ShardNum,omitnil" name:"ShardNum"`
+
+	// Shard memory size in GB
+	ShardMemory *int64 `json:"ShardMemory,omitnil" name:"ShardMemory"`
+
+	// Shard disk size in GB
+	ShardStorage *int64 `json:"ShardStorage,omitnil" name:"ShardStorage"`
+
+	// UUID of the dedicated cluster
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+
+	// (Disused) AZ
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+
+	// (Disused) u200dNumber of CPU u200dcores
+	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
+
+	// VPC ID
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+
+	// Subnet ID
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+
+	// (Disused) Shard model
+	ShardMachine *string `json:"ShardMachine,omitnil" name:"ShardMachine"`
+
+	// Number of shard nodes
+	ShardNodeNum *int64 `json:"ShardNodeNum,omitnil" name:"ShardNodeNum"`
+
+	// (Disused) Number of node CPU cores. Value range: 1-100.
+	ShardNodeCpu *int64 `json:"ShardNodeCpu,omitnil" name:"ShardNodeCpu"`
+
+	// (Disused) Node memory size in GB
+	ShardNodeMemory *int64 `json:"ShardNodeMemory,omitnil" name:"ShardNodeMemory"`
+
+	// (Disused) Node disk size in GB
+	ShardNodeStorage *int64 `json:"ShardNodeStorage,omitnil" name:"ShardNodeStorage"`
+
+	// Database version
+	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+
+	// Security group ID
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+
+	// List of security group IDs
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+
+	// DCN source instance ID
+	DcnInstanceId *string `json:"DcnInstanceId,omitnil" name:"DcnInstanceId"`
+
+	// Region of DCN source instance
+	DcnRegion *string `json:"DcnRegion,omitnil" name:"DcnRegion"`
+
+	// Custom instance name
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+
+	// Tag
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+
+	// Whether IPv6 flag is supported. Valid values: `1` (yes), `0` (no).
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+
+	// (Disused) Pid, which can be queried by the u200d`DescribeSpecInfo` API.
+	Pid *int64 `json:"Pid,omitnil" name:"Pid"`
+
+	// List of parameters. Valid values: `character_set_server` (character set; required), `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive), `innodb_page_size` (InnoDB data page; default size: 16 KB), `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync. Default value: u200d`2`).
+	InitParams []*DBParamValue `json:"InitParams,omitnil" name:"InitParams"`
+
+	// Specified UUID for the source node. If left empty, it will be assigned by the system randomly.
+	MasterHostId *string `json:"MasterHostId,omitnil" name:"MasterHostId"`
+
+	// Specified UUID for the u200dreplica node. If left empty, it will be assigned by the system randomly.
+	SlaveHostIds []*string `json:"SlaveHostIds,omitnil" name:"SlaveHostIds"`
+
+	// ID of the u200dsource instance to be rolled back
+	RollbackInstanceId *string `json:"RollbackInstanceId,omitnil" name:"RollbackInstanceId"`
+
+	// Rollback time
+	RollbackTime *string `json:"RollbackTime,omitnil" name:"RollbackTime"`
+}
+
+func (r *CreateDedicatedClusterDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDedicatedClusterDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GoodsNum")
+	delete(f, "ShardNum")
+	delete(f, "ShardMemory")
+	delete(f, "ShardStorage")
+	delete(f, "ClusterId")
+	delete(f, "Zone")
+	delete(f, "ProjectId")
+	delete(f, "Cpu")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "ShardMachine")
+	delete(f, "ShardNodeNum")
+	delete(f, "ShardNodeCpu")
+	delete(f, "ShardNodeMemory")
+	delete(f, "ShardNodeStorage")
+	delete(f, "DbVersionId")
+	delete(f, "SecurityGroupId")
+	delete(f, "SecurityGroupIds")
+	delete(f, "DcnInstanceId")
+	delete(f, "DcnRegion")
+	delete(f, "InstanceName")
+	delete(f, "ResourceTags")
+	delete(f, "Ipv6Flag")
+	delete(f, "Pid")
+	delete(f, "InitParams")
+	delete(f, "MasterHostId")
+	delete(f, "SlaveHostIds")
+	delete(f, "RollbackInstanceId")
+	delete(f, "RollbackTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDedicatedClusterDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDedicatedClusterDCDBInstanceResponseParams struct {
+	// Array of assigned resource IDs
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+
+	// Flow ID
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateDedicatedClusterDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDedicatedClusterDCDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateDedicatedClusterDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDedicatedClusterDCDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateHourDCDBInstanceRequestParams struct {
 	// Shard memory in GB, which can be obtained through the `DescribeShardSpec` API.
 	//   
@@ -2298,6 +2554,63 @@ func (r *DescribeDBSyncModeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDBTmpInstancesRequestParams struct {
+	// The instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type DescribeDBTmpInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *DescribeDBTmpInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBTmpInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBTmpInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBTmpInstancesResponseParams struct {
+	// List of temp instances
+	TmpInstances []*TmpInstance `json:"TmpInstances,omitnil" name:"TmpInstances"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeDBTmpInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBTmpInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBTmpInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBTmpInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDCDBInstanceDetailRequestParams struct {
 	// Instance ID, such as dcdbt-7oaxtcb7.
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
@@ -2501,7 +2814,7 @@ type DescribeDCDBInstanceDetailResponseParams struct {
 	// Unclaimed network resource
 	ReservedNetResources []*ReservedNetResource `json:"ReservedNetResources,omitnil" name:"ReservedNetResources"`
 
-
+	// Whether physical replication is supported.
 	IsPhysicalReplicationSupported *bool `json:"IsPhysicalReplicationSupported,omitnil" name:"IsPhysicalReplicationSupported"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3407,6 +3720,66 @@ func (r *DescribeFlowResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeFlowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogFileRetentionPeriodRequestParams struct {
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type DescribeLogFileRetentionPeriodRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *DescribeLogFileRetentionPeriodRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogFileRetentionPeriodRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogFileRetentionPeriodRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogFileRetentionPeriodResponseParams struct {
+	// Instance ID in the format of `tdsql-ow728lmc`
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Backup log retention days
+	Days *uint64 `json:"Days,omitnil" name:"Days"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeLogFileRetentionPeriodResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLogFileRetentionPeriodResponseParams `json:"Response"`
+}
+
+func (r *DescribeLogFileRetentionPeriodResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogFileRetentionPeriodResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5576,6 +5949,174 @@ func (r *TerminateDedicatedDBInstanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type TmpInstance struct {
+	// Application ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+
+	// Creation time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Instance remarks
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceRemark *string `json:"InstanceRemark,omitnil" name:"InstanceRemark"`
+
+	// Type of temp instance. Valid values: `0` (non-temp instance), `1` (invalid temp instance), `2` (valid rollback temp instance).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TempType *int64 `json:"TempType,omitnil" name:"TempType"`
+
+	// Instance status. Valid values: `0` (to be initialized), `1` (in process), `2` (running), `-1` (isolated), `-2` (eliminated).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+
+	// Instance ID in the format of `tdsql-ow728lmc`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Virtual instance IP
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitnil" name:"Vip"`
+
+	// Virtual instance port
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+
+	// Validity end time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
+
+	// Source instance ID in the format of `tdsql-ow728lmc`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil" name:"SrcInstanceId"`
+
+	// Instance status description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+
+	// Instance region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// AZ of the instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Virtual IPv6 of the instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+
+	// Instance IPv6 flag
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+}
+
+// Predefined struct for user
+type UpgradeDedicatedDCDBInstanceRequestParams struct {
+	// Upgrade type. Valid values: `ADD` (add a shard), `SPLIT` (split a shard), and `EXPAND` (Vertically expand a shard).
+	UpgradeType *string `json:"UpgradeType,omitnil" name:"UpgradeType"`
+
+	// Instance ID, such as dcdbt-mlfjm74h.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// A parameter for adding shards when `UpgradeType` is `ADD`.
+	AddShardConfig *AddShardConfig `json:"AddShardConfig,omitnil" name:"AddShardConfig"`
+
+	// A parameter for vertically expand a shard when `UpgradeType` is `EXPAND`.
+	ExpandShardConfig *ExpandShardConfig `json:"ExpandShardConfig,omitnil" name:"ExpandShardConfig"`
+
+	// A parameter for splitting a shard when `UpgradeType` is `SPLIT`.
+	SplitShardConfig *SplitShardConfig `json:"SplitShardConfig,omitnil" name:"SplitShardConfig"`
+
+	// Whether to automatically retry u200donce when missing the switch time window. Valid values: `0` (No), `1` (Yes).
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitnil" name:"SwitchAutoRetry"`
+
+	// Switch u200dstart u200dtime
+	SwitchStartTime *string `json:"SwitchStartTime,omitnil" name:"SwitchStartTime"`
+
+	// Switch end time
+	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
+}
+
+type UpgradeDedicatedDCDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Upgrade type. Valid values: `ADD` (add a shard), `SPLIT` (split a shard), and `EXPAND` (Vertically expand a shard).
+	UpgradeType *string `json:"UpgradeType,omitnil" name:"UpgradeType"`
+
+	// Instance ID, such as dcdbt-mlfjm74h.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// A parameter for adding shards when `UpgradeType` is `ADD`.
+	AddShardConfig *AddShardConfig `json:"AddShardConfig,omitnil" name:"AddShardConfig"`
+
+	// A parameter for vertically expand a shard when `UpgradeType` is `EXPAND`.
+	ExpandShardConfig *ExpandShardConfig `json:"ExpandShardConfig,omitnil" name:"ExpandShardConfig"`
+
+	// A parameter for splitting a shard when `UpgradeType` is `SPLIT`.
+	SplitShardConfig *SplitShardConfig `json:"SplitShardConfig,omitnil" name:"SplitShardConfig"`
+
+	// Whether to automatically retry u200donce when missing the switch time window. Valid values: `0` (No), `1` (Yes).
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitnil" name:"SwitchAutoRetry"`
+
+	// Switch u200dstart u200dtime
+	SwitchStartTime *string `json:"SwitchStartTime,omitnil" name:"SwitchStartTime"`
+
+	// Switch end time
+	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
+}
+
+func (r *UpgradeDedicatedDCDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeDedicatedDCDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UpgradeType")
+	delete(f, "InstanceId")
+	delete(f, "AddShardConfig")
+	delete(f, "ExpandShardConfig")
+	delete(f, "SplitShardConfig")
+	delete(f, "SwitchAutoRetry")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDedicatedDCDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeDedicatedDCDBInstanceResponseParams struct {
+	// Async task flow ID
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type UpgradeDedicatedDCDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeDedicatedDCDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *UpgradeDedicatedDCDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeDedicatedDCDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
