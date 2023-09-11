@@ -20,6 +20,36 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type ApiGatewayInstanceDetail struct {
+	// The instance ID.
+	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+
+	// The instance name.
+	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The certificate ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The protocol.
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+}
+
+type ApiGatewayInstanceList struct {
+	// The region.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// The list of APIGATEWAY instances.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*ApiGatewayInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total number of APIGATEWAY instances in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
 // Predefined struct for user
 type ApplyCertificateRequestParams struct {
 	// Validation type. `DNS_AUTO`: automatic DNS validation; `DNS`: manual DNS validation; `FILE`: file validation
@@ -169,6 +199,138 @@ func (r *ApplyCertificateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type BatchDeleteCSRRequestParams struct {
+	// The IDs of the CSRs to be deleted, 100 IDs at most.
+	CSRIds []*int64 `json:"CSRIds,omitnil" name:"CSRIds"`
+}
+
+type BatchDeleteCSRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The IDs of the CSRs to be deleted, 100 IDs at most.
+	CSRIds []*int64 `json:"CSRIds,omitnil" name:"CSRIds"`
+}
+
+func (r *BatchDeleteCSRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchDeleteCSRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CSRIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchDeleteCSRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BatchDeleteCSRResponseParams struct {
+	// The IDs of the CSRs successfully deleted.
+	Success []*int64 `json:"Success,omitnil" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type BatchDeleteCSRResponse struct {
+	*tchttp.BaseResponse
+	Response *BatchDeleteCSRResponseParams `json:"Response"`
+}
+
+func (r *BatchDeleteCSRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchDeleteCSRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BindResourceRegionResult struct {
+	// The region.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// The total number of associated cloud resources.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type BindResourceResult struct {
+	// Supported types: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+	// The region of associated cloud resources.
+	BindResourceRegionResult []*BindResourceRegionResult `json:"BindResourceRegionResult,omitnil" name:"BindResourceRegionResult"`
+}
+
+type CSRItem struct {
+	// The CSR ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *int64 `json:"Id,omitnil" name:"Id"`
+
+	// The account.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OwnerUin *string `json:"OwnerUin,omitnil" name:"OwnerUin"`
+
+	// The domain.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The organization name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Organization *string `json:"Organization,omitnil" name:"Organization"`
+
+	// The department.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Department *string `json:"Department,omitnil" name:"Department"`
+
+	// The email address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitnil" name:"Email"`
+
+	// The province.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Province *string `json:"Province,omitnil" name:"Province"`
+
+	// The city.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// The country or region.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// The remarks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Remarks *string `json:"Remarks,omitnil" name:"Remarks"`
+
+	// The status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+
+	// The creation time.
+	// Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// The encryption algorithm.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+
+	// The algorithm parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KeyParameter *string `json:"KeyParameter,omitnil" name:"KeyParameter"`
+}
+
+// Predefined struct for user
 type CancelCertificateOrderRequestParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
@@ -223,6 +385,53 @@ func (r *CancelCertificateOrderResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CancelCertificateOrderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CdnInstanceDetail struct {
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The ID of the deployed certificate.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The status of the domain.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// The billing status of the domain.
+	HttpsBillingSwitch *string `json:"HttpsBillingSwitch,omitnil" name:"HttpsBillingSwitch"`
+}
+
+type CdnInstanceList struct {
+	// The total number of CDN domains in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// The list of CDN domains.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*CdnInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+}
+
+type CertTaskId struct {
+	// The certificate ID.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The async task ID.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+}
+
+type Certificate struct {
+	// The certificate ID.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The list of domains bound to the certificate.
+	DnsNames []*string `json:"DnsNames,omitnil" name:"DnsNames"`
+
+	// The root certificate ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertCaId *string `json:"CertCaId,omitnil" name:"CertCaId"`
+
+	// The authentication type. Valid values: `UNIDIRECTIONAL` (one-way authentication) and `MUTUAL` (two-way authentication).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SSLMode *string `json:"SSLMode,omitnil" name:"SSLMode"`
 }
 
 type CertificateExtra struct {
@@ -407,6 +616,75 @@ type Certificates struct {
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 }
 
+type ClbInstanceDetail struct {
+	// The CLB instance ID.
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+
+	// The CLB instance name.
+	LoadBalancerName *string `json:"LoadBalancerName,omitnil" name:"LoadBalancerName"`
+
+	// The list of CLB listeners.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Listeners []*ClbListener `json:"Listeners,omitnil" name:"Listeners"`
+}
+
+type ClbInstanceList struct {
+	// The region.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// The list of CLB instances.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*ClbInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total number of CLB instances in this region.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type ClbListener struct {
+	// The listener ID.
+	ListenerId *string `json:"ListenerId,omitnil" name:"ListenerId"`
+
+	// The listener name.
+	ListenerName *string `json:"ListenerName,omitnil" name:"ListenerName"`
+
+	// Whether to enable SNI. Valid values: `1` (enable) and `0` (disable).
+	SniSwitch *uint64 `json:"SniSwitch,omitnil" name:"SniSwitch"`
+
+	// The listener protocol type. Valid values: `HTTPS` and `TCP_SSL`.
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+
+	// The information of the certificate bound to the listener.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Certificate *Certificate `json:"Certificate,omitnil" name:"Certificate"`
+
+	// The list of the listener rules.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Rules []*ClbListenerRule `json:"Rules,omitnil" name:"Rules"`
+
+	// The list of non-matching domains.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoMatchDomains []*string `json:"NoMatchDomains,omitnil" name:"NoMatchDomains"`
+}
+
+type ClbListenerRule struct {
+	// The rule ID.
+	LocationId *string `json:"LocationId,omitnil" name:"LocationId"`
+
+	// The domains bound.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// Whether the rule matches the domains to be associated with a certificate.
+	IsMatch *bool `json:"IsMatch,omitnil" name:"IsMatch"`
+
+	// The certificates associated with the rule.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Certificate *Certificate `json:"Certificate,omitnil" name:"Certificate"`
+
+	// The list of non-matching domains.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoMatchDomains []*string `json:"NoMatchDomains,omitnil" name:"NoMatchDomains"`
+}
+
 // Predefined struct for user
 type CommitCertificateInformationRequestParams struct {
 	// Certificate ID
@@ -471,6 +749,204 @@ func (r *CommitCertificateInformationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CommitCertificateInformationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCSRRequestParams struct {
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The organization name.
+	Organization *string `json:"Organization,omitnil" name:"Organization"`
+
+	// The department.
+	Department *string `json:"Department,omitnil" name:"Department"`
+
+	// The email address.
+	Email *string `json:"Email,omitnil" name:"Email"`
+
+	// The province.
+	Province *string `json:"Province,omitnil" name:"Province"`
+
+	// The city.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// The country or region code that complies with ISO 3166, such as CN and US.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// The encryption algorithm. RSA and ECC are supported.	
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+
+	// The key pair parameter. For RSA, only the 2048-bit and 4096-bit key pairs are supported. For ECC, only prime256v1 is supported.
+	KeyParameter *string `json:"KeyParameter,omitnil" name:"KeyParameter"`
+
+	// Whether to generate the CSR content. Once the CSR content is generated, the CSR record cannot be modified.
+	Generate *bool `json:"Generate,omitnil" name:"Generate"`
+
+	// The password of the private key.
+	KeyPassword *string `json:"KeyPassword,omitnil" name:"KeyPassword"`
+
+	// The remarks.
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
+}
+
+type CreateCSRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The organization name.
+	Organization *string `json:"Organization,omitnil" name:"Organization"`
+
+	// The department.
+	Department *string `json:"Department,omitnil" name:"Department"`
+
+	// The email address.
+	Email *string `json:"Email,omitnil" name:"Email"`
+
+	// The province.
+	Province *string `json:"Province,omitnil" name:"Province"`
+
+	// The city.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// The country or region code that complies with ISO 3166, such as CN and US.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// The encryption algorithm. RSA and ECC are supported.	
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+
+	// The key pair parameter. For RSA, only the 2048-bit and 4096-bit key pairs are supported. For ECC, only prime256v1 is supported.
+	KeyParameter *string `json:"KeyParameter,omitnil" name:"KeyParameter"`
+
+	// Whether to generate the CSR content. Once the CSR content is generated, the CSR record cannot be modified.
+	Generate *bool `json:"Generate,omitnil" name:"Generate"`
+
+	// The password of the private key.
+	KeyPassword *string `json:"KeyPassword,omitnil" name:"KeyPassword"`
+
+	// The remarks.
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
+}
+
+func (r *CreateCSRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCSRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "Organization")
+	delete(f, "Department")
+	delete(f, "Email")
+	delete(f, "Province")
+	delete(f, "City")
+	delete(f, "Country")
+	delete(f, "EncryptAlgo")
+	delete(f, "KeyParameter")
+	delete(f, "Generate")
+	delete(f, "KeyPassword")
+	delete(f, "Remark")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCSRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCSRResponseParams struct {
+	// The CSR ID.
+	Id *int64 `json:"Id,omitnil" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateCSRResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCSRResponseParams `json:"Response"`
+}
+
+func (r *CreateCSRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCSRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCertificateBindResourceSyncTaskRequestParams struct {
+	// The list of certificate IDs, 100 IDs at most.
+	CertificateIds []*string `json:"CertificateIds,omitnil" name:"CertificateIds"`
+
+	// Whether to use the cached results. Valid values: `1` (default) for yes and `0` for no. If any task completed within last 30 minutes exists under the current certificate ID, and the cache is used, the query result of the last task completed within 30 minutes will be read.
+	IsCache *uint64 `json:"IsCache,omitnil" name:"IsCache"`
+}
+
+type CreateCertificateBindResourceSyncTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The list of certificate IDs, 100 IDs at most.
+	CertificateIds []*string `json:"CertificateIds,omitnil" name:"CertificateIds"`
+
+	// Whether to use the cached results. Valid values: `1` (default) for yes and `0` for no. If any task completed within last 30 minutes exists under the current certificate ID, and the cache is used, the query result of the last task completed within 30 minutes will be read.
+	IsCache *uint64 `json:"IsCache,omitnil" name:"IsCache"`
+}
+
+func (r *CreateCertificateBindResourceSyncTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCertificateBindResourceSyncTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertificateIds")
+	delete(f, "IsCache")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCertificateBindResourceSyncTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCertificateBindResourceSyncTaskResponseParams struct {
+	// The IDs of async tasks for querying cloud resources associated with a certificate.
+	CertTaskIds []*CertTaskId `json:"CertTaskIds,omitnil" name:"CertTaskIds"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateCertificateBindResourceSyncTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCertificateBindResourceSyncTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateCertificateBindResourceSyncTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCertificateBindResourceSyncTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -548,6 +1024,33 @@ func (r *CreateCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DdosInstanceDetail struct {
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// The protocol type.
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+
+	// The certificate ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The forwarding port.
+	VirtualPort *string `json:"VirtualPort,omitnil" name:"VirtualPort"`
+}
+
+type DdosInstanceList struct {
+	// The total number of DDOS instances in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// The list of DDOS instances.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*DdosInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+}
+
 // Predefined struct for user
 type DeleteCertificateRequestParams struct {
 	// Certificate ID
@@ -602,6 +1105,381 @@ func (r *DeleteCertificateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCSRRequestParams struct {
+	// The CSR ID.
+	CSRId *int64 `json:"CSRId,omitnil" name:"CSRId"`
+}
+
+type DescribeCSRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The CSR ID.
+	CSRId *int64 `json:"CSRId,omitnil" name:"CSRId"`
+}
+
+func (r *DescribeCSRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCSRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CSRId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCSRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCSRResponseParams struct {
+	// The CSR ID.
+	Id *int64 `json:"Id,omitnil" name:"Id"`
+
+	// The account.
+	OwnerUin *string `json:"OwnerUin,omitnil" name:"OwnerUin"`
+
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The organization name.
+	Organization *string `json:"Organization,omitnil" name:"Organization"`
+
+	// The department.
+	Department *string `json:"Department,omitnil" name:"Department"`
+
+	// The email address.
+	Email *string `json:"Email,omitnil" name:"Email"`
+
+	// The province.
+	Province *string `json:"Province,omitnil" name:"Province"`
+
+	// The city.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// The country or region.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// The key algorithm.
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+
+	// The algorithm parameter.
+	KeyParameter *string `json:"KeyParameter,omitnil" name:"KeyParameter"`
+
+	// The remarks.
+	Remarks *string `json:"Remarks,omitnil" name:"Remarks"`
+
+	// The status.
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+
+	// The password of the private key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KeyPassword *string `json:"KeyPassword,omitnil" name:"KeyPassword"`
+
+	// The creation time.
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// The CSR content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CSR *string `json:"CSR,omitnil" name:"CSR"`
+
+	// The content of the private key.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeCSRResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCSRResponseParams `json:"Response"`
+}
+
+func (r *DescribeCSRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCSRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCSRSetRequestParams struct {
+	// The number of CSRs on each page. The default value is 10, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// The pagination offset, starting from 0.	
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// The domain for CSR filtering.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The encryption algorithm for CSR filtering.
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+}
+
+type DescribeCSRSetRequest struct {
+	*tchttp.BaseRequest
+	
+	// The number of CSRs on each page. The default value is 10, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// The pagination offset, starting from 0.	
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// The domain for CSR filtering.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The encryption algorithm for CSR filtering.
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+}
+
+func (r *DescribeCSRSetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCSRSetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Domain")
+	delete(f, "EncryptAlgo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCSRSetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCSRSetResponseParams struct {
+	// The total number of CSRs.	
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
+
+	// The list of CSRs.
+	Set []*CSRItem `json:"Set,omitnil" name:"Set"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeCSRSetResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCSRSetResponseParams `json:"Response"`
+}
+
+func (r *DescribeCSRSetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCSRSetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCertificateBindResourceTaskDetailRequestParams struct {
+	// The task ID, which is required to query the result of associated cloud resources.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The number of cloud resources displayed on each page. The default value is 10, and the maximum value is 100.
+	Limit *string `json:"Limit,omitnil" name:"Limit"`
+
+	// The current offset.
+	Offset *string `json:"Offset,omitnil" name:"Offset"`
+
+	// The types of the resources to be queried. If no value is passed in, all types of resources will be queried.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil" name:"ResourceTypes"`
+
+	// The regions of the resources to be queried. Only CLB, TKE, WAF, APIGATEWAY, and TCB resources support the query by region.
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
+}
+
+type DescribeCertificateBindResourceTaskDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// The task ID, which is required to query the result of associated cloud resources.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The number of cloud resources displayed on each page. The default value is 10, and the maximum value is 100.
+	Limit *string `json:"Limit,omitnil" name:"Limit"`
+
+	// The current offset.
+	Offset *string `json:"Offset,omitnil" name:"Offset"`
+
+	// The types of the resources to be queried. If no value is passed in, all types of resources will be queried.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil" name:"ResourceTypes"`
+
+	// The regions of the resources to be queried. Only CLB, TKE, WAF, APIGATEWAY, and TCB resources support the query by region.
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
+}
+
+func (r *DescribeCertificateBindResourceTaskDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCertificateBindResourceTaskDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "ResourceTypes")
+	delete(f, "Regions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCertificateBindResourceTaskDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCertificateBindResourceTaskDetailResponseParams struct {
+	// The details of associated CLB resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CLB []*ClbInstanceList `json:"CLB,omitnil" name:"CLB"`
+
+	// The details of associated CDN resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CDN []*CdnInstanceList `json:"CDN,omitnil" name:"CDN"`
+
+	// The details of associated WAF resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WAF []*WafInstanceList `json:"WAF,omitnil" name:"WAF"`
+
+	// The details of associated Anti-DDS resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DDOS []*DdosInstanceList `json:"DDOS,omitnil" name:"DDOS"`
+
+	// The details of associated LIVE resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LIVE []*LiveInstanceList `json:"LIVE,omitnil" name:"LIVE"`
+
+	// The details of associated VOD resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VOD []*VODInstanceList `json:"VOD,omitnil" name:"VOD"`
+
+	// The details of associated TKE resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TKE []*TkeInstanceList `json:"TKE,omitnil" name:"TKE"`
+
+	// The details of associated APIGATEWAY resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	APIGATEWAY []*ApiGatewayInstanceList `json:"APIGATEWAY,omitnil" name:"APIGATEWAY"`
+
+	// The details of associated TCB resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TCB []*TCBInstanceList `json:"TCB,omitnil" name:"TCB"`
+
+	// The details of associated TEO resources.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TEO []*TeoInstanceList `json:"TEO,omitnil" name:"TEO"`
+
+	// The status of the async task. Valid values: `0` for querying, `1` for successful, and `2` for abnormal. If the status is `1`, the result of `BindResourceResult` will be displayed; if the status is `2`, the error causes will be displayed.
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
+
+	// The cache time of the current result.
+	CacheTime *string `json:"CacheTime,omitnil" name:"CacheTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeCertificateBindResourceTaskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCertificateBindResourceTaskDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeCertificateBindResourceTaskDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCertificateBindResourceTaskDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCertificateBindResourceTaskResultRequestParams struct {
+	// The task IDs, which are used to query the results of associated cloud resources, 100 IDs at most.
+	TaskIds []*string `json:"TaskIds,omitnil" name:"TaskIds"`
+}
+
+type DescribeCertificateBindResourceTaskResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// The task IDs, which are used to query the results of associated cloud resources, 100 IDs at most.
+	TaskIds []*string `json:"TaskIds,omitnil" name:"TaskIds"`
+}
+
+func (r *DescribeCertificateBindResourceTaskResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCertificateBindResourceTaskResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCertificateBindResourceTaskResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCertificateBindResourceTaskResultResponseParams struct {
+	// The results of the async tasks for querying associated cloud resources.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SyncTaskBindResourceResult []*SyncTaskBindResourceResult `json:"SyncTaskBindResourceResult,omitnil" name:"SyncTaskBindResourceResult"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeCertificateBindResourceTaskResultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCertificateBindResourceTaskResultResponseParams `json:"Response"`
+}
+
+func (r *DescribeCertificateBindResourceTaskResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCertificateBindResourceTaskResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -797,6 +1675,10 @@ type DescribeCertificateDetailResponseParams struct {
 	// Certificate algorithm
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EncryptAlgorithm *string `json:"EncryptAlgorithm,omitnil" name:"EncryptAlgorithm"`
+
+	// The authentication value for DV certificate revocation.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DvRevokeAuthDetail []*DvAuths `json:"DvRevokeAuthDetail,omitnil" name:"DvRevokeAuthDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -1077,6 +1959,10 @@ type DescribeCertificateResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CAEndTimes []*string `json:"CAEndTimes,omitnil" name:"CAEndTimes"`
 
+	// The authentication value for DV certificate revocation.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DvRevokeAuthDetail []*DvAuths `json:"DvRevokeAuthDetail,omitnil" name:"DvRevokeAuthDetail"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -1137,6 +2023,9 @@ type DescribeCertificatesRequestParams struct {
 
 	// Whether to filter expiring certificates. `1`: Yes; `0`: No.
 	FilterExpiring *uint64 `json:"FilterExpiring,omitnil" name:"FilterExpiring"`
+
+	// Whether the certificate can be hosted. Valid values: `1` for yes and `0` for no.
+	Hostable *uint64 `json:"Hostable,omitnil" name:"Hostable"`
 }
 
 type DescribeCertificatesRequest struct {
@@ -1180,6 +2069,9 @@ type DescribeCertificatesRequest struct {
 
 	// Whether to filter expiring certificates. `1`: Yes; `0`: No.
 	FilterExpiring *uint64 `json:"FilterExpiring,omitnil" name:"FilterExpiring"`
+
+	// Whether the certificate can be hosted. Valid values: `1` for yes and `0` for no.
+	Hostable *uint64 `json:"Hostable,omitnil" name:"Hostable"`
 }
 
 func (r *DescribeCertificatesRequest) ToJsonString() string {
@@ -1207,6 +2099,7 @@ func (r *DescribeCertificatesRequest) FromJsonString(s string) error {
 	delete(f, "FilterSource")
 	delete(f, "IsSM")
 	delete(f, "FilterExpiring")
+	delete(f, "Hostable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCertificatesRequest has unknown keys!", "")
 	}
@@ -1355,6 +2248,180 @@ type DvAuths struct {
 	// DV authentication type
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DvAuthVerifyType *string `json:"DvAuthVerifyType,omitnil" name:"DvAuthVerifyType"`
+}
+
+type Error struct {
+	// The error code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Code *string `json:"Code,omitnil" name:"Code"`
+
+	// The error message.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil" name:"Message"`
+}
+
+type LiveInstanceDetail struct {
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The ID of the associated certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The status. Valid values: `-1`: No certificate is associated with the domain.
+	// `1`: HTTPS is enabled for the domain.
+	// `0`: HTTPS is disabled for the domain.
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+}
+
+type LiveInstanceList struct {
+	// The total number of LIVE instances in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// The list of LIVE instances.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*LiveInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+}
+
+// Predefined struct for user
+type ModifyCSRRequestParams struct {
+	// The CSR ID.	
+	CSRId *int64 `json:"CSRId,omitnil" name:"CSRId"`
+
+	// Whether to generate the CSR content. Once the CSR content is generated, the CSR record cannot be modified.
+	Generate *bool `json:"Generate,omitnil" name:"Generate"`
+
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The organization name.
+	Organization *string `json:"Organization,omitnil" name:"Organization"`
+
+	// The department.
+	Department *string `json:"Department,omitnil" name:"Department"`
+
+	// The email address.
+	Email *string `json:"Email,omitnil" name:"Email"`
+
+	// The province.
+	Province *string `json:"Province,omitnil" name:"Province"`
+
+	// The city.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// The country or region.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// The encryption algorithm. RSA and ECC are supported.	
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+
+	// The key pair parameter. For RSA, only the 2048-bit and 4096-bit key pairs are supported. For ECC, only prime256v1 is supported.
+	KeyParameter *string `json:"KeyParameter,omitnil" name:"KeyParameter"`
+
+	// The remarks.
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
+
+	// The password of the private key.
+	KeyPassword *string `json:"KeyPassword,omitnil" name:"KeyPassword"`
+}
+
+type ModifyCSRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The CSR ID.	
+	CSRId *int64 `json:"CSRId,omitnil" name:"CSRId"`
+
+	// Whether to generate the CSR content. Once the CSR content is generated, the CSR record cannot be modified.
+	Generate *bool `json:"Generate,omitnil" name:"Generate"`
+
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The organization name.
+	Organization *string `json:"Organization,omitnil" name:"Organization"`
+
+	// The department.
+	Department *string `json:"Department,omitnil" name:"Department"`
+
+	// The email address.
+	Email *string `json:"Email,omitnil" name:"Email"`
+
+	// The province.
+	Province *string `json:"Province,omitnil" name:"Province"`
+
+	// The city.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// The country or region.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// The encryption algorithm. RSA and ECC are supported.	
+	EncryptAlgo *string `json:"EncryptAlgo,omitnil" name:"EncryptAlgo"`
+
+	// The key pair parameter. For RSA, only the 2048-bit and 4096-bit key pairs are supported. For ECC, only prime256v1 is supported.
+	KeyParameter *string `json:"KeyParameter,omitnil" name:"KeyParameter"`
+
+	// The remarks.
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
+
+	// The password of the private key.
+	KeyPassword *string `json:"KeyPassword,omitnil" name:"KeyPassword"`
+}
+
+func (r *ModifyCSRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCSRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CSRId")
+	delete(f, "Generate")
+	delete(f, "Domain")
+	delete(f, "Organization")
+	delete(f, "Department")
+	delete(f, "Email")
+	delete(f, "Province")
+	delete(f, "City")
+	delete(f, "Country")
+	delete(f, "EncryptAlgo")
+	delete(f, "KeyParameter")
+	delete(f, "Remark")
+	delete(f, "KeyPassword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCSRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCSRResponseParams struct {
+	// The CSR ID.
+	Id *int64 `json:"Id,omitnil" name:"Id"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyCSRResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCSRResponseParams `json:"Response"`
+}
+
+func (r *ModifyCSRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCSRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1557,6 +2624,13 @@ type ReplaceCertificateRequestParams struct {
 
 	// Reissue reason
 	Reason *string `json:"Reason,omitnil" name:"Reason"`
+
+	// The CSR encryption algorithm. Valid values: `RSA` (default), `ECC1`, and `SM2`.
+	// This parameter is available for selection only when the value of `CsrType` is `Online`.
+	CertCSREncryptAlgo *string `json:"CertCSREncryptAlgo,omitnil" name:"CertCSREncryptAlgo"`
+
+	// The CSR encryption parameters. When `CsrEncryptAlgo` is set to `RSA`, `2048` (default) and `4096` are available for selection; and when`CsrEncryptAlgo` is set to `ECC`, `prime256v1` (default) and `secp384r1` are available for selection. 
+	CertCSRKeyParameter *string `json:"CertCSRKeyParameter,omitnil" name:"CertCSRKeyParameter"`
 }
 
 type ReplaceCertificateRequest struct {
@@ -1579,6 +2653,13 @@ type ReplaceCertificateRequest struct {
 
 	// Reissue reason
 	Reason *string `json:"Reason,omitnil" name:"Reason"`
+
+	// The CSR encryption algorithm. Valid values: `RSA` (default), `ECC1`, and `SM2`.
+	// This parameter is available for selection only when the value of `CsrType` is `Online`.
+	CertCSREncryptAlgo *string `json:"CertCSREncryptAlgo,omitnil" name:"CertCSREncryptAlgo"`
+
+	// The CSR encryption parameters. When `CsrEncryptAlgo` is set to `RSA`, `2048` (default) and `4096` are available for selection; and when`CsrEncryptAlgo` is set to `ECC`, `prime256v1` (default) and `secp384r1` are available for selection. 
+	CertCSRKeyParameter *string `json:"CertCSRKeyParameter,omitnil" name:"CertCSRKeyParameter"`
 }
 
 func (r *ReplaceCertificateRequest) ToJsonString() string {
@@ -1599,6 +2680,8 @@ func (r *ReplaceCertificateRequest) FromJsonString(s string) error {
 	delete(f, "CsrContent")
 	delete(f, "CsrkeyPassword")
 	delete(f, "Reason")
+	delete(f, "CertCSREncryptAlgo")
+	delete(f, "CertCSRKeyParameter")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReplaceCertificateRequest has unknown keys!", "")
 	}
@@ -1978,12 +3061,226 @@ type SubmittedData struct {
 	VerifyType *string `json:"VerifyType,omitnil" name:"VerifyType"`
 }
 
+type SyncTaskBindResourceResult struct {
+	// The task ID.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The associated cloud resources.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BindResourceResult []*BindResourceResult `json:"BindResourceResult,omitnil" name:"BindResourceResult"`
+
+	// The status of the async task. Valid values: `0` for querying, `1` for successful, and `2` for abnormal. If the status is `1`, the result of `BindResourceResult` will be displayed; if the status is `2`, the error causes will be displayed.
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
+
+	// The error occurred when querying the associated cloud resources.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Error *Error `json:"Error,omitnil" name:"Error"`
+
+	// The cache time of the current result.
+	CacheTime *string `json:"CacheTime,omitnil" name:"CacheTime"`
+}
+
+type TCBAccessInstance struct {
+	// The domain.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+
+	// The unified domain status.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UnionStatus *int64 `json:"UnionStatus,omitnil" name:"UnionStatus"`
+
+	// Whether the domain is preempted. A preempted domain is one that is already associated with another environment. It must be disassociated or re-associated first.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsPreempted *bool `json:"IsPreempted,omitnil" name:"IsPreempted"`
+
+	// Whether the domain is added to the ICP blocklist. Valid values: `0` for no and `1` for yes.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ICPStatus *int64 `json:"ICPStatus,omitnil" name:"ICPStatus"`
+
+	// The ID of the associated certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+}
+
+type TCBAccessService struct {
+	// The list of instances.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*TCBAccessInstance `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The instance count.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type TCBEnvironment struct {
+	// The unique ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *string `json:"ID,omitnil" name:"ID"`
+
+	// The source.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Source *string `json:"Source,omitnil" name:"Source"`
+
+	// The name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// The status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil" name:"Status"`
+}
+
+type TCBEnvironments struct {
+	// The TCB environment.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Environment *TCBEnvironment `json:"Environment,omitnil" name:"Environment"`
+
+	// The access service.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessService *TCBAccessService `json:"AccessService,omitnil" name:"AccessService"`
+
+	// Whether static hosting is used.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostService *TCBHostService `json:"HostService,omitnil" name:"HostService"`
+}
+
+type TCBHostInstance struct {
+	// The domain.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// The resolution status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DNSStatus *string `json:"DNSStatus,omitnil" name:"DNSStatus"`
+
+	// The ID of the associated certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+}
+
+type TCBHostService struct {
+	// The list of instances.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*TCBHostInstance `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The instance count.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type TCBInstanceList struct {
+	// The region.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// The list of TCB environments.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Environments []*TCBEnvironments `json:"Environments,omitnil" name:"Environments"`
+}
+
 type Tags struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
 	// Tag value
 	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+}
+
+type TeoInstanceDetail struct {
+	// The domain.
+	Host *string `json:"Host,omitnil" name:"Host"`
+
+	// The certificate ID.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The AZ ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// The status of the domain.
+	Status *string `json:"Status,omitnil" name:"Status"`
+}
+
+type TeoInstanceList struct {
+	// The list of EDGEONE instances.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*TeoInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total number of EDGEONE instances.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type TkeIngressDetail struct {
+	// The Ingress name.
+	IngressName *string `json:"IngressName,omitnil" name:"IngressName"`
+
+	// The list of TLS domains.
+	TlsDomains []*string `json:"TlsDomains,omitnil" name:"TlsDomains"`
+
+	// The list of Ingress domains.
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+}
+
+type TkeInstanceDetail struct {
+	// The cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+
+	// The cluster name.
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+	// The list of cluster namespaces.
+	NamespaceList []*TkeNameSpaceDetail `json:"NamespaceList,omitnil" name:"NamespaceList"`
+
+	// The cluster type.
+	ClusterType *string `json:"ClusterType,omitnil" name:"ClusterType"`
+
+	// The cluster version.
+	ClusterVersion *string `json:"ClusterVersion,omitnil" name:"ClusterVersion"`
+}
+
+type TkeInstanceList struct {
+	// The region.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// The list of TKE instances.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*TkeInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total number of TKE instances in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type TkeNameSpaceDetail struct {
+	// The namespace name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// The secret list.
+	SecretList []*TkeSecretDetail `json:"SecretList,omitnil" name:"SecretList"`
+}
+
+type TkeSecretDetail struct {
+	// The secret name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// The certificate ID.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// The Ingress list.
+	IngressList []*TkeIngressDetail `json:"IngressList,omitnil" name:"IngressList"`
+
+	// The list of domains that do not match the new certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoMatchDomains []*string `json:"NoMatchDomains,omitnil" name:"NoMatchDomains"`
 }
 
 // Predefined struct for user
@@ -2005,6 +3302,9 @@ type UploadCertificateRequestParams struct {
 
 
 	CertificateUse *string `json:"CertificateUse,omitnil" name:"CertificateUse"`
+
+	// The list of tags.
+	Tags []*Tags `json:"Tags,omitnil" name:"Tags"`
 
 	// Whether a certificate can be repeatedly uploaded.
 	Repeatable *bool `json:"Repeatable,omitnil" name:"Repeatable"`
@@ -2030,6 +3330,9 @@ type UploadCertificateRequest struct {
 
 	CertificateUse *string `json:"CertificateUse,omitnil" name:"CertificateUse"`
 
+	// The list of tags.
+	Tags []*Tags `json:"Tags,omitnil" name:"Tags"`
+
 	// Whether a certificate can be repeatedly uploaded.
 	Repeatable *bool `json:"Repeatable,omitnil" name:"Repeatable"`
 }
@@ -2052,6 +3355,7 @@ func (r *UploadCertificateRequest) FromJsonString(s string) error {
 	delete(f, "Alias")
 	delete(f, "ProjectId")
 	delete(f, "CertificateUse")
+	delete(f, "Tags")
 	delete(f, "Repeatable")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadCertificateRequest has unknown keys!", "")
@@ -2153,4 +3457,46 @@ func (r *UploadConfirmLetterResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UploadConfirmLetterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type VODInstanceList struct {
+	// The list of VOD instances.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*VodInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total number of VOD instances in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type VodInstanceDetail struct {
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The certificate ID.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+}
+
+type WafInstanceDetail struct {
+	// The domain.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The certificate ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// Whether to keep the persistent connection.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Keepalive *uint64 `json:"Keepalive,omitnil" name:"Keepalive"`
+}
+
+type WafInstanceList struct {
+	// The region.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// The list of WAF instances.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*WafInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total number of WAF instances in this region.	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 }

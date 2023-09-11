@@ -137,6 +137,62 @@ func (c *Client) ApplyCertificateWithContext(ctx context.Context, request *Apply
     return
 }
 
+func NewBatchDeleteCSRRequest() (request *BatchDeleteCSRRequest) {
+    request = &BatchDeleteCSRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "BatchDeleteCSR")
+    
+    
+    return
+}
+
+func NewBatchDeleteCSRResponse() (response *BatchDeleteCSRResponse) {
+    response = &BatchDeleteCSRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// BatchDeleteCSR
+// This API is used to batch delete CSRs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCSRID = "InvalidParameter.InvalidCSRId"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) BatchDeleteCSR(request *BatchDeleteCSRRequest) (response *BatchDeleteCSRResponse, err error) {
+    return c.BatchDeleteCSRWithContext(context.Background(), request)
+}
+
+// BatchDeleteCSR
+// This API is used to batch delete CSRs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCSRID = "InvalidParameter.InvalidCSRId"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) BatchDeleteCSRWithContext(ctx context.Context, request *BatchDeleteCSRRequest) (response *BatchDeleteCSRResponse, err error) {
+    if request == nil {
+        request = NewBatchDeleteCSRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchDeleteCSR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchDeleteCSRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelCertificateOrderRequest() (request *CancelCertificateOrderRequest) {
     request = &CancelCertificateOrderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -265,6 +321,60 @@ func (c *Client) CommitCertificateInformationWithContext(ctx context.Context, re
     return
 }
 
+func NewCreateCSRRequest() (request *CreateCSRRequest) {
+    request = &CreateCSRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CreateCSR")
+    
+    
+    return
+}
+
+func NewCreateCSRResponse() (response *CreateCSRResponse) {
+    response = &CreateCSRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCSR
+// This API is used to create a CSR.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+func (c *Client) CreateCSR(request *CreateCSRRequest) (response *CreateCSRResponse, err error) {
+    return c.CreateCSRWithContext(context.Background(), request)
+}
+
+// CreateCSR
+// This API is used to create a CSR.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+func (c *Client) CreateCSRWithContext(ctx context.Context, request *CreateCSRRequest) (response *CreateCSRResponse, err error) {
+    if request == nil {
+        request = NewCreateCSRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCSR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCSRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCertificateRequest() (request *CreateCertificateRequest) {
     request = &CreateCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -323,6 +433,56 @@ func (c *Client) CreateCertificateWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCertificateBindResourceSyncTaskRequest() (request *CreateCertificateBindResourceSyncTaskRequest) {
+    request = &CreateCertificateBindResourceSyncTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CreateCertificateBindResourceSyncTask")
+    
+    
+    return
+}
+
+func NewCreateCertificateBindResourceSyncTaskResponse() (response *CreateCertificateBindResourceSyncTaskResponse) {
+    response = &CreateCertificateBindResourceSyncTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CreateCertificateBindResourceSyncTask
+// This API is used to create an async task for querying the cloud resources associated with a certificate. If such a task already exists under the certificate ID, the ID of this task is returned as the result. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE). You can query the result of this task using the `DescribeCertificateBindResourceTaskResult` API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINNERINTERRUPT = "FailedOperation.CertificateHostResourceInnerInterrupt"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+func (c *Client) CreateCertificateBindResourceSyncTask(request *CreateCertificateBindResourceSyncTaskRequest) (response *CreateCertificateBindResourceSyncTaskResponse, err error) {
+    return c.CreateCertificateBindResourceSyncTaskWithContext(context.Background(), request)
+}
+
+// CreateCertificateBindResourceSyncTask
+// This API is used to create an async task for querying the cloud resources associated with a certificate. If such a task already exists under the certificate ID, the ID of this task is returned as the result. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE). You can query the result of this task using the `DescribeCertificateBindResourceTaskResult` API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINNERINTERRUPT = "FailedOperation.CertificateHostResourceInnerInterrupt"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+func (c *Client) CreateCertificateBindResourceSyncTaskWithContext(ctx context.Context, request *CreateCertificateBindResourceSyncTaskRequest) (response *CreateCertificateBindResourceSyncTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateCertificateBindResourceSyncTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCertificateBindResourceSyncTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCertificateBindResourceSyncTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -413,6 +573,110 @@ func (c *Client) DeleteCertificateWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDescribeCSRRequest() (request *DescribeCSRRequest) {
+    request = &DescribeCSRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeCSR")
+    
+    
+    return
+}
+
+func NewDescribeCSRResponse() (response *DescribeCSRResponse) {
+    response = &DescribeCSRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCSR
+// This API is used to query the details of a CSR.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_INVALIDCSRID = "InvalidParameter.InvalidCSRId"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+func (c *Client) DescribeCSR(request *DescribeCSRRequest) (response *DescribeCSRResponse, err error) {
+    return c.DescribeCSRWithContext(context.Background(), request)
+}
+
+// DescribeCSR
+// This API is used to query the details of a CSR.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER_INVALIDCSRID = "InvalidParameter.InvalidCSRId"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+func (c *Client) DescribeCSRWithContext(ctx context.Context, request *DescribeCSRRequest) (response *DescribeCSRResponse, err error) {
+    if request == nil {
+        request = NewDescribeCSRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCSR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCSRResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCSRSetRequest() (request *DescribeCSRSetRequest) {
+    request = &DescribeCSRSetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeCSRSet")
+    
+    
+    return
+}
+
+func NewDescribeCSRSetResponse() (response *DescribeCSRSetResponse) {
+    response = &DescribeCSRSetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCSRSet
+// This API is used to query the CSR list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+func (c *Client) DescribeCSRSet(request *DescribeCSRSetRequest) (response *DescribeCSRSetResponse, err error) {
+    return c.DescribeCSRSetWithContext(context.Background(), request)
+}
+
+// DescribeCSRSet
+// This API is used to query the CSR list.
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+func (c *Client) DescribeCSRSetWithContext(ctx context.Context, request *DescribeCSRSetRequest) (response *DescribeCSRSetResponse, err error) {
+    if request == nil {
+        request = NewDescribeCSRSetRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCSRSet require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCSRSetResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCertificateRequest() (request *DescribeCertificateRequest) {
     request = &DescribeCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -493,6 +757,104 @@ func (c *Client) DescribeCertificateWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCertificateBindResourceTaskDetailRequest() (request *DescribeCertificateBindResourceTaskDetailRequest) {
+    request = &DescribeCertificateBindResourceTaskDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeCertificateBindResourceTaskDetail")
+    
+    
+    return
+}
+
+func NewDescribeCertificateBindResourceTaskDetailResponse() (response *DescribeCertificateBindResourceTaskDetailResponse) {
+    response = &DescribeCertificateBindResourceTaskDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCertificateBindResourceTaskDetail
+// This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
+func (c *Client) DescribeCertificateBindResourceTaskDetail(request *DescribeCertificateBindResourceTaskDetailRequest) (response *DescribeCertificateBindResourceTaskDetailResponse, err error) {
+    return c.DescribeCertificateBindResourceTaskDetailWithContext(context.Background(), request)
+}
+
+// DescribeCertificateBindResourceTaskDetail
+// This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
+func (c *Client) DescribeCertificateBindResourceTaskDetailWithContext(ctx context.Context, request *DescribeCertificateBindResourceTaskDetailRequest) (response *DescribeCertificateBindResourceTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificateBindResourceTaskDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCertificateBindResourceTaskDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCertificateBindResourceTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCertificateBindResourceTaskResultRequest() (request *DescribeCertificateBindResourceTaskResultRequest) {
+    request = &DescribeCertificateBindResourceTaskResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeCertificateBindResourceTaskResult")
+    
+    
+    return
+}
+
+func NewDescribeCertificateBindResourceTaskResultResponse() (response *DescribeCertificateBindResourceTaskResultResponse) {
+    response = &DescribeCertificateBindResourceTaskResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeCertificateBindResourceTaskResult
+// This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCertificateBindResourceTaskResult(request *DescribeCertificateBindResourceTaskResultRequest) (response *DescribeCertificateBindResourceTaskResultResponse, err error) {
+    return c.DescribeCertificateBindResourceTaskResultWithContext(context.Background(), request)
+}
+
+// DescribeCertificateBindResourceTaskResult
+// This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCertificateBindResourceTaskResultWithContext(ctx context.Context, request *DescribeCertificateBindResourceTaskResultRequest) (response *DescribeCertificateBindResourceTaskResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeCertificateBindResourceTaskResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCertificateBindResourceTaskResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCertificateBindResourceTaskResultResponse()
     err = c.Send(request, response)
     return
 }
@@ -785,6 +1147,60 @@ func (c *Client) DownloadCertificateWithContext(ctx context.Context, request *Do
     return
 }
 
+func NewModifyCSRRequest() (request *ModifyCSRRequest) {
+    request = &ModifyCSRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "ModifyCSR")
+    
+    
+    return
+}
+
+func NewModifyCSRResponse() (response *ModifyCSRResponse) {
+    response = &ModifyCSRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCSR
+// This API is used to modify the information of a CSR.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  INVALIDPARAMETER_INVALIDCSRID = "InvalidParameter.InvalidCSRId"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+func (c *Client) ModifyCSR(request *ModifyCSRRequest) (response *ModifyCSRResponse, err error) {
+    return c.ModifyCSRWithContext(context.Background(), request)
+}
+
+// ModifyCSR
+// This API is used to modify the information of a CSR.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NETWORKERROR = "FailedOperation.NetworkError"
+//  INVALIDPARAMETER_INVALIDCSRID = "InvalidParameter.InvalidCSRId"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+func (c *Client) ModifyCSRWithContext(ctx context.Context, request *ModifyCSRRequest) (response *ModifyCSRResponse, err error) {
+    if request == nil {
+        request = NewModifyCSRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCSR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCSRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCertificateAliasRequest() (request *ModifyCertificateAliasRequest) {
     request = &ModifyCertificateAliasRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -868,6 +1284,7 @@ func NewModifyCertificateProjectResponse() (response *ModifyCertificateProjectRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
@@ -881,6 +1298,7 @@ func (c *Client) ModifyCertificateProject(request *ModifyCertificateProjectReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CAMAUTHORIZEDFAIL = "FailedOperation.CAMAuthorizedFail"
 //  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
 //  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
 //  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
@@ -923,6 +1341,7 @@ func NewReplaceCertificateResponse() (response *ReplaceCertificateResponse) {
 // This API is used to reissue a certificate. Note that if you have applied for a free certificate, only an RSA-2048 certificate will be reissued, and the certificate can be reissued only once.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
@@ -948,6 +1367,7 @@ func (c *Client) ReplaceCertificate(request *ReplaceCertificateRequest) (respons
 // This API is used to reissue a certificate. Note that if you have applied for a free certificate, only an RSA-2048 certificate will be reissued, and the certificate can be reissued only once.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
 //  FAILEDOPERATION_CANCELORDERFAILED = "FailedOperation.CancelOrderFailed"
 //  FAILEDOPERATION_CANNOTBEDELETEDISSUED = "FailedOperation.CannotBeDeletedIssued"
