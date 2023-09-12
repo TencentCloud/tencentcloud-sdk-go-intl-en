@@ -227,6 +227,9 @@ type CreateStreamLiveChannelRequestParams struct {
 
 	// The callback settings.
 	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitnil" name:"EventNotifySettings"`
+
+	// Complement the last video frame settings.
+	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
 }
 
 type CreateStreamLiveChannelRequest struct {
@@ -255,6 +258,9 @@ type CreateStreamLiveChannelRequest struct {
 
 	// The callback settings.
 	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitnil" name:"EventNotifySettings"`
+
+	// Complement the last video frame settings.
+	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
 }
 
 func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
@@ -277,6 +283,7 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "AVTemplates")
 	delete(f, "PlanSettings")
 	delete(f, "EventNotifySettings")
+	delete(f, "InputLossBehavior")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -2182,6 +2189,20 @@ type InputInfo struct {
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitnil" name:"InputSettings"`
 }
 
+type InputLossBehaviorInfo struct {
+	// The time to fill in the last video frame, unit ms, range 0-1000000, 1000000 means always inserting, default 0 means filling in black screen frame.
+	RepeatLastFrameMs *uint64 `json:"RepeatLastFrameMs,omitnil" name:"RepeatLastFrameMs"`
+
+	// Fill frame type, COLOR means solid color filling, IMAGE means picture filling, the default is COLOR.
+	InputLossImageType *string `json:"InputLossImageType,omitnil" name:"InputLossImageType"`
+
+	// When the type is COLOR, the corresponding rgb value
+	ColorRGB *string `json:"ColorRGB,omitnil" name:"ColorRGB"`
+
+	// When the type is IMAGE, the corresponding image url value
+	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+}
+
 type InputSecurityGroupInfo struct {
 	// Input security group ID.
 	Id *string `json:"Id,omitnil" name:"Id"`
@@ -2308,6 +2329,9 @@ type ModifyStreamLiveChannelRequestParams struct {
 
 	// The callback settings.
 	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitnil" name:"EventNotifySettings"`
+
+	// Complement the last video frame settings.
+	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
 }
 
 type ModifyStreamLiveChannelRequest struct {
@@ -2339,6 +2363,9 @@ type ModifyStreamLiveChannelRequest struct {
 
 	// The callback settings.
 	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitnil" name:"EventNotifySettings"`
+
+	// Complement the last video frame settings.
+	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
 }
 
 func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
@@ -2362,6 +2389,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "AVTemplates")
 	delete(f, "PlanSettings")
 	delete(f, "EventNotifySettings")
+	delete(f, "InputLossBehavior")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -3073,6 +3101,9 @@ type StreamLiveChannelInfo struct {
 	// The callback settings.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	EventNotifySettings *EventNotifySetting `json:"EventNotifySettings,omitnil" name:"EventNotifySettings"`
+
+	// Supplement the last video frame configuration settings.
+	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
 }
 
 type StreamLiveOutputGroupsInfo struct {
