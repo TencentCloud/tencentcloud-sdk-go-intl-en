@@ -242,6 +242,9 @@ type ApplyWebVerificationBizTokenIntlRequestParams struct {
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
 	Extra *string `json:"Extra,omitnil" name:"Extra"`
+
+	// The parameter control the page configuration.
+	Config *WebVerificationConfigIntl `json:"Config,omitnil" name:"Config"`
 }
 
 type ApplyWebVerificationBizTokenIntlRequest struct {
@@ -256,6 +259,9 @@ type ApplyWebVerificationBizTokenIntlRequest struct {
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
 	Extra *string `json:"Extra,omitnil" name:"Extra"`
+
+	// The parameter control the page configuration.
+	Config *WebVerificationConfigIntl `json:"Config,omitnil" name:"Config"`
 }
 
 func (r *ApplyWebVerificationBizTokenIntlRequest) ToJsonString() string {
@@ -273,6 +279,7 @@ func (r *ApplyWebVerificationBizTokenIntlRequest) FromJsonString(s string) error
 	delete(f, "CompareImageBase64")
 	delete(f, "RedirectURL")
 	delete(f, "Extra")
+	delete(f, "Config")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyWebVerificationBizTokenIntlRequest has unknown keys!", "")
 	}
@@ -282,10 +289,15 @@ func (r *ApplyWebVerificationBizTokenIntlRequest) FromJsonString(s string) error
 // Predefined struct for user
 type ApplyWebVerificationBizTokenIntlResponseParams struct {
 	// The URL of this verification process, which will be returned to the frontend of the browser for starting the process.
+	//
+	// Deprecated: VerificationUrl is deprecated.
 	VerificationUrl *string `json:"VerificationUrl,omitnil" name:"VerificationUrl"`
 
 	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
 	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+
+
+	VerificationURL *string `json:"VerificationURL,omitnil" name:"VerificationURL"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -1592,4 +1604,9 @@ func (r *VideoLivenessCompareResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *VideoLivenessCompareResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type WebVerificationConfigIntl struct {
+	// Whether to automatically redirect to `RedirectUrl` after successful verification. Default value: `false`.
+	AutoSkip *bool `json:"AutoSkip,omitnil" name:"AutoSkip"`
 }
