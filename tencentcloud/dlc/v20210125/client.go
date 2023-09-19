@@ -414,7 +414,7 @@ func NewCreateSparkAppResponse() (response *CreateSparkAppResponse) {
 }
 
 // CreateSparkApp
-// This API is used to create a Spark application.
+// This API is used to create a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -424,7 +424,7 @@ func (c *Client) CreateSparkApp(request *CreateSparkAppRequest) (response *Creat
 }
 
 // CreateSparkApp
-// This API is used to create a Spark application.
+// This API is used to create a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -464,10 +464,11 @@ func NewCreateSparkAppTaskResponse() (response *CreateSparkAppTaskResponse) {
 }
 
 // CreateSparkAppTask
-// This API is used to create a Spark task.
+// This API is used to start a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDROLEARN = "InvalidParameter.InvalidRoleArn"
 //  INVALIDPARAMETER_INVALIDSPARKAPPPARAM = "InvalidParameter.InvalidSparkAppParam"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_USECOMPUTINGENGINE = "UnauthorizedOperation.UseComputingEngine"
@@ -476,10 +477,11 @@ func (c *Client) CreateSparkAppTask(request *CreateSparkAppTaskRequest) (respons
 }
 
 // CreateSparkAppTask
-// This API is used to create a Spark task.
+// This API is used to start a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDROLEARN = "InvalidParameter.InvalidRoleArn"
 //  INVALIDPARAMETER_INVALIDSPARKAPPPARAM = "InvalidParameter.InvalidSparkAppParam"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_USECOMPUTINGENGINE = "UnauthorizedOperation.UseComputingEngine"
@@ -518,7 +520,7 @@ func NewCreateSparkSessionBatchSQLResponse() (response *CreateSparkSessionBatchS
 }
 
 // CreateSparkSessionBatchSQL
-// This API is used to submit a Spark SQL batch task.
+// This API is used to submit a Spark SQL batch task to the job engine.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -534,7 +536,7 @@ func (c *Client) CreateSparkSessionBatchSQL(request *CreateSparkSessionBatchSQLR
 }
 
 // CreateSparkSessionBatchSQL
-// This API is used to submit a Spark SQL batch task.
+// This API is used to submit a Spark SQL batch task to the job engine.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -580,7 +582,7 @@ func NewCreateTaskResponse() (response *CreateTaskResponse) {
 }
 
 // CreateTask
-// This API is used to create a SQL query task. (We recommend you use the `CreateTasks` API instead.)
+// This API is used to create and execute a SQL task. (`CreateTasks` is recommended.)
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -599,7 +601,7 @@ func (c *Client) CreateTask(request *CreateTaskRequest) (response *CreateTaskRes
 }
 
 // CreateTask
-// This API is used to create a SQL query task. (We recommend you use the `CreateTasks` API instead.)
+// This API is used to create and execute a SQL task. (`CreateTasks` is recommended.)
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -648,7 +650,7 @@ func NewCreateTasksResponse() (response *CreateTasksResponse) {
 }
 
 // CreateTasks
-// This API is used to create tasks in batches.
+// This API is used to create and execute SQL tasks in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -669,7 +671,7 @@ func (c *Client) CreateTasks(request *CreateTasksRequest) (response *CreateTasks
 }
 
 // CreateTasks
-// This API is used to create tasks in batches.
+// This API is used to create and execute SQL tasks in batches.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -720,7 +722,7 @@ func NewDeleteSparkAppResponse() (response *DeleteSparkAppResponse) {
 }
 
 // DeleteSparkApp
-// This API is used to delete a Spark application.
+// This API is used to delete a Spark job.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -741,7 +743,7 @@ func (c *Client) DeleteSparkApp(request *DeleteSparkAppRequest) (response *Delet
 }
 
 // DeleteSparkApp
-// This API is used to delete a Spark application.
+// This API is used to delete a Spark job.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -844,7 +846,7 @@ func NewDescribeForbiddenTableProResponse() (response *DescribeForbiddenTablePro
 }
 
 // DescribeForbiddenTablePro
-// This API is used to get the list of disabled table attributes.
+// This API is used to get the list of disabled table attributes (new).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -857,7 +859,7 @@ func (c *Client) DescribeForbiddenTablePro(request *DescribeForbiddenTableProReq
 }
 
 // DescribeForbiddenTablePro
-// This API is used to get the list of disabled table attributes.
+// This API is used to get the list of disabled table attributes (new).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1029,15 +1031,7 @@ func NewDescribeResultDownloadResponse() (response *DescribeResultDownloadRespon
 // This API is used to get a query result download task.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeResultDownload(request *DescribeResultDownloadRequest) (response *DescribeResultDownloadResponse, err error) {
     return c.DescribeResultDownloadWithContext(context.Background(), request)
 }
@@ -1046,15 +1040,7 @@ func (c *Client) DescribeResultDownload(request *DescribeResultDownloadRequest) 
 // This API is used to get a query result download task.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeResultDownloadWithContext(ctx context.Context, request *DescribeResultDownloadRequest) (response *DescribeResultDownloadResponse, err error) {
     if request == nil {
         request = NewDescribeResultDownloadRequest()
@@ -1090,7 +1076,7 @@ func NewDescribeSparkAppJobResponse() (response *DescribeSparkAppJobResponse) {
 }
 
 // DescribeSparkAppJob
-// This API is used to query a specific Spark application.
+// u200cThis API is used to query the information of a Spark job.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1101,7 +1087,7 @@ func (c *Client) DescribeSparkAppJob(request *DescribeSparkAppJobRequest) (respo
 }
 
 // DescribeSparkAppJob
-// This API is used to query a specific Spark application.
+// u200cThis API is used to query the information of a Spark job.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1142,7 +1128,7 @@ func NewDescribeSparkAppJobsResponse() (response *DescribeSparkAppJobsResponse) 
 }
 
 // DescribeSparkAppJobs
-// This API is used to get the list of Spark applications.
+// This API is used to query the list of Spark jobs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1155,7 +1141,7 @@ func (c *Client) DescribeSparkAppJobs(request *DescribeSparkAppJobsRequest) (res
 }
 
 // DescribeSparkAppJobs
-// This API is used to get the list of Spark applications.
+// This API is used to query the list of Spark jobs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1198,7 +1184,7 @@ func NewDescribeSparkAppTasksResponse() (response *DescribeSparkAppTasksResponse
 }
 
 // DescribeSparkAppTasks
-// This API is used to query the list of running task instances of a Spark application.
+// This API is used to query the list of running task instances of a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1207,7 +1193,7 @@ func (c *Client) DescribeSparkAppTasks(request *DescribeSparkAppTasksRequest) (r
 }
 
 // DescribeSparkAppTasks
-// This API is used to query the list of running task instances of a Spark application.
+// This API is used to query the list of running task instances of a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1395,6 +1381,54 @@ func (c *Client) DescribeTasksWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDescribeUserRolesRequest() (request *DescribeUserRolesRequest) {
+    request = &DescribeUserRolesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeUserRoles")
+    
+    
+    return
+}
+
+func NewDescribeUserRolesResponse() (response *DescribeUserRolesResponse) {
+    response = &DescribeUserRolesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeUserRoles
+// This API is used to enumerate user roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeUserRoles(request *DescribeUserRolesRequest) (response *DescribeUserRolesResponse, err error) {
+    return c.DescribeUserRolesWithContext(context.Background(), request)
+}
+
+// DescribeUserRoles
+// This API is used to enumerate user roles.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeUserRolesWithContext(ctx context.Context, request *DescribeUserRolesRequest) (response *DescribeUserRolesResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserRolesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserRoles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserRolesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGenerateCreateMangedTableSqlRequest() (request *GenerateCreateMangedTableSqlRequest) {
     request = &GenerateCreateMangedTableSqlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1538,7 +1572,7 @@ func NewModifySparkAppResponse() (response *ModifySparkAppResponse) {
 }
 
 // ModifySparkApp
-// This API is used to update a Spark application.
+// This API is used to update a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1548,7 +1582,7 @@ func (c *Client) ModifySparkApp(request *ModifySparkAppRequest) (response *Modif
 }
 
 // ModifySparkApp
-// This API is used to update a Spark application.
+// This API is used to update a Spark job.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1644,7 +1678,7 @@ func NewSuspendResumeDataEngineResponse() (response *SuspendResumeDataEngineResp
 }
 
 // SuspendResumeDataEngine
-// This API is used to suspend or resume a data engine.
+// This API is used to suspend or start a data engine.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1656,7 +1690,7 @@ func (c *Client) SuspendResumeDataEngine(request *SuspendResumeDataEngineRequest
 }
 
 // SuspendResumeDataEngine
-// This API is used to suspend or resume a data engine.
+// This API is used to suspend or start a data engine.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

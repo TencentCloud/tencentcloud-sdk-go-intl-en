@@ -170,38 +170,59 @@ type Column struct {
 }
 
 type CommonMetrics struct {
-
+	// The task creation time in ms.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	CreateTaskTime *float64 `json:"CreateTaskTime,omitnil" name:"CreateTaskTime"`
 
-
+	// The processing time in ms.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ProcessTime *float64 `json:"ProcessTime,omitnil" name:"ProcessTime"`
 
-
+	// The queue time in ms.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	QueueTime *float64 `json:"QueueTime,omitnil" name:"QueueTime"`
 
-
+	// The execution duration in ms.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ExecutionTime *float64 `json:"ExecutionTime,omitnil" name:"ExecutionTime"`
 
-
+	// Whether the result cache is hit.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	IsResultCacheHit *bool `json:"IsResultCacheHit,omitnil" name:"IsResultCacheHit"`
 
-
+	// The volume of matched materialized views, in bytes.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	MatchedMVBytes *int64 `json:"MatchedMVBytes,omitnil" name:"MatchedMVBytes"`
 
-
+	// The list of matched materialized views.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	MatchedMVs *string `json:"MatchedMVs,omitnil" name:"MatchedMVs"`
 
-
+	// The result data in bytes.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	AffectedBytes *string `json:"AffectedBytes,omitnil" name:"AffectedBytes"`
 
-
+	// 	The number of rows in the result.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	AffectedRows *int64 `json:"AffectedRows,omitnil" name:"AffectedRows"`
 
-
+	// The volume of the data scanned, in bytes.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ProcessedBytes *int64 `json:"ProcessedBytes,omitnil" name:"ProcessedBytes"`
 
-
+	// 	The number of scanned rows.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ProcessedRows *int64 `json:"ProcessedRows,omitnil" name:"ProcessedRows"`
+}
+
+type CosPermission struct {
+	// The COS path.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CosPath *string `json:"CosPath,omitnil" name:"CosPath"`
+
+	// The permissions. Valid values: `read` and `write`.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Permissions []*string `json:"Permissions,omitnil" name:"Permissions"`
 }
 
 // Predefined struct for user
@@ -228,6 +249,8 @@ type CreateDataEngineRequestParams struct {
 	MaxClusters *int64 `json:"MaxClusters,omitnil" name:"MaxClusters"`
 
 	// Whether the cluster is the default one.
+	//
+	// Deprecated: DefaultDataEngine is deprecated.
 	DefaultDataEngine *bool `json:"DefaultDataEngine,omitnil" name:"DefaultDataEngine"`
 
 	// The VPC CIDR block.
@@ -263,7 +286,7 @@ type CreateDataEngineRequestParams struct {
 	// The complex policy for scheduled start and suspension, including the start/suspension time and suspension policy.
 	CrontabResumeSuspendStrategy *CrontabResumeSuspendStrategy `json:"CrontabResumeSuspendStrategy,omitnil" name:"CrontabResumeSuspendStrategy"`
 
-	// The type of tasks to be executed by the engine, which defaults to SQL.
+	// The type of tasks to be executed by the engine, which defaults to SQL. Valid values: `SQL` and `BATCH`.
 	EngineExecType *string `json:"EngineExecType,omitnil" name:"EngineExecType"`
 
 	// The max task concurrency of a cluster, which defaults to 5.
@@ -284,7 +307,7 @@ type CreateDataEngineRequestParams struct {
 	// The version name of cluster image, such as SuperSQL-P 1.1 and SuperSQL-S 3.2. If no value is passed in, a cluster is created using the latest image version.
 	ImageVersionName *string `json:"ImageVersionName,omitnil" name:"ImageVersionName"`
 
-	// The name of the primary cluster.
+	// The primary cluster, which is specified when a failover cluster is created.
 	MainClusterName *string `json:"MainClusterName,omitnil" name:"MainClusterName"`
 
 	// Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
@@ -357,7 +380,7 @@ type CreateDataEngineRequest struct {
 	// The complex policy for scheduled start and suspension, including the start/suspension time and suspension policy.
 	CrontabResumeSuspendStrategy *CrontabResumeSuspendStrategy `json:"CrontabResumeSuspendStrategy,omitnil" name:"CrontabResumeSuspendStrategy"`
 
-	// The type of tasks to be executed by the engine, which defaults to SQL.
+	// The type of tasks to be executed by the engine, which defaults to SQL. Valid values: `SQL` and `BATCH`.
 	EngineExecType *string `json:"EngineExecType,omitnil" name:"EngineExecType"`
 
 	// The max task concurrency of a cluster, which defaults to 5.
@@ -378,7 +401,7 @@ type CreateDataEngineRequest struct {
 	// The version name of cluster image, such as SuperSQL-P 1.1 and SuperSQL-S 3.2. If no value is passed in, a cluster is created using the latest image version.
 	ImageVersionName *string `json:"ImageVersionName,omitnil" name:"ImageVersionName"`
 
-	// The name of the primary cluster.
+	// The primary cluster, which is specified when a failover cluster is created.
 	MainClusterName *string `json:"MainClusterName,omitnil" name:"MainClusterName"`
 
 	// Whether to enable the scaling feature for a monthly subscribed Spark job cluster.
@@ -615,25 +638,25 @@ func (r *CreateResultDownloadResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSparkAppRequestParams struct {
-	// Spark application name
+	// The Spark job name.
 	AppName *string `json:"AppName,omitnil" name:"AppName"`
 
-	// 1: Spark JAR application; 2: Spark streaming application
+	// The Spark job type. Valid values: `1` for Spark JAR job and `2` for Spark streaming job.
 	AppType *int64 `json:"AppType,omitnil" name:"AppType"`
 
-	// The data engine executing the Spark job
+	// The data engine executing the Spark job.
 	DataEngine *string `json:"DataEngine,omitnil" name:"DataEngine"`
 
-	// Execution entry of the Spark application
+	// The path of the Spark job package.
 	AppFile *string `json:"AppFile,omitnil" name:"AppFile"`
 
-	// Execution role ID of the Spark job
+	// The data access policy (CAM role arn).
 	RoleArn *int64 `json:"RoleArn,omitnil" name:"RoleArn"`
 
-	// Driver resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppDriverSize *string `json:"AppDriverSize,omitnil" name:"AppDriverSize"`
 
-	// Executor resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppExecutorSize *string `json:"AppExecutorSize,omitnil" name:"AppExecutorSize"`
 
 	// Number of Spark job executors
@@ -642,46 +665,46 @@ type CreateSparkAppRequestParams struct {
 	// This field has been disused. Use the `Datasource` field instead.
 	Eni *string `json:"Eni,omitnil" name:"Eni"`
 
-	// Whether it is upload locally. Valid values: `cos`, `lakefs`.
+	// The source of the Spark job package. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocal *string `json:"IsLocal,omitnil" name:"IsLocal"`
 
-	// Main class of the Spark JAR job during execution
+	// The main class of the Spark job.
 	MainClass *string `json:"MainClass,omitnil" name:"MainClass"`
 
 	// Spark configurations separated by line break
 	AppConf *string `json:"AppConf,omitnil" name:"AppConf"`
 
-	// Whether it is upload locally. Valid values: `cos`, `lakefs`.
+	// The source of the dependency JAR packages of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalJars *string `json:"IsLocalJars,omitnil" name:"IsLocalJars"`
 
-	// Dependency JAR packages of the Spark JAR job separated by comma
+	// The dependency JAR packages of the Spark JAR job (JAR packages), separated by comma.
 	AppJars *string `json:"AppJars,omitnil" name:"AppJars"`
 
-	// Whether it is upload locally. Valid values: `cos`, `lakefs`.
+	// The source of the dependency files of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalFiles *string `json:"IsLocalFiles,omitnil" name:"IsLocalFiles"`
 
-	// Dependency resources of the Spark job separated by comma
+	// The dependency files of the Spark job (files other than JAR and ZIP packages) separated by comma.
 	AppFiles *string `json:"AppFiles,omitnil" name:"AppFiles"`
 
-	// Command line parameters of the Spark job
+	// The input parameters of the Spark job, separated by comma.
 	CmdArgs *string `json:"CmdArgs,omitnil" name:"CmdArgs"`
 
-	// This parameter takes effect only for Spark flow tasks.
+	// The maximum number of retries, valid for Spark streaming tasks only.
 	MaxRetries *int64 `json:"MaxRetries,omitnil" name:"MaxRetries"`
 
-	// Data source name
+	// The data source name.
 	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
-	// PySpark: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the PySpark dependencies. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalPythonFiles *string `json:"IsLocalPythonFiles,omitnil" name:"IsLocalPythonFiles"`
 
-	// PySpark: Python dependency, which can be in .py, .zip, or .egg format. Multiple files should be separated by comma.
+	// The PySpark dependencies (Python files), separated by comma, with .py, .zip, and .egg formats supported.
 	AppPythonFiles *string `json:"AppPythonFiles,omitnil" name:"AppPythonFiles"`
 
-	// Archives: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency archives of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalArchives *string `json:"IsLocalArchives,omitnil" name:"IsLocalArchives"`
 
-	// Archives: Dependency resources
+	// The dependency archives of the Spark job, separated by comma, with tar.gz, .tgz, and .tar formats supported.
 	AppArchives *string `json:"AppArchives,omitnil" name:"AppArchives"`
 
 	// The Spark image version.
@@ -698,30 +721,33 @@ type CreateSparkAppRequestParams struct {
 
 	// Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
 	IsInherit *uint64 `json:"IsInherit,omitnil" name:"IsInherit"`
+
+	// Whether to run the task with the session SQLs. Valid values: `false` for no and `true` for yes.
+	IsSessionStarted *bool `json:"IsSessionStarted,omitnil" name:"IsSessionStarted"`
 }
 
 type CreateSparkAppRequest struct {
 	*tchttp.BaseRequest
 	
-	// Spark application name
+	// The Spark job name.
 	AppName *string `json:"AppName,omitnil" name:"AppName"`
 
-	// 1: Spark JAR application; 2: Spark streaming application
+	// The Spark job type. Valid values: `1` for Spark JAR job and `2` for Spark streaming job.
 	AppType *int64 `json:"AppType,omitnil" name:"AppType"`
 
-	// The data engine executing the Spark job
+	// The data engine executing the Spark job.
 	DataEngine *string `json:"DataEngine,omitnil" name:"DataEngine"`
 
-	// Execution entry of the Spark application
+	// The path of the Spark job package.
 	AppFile *string `json:"AppFile,omitnil" name:"AppFile"`
 
-	// Execution role ID of the Spark job
+	// The data access policy (CAM role arn).
 	RoleArn *int64 `json:"RoleArn,omitnil" name:"RoleArn"`
 
-	// Driver resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppDriverSize *string `json:"AppDriverSize,omitnil" name:"AppDriverSize"`
 
-	// Executor resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppExecutorSize *string `json:"AppExecutorSize,omitnil" name:"AppExecutorSize"`
 
 	// Number of Spark job executors
@@ -730,46 +756,46 @@ type CreateSparkAppRequest struct {
 	// This field has been disused. Use the `Datasource` field instead.
 	Eni *string `json:"Eni,omitnil" name:"Eni"`
 
-	// Whether it is upload locally. Valid values: `cos`, `lakefs`.
+	// The source of the Spark job package. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocal *string `json:"IsLocal,omitnil" name:"IsLocal"`
 
-	// Main class of the Spark JAR job during execution
+	// The main class of the Spark job.
 	MainClass *string `json:"MainClass,omitnil" name:"MainClass"`
 
 	// Spark configurations separated by line break
 	AppConf *string `json:"AppConf,omitnil" name:"AppConf"`
 
-	// Whether it is upload locally. Valid values: `cos`, `lakefs`.
+	// The source of the dependency JAR packages of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalJars *string `json:"IsLocalJars,omitnil" name:"IsLocalJars"`
 
-	// Dependency JAR packages of the Spark JAR job separated by comma
+	// The dependency JAR packages of the Spark JAR job (JAR packages), separated by comma.
 	AppJars *string `json:"AppJars,omitnil" name:"AppJars"`
 
-	// Whether it is upload locally. Valid values: `cos`, `lakefs`.
+	// The source of the dependency files of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalFiles *string `json:"IsLocalFiles,omitnil" name:"IsLocalFiles"`
 
-	// Dependency resources of the Spark job separated by comma
+	// The dependency files of the Spark job (files other than JAR and ZIP packages) separated by comma.
 	AppFiles *string `json:"AppFiles,omitnil" name:"AppFiles"`
 
-	// Command line parameters of the Spark job
+	// The input parameters of the Spark job, separated by comma.
 	CmdArgs *string `json:"CmdArgs,omitnil" name:"CmdArgs"`
 
-	// This parameter takes effect only for Spark flow tasks.
+	// The maximum number of retries, valid for Spark streaming tasks only.
 	MaxRetries *int64 `json:"MaxRetries,omitnil" name:"MaxRetries"`
 
-	// Data source name
+	// The data source name.
 	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
-	// PySpark: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the PySpark dependencies. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalPythonFiles *string `json:"IsLocalPythonFiles,omitnil" name:"IsLocalPythonFiles"`
 
-	// PySpark: Python dependency, which can be in .py, .zip, or .egg format. Multiple files should be separated by comma.
+	// The PySpark dependencies (Python files), separated by comma, with .py, .zip, and .egg formats supported.
 	AppPythonFiles *string `json:"AppPythonFiles,omitnil" name:"AppPythonFiles"`
 
-	// Archives: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency archives of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalArchives *string `json:"IsLocalArchives,omitnil" name:"IsLocalArchives"`
 
-	// Archives: Dependency resources
+	// The dependency archives of the Spark job, separated by comma, with tar.gz, .tgz, and .tar formats supported.
 	AppArchives *string `json:"AppArchives,omitnil" name:"AppArchives"`
 
 	// The Spark image version.
@@ -786,6 +812,9 @@ type CreateSparkAppRequest struct {
 
 	// Whether to inherit the task resource configuration from the cluster template. Valid values: `0` (default): No; `1`: Yes.
 	IsInherit *uint64 `json:"IsInherit,omitnil" name:"IsInherit"`
+
+	// Whether to run the task with the session SQLs. Valid values: `false` for no and `true` for yes.
+	IsSessionStarted *bool `json:"IsSessionStarted,omitnil" name:"IsSessionStarted"`
 }
 
 func (r *CreateSparkAppRequest) ToJsonString() string {
@@ -828,6 +857,7 @@ func (r *CreateSparkAppRequest) FromJsonString(s string) error {
 	delete(f, "AppExecutorMaxNumbers")
 	delete(f, "SessionId")
 	delete(f, "IsInherit")
+	delete(f, "IsSessionStarted")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSparkAppRequest has unknown keys!", "")
 	}
@@ -865,7 +895,7 @@ type CreateSparkAppTaskRequestParams struct {
 	// Spark job name
 	JobName *string `json:"JobName,omitnil" name:"JobName"`
 
-	// Command line parameters of the Spark job separated by space. They are generally used for periodic calls.
+	// The input parameters of the Spark job, separated by space. They are generally used for periodic calls.
 	CmdArgs *string `json:"CmdArgs,omitnil" name:"CmdArgs"`
 }
 
@@ -875,7 +905,7 @@ type CreateSparkAppTaskRequest struct {
 	// Spark job name
 	JobName *string `json:"JobName,omitnil" name:"JobName"`
 
-	// Command line parameters of the Spark job separated by space. They are generally used for periodic calls.
+	// The input parameters of the Spark job, separated by space. They are generally used for periodic calls.
 	CmdArgs *string `json:"CmdArgs,omitnil" name:"CmdArgs"`
 }
 
@@ -956,8 +986,13 @@ type CreateSparkSessionBatchSQLRequestParams struct {
 	// The name of the session to create.
 	SessionName *string `json:"SessionName,omitnil" name:"SessionName"`
 
-	// Session configurations. `dlc.eni`, `dlc.role.arn`, `dlc.sql.set.config`, and user-defined configurations are supported.
+	// The session configurations. Valid values: `1.dlc.eni` for user-defined ENI gateway information;
+	// `2.dlc.role.arn` for user-defined roleArn configurations;
+	// and `3.dlc.sql.set.config` for user-defined cluster configurations.
 	Arguments []*KVPair `json:"Arguments,omitnil" name:"Arguments"`
+
+	// Whether to inherit the resource configurations from the cluster. Valid values: `0` for no (default) and `1` for yes.
+	IsInherit *int64 `json:"IsInherit,omitnil" name:"IsInherit"`
 }
 
 type CreateSparkSessionBatchSQLRequest struct {
@@ -990,8 +1025,13 @@ type CreateSparkSessionBatchSQLRequest struct {
 	// The name of the session to create.
 	SessionName *string `json:"SessionName,omitnil" name:"SessionName"`
 
-	// Session configurations. `dlc.eni`, `dlc.role.arn`, `dlc.sql.set.config`, and user-defined configurations are supported.
+	// The session configurations. Valid values: `1.dlc.eni` for user-defined ENI gateway information;
+	// `2.dlc.role.arn` for user-defined roleArn configurations;
+	// and `3.dlc.sql.set.config` for user-defined cluster configurations.
 	Arguments []*KVPair `json:"Arguments,omitnil" name:"Arguments"`
+
+	// Whether to inherit the resource configurations from the cluster. Valid values: `0` for no (default) and `1` for yes.
+	IsInherit *int64 `json:"IsInherit,omitnil" name:"IsInherit"`
 }
 
 func (r *CreateSparkSessionBatchSQLRequest) ToJsonString() string {
@@ -1016,6 +1056,7 @@ func (r *CreateSparkSessionBatchSQLRequest) FromJsonString(s string) error {
 	delete(f, "SessionId")
 	delete(f, "SessionName")
 	delete(f, "Arguments")
+	delete(f, "IsInherit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSparkSessionBatchSQLRequest has unknown keys!", "")
 	}
@@ -1237,14 +1278,14 @@ type DataGovernPolicy struct {
 
 // Predefined struct for user
 type DeleteSparkAppRequestParams struct {
-	// Spark application name
+	// The Spark job name.
 	AppName *string `json:"AppName,omitnil" name:"AppName"`
 }
 
 type DeleteSparkAppRequest struct {
 	*tchttp.BaseRequest
 	
-	// Spark application name
+	// The Spark job name.
 	AppName *string `json:"AppName,omitnil" name:"AppName"`
 }
 
@@ -1291,14 +1332,14 @@ func (r *DeleteSparkAppResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEngineUsageInfoRequestParams struct {
-	// The house ID.
+	// The data engine ID.
 	DataEngineId *string `json:"DataEngineId,omitnil" name:"DataEngineId"`
 }
 
 type DescribeEngineUsageInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// The house ID.
+	// The data engine ID.
 	DataEngineId *string `json:"DataEngineId,omitnil" name:"DataEngineId"`
 }
 
@@ -1584,7 +1625,7 @@ func (r *DescribeResultDownloadResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSparkAppJobRequestParams struct {
-	// Spark job ID. If it co-exists with `JobName`, `JobName` will become invalid.
+	// The Spark job ID. If it co-exists with `JobName`, `JobName` is invalid. At least `JobId` or `JobName` must be used.
 	JobId *string `json:"JobId,omitnil" name:"JobId"`
 
 	// Spark job name
@@ -1594,7 +1635,7 @@ type DescribeSparkAppJobRequestParams struct {
 type DescribeSparkAppJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Spark job ID. If it co-exists with `JobName`, `JobName` will become invalid.
+	// The Spark job ID. If it co-exists with `JobName`, `JobName` is invalid. At least `JobId` or `JobName` must be used.
 	JobId *string `json:"JobId,omitnil" name:"JobId"`
 
 	// Spark job name
@@ -1658,7 +1699,7 @@ type DescribeSparkAppJobsRequestParams struct {
 	// Descending or ascending order, such as `desc`.
 	Sorting *string `json:"Sorting,omitnil" name:"Sorting"`
 
-	// Filter by this parameter, which can be `spark-job-name`.
+	// The filters. The following types are supported, and `Name` of the parameter passed in must be one of them: `spark-job-name` (job name), `spark-job-id` (job ID), `spark-app-type` (job type: `1` for batch, `2` for streaming, and `4` for SQL), `user-name` (creator), and `key-word` (job name or ID keywords for fuzzy search).
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// The update start time in the format of yyyy-mm-dd HH:MM:SS.
@@ -1683,7 +1724,7 @@ type DescribeSparkAppJobsRequest struct {
 	// Descending or ascending order, such as `desc`.
 	Sorting *string `json:"Sorting,omitnil" name:"Sorting"`
 
-	// Filter by this parameter, which can be `spark-job-name`.
+	// The filters. The following types are supported, and `Name` of the parameter passed in must be one of them: `spark-job-name` (job name), `spark-job-id` (job ID), `spark-app-type` (job type: `1` for batch, `2` for streaming, and `4` for SQL), `user-name` (creator), and `key-word` (job name or ID keywords for fuzzy search).
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// The update start time in the format of yyyy-mm-dd HH:MM:SS.
@@ -1766,10 +1807,10 @@ type DescribeSparkAppTasksRequestParams struct {
 	// Execution instance ID
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
 
-	// Update start time
+	// The update start time in the format of yyyy-MM-dd HH:mm:ss.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Update end time
+	// The update end time in the format of yyyy-MM-dd HH:mm:ss.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Filter by this parameter, which can be `task-state`.
@@ -1791,10 +1832,10 @@ type DescribeSparkAppTasksRequest struct {
 	// Execution instance ID
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
 
-	// Update start time
+	// The update start time in the format of yyyy-MM-dd HH:mm:ss.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Update end time
+	// The update end time in the format of yyyy-MM-dd HH:mm:ss.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Filter by this parameter, which can be `task-state`.
@@ -2020,7 +2061,7 @@ type DescribeTasksRequestParams struct {
 	// End time in the format of `yyyy-mm-dd HH:MM:SS`, which is the current time by default. The time span is (0, 30] days. Data in the last 45 days can be queried.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// Filter by compute resource name
+	// The data engine name for filtering.
 	DataEngineName *string `json:"DataEngineName,omitnil" name:"DataEngineName"`
 }
 
@@ -2053,7 +2094,7 @@ type DescribeTasksRequest struct {
 	// End time in the format of `yyyy-mm-dd HH:MM:SS`, which is the current time by default. The time span is (0, 30] days. Data in the last 45 days can be queried.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// Filter by compute resource name
+	// The data engine name for filtering.
 	DataEngineName *string `json:"DataEngineName,omitnil" name:"DataEngineName"`
 }
 
@@ -2112,6 +2153,94 @@ func (r *DescribeTasksResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRolesRequestParams struct {
+	// The number limit of enumerated user roles.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// The offset for starting enumeration. 
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Fuzzy enumeration by arn.
+	Fuzzy *string `json:"Fuzzy,omitnil" name:"Fuzzy"`
+
+	// The field for sorting the returned results.
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
+
+	// The sorting order, descending or ascending, such as `desc`.
+	Sorting *string `json:"Sorting,omitnil" name:"Sorting"`
+}
+
+type DescribeUserRolesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The number limit of enumerated user roles.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// The offset for starting enumeration. 
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Fuzzy enumeration by arn.
+	Fuzzy *string `json:"Fuzzy,omitnil" name:"Fuzzy"`
+
+	// The field for sorting the returned results.
+	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
+
+	// The sorting order, descending or ascending, such as `desc`.
+	Sorting *string `json:"Sorting,omitnil" name:"Sorting"`
+}
+
+func (r *DescribeUserRolesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRolesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Fuzzy")
+	delete(f, "SortBy")
+	delete(f, "Sorting")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUserRolesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUserRolesResponseParams struct {
+	// The total number of user roles meeting the enumeration conditions.
+	Total *int64 `json:"Total,omitnil" name:"Total"`
+
+	// The user roles.
+	UserRoles []*UserRole `json:"UserRoles,omitnil" name:"UserRoles"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeUserRolesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUserRolesResponseParams `json:"Response"`
+}
+
+func (r *DescribeUserRolesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUserRolesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2380,76 +2509,76 @@ func (r *ModifySparkAppBatchResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySparkAppRequestParams struct {
-	// Spark application name
+	// The Spark job name.
 	AppName *string `json:"AppName,omitnil" name:"AppName"`
 
-	// 1: Spark JAR application; 2: Spark streaming application
+	// The Spark job type. Valid values: `1` for Spark JAR job and `2` for Spark streaming job.
 	AppType *int64 `json:"AppType,omitnil" name:"AppType"`
 
-	// The data engine executing the Spark job
+	// The data engine executing the Spark job.
 	DataEngine *string `json:"DataEngine,omitnil" name:"DataEngine"`
 
-	// Execution entry of the Spark application
+	// The path of the Spark job package.
 	AppFile *string `json:"AppFile,omitnil" name:"AppFile"`
 
-	// Execution role ID of the Spark job
+	// The data access policy (CAM role arn).
 	RoleArn *int64 `json:"RoleArn,omitnil" name:"RoleArn"`
 
-	// Driver resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppDriverSize *string `json:"AppDriverSize,omitnil" name:"AppDriverSize"`
 
-	// Executor resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppExecutorSize *string `json:"AppExecutorSize,omitnil" name:"AppExecutorSize"`
 
 	// Number of Spark job executors
 	AppExecutorNums *int64 `json:"AppExecutorNums,omitnil" name:"AppExecutorNums"`
 
-	// Spark application ID
+	// The Spark job ID.
 	SparkAppId *string `json:"SparkAppId,omitnil" name:"SparkAppId"`
 
 	// This field has been disused. Use the `Datasource` field instead.
 	Eni *string `json:"Eni,omitnil" name:"Eni"`
 
-	// Whether it is uploaded locally. Valid values: `cos`, `lakefs`.
+	// The source of the Spark job package. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocal *string `json:"IsLocal,omitnil" name:"IsLocal"`
 
-	// Main class of the Spark JAR job during execution
+	// The main class of the Spark job.
 	MainClass *string `json:"MainClass,omitnil" name:"MainClass"`
 
 	// Spark configurations separated by line break
 	AppConf *string `json:"AppConf,omitnil" name:"AppConf"`
 
-	// JAR resource dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency JAR packages of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalJars *string `json:"IsLocalJars,omitnil" name:"IsLocalJars"`
 
-	// Dependency JAR packages of the Spark JAR job separated by comma
+	// The dependency JAR packages of the Spark JAR job (JAR packages), separated by comma.
 	AppJars *string `json:"AppJars,omitnil" name:"AppJars"`
 
-	// File resource dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency files of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalFiles *string `json:"IsLocalFiles,omitnil" name:"IsLocalFiles"`
 
-	// Dependency resources of the Spark job separated by comma
+	// The dependency files of the Spark job (files other than JAR and ZIP packages), separated by comma.
 	AppFiles *string `json:"AppFiles,omitnil" name:"AppFiles"`
 
-	// PySpark: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the PySpark dependencies. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalPythonFiles *string `json:"IsLocalPythonFiles,omitnil" name:"IsLocalPythonFiles"`
 
-	// PySpark: Python dependency, which can be in .py, .zip, or .egg format. Multiple files should be separated by comma.
+	// The PySpark dependencies (Python files), separated by comma, with .py, .zip, and .egg formats supported.
 	AppPythonFiles *string `json:"AppPythonFiles,omitnil" name:"AppPythonFiles"`
 
-	// Command line parameters of the Spark job
+	// The input parameters of the Spark job, separated by comma.
 	CmdArgs *string `json:"CmdArgs,omitnil" name:"CmdArgs"`
 
-	// This parameter takes effect only for Spark flow tasks.
+	// The maximum number of retries, valid for Spark streaming tasks only.
 	MaxRetries *int64 `json:"MaxRetries,omitnil" name:"MaxRetries"`
 
 	// Data source name
 	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
-	// Archives: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency archives of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalArchives *string `json:"IsLocalArchives,omitnil" name:"IsLocalArchives"`
 
-	// Archives: Dependency resources
+	// The dependency archives of the Spark job, separated by comma, with tar.gz, .tgz, and .tar formats supported.
 	AppArchives *string `json:"AppArchives,omitnil" name:"AppArchives"`
 
 	// The Spark image version.
@@ -2466,81 +2595,84 @@ type ModifySparkAppRequestParams struct {
 
 	// Whether to inherit the task resource configuration from the cluster configuration template. Valid values: `0` (default): No; `1`: Yes.
 	IsInherit *uint64 `json:"IsInherit,omitnil" name:"IsInherit"`
+
+	// Whether to run the task with the session SQLs. Valid values: `false` for no and `true` for yes.
+	IsSessionStarted *bool `json:"IsSessionStarted,omitnil" name:"IsSessionStarted"`
 }
 
 type ModifySparkAppRequest struct {
 	*tchttp.BaseRequest
 	
-	// Spark application name
+	// The Spark job name.
 	AppName *string `json:"AppName,omitnil" name:"AppName"`
 
-	// 1: Spark JAR application; 2: Spark streaming application
+	// The Spark job type. Valid values: `1` for Spark JAR job and `2` for Spark streaming job.
 	AppType *int64 `json:"AppType,omitnil" name:"AppType"`
 
-	// The data engine executing the Spark job
+	// The data engine executing the Spark job.
 	DataEngine *string `json:"DataEngine,omitnil" name:"DataEngine"`
 
-	// Execution entry of the Spark application
+	// The path of the Spark job package.
 	AppFile *string `json:"AppFile,omitnil" name:"AppFile"`
 
-	// Execution role ID of the Spark job
+	// The data access policy (CAM role arn).
 	RoleArn *int64 `json:"RoleArn,omitnil" name:"RoleArn"`
 
-	// Driver resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The driver size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppDriverSize *string `json:"AppDriverSize,omitnil" name:"AppDriverSize"`
 
-	// Executor resource specification of the Spark job. Valid values: `small`, `medium`, `large`, `xlarge`.
+	// The executor size. Valid values: `small` (default, 1 CU), `medium` (2 CUs), `large` (4 CUs), and `xlarge` (8 CUs).
 	AppExecutorSize *string `json:"AppExecutorSize,omitnil" name:"AppExecutorSize"`
 
 	// Number of Spark job executors
 	AppExecutorNums *int64 `json:"AppExecutorNums,omitnil" name:"AppExecutorNums"`
 
-	// Spark application ID
+	// The Spark job ID.
 	SparkAppId *string `json:"SparkAppId,omitnil" name:"SparkAppId"`
 
 	// This field has been disused. Use the `Datasource` field instead.
 	Eni *string `json:"Eni,omitnil" name:"Eni"`
 
-	// Whether it is uploaded locally. Valid values: `cos`, `lakefs`.
+	// The source of the Spark job package. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocal *string `json:"IsLocal,omitnil" name:"IsLocal"`
 
-	// Main class of the Spark JAR job during execution
+	// The main class of the Spark job.
 	MainClass *string `json:"MainClass,omitnil" name:"MainClass"`
 
 	// Spark configurations separated by line break
 	AppConf *string `json:"AppConf,omitnil" name:"AppConf"`
 
-	// JAR resource dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency JAR packages of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalJars *string `json:"IsLocalJars,omitnil" name:"IsLocalJars"`
 
-	// Dependency JAR packages of the Spark JAR job separated by comma
+	// The dependency JAR packages of the Spark JAR job (JAR packages), separated by comma.
 	AppJars *string `json:"AppJars,omitnil" name:"AppJars"`
 
-	// File resource dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency files of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalFiles *string `json:"IsLocalFiles,omitnil" name:"IsLocalFiles"`
 
-	// Dependency resources of the Spark job separated by comma
+	// The dependency files of the Spark job (files other than JAR and ZIP packages), separated by comma.
 	AppFiles *string `json:"AppFiles,omitnil" name:"AppFiles"`
 
-	// PySpark: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the PySpark dependencies. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalPythonFiles *string `json:"IsLocalPythonFiles,omitnil" name:"IsLocalPythonFiles"`
 
-	// PySpark: Python dependency, which can be in .py, .zip, or .egg format. Multiple files should be separated by comma.
+	// The PySpark dependencies (Python files), separated by comma, with .py, .zip, and .egg formats supported.
 	AppPythonFiles *string `json:"AppPythonFiles,omitnil" name:"AppPythonFiles"`
 
-	// Command line parameters of the Spark job
+	// The input parameters of the Spark job, separated by comma.
 	CmdArgs *string `json:"CmdArgs,omitnil" name:"CmdArgs"`
 
-	// This parameter takes effect only for Spark flow tasks.
+	// The maximum number of retries, valid for Spark streaming tasks only.
 	MaxRetries *int64 `json:"MaxRetries,omitnil" name:"MaxRetries"`
 
 	// Data source name
 	DataSource *string `json:"DataSource,omitnil" name:"DataSource"`
 
-	// Archives: Dependency upload method. 1: cos; 2: lakefs (this method needs to be used in the console but cannot be called through APIs).
+	// The source of the dependency archives of the Spark job. Valid values: `cos` for COS and `lakefs` for the local system (for use in the console, but this method does not support direct API calls).
 	IsLocalArchives *string `json:"IsLocalArchives,omitnil" name:"IsLocalArchives"`
 
-	// Archives: Dependency resources
+	// The dependency archives of the Spark job, separated by comma, with tar.gz, .tgz, and .tar formats supported.
 	AppArchives *string `json:"AppArchives,omitnil" name:"AppArchives"`
 
 	// The Spark image version.
@@ -2557,6 +2689,9 @@ type ModifySparkAppRequest struct {
 
 	// Whether to inherit the task resource configuration from the cluster configuration template. Valid values: `0` (default): No; `1`: Yes.
 	IsInherit *uint64 `json:"IsInherit,omitnil" name:"IsInherit"`
+
+	// Whether to run the task with the session SQLs. Valid values: `false` for no and `true` for yes.
+	IsSessionStarted *bool `json:"IsSessionStarted,omitnil" name:"IsSessionStarted"`
 }
 
 func (r *ModifySparkAppRequest) ToJsonString() string {
@@ -2600,6 +2735,7 @@ func (r *ModifySparkAppRequest) FromJsonString(s string) error {
 	delete(f, "AppExecutorMaxNumbers")
 	delete(f, "SessionId")
 	delete(f, "IsInherit")
+	delete(f, "IsSessionStarted")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySparkAppRequest has unknown keys!", "")
 	}
@@ -2694,10 +2830,12 @@ type Policy struct {
 }
 
 type PrestoMonitorMetrics struct {
-
+	// 	The Alluxio cache hit rate.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	LocalCacheHitRate *float64 `json:"LocalCacheHitRate,omitnil" name:"LocalCacheHitRate"`
 
-
+	// The Fragment cache hit rate.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	FragmentCacheHitRate *float64 `json:"FragmentCacheHitRate,omitnil" name:"FragmentCacheHitRate"`
 }
 
@@ -2875,13 +3013,19 @@ type SparkJobInfo struct {
 	// Whether the task resource configuration is inherited from the cluster template. Valid values: `0` (default): No; `1`: Yes.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsInherit *uint64 `json:"IsInherit,omitnil" name:"IsInherit"`
+
+	// Whether the task runs with the session SQLs. Valid values: `false` for no and `true` for yes.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	IsSessionStarted *bool `json:"IsSessionStarted,omitnil" name:"IsSessionStarted"`
 }
 
 type SparkMonitorMetrics struct {
-
+	// The shuffle data (in bytes) that overflows to COS.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ShuffleWriteBytesCos *int64 `json:"ShuffleWriteBytesCos,omitnil" name:"ShuffleWriteBytesCos"`
 
-
+	// The total shuffle data (in bytes).
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ShuffleWriteBytesTotal *int64 `json:"ShuffleWriteBytesTotal,omitnil" name:"ShuffleWriteBytesTotal"`
 }
 
@@ -3197,7 +3341,7 @@ type TaskResponseInfo struct {
 	// Task creation time
 	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
-	// Task status. Valid values: `0` (initial), `1` (executing), `2` (executed successfully), `-1` (failed to execute), `-3` (canceled).
+	// The task status. Valid values: `0` (initializing), `1` (executing), `2` (executed), `3` (writing data), `4` (queuing), `-1` (failed), and `-3` (canceled).
 	State *int64 `json:"State,omitnil" name:"State"`
 
 	// SQL statement type of the task, such as DDL and DML.
@@ -3316,13 +3460,16 @@ type TaskResponseInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExecutorMaxNumbers *uint64 `json:"ExecutorMaxNumbers,omitnil" name:"ExecutorMaxNumbers"`
 
-
+	// Common task metrics
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	CommonMetrics *CommonMetrics `json:"CommonMetrics,omitnil" name:"CommonMetrics"`
 
-
+	// The Spark task metrics.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	SparkMonitorMetrics *SparkMonitorMetrics `json:"SparkMonitorMetrics,omitnil" name:"SparkMonitorMetrics"`
 
-
+	// The Presto task metrics.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	PrestoMonitorMetrics *PrestoMonitorMetrics `json:"PrestoMonitorMetrics,omitnil" name:"PrestoMonitorMetrics"`
 }
 
@@ -3344,7 +3491,7 @@ type TaskResultInfo struct {
 	// Type of the executed task. Valid values: `DDL`, `DML`, `DQL`.
 	SQLType *string `json:"SQLType,omitnil" name:"SQLType"`
 
-	// Current status of the task. `0`: initial; `1`: task running; `2`: task execution succeeded; `-1`: task execution failed; `-3`: task terminated manually by the user. The task execution result will be returned only if task execution succeeds.
+	// u200cThe current task status. Valid values: `0` (initializing), `1` (executing), `2` (executed), `3` (writing data), `4` (queuing), u200c`-1` (failed), and `-3` (canceled). Only when the task is successfully executed, a task execution result will be returned.
 	State *int64 `json:"State,omitnil" name:"State"`
 
 	// Amount of the data scanned in bytes
@@ -3479,4 +3626,40 @@ func (r *UpdateRowFilterResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpdateRowFilterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type UserRole struct {
+	// The role ID.
+	RoleId *int64 `json:"RoleId,omitnil" name:"RoleId"`
+
+	// The user's app ID.
+	AppId *string `json:"AppId,omitnil" name:"AppId"`
+
+	// The user ID.
+	Uin *string `json:"Uin,omitnil" name:"Uin"`
+
+	// The role permission.
+	Arn *string `json:"Arn,omitnil" name:"Arn"`
+
+	// The last modified timestamp.
+	ModifyTime *int64 `json:"ModifyTime,omitnil" name:"ModifyTime"`
+
+	// The role description.
+	Desc *string `json:"Desc,omitnil" name:"Desc"`
+
+	// The role name.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	RoleName *string `json:"RoleName,omitnil" name:"RoleName"`
+
+	// The creator UIN.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Creator *string `json:"Creator,omitnil" name:"Creator"`
+
+	// The COS permission list.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CosPermissionList []*CosPermission `json:"CosPermissionList,omitnil" name:"CosPermissionList"`
+
+	// The CAM policy in JSON.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	PermissionJson *string `json:"PermissionJson,omitnil" name:"PermissionJson"`
 }

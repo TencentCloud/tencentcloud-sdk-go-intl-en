@@ -68,24 +68,25 @@ type AccelerationDomain struct {
 }
 
 type AclCondition struct {
-	// The field to match. Values:
-	// <li>`host`: Request domain name</li>
-	// <li>`sip`: Client IP</li>
-	// <li>`ua`: User-Agent</li>
-	// <li>`cookie`: Cookie</li>
-	// <li>`cgi`: CGI script</li>
-	// <li>`xff`: XFF header</li>
-	// <li>`url`: Request URL</li>
-	// <li>`accept`: Request content type</li>
-	// <li>`method`: Request method</li>
-	// <li>`header`: Request header</li>
-	// <li>`app_proto`: Application layer protocol</li>
-	// <li>`sip_proto`: Network layer protocol</li>
-	// <li>`uabot`: UA rules (only available in custom bot rules)</li>
-	// <li>`idcid`: IDC rules (only available in custom bot rules)</li>
-	// <li>`sipbot`: Search engine rules (only available in custom bot rules)</li>
-	// <li>`portrait`: Client reputation (only available in custom bot rules)</li>
-	// <li>`header_seq`: Header sequence (only available in custom bot rules)</li>
+	// Filters: 
+	// <li>`host`: Request domain name;</li>
+	// <li>`sip`: Client IP;</li>
+	// <li>`ua`: User-Agent;</li>
+	// <li>`cookie`: Cookie;</li>
+	// <li>`cgi`: CGI script;</li>
+	// <li>`xff`: XFF header;</li></li>
+	// <li>`url`: Request URL;<li></li>
+	// <li>`accept`: Request content type;</li>
+	// <li>`method`: Request method<;/li>
+	// <li>`header`: Request header;</li>
+	// <li>`app_proto`: Application layer protocol;</li>
+	// <li>`sip_proto`: Network layer protocol;</li>
+	// <li>`uabot`: UA rules (only available in custom bot rules);</li>
+	// <li>`idcid`: IDC rules (only available in custom bot rules);</li>
+	// <li>`sipbot`: Search engine rules (only available in custom bot rules);</li>
+	// <li>`portrait`: Client reputation (only available in custom bot rules);</li>
+	// <li>`header_seq`: Header sequence (only available in custom bot rules);</li>
+	// <li>`hdr`: Request body (only available in custom Web protection rules). </li>
 	MatchFrom *string `json:"MatchFrom,omitnil" name:"MatchFrom"`
 
 	// The parameter of the field. When `MatchFrom = header`, the key contained in the header can be passed.
@@ -508,6 +509,10 @@ type ApplicationProxyRule struct {
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
 	OriginPort *string `json:"OriginPort,omitnil" name:"OriginPort"`
+
+	// Rule tag.
+	// Note: u200dThis field may returnu200d·`nullu200d`, indicating that no valid values can be obtained.
+	RuleTag *string `json:"RuleTag,omitnil" name:"RuleTag"`
 }
 
 type AscriptionInfo struct {
@@ -808,20 +813,20 @@ type CachePrefresh struct {
 
 // Predefined struct for user
 type CheckCnameStatusRequestParams struct {
-	// ID of the site.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// List of domain names.
+	// List of accelerated domain names.
 	RecordNames []*string `json:"RecordNames,omitnil" name:"RecordNames"`
 }
 
 type CheckCnameStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the site.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// List of domain names.
+	// List of accelerated domain names.
 	RecordNames []*string `json:"RecordNames,omitnil" name:"RecordNames"`
 }
 
@@ -847,7 +852,7 @@ func (r *CheckCnameStatusRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CheckCnameStatusResponseParams struct {
-	// List of CNAME statuses.
+	// CNAME status of accelerated domain names.
 	CnameStatus []*CnameStatus `json:"CnameStatus,omitnil" name:"CnameStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -1274,6 +1279,9 @@ type CreateApplicationProxyRuleRequestParams struct {
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
 	OriginPort *string `json:"OriginPort,omitnil" name:"OriginPort"`
+
+	// Rule tag. This parameter is left empty by default.
+	RuleTag *string `json:"RuleTag,omitnil" name:"RuleTag"`
 }
 
 type CreateApplicationProxyRuleRequest struct {
@@ -1324,6 +1332,9 @@ type CreateApplicationProxyRuleRequest struct {
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
 	OriginPort *string `json:"OriginPort,omitnil" name:"OriginPort"`
+
+	// Rule tag. This parameter is left empty by default.
+	RuleTag *string `json:"RuleTag,omitnil" name:"RuleTag"`
 }
 
 func (r *CreateApplicationProxyRuleRequest) ToJsonString() string {
@@ -1348,6 +1359,7 @@ func (r *CreateApplicationProxyRuleRequest) FromJsonString(s string) error {
 	delete(f, "SessionPersist")
 	delete(f, "SessionPersistTime")
 	delete(f, "OriginPort")
+	delete(f, "RuleTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationProxyRuleRequest has unknown keys!", "")
 	}
@@ -2843,7 +2855,7 @@ type DescribeApplicationProxiesRequestParams struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No</li>
+	// Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>u200d, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -2856,7 +2868,7 @@ type DescribeApplicationProxiesRequest struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`proxy-id`:<br>   Filter by <strong>proxy ID</strong>, such as proxy-ev2sawbwfd<br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-vawer2vadg<br>   Type: String<br>   Required: No</li>
+	// Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>u200d, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -5372,10 +5384,10 @@ type DownloadL4LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
-	// List of L4 proxy IDs.
+	// List of L4 proxy instance IDs.
 	ProxyIds []*string `json:"ProxyIds,omitnil" name:"ProxyIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -5394,10 +5406,10 @@ type DownloadL4LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
-	// List of L4 proxy IDs.
+	// List of L4 proxy instance IDs.
 	ProxyIds []*string `json:"ProxyIds,omitnil" name:"ProxyIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -5433,12 +5445,11 @@ func (r *DownloadL4LogsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DownloadL4LogsResponseParams struct {
-	// The list of L4 log data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*L4OfflineLog `json:"Data,omitnil" name:"Data"`
-
 	// Total number of query results.
 	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// List of L4 logs.
+	Data []*L4OfflineLog `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -5468,7 +5479,7 @@ type DownloadL7LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -5490,7 +5501,7 @@ type DownloadL7LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -5529,12 +5540,11 @@ func (r *DownloadL7LogsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DownloadL7LogsResponseParams struct {
-	// The list of L7 log data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*L7OfflineLog `json:"Data,omitnil" name:"Data"`
-
 	// Total number of query results.
 	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// List of L7 logs.
+	Data []*L7OfflineLog `json:"Data,omitnil" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -6053,48 +6063,59 @@ type Ipv6 struct {
 }
 
 type L4OfflineLog struct {
-	// The start time of the log packaging.
-	LogTime *int64 `json:"LogTime,omitnil" name:"LogTime"`
-
-	// The L4 proxy ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// L4 proxy instance ID.
 	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
 
-	// The log size, in bytes.
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	// Log query area. Valid values:
+	// <li>`mainland`: Chinese mainland;</li>
+	// <li>`overseas`: Global (outside the Chinese mainland). </li>
+	Area *string `json:"Area,omitnil" name:"Area"`
 
-	// The download address.
-	Url *string `json:"Url,omitnil" name:"Url"`
-
-	// The log package name.
+	// Log packet name.
 	LogPacketName *string `json:"LogPacketName,omitnil" name:"LogPacketName"`
 
-	// The acceleration region. Values:
-	// <li>`mainland`: Chinese mainland;</li>
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	Area *string `json:"Area,omitnil" name:"Area"`
+	// Log download address.
+	Url *string `json:"Url,omitnil" name:"Url"`
+
+	// (Disused) Log packaging time. 
+	LogTime *int64 `json:"LogTime,omitnil" name:"LogTime"`
+
+	// Start time of log packaging.
+	LogStartTime *string `json:"LogStartTime,omitnil" name:"LogStartTime"`
+
+	// End time of the log package.
+	LogEndTime *string `json:"LogEndTime,omitnil" name:"LogEndTime"`
+
+	// Log size (in bytes).
+	Size *int64 `json:"Size,omitnil" name:"Size"`
 }
 
 type L7OfflineLog struct {
-	// Start time of the log packaging
-	LogTime *int64 `json:"LogTime,omitnil" name:"LogTime"`
-
-	// The subdomain name.
+	// Log domain name.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Log size, in bytes.
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	// Log query area. Valid values:
+	// <li>`mainland`: Chinese mainland;</li>
+	// <li>`overseas`: Global (outside the Chinese mainland). </li>
+	Area *string `json:"Area,omitnil" name:"Area"`
 
-	// Download address
-	Url *string `json:"Url,omitnil" name:"Url"`
-
-	// Log package name
+	// Log packet name.	
 	LogPacketName *string `json:"LogPacketName,omitnil" name:"LogPacketName"`
 
-	// Acceleration region. Values:
-	// <li>`mainland`: Chinese mainland;</li>
-	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	Area *string `json:"Area,omitnil" name:"Area"`
+	// Log download address.	
+	Url *string `json:"Url,omitnil" name:"Url"`
+
+	// (Disused) Log packaging time. 
+	LogTime *int64 `json:"LogTime,omitnil" name:"LogTime"`
+
+	// Start time of log packaging.
+	LogStartTime *string `json:"LogStartTime,omitnil" name:"LogStartTime"`
+
+	// End time of the log package.
+	LogEndTime *string `json:"LogEndTime,omitnil" name:"LogEndTime"`
+
+	// Original log size (in bytes).
+	Size *int64 `json:"Size,omitnil" name:"Size"`
 }
 
 type MaxAge struct {
@@ -6575,6 +6596,9 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
 	OriginPort *string `json:"OriginPort,omitnil" name:"OriginPort"`
+
+	// Rule tag. The original configuration will apply if it is not specified.
+	RuleTag *string `json:"RuleTag,omitnil" name:"RuleTag"`
 }
 
 type ModifyApplicationProxyRuleRequest struct {
@@ -6630,6 +6654,9 @@ type ModifyApplicationProxyRuleRequest struct {
 	// <li>A single port, such as 80</li>
 	// <li>A port range, such as 81-82</li>
 	OriginPort *string `json:"OriginPort,omitnil" name:"OriginPort"`
+
+	// Rule tag. The original configuration will apply if it is not specified.
+	RuleTag *string `json:"RuleTag,omitnil" name:"RuleTag"`
 }
 
 func (r *ModifyApplicationProxyRuleRequest) ToJsonString() string {
@@ -6655,6 +6682,7 @@ func (r *ModifyApplicationProxyRuleRequest) FromJsonString(s string) error {
 	delete(f, "SessionPersist")
 	delete(f, "SessionPersistTime")
 	delete(f, "OriginPort")
+	delete(f, "RuleTag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationProxyRuleRequest has unknown keys!", "")
 	}
@@ -8114,10 +8142,7 @@ type RateLimitUserRule struct {
 	// The rule name, which consists of only letters, digits, and underscores and cannot start with an underscore.
 	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
 
-	// The action. Values:
-	// <li>`monitor`: Observe</li>
-	// <li>`drop`: Block</li>
-	// <li>`alg`: JavaScript challenge</li>
+	// Action. Valid values: <li>`monitor`: Observe;</li>`<li>drop`: Block;</li> <li>`alg`: JavaScript challenge. </li>	
 	Action *string `json:"Action,omitnil" name:"Action"`
 
 	// The amount of time taken to perform the action. Value range: 0 seconds - 2 days.
@@ -8140,8 +8165,8 @@ type RateLimitUserRule struct {
 	// The rule weight. Value range: 0-100.
 	RulePriority *int64 `json:"RulePriority,omitnil" name:"RulePriority"`
 
-	// The rule ID, which is only used as an output parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID, which is only used as an output parameter.
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	RuleID *int64 `json:"RuleID,omitnil" name:"RuleID"`
 
 	// The filter. Values:
@@ -8153,10 +8178,10 @@ type RateLimitUserRule struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
-	// The statistical dimension. Values:
-	// <li>`source_to_eo`: Responses from the origin server to EdgeOne</li>
-	// <li>`client_to_eo`: Requests from the client to EdgeOne</li>
-	// Note: A null value indicates responses from the origin server to EdgeOne are recorded.
+	// Statistical dimension. `source_to_eo` is entered by default when this parameter is not specified. Valid values:
+	// <li>`source_to_eo`: (Response) Traffic going from the origin to EdgeOne. </li>
+	// <li>`client_to_eo`: (Request) Traffic going from the client to EdgeOne.</li>
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	FreqScope []*string `json:"FreqScope,omitnil" name:"FreqScope"`
 }
 

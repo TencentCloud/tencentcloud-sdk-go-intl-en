@@ -302,10 +302,10 @@ func (r *CreateSSHKeyPairSecretResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSecretRequestParams struct {
-	// Secret name, which must be unique within a region. The name can be up to 128 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
+	// Secret name, which must be unique in the same region. It can contain 128 bytes ([a-z], [A-Z], [0-9], [-_]). It must begin with a letter or digit. Note that it cannot be modified once created. 
 	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
-	// Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information.
+	// Secret version. It can contain up to 64 bytes ([a-z], [A-Z], [0-9], [-_.]). It must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information. If it is left empty, the initial Secret version number is used by default.
 	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Description information, such as the detailed use cases. It can be up to 2048 bytes.
@@ -314,11 +314,17 @@ type CreateSecretRequestParams struct {
 	// KMS CMK used for Secret encryption. If this parameter is left empty, SecretsManager will create a CMK by default. You can also specify a KMS CMK that is created in the same region.
 	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
+	// Secret type. It defaults to `custom`.
+	SecretType *uint64 `json:"SecretType,omitnil" name:"SecretType"`
+
 	// Base64-encoded plaintext of a binary Secret. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
 	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// Plaintext of a Secret, in text format. Base64 encoding is not required. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
 	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
+
+	// Additional configuration of the Secret in JSON format
+	AdditionalConfig *string `json:"AdditionalConfig,omitnil" name:"AdditionalConfig"`
 
 	// List of tags.
 	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
@@ -327,10 +333,10 @@ type CreateSecretRequestParams struct {
 type CreateSecretRequest struct {
 	*tchttp.BaseRequest
 	
-	// Secret name, which must be unique within a region. The name can be up to 128 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit.
+	// Secret name, which must be unique in the same region. It can contain 128 bytes ([a-z], [A-Z], [0-9], [-_]). It must begin with a letter or digit. Note that it cannot be modified once created. 
 	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
 
-	// Secret version. It can be up to 64 bytes, contain letters, digits, hyphens (-), and underscores (_), and must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information.
+	// Secret version. It can contain up to 64 bytes ([a-z], [A-Z], [0-9], [-_.]). It must begin with a letter or digit. `SecretName` and `VersionId` are used to query the Secret information. If it is left empty, the initial Secret version number is used by default.
 	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
 
 	// Description information, such as the detailed use cases. It can be up to 2048 bytes.
@@ -339,11 +345,17 @@ type CreateSecretRequest struct {
 	// KMS CMK used for Secret encryption. If this parameter is left empty, SecretsManager will create a CMK by default. You can also specify a KMS CMK that is created in the same region.
 	KmsKeyId *string `json:"KmsKeyId,omitnil" name:"KmsKeyId"`
 
+	// Secret type. It defaults to `custom`.
+	SecretType *uint64 `json:"SecretType,omitnil" name:"SecretType"`
+
 	// Base64-encoded plaintext of a binary Secret. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
 	SecretBinary *string `json:"SecretBinary,omitnil" name:"SecretBinary"`
 
 	// Plaintext of a Secret, in text format. Base64 encoding is not required. Either `SecretBinary` or `SecretString` must be set. A maximum of 4096 bytes is supported.
 	SecretString *string `json:"SecretString,omitnil" name:"SecretString"`
+
+	// Additional configuration of the Secret in JSON format
+	AdditionalConfig *string `json:"AdditionalConfig,omitnil" name:"AdditionalConfig"`
 
 	// List of tags.
 	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
@@ -365,8 +377,10 @@ func (r *CreateSecretRequest) FromJsonString(s string) error {
 	delete(f, "VersionId")
 	delete(f, "Description")
 	delete(f, "KmsKeyId")
+	delete(f, "SecretType")
 	delete(f, "SecretBinary")
 	delete(f, "SecretString")
+	delete(f, "AdditionalConfig")
 	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSecretRequest has unknown keys!", "")
@@ -836,6 +850,10 @@ type DescribeSecretResponseParams struct {
 	// UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TargetUin *uint64 `json:"TargetUin,omitnil" name:"TargetUin"`
+
+	// Additional configuration of the Secret
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdditionalConfig *string `json:"AdditionalConfig,omitnil" name:"AdditionalConfig"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -1797,6 +1815,18 @@ type SecretMetadata struct {
 	// UIN of the Tencent Cloud API key. This field is valid when the secret type is Tencent Cloud API key secret.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	TargetUin *uint64 `json:"TargetUin,omitnil" name:"TargetUin"`
+
+	// Rotation frequency in days. It takes effect when the rotation feature is enabled. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RotationFrequency *int64 `json:"RotationFrequency,omitnil" name:"RotationFrequency"`
+
+	// ID of Tencent Cloud resource corresponding with the Secret. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceID *string `json:"ResourceID,omitnil" name:"ResourceID"`
+
+	// The rotation start time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RotationBeginTime *string `json:"RotationBeginTime,omitnil" name:"RotationBeginTime"`
 }
 
 type Tag struct {

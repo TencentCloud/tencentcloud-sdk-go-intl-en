@@ -296,7 +296,7 @@ type ApplyWebVerificationBizTokenIntlResponseParams struct {
 	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
 	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 
-
+	// The verification URL to be opened with a browser to start the verification process.
 	VerificationURL *string `json:"VerificationURL,omitnil" name:"VerificationURL"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

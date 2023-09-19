@@ -193,6 +193,54 @@ func (c *Client) BatchDeleteCSRWithContext(ctx context.Context, request *BatchDe
     return
 }
 
+func NewCancelAuditCertificateRequest() (request *CancelAuditCertificateRequest) {
+    request = &CancelAuditCertificateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "CancelAuditCertificate")
+    
+    
+    return
+}
+
+func NewCancelAuditCertificateResponse() (response *CancelAuditCertificateResponse) {
+    response = &CancelAuditCertificateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// CancelAuditCertificate
+// This API is used to cancel certificate review.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATENOTFOUNDORCANTCANCEL = "FailedOperation.CertificateNotFoundOrCantCancel"
+func (c *Client) CancelAuditCertificate(request *CancelAuditCertificateRequest) (response *CancelAuditCertificateResponse, err error) {
+    return c.CancelAuditCertificateWithContext(context.Background(), request)
+}
+
+// CancelAuditCertificate
+// This API is used to cancel certificate review.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CERTIFICATENOTFOUNDORCANTCANCEL = "FailedOperation.CertificateNotFoundOrCantCancel"
+func (c *Client) CancelAuditCertificateWithContext(ctx context.Context, request *CancelAuditCertificateRequest) (response *CancelAuditCertificateResponse, err error) {
+    if request == nil {
+        request = NewCancelAuditCertificateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelAuditCertificate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelAuditCertificateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelCertificateOrderRequest() (request *CancelCertificateOrderRequest) {
     request = &CancelCertificateOrderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1315,6 +1363,64 @@ func (c *Client) ModifyCertificateProjectWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyCertificateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCertificateResubmitRequest() (request *ModifyCertificateResubmitRequest) {
+    request = &ModifyCertificateResubmitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "ModifyCertificateResubmit")
+    
+    
+    return
+}
+
+func NewModifyCertificateResubmitResponse() (response *ModifyCertificateResubmitResponse) {
+    response = &ModifyCertificateResubmitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyCertificateResubmit
+// This API is used to re-submit a review application for a paid certificate whose review failed or was canceled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATESTATUSNOTALLOWRESUBMIT = "FailedOperation.CertificateStatusNotAllowResubmit"
+//  INVALIDPARAMETER_CERTIFICATESTATUSNOTALLOWRESUBMIT = "InvalidParameter.CertificateStatusNotAllowResubmit"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+func (c *Client) ModifyCertificateResubmit(request *ModifyCertificateResubmitRequest) (response *ModifyCertificateResubmitResponse, err error) {
+    return c.ModifyCertificateResubmitWithContext(context.Background(), request)
+}
+
+// ModifyCertificateResubmit
+// This API is used to re-submit a review application for a paid certificate whose review failed or was canceled.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CANNOTGETORDER = "FailedOperation.CannotGetOrder"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATESTATUSNOTALLOWRESUBMIT = "FailedOperation.CertificateStatusNotAllowResubmit"
+//  INVALIDPARAMETER_CERTIFICATESTATUSNOTALLOWRESUBMIT = "InvalidParameter.CertificateStatusNotAllowResubmit"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+func (c *Client) ModifyCertificateResubmitWithContext(ctx context.Context, request *ModifyCertificateResubmitRequest) (response *ModifyCertificateResubmitResponse, err error) {
+    if request == nil {
+        request = NewModifyCertificateResubmitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCertificateResubmit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCertificateResubmitResponse()
     err = c.Send(request, response)
     return
 }

@@ -107,7 +107,7 @@ type AccountPrivilegeModifyInfo struct {
 	// Account permission change information
 	DBPrivileges []*DBPrivilegeModifyInfo `json:"DBPrivileges,omitnil" name:"DBPrivileges"`
 
-	// Whether the account has the admin permission. Valid values: `true` (Yes. It is an admin account when the instance is a basic edition type and `AccountType` is `L0`; it is a privileged account when the instance is a dual-server high availability edition type and `AccountType` is `L1`.), `false` (No. The admin permission is disabled by default).
+	// Whether it is an instance admin account. Valid values: `true` (Yes. When the instance is single-node and `AccountType` is `L0`, it's an admin account; when the instance is two-node and `AccountType` is `L1`, it's a privileged account), `false` (No. It's a standard account and `AccountType` is `L3`).
 	IsAdmin *bool `json:"IsAdmin,omitnil" name:"IsAdmin"`
 
 	// Account type, which is an extension field of `IsAdmin`. Valid values: `L0` (admin account, only for basic edition), `L1` (privileged account), `L2` (designated account), `L3` (standard account, default)
@@ -528,11 +528,14 @@ type CreateBackupRequestParams struct {
 	// List of names of databases to be backed up (required only for multi-database backup)
 	DBNames []*string `json:"DBNames,omitnil" name:"DBNames"`
 
-	// Instance ID in the format of mssql-i1z41iwd
+	// (Required) Instance ID in the format of mssql-i1z41iwd
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Backup name. If this parameter is left empty, a backup name in the format of "[Instance ID]_[Backup start timestamp]" will be automatically generated.
 	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
+
+
+	StorageStrategy *int64 `json:"StorageStrategy,omitnil" name:"StorageStrategy"`
 }
 
 type CreateBackupRequest struct {
@@ -544,11 +547,13 @@ type CreateBackupRequest struct {
 	// List of names of databases to be backed up (required only for multi-database backup)
 	DBNames []*string `json:"DBNames,omitnil" name:"DBNames"`
 
-	// Instance ID in the format of mssql-i1z41iwd
+	// (Required) Instance ID in the format of mssql-i1z41iwd
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// Backup name. If this parameter is left empty, a backup name in the format of "[Instance ID]_[Backup start timestamp]" will be automatically generated.
 	BackupName *string `json:"BackupName,omitnil" name:"BackupName"`
+
+	StorageStrategy *int64 `json:"StorageStrategy,omitnil" name:"StorageStrategy"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -567,6 +572,7 @@ func (r *CreateBackupRequest) FromJsonString(s string) error {
 	delete(f, "DBNames")
 	delete(f, "InstanceId")
 	delete(f, "BackupName")
+	delete(f, "StorageStrategy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupRequest has unknown keys!", "")
 	}
@@ -1091,7 +1097,7 @@ type CreateCloudReadOnlyDBInstancesRequestParams struct {
 	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Number of instances purchased this time. Default value: `1`.
+	// Number of read-only instances to be purchased this time. Default value: `2`.
 	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
 
 	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
@@ -1167,7 +1173,7 @@ type CreateCloudReadOnlyDBInstancesRequest struct {
 	// Billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID` (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Number of instances purchased this time. Default value: `1`.
+	// Number of read-only instances to be purchased this time. Default value: `2`.
 	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
 
 	// VPC subnet ID in the format of `subnet-bdoe83fa`. Both `SubnetId` and `VpcId` need to be set or unset at the same time.
@@ -1767,6 +1773,9 @@ type DBDetail struct {
 
 	// Internal status. ONLINE: running
 	InternalStatus *string `json:"InternalStatus,omitnil" name:"InternalStatus"`
+
+	// TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+	Encryption *string `json:"Encryption,omitnil" name:"Encryption"`
 }
 
 type DBInstance struct {
@@ -1854,7 +1863,7 @@ type DBInstance struct {
 	// Instance version code
 	Version *string `json:"Version,omitnil" name:"Version"`
 
-	// Physical server code
+	// Instance type. Valid values: `TS85` (physical machine, local SSD), `Z3` (early version of physical machine, local SSD), `CLOUD_BASIC` (virtual machine, HDD cloud disk), `CLOUD_PREMIUM` (virtual machine, premium cloud disk), `CLOUD_SSD` (virtual machine, SSD), `CLOUD_HSSD` (virtual machine, enhanced SSD), `CLOUD_TSSD` (virtual machine, ulTra SSD), `CLOUD_BSSD` virtual machine, balanced SSD).
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Billing ID
@@ -1934,8 +1943,8 @@ type DBInstance struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SlaveZones *SlaveZones `json:"SlaveZones,omitnil" name:"SlaveZones"`
 
-	// Architecture type. Valid values: `SINGLE` (single-node), `DOUBLE` (two-node), `TRIPLE` (three-node).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Architecture type. Valid values: `SINGLE` (single-node), `DOUBLE` (two-node).
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	Architecture *string `json:"Architecture,omitnil" name:"Architecture"`
 
 	// Instance type. Valid values: `EXCLUSIVE` (dedicated), `SHARED` (shared)
@@ -1973,6 +1982,14 @@ type DBRenameRes struct {
 
 	// Name of the old database
 	OldName *string `json:"OldName,omitnil" name:"OldName"`
+}
+
+type DBTDEEncrypt struct {
+
+	DBName *string `json:"DBName,omitnil" name:"DBName"`
+
+	// TDE u200dstatus. Valid values: `enable` (enabled), `disable` (disabled).
+	Encryption *string `json:"Encryption,omitnil" name:"Encryption"`
 }
 
 type DbNormalDetail struct {
@@ -2063,6 +2080,14 @@ type DealInfo struct {
 
 	// Instance billing type
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
+}
+
+type DealInstance struct {
+	// Instance ID
+	InstanceId []*string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Order ID
+	DealName *string `json:"DealName,omitnil" name:"DealName"`
 }
 
 // Predefined struct for user
@@ -2618,7 +2643,7 @@ type DescribeBackupFilesRequestParams struct {
 	// Instance ID in the format of mssql-njj2mtpl
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
-	// Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API
+	// Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API (Querying archived backup record is not supported).
 	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Number of entries to be returned per page. Value range: 1-100. Default value: `20`
@@ -2640,7 +2665,7 @@ type DescribeBackupFilesRequest struct {
 	// Instance ID in the format of mssql-njj2mtpl
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
-	// Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API
+	// Group ID of unarchived backup files, which can be obtained by the `DescribeBackups` API (Querying archived backup record is not supported).
 	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
 	// Number of entries to be returned per page. Value range: 1-100. Default value: `20`
@@ -3372,6 +3397,9 @@ type DescribeDBInstancesAttributeResponseParams struct {
 	// Retention period for the files of slow SQL, blocking, deadlock, and extended events.
 	EventSaveDays *int64 `json:"EventSaveDays,omitnil" name:"EventSaveDays"`
 
+	// TDE u200dconfiguration
+	TDEConfig *TDEConfigAttribute `json:"TDEConfig,omitnil" name:"TDEConfig"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -3657,6 +3685,9 @@ type DescribeDBsRequestParams struct {
 
 	// Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
 	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+
+	// TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+	Encryption *string `json:"Encryption,omitnil" name:"Encryption"`
 }
 
 type DescribeDBsRequest struct {
@@ -3676,6 +3707,9 @@ type DescribeDBsRequest struct {
 
 	// Sorting rule. Valid values: `desc` (descending order), `asc` (ascending order). Default value: `desc`.
 	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+
+	// TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+	Encryption *string `json:"Encryption,omitnil" name:"Encryption"`
 }
 
 func (r *DescribeDBsRequest) ToJsonString() string {
@@ -3695,6 +3729,7 @@ func (r *DescribeDBsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Name")
 	delete(f, "OrderByType")
+	delete(f, "Encryption")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBsRequest has unknown keys!", "")
 	}
@@ -3899,6 +3934,63 @@ func (r *DescribeIncrementalMigrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIncrementalMigrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceByOrdersRequestParams struct {
+	// Order ID set
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
+}
+
+type DescribeInstanceByOrdersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Order ID set
+	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
+}
+
+func (r *DescribeInstanceByOrdersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceByOrdersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DealNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceByOrdersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceByOrdersResponseParams struct {
+
+	DealInstance []*DealInstance `json:"DealInstance,omitnil" name:"DealInstance"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeInstanceByOrdersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstanceByOrdersResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstanceByOrdersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceByOrdersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4480,10 +4572,10 @@ type DescribeSlowlogsRequestParams struct {
 	// Instance ID in the format of mssql-k8voqdlz
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
-	// Query start time
+	// Start time in the format of `yyyy-MM-dd HH:mm:ss`
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Query end time
+	// End time in the format of `yyyy-MM-dd HH:mm:ss`
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Number of results per page. Value range: 1-100. Default value: 20
@@ -4499,10 +4591,10 @@ type DescribeSlowlogsRequest struct {
 	// Instance ID in the format of mssql-k8voqdlz
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
-	// Query start time
+	// Start time in the format of `yyyy-MM-dd HH:mm:ss`
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Query end time
+	// End time in the format of `yyyy-MM-dd HH:mm:ss`
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Number of results per page. Value range: 1-100. Default value: 20
@@ -4656,10 +4748,10 @@ type DescribeXEventsRequestParams struct {
 	// Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  deadlock` (deadlock event).
 	EventType *string `json:"EventType,omitnil" name:"EventType"`
 
-	// Generation start time of an extended file
+	// Generation start time of an extended file in the format of yyyy-MM-dd HH:mm:ss.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Generation end time of an extended file
+	// Generation end time of an extended file in the format of yyyy-MM-dd HH:mm:ss.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Page number. Default value: `0`
@@ -4678,10 +4770,10 @@ type DescribeXEventsRequest struct {
 	// Event type. Valid values: `slow` (Slow SQL event), `blocked` (blocking event),  deadlock` (deadlock event).
 	EventType *string `json:"EventType,omitnil" name:"EventType"`
 
-	// Generation start time of an extended file
+	// Generation start time of an extended file in the format of yyyy-MM-dd HH:mm:ss.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Generation end time of an extended file
+	// Generation end time of an extended file in the format of yyyy-MM-dd HH:mm:ss.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Page number. Default value: `0`
@@ -4865,16 +4957,17 @@ type InquiryPriceCreateDBInstancesRequestParams struct {
 	// Number of instances purchased at a time. Value range: 1-100. Default value: 1
 	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
 
-	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). Default value: 2008R2.
+	// SQL version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), `201402` (SQL Server 2014 Standard)`, `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The purchasable version varies by region. It can be queried by the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 
 	// The number of CPU cores of the instance you want to purchase.
 	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
-	// The type of purchased instance. Valid values: HA (high-availability edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (basic edition). Default value: HA.
+	// The type of instance to be purchased. Valid values: `HA` (high-availability edition, including dual-server high-availability and AlwaysOn cluster u200deditionu200d), `RO` (read-only replica edition), `SI` (single-node edition), `cvmHA` (dual-server high-availability edition u200dfor CVM), `cvmRO` (read-only edition u200dfor CVM).
 	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
-	// The host type of purchased instance. Valid values: PM (physical machine), CLOUD_PREMIUM (physical machine with premium cloud disk), CLOUD_SSD (physical machine with SSD). Default value: PM.
+	// The host type of the instance to be purchased. Valid values: `PM` (physical machine), `CLOUD_PREMIUM` (virtual machine with premium cloud disk), `CLOUD_SSD` (virtual machine with SSD), 
+	// `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
 	MachineType *string `json:"MachineType,omitnil" name:"MachineType"`
 }
 
@@ -4899,16 +4992,17 @@ type InquiryPriceCreateDBInstancesRequest struct {
 	// Number of instances purchased at a time. Value range: 1-100. Default value: 1
 	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
 
-	// SQL Server version. Valid values: 2008R2 (SQL Server 2008 Enterprise), 2012SP3 (SQL Server 2012 Enterprise), 2016SP1 (SQL Server 2016 Enterprise), 201602 (SQL Server 2016 Standard), 2017 (SQL Server 2017 Enterprise). Default value: 2008R2.
+	// SQL version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), `201402` (SQL Server 2014 Standard)`, `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The purchasable version varies by region. It can be queried by the `DescribeProductConfig` API.
 	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 
 	// The number of CPU cores of the instance you want to purchase.
 	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
 
-	// The type of purchased instance. Valid values: HA (high-availability edition, including dual-server high availability and AlwaysOn cluster), RO (read-only replica), SI (basic edition). Default value: HA.
+	// The type of instance to be purchased. Valid values: `HA` (high-availability edition, including dual-server high-availability and AlwaysOn cluster u200deditionu200d), `RO` (read-only replica edition), `SI` (single-node edition), `cvmHA` (dual-server high-availability edition u200dfor CVM), `cvmRO` (read-only edition u200dfor CVM).
 	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
 
-	// The host type of purchased instance. Valid values: PM (physical machine), CLOUD_PREMIUM (physical machine with premium cloud disk), CLOUD_SSD (physical machine with SSD). Default value: PM.
+	// The host type of the instance to be purchased. Valid values: `PM` (physical machine), `CLOUD_PREMIUM` (virtual machine with premium cloud disk), `CLOUD_SSD` (virtual machine with SSD), 
+	// `CLOUD_HSSD` (virtual machine with enhanced SSD), `CLOUD_TSSD` (virtual machine with ulTra SSD), `CLOUD_BSSD` (virtual machine with balanced SSD).
 	MachineType *string `json:"MachineType,omitnil" name:"MachineType"`
 }
 
@@ -5652,6 +5746,70 @@ func (r *ModifyBackupStrategyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDBEncryptAttributesRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// A parameter used to enable or disable TDE of the database
+	DBTDEEncrypt []*DBTDEEncrypt `json:"DBTDEEncrypt,omitnil" name:"DBTDEEncrypt"`
+}
+
+type ModifyDBEncryptAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// A parameter used to enable or disable TDE of the database
+	DBTDEEncrypt []*DBTDEEncrypt `json:"DBTDEEncrypt,omitnil" name:"DBTDEEncrypt"`
+}
+
+func (r *ModifyDBEncryptAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBEncryptAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DBTDEEncrypt")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBEncryptAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBEncryptAttributesResponseParams struct {
+	// Task flow ID
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyDBEncryptAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBEncryptAttributesResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBEncryptAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBEncryptAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceNameRequestParams struct {
 	// Database instance ID in the format of mssql-njj2mtpl
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
@@ -6288,6 +6446,77 @@ func (r *ModifyIncrementalMigrationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyIncrementalMigrationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstanceEncryptAttributesRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Certificate u200downership. Valid values: `self` (certificate of this account), `others` (certificate of the other account). Default value: `self`.
+	CertificateAttribution *string `json:"CertificateAttribution,omitnil" name:"CertificateAttribution"`
+
+	// ID of the other referenced root account, which is required when `CertificateAttribution` is `others`.
+	QuoteUin *string `json:"QuoteUin,omitnil" name:"QuoteUin"`
+}
+
+type ModifyInstanceEncryptAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Certificate u200downership. Valid values: `self` (certificate of this account), `others` (certificate of the other account). Default value: `self`.
+	CertificateAttribution *string `json:"CertificateAttribution,omitnil" name:"CertificateAttribution"`
+
+	// ID of the other referenced root account, which is required when `CertificateAttribution` is `others`.
+	QuoteUin *string `json:"QuoteUin,omitnil" name:"QuoteUin"`
+}
+
+func (r *ModifyInstanceEncryptAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceEncryptAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "CertificateAttribution")
+	delete(f, "QuoteUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstanceEncryptAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstanceEncryptAttributesResponseParams struct {
+	// Task flow ID
+	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyInstanceEncryptAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyInstanceEncryptAttributesResponseParams `json:"Response"`
+}
+
+func (r *ModifyInstanceEncryptAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstanceEncryptAttributesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7312,6 +7541,18 @@ func (r *StartInstanceXEventResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StartInstanceXEventResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TDEConfigAttribute struct {
+	// TDE status. Valid values: `enable` (enabled), `disable` (disabled).
+	Encryption *string `json:"Encryption,omitnil" name:"Encryption"`
+
+	// Certificate u200downership. Valid values: `self` (u200dcertificate of the this account), `others` (u200dcertificate of the other account), `none` (no certificate).
+	CertificateAttribution *string `json:"CertificateAttribution,omitnil" name:"CertificateAttribution"`
+
+	// ID of the u200dother referenced root account when enabling TDE
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	QuoteUin *string `json:"QuoteUin,omitnil" name:"QuoteUin"`
 }
 
 // Predefined struct for user

@@ -41,6 +41,9 @@ const (
 	// Locking the backup import task failed.
 	FAILEDOPERATION_MIGRATIONLOCKERROR = "FailedOperation.MigrationLockError"
 
+	// The operation is not supported.
+	FAILEDOPERATION_NOTSUPPORT = "FailedOperation.NotSupport"
+
 	// Failed to query order.
 	FAILEDOPERATION_QUERYORDERFAILED = "FailedOperation.QueryOrderFailed"
 
@@ -262,6 +265,9 @@ const (
 
 	// Unknown parameter error
 	UNKNOWNPARAMETER = "UnknownParameter"
+
+	// The operation is not supported.
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
 	// Repeated operations are not supported.
 	UNSUPPORTEDOPERATION_NOTSUPPORTREPEAT = "UnsupportedOperation.NotSupportRepeat"

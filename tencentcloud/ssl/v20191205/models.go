@@ -331,6 +331,63 @@ type CSRItem struct {
 }
 
 // Predefined struct for user
+type CancelAuditCertificateRequestParams struct {
+	// The certificate ID.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+}
+
+type CancelAuditCertificateRequest struct {
+	*tchttp.BaseRequest
+	
+	// The certificate ID.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+}
+
+func (r *CancelAuditCertificateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelAuditCertificateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertificateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelAuditCertificateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CancelAuditCertificateResponseParams struct {
+	// Whether the operation succeeded.
+	Result *bool `json:"Result,omitnil" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CancelAuditCertificateResponse struct {
+	*tchttp.BaseResponse
+	Response *CancelAuditCertificateResponseParams `json:"Response"`
+}
+
+func (r *CancelAuditCertificateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelAuditCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CancelCertificateOrderRequestParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
@@ -614,6 +671,18 @@ type Certificates struct {
 	// Whether auto-renewal is enabled.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+
+	// The hosting status. Valid values: `0` (hosting), `5` (replacing resources), `10` (hosting completed), and `-1` (not hosted). 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostingStatus *int64 `json:"HostingStatus,omitnil" name:"HostingStatus"`
+
+	// The hosting completion time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostingCompleteTime *string `json:"HostingCompleteTime,omitnil" name:"HostingCompleteTime"`
+
+	// The hosted new certificate ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostingRenewCertId *string `json:"HostingRenewCertId,omitnil" name:"HostingRenewCertId"`
 }
 
 type ClbInstanceDetail struct {
@@ -2554,6 +2623,63 @@ func (r *ModifyCertificateProjectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyCertificateProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCertificateResubmitRequestParams struct {
+	// The certificate ID.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+}
+
+type ModifyCertificateResubmitRequest struct {
+	*tchttp.BaseRequest
+	
+	// The certificate ID.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+}
+
+func (r *ModifyCertificateResubmitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCertificateResubmitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertificateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCertificateResubmitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCertificateResubmitResponseParams struct {
+	// The certificate ID.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyCertificateResubmitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCertificateResubmitResponseParams `json:"Response"`
+}
+
+func (r *ModifyCertificateResubmitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCertificateResubmitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
