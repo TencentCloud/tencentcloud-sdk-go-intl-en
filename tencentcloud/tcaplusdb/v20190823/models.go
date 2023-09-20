@@ -2182,7 +2182,7 @@ type DescribeTablesRequestParams struct {
 	// List of IDs of the table groups where the table to be queried resides
 	TableGroupIds []*string `json:"TableGroupIds,omitnil" name:"TableGroupIds"`
 
-	// Information list of tables to be queried
+	// Information list of tables to be queriedu200d. If you need to filter the tables, use the`Filter` parameter.
 	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitnil" name:"SelectedTables"`
 
 	// Filter. Valid values: TableName, TableInstanceId
@@ -2204,7 +2204,7 @@ type DescribeTablesRequest struct {
 	// List of IDs of the table groups where the table to be queried resides
 	TableGroupIds []*string `json:"TableGroupIds,omitnil" name:"TableGroupIds"`
 
-	// Information list of tables to be queried
+	// Information list of tables to be queriedu200d. If you need to filter the tables, use the`Filter` parameter.
 	SelectedTables []*SelectedTableInfoNew `json:"SelectedTables,omitnil" name:"SelectedTables"`
 
 	// Filter. Valid values: TableName, TableInstanceId
@@ -2691,6 +2691,10 @@ type ImportSnapshotsResponseParams struct {
 	// `TaskId` is in the format of `AppInstanceId-taskId`, used to identify tasks of different clusters.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// `ApplicationId` is in the format of `AppInstanceId-applicationId`, which is used to identify applications of different clusters.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
