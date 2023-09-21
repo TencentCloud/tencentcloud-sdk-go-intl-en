@@ -10859,6 +10859,12 @@ type PullStreamTaskInfo struct {
 	// 1: Use local mode
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VodLocalMode *int64 `json:"VodLocalMode,omitnil" name:"VodLocalMode"`
+
+	//  Recording template ID.
+	RecordTemplateId *string `json:"RecordTemplateId,omitnil" name:"RecordTemplateId"`
+
+	// Newly added streaming address. Used for the scenario of pushing two streams with a single task.
+	BackupToUrl *string `json:"BackupToUrl,omitnil" name:"BackupToUrl"`
 }
 
 type PushAuthKeyInfo struct {
@@ -11157,6 +11163,67 @@ type RefererAuthConfig struct {
 
 	// Referer list. Separate items in it with semicolons (;).
 	Rules *string `json:"Rules,omitnil" name:"Rules"`
+}
+
+// Predefined struct for user
+type RestartLivePullStreamTaskRequestParams struct {
+	// Task Id.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// task operator.
+	Operator *string `json:"Operator,omitnil" name:"Operator"`
+}
+
+type RestartLivePullStreamTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task Id.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// task operator.
+	Operator *string `json:"Operator,omitnil" name:"Operator"`
+}
+
+func (r *RestartLivePullStreamTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartLivePullStreamTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestartLivePullStreamTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RestartLivePullStreamTaskResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type RestartLivePullStreamTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *RestartLivePullStreamTaskResponseParams `json:"Response"`
+}
+
+func (r *RestartLivePullStreamTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartLivePullStreamTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

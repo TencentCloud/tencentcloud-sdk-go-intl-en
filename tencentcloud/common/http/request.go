@@ -254,7 +254,7 @@ func CompleteCommonParams(request Request, region string) {
 	params["Action"] = request.GetAction()
 	params["Timestamp"] = strconv.FormatInt(time.Now().Unix(), 10)
 	params["Nonce"] = strconv.Itoa(rand.Int())
-	params["RequestClient"] = "SDK_GO_3.0.788"
+	params["RequestClient"] = "SDK_GO_3.0.789"
 }
 
 func ConstructParams(req Request) (err error) {

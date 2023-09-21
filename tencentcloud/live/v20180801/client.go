@@ -8563,6 +8563,68 @@ func (c *Client) ModifyLiveTranscodeTemplateWithContext(ctx context.Context, req
     return
 }
 
+func NewRestartLivePullStreamTaskRequest() (request *RestartLivePullStreamTaskRequest) {
+    request = &RestartLivePullStreamTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "RestartLivePullStreamTask")
+    
+    
+    return
+}
+
+func NewRestartLivePullStreamTaskResponse() (response *RestartLivePullStreamTaskResponse) {
+    response = &RestartLivePullStreamTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// RestartLivePullStreamTask
+// Restart the running live streaming pull task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TASKNOTEXIST = "InvalidParameter.TaskNotExist"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) RestartLivePullStreamTask(request *RestartLivePullStreamTaskRequest) (response *RestartLivePullStreamTaskResponse, err error) {
+    return c.RestartLivePullStreamTaskWithContext(context.Background(), request)
+}
+
+// RestartLivePullStreamTask
+// Restart the running live streaming pull task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TASKNOTEXIST = "InvalidParameter.TaskNotExist"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+func (c *Client) RestartLivePullStreamTaskWithContext(ctx context.Context, request *RestartLivePullStreamTaskRequest) (response *RestartLivePullStreamTaskResponse, err error) {
+    if request == nil {
+        request = NewRestartLivePullStreamTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestartLivePullStreamTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRestartLivePullStreamTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResumeDelayLiveStreamRequest() (request *ResumeDelayLiveStreamRequest) {
     request = &ResumeDelayLiveStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
