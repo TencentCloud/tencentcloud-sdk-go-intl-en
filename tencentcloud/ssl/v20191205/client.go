@@ -1115,6 +1115,74 @@ func (c *Client) DescribeCertificatesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeHostTeoInstanceListRequest() (request *DescribeHostTeoInstanceListRequest) {
+    request = &DescribeHostTeoInstanceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeHostTeoInstanceList")
+    
+    
+    return
+}
+
+func NewDescribeHostTeoInstanceListResponse() (response *DescribeHostTeoInstanceListResponse) {
+    response = &DescribeHostTeoInstanceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeHostTeoInstanceList
+// This API is used to query the list of EDGEONE instances to which a certificate can be deployed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINNERINTERRUPT = "FailedOperation.CertificateHostResourceInnerInterrupt"
+//  FAILEDOPERATION_CERTIFICATENOTAVAILABLE = "FailedOperation.CertificateNotAvailable"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) DescribeHostTeoInstanceList(request *DescribeHostTeoInstanceListRequest) (response *DescribeHostTeoInstanceListResponse, err error) {
+    return c.DescribeHostTeoInstanceListWithContext(context.Background(), request)
+}
+
+// DescribeHostTeoInstanceList
+// This API is used to query the list of EDGEONE instances to which a certificate can be deployed.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINNERINTERRUPT = "FailedOperation.CertificateHostResourceInnerInterrupt"
+//  FAILEDOPERATION_CERTIFICATENOTAVAILABLE = "FailedOperation.CertificateNotAvailable"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) DescribeHostTeoInstanceListWithContext(ctx context.Context, request *DescribeHostTeoInstanceListRequest) (response *DescribeHostTeoInstanceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeHostTeoInstanceListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHostTeoInstanceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHostTeoInstanceListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadCertificateRequest() (request *DownloadCertificateRequest) {
     request = &DownloadCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},

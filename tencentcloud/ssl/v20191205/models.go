@@ -2206,6 +2206,116 @@ func (r *DescribeCertificatesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeHostTeoInstanceListRequestParams struct {
+	// The ID of the certificate to be deployed.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// The type of resource for certificate deployment.
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+	// Whether to query the cached results. Valid values: `1` (yes) and `0` (no). By default, the cached results within 30 minutes are queried.
+	IsCache *uint64 `json:"IsCache,omitnil" name:"IsCache"`
+
+	// The list of filter parameters. FilterKey: domainMatch (query the list of instances with matching or non-matching domains). FilterValue: `1` (default; query the list of instances with matching domains) or `0` (query the list of instances with non-matching domains).
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+
+	// The ID of the deployed certificate.
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+
+	// The pagination offset, starting from 0.
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// The number of instances on each page. Default value: 10.	
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Whether the query is asynchronous.
+	AsyncCache *int64 `json:"AsyncCache,omitnil" name:"AsyncCache"`
+}
+
+type DescribeHostTeoInstanceListRequest struct {
+	*tchttp.BaseRequest
+	
+	// The ID of the certificate to be deployed.
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// The type of resource for certificate deployment.
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+	// Whether to query the cached results. Valid values: `1` (yes) and `0` (no). By default, the cached results within 30 minutes are queried.
+	IsCache *uint64 `json:"IsCache,omitnil" name:"IsCache"`
+
+	// The list of filter parameters. FilterKey: domainMatch (query the list of instances with matching or non-matching domains). FilterValue: `1` (default; query the list of instances with matching domains) or `0` (query the list of instances with non-matching domains).
+	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+
+	// The ID of the deployed certificate.
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+
+	// The pagination offset, starting from 0.
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// The number of instances on each page. Default value: 10.	
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Whether the query is asynchronous.
+	AsyncCache *int64 `json:"AsyncCache,omitnil" name:"AsyncCache"`
+}
+
+func (r *DescribeHostTeoInstanceListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostTeoInstanceListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertificateId")
+	delete(f, "ResourceType")
+	delete(f, "IsCache")
+	delete(f, "Filters")
+	delete(f, "OldCertificateId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "AsyncCache")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostTeoInstanceListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostTeoInstanceListResponseParams struct {
+	// The list of EDGEONE instances.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceList []*TeoInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// The total count.
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeHostTeoInstanceListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostTeoInstanceListResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostTeoInstanceListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostTeoInstanceListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DownloadCertificateRequestParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
@@ -2327,6 +2437,14 @@ type Error struct {
 	// The error message.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitnil" name:"Message"`
+}
+
+type Filter struct {
+	// The key of the filter parameter.
+	FilterKey *string `json:"FilterKey,omitnil" name:"FilterKey"`
+
+	// u200cThe value of the filter parameter.
+	FilterValue *string `json:"FilterValue,omitnil" name:"FilterValue"`
 }
 
 type LiveInstanceDetail struct {
