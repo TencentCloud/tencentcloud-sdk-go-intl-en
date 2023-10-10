@@ -63,7 +63,7 @@ func (c *Client) Send(request tchttp.Request, response tchttp.Response) (err err
 		safeInjectClientToken(request)
 	}
 
-	if c.credential == nil {
+	if request.GetSkipSign() {
 		// Some APIs can skip signature.
 		return c.sendWithoutSignature(request, response)
 	} else if c.profile.DisableRegionBreaker == true || c.rb == nil {
