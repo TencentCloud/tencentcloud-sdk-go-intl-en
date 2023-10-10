@@ -40,6 +40,7 @@ type Request interface {
 	GetContentType() string
 	GetContext() context.Context
 	GetHeader() map[string]string
+	GetSkipSign() bool
 	SetScheme(string)
 	SetRootDomain(string)
 	SetDomain(string)
@@ -49,6 +50,7 @@ type Request interface {
 	SetBody([]byte)
 	SetContext(context.Context)
 	SetHeader(header map[string]string)
+	SetSkipSign(skip bool)
 }
 
 type BaseRequest struct {
@@ -58,6 +60,7 @@ type BaseRequest struct {
 	rootDomain string
 	domain     string
 	path       string
+	skipSign   bool
 	params     map[string]string
 	formParams map[string]string
 	header     map[string]string
@@ -202,6 +205,14 @@ func (r *BaseRequest) SetHeader(header map[string]string) {
 	r.header = header
 }
 
+func (r *BaseRequest) GetSkipSign() bool {
+	return r.skipSign
+}
+
+func (r *BaseRequest) SetSkipSign(skip bool) {
+	r.skipSign = skip
+}
+
 func GetUrlQueriesEncoded(params map[string]string) string {
 	values := url.Values{}
 	for key, value := range params {
@@ -254,7 +265,7 @@ func CompleteCommonParams(request Request, region string) {
 	params["Action"] = request.GetAction()
 	params["Timestamp"] = strconv.FormatInt(time.Now().Unix(), 10)
 	params["Nonce"] = strconv.Itoa(rand.Int())
-	params["RequestClient"] = "SDK_GO_3.0.799"
+	params["RequestClient"] = "SDK_GO_3.0.798"
 }
 
 func ConstructParams(req Request) (err error) {
@@ -333,3 +344,4 @@ func flatStructure(value reflect.Value, request Request, prefix string) (err err
 	}
 	return
 }
+
