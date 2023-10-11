@@ -47,7 +47,7 @@ func NewClientProfile() *ClientProfile {
 		HttpProfile:     NewHttpProfile(),
 		SignMethod:      "TC3-HMAC-SHA256",
 		UnsignedPayload: false,
-		Language:        "zh-CN",
+		Language:        "en-US",
 		Debug:           false,
 		// now is true, will become to false in future
 		DisableRegionBreaker: true,
