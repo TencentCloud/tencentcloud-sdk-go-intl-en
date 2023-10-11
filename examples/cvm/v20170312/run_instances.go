@@ -7,7 +7,7 @@ import (
 
 	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common"
 	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
-	"github.com/tencentcloud/tencentcloud-sdk-go-inel-en/tencentcloud/common/profile"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
 	cvm "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/cvm/v20170312"
 )
 
