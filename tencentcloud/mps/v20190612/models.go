@@ -228,8 +228,8 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// List of up to 10 image or text watermarks.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil" name:"WatermarkSet"`
 
-	// Target bucket of an output file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, the `OutputStorage` value of the upper folder will be inherited.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil" name:"OutputStorage"`
 
 	// The relative or absolute output path of the manifest file after being transcoded to adaptive bitrate streaming. If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}.{format}`.
@@ -241,11 +241,12 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// The relative output path of the segment file after being transcoded to adaptive bitrate streaming (in HLS format only). If this parameter is left empty, a relative path in the following format will be used by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
 	SegmentObjectName *string `json:"SegmentObjectName,omitnil" name:"SegmentObjectName"`
 
-	// The subtitle file to add.
+	// 
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil" name:"AddOnSubtitles"`
 
-	// Information of Drm.   Note: This field may return·null, indicating that no valid values can be obtained.
+	// 
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	DrmInfo *DrmInfo `json:"DrmInfo,omitnil" name:"DrmInfo"`
 }
 
@@ -449,6 +450,7 @@ type AiAnalysisTaskHighlightOutput struct {
 	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitnil" name:"HighlightSet"`
 
 	// The storage location of the highlight segments.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil" name:"OutputStorage"`
 }
 
@@ -1097,7 +1099,8 @@ type AiReviewPornOcrTaskOutput struct {
 }
 
 type AiReviewPornTaskInput struct {
-	// ID of a porn information detection template.
+	// The ID of a porn detection template.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 }
 
@@ -1655,6 +1658,69 @@ type AsrWordsConfigureInfoForUpdate struct {
 	LabelSet []*string `json:"LabelSet,omitnil" name:"LabelSet"`
 }
 
+type AudioBeautifyConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `ON`.
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// The audio improvement options. You can specify multiple options. Valid values:
+	// <li>`declick`: Noise removal.</li>
+	// <li>`deesser`: De-essing.</li>
+	// Default: `declick`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Types []*string `json:"Types,omitnil" name:"Types"`
+}
+
+type AudioDenoiseConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `ON`.
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+}
+
+type AudioEnhanceConfig struct {
+	// The audio noise reduction configuration.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Denoise *AudioDenoiseConfig `json:"Denoise,omitnil" name:"Denoise"`
+
+	// The audio separation configuration.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Separate *AudioSeparateConfig `json:"Separate,omitnil" name:"Separate"`
+
+	// The volume equalization configuration.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	VolumeBalance *VolumeBalanceConfig `json:"VolumeBalance,omitnil" name:"VolumeBalance"`
+
+	// The audio improvement configuration.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Beautify *AudioBeautifyConfig `json:"Beautify,omitnil" name:"Beautify"`
+}
+
+type AudioSeparateConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `ON`.
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// The scenario. Valid values:
+	// <li>`normal`: Separate voice and background audio.</li>
+	// <li>`music`: Separate vocals and instrumentals.</li>
+	// Default value: `normal`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// The output audio track. Valid values:
+	// <li>`vocal`: Voice.</li>
+	// <li>`background`: Output background audio if the scenario is `normal`, and output instrumentals if the scenario is `music`.</li>
+	// Default value: `vocal`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Track *string `json:"Track,omitnil" name:"Track"`
+}
+
 type AudioTemplateInfo struct {
 	// Audio stream codec.
 	// When the outer `Container` parameter is `mp3`, the valid value is:
@@ -1762,15 +1828,19 @@ type AwsS3FileUploadTrigger struct {
 
 type AwsSQS struct {
 	// The region of the SQS queue.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	SQSRegion *string `json:"SQSRegion,omitnil" name:"SQSRegion"`
 
 	// The name of the SQS queue.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	SQSQueueName *string `json:"SQSQueueName,omitnil" name:"SQSQueueName"`
 
 	// The key ID required to read from/write to the SQS queue.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	S3SecretId *string `json:"S3SecretId,omitnil" name:"S3SecretId"`
 
 	// The key required to read from/write to the SQS queue.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	S3SecretKey *string `json:"S3SecretKey,omitnil" name:"S3SecretKey"`
 }
 
@@ -1802,6 +1872,435 @@ type ColorEnhanceConfig struct {
 	// Default value: weak.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil" name:"Type"`
+}
+
+type ComposeAudioItem struct {
+	// The media information of the element.
+	SourceMedia *ComposeSourceMedia `json:"SourceMedia,omitnil" name:"SourceMedia"`
+
+	// The time of the element in the timeline. If this is not specified, the element will follow the previous element.
+	TrackTime *ComposeTrackTime `json:"TrackTime,omitnil" name:"TrackTime"`
+
+	// The operations performed, such as muting.
+	AudioOperations []*ComposeAudioOperation `json:"AudioOperations,omitnil" name:"AudioOperations"`
+}
+
+type ComposeAudioOperation struct {
+	// The operation type. Valid values:
+	// <li>`Volume`: Volume adjustment. </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	//  The volume level. This parameter is valid if `Type` is `Volume`. Value range: 0–5. 
+	// <li>If the parameter value is `0`, the video will be muted. </li>
+	// <li>If the parameter value is smaller than 1, the volume will be reduced. </li>
+	// <li>If the parameter value is `1`, the original volume will be kept. </li>
+	// <li>If the parameter value is greater than 1, the volume will be increased. </li>
+	Volume *float64 `json:"Volume,omitnil" name:"Volume"`
+}
+
+type ComposeAudioStream struct {
+	// The codec of the audio stream. Valid values:
+	// <li>`AAC`: AAC (default), which is used for the MP4 container. </li>
+	// <li>`MP3`: MP3 codec, which is used for the MP3 container. </li>
+	Codec *string `json:"Codec,omitnil" name:"Codec"`
+
+	// The sample rate (Hz) of the audio stream.
+	// <li>16000 (default)</li>
+	// <li>32000</li>
+	// <li>44100</li>
+	// <li>48000</li>
+	SampleRate *int64 `json:"SampleRate,omitnil" name:"SampleRate"`
+
+	// The number of sound channels. Valid values:
+	// u200c<li>`1`: Mono. </li>
+	// <li>`2`: Dual (default). </li>
+	AudioChannel *int64 `json:"AudioChannel,omitnil" name:"AudioChannel"`
+}
+
+type ComposeCanvas struct {
+	// The RGB value of the background color. The format is #RRGGBB, such as `#F0F0F0`. 
+	// Default value: `#000000` (black).
+	Color *string `json:"Color,omitnil" name:"Color"`
+
+	// The canvas width (px), which is the width of the output video. Value range: 0–3840.  
+	// The default value is `0`, which means that the canvas is as wide as the first video.
+	Width *int64 `json:"Width,omitnil" name:"Width"`
+
+	// The canvas height (px), which is the height of the output video. Value range: 0–3840.  
+	// The default value is `0`, which means that the canvas is as high as the first video.
+	Height *int64 `json:"Height,omitnil" name:"Height"`
+}
+
+type ComposeEmptyItem struct {
+	// The element duration.
+	// <li>The value of this parameter ends with `s`, which means seconds. For example, `3.5s` indicates 3.5 seconds. </li>
+	Duration *string `json:"Duration,omitnil" name:"Duration"`
+}
+
+type ComposeImageItem struct {
+	// The media information of the element.
+	SourceMedia *ComposeSourceMedia `json:"SourceMedia,omitnil" name:"SourceMedia"`
+
+	// The time of the element in the timeline. If this is not specified, the element will follow the previous element.
+	TrackTime *ComposeTrackTime `json:"TrackTime,omitnil" name:"TrackTime"`
+
+	// The horizontal distance of the element's center from the canvas origin. Two formats are supported:
+	// <li>If the value ends with %, it specifies the distance as a percentage of the canvas width. For example, `10%` means that the distance is 10% of the canvas width. </li>
+	// u200c<li>If the value ends with px, it specifies the distance in pixels. For example, `100px` means that the distance is 100 pixels. </li>
+	// Default value: `50%`.
+	XPos *string `json:"XPos,omitnil" name:"XPos"`
+
+	// The vertical distance of the element's center from the canvas origin. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the distance as a percentage of the canvas height. For example, `10%` means that the distance is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the distance in pixels. For example, `100px` means that the distance is 100 pixels. </li>
+	// Default value: `50%`.
+	YPos *string `json:"YPos,omitnil" name:"YPos"`
+
+	// The width of the video segment. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the width as a percentage of the canvas width. For example, `10%` means that the video width is 10% of the canvas width. </li>
+	// u200c<li>If the value ends with px, it specifies the width in pixels. For example, `100px` means that the video width is 100 pixels. </li>
+	// If one or both parameters are empty or set to `0`:
+	// <li>If both `Width` and `Height` are empty, the original width and height of the element will be kept. </li>
+	// <li>If `Width` is empty and `Height` is not, the width will be auto scaled. </li>
+	// <li>If `Width` is not empty and `Height` is, the height will be auto scaled. </li>
+	Width *string `json:"Width,omitnil" name:"Width"`
+
+	// The height of the element. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the height as a percentage of the canvas height. For example, `10%` means that the height is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the height in pixels. For example, `100px` means that the height is 100 pixels. </li>
+	// If one or both parameters are empty or set to `0`:
+	// <li>If both `Width` and `Height` are empty, the original width and height of the video will be kept. </li>
+	// <li>If `Width` is empty and `Height` is not, the width will be auto scaled. </li>
+	// <li>If `Width` is not empty and `Height` is, the height will be auto scaled. </li>
+	Height *string `json:"Height,omitnil" name:"Height"`
+
+	// The image operations, such as image rotation.
+	ImageOperations []*ComposeImageOperation `json:"ImageOperations,omitnil" name:"ImageOperations"`
+}
+
+type ComposeImageOperation struct {
+	// The type. Valid values:
+	// u200c<li>`Rotate`: Image rotation. </li>
+	// <li>`Flip`: Image flipping. </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// This is valid if `Type` is `Rotate`. The angle of rotation around the image center. Value range: 0–360.
+	RotateAngle *float64 `json:"RotateAngle,omitnil" name:"RotateAngle"`
+
+	// This is valid if `Type` is `Flip`. How to flip the image. Valid values:xa0
+	// u200c<li>`Horizental`: Flip horizontally. </li>
+	// <li>`Vertical`: Flip vertically. </li>
+	FlipType *string `json:"FlipType,omitnil" name:"FlipType"`
+}
+
+type ComposeMediaConfig struct {
+	// The information of the output video.
+	TargetInfo *ComposeTargetInfo `json:"TargetInfo,omitnil" name:"TargetInfo"`
+
+	// The canvas information of the output video.
+	Canvas *ComposeCanvas `json:"Canvas,omitnil" name:"Canvas"`
+
+	// The global styles. This parameter is used together with `Tracks` to specify styles, such as the subtitle style.
+	Styles []*ComposeStyles `json:"Styles,omitnil" name:"Styles"`
+
+	// The information of media tracks (consisting of video, audio, image, and text elements) used to composite the video. About tracks and the timeline:
+	// <ul><li>The timeline of a track is the same as the timeline of the output video. </li><li>The elements of different tracks are overlaid at the same time point in the timeline.</li><ul><li>Video, image, and text elements are overlaid according to their track number, with the first track on top. </li><li>Audio elements are mixed. </li></ul></ul>Note: The different elements of the same track cannot be overlaid (except subtitles).
+	Tracks []*ComposeMediaTrack `json:"Tracks,omitnil" name:"Tracks"`
+}
+
+type ComposeMediaItem struct {
+	// The element type. Valid values:
+	// <li>`Video` </li>
+	// <li>`Audio` </li>
+	// <li>`Image` </li>
+	// <li>`Transition` </li>
+	// <li>`Subtitle` </li>
+	// <li>`Empty` </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// The information of the video element, which is valid if `Type` is `Video`.
+	Video *ComposeVideoItem `json:"Video,omitnil" name:"Video"`
+
+	// The information of the audio element, which is valid if `Type` is `Audio`.
+	Audio *ComposeAudioItem `json:"Audio,omitnil" name:"Audio"`
+
+	// The information of the image element, which is valid if `Type` is `Image`.
+	Image *ComposeImageItem `json:"Image,omitnil" name:"Image"`
+
+	// The information of the transition element, which is valid if `Type` is `Transition`.
+	Transition *ComposeTransitionItem `json:"Transition,omitnil" name:"Transition"`
+
+	// The information of the subtitle element, which is valid if `Type` is `Subtitle`.
+	Subtitle *ComposeSubtitleItem `json:"Subtitle,omitnil" name:"Subtitle"`
+
+	// The information of the empty element, which is valid if `Type` is `Empty`. An empty element is used as a placeholder in the timeline.
+	Empty *ComposeEmptyItem `json:"Empty,omitnil" name:"Empty"`
+}
+
+type ComposeMediaTrack struct {
+	// The track type. Valid values:<ul><li>`Video`: Video track. A video track can consist of the following elements:</li><ul><li>Video</li><li>Image</li><li>Transition</li><li>Empty</li></ul><li>`Audio`: Audio track. An audio track can consist of the following elements:</li><ul><li>Audio</li><li>Transition</li><li>Empty</li></ul><li>`Title`: Text track. A text track can consist of the following elements: </li><ul><li>Subtitle</li></ul>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// The elements of a track.
+	Items []*ComposeMediaItem `json:"Items,omitnil" name:"Items"`
+}
+
+type ComposeSourceMedia struct {
+	// The material ID, which can be found in `FileInfos`.
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// The start time of the material. The following two formats are supported.
+	// <li>If the value of this parameter ends with `s`, it specifies the time in seconds. For example, `3.5s` indicates the time when 3.5 seconds of the material elapses.</li>
+	// u200c<li>If the value of this parameter ends with `%`, it specifies the time as a percentage of the material's duration. For example, `10%` indicates the time when 10% of the material's duration elapses. </li>
+	// Default value: `0s`.
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// The end time of the material. This parameter and `StartTime` determine which time segment of the material is used. The following two formats are supported:
+	// <li>If the value of this parameter ends with `s`, it specifies the time in seconds. For example, `3.5s` indicates the time when 3.5 seconds of the material elapses.</li>
+	// u200c<li>If the value of this parameter ends with `%`, it specifies the time as a percentage of the material's duration. For example, `10%` indicates the time when 10% of the material's duration elapses. </li>
+	// If the track duration is set, the default value is `StartTime` plus the track duration. If not, the default value is `StartTime` plus 1 second.
+	// Note: `EndTime` must be at least 0.02 seconds later than `StartTime`.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+}
+
+type ComposeStyles struct {
+	// The style ID, which identifies an element style.
+	// Note: The style ID can be up to 32 characters long and can contain letters, digits, and special characters -_
+	Id *string `json:"Id,omitnil" name:"Id"`
+
+	// The type. Valid values:
+	// <li>`Subtitle`: The subtitle style. </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// The subtitle style details. This parameter is valid if `Type` is `Subtitle`.
+	Subtitle *ComposeSubtitleStyle `json:"Subtitle,omitnil" name:"Subtitle"`
+}
+
+type ComposeSubtitleItem struct {
+	// The subtitle style ID, which corresponds to the `Id` field of `ComposeStyles`.
+	StyleId *string `json:"StyleId,omitnil" name:"StyleId"`
+
+	// The subtitle text.
+	Text *string `json:"Text,omitnil" name:"Text"`
+
+	// The time of the element in the timeline. If this is not specified, the element will follow the previous element.	
+	TrackTime *ComposeTrackTime `json:"TrackTime,omitnil" name:"TrackTime"`
+}
+
+type ComposeSubtitleStyle struct {
+	// The subtitle height. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the height as a percentage of the canvas height. For example, `10%` means that the height is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the height in pixels. For example, `100px` means that the height is 100 pixels. </li>
+	// The default value is the value of `FontSize`.
+	Height *string `json:"Height,omitnil" name:"Height"`
+
+	// The bottom margin. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the margin as a percentage of the canvas height. For example, `10%` means that the margin is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the margin in pixels. For example, `100px` means that the margin is 100 pixels. </li>
+	// Default value: `0px`.
+	MarginBottom *string `json:"MarginBottom,omitnil" name:"MarginBottom"`
+
+	// The font type. Valid values:
+	// <li>`SimHei`(default): Chinese font Heiti. </li>
+	// <Li>`SimSun`: Chinese font Songti. </li>
+	FontType *string `json:"FontType,omitnil" name:"FontType"`
+
+	// The font size. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the size as a percentage of the canvas height. For example, `10%` means that the size is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the size in pixels. For example, `100px` means that the size is 100 pixels. </li>
+	// Default value: `2%`.
+	FontSize *string `json:"FontSize,omitnil" name:"FontSize"`
+
+	// Whether to bold the text (some fonts may not support bold). Valid values:
+	// <li>`0` (default): No. </li>
+	// <li>`1`: Yes. </li>
+	FontBold *int64 `json:"FontBold,omitnil" name:"FontBold"`
+
+	// Whether to italicize the text (some fonts may not support italics). Valid values:
+	// <li>`0` (default): No. </li>
+	// <li>`1`: Yes. </li>
+	FontItalic *int64 `json:"FontItalic,omitnil" name:"FontItalic"`
+
+	// The font color (#RRGGBBAA).  
+	// Default value: `0x000000FF` (black).  
+	// Note: `AA` in the color notation defines the opacity of the color. It's optional.
+	FontColor *string `json:"FontColor,omitnil" name:"FontColor"`
+
+	// The text alignment. Valid values:
+	// <li>`Center`(default) </li>
+	// <li>`Left` </li>
+	// <li>`Right` </li>
+	FontAlign *string `json:"FontAlign,omitnil" name:"FontAlign"`
+
+	// The margin for left/right align.
+	// <li>If `FontAlign` is `Left`, this parameter specifies the left margin of the subtitles. </li>
+	// <li>If `FontAlign` is `Right`, this parameter specifies the right margin of the subtitles. </li>
+	// Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the margin as a percentage of the canvas width. For example, `10%` means that the margin is 10% of the canvas width. </li>
+	// u200c<li>If the value ends with px, it specifies the margin in pixels. For example, `100px` means that the margin is 100 pixels. </li>
+	FontAlignMargin *string `json:"FontAlignMargin,omitnil" name:"FontAlignMargin"`
+
+	// The subtitle border width. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the width as a percentage of the canvas height. For example, `10%` means that the width is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the width in pixels. For example, `100px` means that the width is 100 pixels. </li>
+	// The default value is `0`, which means the subtitles will have no borders.
+	BorderWidth *string `json:"BorderWidth,omitnil" name:"BorderWidth"`
+
+	// The border color, whose format is the same as that for `FontColor`. This parameter is valid if `BorderWidth` is not `0`.
+	BorderColor *string `json:"BorderColor,omitnil" name:"BorderColor"`
+
+	// The text background color, whose format is the same as that for `FontColor`.  
+	// The default value is an empty string, which means the subtitles will not have a background color.
+	BottomColor *string `json:"BottomColor,omitnil" name:"BottomColor"`
+}
+
+type ComposeTargetInfo struct {
+	// The container. Valid values:
+	// <li>`mp4` (default), for video files. </li>
+	// <li>`mp3`, for audio files. </li>
+	Container *string `json:"Container,omitnil" name:"Container"`
+
+	// Whether to remove video data. Valid values:
+	// <li>`0` (default): No. </li>
+	// <li>`1`: Yes. </li>
+	RemoveVideo *int64 `json:"RemoveVideo,omitnil" name:"RemoveVideo"`
+
+	// Whether to remove audio data. Valid values:
+	// <li>`0` (default): No. </li>
+	// <li>`1`: Yes. </li>
+	RemoveAudio *int64 `json:"RemoveAudio,omitnil" name:"RemoveAudio"`
+
+	// The information of the output video stream.
+	VideoStream *ComposeVideoStream `json:"VideoStream,omitnil" name:"VideoStream"`
+
+	// The information of the output audio stream.
+	AudioStream *ComposeAudioStream `json:"AudioStream,omitnil" name:"AudioStream"`
+}
+
+type ComposeTrackTime struct {
+	// The time when the element starts on the track.
+	// <li>The value of this parameter ends with `s`, which means seconds. For example, `3.5s` indicates the time when 3.5 seconds of the video elapses.</li>
+	// Note: If this parameter is not specified, the start time will be the end time of the previous element. Therefore, you can also use the placeholder parameter `ComposeEmptyItem` to configure the start time.
+	Start *string `json:"Start,omitnil" name:"Start"`
+
+	// The element duration.
+	// <li>The value of this parameter ends with `s`, which means seconds. For example, `3.5s` means 3.5 seconds.</li>
+	// The default value is the material duration, which is determined by `EndTime` and `StartTime` of `ComposeSourceMedia`. If `ComposeSourceMedia` is not specified, the duration will be 1 second.
+	Duration *string `json:"Duration,omitnil" name:"Duration"`
+}
+
+type ComposeTransitionItem struct {
+	// The element duration. <li>The value of this parameter ends with `s`, which means seconds. For example, `3s` indicates 3 seconds. </li>
+	// Default value: `1s`.
+	// Note
+	// <li>The number before `s` must be an integer. Non-integers will be rounded down to the nearest integer. </li>
+	// <li>The transition element must be between two non-empty elements. </li>
+	// <li>The duration of the transition element must be shorter than that of the preceding element and the following element. </li>
+	// u200c<li>The start time of the following element on the track will be automatically changed to the end time of the preceding element minus the duration of the transition element. </li>
+	Duration *string `json:"Duration,omitnil" name:"Duration"`
+
+	// The transition effects.
+	// The default transition effect is fade.
+	// Note: You can add at most one image transition and one audio transition.
+	Transitions []*ComposeTransitionOperation `json:"Transitions,omitnil" name:"Transitions"`
+}
+
+type ComposeTransitionOperation struct {
+	// The transition type.
+	// 
+	// The image transition, which connects two video segments.
+	// <li>`ImageFadeInFadeOut` </li>
+	// u200c<li>`BowTieHorizontal` </li>
+	// u200c<li>`BowTieVertical` </li>
+	// u200c<li>`ButterflyWaveScrawler` </li>
+	// <li>`Cannabisleaf` </li>
+	// <li>`Circle` </li>
+	// <li>`CircleCrop` </li>
+	// u200c<li>`Circleopen` </li>
+	// <li>`Crosswarp` </li>
+	// <li>`Cube` </li>
+	// <li>`DoomScreenTransition` </li>
+	// <li>`Doorway` </li>
+	// <li>`Dreamy` </li>
+	// <li>`DreamyZoom` </li>
+	// <li>`FilmBurn` </li>
+	// <li>`GlitchMemories` </li>
+	// <li>`Heart` </li>
+	// <li>`InvertedPageCurl` </li>
+	// <li>`Luma` </li>
+	// <li>`Mosaic` </li>
+	// <li>`Pinwheel` </li>
+	// <li>`PolarFunction` </li>
+	// <li>`PolkaDotsCurtain` </li>
+	// <li>`Radial` </li>
+	// <li>`RotateScaleFade` </li>
+	// <li>`Squeeze` </li>
+	// <li>`Swap` </li>
+	// <li>`Swirl` </li>
+	// <li>`UndulatingBurnOutSwirl` </li>
+	// <li>`Windowblinds` </li>
+	// <li>`WipeDown` </li>
+	// <li>`WipeLeft` </li>
+	// <li>`WipeRight` </li>
+	// <li>`WipeUp` </li>
+	// <li>`ZoomInCircles` </li> 
+	// The audio transition, which connects two audio segments.
+	// <li>`AudioFadeInFadeOut` </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+}
+
+type ComposeVideoItem struct {
+	// The media information of the element.
+	SourceMedia *ComposeSourceMedia `json:"SourceMedia,omitnil" name:"SourceMedia"`
+
+	// The time of the element in the timeline. If this is not specified, the element will follow the previous element.
+	TrackTime *ComposeTrackTime `json:"TrackTime,omitnil" name:"TrackTime"`
+
+	// The horizontal distance of the element's center from the canvas origin. Two formats are supported:
+	// <li>If the value ends with %, it specifies the distance as a percentage of the canvas width. For example, `10%` means that the distance is 10% of the canvas width. </li>
+	// u200c<li>If the value ends with px, it specifies the distance in pixels. For example, `100px` means that the distance is 100 pixels. </li>
+	// Default value: `50%`.
+	XPos *string `json:"XPos,omitnil" name:"XPos"`
+
+	// The vertical distance of the element's center from the canvas origin. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the distance as a percentage of the canvas height. For example, `10%` means that the distance is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the distance in pixels. For example, `100px` means that the distance is 100 pixels. </li>
+	// Default value: `50%`.
+	YPos *string `json:"YPos,omitnil" name:"YPos"`
+
+	// The width of the video segment. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the width as a percentage of the canvas width. For example, `10%` means that the video width is 10% of the canvas width. </li>
+	// u200c<li>If the value ends with px, it specifies the width in pixels. For example, `100px` means that the video width is 100 pixels. </li>
+	// If one or both parameters are empty or set to `0`:
+	// <li>If both `Width` and `Height` are empty, the original width and height of the element will be kept. </li>
+	// <li>If `Width` is empty and `Height` is not, the width will be auto scaled. </li>
+	// <li>If `Width` is not empty and `Height` is, the height will be auto scaled. </li>
+	Width *string `json:"Width,omitnil" name:"Width"`
+
+	// The height of the element. Two formats are supported:
+	// u200c<li>If the value ends with %, it specifies the height as a percentage of the canvas height. For example, `10%` means that the height is 10% of the canvas height. </li>
+	// u200c<li>If the value ends with px, it specifies the height in pixels. For example, `100px` means that the height is 100 pixels. </li>
+	// If one or both parameters are empty or set to `0`:
+	// <li>If both `Width` and `Height` are empty, the original width and height of the element will be kept. </li>
+	// <li>If `Width` is empty and `Height` is not, the width will be auto scaled. </li>
+	// <li>If `Width` is not empty and `Height` is, the height will be auto scaled. </li>
+	Height *string `json:"Height,omitnil" name:"Height"`
+
+	// The image operations, such as image rotation.
+	ImageOperations []*ComposeImageOperation `json:"ImageOperations,omitnil" name:"ImageOperations"`
+
+	// The audio operations, such as muting.
+	AudioOperations []*ComposeAudioOperation `json:"AudioOperations,omitnil" name:"AudioOperations"`
+}
+
+type ComposeVideoStream struct {
+	// The codec. Valid values:
+	// <li>`H.264` (default) </li>
+	Codec *string `json:"Codec,omitnil" name:"Codec"`
+
+	// The video frame rate (Hz). Value range: 0–60.  
+	// The default value is `0`, which means that the frame rate will be the same as that of the first video.
+	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
 }
 
 type ContentReviewTemplateItem struct {
@@ -5280,6 +5779,10 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScheduleTask *ScheduleTask `json:"ScheduleTask,omitnil" name:"ScheduleTask"`
 
+	// The information of a live scheme. This parameter is valid only if `TaskType` is `LiveScheduleTask`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	LiveScheduleTask *LiveScheduleTask `json:"LiveScheduleTask,omitnil" name:"LiveScheduleTask"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -5890,10 +6393,13 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
 }
 
 type DrmInfo struct {
-
+	// The encryption type.
+	// <li>`simpleaes`: AES-128 encryption.</li>
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-
+	// The AES-128 encryption details.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	SimpleAesDrm *SimpleAesDrm `json:"SimpleAesDrm,omitnil" name:"SimpleAesDrm"`
 }
 
@@ -5901,18 +6407,26 @@ type EditMediaFileInfo struct {
 	// Video input information.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil" name:"InputInfo"`
 
-	// Start time offset of video clipping in seconds.
+	// The start offset (seconds) for video clipping. This parameter is valid for video clipping tasks.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil" name:"StartTimeOffset"`
 
-	// End time offset of video clipping in seconds.
+	// The end offset (seconds) for video clipping. This parameter is valid for video clipping tasks.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
+
+	// The ID of the material associated with an element. This parameter is required for video compositing tasks.
+	// 
+	// Note: The ID can be up to 32 characters long and can contain letters, digits, and special characters -_
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitnil" name:"Id"`
 }
 
 type EditMediaOutputConfig struct {
-	// Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`
+	// The container. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// The editing mode. Valid values are `normal` and `fast`. The default is `normal`, which indicates precise editing.
+	// The clip mode. Valid values: `normal` (default), `fast`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
@@ -5925,10 +6439,17 @@ type EditMediaRequestParams struct {
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil" name:"OutputStorage"`
 
 	// The path to save the media processing output file.
+	// 
+	// Note: For complex compositing tasks, the filename can be up to 64 characters long and can only contain digits, letters, and special characters -_
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil" name:"OutputObjectPath"`
 
-	// Configuration for output files of video editing
+	// The output settings for a video clipping task.
 	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
+
+	// The settings for a video compositing task.
+	// 
+	// Note: If this parameter is not empty, the task is a video compositing task. Otherwise, the task is a video clipping task.
+	ComposeConfig *ComposeMediaConfig `json:"ComposeConfig,omitnil" name:"ComposeConfig"`
 
 	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil" name:"TaskNotifyConfig"`
@@ -5953,10 +6474,17 @@ type EditMediaRequest struct {
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil" name:"OutputStorage"`
 
 	// The path to save the media processing output file.
+	// 
+	// Note: For complex compositing tasks, the filename can be up to 64 characters long and can only contain digits, letters, and special characters -_
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil" name:"OutputObjectPath"`
 
-	// Configuration for output files of video editing
+	// The output settings for a video clipping task.
 	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
+
+	// The settings for a video compositing task.
+	// 
+	// Note: If this parameter is not empty, the task is a video compositing task. Otherwise, the task is a video clipping task.
+	ComposeConfig *ComposeMediaConfig `json:"ComposeConfig,omitnil" name:"ComposeConfig"`
 
 	// Event notification information of task. If this parameter is left empty, no event notifications will be obtained.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil" name:"TaskNotifyConfig"`
@@ -5987,6 +6515,7 @@ func (r *EditMediaRequest) FromJsonString(s string) error {
 	delete(f, "OutputStorage")
 	delete(f, "OutputObjectPath")
 	delete(f, "OutputConfig")
+	delete(f, "ComposeConfig")
 	delete(f, "TaskNotifyConfig")
 	delete(f, "TasksPriority")
 	delete(f, "SessionId")
@@ -6171,6 +6700,10 @@ type EnhanceConfig struct {
 	// Video enhancement configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VideoEnhance *VideoEnhanceConfig `json:"VideoEnhance,omitnil" name:"VideoEnhance"`
+
+	// The audio enhancement configuration.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil" name:"AudioEnhance"`
 }
 
 // Predefined struct for user
@@ -6349,10 +6882,12 @@ type HdrConfig struct {
 }
 
 type HeadTailParameter struct {
-	// Opening credits list
+	// The opening segments.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	HeadSet []*MediaInputInfo `json:"HeadSet,omitnil" name:"HeadSet"`
 
-	// Closing credits list
+	// The closing segments.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	TailSet []*MediaInputInfo `json:"TailSet,omitnil" name:"TailSet"`
 }
 
@@ -6522,6 +7057,129 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil" name:"RepeatType"`
+}
+
+type LiveActivityResItem struct {
+	// The output of a live recording task.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	LiveRecordTask *LiveScheduleLiveRecordTaskResult `json:"LiveRecordTask,omitnil" name:"LiveRecordTask"`
+}
+
+type LiveActivityResult struct {
+	// The task type.
+	// <li>`LiveRecord`: Live recording. </li>
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	ActivityType *string `json:"ActivityType,omitnil" name:"ActivityType"`
+
+	// The task output.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	LiveActivityResItem *LiveActivityResItem `json:"LiveActivityResItem,omitnil" name:"LiveActivityResItem"`
+}
+
+type LiveRecordFile struct {
+	// The URL of the recording file.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitnil" name:"Url"`
+
+	// The size of the recording file.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Size *int64 `json:"Size,omitnil" name:"Size"`
+
+	// The duration of the recording file.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+
+	// The recording start time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// The recording end time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+}
+
+type LiveRecordResult struct {
+	// The storage of the recording file.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil" name:"OutputStorage"`
+
+	// The recording segments.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	FileList []*LiveRecordFile `json:"FileList,omitnil" name:"FileList"`
+}
+
+type LiveRecordTaskInput struct {
+	// The live recording template ID.
+	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
+
+	// The storage of the recording file. If this parameter is left empty, the `OutputStorage` value of the parent folder will be inherited.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil" name:"OutputStorage"`
+
+	// The output path of the recording file.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OutputObjectPath *string `json:"OutputObjectPath,omitnil" name:"OutputObjectPath"`
+}
+
+type LiveScheduleLiveRecordTaskResult struct {
+	// The task status. Valid values: `PROCESSING`, `SUCCESS`, `FAIL`.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://www.tencentcloud.com/document/product/1041/40249).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil" name:"ErrCodeExt"`
+
+	// The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	ErrCode *int64 `json:"ErrCode,omitnil" name:"ErrCode"`
+
+	// The error message.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// The input of a live recording task.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Input *LiveRecordTaskInput `json:"Input,omitnil" name:"Input"`
+
+	// The output of a live recording task.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Output *LiveRecordResult `json:"Output,omitnil" name:"Output"`
+
+	// The time when the task was started, in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+	// The time when the task was completed, in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
+}
+
+type LiveScheduleTask struct {
+	// The ID of a live scheme subtask.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The task status. Valid values:
+	// <li>`PROCESSING`</li>
+	// <li>`FINISH` </li>
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// If the value returned is not `0`, there was a source error. If `0` is returned, refer to the error codes of the corresponding task type.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	ErrCode *int64 `json:"ErrCode,omitnil" name:"ErrCode"`
+
+	// If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// The URL of the live stream.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitnil" name:"Url"`
+
+	// The task output.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	LiveActivityResultSet []*LiveActivityResult `json:"LiveActivityResultSet,omitnil" name:"LiveActivityResultSet"`
 }
 
 type LiveStreamAiRecognitionResultInfo struct {
@@ -9374,6 +10032,14 @@ type ParseNotificationResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScheduleTaskEvent *ScheduleTask `json:"ScheduleTaskEvent,omitnil" name:"ScheduleTaskEvent"`
 
+	// - The expiration time (Unix timestamp) of the notification's signature.
+	// - By default, notifications sent by MPS expire after 10 minutes. If the expiration time specified has elapsed, a notification will be considered invalid. This can prevent replay attacks.
+	// - The format of this parameter is a decimal Unix timestamp, i.e., the number of seconds that have elapsed since 00:00 (UTC/GMT time) on January 1, 1970.
+	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
+
+	// The notification signature. Sign = MD5 (Timestamp + NotifyKey) MPS concatenates `Timestamp` and `NotifyKey` in `TaskNotifyConfig` and calculates a signature using the MD5 algorithm. This signature is included in the notification sent to your backend server. If the signature in the notification matches your own calculation result, it indicates that the notification is from MPS.
+	Sign *string `json:"Sign,omitnil" name:"Sign"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -9653,11 +10319,24 @@ type ProcessLiveStreamRequestParams struct {
 	// Type parameter of video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
 
+
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
+
+
+	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil" name:"AiQualityControlTask"`
+
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// The live scheme ID.
+	// Note 1:
+	// <li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are specified for a subtask of the scheme, those output settings will be applied. </li>
+	// u200c<li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are not specified for a subtask of the scheme, the output parameters specified for `ProcessLiveStream` (if any) will be applied. </li>
+	// Note 2: If `TaskNotifyConfig` is specified when `ProcessLiveStream` is called, the specified settings will be applied instead of the default callback settings of the scheme.
+	ScheduleId *int64 `json:"ScheduleId,omitnil" name:"ScheduleId"`
 }
 
 type ProcessLiveStreamRequest struct {
@@ -9681,11 +10360,22 @@ type ProcessLiveStreamRequest struct {
 	// Type parameter of video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
 
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
+
+	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil" name:"AiQualityControlTask"`
+
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// The live scheme ID.
+	// Note 1:
+	// <li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are specified for a subtask of the scheme, those output settings will be applied. </li>
+	// u200c<li>If an output storage (`OutputStorage`) and directory (`OutputDir`) are not specified for a subtask of the scheme, the output parameters specified for `ProcessLiveStream` (if any) will be applied. </li>
+	// Note 2: If `TaskNotifyConfig` is specified when `ProcessLiveStream` is called, the specified settings will be applied instead of the default callback settings of the scheme.
+	ScheduleId *int64 `json:"ScheduleId,omitnil" name:"ScheduleId"`
 }
 
 func (r *ProcessLiveStreamRequest) ToJsonString() string {
@@ -9706,8 +10396,11 @@ func (r *ProcessLiveStreamRequest) FromJsonString(s string) error {
 	delete(f, "OutputDir")
 	delete(f, "AiContentReviewTask")
 	delete(f, "AiRecognitionTask")
+	delete(f, "AiAnalysisTask")
+	delete(f, "AiQualityControlTask")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
+	delete(f, "ScheduleId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessLiveStreamRequest has unknown keys!", "")
 	}
@@ -10462,11 +11155,17 @@ type SchedulesInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScheduleName *string `json:"ScheduleName,omitnil" name:"ScheduleName"`
 
+	// The scheme type. Valid values:
+	//  <li>`Preset`</li>
+	// <li>`Custom` </li>
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
 	// The scheme status. Valid values:
 	// `Enabled`
 	// `Disabled`
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status []*string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// The trigger of the scheme.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -10524,13 +11223,16 @@ type SharpEnhanceConfig struct {
 }
 
 type SimpleAesDrm struct {
-
+	// The URI of decryption key.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Uri *string `json:"Uri,omitnil" name:"Uri"`
 
-
+	// The encryption key (a 32-byte string).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Key *string `json:"Key,omitnil" name:"Key"`
 
-
+	// The initialization vector for encryption (a 32-byte string).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Vector *string `json:"Vector,omitnil" name:"Vector"`
 }
 
@@ -10759,6 +11461,21 @@ type TagConfigureInfoForUpdate struct {
 }
 
 type TaskNotifyConfig struct {
+	// The notification type. Valid values:
+	// <li>`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
+	// <li>`TDMQ-CMQ`: Message queue</li>
+	// <li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
+	// <li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
+	// <li>`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.</li>
+	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
+	NotifyType *string `json:"NotifyType,omitnil" name:"NotifyType"`
+
+	// Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+	NotifyMode *string `json:"NotifyMode,omitnil" name:"NotifyMode"`
+
+	// HTTP callback URL, required if `NotifyType` is set to `URL`
+	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
+
 	// The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
 	CmqModel *string `json:"CmqModel,omitnil" name:"CmqModel"`
 
@@ -10771,25 +11488,14 @@ type TaskNotifyConfig struct {
 	// The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
 	QueueName *string `json:"QueueName,omitnil" name:"QueueName"`
 
-	// Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
-	NotifyMode *string `json:"NotifyMode,omitnil" name:"NotifyMode"`
-
-	// The notification type. Valid values:
-	// <li>`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
-	// <li>`TDMQ-CMQ`: Message queue</li>
-	// <li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
-	// <li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
-	// <li>`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.</li>
-	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
-	NotifyType *string `json:"NotifyType,omitnil" name:"NotifyType"`
-
-	// HTTP callback URL, required if `NotifyType` is set to `URL`
-	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
-
 	// The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AwsSQS *AwsSQS `json:"AwsSQS,omitnil" name:"AwsSQS"`
+
+	// The key used to generate the callback signature.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	NotifyKey *string `json:"NotifyKey,omitnil" name:"NotifyKey"`
 }
 
 type TaskOutputStorage struct {
@@ -11373,6 +12079,21 @@ type VideoTemplateInfoForUpdate struct {
 	// <li>1: Enable</li>
 	// Default value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
 	ContentAdaptStream *uint64 `json:"ContentAdaptStream,omitnil" name:"ContentAdaptStream"`
+}
+
+type VolumeBalanceConfig struct {
+	// Whether to enable the feature. Valid values:
+	// <li>`ON`</li>
+	// <li>`OFF` </li>
+	// Default value: `ON`.
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// The type. Valid values:
+	// <li>`loudNorm`: Loudness normalization.</li>
+	// <li>`gainControl`: Volume leveling.</li>
+	// Default value: `loudNorm`.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type WatermarkInput struct {

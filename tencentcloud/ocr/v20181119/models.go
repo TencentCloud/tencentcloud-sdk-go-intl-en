@@ -777,7 +777,6 @@ type HKIDCardOCRResponseParams struct {
 	// Multiple alarm codes. If the ID card is spoofed, photocopied, or photoshopped, the corresponding alarm code will be returned.
 	// -9102: Alarm for photocopied document
 	// -9103: Alarm for spoofed document
-	// -9104: Alarm for photoshopped document
 	WarningCode []*int64 `json:"WarningCode,omitnil" name:"WarningCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
